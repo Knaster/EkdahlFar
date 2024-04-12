@@ -1,0 +1,198 @@
+\hypertarget{classsolenoid}{}\doxysection{solenoid Class Reference}
+\label{classsolenoid}\index{solenoid@{solenoid}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsolenoid_a63160f6edecc700f4e3cdaf278e03ccf}{solenoid}} (char \+\_\+solenoid\+Pin)
+\item 
+void \mbox{\hyperlink{classsolenoid_aa21082b6a76e11ce41e7931d0f94dec0}{solenoid\+Engage}} (int force)
+\begin{DoxyCompactList}\small\item\em Engage solenoid with the given force. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsolenoid_a001f939687b6fc07c9d1761ece7bdfb5}{solenoid\+Engage}} ()
+\begin{DoxyCompactList}\small\item\em Engage solenoid with maximum force. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsolenoid_aa9c373f9aa46c11d7c754a4dee2956d0}{solenoid\+Disengage}} ()
+\begin{DoxyCompactList}\small\item\em Disengage solenoid. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsolenoid_a0356c78bc3471f6ca8835eb02b4e3538}{solenoid\+Disengage}} (int value)
+\item 
+bool \mbox{\hyperlink{classsolenoid_a8846508bc47ec4408e84bad43ed5b468}{update\+Solenoid}} ()
+\item 
+String \mbox{\hyperlink{classsolenoid_ab1ef0174b9fc7376449bc0dabfaf918f}{dump\+Data}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{classsolenoid_ad71fc85680b3fc955d83264bb92dc80b}{solenoid\+Pin}}
+\begin{DoxyCompactList}\small\item\em Pin for solenoid activation. \end{DoxyCompactList}\item 
+Teensy\+\_\+\+PWM $\ast$ \mbox{\hyperlink{classsolenoid_a2fccb70eddf3d9661dc99debe4b17447}{solenoid\+PWM}}
+\item 
+bool \mbox{\hyperlink{classsolenoid_a4fca184d2b4e10a9bd02b1290f4dc368}{solenoid\+Engaged}} = false
+\begin{DoxyCompactList}\small\item\em Current state of the pick solenoid. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classsolenoid_a2c6a1e660fcb4f51a6b556c1815767a3}{solenoid\+Engage\+Time}} = 0
+\begin{DoxyCompactList}\small\item\em Time at which the solenoid was engaged last. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classsolenoid_a5444f488ba4bef480704dc7c21ef1463}{solenoid\+Engage\+Duration}} = 15000
+\begin{DoxyCompactList}\small\item\em Duration of the solenoid engagement, given in uS. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classsolenoid_ae035d0d4b493dbdff67f1bd34455bf81}{force\+Max}} = 65535
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classsolenoid_a4af25a31cc8a8ab5406ba5ff07babe47}{force\+Min}} = 0
+\item 
+float \mbox{\hyperlink{classsolenoid_a6e52fb5a39303f154645fc8d6acd58a0}{force\+Multiplier}} = 1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsolenoid_a63160f6edecc700f4e3cdaf278e03ccf}\label{classsolenoid_a63160f6edecc700f4e3cdaf278e03ccf}} 
+\index{solenoid@{solenoid}!solenoid@{solenoid}}
+\index{solenoid@{solenoid}!solenoid@{solenoid}}
+\doxysubsubsection{\texorpdfstring{solenoid()}{solenoid()}}
+{\footnotesize\ttfamily solenoid\+::solenoid (\begin{DoxyParamCaption}\item[{char}]{\+\_\+solenoid\+Pin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsolenoid_ab1ef0174b9fc7376449bc0dabfaf918f}\label{classsolenoid_ab1ef0174b9fc7376449bc0dabfaf918f}} 
+\index{solenoid@{solenoid}!dumpData@{dumpData}}
+\index{dumpData@{dumpData}!solenoid@{solenoid}}
+\doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
+{\footnotesize\ttfamily String solenoid\+::dump\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classsolenoid_aa9c373f9aa46c11d7c754a4dee2956d0}\label{classsolenoid_aa9c373f9aa46c11d7c754a4dee2956d0}} 
+\index{solenoid@{solenoid}!solenoidDisengage@{solenoidDisengage}}
+\index{solenoidDisengage@{solenoidDisengage}!solenoid@{solenoid}}
+\doxysubsubsection{\texorpdfstring{solenoidDisengage()}{solenoidDisengage()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void solenoid\+::solenoid\+Disengage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disengage solenoid. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolenoid_aa9c373f9aa46c11d7c754a4dee2956d0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolenoid_aa9c373f9aa46c11d7c754a4dee2956d0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classsolenoid_a0356c78bc3471f6ca8835eb02b4e3538}\label{classsolenoid_a0356c78bc3471f6ca8835eb02b4e3538}} 
+\index{solenoid@{solenoid}!solenoidDisengage@{solenoidDisengage}}
+\index{solenoidDisengage@{solenoidDisengage}!solenoid@{solenoid}}
+\doxysubsubsection{\texorpdfstring{solenoidDisengage()}{solenoidDisengage()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void solenoid\+::solenoid\+Disengage (\begin{DoxyParamCaption}\item[{int}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolenoid_a0356c78bc3471f6ca8835eb02b4e3538_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classsolenoid_a001f939687b6fc07c9d1761ece7bdfb5}\label{classsolenoid_a001f939687b6fc07c9d1761ece7bdfb5}} 
+\index{solenoid@{solenoid}!solenoidEngage@{solenoidEngage}}
+\index{solenoidEngage@{solenoidEngage}!solenoid@{solenoid}}
+\doxysubsubsection{\texorpdfstring{solenoidEngage()}{solenoidEngage()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void solenoid\+::solenoid\+Engage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Engage solenoid with maximum force. 
+
+\mbox{\Hypertarget{classsolenoid_aa21082b6a76e11ce41e7931d0f94dec0}\label{classsolenoid_aa21082b6a76e11ce41e7931d0f94dec0}} 
+\index{solenoid@{solenoid}!solenoidEngage@{solenoidEngage}}
+\index{solenoidEngage@{solenoidEngage}!solenoid@{solenoid}}
+\doxysubsubsection{\texorpdfstring{solenoidEngage()}{solenoidEngage()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void solenoid\+::solenoid\+Engage (\begin{DoxyParamCaption}\item[{int}]{force }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Engage solenoid with the given force. 
+
+\mbox{\Hypertarget{classsolenoid_a8846508bc47ec4408e84bad43ed5b468}\label{classsolenoid_a8846508bc47ec4408e84bad43ed5b468}} 
+\index{solenoid@{solenoid}!updateSolenoid@{updateSolenoid}}
+\index{updateSolenoid@{updateSolenoid}!solenoid@{solenoid}}
+\doxysubsubsection{\texorpdfstring{updateSolenoid()}{updateSolenoid()}}
+{\footnotesize\ttfamily bool solenoid\+::update\+Solenoid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsolenoid_a8846508bc47ec4408e84bad43ed5b468_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classsolenoid_ae035d0d4b493dbdff67f1bd34455bf81}\label{classsolenoid_ae035d0d4b493dbdff67f1bd34455bf81}} 
+\index{solenoid@{solenoid}!forceMax@{forceMax}}
+\index{forceMax@{forceMax}!solenoid@{solenoid}}
+\doxysubsubsection{\texorpdfstring{forceMax}{forceMax}}
+{\footnotesize\ttfamily uint16\+\_\+t solenoid\+::force\+Max = 65535}
+
+\mbox{\Hypertarget{classsolenoid_a4af25a31cc8a8ab5406ba5ff07babe47}\label{classsolenoid_a4af25a31cc8a8ab5406ba5ff07babe47}} 
+\index{solenoid@{solenoid}!forceMin@{forceMin}}
+\index{forceMin@{forceMin}!solenoid@{solenoid}}
+\doxysubsubsection{\texorpdfstring{forceMin}{forceMin}}
+{\footnotesize\ttfamily uint16\+\_\+t solenoid\+::force\+Min = 0}
+
+\mbox{\Hypertarget{classsolenoid_a6e52fb5a39303f154645fc8d6acd58a0}\label{classsolenoid_a6e52fb5a39303f154645fc8d6acd58a0}} 
+\index{solenoid@{solenoid}!forceMultiplier@{forceMultiplier}}
+\index{forceMultiplier@{forceMultiplier}!solenoid@{solenoid}}
+\doxysubsubsection{\texorpdfstring{forceMultiplier}{forceMultiplier}}
+{\footnotesize\ttfamily float solenoid\+::force\+Multiplier = 1}
+
+\mbox{\Hypertarget{classsolenoid_a4fca184d2b4e10a9bd02b1290f4dc368}\label{classsolenoid_a4fca184d2b4e10a9bd02b1290f4dc368}} 
+\index{solenoid@{solenoid}!solenoidEngaged@{solenoidEngaged}}
+\index{solenoidEngaged@{solenoidEngaged}!solenoid@{solenoid}}
+\doxysubsubsection{\texorpdfstring{solenoidEngaged}{solenoidEngaged}}
+{\footnotesize\ttfamily bool solenoid\+::solenoid\+Engaged = false}
+
+
+
+Current state of the pick solenoid. 
+
+\mbox{\Hypertarget{classsolenoid_a5444f488ba4bef480704dc7c21ef1463}\label{classsolenoid_a5444f488ba4bef480704dc7c21ef1463}} 
+\index{solenoid@{solenoid}!solenoidEngageDuration@{solenoidEngageDuration}}
+\index{solenoidEngageDuration@{solenoidEngageDuration}!solenoid@{solenoid}}
+\doxysubsubsection{\texorpdfstring{solenoidEngageDuration}{solenoidEngageDuration}}
+{\footnotesize\ttfamily unsigned long solenoid\+::solenoid\+Engage\+Duration = 15000}
+
+
+
+Duration of the solenoid engagement, given in uS. 
+
+\mbox{\Hypertarget{classsolenoid_a2c6a1e660fcb4f51a6b556c1815767a3}\label{classsolenoid_a2c6a1e660fcb4f51a6b556c1815767a3}} 
+\index{solenoid@{solenoid}!solenoidEngageTime@{solenoidEngageTime}}
+\index{solenoidEngageTime@{solenoidEngageTime}!solenoid@{solenoid}}
+\doxysubsubsection{\texorpdfstring{solenoidEngageTime}{solenoidEngageTime}}
+{\footnotesize\ttfamily unsigned long solenoid\+::solenoid\+Engage\+Time = 0}
+
+
+
+Time at which the solenoid was engaged last. 
+
+\mbox{\Hypertarget{classsolenoid_ad71fc85680b3fc955d83264bb92dc80b}\label{classsolenoid_ad71fc85680b3fc955d83264bb92dc80b}} 
+\index{solenoid@{solenoid}!solenoidPin@{solenoidPin}}
+\index{solenoidPin@{solenoidPin}!solenoid@{solenoid}}
+\doxysubsubsection{\texorpdfstring{solenoidPin}{solenoidPin}}
+{\footnotesize\ttfamily char solenoid\+::solenoid\+Pin}
+
+
+
+Pin for solenoid activation. 
+
+\mbox{\Hypertarget{classsolenoid_a2fccb70eddf3d9661dc99debe4b17447}\label{classsolenoid_a2fccb70eddf3d9661dc99debe4b17447}} 
+\index{solenoid@{solenoid}!solenoidPWM@{solenoidPWM}}
+\index{solenoidPWM@{solenoidPWM}!solenoid@{solenoid}}
+\doxysubsubsection{\texorpdfstring{solenoidPWM}{solenoidPWM}}
+{\footnotesize\ttfamily Teensy\+\_\+\+PWM$\ast$ solenoid\+::solenoid\+PWM}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{solenoid_8cpp}{solenoid.\+cpp}}\end{DoxyCompactItemize}

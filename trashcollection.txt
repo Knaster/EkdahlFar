@@ -1,0 +1,87 @@
+-- main.cpp general --
+
+-- setup() --
+#ifdef EFARMASTER
+    pwmShield.begin();
+    pwmShield.setOscillatorFrequency(26000000);
+    pwmShield.setPWMFreq(50);
+    pwmShield.setPWM(0, 0, 0);
+
+    pinMode(audioInputPin, INPUT);
+    pinMode(currentInputPin, INPUT);
+    pinMode(motorFaultPin, INPUT_PULLUP);
+#endif
+
+#ifdef EFARMASTER
+    addStringAssembly(0);
+    addStringAssembly(1);
+    addStringAssembly(2);
+#endif
+
+#ifdef EFARMASTER
+    attachInterrupt(digitalPinToInterrupt(motorFaultPin), motorDriverFault, FALLING);
+
+    stringModuleArray[0].bowIOArray[0].delegateTilt = true;
+    stringModuleArray[0].calibrationDataArray[0].firstTouchPressure = 0;
+    stringModuleArray[0].calibrationDataArray[0].stallPressure = 55000;
+#endif
+
+#ifdef EFARMASTER
+    setupMCP23017();
+
+    //4067 setup
+    pinMode(AMUX_DATA, INPUT);
+    pinMode(AMUX_A0, OUTPUT);
+    pinMode(AMUX_A1, OUTPUT);
+    pinMode(AMUX_A2, OUTPUT);
+    pinMode(AMUX_A3, OUTPUT);
+#endif
+
+--- loop() ---
+
+#elif EFARMASTER
+    int  i; // = correctADCValue(leftKnobChannel, 1);
+    //  if (updateStrings >= 5) {
+    ///< TODO\ make the following individual updateString per stringModule which in turn takes care of the bows, solenoids and mutes
+    for (int i=0; i<stringModuleArray.size(); i++) {
+    //      stringModuleArray[i].bowControlArray[0].updateString();
+    //      stringModuleArray[i].solenoidArray[0].updateSolenoid();
+        stringModuleArray[i].updateString();
+    }
+    updateStrings = 0;
+//  }
+#endif
+
+#ifdef EFARMASTER
+  if (motorDriverFaultFlag) {
+    uint8_t portA, portB;
+    mcp23017.interruptedBy(portA, portB);
+
+    debugPrintln("MOTOR FAULT AT A" + String(portA) + " : B" + String(portB), Error);
+    if (portA == 255) { return; }
+    // Check PORTA for channel, starts with '1' (as opposed to 0)
+
+    if (portA && 1 == 1) {
+      stringModuleArray[0].bowControlArray[0].motorFaultDetected();
+    } else
+    if (portA && 2 == 2) {
+      stringModuleArray[1].bowControlArray[0].motorFaultDetected();
+    } else
+    if (portA && 4 == 4) {
+      stringModuleArray[2].bowControlArray[0].motorFaultDetected();
+    };
+    mcp23017.clearInterrupts();
+    motorDriverFaultFlag = false;
+  }
+#endif
+
+elapsedMicros sampleUpdate;
+#define sampleInterval 100
+#define sampleLength 100
+int sampleCount = 0;
+int sampleMax = 0;
+int lastSampleMax = 0;
+
+elapsedMillis updateADCAverage;
+elapsedMicros updateADC;
+

@@ -1,0 +1,118 @@
+\hypertarget{bowcontrol_8cpp}{}\doxysection{bowcontrol.\+cpp File Reference}
+\label{bowcontrol_8cpp}\index{bowcontrol.cpp@{bowcontrol.cpp}}
+{\ttfamily \#include \char`\"{}elapsed\+Millis.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}bowcontrol.\+h\char`\"{}}\newline
+Include dependency graph for bowcontrol.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{bowcontrol_8cpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=171pt]{bowcontrol_8cpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classbowControl}{bow\+Control}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{bowcontrol_8cpp_aacf38327be7078e8bf4e1c68d92e0fcb}{BOWCONTROL\+\_\+C}}
+\item 
+\#define \mbox{\hyperlink{bowcontrol_8cpp_a69164445e96fd1ddd0a316d803c6745b}{string\+Update\+Interval}}~= 10000
+\begin{DoxyCompactList}\small\item\em Interval at which update\+String is being processed, given in uS (10ms) \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{bowcontrol_8cpp_a602e7c2048f30d113126ff5aa6aef597}{pid\+Error\+Threshold}}~5
+\begin{DoxyCompactList}\small\item\em Threshold that will trigger a bow instability event, given in Hertz. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0c}{\+\_\+tilt\+Mode}} \{ \mbox{\hyperlink{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca661e967c4cfe56fd40a290550b64d8dc}{Rest}}
+, \mbox{\hyperlink{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0caffb89f6a29dafbca91038396476c4324}{Engage}}
+, \mbox{\hyperlink{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca9637c4eff490f4d2f4efcd32e0689c46}{Mute}}
+ \}
+\begin{DoxyCompactList}\small\item\em Sets the current bow mode. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{bowcontrol_8cpp_a08216a942f96ea84df79ef77a0554dd8}{\+\_\+speed\+Mode}} \{ \mbox{\hyperlink{bowcontrol_8cpp_a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389}{Automatic}}
+, \mbox{\hyperlink{bowcontrol_8cpp_a08216a942f96ea84df79ef77a0554dd8acad5010fb34447633f3139d69698a0f0}{Manual}}
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{bowcontrol_8cpp_aacf38327be7078e8bf4e1c68d92e0fcb}\label{bowcontrol_8cpp_aacf38327be7078e8bf4e1c68d92e0fcb}} 
+\index{bowcontrol.cpp@{bowcontrol.cpp}!BOWCONTROL\_C@{BOWCONTROL\_C}}
+\index{BOWCONTROL\_C@{BOWCONTROL\_C}!bowcontrol.cpp@{bowcontrol.cpp}}
+\doxysubsubsection{\texorpdfstring{BOWCONTROL\_C}{BOWCONTROL\_C}}
+{\footnotesize\ttfamily \#define BOWCONTROL\+\_\+C}
+
+\mbox{\Hypertarget{bowcontrol_8cpp_a602e7c2048f30d113126ff5aa6aef597}\label{bowcontrol_8cpp_a602e7c2048f30d113126ff5aa6aef597}} 
+\index{bowcontrol.cpp@{bowcontrol.cpp}!pidErrorThreshold@{pidErrorThreshold}}
+\index{pidErrorThreshold@{pidErrorThreshold}!bowcontrol.cpp@{bowcontrol.cpp}}
+\doxysubsubsection{\texorpdfstring{pidErrorThreshold}{pidErrorThreshold}}
+{\footnotesize\ttfamily \#define pid\+Error\+Threshold~5}
+
+
+
+Threshold that will trigger a bow instability event, given in Hertz. 
+
+\mbox{\Hypertarget{bowcontrol_8cpp_a69164445e96fd1ddd0a316d803c6745b}\label{bowcontrol_8cpp_a69164445e96fd1ddd0a316d803c6745b}} 
+\index{bowcontrol.cpp@{bowcontrol.cpp}!stringUpdateInterval@{stringUpdateInterval}}
+\index{stringUpdateInterval@{stringUpdateInterval}!bowcontrol.cpp@{bowcontrol.cpp}}
+\doxysubsubsection{\texorpdfstring{stringUpdateInterval}{stringUpdateInterval}}
+{\footnotesize\ttfamily \#define string\+Update\+Interval~= 10000}
+
+
+
+Interval at which update\+String is being processed, given in uS (10ms) 
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{bowcontrol_8cpp_a08216a942f96ea84df79ef77a0554dd8}\label{bowcontrol_8cpp_a08216a942f96ea84df79ef77a0554dd8}} 
+\index{bowcontrol.cpp@{bowcontrol.cpp}!\_speedMode@{\_speedMode}}
+\index{\_speedMode@{\_speedMode}!bowcontrol.cpp@{bowcontrol.cpp}}
+\doxysubsubsection{\texorpdfstring{\_speedMode}{\_speedMode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{bowcontrol_8cpp_a08216a942f96ea84df79ef77a0554dd8}{\+\_\+speed\+Mode}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Automatic@{Automatic}!bowcontrol.cpp@{bowcontrol.cpp}}\index{bowcontrol.cpp@{bowcontrol.cpp}!Automatic@{Automatic}}}\mbox{\Hypertarget{bowcontrol_8cpp_a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389}\label{bowcontrol_8cpp_a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389}} 
+Automatic&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Manual@{Manual}!bowcontrol.cpp@{bowcontrol.cpp}}\index{bowcontrol.cpp@{bowcontrol.cpp}!Manual@{Manual}}}\mbox{\Hypertarget{bowcontrol_8cpp_a08216a942f96ea84df79ef77a0554dd8acad5010fb34447633f3139d69698a0f0}\label{bowcontrol_8cpp_a08216a942f96ea84df79ef77a0554dd8acad5010fb34447633f3139d69698a0f0}} 
+Manual&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0c}\label{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0c}} 
+\index{bowcontrol.cpp@{bowcontrol.cpp}!\_tiltMode@{\_tiltMode}}
+\index{\_tiltMode@{\_tiltMode}!bowcontrol.cpp@{bowcontrol.cpp}}
+\doxysubsubsection{\texorpdfstring{\_tiltMode}{\_tiltMode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0c}{\+\_\+tilt\+Mode}}}
+
+
+
+Sets the current bow mode. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Rest@{Rest}!bowcontrol.cpp@{bowcontrol.cpp}}\index{bowcontrol.cpp@{bowcontrol.cpp}!Rest@{Rest}}}\mbox{\Hypertarget{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca661e967c4cfe56fd40a290550b64d8dc}\label{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca661e967c4cfe56fd40a290550b64d8dc}} 
+Rest&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Engage@{Engage}!bowcontrol.cpp@{bowcontrol.cpp}}\index{bowcontrol.cpp@{bowcontrol.cpp}!Engage@{Engage}}}\mbox{\Hypertarget{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0caffb89f6a29dafbca91038396476c4324}\label{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0caffb89f6a29dafbca91038396476c4324}} 
+Engage&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mute@{Mute}!bowcontrol.cpp@{bowcontrol.cpp}}\index{bowcontrol.cpp@{bowcontrol.cpp}!Mute@{Mute}}}\mbox{\Hypertarget{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca9637c4eff490f4d2f4efcd32e0689c46}\label{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca9637c4eff490f4d2f4efcd32e0689c46}} 
+Mute&\\
+\hline
+
+\end{DoxyEnumFields}

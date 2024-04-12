@@ -1,0 +1,1 @@
+obj/ReleaseUSBAudio/EEPROM/EEPROM.o: EEPROM/EEPROM.cpp

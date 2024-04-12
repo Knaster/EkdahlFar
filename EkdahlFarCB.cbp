@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="EkdahlFarCB" />
+		<Option pch_mode="2" />
+		<Option compiler="teensyduino_1581" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/EkdahlFarCB.elf" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="obj/Debug/" />
+				<Option type="5" />
+				<Option compiler="teensyduino_1581" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="./" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/EkdahlFarCB.elf" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="obj/Release/" />
+				<Option type="5" />
+				<Option compiler="teensyduino_1581" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DEFARSLAVE" />
+					<Add option="-DUSB_MIDI_SERIAL" />
+					<Add directory="./" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Release Master">
+				<Option output="bin/Release Master/EkdahlFarCB.elf" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="obj/Release Master/" />
+				<Option type="5" />
+				<Option compiler="teensyduino_1581" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DEFARMASTER" />
+					<Add option="-DUSB_MIDI_SERIAL" />
+					<Add directory="./" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Release USB Audio">
+				<Option output="bin/ReleaseUSBAudio/EkdahlFarCB.elf" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="obj/ReleaseUSBAudio/" />
+				<Option type="5" />
+				<Option compiler="teensyduino_1581" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DEFARSLAVE" />
+					<Add option="-DUSB_MIDI_AUDIO_SERIAL" />
+					<Add option="-DAUDIO_INTERFACE" />
+					<Add directory="./" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-mthumb" />
+			<Add option="-Os" />
+			<Add option="-Wall" />
+			<Add option="-std=gnu++14" />
+			<Add option="-g" />
+			<Add option="-ffunction-sections" />
+			<Add option="-fdata-sections" />
+			<Add option="-nostdlib" />
+			<Add option="-MMD" />
+			<Add option="-mcpu=cortex-m7" />
+			<Add option="-mfloat-abi=hard" />
+			<Add option="-mfpu=fpv5-d16" />
+			<Add option="-fno-exceptions" />
+			<Add option="-fpermissive" />
+			<Add option="-fno-rtti" />
+			<Add option="-fno-threadsafe-statics" />
+			<Add option="-felide-constructors" />
+			<Add option="-Wno-error=narrowing" />
+			<Add option="-D__IMXRT1062__" />
+			<Add option="-DTEENSYDUINO=158" />
+			<Add option="-DARDUINO_TEENSY40" />
+			<Add option="-DLAYOUT_US_ENGLISH" />
+			<Add option="-DF_CPU=600000000" />
+			<Add option="-DARDUINO" />
+			<Add directory="teensy4" />
+			<Add directory="SafeString/src" />
+			<Add directory="EEPROM" />
+			<Add directory="Adafruit_BusIO" />
+			<Add directory="SPI" />
+			<Add directory="Wire" />
+			<Add directory="MCP23017/src" />
+			<Add directory="Audio" />
+			<Add directory="Audio/utility" />
+			<Add directory="SD/src" />
+			<Add directory="SdFat/src" />
+			<Add directory="SerialFlash" />
+			<Add directory="TMC2209/src" />
+		</Compiler>
+		<Linker>
+			<Add option="-mthumb" />
+			<Add option="-mcpu=cortex-m7" />
+			<Add option="-mfloat-abi=hard" />
+			<Add option="-mfpu=fpv5-d16" />
+			<Add option="-Os" />
+			<Add option="-Wl,--gc-sections" />
+			<Add option="-Timxrt1062.ld" />
+			<Add library="libarm_cortexM7lfsp_math" />
+			<Add library="m" />
+			<Add library="stdc++" />
+			<Add directory="teensy4" />
+		</Linker>
+		<ExtraCommands>
+			<Add after="arm-none-eabi-size ${TARGET_OUTPUT_FILE}" />
+			<Add after="arm-none-eabi-objcopy -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0 ${TARGET_OUTPUT_FILE} ${TARGET_OUTPUT_DIR}${TARGET_OUTPUT_BASENAME}.eep" />
+			<Add after="arm-none-eabi-objcopy -O ihex -R .eeprom ${TARGET_OUTPUT_FILE} ${TARGET_OUTPUT_DIR}${TARGET_OUTPUT_BASENAME}.hex" />
+			<Add after="arm-none-eabi-objdump -d ${TARGET_OUTPUT_FILE} &gt; ${TARGET_OUTPUT_DIR}${TARGET_OUTPUT_BASENAME}.lst" />
+		</ExtraCommands>
+		<Unit filename="Adafruit_ADS1X15/Adafruit_ADS1X15.cpp" />
+		<Unit filename="Adafruit_ADS1X15/Adafruit_ADS1X15.h" />
+		<Unit filename="Adafruit_BusIO/Adafruit_BusIO_Register.cpp" />
+		<Unit filename="Adafruit_BusIO/Adafruit_BusIO_Register.h" />
+		<Unit filename="Adafruit_BusIO/Adafruit_I2CDevice.cpp" />
+		<Unit filename="Adafruit_BusIO/Adafruit_I2CDevice.h" />
+		<Unit filename="Adafruit_BusIO/Adafruit_I2CRegister.h" />
+		<Unit filename="Adafruit_BusIO/Adafruit_SPIDevice.cpp" />
+		<Unit filename="Adafruit_BusIO/Adafruit_SPIDevice.h" />
+		<Unit filename="Adafruit_PWM_Servo_Driver_Library/Adafruit_PWMServoDriver.cpp" />
+		<Unit filename="Adafruit_PWM_Servo_Driver_Library/Adafruit_PWMServoDriver.h" />
+		<Unit filename="Audio/Audio.h" />
+		<Unit filename="Audio/AudioControl.h" />
+		<Unit filename="Audio/Quantizer.h" />
+		<Unit filename="Audio/Resampler.h" />
+		<Unit filename="Audio/analyze_fft1024.h" />
+		<Unit filename="Audio/analyze_fft256.h" />
+		<Unit filename="Audio/analyze_notefreq.cpp" />
+		<Unit filename="Audio/analyze_notefreq.h" />
+		<Unit filename="Audio/analyze_peak.cpp" />
+		<Unit filename="Audio/analyze_peak.h" />
+		<Unit filename="Audio/analyze_print.h" />
+		<Unit filename="Audio/analyze_rms.h" />
+		<Unit filename="Audio/analyze_tonedetect.h" />
+		<Unit filename="Audio/async_input_spdif3.h" />
+		<Unit filename="Audio/biquad.h" />
+		<Unit filename="Audio/control_ak4558.h" />
+		<Unit filename="Audio/control_cs42448.h" />
+		<Unit filename="Audio/control_cs4272.h" />
+		<Unit filename="Audio/control_sgtl5000.h" />
+		<Unit filename="Audio/control_tlv320aic3206.h" />
+		<Unit filename="Audio/control_wm8731.h" />
+		<Unit filename="Audio/effect_bitcrusher.h" />
+		<Unit filename="Audio/effect_chorus.h" />
+		<Unit filename="Audio/effect_combine.h" />
+		<Unit filename="Audio/effect_delay.h" />
+		<Unit filename="Audio/effect_delay_ext.h" />
+		<Unit filename="Audio/effect_envelope.h" />
+		<Unit filename="Audio/effect_fade.h" />
+		<Unit filename="Audio/effect_flange.h" />
+		<Unit filename="Audio/effect_freeverb.h" />
+		<Unit filename="Audio/effect_granular.h" />
+		<Unit filename="Audio/effect_midside.h" />
+		<Unit filename="Audio/effect_multiply.h" />
+		<Unit filename="Audio/effect_rectifier.h" />
+		<Unit filename="Audio/effect_reverb.h" />
+		<Unit filename="Audio/effect_wavefolder.h" />
+		<Unit filename="Audio/effect_waveshaper.h" />
+		<Unit filename="Audio/examples/Analysis/NoteFrequency/guitar_a2_note.h" />
+		<Unit filename="Audio/examples/Analysis/NoteFrequency/guitar_b3_note.h" />
+		<Unit filename="Audio/examples/Analysis/NoteFrequency/guitar_d3_note.h" />
+		<Unit filename="Audio/examples/Analysis/NoteFrequency/guitar_e2_note.h" />
+		<Unit filename="Audio/examples/Analysis/NoteFrequency/guitar_e4_note.h" />
+		<Unit filename="Audio/examples/Analysis/NoteFrequency/guitar_g3_note.h" />
+		<Unit filename="Audio/examples/Analysis/NoteFrequency/tuba_1.h" />
+		<Unit filename="Audio/examples/Analysis/NoteFrequency/tuba_2.h" />
+		<Unit filename="Audio/examples/Analysis/NoteFrequency/tuba_3.h" />
+		<Unit filename="Audio/examples/Analysis/NoteFrequency/tuba_4.h" />
+		<Unit filename="Audio/examples/Analysis/NoteFrequency/tuba_5.h" />
+		<Unit filename="Audio/examples/Effects/Chorus/effects_info.h" />
+		<Unit filename="Audio/examples/Effects/Filter_FIR/bandp_1200_1700.h" />
+		<Unit filename="Audio/examples/Effects/Filter_FIR/filters.h" />
+		<Unit filename="Audio/examples/Effects/Filter_FIR/lopass_1000_44100.h" />
+		<Unit filename="Audio/examples/Effects/Flange/effects_info.h" />
+		<Unit filename="Audio/examples/HardwareTesting/ADAT_DrumSamplePlayer/AudioSampleCashregister.h" />
+		<Unit filename="Audio/examples/HardwareTesting/ADAT_DrumSamplePlayer/AudioSampleGong.h" />
+		<Unit filename="Audio/examples/HardwareTesting/ADAT_DrumSamplePlayer/AudioSampleHihat.h" />
+		<Unit filename="Audio/examples/HardwareTesting/ADAT_DrumSamplePlayer/AudioSampleKick.h" />
+		<Unit filename="Audio/examples/HardwareTesting/ADAT_DrumSamplePlayer/AudioSampleSnare.h" />
+		<Unit filename="Audio/examples/HardwareTesting/ADAT_DrumSamplePlayer/AudioSampleTomtom.h" />
+		<Unit filename="Audio/examples/SamplePlayer/AudioSampleCashregister.h" />
+		<Unit filename="Audio/examples/SamplePlayer/AudioSampleGong.h" />
+		<Unit filename="Audio/examples/SamplePlayer/AudioSampleHihat.h" />
+		<Unit filename="Audio/examples/SamplePlayer/AudioSampleKick.h" />
+		<Unit filename="Audio/examples/SamplePlayer/AudioSampleSnare.h" />
+		<Unit filename="Audio/examples/SamplePlayer/AudioSampleTomtom.h" />
+		<Unit filename="Audio/examples/Synthesis/Guitar/chords.h" />
+		<Unit filename="Audio/examples/Synthesis/PlaySynthMusic/PlaySynthMusic.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynth/BasicFlute1_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynth/FrenchHorns_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynth/Ocarina_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynth/Pizzicato_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynth/Viola_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthKeyboard/BasicFlute1_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthKeyboard/FrenchHorns_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthKeyboard/Ocarina_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthKeyboard/Pizzicato_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthKeyboard/Viola_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/bassoon_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/clarinet_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/distortiongt_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/epiano_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/flute_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/frenchhorn_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/glockenspiel_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/gtfretnoise_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/harmonica_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/harp_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/mutedgtr_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/nylonstrgtr_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/oboe_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/overdrivegt_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/piano_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/recorder_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/standard_DRUMS_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/steelstrgtr_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/strings_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/timpani_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/trombone_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/trumpet_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/tuba_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/MidiSynthLarge/vibraphone_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/SimpleWavetable/Flute_100kbyte_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/Zelda/MutedTrumpet_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/Zelda/Pizzicato_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/Zelda/PlaySynthMusic.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/Zelda/Viola_samples.h" />
+		<Unit filename="Audio/examples/Synthesis/Wavetable/Zelda/WT_Trumpet_samples.h" />
+		<Unit filename="Audio/examples/Tutorial/Part_2_03_Samples/AudioSampleCashregister.h" />
+		<Unit filename="Audio/examples/Tutorial/Part_2_03_Samples/AudioSampleGong.h" />
+		<Unit filename="Audio/examples/Tutorial/Part_2_03_Samples/AudioSampleHihat.h" />
+		<Unit filename="Audio/examples/Tutorial/Part_2_03_Samples/AudioSampleKick.h" />
+		<Unit filename="Audio/examples/Tutorial/Part_2_03_Samples/AudioSampleSnare.h" />
+		<Unit filename="Audio/examples/Tutorial/Part_2_03_Samples/AudioSampleTomtom.h" />
+		<Unit filename="Audio/examples/Tutorial/Part_3_02_Fourier_Transform/AudioSampleGuitar.h" />
+		<Unit filename="Audio/examples/Tutorial/TestTutorialKit/AudioSampleButton1.h" />
+		<Unit filename="Audio/examples/Tutorial/TestTutorialKit/AudioSampleButton2.h" />
+		<Unit filename="Audio/examples/Tutorial/TestTutorialKit/AudioSampleButton3.h" />
+		<Unit filename="Audio/examples/Tutorial/TestTutorialKit/AudioSampleKnob1.h" />
+		<Unit filename="Audio/examples/Tutorial/TestTutorialKit/AudioSampleKnob2.h" />
+		<Unit filename="Audio/examples/Tutorial/TestTutorialKit/AudioSampleKnob3.h" />
+		<Unit filename="Audio/examples/Tutorial/TestTutorialKit/AudioSampleNosdcard.h" />
+		<Unit filename="Audio/filter_biquad.cpp" />
+		<Unit filename="Audio/filter_biquad.h" />
+		<Unit filename="Audio/filter_fir.h" />
+		<Unit filename="Audio/filter_ladder.h" />
+		<Unit filename="Audio/filter_variable.h" />
+		<Unit filename="Audio/input_adc.cpp" />
+		<Unit filename="Audio/input_adc.h" />
+		<Unit filename="Audio/input_adcs.h" />
+		<Unit filename="Audio/input_i2s.h" />
+		<Unit filename="Audio/input_i2s2.h" />
+		<Unit filename="Audio/input_i2s_hex.h" />
+		<Unit filename="Audio/input_i2s_oct.h" />
+		<Unit filename="Audio/input_i2s_quad.h" />
+		<Unit filename="Audio/input_pdm.h" />
+		<Unit filename="Audio/input_pdm_i2s2.h" />
+		<Unit filename="Audio/input_spdif3.h" />
+		<Unit filename="Audio/input_tdm.h" />
+		<Unit filename="Audio/input_tdm2.h" />
+		<Unit filename="Audio/memcpy_audio.S" />
+		<Unit filename="Audio/memcpy_audio.h" />
+		<Unit filename="Audio/mixer.h" />
+		<Unit filename="Audio/output_adat.h" />
+		<Unit filename="Audio/output_dac.h" />
+		<Unit filename="Audio/output_dacs.h" />
+		<Unit filename="Audio/output_i2s.h" />
+		<Unit filename="Audio/output_i2s2.h" />
+		<Unit filename="Audio/output_i2s_hex.h" />
+		<Unit filename="Audio/output_i2s_oct.h" />
+		<Unit filename="Audio/output_i2s_quad.h" />
+		<Unit filename="Audio/output_mqs.h" />
+		<Unit filename="Audio/output_pt8211.h" />
+		<Unit filename="Audio/output_pt8211_2.h" />
+		<Unit filename="Audio/output_pwm.h" />
+		<Unit filename="Audio/output_spdif.h" />
+		<Unit filename="Audio/output_spdif2.h" />
+		<Unit filename="Audio/output_spdif3.h" />
+		<Unit filename="Audio/output_tdm.h" />
+		<Unit filename="Audio/output_tdm2.h" />
+		<Unit filename="Audio/play_memory.h" />
+		<Unit filename="Audio/play_queue.h" />
+		<Unit filename="Audio/play_sd_raw.h" />
+		<Unit filename="Audio/play_sd_wav.h" />
+		<Unit filename="Audio/play_serialflash_raw.h" />
+		<Unit filename="Audio/record_queue.h" />
+		<Unit filename="Audio/spi_interrupt.h" />
+		<Unit filename="Audio/synth_dc.h" />
+		<Unit filename="Audio/synth_karplusstrong.h" />
+		<Unit filename="Audio/synth_pinknoise.h" />
+		<Unit filename="Audio/synth_pwm.h" />
+		<Unit filename="Audio/synth_simple_drum.h" />
+		<Unit filename="Audio/synth_sine.h" />
+		<Unit filename="Audio/synth_tonesweep.h" />
+		<Unit filename="Audio/synth_waveform.h" />
+		<Unit filename="Audio/synth_wavetable.h" />
+		<Unit filename="Audio/synth_whitenoise.h" />
+		<Unit filename="Audio/utility/dma_chan.h" />
+		<Unit filename="Audio/utility/dspinst.h" />
+		<Unit filename="Audio/utility/imxrt_hw.h" />
+		<Unit filename="Audio/utility/pdb.h" />
+		<Unit filename="Audio/utility/sqrt_integer.h" />
+		<Unit filename="EEPROM/EEPROM.cpp" />
+		<Unit filename="EEPROM/EEPROM.h" />
+		<Unit filename="MCP23017/src/MCP23017.cpp" />
+		<Unit filename="MCP23017/src/MCP23017.h" />
+		<Unit filename="Metro/Metro.cpp" />
+		<Unit filename="Metro/Metro.h" />
+		<Unit filename="SD/src/SD.h" />
+		<Unit filename="SPI/SPI.cpp" />
+		<Unit filename="SPI/SPI.h" />
+		<Unit filename="SafeString/src/BufferedInput.cpp" />
+		<Unit filename="SafeString/src/BufferedInput.h" />
+		<Unit filename="SafeString/src/BufferedOutput.cpp" />
+		<Unit filename="SafeString/src/BufferedOutput.h" />
+		<Unit filename="SafeString/src/PinFlasher.cpp" />
+		<Unit filename="SafeString/src/PinFlasher.h" />
+		<Unit filename="SafeString/src/SafeString.cpp" />
+		<Unit filename="SafeString/src/SafeString.h" />
+		<Unit filename="SafeString/src/SafeStringNameSpace.h" />
+		<Unit filename="SafeString/src/SafeStringNameSpaceEnd.h" />
+		<Unit filename="SafeString/src/SafeStringNameSpaceStart.h" />
+		<Unit filename="SafeString/src/SafeStringReader.cpp" />
+		<Unit filename="SafeString/src/SafeStringReader.h" />
+		<Unit filename="SafeString/src/SafeStringStream.cpp" />
+		<Unit filename="SafeString/src/SafeStringStream.h" />
+		<Unit filename="SafeString/src/SerialComs.cpp" />
+		<Unit filename="SafeString/src/SerialComs.h" />
+		<Unit filename="SafeString/src/loopTimer.cpp" />
+		<Unit filename="SafeString/src/loopTimer.h" />
+		<Unit filename="SafeString/src/millisDelay.cpp" />
+		<Unit filename="SafeString/src/millisDelay.h" />
+		<Unit filename="SdFat/doc/mainpage.h" />
+		<Unit filename="SdFat/examples/AvrAdcLogger/AvrAdcLogger.h" />
+		<Unit filename="SdFat/examples/ExFatLogger/ExFatLogger.h" />
+		<Unit filename="SdFat/extras/attic/PrintBasic.h" />
+		<Unit filename="SdFat/extras/attic/PrintTemplates.h" />
+		<Unit filename="SdFat/src/BufferedPrint.h" />
+		<Unit filename="SdFat/src/DigitalIO/DigitalPin.h" />
+		<Unit filename="SdFat/src/DigitalIO/SoftSPI.h" />
+		<Unit filename="SdFat/src/DigitalIO/boards/AvrDevelopersGpioPinMap.h" />
+		<Unit filename="SdFat/src/DigitalIO/boards/BobuinoGpioPinMap.h" />
+		<Unit filename="SdFat/src/DigitalIO/boards/GpioPinMap.h" />
+		<Unit filename="SdFat/src/DigitalIO/boards/LeonardoGpioPinMap.h" />
+		<Unit filename="SdFat/src/DigitalIO/boards/MegaGpioPinMap.h" />
+		<Unit filename="SdFat/src/DigitalIO/boards/SleepingBeautyGpioPinMap.h" />
+		<Unit filename="SdFat/src/DigitalIO/boards/Standard1284GpioPinMap.h" />
+		<Unit filename="SdFat/src/DigitalIO/boards/Teensy2GpioPinMap.h" />
+		<Unit filename="SdFat/src/DigitalIO/boards/Teensy2ppGpioPinMap.h" />
+		<Unit filename="SdFat/src/DigitalIO/boards/UnoGpioPinMap.h" />
+		<Unit filename="SdFat/src/ExFatLib/ExFatConfig.h" />
+		<Unit filename="SdFat/src/ExFatLib/ExFatFile.h" />
+		<Unit filename="SdFat/src/ExFatLib/ExFatFormatter.h" />
+		<Unit filename="SdFat/src/ExFatLib/ExFatLib.h" />
+		<Unit filename="SdFat/src/ExFatLib/ExFatPartition.h" />
+		<Unit filename="SdFat/src/ExFatLib/ExFatVolume.h" />
+		<Unit filename="SdFat/src/FatLib/FatFile.h" />
+		<Unit filename="SdFat/src/FatLib/FatFormatter.h" />
+		<Unit filename="SdFat/src/FatLib/FatLib.h" />
+		<Unit filename="SdFat/src/FatLib/FatPartition.h" />
+		<Unit filename="SdFat/src/FatLib/FatVolume.h" />
+		<Unit filename="SdFat/src/FreeStack.h" />
+		<Unit filename="SdFat/src/FsLib/FsFile.h" />
+		<Unit filename="SdFat/src/FsLib/FsFormatter.h" />
+		<Unit filename="SdFat/src/FsLib/FsLib.h" />
+		<Unit filename="SdFat/src/FsLib/FsNew.h" />
+		<Unit filename="SdFat/src/FsLib/FsVolume.h" />
+		<Unit filename="SdFat/src/MinimumSerial.h" />
+		<Unit filename="SdFat/src/RingBuf.h" />
+		<Unit filename="SdFat/src/SdCard/SdCard.h" />
+		<Unit filename="SdFat/src/SdCard/SdCardInfo.h" />
+		<Unit filename="SdFat/src/SdCard/SdCardInterface.h" />
+		<Unit filename="SdFat/src/SdCard/SdSpiCard.h" />
+		<Unit filename="SdFat/src/SdCard/SdioCard.h" />
+		<Unit filename="SdFat/src/SdCard/SdioTeensy.h" />
+		<Unit filename="SdFat/src/SdFat.h" />
+		<Unit filename="SdFat/src/SdFatConfig.h" />
+		<Unit filename="SdFat/src/SpiDriver/SdSpiArduinoDriver.h" />
+		<Unit filename="SdFat/src/SpiDriver/SdSpiAvr.h" />
+		<Unit filename="SdFat/src/SpiDriver/SdSpiBareUnoDriver.h" />
+		<Unit filename="SdFat/src/SpiDriver/SdSpiBaseClass.h" />
+		<Unit filename="SdFat/src/SpiDriver/SdSpiDriver.h" />
+		<Unit filename="SdFat/src/SpiDriver/SdSpiLibDriver.h" />
+		<Unit filename="SdFat/src/SpiDriver/SdSpiSoftDriver.h" />
+		<Unit filename="SdFat/src/common/ArduinoFiles.h" />
+		<Unit filename="SdFat/src/common/CompileDateTime.h" />
+		<Unit filename="SdFat/src/common/DebugMacros.h" />
+		<Unit filename="SdFat/src/common/FmtNumber.h" />
+		<Unit filename="SdFat/src/common/FsApiConstants.h" />
+		<Unit filename="SdFat/src/common/FsBlockDevice.h" />
+		<Unit filename="SdFat/src/common/FsBlockDeviceInterface.h" />
+		<Unit filename="SdFat/src/common/FsCache.h" />
+		<Unit filename="SdFat/src/common/FsDateTime.h" />
+		<Unit filename="SdFat/src/common/FsName.h" />
+		<Unit filename="SdFat/src/common/FsStructs.h" />
+		<Unit filename="SdFat/src/common/FsUtf.h" />
+		<Unit filename="SdFat/src/common/PrintBasic.h" />
+		<Unit filename="SdFat/src/common/SysCall.h" />
+		<Unit filename="SdFat/src/common/upcase.h" />
+		<Unit filename="SdFat/src/iostream/ArduinoStream.h" />
+		<Unit filename="SdFat/src/iostream/StdioStream.h" />
+		<Unit filename="SdFat/src/iostream/bufstream.h" />
+		<Unit filename="SdFat/src/iostream/fstream.h" />
+		<Unit filename="SdFat/src/iostream/ios.h" />
+		<Unit filename="SdFat/src/iostream/iostream.h" />
+		<Unit filename="SdFat/src/iostream/istream.h" />
+		<Unit filename="SdFat/src/iostream/ostream.h" />
+		<Unit filename="SdFat/src/sdios.h" />
+		<Unit filename="SerialFlash/SerialFlash.h" />
+		<Unit filename="SerialFlash/SerialFlashChip.cpp" />
+		<Unit filename="SerialFlash/SerialFlashDirectory.cpp" />
+		<Unit filename="SerialFlash/util/SerialFlash_directwrite.h" />
+		<Unit filename="Teensy_PWM/Packages_Patches/hardware/teensy/avr/cores/teensy/Stream.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="Teensy_PWM/Packages_Patches/hardware/teensy/avr/cores/teensy/Stream.h" />
+		<Unit filename="Teensy_PWM/Packages_Patches/hardware/teensy/avr/cores/teensy3/Stream.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="Teensy_PWM/Packages_Patches/hardware/teensy/avr/cores/teensy3/Stream.h" />
+		<Unit filename="Teensy_PWM/Packages_Patches/hardware/teensy/avr/cores/teensy4/Stream.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="Teensy_PWM/Packages_Patches/hardware/teensy/avr/cores/teensy4/Stream.h" />
+		<Unit filename="Teensy_PWM/src/PWM_Generic_Debug.h" />
+		<Unit filename="Teensy_PWM/src/Teensy_PWM.h" />
+		<Unit filename="Wire/Wire.cpp" />
+		<Unit filename="Wire/Wire.h" />
+		<Unit filename="Wire/WireIMXRT.cpp" />
+		<Unit filename="Wire/WireIMXRT.h" />
+		<Unit filename="Wire/WireKinetis.cpp" />
+		<Unit filename="Wire/WireKinetis.h" />
+		<Unit filename="Wire/utility/twi.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Wire/utility/twi.h" />
+		<Unit filename="audioanalyze.h" />
+		<Unit filename="bowcontrol.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="bowcontrol.h" />
+		<Unit filename="bowio.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="bowio.h" />
+		<Unit filename="calibrate.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="calibrate.h" />
+		<Unit filename="commandparser.h" />
+		<Unit filename="configuration.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="configuration.h" />
+		<Unit filename="controlReader.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="controlReader.h" />
+		<Unit filename="debugprint.h" />
+		<Unit filename="eepromhelpers.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="harmonicSeries.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="harmonicSeries.h" />
+		<Unit filename="isrclasswrapper.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="main.cpp" />
+		<Unit filename="maincommandhandler.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="midi.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="mute.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="name.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="servostepper.h" />
+		<Unit filename="settingshandler.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="settingshandler.h" />
+		<Unit filename="solenoid.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="stringmodule.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="teensy4/Arduino.h" />
+		<Unit filename="teensy4/AudioStream.cpp" />
+		<Unit filename="teensy4/AudioStream.h" />
+		<Unit filename="teensy4/Blink.cc">
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="teensy4/Client.h" />
+		<Unit filename="teensy4/CrashReport.cpp" />
+		<Unit filename="teensy4/CrashReport.h" />
+		<Unit filename="teensy4/DMAChannel.cpp" />
+		<Unit filename="teensy4/DMAChannel.h" />
+		<Unit filename="teensy4/EventResponder.cpp" />
+		<Unit filename="teensy4/EventResponder.h" />
+		<Unit filename="teensy4/FS.h" />
+		<Unit filename="teensy4/HardwareSerial.cpp" />
+		<Unit filename="teensy4/HardwareSerial.h" />
+		<Unit filename="teensy4/HardwareSerial1.cpp" />
+		<Unit filename="teensy4/HardwareSerial2.cpp" />
+		<Unit filename="teensy4/HardwareSerial3.cpp" />
+		<Unit filename="teensy4/HardwareSerial4.cpp" />
+		<Unit filename="teensy4/HardwareSerial5.cpp" />
+		<Unit filename="teensy4/HardwareSerial6.cpp" />
+		<Unit filename="teensy4/HardwareSerial7.cpp" />
+		<Unit filename="teensy4/HardwareSerial8.cpp" />
+		<Unit filename="teensy4/IPAddress.cpp" />
+		<Unit filename="teensy4/IPAddress.h" />
+		<Unit filename="teensy4/IntervalTimer.cpp" />
+		<Unit filename="teensy4/IntervalTimer.h" />
+		<Unit filename="teensy4/Keyboard.h" />
+		<Unit filename="teensy4/MIDIUSB.h" />
+		<Unit filename="teensy4/Mouse.h" />
+		<Unit filename="teensy4/Print.cpp" />
+		<Unit filename="teensy4/Print.h" />
+		<Unit filename="teensy4/Printable.h" />
+		<Unit filename="teensy4/Server.h" />
+		<Unit filename="teensy4/Stream.cpp" />
+		<Unit filename="teensy4/Stream.h" />
+		<Unit filename="teensy4/Time.cpp" />
+		<Unit filename="teensy4/Tone.cpp" />
+		<Unit filename="teensy4/Udp.h" />
+		<Unit filename="teensy4/WCharacter.h" />
+		<Unit filename="teensy4/WMath.cpp" />
+		<Unit filename="teensy4/WProgram.h" />
+		<Unit filename="teensy4/WString.cpp" />
+		<Unit filename="teensy4/WString.h" />
+		<Unit filename="teensy4/analog.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/arm_common_tables.h" />
+		<Unit filename="teensy4/arm_const_structs.h" />
+		<Unit filename="teensy4/arm_math.h" />
+		<Unit filename="teensy4/avr/eeprom.h" />
+		<Unit filename="teensy4/avr/interrupt.h" />
+		<Unit filename="teensy4/avr/io.h" />
+		<Unit filename="teensy4/avr/pgmspace.h" />
+		<Unit filename="teensy4/avr/power.h" />
+		<Unit filename="teensy4/avr/sleep.h" />
+		<Unit filename="teensy4/avr/wdt.h" />
+		<Unit filename="teensy4/avr_emulation.h" />
+		<Unit filename="teensy4/avr_functions.h" />
+		<Unit filename="teensy4/binary.h" />
+		<Unit filename="teensy4/bootdata.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/clockspeed.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/cmsis_gcc.h" />
+		<Unit filename="teensy4/core_cm7.h" />
+		<Unit filename="teensy4/core_cmInstr.h" />
+		<Unit filename="teensy4/core_id.h" />
+		<Unit filename="teensy4/core_pins.h" />
+		<Unit filename="teensy4/debug/printf.h" />
+		<Unit filename="teensy4/debugprintf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/delay.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/digital.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/eeprom.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/elapsedMillis.h" />
+		<Unit filename="teensy4/extmem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/fuse.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/imxrt.h" />
+		<Unit filename="teensy4/interrupt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/keylayouts.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/keylayouts.h" />
+		<Unit filename="teensy4/libc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/main.cpp" />
+		<Unit filename="teensy4/math_helper.h" />
+		<Unit filename="teensy4/memcpy-armv7m.S" />
+		<Unit filename="teensy4/memset.S" />
+		<Unit filename="teensy4/new.cpp" />
+		<Unit filename="teensy4/nonstd.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/pgmspace.h" />
+		<Unit filename="teensy4/pins_arduino.h" />
+		<Unit filename="teensy4/pwm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/rtc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/serialEvent.cpp" />
+		<Unit filename="teensy4/serialEvent1.cpp" />
+		<Unit filename="teensy4/serialEvent2.cpp" />
+		<Unit filename="teensy4/serialEvent3.cpp" />
+		<Unit filename="teensy4/serialEvent4.cpp" />
+		<Unit filename="teensy4/serialEvent5.cpp" />
+		<Unit filename="teensy4/serialEvent6.cpp" />
+		<Unit filename="teensy4/serialEvent7.cpp" />
+		<Unit filename="teensy4/serialEvent8.cpp" />
+		<Unit filename="teensy4/serialEventUSB1.cpp" />
+		<Unit filename="teensy4/serialEventUSB2.cpp" />
+		<Unit filename="teensy4/sm_alloc_valid.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/sm_calloc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/sm_free.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/sm_hash.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/sm_malloc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/sm_malloc_stats.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/sm_pool.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/sm_realloc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/sm_realloc_i.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/sm_realloc_move.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/sm_szalloc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/sm_util.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/sm_zalloc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/smalloc.h" />
+		<Unit filename="teensy4/smalloc_i.h" />
+		<Unit filename="teensy4/startup.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/tempmon.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/usb.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/usb_audio.cpp" />
+		<Unit filename="teensy4/usb_audio.h" />
+		<Unit filename="teensy4/usb_desc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/usb_desc.h" />
+		<Unit filename="teensy4/usb_dev.h" />
+		<Unit filename="teensy4/usb_flightsim.cpp" />
+		<Unit filename="teensy4/usb_flightsim.h" />
+		<Unit filename="teensy4/usb_inst.cpp" />
+		<Unit filename="teensy4/usb_joystick.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/usb_joystick.h" />
+		<Unit filename="teensy4/usb_keyboard.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/usb_keyboard.h" />
+		<Unit filename="teensy4/usb_midi.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/usb_midi.h" />
+		<Unit filename="teensy4/usb_mouse.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/usb_mouse.h" />
+		<Unit filename="teensy4/usb_mtp.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/usb_mtp.h" />
+		<Unit filename="teensy4/usb_names.h" />
+		<Unit filename="teensy4/usb_rawhid.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/usb_rawhid.h" />
+		<Unit filename="teensy4/usb_seremu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/usb_seremu.h" />
+		<Unit filename="teensy4/usb_serial.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/usb_serial.h" />
+		<Unit filename="teensy4/usb_serial2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/usb_serial3.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/usb_touch.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teensy4/usb_touch.h" />
+		<Unit filename="teensy4/util/atomic.h" />
+		<Unit filename="teensy4/util/crc16.h" />
+		<Unit filename="teensy4/util/delay.h" />
+		<Unit filename="teensy4/util/parity.h" />
+		<Unit filename="teensy4/wiring.h" />
+		<Unit filename="teensy4/wiring_private.h" />
+		<Unit filename="teensy4/yield.cpp" />
+		<Unit filename="tinyexpr/src/tinyexpr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="tinyexpr/src/tinyexpr.h" />
+		<Unit filename="trashcollection.txt" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,418 @@
+\hypertarget{main_8cpp}{}\doxysection{main.\+cpp File Reference}
+\label{main_8cpp}\index{main.cpp@{main.cpp}}
+{\ttfamily \#include $<$WProgram.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}string.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Hardware\+Serial.\+h$>$}\newline
+{\ttfamily \#include $<$Buffered\+Input.\+h$>$}\newline
+{\ttfamily \#include $<$Buffered\+Output.\+h$>$}\newline
+{\ttfamily \#include $<$Pin\+Flasher.\+h$>$}\newline
+{\ttfamily \#include $<$Safe\+String.\+h$>$}\newline
+{\ttfamily \#include $<$Safe\+String\+Name\+Space.\+h$>$}\newline
+{\ttfamily \#include $<$Safe\+String\+Name\+Space\+End.\+h$>$}\newline
+{\ttfamily \#include $<$Safe\+String\+Name\+Space\+Start.\+h$>$}\newline
+{\ttfamily \#include $<$Safe\+String\+Reader.\+h$>$}\newline
+{\ttfamily \#include $<$Safe\+String\+Stream.\+h$>$}\newline
+{\ttfamily \#include $<$Serial\+Coms.\+h$>$}\newline
+{\ttfamily \#include $<$loop\+Timer.\+h$>$}\newline
+{\ttfamily \#include $<$millis\+Delay.\+h$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}debugprint.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}harmonic\+Series.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}eepromhelpers.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}configuration.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}commandparser.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}audioanalyze.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bowio.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}calibrate.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}solenoid.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bowcontrol.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mute.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stringmodule.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}midi.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}isrclasswrapper.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}settingshandler.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}control\+Reader.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}maincommandhandler.\+cpp\char`\"{}}\newline
+Include dependency graph for main.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main_8cpp_a7d0b5b6bfc1bae2a135c12250762d493}{AUDIO\+\_\+\+INTERFACE}}
+\item 
+\#define \mbox{\hyperlink{main_8cpp_a7a2e501ed0e83cab3740b8934d6c42c1}{master\+Slave\+Baud\+Rate}}~2000000
+\item 
+\#define \mbox{\hyperlink{main_8cpp_ae19eb15a5c6b22f63f3819a0105339d8}{clamp}}(v,  i,  x)~min(max(v,i),x)
+\item 
+\#define \mbox{\hyperlink{main_8cpp_aa13d9ed1a1a161ce9dfc54a559c27b21}{current\+EEPROMVersion}}~0x02
+\item 
+\#define \mbox{\hyperlink{main_8cpp_a2c48b7e8ad263f85342e4132637108c1}{master\+Rx}}~0
+\item 
+\#define \mbox{\hyperlink{main_8cpp_aa9f03a97087feac8e2c2928240e7c332}{master\+Tx}}~1
+\item 
+\#define \mbox{\hyperlink{main_8cpp_ac9a12a1a36ee3528c19ef62340fe33c3}{control\+Read\+Interval\+Time}}~500
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{main_8cpp_a8acf4e573134c18578761aa8ffca1476}{create\+Buffered\+Output}} (ss\+Output, 66, DROP\+\_\+\+UNTIL\+\_\+\+EMPTY)
+\begin{DoxyCompactList}\small\item\em Safe\+String buffer creation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{main_8cpp_ac582113083535f9c743d3251bcbe0de8}{create\+Safe\+String\+Reader}} (ss\+Reader, 4096, \char`\"{}\textbackslash{}r\textbackslash{}n\char`\"{})
+\begin{DoxyCompactList}\small\item\em Safe\+String reader creation. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8cpp_afc3e7d08d802f694ab6a85e9908048f4}{freeram}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_aefb15016346e50493d9dc67f9c02c37d}{motor\+Driver\+Fault}} ()
+\begin{DoxyCompactList}\small\item\em Interrupt call. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a9757a20146502da88270d1534b09db95}{update\+Servo\+Stepper\+Pressure0}} ()
+\begin{DoxyCompactList}\small\item\em Initial setup function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a8b43b6373262751806f58bda13204a9c}{update\+Servo\+Stepper\+Mute0}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+unsigned long \mbox{\hyperlink{main_8cpp_a9d1a03e6178b7c399cce31fc07aaaef8}{\+\_\+heap\+\_\+start}}
+\item 
+unsigned long \mbox{\hyperlink{main_8cpp_a1e096ab52b7c061afd475f4fedc6c1e9}{\+\_\+heap\+\_\+end}}
+\item 
+char $\ast$ \mbox{\hyperlink{main_8cpp_ad193a2cc121e0d4614a1c21eb463fb56}{\+\_\+\+\_\+brkval}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{main_8cpp_a075a4b279561f3ef4e2d17ee5880152d}{read\+EEPROMVersion}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{main_8cpp_aa417422d66c31930beb0e122d074e47f}{current\+EEPROMOffset}} = 0
+\item 
+int \mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{current\+Config}} = 0
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classconfiguration}{configuration}} $>$ \mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{config\+Array}}
+\item 
+\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classstringModule}{string\+Module}} $>$ \mbox{\hyperlink{main_8cpp_aacbb4662d46136722bc7069351a1a30f}{string\+Module\+Array}}
+\item 
+control\+Reader $\ast$ \mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{control\+Read}}
+\item 
+bool \mbox{\hyperlink{main_8cpp_af7549b1077c0ff66290d43d479bccf25}{f\+Continuous}} = false
+\begin{DoxyCompactList}\small\item\em Variable for rolling status on/off. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_a9db6f164a5706425d34dee7a1ec21160}{freq\+Report}} = false
+\item 
+int \mbox{\hyperlink{main_8cpp_a7b9058a935460cc92ebf7b48e4da32bb}{freq\+Report\+Channel}} = 0
+\item 
+int \mbox{\hyperlink{main_8cpp_a0652452d3c6986b4f212f9a4cd94f213}{current\+String\+Module}} = 0
+\item 
+unsigned long \mbox{\hyperlink{main_8cpp_a844366311ce26d965b0899b9a200b26b}{previous\+Time}} = 0
+\begin{DoxyCompactList}\small\item\em Main loop function. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{main_8cpp_af205655c0c86fc6aaf4c8450d8243938}{current\+Time}} = 0
+\item 
+unsigned long \mbox{\hyperlink{main_8cpp_ac87efa454b18ecfc7d56b23ebf8fb735}{command\+Upadate\+Interval}} = 1000
+\item 
+elapsed\+Millis \mbox{\hyperlink{main_8cpp_ab04d737a375f71bd322407e877bcfa68}{update\+Rolling\+Status}}
+\item 
+elapsed\+Millis \mbox{\hyperlink{main_8cpp_a61640147b159085a4b3c74bcfaaf3376}{el\+Test}}
+\item 
+elapsed\+Micros \mbox{\hyperlink{main_8cpp_a24894588b78d05d43473e8e72dc24cb2}{control\+Reader\+Interval}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{main_8cpp_a7d0b5b6bfc1bae2a135c12250762d493}\label{main_8cpp_a7d0b5b6bfc1bae2a135c12250762d493}} 
+\index{main.cpp@{main.cpp}!AUDIO\_INTERFACE@{AUDIO\_INTERFACE}}
+\index{AUDIO\_INTERFACE@{AUDIO\_INTERFACE}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{AUDIO\_INTERFACE}{AUDIO\_INTERFACE}}
+{\footnotesize\ttfamily \#define AUDIO\+\_\+\+INTERFACE}
+
+\mbox{\Hypertarget{main_8cpp_ae19eb15a5c6b22f63f3819a0105339d8}\label{main_8cpp_ae19eb15a5c6b22f63f3819a0105339d8}} 
+\index{main.cpp@{main.cpp}!clamp@{clamp}}
+\index{clamp@{clamp}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{clamp}{clamp}}
+{\footnotesize\ttfamily \#define clamp(\begin{DoxyParamCaption}\item[{}]{v,  }\item[{}]{i,  }\item[{}]{x }\end{DoxyParamCaption})~min(max(v,i),x)}
+
+\mbox{\Hypertarget{main_8cpp_ac9a12a1a36ee3528c19ef62340fe33c3}\label{main_8cpp_ac9a12a1a36ee3528c19ef62340fe33c3}} 
+\index{main.cpp@{main.cpp}!controlReadIntervalTime@{controlReadIntervalTime}}
+\index{controlReadIntervalTime@{controlReadIntervalTime}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{controlReadIntervalTime}{controlReadIntervalTime}}
+{\footnotesize\ttfamily \#define control\+Read\+Interval\+Time~500}
+
+\mbox{\Hypertarget{main_8cpp_aa13d9ed1a1a161ce9dfc54a559c27b21}\label{main_8cpp_aa13d9ed1a1a161ce9dfc54a559c27b21}} 
+\index{main.cpp@{main.cpp}!currentEEPROMVersion@{currentEEPROMVersion}}
+\index{currentEEPROMVersion@{currentEEPROMVersion}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{currentEEPROMVersion}{currentEEPROMVersion}}
+{\footnotesize\ttfamily \#define current\+EEPROMVersion~0x02}
+
+\mbox{\Hypertarget{main_8cpp_a2c48b7e8ad263f85342e4132637108c1}\label{main_8cpp_a2c48b7e8ad263f85342e4132637108c1}} 
+\index{main.cpp@{main.cpp}!masterRx@{masterRx}}
+\index{masterRx@{masterRx}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{masterRx}{masterRx}}
+{\footnotesize\ttfamily \#define master\+Rx~0}
+
+\mbox{\Hypertarget{main_8cpp_a7a2e501ed0e83cab3740b8934d6c42c1}\label{main_8cpp_a7a2e501ed0e83cab3740b8934d6c42c1}} 
+\index{main.cpp@{main.cpp}!masterSlaveBaudRate@{masterSlaveBaudRate}}
+\index{masterSlaveBaudRate@{masterSlaveBaudRate}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{masterSlaveBaudRate}{masterSlaveBaudRate}}
+{\footnotesize\ttfamily \#define master\+Slave\+Baud\+Rate~2000000}
+
+\mbox{\Hypertarget{main_8cpp_aa9f03a97087feac8e2c2928240e7c332}\label{main_8cpp_aa9f03a97087feac8e2c2928240e7c332}} 
+\index{main.cpp@{main.cpp}!masterTx@{masterTx}}
+\index{masterTx@{masterTx}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{masterTx}{masterTx}}
+{\footnotesize\ttfamily \#define master\+Tx~1}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_a8acf4e573134c18578761aa8ffca1476}\label{main_8cpp_a8acf4e573134c18578761aa8ffca1476}} 
+\index{main.cpp@{main.cpp}!createBufferedOutput@{createBufferedOutput}}
+\index{createBufferedOutput@{createBufferedOutput}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{createBufferedOutput()}{createBufferedOutput()}}
+{\footnotesize\ttfamily create\+Buffered\+Output (\begin{DoxyParamCaption}\item[{ss\+Output}]{,  }\item[{66}]{,  }\item[{DROP\+\_\+\+UNTIL\+\_\+\+EMPTY}]{ }\end{DoxyParamCaption})}
+
+
+
+Safe\+String buffer creation. 
+
+\mbox{\Hypertarget{main_8cpp_ac582113083535f9c743d3251bcbe0de8}\label{main_8cpp_ac582113083535f9c743d3251bcbe0de8}} 
+\index{main.cpp@{main.cpp}!createSafeStringReader@{createSafeStringReader}}
+\index{createSafeStringReader@{createSafeStringReader}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{createSafeStringReader()}{createSafeStringReader()}}
+{\footnotesize\ttfamily create\+Safe\+String\+Reader (\begin{DoxyParamCaption}\item[{ss\+Reader}]{,  }\item[{4096}]{,  }\item[{\char`\"{}\textbackslash{}r\textbackslash{}n\char`\"{}}]{ }\end{DoxyParamCaption})}
+
+
+
+Safe\+String reader creation. 
+
+\mbox{\Hypertarget{main_8cpp_afc3e7d08d802f694ab6a85e9908048f4}\label{main_8cpp_afc3e7d08d802f694ab6a85e9908048f4}} 
+\index{main.cpp@{main.cpp}!freeram@{freeram}}
+\index{freeram@{freeram}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{freeram()}{freeram()}}
+{\footnotesize\ttfamily int freeram (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp_afc3e7d08d802f694ab6a85e9908048f4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{main_8cpp_afe461d27b9c48d5921c00d521181f12f}\label{main_8cpp_afe461d27b9c48d5921c00d521181f12f}} 
+\index{main.cpp@{main.cpp}!loop@{loop}}
+\index{loop@{loop}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily void loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp_afe461d27b9c48d5921c00d521181f12f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{main_8cpp_aefb15016346e50493d9dc67f9c02c37d}\label{main_8cpp_aefb15016346e50493d9dc67f9c02c37d}} 
+\index{main.cpp@{main.cpp}!motorDriverFault@{motorDriverFault}}
+\index{motorDriverFault@{motorDriverFault}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{motorDriverFault()}{motorDriverFault()}}
+{\footnotesize\ttfamily void motor\+Driver\+Fault (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Interrupt call. 
+
+\textbackslash{}brietf Interrupt callback function for measuring bowing speed of string unit
+
+fm\+Pin\+State\+Changed\+ISR will be called whenever an Interrupt event happens on the pin associated. The pin associated is in turn connected to the reflection sensor output of a string unit. The function also includes the setting up of a timeout function in case of no bow movement as the interrupt will never be triggered in that case. Interrupt callback function tied to the $\sim$\+FAULT output of the motor driver of a string unit Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp_aefb15016346e50493d9dc67f9c02c37d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}\label{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}} 
+\index{main.cpp@{main.cpp}!setup@{setup}}
+\index{setup@{setup}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{main_8cpp_a8b43b6373262751806f58bda13204a9c}\label{main_8cpp_a8b43b6373262751806f58bda13204a9c}} 
+\index{main.cpp@{main.cpp}!updateServoStepperMute0@{updateServoStepperMute0}}
+\index{updateServoStepperMute0@{updateServoStepperMute0}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{updateServoStepperMute0()}{updateServoStepperMute0()}}
+{\footnotesize\ttfamily void update\+Servo\+Stepper\+Mute0 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{main_8cpp_a8b43b6373262751806f58bda13204a9c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{main_8cpp_a9757a20146502da88270d1534b09db95}\label{main_8cpp_a9757a20146502da88270d1534b09db95}} 
+\index{main.cpp@{main.cpp}!updateServoStepperPressure0@{updateServoStepperPressure0}}
+\index{updateServoStepperPressure0@{updateServoStepperPressure0}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{updateServoStepperPressure0()}{updateServoStepperPressure0()}}
+{\footnotesize\ttfamily void update\+Servo\+Stepper\+Pressure0 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initial setup function. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{main_8cpp_a9757a20146502da88270d1534b09db95_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{main_8cpp_ad193a2cc121e0d4614a1c21eb463fb56}\label{main_8cpp_ad193a2cc121e0d4614a1c21eb463fb56}} 
+\index{main.cpp@{main.cpp}!\_\_brkval@{\_\_brkval}}
+\index{\_\_brkval@{\_\_brkval}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{\_\_brkval}{\_\_brkval}}
+{\footnotesize\ttfamily char$\ast$ \+\_\+\+\_\+brkval\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{main_8cpp_a1e096ab52b7c061afd475f4fedc6c1e9}\label{main_8cpp_a1e096ab52b7c061afd475f4fedc6c1e9}} 
+\index{main.cpp@{main.cpp}!\_heap\_end@{\_heap\_end}}
+\index{\_heap\_end@{\_heap\_end}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{\_heap\_end}{\_heap\_end}}
+{\footnotesize\ttfamily unsigned long \+\_\+heap\+\_\+end\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{main_8cpp_a9d1a03e6178b7c399cce31fc07aaaef8}\label{main_8cpp_a9d1a03e6178b7c399cce31fc07aaaef8}} 
+\index{main.cpp@{main.cpp}!\_heap\_start@{\_heap\_start}}
+\index{\_heap\_start@{\_heap\_start}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{\_heap\_start}{\_heap\_start}}
+{\footnotesize\ttfamily unsigned long \+\_\+heap\+\_\+start\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{main_8cpp_a065be67893a579abec3c0de4659ebc1c}\label{main_8cpp_a065be67893a579abec3c0de4659ebc1c}} 
+\index{main.cpp@{main.cpp}!commands@{commands}}
+\index{commands@{commands}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{commands}{commands}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcommandList}{command\+List}}$\ast$ commands}
+
+\mbox{\Hypertarget{main_8cpp_ac87efa454b18ecfc7d56b23ebf8fb735}\label{main_8cpp_ac87efa454b18ecfc7d56b23ebf8fb735}} 
+\index{main.cpp@{main.cpp}!commandUpadateInterval@{commandUpadateInterval}}
+\index{commandUpadateInterval@{commandUpadateInterval}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{commandUpadateInterval}{commandUpadateInterval}}
+{\footnotesize\ttfamily unsigned long command\+Upadate\+Interval = 1000}
+
+\mbox{\Hypertarget{main_8cpp_abb8915aa4f8893abeb296761ffcff439}\label{main_8cpp_abb8915aa4f8893abeb296761ffcff439}} 
+\index{main.cpp@{main.cpp}!configArray@{configArray}}
+\index{configArray@{configArray}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{configArray}{configArray}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classconfiguration}{configuration}}$>$ config\+Array}
+
+\mbox{\Hypertarget{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}\label{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}} 
+\index{main.cpp@{main.cpp}!controlRead@{controlRead}}
+\index{controlRead@{controlRead}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{controlRead}{controlRead}}
+{\footnotesize\ttfamily control\+Reader$\ast$ control\+Read}
+
+\mbox{\Hypertarget{main_8cpp_a24894588b78d05d43473e8e72dc24cb2}\label{main_8cpp_a24894588b78d05d43473e8e72dc24cb2}} 
+\index{main.cpp@{main.cpp}!controlReaderInterval@{controlReaderInterval}}
+\index{controlReaderInterval@{controlReaderInterval}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{controlReaderInterval}{controlReaderInterval}}
+{\footnotesize\ttfamily elapsed\+Micros control\+Reader\+Interval}
+
+\mbox{\Hypertarget{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}\label{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}} 
+\index{main.cpp@{main.cpp}!currentConfig@{currentConfig}}
+\index{currentConfig@{currentConfig}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{currentConfig}{currentConfig}}
+{\footnotesize\ttfamily int current\+Config = 0}
+
+\mbox{\Hypertarget{main_8cpp_aa417422d66c31930beb0e122d074e47f}\label{main_8cpp_aa417422d66c31930beb0e122d074e47f}} 
+\index{main.cpp@{main.cpp}!currentEEPROMOffset@{currentEEPROMOffset}}
+\index{currentEEPROMOffset@{currentEEPROMOffset}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{currentEEPROMOffset}{currentEEPROMOffset}}
+{\footnotesize\ttfamily uint16\+\_\+t current\+EEPROMOffset = 0}
+
+\mbox{\Hypertarget{main_8cpp_a0652452d3c6986b4f212f9a4cd94f213}\label{main_8cpp_a0652452d3c6986b4f212f9a4cd94f213}} 
+\index{main.cpp@{main.cpp}!currentStringModule@{currentStringModule}}
+\index{currentStringModule@{currentStringModule}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{currentStringModule}{currentStringModule}}
+{\footnotesize\ttfamily int current\+String\+Module = 0}
+
+\mbox{\Hypertarget{main_8cpp_af205655c0c86fc6aaf4c8450d8243938}\label{main_8cpp_af205655c0c86fc6aaf4c8450d8243938}} 
+\index{main.cpp@{main.cpp}!currentTime@{currentTime}}
+\index{currentTime@{currentTime}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{currentTime}{currentTime}}
+{\footnotesize\ttfamily unsigned long current\+Time = 0}
+
+\mbox{\Hypertarget{main_8cpp_a61640147b159085a4b3c74bcfaaf3376}\label{main_8cpp_a61640147b159085a4b3c74bcfaaf3376}} 
+\index{main.cpp@{main.cpp}!elTest@{elTest}}
+\index{elTest@{elTest}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{elTest}{elTest}}
+{\footnotesize\ttfamily elapsed\+Millis el\+Test}
+
+\mbox{\Hypertarget{main_8cpp_af7549b1077c0ff66290d43d479bccf25}\label{main_8cpp_af7549b1077c0ff66290d43d479bccf25}} 
+\index{main.cpp@{main.cpp}!fContinuous@{fContinuous}}
+\index{fContinuous@{fContinuous}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{fContinuous}{fContinuous}}
+{\footnotesize\ttfamily bool f\+Continuous = false}
+
+
+
+Variable for rolling status on/off. 
+
+\mbox{\Hypertarget{main_8cpp_a9db6f164a5706425d34dee7a1ec21160}\label{main_8cpp_a9db6f164a5706425d34dee7a1ec21160}} 
+\index{main.cpp@{main.cpp}!freqReport@{freqReport}}
+\index{freqReport@{freqReport}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{freqReport}{freqReport}}
+{\footnotesize\ttfamily bool freq\+Report = false}
+
+\mbox{\Hypertarget{main_8cpp_a7b9058a935460cc92ebf7b48e4da32bb}\label{main_8cpp_a7b9058a935460cc92ebf7b48e4da32bb}} 
+\index{main.cpp@{main.cpp}!freqReportChannel@{freqReportChannel}}
+\index{freqReportChannel@{freqReportChannel}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{freqReportChannel}{freqReportChannel}}
+{\footnotesize\ttfamily int freq\+Report\+Channel = 0}
+
+\mbox{\Hypertarget{main_8cpp_a844366311ce26d965b0899b9a200b26b}\label{main_8cpp_a844366311ce26d965b0899b9a200b26b}} 
+\index{main.cpp@{main.cpp}!previousTime@{previousTime}}
+\index{previousTime@{previousTime}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{previousTime}{previousTime}}
+{\footnotesize\ttfamily unsigned long previous\+Time = 0}
+
+
+
+Main loop function. 
+
+
+\begin{DoxyItemize}
+\item The flow of the main loop is as follows\+:
+\begin{DoxyEnumerate}
+\item Process serial buffer
+\item Process USB commands
+\item Add any serial commands to command list and execute all commands in list
+\item Process each strings update function 
+\end{DoxyEnumerate}
+\end{DoxyItemize}\mbox{\Hypertarget{main_8cpp_a075a4b279561f3ef4e2d17ee5880152d}\label{main_8cpp_a075a4b279561f3ef4e2d17ee5880152d}} 
+\index{main.cpp@{main.cpp}!readEEPROMVersion@{readEEPROMVersion}}
+\index{readEEPROMVersion@{readEEPROMVersion}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{readEEPROMVersion}{readEEPROMVersion}}
+{\footnotesize\ttfamily uint8\+\_\+t read\+EEPROMVersion}
+
+\mbox{\Hypertarget{main_8cpp_aacbb4662d46136722bc7069351a1a30f}\label{main_8cpp_aacbb4662d46136722bc7069351a1a30f}} 
+\index{main.cpp@{main.cpp}!stringModuleArray@{stringModuleArray}}
+\index{stringModuleArray@{stringModuleArray}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{stringModuleArray}{stringModuleArray}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classstringModule}{string\+Module}}$>$ string\+Module\+Array}
+
+\mbox{\Hypertarget{main_8cpp_ab04d737a375f71bd322407e877bcfa68}\label{main_8cpp_ab04d737a375f71bd322407e877bcfa68}} 
+\index{main.cpp@{main.cpp}!updateRollingStatus@{updateRollingStatus}}
+\index{updateRollingStatus@{updateRollingStatus}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{updateRollingStatus}{updateRollingStatus}}
+{\footnotesize\ttfamily elapsed\+Millis update\+Rolling\+Status}
+

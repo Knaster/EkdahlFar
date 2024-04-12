@@ -1,0 +1,266 @@
+\hypertarget{classcalibrate}{}\doxysection{calibrate Class Reference}
+\label{classcalibrate}\index{calibrate@{calibrate}}
+
+
+{\ttfamily \#include $<$calibrate.\+h$>$}
+
+
+
+Collaboration diagram for calibrate\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcalibrate__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcalibrate_a6b4532bd790dcdc1bd4034e16e15ec71}{calibrate}} (\mbox{\hyperlink{classbowIO}{bow\+IO}} \&\+\_\+bow\+IO, \mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}} \&\+\_\+\+\_\+calibration\+Data, \mbox{\hyperlink{classbowControl}{bow\+Control}} \&\+\_\+bow\+Control)
+\begin{DoxyCompactList}\small\item\em Class constructor. Binds to the associated \mbox{\hyperlink{classbowIO}{bow\+IO}} class and reads any existing EEPROM data into calibration\+Data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcalibrate_af3c73bf75c5b8a2d942615d34669bf53}{start\+Audio\+Analyzing}} ()
+\item 
+void \mbox{\hyperlink{classcalibrate_a928e7a5c8b36e55c34878bdba55df4ee}{stop\+Audio\+Analyzing}} ()
+\item 
+bool \mbox{\hyperlink{classcalibrate_a6e708417f14acd978c8d2a38f5849074}{wait\+For\+Bow\+To\+Stabilize}} (uint16\+\_\+t max\+Iterations)
+\begin{DoxyCompactList}\small\item\em Waits for the bow speed to stabilize, used after setting a new bow speed. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classcalibrate_a8901c66131f46a26940c4ccd5d410996}{find\+Min\+Max\+Pressure}} ()
+\item 
+bool \mbox{\hyperlink{classcalibrate_a6654b82c8a1dbb55502cdfb4ef6a7b1f}{find\+Min\+Max\+Speed\+PWM}} ()
+\begin{DoxyCompactList}\small\item\em Find the minimum and maximum bow speed using direct hardware PWM control (as opposed to PID control) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classcalibrate_ae571678a639c870844b02cfecf3ec2b4}{calibrate\+All}} ()
+\begin{DoxyCompactList}\small\item\em Perform all calibration tests. \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{classcalibrate_a37b5afce3d7146dd5d12f82ddb00e7af}{dump\+Data}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbowIO}{bow\+IO}} $\ast$ \mbox{\hyperlink{classcalibrate_a14b2f0b41944890ea89c8528823c4c00}{bow\+IOConnect}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classbowIO}{bow\+IO}} class associated with this calibration class \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbowControl}{bow\+Control}} $\ast$ \mbox{\hyperlink{classcalibrate_af8ad4af07753d4e21fa3b96e40d6c74e}{bow\+Control\+Connect}}
+\item 
+int \mbox{\hyperlink{classcalibrate_a878d15dd653236499b6bb3cbf90b2d73}{EEPROM\+\_\+offset}} = 0
+\item 
+\mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}} $\ast$ \mbox{\hyperlink{classcalibrate_a86bbeed42caecf5da6d2a4a2c118fa04}{calibration\+Data}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classcalibrate_a74535f13b751adcb657029ef0088e09c}{max\+Test\+Pressure}} = 50000
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classcalibrate_a157d35f3855c4707cfe0d697bd557a8b}{find\+Min\+Pressure}} ()
+\item 
+bool \mbox{\hyperlink{classcalibrate_ac7f4beb3939af5f301ee39f3b59bc74c}{find\+Max\+Pressure}} ()
+\begin{DoxyCompactList}\small\item\em Find the minimum and maximum usable pressure Maximum pressure is calculated as the pressure just before the bow motor stalls against the string using max\+Speed\+PWM as the metric. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for finding out the physical limitations and properties of a bow string unit
+
+The proper scheme for using the routines is to
+\begin{DoxyItemize}
+\item Find the physical minimum and maximum bow speed of the motor using hardware PWM
+\item Find the minimum and maximum bow pressure by
+\begin{DoxyItemize}
+\item Setting the bow speed to the minimum speed limit obtained by previous routines and record the first bow pressure where the motor speed goes down, aka where the bow is touching the string
+\item Setting the bow speed to the maximum speed limit obtained by previous routines and record at what pressure the motor stops completely (stalls) 
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcalibrate_a6b4532bd790dcdc1bd4034e16e15ec71}\label{classcalibrate_a6b4532bd790dcdc1bd4034e16e15ec71}} 
+\index{calibrate@{calibrate}!calibrate@{calibrate}}
+\index{calibrate@{calibrate}!calibrate@{calibrate}}
+\doxysubsubsection{\texorpdfstring{calibrate()}{calibrate()}}
+{\footnotesize\ttfamily calibrate\+::calibrate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classbowIO}{bow\+IO}} \&}]{\+\_\+bow\+IO,  }\item[{\mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}} \&}]{\+\_\+\+\_\+calibration\+Data,  }\item[{\mbox{\hyperlink{classbowControl}{bow\+Control}} \&}]{\+\_\+bow\+Control }\end{DoxyParamCaption})}
+
+
+
+Class constructor. Binds to the associated \mbox{\hyperlink{classbowIO}{bow\+IO}} class and reads any existing EEPROM data into calibration\+Data. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcalibrate_ae571678a639c870844b02cfecf3ec2b4}\label{classcalibrate_ae571678a639c870844b02cfecf3ec2b4}} 
+\index{calibrate@{calibrate}!calibrateAll@{calibrateAll}}
+\index{calibrateAll@{calibrateAll}!calibrate@{calibrate}}
+\doxysubsubsection{\texorpdfstring{calibrateAll()}{calibrateAll()}}
+{\footnotesize\ttfamily bool calibrate\+::calibrate\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Perform all calibration tests. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcalibrate_ae571678a639c870844b02cfecf3ec2b4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcalibrate_a37b5afce3d7146dd5d12f82ddb00e7af}\label{classcalibrate_a37b5afce3d7146dd5d12f82ddb00e7af}} 
+\index{calibrate@{calibrate}!dumpData@{dumpData}}
+\index{dumpData@{dumpData}!calibrate@{calibrate}}
+\doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
+{\footnotesize\ttfamily String calibrate\+::dump\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classcalibrate_ac7f4beb3939af5f301ee39f3b59bc74c}\label{classcalibrate_ac7f4beb3939af5f301ee39f3b59bc74c}} 
+\index{calibrate@{calibrate}!findMaxPressure@{findMaxPressure}}
+\index{findMaxPressure@{findMaxPressure}!calibrate@{calibrate}}
+\doxysubsubsection{\texorpdfstring{findMaxPressure()}{findMaxPressure()}}
+{\footnotesize\ttfamily bool calibrate\+::find\+Max\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Find the minimum and maximum usable pressure Maximum pressure is calculated as the pressure just before the bow motor stalls against the string using max\+Speed\+PWM as the metric. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcalibrate_ac7f4beb3939af5f301ee39f3b59bc74c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcalibrate_ac7f4beb3939af5f301ee39f3b59bc74c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcalibrate_a8901c66131f46a26940c4ccd5d410996}\label{classcalibrate_a8901c66131f46a26940c4ccd5d410996}} 
+\index{calibrate@{calibrate}!findMinMaxPressure@{findMinMaxPressure}}
+\index{findMinMaxPressure@{findMinMaxPressure}!calibrate@{calibrate}}
+\doxysubsubsection{\texorpdfstring{findMinMaxPressure()}{findMinMaxPressure()}}
+{\footnotesize\ttfamily bool calibrate\+::find\+Min\+Max\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcalibrate_a8901c66131f46a26940c4ccd5d410996_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcalibrate_a6654b82c8a1dbb55502cdfb4ef6a7b1f}\label{classcalibrate_a6654b82c8a1dbb55502cdfb4ef6a7b1f}} 
+\index{calibrate@{calibrate}!findMinMaxSpeedPWM@{findMinMaxSpeedPWM}}
+\index{findMinMaxSpeedPWM@{findMinMaxSpeedPWM}!calibrate@{calibrate}}
+\doxysubsubsection{\texorpdfstring{findMinMaxSpeedPWM()}{findMinMaxSpeedPWM()}}
+{\footnotesize\ttfamily bool calibrate\+::find\+Min\+Max\+Speed\+PWM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Find the minimum and maximum bow speed using direct hardware PWM control (as opposed to PID control) 
+
+Finds the minimum PWM value fed to the bow motor controller where a bow speed higher than zero occurs and record PWM and frequency. The maximum speed is recorded as the lowest PWM value that gives a noticeable change in bow speed from the absolute maximum Min and max usable speed is pre-\/calculated using the usable\+Multiplier variable Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcalibrate_a6654b82c8a1dbb55502cdfb4ef6a7b1f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcalibrate_a6654b82c8a1dbb55502cdfb4ef6a7b1f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcalibrate_a157d35f3855c4707cfe0d697bd557a8b}\label{classcalibrate_a157d35f3855c4707cfe0d697bd557a8b}} 
+\index{calibrate@{calibrate}!findMinPressure@{findMinPressure}}
+\index{findMinPressure@{findMinPressure}!calibrate@{calibrate}}
+\doxysubsubsection{\texorpdfstring{findMinPressure()}{findMinPressure()}}
+{\footnotesize\ttfamily bool calibrate\+::find\+Min\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcalibrate_a157d35f3855c4707cfe0d697bd557a8b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcalibrate_a157d35f3855c4707cfe0d697bd557a8b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcalibrate_af3c73bf75c5b8a2d942615d34669bf53}\label{classcalibrate_af3c73bf75c5b8a2d942615d34669bf53}} 
+\index{calibrate@{calibrate}!startAudioAnalyzing@{startAudioAnalyzing}}
+\index{startAudioAnalyzing@{startAudioAnalyzing}!calibrate@{calibrate}}
+\doxysubsubsection{\texorpdfstring{startAudioAnalyzing()}{startAudioAnalyzing()}}
+{\footnotesize\ttfamily void calibrate\+::start\+Audio\+Analyzing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classcalibrate_a928e7a5c8b36e55c34878bdba55df4ee}\label{classcalibrate_a928e7a5c8b36e55c34878bdba55df4ee}} 
+\index{calibrate@{calibrate}!stopAudioAnalyzing@{stopAudioAnalyzing}}
+\index{stopAudioAnalyzing@{stopAudioAnalyzing}!calibrate@{calibrate}}
+\doxysubsubsection{\texorpdfstring{stopAudioAnalyzing()}{stopAudioAnalyzing()}}
+{\footnotesize\ttfamily void calibrate\+::stop\+Audio\+Analyzing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classcalibrate_a6e708417f14acd978c8d2a38f5849074}\label{classcalibrate_a6e708417f14acd978c8d2a38f5849074}} 
+\index{calibrate@{calibrate}!waitForBowToStabilize@{waitForBowToStabilize}}
+\index{waitForBowToStabilize@{waitForBowToStabilize}!calibrate@{calibrate}}
+\doxysubsubsection{\texorpdfstring{waitForBowToStabilize()}{waitForBowToStabilize()}}
+{\footnotesize\ttfamily bool calibrate\+::wait\+For\+Bow\+To\+Stabilize (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{max\+Iterations = {\ttfamily 10} }\end{DoxyParamCaption})}
+
+
+
+Waits for the bow speed to stabilize, used after setting a new bow speed. 
+
+Goes through max\+Iterations number of iterations with a preset delay in between each delay. If bow speed has not stabilized after the max amount of iterations the function returns false otherwise it will return true Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcalibrate_a6e708417f14acd978c8d2a38f5849074_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcalibrate_a6e708417f14acd978c8d2a38f5849074_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classcalibrate_af8ad4af07753d4e21fa3b96e40d6c74e}\label{classcalibrate_af8ad4af07753d4e21fa3b96e40d6c74e}} 
+\index{calibrate@{calibrate}!bowControlConnect@{bowControlConnect}}
+\index{bowControlConnect@{bowControlConnect}!calibrate@{calibrate}}
+\doxysubsubsection{\texorpdfstring{bowControlConnect}{bowControlConnect}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbowControl}{bow\+Control}}$\ast$ calibrate\+::bow\+Control\+Connect}
+
+\mbox{\Hypertarget{classcalibrate_a14b2f0b41944890ea89c8528823c4c00}\label{classcalibrate_a14b2f0b41944890ea89c8528823c4c00}} 
+\index{calibrate@{calibrate}!bowIOConnect@{bowIOConnect}}
+\index{bowIOConnect@{bowIOConnect}!calibrate@{calibrate}}
+\doxysubsubsection{\texorpdfstring{bowIOConnect}{bowIOConnect}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbowIO}{bow\+IO}}$\ast$ calibrate\+::bow\+IOConnect}
+
+
+
+\mbox{\hyperlink{classbowIO}{bow\+IO}} class associated with this calibration class 
+
+\mbox{\Hypertarget{classcalibrate_a86bbeed42caecf5da6d2a4a2c118fa04}\label{classcalibrate_a86bbeed42caecf5da6d2a4a2c118fa04}} 
+\index{calibrate@{calibrate}!calibrationData@{calibrationData}}
+\index{calibrationData@{calibrationData}!calibrate@{calibrate}}
+\doxysubsubsection{\texorpdfstring{calibrationData}{calibrationData}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}}$\ast$ calibrate\+::calibration\+Data}
+
+\mbox{\Hypertarget{classcalibrate_a878d15dd653236499b6bb3cbf90b2d73}\label{classcalibrate_a878d15dd653236499b6bb3cbf90b2d73}} 
+\index{calibrate@{calibrate}!EEPROM\_offset@{EEPROM\_offset}}
+\index{EEPROM\_offset@{EEPROM\_offset}!calibrate@{calibrate}}
+\doxysubsubsection{\texorpdfstring{EEPROM\_offset}{EEPROM\_offset}}
+{\footnotesize\ttfamily int calibrate\+::\+EEPROM\+\_\+offset = 0}
+
+\mbox{\Hypertarget{classcalibrate_a74535f13b751adcb657029ef0088e09c}\label{classcalibrate_a74535f13b751adcb657029ef0088e09c}} 
+\index{calibrate@{calibrate}!maxTestPressure@{maxTestPressure}}
+\index{maxTestPressure@{maxTestPressure}!calibrate@{calibrate}}
+\doxysubsubsection{\texorpdfstring{maxTestPressure}{maxTestPressure}}
+{\footnotesize\ttfamily uint16\+\_\+t calibrate\+::max\+Test\+Pressure = 50000}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{calibrate_8h}{calibrate.\+h}}\item 
+\mbox{\hyperlink{calibrate_8cpp}{calibrate.\+cpp}}\end{DoxyCompactItemize}
