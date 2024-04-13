@@ -84,7 +84,7 @@ void controlReader::readData() {
             adsNewData2 = false;
             a = ads2.getLastConversionResults();
 
-            uint8_t ch;
+            uint8_t ch = 0;
             switch(currentChannel2) {
                 case ADS1X15_REG_CONFIG_MUX_SINGLE_0:
                     ch = 0;
@@ -139,7 +139,7 @@ void controlReader::readData() {
             adsNewData = false;
 
             a = ads.getLastConversionResults();
-            uint8_t ch;
+            uint8_t ch = 0;
             switch(currentChannel) {
                 case ADS1X15_REG_CONFIG_MUX_SINGLE_0:
                     ch = 0;

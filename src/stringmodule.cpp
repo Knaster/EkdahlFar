@@ -43,7 +43,7 @@ serialCommandItem serialCommandsStringModule[] = {
     { "setbowpower", "sbp", "0-65535", "Sets the raw bow motor power" },
     { "setbowhold", "sbh", "0|1", "Sets bow hold on/off" },
     { "setspeedmode", "ssm", "0|1", "Set bow speed mode where 0 = Automatic and 1 = Manual" },
-    { "setbowtimeout", "sbt", "int", "Set bow motor timeout" },
+    { "setbowtimeout", "sbt", "int", "Set bow motor timeout in milliseconds" },
     { "mutesetposition", "msp", "0-65535", "Set mute position" },
     { "mutefullmute", "mfm", "1|0", "Put mute in full mute position (conditional)" },
     { "mutehalfmute", "mhm", "1|0", "Put mute in half mute position (conditional)" },

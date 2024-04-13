@@ -2,6 +2,10 @@
 \label{classbowControl}\index{bowControl@{bowControl}}
 
 
+{\ttfamily \#include $<$bowcontrol.\+h$>$}
+
+
+
 Collaboration diagram for bow\+Control\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -32,6 +36,8 @@ void \mbox{\hyperlink{classbowControl_a51d03db7ff6ba45e3643b3cfb047c081}{pid\+Co
 \item 
 void \mbox{\hyperlink{classbowControl_a1069d2ab76476da2e1fa7e90b8914e11}{pid\+Interrupt\+Caller}} ()
 \begin{DoxyCompactList}\small\item\em This function is to be called every pid\+Update\+Interval. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classbowControl_a7037df2d31d666e40589606f676779a0}{get\+PIDPeak\+Error}} ()
+\item 
 void \mbox{\hyperlink{classbowControl_a0b9ab5ef98479470107f0dbf32120304}{motor\+Fault\+Detected}} ()
 \begin{DoxyCompactList}\small\item\em To be called when a motor FAULT interrupt occurs, adds one occurance to motor\+Fault. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classbowControl_a7845c424d2495a820b8171d316408e77}{check\+Motor\+Fault}} ()
@@ -143,7 +149,7 @@ uint16\+\_\+t \mbox{\hyperlink{classbowControl_afcd061f5ac1b2b3183482ad4316326f7
 \begin{DoxyCompactList}\small\item\em The baseline tilt value used when engaging the bow with the string. \end{DoxyCompactList}\item 
 uint16\+\_\+t \mbox{\hyperlink{classbowControl_a7bc01a8f9a74f227bbff9f419d1789c1}{modifier\+Tilt\+PWM}} = 0
 \begin{DoxyCompactList}\small\item\em The modifier tilt value used in conjunction with the baseline\+Tilt\+PWM when engaing the bow with the string. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0c}{\+\_\+tilt\+Mode}} \mbox{\hyperlink{classbowControl_abe66ed8d74fb825c2bea3daccb157db0}{tilt\+Mode}} = \mbox{\hyperlink{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca661e967c4cfe56fd40a290550b64d8dc}{Rest}}
+\mbox{\hyperlink{bowcontrol_8h_a48bbfa20eaad6b3ba296a4fcb2857e0c}{\+\_\+tilt\+Mode}} \mbox{\hyperlink{classbowControl_abe66ed8d74fb825c2bea3daccb157db0}{tilt\+Mode}} = \mbox{\hyperlink{bowcontrol_8h_a48bbfa20eaad6b3ba296a4fcb2857e0ca661e967c4cfe56fd40a290550b64d8dc}{Rest}}
 \item 
 elapsed\+Millis \mbox{\hyperlink{classbowControl_acbc8b8ed2e2a7fa77311ad90b0a8fae9}{elapsed\+Since\+Mute}}
 \item 
@@ -157,13 +163,19 @@ uint16\+\_\+t \mbox{\hyperlink{classbowControl_aed5c87b2f8c9a9dd0ece68b59091da59
 \item 
 bool \mbox{\hyperlink{classbowControl_aa2253a04ce098480bb52b9daa95f02c6}{bow\+Shutoff\+Timedout}} = false
 \item 
-\mbox{\hyperlink{bowcontrol_8cpp_a08216a942f96ea84df79ef77a0554dd8}{\+\_\+speed\+Mode}} \mbox{\hyperlink{classbowControl_aea27c1e59266aa9d321fcdf859fe4dff}{speed\+Mode}} = \mbox{\hyperlink{bowcontrol_8cpp_a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389}{Automatic}}
+\mbox{\hyperlink{bowcontrol_8h_a08216a942f96ea84df79ef77a0554dd8}{\+\_\+speed\+Mode}} \mbox{\hyperlink{classbowControl_aea27c1e59266aa9d321fcdf859fe4dff}{speed\+Mode}} = \mbox{\hyperlink{bowcontrol_8h_a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389}{Automatic}}
 \item 
 \mbox{\hyperlink{class__harmonicSeriesList}{\+\_\+harmonic\+Series\+List}} \mbox{\hyperlink{classbowControl_af5165e97f45e0072f9f1f3457dae748c}{harmonic\+Series\+List}}
 \item 
 uint8\+\_\+t \mbox{\hyperlink{classbowControl_accc6c95233ced4ae0846c30fb49804f4}{current\+Harmonic\+Series}} = 0
 \item 
 uint8\+\_\+t \mbox{\hyperlink{classbowControl_a4d048030d0f7cb72d90926675d00e8c7}{base\+Note}} = 64
+\item 
+float \mbox{\hyperlink{classbowControl_a77f759d743f371d73ae0546fc530bbc2}{bow\+Speed\+To\+Engage}} = 10
+\item 
+float \mbox{\hyperlink{classbowControl_a9565655dd3613dd02a43515e0e1e7b0f}{bow\+Speed\+While\+Engaged}} = 10
+\item 
+bool \mbox{\hyperlink{classbowControl_a10861de9ca3688546f266128afc1640c}{reached\+Engage}} = false
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -194,6 +206,8 @@ int \mbox{\hyperlink{classbowControl_ac2d2071e4b2fcbc39e58900d44f32436}{harmonic
 bool \mbox{\hyperlink{classbowControl_a820457c7cf5667230bdfa9ccbf54d112}{\+\_\+hold}} = false
 \item 
 float \mbox{\hyperlink{classbowControl_a8ddd8c170720f487d58508822593609b}{bow\+Current\+Limit}} = 1.\+5
+\item 
+float \mbox{\hyperlink{classbowControl_a37af74a65fc919ea50452fc6543516c2}{pid\+Peak\+Error}} = 0
 \end{DoxyCompactItemize}
 
 
@@ -202,7 +216,7 @@ float \mbox{\hyperlink{classbowControl_a8ddd8c170720f487d58508822593609b}{bow\+C
 \index{bowControl@{bowControl}!bowControl@{bowControl}}
 \index{bowControl@{bowControl}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowControl()}{bowControl()}}
-{\footnotesize\ttfamily bow\+Control\+::bow\+Control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classbowIO}{bow\+IO}} \&}]{\+\_\+bow\+IO,  }\item[{\mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}} \&}]{\+\_\+\+\_\+calibration\+Data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bow\+Control\+::bow\+Control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classbowIO}{bow\+IO}} \&}]{\+\_\+bow\+IO,  }\item[{\mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}} \&}]{\+\_\+\+\_\+calibration\+Data }\end{DoxyParamCaption})}
 
 
 
@@ -215,9 +229,10 @@ Constructor.
 \index{bowControl@{bowControl}!bowEngage@{bowEngage}}
 \index{bowEngage@{bowEngage}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowEngage()}{bowEngage()}}
-{\footnotesize\ttfamily bool bow\+Control\+::bow\+Engage (\begin{DoxyParamCaption}\item[{int}]{enact }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool bow\+Control\+::bow\+Engage (\begin{DoxyParamCaption}\item[{int}]{enact }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -228,13 +243,14 @@ Here is the call graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!bowMute@{bowMute}}
 \index{bowMute@{bowMute}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowMute()}{bowMute()}}
-{\footnotesize\ttfamily bool bow\+Control\+::bow\+Mute (\begin{DoxyParamCaption}\item[{int}]{enact }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool bow\+Control\+::bow\+Mute (\begin{DoxyParamCaption}\item[{int}]{enact }\end{DoxyParamCaption})}
 
 
 
 Mute string by turning off the bowing wheel and forcing it into the string by means of setting the Tilt PWM. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -245,9 +261,10 @@ Here is the call graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!bowRest@{bowRest}}
 \index{bowRest@{bowRest}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowRest()}{bowRest()}}
-{\footnotesize\ttfamily bool bow\+Control\+::bow\+Rest (\begin{DoxyParamCaption}\item[{int}]{enact }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool bow\+Control\+::bow\+Rest (\begin{DoxyParamCaption}\item[{int}]{enact }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -265,13 +282,14 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!calculateBaselineModifierPressure@{calculateBaselineModifierPressure}}
 \index{calculateBaselineModifierPressure@{calculateBaselineModifierPressure}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{calculateBaselineModifierPressure()}{calculateBaselineModifierPressure()}}
-{\footnotesize\ttfamily bool bow\+Control\+::calculate\+Baseline\+Modifier\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool bow\+Control\+::calculate\+Baseline\+Modifier\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 Calculate the tilt PWM value using baseline\+Tilt\+PWM and modfier\+Tilt\+PWM and send it to Bow\+IO. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -289,7 +307,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!calculateHarmonicShift@{calculateHarmonicShift}}
 \index{calculateHarmonicShift@{calculateHarmonicShift}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{calculateHarmonicShift()}{calculateHarmonicShift()}}
-{\footnotesize\ttfamily bool bow\+Control\+::calculate\+Harmonic\+Shift (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool bow\+Control\+::calculate\+Harmonic\+Shift (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -313,7 +331,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!checkMotorFault@{checkMotorFault}}
 \index{checkMotorFault@{checkMotorFault}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{checkMotorFault()}{checkMotorFault()}}
-{\footnotesize\ttfamily int bow\+Control\+::check\+Motor\+Fault (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily int bow\+Control\+::check\+Motor\+Fault (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -330,49 +348,55 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!dumpData@{dumpData}}
 \index{dumpData@{dumpData}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
-{\footnotesize\ttfamily String bow\+Control\+::dump\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily String bow\+Control\+::dump\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{classbowControl_adb36e8c79d731f20d06b6ebd1d6c96ea}\label{classbowControl_adb36e8c79d731f20d06b6ebd1d6c96ea}} 
 \index{bowControl@{bowControl}!getBowCurrentLimit@{getBowCurrentLimit}}
 \index{getBowCurrentLimit@{getBowCurrentLimit}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getBowCurrentLimit()}{getBowCurrentLimit()}}
-{\footnotesize\ttfamily float bow\+Control\+::get\+Bow\+Current\+Limit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily float bow\+Control\+::get\+Bow\+Current\+Limit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{classbowControl_a3ed5cc1c0c48effd02d4b7031663569f}\label{classbowControl_a3ed5cc1c0c48effd02d4b7031663569f}} 
 \index{bowControl@{bowControl}!getBowPower@{getBowPower}}
 \index{getBowPower@{getBowPower}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getBowPower()}{getBowPower()}}
-{\footnotesize\ttfamily uint16\+\_\+t bow\+Control\+::get\+Bow\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily uint16\+\_\+t bow\+Control\+::get\+Bow\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{classbowControl_ad07d3247caf8f4bd20cf1cac8dbf5daf}\label{classbowControl_ad07d3247caf8f4bd20cf1cac8dbf5daf}} 
 \index{bowControl@{bowControl}!getHarmonic@{getHarmonic}}
 \index{getHarmonic@{getHarmonic}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getHarmonic()}{getHarmonic()}}
-{\footnotesize\ttfamily int bow\+Control\+::get\+Harmonic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily int bow\+Control\+::get\+Harmonic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{classbowControl_a0c451b2b69b74dd056fb0e41970d94b3}\label{classbowControl_a0c451b2b69b74dd056fb0e41970d94b3}} 
 \index{bowControl@{bowControl}!getHarmonicShift@{getHarmonicShift}}
 \index{getHarmonicShift@{getHarmonicShift}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getHarmonicShift()}{getHarmonicShift()}}
-{\footnotesize\ttfamily int bow\+Control\+::get\+Harmonic\+Shift (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily int bow\+Control\+::get\+Harmonic\+Shift (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{classbowControl_ad6eb8cba264e21be1af99b5cb0831fbb}\label{classbowControl_ad6eb8cba264e21be1af99b5cb0831fbb}} 
 \index{bowControl@{bowControl}!getHarmonicShift5@{getHarmonicShift5}}
 \index{getHarmonicShift5@{getHarmonicShift5}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getHarmonicShift5()}{getHarmonicShift5()}}
-{\footnotesize\ttfamily int bow\+Control\+::get\+Harmonic\+Shift5 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily int bow\+Control\+::get\+Harmonic\+Shift5 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{classbowControl_a830df83b0abd9c5a6814f1938ca5411f}\label{classbowControl_a830df83b0abd9c5a6814f1938ca5411f}} 
 \index{bowControl@{bowControl}!getHarmonicShiftRange@{getHarmonicShiftRange}}
 \index{getHarmonicShiftRange@{getHarmonicShiftRange}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getHarmonicShiftRange()}{getHarmonicShiftRange()}}
-{\footnotesize\ttfamily int bow\+Control\+::get\+Harmonic\+Shift\+Range (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily int bow\+Control\+::get\+Harmonic\+Shift\+Range (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classbowControl_a7037df2d31d666e40589606f676779a0}\label{classbowControl_a7037df2d31d666e40589606f676779a0}} 
+\index{bowControl@{bowControl}!getPIDPeakError@{getPIDPeakError}}
+\index{getPIDPeakError@{getPIDPeakError}!bowControl@{bowControl}}
+\doxysubsubsection{\texorpdfstring{getPIDPeakError()}{getPIDPeakError()}}
+{\footnotesize\ttfamily float bow\+Control\+::get\+PIDPeak\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{classbowControl_a87c3fd0196aa8366ced3d814be5b1cc9}\label{classbowControl_a87c3fd0196aa8366ced3d814be5b1cc9}} 
 \index{bowControl@{bowControl}!getPIDTarget@{getPIDTarget}}
 \index{getPIDTarget@{getPIDTarget}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getPIDTarget()}{getPIDTarget()}}
-{\footnotesize\ttfamily float bow\+Control\+::get\+PIDTarget (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily float bow\+Control\+::get\+PIDTarget (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -389,19 +413,19 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!getPressureBaseline@{getPressureBaseline}}
 \index{getPressureBaseline@{getPressureBaseline}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getPressureBaseline()}{getPressureBaseline()}}
-{\footnotesize\ttfamily uint16\+\_\+t bow\+Control\+::get\+Pressure\+Baseline (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily uint16\+\_\+t bow\+Control\+::get\+Pressure\+Baseline (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{classbowControl_aa96a7e6814366f543a3d42503a24e0bb}\label{classbowControl_aa96a7e6814366f543a3d42503a24e0bb}} 
 \index{bowControl@{bowControl}!getPressureModifier@{getPressureModifier}}
 \index{getPressureModifier@{getPressureModifier}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getPressureModifier()}{getPressureModifier()}}
-{\footnotesize\ttfamily uint16\+\_\+t bow\+Control\+::get\+Pressure\+Modifier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily uint16\+\_\+t bow\+Control\+::get\+Pressure\+Modifier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{classbowControl_a6ac5163fe5784a5e1812908b217da50f}\label{classbowControl_a6ac5163fe5784a5e1812908b217da50f}} 
 \index{bowControl@{bowControl}!isBowStable@{isBowStable}}
 \index{isBowStable@{isBowStable}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{isBowStable()}{isBowStable()}}
-{\footnotesize\ttfamily int bow\+Control\+::is\+Bow\+Stable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily int bow\+Control\+::is\+Bow\+Stable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -418,9 +442,10 @@ Here is the call graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!measureTimeToTarget@{measureTimeToTarget}}
 \index{measureTimeToTarget@{measureTimeToTarget}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{measureTimeToTarget()}{measureTimeToTarget()}}
-{\footnotesize\ttfamily void bow\+Control\+::measure\+Time\+To\+Target (\begin{DoxyParamCaption}\item[{float}]{\+\_\+pid\+Target\+Speed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void bow\+Control\+::measure\+Time\+To\+Target (\begin{DoxyParamCaption}\item[{float}]{\+\_\+pid\+Target\+Speed }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -431,7 +456,7 @@ Here is the call graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!motorFaultDetected@{motorFaultDetected}}
 \index{motorFaultDetected@{motorFaultDetected}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{motorFaultDetected()}{motorFaultDetected()}}
-{\footnotesize\ttfamily void bow\+Control\+::motor\+Fault\+Detected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void bow\+Control\+::motor\+Fault\+Detected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -441,7 +466,7 @@ To be called when a motor FAULT interrupt occurs, adds one occurance to motor\+F
 \index{bowControl@{bowControl}!pidControl@{pidControl}}
 \index{pidControl@{pidControl}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{pidControl()}{pidControl()}}
-{\footnotesize\ttfamily void bow\+Control\+::pid\+Control (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void bow\+Control\+::pid\+Control (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 PID calculation function to be called at pid\+Update\+Interval, called by pid\+Interrupt\+Caller \begin{DoxyRefDesc}{Todo}
 \item[\mbox{\hyperlink{todo__todo000002}{Todo}}]add Integral injection and other pre-\/loading parameters to help bow start and change 
@@ -467,7 +492,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!pidInterruptCaller@{pidInterruptCaller}}
 \index{pidInterruptCaller@{pidInterruptCaller}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{pidInterruptCaller()}{pidInterruptCaller()}}
-{\footnotesize\ttfamily void bow\+Control\+::pid\+Interrupt\+Caller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void bow\+Control\+::pid\+Interrupt\+Caller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -491,13 +516,14 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!pidReset@{pidReset}}
 \index{pidReset@{pidReset}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{pidReset()}{pidReset()}}
-{\footnotesize\ttfamily void bow\+Control\+::pid\+Reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void bow\+Control\+::pid\+Reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 Resets the PID integral. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -508,27 +534,28 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!setBaseNote@{setBaseNote}}
 \index{setBaseNote@{setBaseNote}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setBaseNote()}{setBaseNote()}}
-{\footnotesize\ttfamily bool bow\+Control\+::set\+Base\+Note (\begin{DoxyParamCaption}\item[{int}]{in\+Base\+Note }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool bow\+Control\+::set\+Base\+Note (\begin{DoxyParamCaption}\item[{int}]{in\+Base\+Note }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{classbowControl_a797e74de62f9ba4d9dff86fa9dda59b9}\label{classbowControl_a797e74de62f9ba4d9dff86fa9dda59b9}} 
 \index{bowControl@{bowControl}!setBowCurrentLimit@{setBowCurrentLimit}}
 \index{setBowCurrentLimit@{setBowCurrentLimit}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setBowCurrentLimit()}{setBowCurrentLimit()}}
-{\footnotesize\ttfamily void bow\+Control\+::set\+Bow\+Current\+Limit (\begin{DoxyParamCaption}\item[{float}]{in\+Bow\+Current\+Limit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void bow\+Control\+::set\+Bow\+Current\+Limit (\begin{DoxyParamCaption}\item[{float}]{in\+Bow\+Current\+Limit }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{classbowControl_a3242c3c20eb2ba2654ea501413b8af22}\label{classbowControl_a3242c3c20eb2ba2654ea501413b8af22}} 
 \index{bowControl@{bowControl}!setBowPower@{setBowPower}}
 \index{setBowPower@{setBowPower}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setBowPower()}{setBowPower()}}
-{\footnotesize\ttfamily void bow\+Control\+::set\+Bow\+Power (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{power }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void bow\+Control\+::set\+Bow\+Power (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{power }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{classbowControl_a755a6cc1d1de5684cc77ddd6805960d8}\label{classbowControl_a755a6cc1d1de5684cc77ddd6805960d8}} 
 \index{bowControl@{bowControl}!setBowPressureSafe@{setBowPressureSafe}}
 \index{setBowPressureSafe@{setBowPressureSafe}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setBowPressureSafe()}{setBowPressureSafe()}}
-{\footnotesize\ttfamily void bow\+Control\+::set\+Bow\+Pressure\+Safe (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{tilt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void bow\+Control\+::set\+Bow\+Pressure\+Safe (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{tilt }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -546,11 +573,12 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!setHarmonic@{setHarmonic}}
 \index{setHarmonic@{setHarmonic}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setHarmonic()}{setHarmonic()}}
-{\footnotesize\ttfamily bool bow\+Control\+::set\+Harmonic (\begin{DoxyParamCaption}\item[{int}]{\+\_\+harmonic }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool bow\+Control\+::set\+Harmonic (\begin{DoxyParamCaption}\item[{int}]{\+\_\+harmonic }\end{DoxyParamCaption})}
 
 \begin{DoxyRefDesc}{Todo}
 \item[\mbox{\hyperlink{todo__todo000003}{Todo}}]do we return if we\textquotesingle{}re out of bounds or do lowest/highest possible? \end{DoxyRefDesc}
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -568,9 +596,10 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!setHarmonicShift@{setHarmonicShift}}
 \index{setHarmonicShift@{setHarmonicShift}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setHarmonicShift()}{setHarmonicShift()}}
-{\footnotesize\ttfamily bool bow\+Control\+::set\+Harmonic\+Shift (\begin{DoxyParamCaption}\item[{int}]{in\+Harmonic\+Shift }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool bow\+Control\+::set\+Harmonic\+Shift (\begin{DoxyParamCaption}\item[{int}]{in\+Harmonic\+Shift }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -581,9 +610,10 @@ Here is the call graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!setHarmonicShift5@{setHarmonicShift5}}
 \index{setHarmonicShift5@{setHarmonicShift5}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setHarmonicShift5()}{setHarmonicShift5()}}
-{\footnotesize\ttfamily bool bow\+Control\+::set\+Harmonic\+Shift5 (\begin{DoxyParamCaption}\item[{int}]{in\+Harmonic\+Shift5 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool bow\+Control\+::set\+Harmonic\+Shift5 (\begin{DoxyParamCaption}\item[{int}]{in\+Harmonic\+Shift5 }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -594,15 +624,16 @@ Here is the call graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!setHarmonicShiftRange@{setHarmonicShiftRange}}
 \index{setHarmonicShiftRange@{setHarmonicShiftRange}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setHarmonicShiftRange()}{setHarmonicShiftRange()}}
-{\footnotesize\ttfamily bool bow\+Control\+::set\+Harmonic\+Shift\+Range (\begin{DoxyParamCaption}\item[{int}]{in\+Harmonic\+Shift\+Range }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool bow\+Control\+::set\+Harmonic\+Shift\+Range (\begin{DoxyParamCaption}\item[{int}]{in\+Harmonic\+Shift\+Range }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{classbowControl_a0604ef0ed9ad083fcedf9455488fc3ff}\label{classbowControl_a0604ef0ed9ad083fcedf9455488fc3ff}} 
 \index{bowControl@{bowControl}!setHold@{setHold}}
 \index{setHold@{setHold}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setHold()}{setHold()}}
-{\footnotesize\ttfamily bool bow\+Control\+::set\+Hold (\begin{DoxyParamCaption}\item[{bool}]{hold }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool bow\+Control\+::set\+Hold (\begin{DoxyParamCaption}\item[{bool}]{hold }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -613,9 +644,10 @@ Here is the call graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!setManualTilt@{setManualTilt}}
 \index{setManualTilt@{setManualTilt}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setManualTilt()}{setManualTilt()}}
-{\footnotesize\ttfamily bool bow\+Control\+::set\+Manual\+Tilt (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{tilt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool bow\+Control\+::set\+Manual\+Tilt (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{tilt }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -626,20 +658,22 @@ Here is the call graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!setPIDTarget@{setPIDTarget}}
 \index{setPIDTarget@{setPIDTarget}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setPIDTarget()}{setPIDTarget()}}
-{\footnotesize\ttfamily bool bow\+Control\+::set\+PIDTarget (\begin{DoxyParamCaption}\item[{float}]{\+\_\+pid\+Target\+Speed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool bow\+Control\+::set\+PIDTarget (\begin{DoxyParamCaption}\item[{float}]{\+\_\+pid\+Target\+Speed }\end{DoxyParamCaption})}
 
 
 
 Set PID target speed, check that it doesnt go above max\+Hz or below min\+Hz. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classbowControl_a01e1c268fc72ea56af7234fb8827934d_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -650,13 +684,14 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!setPIDTargetUnsafe@{setPIDTargetUnsafe}}
 \index{setPIDTargetUnsafe@{setPIDTargetUnsafe}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setPIDTargetUnsafe()}{setPIDTargetUnsafe()}}
-{\footnotesize\ttfamily void bow\+Control\+::set\+PIDTarget\+Unsafe (\begin{DoxyParamCaption}\item[{float}]{\+\_\+pid\+Target\+Speed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void bow\+Control\+::set\+PIDTarget\+Unsafe (\begin{DoxyParamCaption}\item[{float}]{\+\_\+pid\+Target\+Speed }\end{DoxyParamCaption})}
 
 
 
 Set PID target speed without any safety checks, used by set\+PIDTarget. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -667,9 +702,10 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!setPressureBaseline@{setPressureBaseline}}
 \index{setPressureBaseline@{setPressureBaseline}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setPressureBaseline()}{setPressureBaseline()}}
-{\footnotesize\ttfamily void bow\+Control\+::set\+Pressure\+Baseline (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{baseline }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void bow\+Control\+::set\+Pressure\+Baseline (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{baseline }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -680,9 +716,10 @@ Here is the call graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!setPressureModifier@{setPressureModifier}}
 \index{setPressureModifier@{setPressureModifier}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setPressureModifier()}{setPressureModifier()}}
-{\footnotesize\ttfamily void bow\+Control\+::set\+Pressure\+Modifier (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{modifier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void bow\+Control\+::set\+Pressure\+Modifier (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{modifier }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -693,9 +730,10 @@ Here is the call graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!updateHarmonicData@{updateHarmonicData}}
 \index{updateHarmonicData@{updateHarmonicData}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{updateHarmonicData()}{updateHarmonicData()}}
-{\footnotesize\ttfamily void bow\+Control\+::update\+Harmonic\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void bow\+Control\+::update\+Harmonic\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -706,7 +744,7 @@ Here is the call graph for this function\+:\nopagebreak
 \index{bowControl@{bowControl}!updateString@{updateString}}
 \index{updateString@{updateString}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{updateString()}{updateString()}}
-{\footnotesize\ttfamily void bow\+Control\+::update\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void bow\+Control\+::update\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -780,6 +818,18 @@ Pointer to associated \mbox{\hyperlink{classbowIO}{bow\+IO}} object.
 \index{bowShutoffTimer@{bowShutoffTimer}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowShutoffTimer}{bowShutoffTimer}}
 {\footnotesize\ttfamily elapsed\+Millis bow\+Control\+::bow\+Shutoff\+Timer}
+
+\mbox{\Hypertarget{classbowControl_a77f759d743f371d73ae0546fc530bbc2}\label{classbowControl_a77f759d743f371d73ae0546fc530bbc2}} 
+\index{bowControl@{bowControl}!bowSpeedToEngage@{bowSpeedToEngage}}
+\index{bowSpeedToEngage@{bowSpeedToEngage}!bowControl@{bowControl}}
+\doxysubsubsection{\texorpdfstring{bowSpeedToEngage}{bowSpeedToEngage}}
+{\footnotesize\ttfamily float bow\+Control\+::bow\+Speed\+To\+Engage = 10}
+
+\mbox{\Hypertarget{classbowControl_a9565655dd3613dd02a43515e0e1e7b0f}\label{classbowControl_a9565655dd3613dd02a43515e0e1e7b0f}} 
+\index{bowControl@{bowControl}!bowSpeedWhileEngaged@{bowSpeedWhileEngaged}}
+\index{bowSpeedWhileEngaged@{bowSpeedWhileEngaged}!bowControl@{bowControl}}
+\doxysubsubsection{\texorpdfstring{bowSpeedWhileEngaged}{bowSpeedWhileEngaged}}
+{\footnotesize\ttfamily float bow\+Control\+::bow\+Speed\+While\+Engaged = 10}
 
 \mbox{\Hypertarget{classbowControl_a3862939e413c6a51f07254245fd1f05d}\label{classbowControl_a3862939e413c6a51f07254245fd1f05d}} 
 \index{bowControl@{bowControl}!calibrationDataConnect@{calibrationDataConnect}}
@@ -1081,6 +1131,12 @@ Max PID error per loop, essentially sets acceleration.
 
 Set to true if the PID is turned on. 
 
+\mbox{\Hypertarget{classbowControl_a37af74a65fc919ea50452fc6543516c2}\label{classbowControl_a37af74a65fc919ea50452fc6543516c2}} 
+\index{bowControl@{bowControl}!pidPeakError@{pidPeakError}}
+\index{pidPeakError@{pidPeakError}!bowControl@{bowControl}}
+\doxysubsubsection{\texorpdfstring{pidPeakError}{pidPeakError}}
+{\footnotesize\ttfamily float bow\+Control\+::pid\+Peak\+Error = 0\hspace{0.3cm}{\ttfamily [private]}}
+
 \mbox{\Hypertarget{classbowControl_a243aaf296cdc56ba9fb85df64f11b40a}\label{classbowControl_a243aaf296cdc56ba9fb85df64f11b40a}} 
 \index{bowControl@{bowControl}!pidTargetSpeed@{pidTargetSpeed}}
 \index{pidTargetSpeed@{pidTargetSpeed}!bowControl@{bowControl}}
@@ -1121,6 +1177,12 @@ Contains the last frequency error calculated by the PID, given in Hertz.
 
 This contains the last time stamp that update\+String has been processed. 
 
+\mbox{\Hypertarget{classbowControl_a10861de9ca3688546f266128afc1640c}\label{classbowControl_a10861de9ca3688546f266128afc1640c}} 
+\index{bowControl@{bowControl}!reachedEngage@{reachedEngage}}
+\index{reachedEngage@{reachedEngage}!bowControl@{bowControl}}
+\doxysubsubsection{\texorpdfstring{reachedEngage}{reachedEngage}}
+{\footnotesize\ttfamily bool bow\+Control\+::reached\+Engage = false}
+
 \mbox{\Hypertarget{classbowControl_aa9c2f6d83485d4ae8494c02fca5f3d2e}\label{classbowControl_aa9c2f6d83485d4ae8494c02fca5f3d2e}} 
 \index{bowControl@{bowControl}!recoverRate@{recoverRate}}
 \index{recoverRate@{recoverRate}!bowControl@{bowControl}}
@@ -1145,16 +1207,17 @@ Set to \textquotesingle{}1\textquotesingle{} if the bowing wheel is running.
 \index{bowControl@{bowControl}!speedMode@{speedMode}}
 \index{speedMode@{speedMode}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{speedMode}{speedMode}}
-{\footnotesize\ttfamily \mbox{\hyperlink{bowcontrol_8cpp_a08216a942f96ea84df79ef77a0554dd8}{\+\_\+speed\+Mode}} bow\+Control\+::speed\+Mode = \mbox{\hyperlink{bowcontrol_8cpp_a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389}{Automatic}}}
+{\footnotesize\ttfamily \mbox{\hyperlink{bowcontrol_8h_a08216a942f96ea84df79ef77a0554dd8}{\+\_\+speed\+Mode}} bow\+Control\+::speed\+Mode = \mbox{\hyperlink{bowcontrol_8h_a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389}{Automatic}}}
 
 \mbox{\Hypertarget{classbowControl_abe66ed8d74fb825c2bea3daccb157db0}\label{classbowControl_abe66ed8d74fb825c2bea3daccb157db0}} 
 \index{bowControl@{bowControl}!tiltMode@{tiltMode}}
 \index{tiltMode@{tiltMode}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{tiltMode}{tiltMode}}
-{\footnotesize\ttfamily \mbox{\hyperlink{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0c}{\+\_\+tilt\+Mode}} bow\+Control\+::tilt\+Mode = \mbox{\hyperlink{bowcontrol_8cpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca661e967c4cfe56fd40a290550b64d8dc}{Rest}}}
+{\footnotesize\ttfamily \mbox{\hyperlink{bowcontrol_8h_a48bbfa20eaad6b3ba296a4fcb2857e0c}{\+\_\+tilt\+Mode}} bow\+Control\+::tilt\+Mode = \mbox{\hyperlink{bowcontrol_8h_a48bbfa20eaad6b3ba296a4fcb2857e0ca661e967c4cfe56fd40a290550b64d8dc}{Rest}}}
 
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
+\mbox{\hyperlink{bowcontrol_8h}{bowcontrol.\+h}}\item 
 \mbox{\hyperlink{bowcontrol_8cpp}{bowcontrol.\+cpp}}\end{DoxyCompactItemize}

@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['lastbowmotorpwm_947',['lastBowMotorPWM',['../classbowIO.html#a8f107cf299b70a0b1b15a1bc1553d94c',1,'bowIO']]],
-  ['lastbowoverpowerevent_948',['lastBowOverPowerEvent',['../classbowIO.html#ab727c8be7d25fd0a28a3a8a2342942f2',1,'bowIO']]],
-  ['lastreflectorisrstate_949',['lastReflectorISRState',['../classbowIO.html#a03334bc47218cd2bcdc1af4d3397efd7',1,'bowIO']]],
-  ['lasttilt_950',['lastTilt',['../classmute.html#a217905db956282cd12ba878b0853bb83',1,'mute::lastTilt()'],['../classbowIO.html#acee6375445970bc0ecbf706d2c8e6e52',1,'bowIO::lastTilt()']]],
-  ['lasttiltpwm_951',['lastTiltPWM',['../classbowControl.html#a30e659701021d55d06a875d9f34b3228',1,'bowControl']]],
-  ['longcommand_952',['longCommand',['../structserialCommandItem.html#acfc1dd4408fcc9ebfb66f7f40fcc8efb',1,'serialCommandItem']]],
-  ['lowerharmonic_953',['lowerHarmonic',['../struct__calibrationData.html#a168376888b0deacbe6714fc7e1bd1f58',1,'_calibrationData']]]
+  ['kd_1037',['Kd',['../classbowControl.html#abcb1f9a4982b4a61b86ce773a1927f74',1,'bowControl']]],
+  ['kdterm_1038',['KdTerm',['../classbowControl.html#adf3b889ba6d172cfcc4102f70e276b6e',1,'bowControl']]],
+  ['ki_1039',['Ki',['../classbowControl.html#a2b1cb030a9257e7f45d810e41b1132c2',1,'bowControl']]],
+  ['kiterm_1040',['KiTerm',['../classbowControl.html#a40a325aaf9a2f9d19aa79205b5f6e7a9',1,'bowControl']]],
+  ['kp_1041',['Kp',['../classbowControl.html#a31bb75cf63d04d3344db0bfd4aed0dc7',1,'bowControl']]],
+  ['kpterm_1042',['KpTerm',['../classbowControl.html#ad2116efce16f57643e4682dbcacbbe8b',1,'bowControl']]]
 ];

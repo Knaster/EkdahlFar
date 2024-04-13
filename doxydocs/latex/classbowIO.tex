@@ -27,6 +27,8 @@ float \mbox{\hyperlink{classbowIO_a685e1ba9c2a8a77ac8286a229e8a7f0c}{get\+Last\+
 \begin{DoxyCompactList}\small\item\em Returns the last added tachometer value. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{classbowIO_a4f7ef490b19cc4d9d6e3bd2e65d77061}{average\+Freq}} ()
 \begin{DoxyCompactList}\small\item\em Returns the average bow speed frequency. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbowIO_a63fefac92798add272f8ac75b6bdd432}{clear\+Tacho\+Data}} ()
+\item 
 void \mbox{\hyperlink{classbowIO_aa6270522a1d74af01e1328d6d9f25d5d}{set\+Speed\+PWMSafe}} (uint16\+\_\+t speed)
 \begin{DoxyCompactList}\small\item\em Ramps the bow speed PWM from the last PWM value given to the value given in speed, blocking, only use for testing purposes. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classbowIO_aa614cecda8ea9c77d0fd85987a8e26e8}{set\+Speed\+PWM}} (uint16\+\_\+t speed)
@@ -76,14 +78,12 @@ char \mbox{\hyperlink{classbowIO_ac58364f8bdc54db6e57c9fccd128657d}{bow\+Motor\+
 \begin{DoxyCompactList}\small\item\em Pin for motor driver $\sim$\+FAULT signal. \end{DoxyCompactList}\item 
 uint8\+\_\+t \mbox{\hyperlink{classbowIO_a27b8883e2e4be45be2aa3d72088526b8}{bow\+Current\+Sense\+Pin}}
 \begin{DoxyCompactList}\small\item\em Pin for motor current sense. \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{classbowIO_ad5e3d0d8112aa11a71103da59c0b9f37}{bow\+Motor\+Current\+Limit}} = 1.\+5
+float \mbox{\hyperlink{classbowIO_ad5e3d0d8112aa11a71103da59c0b9f37}{bow\+Motor\+Current\+Limit}} = 1.\+75
 \begin{DoxyCompactList}\small\item\em Limit for tripping bow current draw error. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{classbowIO_a3cb7ce3224903a11ad4dcb47cf1932e5}{bow\+Motor\+Wattage}} = 12.\+84
 \item 
 \mbox{\hyperlink{classservoStepper}{servo\+Stepper}} $\ast$ \mbox{\hyperlink{classbowIO_abc16b006f225a37cffc0257f9fb32ffc}{step\+Servo\+Stepper}} = nullptr
 \item 
-Adafruit\+\_\+\+PWMServo\+Driver $\ast$ \mbox{\hyperlink{classbowIO_a1fffe28bb5c5c94d62898abc0bca7d98}{pwm\+Shield}} = nullptr
-\begin{DoxyCompactList}\small\item\em Pointer to globally created Adafruit\+\_\+\+PWMServo\+Driver instance. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{classbowIO_a3710c97bb9e51a9f0b0f3b9ad5a98625}{tilt\+Adjust}} = 0
 \begin{DoxyCompactList}\small\item\em Adjustment to the tilt value to avoid bow stalling and oscillation. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classbowIO_acc60f3a0b373a28fb864a4ac352a60fa}{bow\+Over\+Power\+Flag}} = false
@@ -128,7 +128,7 @@ const int \mbox{\hyperlink{classbowIO_a4235f50ad4a21a879df925da06e96ce3}{step\+C
 \begin{DoxyCompactList}\small\item\em Delay in between connecting to stepper and issuing commandss. \end{DoxyCompactList}\item 
 const uint8\+\_\+t \mbox{\hyperlink{classbowIO_acb563b005278378a29e3a49e36b4b367}{step\+Run\+Current\+Percent}} = 40
 \begin{DoxyCompactList}\small\item\em Stepper current during run phase. \end{DoxyCompactList}\item 
-const uint8\+\_\+t \mbox{\hyperlink{classbowIO_ad1228b53e70ce9fa5a59cb76d29a7cc8}{step\+Home\+Current\+Percent}} = 10
+const uint8\+\_\+t \mbox{\hyperlink{classbowIO_ad1228b53e70ce9fa5a59cb76d29a7cc8}{step\+Home\+Current\+Percent}} = 20
 \item 
 const char \mbox{\hyperlink{classbowIO_aaa0c90edf8a14856b5fd49d90d6df3fb}{step\+Microstepping}} = 32
 \begin{DoxyCompactList}\small\item\em Tilt stepper micro stepping. \end{DoxyCompactList}\item 
@@ -215,7 +215,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowIO_a4f7ef490b19cc4d9d6e3bd2e65d77061_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -233,6 +234,14 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classbowIO_a25eabc5e7b0c82b2d117586d155aae66_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classbowIO_a25eabc5e7b0c82b2d117586d155aae66_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{classbowIO_a147462aa41b453a7096c94f93be3d38b}\label{classbowIO_a147462aa41b453a7096c94f93be3d38b}} 
@@ -280,6 +289,20 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowIO_ab579e762084f1b384c5a6c1b968cd769_icgraph}
 \end{center}
 \end{figure}
+\mbox{\Hypertarget{classbowIO_a63fefac92798add272f8ac75b6bdd432}\label{classbowIO_a63fefac92798add272f8ac75b6bdd432}} 
+\index{bowIO@{bowIO}!clearTachoData@{clearTachoData}}
+\index{clearTachoData@{clearTachoData}!bowIO@{bowIO}}
+\doxysubsubsection{\texorpdfstring{clearTachoData()}{clearTachoData()}}
+{\footnotesize\ttfamily void bow\+IO\+::clear\+Tacho\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classbowIO_a63fefac92798add272f8ac75b6bdd432_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classbowIO_a06a6d2dab473c40d8089b10114f06f83}\label{classbowIO_a06a6d2dab473c40d8089b10114f06f83}} 
 \index{bowIO@{bowIO}!createStepper@{createStepper}}
 \index{createStepper@{createStepper}!bowIO@{bowIO}}
@@ -311,6 +334,14 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{enableBowPower()}{enableBowPower()}}
 {\footnotesize\ttfamily bool bow\+IO\+::enable\+Bow\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classbowIO_a93f89060d1b63b5433dda54836075efa_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classbowIO_a563fccfa0253235dfdb061135c9ddbd8}\label{classbowIO_a563fccfa0253235dfdb061135c9ddbd8}} 
 \index{bowIO@{bowIO}!getBowCurrent@{getBowCurrent}}
 \index{getBowCurrent@{getBowCurrent}!bowIO@{bowIO}}
@@ -331,6 +362,14 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{getBowMotorVoltage()}{getBowMotorVoltage()}}
 {\footnotesize\ttfamily float bow\+IO\+::get\+Bow\+Motor\+Voltage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classbowIO_a52974e4eccc141a2971174983d50dc12_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classbowIO_a685e1ba9c2a8a77ac8286a229e8a7f0c}\label{classbowIO_a685e1ba9c2a8a77ac8286a229e8a7f0c}} 
 \index{bowIO@{bowIO}!getLastTachoFreq@{getLastTachoFreq}}
 \index{getLastTachoFreq@{getLastTachoFreq}!bowIO@{bowIO}}
@@ -354,6 +393,14 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{getMotorFault()}{getMotorFault()}}
 {\footnotesize\ttfamily bool bow\+IO\+::get\+Motor\+Fault (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classbowIO_a951120e99c2120a3c7e07181cafc621a_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classbowIO_a76c490095ad46b62c107b738a423c321}\label{classbowIO_a76c490095ad46b62c107b738a423c321}} 
 \index{bowIO@{bowIO}!getTMC2209Info@{getTMC2209Info}}
 \index{getTMC2209Info@{getTMC2209Info}!bowIO@{bowIO}}
@@ -407,7 +454,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Ramps the bow speed PWM from the last PWM value given to the value given in speed, blocking, only use for testing purposes. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -431,7 +479,8 @@ Recalculated internally to use SERVO\+\_\+\+MIN and SERVO\+\_\+\+MAX as lower an
 \includegraphics[width=350pt]{classbowIO_a105d8980fb4e0596755e8d337144aae6_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -481,8 +530,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{updateBow()}{updateBow()}}
 {\footnotesize\ttfamily void bow\+IO\+::update\+Bow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -509,7 +557,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowIO_a8d4057a6d30a1394038afbe2e2752286_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -533,7 +582,7 @@ Pin for motor current sense.
 \index{bowIO@{bowIO}!bowMotorCurrentLimit@{bowMotorCurrentLimit}}
 \index{bowMotorCurrentLimit@{bowMotorCurrentLimit}!bowIO@{bowIO}}
 \doxysubsubsection{\texorpdfstring{bowMotorCurrentLimit}{bowMotorCurrentLimit}}
-{\footnotesize\ttfamily float bow\+IO\+::bow\+Motor\+Current\+Limit = 1.\+5}
+{\footnotesize\ttfamily float bow\+IO\+::bow\+Motor\+Current\+Limit = 1.\+75}
 
 
 
@@ -643,16 +692,6 @@ Hold the last reflector output state.
 
 Last tilt value set. 
 
-\mbox{\Hypertarget{classbowIO_a1fffe28bb5c5c94d62898abc0bca7d98}\label{classbowIO_a1fffe28bb5c5c94d62898abc0bca7d98}} 
-\index{bowIO@{bowIO}!pwmShield@{pwmShield}}
-\index{pwmShield@{pwmShield}!bowIO@{bowIO}}
-\doxysubsubsection{\texorpdfstring{pwmShield}{pwmShield}}
-{\footnotesize\ttfamily Adafruit\+\_\+\+PWMServo\+Driver$\ast$ bow\+IO\+::pwm\+Shield = nullptr}
-
-
-
-Pointer to globally created Adafruit\+\_\+\+PWMServo\+Driver instance. 
-
 \mbox{\Hypertarget{classbowIO_a8524be5ec6375822275113db99378ed0}\label{classbowIO_a8524be5ec6375822275113db99378ed0}} 
 \index{bowIO@{bowIO}!reflectorCounter@{reflectorCounter}}
 \index{reflectorCounter@{reflectorCounter}!bowIO@{bowIO}}
@@ -727,7 +766,7 @@ Pin for tilt stepper driver enable.
 \index{bowIO@{bowIO}!stepHomeCurrentPercent@{stepHomeCurrentPercent}}
 \index{stepHomeCurrentPercent@{stepHomeCurrentPercent}!bowIO@{bowIO}}
 \doxysubsubsection{\texorpdfstring{stepHomeCurrentPercent}{stepHomeCurrentPercent}}
-{\footnotesize\ttfamily const uint8\+\_\+t bow\+IO\+::step\+Home\+Current\+Percent = 10\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const uint8\+\_\+t bow\+IO\+::step\+Home\+Current\+Percent = 20\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{classbowIO_aaa0c90edf8a14856b5fd49d90d6df3fb}\label{classbowIO_aaa0c90edf8a14856b5fd49d90d6df3fb}} 
 \index{bowIO@{bowIO}!stepMicrostepping@{stepMicrostepping}}

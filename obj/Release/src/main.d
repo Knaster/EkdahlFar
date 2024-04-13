@@ -117,8 +117,8 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  lib/Wire/WireIMXRT.h src/bowio.cpp src/bowio.h \
  lib/Teensy_PWM/src/Teensy_PWM.h lib/Teensy_PWM/src/PWM_Generic_Debug.h \
  lib/TMC2209/src/TMC2209.cpp lib/TMC2209/src/TMC2209.h src/servostepper.h \
- src/bowcontrol.cpp lib/teensy4/elapsedMillis.h src/bowcontrol.h \
- src/calibrate.h src/calibrate.cpp src/solenoid.cpp src/mute.cpp \
+ src/bowcontrol.cpp lib/teensy4/elapsedMillis.h src/calibrate.h \
+ src/bowcontrol.h src/calibrate.cpp src/solenoid.cpp src/mute.cpp \
  src/stringmodule.cpp src/midi.cpp src/isrclasswrapper.cpp \
  src/settingshandler.cpp lib/EEPROM/EEPROM.h lib/teensy4/avr/eeprom.h \
  lib/teensy4/avr/io.h lib/teensy4/avr/../avr_emulation.h \

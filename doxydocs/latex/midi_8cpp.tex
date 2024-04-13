@@ -36,9 +36,11 @@ void \mbox{\hyperlink{midi_8cpp_ad49be36e31ac13009fbc84e03bb78cdc}{update\+Local
 \item 
 void \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{process\+Local\+Message}} (String $\ast$message)
 \item 
-void \mbox{\hyperlink{midi_8cpp_adae513bd93c17269a7aa93788cb85a8d}{add\+Note}} (byte channel, byte note, byte velocity)
+int8\+\_\+t \mbox{\hyperlink{midi_8cpp_a4989ed85e805ad55b1a49073de2380f9}{find\+Note}} (byte channel, byte note)
 \item 
-void \mbox{\hyperlink{midi_8cpp_a2ed210fff7b6141cf2f38b79fd334d92}{remove\+Note}} (byte channel, byte note)
+bool \mbox{\hyperlink{midi_8cpp_a73939c2904328a68f8ff33cdb29358d6}{remove\+Note}} (byte channel, byte note)
+\item 
+void \mbox{\hyperlink{midi_8cpp_adae513bd93c17269a7aa93788cb85a8d}{add\+Note}} (byte channel, byte note, byte velocity)
 \item 
 void \mbox{\hyperlink{midi_8cpp_a24101d1e9fbfa918d5da035c6ca023a2}{set\+Note}} ()
 \item 
@@ -129,7 +131,8 @@ std\+::vector$<$ \mbox{\hyperlink{structnoteMsg}{note\+Msg}} $>$ \mbox{\hyperlin
 \doxysubsubsection{\texorpdfstring{addNote()}{addNote()}}
 {\footnotesize\ttfamily void add\+Note (\begin{DoxyParamCaption}\item[{byte}]{channel,  }\item[{byte}]{note,  }\item[{byte}]{velocity }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -155,6 +158,20 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{expIBool()}{expIBool()}}
 {\footnotesize\ttfamily double exp\+IBool (\begin{DoxyParamCaption}\item[{double}]{input }\end{DoxyParamCaption})}
 
+\mbox{\Hypertarget{midi_8cpp_a4989ed85e805ad55b1a49073de2380f9}\label{midi_8cpp_a4989ed85e805ad55b1a49073de2380f9}} 
+\index{midi.cpp@{midi.cpp}!findNote@{findNote}}
+\index{findNote@{findNote}!midi.cpp@{midi.cpp}}
+\doxysubsubsection{\texorpdfstring{findNote()}{findNote()}}
+{\footnotesize\ttfamily int8\+\_\+t find\+Note (\begin{DoxyParamCaption}\item[{byte}]{channel,  }\item[{byte}]{note }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{midi_8cpp_a4989ed85e805ad55b1a49073de2380f9_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{midi_8cpp_ad0dc2236017f1b8b833b71760eccef64}\label{midi_8cpp_ad0dc2236017f1b8b833b71760eccef64}} 
 \index{midi.cpp@{midi.cpp}!mapKeys@{mapKeys}}
 \index{mapKeys@{mapKeys}!midi.cpp@{midi.cpp}}
@@ -188,7 +205,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Handle poly aftertouch message. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -212,7 +230,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 handle control change message 
 
-All notes offHere is the call graph for this function\+:\nopagebreak
+All notes offHere is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -236,7 +255,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Handle note off message. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -260,7 +280,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Handles note on messages. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -284,7 +305,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 handle pitch bend message 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -304,7 +326,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{OnProgramChange()}{OnProgramChange()}}
 {\footnotesize\ttfamily void On\+Program\+Change (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{channel,  }\item[{uint8\+\_\+t}]{program }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -324,38 +347,42 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{processLocalMessage()}{processLocalMessage()}}
 {\footnotesize\ttfamily void process\+Local\+Message (\begin{DoxyParamCaption}\item[{String $\ast$}]{message }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{midi_8cpp_a2ed210fff7b6141cf2f38b79fd334d92}\label{midi_8cpp_a2ed210fff7b6141cf2f38b79fd334d92}} 
+\mbox{\Hypertarget{midi_8cpp_a73939c2904328a68f8ff33cdb29358d6}\label{midi_8cpp_a73939c2904328a68f8ff33cdb29358d6}} 
 \index{midi.cpp@{midi.cpp}!removeNote@{removeNote}}
 \index{removeNote@{removeNote}!midi.cpp@{midi.cpp}}
 \doxysubsubsection{\texorpdfstring{removeNote()}{removeNote()}}
-{\footnotesize\ttfamily void remove\+Note (\begin{DoxyParamCaption}\item[{byte}]{channel,  }\item[{byte}]{note }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool remove\+Note (\begin{DoxyParamCaption}\item[{byte}]{channel,  }\item[{byte}]{note }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{midi_8cpp_a2ed210fff7b6141cf2f38b79fd334d92_cgraph}
+\includegraphics[width=350pt]{midi_8cpp_a73939c2904328a68f8ff33cdb29358d6_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{midi_8cpp_a2ed210fff7b6141cf2f38b79fd334d92_icgraph}
+\includegraphics[width=350pt]{midi_8cpp_a73939c2904328a68f8ff33cdb29358d6_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{midi_8cpp_a24101d1e9fbfa918d5da035c6ca023a2}\label{midi_8cpp_a24101d1e9fbfa918d5da035c6ca023a2}} 
@@ -364,7 +391,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{setNote()}{setNote()}}
 {\footnotesize\ttfamily void set\+Note (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-messaging note cue end Here is the call graph for this function\+:\nopagebreak
+messaging note cue end Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -384,7 +412,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{setNotes()}{setNotes()}}
 {\footnotesize\ttfamily void set\+Notes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -404,7 +433,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{updateLocalVariables()}{updateLocalVariables()}}
 {\footnotesize\ttfamily void update\+Local\+Variables (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

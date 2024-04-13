@@ -1,8 +1,24 @@
 var searchData=
 [
-  ['note_972',['note',['../structnoteMsg.html#a0e74b207ccf427dc34a04df2686fa501',1,'noteMsg']]],
-  ['notecount_973',['noteCount',['../midi_8cpp.html#a86e27933d2680a2f0fe44c77716b48b9',1,'midi.cpp']]],
-  ['noteoff_974',['noteOff',['../classconfiguration.html#af44d3f003c6bba79474aab5d38bf0637',1,'configuration']]],
-  ['noteon_975',['noteOn',['../classconfiguration.html#a36a671b6f1e684b991f3cdb5fed48a75',1,'configuration']]],
-  ['notesheld_976',['notesHeld',['../midi_8cpp.html#a1554d7cca07515767222c66e2dbb4eca',1,'midi.cpp']]]
+  ['manualspeedpwm_1050',['manualSpeedPWM',['../classbowControl.html#a16ce07c4b7a3eaefa2a82a7945ca4ce7',1,'bowControl']]],
+  ['manualtiltpwm_1051',['manualTiltPWM',['../classbowControl.html#addb7f6f29b5f645cbf52dfaa090c735d',1,'bowControl']]],
+  ['maxhz_1052',['maxHz',['../struct__calibrationData.html#af8d742277e4ed67873611479481e7f2f',1,'_calibrationData']]],
+  ['maxhzpidfullpressure_1053',['maxHzPIDFullPressure',['../struct__calibrationData.html#a9a62b6fa0594638e947aef422d774535',1,'_calibrationData']]],
+  ['maxspeed_1054',['maxSpeed',['../classservoStepper.html#ade217ba50aac10e1f1e69c3f1dd25a6a',1,'servoStepper']]],
+  ['maxspeedpwm_1055',['maxSpeedPWM',['../struct__calibrationData.html#a7359cc201af09ef84f616f19bf21a82b',1,'_calibrationData']]],
+  ['maxtestpressure_1056',['maxTestPressure',['../classcalibrate.html#a74535f13b751adcb657029ef0088e09c',1,'calibrate']]],
+  ['midirxchannel_1057',['midiRxChannel',['../classconfiguration.html#a1e915fd6a01b6df31be57ed60bec4374',1,'configuration']]],
+  ['minhz_1058',['minHz',['../struct__calibrationData.html#aa5fc10820d9bfdf719f843f3fb98bead',1,'_calibrationData']]],
+  ['mininertialpwm_1059',['minInertialPWM',['../struct__calibrationData.html#ac1850f7a5704f4d9b2f04534e015e382',1,'_calibrationData']]],
+  ['minspeedpwm_1060',['minSpeedPWM',['../struct__calibrationData.html#a703fec13dcf0d8cf024236c6c97ca84f',1,'_calibrationData']]],
+  ['modifiertiltpwm_1061',['modifierTiltPWM',['../classbowControl.html#a7bc01a8f9a74f227bbff9f419d1789c1',1,'bowControl']]],
+  ['monomode_1062',['monoMode',['../midi_8cpp.html#ae8a3ecedd527c653a15db37f02dda9b2',1,'midi.cpp']]],
+  ['motorfault_1063',['motorFault',['../classbowControl.html#aab9dc396134241a4303acec3be3585c5',1,'bowControl']]],
+  ['movedirection_1064',['moveDirection',['../classservoStepper.html#a7c94ef2adcc44ed88259ac8fa975a838',1,'servoStepper']]],
+  ['movingto_1065',['movingTo',['../classservoStepper.html#acadd836f8be53ca1366cbf5768fbd231',1,'servoStepper']]],
+  ['mutearray_1066',['muteArray',['../classstringModule.html#ac21fd840807f137b8ce5384e1dea3ee3',1,'stringModule']]],
+  ['muteforce_1067',['muteForce',['../classbowControl.html#a8e7fd35de30ce28f5e6a5d64d9a80bcd',1,'bowControl']]],
+  ['mutemaxposition_1068',['muteMaxPosition',['../classmute.html#a9170951ebc077ecd2f4cffa75dfc5505',1,'mute']]],
+  ['muteperiod_1069',['mutePeriod',['../classbowControl.html#a04b7c70b2776c8717ba627c6e85c16a6',1,'bowControl']]],
+  ['muteposition_1070',['mutePosition',['../classmute.html#a449c9f6158309fe66b59df762ce42c94',1,'mute']]]
 ];

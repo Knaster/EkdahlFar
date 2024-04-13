@@ -86,6 +86,8 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a7359cc201af09ef84f616f19bf21a82b"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__calibrationData.html#a7359cc201af09ef84f616f19bf21a82b">maxSpeedPWM</a> = 64564</td></tr>
 <tr class="memdesc:a7359cc201af09ef84f616f19bf21a82b"><td class="mdescLeft">&#160;</td><td class="mdescRight">PWM value used to obtain maxHz.  <a href="struct__calibrationData.html#a7359cc201af09ef84f616f19bf21a82b">More...</a><br /></td></tr>
 <tr class="separator:a7359cc201af09ef84f616f19bf21a82b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1850f7a5704f4d9b2f04534e015e382"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__calibrationData.html#ac1850f7a5704f4d9b2f04534e015e382">minInertialPWM</a> = 10619</td></tr>
+<tr class="separator:ac1850f7a5704f4d9b2f04534e015e382"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a953d084880e9d28c44266b01e596d3c6"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__calibrationData.html#a953d084880e9d28c44266b01e596d3c6">firstTouchPressure</a> = 16460</td></tr>
 <tr class="memdesc:a953d084880e9d28c44266b01e596d3c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum "usable" PWM value used for the tilt servo. Calculated as the first point of where the bow speed slows down i.e. touches the string.  <a href="struct__calibrationData.html#a953d084880e9d28c44266b01e596d3c6">More...</a><br /></td></tr>
 <tr class="separator:a953d084880e9d28c44266b01e596d3c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -99,6 +101,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a168376888b0deacbe6714fc7e1bd1f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58ccf8bf48458dc0130c173cf0b6e107"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__calibrationData.html#a58ccf8bf48458dc0130c173cf0b6e107">upperHarmonic</a> = 49</td></tr>
 <tr class="separator:a58ccf8bf48458dc0130c173cf0b6e107"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a62b6fa0594638e947aef422d774535"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__calibrationData.html#a9a62b6fa0594638e947aef422d774535">maxHzPIDFullPressure</a> = -1</td></tr>
+<tr class="separator:a9a62b6fa0594638e947aef422d774535"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3468da1beb3aebcec00848d05fb068a4"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__calibrationData.html#a3468da1beb3aebcec00848d05fb068a4">restPosition</a> = 0</td></tr>
 <tr class="separator:a3468da1beb3aebcec00848d05fb068a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -165,6 +169,20 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a9a62b6fa0594638e947aef422d774535"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a62b6fa0594638e947aef422d774535">&#9670;&nbsp;</a></span>maxHzPIDFullPressure</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float _calibrationData::maxHzPIDFullPressure = -1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7359cc201af09ef84f616f19bf21a82b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7359cc201af09ef84f616f19bf21a82b">&#9670;&nbsp;</a></span>maxSpeedPWM</h2>
 
@@ -178,7 +196,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>PWM value used to obtain maxHz. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000010">Todo:</a></b></dt><dd>USED FOR CALIBRATION ONLY, REPLACE WITH LOCAL WHEN NEEDED </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>USED FOR CALIBRATION ONLY, REPLACE WITH LOCAL WHEN NEEDED </dd></dl>
 
 </div>
 </div>
@@ -198,6 +216,20 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ac1850f7a5704f4d9b2f04534e015e382"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1850f7a5704f4d9b2f04534e015e382">&#9670;&nbsp;</a></span>minInertialPWM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t _calibrationData::minInertialPWM = 10619</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a703fec13dcf0d8cf024236c6c97ca84f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a703fec13dcf0d8cf024236c6c97ca84f">&#9670;&nbsp;</a></span>minSpeedPWM</h2>
 
@@ -211,7 +243,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>PWM value used to obtain minHz. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000009">Todo:</a></b></dt><dd>USED FOR CALIBRATION ONLY, REPLACE WITH LOCAL WHEN NEEDED </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>USED FOR CALIBRATION ONLY, REPLACE WITH LOCAL WHEN NEEDED </dd></dl>
 
 </div>
 </div>

@@ -51,7 +51,7 @@ uint16_t saveParams() {
 String dumpData() {
     String saveData = "ver:1,";
     uint8_t saveCurrentConfig = currentConfig;
-    for (int i; i < (configArray.size()); i++) {
+    for (int i = 0; i < (configArray.size()); i++) {
         saveData += "scf:" + String(i) + "," + configArray[i].dumpData();
     }
     saveData += "scf:" + String(saveCurrentConfig) + ",";

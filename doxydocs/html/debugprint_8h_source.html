@@ -46,7 +46,6 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
-</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -61,6 +60,11 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">debugprint.h</div>  </div>
@@ -70,7 +74,7 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="debugprint_8h.html#a9b9f43fa932668c3ae692f0f2a8655e0">    2</a></span>&#160;<span class="preprocessor">#define debugPrintTypes 11</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="debugprint_8h.html#acbab4b58032141437b697b6071034ed6">    3</a></span>&#160;String <a class="code" href="debugprint_8h.html#acbab4b58032141437b697b6071034ed6">debugPrintTypeName</a>[<a class="code" href="debugprint_8h.html#a9b9f43fa932668c3ae692f0f2a8655e0">debugPrintTypes</a>] = { <span class="stringliteral">&quot;command&quot;</span>, <span class="stringliteral">&quot;usb&quot;</span>, <span class="stringliteral">&quot;hardware&quot;</span> , <span class="stringliteral">&quot;undefined&quot;</span>, <span class="stringliteral">&quot;priority&quot;</span>, <span class="stringliteral">&quot;error&quot;</span>, <span class="stringliteral">&quot;inforequest&quot;</span>, <span class="stringliteral">&quot;expressionparser&quot;</span>, <span class="stringliteral">&quot;debug&quot;</span>, <span class="stringliteral">&quot;textinfo&quot;</span>, <span class="stringliteral">&quot;help&quot;</span> };</div>
 <div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="debugprint_8h.html#a325006d92e4f547b1b983336d5be8b08">    4</a></span>&#160;String <a class="code" href="debugprint_8h.html#a325006d92e4f547b1b983336d5be8b08">debugPrintTypeNameShort</a>[<a class="code" href="debugprint_8h.html#a9b9f43fa932668c3ae692f0f2a8655e0">debugPrintTypes</a>] = { <span class="stringliteral">&quot;cmd&quot;</span>, <span class="stringliteral">&quot;usb&quot;</span>, <span class="stringliteral">&quot;hw&quot;</span>, <span class="stringliteral">&quot;un&quot;</span>, <span class="stringliteral">&quot;pri&quot;</span>, <span class="stringliteral">&quot;err&quot;</span>, <span class="stringliteral">&quot;irq&quot;</span>, <span class="stringliteral">&quot;ep&quot;</span>, <span class="stringliteral">&quot;dbg&quot;</span>, <span class="stringliteral">&quot;txi&quot;</span>, <span class="stringliteral">&quot;hlp&quot;</span>};</div>
-<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="debugprint_8h.html#a9c71895d3563902fd61dbfe70213f577">    5</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="debugprint_8h.html#a9c71895d3563902fd61dbfe70213f577">debugPrintEnabled</a>[<a class="code" href="debugprint_8h.html#a9b9f43fa932668c3ae692f0f2a8655e0">debugPrintTypes</a>] = { <span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">true</span> };</div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="debugprint_8h.html#a9c71895d3563902fd61dbfe70213f577">    5</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="debugprint_8h.html#a9c71895d3563902fd61dbfe70213f577">debugPrintEnabled</a>[<a class="code" href="debugprint_8h.html#a9b9f43fa932668c3ae692f0f2a8655e0">debugPrintTypes</a>] = { <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">true</span> };</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="debugprint_8h.html#a02212746d4c3138ec12bc5d582e5dc8f">    7</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="debugprint_8h.html#a02212746d4c3138ec12bc5d582e5dc8f">debugPrintCheckType</a>(<a class="code" href="debugprint_8h.html#a7f327d12d94173c3c786ded0b10d2be4">debugPrintType</a> printType) {</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="debugprint_8h.html#a9c71895d3563902fd61dbfe70213f577">debugPrintEnabled</a>[printType] == <span class="keyword">true</span>) { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>

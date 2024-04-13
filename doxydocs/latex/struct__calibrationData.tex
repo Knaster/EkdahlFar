@@ -15,6 +15,8 @@ float \mbox{\hyperlink{struct__calibrationData_af8d742277e4ed67873611479481e7f2f
 \begin{DoxyCompactList}\small\item\em Maximum bow speed that the motor and controller can handle, in Hertz. \end{DoxyCompactList}\item 
 uint16\+\_\+t \mbox{\hyperlink{struct__calibrationData_a7359cc201af09ef84f616f19bf21a82b}{max\+Speed\+PWM}} = 64564
 \begin{DoxyCompactList}\small\item\em PWM value used to obtain max\+Hz. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{struct__calibrationData_ac1850f7a5704f4d9b2f04534e015e382}{min\+Inertial\+PWM}} = 10619
+\item 
 uint16\+\_\+t \mbox{\hyperlink{struct__calibrationData_a953d084880e9d28c44266b01e596d3c6}{first\+Touch\+Pressure}} = 16460
 \begin{DoxyCompactList}\small\item\em Minimum \char`\"{}usable\char`\"{} PWM value used for the tilt servo. Calculated as the first point of where the bow speed slows down i.\+e. touches the string. \end{DoxyCompactList}\item 
 uint16\+\_\+t \mbox{\hyperlink{struct__calibrationData_a81735242698d29873c6c786fd143d96e}{stall\+Pressure}} = 51063
@@ -24,6 +26,8 @@ float \mbox{\hyperlink{struct__calibrationData_a60cf6f29df7890cc1411d154a3796277
 int16\+\_\+t \mbox{\hyperlink{struct__calibrationData_a168376888b0deacbe6714fc7e1bd1f58}{lower\+Harmonic}} = -\/48
 \item 
 int16\+\_\+t \mbox{\hyperlink{struct__calibrationData_a58ccf8bf48458dc0130c173cf0b6e107}{upper\+Harmonic}} = 49
+\item 
+float \mbox{\hyperlink{struct__calibrationData_a9a62b6fa0594638e947aef422d774535}{max\+Hz\+PIDFull\+Pressure}} = -\/1
 \item 
 uint16\+\_\+t \mbox{\hyperlink{struct__calibrationData_a3468da1beb3aebcec00848d05fb068a4}{rest\+Position}} = 0
 \end{DoxyCompactItemize}
@@ -66,6 +70,12 @@ The fundamental frequency of the string in Hertz.
 
 Maximum bow speed that the motor and controller can handle, in Hertz. 
 
+\mbox{\Hypertarget{struct__calibrationData_a9a62b6fa0594638e947aef422d774535}\label{struct__calibrationData_a9a62b6fa0594638e947aef422d774535}} 
+\index{\_calibrationData@{\_calibrationData}!maxHzPIDFullPressure@{maxHzPIDFullPressure}}
+\index{maxHzPIDFullPressure@{maxHzPIDFullPressure}!\_calibrationData@{\_calibrationData}}
+\doxysubsubsection{\texorpdfstring{maxHzPIDFullPressure}{maxHzPIDFullPressure}}
+{\footnotesize\ttfamily float \+\_\+calibration\+Data\+::max\+Hz\+PIDFull\+Pressure = -\/1}
+
 \mbox{\Hypertarget{struct__calibrationData_a7359cc201af09ef84f616f19bf21a82b}\label{struct__calibrationData_a7359cc201af09ef84f616f19bf21a82b}} 
 \index{\_calibrationData@{\_calibrationData}!maxSpeedPWM@{maxSpeedPWM}}
 \index{maxSpeedPWM@{maxSpeedPWM}!\_calibrationData@{\_calibrationData}}
@@ -77,7 +87,7 @@ Maximum bow speed that the motor and controller can handle, in Hertz.
 PWM value used to obtain max\+Hz. 
 
 \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{todo__todo000010}{Todo}}]USED FOR CALIBRATION ONLY, REPLACE WITH LOCAL WHEN NEEDED \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{todo__todo000007}{Todo}}]USED FOR CALIBRATION ONLY, REPLACE WITH LOCAL WHEN NEEDED \end{DoxyRefDesc}
 \mbox{\Hypertarget{struct__calibrationData_aa5fc10820d9bfdf719f843f3fb98bead}\label{struct__calibrationData_aa5fc10820d9bfdf719f843f3fb98bead}} 
 \index{\_calibrationData@{\_calibrationData}!minHz@{minHz}}
 \index{minHz@{minHz}!\_calibrationData@{\_calibrationData}}
@@ -87,6 +97,12 @@ PWM value used to obtain max\+Hz.
 
 
 Minimum bow speed that the motor and controller can handle, in Hertz. 
+
+\mbox{\Hypertarget{struct__calibrationData_ac1850f7a5704f4d9b2f04534e015e382}\label{struct__calibrationData_ac1850f7a5704f4d9b2f04534e015e382}} 
+\index{\_calibrationData@{\_calibrationData}!minInertialPWM@{minInertialPWM}}
+\index{minInertialPWM@{minInertialPWM}!\_calibrationData@{\_calibrationData}}
+\doxysubsubsection{\texorpdfstring{minInertialPWM}{minInertialPWM}}
+{\footnotesize\ttfamily uint16\+\_\+t \+\_\+calibration\+Data\+::min\+Inertial\+PWM = 10619}
 
 \mbox{\Hypertarget{struct__calibrationData_a703fec13dcf0d8cf024236c6c97ca84f}\label{struct__calibrationData_a703fec13dcf0d8cf024236c6c97ca84f}} 
 \index{\_calibrationData@{\_calibrationData}!minSpeedPWM@{minSpeedPWM}}
@@ -99,7 +115,7 @@ Minimum bow speed that the motor and controller can handle, in Hertz.
 PWM value used to obtain min\+Hz. 
 
 \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{todo__todo000009}{Todo}}]USED FOR CALIBRATION ONLY, REPLACE WITH LOCAL WHEN NEEDED \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{todo__todo000006}{Todo}}]USED FOR CALIBRATION ONLY, REPLACE WITH LOCAL WHEN NEEDED \end{DoxyRefDesc}
 \mbox{\Hypertarget{struct__calibrationData_a3468da1beb3aebcec00848d05fb068a4}\label{struct__calibrationData_a3468da1beb3aebcec00848d05fb068a4}} 
 \index{\_calibrationData@{\_calibrationData}!restPosition@{restPosition}}
 \index{restPosition@{restPosition}!\_calibrationData@{\_calibrationData}}

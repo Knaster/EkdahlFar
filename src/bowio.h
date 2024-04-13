@@ -72,7 +72,7 @@ private:
     const long stepBaudRate = 115200;       ///< Baud rate for tilt stepper serial
     const int stepConnectDelay = 200;       ///< Delay in between connecting to stepper and issuing commandss
     const uint8_t stepRunCurrentPercent = 40;   ///< Stepper current during run phase
-    const uint8_t stepHomeCurrentPercent = 10;
+    const uint8_t stepHomeCurrentPercent = 20;
 //    const int32_t VELOCITY = 100000;
 //    #define microstepping 32
     const char stepMicrostepping = 32;      ///< Tilt stepper micro stepping

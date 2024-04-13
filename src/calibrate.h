@@ -50,20 +50,14 @@ public:
 
     int EEPROM_offset = 0;
 
-    //#define speedTestDelay  10
     _calibrationData *calibrationData;
 
     calibrate(bowIO &_bowIO, _calibrationData &__calibrationData, bowControl &_bowControl);
 
-    // GUItool: begin automatically generated code
-    // GUItool: end automatically generated code
     void startAudioAnalyzing();
     void stopAudioAnalyzing();
 
     bool waitForBowToStabilize(uint16_t maxIterations);
-    //  bool waitForBowToStabilizePID(uint16_t maxIterations);
-//    int increaseSpeedPWMToTarget(uint16_t startPWM, float target);
-//    int derivativeSpeedPWMToTarget(int startPWM, float target, uint16_t maxIterations);
 private:
     bool findMinPressure();
     bool findMaxPressure();
@@ -71,19 +65,10 @@ public:
     uint16_t maxTestPressure = 50000;
     bool findMinMaxPressure();
     bool findMinMaxSpeedPWM();
-    //  bool findFundamentalFrequency();
     bool findMinMaxSpeedPID();
 
     bool calibrateAll();
-//    void printCalibrationData();
-//    uint16_t saveParams();
-//    uint16_t loadParams(uint8_t EEPROMVersion);
 
     String dumpData();
-//  float maxSpeed();
-//  void updateWhileDelayUs(int us);
-//  int findLowerHarmonic();
-//  int findUpperHarmonic();
-//  bool findMinMaxSpeedPID();
 };
 #endif

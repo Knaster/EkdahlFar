@@ -1,0 +1,185 @@
+\hypertarget{classcontrolReader}{}\doxysection{control\+Reader Class Reference}
+\label{classcontrolReader}\index{controlReader@{controlReader}}
+
+
+{\ttfamily \#include $<$control\+Reader.\+h$>$}
+
+
+
+Collaboration diagram for control\+Reader\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{classcontrolReader__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcontrolReader_a87503796c1a256c06b197c398640dee1}{control\+Reader}} (uint8\+\_\+t in\+Data\+Ready\+Pin, uint8\+\_\+t in\+Gate\+Pin)
+\item 
+virtual \mbox{\hyperlink{classcontrolReader_af11b0fcb9e6bf635484623d7ab215417}{$\sim$control\+Reader}} ()
+\item 
+void \mbox{\hyperlink{classcontrolReader_a9d830f90d3165103c4c1b6ebc124da33}{read\+Data}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+String \mbox{\hyperlink{classcontrolReader_a5fc695cd52ed54e7aac4b2d0784e685c}{cv\+Input\+Commands}} \mbox{[}8\mbox{]}
+\item 
+bool \mbox{\hyperlink{classcontrolReader_a9e0ed0efc8a3a5f821eedace5eb2840f}{adc\+Debug\+Report}} = true
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classcontrolReader_a60201e996420e7b6c89c634e5bd7616a}{gate\+State}} = 0
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classcontrolReader_a23bcf8d7a4ae68844d15d4950b7a48fc}{ads\+Init}} = false
+\item 
+Adafruit\+\_\+\+ADS1115 \mbox{\hyperlink{classcontrolReader_a034a8f5368bf7be7308ca6598fc8a681}{ads}}
+\item 
+Adafruit\+\_\+\+ADS1015 \mbox{\hyperlink{classcontrolReader_a74fb34f83d58e7bfc31895f5f32519ab}{ads2}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classcontrolReader_a675268bbd9fe4f6435569352b30242f4}{pin\+Data\+Ready}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classcontrolReader_aaf068b8234bef248daa827f86236f66f}{pin\+Gate}}
+\item 
+\mbox{\hyperlink{classaverager}{averager}} \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}} \mbox{[}8\mbox{]}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classcontrolReader_abdb58cc1bcb3d795df920c7d417070ba}{current\+Channel}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classcontrolReader_aa143fcfbe08f7681d518cbe667897372}{current\+Channel2}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcontrolReader_a87503796c1a256c06b197c398640dee1}\label{classcontrolReader_a87503796c1a256c06b197c398640dee1}} 
+\index{controlReader@{controlReader}!controlReader@{controlReader}}
+\index{controlReader@{controlReader}!controlReader@{controlReader}}
+\doxysubsubsection{\texorpdfstring{controlReader()}{controlReader()}}
+{\footnotesize\ttfamily control\+Reader\+::control\+Reader (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{in\+Data\+Ready\+Pin,  }\item[{uint8\+\_\+t}]{in\+Gate\+Pin }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcontrolReader_a87503796c1a256c06b197c398640dee1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcontrolReader_af11b0fcb9e6bf635484623d7ab215417}\label{classcontrolReader_af11b0fcb9e6bf635484623d7ab215417}} 
+\index{controlReader@{controlReader}!````~controlReader@{$\sim$controlReader}}
+\index{````~controlReader@{$\sim$controlReader}!controlReader@{controlReader}}
+\doxysubsubsection{\texorpdfstring{$\sim$controlReader()}{~controlReader()}}
+{\footnotesize\ttfamily control\+Reader\+::$\sim$control\+Reader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcontrolReader_a9d830f90d3165103c4c1b6ebc124da33}\label{classcontrolReader_a9d830f90d3165103c4c1b6ebc124da33}} 
+\index{controlReader@{controlReader}!readData@{readData}}
+\index{readData@{readData}!controlReader@{controlReader}}
+\doxysubsubsection{\texorpdfstring{readData()}{readData()}}
+{\footnotesize\ttfamily void control\+Reader\+::read\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcontrolReader_a9d830f90d3165103c4c1b6ebc124da33_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=290pt]{classcontrolReader_a9d830f90d3165103c4c1b6ebc124da33_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classcontrolReader_a9e0ed0efc8a3a5f821eedace5eb2840f}\label{classcontrolReader_a9e0ed0efc8a3a5f821eedace5eb2840f}} 
+\index{controlReader@{controlReader}!adcDebugReport@{adcDebugReport}}
+\index{adcDebugReport@{adcDebugReport}!controlReader@{controlReader}}
+\doxysubsubsection{\texorpdfstring{adcDebugReport}{adcDebugReport}}
+{\footnotesize\ttfamily bool control\+Reader\+::adc\+Debug\+Report = true}
+
+\mbox{\Hypertarget{classcontrolReader_a034a8f5368bf7be7308ca6598fc8a681}\label{classcontrolReader_a034a8f5368bf7be7308ca6598fc8a681}} 
+\index{controlReader@{controlReader}!ads@{ads}}
+\index{ads@{ads}!controlReader@{controlReader}}
+\doxysubsubsection{\texorpdfstring{ads}{ads}}
+{\footnotesize\ttfamily Adafruit\+\_\+\+ADS1115 control\+Reader\+::ads\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classcontrolReader_a74fb34f83d58e7bfc31895f5f32519ab}\label{classcontrolReader_a74fb34f83d58e7bfc31895f5f32519ab}} 
+\index{controlReader@{controlReader}!ads2@{ads2}}
+\index{ads2@{ads2}!controlReader@{controlReader}}
+\doxysubsubsection{\texorpdfstring{ads2}{ads2}}
+{\footnotesize\ttfamily Adafruit\+\_\+\+ADS1015 control\+Reader\+::ads2\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classcontrolReader_a23bcf8d7a4ae68844d15d4950b7a48fc}\label{classcontrolReader_a23bcf8d7a4ae68844d15d4950b7a48fc}} 
+\index{controlReader@{controlReader}!adsInit@{adsInit}}
+\index{adsInit@{adsInit}!controlReader@{controlReader}}
+\doxysubsubsection{\texorpdfstring{adsInit}{adsInit}}
+{\footnotesize\ttfamily bool control\+Reader\+::ads\+Init = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}\label{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}} 
+\index{controlReader@{controlReader}!averages@{averages}}
+\index{averages@{averages}!controlReader@{controlReader}}
+\doxysubsubsection{\texorpdfstring{averages}{averages}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classaverager}{averager}} control\+Reader\+::averages\mbox{[}8\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classcontrolReader_abdb58cc1bcb3d795df920c7d417070ba}\label{classcontrolReader_abdb58cc1bcb3d795df920c7d417070ba}} 
+\index{controlReader@{controlReader}!currentChannel@{currentChannel}}
+\index{currentChannel@{currentChannel}!controlReader@{controlReader}}
+\doxysubsubsection{\texorpdfstring{currentChannel}{currentChannel}}
+{\footnotesize\ttfamily uint16\+\_\+t control\+Reader\+::current\+Channel\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classcontrolReader_aa143fcfbe08f7681d518cbe667897372}\label{classcontrolReader_aa143fcfbe08f7681d518cbe667897372}} 
+\index{controlReader@{controlReader}!currentChannel2@{currentChannel2}}
+\index{currentChannel2@{currentChannel2}!controlReader@{controlReader}}
+\doxysubsubsection{\texorpdfstring{currentChannel2}{currentChannel2}}
+{\footnotesize\ttfamily uint16\+\_\+t control\+Reader\+::current\+Channel2\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classcontrolReader_a5fc695cd52ed54e7aac4b2d0784e685c}\label{classcontrolReader_a5fc695cd52ed54e7aac4b2d0784e685c}} 
+\index{controlReader@{controlReader}!cvInputCommands@{cvInputCommands}}
+\index{cvInputCommands@{cvInputCommands}!controlReader@{controlReader}}
+\doxysubsubsection{\texorpdfstring{cvInputCommands}{cvInputCommands}}
+{\footnotesize\ttfamily String control\+Reader\+::cv\+Input\+Commands\mbox{[}8\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{ \textcolor{stringliteral}{"{}m:0,h:value/1327.716667-\/0.39"{}}, \textcolor{stringliteral}{"{}m:0,shs5:((value-\/32000)*1.018082958)"{}}, \textcolor{stringliteral}{"{}m:0,msp:value"{}}, \textcolor{stringliteral}{"{}m:0,spb:value"{}},}
+\DoxyCodeLine{            \textcolor{stringliteral}{"{}m:0,se:value"{}}, \textcolor{stringliteral}{"{}m:0,run:bool(value-\/32767),pid:1,ssm:0,engage:bool(value-\/32767),rest:ibool(value-\/32767)"{}}, \textcolor{stringliteral}{"{}"{}}, \textcolor{stringliteral}{"{}"{}} \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classcontrolReader_a60201e996420e7b6c89c634e5bd7616a}\label{classcontrolReader_a60201e996420e7b6c89c634e5bd7616a}} 
+\index{controlReader@{controlReader}!gateState@{gateState}}
+\index{gateState@{gateState}!controlReader@{controlReader}}
+\doxysubsubsection{\texorpdfstring{gateState}{gateState}}
+{\footnotesize\ttfamily uint16\+\_\+t control\+Reader\+::gate\+State = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classcontrolReader_a675268bbd9fe4f6435569352b30242f4}\label{classcontrolReader_a675268bbd9fe4f6435569352b30242f4}} 
+\index{controlReader@{controlReader}!pinDataReady@{pinDataReady}}
+\index{pinDataReady@{pinDataReady}!controlReader@{controlReader}}
+\doxysubsubsection{\texorpdfstring{pinDataReady}{pinDataReady}}
+{\footnotesize\ttfamily uint8\+\_\+t control\+Reader\+::pin\+Data\+Ready\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classcontrolReader_aaf068b8234bef248daa827f86236f66f}\label{classcontrolReader_aaf068b8234bef248daa827f86236f66f}} 
+\index{controlReader@{controlReader}!pinGate@{pinGate}}
+\index{pinGate@{pinGate}!controlReader@{controlReader}}
+\doxysubsubsection{\texorpdfstring{pinGate}{pinGate}}
+{\footnotesize\ttfamily uint8\+\_\+t control\+Reader\+::pin\+Gate\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{controlReader_8h}{control\+Reader.\+h}}\item 
+\mbox{\hyperlink{controlReader_8cpp}{control\+Reader.\+cpp}}\end{DoxyCompactItemize}
