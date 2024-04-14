@@ -1,3 +1,8 @@
+#ifndef BOWCONTROL_H
+#define BOWCONTROL_H
+
+#include "bowActuators.cpp"
+
 /// Sets the current bow mode
 enum _tiltMode { Rest, Engage, Mute };
 enum _speedMode { Automatic, Manual };
@@ -6,6 +11,8 @@ class bowControl {
 public:
     bowIO *bowIOConnect;                      ///< Pointer to associated bowIO object
     _calibrationData *calibrationDataConnect; ///< Pointer to associated _calibrationData object
+
+    BowActuators *bowActuators;
 
     float Kp = 200;                           ///< PID P multiplier 100
     float Ki = 12;                             ///< PID I multiplier 2
@@ -85,6 +92,7 @@ public:
     void setBowCurrentLimit(float inBowCurrentLimit);
     float getBowCurrentLimit();
     int isBowStable();
+
     void pidReset();
     bool setPIDTarget(float _pidTargetSpeed);
     void setPIDTargetUnsafe(float _pidTargetSpeed);
@@ -92,6 +100,7 @@ public:
     void pidControl();
     void pidInterruptCaller();
     float getPIDPeakError();
+
     void motorFaultDetected();
     int checkMotorFault();
     void setBowPressureSafe(uint16_t tilt);
@@ -107,6 +116,7 @@ public:
     bool setHold(bool hold);
     bool bowEngage(int enact);
     bool bowMute(int enact);
+
     bool calculateHarmonicShift();
     bool setHarmonicShift(int inHarmonicShift);
     bool setHarmonicShift5(int inHarmonicShift5);
@@ -118,7 +128,10 @@ public:
     int getHarmonic();
     void updateHarmonicData();
     bool setBaseNote(int inBaseNote);
+
     void measureTimeToTarget(float _pidTargetSpeed);
     String dumpData();
     void updateString();
 };
+
+#endif
