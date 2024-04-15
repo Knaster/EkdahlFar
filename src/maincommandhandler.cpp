@@ -1,4 +1,3 @@
-
 serialCommandItem serialCommandsMain[] = {
   { "module", "m", "0-15", "Sets the currently active string module"},
   { "runningstatus", "rs", "0|1", "Turns on or off continuous status updates" },

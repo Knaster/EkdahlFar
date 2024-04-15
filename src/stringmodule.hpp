@@ -80,7 +80,10 @@ serialCommandItem serialCommandsStringModule[] = {
 
     { "bowactuatorset", "bas", "0-127", "Set current bow actuator"},
     { "bowactuatorload", "bal", "-", "Load parameters from current bow actuator"},
-    { "bowactuatorsave", "bav", "-", "Save current bow parameters into currently selected bow actuator" }
+    { "bowactuatorsave", "bav", "-", "Save current bow parameters into currently selected bow actuator" },
+    { "bowactuatordata", "bad", "0-65535:0-65535:0-65535", "Set all data of current bow actuator (firstTouchPressure, stallPressure, restPosition)" },
+    { "bowactuatorcount", "bac", "-", "Returns the amount of saved bow actuators"},
+    { "bowactuatorid", "bai", "-", "Sets the ID of the current bow actuator"},
 };
 
 class stringModule {
@@ -108,8 +111,8 @@ class stringModule {
         char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin, char stepCorrectionSensorPin);
     bool addSolenoid(char _solenoidPin);
     void writeToSlave(String command);
-
     bool addMute(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin);
+
     bool processSerialCommand_GeneralControl(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false,
         commandList *delegatedCommands = nullptr);
     bool processSerialCommand_CalibrationsSettings(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false,
@@ -117,6 +120,8 @@ class stringModule {
     bool processSerialCommand_MuteControl(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false,
         commandList *delegatedCommands = nullptr);
     bool processSerialCommand_StatusTesting(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false,
+        commandList *delegatedCommands = nullptr);
+    bool processSerialCommand_BowActuator(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false,
         commandList *delegatedCommands = nullptr);
     bool processRequestCommand(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool delegated);
     bool processSerialCommand(commandList *commands, uint16_t *index, std::vector<commandResponse> *commandResponses, bool delegated);

@@ -37,6 +37,7 @@
 bowControl::bowControl(bowIO &_bowIO, _calibrationData &__calibrationData) {
     bowIOConnect = &_bowIO;
     calibrationDataConnect = &__calibrationData;
+    bowActuators = new BowActuators(&__calibrationData);
 }
 
 #define pidErrorThreshold 5     ///< Threshold that will trigger a bow instability event, given in Hertz

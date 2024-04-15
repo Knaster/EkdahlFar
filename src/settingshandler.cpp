@@ -60,7 +60,8 @@ String dumpData() {
     saveData += stringModuleArray[0].bowControlArray[0].dumpData();
     saveData += stringModuleArray[0].bowIOArray[0].dumpData();
     saveData += stringModuleArray[0].solenoidArray[0].dumpData();
-    saveData += stringModuleArray[0].bowControlArray[0].harmonicSeriesList.dumpData() + "\n";
+    saveData += stringModuleArray[0].bowControlArray[0].harmonicSeriesList.dumpData();
+    saveData += stringModuleArray[0].bowControlArray[0].bowActuators->dumpData() + "\n";
     return saveData;
 }
 

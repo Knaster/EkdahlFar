@@ -1,8 +1,6 @@
 #ifndef BOWCONTROL_H
 #define BOWCONTROL_H
 
-#include "bowActuators.cpp"
-
 /// Sets the current bow mode
 enum _tiltMode { Rest, Engage, Mute };
 enum _speedMode { Automatic, Manual };

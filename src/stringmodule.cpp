@@ -650,6 +650,63 @@ bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem,
     return true;
 }
 
+/*    { "bowactuatorset", "bas", "0-127", "Set current bow actuator"},
+    { "bowactuatorload", "bal", "-", "Load parameters from current bow actuator"},
+    { "bowactuatorsave", "bav", "-", "Save current bow parameters into currently selected bow actuator" }
+*/
+bool stringModule::processSerialCommand_BowActuator(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false,
+    commandList *delegatedCommands = nullptr) {
+
+    if (_commandItem->command == "bowactuatorset") {
+        if (request) {
+            commandResponses->push_back({ "bas:" + String(bowControlArray[currentBowSerial].bowActuators->getBowActuator()), InfoRequest });
+        } else {
+            if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+            bowControlArray[currentBowSerial].bowActuators->setBowActuator(_commandItem->argument[0].toInt());
+            debugPrintln("Setting bow actuator to " + String(bowControlArray[currentBowSerial].bowActuators->getBowActuator()), Command);
+        }
+    }  else
+    if (_commandItem->command == "bowactuatorload") {
+        bowControlArray[currentBowSerial].bowActuators->loadBowActuator();
+        debugPrintln("Loaded data for actuator " + String(bowControlArray[currentBowSerial].bowActuators->getBowActuator()), Command);
+    }  else
+    if (_commandItem->command == "bowactuatorsave") {
+        bowControlArray[currentBowSerial].bowActuators->saveBowActuator();
+        debugPrintln("Saving data for actuator " + String(bowControlArray[currentBowSerial].bowActuators->getBowActuator()), Command);
+    }  else
+    if (_commandItem->command == "bowactuatordata") {
+        if (request) {
+            commandResponses->push_back({ "bad:" +  String(bowControlArray[currentBowSerial].bowActuators->getBowActuatorFirstTouchPressure()) + ":"  +
+                String(bowControlArray[currentBowSerial].bowActuators->getBowActuatorStallPressure()) + ":" +
+                String(bowControlArray[currentBowSerial].bowActuators->getBowActuatorRestPosition()) + ":" +
+                String(bowControlArray[currentBowSerial].bowActuators->getBowActuatorID()), InfoRequest });
+        } else {
+            if (!checkArguments(_commandItem, commandResponses, 4)) { return false; }
+            bowControlArray[currentBowSerial].bowActuators->setBowActuatorData(_commandItem->argument[0].toInt(), _commandItem->argument[1].toInt(),
+                _commandItem->argument[2].toInt(), _commandItem->argument[3]);
+            debugPrintln("Setting bow actuator data for bow " + String(bowControlArray[currentBowSerial].bowActuators->getBowActuator()) + "  ID: " +
+                _commandItem->argument[3] + ", first touch: " + String(_commandItem->argument[0]) + ", stall pressure: " + _commandItem->argument[1] +
+                ", rest position: " + _commandItem->argument[2] , Command);
+        }
+    } else
+    if (_commandItem->command == "bowactuatorid") {
+        if (request) {
+            commandResponses->push_back({ "bai:" + String(bowControlArray[currentBowSerial].bowActuators->getBowActuatorID()), InfoRequest });
+        } else {
+            if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+            bowControlArray[currentBowSerial].bowActuators->setBowActuatorID(_commandItem->argument[0]);
+            debugPrintln("Setting bow actuator ID to " + String(bowControlArray[currentBowSerial].bowActuators->getBowActuatorID()), Command);
+        }
+    }  else
+    if (_commandItem->command == "bowactuatorcount") {
+        commandResponses->push_back({ "bac:" + String(bowControlArray[currentBowSerial].bowActuators->getBowActuatorCount()), InfoRequest });
+    } else {
+        return false;
+    }
+    return true;
+}
+
+
 bool stringModule::processRequestCommand(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool delegated) {
     if (!checkArgumentsMin(_commandItem, commandResponses, 1)) { return false; }
     String command = _commandItem->argument[0];
@@ -668,6 +725,8 @@ bool stringModule::processRequestCommand(commandItem *_commandItem, std::vector<
     if (processSerialCommand_MuteControl(&requestItem, commandResponses, true, delegated)) {
     } else
     if (processSerialCommand_StatusTesting(&requestItem, commandResponses, true, delegated)) {
+    } else
+    if (processSerialCommand_BowActuator(&requestItem, commandResponses, true, delegated)) {
     } else
     {
         return false;
@@ -705,6 +764,8 @@ bool stringModule::processSerialCommand(commandList *commands, uint16_t *index, 
     if (processSerialCommand_MuteControl(_commandItem, commandResponses, false, delegated)) {
     } else
     if (processSerialCommand_StatusTesting(_commandItem, commandResponses, false, delegated)) {
+    } else
+    if (processSerialCommand_BowActuator(_commandItem, commandResponses, false, delegated)) {
     } else
     if (_commandItem->command == "help") {
         //String help = "These commands are specific for the currently selected string module\n";

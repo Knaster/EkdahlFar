@@ -112,9 +112,12 @@ commandList *commands;
 #include "audioanalyze.h"
 
 #include "bowio.cpp"
+class _calibrationData;
+#include "bowActuators.h"
 class bowControl;
 #include "bowcontrol.cpp"
 #include "calibrate.cpp"
+#include "bowActuators.cpp"
 #include "solenoid.cpp"
 #include "mute.cpp"
 #include "stringmodule.cpp"

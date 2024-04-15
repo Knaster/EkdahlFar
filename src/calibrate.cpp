@@ -116,6 +116,7 @@ bool calibrate::findMinPressure() {
 bool calibrate::findMaxPressure() {
     debugPrintln("Finding max contact", TextInfo);
 
+//    bowControlConnect->run = 1;
     bowIOConnect->setSpeedPWMSafe(calibrationData->maxSpeedPWM);
     bowIOConnect->setTiltPWM(0);
     bowIOConnect->waitForTiltToComplete(5000);
@@ -162,14 +163,29 @@ bool calibrate::findMinMaxPressure() {
     bool autoCorrectPositionSave = bowIOConnect->stepServoStepper->autoCorrectPosition;
     bowIOConnect->stepServoStepper->autoCorrectPosition = false;
 
+    bool PIDOn = bowControlConnect->PIDon;
+    bowControlConnect->PIDon = 0;
+//    bowControlConnect->run = 1;
+    bowIOConnect->enableBowPower();
+
     uint16_t speed = bowIOConnect->stepServoStepper->speedRPM;
     bowIOConnect->stepServoStepper->setSpeed(5);
 
-
     bool result = findMinPressure() && findMaxPressure();
+
+    if (result) {
+        if (calibrationData->firstTouchPressure > 4000) {
+            calibrationData->restPosition = calibrationData->firstTouchPressure - 4000;
+        } else {
+            calibrationData->restPosition =  0;
+        }
+    }
 
     bowIOConnect->stepServoStepper->autoCorrectPosition = autoCorrectPositionSave;
     bowIOConnect->stepServoStepper->setSpeed(speed);
+    bowControlConnect->run = 0;
+    bowControlConnect->PIDon = PIDOn;
+
     return result;
 }
 
@@ -188,6 +204,11 @@ bool calibrate::findMinMaxSpeedPWM() {
     int speed = 0;
     uint32_t i =0;
     float bowMotorWattage = bowIOConnect->bowMotorWattage;
+
+    bool PIDOn = bowControlConnect->PIDon;
+    bowControlConnect->PIDon = 0;
+//    bowControlConnect->run = 1;
+    bowIOConnect->enableBowPower();
 
     debugPrintln("Finding min speed", TextInfo);
     bowIOConnect->setSpeedPWMSafe(0);
@@ -237,6 +258,9 @@ bool calibrate::findMinMaxSpeedPWM() {
 skiptoend:
     bowIOConnect->setSpeedPWMSafe(0);
     bowIOConnect->setTiltPWM(0);
+
+    bowControlConnect->run = 0;
+    bowControlConnect->PIDon = PIDOn;
 
     return true;
 }
