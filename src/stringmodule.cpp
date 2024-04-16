@@ -662,7 +662,9 @@ bool stringModule::processSerialCommand_BowActuator(commandItem *_commandItem, s
             commandResponses->push_back({ "bas:" + String(bowControlArray[currentBowSerial].bowActuators->getBowActuator()), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
-            bowControlArray[currentBowSerial].bowActuators->setBowActuator(_commandItem->argument[0].toInt());
+            if (bowControlArray[currentBowSerial].bowActuators->setBowActuator(_commandItem->argument[0].toInt()) != _commandItem->argument[0].toInt()) {
+                return false;
+            }
             debugPrintln("Setting bow actuator to " + String(bowControlArray[currentBowSerial].bowActuators->getBowActuator()), Command);
         }
     }  else
@@ -676,17 +678,24 @@ bool stringModule::processSerialCommand_BowActuator(commandItem *_commandItem, s
     }  else
     if (_commandItem->command == "bowactuatordata") {
         if (request) {
-            commandResponses->push_back({ "bad:" +  String(bowControlArray[currentBowSerial].bowActuators->getBowActuatorFirstTouchPressure()) + ":"  +
-                String(bowControlArray[currentBowSerial].bowActuators->getBowActuatorStallPressure()) + ":" +
-                String(bowControlArray[currentBowSerial].bowActuators->getBowActuatorRestPosition()) + ":" +
-                String(bowControlArray[currentBowSerial].bowActuators->getBowActuatorID()), InfoRequest });
+            int8_t bowIndex = bowControlArray[currentBowSerial].bowActuators->getBowActuator();
+            if (checkArguments(_commandItem, commandResponses, 1, true)) {
+                bowIndex = _commandItem->argument[0].toInt();
+                if (bowIndex > (bowControlArray[currentBowSerial].bowActuators->getBowActuatorCount() - 1)) {
+                    return false;
+                }
+            }
+            commandResponses->push_back({ "bad:" + String(bowIndex) + ":" +
+                String(bowControlArray[currentBowSerial].bowActuators->getBowActuatorFirstTouchPressure(bowIndex)) + ":"  +
+                String(bowControlArray[currentBowSerial].bowActuators->getBowActuatorStallPressure(bowIndex)) + ":" +
+                String(bowControlArray[currentBowSerial].bowActuators->getBowActuatorRestPosition(bowIndex)) + ":" +
+                bowControlArray[currentBowSerial].bowActuators->getBowActuatorID(bowIndex), InfoRequest });
         } else {
-            if (!checkArguments(_commandItem, commandResponses, 4)) { return false; }
+            if (!checkArguments(_commandItem, commandResponses, 5)) { return false; }
             bowControlArray[currentBowSerial].bowActuators->setBowActuatorData(_commandItem->argument[0].toInt(), _commandItem->argument[1].toInt(),
-                _commandItem->argument[2].toInt(), _commandItem->argument[3]);
-            debugPrintln("Setting bow actuator data for bow " + String(bowControlArray[currentBowSerial].bowActuators->getBowActuator()) + "  ID: " +
-                _commandItem->argument[3] + ", first touch: " + String(_commandItem->argument[0]) + ", stall pressure: " + _commandItem->argument[1] +
-                ", rest position: " + _commandItem->argument[2] , Command);
+                _commandItem->argument[2].toInt(), _commandItem->argument[3].toInt(), _commandItem->argument[4]);
+            debugPrintln("Setting bow actuator data for bow " + _commandItem->argument[0] + "  ID: " + _commandItem->argument[4] + ", first touch: " +
+                _commandItem->argument[1] + ", stall pressure: " + _commandItem->argument[2] + ", rest position: " + _commandItem->argument[3] , Command);
         }
     } else
     if (_commandItem->command == "bowactuatorid") {
@@ -700,6 +709,23 @@ bool stringModule::processSerialCommand_BowActuator(commandItem *_commandItem, s
     }  else
     if (_commandItem->command == "bowactuatorcount") {
         commandResponses->push_back({ "bac:" + String(bowControlArray[currentBowSerial].bowActuators->getBowActuatorCount()), InfoRequest });
+    } else
+    if (_commandItem->command == "bowactuatoradd") {
+        if (request) {
+            return false;
+        } else {
+            uint8_t bowIndex = bowControlArray[currentBowSerial].bowActuators->addBowActuator();
+            debugPrintln("Adding bow actuator " + String(bowIndex), Command);
+        }
+    } else
+    if (_commandItem->command == "bowactuatorremove") {
+        if (request) {
+            return false;
+        } else {
+            if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+            if (!bowControlArray[currentBowSerial].bowActuators->removeBowActuator(_commandItem->argument[0].toInt())) { return false; }
+            debugPrintln("Removing bow actuator " + String(_commandItem->argument[0].toInt()), Command);
+        }
     } else {
         return false;
     }
@@ -716,8 +742,11 @@ bool stringModule::processRequestCommand(commandItem *_commandItem, std::vector<
             break;
         }
     }
-
     commandItem requestItem(command);
+    for (uint8_t i = 1; i<_commandItem->argument.size();i++) {
+        requestItem.argument.push_back(_commandItem->argument[i]);
+    }
+
     if (processSerialCommand_GeneralControl(&requestItem, commandResponses, true, delegated)) {
     } else
     if (processSerialCommand_CalibrationsSettings(&requestItem, commandResponses, true, delegated)) {

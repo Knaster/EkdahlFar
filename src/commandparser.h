@@ -229,9 +229,11 @@ bool skipToCommand(commandList *commands, uint16_t *index, String command) {
   return false;
 }
 */
-bool checkArguments(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, uint8_t arguments) {
+bool checkArguments(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, uint8_t arguments, bool t_supressError = false) {
     if (_commandItem->argument.size() != arguments) {
-        commandResponses->push_back({"Wrong number of arguments " + String(_commandItem->argument.size()), Error});
+        if (!t_supressError) {
+            commandResponses->push_back({"Wrong number of arguments " + String(_commandItem->argument.size()), Error});
+        }
         return false;
     }
     return true;

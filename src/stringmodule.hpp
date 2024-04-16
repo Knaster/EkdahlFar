@@ -78,10 +78,12 @@ serialCommandItem serialCommandsStringModule[] = {
     { "bowmodulationspeed", "bms", "0.1 - 10", "Set maximum bow movement speed once engaged"},
     { "bowengagespeed", "bes", "1 - 100?", "Set maximum bow movement when engaging or disengaging"},
 
-    { "bowactuatorset", "bas", "0-127", "Set current bow actuator"},
+    { "bowactuatoradd", "baa", "-", "Add new bow actuator"},
+    { "bowactuatorremove", "bar", "actuator", "Remove bow actuator"},
+    { "bowactuatorset", "bas", "actuator", "Set current bow actuator"},
     { "bowactuatorload", "bal", "-", "Load parameters from current bow actuator"},
     { "bowactuatorsave", "bav", "-", "Save current bow parameters into currently selected bow actuator" },
-    { "bowactuatordata", "bad", "0-65535:0-65535:0-65535", "Set all data of current bow actuator (firstTouchPressure, stallPressure, restPosition)" },
+    { "bowactuatordata", "bad", "actuator,0-65535:0-65535:0-65535", "Set all data of current bow actuator (firstTouchPressure, stallPressure, restPosition)" },
     { "bowactuatorcount", "bac", "-", "Returns the amount of saved bow actuators"},
     { "bowactuatorid", "bai", "-", "Sets the ID of the current bow actuator"},
 };

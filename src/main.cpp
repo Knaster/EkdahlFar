@@ -320,7 +320,7 @@ void loop() {
         stringModuleArray[i].updateString();
         if (stringModuleArray[i].bowIOArray[0].bowOverPowerFlag) {
             stringModuleArray[i].bowIOArray[0].tiltAdjust += 1000;
-            debugPrintln("Bow over power! Adjusting down", debugPrintType::Error);
+//            debugPrintln("Bow over power! Adjusting down", debugPrintType::Error);
         }
     }
 #endif
