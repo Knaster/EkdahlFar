@@ -361,7 +361,6 @@ public:
 
         1) if homingswitch is not active, go to 2.1
         1.1) if homingswitch is active go in the opposite direction oh homingDirection until the homingswitch is inactive and then continue to 1
-
         2) move in homingDirection until homingswitch is homeSenseActive
             2.1) if the amount of steps surpass that of homingStepsThreshold, go in the opposite direction of homingDirection until the homingswitch is active and then
                  continue to 1.1
@@ -395,6 +394,9 @@ public:
 
             //setDirection(homingOffsetDirection);
             //homing = eHomingStage::GOTOOFFSET;
+
+            debugPrintln("[firsthomerising] Next direction is " + String(moveDirection) + ", direction inversion is " + String(invertDirection), debugPrintType::Debug);
+
             homing = eHomingStage::SECONDHOMINGFALLING;
         } else {
             stepNext();
@@ -410,10 +412,16 @@ public:
     #define secondHomeOverStep 20*32
 
     void updatePositionSecondHomingFalling() {
-        if ((foundSecondHomeFalling) && (abs(currentStep - foundSecondHomeFalling) > secondHomeOverStep)) {
+        // ?????????????? WTF IS THIS ??????? if statement makes no sense
+//        if ((foundSecondHomeFalling) && (abs(currentStep - foundSecondHomeFalling) > secondHomeOverStep)) {   // removed 2024-04-18
+        if ((foundSecondHomeFalling) && (currentStep > secondHomeOverStep)) {
+            debugPrintln("Second home overstep " + String(secondHomeOverStep), debugPrintType::Debug);
             debugPrintln("Done over stepping, going to next step : stepID " + String(stepperID), debugPrintType::Debug);
             setDirection(notDirection(homingDirection));
             homing = eHomingStage::SECONDHOMINGRISING;
+            foundSecondHomeFalling = false; // Added 2024-04-18
+
+            debugPrintln("[secondhomefalling] Next direction is " + String(moveDirection) + ", direction inversion is " + String(invertDirection), debugPrintType::Debug);
         } else
         if ((homingSensedChanged) && (homingSensed == homeSenseInactive)) {
             homingPoint[eEdgeType::EDGEFALLING][homingDirection] = currentStep;
@@ -511,6 +519,11 @@ public:
         homingSpeedRough = inHomingSpeedRough;
         homingSpeedFine = inHomingSpeedFine;
         homingOffsetDirection = inOffsetDirection;
+
+        currentStep = 0; // Reset current step
+
+        debugPrintln("Homing direction " + String(homingDirection) + " homing speed r " + String(homingSpeedRough) + " homing speed f " + String(homingSpeedFine) +
+            " homing ofs. dir. " + String(homingOffsetDirection), debugPrintType::Debug);
 
         setSpeed(homingSpeedRough);
         if (homingSensed == homeSenseActive) {

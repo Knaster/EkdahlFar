@@ -129,11 +129,13 @@ bool calibrate::findMaxPressure() {
 
     uint16_t i;
     float average;
+    bool fault = false;
 
     for (i =calibrationData->firstTouchPressure; i<maxTestPressure; i+=1) {
         bowIOConnect->setTiltPWM(i);
         if (!bowIOConnect->waitForTiltToComplete(1000)) {
             debugPrintln("Tilt didn't finish", Debug);
+            fault = true;
             break;
         }
         delayMicroseconds(100);
@@ -147,11 +149,16 @@ bool calibrate::findMaxPressure() {
             break;
         }
     }
+    if (!fault) {
+        calibrationData->stallPressure = i;
 
-    calibrationData->stallPressure = i;
-
-    debugPrintln("Final contact PWM " + String(calibrationData->stallPressure) + " at frequency " + String(bowIOConnect->averageFreq()) + "Hz"/* with max current " +
+        debugPrintln("Final contact PWM " + String(calibrationData->stallPressure) + " at frequency " + String(bowIOConnect->averageFreq()) + "Hz"/* with max current " +
         String(maxCurrentRead)*/, TextInfo);
+    } else {
+        debugPrintln("Max pressure calibration ERROR!", debugPrintType::Error);
+        bowIOConnect->homeBow();
+    }
+
 
     bowIOConnect->setSpeedPWMSafe(0);
     bowIOConnect->setTiltPWM(0);
@@ -369,12 +376,12 @@ bool calibrate::findMinMaxSpeedPID() {
 
 String calibrate::dumpData() {
     String dump = "";
-    dump += "bis:" + String(calibrationData->minHz) + ",";
-    dump += "bxs:" + String(calibrationData->maxHz) + ",";
-    dump += "bip:" + String(calibrationData->firstTouchPressure) + ",";
-    dump += "bxp:" + String(calibrationData->stallPressure) + ",";
-    dump += "brp:" + String(calibrationData->restPosition) + ",";
-    dump += "u:" + String(calibrationData->fundamentalFrequency) + ",";
+    dump += "bmsi:" + String(calibrationData->minHz) + ",";
+    dump += "bmsx:" + String(calibrationData->maxHz) + ",";
+    dump += "bppe:" + String(calibrationData->firstTouchPressure) + ",";
+    dump += "bppx:" + String(calibrationData->stallPressure) + ",";
+    dump += "bppr:" + String(calibrationData->restPosition) + ",";
+    dump += "bcu:" + String(calibrationData->fundamentalFrequency) + ",";
     return dump;
 }
 

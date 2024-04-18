@@ -132,7 +132,6 @@ void bowControl::pidControl() {
     if (output > 65535) { output = 65535; }
 
     // Set the motor speed using PWM
-//        debugPrintln("PID", Debug);
     bowIOConnect->setSpeedPWM(static_cast<uint16_t>(output));
 
     // Store the current error for the next iteration
@@ -186,10 +185,6 @@ void bowControl::setBowPressureSafe(uint16_t tilt) {
 
 /// Calculate the tilt PWM value using baselineTiltPWM and modfierTiltPWM and send it to BowIO
 bool bowControl::calculateBaselineModifierPressure() {
-/*        unsigned int tiltPWM = calibrationDataConnect->firstTouchPressure - 4000 +
-        ((double)(calibrationDataConnect->stallPressure - calibrationDataConnect->firstTouchPressure + 8000)
-        / 65535 * ((double)(baselineTiltPWM + modifierTiltPWM)));
-*/
     unsigned int tiltPWM = calibrationDataConnect->firstTouchPressure +
         ((double)(calibrationDataConnect->stallPressure - calibrationDataConnect->firstTouchPressure)
         / 65535 * ((double)(baselineTiltPWM + modifierTiltPWM)));
@@ -241,9 +236,6 @@ uint16_t bowControl::getBowPower() {
 
 // set the manual tilt value and send it to BowIO
 bool bowControl::setManualTilt(uint16_t tilt) {
-/*    unsigned int tiltPWM = calibrationDataConnect->minUsablePressure - 4000 +
-  ((double)(calibrationDataConnect->maxUsablePressure - calibrationDataConnect->minUsablePressure + 8000)
-  / 65535 * ((double)(manualTiltPWM / 127 * (pressure + 1))));*/
     manualTiltPWM = tilt;
     setBowPressureSafe(tilt);
     debugPrintln("setManualTilt", Debug);
@@ -254,9 +246,6 @@ bool bowControl::bowRest(int enact) {
     if (enact == 0) { return false; }
     tiltMode = Rest;
     if (_hold) { return true; }
-    //int restPosition = calibrationDataConnect->firstTouchPressure - 4000;
-    //if (restPosition < 0) { restPosition = 0; }
-    //if (restPosition > calibrationDataConnect->stallPressure) { restPosition = calibrationDataConnect->stallPressure; }
 
     reachedEngage = false;
     bowShutoffTimer = 0;
@@ -419,15 +408,15 @@ void bowControl::measureTimeToTarget(float _pidTargetSpeed) {
 
 String bowControl::dumpData() {
     String dump = "";
-    dump += "ki:" + String(Ki) + ",";
-    dump += "kp:" + String(Kp) + ",";
-    dump += "kd:" + String(Kd) + ",";
-    dump += "ie:" + String(integratorIgnoreBelow) + ",";
-    dump += "sbn:" + String(baseNote) + ",";
-    dump += "hsr:" + String(harmonicShiftRange) + ",";
-    dump += "bes:" + String(bowSpeedToEngage) + ",";
-    dump += "bms:" + String(bowSpeedWhileEngaged) + ",";
-    dump += "sbt:" + String(bowShutoffTimeout) + ",";
+    dump += "bpki:" + String(Ki) + ",";
+    dump += "bpkp:" + String(Kp) + ",";
+    dump += "bpkd:" + String(Kd) + ",";
+    dump += "bpie:" + String(integratorIgnoreBelow) + ",";
+    dump += "bchbn:" + String(baseNote) + ",";
+    dump += "bchsr:" + String(harmonicShiftRange) + ",";
+    dump += "bpes:" + String(bowSpeedToEngage) + ",";
+    dump += "bpms:" + String(bowSpeedWhileEngaged) + ",";
+    dump += "bmt:" + String(bowShutoffTimeout) + ",";
     return dump;
 }
 

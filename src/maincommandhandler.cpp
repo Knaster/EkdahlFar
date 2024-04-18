@@ -1,19 +1,30 @@
 serialCommandItem serialCommandsMain[] = {
+  { "requestinfo", "rqi", "command", "Retrives rather than sets data associated with a command, if appliccable"},
   { "module", "m", "0-15", "Sets the currently active string module"},
-  { "runningstatus", "rs", "0|1", "Turns on or off continuous status updates" },
-  { "debugprint", "dp", "command|usb|hardware|undefined|priority|error|inforequest|expressionparser|debug:1|0", "Turns on or off serial feedback for the given item"},
-  { "freqreport", "fr", "0|1", "Sets string frequency reporting on off" },
-  { "eventhandler", "ev", "noteon|noteoff|pat|cc:num|cat|pb|pc", "Set event handling string in the current configuration"},
-  { "eventhandlerccremove", "evccr", "0-127", "remove CC from list"},
-  { "saveallparameters", "sap", "-", "Saves all avaliable parameters"},
-  { "loadallparameters", "lap", "-", "Loads all avaliable parameters"},
-  { "uservariable", "uv", "0-9:value", "Set user variable 0-9 to value"},
-  { "requestinfo", "rqi", "command", "Retrieves the resulting value of a command, if any"},
   { "modulecount", "mc", "-", "Returns the number of string modules detected"},
-  { "setconfiguration", "scf", "int", "Sets the current configuration" },
-  { "addconfiguration", "acf", "-", "Adds a new configuration" },
-  { "removeconfiguration", "rcf", "int", "Remove configuration" },
-  { "numberofconfigurations", "ncf", "-", "Returns the number of configurations" },
+  // runningstatus, rs
+  { "debugrunningstatus", "drs", "0|1", "Turns on or off continuous status updates" },
+  { "debugprint", "dp", "command|usb|hardware|undefined|priority|error|inforequest|expressionparser|debug:1|0", "Turns on or off serial feedback for the given item"},
+  // freqreport, fr
+  { "debugfreqreport", "dfr", "0|1", "Sets string frequency reporting on off" },
+  // saveallparameters
+  { "globalsaveallparameters", "gsap", "-", "Saves all avaliable parameters"},
+  // loadallparameters
+  { "globalloadallparameters", "glap", "-", "Loads all avaliable parameters"},
+  // uservariable, uv
+  { "globaluservariable", "guv", "variable(0-9):value", "Set user variable 0-9 to value"},
+  // setconfiguration, scf
+  { "midisetconfiguration", "mscf", "int", "Sets the current MIDI configuration" },
+  // addconfiguration, acf
+  { "midiaddconfiguration", "macf", "-", "Adds a new MIDI configuration" },
+  // removeconfiguration, rcf
+  { "midiremoveconfiguration", "mrcf", "int", "Remove the specified MIDI configuration" },
+  // numberofconfigurations, ?
+  { "midiconfigurationcount", "mcc", "-", "Returns the number of MIDI configurations" },
+  // eventhandler, ev
+  { "midieventhandler", "mev", "noteon|noteoff|pat|cc:(0-127)|cat|pb|pc", "Set the MIDI event handling string in the current configuration"},
+  // eventhandlerccremove, evccr
+  { "midieventhandlerccremove", "mevcr", "cc(0-127)", "remove CC from list"},
   { "midireceivechannel", "mrc", "-", "Sets the midi receive channel of the current configuration. 1-16 sets specific channel, any other value for OMNI"}
 };
 
@@ -28,7 +39,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             commandResponses->push_back({"Setting current string module to " + String(currentStringModule), Command});
         }
     } else
-    if (_commandItem->command == "runningstatus") {
+    if (_commandItem->command == "debugrunningstatus") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         if (_commandItem->argument[0] == 1) { fContinuous = true; } else { fContinuous = false; }
         commandResponses->push_back({"Setting show running status to " + String(fContinuous), Command});
@@ -53,7 +64,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
     if (_commandItem->command == "ver") {
         debugPrintln("Ekdahl far version " + _commandItem->argument[0], Command);
     } else
-    if (_commandItem->command == "uservariable") {
+    if (_commandItem->command == "globaluservariable") {
         if (!checkArguments(_commandItem, commandResponses, 2)) { return false; }
         if (!validateNumber(_commandItem->argument[0].toInt(), 0, userVariableMax)) { return false; }
 
@@ -61,10 +72,10 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             duv[userVariable] = _commandItem->argument[1].toFloat();
             commandResponses->push_back({"Set user variable " + String(userVariable) + " to " + String(duv[userVariable]), Command});
     } else
-    if (_commandItem->command == "eventhandler") {
+    if (_commandItem->command == "midieventhandler") {
         if (request) {
             int check = 10;
-            if (checkArguments(_commandItem, commandResponses, 1)) {
+            if (checkArguments(_commandItem, commandResponses, 1, true)) {
 /*                check = 10;
             } else {*/
                 if (_commandItem->argument[0] == "noteon") {
@@ -93,34 +104,34 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             String response = "";
 
             if ((check == 1) || (check == 10)) {
-                response += "ev:noteon:\"" + (*configArray[currentConfig].noteOn) + "\"";
+                response += "mev:noteon:\"" + (*configArray[currentConfig].noteOn) + "\"";
                 if (check == 10) { response += ","; }
             }
             if ((check == 2) || (check == 10)) {
-                response += "ev:noteoff:\"" + (*configArray[currentConfig].noteOff) + "\"";
+                response += "mev:noteoff:\"" + (*configArray[currentConfig].noteOff) + "\"";
                 if (check == 10) { response += ","; }
             }
             if ((check == 3) || (check == 10)) {
                 for (int i = 0; i < int(configArray[currentConfig].controlChange.size()); i++) {
-                    response += "ev:cc:" + String(configArray[currentConfig].controlChange[i].control) + ":\"" + (configArray[currentConfig].controlChange[i].command) + "\"";
+                    response += "mev:cc:" + String(configArray[currentConfig].controlChange[i].control) + ":\"" + (configArray[currentConfig].controlChange[i].command) + "\"";
                     //if ((i + 1) < int(configArray[currentConfig].controlChange.size())) { response += ","; }
                     response += ",";
                 }
             }
             if ((check == 4) || (check == 10)) {
-                response += "ev:pat:\"" + (*configArray[currentConfig].polyAftertouch) + "\"";
+                response += "mev:pat:\"" + (*configArray[currentConfig].polyAftertouch) + "\"";
                 if (check == 10) { response += ","; }
             }
             if ((check == 5) || (check == 10)) {
-                response += "ev:pb:\"" + (*configArray[currentConfig].pitchBend) + "\"";
+                response += "mev:pb:\"" + (*configArray[currentConfig].pitchBend) + "\"";
                 if (check == 10) { response += ","; }
             }
             if ((check == 6) || (check == 10)) {
-                response += "ev:cat:\"" + (*configArray[currentConfig].channelAftertouch) + "\"";
+                response += "mev:cat:\"" + (*configArray[currentConfig].channelAftertouch) + "\"";
                 if (check == 10) { response += ","; }
             }
             if ((check == 7) || (check == 10)) {
-                response += "ev:pc:\"" + (*configArray[currentConfig].programChange) + "\"";
+                response += "mev:pc:\"" + (*configArray[currentConfig].programChange) + "\"";
                 if (check == 10) { response += ","; }
             }
 
@@ -164,7 +175,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             }
         }
     } else
-    if (_commandItem->command == "eventhandlerccremove") {
+    if (_commandItem->command == "midieventhandlerccremove") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         if (!validateNumber(_commandItem->argument[0].toInt(), 0, 127)) { return false; }
         if (configArray[currentConfig].removeCC(_commandItem->argument[0].toInt())) {
@@ -173,10 +184,10 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             commandResponses->push_back({"Unknown CC " + _commandItem->argument[0], Error});
         }
     } else
-    if (_commandItem->command == "saveallparameters") {
+    if (_commandItem->command == "globalsaveallparameters") {
         saveAllParams();
     } else
-    if (_commandItem->command == "loadallparameters") {
+    if (_commandItem->command == "globalloadallparameters") {
         loadAllParams();
     } else
     if (_commandItem->command == "test") {
@@ -184,9 +195,9 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
     if (_commandItem->command == "modulecount") {
         commandResponses->push_back({ "mc:" + String(stringModuleArray.size()), InfoRequest });
     } else
-    if (_commandItem->command == "setconfiguration") {
+    if (_commandItem->command == "midisetconfiguration") {
         if (request) {
-            commandResponses->push_back({ "scf:" + String(currentConfig), InfoRequest});
+            commandResponses->push_back({ "mscf:" + String(currentConfig), InfoRequest});
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             //if (!validateNumber(_commandItem->argument[0].toInt(), 0, configArray.size() - 1)) { return false; }
@@ -200,11 +211,11 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             commandResponses->push_back({ response, debugPrintType::Command});
         }
     } else
-    if (_commandItem->command == "addconfiguration") {
+    if (_commandItem->command == "midiaddconfiguration") {
         configArray.push_back(configuration());
         commandResponses->push_back({ "Added configuration no " + String(configArray.size() - 1), InfoRequest });
     } else
-    if (_commandItem->command == "removeconfiguration") {
+    if (_commandItem->command == "midiremoveconfiguration") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         if (!validateNumber(_commandItem->argument[0].toInt(), 0, configArray.size() - 1)) {
             commandResponses->push_back({ "Configuration out of range", debugPrintType::Error});
@@ -220,8 +231,8 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         configArray.erase(configArray.begin() + removeConfig);
         commandResponses->push_back({ "Removed configuration " + String(removeConfig), debugPrintType::Command});
     } else
-    if (_commandItem->command == "numberofconfigurations") {
-        commandResponses->push_back({ "ncf:" + String(configArray.size()), InfoRequest });
+    if (_commandItem->command == "midiconfigurationcount") {
+        commandResponses->push_back({ "mcc:" + String(configArray.size()), InfoRequest });
     } else
     if (_commandItem->command == "free") {
         //printHeapStats();
@@ -248,10 +259,8 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
 bool processRequestCommand(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool delegated) {
     if (!checkArgumentsMin(_commandItem, commandResponses, 1)) { return false; }
     String command = _commandItem->argument[0];
-//    debugPrintln("Looking for command '" + command + "'", Debug);
     for (int i = 0; i < int(sizeof(serialCommandsMain) / sizeof(serialCommandItem)); i++) {
         if (serialCommandsMain[i].shortCommand == command) {
-//            debugPrintln("Replaced short command", Debug);
             command = serialCommandsMain[i].longCommand;
             break;
         }
@@ -263,19 +272,11 @@ bool processRequestCommand(commandItem *_commandItem, std::vector<commandRespons
     }
 
     if (processMainCommands(&requestItem, commandResponses, true, delegated)) {
-/*
-    (processSerialCommand_GeneralControl(&requestItem, commandResponses, true, delegated)) {
-    } else
-    if (processSerialCommand_CalibrationsSettings(&requestItem, commandResponses, true, delegated)) {
-    } else
-    if (processSerialCommand_MuteControl(&requestItem, commandResponses, true, delegated)) {
-*/
     } else
     {
         return false;
     }
 
-//    debugPrintln("Success processing main request", Debug);
     return true;
 }
 
@@ -301,7 +302,12 @@ void processSerialCommands() {
                 std::vector<commandResponse> moduleResponses;
 
                 if (!stringModuleArray[currentStringModule].processSerialCommand(commands, &i, &moduleResponses, false)) {
-                    debugPrintln("Unknown command " + String(_commandItem->command), Error);
+                    String error = "Unknown sequence " + String(_commandItem->command);
+                    for (uint8_t i = 0; i < _commandItem->argument.size(); i++) {
+                        error += ":" + _commandItem->argument[i];
+                    }
+                    debugPrintln(error, Error);
+                    //debugPrintln("Unknown command " + String(_commandItem->command), Error);
                 } else {
 
                 }
@@ -320,7 +326,12 @@ void processSerialCommands() {
                 //commandResponses.push_back({help, debugPrintType::Help});
 
                 if (!stringModuleArray[currentStringModule].processSerialCommand(commands, &i, &commandResponses, false)) {
-                    debugPrintln("Unknown command " + String(_commandItem->command), Error);
+                    String error = "Unknown sequence " + String(_commandItem->command);
+                    for (uint8_t i = 0; i < _commandItem->argument.size(); i++) {
+                        error += ":" + _commandItem->argument[i];
+                    }
+                    debugPrintln(error, Error);
+//                    debugPrintln("Unknown command " + String(_commandItem->command), Error);
                 }
 /*
                 if (!stringModuleArray[currentStringModule].processSerialCommand(commands, &i, &moduleResponses, false)) {

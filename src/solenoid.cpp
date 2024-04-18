@@ -70,8 +70,8 @@ public:
 
     String dumpData() {
         String dump = "";
-        dump += "ssxf:" + String(forceMax) + ",";
-        dump += "ssif:" + String(forceMin) + ",";
+        dump += "sxf:" + String(forceMax) + ",";
+        dump += "sif:" + String(forceMin) + ",";
         return dump;
     }
 

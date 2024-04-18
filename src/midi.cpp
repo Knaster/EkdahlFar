@@ -67,9 +67,7 @@ void updateLocalVariables() {
 
 void processLocalMessage(String *message) {
     updateLocalVariables();
-//    debugPrintln("processLocalMessage: " + *message, Debug);
     commands->addCommands(*message);
-    //  commands->parseCommandExpressions(midiVariables, midiVariableCount);
     commands->parseCommandExpressions(expFunctions, expFunctionCount);
 }
 /** messaging system end **/
@@ -93,13 +91,6 @@ int8_t findNote(byte channel, byte note) {
 }
 
 bool removeNote(byte channel, byte note) {
-/*    for (int i = 0; i < int(notesHeld.size()); i++) {
-        if ((notesHeld[i].note == note) && (notesHeld[i].channel == channel)) {
-            notesHeld.erase(notesHeld.begin() + i);
-            debugPrintln("Removing note " + String(note), Debug);
-            return;
-        }
-    }*/
     int8_t i = findNote(channel, note);
     if (i == -1) {
         debugPrintln("Couldn't find note " + String(note), Debug);
@@ -124,21 +115,6 @@ void addNote(byte channel, byte note, byte velocity) {
 };
 
 /** messaging note cue end **/
-
-/*
-/// Sets the tilt using MIDI PRESSURE
-/// \todo contains arbitrary values that need to be defined or otherwise manipulative
-void setPressure7bit(int pressure) {
-  if (pressure > 127) { pressure = 127; }
-  if (pressure < 0) { pressure = 0; }
-
-  unsigned int tiltPWM = stringModuleArray[0].calibrationDataArray[0].minUsablePressure - 4000 +
-    ((double)(stringModuleArray[0].calibrationDataArray[0].maxUsablePressure - stringModuleArray[0].calibrationDataArray[0].minUsablePressure + 8000)
-    / 65535 * ((double)(stringModuleArray[0].bowControlArray[0].manualTiltPWM / 127 * (pressure + 1))));
-  stringModuleArray[0].bowIOArray[0].setTiltPWM(tiltPWM);
-  debugPrintln("Setting pressure " + String(pressure) + " = PWM " + String(tiltPWM), USB);
-}
-*/
 
 void setNote() {
     debugPrintln("Set note", Debug);

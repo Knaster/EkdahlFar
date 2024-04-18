@@ -6,7 +6,7 @@ private:
     uint16_t lastTilt;
 
     uint16_t restPosition = 0;
-    uint16_t fullMutePosition = 0;
+    uint16_t fullMutePosition = 65535;
     uint16_t halfMutePosition = 0;
 
     bool sustain = false;

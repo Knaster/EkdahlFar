@@ -129,6 +129,8 @@ public:
 
     bool bowOverPowerFlag = false;
     elapsedMillis lastBowOverPowerEvent;
+
+    bool homeBow(bool invert = false);
 };
 
 #endif

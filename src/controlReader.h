@@ -121,8 +121,14 @@ class controlReader
 //            "m:0,se:value", "m:0,run:1,pid:1,ssm:0,engage:bool(value-32767),rest:ibool(value-32767)", "", "" };
             //"m:0,run:1,pid:1,engage:1,ssm:0", "m:0,rest:1,ssm:0" };
 
-        String cvInputCommands[8] = { "m:0,h:value/1327.716667-0.39", "m:0,shs5:((value-32000)*1.018082958)", "m:0,msp:value", "m:0,spb:value",
-            "m:0,se:value", "m:0,run:bool(value-32767),pid:1,ssm:0,engage:bool(value-32767),rest:ibool(value-32767)", "", "" };
+        String cvInputCommands[8] = {
+            "m:0,bch:value/1327.716667-0.39",
+            "m:0,bchs5:((value-32000)*1.018082958)",
+            "m:0,msp:value",
+            "m:0,bpb:value",
+            "m:0,se:value",
+            "m:0,bmr:bool(value-32767),bpid:1,bcsm:0,bpe:bool(value-32767),bpr:ibool(value-32767)",
+            "", "" };
 
         bool adcDebugReport = true;
 

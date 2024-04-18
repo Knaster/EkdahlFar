@@ -58,18 +58,18 @@ bool stringModule::processSerialCommand_GeneralControl(commandItem *_commandItem
             commandResponses->push_back({"Setting current bow to " + String(currentBowSerial), Command});
         }
     }  else
-    if (_commandItem->command == "frequency") {
+    if (_commandItem->command == "bowcontrolfrequency") {
         if (request) {
-            commandResponses->push_back({ "f:" + String(bowControlArray[currentBowSerial].getPIDTarget()), InfoRequest });
+            commandResponses->push_back({ "bcf:" + String(bowControlArray[currentBowSerial].getPIDTarget()), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             bowControlArray[currentBowSerial].setPIDTarget(_commandItem->argument[0].toFloat()); //String(serialCommand.substring(1,serialCommand.length())).toFloat());
             commandResponses->push_back({"Setting frequency " + String(bowControlArray[currentBowSerial].getPIDTarget()) + "Hz", Command});
         }
     }else
-    if (_commandItem->command == "run") {
+    if (_commandItem->command == "bowmotorrun") {
         if (request) {
-            commandResponses->push_back({ "run:" + String(bowControlArray[currentBowSerial].run), InfoRequest });
+            commandResponses->push_back({ "bmr:" + String(bowControlArray[currentBowSerial].run), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             if (_commandItem->argument[0].toInt() > 0) {
@@ -82,14 +82,14 @@ bool stringModule::processSerialCommand_GeneralControl(commandItem *_commandItem
             debugPrintln("Setting run to " + String(bowControlArray[currentBowSerial].run), Command);
         }
     } else
-    if (_commandItem->command == "pid") {
+    if (_commandItem->command == "bowpid") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         if (_commandItem->argument[0].toInt() > 0) { bowControlArray[currentBowSerial].PIDon = true; } else { bowControlArray[currentBowSerial].PIDon = false;}
         debugPrintln("Setting PID On to " + String(bowControlArray[currentBowSerial].PIDon), Command);
     } else
-    if (_commandItem->command == "harmonic") {
+    if (_commandItem->command == "bowcontrolharmonic") {
         if (request) {
-            commandResponses->push_back({ "h:" + String(bowControlArray[currentBowSerial].getHarmonic()), InfoRequest });
+            commandResponses->push_back({ "bch:" + String(bowControlArray[currentBowSerial].getHarmonic()), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             if (!bowControlArray[currentBowSerial].setHarmonic(_commandItem->argument[0].toInt())) {
@@ -99,7 +99,7 @@ bool stringModule::processSerialCommand_GeneralControl(commandItem *_commandItem
             }
         }
     } else
-    if (_commandItem->command == "harmonicbase") {
+    if (_commandItem->command == "bowcontrolharmonicbase") {
         if (request) {
 //                commandResponses->push_back({ "h:" + String(bowControlArray[currentBowSerial].getHarmonic()), InfoRequest });
         } else {
@@ -128,30 +128,30 @@ bool stringModule::processSerialCommand_GeneralControl(commandItem *_commandItem
         bowControlArray[currentBowSerial].setManualTilt(_commandItem->argument[0].toInt());
         debugPrintln("Setting pressure to " + String(_commandItem->argument[0].toInt()), Command);
     } else
-    if (_commandItem->command == "setpressurebaseline") {
+    if (_commandItem->command == "bowpressurebaseline") {
         if (request) {
-            commandResponses->push_back({ "spb:" + String(bowControlArray[currentBowSerial].getPressureBaseline()), InfoRequest });
+            commandResponses->push_back({ "bpb:" + String(bowControlArray[currentBowSerial].getPressureBaseline()), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             bowControlArray[currentBowSerial].setPressureBaseline(_commandItem->argument[0].toInt());
             debugPrintln("Setting pressure baseline to " + String(_commandItem->argument[0].toInt()), Command);
         }
     } else
-    if (_commandItem->command == "setpressuremodifier") {
+    if (_commandItem->command == "bowpressuremodifier") {
         if (request) {
-            commandResponses->push_back({ "spm:" + String(bowControlArray[currentBowSerial].getPressureModifier()), InfoRequest });
+            commandResponses->push_back({ "bpm:" + String(bowControlArray[currentBowSerial].getPressureModifier()), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             bowControlArray[currentBowSerial].setPressureModifier(_commandItem->argument[0].toInt());
             debugPrintln("Setting pressure modifier to " + String(_commandItem->argument[0].toInt()), Command);
         }
     } else
-    if (_commandItem->command == "rest") {
+    if (_commandItem->command == "bowpressurerest") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         bowControlArray[currentBowSerial].bowRest(_commandItem->argument[0].toInt());
         debugPrintln("Setting bow rest position to " + String(_commandItem->argument[0].toInt()), Command);
     } else
-    if (_commandItem->command == "engage") {
+    if (_commandItem->command == "bowpressureengage") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         bowControlArray[currentBowSerial].bowEngage(_commandItem->argument[0].toInt());
         debugPrintln("Setting bow engage to " + String(_commandItem->argument[0].toInt()), Command);
@@ -168,9 +168,9 @@ bool stringModule::processSerialCommand_GeneralControl(commandItem *_commandItem
       bowControlArray[currentBowSerial].mutePeriod = _commandItem->argument[0].toInt();
       debugPrintln("Setting mute perid to " + String(bowControlArray[currentBowSerial].muteForce) + " ms", Command);
     } else */
-    if (_commandItem->command == "setbowpower") {
+    if (_commandItem->command == "bowmotorpower") {
         if (request) {
-            commandResponses->push_back({ "sbp:" + String(bowControlArray[currentBowSerial].getBowPower()), InfoRequest });
+            commandResponses->push_back({ "bmp:" + String(bowControlArray[currentBowSerial].getBowPower()), InfoRequest });
         } else {
 //                bowControlArray[currentBowSerial].manualSpeedPWM =_commandItem->argument[0].toInt();
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
@@ -178,30 +178,30 @@ bool stringModule::processSerialCommand_GeneralControl(commandItem *_commandItem
             debugPrintln("Setting bow power to " + String(bowControlArray[currentBowSerial].manualSpeedPWM), Command);
         }
     } else
-    if (_commandItem->command == "setbowhold") {
+/*    if (_commandItem->command == "setbowhold") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         if (_commandItem->argument[0].toInt() > 0) { bowControlArray[currentBowSerial].setHold(true); } else { bowControlArray[currentBowSerial].setHold(false);}
         debugPrintln("Setting bow hold to " + String(_commandItem->argument[0].toInt()), Command);
-    } else
-    if (_commandItem->command == "setspeedmode") {
+    } else*/
+    if (_commandItem->command == "bowcontrolspeedmode") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         if ((_commandItem->argument[0].toInt() >= 0) && (_commandItem->argument[0].toInt() <= 1)) {
             bowControlArray[currentBowSerial].speedMode = (_speedMode) (_commandItem->argument[0].toInt());
         }
         debugPrintln("Setting speed mode to " + String(int(bowControlArray[currentBowSerial].speedMode)), Command);
     } else
-    if (_commandItem->command == "setharmonicshift") {
+    if (_commandItem->command == "bowcontrolharmonicshift") {
         if (request) {
-            commandResponses->push_back({ "shs:" + String(bowControlArray[currentBowSerial].getHarmonicShift()), InfoRequest });
+            commandResponses->push_back({ "bchsh:" + String(bowControlArray[currentBowSerial].getHarmonicShift()), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             bowControlArray[currentBowSerial].setHarmonicShift(_commandItem->argument[0].toInt());
             debugPrintln("Setting harmonic shift to " + String(bowControlArray[currentBowSerial].getHarmonicShift()), Command);
         }
     } else
-    if (_commandItem->command == "setharmonicshift5") {
+    if (_commandItem->command == "bowcontrolharmonicshift5") {
         if (request) {
-            commandResponses->push_back({ "shs5:" + String(bowControlArray[currentBowSerial].getHarmonicShift5()), InfoRequest });
+            commandResponses->push_back({ "bchs5:" + String(bowControlArray[currentBowSerial].getHarmonicShift5()), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             bowControlArray[currentBowSerial].setHarmonicShift5(_commandItem->argument[0].toInt());
@@ -214,72 +214,72 @@ bool stringModule::processSerialCommand_GeneralControl(commandItem *_commandItem
 }
 
 bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {
-    if (_commandItem->command == "pidki") {
+    if (_commandItem->command == "bowpidki") {
         if (request) {
-            commandResponses->push_back({ "ki:" + String(bowControlArray[currentBowSerial].Ki), InfoRequest });
+            commandResponses->push_back({ "bpki:" + String(bowControlArray[currentBowSerial].Ki), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             bowControlArray[currentBowSerial].Ki = _commandItem->argument[0].toFloat();
             debugPrintln("Setting PID Ki value to " + String(bowControlArray[currentBowSerial].Ki), Command);
         }
     } else
-    if (_commandItem->command == "pidkp") {
+    if (_commandItem->command == "bowpidkp") {
         if (request) {
-            commandResponses->push_back({ "kp:" + String(bowControlArray[currentBowSerial].Kp), InfoRequest });
+            commandResponses->push_back({ "bpkp:" + String(bowControlArray[currentBowSerial].Kp), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             bowControlArray[currentBowSerial].Kp = _commandItem->argument[0].toFloat(); //String(serialCommand.substring(2,serialCommand.length())).toFloat();
             debugPrintln("Setting PID Kp value to " + String(bowControlArray[currentBowSerial].Kp), Command);
         }
     } else
-    if (_commandItem->command == "pidkd") {
+    if (_commandItem->command == "bowpidkd") {
         if (request) {
-            commandResponses->push_back({ "kd:" + String(bowControlArray[currentBowSerial].Kd), InfoRequest });
+            commandResponses->push_back({ "bpkd:" + String(bowControlArray[currentBowSerial].Kd), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             bowControlArray[currentBowSerial].Kd = _commandItem->argument[0].toFloat(); //String(serialCommand.substring(2,serialCommand.length())).toFloat();
             debugPrintln("Setting PID Kd value to " + String(bowControlArray[currentBowSerial].Kd), Command);
         }
     } else
-    if (_commandItem->command == "pidr") {
+    if (_commandItem->command == "bowpidr") {
         debugPrintln("Resetting PID", Command);
         bowControlArray[currentBowSerial].previousError = 0;
         bowControlArray[currentBowSerial].pidReset();
     }  else
-    if (_commandItem->command == "integratorerror") {
+    if (_commandItem->command == "bowpidintegratorerror") {
         if (request) {
-            commandResponses->push_back({ "ie:" + String(bowControlArray[currentBowSerial].integratorIgnoreBelow), InfoRequest });
+            commandResponses->push_back({ "bpie:" + String(bowControlArray[currentBowSerial].integratorIgnoreBelow), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             bowControlArray[currentBowSerial].integratorIgnoreBelow = _commandItem->argument[0].toFloat(); //String(serialCommand.substring(2,serialCommand.length())).toFloat();
             debugPrintln("Setting error ignore to " + String(bowControlArray[currentBowSerial].integratorIgnoreBelow), Command);
         }
     } else
-    if (_commandItem->command == "fundamental") {
+    if (_commandItem->command == "bowcontrolfundamental") {
         if (request) {
-            commandResponses->push_back({ "u:" + String(calibrationDataArray[currentBowSerial].fundamentalFrequency), InfoRequest });
+            commandResponses->push_back({ "bcu:" + String(calibrationDataArray[currentBowSerial].fundamentalFrequency), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             calibrationDataArray[currentBowSerial].fundamentalFrequency = _commandItem->argument[0].toFloat(); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
             debugPrintln("Setting fundamental frequency to " + String(calibrationDataArray[currentBowSerial].fundamentalFrequency), Command);
         }
     } else
-    if (_commandItem->command == "calibrateall") {
+    if (_commandItem->command == "bowcalibrateall") {
         calibrateArray[currentBowSerial].calibrateAll();
     } else
-    if (_commandItem->command == "calibratepressure") {
+    if (_commandItem->command == "bowcalibratepressure") {
         debugPrintln("Finding min/max pressure", Command);
         if (!calibrateArray[currentBowSerial].findMinMaxPressure()) {
             debugPrintln("Find min/max pressure FAILED", Error);
         }
     } else
-    if (_commandItem->command == "calibratespeed") {
+    if (_commandItem->command == "bowcalibratespeed") {
         debugPrintln("Finding min/max speed", Command);
         if (!calibrateArray[currentBowSerial].findMinMaxSpeedPWM()) {
             debugPrintln("Find min/max speed FAILED", Error);
         }
     } else
-    if (_commandItem->command == "calibratespeedpid") {
+    if (_commandItem->command == "bowcalibratespeedpid") {
         debugPrintln("Finding min/max speed with the PID", Command);
         if (!calibrateArray[currentBowSerial].findMinMaxSpeedPID()) {
             debugPrintln("Find min/max speed with the PID FAILED", Error);
@@ -293,83 +293,83 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
         debugPrintln("Calibration data:", Command);
         calibrateArray[currentBowSerial].printCalibrationData();
     }  else*/
-    if (_commandItem->command == "stablethreshold") {
+    if (_commandItem->command == "bowcalibratestablethreshold") {
         bowControlArray[currentBowSerial].elapsedTimeThreshold = _commandItem->argument[0].toFloat(); // String(serialCommand.substring(2,serialCommand.length())).toFloat();
         debugPrintln("Setting elapsed stable threshold to " + String(bowControlArray[currentBowSerial].elapsedTimeThreshold) + "ms", Command);
     } else
-    if (_commandItem->command == "recoverrate") {
+/*    if (_commandItem->command == "recoverrate") {
         bowControlArray[currentBowSerial].recoverRate = _commandItem->argument[0].toFloat(); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
         debugPrintln("Setting recover rate to " + String(bowControlArray[currentBowSerial].recoverRate), Command);
-    } else
-    if (_commandItem->command == "pidmaxerror") {
+    } else*/
+    if (_commandItem->command == "bowpidmaxerror") {
         bowControlArray[currentBowSerial].pidMaxError = _commandItem->argument[0].toInt();
         debugPrintln("Setting pid max error to " + String(bowControlArray[currentBowSerial].pidMaxError), Command);
     } else
-    if (_commandItem->command == "setbowtimeout") {
+    if (_commandItem->command == "bowmotortimeout") {
         if (request) {
-            commandResponses->push_back({ "sbt:" + String(bowControlArray[currentBowSerial].bowShutoffTimeout), InfoRequest });
+            commandResponses->push_back({ "bmt:" + String(bowControlArray[currentBowSerial].bowShutoffTimeout), InfoRequest });
         } else {
             bowControlArray[currentBowSerial].bowShutoffTimeout = _commandItem->argument[0].toInt();
             debugPrintln("Setting motor timeout to " + String( bowControlArray[currentBowSerial].bowShutoffTimeout), Command);
         }
     } else
-    if (_commandItem->command == "bowmaxspeed") {
+    if (_commandItem->command == "bowmotorspeedmax") {
         if (request) {
-            commandResponses->push_back({ "bxs:" + String(calibrationDataArray[currentBowSerial].maxHz), InfoRequest });
+            commandResponses->push_back({ "bmsx:" + String(calibrationDataArray[currentBowSerial].maxHz), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             calibrationDataArray[currentBowSerial].maxHz = _commandItem->argument[0].toFloat(); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
             debugPrintln("Setting max bow frequency to " + String(calibrationDataArray[currentBowSerial].maxHz), Command);
         }
     } else
-    if (_commandItem->command == "bowminspeed") {
+    if (_commandItem->command == "bowmotorspeedmin") {
         if (request) {
-            commandResponses->push_back({ "bis:" + String(calibrationDataArray[currentBowSerial].minHz), InfoRequest });
+            commandResponses->push_back({ "bmsi:" + String(calibrationDataArray[currentBowSerial].minHz), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             calibrationDataArray[currentBowSerial].minHz = _commandItem->argument[0].toFloat(); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
             debugPrintln("Setting min bow frequency to " + String(calibrationDataArray[currentBowSerial].minHz), Command);
         }
     } else
-    if (_commandItem->command == "bowmininertialpwm") {
+    if (_commandItem->command == "bowmotormininertialpwm") {
         if (request) {
-            commandResponses->push_back({ "biiw:" + String(calibrationDataArray[currentBowSerial].minInertialPWM), InfoRequest });
+            commandResponses->push_back({ "bmmip:" + String(calibrationDataArray[currentBowSerial].minInertialPWM), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             calibrationDataArray[currentBowSerial].minInertialPWM = _commandItem->argument[0].toFloat(); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
             debugPrintln("Setting min bow inertial PWM to " + String(calibrationDataArray[currentBowSerial].minInertialPWM), Command);
         }
     } else
-    if (_commandItem->command == "bowmaxpressure") {
+    if (_commandItem->command == "bowpressurepositionmax") {
         if (request) {
-            commandResponses->push_back({ "bxp:" + String(calibrationDataArray[currentBowSerial].stallPressure), InfoRequest });
+            commandResponses->push_back({ "bppx:" + String(calibrationDataArray[currentBowSerial].stallPressure), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             calibrationDataArray[currentBowSerial].stallPressure = _commandItem->argument[0].toInt(); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
             debugPrintln("Setting max bow pressure to " + String(calibrationDataArray[currentBowSerial].stallPressure), Command);
         }
     } else
-    if (_commandItem->command == "bowminpressure") {
+    if (_commandItem->command == "bowpressurepositionengage") {
         if (request) {
-            commandResponses->push_back({ "bip:" + String(calibrationDataArray[currentBowSerial].firstTouchPressure), InfoRequest });
+            commandResponses->push_back({ "bppe:" + String(calibrationDataArray[currentBowSerial].firstTouchPressure), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             calibrationDataArray[currentBowSerial].firstTouchPressure = _commandItem->argument[0].toInt(); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
             debugPrintln("Setting min bow pressure to " + String(calibrationDataArray[currentBowSerial].firstTouchPressure), Command);
         }
     } else
-    if (_commandItem->command == "bowrestposition") {
+    if (_commandItem->command == "bowpressurepositionrest") {
         if (request) {
-            commandResponses->push_back({ "brp:" + String(calibrationDataArray[currentBowSerial].restPosition), InfoRequest });
+            commandResponses->push_back({ "bppr:" + String(calibrationDataArray[currentBowSerial].restPosition), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             calibrationDataArray[currentBowSerial].restPosition = _commandItem->argument[0].toInt(); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
             debugPrintln("Setting bow rest position " + String(calibrationDataArray[currentBowSerial].restPosition), Command);
         }
     } else
-    if (_commandItem->command == "harmonicseries") {
+    if (_commandItem->command == "bowcontrolharmonicseries") {
         if (request) {
-            commandResponses->push_back({ "hs:" + String(bowControlArray[currentBowSerial].currentHarmonicSeries), InfoRequest });
+            commandResponses->push_back({ "bchs:" + String(bowControlArray[currentBowSerial].currentHarmonicSeries), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             if (!validateNumber(_commandItem->argument[0].toInt(), 0, bowControlArray[currentBowSerial].harmonicSeriesList.series.size())) { return false; }
@@ -382,10 +382,10 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
             commandResponses->push_back({"Setting harmonic series to " + String(bowControlArray[currentBowSerial].currentHarmonicSeries), Command});
         }
     } else
-    if (_commandItem->command == "harmoniclist") {
+    if (_commandItem->command == "bowcontrolharmoniclist") {
         if (request) {
             for (int i = 0; i < int(bowControlArray[currentBowSerial].harmonicSeriesList.series.size()); i++) {
-                String response = "hl:" + String(i);
+                String response = "bchl:" + String(i);
                 int j=0;
                 while (j < int(bowControlArray[currentBowSerial].harmonicSeriesList.series[i].frequency.size())) {
                     response += ":" + String(bowControlArray[currentBowSerial].harmonicSeriesList.series[i].frequency[j], 4);
@@ -407,7 +407,7 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
             commandResponses->push_back({response, Command});
         }
     } else
-    if (_commandItem->command == "setharmonic") {
+    if (_commandItem->command == "bowcontrolharmonicratio") {
         if (!checkArguments(_commandItem, commandResponses, 2)) { return false; }
         if (!validateNumber(_commandItem->argument[0].toInt(), 0,
             bowControlArray[currentBowSerial].harmonicSeriesList.series[bowControlArray[currentBowSerial].currentHarmonicSeries].frequency.size())) { return false; }
@@ -420,84 +420,84 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
         commandResponses->push_back({"Set harmonic " + String(_commandItem->argument[0].toInt()) + " to " + String(_commandItem->argument[1].toFloat()) +
             " Hertz" , Command});
     } else
-    if (_commandItem->command == "harmoniccount") {
+    if (_commandItem->command == "bowcontrolharmoniccount") {
         if (request) {
-            commandResponses->push_back({ "hc:" + String(bowControlArray[currentBowSerial].harmonicSeriesList.series.size()), InfoRequest });
+            commandResponses->push_back({ "bchc:" + String(bowControlArray[currentBowSerial].harmonicSeriesList.series.size()), InfoRequest });
         } else {
         }
     } else
-    if (_commandItem->command == "bowvoltage") {
+    if (_commandItem->command == "bowmotorvoltage") {
         if (request) {
-            commandResponses->push_back({ "bv:" + String(bowIOArray[currentBowSerial].getBowMotorVoltage()), InfoRequest });
+            commandResponses->push_back({ "bmv:" + String(bowIOArray[currentBowSerial].getBowMotorVoltage()), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             bowIOArray[currentBowSerial].setBowMotorVoltage(_commandItem->argument[0].toFloat());
             debugPrintln("Setting bow voltage to " + String(bowIOArray[currentBowSerial].getBowMotorVoltage()), Command);
         }
     } else
-    if (_commandItem->command == "bowcurrent") {
+    if (_commandItem->command == "bowmotorcurrent") {
         if (request) {
-            commandResponses->push_back({ "bc:" + String(bowIOArray[currentBowSerial].getBowCurrent()), InfoRequest });
+            commandResponses->push_back({ "bmc:" + String(bowIOArray[currentBowSerial].getBowCurrent()), InfoRequest });
         } else {
         }
     } else
-    if (_commandItem->command == "setbasenote") {
+    if (_commandItem->command == "bowcontrolharmonicbasenote") {
         if (request) {
-            commandResponses->push_back({ "sbn:" + String(bowControlArray[currentBowSerial].baseNote), InfoRequest });
+            commandResponses->push_back({ "bchbn:" + String(bowControlArray[currentBowSerial].baseNote), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             bowControlArray[currentBowSerial].setBaseNote(_commandItem->argument[0].toInt());
             debugPrintln("Setting base note to " + String(bowControlArray[currentBowSerial].baseNote), Command);
         }
     } else
-    if (_commandItem->command == "bowcurrentlimit") {
+    if (_commandItem->command == "bowmotorcurrentlimit") {
         if (request) {
-            commandResponses->push_back({ "bcl:" + String(bowIOArray[currentBowSerial].bowMotorCurrentLimit), InfoRequest });
+            commandResponses->push_back({ "bmcl:" + String(bowIOArray[currentBowSerial].bowMotorCurrentLimit), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             bowIOArray[currentBowSerial].bowMotorCurrentLimit = _commandItem->argument[0].toFloat();
             debugPrintln("Setting bow current limit to " + String(bowIOArray[currentBowSerial].bowMotorCurrentLimit), Command);
         }
     } else
-    if (_commandItem->command == "harmonicshiftrange") {
+    if (_commandItem->command == "bowcontrolharmonicshiftrange") {
         if (request) {
-            commandResponses->push_back({ "hsr:" + String(bowControlArray[currentBowSerial].getHarmonicShiftRange()), InfoRequest });
+            commandResponses->push_back({ "bchsr:" + String(bowControlArray[currentBowSerial].getHarmonicShiftRange()), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             bowControlArray[currentBowSerial].setHarmonicShiftRange(_commandItem->argument[0].toFloat());
             debugPrintln("Setting harmonic shift range to " + String(bowControlArray[currentBowSerial].getHarmonicShiftRange()), Command);
         }
     } else
-    if (_commandItem->command == "setsolenoidmaxforce") {
+    if (_commandItem->command == "solenoidmaxforce") {
         if (request) {
-            commandResponses->push_back({ "ssxf:" + String(solenoidArray[currentSolenoidSerial].forceMax), InfoRequest });
+            commandResponses->push_back({ "sxf:" + String(solenoidArray[currentSolenoidSerial].forceMax), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             solenoidArray[currentSolenoidSerial].forceMax = _commandItem->argument[0].toInt();
             debugPrintln("Setting solenoid max force to " + String(solenoidArray[currentSolenoidSerial].forceMax), Command);
         }
     } else
-    if (_commandItem->command == "setsolenoidminforce") {
+    if (_commandItem->command == "solenoidminforce") {
         if (request) {
-            commandResponses->push_back({ "ssif:" + String(solenoidArray[currentSolenoidSerial].forceMin), InfoRequest });
+            commandResponses->push_back({ "sif:" + String(solenoidArray[currentSolenoidSerial].forceMin), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             solenoidArray[currentSolenoidSerial].forceMin = _commandItem->argument[0].toInt();
             debugPrintln("Setting solenoid min force to " + String(solenoidArray[currentSolenoidSerial].forceMin), Command);
         }
     } else
-    if (_commandItem->command == "setsolenoidforcemultiplier") {
+    if (_commandItem->command == "solenoidforcemultiplier") {
         if (request) {
-            commandResponses->push_back({ "ssfm:" + String(solenoidArray[currentSolenoidSerial].forceMultiplier), InfoRequest });
+            commandResponses->push_back({ "sfm:" + String(solenoidArray[currentSolenoidSerial].forceMultiplier), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             solenoidArray[currentSolenoidSerial].forceMultiplier = _commandItem->argument[0].toFloat();
             debugPrintln("Setting solenoid force multiplier to " + String(solenoidArray[currentSolenoidSerial].forceMultiplier), Command);
         }
     } else
-    if (_commandItem->command == "bowmodulationspeed") {
+    if (_commandItem->command == "bowpressuremodulationspeed") {
         if (request) {
-            commandResponses->push_back({ "bms:" + String(bowControlArray[currentBowSerial].bowSpeedWhileEngaged), InfoRequest });
+            commandResponses->push_back({ "bpms:" + String(bowControlArray[currentBowSerial].bowSpeedWhileEngaged), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             uint16_t bes = _commandItem->argument[0].toInt();
@@ -506,9 +506,9 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
             debugPrintln("Setting bow modulation speed to " + String(bowControlArray[currentBowSerial].bowSpeedWhileEngaged), Command);
         }
     } else
-    if (_commandItem->command == "bowengagespeed") {
+    if (_commandItem->command == "bowpressureengagespeed") {
         if (request) {
-            commandResponses->push_back({ "bes:" + String(bowControlArray[currentBowSerial].bowSpeedToEngage), InfoRequest });
+            commandResponses->push_back({ "bpes:" + String(bowControlArray[currentBowSerial].bowSpeedToEngage), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             uint16_t bes = _commandItem->argument[0].toInt();
@@ -516,6 +516,9 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
             bowControlArray[currentBowSerial].bowSpeedToEngage = bes;
             debugPrintln("Setting bow engage speed to " + String(bowControlArray[currentBowSerial].bowSpeedToEngage), Command);
         }
+    } else
+    if (_commandItem->command == "bowhome") {
+        bowControlArray[currentBowSerial].bowIOConnect->homeBow();
     } else {
         return false;
     }
@@ -523,9 +526,7 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
 }
 
 bool stringModule::processSerialCommand_MuteControl(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {
-//        debugPrintln("Mute size " + String(muteArray.size()) + " current " + String(currentBowSerial), Debug);
     if (currentBowSerial >= int(muteArray.size())) {
-        //debugPrintln("Mute out of bounds", Error);
         return false;
     }
     if (_commandItem->command == "mutesetposition") {
@@ -564,10 +565,6 @@ bool stringModule::processSerialCommand_MuteControl(commandItem *_commandItem, s
         muteArray[currentBowSerial].saveRest();
         debugPrintln("Saving rest position", Command);
     } else
-/*        if (_commandItem->command == "mutesaveparams") {
-        muteArray[currentBowSerial].saveParams();
-        debugPrintln("Saving mute parameters in EEPROM", Command);
-    } else*/
     if (_commandItem->command == "mutefullmuteposition") {
         if (request) {
             commandResponses->push_back({ "mfmp:" + String(muteArray[currentBowSerial].getFullMutePosition()), InfoRequest });
@@ -614,7 +611,7 @@ bool stringModule::processSerialCommand_MuteControl(commandItem *_commandItem, s
 }
 
 bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {
-    if (_commandItem->command == "status") {
+    if (_commandItem->command == "bowstatus") {
         debugPrint("Set frequency " + String(bowControlArray[currentBowSerial].getPIDTarget()) + " Hz, ", TextInfo);
         debugPrint("Read frequency " + String(bowIOArray[currentBowSerial].averageFreq()) + " Hz", TextInfo);
         debugPrint(" P gain " + String(bowControlArray[currentBowSerial].Kp), TextInfo);
@@ -623,26 +620,26 @@ bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem,
         debugPrint(" ignore below " + String(bowControlArray[currentBowSerial].integratorIgnoreBelow), TextInfo);
         debugPrintln(" max error " + String(bowControlArray[currentBowSerial].pidMaxError), TextInfo);
     } else
-    if (_commandItem->command == "measuretimetotarget") {
+    if (_commandItem->command == "bowdebugmeasuretimetotarget") {
         bowControlArray[currentBowSerial].measureTimeToTarget(_commandItem->argument[0].toInt());
     }  else
-    if (_commandItem->command == "stringfrequency") {
+    if (_commandItem->command == "pickupstringfrequency") {
         if (request) {
             if (audioFrequencyAvaliable()) {
-                commandResponses->push_back({ "sf:" + String(audioFrequency(),1), InfoRequest });
+                commandResponses->push_back({ "psf:" + String(audioFrequency(),1), InfoRequest });
             } else {
-                commandResponses->push_back({ "sf: 0", InfoRequest });
+                commandResponses->push_back({ "psf: 0", InfoRequest });
             }
         }
     }  else
-    if (_commandItem->command == "bowfrequency") {
+    if (_commandItem->command == "bowmotorfrequency") {
         if (request) {
-            commandResponses->push_back({ "bf:" + String(bowIOArray[currentBowSerial].averageFreq()), InfoRequest });
+            commandResponses->push_back({ "bmf:" + String(bowIOArray[currentBowSerial].averageFreq()), InfoRequest });
         }
     }  else
-    if (_commandItem->command == "pidpeakerror") {
+    if (_commandItem->command == "bowpidpeakerror") {
         if (request) {
-            commandResponses->push_back({ "pidperr:" + String(bowControlArray[currentBowSerial].getPIDPeakError()), InfoRequest });
+            commandResponses->push_back({ "bpperr:" + String(bowControlArray[currentBowSerial].getPIDPeakError()), InfoRequest });
         }
     } else {
         return false;

@@ -45,7 +45,7 @@ public:
     String dumpData() {
         String dump = "";
         for (int i = 0; i < int(series.size()); i++) {
-            dump += "hl:" + String(i);
+            dump += "bchl:" + String(i);
             for (int j = 0; j < int(series[i].frequency.size()); j++) {
                 dump += ":" + String(series[i].frequency[j], 4);
             }

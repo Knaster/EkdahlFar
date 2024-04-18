@@ -41,6 +41,31 @@ bool bowIO::enableBowPower() {
     return true;
 }
 
+bool bowIO::homeBow(bool invert = false) {
+    debugPrintln("Starting home", Debug);
+
+    stepServoStepper->setHomingOffset(6000);
+    stepTMC2209Driver->setRunCurrent(stepHomeCurrentPercent);
+    stepServoStepper->eStop();
+    if (!invert) {
+        stepServoStepper->home(servoStepper::eStepDirection::FORWARD,5,5,servoStepper::eStepDirection::REVERSE); // ,5,5
+    } else {
+        stepServoStepper->home(servoStepper::eStepDirection::REVERSE,5,5,servoStepper::eStepDirection::FORWARD); // ,5,5
+    }
+
+    if (stepServoStepper->completeTask(5000)) {    //2000
+        debugPrintln("Homed", Debug);
+    } else {
+        debugPrintln("Homing FAILED!", Error);
+        return false;
+    }
+    return true;
+    stepTMC2209Driver->setRunCurrent(stepRunCurrentPercent);
+    stepServoStepper->setSpeed(20);
+    stepServoStepper->setPosition(0);
+    stepServoStepper->completeTask();
+}
+
 bowIO::bowIO(char motorRevPin, char motorVoltagePin, char motorDCDCEnPin, char tachoPin, char currentSensePin, char motorFaultPin, char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin, char stepCorrectionSensorPin) {
     bowMotorRevPin = motorRevPin;
     reflectorInterruptPin = tachoPin;
@@ -72,20 +97,8 @@ bowIO::bowIO(char motorRevPin, char motorVoltagePin, char motorDCDCEnPin, char t
     stepServoStepper = new servoStepper(stepStepPin, stepDirPin, stepHomeSensorPin); //, stepEnPin);
     stepTMC2209Driver = new TMC2209();
     setupTMC2209();
-    stepServoStepper->setHomingOffset(6000);
 //    stepServoStepper->setHomingOffset(22500);
-    debugPrintln("Starting home", Debug);
-    stepTMC2209Driver->setRunCurrent(stepHomeCurrentPercent);
-    stepServoStepper->home(servoStepper::eStepDirection::FORWARD,5,5,servoStepper::eStepDirection::REVERSE); // ,5,5
-    if (stepServoStepper->completeTask(5000)) {    //2000
-        debugPrintln("Homed", Debug);
-    } else {
-        debugPrintln("Homing FAILED!", Error);
-    }
-    stepTMC2209Driver->setRunCurrent(stepRunCurrentPercent);
-    stepServoStepper->setSpeed(20);
-    stepServoStepper->setPosition(0);
-    stepServoStepper->completeTask();
+    homeBow();
     //stepServoStepper->setSpeed(20);
 }
 
@@ -213,6 +226,7 @@ void bowIO::setSpeedPWM(uint16_t speed) {
  *  Recalculated internally to use SERVO_MIN and SERVO_MAX as lower and upper bound respectively
  */
 void bowIO::setTiltPWM(uint16_t tilt) {
+
 /*    int a = SERVO_MIN + (((float) (SERVO_MAX - SERVO_MIN) * (65535 - tilt) / 65535));
     a -= tiltAdjust;
     if (lastTilt != a) {
@@ -236,7 +250,8 @@ void bowIO::setTiltPWM(uint16_t tilt) {
     }*/
 #elif EFARSLAVE
     if (stepServoStepper != nullptr) {
-        debugPrintln("Setting stepper tilt to " + String(tilt - tiltAdjust), Hardware);
+//        debugPrintln("Setting stepper tilt to " + String(tilt - tiltAdjust), Hardware);
+        debugPrintln("Setting stepper tilt to " + String(tilt), Hardware);
         stepServoStepper->setPosition(tilt);
         lastTilt = tilt;
     }
@@ -412,7 +427,7 @@ bool bowIO::getMotorFault() {
 
 String bowIO::dumpData() {
     String dump;
-    dump = "bv:" + String(bowMotorVoltage) + ",";
+    dump = "bmv:" + String(bowMotorVoltage) + ",";
     return dump;
 }
 #endif
