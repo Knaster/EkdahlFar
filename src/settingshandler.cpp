@@ -7,6 +7,9 @@ String dumpData() {
         saveData += "mscf:" + String(i) + "," + configArray[i].dumpData();
     }
     saveData += "mscf:" + String(saveCurrentConfig) + ",";
+
+    saveData += controlRead->dumpData();
+
     saveData += "m:0," + stringModuleArray[0].calibrateArray[0].dumpData();
     saveData += stringModuleArray[0].muteArray[0].dumpData();
     saveData += stringModuleArray[0].bowControlArray[0].dumpData();

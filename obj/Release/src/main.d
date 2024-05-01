@@ -121,8 +121,8 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  src/calibrate.h src/bowcontrol.h src/calibrate.cpp src/bowActuators.cpp \
  src/solenoid.cpp src/mute.cpp src/mute.h src/stringmodule.cpp \
  src/stringmodule.hpp src/midi.cpp src/isrclasswrapper.cpp \
- src/settingshandler.cpp lib/EEPROM/EEPROM.h lib/teensy4/avr/eeprom.h \
- lib/teensy4/avr/io.h lib/teensy4/avr/../avr_emulation.h \
  src/controlReader.cpp src/controlReader.h \
  lib/Adafruit_ADS1X15/Adafruit_ADS1X15.h \
- lib/Adafruit_BusIO/Adafruit_I2CDevice.h src/maincommandhandler.cpp
+ lib/Adafruit_BusIO/Adafruit_I2CDevice.h src/settingshandler.cpp \
+ lib/EEPROM/EEPROM.h lib/teensy4/avr/eeprom.h lib/teensy4/avr/io.h \
+ lib/teensy4/avr/../avr_emulation.h src/maincommandhandler.cpp

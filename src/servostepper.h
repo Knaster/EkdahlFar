@@ -353,6 +353,7 @@ public:
     }
 
     void eStop() {
+        isMoving = false;
         homing = eHomingStage::UNHOMED;
     }
 
@@ -458,10 +459,12 @@ public:
     void updatePositionFirstHomingFalling() {
         if ((homingSensedChanged) && (homingSensed == homeSenseInactive)) {
             homingPoint[eEdgeType::EDGEFALLING][notDirection(homingDirection)] = currentStep - 1;
-            debugPrintln("Setting first homing rising point " + String(notDirection(homingDirection)) + " to " +
+            debugPrintln("Setting first homing falling point " + String(notDirection(homingDirection)) + " to " +
                 String(homingPoint[eEdgeType::EDGEFALLING][notDirection(homingDirection)]) + " : stepID " + String(stepperID), debugPrintType::Debug);
 
             homing = eHomingStage::GOTOOFFSET;
+            movingTo = 0;
+            //debugPrintln("Moving to offset " + String(movingTo), debugPrintType::Debug);
         } else {
             stepNext();
             if (hasStepped) {
@@ -513,7 +516,10 @@ public:
     bool home(eStepDirection inHomingDirection = eStepDirection::REVERSE, uint8_t inHomingSpeedRough = 10, uint8_t inHomingSpeedFine = 5,
         eStepDirection inOffsetDirection = eStepDirection::FORWARD) {
 
-        if (isMoving) { return false; }
+        if (isMoving) {
+            debugPrintln("Moving!!! Not homing", debugPrintType::Error);
+            return false;
+        }
 
         homingDirection = inHomingDirection;
         homingSpeedRough = inHomingSpeedRough;

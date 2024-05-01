@@ -142,10 +142,11 @@ void motorDriverFault() {
   debugPrintln("Fault!", Error);
 }
 
-#include "settingshandler.cpp"
 
 #include "controlReader.cpp"
 controlReader *controlRead;
+
+#include "settingshandler.cpp"
 
 /*! \brief Initial setup function
  *

@@ -134,6 +134,7 @@ serialCommandItem serialCommandsStringModule[] = {
     { "mutehalfmuteposition", "mhmp", "0-65535", "Mute half mute position"},
     { "muterestposition", "mrp", "0-65535", "Mute rest position"},
     { "mutesustain", "ms", "0|1", "Setting sustain on (1) or off (0)" },
+    { "mutebackoff", "mbo", "0-65535", "Setting the time that the mute stays in the mutefullmute position before automatically going into rest, set in mS"},
 
     { "bowactuatoradd", "baa", "-", "Add new bow actuator"},
     { "bowactuatorremove", "bar", "actuator", "Remove bow actuator"},

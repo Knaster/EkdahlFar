@@ -111,16 +111,9 @@ class controlReader
         controlReader(uint8_t inDataReadyPin, uint8_t inGatePin);
         virtual ~controlReader();
         void readData();
-//                   normal -                   "m:0,f:65*2^(1 / 15878 * value)",
-//                      quantize - "m:0,h:value/1191.516 667"
-//m:0,shs:(-31040+value)
 
 // Commands are; Base Note CV, Fine / Modulation CV, Mute CV, Pressure CV, Hammer CV-Trigger, Engage trigger
-
-//        String cvInputCommands[8] = { "m:0,h:(value-157)/1191.6", "m:0,shs5:((value-31198.75)*0.934519)", "m:0,msp:value", "m:0,spm:value",
-//            "m:0,se:value", "m:0,run:1,pid:1,ssm:0,engage:bool(value-32767),rest:ibool(value-32767)", "", "" };
-            //"m:0,run:1,pid:1,engage:1,ssm:0", "m:0,rest:1,ssm:0" };
-
+/*
         String cvInputCommands[8] = {
             "m:0,bch:value/1327.716667-0.39",
             "m:0,bchs5:((value-32000)*1.018082958)",
@@ -129,9 +122,12 @@ class controlReader
             "m:0,se:value",
             "m:0,bmr:bool(value-32767),bpid:1,bcsm:0,bpe:bool(value-32767),bpr:ibool(value-32767)",
             "", "" };
+*/
+        std::vector<String> cvInputCommands;
 
         bool adcDebugReport = true;
-
+        bool setADCCommands(uint8_t channel, String commands);
+        String dumpData();
     protected:
         uint16_t gateState = 0;
 

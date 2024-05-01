@@ -25,7 +25,8 @@ serialCommandItem serialCommandsMain[] = {
   { "midieventhandler", "mev", "noteon|noteoff|pat|cc:(0-127)|cat|pb|pc", "Set the MIDI event handling string in the current configuration"},
   // eventhandlerccremove, evccr
   { "midieventhandlerccremove", "mevcr", "cc(0-127)", "remove CC from list"},
-  { "midireceivechannel", "mrc", "-", "Sets the midi receive channel of the current configuration. 1-16 sets specific channel, any other value for OMNI"}
+  { "midireceivechannel", "mrc", "-", "Sets the midi receive channel of the current configuration. 1-16 sets specific channel, any other value for OMNI"},
+  { "adccommandmap", "acm", "channel:command string", "Sets the command string invoked when the value on ADC channel [channel] changes"}
 };
 
 bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {
@@ -248,6 +249,18 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             }
             configArray[currentConfig].midiRxChannel = _commandItem->argument[0].toInt();
             commandResponses->push_back({ "Setting midi receive channel to " + String(configArray[currentConfig].midiRxChannel), debugPrintType::Command});
+        }
+    } else
+    if (_commandItem->command == "adccommandmap") {
+        if (!checkArgumentsMin(_commandItem, commandResponses, 1)) { return false; }
+        uint8_t channel = _commandItem->argument[0].toInt();
+
+        if (request) {
+            commandResponses->push_back({ "acm:" + String(controlRead->cvInputCommands[channel]), InfoRequest});
+        } else {
+            if (!checkArguments(_commandItem, commandResponses, 2)) { return false; }
+            controlRead->setADCCommands(channel, _commandItem->argument[1]);
+            commandResponses->push_back({ "Setting adc channel " + String(channel) + " command string to " + String(controlRead->cvInputCommands[channel]), debugPrintType::Command});
         }
     } else {
         return false;

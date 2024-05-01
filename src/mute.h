@@ -17,6 +17,9 @@ public:
     uint16_t hwMutePos = 0;
     uint16_t hwLastMutePos = 0;
 
+    uint16_t backOffTime = 0;
+    elapsedMillis backOffTimer;
+
     enum emutePosition {mpUndefined, mpRest, mpFull, mpHalf };
     emutePosition mutePosition = mpUndefined;
 

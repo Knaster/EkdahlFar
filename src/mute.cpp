@@ -138,6 +138,7 @@ bool mute::fullMute() {
     mutePosition = mpFull;
     if (sustain) { return true; }
     hwMutePos = fullMutePosition;
+    backOffTimer = 0;
     return true;
 }
 
@@ -217,6 +218,7 @@ String mute::dumpData() {
     dump += "mfmp:" + String(fullMutePosition) + ",";
     dump += "mhmp:" + String(halfMutePosition) + ",";
     dump += "mrp:" + String(restPosition) + ",";
+    dump += "mbo:" + String(backOffTime) + ",";
     return dump;
 }
 
@@ -225,7 +227,12 @@ void mute::updateMute() {
         stepServoStepper->setPosition(hwMutePos);
         hwLastMutePos = hwMutePos;
     }
-    stepServoStepper->updatePosition();
+
+    if ((backOffTime > 0) && (mutePosition == mpFull) && (backOffTimer > backOffTime) && (!stepServoStepper->isMoving)) {
+        debugPrintln("Backing off mute", debugPrintType::Debug);
+        rest();
+    }
+    //stepServoStepper->updatePosition();
 }
 
 #endif

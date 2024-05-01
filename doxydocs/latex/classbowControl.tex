@@ -6,7 +6,8 @@
 
 
 
-Collaboration diagram for bow\+Control\+:\nopagebreak
+Collaboration diagram for bow\+Control\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -103,6 +104,8 @@ void \mbox{\hyperlink{classbowControl_ac763e2c7400be2248ffad2e13462d60a}{update\
 \begin{DoxyCompactList}\small\item\em Pointer to associated \mbox{\hyperlink{classbowIO}{bow\+IO}} object. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}} $\ast$ \mbox{\hyperlink{classbowControl_a3862939e413c6a51f07254245fd1f05d}{calibration\+Data\+Connect}}
 \begin{DoxyCompactList}\small\item\em Pointer to associated \mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classBowActuators}{Bow\+Actuators}} $\ast$ \mbox{\hyperlink{classbowControl_a80ad832b525e1fcf51e45ae454aa09be}{bow\+Actuators}}
+\item 
 float \mbox{\hyperlink{classbowControl_a31bb75cf63d04d3344db0bfd4aed0dc7}{Kp}} = 200
 \begin{DoxyCompactList}\small\item\em PID P multiplier 100. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{classbowControl_a2b1cb030a9257e7f45d810e41b1132c2}{Ki}} = 12
@@ -129,8 +132,6 @@ elapsed\+Millis \mbox{\hyperlink{classbowControl_ac63382008b2bcf28eba2584a9d1c03
 \begin{DoxyCompactList}\small\item\em Time elapsed since last change in bowing speed or pressure. \end{DoxyCompactList}\item 
 char \mbox{\hyperlink{classbowControl_a11d8c7f71ade3acdd16e89d8473e7a26}{elapsed\+Time\+Threshold}} = 40
 \begin{DoxyCompactList}\small\item\em Time in ms that elapses in between each bow speed stability check. \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{classbowControl_aa9c2f6d83485d4ae8494c02fca5f3d2e}{recover\+Rate}} = 0.\+05
-\begin{DoxyCompactList}\small\item\em Rate at which the Tilt PWM recovers when it has been decreased in order to avoid bow motor stall and oscillation. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classbowControl_aa3bbd0973cc2b096b3b49fca6af6e58c}{in\+Recovery}} = false
 \begin{DoxyCompactList}\small\item\em Set to true when bow recovery has started. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classbowControl_ae1bbe11e9421bf5e875dca7d964f56dd}{in\+Relapse}} = false
@@ -231,8 +232,7 @@ Constructor.
 \doxysubsubsection{\texorpdfstring{bowEngage()}{bowEngage()}}
 {\footnotesize\ttfamily bool bow\+Control\+::bow\+Engage (\begin{DoxyParamCaption}\item[{int}]{enact }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -249,8 +249,7 @@ Here is the call graph for this function\+:
 
 Mute string by turning off the bowing wheel and forcing it into the string by means of setting the Tilt PWM. 
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -263,8 +262,7 @@ Here is the call graph for this function\+:
 \doxysubsubsection{\texorpdfstring{bowRest()}{bowRest()}}
 {\footnotesize\ttfamily bool bow\+Control\+::bow\+Rest (\begin{DoxyParamCaption}\item[{int}]{enact }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -288,8 +286,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Calculate the tilt PWM value using baseline\+Tilt\+PWM and modfier\+Tilt\+PWM and send it to Bow\+IO. 
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -444,8 +441,7 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{measureTimeToTarget()}{measureTimeToTarget()}}
 {\footnotesize\ttfamily void bow\+Control\+::measure\+Time\+To\+Target (\begin{DoxyParamCaption}\item[{float}]{\+\_\+pid\+Target\+Speed }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -522,8 +518,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Resets the PID integral. 
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -554,8 +549,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{setBowPressureSafe()}{setBowPressureSafe()}}
 {\footnotesize\ttfamily void bow\+Control\+::set\+Bow\+Pressure\+Safe (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{tilt }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -577,8 +571,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 \begin{DoxyRefDesc}{Todo}
 \item[\mbox{\hyperlink{todo__todo000003}{Todo}}]do we return if we\textquotesingle{}re out of bounds or do lowest/highest possible? \end{DoxyRefDesc}
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -598,8 +591,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{setHarmonicShift()}{setHarmonicShift()}}
 {\footnotesize\ttfamily bool bow\+Control\+::set\+Harmonic\+Shift (\begin{DoxyParamCaption}\item[{int}]{in\+Harmonic\+Shift }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -612,8 +604,7 @@ Here is the call graph for this function\+:
 \doxysubsubsection{\texorpdfstring{setHarmonicShift5()}{setHarmonicShift5()}}
 {\footnotesize\ttfamily bool bow\+Control\+::set\+Harmonic\+Shift5 (\begin{DoxyParamCaption}\item[{int}]{in\+Harmonic\+Shift5 }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -632,8 +623,7 @@ Here is the call graph for this function\+:
 \doxysubsubsection{\texorpdfstring{setHold()}{setHold()}}
 {\footnotesize\ttfamily bool bow\+Control\+::set\+Hold (\begin{DoxyParamCaption}\item[{bool}]{hold }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -646,8 +636,7 @@ Here is the call graph for this function\+:
 \doxysubsubsection{\texorpdfstring{setManualTilt()}{setManualTilt()}}
 {\footnotesize\ttfamily bool bow\+Control\+::set\+Manual\+Tilt (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{tilt }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -664,16 +653,14 @@ Here is the call graph for this function\+:
 
 Set PID target speed, check that it doesnt go above max\+Hz or below min\+Hz. 
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classbowControl_a01e1c268fc72ea56af7234fb8827934d_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -690,8 +677,7 @@ Here is the caller graph for this function\+:
 
 Set PID target speed without any safety checks, used by set\+PIDTarget. 
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -704,8 +690,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{setPressureBaseline()}{setPressureBaseline()}}
 {\footnotesize\ttfamily void bow\+Control\+::set\+Pressure\+Baseline (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{baseline }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -718,8 +703,7 @@ Here is the call graph for this function\+:
 \doxysubsubsection{\texorpdfstring{setPressureModifier()}{setPressureModifier()}}
 {\footnotesize\ttfamily void bow\+Control\+::set\+Pressure\+Modifier (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{modifier }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -732,8 +716,7 @@ Here is the call graph for this function\+:
 \doxysubsubsection{\texorpdfstring{updateHarmonicData()}{updateHarmonicData()}}
 {\footnotesize\ttfamily void bow\+Control\+::update\+Harmonic\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -752,8 +735,7 @@ Handles Tilt PWM updates, zero-\/speed bow state and motor faults / oscillations
 
 \begin{DoxyRefDesc}{Todo}
 \item[\mbox{\hyperlink{todo__todo000004}{Todo}}]Replace with a proper motor fault \end{DoxyRefDesc}
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -784,6 +766,12 @@ The baseline tilt value used when engaging the bow with the string.
 \index{baseNote@{baseNote}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{baseNote}{baseNote}}
 {\footnotesize\ttfamily uint8\+\_\+t bow\+Control\+::base\+Note = 64}
+
+\mbox{\Hypertarget{classbowControl_a80ad832b525e1fcf51e45ae454aa09be}\label{classbowControl_a80ad832b525e1fcf51e45ae454aa09be}} 
+\index{bowControl@{bowControl}!bowActuators@{bowActuators}}
+\index{bowActuators@{bowActuators}!bowControl@{bowControl}}
+\doxysubsubsection{\texorpdfstring{bowActuators}{bowActuators}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classBowActuators}{Bow\+Actuators}}$\ast$ bow\+Control\+::bow\+Actuators}
 
 \mbox{\Hypertarget{classbowControl_a8ddd8c170720f487d58508822593609b}\label{classbowControl_a8ddd8c170720f487d58508822593609b}} 
 \index{bowControl@{bowControl}!bowCurrentLimit@{bowCurrentLimit}}
@@ -1182,16 +1170,6 @@ This contains the last time stamp that update\+String has been processed.
 \index{reachedEngage@{reachedEngage}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{reachedEngage}{reachedEngage}}
 {\footnotesize\ttfamily bool bow\+Control\+::reached\+Engage = false}
-
-\mbox{\Hypertarget{classbowControl_aa9c2f6d83485d4ae8494c02fca5f3d2e}\label{classbowControl_aa9c2f6d83485d4ae8494c02fca5f3d2e}} 
-\index{bowControl@{bowControl}!recoverRate@{recoverRate}}
-\index{recoverRate@{recoverRate}!bowControl@{bowControl}}
-\doxysubsubsection{\texorpdfstring{recoverRate}{recoverRate}}
-{\footnotesize\ttfamily float bow\+Control\+::recover\+Rate = 0.\+05}
-
-
-
-Rate at which the Tilt PWM recovers when it has been decreased in order to avoid bow motor stall and oscillation. 
 
 \mbox{\Hypertarget{classbowControl_a00fa8313da3753909d1186b540b8a536}\label{classbowControl_a00fa8313da3753909d1186b540b8a536}} 
 \index{bowControl@{bowControl}!run@{run}}

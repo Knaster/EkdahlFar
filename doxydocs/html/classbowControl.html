@@ -79,11 +79,12 @@ Collaboration diagram for bowControl:</div>
 <div class="dyncontent">
 <div class="center"><img src="classbowControl__coll__graph.png" border="0" usemap="#abowControl_coll__map" alt="Collaboration graph"/></div>
 <map name="abowControl_coll__map" id="abowControl_coll__map">
-<area shape="rect" title=" " alt="" coords="141,184,237,211"/>
-<area shape="rect" href="classbowIO.html" title="The bowIO class deals with interfacing with the hardware of a string unit." alt="" coords="28,95,91,121"/>
-<area shape="rect" href="classservoStepper.html" title="The purpose of this class is to control stepper motors in terms of positional indexing much like RC s..." alt="" coords="5,5,113,32"/>
-<area shape="rect" href="struct__calibrationData.html" title=" " alt="" coords="124,95,253,121"/>
-<area shape="rect" href="class__harmonicSeriesList.html" title=" " alt="" coords="300,95,453,121"/>
+<area shape="rect" title=" " alt="" coords="274,184,370,211"/>
+<area shape="rect" href="classBowActuators.html" title=" " alt="" coords="210,95,322,121"/>
+<area shape="rect" href="struct__calibrationData.html" title=" " alt="" coords="5,5,135,32"/>
+<area shape="rect" href="classbowIO.html" title="The bowIO class deals with interfacing with the hardware of a string unit." alt="" coords="352,95,415,121"/>
+<area shape="rect" href="classservoStepper.html" title="The purpose of this class is to control stepper motors in terms of positional indexing much like RC s..." alt="" coords="329,5,437,32"/>
+<area shape="rect" href="class__harmonicSeriesList.html" title=" " alt="" coords="439,95,592,121"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -191,6 +192,8 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a3862939e413c6a51f07254245fd1f05d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct__calibrationData.html">_calibrationData</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbowControl.html#a3862939e413c6a51f07254245fd1f05d">calibrationDataConnect</a></td></tr>
 <tr class="memdesc:a3862939e413c6a51f07254245fd1f05d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to associated <a class="el" href="struct__calibrationData.html">_calibrationData</a> object.  <a href="classbowControl.html#a3862939e413c6a51f07254245fd1f05d">More...</a><br /></td></tr>
 <tr class="separator:a3862939e413c6a51f07254245fd1f05d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80ad832b525e1fcf51e45ae454aa09be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBowActuators.html">BowActuators</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbowControl.html#a80ad832b525e1fcf51e45ae454aa09be">bowActuators</a></td></tr>
+<tr class="separator:a80ad832b525e1fcf51e45ae454aa09be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31bb75cf63d04d3344db0bfd4aed0dc7"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbowControl.html#a31bb75cf63d04d3344db0bfd4aed0dc7">Kp</a> = 200</td></tr>
 <tr class="memdesc:a31bb75cf63d04d3344db0bfd4aed0dc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">PID P multiplier 100.  <a href="classbowControl.html#a31bb75cf63d04d3344db0bfd4aed0dc7">More...</a><br /></td></tr>
 <tr class="separator:a31bb75cf63d04d3344db0bfd4aed0dc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -230,9 +233,6 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a11d8c7f71ade3acdd16e89d8473e7a26"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbowControl.html#a11d8c7f71ade3acdd16e89d8473e7a26">elapsedTimeThreshold</a> = 40</td></tr>
 <tr class="memdesc:a11d8c7f71ade3acdd16e89d8473e7a26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time in ms that elapses in between each bow speed stability check.  <a href="classbowControl.html#a11d8c7f71ade3acdd16e89d8473e7a26">More...</a><br /></td></tr>
 <tr class="separator:a11d8c7f71ade3acdd16e89d8473e7a26"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9c2f6d83485d4ae8494c02fca5f3d2e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbowControl.html#aa9c2f6d83485d4ae8494c02fca5f3d2e">recoverRate</a> = 0.05</td></tr>
-<tr class="memdesc:aa9c2f6d83485d4ae8494c02fca5f3d2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rate at which the Tilt PWM recovers when it has been decreased in order to avoid bow motor stall and oscillation.  <a href="classbowControl.html#aa9c2f6d83485d4ae8494c02fca5f3d2e">More...</a><br /></td></tr>
-<tr class="separator:aa9c2f6d83485d4ae8494c02fca5f3d2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3bbd0973cc2b096b3b49fca6af6e58c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbowControl.html#aa3bbd0973cc2b096b3b49fca6af6e58c">inRecovery</a> = false</td></tr>
 <tr class="memdesc:aa3bbd0973cc2b096b3b49fca6af6e58c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set to true when bow recovery has started.  <a href="classbowControl.html#aa3bbd0973cc2b096b3b49fca6af6e58c">More...</a><br /></td></tr>
 <tr class="separator:aa3bbd0973cc2b096b3b49fca6af6e58c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1728,6 +1728,20 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a id="a80ad832b525e1fcf51e45ae454aa09be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80ad832b525e1fcf51e45ae454aa09be">&#9670;&nbsp;</a></span>bowActuators</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBowActuators.html">BowActuators</a>* bowControl::bowActuators</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a8ddd8c170720f487d58508822593609b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8ddd8c170720f487d58508822593609b">&#9670;&nbsp;</a></span>bowCurrentLimit</h2>
 
@@ -2516,22 +2530,6 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa9c2f6d83485d4ae8494c02fca5f3d2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9c2f6d83485d4ae8494c02fca5f3d2e">&#9670;&nbsp;</a></span>recoverRate</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float bowControl::recoverRate = 0.05</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Rate at which the Tilt PWM recovers when it has been decreased in order to avoid bow motor stall and oscillation. </p>
 
 </div>
 </div>

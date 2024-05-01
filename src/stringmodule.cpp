@@ -604,6 +604,16 @@ bool stringModule::processSerialCommand_MuteControl(commandItem *_commandItem, s
             }
             debugPrintln("Setting sustain to " + String(muteArray[currentBowSerial].getSustain()), Command);
         }
+    } else
+    if (_commandItem->command == "mutebackoff") {
+        if (request) {
+            commandResponses->push_back({ "mbo:" + String(muteArray[currentBowSerial].backOffTime), InfoRequest });
+        } else {
+            if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+
+            muteArray[currentBowSerial].backOffTime = _commandItem->argument[0].toInt();
+            debugPrintln("Mute backoff set to " + String(muteArray[currentBowSerial].backOffTime), Command);
+        }
     } else {
         return false;
     }

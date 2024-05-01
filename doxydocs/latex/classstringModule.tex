@@ -1,11 +1,21 @@
 \hypertarget{classstringModule}{}\doxysection{string\+Module Class Reference}
 \label{classstringModule}\index{stringModule@{stringModule}}
+
+
+{\ttfamily \#include $<$stringmodule.\+hpp$>$}
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classstringModule_a8d2813e57f62a901fe0ca8c348112a78}{string\+Module}} ()
+\item 
+void \mbox{\hyperlink{classstringModule_a6be6dd0b987fed725a84cd3b6417aaf7}{update\+String}} ()
 \item 
 bool \mbox{\hyperlink{classstringModule_a52a5b213e054d030023de05b46769555}{add\+Bow}} (char motor\+Rev\+Pin, char motor\+Voltage\+Pin, char motor\+DCDCEn, char tacho\+Pin, char current\+Sense\+Pin, char motor\+Fault\+Pin, char step\+En\+Pin, char step\+Dir\+Pin, char step\+Step\+Pin, Hardware\+Serial $\ast$step\+Serial\+Port, char step\+Home\+Sensor\+Pin, char step\+Correction\+Sensor\+Pin)
 \item 
 bool \mbox{\hyperlink{classstringModule_a383d333da12d8b196c3a0a3085f466c9}{add\+Solenoid}} (char \+\_\+solenoid\+Pin)
+\item 
+void \mbox{\hyperlink{classstringModule_ab627523a631c2d63089092e18f430e63}{write\+To\+Slave}} (String command)
 \item 
 bool \mbox{\hyperlink{classstringModule_ae900a34fa51bb9cdf8e0db8ad54698ee}{add\+Mute}} (char step\+En\+Pin, char step\+Dir\+Pin, char step\+Step\+Pin, Hardware\+Serial $\ast$step\+Serial\+Port, char step\+Home\+Sensor\+Pin)
 \item 
@@ -17,15 +27,11 @@ bool \mbox{\hyperlink{classstringModule_a6d98b93184bfe0426df837453db67143}{proce
 \item 
 bool \mbox{\hyperlink{classstringModule_a2e3deb9ec1e55ddadba3cce25fdde5e2}{process\+Serial\+Command\+\_\+\+Status\+Testing}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$\+\_\+command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$command\+Responses, bool request=false, bool delegated=false, \mbox{\hyperlink{classcommandList}{command\+List}} $\ast$delegated\+Commands=nullptr)
 \item 
+bool \mbox{\hyperlink{classstringModule_a51411f820b0092854766bdbe0fbda616}{process\+Serial\+Command\+\_\+\+Bow\+Actuator}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$\+\_\+command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$command\+Responses, bool request=false, bool delegated=false, \mbox{\hyperlink{classcommandList}{command\+List}} $\ast$delegated\+Commands=nullptr)
+\item 
 bool \mbox{\hyperlink{classstringModule_aa7efea7570178b24f2ecc1fefc22c8fb}{process\+Request\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$\+\_\+command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$command\+Responses, bool delegated)
 \item 
-void \mbox{\hyperlink{classstringModule_ab627523a631c2d63089092e18f430e63}{write\+To\+Slave}} (String command)
-\item 
 bool \mbox{\hyperlink{classstringModule_a5e7353fae7c3d63c8315b485c1ad1626}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$\mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}}, uint16\+\_\+t $\ast$index, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$command\+Responses, bool delegated)
-\item 
-\mbox{\hyperlink{classstringModule_a8d2813e57f62a901fe0ca8c348112a78}{string\+Module}} ()
-\item 
-void \mbox{\hyperlink{classstringModule_a6be6dd0b987fed725a84cd3b6417aaf7}{update\+String}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -59,7 +65,7 @@ Safe\+String\+Reader $\ast$ \mbox{\hyperlink{classstringModule_a4cb3706886fe89b9
 \index{stringModule@{stringModule}!stringModule@{stringModule}}
 \index{stringModule@{stringModule}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{stringModule()}{stringModule()}}
-{\footnotesize\ttfamily string\+Module\+::string\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily string\+Module\+::string\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -68,7 +74,7 @@ Safe\+String\+Reader $\ast$ \mbox{\hyperlink{classstringModule_a4cb3706886fe89b9
 \index{stringModule@{stringModule}!addBow@{addBow}}
 \index{addBow@{addBow}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{addBow()}{addBow()}}
-{\footnotesize\ttfamily bool string\+Module\+::add\+Bow (\begin{DoxyParamCaption}\item[{char}]{motor\+Rev\+Pin,  }\item[{char}]{motor\+Voltage\+Pin,  }\item[{char}]{motor\+DCDCEn,  }\item[{char}]{tacho\+Pin,  }\item[{char}]{current\+Sense\+Pin,  }\item[{char}]{motor\+Fault\+Pin,  }\item[{char}]{step\+En\+Pin,  }\item[{char}]{step\+Dir\+Pin,  }\item[{char}]{step\+Step\+Pin,  }\item[{Hardware\+Serial $\ast$}]{step\+Serial\+Port,  }\item[{char}]{step\+Home\+Sensor\+Pin,  }\item[{char}]{step\+Correction\+Sensor\+Pin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool string\+Module\+::add\+Bow (\begin{DoxyParamCaption}\item[{char}]{motor\+Rev\+Pin,  }\item[{char}]{motor\+Voltage\+Pin,  }\item[{char}]{motor\+DCDCEn,  }\item[{char}]{tacho\+Pin,  }\item[{char}]{current\+Sense\+Pin,  }\item[{char}]{motor\+Fault\+Pin,  }\item[{char}]{step\+En\+Pin,  }\item[{char}]{step\+Dir\+Pin,  }\item[{char}]{step\+Step\+Pin,  }\item[{Hardware\+Serial $\ast$}]{step\+Serial\+Port,  }\item[{char}]{step\+Home\+Sensor\+Pin,  }\item[{char}]{step\+Correction\+Sensor\+Pin }\end{DoxyParamCaption})}
 
 \begin{DoxyRefDesc}{Todo}
 \item[\mbox{\hyperlink{todo__todo000009}{Todo}}]fix pointers here, major irritation \end{DoxyRefDesc}
@@ -76,7 +82,7 @@ Safe\+String\+Reader $\ast$ \mbox{\hyperlink{classstringModule_a4cb3706886fe89b9
 \index{stringModule@{stringModule}!addMute@{addMute}}
 \index{addMute@{addMute}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{addMute()}{addMute()}}
-{\footnotesize\ttfamily bool string\+Module\+::add\+Mute (\begin{DoxyParamCaption}\item[{char}]{step\+En\+Pin,  }\item[{char}]{step\+Dir\+Pin,  }\item[{char}]{step\+Step\+Pin,  }\item[{Hardware\+Serial $\ast$}]{step\+Serial\+Port,  }\item[{char}]{step\+Home\+Sensor\+Pin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool string\+Module\+::add\+Mute (\begin{DoxyParamCaption}\item[{char}]{step\+En\+Pin,  }\item[{char}]{step\+Dir\+Pin,  }\item[{char}]{step\+Step\+Pin,  }\item[{Hardware\+Serial $\ast$}]{step\+Serial\+Port,  }\item[{char}]{step\+Home\+Sensor\+Pin }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -89,7 +95,7 @@ Here is the call graph for this function\+:\nopagebreak
 \index{stringModule@{stringModule}!addSolenoid@{addSolenoid}}
 \index{addSolenoid@{addSolenoid}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{addSolenoid()}{addSolenoid()}}
-{\footnotesize\ttfamily bool string\+Module\+::add\+Solenoid (\begin{DoxyParamCaption}\item[{char}]{\+\_\+solenoid\+Pin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool string\+Module\+::add\+Solenoid (\begin{DoxyParamCaption}\item[{char}]{\+\_\+solenoid\+Pin }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -102,9 +108,10 @@ Here is the call graph for this function\+:\nopagebreak
 \index{stringModule@{stringModule}!processRequestCommand@{processRequestCommand}}
 \index{processRequestCommand@{processRequestCommand}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{processRequestCommand()}{processRequestCommand()}}
-{\footnotesize\ttfamily bool string\+Module\+::process\+Request\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{delegated }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool string\+Module\+::process\+Request\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{delegated }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -122,22 +129,46 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{stringModule@{stringModule}!processSerialCommand@{processSerialCommand}}
 \index{processSerialCommand@{processSerialCommand}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{processSerialCommand()}{processSerialCommand()}}
-{\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$}]{commands,  }\item[{uint16\+\_\+t $\ast$}]{index,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{delegated }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$}]{commands,  }\item[{uint16\+\_\+t $\ast$}]{index,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{delegated }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classstringModule_a5e7353fae7c3d63c8315b485c1ad1626_cgraph}
 \end{center}
 \end{figure}
+\mbox{\Hypertarget{classstringModule_a51411f820b0092854766bdbe0fbda616}\label{classstringModule_a51411f820b0092854766bdbe0fbda616}} 
+\index{stringModule@{stringModule}!processSerialCommand\_BowActuator@{processSerialCommand\_BowActuator}}
+\index{processSerialCommand\_BowActuator@{processSerialCommand\_BowActuator}!stringModule@{stringModule}}
+\doxysubsubsection{\texorpdfstring{processSerialCommand\_BowActuator()}{processSerialCommand\_BowActuator()}}
+{\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+Bow\+Actuator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classstringModule_a51411f820b0092854766bdbe0fbda616_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classstringModule_a51411f820b0092854766bdbe0fbda616_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classstringModule_abeee7163a63d261fed0f7a92622d86de}\label{classstringModule_abeee7163a63d261fed0f7a92622d86de}} 
 \index{stringModule@{stringModule}!processSerialCommand\_CalibrationsSettings@{processSerialCommand\_CalibrationsSettings}}
 \index{processSerialCommand\_CalibrationsSettings@{processSerialCommand\_CalibrationsSettings}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{processSerialCommand\_CalibrationsSettings()}{processSerialCommand\_CalibrationsSettings()}}
-{\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+Calibrations\+Settings (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+Calibrations\+Settings (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -155,9 +186,10 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{stringModule@{stringModule}!processSerialCommand\_GeneralControl@{processSerialCommand\_GeneralControl}}
 \index{processSerialCommand\_GeneralControl@{processSerialCommand\_GeneralControl}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{processSerialCommand\_GeneralControl()}{processSerialCommand\_GeneralControl()}}
-{\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+General\+Control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+General\+Control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -175,9 +207,10 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{stringModule@{stringModule}!processSerialCommand\_MuteControl@{processSerialCommand\_MuteControl}}
 \index{processSerialCommand\_MuteControl@{processSerialCommand\_MuteControl}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{processSerialCommand\_MuteControl()}{processSerialCommand\_MuteControl()}}
-{\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+Mute\+Control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+Mute\+Control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -195,7 +228,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{stringModule@{stringModule}!processSerialCommand\_StatusTesting@{processSerialCommand\_StatusTesting}}
 \index{processSerialCommand\_StatusTesting@{processSerialCommand\_StatusTesting}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{processSerialCommand\_StatusTesting()}{processSerialCommand\_StatusTesting()}}
-{\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+Status\+Testing (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+Status\+Testing (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -215,13 +248,13 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{stringModule@{stringModule}!updateString@{updateString}}
 \index{updateString@{updateString}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{updateString()}{updateString()}}
-{\footnotesize\ttfamily void string\+Module\+::update\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void string\+Module\+::update\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{classstringModule_ab627523a631c2d63089092e18f430e63}\label{classstringModule_ab627523a631c2d63089092e18f430e63}} 
 \index{stringModule@{stringModule}!writeToSlave@{writeToSlave}}
 \index{writeToSlave@{writeToSlave}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{writeToSlave()}{writeToSlave()}}
-{\footnotesize\ttfamily void string\+Module\+::write\+To\+Slave (\begin{DoxyParamCaption}\item[{String}]{command }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void string\+Module\+::write\+To\+Slave (\begin{DoxyParamCaption}\item[{String}]{command }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -308,6 +341,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
+\mbox{\hyperlink{stringmodule_8hpp}{stringmodule.\+hpp}}\item 
 \mbox{\hyperlink{stringmodule_8cpp}{stringmodule.\+cpp}}\end{DoxyCompactItemize}

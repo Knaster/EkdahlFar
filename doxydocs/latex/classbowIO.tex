@@ -64,6 +64,8 @@ bool \mbox{\hyperlink{classbowIO_a147462aa41b453a7096c94f93be3d38b}{bow\+Over\+P
 bool \mbox{\hyperlink{classbowIO_a951120e99c2120a3c7e07181cafc621a}{get\+Motor\+Fault}} ()
 \item 
 String \mbox{\hyperlink{classbowIO_a10371f6b9c9c3f2a4690040d144c2320}{dump\+Data}} ()
+\item 
+bool \mbox{\hyperlink{classbowIO_a090ba4c4cb860b6aa26cd80d6bc079e1}{home\+Bow}} (bool invert=false)
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -162,7 +164,8 @@ The \mbox{\hyperlink{classbowIO}{bow\+IO}} class deals with interfacing with the
 \doxysubsubsection{\texorpdfstring{bowIO()}{bowIO()}}
 {\footnotesize\ttfamily bow\+IO\+::bow\+IO (\begin{DoxyParamCaption}\item[{char}]{motor\+Rev\+Pin,  }\item[{char}]{motor\+Voltage\+Pin,  }\item[{char}]{motor\+DCDCEn\+Pin,  }\item[{char}]{tacho\+Pin,  }\item[{char}]{current\+Sense\+Pin,  }\item[{char}]{motor\+Fault\+Pin,  }\item[{char}]{step\+En\+Pin,  }\item[{char}]{step\+Dir\+Pin,  }\item[{char}]{step\+Step\+Pin,  }\item[{Hardware\+Serial $\ast$}]{step\+Serial\+Port,  }\item[{char}]{step\+Home\+Sensor\+Pin,  }\item[{char}]{step\+Correction\+Sensor\+Pin }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -215,8 +218,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowIO_a4f7ef490b19cc4d9d6e3bd2e65d77061_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -236,8 +238,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowIO_a25eabc5e7b0c82b2d117586d155aae66_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -257,8 +258,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowIO_a147462aa41b453a7096c94f93be3d38b_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -295,8 +295,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{clearTachoData()}{clearTachoData()}}
 {\footnotesize\ttfamily void bow\+IO\+::clear\+Tacho\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -348,8 +347,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{getBowCurrent()}{getBowCurrent()}}
 {\footnotesize\ttfamily float bow\+IO\+::get\+Bow\+Current (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -362,8 +360,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{getBowMotorVoltage()}{getBowMotorVoltage()}}
 {\footnotesize\ttfamily float bow\+IO\+::get\+Bow\+Motor\+Voltage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -393,8 +390,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{getMotorFault()}{getMotorFault()}}
 {\footnotesize\ttfamily bool bow\+IO\+::get\+Motor\+Fault (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -412,6 +408,28 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classbowIO_a76c490095ad46b62c107b738a423c321_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classbowIO_a090ba4c4cb860b6aa26cd80d6bc079e1}\label{classbowIO_a090ba4c4cb860b6aa26cd80d6bc079e1}} 
+\index{bowIO@{bowIO}!homeBow@{homeBow}}
+\index{homeBow@{homeBow}!bowIO@{bowIO}}
+\doxysubsubsection{\texorpdfstring{homeBow()}{homeBow()}}
+{\footnotesize\ttfamily bool bow\+IO\+::home\+Bow (\begin{DoxyParamCaption}\item[{bool}]{invert = {\ttfamily false} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classbowIO_a090ba4c4cb860b6aa26cd80d6bc079e1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classbowIO_a090ba4c4cb860b6aa26cd80d6bc079e1_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{classbowIO_a5862fd84eae540cec06f7cf6b01b2724}\label{classbowIO_a5862fd84eae540cec06f7cf6b01b2724}} 
@@ -454,8 +472,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Ramps the bow speed PWM from the last PWM value given to the value given in speed, blocking, only use for testing purposes. 
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -479,8 +496,7 @@ Recalculated internally to use SERVO\+\_\+\+MIN and SERVO\+\_\+\+MAX as lower an
 \includegraphics[width=350pt]{classbowIO_a105d8980fb4e0596755e8d337144aae6_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -557,8 +573,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowIO_a8d4057a6d30a1394038afbe2e2752286_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
