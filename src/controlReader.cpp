@@ -19,6 +19,8 @@ void IRS_GateChanged() {
 
 controlReader::controlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
 {
+    setDefaults();
+
     pinDataReady = inDataReadyPin;
     pinGate = inGatePin;
 
@@ -68,15 +70,6 @@ controlReader::controlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
 
     currentChannel = ADS1X15_REG_CONFIG_MUX_SINGLE_0;
     currentChannel2 = ADS1X15_REG_CONFIG_MUX_SINGLE_0;
-
-    cvInputCommands.push_back("m:0,bch:value/1327.716667-0.39");
-    cvInputCommands.push_back("m:0,bchs5:((value-32000)*1.018082958)");
-    cvInputCommands.push_back("m:0,msp:value");
-    cvInputCommands.push_back("m:0,bpb:value");
-    cvInputCommands.push_back("m:0,se:value");
-    cvInputCommands.push_back("m:0,bmr:bool(value-32767),bpid:1,bcsm:0,bpe:bool(value-32767),bpr:ibool(value-32767)");
-    cvInputCommands.push_back("");
-    cvInputCommands.push_back("");
 
     debugPrintln("ADS Initialized", debugPrintType::Debug);
     return;
@@ -209,7 +202,21 @@ bool controlReader::setADCCommands(uint8_t channel, String commands) {
     return true;
 }
 
+void controlReader::setDefaults() {
+    cvInputCommands.clear();
+    cvInputCommands.push_back("m:0,bch:value/1327.716667-0.39");
+    cvInputCommands.push_back("m:0,bchs5:((value-32000)*1.018082958)");
+    cvInputCommands.push_back("m:0,msp:value");
+    cvInputCommands.push_back("m:0,bpb:value");
+    cvInputCommands.push_back("m:0,se:value");
+    cvInputCommands.push_back("m:0,bmr:bool(value-32767),bpid:1,bcsm:0,bpe:bool(value-32767),bpr:ibool(value-32767)");
+    cvInputCommands.push_back("");
+    cvInputCommands.push_back("");
+}
+
 String controlReader::dumpData() {
+//    if (!adsInit) { return ""; }
+
     String saveData = "";
     for (uint8_t i = 0; i < 8; i++) {
         saveData += "acm:" + String(i) + ":'" + cvInputCommands[i] + "',";

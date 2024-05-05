@@ -206,7 +206,7 @@ void OnControlChange(byte channel, byte control, byte value) {
         //debugPrintln(configArray[currentConfig].controlChange[i].command, Debug);
         }
     }
-
+/*
     if (control == 64) {  // Sustain
         if (value == 0) {
             sustain = false;
@@ -214,8 +214,8 @@ void OnControlChange(byte channel, byte control, byte value) {
             sustain = true;
         }
         debugPrintln("Setting sustain to " + String(sustain), USB);
-    } else
-    if (control == 123) {  /// All notes off
+    } else*/
+/*    if (control == 123) {  /// All notes off
         if (noteCount != 0) {
             debugPrintln("All notes not removed!", Error);
             noteCount = 0;
@@ -224,6 +224,17 @@ void OnControlChange(byte channel, byte control, byte value) {
             processLocalMessage(configArray[currentConfig].noteOff);
             notesHeld.clear();
         }
+    }*/
+}
+
+void midiAllNotesOff() {
+    if (noteCount != 0) {
+        debugPrintln("All notes not removed!", Error);
+        noteCount = 0;
+
+        dchannel = notesHeld[0].channel; dnote = notesHeld[0].note; dvelocity = notesHeld[0].velocity;
+        processLocalMessage(configArray[currentConfig].noteOff);
+        notesHeld.clear();
     }
 }
 

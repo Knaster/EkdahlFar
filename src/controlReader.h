@@ -127,6 +127,7 @@ class controlReader
 
         bool adcDebugReport = true;
         bool setADCCommands(uint8_t channel, String commands);
+        void setDefaults();
         String dumpData();
     protected:
         uint16_t gateState = 0;

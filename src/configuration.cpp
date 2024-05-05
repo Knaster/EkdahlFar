@@ -6,21 +6,18 @@
 #include "configuration.h"
 
 configuration::configuration() {
-    #define noteOnSingle "m:guv0,b:0,bchb:note,bmr:1,bpid:1,bpe:1,se:(velocity*512)*(1-notecount),bcsm:0" //"m:uv0,b:0,hb:note,run:1,pid:1,engage:1,muterest,ssm:0"
-    #define noteOffSingle "m:guv0,b:0,bpr:ibool(notecount),bcsm:0" // "m:uv0,b:0,rest:ibool(notecount),mutefullmute,ssm:0"
+    #define noteOnSingle "m:uv0,b:0,bchb:note,bmr:1,bpid:1,bpe:1,se:(velocity*512)*(1-notecount),bcsm:0" //"m:uv0,b:0,hb:note,run:1,pid:1,engage:1,muterest,ssm:0"
+    #define noteOffSingle "m:uv0,b:0,bpr:ibool(notecount),bcsm:0" // "m:uv0,b:0,rest:ibool(notecount),mutefullmute,ssm:0"
 
-    noteOff = new String(noteOffSingle);
-    noteOn = new String(noteOnSingle);
-    polyAftertouch = new String("");
-    programChange = new String("");
-    channelAftertouch = new String("m:guv0,b:0,bpm:(pressure*512)");
-    pitchBend = new String("m:0,b:0,bchsh:pitch/2");
-    midiRxChannel = 0x7F;
-
-    /*controlChange.push_back( { 0, "m:0,spb:value*512"} );
-    controlChange.push_back( { 48, "se:value*512"} );
-    controlChange.push_back( { 72, "m:uv0,b:0,msp:(value*512)"} );
-    controlChange.push_back( { 2, "ssfm:value/127"} );*/
+    name = new String(); //String("default");
+    noteOff = new String(); //String(noteOffSingle);
+    noteOn = new String(); //String(noteOnSingle);
+    polyAftertouch = new String();
+    programChange = new String();
+    channelAftertouch = new String(); //String("m:uv0,b:0,bpm:(pressure*512)");
+    pitchBend = new String(); //String("m:0,b:0,bchsh:pitch/2");
+//    midiRxChannel = 0x7F;
+    setDefaultBaseParameters();
 }
 
 uint8_t configuration::setCC(uint8_t controller, String *command) {
@@ -44,8 +41,31 @@ bool configuration::removeCC(uint8_t controller) {
     return false;
 }
 
+void configuration::setDefaultBaseParameters() {
+    *name = "default";
+    *noteOff = "m:0,b:0,bpr:ibool(notecount),bcsm:0";
+    *noteOn = "m:0,b:0,bchb:note,bmr:1,bpid:1,bpe:1,se:(velocity*512)*(1-notecount),bcsm:0";
+    *polyAftertouch = "";
+    *programChange = "";
+    *channelAftertouch = "m:0,b:0,bpm:(pressure*512)";
+    *pitchBend = "m:0,b:0,bchsh:pitch/2";
+    midiRxChannel = 0x7F;
+}
+
+void configuration::setDefaultCCs() {
+    controlChange.clear();
+    controlChange.push_back({64, "midisustain:1"});
+    controlChange.push_back({123, "midiallnotesoff"});
+}
+
+void configuration::setDefaults() {
+    setDefaultBaseParameters();
+    setDefaultCCs();
+}
+
 String configuration::dumpData() {
     String dump = "mrc:" + String(midiRxChannel)+ ",";
+    if (*name != "default") { dump += "mcfn:\"" +  (*name) + "\","; }
     if (*noteOff != "") { dump += "mev:noteoff:\"" + (*noteOff) + "\","; }
     if (*noteOn != "") { dump += "mev:noteon:\"" + (*noteOn) + "\","; }
     if (*polyAftertouch != "") { dump += "mev:pat:\"" + (*polyAftertouch) + "\","; }

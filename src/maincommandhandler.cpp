@@ -14,19 +14,26 @@ serialCommandItem serialCommandsMain[] = {
   // uservariable, uv
   { "globaluservariable", "guv", "variable(0-9):value", "Set user variable 0-9 to value"},
   // setconfiguration, scf
-  { "midisetconfiguration", "mscf", "int", "Sets the current MIDI configuration" },
+  { "midiconfiguration", "mcf", "int", "Sets the current MIDI configuration" },
   // addconfiguration, acf
-  { "midiaddconfiguration", "macf", "-", "Adds a new MIDI configuration" },
+  { "midiconfigurationadd", "mcfa", "-", "Adds a new MIDI configuration" },
   // removeconfiguration, rcf
-  { "midiremoveconfiguration", "mrcf", "int", "Remove the specified MIDI configuration" },
+  { "midiconfigurationremove", "mcfr", "int", "Remove the specified MIDI configuration" },
   // numberofconfigurations, ?
-  { "midiconfigurationcount", "mcc", "-", "Returns the number of MIDI configurations" },
+  { "midiconfigurationcount", "mcfc", "-", "Returns the number of MIDI configurations" },
+  { "midiconfigurationname", "mcfn", "string", "Set the name of the MIDI configuration (for request, argument is index of configuration to return name for (optional))" },
   // eventhandler, ev
   { "midieventhandler", "mev", "noteon|noteoff|pat|cc:(0-127)|cat|pb|pc", "Set the MIDI event handling string in the current configuration"},
   // eventhandlerccremove, evccr
   { "midieventhandlerccremove", "mevcr", "cc(0-127)", "remove CC from list"},
-  { "midireceivechannel", "mrc", "-", "Sets the midi receive channel of the current configuration. 1-16 sets specific channel, any other value for OMNI"},
-  { "adccommandmap", "acm", "channel:command string", "Sets the command string invoked when the value on ADC channel [channel] changes"}
+  { "midiconfigurationdefaults", "mcfd", "-", "Reverts the current configuration to default values and CCs"},
+  { "midireceivechannel", "mrc", "-", "Sets the MIDI receive channel of the current configuration. 1-16 sets specific channel, any other value for OMNI"},
+  { "midisustain", "msu", "1|0", "Turn sustain on for MIDI notes, aka ignore NOTE OFF messages and whatever commands they have"},
+  { "midiallnotesoff", "mano", "1|0", "Clear the entire buffer of MIDI notes held"},
+  { "adccommandmap", "acm", "channel:command string", "Sets the command string invoked when the value on ADC channel [channel] changes"},
+  { "adcdefaults", "acd", "Reverts all ADC command strings to default values" },
+  { "adcread", "adcr", "channel:value", "Sent when a new value is presented on one of the ADC channels, cannot be invoked" },
+  { "evaluate", "ev", "expression", "Evaluates an arithmetric expression and sends back the output"}
 };
 
 bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {
@@ -196,9 +203,25 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
     if (_commandItem->command == "modulecount") {
         commandResponses->push_back({ "mc:" + String(stringModuleArray.size()), InfoRequest });
     } else
-    if (_commandItem->command == "midisetconfiguration") {
+    if (_commandItem->command == "midiconfigurationname") {
         if (request) {
-            commandResponses->push_back({ "mscf:" + String(currentConfig), InfoRequest});
+            int8_t conf = currentConfig;
+            if (checkArguments(_commandItem, commandResponses, 1, true)) {
+                conf = _commandItem->argument[0].toInt();
+                if ((conf < 0) || (conf >= configArray.size())) { return false; }
+            }
+            commandResponses->push_back({ "mcfn:" + String(conf) + ":" + *(configArray[conf].name), InfoRequest });
+        } else {
+            if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+            _commandItem->argument[0].replace("\"", "");
+            _commandItem->argument[0].replace("'", "");
+            *(configArray[currentConfig].name) = _commandItem->argument[0];
+            commandResponses->push_back({ "Set configuration name to " + *(configArray[currentConfig].name), InfoRequest });
+        }
+    } else
+    if (_commandItem->command == "midiconfiguration") {
+        if (request) {
+            commandResponses->push_back({ "mcf:" + String(currentConfig), InfoRequest});
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             //if (!validateNumber(_commandItem->argument[0].toInt(), 0, configArray.size() - 1)) { return false; }
@@ -212,11 +235,11 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             commandResponses->push_back({ response, debugPrintType::Command});
         }
     } else
-    if (_commandItem->command == "midiaddconfiguration") {
+    if (_commandItem->command == "midiconfigurationadd") {
         configArray.push_back(configuration());
         commandResponses->push_back({ "Added configuration no " + String(configArray.size() - 1), InfoRequest });
     } else
-    if (_commandItem->command == "midiremoveconfiguration") {
+    if (_commandItem->command == "midiconfigurationremove") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         if (!validateNumber(_commandItem->argument[0].toInt(), 0, configArray.size() - 1)) {
             commandResponses->push_back({ "Configuration out of range", debugPrintType::Error});
@@ -233,11 +256,15 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         commandResponses->push_back({ "Removed configuration " + String(removeConfig), debugPrintType::Command});
     } else
     if (_commandItem->command == "midiconfigurationcount") {
-        commandResponses->push_back({ "mcc:" + String(configArray.size()), InfoRequest });
+        commandResponses->push_back({ "mcfc:" + String(configArray.size()), InfoRequest });
     } else
     if (_commandItem->command == "free") {
         //printHeapStats();
         debugPrintln("RAM free " + String(freeram()), Command);
+    } else
+    if (_commandItem->command == "midiconfigurationdefaults") {
+        configArray[currentConfig].setDefaults();
+        commandResponses->push_back({ "Configuration reverted to defaults", debugPrintType::Command});
     } else
     if (_commandItem->command == "midireceivechannel") {
         if (request) {
@@ -248,7 +275,23 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
                 return false;
             }
             configArray[currentConfig].midiRxChannel = _commandItem->argument[0].toInt();
-            commandResponses->push_back({ "Setting midi receive channel to " + String(configArray[currentConfig].midiRxChannel), debugPrintType::Command});
+            commandResponses->push_back({ "Setting MIDI receive channel to " + String(configArray[currentConfig].midiRxChannel), debugPrintType::Command});
+        }
+    } else
+    if (_commandItem->command == "midisustain") {
+        if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+        if (_commandItem->argument[0].toInt() == 1) {
+            sustain = true;
+        } else {
+            sustain = false;
+        }
+        commandResponses->push_back({ "MIDI sustain set to " + String(sustain), debugPrintType::Command});
+    } else
+    if (_commandItem->command == "midiallnotesoff") {
+        if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+        if (_commandItem->argument[0].toInt() == 1) {
+            midiAllNotesOff();
+            commandResponses->push_back({ "All MIDI notes off", debugPrintType::Command});
         }
     } else
     if (_commandItem->command == "adccommandmap") {
@@ -262,6 +305,19 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             controlRead->setADCCommands(channel, _commandItem->argument[1]);
             commandResponses->push_back({ "Setting adc channel " + String(channel) + " command string to " + String(controlRead->cvInputCommands[channel]), debugPrintType::Command});
         }
+    } else
+    if (_commandItem->command == "adcdefaults") {
+        controlRead->setDefaults();
+        commandResponses->push_back({ "Reverted adc channel commands", debugPrintType::Command});
+    } else
+    if (_commandItem->command == "evaluate") {
+        if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+        updateLocalVariables();
+
+        commandList testCommands("ev:" + _commandItem->argument[0]);
+        //testCommands.addCommands;
+        testCommands.parseCommandExpressions(expFunctions, expFunctionCount);
+        commandResponses->push_back({ "Evaluation result: " + String(testCommands.item[0].argument[0]), debugPrintType::InfoRequest});
     } else {
         return false;
     }

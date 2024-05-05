@@ -5,6 +5,7 @@
 
 class configuration {
 public:
+    String *name;
     String *noteOn;
     String *noteOff;
     String *polyAftertouch;
@@ -26,6 +27,9 @@ public:
     configuration();
     uint8_t setCC(uint8_t controller, String *command);
     bool removeCC(uint8_t controller);
+    void setDefaultBaseParameters();
+    void setDefaultCCs();
+    void setDefaults();
 //    uint16_t saveParams();
 //    uint16_t loadParams(uint8_t EEPROMVersion);
     String dumpData();
