@@ -98,7 +98,7 @@ Macros</h2></td></tr>
 <tr class="separator:ac95cb2b2f0097507ba0b2e1666593a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5f9f8958f0af48944f91c92f074fbc8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="midi_8cpp.html#af5f9f8958f0af48944f91c92f074fbc8">mapSize</a>&#160;&#160;&#160;12</td></tr>
 <tr class="separator:af5f9f8958f0af48944f91c92f074fbc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6eb5580c71ee23146ac858f01b19c60"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="midi_8cpp.html#aa6eb5580c71ee23146ac858f01b19c60">expFunctionCount</a>&#160;&#160;&#160;21</td></tr>
+<tr class="memitem:aa6eb5580c71ee23146ac858f01b19c60"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="midi_8cpp.html#aa6eb5580c71ee23146ac858f01b19c60">expFunctionCount</a>&#160;&#160;&#160;22</td></tr>
 <tr class="separator:aa6eb5580c71ee23146ac858f01b19c60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -109,6 +109,8 @@ Functions</h2></td></tr>
 <tr class="separator:aa65a82429d9b5c75e567ec3c506cc8ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2479e1cbea7ce980c56a174fcd961618"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="midi_8cpp.html#a2479e1cbea7ce980c56a174fcd961618">expIBool</a> (double input)</td></tr>
 <tr class="separator:a2479e1cbea7ce980c56a174fcd961618"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfbf88e9fa2336b8c29807f94a03a9ad"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="midi_8cpp.html#acfbf88e9fa2336b8c29807f94a03a9ad">deadband</a> (double value)</td></tr>
+<tr class="separator:acfbf88e9fa2336b8c29807f94a03a9ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad49be36e31ac13009fbc84e03bb78cdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="midi_8cpp.html#ad49be36e31ac13009fbc84e03bb78cdc">updateLocalVariables</a> ()</td></tr>
 <tr class="separator:ad49be36e31ac13009fbc84e03bb78cdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c89c13da1a12e219901ae9165382a3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="midi_8cpp.html#a9c89c13da1a12e219901ae9165382a3f">processLocalMessage</a> (String *message)</td></tr>
@@ -138,6 +140,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a0811c03903ea2e31dd0f96b5781955d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="midi_8cpp.html#a0811c03903ea2e31dd0f96b5781955d9">OnControlChange</a> (byte channel, byte control, byte value)</td></tr>
 <tr class="memdesc:a0811c03903ea2e31dd0f96b5781955d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">handle control change message  <a href="midi_8cpp.html#a0811c03903ea2e31dd0f96b5781955d9">More...</a><br /></td></tr>
 <tr class="separator:a0811c03903ea2e31dd0f96b5781955d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3380d03f7876fabe1bba4bb9baf6fbd8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="midi_8cpp.html#a3380d03f7876fabe1bba4bb9baf6fbd8">midiAllNotesOff</a> ()</td></tr>
+<tr class="separator:a3380d03f7876fabe1bba4bb9baf6fbd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac56e8c5c671d4bcf1cc4d5e0b3b7e311"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="midi_8cpp.html#ac56e8c5c671d4bcf1cc4d5e0b3b7e311">OnPitchBend</a> (byte channel, int pitch)</td></tr>
 <tr class="memdesc:ac56e8c5c671d4bcf1cc4d5e0b3b7e311"><td class="mdescLeft">&#160;</td><td class="mdescRight">handle pitch bend message  <a href="midi_8cpp.html#ac56e8c5c671d4bcf1cc4d5e0b3b7e311">More...</a><br /></td></tr>
 <tr class="separator:ac56e8c5c671d4bcf1cc4d5e0b3b7e311"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,8 +181,10 @@ Variables</h2></td></tr>
 <tr class="separator:ad31c4c0ab2326a2058452d0a2ee7626b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e0fa8899ed6b9f1bde2bc03de889626"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="midi_8cpp.html#a4e0fa8899ed6b9f1bde2bc03de889626">dMap</a> [12] = { 1, 1, 0, 1, 2, 1, 0, 0, 1, 0, 1, 2 }</td></tr>
 <tr class="separator:a4e0fa8899ed6b9f1bde2bc03de889626"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab51f6fcaf312ad71abc8ae0df0167ca6"><td class="memItemLeft" align="right" valign="top">te_variable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="midi_8cpp.html#ab51f6fcaf312ad71abc8ae0df0167ca6">expFunctions</a> [21]</td></tr>
-<tr class="separator:ab51f6fcaf312ad71abc8ae0df0167ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5e1f0ee8723368b23970791f61b2c4f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="midi_8cpp.html#af5e1f0ee8723368b23970791f61b2c4f">epDeadbandThreshold</a> = 175</td></tr>
+<tr class="separator:af5e1f0ee8723368b23970791f61b2c4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaf1e2a0916bb47e1e6862fcfdc04874"><td class="memItemLeft" align="right" valign="top">te_variable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="midi_8cpp.html#acaf1e2a0916bb47e1e6862fcfdc04874">expFunctions</a> [22]</td></tr>
+<tr class="separator:acaf1e2a0916bb47e1e6862fcfdc04874"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1554d7cca07515767222c66e2dbb4eca"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structnoteMsg.html">noteMsg</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="midi_8cpp.html#a1554d7cca07515767222c66e2dbb4eca">notesHeld</a></td></tr>
 <tr class="separator:a1554d7cca07515767222c66e2dbb4eca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -190,7 +196,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define expFunctionCount&#160;&#160;&#160;21</td>
+          <td class="memname">#define expFunctionCount&#160;&#160;&#160;22</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -296,6 +302,24 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="acfbf88e9fa2336b8c29807f94a03a9ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfbf88e9fa2336b8c29807f94a03a9ad">&#9670;&nbsp;</a></span>deadband()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double deadband </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa65a82429d9b5c75e567ec3c506cc8ab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa65a82429d9b5c75e567ec3c506cc8ab">&#9670;&nbsp;</a></span>expBool()</h2>
 
@@ -388,6 +412,38 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3380d03f7876fabe1bba4bb9baf6fbd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3380d03f7876fabe1bba4bb9baf6fbd8">&#9670;&nbsp;</a></span>midiAllNotesOff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void midiAllNotesOff </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="midi_8cpp_a3380d03f7876fabe1bba4bb9baf6fbd8_cgraph.png" border="0" usemap="#amidi_8cpp_a3380d03f7876fabe1bba4bb9baf6fbd8_cgraph" alt=""/></div>
+<map name="amidi_8cpp_a3380d03f7876fabe1bba4bb9baf6fbd8_cgraph" id="amidi_8cpp_a3380d03f7876fabe1bba4bb9baf6fbd8_cgraph">
+<area shape="rect" title=" " alt="" coords="5,32,131,59"/>
+<area shape="rect" href="debugprint_8h.html#a244cb57e724866118a7077bdfc5da06e" title=" " alt="" coords="721,5,825,32"/>
+<area shape="rect" href="midi_8cpp.html#a9c89c13da1a12e219901ae9165382a3f" title=" " alt="" coords="179,61,343,88"/>
+<area shape="rect" href="debugprint_8h.html#a02212746d4c3138ec12bc5d582e5dc8f" title=" " alt="" coords="933,5,1096,32"/>
+<area shape="rect" href="classcommandList.html#a904e6e8220f9141ed807005326dd96f6" title="Parses a string of commands into several commandItem objects." alt="" coords="393,91,609,117"/>
+<area shape="rect" href="classcommandList.html#af42de049662f915fd12f8ed92477c03f" title="Parses out a commandItem objects arguments with a expression parser using a list of variables." alt="" coords="391,25,612,66"/>
+<area shape="rect" href="midi_8cpp.html#ad49be36e31ac13009fbc84e03bb78cdc" title=" " alt="" coords="421,141,582,168"/>
+<area shape="rect" href="classcommandList.html#a0a2aa6dcae713788e3217d85d4facfd7" title=" " alt="" coords="660,60,885,87"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -523,7 +579,6 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>handle control change message </p>
-<p>All notes off</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -821,18 +876,19 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="midi_8cpp_a9c89c13da1a12e219901ae9165382a3f_icgraph.png" border="0" usemap="#amidi_8cpp_a9c89c13da1a12e219901ae9165382a3f_icgraph" alt=""/></div>
 <map name="amidi_8cpp_a9c89c13da1a12e219901ae9165382a3f_icgraph" id="amidi_8cpp_a9c89c13da1a12e219901ae9165382a3f_icgraph">
-<area shape="rect" title=" " alt="" coords="733,183,897,209"/>
-<area shape="rect" href="midi_8cpp.html#a5431e7bcaf327c6932c39854ad638b20" title="Handle poly aftertouch message." alt="" coords="112,5,272,32"/>
-<area shape="rect" href="midi_8cpp.html#a0811c03903ea2e31dd0f96b5781955d9" title="handle control change message" alt="" coords="320,56,456,83"/>
-<area shape="rect" href="midi_8cpp.html#a1d306bc8c6590fb58aa505fa4ce488ed" title="Handle note off message." alt="" coords="343,183,433,209"/>
-<area shape="rect" href="midi_8cpp.html#ac56e8c5c671d4bcf1cc4d5e0b3b7e311" title="handle pitch bend message" alt="" coords="139,107,245,133"/>
-<area shape="rect" href="midi_8cpp.html#a293b5dd663597fd5b9320359cecd69cb" title=" " alt="" coords="523,360,667,387"/>
-<area shape="rect" href="classcontrolReader.html#a9d830f90d3165103c4c1b6ebc124da33" title=" " alt="" coords="504,309,685,336"/>
-<area shape="rect" href="midi_8cpp.html#a24101d1e9fbfa918d5da035c6ca023a2" title=" " alt="" coords="351,259,425,285"/>
-<area shape="rect" href="midi_8cpp.html#af56bc32ff0a53e0ca759d30779c3dd34" title=" " alt="" coords="555,157,635,184"/>
-<area shape="rect" href="main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d" title=" " alt="" coords="5,132,64,159"/>
-<area shape="rect" href="midi_8cpp.html#a6ea39bb57136b23ae0f97b4b2502fec0" title="Handles note on messages." alt="" coords="147,208,237,235"/>
-<area shape="rect" href="main_8cpp.html#afe461d27b9c48d5921c00d521181f12f" title=" " alt="" coords="363,309,413,336"/>
+<area shape="rect" title=" " alt="" coords="733,208,897,235"/>
+<area shape="rect" href="midi_8cpp.html#a3380d03f7876fabe1bba4bb9baf6fbd8" title=" " alt="" coords="532,5,657,32"/>
+<area shape="rect" href="midi_8cpp.html#a5431e7bcaf327c6932c39854ad638b20" title="Handle poly aftertouch message." alt="" coords="112,56,272,83"/>
+<area shape="rect" href="midi_8cpp.html#a0811c03903ea2e31dd0f96b5781955d9" title="handle control change message" alt="" coords="320,107,456,133"/>
+<area shape="rect" href="midi_8cpp.html#a1d306bc8c6590fb58aa505fa4ce488ed" title="Handle note off message." alt="" coords="343,233,433,260"/>
+<area shape="rect" href="midi_8cpp.html#ac56e8c5c671d4bcf1cc4d5e0b3b7e311" title="handle pitch bend message" alt="" coords="139,157,245,184"/>
+<area shape="rect" href="midi_8cpp.html#a293b5dd663597fd5b9320359cecd69cb" title=" " alt="" coords="120,360,264,387"/>
+<area shape="rect" href="classcontrolReader.html#a9d830f90d3165103c4c1b6ebc124da33" title=" " alt="" coords="504,360,685,387"/>
+<area shape="rect" href="midi_8cpp.html#a24101d1e9fbfa918d5da035c6ca023a2" title=" " alt="" coords="351,309,425,336"/>
+<area shape="rect" href="midi_8cpp.html#af56bc32ff0a53e0ca759d30779c3dd34" title=" " alt="" coords="555,259,635,285"/>
+<area shape="rect" href="main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d" title=" " alt="" coords="5,183,64,209"/>
+<area shape="rect" href="midi_8cpp.html#a6ea39bb57136b23ae0f97b4b2502fec0" title="Handles note on messages." alt="" coords="147,259,237,285"/>
+<area shape="rect" href="main_8cpp.html#afe461d27b9c48d5921c00d521181f12f" title=" " alt="" coords="363,360,413,387"/>
 </map>
 </div>
 
@@ -994,19 +1050,20 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="midi_8cpp_ad49be36e31ac13009fbc84e03bb78cdc_icgraph.png" border="0" usemap="#amidi_8cpp_ad49be36e31ac13009fbc84e03bb78cdc_icgraph" alt=""/></div>
 <map name="amidi_8cpp_ad49be36e31ac13009fbc84e03bb78cdc_icgraph" id="amidi_8cpp_ad49be36e31ac13009fbc84e03bb78cdc_icgraph">
-<area shape="rect" title=" " alt="" coords="945,183,1107,209"/>
-<area shape="rect" href="midi_8cpp.html#a9c89c13da1a12e219901ae9165382a3f" title=" " alt="" coords="733,183,897,209"/>
-<area shape="rect" href="midi_8cpp.html#a5431e7bcaf327c6932c39854ad638b20" title="Handle poly aftertouch message." alt="" coords="112,5,272,32"/>
-<area shape="rect" href="midi_8cpp.html#a0811c03903ea2e31dd0f96b5781955d9" title="handle control change message" alt="" coords="320,56,456,83"/>
-<area shape="rect" href="midi_8cpp.html#a1d306bc8c6590fb58aa505fa4ce488ed" title="Handle note off message." alt="" coords="343,183,433,209"/>
-<area shape="rect" href="midi_8cpp.html#ac56e8c5c671d4bcf1cc4d5e0b3b7e311" title="handle pitch bend message" alt="" coords="139,107,245,133"/>
-<area shape="rect" href="midi_8cpp.html#a293b5dd663597fd5b9320359cecd69cb" title=" " alt="" coords="523,360,667,387"/>
-<area shape="rect" href="classcontrolReader.html#a9d830f90d3165103c4c1b6ebc124da33" title=" " alt="" coords="504,309,685,336"/>
-<area shape="rect" href="midi_8cpp.html#a24101d1e9fbfa918d5da035c6ca023a2" title=" " alt="" coords="351,259,425,285"/>
-<area shape="rect" href="midi_8cpp.html#af56bc32ff0a53e0ca759d30779c3dd34" title=" " alt="" coords="555,157,635,184"/>
-<area shape="rect" href="main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d" title=" " alt="" coords="5,132,64,159"/>
-<area shape="rect" href="midi_8cpp.html#a6ea39bb57136b23ae0f97b4b2502fec0" title="Handles note on messages." alt="" coords="147,208,237,235"/>
-<area shape="rect" href="main_8cpp.html#afe461d27b9c48d5921c00d521181f12f" title=" " alt="" coords="363,309,413,336"/>
+<area shape="rect" title=" " alt="" coords="945,208,1107,235"/>
+<area shape="rect" href="midi_8cpp.html#a9c89c13da1a12e219901ae9165382a3f" title=" " alt="" coords="733,208,897,235"/>
+<area shape="rect" href="midi_8cpp.html#a3380d03f7876fabe1bba4bb9baf6fbd8" title=" " alt="" coords="532,5,657,32"/>
+<area shape="rect" href="midi_8cpp.html#a5431e7bcaf327c6932c39854ad638b20" title="Handle poly aftertouch message." alt="" coords="112,56,272,83"/>
+<area shape="rect" href="midi_8cpp.html#a0811c03903ea2e31dd0f96b5781955d9" title="handle control change message" alt="" coords="320,107,456,133"/>
+<area shape="rect" href="midi_8cpp.html#a1d306bc8c6590fb58aa505fa4ce488ed" title="Handle note off message." alt="" coords="343,233,433,260"/>
+<area shape="rect" href="midi_8cpp.html#ac56e8c5c671d4bcf1cc4d5e0b3b7e311" title="handle pitch bend message" alt="" coords="139,157,245,184"/>
+<area shape="rect" href="midi_8cpp.html#a293b5dd663597fd5b9320359cecd69cb" title=" " alt="" coords="120,360,264,387"/>
+<area shape="rect" href="classcontrolReader.html#a9d830f90d3165103c4c1b6ebc124da33" title=" " alt="" coords="504,360,685,387"/>
+<area shape="rect" href="midi_8cpp.html#a24101d1e9fbfa918d5da035c6ca023a2" title=" " alt="" coords="351,309,425,336"/>
+<area shape="rect" href="midi_8cpp.html#af56bc32ff0a53e0ca759d30779c3dd34" title=" " alt="" coords="555,259,635,285"/>
+<area shape="rect" href="main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d" title=" " alt="" coords="5,183,64,209"/>
+<area shape="rect" href="midi_8cpp.html#a6ea39bb57136b23ae0f97b4b2502fec0" title="Handles note on messages." alt="" coords="147,259,237,285"/>
+<area shape="rect" href="main_8cpp.html#afe461d27b9c48d5921c00d521181f12f" title=" " alt="" coords="363,360,413,387"/>
 </map>
 </div>
 
@@ -1154,20 +1211,34 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="ab51f6fcaf312ad71abc8ae0df0167ca6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab51f6fcaf312ad71abc8ae0df0167ca6">&#9670;&nbsp;</a></span>expFunctions</h2>
+<a id="af5e1f0ee8723368b23970791f61b2c4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5e1f0ee8723368b23970791f61b2c4f">&#9670;&nbsp;</a></span>epDeadbandThreshold</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">te_variable expFunctions[21]</td>
+          <td class="memname">double epDeadbandThreshold = 175</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acaf1e2a0916bb47e1e6862fcfdc04874"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acaf1e2a0916bb47e1e6862fcfdc04874">&#9670;&nbsp;</a></span>expFunctions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">te_variable expFunctions[22]</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= {{ <span class="stringliteral">&quot;channel&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#aa2816efa610ba96e26646ca2d25f0cba">dchannel</a> } , { <span class="stringliteral">&quot;note&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#afe77cbca418de1f23989ea0572954c2f">dnote</a> }, { <span class="stringliteral">&quot;velocity&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#a363d3e781f267bacd53748c7f8752a4a">dvelocity</a> }, { <span class="stringliteral">&quot;notecount&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#a43fd958e8f9b57cb0a7710fd2fc7a62a">dnotecount</a>},</div>
 <div class="line">    { <span class="stringliteral">&quot;bool&quot;</span>, (<span class="keyword">const</span> <span class="keywordtype">void</span>*) <a class="code" href="midi_8cpp.html#aa65a82429d9b5c75e567ec3c506cc8ab">expBool</a>, TE_FUNCTION1 }, { <span class="stringliteral">&quot;ibool&quot;</span>, (<span class="keyword">const</span> <span class="keywordtype">void</span>*) <a class="code" href="midi_8cpp.html#a2479e1cbea7ce980c56a174fcd961618">expIBool</a>, TE_FUNCTION1 }, { <span class="stringliteral">&quot;pressure&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#aa57ea4be85a9ab70734ba96f316234b3">dpressure</a>}, { <span class="stringliteral">&quot;value&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#ab88920172b5a32b077bd95bb1f3d6f8e">dvalue</a> },</div>
-<div class="line">    { <span class="stringliteral">&quot;mapkeys&quot;</span>, (<span class="keyword">const</span> <span class="keywordtype">void</span>*) <a class="code" href="midi_8cpp.html#ad0dc2236017f1b8b833b71760eccef64">mapKeys</a>, TE_FUNCTION1 }, { <span class="stringliteral">&quot;pitch&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#a2230b468d53b40b5e940c8dc818345c6">dpitch</a> }, { <span class="stringliteral">&quot;program&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#a298e941b7f939b9387cfe86b767f401c">dprogram</a> },</div>
+<div class="line">    { <span class="stringliteral">&quot;mapkeys&quot;</span>, (<span class="keyword">const</span> <span class="keywordtype">void</span>*) <a class="code" href="midi_8cpp.html#ad0dc2236017f1b8b833b71760eccef64">mapKeys</a>, TE_FUNCTION1 }, { <span class="stringliteral">&quot;pitch&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#a2230b468d53b40b5e940c8dc818345c6">dpitch</a> }, { <span class="stringliteral">&quot;program&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#a298e941b7f939b9387cfe86b767f401c">dprogram</a> }, { <span class="stringliteral">&quot;deadband&quot;</span>, (<span class="keyword">const</span> <span class="keywordtype">void</span>*) <a class="code" href="midi_8cpp.html#acfbf88e9fa2336b8c29807f94a03a9ad">deadband</a>, TE_FUNCTION1 },</div>
 <div class="line">    { <span class="stringliteral">&quot;uv0&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#ad31c4c0ab2326a2058452d0a2ee7626b">duv</a>[0]}, { <span class="stringliteral">&quot;uv1&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#ad31c4c0ab2326a2058452d0a2ee7626b">duv</a>[1]}, { <span class="stringliteral">&quot;uv2&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#ad31c4c0ab2326a2058452d0a2ee7626b">duv</a>[2]}, { <span class="stringliteral">&quot;uv3&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#ad31c4c0ab2326a2058452d0a2ee7626b">duv</a>[3]}, { <span class="stringliteral">&quot;uv4&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#ad31c4c0ab2326a2058452d0a2ee7626b">duv</a>[4]},</div>
 <div class="line">    { <span class="stringliteral">&quot;uv5&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#ad31c4c0ab2326a2058452d0a2ee7626b">duv</a>[5]}, { <span class="stringliteral">&quot;uv6&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#ad31c4c0ab2326a2058452d0a2ee7626b">duv</a>[6]}, { <span class="stringliteral">&quot;uv7&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#ad31c4c0ab2326a2058452d0a2ee7626b">duv</a>[7]}, { <span class="stringliteral">&quot;uv8&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#ad31c4c0ab2326a2058452d0a2ee7626b">duv</a>[8]}, { <span class="stringliteral">&quot;uv9&quot;</span>, &amp;<a class="code" href="midi_8cpp.html#ad31c4c0ab2326a2058452d0a2ee7626b">duv</a>[9]} }</div>
 <div class="ttc" id="amidi_8cpp_html_a2230b468d53b40b5e940c8dc818345c6"><div class="ttname"><a href="midi_8cpp.html#a2230b468d53b40b5e940c8dc818345c6">dpitch</a></div><div class="ttdeci">double dpitch</div><div class="ttdef"><b>Definition:</b> midi.cpp:34</div></div>
@@ -1179,6 +1250,7 @@ Here is the caller graph for this function:</div>
 <div class="ttc" id="amidi_8cpp_html_aa57ea4be85a9ab70734ba96f316234b3"><div class="ttname"><a href="midi_8cpp.html#aa57ea4be85a9ab70734ba96f316234b3">dpressure</a></div><div class="ttdeci">double dpressure</div><div class="ttdef"><b>Definition:</b> midi.cpp:32</div></div>
 <div class="ttc" id="amidi_8cpp_html_aa65a82429d9b5c75e567ec3c506cc8ab"><div class="ttname"><a href="midi_8cpp.html#aa65a82429d9b5c75e567ec3c506cc8ab">expBool</a></div><div class="ttdeci">double expBool(double input)</div><div class="ttdef"><b>Definition:</b> midi.cpp:49</div></div>
 <div class="ttc" id="amidi_8cpp_html_ab88920172b5a32b077bd95bb1f3d6f8e"><div class="ttname"><a href="midi_8cpp.html#ab88920172b5a32b077bd95bb1f3d6f8e">dvalue</a></div><div class="ttdeci">double dvalue</div><div class="ttdef"><b>Definition:</b> midi.cpp:33</div></div>
+<div class="ttc" id="amidi_8cpp_html_acfbf88e9fa2336b8c29807f94a03a9ad"><div class="ttname"><a href="midi_8cpp.html#acfbf88e9fa2336b8c29807f94a03a9ad">deadband</a></div><div class="ttdeci">double deadband(double value)</div><div class="ttdef"><b>Definition:</b> midi.cpp:59</div></div>
 <div class="ttc" id="amidi_8cpp_html_ad0dc2236017f1b8b833b71760eccef64"><div class="ttname"><a href="midi_8cpp.html#ad0dc2236017f1b8b833b71760eccef64">mapKeys</a></div><div class="ttdeci">double mapKeys(double key)</div><div class="ttdef"><b>Definition:</b> midi.cpp:42</div></div>
 <div class="ttc" id="amidi_8cpp_html_ad31c4c0ab2326a2058452d0a2ee7626b"><div class="ttname"><a href="midi_8cpp.html#ad31c4c0ab2326a2058452d0a2ee7626b">duv</a></div><div class="ttdeci">double duv[10]</div><div class="ttdef"><b>Definition:</b> midi.cpp:37</div></div>
 <div class="ttc" id="amidi_8cpp_html_afe77cbca418de1f23989ea0572954c2f"><div class="ttname"><a href="midi_8cpp.html#afe77cbca418de1f23989ea0572954c2f">dnote</a></div><div class="ttdeci">double dnote</div><div class="ttdef"><b>Definition:</b> midi.cpp:28</div></div>

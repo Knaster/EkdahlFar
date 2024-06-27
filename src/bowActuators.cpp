@@ -8,7 +8,7 @@
 #include <vector>
 #include "bowActuators.h"
 
-BowActuators::BowActuators(_calibrationData *t_calibrationDataConnect)
+BowActuators::BowActuators(CalibrationData *t_calibrationDataConnect)
 {
     m_calibrationDataConnect = t_calibrationDataConnect;
     m_bowActuator.push_back({0, 65535, 0});

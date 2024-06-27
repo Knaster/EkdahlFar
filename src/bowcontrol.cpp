@@ -34,7 +34,7 @@
 
 
 /// Constructor
-bowControl::bowControl(bowIO &_bowIO, _calibrationData &__calibrationData) {
+bowControl::bowControl(bowIO &_bowIO, CalibrationData &__calibrationData) {
     bowIOConnect = &_bowIO;
     calibrationDataConnect = &__calibrationData;
     bowActuators = new BowActuators(&__calibrationData);

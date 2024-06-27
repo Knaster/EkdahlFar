@@ -10,7 +10,7 @@
 bool stringModule::addBow(char motorRevPin, char motorVoltagePin, char motorDCDCEn, char tachoPin, char currentSensePin, char motorFaultPin, char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort,
     char stepHomeSensorPin, char stepCorrectionSensorPin) {
 
-    _calibrationData* calibrationData = new _calibrationData();
+    CalibrationData* calibrationData = new CalibrationData();
     calibrationDataArray.push_back(*calibrationData);
 
     bowIO* _bowIO = new bowIO(motorRevPin, motorVoltagePin, motorDCDCEn, tachoPin, currentSensePin, motorFaultPin, stepEnPin, stepDirPin, stepStepPin, stepSerialPort, stepHomeSensorPin, stepCorrectionSensorPin);
@@ -122,6 +122,15 @@ bool stringModule::processSerialCommand_GeneralControl(commandItem *_commandItem
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         solenoidArray[currentSolenoidSerial].solenoidDisengage(_commandItem->argument[0].toInt());
         debugPrintln("Setting solenoid disengagement to " + String(_commandItem->argument[0].toInt()), Command);
+    } else
+    if (_commandItem->command == "solenoidengageduration") {
+        if (request) {
+            commandResponses->push_back({ "sed:" + String(solenoidArray[currentSolenoidSerial].solenoidEngageDuration), InfoRequest });
+        } else {
+            if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+            solenoidArray[currentSolenoidSerial].solenoidEngageDuration = _commandItem->argument[0].toInt();
+            debugPrintln("Setting solenoid engage duration to " + String(_commandItem->argument[0].toInt()), Command);
+        }
     } else
     if (_commandItem->command == "setmanualpressure") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
@@ -268,13 +277,16 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
         calibrateArray[currentBowSerial].calibrateAll();
     } else
     if (_commandItem->command == "bowcalibratepressure") {
-        debugPrintln("Finding min/max pressure", Command);
+        //debugPrintln("Finding min/max pressure", Command);
         if (!calibrateArray[currentBowSerial].findMinMaxPressure()) {
-            debugPrintln("Find min/max pressure FAILED", Error);
+            //debugPrintln("Find min/max pressure FAILED", Error);
+            commandResponses->push_back({"bcp:error", debugPrintType::Error});
+        } else {
+            commandResponses->push_back({"bcp:ok", debugPrintType::InfoRequest});
         }
     } else
     if (_commandItem->command == "bowcalibratespeed") {
-        debugPrintln("Finding min/max speed", Command);
+        //debugPrintln("Finding min/max speed", Command);
         if (!calibrateArray[currentBowSerial].findMinMaxSpeedPWM()) {
             debugPrintln("Find min/max speed FAILED", Error);
         }
@@ -614,6 +626,9 @@ bool stringModule::processSerialCommand_MuteControl(commandItem *_commandItem, s
             muteArray[currentBowSerial].backOffTime = _commandItem->argument[0].toInt();
             debugPrintln("Mute backoff set to " + String(muteArray[currentBowSerial].backOffTime), Command);
         }
+    } else
+    if (_commandItem->command == "mutehome") {
+        muteArray[currentBowSerial].homeMute();
     } else {
         return false;
     }

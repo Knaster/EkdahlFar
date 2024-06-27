@@ -33,11 +33,10 @@
 {\ttfamily \#include \char`\"{}stringmodule.\+cpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}midi.\+cpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}isrclasswrapper.\+cpp\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}settingshandler.\+cpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}control\+Reader.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}settingshandler.\+cpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}maincommandhandler.\+cpp\char`\"{}}\newline
-Include dependency graph for main.\+cpp\+:
-\nopagebreak
+Include dependency graph for main.\+cpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -59,7 +58,7 @@ Include dependency graph for main.\+cpp\+:
 \item 
 \#define \mbox{\hyperlink{main_8cpp_aa9f03a97087feac8e2c2928240e7c332}{master\+Tx}}~1
 \item 
-\#define \mbox{\hyperlink{main_8cpp_ac9a12a1a36ee3528c19ef62340fe33c3}{control\+Read\+Interval\+Time}}~500
+\#define \mbox{\hyperlink{main_8cpp_ac9a12a1a36ee3528c19ef62340fe33c3}{control\+Read\+Interval\+Time}}~50
 \end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -83,6 +82,10 @@ void \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
+elapsed\+Micros \mbox{\hyperlink{main_8cpp_a74a971e8a878363938ad6d1426e8255c}{test\+Measurement}}
+\begin{DoxyCompactList}\small\item\em Used for various internal tests. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_a651d0075db9c3f29b556e9dd764b41c2}{test\+Measurement\+Ongoing}} = false
+\item 
 unsigned long \mbox{\hyperlink{main_8cpp_a9d1a03e6178b7c399cce31fc07aaaef8}{\+\_\+heap\+\_\+start}}
 \item 
 unsigned long \mbox{\hyperlink{main_8cpp_a1e096ab52b7c061afd475f4fedc6c1e9}{\+\_\+heap\+\_\+end}}
@@ -92,6 +95,8 @@ char $\ast$ \mbox{\hyperlink{main_8cpp_ad193a2cc121e0d4614a1c21eb463fb56}{\+\_\+
 uint8\+\_\+t \mbox{\hyperlink{main_8cpp_a075a4b279561f3ef4e2d17ee5880152d}{read\+EEPROMVersion}}
 \item 
 uint16\+\_\+t \mbox{\hyperlink{main_8cpp_aa417422d66c31930beb0e122d074e47f}{current\+EEPROMOffset}} = 0
+\item 
+String \mbox{\hyperlink{main_8cpp_af9f3e3acdcf4bf93bbe8015c4f666f26}{custom\+Startup\+Parameters}} = \char`\"{}\char`\"{}
 \item 
 int \mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{current\+Config}} = 0
 \item 
@@ -119,8 +124,6 @@ unsigned long \mbox{\hyperlink{main_8cpp_ac87efa454b18ecfc7d56b23ebf8fb735}{comm
 \item 
 elapsed\+Millis \mbox{\hyperlink{main_8cpp_ab04d737a375f71bd322407e877bcfa68}{update\+Rolling\+Status}}
 \item 
-elapsed\+Millis \mbox{\hyperlink{main_8cpp_a61640147b159085a4b3c74bcfaaf3376}{el\+Test}}
-\item 
 elapsed\+Micros \mbox{\hyperlink{main_8cpp_a24894588b78d05d43473e8e72dc24cb2}{control\+Reader\+Interval}}
 \end{DoxyCompactItemize}
 
@@ -142,7 +145,7 @@ elapsed\+Micros \mbox{\hyperlink{main_8cpp_a24894588b78d05d43473e8e72dc24cb2}{co
 \index{main.cpp@{main.cpp}!controlReadIntervalTime@{controlReadIntervalTime}}
 \index{controlReadIntervalTime@{controlReadIntervalTime}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{controlReadIntervalTime}{controlReadIntervalTime}}
-{\footnotesize\ttfamily \#define control\+Read\+Interval\+Time~500}
+{\footnotesize\ttfamily \#define control\+Read\+Interval\+Time~50}
 
 \mbox{\Hypertarget{main_8cpp_aa13d9ed1a1a161ce9dfc54a559c27b21}\label{main_8cpp_aa13d9ed1a1a161ce9dfc54a559c27b21}} 
 \index{main.cpp@{main.cpp}!currentEEPROMVersion@{currentEEPROMVersion}}
@@ -201,7 +204,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{main_8cpp_afc3e7d08d802f694ab6a85e9908048f4_icgraph}
+\includegraphics[width=216pt]{main_8cpp_afc3e7d08d802f694ab6a85e9908048f4_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{main_8cpp_afe461d27b9c48d5921c00d521181f12f}\label{main_8cpp_afe461d27b9c48d5921c00d521181f12f}} 
@@ -355,11 +358,11 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{currentTime}{currentTime}}
 {\footnotesize\ttfamily unsigned long current\+Time = 0}
 
-\mbox{\Hypertarget{main_8cpp_a61640147b159085a4b3c74bcfaaf3376}\label{main_8cpp_a61640147b159085a4b3c74bcfaaf3376}} 
-\index{main.cpp@{main.cpp}!elTest@{elTest}}
-\index{elTest@{elTest}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{elTest}{elTest}}
-{\footnotesize\ttfamily elapsed\+Millis el\+Test}
+\mbox{\Hypertarget{main_8cpp_af9f3e3acdcf4bf93bbe8015c4f666f26}\label{main_8cpp_af9f3e3acdcf4bf93bbe8015c4f666f26}} 
+\index{main.cpp@{main.cpp}!customStartupParameters@{customStartupParameters}}
+\index{customStartupParameters@{customStartupParameters}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{customStartupParameters}{customStartupParameters}}
+{\footnotesize\ttfamily String custom\+Startup\+Parameters = \char`\"{}\char`\"{}}
 
 \mbox{\Hypertarget{main_8cpp_af7549b1077c0ff66290d43d479bccf25}\label{main_8cpp_af7549b1077c0ff66290d43d479bccf25}} 
 \index{main.cpp@{main.cpp}!fContinuous@{fContinuous}}
@@ -413,6 +416,22 @@ Main loop function.
 \index{stringModuleArray@{stringModuleArray}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{stringModuleArray}{stringModuleArray}}
 {\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classstringModule}{string\+Module}}$>$ string\+Module\+Array}
+
+\mbox{\Hypertarget{main_8cpp_a74a971e8a878363938ad6d1426e8255c}\label{main_8cpp_a74a971e8a878363938ad6d1426e8255c}} 
+\index{main.cpp@{main.cpp}!testMeasurement@{testMeasurement}}
+\index{testMeasurement@{testMeasurement}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{testMeasurement}{testMeasurement}}
+{\footnotesize\ttfamily elapsed\+Micros test\+Measurement}
+
+
+
+Used for various internal tests. 
+
+\mbox{\Hypertarget{main_8cpp_a651d0075db9c3f29b556e9dd764b41c2}\label{main_8cpp_a651d0075db9c3f29b556e9dd764b41c2}} 
+\index{main.cpp@{main.cpp}!testMeasurementOngoing@{testMeasurementOngoing}}
+\index{testMeasurementOngoing@{testMeasurementOngoing}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{testMeasurementOngoing}{testMeasurementOngoing}}
+{\footnotesize\ttfamily bool test\+Measurement\+Ongoing = false}
 
 \mbox{\Hypertarget{main_8cpp_ab04d737a375f71bd322407e877bcfa68}\label{main_8cpp_ab04d737a375f71bd322407e877bcfa68}} 
 \index{main.cpp@{main.cpp}!updateRollingStatus@{updateRollingStatus}}

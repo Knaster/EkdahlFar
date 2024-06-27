@@ -2,38 +2,84 @@ serialCommandItem serialCommandsMain[] = {
   { "requestinfo", "rqi", "command", "Retrives rather than sets data associated with a command, if appliccable"},
   { "module", "m", "0-15", "Sets the currently active string module"},
   { "modulecount", "mc", "-", "Returns the number of string modules detected"},
-  // runningstatus, rs
-  { "debugrunningstatus", "drs", "0|1", "Turns on or off continuous status updates" },
+
+  { "debugrunningstatus", "drs", "0|1", "Turns on or off continuous status updates" },  // runningstatus, rs
   { "debugprint", "dp", "command|usb|hardware|undefined|priority|error|inforequest|expressionparser|debug:1|0", "Turns on or off serial feedback for the given item"},
-  // freqreport, fr
-  { "debugfreqreport", "dfr", "0|1", "Sets string frequency reporting on off" },
-  // saveallparameters
-  { "globalsaveallparameters", "gsap", "-", "Saves all avaliable parameters"},
-  // loadallparameters
-  { "globalloadallparameters", "glap", "-", "Loads all avaliable parameters"},
-  // uservariable, uv
-  { "globaluservariable", "guv", "variable(0-9):value", "Set user variable 0-9 to value"},
-  // setconfiguration, scf
-  { "midiconfiguration", "mcf", "int", "Sets the current MIDI configuration" },
-  // addconfiguration, acf
-  { "midiconfigurationadd", "mcfa", "-", "Adds a new MIDI configuration" },
-  // removeconfiguration, rcf
-  { "midiconfigurationremove", "mcfr", "int", "Remove the specified MIDI configuration" },
-  // numberofconfigurations, ?
-  { "midiconfigurationcount", "mcfc", "-", "Returns the number of MIDI configurations" },
+  { "debugfreqreport", "dfr", "0|1", "Sets string frequency reporting on off" },    // freqreport, fr
+  { "globalsaveallparameters", "gsap", "-", "Saves all avaliable parameters"},  // saveallparameters
+  { "globalloadallparameters", "glap", "-", "Loads all avaliable parameters"},  // loadallparameters
+  { "globaluservariable", "guv", "variable(0-9):value", "Set user variable 0-9 to value"},  // uservariable, uv
+
+/*
+    Saving custom data:
+        litterals - example:
+            gcsl:"adcsettings:5:2:10:3:10, adcsettings:0:2:10:3:10"
+            - when invoked:
+                litteralvariable = "adcsettings:5:2:10:3:10, adcsettings:0:2:10:3:10"
+                parse the command list in litteralvariable and execute all commands
+            - when saved
+                save as 'gscl:"' + litteralvariable + '"'
+            - at startup:
+                -> when invoked
+
+        rqis - examples
+            gscr:"adcsetting:5, adcsetting:0"
+            - when invoked
+                rqivariable = argument[0] = "adcsetting:5, adcsetting:0"
+                if argument[1] exists and isn't null
+                    parse argument[1] as a commandlist and execute all commands
+
+            - when saved
+                    parse rqivariable command list and do an rqi on all commands and save the outcome:
+                        rqi:adcsettings:5   -> rqivariableoutput = "adcsettings:5:2:10:3:10"
+                        rqi:adcsettings:0   -> rqivariableoutput += ", " + "adcsettings:0:2:10:3:10"
+
+                    save as 'gscr: "' + rqivariable + '", "' + rqivariableoutput + '"' which becomes
+                     'gscr:"adcsetting:5, adcsetting:0":"adcsettings:5:2:10:3:10, adcsettings:0:2:10:3:10"'
+
+        rqis - example 2, with saved data 'gscr:"adcsetting:5":"adcsettings:5:2:10:3:10"'
+            - startup:
+                rqivariable = "adcsetting:5"
+                execute "adcsettings:5:2:10:3:10"
+            - when working
+                executing "adcsettings:5:1:5:2:10"
+            - later saving
+                parsing rqivariable and doing an rqi on the outcome:
+                    rqi:adcsetting:5    -> rqivariableoutput = "adcsettings:5:1:5:2:10"
+                save as 'gscr:"adcsetting:5":"adcsettings:5:1:5:2:10"'
+            - rebooting
+                rqivariable = "adcsetting:5"
+                executing "adcsetting:5:1:5:2:10"
+
+*/
+
+//  { "globalcustomstartuplitterals", "gcsl", "string", "Save the command string and execute at startup" },
+//  { "globalcustomstartuprqis", "gcsr", "string", "A list of commands to, when saving parameters, perform the 'requestinfo' command on and add to the " },
+
+  { "midiconfiguration", "mcf", "int", "Sets the current MIDI configuration" }, // setconfiguration, scf
+  { "midiconfigurationadd", "mcfa", "-", "Adds a new MIDI configuration" }, // addconfiguration, acf
+  { "midiconfigurationremove", "mcfr", "int", "Remove the specified MIDI configuration" },  // removeconfiguration, rcf
+  { "midiconfigurationcount", "mcfc", "-", "Returns the number of MIDI configurations" },   // numberofconfigurations, ?
   { "midiconfigurationname", "mcfn", "string", "Set the name of the MIDI configuration (for request, argument is index of configuration to return name for (optional))" },
-  // eventhandler, ev
-  { "midieventhandler", "mev", "noteon|noteoff|pat|cc:(0-127)|cat|pb|pc", "Set the MIDI event handling string in the current configuration"},
-  // eventhandlerccremove, evccr
-  { "midieventhandlerccremove", "mevcr", "cc(0-127)", "remove CC from list"},
+  { "midieventhandler", "mev", "noteon|noteoff|pat|cc:(0-127)|cat|pb|pc", "Set the MIDI event handling string in the current configuration"},   // eventhandler, ev
+  { "midieventhandlerccremove", "mevcr", "cc(0-127)", "remove CC from list"},   // eventhandlerccremove, evccr
   { "midiconfigurationdefaults", "mcfd", "-", "Reverts the current configuration to default values and CCs"},
   { "midireceivechannel", "mrc", "-", "Sets the MIDI receive channel of the current configuration. 1-16 sets specific channel, any other value for OMNI"},
   { "midisustain", "msu", "1|0", "Turn sustain on for MIDI notes, aka ignore NOTE OFF messages and whatever commands they have"},
   { "midiallnotesoff", "mano", "1|0", "Clear the entire buffer of MIDI notes held"},
+
+  { "adcr", "adcr", "-", "ADC value changed report, cannot be invoked manually"},
   { "adccommandmap", "acm", "channel:command string", "Sets the command string invoked when the value on ADC channel [channel] changes"},
   { "adcdefaults", "acd", "Reverts all ADC command strings to default values" },
   { "adcread", "adcr", "channel:value", "Sent when a new value is presented on one of the ADC channels, cannot be invoked" },
-  { "evaluate", "ev", "expression", "Evaluates an arithmetric expression and sends back the output"}
+  { "adcsettings", "adcs", "channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout", "Explain ADC settings here"},
+
+  { "expressionparserevaluate", "epev", "expression", "Evaluates an arithmetric expression and sends back the output"},
+  { "expressionparserdeadbandthreshold", "epdbt", "float", "Sets the threshold for the deadband function in the expression parser"},
+
+  { "testadclatency", "tal", "0-65535", "Test ADC Latency" },
+  { "testadclatencyreturn", "talr", "-", "Return from test" },
+  { "testadcminmax", "tamm", "channel", "Measure min/max value for a given channel and resets the counter" },
 };
 
 bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {
@@ -200,6 +246,32 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
     } else
     if (_commandItem->command == "test") {
     } else
+    if (_commandItem->command == "testadclatency") {
+  //      commandResponses->push_back({"Starting ADC latency test", InfoRequest});
+        if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+//        if (!validateNumber(_commandItem->argument[0].toInt(), 0, 65535)) { return false; }
+        testMeasurement = 0;
+        testMeasurementOngoing = true;
+        analogWrite(3, int(_commandItem->argument[0].toInt()));
+        commandResponses->push_back({"Starting ADC latency test", InfoRequest});
+    } else
+    if (_commandItem->command == "testadclatencyreturn") {
+        testMeasurementOngoing = false;
+        commandResponses->push_back({"Returned from ADC latency test in " + String(testMeasurement) + " uS", InfoRequest});
+    } else
+    if (_commandItem->command == "testadcminmax") {
+        if (request) {
+            commandResponses->push_back({ "tamm:" + String(controlRead->testChannel) + ":" + String(controlRead->testMin) + ":" + String(controlRead->testMax), InfoRequest });
+        } else {
+            if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+            int testChannel = _commandItem->argument[0].toInt();
+            if ((testChannel < 0) || (testChannel > 7)) { return false; }
+            controlRead->setADCMinMaxTestChannel(testChannel);
+            commandResponses->push_back({ "Starting ADC min/max test on channel " + String(controlRead->testChannel), InfoRequest });
+        }
+    } else
+
+
     if (_commandItem->command == "modulecount") {
         commandResponses->push_back({ "mc:" + String(stringModuleArray.size()), InfoRequest });
     } else
@@ -299,7 +371,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         uint8_t channel = _commandItem->argument[0].toInt();
 
         if (request) {
-            commandResponses->push_back({ "acm:" + String(controlRead->cvInputCommands[channel]), InfoRequest});
+            commandResponses->push_back({ "acm:" + String(channel) + ":'" + String(controlRead->cvInputCommands[channel]) + "'", InfoRequest});
         } else {
             if (!checkArguments(_commandItem, commandResponses, 2)) { return false; }
             controlRead->setADCCommands(channel, _commandItem->argument[1]);
@@ -310,7 +382,24 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         controlRead->setDefaults();
         commandResponses->push_back({ "Reverted adc channel commands", debugPrintType::Command});
     } else
-    if (_commandItem->command == "evaluate") {
+
+// { "adcsettings", "adcs", "channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout"
+    if (_commandItem->command == "adcsettings") {
+        if (!checkArgumentsMin(_commandItem, commandResponses, 1)) { return false; }
+        uint8_t channel = _commandItem->argument[0].toInt();
+        if (channel > 7) { return false; }
+
+        if (request) {
+            commandResponses->push_back({ "adcs:" + String(channel) + ":" + controlRead->getADCAveragerSettings(channel), InfoRequest});
+        } else {
+            if (!checkArguments(_commandItem, commandResponses, 5)) { return false; }
+            if (!controlRead->setADCAveragerSettings(_commandItem->argument[0].toInt(), _commandItem->argument[1].toInt(), _commandItem->argument[2].toInt(), _commandItem->argument[3].toInt(),
+                _commandItem->argument[4].toInt())) { return false; }
+            commandResponses->push_back({ "Setting adc channel " + String(channel) + " settings to " + controlRead->getADCAveragerSettings(channel), debugPrintType::Command});
+        }
+    } else
+
+    if (_commandItem->command == "expressionparserevaluate") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         updateLocalVariables();
 
@@ -318,6 +407,16 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         //testCommands.addCommands;
         testCommands.parseCommandExpressions(expFunctions, expFunctionCount);
         commandResponses->push_back({ "Evaluation result: " + String(testCommands.item[0].argument[0]), debugPrintType::InfoRequest});
+    } else
+    if (_commandItem->command == "expressionparserdeadbandthreshold") {
+        if (request) {
+            commandResponses->push_back({ "epdbt:" + String(epDeadbandThreshold), InfoRequest});
+        } else {
+            if (!checkArgumentsMin(_commandItem, commandResponses, 1)) { return false; }
+            //controlRead->setADCCommands(channel, _commandItem->argument[1]);
+            epDeadbandThreshold = _commandItem->argument[0].toFloat();
+            commandResponses->push_back({ "Setting expression parser deadband thershold to " + String(epDeadbandThreshold), debugPrintType::Command});
+        }
     } else {
         return false;
     }

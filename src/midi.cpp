@@ -54,10 +54,18 @@ double expIBool(double input) {
     if (input <= 0) { return 1; } else { return 0; };
 }
 
-#define expFunctionCount 21
+double epDeadbandThreshold = 175;
+
+double deadband(double value) { //, double threshold = 65) {
+    double target = 0;
+//    double threshold = 65;
+    if ((value < (target + epDeadbandThreshold)) && (value > (target - epDeadbandThreshold))) { return target; } else { return value; };
+}
+
+#define expFunctionCount 22
 te_variable expFunctions[expFunctionCount] = {{ "channel", &dchannel } , { "note", &dnote }, { "velocity", &dvelocity }, { "notecount", &dnotecount},
     { "bool", (const void*) expBool, TE_FUNCTION1 }, { "ibool", (const void*) expIBool, TE_FUNCTION1 }, { "pressure", &dpressure}, { "value", &dvalue },
-    { "mapkeys", (const void*) mapKeys, TE_FUNCTION1 }, { "pitch", &dpitch }, { "program", &dprogram },
+    { "mapkeys", (const void*) mapKeys, TE_FUNCTION1 }, { "pitch", &dpitch }, { "program", &dprogram }, { "deadband", (const void*) deadband, TE_FUNCTION1 },
     { "uv0", &duv[0]}, { "uv1", &duv[1]}, { "uv2", &duv[2]}, { "uv3", &duv[3]}, { "uv4", &duv[4]},
     { "uv5", &duv[5]}, { "uv6", &duv[6]}, { "uv7", &duv[7]}, { "uv8", &duv[8]}, { "uv9", &duv[9]} };
 

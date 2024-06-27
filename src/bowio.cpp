@@ -59,11 +59,12 @@ bool bowIO::homeBow(bool invert = false) {
         debugPrintln("Homing FAILED!", Error);
         return false;
     }
-    return true;
+//    return true;
     stepTMC2209Driver->setRunCurrent(stepRunCurrentPercent);
-    stepServoStepper->setSpeed(20);
+//    stepServoStepper->setSpeed(20);
     stepServoStepper->setPosition(0);
     stepServoStepper->completeTask();
+    return true;
 }
 
 bowIO::bowIO(char motorRevPin, char motorVoltagePin, char motorDCDCEnPin, char tachoPin, char currentSensePin, char motorFaultPin, char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin, char stepCorrectionSensorPin) {
@@ -418,7 +419,7 @@ bool bowIO::bowOverPower() {
 }
 
 bool bowIO::getMotorFault() {
-    if (digitalRead(bowMotorFaultPin) == 1) {
+    if (digitalRead(bowMotorFaultPin) == 0) {    // changed 2024-05-07
         return  true;
     } else {
         return false;

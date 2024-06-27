@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['averager_664',['averager',['../classaverager.html',1,'']]]
+  ['averager_684',['averager',['../classaverager.html',1,'']]]
 ];

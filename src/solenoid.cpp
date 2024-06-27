@@ -61,7 +61,7 @@ public:
 
     bool updateSolenoid() {
         unsigned long currentTime = micros();
-        if ((solenoidEngaged) && (currentTime - solenoidEngageTime > solenoidEngageDuration)) {
+        if ((solenoidEngaged) && (currentTime - solenoidEngageTime > solenoidEngageDuration) && (solenoidEngageDuration != 0)) {
             solenoidDisengage();
             return true;
           }

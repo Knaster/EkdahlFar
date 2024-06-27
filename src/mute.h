@@ -58,5 +58,6 @@ public:
     bool getSustain();
     String dumpData();
     void updateMute();
+    bool homeMute(bool invert = false);
 };
 #endif

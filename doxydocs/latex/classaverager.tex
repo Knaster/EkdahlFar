@@ -26,11 +26,11 @@ uint16\+\_\+t \mbox{\hyperlink{classaverager_a655a24b1204e470116902f8ed8ddcfc3}{
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classaverager_a82f127ce49291496bdf93d634855ef62}{data\+Count}}
 \item 
-uint8\+\_\+t \mbox{\hyperlink{classaverager_a7417574d52dfddfad6e8d0b641b5c7d3}{error\+Threshold}} = 2
+uint16\+\_\+t \mbox{\hyperlink{classaverager_a4af58bd77d322d550fe5d13bc4c6c0fb}{continuous\+Timeout}} = 10
 \item 
-uint8\+\_\+t \mbox{\hyperlink{classaverager_af73da4a2e3c3260788fb308bfed7d1aa}{delay\+Error\+Threshold}} = 10
+uint16\+\_\+t \mbox{\hyperlink{classaverager_a19eff7c8e3e37b7f08e2ac120ddcc0e3}{continuous\+Error\+Threshold}} = 2
 \item 
-uint16\+\_\+t \mbox{\hyperlink{classaverager_acde8bc93ed2434ae7bde7083d847449e}{error\+Time\+Threshold}} = 20
+uint16\+\_\+t \mbox{\hyperlink{classaverager_ae65171959ff0da0adeed67a844e0e3d9}{interrupted\+Error\+Threshold}} = 5
 \item 
 bool \mbox{\hyperlink{classaverager_a911b8cf08ca00c9c0a8040f5627809ae}{trigger}} = false
 \item 
@@ -71,6 +71,14 @@ elapsed\+Millis \mbox{\hyperlink{classaverager_ac44fcaf126fc2e739d07307ebe55556e
 \doxysubsubsection{\texorpdfstring{addData()}{addData()}}
 {\footnotesize\ttfamily bool averager\+::add\+Data (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaverager_aaa54da4b2f567beab8279a63a683a4bb_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -87,6 +95,18 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classaverager_a19eff7c8e3e37b7f08e2ac120ddcc0e3}\label{classaverager_a19eff7c8e3e37b7f08e2ac120ddcc0e3}} 
+\index{averager@{averager}!continuousErrorThreshold@{continuousErrorThreshold}}
+\index{continuousErrorThreshold@{continuousErrorThreshold}!averager@{averager}}
+\doxysubsubsection{\texorpdfstring{continuousErrorThreshold}{continuousErrorThreshold}}
+{\footnotesize\ttfamily uint16\+\_\+t averager\+::continuous\+Error\+Threshold = 2}
+
+\mbox{\Hypertarget{classaverager_a4af58bd77d322d550fe5d13bc4c6c0fb}\label{classaverager_a4af58bd77d322d550fe5d13bc4c6c0fb}} 
+\index{averager@{averager}!continuousTimeout@{continuousTimeout}}
+\index{continuousTimeout@{continuousTimeout}!averager@{averager}}
+\doxysubsubsection{\texorpdfstring{continuousTimeout}{continuousTimeout}}
+{\footnotesize\ttfamily uint16\+\_\+t averager\+::continuous\+Timeout = 10}
+
 \mbox{\Hypertarget{classaverager_a655a24b1204e470116902f8ed8ddcfc3}\label{classaverager_a655a24b1204e470116902f8ed8ddcfc3}} 
 \index{averager@{averager}!dataArray@{dataArray}}
 \index{dataArray@{dataArray}!averager@{averager}}
@@ -111,23 +131,11 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{dataIndex}{dataIndex}}
 {\footnotesize\ttfamily uint16\+\_\+t averager\+::data\+Index}
 
-\mbox{\Hypertarget{classaverager_af73da4a2e3c3260788fb308bfed7d1aa}\label{classaverager_af73da4a2e3c3260788fb308bfed7d1aa}} 
-\index{averager@{averager}!delayErrorThreshold@{delayErrorThreshold}}
-\index{delayErrorThreshold@{delayErrorThreshold}!averager@{averager}}
-\doxysubsubsection{\texorpdfstring{delayErrorThreshold}{delayErrorThreshold}}
-{\footnotesize\ttfamily uint8\+\_\+t averager\+::delay\+Error\+Threshold = 10}
-
-\mbox{\Hypertarget{classaverager_a7417574d52dfddfad6e8d0b641b5c7d3}\label{classaverager_a7417574d52dfddfad6e8d0b641b5c7d3}} 
-\index{averager@{averager}!errorThreshold@{errorThreshold}}
-\index{errorThreshold@{errorThreshold}!averager@{averager}}
-\doxysubsubsection{\texorpdfstring{errorThreshold}{errorThreshold}}
-{\footnotesize\ttfamily uint8\+\_\+t averager\+::error\+Threshold = 2}
-
-\mbox{\Hypertarget{classaverager_acde8bc93ed2434ae7bde7083d847449e}\label{classaverager_acde8bc93ed2434ae7bde7083d847449e}} 
-\index{averager@{averager}!errorTimeThreshold@{errorTimeThreshold}}
-\index{errorTimeThreshold@{errorTimeThreshold}!averager@{averager}}
-\doxysubsubsection{\texorpdfstring{errorTimeThreshold}{errorTimeThreshold}}
-{\footnotesize\ttfamily uint16\+\_\+t averager\+::error\+Time\+Threshold = 20}
+\mbox{\Hypertarget{classaverager_ae65171959ff0da0adeed67a844e0e3d9}\label{classaverager_ae65171959ff0da0adeed67a844e0e3d9}} 
+\index{averager@{averager}!interruptedErrorThreshold@{interruptedErrorThreshold}}
+\index{interruptedErrorThreshold@{interruptedErrorThreshold}!averager@{averager}}
+\doxysubsubsection{\texorpdfstring{interruptedErrorThreshold}{interruptedErrorThreshold}}
+{\footnotesize\ttfamily uint16\+\_\+t averager\+::interrupted\+Error\+Threshold = 5}
 
 \mbox{\Hypertarget{classaverager_aaf07cf2bb27948fc13dbef3b54e28f9a}\label{classaverager_aaf07cf2bb27948fc13dbef3b54e28f9a}} 
 \index{averager@{averager}!pDataChanged@{pDataChanged}}

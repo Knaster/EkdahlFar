@@ -6,8 +6,7 @@
 
 
 
-Collaboration diagram for calibrate\+:
-\nopagebreak
+Collaboration diagram for calibrate\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -17,7 +16,7 @@ Collaboration diagram for calibrate\+:
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classcalibrate_a6b4532bd790dcdc1bd4034e16e15ec71}{calibrate}} (\mbox{\hyperlink{classbowIO}{bow\+IO}} \&\+\_\+bow\+IO, \mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}} \&\+\_\+\+\_\+calibration\+Data, \mbox{\hyperlink{classbowControl}{bow\+Control}} \&\+\_\+bow\+Control)
+\mbox{\hyperlink{classcalibrate_a9de59b7b65c6de9299ce34396191694b}{calibrate}} (\mbox{\hyperlink{classbowIO}{bow\+IO}} \&\+\_\+bow\+IO, \mbox{\hyperlink{structCalibrationData}{Calibration\+Data}} \&\+\_\+\+\_\+calibration\+Data, \mbox{\hyperlink{classbowControl}{bow\+Control}} \&\+\_\+bow\+Control)
 \begin{DoxyCompactList}\small\item\em Class constructor. Binds to the associated \mbox{\hyperlink{classbowIO}{bow\+IO}} class and reads any existing EEPROM data into calibration\+Data. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcalibrate_af3c73bf75c5b8a2d942615d34669bf53}{start\+Audio\+Analyzing}} ()
 \item 
@@ -44,9 +43,11 @@ String \mbox{\hyperlink{classcalibrate_a37b5afce3d7146dd5d12f82ddb00e7af}{dump\+
 \item 
 int \mbox{\hyperlink{classcalibrate_a878d15dd653236499b6bb3cbf90b2d73}{EEPROM\+\_\+offset}} = 0
 \item 
-\mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}} $\ast$ \mbox{\hyperlink{classcalibrate_a86bbeed42caecf5da6d2a4a2c118fa04}{calibration\+Data}}
+\mbox{\hyperlink{structCalibrationData}{Calibration\+Data}} $\ast$ \mbox{\hyperlink{classcalibrate_a65a3293c475c0cd57131a883c11d9436}{calibration\+Data}}
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classcalibrate_a74535f13b751adcb657029ef0088e09c}{max\+Test\+Pressure}} = 50000
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classcalibrate_ae1209ef38c0013fcead07f8a98021cd3}{pressure\+Test\+Retract}} = 7500
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -71,11 +72,11 @@ The proper scheme for using the routines is to
 \end{DoxyItemize}
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classcalibrate_a6b4532bd790dcdc1bd4034e16e15ec71}\label{classcalibrate_a6b4532bd790dcdc1bd4034e16e15ec71}} 
+\mbox{\Hypertarget{classcalibrate_a9de59b7b65c6de9299ce34396191694b}\label{classcalibrate_a9de59b7b65c6de9299ce34396191694b}} 
 \index{calibrate@{calibrate}!calibrate@{calibrate}}
 \index{calibrate@{calibrate}!calibrate@{calibrate}}
 \doxysubsubsection{\texorpdfstring{calibrate()}{calibrate()}}
-{\footnotesize\ttfamily calibrate\+::calibrate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classbowIO}{bow\+IO}} \&}]{\+\_\+bow\+IO,  }\item[{\mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}} \&}]{\+\_\+\+\_\+calibration\+Data,  }\item[{\mbox{\hyperlink{classbowControl}{bow\+Control}} \&}]{\+\_\+bow\+Control }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily calibrate\+::calibrate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classbowIO}{bow\+IO}} \&}]{\+\_\+bow\+IO,  }\item[{\mbox{\hyperlink{structCalibrationData}{Calibration\+Data}} \&}]{\+\_\+\+\_\+calibration\+Data,  }\item[{\mbox{\hyperlink{classbowControl}{bow\+Control}} \&}]{\+\_\+bow\+Control }\end{DoxyParamCaption})}
 
 
 
@@ -170,8 +171,7 @@ Here is the call graph for this function\+:\nopagebreak
 
 Find the minimum and maximum bow speed using direct hardware PWM control (as opposed to PID control) 
 
-Finds the minimum PWM value fed to the bow motor controller where a bow speed higher than zero occurs and record PWM and frequency. The maximum speed is recorded as the lowest PWM value that gives a noticeable change in bow speed from the absolute maximum Min and max usable speed is pre-\/calculated using the usable\+Multiplier variable Here is the call graph for this function\+:
-\nopagebreak
+Finds the minimum PWM value fed to the bow motor controller where a bow speed higher than zero occurs and record PWM and frequency. The maximum speed is recorded as the lowest PWM value that gives a noticeable change in bow speed from the absolute maximum Min and max usable speed is pre-\/calculated using the usable\+Multiplier variable Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -260,11 +260,11 @@ Here is the caller graph for this function\+:\nopagebreak
 
 \mbox{\hyperlink{classbowIO}{bow\+IO}} class associated with this calibration class 
 
-\mbox{\Hypertarget{classcalibrate_a86bbeed42caecf5da6d2a4a2c118fa04}\label{classcalibrate_a86bbeed42caecf5da6d2a4a2c118fa04}} 
+\mbox{\Hypertarget{classcalibrate_a65a3293c475c0cd57131a883c11d9436}\label{classcalibrate_a65a3293c475c0cd57131a883c11d9436}} 
 \index{calibrate@{calibrate}!calibrationData@{calibrationData}}
 \index{calibrationData@{calibrationData}!calibrate@{calibrate}}
 \doxysubsubsection{\texorpdfstring{calibrationData}{calibrationData}}
-{\footnotesize\ttfamily \mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}}$\ast$ calibrate\+::calibration\+Data}
+{\footnotesize\ttfamily \mbox{\hyperlink{structCalibrationData}{Calibration\+Data}}$\ast$ calibrate\+::calibration\+Data}
 
 \mbox{\Hypertarget{classcalibrate_a878d15dd653236499b6bb3cbf90b2d73}\label{classcalibrate_a878d15dd653236499b6bb3cbf90b2d73}} 
 \index{calibrate@{calibrate}!EEPROM\_offset@{EEPROM\_offset}}
@@ -277,6 +277,12 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{maxTestPressure@{maxTestPressure}!calibrate@{calibrate}}
 \doxysubsubsection{\texorpdfstring{maxTestPressure}{maxTestPressure}}
 {\footnotesize\ttfamily uint16\+\_\+t calibrate\+::max\+Test\+Pressure = 50000}
+
+\mbox{\Hypertarget{classcalibrate_ae1209ef38c0013fcead07f8a98021cd3}\label{classcalibrate_ae1209ef38c0013fcead07f8a98021cd3}} 
+\index{calibrate@{calibrate}!pressureTestRetract@{pressureTestRetract}}
+\index{pressureTestRetract@{pressureTestRetract}!calibrate@{calibrate}}
+\doxysubsubsection{\texorpdfstring{pressureTestRetract}{pressureTestRetract}}
+{\footnotesize\ttfamily uint16\+\_\+t calibrate\+::pressure\+Test\+Retract = 7500}
 
 
 

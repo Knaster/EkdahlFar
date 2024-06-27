@@ -2,7 +2,7 @@
 #define AUDIOANALYZE_H
 
 #include <Audio.h>
-#include <Wire.h>
+//#include <Wire.h>
 #include <SPI.h>
 #include <SerialFlash.h>
 #include <usb_audio.h>

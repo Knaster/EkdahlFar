@@ -1,47 +1,121 @@
 /**
- * @file teensyfarcode.ino
+ * @file main.cpp
  *
  * @mainpage Ekdahl FAR main file
  *
+ * \image html knaslogo_nofont.svg
  * @section description Description
- * Code for using and controlling the Ekdahl FAR and one or more strings with their associated hardware
+ * Firmware for the KNAS Ekdahl FAR, a string based electro-acoustic music instrument
+ *
+ * @section terminology Terminologoy
+ * - actuator - the object that is physically rotated against the string, usually a replaceable felt disc.
+ * - soft-limit - a stored value above or below which a certain physical movement or action will not be taken, e.g. minimum motor speed or maximum bow pressure
+ * - command message - a text-based message with none or more arguments, all external control of the software is done through these messages
+ * - bowing jack - the assembly that holds the DC bowing motor and reflection sensor tachometer
+ * - pressure - the position of the bowing jack as set by the stepper motor connected to the assembly
+ * - string module - a complete assembly of functions connected to a single string, this includes pickups, solenoids, mutes, bows etc.
+ *
+ * @section brief Brief overview
+ *
+ * The code is structured primarily around a hierarchial class structure where the base objects is a vector of stringModule instances. This class handles all <em>command messages</em> surrounding a single string
+ * and delegates data and commands to other classes down the line. The top level classes deals with direct hardware interfacing, the middle level takes care of the
+ * logical control of these classes depending on the outcome of processed data and the bottom level deals with interpretation and handling of command messages.
+ * Everything is tied together through the main function which periodically runs basic function calls which are not time-sensitive while time-critical functions are
+ * called through periodic interrupts.
+ *
+ * All outwards functionality can be accessed through command messages, these can be invoked through USB-Serial, RS232 and added to que by internal functions that may or may not be connected to other external hardware.
+ * All incoming MIDI-messages are mapped to a editable string of command messages, this way complete freedom in midi-mapping is obtained.
+ * A universal messaging system that is ignorant of the source of the control messages makes for a more transparent and uniform way of handling events, hardware control and data processing.
+ * This also makes for a system where minimal code changes are required when doing modifications or introducing new functionaltiy and options.
+ * The 'help'-command exposes existing commands, their arguments and a brief description.
+ *
+ * Classes that contain data that are to be saved into EEPROM implements a function with the name dumpData() that returns a string of commands with any applicable parameters containing the data to be saved,
+ * the returned string can then be executed as-is to set the desired parameters.
+ *
+ * @section hardwareclasses Classes and header files with direct hardware access:
+ * - servoStepper - library for handling stepper motor step/dir signals as well as homing switch control. Based on a positional approach like that of a classic RC servo,
+ * includes speed and acceleration parameters. The class is normally used with periodic interrupt driven polling of the servoStepper::updatePosition() function but can be used in a
+ * blocking manner by utilization of the servoStepper::completeTask() function
+ * \n
+ * - bowIO - handles bowing jack stepper motor position (through a servoStepper class instance), direct speed control of the DC bowing motor, tachometer interrupt calls and control of the
+ * DC/DC converter that drives the DC motor driver. It also provides functionality for checking motor driver fault conditions and over-current/power measurements
+ * through the current sensor connected to the DC/DC converter.
+ * \n
+ * - \ref mute - handles mute stepper motor position and provides functions for setting various mute states. Requires frequent polling of the mute::updateMute() function in order for the stepper motor
+ * to continuously update its position.
+ * \n
+ * - \ref solenoid - provides variable force solenoid control through the utilization of PWM, engages the solenoid for a set period of time (in uS) after which it will automatically disengage,
+ * Requires frequent polling of the solenoid::updateSolenoid() function in order to engage and disengage the solenoid in a timely manner.
+ * \n
+ * - stringModule - this class handles an entire string module with vectors of bowControl, \ref solenoid and \ref mute objects as well as bowIO, \ref calibrate and CalibrationData objects.
+ * The stringModule instance parses all local command messages applicable and does the appropriate function calls.
+ * \n
+ * - controlReader - reads data from i2c ADC converter(s) and will issue the command messages associated with the given ADC channel at certain value-change conditions. This class is updated through
+ * the controlReader::readData() function which is to to be called periodically. Due to the blocking nature of the ARM i2c library one needs to take care with how often controlReader::readData() is called.
+ * \n
+ * - \ref audioanalyze.h - reads audio data from a pin connected to the pickup and does basic DSP calculations on frequency and audio level
+ *
+ * @section controlclasses Intermediary data and sensor processing classes and header files
+ * - bowControl - Control class for high level interfacing with a bowIO object. This object contains the PID for stable bowing motor control, calcualtes motor set frequency from harmonic tables and
+ * pressure engage, rest and free positiong. Parameters are limited by user set soft-limitis contained in the pointed to CalibrationData and BowActuators class instances
+ * \n
+ * - main.cpp - Main software starting point. Initializes various hardware, class instances, loads any eeprom settings and binds interrupts to functions. Also contains the main loop function as well as
+ * various helper functions. This class has an array of stringModule class instances and is through maincommandhandler.cpp deciding which stringModule instance is currently being controlled and is
+ * passing along any command messages that aren't recognized as global.
+ * \n
+ * - maincommandhandler.cpp - contains functions for processing of global commands sent to the internal command message que.
+ * \n
+ * - midi.cpp - contains functions for processing midi commands according to the current \ref configuration class. Not directly bound to hardware but used with callback function pointers by main.cpp
+ * \n
+ *
+ * @section auxclasses Auxilary classes and header files
+ * - BowActuators - contains handling of a vector of bowActuator classes which in turn contains soft-limit data for user-defined actuators
+ * \n
+ * - \ref calibrate - contains functions for finding soft-limits of the current actuator, utilizes pointeres to bowIO and bowControl class instances to perform calibration tests and monitor sensor outputs
+ * \n
+ * - \ref commandparser.h - contains functions and classes for parsing and storing command messages. The main classes are commandItem which contains a single command and arguments, and commandList which
+ * contains a vector of commandItem instances.
+ * \n
+ * - \ref configuration - data storage class for midi mapped command strings
+ * - debugprint.h - contains functions for message reporting over USB-Serial
+ * \n
+ * - eepromhelpers.cpp - contains functions for saving and loading EEPROM data
+ * \n
+ * - HarmonicSeriesList - contains a vector of harmonicSeries instances which in turn contains the harmonic ratios used by functions in the bowControl class to set bowing frequencies
+ * \n
+ * - isrclasswrapper.cpp - wrapper enabling class-based functions to be called by interrupts
+ * \n
+ * - name.c - Teensy 4-specific class for setting USB device names
+ * \n
+ * - settingshandler.cpp - functions for saving EEPROM data
  *
  * @section libraries Libraries
- * - SafeString
- *
- * @section classes Internal classes and files
- * - stringModule
- * - bowIO
- * - bowControl
- * - solenoid
- * - calibrate
- * - commandItem
- * - commandList
- * - configuration
- *
- * @section goals Goals
- *
- *  Write down flow from MIDI input to hardware output including all pressure modifiers etc.\n
- *  Save only data not in default
- *  Replace keymap with per-key commands, pre/post?\n
- *  Make global sustain variable\n
- *  Ignore out of bounds references for strings, bows, solenoids etc.\n
- *  Edit map commands\n (??)
- *  DONE, TEST - Implement all midi events\n
- *  DONE - TEST - Implement all functions needed for configuration switching, adding and removing\n
- *  DONE - Implement bow current limit\n
- *  DONE - Check bow current limit in pressure calibration routine\n
- *  Implement current-limited forward/backwards homing
- *  DONE - Implement "set harmonic shift" for pitch bend
- *  DONE - Implement sustain
- *  DONE - Make bow hold go over any previously held notes and turn them off
- *  Double check that stepper speeds are good / no missed steps
- *  Change ADC I2C speed to 2MHz
- *  Create individual averaging per input
+ * - Adafruit_ADS1X15 - library for using the ADS1X15 ADC converters, used by the controlReader class
+ * \n
+ * - Adafruit_BusIO - library used by the Adafruit_ADS1X15 library
+ * \n
+ * - Audio - PJRC Teensy 4 Audio library, used by functions in \ref audioanalyze.h
+ * \n
+ * - EEPROM - Library for saving data into the Teensy 4 EEPROM, used by \ref eepromhelpers.cpp
+ * \n
+ * - SafeString - Partial use of its RS-232 functionality, used by \ref main.cpp and \ref debugprint.h
+ * \n
+ * - SD, SdFat, SerialFlash, SPI - Libraries required by the Teensy 4 Audio library
+ * \n
+ * - Teensy4 - The PJRC Teensy 4 library
+ * \n
+ * - Teensy_PWM - Library for better manipulation of the Teensy 4 PWM ports, used by the \ref bowIO and \ref solenoid classes
+ * \n
+ * - tinyexpr - Expression parser library used for parsing command message expressions in \ref commandList::parseCommandExpressions
+ * \n
+ * - TMC2209 - Library for the TMC2209 stepper motor driver IC, used by the \ref bowIO and \ref mute classes
+ * \n
+ * - Wire - Library for i2c communications, used by the controlReader class
+ * \n
  *
  * @section author Author
  * - Created by Karl Ekdahl on 2023-09-03
- * - Modified by Karl Ekdahl on 2023-12-18
+ * - Modified by Karl Ekdahl on 2024-06-02
  *
  */
 
@@ -83,6 +157,9 @@ createSafeStringReader(slaveSerialRead1, 256, "\r\n");       ///< SafeString rea
 #define clamp(v,i,x) min(max(v,i),x)
 #include <vector>
 
+elapsedMicros testMeasurement;  ///< Used for various internal tests
+bool testMeasurementOngoing = false;
+
 #include "debugprint.h"
 
 extern unsigned long _heap_start;
@@ -98,6 +175,9 @@ int freeram() {
 #define currentEEPROMVersion 0x02
 uint8_t readEEPROMVersion;
 uint16_t currentEEPROMOffset = 0;
+
+String customStartupParameters = "";
+
 #include "eepromhelpers.cpp"
 #include "configuration.cpp"
 int currentConfig = 0;
@@ -112,7 +192,7 @@ commandList *commands;
 #include "audioanalyze.h"
 
 #include "bowio.cpp"
-class _calibrationData;
+class CalibrationData;
 #include "bowActuators.h"
 class bowControl;
 #include "bowcontrol.cpp"
@@ -286,10 +366,8 @@ unsigned long commandUpadateInterval = 1000;
 
 elapsedMillis updateRollingStatus;
 //elapsedMillis updateStrings;
-elapsedMillis elTest;
-
 elapsedMicros controlReaderInterval;
-#define controlReadIntervalTime 500
+#define controlReadIntervalTime 50
 
 void loop() {
     ssOutput.nextByteOut();

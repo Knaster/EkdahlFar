@@ -66,6 +66,8 @@ bool \mbox{\hyperlink{classmute_a00b5fdf520afb19d007292f73f742fa6}{get\+Sustain}
 String \mbox{\hyperlink{classmute_a66ce0e653e7d25033a4f0eb20e7f360f}{dump\+Data}} ()
 \item 
 void \mbox{\hyperlink{classmute_ae445f099349b08eda3cd31d1e08e4f75}{update\+Mute}} ()
+\item 
+bool \mbox{\hyperlink{classmute_a8205ea9cb3da2cfb5152bcba2a33aa02}{home\+Mute}} (bool invert=false)
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -73,6 +75,10 @@ void \mbox{\hyperlink{classmute_ae445f099349b08eda3cd31d1e08e4f75}{update\+Mute}
 uint16\+\_\+t \mbox{\hyperlink{classmute_a986027b75414019d6089d16d74e31c7c}{hw\+Mute\+Pos}} = 0
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classmute_a9f622ea8c3d1e798b4852d16783d259a}{hw\+Last\+Mute\+Pos}} = 0
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classmute_a3df5559581a080e59f72deb80bb42c87}{back\+Off\+Time}} = 0
+\item 
+elapsed\+Millis \mbox{\hyperlink{classmute_afeaa0168890253259c1e30fd4ea4dcd2}{back\+Off\+Timer}}
 \item 
 \mbox{\hyperlink{classmute_addfeb04122f662fb55dc68c5d9814437}{emute\+Position}} \mbox{\hyperlink{classmute_a449c9f6158309fe66b59df762ce42c94}{mute\+Position}} = \mbox{\hyperlink{classmute_addfeb04122f662fb55dc68c5d9814437a25edb09c84018fe6ae55dd3778dc4616}{mp\+Undefined}}
 \item 
@@ -220,12 +226,33 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{halfMute()}{halfMute()}}
 {\footnotesize\ttfamily bool mute\+::half\+Mute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+\mbox{\Hypertarget{classmute_a8205ea9cb3da2cfb5152bcba2a33aa02}\label{classmute_a8205ea9cb3da2cfb5152bcba2a33aa02}} 
+\index{mute@{mute}!homeMute@{homeMute}}
+\index{homeMute@{homeMute}!mute@{mute}}
+\doxysubsubsection{\texorpdfstring{homeMute()}{homeMute()}}
+{\footnotesize\ttfamily bool mute\+::home\+Mute (\begin{DoxyParamCaption}\item[{bool}]{invert = {\ttfamily false} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmute_a8205ea9cb3da2cfb5152bcba2a33aa02_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classmute_ab12b8e1009e28f096c6e69457c975a99}\label{classmute_ab12b8e1009e28f096c6e69457c975a99}} 
 \index{mute@{mute}!rest@{rest}}
 \index{rest@{rest}!mute@{mute}}
 \doxysubsubsection{\texorpdfstring{rest()}{rest()}}
 {\footnotesize\ttfamily bool mute\+::rest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=290pt]{classmute_ab12b8e1009e28f096c6e69457c975a99_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classmute_a852fbe13e8922dfda416e0bbe00b2fe2}\label{classmute_a852fbe13e8922dfda416e0bbe00b2fe2}} 
 \index{mute@{mute}!saveFullMute@{saveFullMute}}
 \index{saveFullMute@{saveFullMute}!mute@{mute}}
@@ -331,6 +358,18 @@ Here is the call graph for this function\+:\nopagebreak
 
 
 \doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classmute_a3df5559581a080e59f72deb80bb42c87}\label{classmute_a3df5559581a080e59f72deb80bb42c87}} 
+\index{mute@{mute}!backOffTime@{backOffTime}}
+\index{backOffTime@{backOffTime}!mute@{mute}}
+\doxysubsubsection{\texorpdfstring{backOffTime}{backOffTime}}
+{\footnotesize\ttfamily uint16\+\_\+t mute\+::back\+Off\+Time = 0}
+
+\mbox{\Hypertarget{classmute_afeaa0168890253259c1e30fd4ea4dcd2}\label{classmute_afeaa0168890253259c1e30fd4ea4dcd2}} 
+\index{mute@{mute}!backOffTimer@{backOffTimer}}
+\index{backOffTimer@{backOffTimer}!mute@{mute}}
+\doxysubsubsection{\texorpdfstring{backOffTimer}{backOffTimer}}
+{\footnotesize\ttfamily elapsed\+Millis mute\+::back\+Off\+Timer}
+
 \mbox{\Hypertarget{classmute_abdb72fbf056ae9547d43e808b34af23d}\label{classmute_abdb72fbf056ae9547d43e808b34af23d}} 
 \index{mute@{mute}!fullMutePosition@{fullMutePosition}}
 \index{fullMutePosition@{fullMutePosition}!mute@{mute}}

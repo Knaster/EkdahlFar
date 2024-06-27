@@ -23,7 +23,7 @@ public:
     }
 };
 
-class _harmonicSeriesList {
+class HarmonicSeriesList {
 public:
     std::vector<harmonicSeries> series;
 

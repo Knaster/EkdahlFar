@@ -8,7 +8,7 @@ enum _speedMode { Automatic, Manual };
 class bowControl {
 public:
     bowIO *bowIOConnect;                      ///< Pointer to associated bowIO object
-    _calibrationData *calibrationDataConnect; ///< Pointer to associated _calibrationData object
+    CalibrationData *calibrationDataConnect; ///< Pointer to associated _calibrationData object
 
     BowActuators *bowActuators;
 
@@ -16,7 +16,7 @@ public:
     float Ki = 12;                             ///< PID I multiplier 2
     float Kd = 200;                            ///< PID D multiplier 40
     float previousError = 0.0;                ///< Contains the last frequency error calculated by the PID, given in Hertz
-    float integratorIgnoreBelow = 0.5;        ///< The PID will ignore any integral errors under this threshold 0.4
+    float integratorIgnoreBelow = 0.1;        ///< The PID will ignore any integral errors under this threshold 0.4
     uint16_t pidUpdateInterval = 1000;        ///< The interval at which the PID is being called, given in uS
     float pidMaxError = 50;                   ///< Max PID error per loop, essentially sets acceleration
 
@@ -62,7 +62,7 @@ public:
 
 //    BufferedOutput *slaveSerialOut = nullptr;
 //    SafeStringReader *slaveSerialRead = nullptr;
-    _harmonicSeriesList harmonicSeriesList;
+    HarmonicSeriesList harmonicSeriesList;
     uint8_t currentHarmonicSeries = 0;
 
     uint8_t baseNote = 64;
@@ -86,7 +86,7 @@ private:
     float pidPeakError = 0;
 
 public:
-    bowControl(bowIO &_bowIO, _calibrationData &__calibrationData);
+    bowControl(bowIO &_bowIO, CalibrationData &__calibrationData);
     void setBowCurrentLimit(float inBowCurrentLimit);
     float getBowCurrentLimit();
     int isBowStable();

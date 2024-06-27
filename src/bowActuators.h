@@ -8,10 +8,10 @@
 class BowActuators
 {
     public:
-        BowActuators(_calibrationData *t_calibrationDataConnect);
+        BowActuators(CalibrationData *t_calibrationDataConnect);
         virtual ~BowActuators();
 
-        _calibrationData *m_calibrationDataConnect;
+        CalibrationData *m_calibrationDataConnect;
 
         struct BowActuator {
             uint16_t firstTouchPressure = 0;

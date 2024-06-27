@@ -113,16 +113,16 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  lib/Audio/synth_waveform.h lib/Audio/synth_dc.h \
  lib/Audio/synth_whitenoise.h lib/Audio/synth_pinknoise.h \
  lib/Audio/synth_karplusstrong.h lib/Audio/synth_simple_drum.h \
- lib/Audio/synth_pwm.h lib/Audio/synth_wavetable.h lib/Wire/Wire.h \
- lib/Wire/WireIMXRT.h src/bowio.cpp src/bowio.h \
- lib/Teensy_PWM/src/Teensy_PWM.h lib/Teensy_PWM/src/PWM_Generic_Debug.h \
- lib/TMC2209/src/TMC2209.cpp lib/TMC2209/src/TMC2209.h src/servostepper.h \
- src/bowActuators.h src/bowcontrol.cpp lib/teensy4/elapsedMillis.h \
- src/calibrate.h src/bowcontrol.h src/calibrate.cpp src/bowActuators.cpp \
- src/solenoid.cpp src/mute.cpp src/mute.h src/stringmodule.cpp \
- src/stringmodule.hpp src/midi.cpp src/isrclasswrapper.cpp \
- src/controlReader.cpp src/controlReader.h \
- lib/Adafruit_ADS1X15/Adafruit_ADS1X15.h \
- lib/Adafruit_BusIO/Adafruit_I2CDevice.h src/settingshandler.cpp \
- lib/EEPROM/EEPROM.h lib/teensy4/avr/eeprom.h lib/teensy4/avr/io.h \
+ lib/Audio/synth_pwm.h lib/Audio/synth_wavetable.h src/bowio.cpp \
+ src/bowio.h lib/Teensy_PWM/src/Teensy_PWM.h \
+ lib/Teensy_PWM/src/PWM_Generic_Debug.h lib/TMC2209/src/TMC2209.cpp \
+ lib/TMC2209/src/TMC2209.h src/servostepper.h src/bowActuators.h \
+ src/bowcontrol.cpp lib/teensy4/elapsedMillis.h src/calibrate.h \
+ src/bowcontrol.h src/calibrate.cpp src/bowActuators.cpp src/solenoid.cpp \
+ src/mute.cpp src/mute.h src/stringmodule.cpp src/stringmodule.hpp \
+ src/midi.cpp src/isrclasswrapper.cpp src/controlReader.cpp \
+ src/controlReader.h lib/Adafruit_ADS1X15/Adafruit_ADS1X15.h \
+ lib/Adafruit_BusIO/Adafruit_I2CDevice.h lib/Wire/Wire.h \
+ lib/Wire/WireIMXRT.h src/settingshandler.cpp lib/EEPROM/EEPROM.h \
+ lib/teensy4/avr/eeprom.h lib/teensy4/avr/io.h \
  lib/teensy4/avr/../avr_emulation.h src/maincommandhandler.cpp

@@ -122,6 +122,7 @@ serialCommandItem serialCommandsStringModule[] = {
     { "solenoidminforce", "sif", "0 - 65535", "Set solenoid minimum usable force" },
     // setsolenoidforcemultiplier, ssfm
     { "solenoidforcemultiplier", "sfm", "0 - 1", "Set solenoid force multiplier" },
+    { "solenoidengageduration", "sed", "uS", "Sets the duration of the solenoid hit in uS, if a value of 0 is set the solenoid will not disengage until a solenoiddisengage command has been given"},
 
     { "mutesetposition", "msp", "0-65535", "Set mute position" },
     { "mutefullmute", "mfm", "1|0", "Put mute in full mute position (conditional)" },
@@ -135,6 +136,7 @@ serialCommandItem serialCommandsStringModule[] = {
     { "muterestposition", "mrp", "0-65535", "Mute rest position"},
     { "mutesustain", "ms", "0|1", "Setting sustain on (1) or off (0)" },
     { "mutebackoff", "mbo", "0-65535", "Setting the time that the mute stays in the mutefullmute position before automatically going into rest, set in mS"},
+    { "mutehome", "mh", "-", "Rehome mute" },
 
     { "bowactuatoradd", "baa", "-", "Add new bow actuator"},
     { "bowactuatorremove", "bar", "actuator", "Remove bow actuator"},
@@ -146,16 +148,14 @@ serialCommandItem serialCommandsStringModule[] = {
     { "bowactuatorid", "bai", "-", "Sets the ID of the current bow actuator"},
     { "bowactuatorsavestall", "bass", "-", "Save current position as bow actuator stall position"}, //NEW - ADD
     { "bowactuatorsavefirsttouch", "basft", "-", "Save current position as bow actuator first touch position"}, //NEW - ADD
-    { "bowactuatorsaverest", "basr", "-", "Save current position as bow actuator rest position"}, //NEW - ADD
-
-    { "adcr", "adcr", "-", "ADC value changed report, cannot be invoked manually"}
+    { "bowactuatorsaverest", "basr", "-", "Save current position as bow actuator rest position"} //NEW - ADD
 };
 
 class stringModule {
     public:
     std::vector<bowIO> bowIOArray;
     std::vector<bowControl> bowControlArray;
-    std::vector<_calibrationData> calibrationDataArray;
+    std::vector<CalibrationData> calibrationDataArray;
     std::vector<calibrate> calibrateArray;
 
     std::vector<solenoid> solenoidArray;

@@ -235,4 +235,31 @@ void mute::updateMute() {
     //stepServoStepper->updatePosition();
 }
 
+
+bool mute::homeMute(bool invert = false) {
+    debugPrintln("Starting home", Debug);
+
+    stepServoStepper->setHomingOffset(6000);
+    stepTMC2209Driver->setRunCurrent(stepHomeCurrentPercent);
+    stepServoStepper->eStop();
+    if (!invert) {
+        stepServoStepper->home(servoStepper::eStepDirection::FORWARD,5,5,servoStepper::eStepDirection::REVERSE); // ,5,5
+    } else {
+        stepServoStepper->home(servoStepper::eStepDirection::REVERSE,5,5,servoStepper::eStepDirection::FORWARD); // ,5,5
+    }
+
+    if (stepServoStepper->completeTask(5000)) {    //2000
+        debugPrintln("Homed", Debug);
+    } else {
+        debugPrintln("Homing FAILED!", Error);
+        return false;
+    }
+//    return true;
+    stepTMC2209Driver->setRunCurrent(stepRunCurrentPercent);
+//    stepServoStepper->setSpeed(20);
+    stepServoStepper->setPosition(0);
+    stepServoStepper->completeTask();
+    return true;
+}
+
 #endif

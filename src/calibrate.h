@@ -3,7 +3,7 @@
 #ifndef CALIBRATE_H
 #define CALIBRATE_H
 
-struct _calibrationData {
+struct CalibrationData {
     float minHz = 19.05;                    ///< Minimum bow speed that the motor and controller can handle, in Hertz
     uint16_t minSpeedPWM = 10619;           ///< PWM value used to obtain minHz \todo USED FOR CALIBRATION ONLY, REPLACE WITH LOCAL WHEN NEEDED
 
@@ -50,9 +50,9 @@ public:
 
     int EEPROM_offset = 0;
 
-    _calibrationData *calibrationData;
+    CalibrationData *calibrationData;
 
-    calibrate(bowIO &_bowIO, _calibrationData &__calibrationData, bowControl &_bowControl);
+    calibrate(bowIO &_bowIO, CalibrationData &__calibrationData, bowControl &_bowControl);
 
     void startAudioAnalyzing();
     void stopAudioAnalyzing();
@@ -63,6 +63,7 @@ private:
     bool findMaxPressure();
 public:
     uint16_t maxTestPressure = 50000;
+    uint16_t pressureTestRetract = 7500;
     bool findMinMaxPressure();
     bool findMinMaxSpeedPWM();
     bool findMinMaxSpeedPID();

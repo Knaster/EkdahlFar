@@ -6,8 +6,7 @@
 
 
 
-Collaboration diagram for bow\+Control\+:
-\nopagebreak
+Collaboration diagram for bow\+Control\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -17,7 +16,7 @@ Collaboration diagram for bow\+Control\+:
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classbowControl_ab126d4ea95a90585cffa5c0bcb56bc31}{bow\+Control}} (\mbox{\hyperlink{classbowIO}{bow\+IO}} \&\+\_\+bow\+IO, \mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}} \&\+\_\+\+\_\+calibration\+Data)
+\mbox{\hyperlink{classbowControl_a4114939e6e9d417415aef69c8c909a7a}{bow\+Control}} (\mbox{\hyperlink{classbowIO}{bow\+IO}} \&\+\_\+bow\+IO, \mbox{\hyperlink{structCalibrationData}{Calibration\+Data}} \&\+\_\+\+\_\+calibration\+Data)
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classbowControl_a797e74de62f9ba4d9dff86fa9dda59b9}{set\+Bow\+Current\+Limit}} (float in\+Bow\+Current\+Limit)
 \item 
@@ -102,8 +101,8 @@ void \mbox{\hyperlink{classbowControl_ac763e2c7400be2248ffad2e13462d60a}{update\
 \item 
 \mbox{\hyperlink{classbowIO}{bow\+IO}} $\ast$ \mbox{\hyperlink{classbowControl_aaddf2f2f0acdb9c8edf8a35faa72e88b}{bow\+IOConnect}}
 \begin{DoxyCompactList}\small\item\em Pointer to associated \mbox{\hyperlink{classbowIO}{bow\+IO}} object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}} $\ast$ \mbox{\hyperlink{classbowControl_a3862939e413c6a51f07254245fd1f05d}{calibration\+Data\+Connect}}
-\begin{DoxyCompactList}\small\item\em Pointer to associated \mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structCalibrationData}{Calibration\+Data}} $\ast$ \mbox{\hyperlink{classbowControl_a1ca492c797dc01e00ab2f80a88fc367c}{calibration\+Data\+Connect}}
+\begin{DoxyCompactList}\small\item\em Pointer to associated \+\_\+calibration\+Data object. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classBowActuators}{Bow\+Actuators}} $\ast$ \mbox{\hyperlink{classbowControl_a80ad832b525e1fcf51e45ae454aa09be}{bow\+Actuators}}
 \item 
 float \mbox{\hyperlink{classbowControl_a31bb75cf63d04d3344db0bfd4aed0dc7}{Kp}} = 200
@@ -114,7 +113,7 @@ float \mbox{\hyperlink{classbowControl_abcb1f9a4982b4a61b86ce773a1927f74}{Kd}} =
 \begin{DoxyCompactList}\small\item\em PID D multiplier 40. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{classbowControl_a14a6f6577887d4feed8a0bc2ab63adf4}{previous\+Error}} = 0.\+0
 \begin{DoxyCompactList}\small\item\em Contains the last frequency error calculated by the PID, given in Hertz. \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{classbowControl_ac509e827e903c5baa16e097f1b302a56}{integrator\+Ignore\+Below}} = 0.\+5
+float \mbox{\hyperlink{classbowControl_ac509e827e903c5baa16e097f1b302a56}{integrator\+Ignore\+Below}} = 0.\+1
 \begin{DoxyCompactList}\small\item\em The PID will ignore any integral errors under this threshold 0.\+4. \end{DoxyCompactList}\item 
 uint16\+\_\+t \mbox{\hyperlink{classbowControl_aa11b77b46796ace01ef089ed5d7e96dd}{pid\+Update\+Interval}} = 1000
 \begin{DoxyCompactList}\small\item\em The interval at which the PID is being called, given in uS. \end{DoxyCompactList}\item 
@@ -166,7 +165,7 @@ bool \mbox{\hyperlink{classbowControl_aa2253a04ce098480bb52b9daa95f02c6}{bow\+Sh
 \item 
 \mbox{\hyperlink{bowcontrol_8h_a08216a942f96ea84df79ef77a0554dd8}{\+\_\+speed\+Mode}} \mbox{\hyperlink{classbowControl_aea27c1e59266aa9d321fcdf859fe4dff}{speed\+Mode}} = \mbox{\hyperlink{bowcontrol_8h_a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389}{Automatic}}
 \item 
-\mbox{\hyperlink{class__harmonicSeriesList}{\+\_\+harmonic\+Series\+List}} \mbox{\hyperlink{classbowControl_af5165e97f45e0072f9f1f3457dae748c}{harmonic\+Series\+List}}
+\mbox{\hyperlink{classHarmonicSeriesList}{Harmonic\+Series\+List}} \mbox{\hyperlink{classbowControl_aff3d711d47ddb95b8cd61f64272c5c4b}{harmonic\+Series\+List}}
 \item 
 uint8\+\_\+t \mbox{\hyperlink{classbowControl_accc6c95233ced4ae0846c30fb49804f4}{current\+Harmonic\+Series}} = 0
 \item 
@@ -213,11 +212,11 @@ float \mbox{\hyperlink{classbowControl_a37af74a65fc919ea50452fc6543516c2}{pid\+P
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classbowControl_ab126d4ea95a90585cffa5c0bcb56bc31}\label{classbowControl_ab126d4ea95a90585cffa5c0bcb56bc31}} 
+\mbox{\Hypertarget{classbowControl_a4114939e6e9d417415aef69c8c909a7a}\label{classbowControl_a4114939e6e9d417415aef69c8c909a7a}} 
 \index{bowControl@{bowControl}!bowControl@{bowControl}}
 \index{bowControl@{bowControl}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowControl()}{bowControl()}}
-{\footnotesize\ttfamily bow\+Control\+::bow\+Control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classbowIO}{bow\+IO}} \&}]{\+\_\+bow\+IO,  }\item[{\mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}} \&}]{\+\_\+\+\_\+calibration\+Data }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bow\+Control\+::bow\+Control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classbowIO}{bow\+IO}} \&}]{\+\_\+bow\+IO,  }\item[{\mbox{\hyperlink{structCalibrationData}{Calibration\+Data}} \&}]{\+\_\+\+\_\+calibration\+Data }\end{DoxyParamCaption})}
 
 
 
@@ -819,15 +818,15 @@ Pointer to associated \mbox{\hyperlink{classbowIO}{bow\+IO}} object.
 \doxysubsubsection{\texorpdfstring{bowSpeedWhileEngaged}{bowSpeedWhileEngaged}}
 {\footnotesize\ttfamily float bow\+Control\+::bow\+Speed\+While\+Engaged = 10}
 
-\mbox{\Hypertarget{classbowControl_a3862939e413c6a51f07254245fd1f05d}\label{classbowControl_a3862939e413c6a51f07254245fd1f05d}} 
+\mbox{\Hypertarget{classbowControl_a1ca492c797dc01e00ab2f80a88fc367c}\label{classbowControl_a1ca492c797dc01e00ab2f80a88fc367c}} 
 \index{bowControl@{bowControl}!calibrationDataConnect@{calibrationDataConnect}}
 \index{calibrationDataConnect@{calibrationDataConnect}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{calibrationDataConnect}{calibrationDataConnect}}
-{\footnotesize\ttfamily \mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}}$\ast$ bow\+Control\+::calibration\+Data\+Connect}
+{\footnotesize\ttfamily \mbox{\hyperlink{structCalibrationData}{Calibration\+Data}}$\ast$ bow\+Control\+::calibration\+Data\+Connect}
 
 
 
-Pointer to associated \mbox{\hyperlink{struct__calibrationData}{\+\_\+calibration\+Data}} object. 
+Pointer to associated \+\_\+calibration\+Data object. 
 
 \mbox{\Hypertarget{classbowControl_a2c0dcfc6716cd9b7a4bfd6835e7d8f52}\label{classbowControl_a2c0dcfc6716cd9b7a4bfd6835e7d8f52}} 
 \index{bowControl@{bowControl}!currentHarmonicFreq@{currentHarmonicFreq}}
@@ -897,11 +896,11 @@ Time in ms that elapses in between each bow speed stability check.
 
 Current harmonic. 
 
-\mbox{\Hypertarget{classbowControl_af5165e97f45e0072f9f1f3457dae748c}\label{classbowControl_af5165e97f45e0072f9f1f3457dae748c}} 
+\mbox{\Hypertarget{classbowControl_aff3d711d47ddb95b8cd61f64272c5c4b}\label{classbowControl_aff3d711d47ddb95b8cd61f64272c5c4b}} 
 \index{bowControl@{bowControl}!harmonicSeriesList@{harmonicSeriesList}}
 \index{harmonicSeriesList@{harmonicSeriesList}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{harmonicSeriesList}{harmonicSeriesList}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class__harmonicSeriesList}{\+\_\+harmonic\+Series\+List}} bow\+Control\+::harmonic\+Series\+List}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHarmonicSeriesList}{Harmonic\+Series\+List}} bow\+Control\+::harmonic\+Series\+List}
 
 \mbox{\Hypertarget{classbowControl_a26ddde921eb977af08b17b5ece648c8b}\label{classbowControl_a26ddde921eb977af08b17b5ece648c8b}} 
 \index{bowControl@{bowControl}!harmonicShift@{harmonicShift}}
@@ -963,7 +962,7 @@ Contains the integral used by the PID.
 \index{bowControl@{bowControl}!integratorIgnoreBelow@{integratorIgnoreBelow}}
 \index{integratorIgnoreBelow@{integratorIgnoreBelow}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{integratorIgnoreBelow}{integratorIgnoreBelow}}
-{\footnotesize\ttfamily float bow\+Control\+::integrator\+Ignore\+Below = 0.\+5}
+{\footnotesize\ttfamily float bow\+Control\+::integrator\+Ignore\+Below = 0.\+1}
 
 
 

@@ -21,7 +21,7 @@ struct \mbox{\hyperlink{structnoteMsg}{note\+Msg}}
 \item 
 \#define \mbox{\hyperlink{midi_8cpp_af5f9f8958f0af48944f91c92f074fbc8}{map\+Size}}~12
 \item 
-\#define \mbox{\hyperlink{midi_8cpp_aa6eb5580c71ee23146ac858f01b19c60}{exp\+Function\+Count}}~21
+\#define \mbox{\hyperlink{midi_8cpp_aa6eb5580c71ee23146ac858f01b19c60}{exp\+Function\+Count}}~22
 \end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -31,6 +31,8 @@ double \mbox{\hyperlink{midi_8cpp_ad0dc2236017f1b8b833b71760eccef64}{map\+Keys}}
 double \mbox{\hyperlink{midi_8cpp_aa65a82429d9b5c75e567ec3c506cc8ab}{exp\+Bool}} (double input)
 \item 
 double \mbox{\hyperlink{midi_8cpp_a2479e1cbea7ce980c56a174fcd961618}{exp\+IBool}} (double input)
+\item 
+double \mbox{\hyperlink{midi_8cpp_acfbf88e9fa2336b8c29807f94a03a9ad}{deadband}} (double value)
 \item 
 void \mbox{\hyperlink{midi_8cpp_ad49be36e31ac13009fbc84e03bb78cdc}{update\+Local\+Variables}} ()
 \item 
@@ -56,6 +58,8 @@ void \mbox{\hyperlink{midi_8cpp_a5431e7bcaf327c6932c39854ad638b20}{On\+Channel\+
 \begin{DoxyCompactList}\small\item\em Handle poly aftertouch message. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{midi_8cpp_a0811c03903ea2e31dd0f96b5781955d9}{On\+Control\+Change}} (byte channel, byte control, byte value)
 \begin{DoxyCompactList}\small\item\em handle control change message \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{midi_8cpp_a3380d03f7876fabe1bba4bb9baf6fbd8}{midi\+All\+Notes\+Off}} ()
+\item 
 void \mbox{\hyperlink{midi_8cpp_ac56e8c5c671d4bcf1cc4d5e0b3b7e311}{On\+Pitch\+Bend}} (byte channel, int pitch)
 \begin{DoxyCompactList}\small\item\em handle pitch bend message \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{midi_8cpp_a293b5dd663597fd5b9320359cecd69cb}{On\+Program\+Change}} (uint8\+\_\+t channel, uint8\+\_\+t program)
@@ -91,7 +95,9 @@ double \mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}} \mbox
 \item 
 double \mbox{\hyperlink{midi_8cpp_a4e0fa8899ed6b9f1bde2bc03de889626}{d\+Map}} \mbox{[}12\mbox{]} = \{ 1, 1, 0, 1, 2, 1, 0, 0, 1, 0, 1, 2 \}
 \item 
-te\+\_\+variable \mbox{\hyperlink{midi_8cpp_ab51f6fcaf312ad71abc8ae0df0167ca6}{exp\+Functions}} \mbox{[}21\mbox{]}
+double \mbox{\hyperlink{midi_8cpp_af5e1f0ee8723368b23970791f61b2c4f}{ep\+Deadband\+Threshold}} = 175
+\item 
+te\+\_\+variable \mbox{\hyperlink{midi_8cpp_acaf1e2a0916bb47e1e6862fcfdc04874}{exp\+Functions}} \mbox{[}22\mbox{]}
 \item 
 std\+::vector$<$ \mbox{\hyperlink{structnoteMsg}{note\+Msg}} $>$ \mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notes\+Held}}
 \end{DoxyCompactItemize}
@@ -102,7 +108,7 @@ std\+::vector$<$ \mbox{\hyperlink{structnoteMsg}{note\+Msg}} $>$ \mbox{\hyperlin
 \index{midi.cpp@{midi.cpp}!expFunctionCount@{expFunctionCount}}
 \index{expFunctionCount@{expFunctionCount}!midi.cpp@{midi.cpp}}
 \doxysubsubsection{\texorpdfstring{expFunctionCount}{expFunctionCount}}
-{\footnotesize\ttfamily \#define exp\+Function\+Count~21}
+{\footnotesize\ttfamily \#define exp\+Function\+Count~22}
 
 \mbox{\Hypertarget{midi_8cpp_af5f9f8958f0af48944f91c92f074fbc8}\label{midi_8cpp_af5f9f8958f0af48944f91c92f074fbc8}} 
 \index{midi.cpp@{midi.cpp}!mapSize@{mapSize}}
@@ -145,6 +151,12 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=321pt]{midi_8cpp_adae513bd93c17269a7aa93788cb85a8d_icgraph}
 \end{center}
 \end{figure}
+\mbox{\Hypertarget{midi_8cpp_acfbf88e9fa2336b8c29807f94a03a9ad}\label{midi_8cpp_acfbf88e9fa2336b8c29807f94a03a9ad}} 
+\index{midi.cpp@{midi.cpp}!deadband@{deadband}}
+\index{deadband@{deadband}!midi.cpp@{midi.cpp}}
+\doxysubsubsection{\texorpdfstring{deadband()}{deadband()}}
+{\footnotesize\ttfamily double deadband (\begin{DoxyParamCaption}\item[{double}]{value }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{midi_8cpp_aa65a82429d9b5c75e567ec3c506cc8ab}\label{midi_8cpp_aa65a82429d9b5c75e567ec3c506cc8ab}} 
 \index{midi.cpp@{midi.cpp}!expBool@{expBool}}
 \index{expBool@{expBool}!midi.cpp@{midi.cpp}}
@@ -176,6 +188,19 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{mapKeys()}{mapKeys()}}
 {\footnotesize\ttfamily double map\+Keys (\begin{DoxyParamCaption}\item[{double}]{key }\end{DoxyParamCaption})}
 
+\mbox{\Hypertarget{midi_8cpp_a3380d03f7876fabe1bba4bb9baf6fbd8}\label{midi_8cpp_a3380d03f7876fabe1bba4bb9baf6fbd8}} 
+\index{midi.cpp@{midi.cpp}!midiAllNotesOff@{midiAllNotesOff}}
+\index{midiAllNotesOff@{midiAllNotesOff}!midi.cpp@{midi.cpp}}
+\doxysubsubsection{\texorpdfstring{midiAllNotesOff()}{midiAllNotesOff()}}
+{\footnotesize\ttfamily void midi\+All\+Notes\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{midi_8cpp_a3380d03f7876fabe1bba4bb9baf6fbd8_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{midi_8cpp_a5ee6c107ead559b3d2c201b681511a4b}\label{midi_8cpp_a5ee6c107ead559b3d2c201b681511a4b}} 
 \index{midi.cpp@{midi.cpp}!OnAfterTouchPoly@{OnAfterTouchPoly}}
 \index{OnAfterTouchPoly@{OnAfterTouchPoly}!midi.cpp@{midi.cpp}}
@@ -227,7 +252,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 handle control change message 
 
-All notes offHere is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -489,17 +514,23 @@ messaging system begin \mbox{\Hypertarget{midi_8cpp_a43fd958e8f9b57cb0a7710fd2fc
 \doxysubsubsection{\texorpdfstring{dvelocity}{dvelocity}}
 {\footnotesize\ttfamily double dvelocity}
 
-\mbox{\Hypertarget{midi_8cpp_ab51f6fcaf312ad71abc8ae0df0167ca6}\label{midi_8cpp_ab51f6fcaf312ad71abc8ae0df0167ca6}} 
+\mbox{\Hypertarget{midi_8cpp_af5e1f0ee8723368b23970791f61b2c4f}\label{midi_8cpp_af5e1f0ee8723368b23970791f61b2c4f}} 
+\index{midi.cpp@{midi.cpp}!epDeadbandThreshold@{epDeadbandThreshold}}
+\index{epDeadbandThreshold@{epDeadbandThreshold}!midi.cpp@{midi.cpp}}
+\doxysubsubsection{\texorpdfstring{epDeadbandThreshold}{epDeadbandThreshold}}
+{\footnotesize\ttfamily double ep\+Deadband\+Threshold = 175}
+
+\mbox{\Hypertarget{midi_8cpp_acaf1e2a0916bb47e1e6862fcfdc04874}\label{midi_8cpp_acaf1e2a0916bb47e1e6862fcfdc04874}} 
 \index{midi.cpp@{midi.cpp}!expFunctions@{expFunctions}}
 \index{expFunctions@{expFunctions}!midi.cpp@{midi.cpp}}
 \doxysubsubsection{\texorpdfstring{expFunctions}{expFunctions}}
-{\footnotesize\ttfamily te\+\_\+variable exp\+Functions\mbox{[}21\mbox{]}}
+{\footnotesize\ttfamily te\+\_\+variable exp\+Functions\mbox{[}22\mbox{]}}
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{= \{\{ \textcolor{stringliteral}{"{}channel"{}}, \&\mbox{\hyperlink{midi_8cpp_aa2816efa610ba96e26646ca2d25f0cba}{dchannel}} \} , \{ \textcolor{stringliteral}{"{}note"{}}, \&\mbox{\hyperlink{midi_8cpp_afe77cbca418de1f23989ea0572954c2f}{dnote}} \}, \{ \textcolor{stringliteral}{"{}velocity"{}}, \&\mbox{\hyperlink{midi_8cpp_a363d3e781f267bacd53748c7f8752a4a}{dvelocity}} \}, \{ \textcolor{stringliteral}{"{}notecount"{}}, \&\mbox{\hyperlink{midi_8cpp_a43fd958e8f9b57cb0a7710fd2fc7a62a}{dnotecount}}\},}
 \DoxyCodeLine{    \{ \textcolor{stringliteral}{"{}bool"{}}, (\textcolor{keyword}{const} \textcolor{keywordtype}{void}*) \mbox{\hyperlink{midi_8cpp_aa65a82429d9b5c75e567ec3c506cc8ab}{expBool}}, TE\_FUNCTION1 \}, \{ \textcolor{stringliteral}{"{}ibool"{}}, (\textcolor{keyword}{const} \textcolor{keywordtype}{void}*) \mbox{\hyperlink{midi_8cpp_a2479e1cbea7ce980c56a174fcd961618}{expIBool}}, TE\_FUNCTION1 \}, \{ \textcolor{stringliteral}{"{}pressure"{}}, \&\mbox{\hyperlink{midi_8cpp_aa57ea4be85a9ab70734ba96f316234b3}{dpressure}}\}, \{ \textcolor{stringliteral}{"{}value"{}}, \&\mbox{\hyperlink{midi_8cpp_ab88920172b5a32b077bd95bb1f3d6f8e}{dvalue}} \},}
-\DoxyCodeLine{    \{ \textcolor{stringliteral}{"{}mapkeys"{}}, (\textcolor{keyword}{const} \textcolor{keywordtype}{void}*) \mbox{\hyperlink{midi_8cpp_ad0dc2236017f1b8b833b71760eccef64}{mapKeys}}, TE\_FUNCTION1 \}, \{ \textcolor{stringliteral}{"{}pitch"{}}, \&\mbox{\hyperlink{midi_8cpp_a2230b468d53b40b5e940c8dc818345c6}{dpitch}} \}, \{ \textcolor{stringliteral}{"{}program"{}}, \&\mbox{\hyperlink{midi_8cpp_a298e941b7f939b9387cfe86b767f401c}{dprogram}} \},}
+\DoxyCodeLine{    \{ \textcolor{stringliteral}{"{}mapkeys"{}}, (\textcolor{keyword}{const} \textcolor{keywordtype}{void}*) \mbox{\hyperlink{midi_8cpp_ad0dc2236017f1b8b833b71760eccef64}{mapKeys}}, TE\_FUNCTION1 \}, \{ \textcolor{stringliteral}{"{}pitch"{}}, \&\mbox{\hyperlink{midi_8cpp_a2230b468d53b40b5e940c8dc818345c6}{dpitch}} \}, \{ \textcolor{stringliteral}{"{}program"{}}, \&\mbox{\hyperlink{midi_8cpp_a298e941b7f939b9387cfe86b767f401c}{dprogram}} \}, \{ \textcolor{stringliteral}{"{}deadband"{}}, (\textcolor{keyword}{const} \textcolor{keywordtype}{void}*) \mbox{\hyperlink{midi_8cpp_acfbf88e9fa2336b8c29807f94a03a9ad}{deadband}}, TE\_FUNCTION1 \},}
 \DoxyCodeLine{    \{ \textcolor{stringliteral}{"{}uv0"{}}, \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[0]\}, \{ \textcolor{stringliteral}{"{}uv1"{}}, \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[1]\}, \{ \textcolor{stringliteral}{"{}uv2"{}}, \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[2]\}, \{ \textcolor{stringliteral}{"{}uv3"{}}, \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[3]\}, \{ \textcolor{stringliteral}{"{}uv4"{}}, \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[4]\},}
 \DoxyCodeLine{    \{ \textcolor{stringliteral}{"{}uv5"{}}, \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[5]\}, \{ \textcolor{stringliteral}{"{}uv6"{}}, \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[6]\}, \{ \textcolor{stringliteral}{"{}uv7"{}}, \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[7]\}, \{ \textcolor{stringliteral}{"{}uv8"{}}, \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[8]\}, \{ \textcolor{stringliteral}{"{}uv9"{}}, \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[9]\} \}}
 

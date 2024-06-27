@@ -11,7 +11,7 @@
 #include "calibrate.h"
 
 /// Class constructor. Binds to the associated bowIO class and reads any existing EEPROM data into calibrationData
-calibrate::calibrate(bowIO &_bowIO, _calibrationData &__calibrationData, bowControl &_bowControl) {
+calibrate::calibrate(bowIO &_bowIO, CalibrationData &__calibrationData, bowControl &_bowControl) {
     bowIOConnect = &_bowIO;
     calibrationData = &__calibrationData;
     bowControlConnect = &_bowControl;
@@ -78,7 +78,7 @@ bool calibrate::findMinPressure() {
     }
     if (bowIOConnect->averageFreq() <= 0) { return false; }
     debugPrintln("intial contact found at "  + String(i) + " frequency " + String(bowIOConnect->averageFreq()) + "Hz", TextInfo);
-    i -= 7500;
+    i -= pressureTestRetract;
     bowIOConnect->setSpeedPWMSafe(0);
     bowIOConnect->setTiltPWM(i);
     bowIOConnect->waitForTiltToComplete();
@@ -87,9 +87,14 @@ bool calibrate::findMinPressure() {
     bowIOConnect->setSpeedPWMSafe(calibrationData->minSpeedPWM);
     if (!waitForBowToStabilize()) { return false; }
 
+    bool fault = false;
+
     do {
         bowIOConnect->setTiltPWM(i);
-        bowIOConnect->waitForTiltToComplete();
+        if (!bowIOConnect->waitForTiltToComplete(100)) {
+            fault = true;
+            break;
+        }
 
         delayMicroseconds(100);
         if (bowIOConnect->averageFreq() < (initialMotorFreq - deviation)) {
@@ -97,7 +102,7 @@ bool calibrate::findMinPressure() {
         }
         i++;
     } while(1 != 2);
-    if (bowIOConnect->averageFreq() <= 0) { return false; }
+    if ((bowIOConnect->averageFreq() <= 0) || (fault)) { return false; }
 
     calibrationData->firstTouchPressure = i;
 
@@ -117,7 +122,7 @@ bool calibrate::findMaxPressure() {
     debugPrintln("Finding max contact", TextInfo);
 
 //    bowControlConnect->run = 1;
-    bowIOConnect->setSpeedPWMSafe(calibrationData->maxSpeedPWM);
+    bowIOConnect->setSpeedPWMSafe( calibrationData->minSpeedPWM + (calibrationData->maxSpeedPWM - calibrationData->minSpeedPWM) / 2  );
     bowIOConnect->setTiltPWM(0);
     bowIOConnect->waitForTiltToComplete(5000);
     delay(500);
@@ -125,43 +130,50 @@ bool calibrate::findMaxPressure() {
     float initialMotorFreq = bowIOConnect->averageFreq();
     if (initialMotorFreq == 0) { return false; }
 
-    debugPrintln("Starting freq " + String(initialMotorFreq) + "Hz", TextInfo);
+    bowIOConnect->setTiltPWM((calibrationData->firstTouchPressure - pressureTestRetract));
+    if (bowIOConnect->waitForTiltToComplete(5000)) {
+        debugPrintln("Starting freq " + String(initialMotorFreq) + "Hz", TextInfo);
 
-    uint16_t i;
-    float average;
-    bool fault = false;
+        uint16_t i;
+        float average;
+        bool fault = false;
 
-    for (i =calibrationData->firstTouchPressure; i<maxTestPressure; i+=1) {
-        bowIOConnect->setTiltPWM(i);
-        if (!bowIOConnect->waitForTiltToComplete(1000)) {
-            debugPrintln("Tilt didn't finish", Debug);
-            fault = true;
-            break;
+        for (i =(calibrationData->firstTouchPressure - pressureTestRetract); i<maxTestPressure; i+=1) {
+            bowIOConnect->setTiltPWM(i);
+            if (!bowIOConnect->waitForTiltToComplete(100)) {
+                debugPrintln("Tilt didn't finish", Debug);
+                fault = true;
+                break;
+            }
+            delayMicroseconds(100);
+            average = bowIOConnect->averageFreq();
+            bowIOConnect->checkTimeout();
+
+    //        debugPrintln("Tilt " + String (i) + " Average frequency " + String(average) + " power " + String(bowIOConnect->getBowCurrent() * bowIOConnect->getBowMotorVoltage())
+    //            + ", current " + String(bowIOConnect->getBowCurrent()) + "A, motor fault " + String(bowIOConnect->getMotorFault()), Debug);
+
+            if ((average == 0) || bowIOConnect->bowOverPower() || bowIOConnect->bowOverCurrent()) {
+                break;
+            }
         }
-        delayMicroseconds(100);
-        average = bowIOConnect->averageFreq();
-        bowIOConnect->checkTimeout();
 
-        debugPrintln("Tilt " + String (i) + " Average frequency " + String(average) + " power " + String(bowIOConnect->getBowCurrent() * bowIOConnect->getBowMotorVoltage())
-            + ", current " + String(bowIOConnect->getBowCurrent()) + "A, motor fault " + String(bowIOConnect->getMotorFault()), Debug);
-
-        if ((average == 0) || bowIOConnect->bowOverPower() || bowIOConnect->bowOverCurrent()) {
-            break;
-        }
-    }
-    if (!fault) {
         calibrationData->stallPressure = i;
-
-        debugPrintln("Final contact PWM " + String(calibrationData->stallPressure) + " at frequency " + String(bowIOConnect->averageFreq()) + "Hz"/* with max current " +
-        String(maxCurrentRead)*/, TextInfo);
+        if (!fault) {
+            debugPrintln("Final contact PWM " + String(calibrationData->stallPressure) + " at frequency " + String(bowIOConnect->averageFreq()) + "Hz"/* with max current " +
+            String(maxCurrentRead)*/, TextInfo);
+        } else {
+            debugPrintln("Got Fault! Final contact PWM " + String(calibrationData->stallPressure) + " at frequency " + String(bowIOConnect->averageFreq()) + "Hz"/* with max current " +
+            String(maxCurrentRead)*/, TextInfo);
+    //        debugPrintln("Max pressure calibration ERROR!", debugPrintType::Error);
+        }
     } else {
-        debugPrintln("Max pressure calibration ERROR!", debugPrintType::Error);
-        bowIOConnect->homeBow();
+        debugPrintln("Couldn't get calibration start conditions", debugPrintType::Error);
     }
-
 
     bowIOConnect->setSpeedPWMSafe(0);
     bowIOConnect->setTiltPWM(0);
+    delay(1000);
+    bowIOConnect->homeBow();
 
     return true;
 }
@@ -178,11 +190,21 @@ bool calibrate::findMinMaxPressure() {
     uint16_t speed = bowIOConnect->stepServoStepper->speedRPM;
     bowIOConnect->stepServoStepper->setSpeed(5);
 
-    bool result = findMinPressure() && findMaxPressure();
+    //bool result = findMinPressure() && findMaxPressure();
+    bool result = findMinPressure();
+    if (result) {
+        result = result & findMaxPressure();
+    }
 
     if (result) {
-        if (calibrationData->firstTouchPressure > 4000) {
-            calibrationData->restPosition = calibrationData->firstTouchPressure - 4000;
+        if (calibrationData->firstTouchPressure > 3000) {
+            calibrationData->firstTouchPressure -= 3000;
+        } else {
+            calibrationData->firstTouchPressure =  0;
+        }
+
+        if (calibrationData->firstTouchPressure > 3000) {
+            calibrationData->restPosition = calibrationData->firstTouchPressure - 3000;
         } else {
             calibrationData->restPosition =  0;
         }
