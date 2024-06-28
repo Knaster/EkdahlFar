@@ -48,7 +48,7 @@ public:
     #define minPermissibleBowSpeedForCalibration 20
     #define maxPowerUseMultiplierDuringCalibration 0.75
 
-    int EEPROM_offset = 0;
+//    int EEPROM_offset = 0;
 
     CalibrationData *calibrationData;
 

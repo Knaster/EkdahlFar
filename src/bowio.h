@@ -25,7 +25,7 @@ class bowIO {
     double tachoFreq[tachoFreqLength];      ///< Tachometer buffer, used as a circular storage point of tachometer values for averaging
     int tachoFreqCount = 0;                 ///< Number of tachometer values stored, this will only be lower than tachoFreqLength at the very beginning of the program running
     int tachoFreqIndex = 0;                 ///< Current tachometer index
-    #define tachoFreqPerimssibleMIN 1       ///< Minimum tachometer value acceptable, given in Hertz
+    #define tachoFreqPerimssibleMIN 10      ///< Minimum tachometer value acceptable, given in Hertz
     #define tachoFreqPerimssibleMAX 100000  ///< Maximum tachometer value acceptable, given in Hertz
 
     #define permissibleFreqDeviation 10     ///< Maximum permissible deviation from median value when averaging tachometer values, given in Hertz
@@ -37,7 +37,7 @@ class bowIO {
     long reflectorCyclePeriod = 0;          ///< Holds the current tachometer cycle value in micro seconds
     elapsedMicros reflectorCounter;         ///< Local counter for the bow speed tachometer
 
-    unsigned long reflectorZeroTimeoutValue = 500000; ///< Threshold at which the bow movement is considered zero, given in Hertz (50Hz)
+    unsigned long reflectorZeroTimeoutValue = 50000; ///< Threshold at which the bow movement is considered zero, given in uS (was 500,000 for 0.5Hz, now 50,000 for 20Hz)
 
     public:
     uint16_t lastTilt = 0;                  ///< Last tilt value set

@@ -6,6 +6,7 @@ serialCommandItem serialCommandsMain[] = {
   { "debugrunningstatus", "drs", "0|1", "Turns on or off continuous status updates" },  // runningstatus, rs
   { "debugprint", "dp", "command|usb|hardware|undefined|priority|error|inforequest|expressionparser|debug:1|0", "Turns on or off serial feedback for the given item"},
   { "debugfreqreport", "dfr", "0|1", "Sets string frequency reporting on off" },    // freqreport, fr
+  { "version", "ver", "-", "Gets the current firmware version"},
   { "globalsaveallparameters", "gsap", "-", "Saves all avaliable parameters"},  // saveallparameters
   { "globalloadallparameters", "glap", "-", "Loads all avaliable parameters"},  // loadallparameters
   { "globaluservariable", "guv", "variable(0-9):value", "Set user variable 0-9 to value"},  // uservariable, uv
@@ -115,8 +116,17 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         if (_commandItem->argument[0] == 1) { freqReport = true; } else { freqReport = false; }
     } else
-    if (_commandItem->command == "ver") {
-        debugPrintln("Ekdahl far version " + _commandItem->argument[0], Command);
+    if (_commandItem->command == "version") {
+        if (request) {
+            commandResponses->push_back({"ver:" + currentFirmwareVersion, InfoRequest});
+        } else {
+            if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+            if ((currentFirmwareVersion != _commandItem->argument[0])) {
+                firmwareChanged = true;
+                commandResponses->push_back({"Firmware version changed! Previous version: " + _commandItem->argument[0], InfoRequest});
+            }
+            commandResponses->push_back({"Current firmware version: " + currentFirmwareVersion, InfoRequest});
+        }
     } else
     if (_commandItem->command == "globaluservariable") {
         if (!checkArguments(_commandItem, commandResponses, 2)) { return false; }

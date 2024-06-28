@@ -63,11 +63,11 @@ bool calibrate::findMinPressure() {
     if (initialMotorFreq <= 0) { return false; }
     debugPrintln("Starting freq " + String(initialMotorFreq) + String("Hz"), TextInfo);
 
-    int i;
+    uint16_t i;
     int average;
     for (i =0; i<maxTestPressure; i+=10) {
         bowIOConnect->setTiltPWM(i);
-        bowIOConnect->waitForTiltToComplete();
+        bowIOConnect->waitForTiltToComplete(10);    // was 3000 (2024-06-27)
         do {
             average = bowIOConnect->averageFreq();
         } while (average <= 0);
@@ -78,7 +78,13 @@ bool calibrate::findMinPressure() {
     }
     if (bowIOConnect->averageFreq() <= 0) { return false; }
     debugPrintln("intial contact found at "  + String(i) + " frequency " + String(bowIOConnect->averageFreq()) + "Hz", TextInfo);
-    i -= pressureTestRetract;
+
+    if (i > pressureTestRetract) {
+        i -= pressureTestRetract;
+    } else {
+        i = 0;
+    }
+
     bowIOConnect->setSpeedPWMSafe(0);
     bowIOConnect->setTiltPWM(i);
     bowIOConnect->waitForTiltToComplete();
@@ -91,7 +97,7 @@ bool calibrate::findMinPressure() {
 
     do {
         bowIOConnect->setTiltPWM(i);
-        if (!bowIOConnect->waitForTiltToComplete(100)) {
+        if (!bowIOConnect->waitForTiltToComplete(1)) {  // was 100
             fault = true;
             break;
         }
@@ -130,7 +136,14 @@ bool calibrate::findMaxPressure() {
     float initialMotorFreq = bowIOConnect->averageFreq();
     if (initialMotorFreq == 0) { return false; }
 
-    bowIOConnect->setTiltPWM((calibrationData->firstTouchPressure - pressureTestRetract));
+    int16_t j = calibrationData->firstTouchPressure;
+    if (j > pressureTestRetract) {
+        j -= pressureTestRetract;
+    } else {
+        j = 0;
+    }
+    //bowIOConnect->setTiltPWM((calibrationData->firstTouchPressure - pressureTestRetract));
+    bowIOConnect->setTiltPWM(j);
     if (bowIOConnect->waitForTiltToComplete(5000)) {
         debugPrintln("Starting freq " + String(initialMotorFreq) + "Hz", TextInfo);
 
@@ -138,7 +151,8 @@ bool calibrate::findMaxPressure() {
         float average;
         bool fault = false;
 
-        for (i =(calibrationData->firstTouchPressure - pressureTestRetract); i<maxTestPressure; i+=1) {
+//        for (i =(calibrationData->firstTouchPressure - pressureTestRetract); i<maxTestPressure; i+=1) {
+        for (i =j; i<maxTestPressure; i+=1) {
             bowIOConnect->setTiltPWM(i);
             if (!bowIOConnect->waitForTiltToComplete(100)) {
                 debugPrintln("Tilt didn't finish", Debug);
@@ -179,6 +193,7 @@ bool calibrate::findMaxPressure() {
 }
 
 bool calibrate::findMinMaxPressure() {
+    // Save the current state of the stepper auto-correction setting and restore before exiting
     bool autoCorrectPositionSave = bowIOConnect->stepServoStepper->autoCorrectPosition;
     bowIOConnect->stepServoStepper->autoCorrectPosition = false;
 

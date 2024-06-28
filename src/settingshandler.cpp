@@ -1,7 +1,7 @@
 #include <EEPROM.h>
 
 String dumpData() {
-    String saveData = "ver:1,";
+    String saveData = "ver:" + currentFirmwareVersion + ","; // "ver:1,";
     uint8_t saveCurrentConfig = currentConfig;
     debugPrintln("Saving configurations", debugPrintType::Debug);
     for (int i = 0; i < (configArray.size()); i++) {

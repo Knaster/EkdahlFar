@@ -58,6 +58,7 @@ public:
     elapsedMillis bowShutoffTimer;
     uint16_t bowShutoffTimeout = 1000;
     bool bowShutoffTimedout = false;
+    bool bowShutoffMotorDisabled = false;
     _speedMode speedMode = Automatic;
 
 //    BufferedOutput *slaveSerialOut = nullptr;

@@ -124,6 +124,8 @@
 
 #include <WProgram.h>
 
+#include "automaticversion.hpp"
+
 #include "string.h"
 #include <HardwareSerial.h>
 
@@ -172,9 +174,9 @@ int freeram() {
 
 #include "harmonicSeries.cpp"
 
-#define currentEEPROMVersion 0x02
-uint8_t readEEPROMVersion;
-uint16_t currentEEPROMOffset = 0;
+//#define currentEEPROMVersion 0x02
+//#uint8_t readEEPROMVersion;
+//uint16_t currentEEPROMOffset = 0;
 
 String customStartupParameters = "";
 
@@ -298,8 +300,8 @@ void setup() {
     pidISR_assignInterrupt(&stringModuleArray[moduleIndex].bowControlArray[0]);
 //    attachInterrupt(digitalPinToInterrupt(11), motorDriverFault, CHANGE);
 
-    stringModuleArray[moduleIndex].EEPROM_offset = currentEEPROMOffset;
-    debugPrintln("Loading string data from offset " + String(stringModuleArray[moduleIndex].EEPROM_offset), Debug);
+//    stringModuleArray[moduleIndex].EEPROM_offset = currentEEPROMOffset;
+//    debugPrintln("Loading string data from offset " + String(stringModuleArray[moduleIndex].EEPROM_offset), Debug);
 
     stringModuleArray[0].calibrationDataArray[0].firstTouchPressure = 0;
     stringModuleArray[0].calibrationDataArray[0].stallPressure = 55000;
@@ -342,6 +344,10 @@ void setup() {
 #else
 #error "Must be master or slave"
 #endif
+
+    //String currentVersion(reinterpret_cast< char const* >(&completeVersion));
+    currentFirmwareVersion = String(reinterpret_cast< char const* >(&completeVersion));
+    debugPrintln("Current version is " + currentFirmwareVersion, debugPrintType::Debug);
 }
 
 bool fContinuous = false; ///< Variable for rolling status on/off

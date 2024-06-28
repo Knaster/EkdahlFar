@@ -15,8 +15,9 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  lib/teensy4/WCharacter.h lib/teensy4/elapsedMillis.h \
  lib/teensy4/WProgram.h lib/teensy4/IntervalTimer.h \
  lib/teensy4/CrashReport.h lib/teensy4/Printable.h lib/teensy4/WString.h \
- lib/teensy4/HardwareSerial.h lib/SafeString/src/BufferedInput.h \
- lib/teensy4/Print.h lib/SafeString/src/SafeString.h lib/teensy4/Stream.h \
+ src/automaticversion.hpp lib/teensy4/HardwareSerial.h \
+ lib/SafeString/src/BufferedInput.h lib/teensy4/Print.h \
+ lib/SafeString/src/SafeString.h lib/teensy4/Stream.h \
  lib/SafeString/src/SafeStringNameSpaceStart.h \
  lib/SafeString/src/SafeStringNameSpaceEnd.h \
  lib/SafeString/src/BufferedOutput.h lib/SafeString/src/PinFlasher.h \

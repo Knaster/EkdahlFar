@@ -162,7 +162,7 @@ class stringModule {
 
     std::vector<mute> muteArray;
 
-    int EEPROM_offset = 0;
+//    int EEPROM_offset = 0;
 
     int currentBowSerial = 0;
     int currentSolenoidSerial = 0;

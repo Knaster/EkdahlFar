@@ -87,6 +87,7 @@ void bowControl::setPIDTargetUnsafe(float _pidTargetSpeed) {
     pidTargetSpeed = _pidTargetSpeed;
     elapsedSinceLastTarget = 0;
     bowShutoffTimedout = false;
+    bowShutoffMotorDisabled = false;
 }
 
 /// Returns the PID target speed
@@ -248,7 +249,11 @@ bool bowControl::bowRest(int enact) {
     if (_hold) { return true; }
 
     reachedEngage = false;
+
     bowShutoffTimer = 0;
+    bowShutoffTimedout = false;         // added 2024-06-27
+    bowShutoffMotorDisabled = false;    // added 2024-06-27
+
     setBowPressureSafe(calibrationDataConnect->restPosition);
     return true;
 }
@@ -439,10 +444,17 @@ void bowControl::updateString() {
             debugPrintln("Motor driver Fault!", Error);
         }
 
-        if ((tiltMode == Rest) && (speedMode == Automatic) &&  (_hold == false) && (bowShutoffTimer >= bowShutoffTimeout) && (bowShutoffTimedout == false)) {
-            run = 0;
-            bowShutoffTimedout = true;
-            debugPrintln("Auto shutdown of motor", Debug);
+        if ((speedMode == Automatic) &&  (_hold == false) && (bowShutoffTimer >= bowShutoffTimeout) ) {
+            if ((tiltMode == Rest) && (bowShutoffTimedout == false)) {
+                run = 0;
+                bowShutoffTimedout = true;
+                debugPrintln("Auto shutdown of motor", Debug);
+            } else
+            if ((bowShutoffTimedout == true) && (bowShutoffMotorDisabled == false) && (bowIOConnect->averageFreq() == 0)) {
+                bowIOConnect->disableBowPower();
+                bowShutoffMotorDisabled = true;
+                debugPrintln("Auto shutdown of motor dc/dc converter", Debug);
+            }
         }
 
         if (run) {
@@ -462,6 +474,8 @@ void bowControl::updateString() {
 
         // Check if the bowing wheel speed is zero
         bowIOConnect->checkTimeout();
+
+        // Check if bow has been put into mute and been at the mute position for long enough
         if (((tiltMode == Mute) && (mutePeriod > 0)) && (elapsedSinceMute >= mutePeriod)) {
             bowRest(1);
         }
