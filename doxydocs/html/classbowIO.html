@@ -172,8 +172,12 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a3710c97bb9e51a9f0b0f3b9ad5a98625"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc60f3a0b373a28fb864a4ac352a60fa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbowIO.html#acc60f3a0b373a28fb864a4ac352a60fa">bowOverPowerFlag</a> = false</td></tr>
 <tr class="separator:acc60f3a0b373a28fb864a4ac352a60fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3e77ef140722811625e332893d49cf9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbowIO.html#ae3e77ef140722811625e332893d49cf9">transientOverPower</a> = false</td></tr>
+<tr class="separator:ae3e77ef140722811625e332893d49cf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab727c8be7d25fd0a28a3a8a2342942f2"><td class="memItemLeft" align="right" valign="top">elapsedMillis&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbowIO.html#ab727c8be7d25fd0a28a3a8a2342942f2">lastBowOverPowerEvent</a></td></tr>
 <tr class="separator:ab727c8be7d25fd0a28a3a8a2342942f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e31bad3796820041267074775c177c4"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbowIO.html#a2e31bad3796820041267074775c177c4">bowOverPowerDuration</a> = 100</td></tr>
+<tr class="separator:a2e31bad3796820041267074775c177c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -211,8 +215,8 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a8524be5ec6375822275113db99378ed0"><td class="memItemLeft" align="right" valign="top">elapsedMicros&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbowIO.html#a8524be5ec6375822275113db99378ed0">reflectorCounter</a></td></tr>
 <tr class="memdesc:a8524be5ec6375822275113db99378ed0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local counter for the bow speed tachometer.  <a href="classbowIO.html#a8524be5ec6375822275113db99378ed0">More...</a><br /></td></tr>
 <tr class="separator:a8524be5ec6375822275113db99378ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac44fcb0bdfac398a9ebf3a8e2c811f71"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbowIO.html#ac44fcb0bdfac398a9ebf3a8e2c811f71">reflectorZeroTimeoutValue</a> = 500000</td></tr>
-<tr class="memdesc:ac44fcb0bdfac398a9ebf3a8e2c811f71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Threshold at which the bow movement is considered zero, given in Hertz (50Hz)  <a href="classbowIO.html#ac44fcb0bdfac398a9ebf3a8e2c811f71">More...</a><br /></td></tr>
+<tr class="memitem:ac44fcb0bdfac398a9ebf3a8e2c811f71"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbowIO.html#ac44fcb0bdfac398a9ebf3a8e2c811f71">reflectorZeroTimeoutValue</a> = 50000</td></tr>
+<tr class="memdesc:ac44fcb0bdfac398a9ebf3a8e2c811f71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Threshold at which the bow movement is considered zero, given in uS (was 500,000 for 0.5Hz, now 50,000 for 20Hz)  <a href="classbowIO.html#ac44fcb0bdfac398a9ebf3a8e2c811f71">More...</a><br /></td></tr>
 <tr class="separator:ac44fcb0bdfac398a9ebf3a8e2c811f71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3c60c3f3279a2ec0cf86bbb1dd2165e"><td class="memItemLeft" align="right" valign="top">HardwareSerial *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbowIO.html#ae3c60c3f3279a2ec0cf86bbb1dd2165e">stepSerialStream</a></td></tr>
 <tr class="memdesc:ae3c60c3f3279a2ec0cf86bbb1dd2165e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serial port for tilt stepper.  <a href="classbowIO.html#ae3c60c3f3279a2ec0cf86bbb1dd2165e">More...</a><br /></td></tr>
@@ -480,16 +484,17 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classbowIO_a4f7ef490b19cc4d9d6e3bd2e65d77061_icgraph.png" border="0" usemap="#aclassbowIO_a4f7ef490b19cc4d9d6e3bd2e65d77061_icgraph" alt=""/></div>
 <map name="aclassbowIO_a4f7ef490b19cc4d9d6e3bd2e65d77061_icgraph" id="aclassbowIO_a4f7ef490b19cc4d9d6e3bd2e65d77061_icgraph">
-<area shape="rect" title="Returns the average bow speed frequency." alt="" coords="837,133,989,160"/>
-<area shape="rect" href="classcalibrate.html#ac7f4beb3939af5f301ee39f3b59bc74c" title="Find the minimum and maximum usable pressure Maximum pressure is calculated as the pressure just befo..." alt="" coords="293,57,487,84"/>
-<area shape="rect" href="classcalibrate.html#ab7f48f8f5de0d0e6ae30c0be6ca4843d" title=" " alt="" coords="560,184,785,211"/>
-<area shape="rect" href="classcalibrate.html#a6654b82c8a1dbb55502cdfb4ef6a7b1f" title="Find the minimum and maximum bow speed using direct hardware PWM control (as opposed to PID control)" alt="" coords="272,7,508,33"/>
-<area shape="rect" href="classcalibrate.html#a157d35f3855c4707cfe0d697bd557a8b" title=" " alt="" coords="295,108,485,135"/>
-<area shape="rect" href="classbowControl.html#a6ac5163fe5784a5e1812908b217da50f" title="Check if the bow is holding a stable frequency." alt="" coords="581,235,765,261"/>
-<area shape="rect" href="classbowControl.html#ac4e9c27470227a129acdf20603ba2259" title=" " alt="" coords="569,286,777,327"/>
-<area shape="rect" href="classcalibrate.html#a6e708417f14acd978c8d2a38f5849074" title="Waits for the bow speed to stabilize, used after setting a new bow speed." alt="" coords="556,83,789,109"/>
-<area shape="rect" href="classcalibrate.html#ae571678a639c870844b02cfecf3ec2b4" title="Perform all calibration tests." alt="" coords="34,57,195,84"/>
-<area shape="rect" href="classcalibrate.html#a8901c66131f46a26940c4ccd5d410996" title=" " alt="" coords="5,108,224,135"/>
+<area shape="rect" title="Returns the average bow speed frequency." alt="" coords="837,178,989,205"/>
+<area shape="rect" href="classcalibrate.html#ac7f4beb3939af5f301ee39f3b59bc74c" title="Find the minimum and maximum usable pressure Maximum pressure is calculated as the pressure just befo..." alt="" coords="293,77,487,103"/>
+<area shape="rect" href="classcalibrate.html#ab7f48f8f5de0d0e6ae30c0be6ca4843d" title=" " alt="" coords="560,203,785,230"/>
+<area shape="rect" href="classcalibrate.html#a6654b82c8a1dbb55502cdfb4ef6a7b1f" title="Find the minimum and maximum bow speed using direct hardware PWM control (as opposed to PID control)" alt="" coords="272,26,508,53"/>
+<area shape="rect" href="classcalibrate.html#a157d35f3855c4707cfe0d697bd557a8b" title=" " alt="" coords="295,127,485,154"/>
+<area shape="rect" href="classbowControl.html#a6ac5163fe5784a5e1812908b217da50f" title="Check if the bow is holding a stable frequency." alt="" coords="581,254,765,281"/>
+<area shape="rect" href="classbowControl.html#ac4e9c27470227a129acdf20603ba2259" title=" " alt="" coords="569,305,777,347"/>
+<area shape="rect" href="classbowControl.html#ac763e2c7400be2248ffad2e13462d60a" title="Handles Tilt PWM updates, zero&#45;speed bow state and motor faults / oscillations." alt="" coords="579,371,766,398"/>
+<area shape="rect" href="classcalibrate.html#a6e708417f14acd978c8d2a38f5849074" title="Waits for the bow speed to stabilize, used after setting a new bow speed." alt="" coords="556,51,789,78"/>
+<area shape="rect" href="classcalibrate.html#ae571678a639c870844b02cfecf3ec2b4" title="Perform all calibration tests." alt="" coords="34,77,195,103"/>
+<area shape="rect" href="classcalibrate.html#a8901c66131f46a26940c4ccd5d410996" title=" " alt="" coords="5,127,224,154"/>
 </map>
 </div>
 
@@ -694,8 +699,9 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classbowIO_af543966b009896f0e529909262be4c87_icgraph.png" border="0" usemap="#aclassbowIO_af543966b009896f0e529909262be4c87_icgraph" alt=""/></div>
 <map name="aclassbowIO_af543966b009896f0e529909262be4c87_icgraph" id="aclassbowIO_af543966b009896f0e529909262be4c87_icgraph">
-<area shape="rect" title=" " alt="" coords="165,5,352,32"/>
-<area shape="rect" href="classbowIO.html#a83516a820794abb85aab7ac3c636e43b" title=" " alt="" coords="5,5,117,32"/>
+<area shape="rect" title=" " alt="" coords="240,31,427,57"/>
+<area shape="rect" href="classbowIO.html#a83516a820794abb85aab7ac3c636e43b" title=" " alt="" coords="43,5,155,32"/>
+<area shape="rect" href="classbowControl.html#ac763e2c7400be2248ffad2e13462d60a" title="Handles Tilt PWM updates, zero&#45;speed bow state and motor faults / oscillations." alt="" coords="5,56,192,83"/>
 </map>
 </div>
 
@@ -1517,6 +1523,20 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a2e31bad3796820041267074775c177c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e31bad3796820041267074775c177c4">&#9670;&nbsp;</a></span>bowOverPowerDuration</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bowIO::bowOverPowerDuration = 100</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="acc60f3a0b373a28fb864a4ac352a60fa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acc60f3a0b373a28fb864a4ac352a60fa">&#9670;&nbsp;</a></span>bowOverPowerFlag</h2>
 
@@ -1683,7 +1703,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long bowIO::reflectorZeroTimeoutValue = 500000</td>
+          <td class="memname">unsigned long bowIO::reflectorZeroTimeoutValue = 50000</td>
         </tr>
       </table>
   </td>
@@ -1693,7 +1713,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Threshold at which the bow movement is considered zero, given in Hertz (50Hz) </p>
+<p>Threshold at which the bow movement is considered zero, given in uS (was 500,000 for 0.5Hz, now 50,000 for 20Hz) </p>
 
 </div>
 </div>
@@ -2058,6 +2078,20 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Adjustment to the tilt value to avoid bow stalling and oscillation. </p>
+
+</div>
+</div>
+<a id="ae3e77ef140722811625e332893d49cf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3e77ef140722811625e332893d49cf9">&#9670;&nbsp;</a></span>transientOverPower</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool bowIO::transientOverPower = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

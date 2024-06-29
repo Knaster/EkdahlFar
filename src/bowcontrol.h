@@ -72,6 +72,9 @@ public:
     float bowSpeedWhileEngaged = 10;
     bool reachedEngage = false;
 
+    String commandsOverPowerCurrent = "";
+    String commandsMotorFault = "";
+
 private:
     float currentHarmonicFreq = 0;            ///< Base frequency of current harmonic
     float currentHarmonicShiftFreq = 0;       ///< Calculated frequency with harmonic shift

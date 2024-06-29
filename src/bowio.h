@@ -127,8 +127,10 @@ public:
 
     String dumpData();
 
-    bool bowOverPowerFlag = false;
+    bool bowOverPowerFlag = false;       // External flag to show a over-power event has happend, taking into account the duration of the event etc.
+    bool transientOverPower = false;  // Set to true at first over-power event, cleared if bow is not over power
     elapsedMillis lastBowOverPowerEvent;
+    uint32_t bowOverPowerDuration = 100; // If bow over power events are going past the duration (in ms), signal the over power event
 
     bool homeBow(bool invert = false);
 };

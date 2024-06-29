@@ -70,7 +70,7 @@ serialCommandItem serialCommandsStringModule[] = {
     //run, run
     { "bowmotorrun", "bmr", "1|0", "Set bow motor run on/off" },
     //setbowpower, sbp
-    { "bowmotorpower", "bmp", "0-65535", "Bow motor raw power in 16-bit PWM values, requires that the PID is turned off" },
+    { "bowmotordirectpwm", "bmdp", "0-65535", "Bow motor direct power in 16-bit PWM values, requires that the PID is turned off" },
     //setbowtimeout, sbt
     { "bowmotortimeout", "bmt", "ms(0-65535)", "Bow motor shutdown timeout after bow having been put into the rest position" },
     //bowmaxspeed, bxs
@@ -84,7 +84,10 @@ serialCommandItem serialCommandsStringModule[] = {
     //bowcurrent, bc
     { "bowmotorcurrent", "bmc", "0-3", "Bow motor reported current use" },
     //bowcurrentlimit, bcl
-    { "bowmotorcurrentlimit", "bmcl", "0-3", "Bow motor current limit" },
+    { "bowmotorcurrentlimit", "bmcl", "0-3", "Bow motor current limit (A)- !WARNING! Can ruin your instrument if changed" },
+    { "bowmotorpowerlimit", "bmpl", "0-255", "Bow motor power limit (W) - !WARNING! Can ruin your instrument if changed" },
+    { "bowmotorfaultcommands", "bmfc", "command list", "Commands to execute when a motor fault is tripped - !WARNING! Can ruin your instrument if changed" },
+    { "bowmotoroverpowercommands", "bmopc", "command list", "Commands to execute when motor is over the power limit - !WARNING! Can ruin your instrument if changed" },
     //bowmininertiapwm, biiw
     { "bowmotormininertialpwm", "bmmip", "0 - 65535", "Bow minimal PWM to keep inertia"},
 

@@ -440,9 +440,9 @@ void bowControl::updateString() {
         //  ((double) (calibrationDataConnect->maxUsablePressure - calibrationDataConnect->minUsablePressure + 16000) / 65535 * manualTiltPWM);
 
         /// \todo Replace with a proper motor fault
-        if (checkMotorFault()) {
+/*        if (checkMotorFault()) {
             debugPrintln("Motor driver Fault!", Error);
-        }
+        }*/
 
         if ((speedMode == Automatic) &&  (_hold == false) && (bowShutoffTimer >= bowShutoffTimeout) ) {
             if ((tiltMode == Rest) && (bowShutoffTimedout == false)) {

@@ -90,7 +90,11 @@ float \mbox{\hyperlink{classbowIO_a3710c97bb9e51a9f0b0f3b9ad5a98625}{tilt\+Adjus
 \begin{DoxyCompactList}\small\item\em Adjustment to the tilt value to avoid bow stalling and oscillation. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classbowIO_acc60f3a0b373a28fb864a4ac352a60fa}{bow\+Over\+Power\+Flag}} = false
 \item 
+bool \mbox{\hyperlink{classbowIO_ae3e77ef140722811625e332893d49cf9}{transient\+Over\+Power}} = false
+\item 
 elapsed\+Millis \mbox{\hyperlink{classbowIO_ab727c8be7d25fd0a28a3a8a2342942f2}{last\+Bow\+Over\+Power\+Event}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classbowIO_a2e31bad3796820041267074775c177c4}{bow\+Over\+Power\+Duration}} = 100
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -120,8 +124,8 @@ long \mbox{\hyperlink{classbowIO_a81178d84fd24fd44e0460dfcfdb16149}{reflector\+C
 \begin{DoxyCompactList}\small\item\em Holds the current tachometer cycle value in micro seconds. \end{DoxyCompactList}\item 
 elapsed\+Micros \mbox{\hyperlink{classbowIO_a8524be5ec6375822275113db99378ed0}{reflector\+Counter}}
 \begin{DoxyCompactList}\small\item\em Local counter for the bow speed tachometer. \end{DoxyCompactList}\item 
-unsigned long \mbox{\hyperlink{classbowIO_ac44fcb0bdfac398a9ebf3a8e2c811f71}{reflector\+Zero\+Timeout\+Value}} = 500000
-\begin{DoxyCompactList}\small\item\em Threshold at which the bow movement is considered zero, given in Hertz (50Hz) \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classbowIO_ac44fcb0bdfac398a9ebf3a8e2c811f71}{reflector\+Zero\+Timeout\+Value}} = 50000
+\begin{DoxyCompactList}\small\item\em Threshold at which the bow movement is considered zero, given in uS (was 500,000 for 0.\+5\+Hz, now 50,000 for 20Hz) \end{DoxyCompactList}\item 
 Hardware\+Serial $\ast$ \mbox{\hyperlink{classbowIO_ae3c60c3f3279a2ec0cf86bbb1dd2165e}{step\+Serial\+Stream}}
 \begin{DoxyCompactList}\small\item\em Serial port for tilt stepper. \end{DoxyCompactList}\item 
 const long \mbox{\hyperlink{classbowIO_addc79c370469f263a12d3c501d5e2302}{step\+Baud\+Rate}} = 115200
@@ -164,8 +168,7 @@ The \mbox{\hyperlink{classbowIO}{bow\+IO}} class deals with interfacing with the
 \doxysubsubsection{\texorpdfstring{bowIO()}{bowIO()}}
 {\footnotesize\ttfamily bow\+IO\+::bow\+IO (\begin{DoxyParamCaption}\item[{char}]{motor\+Rev\+Pin,  }\item[{char}]{motor\+Voltage\+Pin,  }\item[{char}]{motor\+DCDCEn\+Pin,  }\item[{char}]{tacho\+Pin,  }\item[{char}]{current\+Sense\+Pin,  }\item[{char}]{motor\+Fault\+Pin,  }\item[{char}]{step\+En\+Pin,  }\item[{char}]{step\+Dir\+Pin,  }\item[{char}]{step\+Step\+Pin,  }\item[{Hardware\+Serial $\ast$}]{step\+Serial\+Port,  }\item[{char}]{step\+Home\+Sensor\+Pin,  }\item[{char}]{step\+Correction\+Sensor\+Pin }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -218,7 +221,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowIO_a4f7ef490b19cc4d9d6e3bd2e65d77061_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -314,11 +318,12 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{disableBowPower()}{disableBowPower()}}
 {\footnotesize\ttfamily bool bow\+IO\+::disable\+Bow\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=340pt]{classbowIO_af543966b009896f0e529909262be4c87_icgraph}
+\includegraphics[width=350pt]{classbowIO_af543966b009896f0e529909262be4c87_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{classbowIO_a10371f6b9c9c3f2a4690040d144c2320}\label{classbowIO_a10371f6b9c9c3f2a4690040d144c2320}} 
@@ -408,8 +413,7 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{homeBow()}{homeBow()}}
 {\footnotesize\ttfamily bool bow\+IO\+::home\+Bow (\begin{DoxyParamCaption}\item[{bool}]{invert = {\ttfamily false} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -656,6 +660,12 @@ Pin for motor driver reverse PWM.
 \doxysubsubsection{\texorpdfstring{bowMotorWattage}{bowMotorWattage}}
 {\footnotesize\ttfamily float bow\+IO\+::bow\+Motor\+Wattage = 12.\+84}
 
+\mbox{\Hypertarget{classbowIO_a2e31bad3796820041267074775c177c4}\label{classbowIO_a2e31bad3796820041267074775c177c4}} 
+\index{bowIO@{bowIO}!bowOverPowerDuration@{bowOverPowerDuration}}
+\index{bowOverPowerDuration@{bowOverPowerDuration}!bowIO@{bowIO}}
+\doxysubsubsection{\texorpdfstring{bowOverPowerDuration}{bowOverPowerDuration}}
+{\footnotesize\ttfamily uint32\+\_\+t bow\+IO\+::bow\+Over\+Power\+Duration = 100}
+
 \mbox{\Hypertarget{classbowIO_acc60f3a0b373a28fb864a4ac352a60fa}\label{classbowIO_acc60f3a0b373a28fb864a4ac352a60fa}} 
 \index{bowIO@{bowIO}!bowOverPowerFlag@{bowOverPowerFlag}}
 \index{bowOverPowerFlag@{bowOverPowerFlag}!bowIO@{bowIO}}
@@ -732,11 +742,11 @@ Pin for reflection sensor output.
 \index{bowIO@{bowIO}!reflectorZeroTimeoutValue@{reflectorZeroTimeoutValue}}
 \index{reflectorZeroTimeoutValue@{reflectorZeroTimeoutValue}!bowIO@{bowIO}}
 \doxysubsubsection{\texorpdfstring{reflectorZeroTimeoutValue}{reflectorZeroTimeoutValue}}
-{\footnotesize\ttfamily unsigned long bow\+IO\+::reflector\+Zero\+Timeout\+Value = 500000\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily unsigned long bow\+IO\+::reflector\+Zero\+Timeout\+Value = 50000\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Threshold at which the bow movement is considered zero, given in Hertz (50Hz) 
+Threshold at which the bow movement is considered zero, given in uS (was 500,000 for 0.\+5\+Hz, now 50,000 for 20Hz) 
 
 \mbox{\Hypertarget{classbowIO_addc79c370469f263a12d3c501d5e2302}\label{classbowIO_addc79c370469f263a12d3c501d5e2302}} 
 \index{bowIO@{bowIO}!stepBaudRate@{stepBaudRate}}
@@ -889,6 +899,12 @@ Holds the last calculate tachometer average, given in Hertz.
 
 
 Adjustment to the tilt value to avoid bow stalling and oscillation. 
+
+\mbox{\Hypertarget{classbowIO_ae3e77ef140722811625e332893d49cf9}\label{classbowIO_ae3e77ef140722811625e332893d49cf9}} 
+\index{bowIO@{bowIO}!transientOverPower@{transientOverPower}}
+\index{transientOverPower@{transientOverPower}!bowIO@{bowIO}}
+\doxysubsubsection{\texorpdfstring{transientOverPower}{transientOverPower}}
+{\footnotesize\ttfamily bool bow\+IO\+::transient\+Over\+Power = false}
 
 
 

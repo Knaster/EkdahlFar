@@ -163,6 +163,8 @@ uint16\+\_\+t \mbox{\hyperlink{classbowControl_aed5c87b2f8c9a9dd0ece68b59091da59
 \item 
 bool \mbox{\hyperlink{classbowControl_aa2253a04ce098480bb52b9daa95f02c6}{bow\+Shutoff\+Timedout}} = false
 \item 
+bool \mbox{\hyperlink{classbowControl_a41b68cfab4948911050b02116490f021}{bow\+Shutoff\+Motor\+Disabled}} = false
+\item 
 \mbox{\hyperlink{bowcontrol_8h_a08216a942f96ea84df79ef77a0554dd8}{\+\_\+speed\+Mode}} \mbox{\hyperlink{classbowControl_aea27c1e59266aa9d321fcdf859fe4dff}{speed\+Mode}} = \mbox{\hyperlink{bowcontrol_8h_a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389}{Automatic}}
 \item 
 \mbox{\hyperlink{classHarmonicSeriesList}{Harmonic\+Series\+List}} \mbox{\hyperlink{classbowControl_aff3d711d47ddb95b8cd61f64272c5c4b}{harmonic\+Series\+List}}
@@ -176,6 +178,10 @@ float \mbox{\hyperlink{classbowControl_a77f759d743f371d73ae0546fc530bbc2}{bow\+S
 float \mbox{\hyperlink{classbowControl_a9565655dd3613dd02a43515e0e1e7b0f}{bow\+Speed\+While\+Engaged}} = 10
 \item 
 bool \mbox{\hyperlink{classbowControl_a10861de9ca3688546f266128afc1640c}{reached\+Engage}} = false
+\item 
+String \mbox{\hyperlink{classbowControl_a8b72b42733233ae00c8780fc6ac3dddf}{commands\+Over\+Power\+Current}} = \char`\"{}\char`\"{}
+\item 
+String \mbox{\hyperlink{classbowControl_a8869baca382bd6a9c6885e4eaaab7a46}{commands\+Motor\+Fault}} = \char`\"{}\char`\"{}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -333,11 +339,12 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Returns the number of motor faults that has happend since the last check and zeroes motor\+Fault. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classbowControl_a7845c424d2495a820b8171d316408e77_icgraph}
+\includegraphics[width=312pt]{classbowControl_a7845c424d2495a820b8171d316408e77_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{classbowControl_a42eab3d685cd13f718c71aee11e5714f}\label{classbowControl_a42eab3d685cd13f718c71aee11e5714f}} 
@@ -734,7 +741,8 @@ Handles Tilt PWM updates, zero-\/speed bow state and motor faults / oscillations
 
 \begin{DoxyRefDesc}{Todo}
 \item[\mbox{\hyperlink{todo__todo000004}{Todo}}]Replace with a proper motor fault \end{DoxyRefDesc}
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -788,6 +796,12 @@ The baseline tilt value used when engaging the bow with the string.
 
 Pointer to associated \mbox{\hyperlink{classbowIO}{bow\+IO}} object. 
 
+\mbox{\Hypertarget{classbowControl_a41b68cfab4948911050b02116490f021}\label{classbowControl_a41b68cfab4948911050b02116490f021}} 
+\index{bowControl@{bowControl}!bowShutoffMotorDisabled@{bowShutoffMotorDisabled}}
+\index{bowShutoffMotorDisabled@{bowShutoffMotorDisabled}!bowControl@{bowControl}}
+\doxysubsubsection{\texorpdfstring{bowShutoffMotorDisabled}{bowShutoffMotorDisabled}}
+{\footnotesize\ttfamily bool bow\+Control\+::bow\+Shutoff\+Motor\+Disabled = false}
+
 \mbox{\Hypertarget{classbowControl_aa2253a04ce098480bb52b9daa95f02c6}\label{classbowControl_aa2253a04ce098480bb52b9daa95f02c6}} 
 \index{bowControl@{bowControl}!bowShutoffTimedout@{bowShutoffTimedout}}
 \index{bowShutoffTimedout@{bowShutoffTimedout}!bowControl@{bowControl}}
@@ -827,6 +841,18 @@ Pointer to associated \mbox{\hyperlink{classbowIO}{bow\+IO}} object.
 
 
 Pointer to associated \+\_\+calibration\+Data object. 
+
+\mbox{\Hypertarget{classbowControl_a8869baca382bd6a9c6885e4eaaab7a46}\label{classbowControl_a8869baca382bd6a9c6885e4eaaab7a46}} 
+\index{bowControl@{bowControl}!commandsMotorFault@{commandsMotorFault}}
+\index{commandsMotorFault@{commandsMotorFault}!bowControl@{bowControl}}
+\doxysubsubsection{\texorpdfstring{commandsMotorFault}{commandsMotorFault}}
+{\footnotesize\ttfamily String bow\+Control\+::commands\+Motor\+Fault = \char`\"{}\char`\"{}}
+
+\mbox{\Hypertarget{classbowControl_a8b72b42733233ae00c8780fc6ac3dddf}\label{classbowControl_a8b72b42733233ae00c8780fc6ac3dddf}} 
+\index{bowControl@{bowControl}!commandsOverPowerCurrent@{commandsOverPowerCurrent}}
+\index{commandsOverPowerCurrent@{commandsOverPowerCurrent}!bowControl@{bowControl}}
+\doxysubsubsection{\texorpdfstring{commandsOverPowerCurrent}{commandsOverPowerCurrent}}
+{\footnotesize\ttfamily String bow\+Control\+::commands\+Over\+Power\+Current = \char`\"{}\char`\"{}}
 
 \mbox{\Hypertarget{classbowControl_a2c0dcfc6716cd9b7a4bfd6835e7d8f52}\label{classbowControl_a2c0dcfc6716cd9b7a4bfd6835e7d8f52}} 
 \index{bowControl@{bowControl}!currentHarmonicFreq@{currentHarmonicFreq}}

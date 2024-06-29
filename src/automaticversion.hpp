@@ -1,3 +1,5 @@
+// Gotten from https://stackoverflow.com/questions/11697820/how-to-use-date-and-time-predefined-macros-in-as-two-integers-then-stri
+
 // source file version_num.h
 
 #ifndef VERSION_NUM_H

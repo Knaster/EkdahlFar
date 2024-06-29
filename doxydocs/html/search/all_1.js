@@ -8,7 +8,7 @@ var searchData=
   ['addcommandhelp_12',['addCommandHelp',['../commandparser_8h.html#a55f22cf254c21b7922ea450b24b48dd2',1,'commandparser.h']]],
   ['addcommands_13',['addCommands',['../classcommandList.html#a904e6e8220f9141ed807005326dd96f6',1,'commandList']]],
   ['adddata_14',['addData',['../classaverager.html#aaa54da4b2f567beab8279a63a683a4bb',1,'averager']]],
-  ['addharmonicseries_15',['addHarmonicSeries',['../classHarmonicSeriesList.html#a7c71abff4db71f6d336b524770535800',1,'HarmonicSeriesList::addHarmonicSeries()'],['../classHarmonicSeriesList.html#a34084fec0dce96af5366b080c8b98f8d',1,'HarmonicSeriesList::addHarmonicSeries(float frequency[])']]],
+  ['addharmonicseries_15',['addHarmonicSeries',['../classHarmonicSeriesList.html#a34084fec0dce96af5366b080c8b98f8d',1,'HarmonicSeriesList::addHarmonicSeries(float frequency[])'],['../classHarmonicSeriesList.html#a7c71abff4db71f6d336b524770535800',1,'HarmonicSeriesList::addHarmonicSeries()']]],
   ['addmute_16',['addMute',['../classstringModule.html#ae900a34fa51bb9cdf8e0db8ad54698ee',1,'stringModule']]],
   ['addnote_17',['addNote',['../midi_8cpp.html#adae513bd93c17269a7aa93788cb85a8d',1,'midi.cpp']]],
   ['addsolenoid_18',['addSolenoid',['../classstringModule.html#a383d333da12d8b196c3a0a3085f466c9',1,'stringModule']]],
@@ -39,7 +39,8 @@ var searchData=
   ['audioprocessorusage_43',['audioProcessorUsage',['../audioanalyze_8h.html#a1119501c55b77d995f19fb79432bfe53',1,'audioanalyze.h']]],
   ['autocorrectposition_44',['autoCorrectPosition',['../classservoStepper.html#afad39eb0e3b738035e7a81cfdc87a26d',1,'servoStepper']]],
   ['automatic_45',['Automatic',['../bowcontrol_8h.html#a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389',1,'bowcontrol.h']]],
-  ['averagefreq_46',['averageFreq',['../classbowIO.html#a4f7ef490b19cc4d9d6e3bd2e65d77061',1,'bowIO']]],
-  ['averager_47',['averager',['../classaverager.html#a984c8c03a83d4d02ed1cfeb1f5f320ae',1,'averager::averager()'],['../classaverager.html',1,'averager']]],
-  ['averages_48',['averages',['../classcontrolReader.html#a891bcb175dc04b745648c88dccb4393e',1,'controlReader']]]
+  ['automaticversion_2ehpp_46',['automaticversion.hpp',['../automaticversion_8hpp.html',1,'']]],
+  ['averagefreq_47',['averageFreq',['../classbowIO.html#a4f7ef490b19cc4d9d6e3bd2e65d77061',1,'bowIO']]],
+  ['averager_48',['averager',['../classaverager.html#a984c8c03a83d4d02ed1cfeb1f5f320ae',1,'averager::averager()'],['../classaverager.html',1,'averager']]],
+  ['averages_49',['averages',['../classcontrolReader.html#a891bcb175dc04b745648c88dccb4393e',1,'controlReader']]]
 ];

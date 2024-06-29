@@ -409,11 +409,23 @@ bool bowIO::bowOverCurrent() {
 
 bool bowIO::bowOverPower() {
     if (getBowCurrent() >= (bowMotorWattage / bowMotorVoltage)) {
-        bowOverPowerFlag = true;
-        lastBowOverPowerEvent = 0;
+        // If we have already set the internal over-power flag
+        if (transientOverPower) {
+            // And that was set more than the allowed time-span ago, aka the over-power event has been going on for X ms
+            if (lastBowOverPowerEvent > bowOverPowerDuration) {
+                // Signal the external over power flag
+                bowOverPowerFlag = true;
+            }
+        } else {
+            // If this is a new over-power event set the flag and clear the event-time
+            transientOverPower = true;
+            lastBowOverPowerEvent = 0;
+        }
         return true;
     } else {
+        // Clear everything if we no longer have an over power event
         bowOverPowerFlag = false;
+        transientOverPower = false;
         return false;
     }
 }

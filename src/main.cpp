@@ -393,6 +393,25 @@ void loop() {
     stringModuleArray[0].slaveSerialOut->nextByteOut();
 #endif
 
+#ifdef EFARSLAVE
+    for (int i = 0; i < int(stringModuleArray.size()); i++) {
+        stringModuleArray[i].updateString();
+        for (int j=0; j<stringModuleArray[i].bowControlArray.size(); j++) {
+            if (stringModuleArray[i].bowIOArray[j].bowOverPowerFlag) {
+    //            stringModuleArray[i].bowIOArray[0].tiltAdjust += 1000;
+                debugPrintln("Bow over power!", debugPrintType::Error);
+                commands->addCommands(stringModuleArray[i].bowControlArray[j].commandsOverPowerCurrent);
+                //commands->addCommands("bmr:0, bpr:1");
+            }
+            if (stringModuleArray[i].bowControlArray[j].checkMotorFault()) {
+                debugPrintln("Bow motor fault!", debugPrintType::Error);
+                commands->addCommands(stringModuleArray[i].bowControlArray[j].commandsMotorFault);
+            }
+
+        }
+    }
+#endif
+
     unsigned long currentTime = micros();
     if (currentTime - previousTime >= commandUpadateInterval) {
         previousTime = currentTime;
@@ -400,15 +419,6 @@ void loop() {
     }
 
     //if (Serial1.available()) {
-#ifdef EFARSLAVE
-    for (int i = 0; i < int(stringModuleArray.size()); i++) {
-        stringModuleArray[i].updateString();
-        if (stringModuleArray[i].bowIOArray[0].bowOverPowerFlag) {
-            stringModuleArray[i].bowIOArray[0].tiltAdjust += 1000;
-//            debugPrintln("Bow over power! Adjusting down", debugPrintType::Error);
-        }
-    }
-#endif
 
     if (fContinuous) {
         if (updateRollingStatus >= 100) {

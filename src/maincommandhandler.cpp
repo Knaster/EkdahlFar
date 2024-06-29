@@ -110,7 +110,9 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
                 break;
             }
         }
-        if (!found) { debugPrintln("Print type not found", Error); }
+        if (!found) {
+            commandResponses->push_back({"Print type not found", Command});
+        }
     } else
     if (_commandItem->command == "freqreport") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
@@ -342,7 +344,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
     } else
     if (_commandItem->command == "free") {
         //printHeapStats();
-        debugPrintln("RAM free " + String(freeram()), Command);
+        commandResponses->push_back({ "free:" + String(freeram()), InfoRequest });
     } else
     if (_commandItem->command == "midiconfigurationdefaults") {
         configArray[currentConfig].setDefaults();
@@ -484,7 +486,8 @@ void processSerialCommands() {
                     for (uint8_t i = 0; i < _commandItem->argument.size(); i++) {
                         error += ":" + _commandItem->argument[i];
                     }
-                    debugPrintln(error, Error);
+                    commandResponses.push_back({error, debugPrintType::Error});
+                    //debugPrintln(error, Error);
                     //debugPrintln("Unknown command " + String(_commandItem->command), Error);
                 } else {
 
@@ -508,7 +511,8 @@ void processSerialCommands() {
                     for (uint8_t i = 0; i < _commandItem->argument.size(); i++) {
                         error += ":" + _commandItem->argument[i];
                     }
-                    debugPrintln(error, Error);
+                    commandResponses.push_back({error, debugPrintType::Error});
+                    //debugPrintln(error, Error);
 //                    debugPrintln("Unknown command " + String(_commandItem->command), Error);
                 }
 /*
@@ -531,7 +535,7 @@ void processSerialCommands() {
                     commandResponses.push_back({"m:" + String(currentStringModule) + "," + moduleResponses[i].response, moduleResponses[i].responseType});
                 }
             } else {
-                debugPrintln("Command not found '" + _commandItem->command + "'", Error);
+                commandResponses.push_back({"Command not found '" + _commandItem->command + "'", debugPrintType::Error});
             }
         }
         i++;

@@ -1,6 +1,7 @@
 \hypertarget{main_8cpp}{}\doxysection{main.\+cpp File Reference}
 \label{main_8cpp}\index{main.cpp@{main.cpp}}
 {\ttfamily \#include $<$WProgram.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}automaticversion.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}string.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$Hardware\+Serial.\+h$>$}\newline
 {\ttfamily \#include $<$Buffered\+Input.\+h$>$}\newline
@@ -36,7 +37,8 @@
 {\ttfamily \#include \char`\"{}control\+Reader.\+cpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}settingshandler.\+cpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}maincommandhandler.\+cpp\char`\"{}}\newline
-Include dependency graph for main.\+cpp\+:\nopagebreak
+Include dependency graph for main.\+cpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -51,8 +53,6 @@ Include dependency graph for main.\+cpp\+:\nopagebreak
 \#define \mbox{\hyperlink{main_8cpp_a7a2e501ed0e83cab3740b8934d6c42c1}{master\+Slave\+Baud\+Rate}}~2000000
 \item 
 \#define \mbox{\hyperlink{main_8cpp_ae19eb15a5c6b22f63f3819a0105339d8}{clamp}}(v,  i,  x)~min(max(v,i),x)
-\item 
-\#define \mbox{\hyperlink{main_8cpp_aa13d9ed1a1a161ce9dfc54a559c27b21}{current\+EEPROMVersion}}~0x02
 \item 
 \#define \mbox{\hyperlink{main_8cpp_a2c48b7e8ad263f85342e4132637108c1}{master\+Rx}}~0
 \item 
@@ -91,10 +91,6 @@ unsigned long \mbox{\hyperlink{main_8cpp_a9d1a03e6178b7c399cce31fc07aaaef8}{\+\_
 unsigned long \mbox{\hyperlink{main_8cpp_a1e096ab52b7c061afd475f4fedc6c1e9}{\+\_\+heap\+\_\+end}}
 \item 
 char $\ast$ \mbox{\hyperlink{main_8cpp_ad193a2cc121e0d4614a1c21eb463fb56}{\+\_\+\+\_\+brkval}}
-\item 
-uint8\+\_\+t \mbox{\hyperlink{main_8cpp_a075a4b279561f3ef4e2d17ee5880152d}{read\+EEPROMVersion}}
-\item 
-uint16\+\_\+t \mbox{\hyperlink{main_8cpp_aa417422d66c31930beb0e122d074e47f}{current\+EEPROMOffset}} = 0
 \item 
 String \mbox{\hyperlink{main_8cpp_af9f3e3acdcf4bf93bbe8015c4f666f26}{custom\+Startup\+Parameters}} = \char`\"{}\char`\"{}
 \item 
@@ -146,12 +142,6 @@ elapsed\+Micros \mbox{\hyperlink{main_8cpp_a24894588b78d05d43473e8e72dc24cb2}{co
 \index{controlReadIntervalTime@{controlReadIntervalTime}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{controlReadIntervalTime}{controlReadIntervalTime}}
 {\footnotesize\ttfamily \#define control\+Read\+Interval\+Time~50}
-
-\mbox{\Hypertarget{main_8cpp_aa13d9ed1a1a161ce9dfc54a559c27b21}\label{main_8cpp_aa13d9ed1a1a161ce9dfc54a559c27b21}} 
-\index{main.cpp@{main.cpp}!currentEEPROMVersion@{currentEEPROMVersion}}
-\index{currentEEPROMVersion@{currentEEPROMVersion}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{currentEEPROMVersion}{currentEEPROMVersion}}
-{\footnotesize\ttfamily \#define current\+EEPROMVersion~0x02}
 
 \mbox{\Hypertarget{main_8cpp_a2c48b7e8ad263f85342e4132637108c1}\label{main_8cpp_a2c48b7e8ad263f85342e4132637108c1}} 
 \index{main.cpp@{main.cpp}!masterRx@{masterRx}}
@@ -340,12 +330,6 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{currentConfig}{currentConfig}}
 {\footnotesize\ttfamily int current\+Config = 0}
 
-\mbox{\Hypertarget{main_8cpp_aa417422d66c31930beb0e122d074e47f}\label{main_8cpp_aa417422d66c31930beb0e122d074e47f}} 
-\index{main.cpp@{main.cpp}!currentEEPROMOffset@{currentEEPROMOffset}}
-\index{currentEEPROMOffset@{currentEEPROMOffset}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{currentEEPROMOffset}{currentEEPROMOffset}}
-{\footnotesize\ttfamily uint16\+\_\+t current\+EEPROMOffset = 0}
-
 \mbox{\Hypertarget{main_8cpp_a0652452d3c6986b4f212f9a4cd94f213}\label{main_8cpp_a0652452d3c6986b4f212f9a4cd94f213}} 
 \index{main.cpp@{main.cpp}!currentStringModule@{currentStringModule}}
 \index{currentStringModule@{currentStringModule}!main.cpp@{main.cpp}}
@@ -405,13 +389,7 @@ Main loop function.
 \item Add any serial commands to command list and execute all commands in list
 \item Process each strings update function 
 \end{DoxyEnumerate}
-\end{DoxyItemize}\mbox{\Hypertarget{main_8cpp_a075a4b279561f3ef4e2d17ee5880152d}\label{main_8cpp_a075a4b279561f3ef4e2d17ee5880152d}} 
-\index{main.cpp@{main.cpp}!readEEPROMVersion@{readEEPROMVersion}}
-\index{readEEPROMVersion@{readEEPROMVersion}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{readEEPROMVersion}{readEEPROMVersion}}
-{\footnotesize\ttfamily uint8\+\_\+t read\+EEPROMVersion}
-
-\mbox{\Hypertarget{main_8cpp_aacbb4662d46136722bc7069351a1a30f}\label{main_8cpp_aacbb4662d46136722bc7069351a1a30f}} 
+\end{DoxyItemize}\mbox{\Hypertarget{main_8cpp_aacbb4662d46136722bc7069351a1a30f}\label{main_8cpp_aacbb4662d46136722bc7069351a1a30f}} 
 \index{main.cpp@{main.cpp}!stringModuleArray@{stringModuleArray}}
 \index{stringModuleArray@{stringModuleArray}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{stringModuleArray}{stringModuleArray}}
