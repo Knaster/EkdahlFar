@@ -28,8 +28,8 @@ private:
     HardwareSerial *stepSerialStream;       ///< Serial port for tilt stepper
     const long stepBaudRate = 115200;       ///< Baud rate for tilt stepper serial
     const int stepConnectDelay = 200;       ///< Delay in between connecting to stepper and issuing commandss
-    const uint8_t stepRunCurrentPercent = 30;   ///< Stepper current during run phase
-    const uint8_t stepHomeCurrentPercent = 10;
+    const uint8_t stepRunCurrentPercent = 40;   ///< Stepper current during run phase
+    const uint8_t stepHomeCurrentPercent = 20;
     const char stepMicrostepping = 32;      ///< Tilt stepper micro stepping
     char stepEnPin;                         ///< Pin for tilt stepper driver enable
     char stepperDirPin;                     ///< Pin for tilt stepper driver direction

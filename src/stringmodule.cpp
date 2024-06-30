@@ -169,6 +169,11 @@ bool stringModule::processSerialCommand_GeneralControl(commandItem *_commandItem
         bowControlArray[currentBowSerial].bowEngage(_commandItem->argument[0].toInt());
         commandResponses->push_back({"Setting bow engage to " + String(_commandItem->argument[0].toInt()), Command});
     } else
+    if (_commandItem->command == "bowpressurehold") {
+        if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+        if (_commandItem->argument[0].toInt() > 0) { bowControlArray[currentBowSerial].setHold(true); } else { bowControlArray[currentBowSerial].setHold(false);}
+        commandResponses->push_back({"Setting bow hold to " + String(_commandItem->argument[0].toInt()), Command});
+    } else
     /*    if (_commandItem->command == "mute") {
       bowControlArray[currentBowSerial].bowMute(_commandItem->argument[0].toInt());
       debugPrintln("Setting bow mute to " + String(_commandItem->argument[0].toInt()), Command);
@@ -191,11 +196,6 @@ bool stringModule::processSerialCommand_GeneralControl(commandItem *_commandItem
             commandResponses->push_back({"Setting bow power to " + String(bowControlArray[currentBowSerial].manualSpeedPWM), Command});
         }
     } else
-/*    if (_commandItem->command == "setbowhold") {
-        if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
-        if (_commandItem->argument[0].toInt() > 0) { bowControlArray[currentBowSerial].setHold(true); } else { bowControlArray[currentBowSerial].setHold(false);}
-        debugPrintln("Setting bow hold to " + String(_commandItem->argument[0].toInt()), Command);
-    } else*/
     if (_commandItem->command == "bowcontrolspeedmode") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         if ((_commandItem->argument[0].toInt() >= 0) && (_commandItem->argument[0].toInt() <= 1)) {

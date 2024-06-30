@@ -18,8 +18,10 @@
 #ifndef MIDI_H
 #define MIDI_H
 
+#include <MIDI.h>
+
 int noteCount = 0;         ///< The current amount of keys depressed
-bool sustain = true;       ///< State of sustain pedal
+//bool sustain = true;       ///< State of sustain pedal
 bool monoMode = true;
 signed int pitchBend = 0;  ///< Current pit mod value
 //uint8_t midiRxChannel = 0x7F;
@@ -264,5 +266,40 @@ void OnProgramChange(uint8_t channel, uint8_t program) {
     dchannel = channel;
     dprogram = program;
     processLocalMessage(configArray[currentConfig].programChange);
+}
+
+MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI);
+/*
+void handleNoteOff(byte channel, byte note, byte velocity) {
+  //debugPrintln(String("Note Off: ch=") + channel + ", note=" + note + ", velocity=" + velocity, Debug);
+  OnN
+}
+
+void handleNoteOn(byte channel, byte note, byte velocity) {
+  if (velocity > 0) {
+    debugPrintln(String("Note On:  ch=") + channel + ", note=" + note + ", velocity=" + velocity, Debug);
+  } else {
+    debugPrintln(String("Note Off: ch=") + channel + ", note=" + note, Debug);
+  }
+}
+*/
+void initMidi() {
+    usbMIDI.setHandleNoteOff(OnNoteOff);
+    usbMIDI.setHandleNoteOn(OnNoteOn);
+    usbMIDI.setHandleAfterTouchPoly(OnAfterTouchPoly);
+    usbMIDI.setHandleControlChange(OnControlChange);
+    usbMIDI.setHandlePitchChange(OnPitchBend);
+    usbMIDI.setHandleAfterTouch(OnChannelAftertouch);
+    usbMIDI.setHandleProgramChange(OnProgramChange);
+
+    Serial1.begin(31250, SERIAL_8N1); //SERIAL_8N2);
+    MIDI.begin();
+    MIDI.setHandleNoteOff(OnNoteOff);
+    MIDI.setHandleNoteOn(OnNoteOn);
+    MIDI.setHandleAfterTouchPoly(OnAfterTouchPoly);
+    MIDI.setHandleControlChange(OnControlChange);
+    MIDI.setHandlePitchBend(OnPitchBend);
+    MIDI.setHandleAfterTouchChannel(OnChannelAftertouch);
+    MIDI.setHandleProgramChange(OnProgramChange);
 }
 #endif

@@ -272,9 +272,9 @@ void setup() {
     slaveSerialOut1.connect(Serial1);
     slaveSerialRead1.connect(Serial1);
 #elif EFARSLAVE
-    Serial1.begin(masterSlaveBaudRate); //2000000
+/*    Serial1.begin(masterSlaveBaudRate); //2000000
     masterSerialOut.connect(Serial1);
-    masterSerialRead.connect(Serial1);
+    masterSerialRead.connect(Serial1);*/
 #endif // EFARMASTER
 
     commands = new commandList();
@@ -326,13 +326,7 @@ void setup() {
 
     loadAllParams();
 #endif
-    usbMIDI.setHandleNoteOff(OnNoteOff);
-    usbMIDI.setHandleNoteOn(OnNoteOn);
-    usbMIDI.setHandleAfterTouchPoly(OnAfterTouchPoly);
-    usbMIDI.setHandleControlChange(OnControlChange);
-    usbMIDI.setHandlePitchChange(OnPitchBend);
-    usbMIDI.setHandleAfterTouch(OnChannelAftertouch);
-    usbMIDI.setHandleProgramChange(OnProgramChange);
+    initMidi();
 
     startAudioAnalyze();
 
@@ -383,12 +377,15 @@ void loop() {
         controlReaderInterval = 0;
     }
 
+    MIDI.read();
+
 #if EFARSLAVE
-    masterSerialOut.nextByteOut();
+// commented out in order to use the master serial for HW MIDI
+/*    masterSerialOut.nextByteOut();
     if (masterSerialRead.read()) {
         commands->addCommands(masterSerialRead.c_str());
 //        debugPrintln("Master reception: " + String(masterSerialRead.c_str()), Debug);
-    }
+    }*/
 #elif EFARMASTER
     stringModuleArray[0].slaveSerialOut->nextByteOut();
 #endif

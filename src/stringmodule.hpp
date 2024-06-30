@@ -113,7 +113,7 @@ serialCommandItem serialCommandsStringModule[] = {
     //bowmodulationspeed, bms
     { "bowpressuremodulationspeed", "bpms", "0.1 - 10", "Bow pressure movement speed while engaged"},
 
-//    { "setbowhold", "sbh", "0|1", "Sets bow hold on/off" },
+    { "bowpressurehold", "bph", "0|1", "Sets bow hold on/off" },
 
     // solenoid, solenoid
     { "solenoid", "so", "int", "Sets the currently selected solenoid" },

@@ -66,7 +66,7 @@ serialCommandItem serialCommandsMain[] = {
   { "midieventhandlerccremove", "mevcr", "cc(0-127)", "remove CC from list"},   // eventhandlerccremove, evccr
   { "midiconfigurationdefaults", "mcfd", "-", "Reverts the current configuration to default values and CCs"},
   { "midireceivechannel", "mrc", "-", "Sets the MIDI receive channel of the current configuration. 1-16 sets specific channel, any other value for OMNI"},
-  { "midisustain", "msu", "1|0", "Turn sustain on for MIDI notes, aka ignore NOTE OFF messages and whatever commands they have"},
+//  { "midisustain", "msu", "1|0", "Turn sustain on for MIDI notes, aka ignore NOTE OFF messages and whatever commands they have"},
   { "midiallnotesoff", "mano", "1|0", "Clear the entire buffer of MIDI notes held"},
 
   { "adcr", "adcr", "-", "ADC value changed report, cannot be invoked manually"},
@@ -362,7 +362,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             commandResponses->push_back({ "Setting MIDI receive channel to " + String(configArray[currentConfig].midiRxChannel), debugPrintType::Command});
         }
     } else
-    if (_commandItem->command == "midisustain") {
+/*    if (_commandItem->command == "midisustain") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         if (_commandItem->argument[0].toInt() == 1) {
             sustain = true;
@@ -370,7 +370,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             sustain = false;
         }
         commandResponses->push_back({ "MIDI sustain set to " + String(sustain), debugPrintType::Command});
-    } else
+    } else*/
     if (_commandItem->command == "midiallnotesoff") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         if (_commandItem->argument[0].toInt() == 1) {
