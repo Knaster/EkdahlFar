@@ -31,6 +31,7 @@
 {\ttfamily \#include \char`\"{}bow\+Actuators.\+cpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}solenoid.\+cpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}mute.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mutecalibration.\+cpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}stringmodule.\+cpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}midi.\+cpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}isrclasswrapper.\+cpp\char`\"{}}\newline
@@ -63,9 +64,9 @@ Include dependency graph for main.\+cpp\+:
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{main_8cpp_a8acf4e573134c18578761aa8ffca1476}{create\+Buffered\+Output}} (ss\+Output, 66, DROP\+\_\+\+UNTIL\+\_\+\+EMPTY)
+\mbox{\hyperlink{main_8cpp_ac2dc5984145d4f78c73928eca404b8ae}{create\+Buffered\+Output}} (ss\+Output, 8192, DROP\+\_\+\+UNTIL\+\_\+\+EMPTY)
 \begin{DoxyCompactList}\small\item\em Safe\+String buffer creation. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{main_8cpp_ac582113083535f9c743d3251bcbe0de8}{create\+Safe\+String\+Reader}} (ss\+Reader, 4096, \char`\"{}\textbackslash{}r\textbackslash{}n\char`\"{})
+\mbox{\hyperlink{main_8cpp_a74558414decb37e920b3291b8623615e}{create\+Safe\+String\+Reader}} (ss\+Reader, 8192, \char`\"{}\textbackslash{}r\textbackslash{}n\char`\"{})
 \begin{DoxyCompactList}\small\item\em Safe\+String reader creation. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{main_8cpp_afc3e7d08d802f694ab6a85e9908048f4}{freeram}} ()
 \item 
@@ -164,21 +165,21 @@ elapsed\+Micros \mbox{\hyperlink{main_8cpp_a24894588b78d05d43473e8e72dc24cb2}{co
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{main_8cpp_a8acf4e573134c18578761aa8ffca1476}\label{main_8cpp_a8acf4e573134c18578761aa8ffca1476}} 
+\mbox{\Hypertarget{main_8cpp_ac2dc5984145d4f78c73928eca404b8ae}\label{main_8cpp_ac2dc5984145d4f78c73928eca404b8ae}} 
 \index{main.cpp@{main.cpp}!createBufferedOutput@{createBufferedOutput}}
 \index{createBufferedOutput@{createBufferedOutput}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{createBufferedOutput()}{createBufferedOutput()}}
-{\footnotesize\ttfamily create\+Buffered\+Output (\begin{DoxyParamCaption}\item[{ss\+Output}]{,  }\item[{66}]{,  }\item[{DROP\+\_\+\+UNTIL\+\_\+\+EMPTY}]{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily create\+Buffered\+Output (\begin{DoxyParamCaption}\item[{ss\+Output}]{,  }\item[{8192}]{,  }\item[{DROP\+\_\+\+UNTIL\+\_\+\+EMPTY}]{ }\end{DoxyParamCaption})}
 
 
 
 Safe\+String buffer creation. 
 
-\mbox{\Hypertarget{main_8cpp_ac582113083535f9c743d3251bcbe0de8}\label{main_8cpp_ac582113083535f9c743d3251bcbe0de8}} 
+\mbox{\Hypertarget{main_8cpp_a74558414decb37e920b3291b8623615e}\label{main_8cpp_a74558414decb37e920b3291b8623615e}} 
 \index{main.cpp@{main.cpp}!createSafeStringReader@{createSafeStringReader}}
 \index{createSafeStringReader@{createSafeStringReader}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{createSafeStringReader()}{createSafeStringReader()}}
-{\footnotesize\ttfamily create\+Safe\+String\+Reader (\begin{DoxyParamCaption}\item[{ss\+Reader}]{,  }\item[{4096}]{,  }\item[{\char`\"{}\textbackslash{}r\textbackslash{}n\char`\"{}}]{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily create\+Safe\+String\+Reader (\begin{DoxyParamCaption}\item[{ss\+Reader}]{,  }\item[{8192}]{,  }\item[{\char`\"{}\textbackslash{}r\textbackslash{}n\char`\"{}}]{ }\end{DoxyParamCaption})}
 
 
 
@@ -236,7 +237,8 @@ fm\+Pin\+State\+Changed\+ISR will be called whenever an Interrupt event happens 
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}}
 {\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

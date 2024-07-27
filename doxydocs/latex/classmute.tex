@@ -105,9 +105,9 @@ const long \mbox{\hyperlink{classmute_a287a11ca06b6b4d1fb6d3b51c14decce}{step\+B
 \begin{DoxyCompactList}\small\item\em Baud rate for tilt stepper serial. \end{DoxyCompactList}\item 
 const int \mbox{\hyperlink{classmute_a5ab1822665131abeccd001d04b71df9e}{step\+Connect\+Delay}} = 200
 \begin{DoxyCompactList}\small\item\em Delay in between connecting to stepper and issuing commandss. \end{DoxyCompactList}\item 
-const uint8\+\_\+t \mbox{\hyperlink{classmute_ac8dcf6930d2d3eda83b2362ca95d7730}{step\+Run\+Current\+Percent}} = 30
+const uint8\+\_\+t \mbox{\hyperlink{classmute_ac8dcf6930d2d3eda83b2362ca95d7730}{step\+Run\+Current\+Percent}} = 40
 \begin{DoxyCompactList}\small\item\em Stepper current during run phase. \end{DoxyCompactList}\item 
-const uint8\+\_\+t \mbox{\hyperlink{classmute_a9ba529afa13fa80787a810b5a3fbc7a1}{step\+Home\+Current\+Percent}} = 10
+const uint8\+\_\+t \mbox{\hyperlink{classmute_a9ba529afa13fa80787a810b5a3fbc7a1}{step\+Home\+Current\+Percent}} = 20
 \item 
 const char \mbox{\hyperlink{classmute_a1c4f1af94bdaca6ace038062e16dd86c}{step\+Microstepping}} = 32
 \begin{DoxyCompactList}\small\item\em Tilt stepper micro stepping. \end{DoxyCompactList}\item 
@@ -155,7 +155,8 @@ mp\+Half&\\
 \doxysubsubsection{\texorpdfstring{mute()}{mute()}}
 {\footnotesize\ttfamily mute\+::mute (\begin{DoxyParamCaption}\item[{char}]{step\+En\+Pin,  }\item[{char}]{step\+Dir\+Pin,  }\item[{char}]{step\+Step\+Pin,  }\item[{Hardware\+Serial $\ast$}]{step\+Serial\+Port,  }\item[{char}]{step\+Home\+Sensor\+Pin }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -183,6 +184,14 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{getFullMutePosition()}{getFullMutePosition()}}
 {\footnotesize\ttfamily uint16\+\_\+t mute\+::get\+Full\+Mute\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmute_a95be06612690ef583ba2b5ccd80a8741_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classmute_af96a3bcd357d8836e951e0ac53f40233}\label{classmute_af96a3bcd357d8836e951e0ac53f40233}} 
 \index{mute@{mute}!getHalfMutePosition@{getHalfMutePosition}}
 \index{getHalfMutePosition@{getHalfMutePosition}!mute@{mute}}
@@ -232,11 +241,20 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{homeMute()}{homeMute()}}
 {\footnotesize\ttfamily bool mute\+::home\+Mute (\begin{DoxyParamCaption}\item[{bool}]{invert = {\ttfamily false} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classmute_a8205ea9cb3da2cfb5152bcba2a33aa02_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmute_a8205ea9cb3da2cfb5152bcba2a33aa02_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{classmute_ab12b8e1009e28f096c6e69457c975a99}\label{classmute_ab12b8e1009e28f096c6e69457c975a99}} 
@@ -297,6 +315,14 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{setFullMutePosition()}{setFullMutePosition()}}
 {\footnotesize\ttfamily bool mute\+::set\+Full\+Mute\+Position (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{in\+Full\+Mute\+Position }\end{DoxyParamCaption})}
 
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmute_a889fe5684e410c8dd398ed59233cf047_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classmute_a66681a7501fae2e3cdeaed42080cf353}\label{classmute_a66681a7501fae2e3cdeaed42080cf353}} 
 \index{mute@{mute}!setHalfMutePosition@{setHalfMutePosition}}
 \index{setHalfMutePosition@{setHalfMutePosition}!mute@{mute}}
@@ -347,7 +373,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{updateMute()}{updateMute()}}
 {\footnotesize\ttfamily void mute\+::update\+Mute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -451,7 +478,7 @@ Pin for tilt stepper driver enable.
 \index{mute@{mute}!stepHomeCurrentPercent@{stepHomeCurrentPercent}}
 \index{stepHomeCurrentPercent@{stepHomeCurrentPercent}!mute@{mute}}
 \doxysubsubsection{\texorpdfstring{stepHomeCurrentPercent}{stepHomeCurrentPercent}}
-{\footnotesize\ttfamily const uint8\+\_\+t mute\+::step\+Home\+Current\+Percent = 10\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const uint8\+\_\+t mute\+::step\+Home\+Current\+Percent = 20\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{classmute_a1c4f1af94bdaca6ace038062e16dd86c}\label{classmute_a1c4f1af94bdaca6ace038062e16dd86c}} 
 \index{mute@{mute}!stepMicrostepping@{stepMicrostepping}}
@@ -477,7 +504,7 @@ Pin for tilt stepper driver direction.
 \index{mute@{mute}!stepRunCurrentPercent@{stepRunCurrentPercent}}
 \index{stepRunCurrentPercent@{stepRunCurrentPercent}!mute@{mute}}
 \doxysubsubsection{\texorpdfstring{stepRunCurrentPercent}{stepRunCurrentPercent}}
-{\footnotesize\ttfamily const uint8\+\_\+t mute\+::step\+Run\+Current\+Percent = 30\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const uint8\+\_\+t mute\+::step\+Run\+Current\+Percent = 40\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

@@ -330,33 +330,24 @@ int bowControl::getHarmonicShiftRange() {
 }
 
 bool bowControl::setHarmonic(int _harmonic) {
-    //    debugPrintln("Remove the following line, its just for testing ", Error)
-    //    calibrationDataConnect->upperHarmonic = 49;
-    /// \todo do we return if we're out of bounds or do lowest/highest possible?
     int __harmonic = clamp(_harmonic, calibrationDataConnect->lowerHarmonic, calibrationDataConnect->upperHarmonic);
-    //    debugPrintln("LH " + String(calibrationDataConnect->lowerHarmonic) + " UH " + String(calibrationDataConnect->upperHarmonic), Debug);
     if (__harmonic != _harmonic) { return false; }
     harmonic = __harmonic;
     int harmonicCount = harmonicSeriesList.series[currentHarmonicSeries].frequency.size();
     // Calculate where in the series the current harmonic resides (0-11)
-    /*    int series = harmonic % 12;
-    if (series < 0) { series = 12 + series; }*/
     int series = harmonic % harmonicCount;
     if (series < 0) { series = harmonicCount + series; }
     // If harmonic is below 0 we need to reduce for the truncation to work properly
-    /*    if (harmonic < 0) { harmonic -= 11; }
-    int octave = trunc(harmonic / 12);*/
     if (harmonic < 0) { harmonic -= (harmonicCount - 1); }
     int octave = trunc(harmonic / harmonicCount);
 
-    //    float freq = calibrationDataConnect->fundamentalFrequency * pow(2, octave) * justSeries[series]; // - 0.4;
     float freq = calibrationDataConnect->fundamentalFrequency * pow(2, octave) * harmonicSeriesList.series[currentHarmonicSeries].frequency[series]; // - 0.4;
 
     if (outputDebugData) { debugPrintln("Setting harmonic to " + String(series) + " @ frequency " + String(freq), Debug); }
-
+/*
     if (freq > calibrationDataConnect->maxHz) { debugPrintln("ERROR! Over max speed!!", Error); return false; };
     if (freq < calibrationDataConnect->minHz) { debugPrintln("Harmonic under limit @ " + String(freq) + " Hertz", Error); return false; }
-
+*/
     currentHarmonicFreq = freq;
     calculateHarmonicShift();
     if (!setPIDTarget(currentHarmonicShiftFreq)) { return false; };

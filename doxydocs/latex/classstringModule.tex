@@ -48,6 +48,8 @@ std\+::vector$<$ \mbox{\hyperlink{classsolenoid}{solenoid}} $>$ \mbox{\hyperlink
 \item 
 std\+::vector$<$ \mbox{\hyperlink{classmute}{mute}} $>$ \mbox{\hyperlink{classstringModule_ac21fd840807f137b8ce5384e1dea3ee3}{mute\+Array}}
 \item 
+std\+::vector$<$ \mbox{\hyperlink{classcalibrateMute}{calibrate\+Mute}} $>$ \mbox{\hyperlink{classstringModule_a5dab3a72fceb5aac97140e8acd462770}{calibrate\+Mute\+Array}}
+\item 
 int \mbox{\hyperlink{classstringModule_a7fb66cceefcbed37d29993401fcfe38b}{current\+Bow\+Serial}} = 0
 \item 
 int \mbox{\hyperlink{classstringModule_a7a05b447369edd8b38c8efaabb636225}{current\+Solenoid\+Serial}} = 0
@@ -75,7 +77,7 @@ Safe\+String\+Reader $\ast$ \mbox{\hyperlink{classstringModule_a4cb3706886fe89b9
 {\footnotesize\ttfamily bool string\+Module\+::add\+Bow (\begin{DoxyParamCaption}\item[{char}]{motor\+Rev\+Pin,  }\item[{char}]{motor\+Voltage\+Pin,  }\item[{char}]{motor\+DCDCEn,  }\item[{char}]{tacho\+Pin,  }\item[{char}]{current\+Sense\+Pin,  }\item[{char}]{motor\+Fault\+Pin,  }\item[{char}]{step\+En\+Pin,  }\item[{char}]{step\+Dir\+Pin,  }\item[{char}]{step\+Step\+Pin,  }\item[{Hardware\+Serial $\ast$}]{step\+Serial\+Port,  }\item[{char}]{step\+Home\+Sensor\+Pin,  }\item[{char}]{step\+Correction\+Sensor\+Pin }\end{DoxyParamCaption})}
 
 \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{todo__todo000009}{Todo}}]fix pointers here, major irritation \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{todo__todo000008}{Todo}}]fix pointers here, major irritation \end{DoxyRefDesc}
 \mbox{\Hypertarget{classstringModule_ae900a34fa51bb9cdf8e0db8ad54698ee}\label{classstringModule_ae900a34fa51bb9cdf8e0db8ad54698ee}} 
 \index{stringModule@{stringModule}!addMute@{addMute}}
 \index{addMute@{addMute}!stringModule@{stringModule}}
@@ -143,8 +145,7 @@ Here is the call graph for this function\+:
 \doxysubsubsection{\texorpdfstring{processSerialCommand\_BowActuator()}{processSerialCommand\_BowActuator()}}
 {\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+Bow\+Actuator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -164,8 +165,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{processSerialCommand\_CalibrationsSettings()}{processSerialCommand\_CalibrationsSettings()}}
 {\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+Calibrations\+Settings (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -185,8 +185,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{processSerialCommand\_GeneralControl()}{processSerialCommand\_GeneralControl()}}
 {\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+General\+Control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -206,8 +205,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{processSerialCommand\_MuteControl()}{processSerialCommand\_MuteControl()}}
 {\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+Mute\+Control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} $\ast$}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ $\ast$}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} $\ast$}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -288,6 +286,12 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{calibrateArray@{calibrateArray}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{calibrateArray}{calibrateArray}}
 {\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classcalibrate}{calibrate}}$>$ string\+Module\+::calibrate\+Array}
+
+\mbox{\Hypertarget{classstringModule_a5dab3a72fceb5aac97140e8acd462770}\label{classstringModule_a5dab3a72fceb5aac97140e8acd462770}} 
+\index{stringModule@{stringModule}!calibrateMuteArray@{calibrateMuteArray}}
+\index{calibrateMuteArray@{calibrateMuteArray}!stringModule@{stringModule}}
+\doxysubsubsection{\texorpdfstring{calibrateMuteArray}{calibrateMuteArray}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classcalibrateMute}{calibrate\+Mute}}$>$ string\+Module\+::calibrate\+Mute\+Array}
 
 \mbox{\Hypertarget{classstringModule_a683500a505f3f4cdcf592142b5c8711d}\label{classstringModule_a683500a505f3f4cdcf592142b5c8711d}} 
 \index{stringModule@{stringModule}!calibrationDataArray@{calibrationDataArray}}

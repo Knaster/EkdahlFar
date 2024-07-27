@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['zxbmrevpin_817',['ZXBMRevPin',['../classbowIO.html#abaa032ac2cd5e22904b5f55c710283cc',1,'bowIO']]]
+  ['value_1382',['value',['../classaverager.html#ade0cac017e395f4b8a524d44b0d831ec',1,'averager']]],
+  ['velocity_1383',['velocity',['../structnoteMsg.html#ab465b72dedecef1146ca0c584ef5c48f',1,'noteMsg']]]
 ];

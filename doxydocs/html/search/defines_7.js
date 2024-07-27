@@ -1,5 +1,21 @@
 var searchData=
 [
-  ['noteoffsingle_1427',['noteOffSingle',['../configuration_8cpp.html#ace094a5a481a9002559586aef645e904',1,'configuration.cpp']]],
-  ['noteonsingle_1428',['noteOnSingle',['../configuration_8cpp.html#a38c83139c1b05e16c729112eacd38624',1,'configuration.cpp']]]
+  ['manufacturer_5fname_1472',['MANUFACTURER_NAME',['../name_8c.html#aaa2b8f5b105c3019df0cb346f472e803',1,'name.c']]],
+  ['manufacturer_5fname_5flen_1473',['MANUFACTURER_NAME_LEN',['../name_8c.html#a7ec873977ee9666aa7646bd4c6654df9',1,'name.c']]],
+  ['mapsize_1474',['mapSize',['../midi_8cpp.html#af5f9f8958f0af48944f91c92f074fbc8',1,'midi.cpp']]],
+  ['masterrx_1475',['masterRx',['../main_8cpp.html#a2c48b7e8ad263f85342e4132637108c1',1,'main.cpp']]],
+  ['masterslavebaudrate_1476',['masterSlaveBaudRate',['../main_8cpp.html#a7a2e501ed0e83cab3740b8934d6c42c1',1,'main.cpp']]],
+  ['mastertx_1477',['masterTx',['../main_8cpp.html#aa9f03a97087feac8e2c2928240e7c332',1,'main.cpp']]],
+  ['maxpowerusemultiplierduringcalibration_1478',['maxPowerUseMultiplierDuringCalibration',['../calibrate_8h.html#a947c967c63e6d866be6d4f8905de7de5',1,'calibrate.h']]],
+  ['maxstepretract_1479',['maxStepRetract',['../mutecalibration_8hpp.html#a2dcced8846e12aa1985258bed43d006b',1,'mutecalibration.hpp']]],
+  ['maxtestfreq_1480',['maxTestFreq',['../calibrate_8h.html#a47b98850cbd5784fa0048dc4f4285ec6',1,'calibrate.h']]],
+  ['microsteps_1481',['microSteps',['../servostepper_8h.html#a6fe78f5adf18de498acaac123384db1a',1,'servostepper.h']]],
+  ['midi_5fh_1482',['MIDI_H',['../midi_8cpp.html#a167c786385a6cfac01f53560f43b7f9b',1,'midi.cpp']]],
+  ['midi_5fname_1483',['MIDI_NAME',['../name_8c.html#acfb86508806c2d3aabbe8f8c2ef9f401',1,'name.c']]],
+  ['midi_5fname_5flen_1484',['MIDI_NAME_LEN',['../name_8c.html#a7b129d726ca2eff9f6b5fd035af68834',1,'name.c']]],
+  ['minamplitude_1485',['minAmplitude',['../mutecalibration_8hpp.html#aa1f92eccb1ad4f6e21e7a95dff6dec93',1,'mutecalibration.hpp']]],
+  ['minpermissiblebowspeedforcalibration_1486',['minPermissibleBowSpeedForCalibration',['../calibrate_8h.html#a207f202ec9674a99e0465a1d6cdf2081',1,'calibrate.h']]],
+  ['mintestfreq_1487',['minTestFreq',['../calibrate_8h.html#a8c8701de81f6984d1467051303c5d5c8',1,'calibrate.h']]],
+  ['mute_5fc_1488',['MUTE_C',['../mute_8cpp.html#af472a2398d3de72d6ed2271c9c09e0dc',1,'mute.cpp']]],
+  ['mutecalibration_5fcpp_1489',['MUTECALIBRATION_CPP',['../mutecalibration_8cpp.html#a7050195731e27b577ef16d01e86c7a52',1,'mutecalibration.cpp']]]
 ];

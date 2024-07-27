@@ -37,9 +37,9 @@ enum \mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057da}{e\+Ed
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classservoStepper_aa2ba385db7d51af709ada204f4513e3e}{calculate\+Acceleration}} ()
-\item 
 \mbox{\hyperlink{classservoStepper_add036b7f2f70ed5e6590b2eea3ba5a69}{servo\+Stepper}} (byte in\+Pin\+Step, byte in\+Pin\+Dir, byte in\+Pin\+Home\+Sense, void $\ast$in\+Step\+Interval\+Callback=nullptr)
+\item 
+void \mbox{\hyperlink{classservoStepper_acac2b7ede284e6e575793cf2a319f799}{ts\+Debug\+Println}} (String m\+\_\+msg, \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}} m\+\_\+dp\+Type)
 \item 
 bool \mbox{\hyperlink{classservoStepper_a5eb8cba1199d79c6901eb356b10cdc5e}{set\+Max\+Speed}} (uint16\+\_\+t in\+Speed\+RPM)
 \item 
@@ -49,6 +49,8 @@ void \mbox{\hyperlink{classservoStepper_a2bf706707316fe6953dd80b462329264}{set\+
 \item 
 \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} \mbox{\hyperlink{classservoStepper_a8f11cc27e61d5cf2a8bbe79843f6198c}{not\+Direction}} (\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} in\+Direction)
 \item 
+void \mbox{\hyperlink{classservoStepper_aa2ba385db7d51af709ada204f4513e3e}{calculate\+Acceleration}} ()
+\item 
 bool \mbox{\hyperlink{classservoStepper_a97b04e23af09fdcf769ab2dbf75990ab}{get\+Homing\+Change}} ()
 \item 
 void \mbox{\hyperlink{classservoStepper_aeecabbc0f2f57edd9bb49740b1b9a1bc}{step\+Next}} (uint16\+\_\+t period)
@@ -57,7 +59,7 @@ void \mbox{\hyperlink{classservoStepper_a6ac51a96a27dfaccd4b88da6bc4021b7}{step\
 \item 
 \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} \mbox{\hyperlink{classservoStepper_a6e907b5b11ec3a35b96e98c3f0c88e0f}{get\+Direction\+To}} (uint16\+\_\+t position)
 \item 
-void \mbox{\hyperlink{classservoStepper_a7146e64e34d9b1fbf6d9a93e47551f7b}{update\+Position}} ()
+void \mbox{\hyperlink{classservoStepper_a981bafbfa5bf82c13a4e620aab894dc2}{update\+Position}} (bool interrupt\+Driven=true)
 \item 
 void \mbox{\hyperlink{classservoStepper_af927425c748666b146956f455effbcad}{update\+Position\+Move}} ()
 \item 
@@ -156,6 +158,14 @@ int \mbox{\hyperlink{classservoStepper_a2479d6b10fc0be2b9e830c545994409b}{steppe
 \item 
 bool \mbox{\hyperlink{classservoStepper_a6ce149fe254e8fa5c1b93d73d16b11e5}{reached\+Target}} = false
 \item 
+bool \mbox{\hyperlink{classservoStepper_a4d77b0b31e409b487aeff3dc292c615f}{output\+Debug\+Data}} = false
+\item 
+bool \mbox{\hyperlink{classservoStepper_a12db281a4ffca912600b304246a0006a}{int\+Driven\+Msg\+Flag}} = false
+\item 
+String \mbox{\hyperlink{classservoStepper_a23a921036b9cf600e2a96d510788b722}{int\+Driven\+Msg}} = \char`\"{}\char`\"{}
+\item 
+bool \mbox{\hyperlink{classservoStepper_a4c13475c378d9d3d45570c4dc3ba3a07}{inhibit\+Interrupt}} = false
+\item 
 bool \mbox{\hyperlink{classservoStepper_aeb2ec33ba06c84ab9a4ae24927389150}{found\+Second\+Home\+Falling}} = false
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classservoStepper_ad981181ba349dab9d8ff9cc1b0464b2b}{second\+Home\+Falling\+Steps}} = 0
@@ -172,13 +182,15 @@ uint8\+\_\+t \mbox{\hyperlink{classservoStepper_a0753a0f4c51819d1160649f2049dd4b
 uint8\+\_\+t \mbox{\hyperlink{classservoStepper_abd1bbdb87eb98a9906215f9dc5108abe}{pin\+Vref}} = -\/1
 \item 
 uint8\+\_\+t \mbox{\hyperlink{classservoStepper_a628c5fe63b3e05ee4ef76a8e9bcfc4a4}{pin\+En}} = -\/1
+\item 
+String \mbox{\hyperlink{classservoStepper_a1ce32e635777e6e5ce904dfc3a935e8a}{int\+Driven\+MsgP}} = \char`\"{}\char`\"{}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 The purpose of this class is to control stepper motors in terms of positional indexing much like RC servos. 
 
-All functions are non-\/blocking and \mbox{\hyperlink{classservoStepper_a7146e64e34d9b1fbf6d9a93e47551f7b}{update\+Position()}} has to be called continously in order for software and hardware to be updated.
+All functions are non-\/blocking and \mbox{\hyperlink{classservoStepper_a981bafbfa5bf82c13a4e620aab894dc2}{update\+Position()}} has to be called continously in order for software and hardware to be updated.
 
 The function \mbox{\hyperlink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{complete\+Task()}} can be called in order to block execution until the last command has completed or timed out
 
@@ -286,7 +298,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{calculateAcceleration()}{calculateAcceleration()}}
 {\footnotesize\ttfamily void servo\+Stepper\+::calculate\+Acceleration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -299,14 +312,16 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{completeTask()}{completeTask()}}
 {\footnotesize\ttfamily bool servo\+Stepper\+::complete\+Task (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{timeout = {\ttfamily 3000} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -326,7 +341,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classservoStepper_ad91fe477516c66c204e6450732216f1d_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -339,7 +355,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{eStop()}{eStop()}}
 {\footnotesize\ttfamily void servo\+Stepper\+::e\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -352,7 +369,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{getDirectionTo()}{getDirectionTo()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} servo\+Stepper\+::get\+Direction\+To (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -365,7 +383,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{getHomingChange()}{getHomingChange()}}
 {\footnotesize\ttfamily bool servo\+Stepper\+::get\+Homing\+Change (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -385,7 +404,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classservoStepper_a30df0093cfd5951322cb0bdf857e4209_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -398,7 +418,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{notDirection()}{notDirection()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} servo\+Stepper\+::not\+Direction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}}}]{in\+Direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -411,7 +432,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{setDirection()}{setDirection()}}
 {\footnotesize\ttfamily void servo\+Stepper\+::set\+Direction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}}}]{in\+Direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -424,7 +446,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{setHomingOffset()}{setHomingOffset()}}
 {\footnotesize\ttfamily void servo\+Stepper\+::set\+Homing\+Offset (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -443,14 +466,16 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}}
 {\footnotesize\ttfamily bool servo\+Stepper\+::set\+Position (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classservoStepper_a65a7de2492de7c71e3b2bf9cc5b1f9fd_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -463,7 +488,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{setSpeed()}{setSpeed()}}
 {\footnotesize\ttfamily bool servo\+Stepper\+::set\+Speed (\begin{DoxyParamCaption}\item[{float}]{in\+Speed\+RPM }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -476,7 +502,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{stepNext()}{stepNext()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily void servo\+Stepper\+::step\+Next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -489,24 +516,48 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{stepNext()}{stepNext()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily void servo\+Stepper\+::step\+Next (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{period }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-\mbox{\Hypertarget{classservoStepper_a7146e64e34d9b1fbf6d9a93e47551f7b}\label{classservoStepper_a7146e64e34d9b1fbf6d9a93e47551f7b}} 
+\mbox{\Hypertarget{classservoStepper_acac2b7ede284e6e575793cf2a319f799}\label{classservoStepper_acac2b7ede284e6e575793cf2a319f799}} 
+\index{servoStepper@{servoStepper}!tsDebugPrintln@{tsDebugPrintln}}
+\index{tsDebugPrintln@{tsDebugPrintln}!servoStepper@{servoStepper}}
+\doxysubsubsection{\texorpdfstring{tsDebugPrintln()}{tsDebugPrintln()}}
+{\footnotesize\ttfamily void servo\+Stepper\+::ts\+Debug\+Println (\begin{DoxyParamCaption}\item[{String}]{m\+\_\+msg,  }\item[{\mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}}}]{m\+\_\+dp\+Type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classservoStepper_acac2b7ede284e6e575793cf2a319f799_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classservoStepper_acac2b7ede284e6e575793cf2a319f799_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classservoStepper_a981bafbfa5bf82c13a4e620aab894dc2}\label{classservoStepper_a981bafbfa5bf82c13a4e620aab894dc2}} 
 \index{servoStepper@{servoStepper}!updatePosition@{updatePosition}}
 \index{updatePosition@{updatePosition}!servoStepper@{servoStepper}}
 \doxysubsubsection{\texorpdfstring{updatePosition()}{updatePosition()}}
-{\footnotesize\ttfamily void servo\+Stepper\+::update\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void servo\+Stepper\+::update\+Position (\begin{DoxyParamCaption}\item[{bool}]{interrupt\+Driven = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classservoStepper_a7146e64e34d9b1fbf6d9a93e47551f7b_cgraph}
+\includegraphics[width=350pt]{classservoStepper_a981bafbfa5bf82c13a4e620aab894dc2_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classservoStepper_a7146e64e34d9b1fbf6d9a93e47551f7b_icgraph}
+\includegraphics[width=350pt]{classservoStepper_a981bafbfa5bf82c13a4e620aab894dc2_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{classservoStepper_ad2792b0bdfa52d1caf01fddabdb88b4c}\label{classservoStepper_ad2792b0bdfa52d1caf01fddabdb88b4c}} 
@@ -522,7 +573,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classservoStepper_ad2792b0bdfa52d1caf01fddabdb88b4c_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -542,7 +594,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classservoStepper_a5d38d0a8e3d48c6f94736515247d0c32_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -562,7 +615,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classservoStepper_a461c43ca0fd0232c93fc18a7bd493d9f_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -575,14 +629,16 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{updatePositionMove()}{updatePositionMove()}}
 {\footnotesize\ttfamily void servo\+Stepper\+::update\+Position\+Move (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classservoStepper_af927425c748666b146956f455effbcad_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -602,7 +658,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classservoStepper_a131155bf76281c013cb17abaea38d0c9_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -622,7 +679,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classservoStepper_a6d11d8308b5d1ffad77f5df3331d99a6_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -642,7 +700,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classservoStepper_aba059b166e86d21121671db3530db43a_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -662,7 +721,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classservoStepper_a1a7fb59f63dd2f6cf7f513ceb11a293e_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -780,6 +840,30 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{homingStepsThreshold}{homingStepsThreshold}}
 {\footnotesize\ttfamily int16\+\_\+t servo\+Stepper\+::homing\+Steps\+Threshold = ( 200 / 2) $\ast$ 32}
 
+\mbox{\Hypertarget{classservoStepper_a4c13475c378d9d3d45570c4dc3ba3a07}\label{classservoStepper_a4c13475c378d9d3d45570c4dc3ba3a07}} 
+\index{servoStepper@{servoStepper}!inhibitInterrupt@{inhibitInterrupt}}
+\index{inhibitInterrupt@{inhibitInterrupt}!servoStepper@{servoStepper}}
+\doxysubsubsection{\texorpdfstring{inhibitInterrupt}{inhibitInterrupt}}
+{\footnotesize\ttfamily bool servo\+Stepper\+::inhibit\+Interrupt = false}
+
+\mbox{\Hypertarget{classservoStepper_a23a921036b9cf600e2a96d510788b722}\label{classservoStepper_a23a921036b9cf600e2a96d510788b722}} 
+\index{servoStepper@{servoStepper}!intDrivenMsg@{intDrivenMsg}}
+\index{intDrivenMsg@{intDrivenMsg}!servoStepper@{servoStepper}}
+\doxysubsubsection{\texorpdfstring{intDrivenMsg}{intDrivenMsg}}
+{\footnotesize\ttfamily String servo\+Stepper\+::int\+Driven\+Msg = \char`\"{}\char`\"{}}
+
+\mbox{\Hypertarget{classservoStepper_a12db281a4ffca912600b304246a0006a}\label{classservoStepper_a12db281a4ffca912600b304246a0006a}} 
+\index{servoStepper@{servoStepper}!intDrivenMsgFlag@{intDrivenMsgFlag}}
+\index{intDrivenMsgFlag@{intDrivenMsgFlag}!servoStepper@{servoStepper}}
+\doxysubsubsection{\texorpdfstring{intDrivenMsgFlag}{intDrivenMsgFlag}}
+{\footnotesize\ttfamily bool servo\+Stepper\+::int\+Driven\+Msg\+Flag = false}
+
+\mbox{\Hypertarget{classservoStepper_a1ce32e635777e6e5ce904dfc3a935e8a}\label{classservoStepper_a1ce32e635777e6e5ce904dfc3a935e8a}} 
+\index{servoStepper@{servoStepper}!intDrivenMsgP@{intDrivenMsgP}}
+\index{intDrivenMsgP@{intDrivenMsgP}!servoStepper@{servoStepper}}
+\doxysubsubsection{\texorpdfstring{intDrivenMsgP}{intDrivenMsgP}}
+{\footnotesize\ttfamily String servo\+Stepper\+::int\+Driven\+MsgP = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
 \mbox{\Hypertarget{classservoStepper_a64601bfc98656bc629953d6ca7a249b0}\label{classservoStepper_a64601bfc98656bc629953d6ca7a249b0}} 
 \index{servoStepper@{servoStepper}!invertDirection@{invertDirection}}
 \index{invertDirection@{invertDirection}!servoStepper@{servoStepper}}
@@ -809,6 +893,12 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{movingTo@{movingTo}!servoStepper@{servoStepper}}
 \doxysubsubsection{\texorpdfstring{movingTo}{movingTo}}
 {\footnotesize\ttfamily uint16\+\_\+t servo\+Stepper\+::moving\+To = 0}
+
+\mbox{\Hypertarget{classservoStepper_a4d77b0b31e409b487aeff3dc292c615f}\label{classservoStepper_a4d77b0b31e409b487aeff3dc292c615f}} 
+\index{servoStepper@{servoStepper}!outputDebugData@{outputDebugData}}
+\index{outputDebugData@{outputDebugData}!servoStepper@{servoStepper}}
+\doxysubsubsection{\texorpdfstring{outputDebugData}{outputDebugData}}
+{\footnotesize\ttfamily bool servo\+Stepper\+::output\+Debug\+Data = false}
 
 \mbox{\Hypertarget{classservoStepper_a03ab7d33858f698587e4a9704cb321bd}\label{classservoStepper_a03ab7d33858f698587e4a9704cb321bd}} 
 \index{servoStepper@{servoStepper}!pinDir@{pinDir}}

@@ -377,7 +377,6 @@ void loop() {
         controlRead->readData();
         controlReaderInterval = 0;
     }
-
     MIDI.read();
 
 #if EFARSLAVE
