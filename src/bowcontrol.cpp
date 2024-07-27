@@ -169,15 +169,15 @@ void bowControl::setBowPressureSafe(uint16_t tilt) {
 
     if ((tiltMode == Engage) && (bowIOConnect->stepServoStepper->reachedTarget))  {
         reachedEngage = true;
-        debugPrintln("Reached engage", debugPrintType::Debug);
+        if (outputDebugData) { debugPrintln("Reached engage", debugPrintType::Debug); }
     }
 
     if ((tiltMode == Engage) && (reachedEngage)) {
         bowIOConnect->stepServoStepper->setSpeed(bowSpeedWhileEngaged);
-        debugPrintln("Setting pressure speed to slow", debugPrintType::Debug);
+        if (outputDebugData) { debugPrintln("Setting pressure speed to slow", debugPrintType::Debug); }
     } else {
         bowIOConnect->stepServoStepper->setSpeed(bowSpeedToEngage);
-        debugPrintln("Setting pressure speed to high", debugPrintType::Debug);
+        if (outputDebugData) { debugPrintln("Setting pressure speed to high", debugPrintType::Debug); }
     }
 
     bowIOConnect->setTiltPWM(tilt);
@@ -239,7 +239,7 @@ uint16_t bowControl::getBowPower() {
 bool bowControl::setManualTilt(uint16_t tilt) {
     manualTiltPWM = tilt;
     setBowPressureSafe(tilt);
-    debugPrintln("setManualTilt", Debug);
+    if (outputDebugData) { debugPrintln("setManualTilt", Debug); }
     return true;
 }
 
@@ -260,7 +260,7 @@ bool bowControl::bowRest(int enact) {
 
 bool bowControl::setHold(bool hold) {
     _hold = !hold;
-    debugPrintln("Hold " + String(hold), Debug);
+    if (outputDebugData) { debugPrintln("Hold " + String(hold), Debug); }
     if ((_hold == false) && (tiltMode == Rest)) { bowRest(1); }
     return true;
 }
@@ -280,7 +280,7 @@ bool bowControl::bowMute(int enact) {
     pidTargetSpeed = 0;
     bowIOConnect->setSpeedPWM(0);
     setBowPressureSafe(calibrationDataConnect->firstTouchPressure + muteForce);
-    debugPrintln("bowMute", Debug);
+    if (outputDebugData) { debugPrintln("bowMute", Debug); }
     tiltMode = Mute;
     elapsedSinceMute = 0;
     return true;
@@ -290,7 +290,7 @@ bool bowControl::bowMute(int enact) {
 bool bowControl::calculateHarmonicShift() {
     float freq = currentHarmonicFreq * pow(2, ((float) (((float) harmonicShiftRange) / 12) * harmonicShift / 32768 ));
     float freq5 = freq * pow(2, ((float) (((float) 60) / 12) * harmonicShift5 / 32768 ));
-    debugPrintln("Current freq " + String(currentHarmonicFreq) + " shifted freq " + String(freq) + " shifted freq 5 octaves " + String(freq5), Debug);
+    if (outputDebugData) { debugPrintln("Current freq " + String(currentHarmonicFreq) + " shifted freq " + String(freq) + " shifted freq 5 octaves " + String(freq5), Debug); }
     currentHarmonicShiftFreq = clamp(freq5, calibrationDataConnect->minHz, calibrationDataConnect->maxHz);
     if (currentHarmonicShiftFreq != freq5) { return false; }
     return true;
@@ -300,7 +300,7 @@ bool bowControl::setHarmonicShift(int inHarmonicShift) {
     harmonicShift = inHarmonicShift;
     if (!calculateHarmonicShift()) { return false; }
     if (!setPIDTarget(currentHarmonicShiftFreq)) { return false; };
-    debugPrintln("New shifted frequency is " + String (currentHarmonicShiftFreq), Debug);
+    if (outputDebugData) { debugPrintln("New shifted frequency is " + String (currentHarmonicShiftFreq), Debug); }
     return true;
 }
 
@@ -308,7 +308,7 @@ bool bowControl::setHarmonicShift5(int inHarmonicShift5) {
     harmonicShift5 = inHarmonicShift5;
     if (!calculateHarmonicShift()) { return false; }
     if (!setPIDTarget(currentHarmonicShiftFreq)) { return false; };
-    debugPrintln("New shifted frequency is " + String (currentHarmonicShiftFreq), Debug);
+    if (outputDebugData) { debugPrintln("New shifted frequency is " + String (currentHarmonicShiftFreq), Debug); }
     return true;
 }
 
@@ -352,7 +352,7 @@ bool bowControl::setHarmonic(int _harmonic) {
     //    float freq = calibrationDataConnect->fundamentalFrequency * pow(2, octave) * justSeries[series]; // - 0.4;
     float freq = calibrationDataConnect->fundamentalFrequency * pow(2, octave) * harmonicSeriesList.series[currentHarmonicSeries].frequency[series]; // - 0.4;
 
-    debugPrintln("Setting harmonic to " + String(series) + " @ frequency " + String(freq), Debug);
+    if (outputDebugData) { debugPrintln("Setting harmonic to " + String(series) + " @ frequency " + String(freq), Debug); }
 
     if (freq > calibrationDataConnect->maxHz) { debugPrintln("ERROR! Over max speed!!", Error); return false; };
     if (freq < calibrationDataConnect->minHz) { debugPrintln("Harmonic under limit @ " + String(freq) + " Hertz", Error); return false; }
@@ -448,12 +448,12 @@ void bowControl::updateString() {
             if ((tiltMode == Rest) && (bowShutoffTimedout == false)) {
                 run = 0;
                 bowShutoffTimedout = true;
-                debugPrintln("Auto shutdown of motor", Debug);
+                if (outputDebugData) { debugPrintln("Auto shutdown of motor", Debug); }
             } else
             if ((bowShutoffTimedout == true) && (bowShutoffMotorDisabled == false) && (bowIOConnect->averageFreq() == 0)) {
                 bowIOConnect->disableBowPower();
                 bowShutoffMotorDisabled = true;
-                debugPrintln("Auto shutdown of motor dc/dc converter", Debug);
+                if (outputDebugData) { debugPrintln("Auto shutdown of motor dc/dc converter", Debug); }
             }
         }
 

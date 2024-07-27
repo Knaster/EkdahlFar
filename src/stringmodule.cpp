@@ -48,6 +48,17 @@ bool stringModule::addMute(char stepEnPin, char stepDirPin, char stepStepPin, Ha
     mmute->setTilt(0);
     mmute->stepServoStepper->stepperID = 2;
 
+    int arrayIndex = bowIOArray.size() - 1;
+
+    calibrateMute* muteCalibration = new calibrateMute(*mmute, bowIOArray[arrayIndex], bowControlArray[arrayIndex]);
+    calibrateMuteArray.push_back(*muteCalibration);
+/*
+    int arrayIndex = bowIOArray.size() - 1;
+    if (arrayIndex < 0) {
+        debugPrintln("arrayIndex below zero in addMute", debugPrintType::Error);
+        return false;
+    }
+*/
     return true;
 }
 
@@ -666,6 +677,12 @@ bool stringModule::processSerialCommand_MuteControl(commandItem *_commandItem, s
     } else
     if (_commandItem->command == "mutehome") {
         muteArray[currentBowSerial].homeMute();
+    } else
+    if (_commandItem->command == "mutecalibrate") {
+        if (!calibrateMuteArray[currentBowSerial].calibrateAll()) {
+            return false;
+        }
+        commandResponses->push_back({"Mute calibration finished", Command});
     } else {
         return false;
     }
@@ -685,14 +702,19 @@ bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem,
     if (_commandItem->command == "bowdebugmeasuretimetotarget") {
         bowControlArray[currentBowSerial].measureTimeToTarget(_commandItem->argument[0].toInt());
     }  else
+
     if (_commandItem->command == "pickupstringfrequency") {
-        if (request) {
-            if (audioFrequencyAvaliable()) {
-                commandResponses->push_back({ "psf:" + String(audioFrequency(),1), InfoRequest });
-            } else {
-                commandResponses->push_back({ "psf: 0", InfoRequest });
-            }
+        if (audioFrequencyAvaliable()) {
+            commandResponses->push_back({ "psf:" + String(audioFrequency(),1), InfoRequest });
+        } else {
+            commandResponses->push_back({ "psf: 0", InfoRequest });
         }
+    }  else
+    if (_commandItem->command == "pickupaudiopeak") {
+        commandResponses->push_back({ "pap:" + String(audioPeakAmplitude()), InfoRequest });
+    }  else
+    if (_commandItem->command == "pickupaudiorms") {
+        commandResponses->push_back({ "par:" + String(audioRMSAmplitude()), InfoRequest });
     }  else
     if (_commandItem->command == "bowmotorfrequency") {
         if (request) {

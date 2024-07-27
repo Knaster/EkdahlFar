@@ -51,8 +51,9 @@ serialCommandItem serialCommandsStringModule[] = {
     //status, s
     { "bowstatus", "bs", "-", "Prints status information for the selected bow" },
     //stringfrequency, sf
-    { "pickupstringfrequency", "psf", "-", "Samples the pickup and returns the fundamental tone calculated, if appliccable"},
-    //measuretimetotarget, mtt
+    { "pickupstringfrequency", "psf", "-", "Returns the fundamental tone calculated from the current audio signal if appliccable"},
+    { "pickupaudiopeak", "pap", "-", "Returns the peak amplitude of the current audio signal"},
+    { "pickupaudiorms", "par", "-", "Returns the RMS amplitude of the current audio signal"},
     { "bowdebugmeasuretimetotarget", "bdmtt", "float", "Measure the time it takes to change from the current frequency to the target frequency" },
     { "bowhome", "bh", "-", "Homing bow, used at startup and in case of the bow loosing position" },
 
@@ -140,6 +141,7 @@ serialCommandItem serialCommandsStringModule[] = {
     { "mutesustain", "ms", "0|1", "Setting sustain on (1) or off (0)" },
     { "mutebackoff", "mbo", "0-65535", "Setting the time that the mute stays in the mutefullmute position before automatically going into rest, set in mS"},
     { "mutehome", "mh", "-", "Rehome mute" },
+    { "mutecalibrate", "mc", "-", "Calibrate mute settings"},
 
     { "bowactuatoradd", "baa", "-", "Add new bow actuator"},
     { "bowactuatorremove", "bar", "actuator", "Remove bow actuator"},
@@ -164,6 +166,7 @@ class stringModule {
     std::vector<solenoid> solenoidArray;
 
     std::vector<mute> muteArray;
+    std::vector<calibrateMute> calibrateMuteArray;
 
 //    int EEPROM_offset = 0;
 

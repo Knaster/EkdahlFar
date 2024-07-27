@@ -17,6 +17,7 @@ calibrate::calibrate(bowIO &_bowIO, CalibrationData &__calibrationData, bowContr
     bowControlConnect = &_bowControl;
 }
 
+
 /** \brief Waits for the bow speed to stabilize, used after setting a new bow speed
  *
  *  Goes through maxIterations number of iterations with a preset delay in between each delay.
@@ -95,6 +96,12 @@ bool calibrate::findMinPressure() {
 
     bool fault = false;
 
+    // Set the tilt PWM with a long delay allowance at first
+    bowIOConnect->setTiltPWM(i);
+    if (!bowIOConnect->waitForTiltToComplete(500)) {  // was 100
+        return false;
+    }
+    // Then move on to the test
     do {
         bowIOConnect->setTiltPWM(i);
         if (!bowIOConnect->waitForTiltToComplete(1)) {  // was 100
@@ -424,22 +431,29 @@ String calibrate::dumpData() {
 
 /// Perform all calibration tests
 bool calibrate::calibrateAll() {
-  if (!findMinMaxSpeedPWM()) {
-    debugPrintln("findMinMaxSpeedPWM FAILED!", Error);
-    return false;
-  }
-  if (!findMinPressure()) {
-    debugPrintln("findMinPressure FAILED!", Error);
-    return false;
-  }
-  if (!findMaxPressure()) {
-    debugPrintln("findMaxPressure FAILED!", Error);
-    return false;
-  }
+    if (!bowIOConnect->homeBow()) {
+        debugPrintln("Couldn't home bowing jack", Error);
+        return false;
+    }
 
-  debugPrintln("Calibrations done", InfoRequest);
+    if (!findMinMaxSpeedPWM()) {
+        debugPrintln("findMinMaxSpeedPWM FAILED!", Error);
+        return false;
+    }
 
-  return true;
+    if (!findMinPressure()) {
+        debugPrintln("findMinPressure FAILED!", Error);
+        return false;
+    }
+
+    if (!findMaxPressure()) {
+        debugPrintln("findMaxPressure FAILED!", Error);
+        return false;
+    }
+
+    debugPrintln("Calibrations done", InfoRequest);
+
+    return true;
 }
 
 #endif

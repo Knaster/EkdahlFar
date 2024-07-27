@@ -11,23 +11,29 @@
 AudioInputAnalog          *audioADC;//adc1(AMUX_DATA);           //xy=317,326
 AudioAnalyzeNoteFrequency *audioNoteFreq;//notefreq2;      //xy=549,350
 AudioAnalyzePeak          *audioPeak;
+AudioAnalyzeRMS           *audioRMS;
+
 AudioConnection           *audioPatchCord1;//patchCord1(adc1, notefreq2);
 AudioConnection           *audioPatchCord2;
 AudioConnection           *audioPatchCord3;
+AudioConnection           *audioPatchCord4;
+
 AudioOutputUSB            *audioOutUSB;
 
 AudioFilterBiquad         *audioFilterBiquad;
-AudioConnection           *audioPatchCord4;
+
+#define noteFreqCutoff 800
 
 bool audioAnalyzeStarted = false;
 
 void startAudioAnalyze() {
     audioADC = new AudioInputAnalog(22);
     audioFilterBiquad = new AudioFilterBiquad();
-    audioFilterBiquad->setLowpass(0, 800, 0.707);
+    audioFilterBiquad->setLowpass(0, noteFreqCutoff, 0.707);
 #ifndef USB_MIDI_AUDIO_SERIAL
     audioNoteFreq = new AudioAnalyzeNoteFrequency();
     audioPeak = new AudioAnalyzePeak();
+    audioRMS = new AudioAnalyzeRMS();
 #endif
 
 #ifdef USB_MIDI_AUDIO_SERIAL
@@ -37,6 +43,7 @@ void startAudioAnalyze() {
     audioPatchCord3 = new AudioConnection(*audioADC, *audioFilterBiquad);
     audioPatchCord1 = new AudioConnection(*audioFilterBiquad, *audioNoteFreq);
     audioPatchCord2 = new AudioConnection(*audioFilterBiquad, *audioPeak);
+    audioPatchCord4 = new AudioConnection(*audioADC, *audioRMS);
 //    audioPatchCord1 = new AudioConnection(*audioADC, *audioNoteFreq);
 //    audioPatchCord2 = new AudioConnection(*audioADC, *audioPeak);
 #endif
@@ -52,7 +59,7 @@ void startAudioAnalyze() {
     audioNoteFreq->begin(0.45);
 #endif
 }
-
+/*
 void stopAudioAnalyze() {
     delete audioPatchCord1;
     delete audioNoteFreq;
@@ -61,7 +68,7 @@ void stopAudioAnalyze() {
     delete audioADC;
     audioAnalyzeStarted = false;
 }
-
+*/
 bool audioFrequencyAvaliable() {
     if (!audioAnalyzeStarted) { return false; }
     return audioNoteFreq->available();
@@ -72,12 +79,29 @@ float audioFrequency() {
     return audioNoteFreq->read();
 }
 
+float audioPeakAmplitude() {
+    if (audioPeak->available()) {
+        return audioPeak->read();
+    } else {
+        return -1;
+    }
+}
+
+float audioRMSAmplitude() {
+    if (audioRMS->available()) {
+        return audioRMS->read();
+    } else {
+        return -1;
+    }
+}
+
+/*
 float audioProbability() {
     if (!audioAnalyzeStarted) { return -1; }
     //  if (!audioNoteFreq->available()) { return -1; }
     return audioNoteFreq->probability();
 }
-
+*/
 float audioProcessorUsage() {
     if (!audioAnalyzeStarted) { return -1; }
     return audioNoteFreq->processorUsage();

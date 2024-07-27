@@ -48,7 +48,7 @@ void configuration::setDefaultBaseParameters() {
     *polyAftertouch = "";
     *programChange = "";
     *channelAftertouch = "m:0,b:0,bpm:(pressure*512)";
-    *pitchBend = "m:0,b:0,bchsh:pitch/2";
+    *pitchBend = "m:0,b:0,bchsh:pitch*4";
     midiRxChannel = 0x7F;
 }
 

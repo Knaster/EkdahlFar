@@ -26,25 +26,17 @@ controlReader::controlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
 
     pinMode(pinDataReady, INPUT);
     pinMode(pinGate, INPUT);
-
+/*
     averages[0].continuousTimeout = 5;
     averages[0].interruptedErrorThreshold = 20;
-
     averages[1].interruptedErrorThreshold = 25;
-    //averages[1].dataAverageLength = 1;
-
-    //averages[3].dataAverageLength = 3;
     averages[3].interruptedErrorThreshold = 20;
+*/
     averages[4].trigger = true;
     averages[4].dataAverageLength = 1;
     averages[5].trigger = true;
-    averages[6].interruptedErrorThreshold = 10;
+//    averages[6].interruptedErrorThreshold = 10;
 
-//    averages[1].errorTimeThreshold = 25;
-//    averages[1].delayErrorThreshold = 10;
-
-//    averages[0].errorThreshold = 150;
-//    averages[0].delayErrorThreshold = 50;
 
 //    Wire.setClock(1000000);
     if (!ads.begin(0x48, &Wire)) {
@@ -108,7 +100,7 @@ void controlReader::readData() {
                     break;
                 case ADS1X15_REG_CONFIG_MUX_SINGLE_2:
                     ch = 2;
-                    currentChannel2 = ADS1X15_REG_CONFIG_MUX_SINGLE_0;
+                    currentChannel2 = ADS1X15_REG_CONFIG_MUX_SINGLE_3;
                     break;
                 case ADS1X15_REG_CONFIG_MUX_SINGLE_3:
                     ch = 3;
@@ -138,7 +130,7 @@ void controlReader::readData() {
                 dvalue = (double) convertedValue;
 //                if (ch == 1) {
 //                    debugPrintln("Data changed on ADS2, channel " + String(ch) + " to " + String(convertedValue) + " (" + String(averages[4 + ch].value) + ")", debugPrintType::Debug);
-                if (adcDebugReport) {
+                if (outputDebugData) {
                     debugPrintln("adcr:" + String(ch + 4) + ":" + String(convertedValue) + ":" + String(averages[4 + ch].value), debugPrintType::InfoRequest);
                 }
 
@@ -204,9 +196,11 @@ void controlReader::readData() {
                 int32_t convertedValue = (int32_t) ((float) averages[ch].value * ((float) 65536 / 32767));
                 if (convertedValue > 65535) { convertedValue = 65535; }
                 if (ch == 0) {
-                    debugPrintln("Data changed on ADS1, channel " + String(ch) + " to " + String(convertedValue) + " (" + String(averages[ch].value) + ")", debugPrintType::Debug);
+                    if (outputDebugData) {
+                        debugPrintln("Data changed on ADS1, channel " + String(ch) + " to " + String(convertedValue) + " (" + String(averages[ch].value) + ")", debugPrintType::Debug);
+                    }
                 }
-                if (adcDebugReport) {
+                if (outputDebugData) {
                     debugPrintln("adcr:" + String(ch) + ":" + String(convertedValue) + ":" + String(averages[ch].value), debugPrintType::InfoRequest);
                 }
 //                }
@@ -279,13 +273,13 @@ void controlReader::setADCMinMaxTestChannel(uint8_t t_channel) {
 void controlReader::setDefaults() {
     cvInputCommands.clear();
     cvInputCommands.push_back("bch:value/1327.716667-0.39");
-    cvInputCommands.push_back("bchs5:deadband((value-38350)*0.49064)");
-    cvInputCommands.push_back("msp:value");
+    cvInputCommands.push_back("bchs5:(value-31900)/2.425");
+    cvInputCommands.push_back("bchsh:deadband((value-32650)*0.49064)");//    cvInputCommands.push_back("msp:value");
     cvInputCommands.push_back("bpb:value");
     cvInputCommands.push_back("se:value");
-    cvInputCommands.push_back("bmr:1,bpid:1,bcsm:0,bpe:bool(value-32767),bpr:ibool(value-32767)");
+    cvInputCommands.push_back("bmr:1,bpid:1,bcsm:0,bpe:bool(value-32767),bpr:ibool(value-32767),bph:ibool(value-32767)");
     cvInputCommands.push_back("sfm:1/65535*value");
-    cvInputCommands.push_back("");
+    cvInputCommands.push_back("msp:value");//    cvInputCommands.push_back("");
 }
 
 String controlReader::dumpData() {

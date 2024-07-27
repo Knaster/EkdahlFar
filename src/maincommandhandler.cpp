@@ -9,6 +9,7 @@ serialCommandItem serialCommandsMain[] = {
   { "version", "ver", "-", "Gets the current firmware version"},
   { "globalsaveallparameters", "gsap", "-", "Saves all avaliable parameters"},  // saveallparameters
   { "globalloadallparameters", "glap", "-", "Loads all avaliable parameters"},  // loadallparameters
+  { "globalresetallparameters", "grap", "-", "Resets all saved parameters"},
   { "globaluservariable", "guv", "variable(0-9):value", "Set user variable 0-9 to value"},  // uservariable, uv
 
 /*
@@ -256,6 +257,9 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
     if (_commandItem->command == "globalloadallparameters") {
         loadAllParams();
     } else
+    if (_commandItem->command == "globalresetallparameters") {
+        resetAllParams();
+    } else
     if (_commandItem->command == "test") {
     } else
     if (_commandItem->command == "testadclatency") {
@@ -502,9 +506,7 @@ void processSerialCommands() {
             if (_commandItem->command == "help") {
                 String help = ":\"Below is a list of avaliable commands given in both short and long form, either works. The number and type(s) of arguments are listed afterwards and a brief description. Command usage: command:argument1:argument2 [etc]\"";
                 commandResponses.push_back({help, debugPrintType::Help});
-                //help = printCommandHelp(serialCommandsMain, sizeof(serialCommandsMain) / sizeof(serialCommandItem));
                 addCommandHelp(serialCommandsMain, sizeof(serialCommandsMain) / sizeof(serialCommandItem), &commandResponses,"[glo]:");
-                //commandResponses.push_back({help, debugPrintType::Help});
 
                 if (!stringModuleArray[currentStringModule].processSerialCommand(commands, &i, &commandResponses, false)) {
                     String error = "Unknown sequence " + String(_commandItem->command);
@@ -512,25 +514,9 @@ void processSerialCommands() {
                         error += ":" + _commandItem->argument[i];
                     }
                     commandResponses.push_back({error, debugPrintType::Error});
-                    //debugPrintln(error, Error);
-//                    debugPrintln("Unknown command " + String(_commandItem->command), Error);
                 }
-/*
-                if (!stringModuleArray[currentStringModule].processSerialCommand(commands, &i, &moduleResponses, false)) {
-                    debugPrintln("Unknown command " + String(_commandItem->command), Error);
-                } else {
-
-                }
-                for (int i = 0; i < int(moduleResponses.size()); i++) {
-                    commandResponses.push_back({"m:" + String(currentStringModule) + ":" + moduleResponses[i].response, moduleResponses[i].responseType});
-                    //help += "m:" + String(currentStringModule) + "," + moduleResponses[i].response;
-                }
-*/
-                //help += "\"";
-                //commandResponses.push_back({help, InfoRequest});
             } else
             if (stringModuleArray[currentStringModule].processSerialCommand(commands, &i, &moduleResponses, false)) {
-//                debugPrintln("Check string module", Debug);
                 for (int i = 0; i < int(moduleResponses.size()); i++) {
                     commandResponses.push_back({"m:" + String(currentStringModule) + "," + moduleResponses[i].response, moduleResponses[i].responseType});
                 }

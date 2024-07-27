@@ -22,7 +22,7 @@ class averager
         //uint8_t errorThreshold = 2;         //2, 0
         uint16_t continuousErrorThreshold = 2;
 //        uint8_t delayErrorThreshold = 5;   //10, 5, 20          // Amount of data change required to signal dataChanged after errorTimeThreshold has elapsed
-        uint16_t interruptedErrorThreshold = 5;
+        uint16_t interruptedErrorThreshold = 20; //5
 
         bool trigger = false;                   // Set to true to enable a pDataChanged whenever the data goes above or below the value given by triggerThreshold
         uint16_t triggerThreshold = 100;           // Threshold which at to trigger a data change
@@ -31,6 +31,8 @@ class averager
         bool triggerDelayEngage = false;        // Flag to indicate trigger has been received and sampling delay engaged
 
         bool singleShot = false;
+
+        bool outputDebugData = false;
 
         averager() {
             dataIndex = 0;
@@ -95,16 +97,19 @@ class averager
                     // then we are being lenient and passing any value change greater than continuousErrorThreshold. This is to allow continuous sweeps
                     if (timeSinceChange < continuousTimeout) {
                         if ((temp < (value - continuousErrorThreshold)) || (temp > (value + continuousErrorThreshold))) {
-                            debugPrintln("Continuous data change occured at " + String(timeSinceChange) + " ms which is below the continuousTimeout of " + String(continuousTimeout) + " ms."
-                                 "The data is above the continuousErrorThreshold of " + String(continuousErrorThreshold) + ". The new data is " + String(temp) + " while the old data was " + String(value), Debug);
+                            if (outputDebugData) {
+                                debugPrintln("Continuous data change occured at " + String(timeSinceChange) + " ms which is below the continuousTimeout of " + String(continuousTimeout) + " ms."
+                                     "The data is above the continuousErrorThreshold of " + String(continuousErrorThreshold) + ". The new data is " + String(temp) + " while the old data was " + String(value), Debug);
+                            }
                             pDataChanged = true;
                             timeSinceChange = 0;
                         }
                     } else {
                         if ((temp < (value - interruptedErrorThreshold)) || (temp > (value + interruptedErrorThreshold))) {
-                            debugPrintln("A data change occured after the errorThreshold time, the data did surpass the interruptedErrorThreshold of " + String(interruptedErrorThreshold) +
-                                ". The new data is " + String(temp) + " while the old data was " + String(value), Debug);
-
+                            if (outputDebugData) {
+                                debugPrintln("A data change occured after the errorThreshold time, the data did surpass the interruptedErrorThreshold of " + String(interruptedErrorThreshold) +
+                                    ". The new data is " + String(temp) + " while the old data was " + String(value), Debug);
+                            }
                             pDataChanged = true;
                             timeSinceChange = 0;
                         }
@@ -137,7 +142,7 @@ class controlReader
 */
         std::vector<String> cvInputCommands;
 
-        bool adcDebugReport = true;
+        bool outputDebugData = false;
         bool setADCCommands(uint8_t channel, String commands);
         //{ "adcsettings", "adcs", "channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout"
         bool setADCAveragerSettings(uint8_t t_channel, uint8_t t_averages, uint16_t t_interruptErrorThreshold, uint16_t t_continuousErrorThreshold, uint16_t t_continuousTimeout);

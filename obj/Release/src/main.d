@@ -120,9 +120,9 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  lib/TMC2209/src/TMC2209.h src/servostepper.h src/bowActuators.h \
  src/bowcontrol.cpp lib/teensy4/elapsedMillis.h src/calibrate.h \
  src/bowcontrol.h src/calibrate.cpp src/bowActuators.cpp src/solenoid.cpp \
- src/mute.cpp src/mute.h src/stringmodule.cpp src/stringmodule.hpp \
- src/midi.cpp lib/MIDI/MIDI.h lib/MIDI/midi_Defs.h \
- lib/MIDI/midi_Namespace.h lib/MIDI/midi_Platform.h \
+ src/mute.cpp src/mute.h src/mutecalibration.cpp src/mutecalibration.hpp \
+ src/stringmodule.cpp src/stringmodule.hpp src/midi.cpp lib/MIDI/MIDI.h \
+ lib/MIDI/midi_Defs.h lib/MIDI/midi_Namespace.h lib/MIDI/midi_Platform.h \
  lib/MIDI/midi_Settings.h lib/MIDI/midi_Message.h lib/MIDI/serialMIDI.h \
  lib/MIDI/MIDI.hpp src/isrclasswrapper.cpp src/controlReader.cpp \
  src/controlReader.h lib/Adafruit_ADS1X15/Adafruit_ADS1X15.h \

@@ -75,6 +75,8 @@ public:
     String commandsOverPowerCurrent = "";
     String commandsMotorFault = "";
 
+    bool outputDebugData = false;
+
 private:
     float currentHarmonicFreq = 0;            ///< Base frequency of current harmonic
     float currentHarmonicShiftFreq = 0;       ///< Calculated frequency with harmonic shift

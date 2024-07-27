@@ -29,6 +29,12 @@ String dumpData() {
     return saveData;
 }
 
+bool resetAllParams() {
+    String saveData = "ver:" + currentFirmwareVersion + ","; // "ver:1,";
+    debugPrintln("Saving\n" + saveData + "\n" + "Total: " + String(EEPROMSaveString(&saveData, 0)) + " bytes", Command);
+    return true;
+}
+
 bool saveAllParams() {
     String saveData = dumpData();
     debugPrintln("Saving\n" + saveData + "\n" + "Total: " + String(EEPROMSaveString(&saveData, 0)) + " bytes", Command);

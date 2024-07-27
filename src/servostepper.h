@@ -23,12 +23,12 @@ public:
     enum eHomingStage { UNHOMED, HOMED, FIRSTHOMINGRISING, SECONDHOMINGFALLING, SECONDHOMINGRISING, FIRSTHOMINGFALLING, MOVEPASTHOMESWITCH, MOVETOHOMESWITCH, GOTOOFFSET };
     eHomingStage homing = UNHOMED;
 
-    enum eStepDirection {  REVERSE = 1, FORWARD = 0 };
+    enum eStepDirection { REVERSE = 1, FORWARD = 0 };
     eStepDirection moveDirection = eStepDirection::REVERSE;
 
     enum eEdgeType { EDGERISING = 1, EDGEFALLING = 0 };
 
-    uint16_t homingPoint[2][2]; // index by eEdgeType, eStepDirection
+    uint16_t homingPoint[2][2]; // index by eEdgeType, eStepDirection, homing point given in STEPS (with microstepping)
 
     #define stepsPerRevolution 200
     #define microSteps 32
@@ -38,8 +38,6 @@ public:
     #define homeSenseActive 0
     #define homeSenseInactive 1
 
-//    #define homingSpeedRough 10
-//    #define homingSpeedFine 5
     uint8_t homingSpeedRough = 10;
     uint8_t homingSpeedFine = 5;
     eStepDirection homingDirection = eStepDirection::REVERSE;
@@ -83,7 +81,6 @@ public:
 
     IntervalTimer stepInterval;
     void *stepIntervalCallback;
-    //eStepDirection indexingDirection = eStepDirection
 
     bool autoCorrectPosition = false;
 
@@ -91,29 +88,16 @@ public:
 
     bool reachedTarget = false;
 
+    bool outputDebugData = false;
+
+    bool intDrivenMsgFlag = false;
+    String intDrivenMsg = "";
+
+    bool inhibitInterrupt = false;  // Used by statically called functions when changing position parameters so that the interrupt won't fuck shit up
+private:
+    String intDrivenMsgP = "";
+
 public:
-    void calculateAcceleration() {
-        int stepsFromEnd = 0;
-//        int stepsFromStart = 0;
-
-        if (moveDirection == eStepDirection::FORWARD) {
-            stepsFromEnd = movingTo - currentStep;
-        } else {
-            stepsFromEnd = currentStep - movingTo;
-        }
-
-        if (stepsFromEnd <= accelerationSteps) {
-            currentAccelStep--;
-        } else {
-            currentAccelStep++;
-        }
-
-        if (currentAccelStep < 0) { currentAccelStep = 0; }
-        if (currentAccelStep > accelerationSteps) { currentAccelStep = accelerationSteps; }
-
-        uAccelPeriod = speedUPeriod + speedUPeriod * (accelerationSteps - currentAccelStep) * accelerationMultiplier;
-    }
-
 //    servoStepper(byte _pinStep, byte _pinDir, byte _pinHomeSense, byte _pinFault = -1, void (*faultCallback)(void) = NULL, byte _pinEn = -1, byte _pinVref = -1, byte current = 0.2) {
     servoStepper(byte inPinStep, byte inPinDir, byte inPinHomeSense, void *inStepIntervalCallback = nullptr) { //, byte inPinEn = -1) {
         pinStep = inPinStep;
@@ -135,6 +119,12 @@ public:
         stepIntervalCallback = inStepIntervalCallback;
 
         getHomingChange();
+    }
+
+    void tsDebugPrintln(String m_msg, debugPrintType m_dpType) {
+        if (debugPrintCheckType(m_dpType)) {
+            intDrivenMsgP += "[" + debugPrintTypeNameShort[m_dpType] + "]" + m_msg;
+        }
     }
 
     bool setMaxSpeed(uint16_t inSpeedRPM) {
@@ -159,6 +149,7 @@ public:
         }
         digitalWrite(pinDir, tDirection);
         moveDirection = inDirection;
+        //if (outputDebugData) { DebugPrintln("setDirection: original " + String(inDirection) + " final " + String(tDirection), debugPrintType::Debug); }
     }
 
     eStepDirection notDirection(eStepDirection inDirection) {
@@ -167,6 +158,28 @@ public:
         } else {
             return eStepDirection::FORWARD;
         }
+    }
+
+    void calculateAcceleration() {
+        int stepsFromEnd = 0;
+//        int stepsFromStart = 0;
+
+        if (moveDirection == eStepDirection::FORWARD) {
+            stepsFromEnd = movingTo - currentStep;
+        } else {
+            stepsFromEnd = currentStep - movingTo;
+        }
+
+        if (stepsFromEnd <= accelerationSteps) {
+            currentAccelStep--;
+        } else {
+            currentAccelStep++;
+        }
+
+        if (currentAccelStep < 0) { currentAccelStep = 0; }
+        if (currentAccelStep > accelerationSteps) { currentAccelStep = accelerationSteps; }
+
+        uAccelPeriod = speedUPeriod + speedUPeriod * (accelerationSteps - currentAccelStep) * accelerationMultiplier;
     }
 
     bool getHomingChange() {
@@ -212,45 +225,63 @@ public:
         }
     }
 
-    void updatePosition() {
-        getHomingChange();
+    void updatePosition(bool interruptDriven = true) {
+        intDrivenMsgFlag = false;
+        intDrivenMsgP = "";
 
-        switch(homing) {
-            case eHomingStage::HOMED:
-                updatePositionMove();
-                break;
-            case eHomingStage::UNHOMED:
-                break;
-            case eHomingStage::FIRSTHOMINGRISING:
-                updatePositionFirstHomingRising();
-                break;
-            case eHomingStage::SECONDHOMINGFALLING:
-                updatePositionSecondHomingFalling();
-                break;
-            case eHomingStage::SECONDHOMINGRISING:
-                updatePositionSecondHomingRising();
-                break;
-            case eHomingStage::FIRSTHOMINGFALLING:
-                updatePositionFirstHomingFalling();
-                break;
-            case eHomingStage::MOVEPASTHOMESWITCH:
-                updatePositionMovePastHomeSwitch();
-                break;
-            case eHomingStage::MOVETOHOMESWITCH:
-                updatePositionMoveToHomeSwitch();
-                break;
-            case eHomingStage::GOTOOFFSET:
-                updatePositionGotoOffset();
-                break;
+        if (!(interruptDriven && inhibitInterrupt)) {
+            getHomingChange();
+
+            switch(homing) {
+                case eHomingStage::HOMED:
+                    updatePositionMove();
+                    break;
+                case eHomingStage::UNHOMED:
+                    break;
+                case eHomingStage::FIRSTHOMINGRISING:
+                    updatePositionFirstHomingRising();
+                    break;
+                case eHomingStage::SECONDHOMINGFALLING:
+                    updatePositionSecondHomingFalling();
+                    break;
+                case eHomingStage::SECONDHOMINGRISING:
+                    updatePositionSecondHomingRising();
+                    break;
+                case eHomingStage::FIRSTHOMINGFALLING:
+                    updatePositionFirstHomingFalling();
+                    break;
+                case eHomingStage::MOVEPASTHOMESWITCH:
+                    updatePositionMovePastHomeSwitch();
+                    break;
+                case eHomingStage::MOVETOHOMESWITCH:
+                    updatePositionMoveToHomeSwitch();
+                    break;
+                case eHomingStage::GOTOOFFSET:
+                    updatePositionGotoOffset();
+                    break;
+            }
+        } else {
+            tsDebugPrintln("Interrupt inhibited because interruptDriven " + String(interruptDriven) + " and inhibitInterrupt " + String(inhibitInterrupt), debugPrintType::Debug);
         }
+
+        intDrivenMsg = intDrivenMsgP;
+        if (intDrivenMsg != "") { intDrivenMsgFlag = true; }
     }
 
     void updatePositionMove() {
         if (isMoving) {
             if (autoCorrectPosition) { correctPosition(); }
 
+            if (((currentStep < movingTo) && (moveDirection == REVERSE)) || ((currentStep > movingTo) && (moveDirection == FORWARD))) {
+                tsDebugPrintln("ERROR! direction, currentStep and movingTo does not match!!", debugPrintType::Error);
+                tsDebugPrintln("updatePositionMove: moving to target " + String(movingTo) + " current step " + String(currentStep) + " direction " + (moveDirection), debugPrintType::Debug);
+            }
+
             if (currentStep == movingTo) {
+                if ((outputDebugData) && (hasStepped)) { tsDebugPrintln("updatePositionMove: reached target " + String(currentStep), debugPrintType::Debug); }
+
                 if (turnAround) {
+                    if (outputDebugData) { tsDebugPrintln("updatePositionMove: reached turnAround", debugPrintType::Debug); }
                     movingTo = turnAroundPosition;
                     setDirection(turnAroundDirection);
                     turnAround = false;
@@ -260,6 +291,8 @@ public:
                     isMoving = false;
                 }
             } else {
+                //if ((outputDebugData) && (hasStepped)) { debugPrintln("updatePositionMove: moving to target " + String(movingTo) + " current step " + String(currentStep) + " direction " + (moveDirection), debugPrintType::Debug); }
+
                 if (hasStepped) {
                     calculateAcceleration();
                     hasStepped = false;
@@ -312,20 +345,30 @@ public:
     bool setPosition(uint16_t position) {
         uint16_t wantToMoveTo = ((float) valuePerRotation * position);
 
+        if (outputDebugData) { tsDebugPrintln("setPosition: wantToMoveTo " + String(wantToMoveTo), debugPrintType::Debug); }
+
         if ((wantToMoveTo == movingTo) && (isMoving)) { return true; }
+
+        inhibitInterrupt = true;
 
         if (isMoving) {
             if (moveDirection == getDirectionTo(wantToMoveTo)) {
+//                if (outputDebugData) { debugPrintln("setPosition: moving the same direction", debugPrintType::Debug); }
                 if (turnAround) {
+//                    if (outputDebugData) { debugPrintln("setPosition: Is in turn around, you have to do something here!!", debugPrintType::Debug); }
                 }
                 turnAround = false;
             } else {
+//                if (outputDebugData) { debugPrintln("setPosition: moving the opposite direction", debugPrintType::Debug); }
                 if (turnAround) {
+//                    if (outputDebugData) { debugPrintln("setPosition: Is in turn around, you have to do something here!!", debugPrintType::Debug); }
                 }
                 turnAroundPosition = wantToMoveTo;
                 turnAroundDirection = getDirectionTo(wantToMoveTo);
 
                 if ((!turnAround) && ((currentStep + accelerationSteps) > movingTo)) {
+//                    if (outputDebugData) { debugPrintln("setPosition: Odd thing here, maybe at fault?", debugPrintType::Debug); }
+
                     if (moveDirection == eStepDirection::FORWARD) {
                         movingTo = currentStep + accelerationSteps;
                     } else {
@@ -333,6 +376,7 @@ public:
                     }
                 }
                 turnAround = true;
+                inhibitInterrupt = false;
                 return true;
             }
         } else {
@@ -344,7 +388,8 @@ public:
         isMoving = true;
 //        debugPrintln("Setting reached target to false", debugPrintType::Debug);
         reachedTarget = false;
-        updatePosition();
+        updatePosition(false);
+        inhibitInterrupt = false;
         return true;
     }
 
@@ -357,7 +402,9 @@ public:
         homing = eHomingStage::UNHOMED;
     }
 
-    /*
+    /***** HOMING COMMANDS ONLY PAST THIS POINT ******
+
+
         Homing sequence:
 
         1) if homingswitch is not active, go to 2.1
@@ -548,7 +595,7 @@ public:
     bool completeTask(uint16_t timeout = 3000) {
         elapsedMillis timeOutElapse;
         do {
-            updatePosition();
+            updatePosition(false);
         } while ((isMoving) && (timeOutElapse < timeout));
         if (isMoving) {
             eStop();

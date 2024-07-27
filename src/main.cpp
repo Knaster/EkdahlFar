@@ -142,12 +142,12 @@
 #include <loopTimer.h>
 #include <millisDelay.h>
 
-createBufferedOutput(ssOutput, 66, DROP_UNTIL_EMPTY); ///< SafeString buffer creation
-createSafeStringReader(ssReader, 4096, "\r\n");       ///< SafeString reader creation
+createBufferedOutput(ssOutput, 8192, DROP_UNTIL_EMPTY); ///< SafeString buffer creation
+createSafeStringReader(ssReader, 8192, "\r\n");       ///< SafeString reader creation
 
 #ifdef EFARSLAVE
-createBufferedOutput(masterSerialOut, 66, DROP_UNTIL_EMPTY); ///< SafeString buffer creation
-createSafeStringReader(masterSerialRead, 4096, "\r\n");       ///< SafeString reader creation
+createBufferedOutput(masterSerialOut, 8192, DROP_UNTIL_EMPTY); ///< SafeString buffer creation
+createSafeStringReader(masterSerialRead, 8192, "\r\n");       ///< SafeString reader creation
 #elif EFARMASTER
 createBufferedOutput(slaveSerialOut1, 66, DROP_UNTIL_EMPTY); ///< SafeString buffer creation
 createSafeStringReader(slaveSerialRead1, 256, "\r\n");       ///< SafeString reader creation
@@ -202,6 +202,7 @@ class bowControl;
 #include "bowActuators.cpp"
 #include "solenoid.cpp"
 #include "mute.cpp"
+#include "mutecalibration.cpp"
 #include "stringmodule.cpp"
 
 std::vector <stringModule> stringModuleArray;
@@ -393,12 +394,11 @@ void loop() {
 #ifdef EFARSLAVE
     for (int i = 0; i < int(stringModuleArray.size()); i++) {
         stringModuleArray[i].updateString();
+
         for (int j=0; j<stringModuleArray[i].bowControlArray.size(); j++) {
             if (stringModuleArray[i].bowIOArray[j].bowOverPowerFlag) {
-    //            stringModuleArray[i].bowIOArray[0].tiltAdjust += 1000;
                 debugPrintln("Bow over power!", debugPrintType::Error);
                 commands->addCommands(stringModuleArray[i].bowControlArray[j].commandsOverPowerCurrent);
-                //commands->addCommands("bmr:0, bpr:1");
             }
             if (stringModuleArray[i].bowControlArray[j].checkMotorFault()) {
                 debugPrintln("Bow motor fault!", debugPrintType::Error);
@@ -415,32 +415,8 @@ void loop() {
         processSerialCommands();
     }
 
-    //if (Serial1.available()) {
-
-    if (fContinuous) {
-        if (updateRollingStatus >= 100) {
-            pinMode(23, INPUT);
-            float avFreq = stringModuleArray[0].bowIOArray[0].averageFreq();
-            float targetFreq = stringModuleArray[0].bowControlArray[0].getPIDTarget();
-            float freqError = (avFreq / targetFreq * 100) - 100;
-            float current = stringModuleArray[0].bowIOArray[0].getBowCurrent();
-            bool fault = stringModuleArray[0].bowIOArray[0].getMotorFault();
-            debugPrintln("Read frequency " + String(avFreq) + " Hz, Target freq " + String(targetFreq) + " Hz" +
-                ", error %" + String(freqError) + " current use " + String(current) + " Fault " + String(fault)
-                , InfoRequest);
-            updateRollingStatus = 0;
-        }
-    }
-
-    if (freqReport) {
-        //    setAMUXAddress(freqReportChannel*2);
-        if (audioFrequencyAvaliable()) {
-                debugPrint("Frequency " + String(audioFrequency(),1) + " acc " + String(audioProbability()) + " @ " + String(audioProcessorUsage()) + " CPU ", InfoRequest);
-            if (audioPeak->available()) {
-                debugPrintln("Peak " + String(audioPeak->read()), InfoRequest);
-            } else {
-                debugPrintln("", InfoRequest);
-            }
-        }
+    if (stringModuleArray[0].bowIOArray[0].stepServoStepper->intDrivenMsgFlag) {
+        debugRaw(stringModuleArray[0].bowIOArray[0].stepServoStepper->intDrivenMsg);
+        stringModuleArray[0].bowIOArray[0].stepServoStepper->intDrivenMsgFlag = false;
     }
 }

@@ -18,6 +18,10 @@ void debugPrintln(String text, debugPrintType printType) {
   return;
 }
 
+void debugRaw(String text) {
+    ssOutput.println(text);
+}
+
 bool setDebugReporting(String debugName, bool setting) {
   for (int i=0; i<debugPrintTypes; i++) {
     if (debugPrintTypeName[i] == debugName) {

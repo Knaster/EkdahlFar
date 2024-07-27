@@ -269,20 +269,7 @@ void OnProgramChange(uint8_t channel, uint8_t program) {
 }
 
 MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI);
-/*
-void handleNoteOff(byte channel, byte note, byte velocity) {
-  //debugPrintln(String("Note Off: ch=") + channel + ", note=" + note + ", velocity=" + velocity, Debug);
-  OnN
-}
 
-void handleNoteOn(byte channel, byte note, byte velocity) {
-  if (velocity > 0) {
-    debugPrintln(String("Note On:  ch=") + channel + ", note=" + note + ", velocity=" + velocity, Debug);
-  } else {
-    debugPrintln(String("Note Off: ch=") + channel + ", note=" + note, Debug);
-  }
-}
-*/
 void initMidi() {
     usbMIDI.setHandleNoteOff(OnNoteOff);
     usbMIDI.setHandleNoteOn(OnNoteOn);
@@ -292,7 +279,7 @@ void initMidi() {
     usbMIDI.setHandleAfterTouch(OnChannelAftertouch);
     usbMIDI.setHandleProgramChange(OnProgramChange);
 
-    Serial1.begin(31250, SERIAL_8N1); //SERIAL_8N2);
+    Serial1.begin(31250, SERIAL_8N1);
     MIDI.begin();
     MIDI.setHandleNoteOff(OnNoteOff);
     MIDI.setHandleNoteOn(OnNoteOn);
@@ -301,5 +288,6 @@ void initMidi() {
     MIDI.setHandlePitchBend(OnPitchBend);
     MIDI.setHandleAfterTouchChannel(OnChannelAftertouch);
     MIDI.setHandleProgramChange(OnProgramChange);
+
 }
 #endif
