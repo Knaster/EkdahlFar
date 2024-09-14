@@ -1,3 +1,21 @@
+/*
+ * This file is part of The Ekdahl FAR firmware.
+ *
+ * The Ekdahl FAR firmware is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * The Ekdahl FAR firmware is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with The Ekdahl FAR firmware. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2024 Karl Ekdahl
+ */
 #include "controlReader.h"
 
 volatile bool adsNewData = false;
@@ -28,10 +46,11 @@ controlReader::controlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
     pinMode(pinGate, INPUT);
 /*
     averages[0].continuousTimeout = 5;
-    averages[0].interruptedErrorThreshold = 20;
-    averages[1].interruptedErrorThreshold = 25;
     averages[3].interruptedErrorThreshold = 20;
 */
+    averages[0].interruptedErrorThreshold = 60;
+    averages[2].interruptedErrorThreshold = 30;
+
     averages[4].trigger = true;
     averages[4].dataAverageLength = 1;
     averages[5].trigger = true;

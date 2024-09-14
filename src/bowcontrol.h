@@ -1,3 +1,21 @@
+/*
+ * This file is part of The Ekdahl FAR firmware.
+ *
+ * The Ekdahl FAR firmware is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * The Ekdahl FAR firmware is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with The Ekdahl FAR firmware. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2024 Karl Ekdahl
+ */
 #ifndef BOWCONTROL_H
 #define BOWCONTROL_H
 
@@ -12,8 +30,8 @@ public:
 
     BowActuators *bowActuators;
 
-    float Kp = 200;                           ///< PID P multiplier 100
-    float Ki = 12;                             ///< PID I multiplier 2
+    float Kp = 500;                           ///< PID P multiplier 100
+    float Ki = 7;                             ///< PID I multiplier 2
     float Kd = 200;                            ///< PID D multiplier 40
     float previousError = 0.0;                ///< Contains the last frequency error calculated by the PID, given in Hertz
     float integratorIgnoreBelow = 0.1;        ///< The PID will ignore any integral errors under this threshold 0.4
@@ -75,7 +93,7 @@ public:
     String commandsOverPowerCurrent = "";
     String commandsMotorFault = "";
 
-    bool outputDebugData = false;
+    bool outputDebugData = true;
 
 private:
     float currentHarmonicFreq = 0;            ///< Base frequency of current harmonic

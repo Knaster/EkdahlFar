@@ -84,9 +84,9 @@ Terminologoy</h1>
 </ul>
 <h1><a class="anchor" id="brief"></a>
 Brief overview</h1>
-<p>The code is structured primarily around a hierarchial class structure where the base objects is a vector of <a class="el" href="classstringModule.html">stringModule</a> instances. This class handles all <em>command messages</em> surrounding a single string and delegates data and commands to other classes down the line. The top level classes deals with direct hardware interfacing, the middle level takes care of the logical control of these classes depending on the outcome of processed data and the bottom level deals with interpretation and handling of command messages. Everything is tied together through the main function which periodically runs basic function calls which are not time-sensitive while time-critical functions are called through periodic interrupts.</p>
+<p>The code is structured primarily around a hierarchial class structure where the base objects is a vector of <a class="el" href="classstringModule.html">stringModule</a> instances. This class handles all <em>command messages</em> surrounding a single string and delegates data and commands to other classes down the line. The top level classes deals with direct hardware interfacing, the middle level takes care of the logical control of these classes depending on the outcome of processed data and the bottom level deals with interpretation and handling of command messages. Everything is tied together through the main function which periodically runs basic function calls which are not time-sensitive while time-critical functions are called through periodic interrupts. Global messages are handled through the loop via the use of functions in <a class="el" href="maincommandhandler_8cpp.html">maincommandhandler.cpp</a></p>
 <p>All outwards functionality can be accessed through command messages, these can be invoked through USB-Serial, RS232 and added to que by internal functions that may or may not be connected to other external hardware. All incoming MIDI-messages are mapped to a editable string of command messages, this way complete freedom in midi-mapping is obtained. A universal messaging system that is ignorant of the source of the control messages makes for a more transparent and uniform way of handling events, hardware control and data processing. This also makes for a system where minimal code changes are required when doing modifications or introducing new functionaltiy and options. The 'help'-command exposes existing commands, their arguments and a brief description.</p>
-<p>Classes that contain data that are to be saved into EEPROM implements a function with the name <a class="el" href="settingshandler_8cpp.html#a046d4c46537d3b0f2aab95d06f33174d">dumpData()</a> that returns a string of commands with any applicable parameters containing the data to be saved, the returned string can then be executed as-is to set the desired parameters.</p>
+<p>Classes that contain data that are to be saved into EEPROM implements a function with the name <a class="el" href="settingshandler_8cpp.html#a046d4c46537d3b0f2aab95d06f33174d">dumpData()</a> that returns a string of commands with any applicable parameters containing the data to be saved. On load, the command string can be directly added to que and thus executed as is to set the desired parameters.</p>
 <h1><a class="anchor" id="hardwareclasses"></a>
 Classes and header files with direct hardware access:</h1>
 <ul>
@@ -94,18 +94,18 @@ Classes and header files with direct hardware access:</h1>
 </li>
 <li><a class="el" href="classbowIO.html" title="The bowIO class deals with interfacing with the hardware of a string unit.">bowIO</a> - handles bowing jack stepper motor position (through a <a class="el" href="classservoStepper.html" title="The purpose of this class is to control stepper motors in terms of positional indexing much like RC s...">servoStepper</a> class instance), direct speed control of the DC bowing motor, tachometer interrupt calls and control of the DC/DC converter that drives the DC motor driver. It also provides functionality for checking motor driver fault conditions and over-current/power measurements through the current sensor connected to the DC/DC converter. <br  />
 </li>
-<li><a class="el" href="classmute.html">mute</a> - handles mute stepper motor position and provides functions for setting various mute states. Requires frequent polling of the <a class="el" href="classmute.html#ae445f099349b08eda3cd31d1e08e4f75">mute::updateMute()</a> function in order for the stepper motor to continuously update its position. <br  />
+<li><a class="el" href="classmute.html">mute</a> - handles mute stepper motor position and provides functions for setting various mute states. Requires frequent polling of stepServoStepper-&gt;updatePosition() in order for the stepper motor to continuously update its position, this is preferably done via interrupts. <br  />
 </li>
 <li><a class="el" href="classsolenoid.html">solenoid</a> - provides variable force solenoid control through the utilization of PWM, engages the solenoid for a set period of time (in uS) after which it will automatically disengage, Requires frequent polling of the <a class="el" href="classsolenoid.html#a8846508bc47ec4408e84bad43ed5b468">solenoid::updateSolenoid()</a> function in order to engage and disengage the solenoid in a timely manner. <br  />
 </li>
 <li><a class="el" href="classstringModule.html">stringModule</a> - this class handles an entire string module with vectors of <a class="el" href="classbowControl.html">bowControl</a>, <a class="el" href="classsolenoid.html">solenoid</a> and <a class="el" href="classmute.html">mute</a> objects as well as <a class="el" href="classbowIO.html" title="The bowIO class deals with interfacing with the hardware of a string unit.">bowIO</a>, <a class="el" href="classcalibrate.html">calibrate</a> and <a class="el" href="structCalibrationData.html">CalibrationData</a> objects. The <a class="el" href="classstringModule.html">stringModule</a> instance parses all local command messages applicable and does the appropriate function calls. <br  />
 </li>
-<li><a class="el" href="classcontrolReader.html">controlReader</a> - reads data from i2c ADC converter(s) and will issue the command messages associated with the given ADC channel at certain value-change conditions. This class is updated through the <a class="el" href="classcontrolReader.html#a9d830f90d3165103c4c1b6ebc124da33">controlReader::readData()</a> function which is to to be called periodically. Due to the blocking nature of the ARM i2c library one needs to take care with how often <a class="el" href="classcontrolReader.html#a9d830f90d3165103c4c1b6ebc124da33">controlReader::readData()</a> is called. <br  />
+<li><a class="el" href="classcontrolReader.html">controlReader</a> - reads data from i2c ADC converter(s) and issues command messages associated with the given ADC channel at certain value-change conditions. This class is updated through the <a class="el" href="classcontrolReader.html#a9d830f90d3165103c4c1b6ebc124da33">controlReader::readData()</a> function which is to to be called periodically. Due to the blocking nature of the ARM i2c library one needs to take care with how often <a class="el" href="classcontrolReader.html#a9d830f90d3165103c4c1b6ebc124da33">controlReader::readData()</a> is called. <br  />
 </li>
-<li><a class="el" href="audioanalyze_8h.html">audioanalyze.h</a> - reads audio data from a pin connected to the pickup and does basic DSP calculations on frequency and audio level</li>
+<li><a class="el" href="audioanalyze_8h.html">audioanalyze.h</a> - samples audio data from a pin connected to the electromagnetic pickup and does basic DSP calculations on frequency and audio level</li>
 </ul>
 <h1><a class="anchor" id="controlclasses"></a>
-Intermediary data and sensor processing classes and header files</h1>
+Intermediary data and sensor data processing classes and header files</h1>
 <ul>
 <li><a class="el" href="classbowControl.html">bowControl</a> - Control class for high level interfacing with a <a class="el" href="classbowIO.html" title="The bowIO class deals with interfacing with the hardware of a string unit.">bowIO</a> object. This object contains the PID for stable bowing motor control, calcualtes motor set frequency from harmonic tables and pressure engage, rest and free positiong. Parameters are limited by user set soft-limitis contained in the pointed to <a class="el" href="structCalibrationData.html">CalibrationData</a> and <a class="el" href="classBowActuators.html">BowActuators</a> class instances <br  />
 </li>
@@ -117,7 +117,7 @@ Intermediary data and sensor processing classes and header files</h1>
  </li>
 </ul>
 <h1><a class="anchor" id="auxclasses"></a>
-Auxilary classes and header files</h1>
+Auxilary / Misc classes and header files</h1>
 <ul>
 <li><a class="el" href="classBowActuators.html">BowActuators</a> - contains handling of a vector of bowActuator classes which in turn contains soft-limit data for user-defined actuators <br  />
 </li>
@@ -130,13 +130,15 @@ Auxilary classes and header files</h1>
 </li>
 <li><a class="el" href="eepromhelpers_8cpp.html">eepromhelpers.cpp</a> - contains functions for saving and loading EEPROM data <br  />
 </li>
-<li><a class="el" href="classHarmonicSeriesList.html">HarmonicSeriesList</a> - contains a vector of <a class="el" href="classharmonicSeries.html">harmonicSeries</a> instances which in turn contains the harmonic ratios used by functions in the <a class="el" href="classbowControl.html">bowControl</a> class to set bowing frequencies <br  />
+<li><a class="el" href="harmonicSeries_8cpp.html">harmonicSeries.cpp</a> and <a class="el" href="harmonicSeries_8h.html">harmonicSeries.h</a> - contains a vector of <a class="el" href="classharmonicSeries.html">harmonicSeries</a> instances which in turn contains the harmonic ratios used by functions in the <a class="el" href="classbowControl.html">bowControl</a> class to set bowing frequencies <br  />
 </li>
 <li><a class="el" href="isrclasswrapper_8cpp.html">isrclasswrapper.cpp</a> - wrapper enabling class-based functions to be called by interrupts <br  />
 </li>
 <li><a class="el" href="name_8c.html">name.c</a> - Teensy 4-specific class for setting USB device names <br  />
 </li>
-<li><a class="el" href="settingshandler_8cpp.html">settingshandler.cpp</a> - functions for saving EEPROM data</li>
+<li><a class="el" href="settingshandler_8cpp.html">settingshandler.cpp</a> - functions for saving EEPROM data <br  />
+</li>
+<li><a class="el" href="automaticversion_8hpp.html">automaticversion.hpp</a> - functions for autmatically creating a build version number at each compile</li>
 </ul>
 <h1><a class="anchor" id="libraries"></a>
 Libraries</h1>
@@ -168,7 +170,7 @@ Libraries</h1>
 Author</h1>
 <ul>
 <li>Created by Karl Ekdahl on 2023-09-03</li>
-<li>Modified by Karl Ekdahl on 2024-06-02 </li>
+<li>Modified by Karl Ekdahl on 2024-07-26 </li>
 </ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->

@@ -1,3 +1,22 @@
+/*
+ * This file is part of The Ekdahl FAR firmware.
+ *
+ * The Ekdahl FAR firmware is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * The Ekdahl FAR firmware is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with The Ekdahl FAR firmware. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2024 Karl Ekdahl
+ */
+
 /**
  * @file main.cpp
  *
@@ -21,7 +40,7 @@
  * and delegates data and commands to other classes down the line. The top level classes deals with direct hardware interfacing, the middle level takes care of the
  * logical control of these classes depending on the outcome of processed data and the bottom level deals with interpretation and handling of command messages.
  * Everything is tied together through the main function which periodically runs basic function calls which are not time-sensitive while time-critical functions are
- * called through periodic interrupts.
+ * called through periodic interrupts. Global messages are handled through the loop via the use of functions in maincommandhandler.cpp
  *
  * All outwards functionality can be accessed through command messages, these can be invoked through USB-Serial, RS232 and added to que by internal functions that may or may not be connected to other external hardware.
  * All incoming MIDI-messages are mapped to a editable string of command messages, this way complete freedom in midi-mapping is obtained.
@@ -29,8 +48,8 @@
  * This also makes for a system where minimal code changes are required when doing modifications or introducing new functionaltiy and options.
  * The 'help'-command exposes existing commands, their arguments and a brief description.
  *
- * Classes that contain data that are to be saved into EEPROM implements a function with the name dumpData() that returns a string of commands with any applicable parameters containing the data to be saved,
- * the returned string can then be executed as-is to set the desired parameters.
+ * Classes that contain data that are to be saved into EEPROM implements a function with the name dumpData() that returns a string of commands with any applicable parameters containing the data to be saved.
+ * On load, the command string can be directly added to que and thus executed as is to set the desired parameters.
  *
  * @section hardwareclasses Classes and header files with direct hardware access:
  * - servoStepper - library for handling stepper motor step/dir signals as well as homing switch control. Based on a positional approach like that of a classic RC servo,
@@ -41,8 +60,8 @@
  * DC/DC converter that drives the DC motor driver. It also provides functionality for checking motor driver fault conditions and over-current/power measurements
  * through the current sensor connected to the DC/DC converter.
  * \n
- * - \ref mute - handles mute stepper motor position and provides functions for setting various mute states. Requires frequent polling of the mute::updateMute() function in order for the stepper motor
- * to continuously update its position.
+ * - \ref mute - handles mute stepper motor position and provides functions for setting various mute states. Requires frequent polling of stepServoStepper->updatePosition() in order for the
+ * stepper motor to continuously update its position, this is preferably done via interrupts.
  * \n
  * - \ref solenoid - provides variable force solenoid control through the utilization of PWM, engages the solenoid for a set period of time (in uS) after which it will automatically disengage,
  * Requires frequent polling of the solenoid::updateSolenoid() function in order to engage and disengage the solenoid in a timely manner.
@@ -50,12 +69,12 @@
  * - stringModule - this class handles an entire string module with vectors of bowControl, \ref solenoid and \ref mute objects as well as bowIO, \ref calibrate and CalibrationData objects.
  * The stringModule instance parses all local command messages applicable and does the appropriate function calls.
  * \n
- * - controlReader - reads data from i2c ADC converter(s) and will issue the command messages associated with the given ADC channel at certain value-change conditions. This class is updated through
+ * - controlReader - reads data from i2c ADC converter(s) and issues command messages associated with the given ADC channel at certain value-change conditions. This class is updated through
  * the controlReader::readData() function which is to to be called periodically. Due to the blocking nature of the ARM i2c library one needs to take care with how often controlReader::readData() is called.
  * \n
- * - \ref audioanalyze.h - reads audio data from a pin connected to the pickup and does basic DSP calculations on frequency and audio level
+ * - \ref audioanalyze.h - samples audio data from a pin connected to the electromagnetic pickup and does basic DSP calculations on frequency and audio level
  *
- * @section controlclasses Intermediary data and sensor processing classes and header files
+ * @section controlclasses Intermediary data and sensor data processing classes and header files
  * - bowControl - Control class for high level interfacing with a bowIO object. This object contains the PID for stable bowing motor control, calcualtes motor set frequency from harmonic tables and
  * pressure engage, rest and free positiong. Parameters are limited by user set soft-limitis contained in the pointed to CalibrationData and BowActuators class instances
  * \n
@@ -68,7 +87,7 @@
  * - midi.cpp - contains functions for processing midi commands according to the current \ref configuration class. Not directly bound to hardware but used with callback function pointers by main.cpp
  * \n
  *
- * @section auxclasses Auxilary classes and header files
+ * @section auxclasses Auxilary / Misc classes and header files
  * - BowActuators - contains handling of a vector of bowActuator classes which in turn contains soft-limit data for user-defined actuators
  * \n
  * - \ref calibrate - contains functions for finding soft-limits of the current actuator, utilizes pointeres to bowIO and bowControl class instances to perform calibration tests and monitor sensor outputs
@@ -81,13 +100,15 @@
  * \n
  * - eepromhelpers.cpp - contains functions for saving and loading EEPROM data
  * \n
- * - HarmonicSeriesList - contains a vector of harmonicSeries instances which in turn contains the harmonic ratios used by functions in the bowControl class to set bowing frequencies
+ * - harmonicSeries.cpp and harmonicSeries.h - contains a vector of harmonicSeries instances which in turn contains the harmonic ratios used by functions in the bowControl class to set bowing frequencies
  * \n
  * - isrclasswrapper.cpp - wrapper enabling class-based functions to be called by interrupts
  * \n
  * - name.c - Teensy 4-specific class for setting USB device names
  * \n
  * - settingshandler.cpp - functions for saving EEPROM data
+ * \n
+ * - automaticversion.hpp - functions for autmatically creating a build version number at each compile
  *
  * @section libraries Libraries
  * - Adafruit_ADS1X15 - library for using the ADS1X15 ADC converters, used by the controlReader class
@@ -115,7 +136,7 @@
  *
  * @section author Author
  * - Created by Karl Ekdahl on 2023-09-03
- * - Modified by Karl Ekdahl on 2024-06-02
+ * - Modified by Karl Ekdahl on 2024-07-26
  *
  */
 

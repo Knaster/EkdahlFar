@@ -1,3 +1,21 @@
+/*
+ * This file is part of The Ekdahl FAR firmware.
+ *
+ * The Ekdahl FAR firmware is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * The Ekdahl FAR firmware is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with The Ekdahl FAR firmware. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2024 Karl Ekdahl
+ */
 #ifndef COMMANDPARSER_H
 #define COMMANDPARSER_H
 
@@ -21,7 +39,7 @@ public:
       return;
     }
     command = commandString.substring(0, i).toLowerCase();
-
+//    debugPrintln("Adding command " + command, Debug);
     while (i < (int(commandString.length()) - 1)) {
       i++;
       int e = commandString.indexOf(":", i);
@@ -45,7 +63,7 @@ public:
       }
       String* _argument = new String(commandString.substring(i, e).toLowerCase());
       argument.push_back(*_argument);
-      //debugPrintln("Adding argument " + *_argument, Debug);
+//      debugPrintln("Adding argument " + *_argument, Debug);
       delete _argument;
       i = e;
     }
@@ -126,7 +144,7 @@ public:
         double r = -1;
         if (n) {
           r = te_eval(n);
-          item[i].argument[j] = String(r);
+          item[i].argument[j] = String(r, 5);
         } else {
           //debugPrintln("Error in expression at " + item[i].argument[j].substring(err, item[i].argument[j].length() - 1));
         }

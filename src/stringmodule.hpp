@@ -1,3 +1,21 @@
+/*
+ * This file is part of The Ekdahl FAR firmware.
+ *
+ * The Ekdahl FAR firmware is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * The Ekdahl FAR firmware is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with The Ekdahl FAR firmware. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2024 Karl Ekdahl
+ */
 #ifndef STRINGMODULE_HPP
 #define STRINGMODULE_HPP
 
@@ -42,7 +60,7 @@ serialCommandItem serialCommandsStringModule[] = {
     //setharmonicshift, shs
     { "bowcontrolharmonicshift", "bchsh", "-32767-32767", "Setting shift from the currently playing harmonic where 32767 equals the entire harmonic shift range shifted up" },
     //harmonicshiftrange, hsr
-    { "bowcontrolharmonicshiftrange", "bchsr", "0-36", "Set the number of notes for the entire harmonic shift" },
+    { "bowcontrolharmonicshiftrange", "bchsr", "0-36", "Set the number of harmonic numbers that constitutes the entire harmonic shift" },
     //setharmonicshift5, shs5
     { "bowcontrolharmonicshift5", "bchs5", "-32767-32767", "Setting shift from the currently playing harmonic over 5 octaves where 32767 equals 5 octaves shift up from the fundamental" },
     //setspeedmode, ssm
@@ -141,14 +159,14 @@ serialCommandItem serialCommandsStringModule[] = {
     { "mutesustain", "ms", "0|1", "Setting sustain on (1) or off (0)" },
     { "mutebackoff", "mbo", "0-65535", "Setting the time that the mute stays in the mutefullmute position before automatically going into rest, set in mS"},
     { "mutehome", "mh", "-", "Rehome mute" },
-    { "mutecalibrate", "mc", "-", "Calibrate mute settings"},
+    { "mutecalibrate", "mca", "-", "Calibrate mute settings"},
 
     { "bowactuatoradd", "baa", "-", "Add new bow actuator"},
     { "bowactuatorremove", "bar", "actuator", "Remove bow actuator"},
     { "bowactuatorset", "bas", "actuator", "Set current bow actuator"},
     { "bowactuatorload", "bal", "-", "Load parameters from current bow actuator"},
     { "bowactuatorsave", "bav", "-", "Save current bow parameters into currently selected bow actuator" },
-    { "bowactuatordata", "bad", "actuator:engagepressure:stallpressure:resposition", "Set data of bow actuator [actuator]" },
+    { "bowactuatordata", "bad", "actuator:engagepressure:stallpressure:resposition:id", "Set data of bow actuator [actuator]" },
     { "bowactuatorcount", "bac", "-", "Returns the amount of saved bow actuators"},
     { "bowactuatorid", "bai", "-", "Sets the ID of the current bow actuator"},
     { "bowactuatorsavestall", "bass", "-", "Save current position as bow actuator stall position"}, //NEW - ADD
