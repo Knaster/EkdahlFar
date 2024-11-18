@@ -74,18 +74,50 @@ double expIBool(double input) {
     if (input <= 0) { return 1; } else { return 0; };
 }
 
-double epDeadbandThreshold = 175;
+double epDeadbandThreshold = 250;
 
-double deadband(double value) { //, double threshold = 65) {
+double deadbando(double value) {
     double target = 0;
-//    double threshold = 65;
-    if ((value < (target + epDeadbandThreshold)) && (value > (target - epDeadbandThreshold))) { return target; } else { return value; };
+    //if ((value < (target + epDeadbandThreshold)) && (value > (target - epDeadbandThreshold))) { return target; } else { return value; };
+    if ((value < (target + epDeadbandThreshold)) && (value > (target - epDeadbandThreshold))) { return target; } else {
+        if (value > target) {
+            return value - epDeadbandThreshold;
+        } else {
+            return value + epDeadbandThreshold;
+        }
+
+    };
 }
 
-#define expFunctionCount 22
+double deadband(double value, double threshold) {
+    double target = 0;
+    //if ((value < (target + epDeadbandThreshold)) && (value > (target - epDeadbandThreshold))) { return target; } else { return value; };
+    if ((value < (target + threshold)) && (value > (target - threshold))) { return target; } else {
+        if (value > target) {
+            return value - threshold;
+        } else {
+            return value + threshold;
+        }
+
+    };
+}
+
+
+double epZeroThreshold = 200;
+
+double zeroThreshold(double value) {
+    if (value < epZeroThreshold) {
+        return 0;
+    } else {
+        return value;
+    }
+}
+
+#define expFunctionCount 24
 te_variable expFunctions[expFunctionCount] = {{ "channel", &dchannel } , { "note", &dnote }, { "velocity", &dvelocity }, { "notecount", &dnotecount},
     { "bool", (const void*) expBool, TE_FUNCTION1 }, { "ibool", (const void*) expIBool, TE_FUNCTION1 }, { "pressure", &dpressure}, { "value", &dvalue },
-    { "mapkeys", (const void*) mapKeys, TE_FUNCTION1 }, { "pitch", &dpitch }, { "program", &dprogram }, { "deadband", (const void*) deadband, TE_FUNCTION1 },
+    { "mapkeys", (const void*) mapKeys, TE_FUNCTION1 }, { "pitch", &dpitch }, { "program", &dprogram }, { "deadbando", (const void*) deadbando, TE_FUNCTION1 },
+    { "deadband", (const void*) deadband, TE_FUNCTION2 }, { "zerothreshold", (const void*) zeroThreshold, TE_FUNCTION1 },
     { "uv0", &duv[0]}, { "uv1", &duv[1]}, { "uv2", &duv[2]}, { "uv3", &duv[3]}, { "uv4", &duv[4]},
     { "uv5", &duv[5]}, { "uv6", &duv[6]}, { "uv7", &duv[7]}, { "uv8", &duv[8]}, { "uv9", &duv[9]} };
 
@@ -179,7 +211,7 @@ void OnNoteOff(byte channel, byte note, byte velocity) {
         setNotes();
     }
 
-    debugPrintln("NoteOff", USB);
+    debugPrintln("NoteOff with note " + String(note) + " at velocity " + String(velocity), USB);
 }
 
 /// Handles note on messages
@@ -207,6 +239,8 @@ void OnAfterTouchPoly(byte channel, byte note, byte velocity) {
     if (velocity == 127) {
         stringModuleArray[0].solenoidArray[0].solenoidEngage();
     }
+
+    debugPrintln("PolyAT on channel " + String(channel) + " note " + String(note) + " value " + String(velocity), USB);
 //  setPressure7bit(velocity);
 }
 
@@ -217,6 +251,8 @@ void OnChannelAftertouch(byte channel, byte pressure) {
 
     dchannel = channel; dpressure = pressure;
     processLocalMessage(configArray[currentConfig].channelAftertouch);
+
+    debugPrintln("ChannelAT on channel " + String(channel) + " value " + String(pressure), USB);
 }
 
 /// handle control change message
@@ -224,7 +260,7 @@ void OnControlChange(byte channel, byte control, byte value) {
     if ((configArray[currentConfig].midiRxChannel != channel) && (configArray[currentConfig].midiRxChannel < 17) &&
         (configArray[currentConfig].midiRxChannel > 0)) { return; }
 
-    debugPrintln("Control change " + String(control) + " with value " + String(value), USB);
+    debugPrintln("Control change on channel " + String(channel) + " control " + String(control) + " value " + String(value), USB);
 
     for (int i = 0; i < int(configArray[currentConfig].controlChange.size()); i++) {
         if (configArray[currentConfig].controlChange[i].control == control) {
@@ -264,6 +300,7 @@ void midiAllNotesOff() {
         processLocalMessage(configArray[currentConfig].noteOff);
         notesHeld.clear();
     }
+    debugPrintln("All notes off", USB);
 }
 
 /// handle pitch bend message
@@ -275,6 +312,7 @@ void OnPitchBend(byte channel, int pitch) {
     dpitch = pitch;
     processLocalMessage(configArray[currentConfig].pitchBend);
     //stringModuleArray[0].bowControlArray[0].setHarmonicShift(pitch * 2);
+    debugPrintln("Pitch bend on channel " + String(channel) + " value " + String(pitch), USB);
 }
 
 void OnProgramChange(uint8_t channel, uint8_t program) {
@@ -284,6 +322,8 @@ void OnProgramChange(uint8_t channel, uint8_t program) {
     dchannel = channel;
     dprogram = program;
     processLocalMessage(configArray[currentConfig].programChange);
+
+    debugPrintln("Program change on channel " + String(channel) + " program " + String(program), USB);
 }
 
 MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI);

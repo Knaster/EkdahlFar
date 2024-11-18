@@ -38,9 +38,9 @@ class averager
 //        uint16_t errorTimeThreshold = 10;  //20, 10, 50     // Amount of time that has elapsed since last time the dataChanged flag has been signaled
         uint16_t continuousTimeout = 10;
         //uint8_t errorThreshold = 2;         //2, 0
-        uint16_t continuousErrorThreshold = 2;
+        uint16_t continuousErrorThreshold = 2;  //PCB5 test - 5
 //        uint8_t delayErrorThreshold = 5;   //10, 5, 20          // Amount of data change required to signal dataChanged after errorTimeThreshold has elapsed
-        uint16_t interruptedErrorThreshold = 20; //5
+        uint16_t interruptedErrorThreshold = 40; //PCB5 test - 20
 
         bool trigger = false;                   // Set to true to enable a pDataChanged whenever the data goes above or below the value given by triggerThreshold
         uint16_t triggerThreshold = 100;           // Threshold which at to trigger a data change
@@ -173,6 +173,8 @@ class controlReader
         uint8_t testChannel = 0;
         void setADCMinMaxTestChannel(uint8_t t_channel);
 
+        void resetAds();
+
     protected:
         uint16_t gateState = 0;
 
@@ -187,6 +189,16 @@ class controlReader
         uint16_t currentChannel2;
 
         void addTestData(uint16_t value);
+
+        long adsTimeOut = 10;
+        long adsConversionStart;
+        bool adsErrorReported = false;
+        long ads2TimeOut = 10;
+        long ads2ConversionStart;
+        bool ads2ErrorReported = false;
+
+        long adsReinitializeTimeout = 1000;
+        long adsReinitCountStart;
 };
 
 #endif // CONTROLREADER_H

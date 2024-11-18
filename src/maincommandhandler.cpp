@@ -21,9 +21,9 @@ serialCommandItem serialCommandsMain[] = {
   { "module", "m", "0-15", "Sets the currently active string module"},
   { "modulecount", "mc", "-", "Returns the number of string modules detected"},
 
-  { "debugrunningstatus", "drs", "0|1", "Turns on or off continuous status updates" },  // runningstatus, rs
+  //{ "debugrunningstatus", "drs", "0|1", "Turns on or off continuous status updates" },  // runningstatus, rs
   { "debugprint", "dp", "command|usb|hardware|undefined|priority|error|inforequest|expressionparser|debug:1|0", "Turns on or off serial feedback for the given item"},
-  { "debugfreqreport", "dfr", "0|1", "Sets string frequency reporting on off" },    // freqreport, fr
+//  { "debugfreqreport", "dfr", "0|1", "Sets string frequency reporting on off" },    // freqreport, fr
   { "version", "ver", "-", "Gets the current firmware version"},
   { "globalsaveallparameters", "gsap", "-", "Saves all avaliable parameters"},  // saveallparameters
   { "globalloadallparameters", "glap", "-", "Loads all avaliable parameters"},  // loadallparameters
@@ -109,15 +109,15 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             if (!validateNumber(_commandItem->argument[0].toInt(), 0, stringModuleArray.size())) { return false; }
             currentStringModule = _commandItem->argument[0].toInt();
-            freqReportChannel = currentStringModule;
+//            freqReportChannel = currentStringModule;
             commandResponses->push_back({"Setting current string module to " + String(currentStringModule), Command});
         }
     } else
-    if (_commandItem->command == "debugrunningstatus") {
+/*    if (_commandItem->command == "debugrunningstatus") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         if (_commandItem->argument[0] == 1) { fContinuous = true; } else { fContinuous = false; }
         commandResponses->push_back({"Setting show running status to " + String(fContinuous), Command});
-    }  else
+    }  else*/
     if (_commandItem->command == "debugprint") {
         if (!checkArguments(_commandItem, commandResponses, 2)) { return false; }
         bool found = false;
@@ -133,10 +133,10 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             commandResponses->push_back({"Print type not found", Command});
         }
     } else
-    if (_commandItem->command == "freqreport") {
+/*    if (_commandItem->command == "freqreport") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         if (_commandItem->argument[0] == 1) { freqReport = true; } else { freqReport = false; }
-    } else
+    } else*/
     if (_commandItem->command == "version") {
         if (request) {
             commandResponses->push_back({"ver:" + currentFirmwareVersion, InfoRequest});
@@ -438,6 +438,15 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         updateLocalVariables();
 
         commandList testCommands("ev:" + _commandItem->argument[0]);
+/*
+        String expression =_commandItem->argument[0];
+        debugPrintln("index of \" " + String(expression.indexOf("\"")) + ", ' " + String(expression.indexOf("'")), debugPrintType::Debug);
+        if ((expression.indexOf("\"") != -1) || (expression.indexOf("'") != -1)) {
+            expression = expression.substring(1, expression.length() - 1);
+            debugPrintln("Cleaned expression " + expression, debugPrintType::Debug);
+        }
+        commandList testCommands("ev:" + expression);
+*/
         //testCommands.addCommands;
         testCommands.parseCommandExpressions(expFunctions, expFunctionCount);
         commandResponses->push_back({ "Evaluation result: " + String(testCommands.item[0].argument[0]), debugPrintType::InfoRequest});

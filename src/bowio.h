@@ -49,15 +49,15 @@ class bowIO {
     #define permissibleFreqDeviation 10     ///< Maximum permissible deviation from median value when averaging tachometer values, given in Hertz
     float tachoOldAverage = 0;              ///< Holds the last calculate tachometer average, given in Hertz
 
-    int lastBowMotorPWM = 0;                ///< Holds the last PWM speed value sent to the bowing wheel
-
     char lastReflectorISRState;             ///< Hold the last reflector output state
     long reflectorCyclePeriod = 0;          ///< Holds the current tachometer cycle value in micro seconds
     elapsedMicros reflectorCounter;         ///< Local counter for the bow speed tachometer
 
     unsigned long reflectorZeroTimeoutValue = 50000; ///< Threshold at which the bow movement is considered zero, given in uS (was 500,000 for 0.5Hz, now 50,000 for 20Hz)
 
-    public:
+    int lastBowMotorPWM = 0;                ///< Holds the last PWM speed value sent to the bowing wheel
+
+public:
     uint16_t lastTilt = 0;                  ///< Last tilt value set
 /*
     uint16_t SERVO_MIN = 100; ///< Min permissible PWM setting for servo rotation (was 100)
@@ -125,6 +125,8 @@ public:
 
     void setSpeedPWMSafe(uint16_t speed);
     void setSpeedPWM(uint16_t speed);
+    uint16_t getSpeedPWM();
+
     void setTiltPWM(uint16_t tilt);
     bool waitForTiltToComplete(uint16_t timeout = 3000);
     void tachoISRHandler();

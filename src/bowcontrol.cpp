@@ -351,34 +351,64 @@ bool bowControl::setHarmonic(int _harmonic) {
     int __harmonic = clamp(_harmonic, calibrationDataConnect->lowerHarmonic, calibrationDataConnect->upperHarmonic);
     if (__harmonic != _harmonic) { return false; }
     harmonic = __harmonic;
+/*
+    int targetHarmonic = harmonic + harmonicAdd;
+
     int harmonicCount = harmonicSeriesList.series[currentHarmonicSeries].frequency.size();
     // Calculate where in the series the current harmonic resides (0-11)
-    int series = harmonic % harmonicCount;
+    int series = targetHarmonic % harmonicCount;
     if (series < 0) { series = harmonicCount + series; }
     // If harmonic is below 0 we need to reduce for the truncation to work properly
-    if (harmonic < 0) { harmonic -= (harmonicCount - 1); }
-    int octave = trunc(harmonic / harmonicCount);
+    if (targetHarmonic < 0) { targetHarmonic -= (harmonicCount - 1); }
+    int octave = trunc(targetHarmonic / harmonicCount);
 
     float freq = calibrationDataConnect->fundamentalFrequency * pow(2, octave) * harmonicSeriesList.series[currentHarmonicSeries].frequency[series]; // - 0.4;
 
     if (outputDebugData) { debugPrintln("Setting harmonic to " + String(series) + " @ frequency " + String(freq), Debug); }
-/*
-    if (freq > calibrationDataConnect->maxHz) { debugPrintln("ERROR! Over max speed!!", Error); return false; };
-    if (freq < calibrationDataConnect->minHz) { debugPrintln("Harmonic under limit @ " + String(freq) + " Hertz", Error); return false; }
-*/
+
     currentHarmonicFreq = freq;
     calculateHarmonicShift();
     if (!setPIDTarget(currentHarmonicShiftFreq)) { return false; };
 
     return true;
+    */
+    return updateHarmonicData();
 }
 
 int bowControl::getHarmonic() {
     return harmonic;
 }
 
-void bowControl::updateHarmonicData() {
-    setHarmonic(harmonic);
+bool bowControl::setHarmonicAdd(int _harmonic) {
+    harmonicAdd = _harmonic;
+    return updateHarmonicData();
+}
+
+int bowControl::getHarmonicAdd() {
+    return harmonicAdd;
+}
+
+bool bowControl::updateHarmonicData() {
+    int targetHarmonic = harmonic + harmonicAdd;
+
+    int harmonicCount = harmonicSeriesList.series[currentHarmonicSeries].frequency.size();
+    // Calculate where in the series the current harmonic resides (0-11)
+    int series = targetHarmonic % harmonicCount;
+    if (series < 0) { series = harmonicCount + series; }
+    // If harmonic is below 0 we need to reduce for the truncation to work properly
+    if (targetHarmonic < 0) { targetHarmonic -= (harmonicCount - 1); }
+    int octave = trunc(targetHarmonic / harmonicCount);
+
+    float freq = calibrationDataConnect->fundamentalFrequency * pow(2, octave) * harmonicSeriesList.series[currentHarmonicSeries].frequency[series]; // - 0.4;
+
+    if (outputDebugData) { debugPrintln("Setting harmonic data to " + String(series) + " @ frequency " + String(freq), Debug); }
+
+    currentHarmonicFreq = freq;
+    calculateHarmonicShift();
+    //if (!setPIDTarget(currentHarmonicShiftFreq)) { return false; };
+    return setPIDTarget(currentHarmonicShiftFreq);
+
+//    setHarmonic(harmonic);
 }
 
 bool bowControl::setBaseNote(int inBaseNote) {

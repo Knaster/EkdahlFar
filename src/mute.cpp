@@ -61,81 +61,90 @@ bool mute::setupTMC2209() {
 
 
 void mute::getTMC2209Info() {
-    debugPrintln("*************************", InfoRequest);
-    debugPrintln("getSettings()", InfoRequest);
+    debugPrintln("*************************", Debug);
+    debugPrintln("getSettings()", Debug);
     TMC2209::Settings settings = stepTMC2209Driver->getSettings();
-    debugPrintln("settings.is_communicating = " + String(settings.is_communicating), InfoRequest);
-    debugPrintln("settings.is_setup = " + String(settings.is_setup), InfoRequest);
-    debugPrintln("settings.software_enabled = " + String(settings.software_enabled), InfoRequest);
-    debugPrintln("settings.microsteps_per_step = " + String(settings.microsteps_per_step), InfoRequest);
-    debugPrintln("settings.inverse_motor_direction_enabled = " + String(settings.inverse_motor_direction_enabled), InfoRequest);
-    debugPrintln("settings.stealth_chop_enabled = " + String(settings.stealth_chop_enabled), InfoRequest);
-    debugPrintln("settings.standstill_mode = ", InfoRequest);
+    debugPrintln("settings.is_communicating = " + String(settings.is_communicating), Debug);
+    debugPrintln("settings.is_setup = " + String(settings.is_setup), Debug);
+    debugPrintln("settings.software_enabled = " + String(settings.software_enabled), Debug);
+    debugPrintln("settings.microsteps_per_step = " + String(settings.microsteps_per_step), Debug);
+    debugPrintln("settings.inverse_motor_direction_enabled = " + String(settings.inverse_motor_direction_enabled), Debug);
+    debugPrintln("settings.stealth_chop_enabled = " + String(settings.stealth_chop_enabled), Debug);
+    debugPrintln("settings.standstill_mode = ", Debug);
     switch (settings.standstill_mode)
     {
     case TMC2209::NORMAL:
-        debugPrintln("normal", InfoRequest);
+        debugPrintln("normal", Debug);
         break;
     case TMC2209::FREEWHEELING:
-        debugPrintln("freewheeling", InfoRequest);
+        debugPrintln("freewheeling", Debug);
         break;
     case TMC2209::STRONG_BRAKING:
-        debugPrintln("strong_braking", InfoRequest);
+        debugPrintln("strong_braking", Debug);
         break;
     case TMC2209::BRAKING:
-        debugPrintln("braking", InfoRequest);
+        debugPrintln("braking", Debug);
         break;
     }
-    debugPrintln("settings.irun_percent = " + String(settings.irun_percent), InfoRequest);
-    debugPrintln("settings.irun_register_value = " + String(settings.irun_register_value), InfoRequest);
-    debugPrintln("settings.ihold_percent = " + String(settings.ihold_percent), InfoRequest);
-    debugPrintln("settings.ihold_register_value = " + String(settings.ihold_register_value), InfoRequest);
-    debugPrintln("settings.iholddelay_percent = " + String(settings.iholddelay_percent), InfoRequest);
-    debugPrintln("settings.iholddelay_register_value = " + String(settings.iholddelay_register_value), InfoRequest);
-    debugPrintln("settings.automatic_current_scaling_enabled = " + String(settings.automatic_current_scaling_enabled), InfoRequest);
-    debugPrintln("settings.automatic_gradient_adaptation_enabled = " + String(settings.automatic_gradient_adaptation_enabled), InfoRequest);
-    debugPrintln("settings.pwm_offset = " + String(settings.pwm_offset), InfoRequest);
-    debugPrintln("settings.pwm_gradient = " + String(settings.pwm_gradient), InfoRequest);
-    debugPrintln("settings.cool_step_enabled = " + String(settings.cool_step_enabled), InfoRequest);
-    debugPrintln("settings.analog_current_scaling_enabled = " + String(settings.analog_current_scaling_enabled), InfoRequest);
-    debugPrintln("settings.internal_sense_resistors_enabled = " + String(settings.internal_sense_resistors_enabled), InfoRequest);
-    debugPrintln("*************************", InfoRequest);
-    debugPrintln("", InfoRequest);
+    debugPrintln("settings.irun_percent = " + String(settings.irun_percent), Debug);
+    debugPrintln("settings.irun_register_value = " + String(settings.irun_register_value), Debug);
+    debugPrintln("settings.ihold_percent = " + String(settings.ihold_percent), Debug);
+    debugPrintln("settings.ihold_register_value = " + String(settings.ihold_register_value), Debug);
+    debugPrintln("settings.iholddelay_percent = " + String(settings.iholddelay_percent), Debug);
+    debugPrintln("settings.iholddelay_register_value = " + String(settings.iholddelay_register_value), Debug);
+    debugPrintln("settings.automatic_current_scaling_enabled = " + String(settings.automatic_current_scaling_enabled), Debug);
+    debugPrintln("settings.automatic_gradient_adaptation_enabled = " + String(settings.automatic_gradient_adaptation_enabled), Debug);
+    debugPrintln("settings.pwm_offset = " + String(settings.pwm_offset), Debug);
+    debugPrintln("settings.pwm_gradient = " + String(settings.pwm_gradient), Debug);
+    debugPrintln("settings.cool_step_enabled = " + String(settings.cool_step_enabled), Debug);
+    debugPrintln("settings.analog_current_scaling_enabled = " + String(settings.analog_current_scaling_enabled), Debug);
+    debugPrintln("settings.internal_sense_resistors_enabled = " + String(settings.internal_sense_resistors_enabled), Debug);
+    debugPrintln("*************************", Debug);
+    debugPrintln("", Debug);
 
-    debugPrintln("*************************", InfoRequest);
-    debugPrintln("hardwareDisabled()", InfoRequest);
+    debugPrintln("*************************", Debug);
+    debugPrintln("hardwareDisabled()", Debug);
     bool hardware_disabled = stepTMC2209Driver->hardwareDisabled();
-    debugPrint("hardware_disabled = " + String(hardware_disabled), InfoRequest);
-    debugPrintln("*************************", InfoRequest);
-    debugPrintln("", InfoRequest);
+    debugPrint("hardware_disabled = " + String(hardware_disabled), Debug);
+    debugPrintln("*************************", Debug);
+    debugPrintln("", Debug);
 
-    debugPrintln("*************************", InfoRequest);
-    debugPrintln("getStatus()", InfoRequest);
+    debugPrintln("*************************", Debug);
+    debugPrintln("getStatus()", Debug);
     TMC2209::Status status = stepTMC2209Driver->getStatus();
-    debugPrintln("status.over_temperature_warning = " + String(status.over_temperature_warning), InfoRequest);
-    debugPrintln("status.over_temperature_shutdown = " + String(status.over_temperature_shutdown), InfoRequest);
-    debugPrintln("status.short_to_ground_a = " + String(status.short_to_ground_a), InfoRequest);
-    debugPrintln("status.short_to_ground_b = " + String(status.short_to_ground_b), InfoRequest);
-    debugPrintln("status.low_side_short_a = " + String(status.low_side_short_a), InfoRequest);
-    debugPrintln("status.low_side_short_b = " + String(status.low_side_short_b), InfoRequest);
-    debugPrintln("status.open_load_a = " + String(status.open_load_a), InfoRequest);
-    debugPrintln("status.open_load_b = " + String(status.open_load_b), InfoRequest);
-    debugPrintln("status.over_temperature_120c = " + String(status.over_temperature_120c), InfoRequest);
-    debugPrintln("status.over_temperature_143c = " + String(status.over_temperature_143c), InfoRequest);
-    debugPrintln("status.over_temperature_150c = " + String(status.over_temperature_150c), InfoRequest);
-    debugPrintln("status.over_temperature_157c = " + String(status.over_temperature_157c), InfoRequest);
-    debugPrintln("status.current_scaling = " + String(status.current_scaling), InfoRequest);
-    debugPrintln("status.stealth_chop_mode = " + String(status.stealth_chop_mode), InfoRequest);
-    debugPrintln("status.standstill = " + String(status.standstill), InfoRequest);
-    debugPrintln("*************************", InfoRequest);
-    debugPrintln("", InfoRequest);
+    debugPrintln("status.over_temperature_warning = " + String(status.over_temperature_warning), Debug);
+    debugPrintln("status.over_temperature_shutdown = " + String(status.over_temperature_shutdown), Debug);
+    debugPrintln("status.short_to_ground_a = " + String(status.short_to_ground_a), Debug);
+    debugPrintln("status.short_to_ground_b = " + String(status.short_to_ground_b), Debug);
+    debugPrintln("status.low_side_short_a = " + String(status.low_side_short_a), Debug);
+    debugPrintln("status.low_side_short_b = " + String(status.low_side_short_b), Debug);
+    debugPrintln("status.open_load_a = " + String(status.open_load_a), Debug);
+    debugPrintln("status.open_load_b = " + String(status.open_load_b), Debug);
+    debugPrintln("status.over_temperature_120c = " + String(status.over_temperature_120c), Debug);
+    debugPrintln("status.over_temperature_143c = " + String(status.over_temperature_143c), Debug);
+    debugPrintln("status.over_temperature_150c = " + String(status.over_temperature_150c), Debug);
+    debugPrintln("status.over_temperature_157c = " + String(status.over_temperature_157c), Debug);
+    debugPrintln("status.current_scaling = " + String(status.current_scaling), Debug);
+    debugPrintln("status.stealth_chop_mode = " + String(status.stealth_chop_mode), Debug);
+    debugPrintln("status.standstill = " + String(status.standstill), Debug);
+    debugPrintln("*************************", Debug);
+    debugPrintln("", Debug);
     return;
 }
 
 bool mute::setTilt(uint16_t tilt) {
     // Edited 2024-07-28
     //int a = tilt;
-    uint32_t a = ((float) (((float) tilt) / (65535 / fullMutePosition))) ;
+//    uint32_t a = ((float) (((float) tilt) / (65535 / fullMutePosition))) ;
+
+
+//    unsigned int tiltPWM = calibrationDataConnect->firstTouchPressure +
+//        ((double)(calibrationDataConnect->stallPressure - calibrationDataConnect->firstTouchPressure)
+//        / 65535 * ((double)(baselineTiltPWM + modifierTiltPWM)));
+
+    uint32_t a = restPosition + ((double)(fullMutePosition - restPosition) / 65535 * ((double)tilt));
+
+
     if (a < 0) { a = 0; }
     if (a > 65535) { a = 65535; }
     if (a > fullMutePosition) { a = fullMutePosition; }

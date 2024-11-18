@@ -332,8 +332,14 @@ void setup() {
 
     stringModuleArray[0].bowIOArray[0].stepServoStepper->stepIntervalCallback = &updateServoStepperPressure0;
     stringModuleArray[0].muteArray[0].stepServoStepper->stepIntervalCallback = &updateServoStepperMute0;
-//    stringModuleArray[0].bowIOArray[0].getTMC2209Info();
-//    stringModuleArray[0].muteArray[0].getTMC2209Info();
+    stringModuleArray[0].bowIOArray[0].getTMC2209Info();
+    stringModuleArray[0].muteArray[0].getTMC2209Info();
+    if (stringModuleArray[0].bowIOArray[0].stepServoStepper->homing == servoStepper::UNHOMED) {
+        stringModuleArray[0].bowIOArray[0].homeBow();
+    }
+    if (stringModuleArray[0].muteArray[0].stepServoStepper->homing == servoStepper::UNHOMED) {
+        stringModuleArray[0].muteArray[0].homeMute();
+    }
 
 
     float equalSeries[12] = { 1, 1.059463094, 1.122462048, 1.189207115, 1.25992105, 1.334839854, 1.414213562, 1.498307077, 1.587401052, 1.681792831, 1.781797436, 1.887748625 };
@@ -364,11 +370,13 @@ void setup() {
     //String currentVersion(reinterpret_cast< char const* >(&completeVersion));
     currentFirmwareVersion = String(reinterpret_cast< char const* >(&completeVersion));
     debugPrintln("Current version is " + currentFirmwareVersion, debugPrintType::Debug);
+    delay(100);
+    commands->addCommands("bpr:1");
 }
 
-bool fContinuous = false; ///< Variable for rolling status on/off
-bool freqReport = false;
-int freqReportChannel = 0;
+//bool fContinuous = false; ///< Variable for rolling status on/off
+//bool freqReport = false;
+//int freqReportChannel = 0;
 
 int currentStringModule = 0;
 
@@ -382,12 +390,11 @@ int currentStringModule = 0;
  *    -# Process each strings update function
  */
 
+// Variables for command execution interval
 unsigned long previousTime = 0;
 unsigned long currentTime = 0;
 unsigned long commandUpadateInterval = 1000;
-
 elapsedMillis updateRollingStatus;
-//elapsedMillis updateStrings;
 elapsedMicros controlReaderInterval;
 #define controlReadIntervalTime 50
 
@@ -416,15 +423,17 @@ void loop() {
         stringModuleArray[i].updateString();
 
         for (int j=0; j<stringModuleArray[i].bowControlArray.size(); j++) {
-            if (stringModuleArray[i].bowIOArray[j].bowOverPowerFlag) {
-                debugPrintln("Bow over power!", debugPrintType::Error);
-                commands->addCommands(stringModuleArray[i].bowControlArray[j].commandsOverPowerCurrent);
+            // If the motor is not running, ignore errors as it's likely that a motor simply isn't connected
+            if (stringModuleArray[i].bowIOArray[j].getSpeedPWM() != 0) {
+                if (stringModuleArray[i].bowIOArray[j].bowOverPowerFlag) {
+                    debugPrintln("Bow over power!", debugPrintType::Error);
+                    commands->addCommands(stringModuleArray[i].bowControlArray[j].commandsOverPowerCurrent);
+                }
+                if (stringModuleArray[i].bowControlArray[j].checkMotorFault()) {
+                    debugPrintln("Bow motor fault!", debugPrintType::Error);
+                    commands->addCommands(stringModuleArray[i].bowControlArray[j].commandsMotorFault);
+                }
             }
-            if (stringModuleArray[i].bowControlArray[j].checkMotorFault()) {
-                debugPrintln("Bow motor fault!", debugPrintType::Error);
-                commands->addCommands(stringModuleArray[i].bowControlArray[j].commandsMotorFault);
-            }
-
         }
     }
 #endif

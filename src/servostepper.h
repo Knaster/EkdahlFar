@@ -95,7 +95,7 @@ public:
     uint16_t turnAroundPosition = 0;
     eStepDirection turnAroundDirection = eStepDirection::REVERSE;
 
-    bool invertDirection = false;
+    bool invertDirection = true;
 
     IntervalTimer stepInterval;
     void *stepIntervalCallback;

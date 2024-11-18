@@ -94,16 +94,16 @@ public:
       int f = commandItems.indexOf("'", i);
       int h = commandItems.indexOf("\"",i);   // Added 2023-10-25
 
-  //    debugPrintln("Found , @ " + String(e) + " ' @ " + String(f) + " \" @ " + String(h), Debug); // Added 2023-10-25
+      debugPrintln("Found , @ " + String(e) + " ' @ " + String(f) + " \" @ " + String(h), EParser); // Added 2023-10-25
 
       // If we find quotes, and they come before the next command separator, process the quotes
 //      if ((f != -1) && (f < e)) {   // commented out 2023-10-25
       if (((f != -1) && (f < e)) || ((h != -1) && (h < e))) { // Added 2023-10-25
-//        debugPrintln("Found delimiter", Debug);
+        debugPrintln("Found delimiter", EParser);
         String searchFor = "'"; // Added 2023-10-25
         if (((h < f) && (h != -1)) || (f == -1)) { searchFor = "\""; f = h; } else { searchFor = "'"; } // Added 2023-10-25
         int g = commandItems.indexOf(searchFor,f + 1);  // Added 2023-10-25
-//        debugPrintln("Found other  " + searchFor + " at " + String(g), Debug);  // Added 2023-10-25
+        debugPrintln("Found other  " + searchFor + " at " + String(g), EParser);  // Added 2023-10-25
 //        int g = commandItems.indexOf("'",f + 1); // commented out 2023-10-25
         if (g != -1) {
           e = g + 1;
@@ -114,8 +114,8 @@ public:
         e = commandItems.length();
       }
       String* _item = new String(commandItems.substring(i, e).toLowerCase());
-//      debugPrintln("New string from " + String(i) + " to " + String(e) + " is " + commandItems.substring(i, e).toLowerCase(), Debug);
-      //debugPrintln("Creating command string " + *_item, EParser);
+      debugPrintln("New string from " + String(i) + " to " + String(e) + " is " + commandItems.substring(i, e).toLowerCase(), EParser);
+      debugPrintln("Creating command string " + *_item, EParser);
       commandItem *_commandItem = new commandItem(*_item);
 
       item.push_back(*_item);
@@ -132,12 +132,21 @@ public:
     waitIfProcessing();
     String debugOut;
     //debugPrint("Command sequence ", EParser);
+
     debugOut = "Command sequence ";
     for (int i = 0; i < int(item.size()); i++) {
       //debugPrint(item[i].command, EParser);
       debugOut += item[i].command;
       for (int j = 0; j < int(item[i].argument.size()); j++) {
         //debugPrint(":", EParser);
+
+        debugPrintln("index of \" " + String(item[i].argument[j].indexOf("\"")) + ", ' " + String(item[i].argument[j].indexOf("'")), debugPrintType::Debug);
+        if ((item[i].argument[j].indexOf("\"") != -1) || (item[i].argument[j].indexOf("'") != -1)) {
+            item[i].argument[j] = item[i].argument[j].substring(1, item[i].argument[j].length() - 1);
+            debugPrintln("Cleaned expression " + item[i].argument[j], debugPrintType::Debug);
+        }
+
+
         debugOut +=  ":";
         int err;
         te_expr *n = te_compile(item[i].argument[j].c_str(), vars, varCount, &err);

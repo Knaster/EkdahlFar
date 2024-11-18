@@ -45,6 +45,7 @@ serialCommandItem serialCommandsStringModule[] = {
     { "bowcontrolfundamental", "bcu", "float", "Bow fundamental frequency, all harmonics are calculated from this number" },
     //harmonic, h
     { "bowcontrolharmonic", "bch", "int", "Bow motor speed in terms of a harmonic number. A ratio is taken from the given harmonic in the current harmonic list, the ratio is then multiplied by the bow fundamental frequency" },
+    { "bowcontrolharmonicadd", "bcha", "int", "Additative version of bowcontrolharmonic, the number is given is added to the harmonic given" },
     //harmonicbase, hb
     { "bowcontrolharmonicbase", "bchb", "int", "Same as bowcontrolharmonic but where the harmonic number is based on a MIDI note given by bowcontrolbasenote" },
     //setbasenote, sbn

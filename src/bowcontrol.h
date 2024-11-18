@@ -103,6 +103,7 @@ private:
     int harmonicShift = 0;                    ///< Harmonic shift given as one 16-bit integer
     int harmonicShift5 = 0;
     int harmonic = 0;                         ///< Current harmonic
+    int harmonicAdd = 0;
 
     bool _hold = false;
 
@@ -148,7 +149,11 @@ public:
     int getHarmonicShiftRange();
     bool setHarmonic(int _harmonic);
     int getHarmonic();
-    void updateHarmonicData();
+
+    bool setHarmonicAdd(int _harmonic);
+    int getHarmonicAdd();
+
+    bool updateHarmonicData();
     bool setBaseNote(int inBaseNote);
 
     void measureTimeToTarget(float _pidTargetSpeed);

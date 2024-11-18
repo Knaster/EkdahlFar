@@ -44,20 +44,24 @@ controlReader::controlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
 
     pinMode(pinDataReady, INPUT);
     pinMode(pinGate, INPUT);
-/*
-    averages[0].continuousTimeout = 5;
-    averages[3].interruptedErrorThreshold = 20;
-*/
-    averages[0].interruptedErrorThreshold = 60;
-    averages[2].interruptedErrorThreshold = 30;
+
+    /* Test with ControlBox 5 Start */
+//    averages[0].interruptedErrorThreshold = 400;
+//    averages[3].interruptedErrorThreshold = 150;
+//    averages[6].interruptedErrorThreshold = 8;
+  //  averages[6].continuousErrorThreshold = 2;
+ //   averages[7].interruptedErrorThreshold = 8;
+//    averages[7].continuousErrorThreshold = 2;
+    /* Test with ControlBox 5 End */
+
+    /* Test with ControlBox 6 Start */
+    /* Test with ControlBox 6 End */
+
 
     averages[4].trigger = true;
     averages[4].dataAverageLength = 1;
     averages[5].trigger = true;
-//    averages[6].interruptedErrorThreshold = 10;
-
-
-//    Wire.setClock(1000000);
+/*
     if (!ads.begin(0x48, &Wire)) {
         debugPrintln("Failed to initialize ADS.", debugPrintType::Debug);
         //return;
@@ -65,7 +69,7 @@ controlReader::controlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
         adsInit = true;
         ads.setGain(GAIN_ONE);    //GAIN_TWOTHIRDS
         ads.startADCReading(ADS1X15_REG_CONFIG_MUX_SINGLE_0, false);
-        //ads.setDataRate(RATE_ADS1115_128SPS);   // default = RATE_ADS1115_128SPS*/
+        //ads.setDataRate(RATE_ADS1115_128SPS);   // default = RATE_ADS1115_128SPS
         ads.setDataRate(RATE_ADS1115_860SPS);
         //RATE_ADS1115_860SPS
     }
@@ -82,9 +86,6 @@ controlReader::controlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
 //    Wire.setClock(100000);
     Wire.setClock(400000);
 
-    attachInterrupt(digitalPinToInterrupt(pinDataReady), IRS_AdsDataReady, FALLING);
-    //attachInterrupt(digitalPinToInterrupt(pinGate), IRS_GateChanged, CHANGE);
-    attachInterrupt(digitalPinToInterrupt(pinGate), IRS_AdsDataReady2, FALLING);
 
     ads2.startADCReading(ADS1X15_REG_CONFIG_MUX_SINGLE_0, false);
 
@@ -92,13 +93,57 @@ controlReader::controlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
     currentChannel2 = ADS1X15_REG_CONFIG_MUX_SINGLE_0;
 
     debugPrintln("ADS Initialized", debugPrintType::Debug);
+*/
+    resetAds();
+
+    attachInterrupt(digitalPinToInterrupt(pinDataReady), IRS_AdsDataReady, FALLING);
+    //attachInterrupt(digitalPinToInterrupt(pinGate), IRS_GateChanged, CHANGE);
+    attachInterrupt(digitalPinToInterrupt(pinGate), IRS_AdsDataReady2, FALLING);
     return;
+}
+
+void controlReader::resetAds() {
+    adsInit = false;
+
+    if (!ads.begin(0x48, &Wire)) {
+        debugPrintln("Failed to initialize ADS.", debugPrintType::Debug);
+        return;
+    } else {
+        //adsInit = true;
+        ads.setGain(GAIN_ONE);    //GAIN_TWOTHIRDS
+        ads.startADCReading(ADS1X15_REG_CONFIG_MUX_SINGLE_0, false);
+        ads.setDataRate(RATE_ADS1115_860SPS);
+    }
+
+    if (!ads2.begin(0x49, &Wire)) {
+        debugPrintln("Failed to initialize ADS2", debugPrintType::Debug);
+        return;
+    }
+
+    adsInit = true;
+    ads2.setGain(GAIN_ONE);
+    ads2.setDataRate(RATE_ADS1015_3300SPS);
+
+    Wire.setClock(400000);
+
+    ads2.startADCReading(ADS1X15_REG_CONFIG_MUX_SINGLE_0, false);
+
+    currentChannel = ADS1X15_REG_CONFIG_MUX_SINGLE_0;
+    currentChannel2 = ADS1X15_REG_CONFIG_MUX_SINGLE_0;
+
+    debugPrintln("ADS Initialized", debugPrintType::Debug);
 }
 
 //elapsedMicros tempEM;
 
 void controlReader::readData() {
     int16_t a;
+
+    if ((adsErrorReported || ads2ErrorReported) && ((millis() > (adsReinitCountStart + adsReinitializeTimeout)))) {
+        adsReinitCountStart = millis();
+        debugPrintln("Trying to reinitialize control box", debugPrintType::Debug);
+        resetAds();
+    }
 
     if (!adsInit) { return; }
 
@@ -165,8 +210,14 @@ void controlReader::readData() {
             }
 
             ads2.startADCReading(currentChannel2, false);
+            ads2ConversionStart = millis();
+            ads2ErrorReported = false;
         } else {
-            debugPrintln("No data on ADS2!", Debug);
+            if ((millis() > (ads2ConversionStart + ads2TimeOut)) && (!ads2ErrorReported)) {
+                debugPrintln("No data on ADS2!", Error);
+                ads2ErrorReported = true;
+                adsReinitCountStart = millis();
+            }
         }
     }
 
@@ -235,10 +286,16 @@ void controlReader::readData() {
             }
 
             ads.startADCReading(currentChannel, false);
-
+            adsConversionStart = millis();
+            adsErrorReported = false;
+        } else {
+            if ((millis() > (adsConversionStart + adsTimeOut)) && (!adsErrorReported)) {
+                debugPrintln("No data on ADS!", Error);
+                adsErrorReported = true;
+                adsReinitCountStart = millis();
+            }
         }
     }
-
 }
 
 
@@ -246,11 +303,13 @@ bool controlReader::setADCCommands(uint8_t channel, String commands) {
     if ((channel > 7)) {
         return false;
     }
-    //cvInputCommands.erase(cvInputCommands.begin() + channel);
-    //cvInputCommands.insert(cvInputCommands.begin() + channel, commands);
-
-    commands.replace("\"", "");
-    commands.replace("'", "");
+    // // removed 2024-11-17:
+    //commands.replace("\"", "");
+    //commands.replace("'", "");
+    if ((commands[0] == "'") || (commands[0] == '"')) {
+        commands = commands.substring(1, commands.length() - 1);
+        debugPrintln("Found initial quote, stripping and getting " + commands, debugPrintType::Debug);
+    }
     cvInputCommands[channel] = commands;
     return true;
 }
@@ -291,13 +350,13 @@ void controlReader::setADCMinMaxTestChannel(uint8_t t_channel) {
 
 void controlReader::setDefaults() {
     cvInputCommands.clear();
-    cvInputCommands.push_back("bch:value/1327.716667-0.39");
-    cvInputCommands.push_back("bchs5:(value-31900)/2.425");
-    cvInputCommands.push_back("bchsh:deadband((value-32650)*0.49064)");//    cvInputCommands.push_back("msp:value");
+    cvInputCommands.push_back("bcha:value/1327.716667-20");
+    cvInputCommands.push_back("bchs5:'deadband(value-32236, 20)/2.425'");
+    cvInputCommands.push_back("bchsh:'deadband((value-32600)*0.49064, 250)'");//    cvInputCommands.push_back("msp:value");
     cvInputCommands.push_back("bpb:value");
     cvInputCommands.push_back("se:value");
-    cvInputCommands.push_back("bmr:1,bpid:1,bcsm:0,bpe:bool(value-32767),bpr:ibool(value-32767),bph:ibool(value-32767)");
-    cvInputCommands.push_back("sfm:1/65535*value");
+    cvInputCommands.push_back("bmr:1,bpid:1,bcsm:0,bpe:bool(value-1000),bpr:ibool(value-1000),bph:ibool(value-1000)");
+    cvInputCommands.push_back("sfm:'deadband(1/65535*value,0.002)'");
     cvInputCommands.push_back("msp:value");//    cvInputCommands.push_back("");
 }
 
@@ -306,7 +365,20 @@ String controlReader::dumpData() {
 
     String saveData = "epdbt:" + String(epDeadbandThreshold);
     for (uint8_t i = 0; i < 8; i++) {
-        saveData += "acm:" + String(i) + ":'" + cvInputCommands[i] + "',";
+        // We need quotations for multiple commands in here but the command string may already contain quotations, so figure out which one to use
+        String delimit = "'";
+        if (cvInputCommands[i].indexOf("'") != -1) {
+            delimit = "\"";
+        }
+        if (cvInputCommands[i].indexOf("\"") != -1) {
+            if (delimit == "\"") {
+                debugPrintln("Both quotation styles found in command string, this is going to be an issue", debugPrintType::Error);
+                delimit = "";
+            }
+        }
+
+        saveData += "acm:" + String(i) + ":" + delimit + cvInputCommands[i] + delimit + ",";
+        saveData += "adcs:" + String(i) + ":" + averages[i].dataAverageLength + ":" + averages[i].interruptedErrorThreshold + ":" + averages[i].continuousErrorThreshold + ":" + averages[i].continuousTimeout + ",";
     }
     return saveData;
 }

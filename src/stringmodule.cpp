@@ -133,6 +133,18 @@ bool stringModule::processSerialCommand_GeneralControl(commandItem *_commandItem
             }
         }
     } else
+    if (_commandItem->command == "bowcontrolharmonicadd") {
+        if (request) {
+            commandResponses->push_back({ "bcha:" + String(bowControlArray[currentBowSerial].getHarmonic()), InfoRequest });
+        } else {
+            if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+            if (!bowControlArray[currentBowSerial].setHarmonicAdd(_commandItem->argument[0].toInt())) {
+                commandResponses->push_back({"ERROR setting harmonic add to " + String(_commandItem->argument[0].toInt()), Error});
+            } else {
+                commandResponses->push_back({"Setting harmonic add to " + String(_commandItem->argument[0].toInt()), Command});
+            }
+        }
+    } else
     if (_commandItem->command == "bowcontrolharmonicbase") {
         if (request) {
 //                commandResponses->push_back({ "h:" + String(bowControlArray[currentBowSerial].getHarmonic()), InfoRequest });
@@ -348,8 +360,13 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
         debugPrintln("Setting recover rate to " + String(bowControlArray[currentBowSerial].recoverRate), Command);
     } else*/
     if (_commandItem->command == "bowpidmaxerror") {
-        bowControlArray[currentBowSerial].pidMaxError = _commandItem->argument[0].toInt();
-        commandResponses->push_back({"Setting pid max error to " + String(bowControlArray[currentBowSerial].pidMaxError), Command});
+        if (request) {
+            commandResponses->push_back({ "bpme:" + String(bowControlArray[currentBowSerial].pidMaxError), InfoRequest });
+        } else {
+            if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+            bowControlArray[currentBowSerial].pidMaxError = _commandItem->argument[0].toInt();
+            commandResponses->push_back({"Setting pid max error to " + String(bowControlArray[currentBowSerial].pidMaxError), Command});
+        }
     } else
     if (_commandItem->command == "bowmotortimeout") {
         if (request) {
