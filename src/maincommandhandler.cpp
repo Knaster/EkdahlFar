@@ -88,7 +88,6 @@ serialCommandItem serialCommandsMain[] = {
 //  { "midisustain", "msu", "1|0", "Turn sustain on for MIDI notes, aka ignore NOTE OFF messages and whatever commands they have"},
   { "midiallnotesoff", "mano", "1|0", "Clear the entire buffer of MIDI notes held"},
 
-  { "adcr", "adcr", "-", "ADC value changed report, cannot be invoked manually"},
   { "adccommandmap", "acm", "channel:command string", "Sets the command string invoked when the value on ADC channel [channel] changes"},
   { "adcdefaults", "acd", "Reverts all ADC command strings to default values" },
   { "adcread", "adcr", "channel:value", "Sent when a new value is presented on one of the ADC channels, cannot be invoked" },
@@ -189,34 +188,40 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             String response = "";
 
             if ((check == 1) || (check == 10)) {
-                response += "mev:noteon:\"" + (*configArray[currentConfig].noteOn) + "\"";
+                //response += "mev:noteon:\"" + (*configArray[currentConfig].noteOn) + "\"";
+                response += "mev:noteon:" + delimitExpression(*configArray[currentConfig].noteOn, true) + "";
                 if (check == 10) { response += ","; }
             }
             if ((check == 2) || (check == 10)) {
-                response += "mev:noteoff:\"" + (*configArray[currentConfig].noteOff) + "\"";
+                //response += "mev:noteoff:\"" + (*configArray[currentConfig].noteOff) + "\"";
+                response += "mev:noteoff:" + delimitExpression(*configArray[currentConfig].noteOff, true) + "";
                 if (check == 10) { response += ","; }
             }
             if ((check == 3) || (check == 10)) {
                 for (int i = 0; i < int(configArray[currentConfig].controlChange.size()); i++) {
-                    response += "mev:cc:" + String(configArray[currentConfig].controlChange[i].control) + ":\"" + (configArray[currentConfig].controlChange[i].command) + "\"";
-                    //if ((i + 1) < int(configArray[currentConfig].controlChange.size())) { response += ","; }
+                    //response += "mev:cc:" + String(configArray[currentConfig].controlChange[i].control) + ":\"" + (configArray[currentConfig].controlChange[i].command) + "\"";
+                    response += "mev:cc:" + String(configArray[currentConfig].controlChange[i].control) + ":" + delimitExpression(configArray[currentConfig].controlChange[i].command, true) + "";
                     response += ",";
                 }
             }
             if ((check == 4) || (check == 10)) {
-                response += "mev:pat:\"" + (*configArray[currentConfig].polyAftertouch) + "\"";
+                //response += "mev:pat:\"" + (*configArray[currentConfig].polyAftertouch) + "\"";
+                response += "mev:pat:" + delimitExpression(*configArray[currentConfig].polyAftertouch, true) + "";
                 if (check == 10) { response += ","; }
             }
             if ((check == 5) || (check == 10)) {
-                response += "mev:pb:\"" + (*configArray[currentConfig].pitchBend) + "\"";
+                //response += "mev:pb:\"" + (*configArray[currentConfig].pitchBend) + "\"";
+                response += "mev:pb:" + delimitExpression(*configArray[currentConfig].pitchBend, true) + "";
                 if (check == 10) { response += ","; }
             }
             if ((check == 6) || (check == 10)) {
-                response += "mev:cat:\"" + (*configArray[currentConfig].channelAftertouch) + "\"";
+                //response += "mev:cat:\"" + (*configArray[currentConfig].channelAftertouch) + "\"";
+                response += "mev:cat:" + delimitExpression(*configArray[currentConfig].channelAftertouch, true) + "";
                 if (check == 10) { response += ","; }
             }
             if ((check == 7) || (check == 10)) {
-                response += "mev:pc:\"" + (*configArray[currentConfig].programChange) + "\"";
+                //response += "mev:pc:\"" + (*configArray[currentConfig].programChange) + "\"";
+                response += "mev:pc:" + delimitExpression(*configArray[currentConfig].programChange, true) + "";
                 if (check == 10) { response += ","; }
             }
 
@@ -225,35 +230,44 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         } else {
             if (!checkArgumentsMin(_commandItem, commandResponses, 2)) { return false; }
             if (_commandItem->argument[0] == "noteon") {
-                *configArray[currentConfig].noteOn = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
+//                *configArray[currentConfig].noteOn = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
+                *configArray[currentConfig].noteOn = stripQuotes(_commandItem->argument[1]);
                 commandResponses->push_back({"Setting noteOn event handler to " + *configArray[currentConfig].noteOn, Command});
             } else
             if (_commandItem->argument[0] == "noteoff") {
-                *configArray[currentConfig].noteOff = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
+                //*configArray[currentConfig].noteOff = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
+                *configArray[currentConfig].noteOff = stripQuotes(_commandItem->argument[1]);
                 commandResponses->push_back({"Setting noteOff event handler to " + *configArray[currentConfig].noteOff, Command});
             } else
             if (_commandItem->argument[0] == "cc") {
                 if (!checkArguments(_commandItem, commandResponses, 3)) { return false; }
                 if (!validateNumber(_commandItem->argument[1].toInt(), 0, 127)) { return false; }
-                String *sTemp = new String(_commandItem->argument[2].substring(1, _commandItem->argument[2].length() - 1));
+                //String *sTemp = new String(_commandItem->argument[2].substring(1, _commandItem->argument[2].length() - 1));
+                String *sTemp = new String(stripQuotes(_commandItem->argument[2]));
                 configArray[currentConfig].setCC(_commandItem->argument[1].toInt(), sTemp);
+//                commandResponses->push_back({"Setting CC " + String(_commandItem->argument[1].toInt()) + " event handler to " +
+//                    _commandItem->argument[2].substring(1, _commandItem->argument[2].length() - 1), Command});
                 commandResponses->push_back({"Setting CC " + String(_commandItem->argument[1].toInt()) + " event handler to " +
-                    _commandItem->argument[2].substring(1, _commandItem->argument[2].length() - 1), Command});
+                    *sTemp, Command});
             } else
             if (_commandItem->argument[0] == "pat") {
-                *configArray[currentConfig].polyAftertouch = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
+                //*configArray[currentConfig].polyAftertouch = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
+                *configArray[currentConfig].polyAftertouch = stripQuotes(_commandItem->argument[1]);
                 commandResponses->push_back({"Setting polyAfterTouch event handler to " + *configArray[currentConfig].polyAftertouch, Command});
             } else
             if (_commandItem->argument[0] == "cat") {
-                *configArray[currentConfig].channelAftertouch = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
+                //*configArray[currentConfig].channelAftertouch = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
+                *configArray[currentConfig].channelAftertouch = stripQuotes(_commandItem->argument[1]);
                 commandResponses->push_back({"Setting channelAfterTouch event handler to " + *configArray[currentConfig].channelAftertouch, Command});
             } else
             if (_commandItem->argument[0] == "pb") {
-                *configArray[currentConfig].pitchBend = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
+                //*configArray[currentConfig].pitchBend = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
+                *configArray[currentConfig].pitchBend =  stripQuotes( _commandItem->argument[1]);
                 commandResponses->push_back({"Setting pitchBend event handler to " + *configArray[currentConfig].pitchBend, Command});
             } else
             if (_commandItem->argument[0] == "pc") {
-                *configArray[currentConfig].programChange = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
+                //*configArray[currentConfig].programChange = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
+                *configArray[currentConfig].programChange = stripQuotes(_commandItem->argument[1]);
                 commandResponses->push_back({"Setting programChange event handler to " + *configArray[currentConfig].programChange, Command});
             } else {
                 commandResponses->push_back({"Unknown event " + _commandItem->argument[0], Error});
@@ -319,9 +333,10 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             commandResponses->push_back({ "mcfn:" + String(conf) + ":" + *(configArray[conf].name), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
-            _commandItem->argument[0].replace("\"", "");
-            _commandItem->argument[0].replace("'", "");
-            *(configArray[currentConfig].name) = _commandItem->argument[0];
+//            _commandItem->argument[0].replace("\"", "");
+//            _commandItem->argument[0].replace("'", "");
+//            *(configArray[currentConfig].name) = _commandItem->argument[0];
+            *(configArray[currentConfig].name) = stripQuotes(_commandItem->argument[0]);
             commandResponses->push_back({ "Set configuration name to " + *(configArray[currentConfig].name), InfoRequest });
         }
     } else
@@ -400,16 +415,31 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             commandResponses->push_back({ "All MIDI notes off", debugPrintType::Command});
         }
     } else
+    if (_commandItem->command == "adcread") {
+        if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+        int i = _commandItem->argument[0].toInt();
+        if ((i < 0) || (i > 7)) { return false; }
+
+        int32_t convertedValue;
+        if (i < 5) {
+            convertedValue = (int32_t) ((float) controlRead->getData(i) * ((float) 65536 / 32767));
+        } else {
+            convertedValue = (int32_t) ((float) controlRead->getData(i) * ((float) 65536 / 2048));
+        }
+        if (convertedValue > 65535) { convertedValue = 65535; }
+        commandResponses->push_back({ "adcr:" + String(i) + ":" + String(convertedValue) + ":" + String(controlRead->getData(i)), debugPrintType::InfoRequest});
+    } else
     if (_commandItem->command == "adccommandmap") {
         if (!checkArgumentsMin(_commandItem, commandResponses, 1)) { return false; }
         uint8_t channel = _commandItem->argument[0].toInt();
 
         if (request) {
-            commandResponses->push_back({ "acm:" + String(channel) + ":'" + String(controlRead->cvInputCommands[channel]) + "'", InfoRequest});
+            //commandResponses->push_back({ "acm:" + String(channel) + ":'" + String(controlRead->cvInputCommands[channel]) + "'", InfoRequest});
+            commandResponses->push_back({ "acm:" + String(channel) + ":" + delimitExpression(controlRead->cvInputCommands[channel], true), InfoRequest});
         } else {
             if (!checkArguments(_commandItem, commandResponses, 2)) { return false; }
-            controlRead->setADCCommands(channel, _commandItem->argument[1]);
-            commandResponses->push_back({ "Setting adc channel " + String(channel) + " command string to " + String(controlRead->cvInputCommands[channel]), debugPrintType::Command});
+            controlRead->setADCCommands(channel, stripQuotes(_commandItem->argument[1]));
+            commandResponses->push_back({ "Setting adc channel " + String(channel) + " command string to " + controlRead->cvInputCommands[channel], debugPrintType::Command});
         }
     } else
     if (_commandItem->command == "adcdefaults") {
@@ -548,7 +578,7 @@ void processSerialCommands() {
                     commandResponses.push_back({"m:" + String(currentStringModule) + "," + moduleResponses[i].response, moduleResponses[i].responseType});
                 }
             } else {
-                commandResponses.push_back({"Command not found '" + _commandItem->command + "'", debugPrintType::Error});
+                commandResponses.push_back({"Command not found -" + _commandItem->command + "-", debugPrintType::Error});
             }
         }
         i++;

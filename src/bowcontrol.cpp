@@ -306,8 +306,12 @@ bool bowControl::bowMute(int enact) {
 
 /// Calculate the final frequency using currentHarmonicFreq and currentHarmonicShiftFreq
 bool bowControl::calculateHarmonicShift() {
-    float freq = currentHarmonicFreq * pow(2, ((float) (((float) harmonicShiftRange) / 12) * harmonicShift / 32768 ));
-    float freq5 = freq * pow(2, ((float) (((float) 60) / 12) * harmonicShift5 / 32768 ));
+    int octave = currentHarmonicSeriesData.ratio.size();
+
+ //   float freq = currentHarmonicFreq * pow(2, ((float) (((float) harmonicShiftRange) / 12) * harmonicShift / 32768 ));
+ //   float freq5 = freq * pow(2, ((float) (((float) 60) / 12) * harmonicShift5 / 32768 ));
+    float freq = currentHarmonicFreq * pow(2, ((float) (((float) harmonicShiftRange) / octave) * harmonicShift / 32768 ));
+    float freq5 = freq * pow(2, ((float) (((float) (5 * octave)) / octave) * harmonicShift5 / 32768 ));
     if (outputDebugData) { debugPrintln("Current freq " + String(currentHarmonicFreq) + " shifted freq " + String(freq) + " shifted freq 5 octaves " + String(freq5), Debug); }
     currentHarmonicShiftFreq = clamp(freq5, calibrationDataConnect->minHz, calibrationDataConnect->maxHz);
     if (currentHarmonicShiftFreq != freq5) { return false; }
@@ -391,7 +395,12 @@ int bowControl::getHarmonicAdd() {
 bool bowControl::updateHarmonicData() {
     int targetHarmonic = harmonic + harmonicAdd;
 
-    int harmonicCount = harmonicSeriesList.series[currentHarmonicSeries].frequency.size();
+//    int harmonicCount = harmonicSeriesList.series[currentHarmonicSeries].ratio.size();
+    int harmonicCount = currentHarmonicSeriesData.ratio.size();
+    if (harmonicCount == 0) {
+        debugPrintln("Harmonic list empty!", debugPrintType::Error);
+        return false;
+    }
     // Calculate where in the series the current harmonic resides (0-11)
     int series = targetHarmonic % harmonicCount;
     if (series < 0) { series = harmonicCount + series; }
@@ -399,16 +408,15 @@ bool bowControl::updateHarmonicData() {
     if (targetHarmonic < 0) { targetHarmonic -= (harmonicCount - 1); }
     int octave = trunc(targetHarmonic / harmonicCount);
 
-    float freq = calibrationDataConnect->fundamentalFrequency * pow(2, octave) * harmonicSeriesList.series[currentHarmonicSeries].frequency[series]; // - 0.4;
+    //float freq = calibrationDataConnect->fundamentalFrequency * pow(2, octave) * harmonicSeriesList.series[currentHarmonicSeries].ratio[series]; // - 0.4;
+    float freq = calibrationDataConnect->fundamentalFrequency * pow(2, octave) * currentHarmonicSeriesData.ratio[series]; // - 0.4;
 
     if (outputDebugData) { debugPrintln("Setting harmonic data to " + String(series) + " @ frequency " + String(freq), Debug); }
 
     currentHarmonicFreq = freq;
     calculateHarmonicShift();
-    //if (!setPIDTarget(currentHarmonicShiftFreq)) { return false; };
-    return setPIDTarget(currentHarmonicShiftFreq);
 
-//    setHarmonic(harmonic);
+    return setPIDTarget(currentHarmonicShiftFreq);
 }
 
 bool bowControl::setBaseNote(int inBaseNote) {
@@ -461,6 +469,7 @@ String bowControl::dumpData() {
     dump += "bpes:" + String(bowSpeedToEngage) + ",";
     dump += "bpms:" + String(bowSpeedWhileEngaged) + ",";
     dump += "bmt:" + String(bowShutoffTimeout) + ",";
+    dump += "bhs:" + String(currentHarmonicSeries) + ",";
     return dump;
 }
 
@@ -519,6 +528,15 @@ void bowControl::updateString() {
             bowRest(1);
         }
     }
+};
+
+bool bowControl::loadHarmonicSeries(int i) {
+    if ((i > (harmonicSeriesList.series.size() - 1)) || (i < 0)) {
+        return false;
+    }
+    currentHarmonicSeries = i;
+    currentHarmonicSeriesData = harmonicSeriesList.series[i];
+    return true;
 };
 
 #endif

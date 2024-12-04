@@ -430,9 +430,9 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
             commandResponses->push_back({"Setting bow rest position " + String(calibrationDataArray[currentBowSerial].restPosition), Command});
         }
     } else
-    if (_commandItem->command == "bowcontrolharmonicseries") {
+    if (_commandItem->command == "bowharmonicseries") {
         if (request) {
-            commandResponses->push_back({ "bchs:" + String(bowControlArray[currentBowSerial].currentHarmonicSeries), InfoRequest });
+            commandResponses->push_back({ "bhs:" + String(bowControlArray[currentBowSerial].currentHarmonicSeries), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             if (!validateNumber(_commandItem->argument[0].toInt(), 0, bowControlArray[currentBowSerial].harmonicSeriesList.series.size())) { return false; }
@@ -440,53 +440,132 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
             if (hs > (bowControlArray[currentBowSerial].harmonicSeriesList.series.size() - 1)) {
                 commandResponses->push_back({"Harmonic list doesn't exist " + String(hs), Error});
                 return true;
-            }
+            }/*
             bowControlArray[currentBowSerial].currentHarmonicSeries = hs;
+            bowControlArray[currentBowSerial].currentHarmonicSeriesData = bowControlArray[currentBowSerial].harmonicSeriesList.series[hs];*/
+            bowControlArray[currentBowSerial].loadHarmonicSeries(hs);
             commandResponses->push_back({"Setting harmonic series to " + String(bowControlArray[currentBowSerial].currentHarmonicSeries), Command});
         }
     } else
-    if (_commandItem->command == "bowcontrolharmoniclist") {
+    if (_commandItem->command == "bowharmonicserieslist") {
         if (request) {
-            for (int i = 0; i < int(bowControlArray[currentBowSerial].harmonicSeriesList.series.size()); i++) {
-                String response = "bchl:" + String(i);
+/*            for (int i = 0; i < int(bowControlArray[currentBowSerial].harmonicSeriesList.series.size()); i++) {
+                String response = "bhsl:" + String(i);
                 int j=0;
-                while (j < int(bowControlArray[currentBowSerial].harmonicSeriesList.series[i].frequency.size())) {
-                    response += ":" + String(bowControlArray[currentBowSerial].harmonicSeriesList.series[i].frequency[j], 4);
+                while (j < int(bowControlArray[currentBowSerial].harmonicSeriesList.series[i].ratio.size())) {
+                    response += ":" + String(bowControlArray[currentBowSerial].harmonicSeriesList.series[i].ratio[j], 4);
                     j++;
                 }
                 commandResponses->push_back({response, InfoRequest});
+            }*/
+            String response = "bhsl";
+            int j=0;
+            while (j < int(bowControlArray[currentBowSerial].currentHarmonicSeriesData.ratio.size())) {
+                response += ":" + String(bowControlArray[currentBowSerial].currentHarmonicSeriesData.ratio[j], 4);
+                j++;
             }
+            commandResponses->push_back({response, InfoRequest});
         } else {
             if (!checkArgumentsMin(_commandItem, commandResponses, 2)) { return false; }
             String response = "Setting harmonic list data:" + String(_commandItem->argument[0].toInt());
 
-            bowControlArray[currentBowSerial].harmonicSeriesList.series[_commandItem->argument[0].toInt()].frequency.clear();
-            for (int i = 1; i < int(_commandItem->argument.size()); i++) {
-                response += ":" + _commandItem->argument[i];
-                bowControlArray[currentBowSerial].harmonicSeriesList.series[_commandItem->argument[0].toInt()].setHarmonic(i - 1,
-                    _commandItem->argument[i].toFloat());
+//            debugPrintln("wanted " + String(_commandItem->argument[0].toInt()) + " list size is " + String(bowControlArray[currentBowSerial].harmonicSeriesList.series.size() - 1), debugPrintType::Debug);
+            while (_commandItem->argument[0].toInt() > bowControlArray[currentBowSerial].harmonicSeriesList.series.size() - 1) {
+//                debugPrintln("Adding new list", debugPrintType::Debug);
+                bowControlArray[currentBowSerial].harmonicSeriesList.addHarmonicSeries();
             }
+
+//            debugPrintln("Clearing ratios", debugPrintType::Debug);
+            bowControlArray[currentBowSerial].harmonicSeriesList.series[_commandItem->argument[0].toInt()].ratio.clear();
+//            debugPrintln("Setting ID", debugPrintType::Debug);
+            bowControlArray[currentBowSerial].harmonicSeriesList.series[_commandItem->argument[0].toInt()].Id = String(_commandItem->argument[1]);
+
+//            debugPrintln("Setting data", debugPrintType::Debug);
+            for (int i = 1; i < (int(_commandItem->argument.size()) - 1); i++) {
+                response += ":" + _commandItem->argument[i + 1];
+                bowControlArray[currentBowSerial].harmonicSeriesList.series[_commandItem->argument[0].toInt()].setHarmonic(i - 1, _commandItem->argument[i + 1].toFloat());
+            }
+//            debugPrintln("About to update harmonic data", debugPrintType::Debug);
+
+            if (bowControlArray[currentBowSerial].currentHarmonicSeriesData.ratio.size() == 0) {
+                debugPrintln("Current harmonic series is zero, reloading", debugPrintType::Debug);
+                bowControlArray[currentBowSerial].loadHarmonicSeries(bowControlArray[currentBowSerial].currentHarmonicSeries);
+            }
+
             bowControlArray[currentBowSerial].updateHarmonicData();
             commandResponses->push_back({response, Command});
         }
     } else
-    if (_commandItem->command == "bowcontrolharmonicratio") {
+    if (_commandItem->command == "bowharmonicseriesratio") {
         if (!checkArguments(_commandItem, commandResponses, 2)) { return false; }
-        if (!validateNumber(_commandItem->argument[0].toInt(), 0,
-            bowControlArray[currentBowSerial].harmonicSeriesList.series[bowControlArray[currentBowSerial].currentHarmonicSeries].frequency.size())) { return false; }
+        /*if (!validateNumber(_commandItem->argument[0].toInt(), 0,
+            bowControlArray[currentBowSerial].harmonicSeriesList.series[bowControlArray[currentBowSerial].currentHarmonicSeries].ratio.size())) { return false; }
 
         bowControlArray[currentBowSerial].harmonicSeriesList.series[bowControlArray[currentBowSerial].currentHarmonicSeries].setHarmonic(
+            _commandItem->argument[0].toInt(), _commandItem->argument[1].toFloat());*/
+
+        bowControlArray[currentBowSerial].currentHarmonicSeriesData.setHarmonic(
             _commandItem->argument[0].toInt(), _commandItem->argument[1].toFloat());
+
 
         bowControlArray[currentBowSerial].updateHarmonicData();
 
-        commandResponses->push_back({"Set harmonic " + String(_commandItem->argument[0].toInt()) + " to " + String(_commandItem->argument[1].toFloat()) +
-            " Hertz" , Command});
+        commandResponses->push_back({"Set harmonic " + String(_commandItem->argument[0].toInt()) + " to " + String(_commandItem->argument[1].toFloat()), Command});
     } else
-    if (_commandItem->command == "bowcontrolharmoniccount") {
+    if (_commandItem->command == "bowharmonicseriesratioremove") {
+        if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+        if (bowControlArray[currentBowSerial].currentHarmonicSeriesData.ratio.size() < 2) {
+            commandResponses->push_back({"Cannot remove all harmonics", Error});
+            return false;
+        }
+
+        int i = _commandItem->argument[0].toInt();
+        bowControlArray[currentBowSerial].currentHarmonicSeriesData.ratio.erase(bowControlArray[currentBowSerial].currentHarmonicSeriesData.ratio.begin() + i);
+        bowControlArray[currentBowSerial].updateHarmonicData();
+
+        commandResponses->push_back({"Removing ratio " + String(i), Command});
+    } else
+    if (_commandItem->command == "bowharmonicseriescount") {
+        //commandResponses->push_back({ "bhsc:" + String(bowControlArray[currentBowSerial].harmonicSeriesList.series.size()), InfoRequest });
+        String response = "bhsc:" + String(bowControlArray[currentBowSerial].harmonicSeriesList.series.size());
+        for (int i=0; i<bowControlArray[currentBowSerial].harmonicSeriesList.series.size(); i++) {
+            response += ":" + bowControlArray[currentBowSerial].harmonicSeriesList.series[i].Id;
+        }
+        commandResponses->push_back({ response, InfoRequest });
+    } else
+    if (_commandItem->command == "bowharmonicseriessave") {
         if (request) {
-            commandResponses->push_back({ "bchc:" + String(bowControlArray[currentBowSerial].harmonicSeriesList.series.size()), InfoRequest });
+            commandResponses->push_back({ "bhss:" + String(bowControlArray[currentBowSerial].harmonicSeriesList.series.size()), InfoRequest });
         } else {
+            if (!checkArguments(_commandItem, commandResponses, 2)) { return false; }
+            if (!validateNumber(_commandItem->argument[1].toInt(), 0, bowControlArray[currentBowSerial].harmonicSeriesList.series.size() - 1, true)) {
+                bowControlArray[currentBowSerial].harmonicSeriesList.addHarmonicSeries(_commandItem->argument[0], bowControlArray[currentBowSerial].currentHarmonicSeriesData.ratio);
+                bowControlArray[currentBowSerial].currentHarmonicSeries = bowControlArray[currentBowSerial].harmonicSeriesList.series.size() - 1;
+                commandResponses->push_back({ "Saved as new harmonic list " + String(bowControlArray[currentBowSerial].currentHarmonicSeries), Command });
+            } else {
+                bowControlArray[currentBowSerial].harmonicSeriesList.series[_commandItem->argument[1].toInt()] = bowControlArray[currentBowSerial].currentHarmonicSeriesData;
+                bowControlArray[currentBowSerial].harmonicSeriesList.series[_commandItem->argument[1].toInt()].Id = _commandItem->argument[0];
+                bowControlArray[currentBowSerial].currentHarmonicSeries = _commandItem->argument[1].toInt();
+                commandResponses->push_back({ "Saved over harmonic list " + String(bowControlArray[currentBowSerial].currentHarmonicSeries), Command });
+            }
+        }
+    } else
+    if (_commandItem->command == "bowharmonicseriesremove") {
+        if (request) {
+        } else {
+            if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+            int listNo = _commandItem->argument[0].toInt();
+            debugPrintln("Attempting to remove list " + String(listNo), debugPrintType::Debug);
+            if (!validateNumber(listNo, 0, bowControlArray[currentBowSerial].harmonicSeriesList.series.size() - 1, true)) { return false; }
+
+            bowControlArray[currentBowSerial].harmonicSeriesList.series.erase(
+                bowControlArray[currentBowSerial].harmonicSeriesList.series.begin() + listNo);
+
+            if ((bowControlArray[currentBowSerial].currentHarmonicSeries >= listNo) && (bowControlArray[currentBowSerial].currentHarmonicSeries > 0)) {
+                bowControlArray[currentBowSerial].currentHarmonicSeries--;
+            }
+
+            commandResponses->push_back({ "Removed list " + String(bowControlArray[currentBowSerial].currentHarmonicSeries), Command });
         }
     } else
     if (_commandItem->command == "bowmotorvoltage") {
@@ -773,6 +852,9 @@ bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem,
         if (request) {
             commandResponses->push_back({ "bpperr:" + String(bowControlArray[currentBowSerial].getPIDPeakError()), InfoRequest });
         }
+    }  else
+    if (_commandItem->command == "nooperation") {
+        commandResponses->push_back({ "Precisely did nothing at all", Command });
     } else {
         return false;
     }

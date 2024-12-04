@@ -50,14 +50,6 @@ serialCommandItem serialCommandsStringModule[] = {
     { "bowcontrolharmonicbase", "bchb", "int", "Same as bowcontrolharmonic but where the harmonic number is based on a MIDI note given by bowcontrolbasenote" },
     //setbasenote, sbn
     { "bowcontrolharmonicbasenote", "bchbn", "0-127", "Sets the MIDI base note of the string, used in conjunction with bowcontrolharmonicbase"},
-    //harmonicseries, hs
-    { "bowcontrolharmonicseries", "bchs", "int", "Set/Get the current harmonic series" },
-    //harmoniclist, hl
-    { "bowcontrolharmoniclist", "bchl", "-", "List the harmonic ratios in the current harmonic series" },
-    //setharmonic, sh
-    { "bowcontrolharmonicratio", "bchr", "harmonic(int):ratio(float)", "Sets the ratio of the given harmonic in current harmonic series" },
-    //harmoniccount, hc
-    { "bowcontrolharmoniccount", "bchc", "-", "Returns the number of harmonic lists"},
     //setharmonicshift, shs
     { "bowcontrolharmonicshift", "bchsh", "-32767-32767", "Setting shift from the currently playing harmonic where 32767 equals the entire harmonic shift range shifted up" },
     //harmonicshiftrange, hsr
@@ -66,6 +58,18 @@ serialCommandItem serialCommandsStringModule[] = {
     { "bowcontrolharmonicshift5", "bchs5", "-32767-32767", "Setting shift from the currently playing harmonic over 5 octaves where 32767 equals 5 octaves shift up from the fundamental" },
     //setspeedmode, ssm
     { "bowcontrolspeedmode", "bcsm", "0|1", "Bow motor speed mode, 0 = Automatic and 1 = Manual" },
+
+    //bowcontrolharmonicseries, bchs //harmonicseries, hs
+    { "bowharmonicseries", "bhs", "int", "Get/set the current harmonic series" },
+    //bowcontrolharmoniclist, bchl //harmoniclist, hl
+    { "bowharmonicserieslist", "bhsl", "slot:name:ratios", "Get/set the harmonic ratios and name in the given slot" },
+    //bowcontrolharmonicratio, bchr setharmonic, sh
+    { "bowharmonicseriesratio", "bhsr", "harmonic:ratio", "Sets the ratio of the given harmonic in current harmonic series, will increase the list size if needed to adress the harmonic" },
+    { "bowharmonicseriesratioremove", "bhsrr", "ratio", "Remove the harmmonic ratio given in the current series and shift any ratios accordingly. Cannot remove all ratios"},
+    //bowcontrolharmoniccount, bchc //harmoniccount, hc
+    { "bowharmonicseriescount", "bhsc", "-", "Returns the number of harmonic series in the list and their IDs"},
+    { "bowharmonicseriessave", "bhss", "name:series", "Saves the current harmonic series in the slot given, or if the slot is out of range, creates a new one at the end of the list"},
+    { "bowharmonicseriesremove", "bhsrm", "series", "Remove the series given and shift any series accordingly. Cannot remove all series"},
 
     //status, s
     { "bowstatus", "bs", "-", "Prints status information for the selected bow" },
@@ -172,7 +176,9 @@ serialCommandItem serialCommandsStringModule[] = {
     { "bowactuatorid", "bai", "-", "Sets the ID of the current bow actuator"},
     { "bowactuatorsavestall", "bass", "-", "Save current position as bow actuator stall position"}, //NEW - ADD
     { "bowactuatorsavefirsttouch", "basft", "-", "Save current position as bow actuator first touch position"}, //NEW - ADD
-    { "bowactuatorsaverest", "basr", "-", "Save current position as bow actuator rest position"} //NEW - ADD
+    { "bowactuatorsaverest", "basr", "-", "Save current position as bow actuator rest position"}, //NEW - ADD
+
+    { "nooperation", "nop", "-", "Do absolutely, positively, nothing"}
 };
 
 class stringModule {

@@ -351,23 +351,23 @@ void controlReader::setADCMinMaxTestChannel(uint8_t t_channel) {
 void controlReader::setDefaults() {
     cvInputCommands.clear();
     cvInputCommands.push_back("bcha:value/1327.716667-20");
-    cvInputCommands.push_back("bchs5:'deadband(value-32236, 20)/2.425'");
-    cvInputCommands.push_back("bchsh:'deadband((value-32600)*0.49064, 250)'");//    cvInputCommands.push_back("msp:value");
+    cvInputCommands.push_back("bchs5:\"deadband(value-32236, 20)/2.425\"");
+    cvInputCommands.push_back("bchsh:\"deadband((value-32600)*0.49064, 250)\"");//    cvInputCommands.push_back("msp:value");
     cvInputCommands.push_back("bpb:value");
     cvInputCommands.push_back("se:value");
     cvInputCommands.push_back("bmr:1,bpid:1,bcsm:0,bpe:bool(value-1000),bpr:ibool(value-1000),bph:ibool(value-1000)");
-    cvInputCommands.push_back("sfm:'deadband(1/65535*value,0.002)'");
+    cvInputCommands.push_back("sfm:\"deadband(1/65535*value,0.002)\"");
     cvInputCommands.push_back("msp:value");//    cvInputCommands.push_back("");
 }
 
 String controlReader::dumpData() {
 //    if (!adsInit) { return ""; }
 
-    String saveData = "epdbt:" + String(epDeadbandThreshold);
+    String saveData = "epdbt:" + String(epDeadbandThreshold) + ",";
     for (uint8_t i = 0; i < 8; i++) {
         // We need quotations for multiple commands in here but the command string may already contain quotations, so figure out which one to use
-        String delimit = "'";
-        if (cvInputCommands[i].indexOf("'") != -1) {
+//        String delimit = "'";
+/*        if (cvInputCommands[i].indexOf("'") != -1) {
             delimit = "\"";
         }
         if (cvInputCommands[i].indexOf("\"") != -1) {
@@ -376,11 +376,28 @@ String controlReader::dumpData() {
                 delimit = "";
             }
         }
-
-        saveData += "acm:" + String(i) + ":" + delimit + cvInputCommands[i] + delimit + ",";
+*/
+/*        delimit = "";
+        if (cvInputCommands[i].indexOf("'") < cvInputCommands[i].indexOf("\"")) {
+            delimit = "'";
+        } else if (cvInputCommands[i].indexOf("'") > cvInputCommands[i].indexOf("\"")) {
+            delimit = "\"";
+        }
+        debugPrintln("Using quotestyle " + delimit, debugPrintType::Debug);
+*/
+//        saveData += "acm:" + String(i) + ":" + delimit + cvInputCommands[i] + delimit + ",";
+        saveData += "acm:" + String(i) + ":" + delimitExpression(cvInputCommands[i], true) + ",";
         saveData += "adcs:" + String(i) + ":" + averages[i].dataAverageLength + ":" + averages[i].interruptedErrorThreshold + ":" + averages[i].continuousErrorThreshold + ":" + averages[i].continuousTimeout + ",";
     }
     return saveData;
+}
+
+int32_t controlReader::getData(int16_t channel) {
+    if ((channel < 0) || (channel > 7)) {
+        return -1;
+    } else {
+        return averages[channel].value;
+    }
 }
 
 controlReader::~controlReader()

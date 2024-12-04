@@ -81,6 +81,7 @@ public:
 
 //    BufferedOutput *slaveSerialOut = nullptr;
 //    SafeStringReader *slaveSerialRead = nullptr;
+    harmonicSeries currentHarmonicSeriesData;
     HarmonicSeriesList harmonicSeriesList;
     uint8_t currentHarmonicSeries = 0;
 
@@ -159,6 +160,8 @@ public:
     void measureTimeToTarget(float _pidTargetSpeed);
     String dumpData();
     void updateString();
+
+    bool loadHarmonicSeries(int i);
 };
 
 #endif

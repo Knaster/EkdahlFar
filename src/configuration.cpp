@@ -83,7 +83,7 @@ void configuration::setDefaults() {
 
 String configuration::dumpData() {
     String dump = "mrc:" + String(midiRxChannel)+ ",";
-    if (*name != "default") { dump += "mcfn:\"" +  (*name) + "\","; }
+/*    if (*name != "default") { dump += "mcfn:\"" +  (*name) + "\","; }
     if (*noteOff != "") { dump += "mev:noteoff:\"" + (*noteOff) + "\","; }
     if (*noteOn != "") { dump += "mev:noteon:\"" + (*noteOn) + "\","; }
     if (*polyAftertouch != "") { dump += "mev:pat:\"" + (*polyAftertouch) + "\","; }
@@ -92,6 +92,17 @@ String configuration::dumpData() {
     if (*pitchBend != "") { dump += "mev:pb:\"" + (*pitchBend) + "\","; }
     for (int i = 0; i < int(controlChange.size()); i++) {
         dump += "mev:cc:" + String(controlChange[i].control) + ":\"" + controlChange[i].command + "\",";
+    }*/
+
+    if (*name != "default") { dump += "mcfn:" +  delimitExpression((*name), true) + ","; }
+    if (*noteOff != "") { dump += "mev:noteoff:" + delimitExpression((*noteOff), true) + ","; }
+    if (*noteOn != "") { dump += "mev:noteon:" + delimitExpression((*noteOn), true) + ","; }
+    if (*polyAftertouch != "") { dump += "mev:pat:" + delimitExpression((*polyAftertouch), true) + ","; }
+    if (*programChange != "") { dump += "mev:pc:" + delimitExpression((*programChange), true) + ","; }
+    if (*channelAftertouch != "") { dump += "mev:cat:" + delimitExpression((*channelAftertouch), true) + ","; }
+    if (*pitchBend != "") { dump += "mev:pb:" + delimitExpression((*pitchBend), true) + ","; }
+    for (int i = 0; i < int(controlChange.size()); i++) {
+        dump += "mev:cc:" + String(controlChange[i].control) + ":" + delimitExpression(controlChange[i].command, true) + ",";
     }
 
     return dump;

@@ -174,6 +174,7 @@ class controlReader
         void setADCMinMaxTestChannel(uint8_t t_channel);
 
         void resetAds();
+        int32_t getData(int16_t channel);
 
     protected:
         uint16_t gateState = 0;

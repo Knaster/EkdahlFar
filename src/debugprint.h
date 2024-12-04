@@ -20,7 +20,7 @@ enum debugPrintType { Command, USB, Hardware, Undefined, Priority, Error, InfoRe
 #define debugPrintTypes 11
 String debugPrintTypeName[debugPrintTypes] = { "command", "usb", "hardware" , "undefined", "priority", "error", "inforequest", "expressionparser", "debug", "textinfo", "help" };
 String debugPrintTypeNameShort[debugPrintTypes] = { "cmd", "usb", "hw", "un", "pri", "err", "irq", "ep", "dbg", "txi", "hlp"};
-bool debugPrintEnabled[debugPrintTypes] = { true, true, true, true, true, true, true, true, true, true, true };
+bool debugPrintEnabled[debugPrintTypes] = { true, true, true, true, true, true, true, false, true, true, true };
 
 bool debugPrintCheckType(debugPrintType printType) {
   if (debugPrintEnabled[printType] == true) { return true; }

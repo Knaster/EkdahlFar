@@ -149,7 +149,7 @@ String BowActuators::dumpData() {
     String dump = "";
     for (uint8_t i = 0; i < (m_bowActuator.size()); i++) {
         dump += "bad:" + String(i) + ":" + String(m_bowActuator[i].firstTouchPressure) + ":" + String(m_bowActuator[i].stallPressure) + ":" +
-            String(m_bowActuator[i].restPosition) + ":" + m_bowActuator[i].id + ",";
+            String(m_bowActuator[i].restPosition) + ":" + delimitExpression(m_bowActuator[i].id, true) + ",";
     }
     dump += "bas:" + String(m_currentBowActuator) + ",bal,";
     return dump;

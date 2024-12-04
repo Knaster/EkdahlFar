@@ -202,6 +202,9 @@ int freeram() {
 String customStartupParameters = "";
 
 #include "eepromhelpers.cpp"
+
+/* TODO: REMOVE THIS SHIT, IMPLEMENT REAL HEADER FUCKERS */
+String delimitExpression(String expression, bool force = false);
 #include "configuration.cpp"
 int currentConfig = 0;
 std::vector<configuration> configArray;
@@ -345,8 +348,8 @@ void setup() {
     float equalSeries[12] = { 1, 1.059463094, 1.122462048, 1.189207115, 1.25992105, 1.334839854, 1.414213562, 1.498307077, 1.587401052, 1.681792831, 1.781797436, 1.887748625 };
     float justSeries[12] = {1, 1.06667, 1.125, 1.2, 1.25, 1.3333, 1.40625, 1.5, 1.6, 1.66667, 1.8, 1.875 };
                         //C  C#       D      D#   E     F       F#       G    G#   A        A#   B
-    stringModuleArray[0].bowControlArray[0].harmonicSeriesList.addHarmonicSeries(equalSeries);
-    stringModuleArray[0].bowControlArray[0].harmonicSeriesList.addHarmonicSeries(justSeries);
+    stringModuleArray[0].bowControlArray[0].harmonicSeriesList.addHarmonicSeries("\"Just intonation\"", justSeries);
+    stringModuleArray[0].bowControlArray[0].harmonicSeriesList.addHarmonicSeries("\"Equal temperament\"", equalSeries);
 
     controlRead = new controlReader(17, 16);
     //controlRead->cvInputCommands[0] = "m:0,f:" + String(stringModuleArray[0].calibrationDataArray[0].fundamentalFrequency) + "*2^(1 / 15878 * value)";
