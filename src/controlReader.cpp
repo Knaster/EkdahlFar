@@ -20,23 +20,29 @@
 
 volatile bool adsNewData = false;
 volatile bool adsNewData2 = false;
-volatile bool gateChanged = false;
+//volatile bool gateChanged = false;
+
+//volatile bool adsNewDataX[2] = { false, false };
 
 void IRS_AdsDataReady() {
     adsNewData = true;
+//    adsNewDataX[0] = true;
 }
 
 void IRS_AdsDataReady2() {
     adsNewData2 = true;
+//    adsNewDataX[1] = true;
 }
-
-
+/*
 void IRS_GateChanged() {
     gateChanged = true;
 }
-
+*/
 controlReader::controlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
 {
+//    ADC[0].init(1); // = new ADC(1);
+//    ADC[1].init(0); // = new ADC(0);
+
     setDefaults();
 
     pinDataReady = inDataReadyPin;
@@ -45,62 +51,19 @@ controlReader::controlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
     pinMode(pinDataReady, INPUT);
     pinMode(pinGate, INPUT);
 
-    /* Test with ControlBox 5 Start */
-//    averages[0].interruptedErrorThreshold = 400;
-//    averages[3].interruptedErrorThreshold = 150;
-//    averages[6].interruptedErrorThreshold = 8;
-  //  averages[6].continuousErrorThreshold = 2;
- //   averages[7].interruptedErrorThreshold = 8;
-//    averages[7].continuousErrorThreshold = 2;
-    /* Test with ControlBox 5 End */
-
-    /* Test with ControlBox 6 Start */
-    /* Test with ControlBox 6 End */
-
-
     averages[4].trigger = true;
     averages[4].dataAverageLength = 1;
     averages[5].trigger = true;
-/*
-    if (!ads.begin(0x48, &Wire)) {
-        debugPrintln("Failed to initialize ADS.", debugPrintType::Debug);
-        //return;
-    } else {
-        adsInit = true;
-        ads.setGain(GAIN_ONE);    //GAIN_TWOTHIRDS
-        ads.startADCReading(ADS1X15_REG_CONFIG_MUX_SINGLE_0, false);
-        //ads.setDataRate(RATE_ADS1115_128SPS);   // default = RATE_ADS1115_128SPS
-        ads.setDataRate(RATE_ADS1115_860SPS);
-        //RATE_ADS1115_860SPS
-    }
 
-    if (!ads2.begin(0x49, &Wire)) {
-        debugPrintln("Failed to initialize ADS2", debugPrintType::Debug);
-        return;
-    }
-    if (!adsInit) { return; }
-    adsInit = true;
-    ads2.setGain(GAIN_ONE);
-    ads2.setDataRate(RATE_ADS1015_3300SPS);
-
-//    Wire.setClock(100000);
-    Wire.setClock(400000);
-
-
-    ads2.startADCReading(ADS1X15_REG_CONFIG_MUX_SINGLE_0, false);
-
-    currentChannel = ADS1X15_REG_CONFIG_MUX_SINGLE_0;
-    currentChannel2 = ADS1X15_REG_CONFIG_MUX_SINGLE_0;
-
-    debugPrintln("ADS Initialized", debugPrintType::Debug);
-*/
     resetAds();
 
     attachInterrupt(digitalPinToInterrupt(pinDataReady), IRS_AdsDataReady, FALLING);
-    //attachInterrupt(digitalPinToInterrupt(pinGate), IRS_GateChanged, CHANGE);
     attachInterrupt(digitalPinToInterrupt(pinGate), IRS_AdsDataReady2, FALLING);
     return;
 }
+
+/*! \brief Tries to reconnect to the ADC converters
+ */
 
 void controlReader::resetAds() {
     adsInit = false;
@@ -109,7 +72,6 @@ void controlReader::resetAds() {
         debugPrintln("Failed to initialize ADS.", debugPrintType::Debug);
         return;
     } else {
-        //adsInit = true;
         ads.setGain(GAIN_ONE);    //GAIN_TWOTHIRDS
         ads.startADCReading(ADS1X15_REG_CONFIG_MUX_SINGLE_0, false);
         ads.setDataRate(RATE_ADS1115_860SPS);
@@ -133,9 +95,22 @@ void controlReader::resetAds() {
 
     debugPrintln("ADS Initialized", debugPrintType::Debug);
 }
+/*
+void controlReader::handleADCData(uint16_t adcIndex) {
+    bool iAdsNewData = false;
+    bool iAdsConversionComplete;
 
-//elapsedMicros tempEM;
+    switch (adcIndex) {
+        case 0:
+            iAdsNewData = adsNewData;
+            iAdsConversionComplete = ads.conversionComplete();
+        case 1:
 
+    }
+
+Adafruit_ADS1X15
+}
+*/
 void controlReader::readData() {
     int16_t a;
 
@@ -300,16 +275,13 @@ void controlReader::readData() {
 
 
 bool controlReader::setADCCommands(uint8_t channel, String commands) {
-    if ((channel > 7)) {
-        return false;
-    }
-    // // removed 2024-11-17:
-    //commands.replace("\"", "");
-    //commands.replace("'", "");
-    if ((commands[0] == "'") || (commands[0] == '"')) {
+    if ((channel > 7)) { return false; }
+
+    commands = stripQuotes(commands);
+    /*if ((commands[0] == "'") || (commands[0] == '"')) {
         commands = commands.substring(1, commands.length() - 1);
         debugPrintln("Found initial quote, stripping and getting " + commands, debugPrintType::Debug);
-    }
+    }*/
     cvInputCommands[channel] = commands;
     return true;
 }
@@ -362,30 +334,8 @@ void controlReader::setDefaults() {
 
 String controlReader::dumpData() {
 //    if (!adsInit) { return ""; }
-
     String saveData = "epdbt:" + String(epDeadbandThreshold) + ",";
     for (uint8_t i = 0; i < 8; i++) {
-        // We need quotations for multiple commands in here but the command string may already contain quotations, so figure out which one to use
-//        String delimit = "'";
-/*        if (cvInputCommands[i].indexOf("'") != -1) {
-            delimit = "\"";
-        }
-        if (cvInputCommands[i].indexOf("\"") != -1) {
-            if (delimit == "\"") {
-                debugPrintln("Both quotation styles found in command string, this is going to be an issue", debugPrintType::Error);
-                delimit = "";
-            }
-        }
-*/
-/*        delimit = "";
-        if (cvInputCommands[i].indexOf("'") < cvInputCommands[i].indexOf("\"")) {
-            delimit = "'";
-        } else if (cvInputCommands[i].indexOf("'") > cvInputCommands[i].indexOf("\"")) {
-            delimit = "\"";
-        }
-        debugPrintln("Using quotestyle " + delimit, debugPrintType::Debug);
-*/
-//        saveData += "acm:" + String(i) + ":" + delimit + cvInputCommands[i] + delimit + ",";
         saveData += "acm:" + String(i) + ":" + delimitExpression(cvInputCommands[i], true) + ",";
         saveData += "adcs:" + String(i) + ":" + averages[i].dataAverageLength + ":" + averages[i].interruptedErrorThreshold + ":" + averages[i].continuousErrorThreshold + ":" + averages[i].continuousTimeout + ",";
     }
@@ -399,7 +349,23 @@ int32_t controlReader::getData(int16_t channel) {
         return averages[channel].value;
     }
 }
+/*
+long controlReader::findAndSetNull(uint16_t ch) {
+    Adafruit_ADS1X15 *poo;
 
+    if ((ch < 0) || (ch > 7)) { return -1; }
+    if (ch < 4) {
+        poo = &ads;
+    } else {
+        poo = &ads2;
+        ch -= 4;
+    }
+    poo.startADCReading(ch, false);
+    long timeOut = millis();
+    while (!poo.conversionComplete() && (timeOut + 1000 < millis())) {
+    };
+}
+*/
 controlReader::~controlReader()
 {
 }

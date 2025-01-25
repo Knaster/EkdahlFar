@@ -439,7 +439,8 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         } else {
             if (!checkArguments(_commandItem, commandResponses, 2)) { return false; }
             controlRead->setADCCommands(channel, stripQuotes(_commandItem->argument[1]));
-            commandResponses->push_back({ "Setting adc channel " + String(channel) + " command string to " + controlRead->cvInputCommands[channel], debugPrintType::Command});
+            //commandResponses->push_back({ "Setting adc channel " + String(channel) + " command string to " + controlRead->cvInputCommands[channel], debugPrintType::Command});
+            commandResponses->push_back({ "acm:" + String(channel) + ":" + delimitExpression(controlRead->cvInputCommands[channel], true), InfoRequest});
         }
     } else
     if (_commandItem->command == "adcdefaults") {

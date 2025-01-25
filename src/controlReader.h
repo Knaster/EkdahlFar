@@ -19,12 +19,13 @@
 #ifndef CONTROLREADER_H
 #define CONTROLREADER_H
 
+#include <Wire.h>
 #include <Adafruit_ADS1X15.h>
 
 class averager
 {
     public:
-        int32_t value;                          // Final value after averaging
+        int32_t value = 0;                          // Final value after averaging
         uint8_t dataAverageLength = 1;          // Amount of data points to store and average
         uint16_t dataIndex;                     // Current pointer in data array
         uint16_t dataArray[10];  // Data array
@@ -139,7 +140,25 @@ class averager
             return true;
         }
 };
+/*
+class physicalADC {
+public:
+    Adafruit_ADS1X15 *ADS;
+    uint16_t currentChannel;
+    long adsTimeOut = 10;
+    long adsConversionStart;
+    bool adsErrorReported = false;
 
+    init(uint16_t adcType) {
+        switch (adcType) {
+            case 0:
+                ADS = new  Adafruit_ADS1015();
+            case 1:
+                ADS = new Adafruit_ADS1115();
+        }
+    }
+};
+*/
 class controlReader
 {
     public:
@@ -147,22 +166,11 @@ class controlReader
         virtual ~controlReader();
         void readData();
 
-// Commands are; Base Note CV, Fine / Modulation CV, Mute CV, Pressure CV, Hammer CV-Trigger, Engage trigger
-/*
-        String cvInputCommands[8] = {
-            "m:0,bch:value/1327.716667-0.39",
-            "m:0,bchs5:((value-32000)*1.018082958)",
-            "m:0,msp:value",
-            "m:0,bpb:value",
-            "m:0,se:value",
-            "m:0,bmr:bool(value-32767),bpid:1,bcsm:0,bpe:bool(value-32767),bpr:ibool(value-32767)",
-            "", "" };
-*/
         std::vector<String> cvInputCommands;
 
         bool outputDebugData = true;
         bool setADCCommands(uint8_t channel, String commands);
-        //{ "adcsettings", "adcs", "channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout"
+
         bool setADCAveragerSettings(uint8_t t_channel, uint8_t t_averages, uint16_t t_interruptErrorThreshold, uint16_t t_continuousErrorThreshold, uint16_t t_continuousTimeout);
         String getADCAveragerSettings(uint8_t channel);
         void setDefaults();
@@ -198,8 +206,12 @@ class controlReader
         long ads2ConversionStart;
         bool ads2ErrorReported = false;
 
+//        physicalADC ADC[2];
+
         long adsReinitializeTimeout = 1000;
         long adsReinitCountStart;
+
+//        long findAndSetNull(uint16_t ch);
 };
 
 #endif // CONTROLREADER_H

@@ -340,7 +340,10 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
     if (_commandItem->command == "bowcalibratespeedpid") {
         commandResponses->push_back({"Finding min/max speed with the PID", Command});
         if (!calibrateArray[currentBowSerial].findMinMaxSpeedPID()) {
-            commandResponses->push_back({"Find min/max speed with the PID FAILED", Error});
+            //commandResponses->push_back({"Find min/max speed with the PID FAILED", Error});
+            commandResponses->push_back({"bcs:error", Error});
+        } else {
+            commandResponses->push_back({"bcs:ok", InfoRequest});
         }
     } else
 /*        if (_commandItem->command == "calibratesave") {
@@ -807,9 +810,12 @@ bool stringModule::processSerialCommand_MuteControl(commandItem *_commandItem, s
     } else
     if (_commandItem->command == "mutecalibrate") {
         if (!calibrateMuteArray[currentBowSerial].calibrateAll()) {
-            return false;
+            commandResponses->push_back({"mca:error", InfoRequest});
+            //return false;
+        } else {
+            commandResponses->push_back({"mca:ok", InfoRequest});
         }
-        commandResponses->push_back({"Mute calibration finished", Command});
+        //commandResponses->push_back({"Mute calibration finished", Command});
     } else {
         return false;
     }
@@ -854,7 +860,7 @@ bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem,
         }
     }  else
     if (_commandItem->command == "nooperation") {
-        commandResponses->push_back({ "Precisely did nothing at all", Command });
+        commandResponses->push_back({ "nop", InfoRequest });
     } else {
         return false;
     }

@@ -72,7 +72,7 @@ void configuration::setDefaultBaseParameters() {
 
 void configuration::setDefaultCCs() {
     controlChange.clear();
-    controlChange.push_back({64, "midisustain:bool(value)"});
+    controlChange.push_back({64, "bowpressurehold:bool(value)"});
     controlChange.push_back({123, "midiallnotesoff:1"});
 }
 

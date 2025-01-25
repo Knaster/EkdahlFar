@@ -4,8 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 <tt>
-Build started on: <u>03-12-2024 at 21:18.10</u><br />
-Build ended on: <u>03-12-2024 at 21:18.15</u><p />
+Build started on: <u>03-01-2025 at 13:53.31</u><br />
+Build ended on: <u>03-01-2025 at 13:53.36</u><p />
 <b>-------------- Build: Release in EkdahlFarCB (compiler: Teensyduino 1.58.1)---------------</b><br />
 arm-none-eabi-g++ -mthumb -Os -Wall -std=gnu++14 -g -ffunction-sections -fdata-sections -nostdlib -MMD -mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -fno-exceptions -fpermissive -fno-rtti -fno-threadsafe-statics -felide-constructors -Wno-error=narrowing -D__IMXRT1062__ -DTEENSYDUINO=158 -DARDUINO_TEENSY40 -DLAYOUT_US_ENGLISH -DF_CPU=600000000 -DARDUINO -O2 -DEFARSLAVE -DUSB_MIDI_SERIAL -ffunction-sections -fdata-sections -nostdlib -MMD -mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -fno-exceptions -fpermissive -fno-rtti -fno-threadsafe-statics -felide-constructors -Wno-error=narrowing -D__IMXRT1062__ -DTEENSYDUINO=158 -DARDUINO_TEENSY40 -DLAYOUT_US_ENGLISH -DF_CPU=600000000 -Ilib/teensy4 -Ilib/SafeString/src -Ilib/EEPROM -Ilib/Adafruit_BusIO -Ilib/SPI -Ilib/Wire -Ilib/Audio -Ilib/Audio/utility -Ilib/SD/src -Ilib/SdFat/src -Ilib/SerialFlash -Ilib/TMC2209/src -Ilib/tinyexpr/src -Ilib/Teensy_PWM/src -Ilib/Adafruit_ADS1X15 -Ilib/MIDI -I./ -c src/main.cpp -o obj/Release/src/main.o<br />
 In file included from src/main.cpp:212:<br />
@@ -140,15 +140,15 @@ src/stringmodule.hpp:214:10: note: previous specification in 'bool stringModule:
       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
 In file included from src/main.cpp:230:<br />
 src/stringmodule.cpp: In member function 'bool stringModule::processSerialCommand_CalibrationsSettings(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)':<br />
-<font color="#0000ff">src/stringmodule.cpp:473:54: warning: comparison of integer expressions of different signedness: 'long int' and 'std::vector&lt;harmonicSeries&gt;::size_type' {aka 'unsigned int'} [-Wsign-compare]</font><br />
-  473 |             while (_commandItem-&gt;argument[0].toInt() &gt; bowControlArray[currentBowSerial].harmonicSeriesList.series.size() - 1) {<br />
+<font color="#0000ff">src/stringmodule.cpp:476:54: warning: comparison of integer expressions of different signedness: 'long int' and 'std::vector&lt;harmonicSeries&gt;::size_type' {aka 'unsigned int'} [-Wsign-compare]</font><br />
+  476 |             while (_commandItem-&gt;argument[0].toInt() &gt; bowControlArray[currentBowSerial].harmonicSeriesList.series.size() - 1) {<br />
       |                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
-<font color="#0000ff">src/stringmodule.cpp:531:24: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector&lt;harmonicSeries&gt;::size_type' {aka 'unsigned int'} [-Wsign-compare]</font><br />
-  531 |         for (int i=0; i&lt;bowControlArray[currentBowSerial].harmonicSeriesList.series.size(); i++) {<br />
+<font color="#0000ff">src/stringmodule.cpp:534:24: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector&lt;harmonicSeries&gt;::size_type' {aka 'unsigned int'} [-Wsign-compare]</font><br />
+  534 |         for (int i=0; i&lt;bowControlArray[currentBowSerial].harmonicSeriesList.series.size(); i++) {<br />
       |                       ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
 src/stringmodule.cpp: At global scope:<br />
-<font color="#0000ff">src/stringmodule.cpp:703:6: warning: default argument given for parameter 3 of 'bool stringModule::processSerialCommand_MuteControl(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
-  703 | bool stringModule::processSerialCommand_MuteControl(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {<br />
+<font color="#0000ff">src/stringmodule.cpp:706:6: warning: default argument given for parameter 3 of 'bool stringModule::processSerialCommand_MuteControl(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
+  706 | bool stringModule::processSerialCommand_MuteControl(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {<br />
       |      ^~~~~~~~~~~~<br />
 In file included from src/stringmodule.cpp:26,<br />
                  from src/main.cpp:230:<br />
@@ -156,8 +156,8 @@ src/stringmodule.hpp:216:10: note: previous specification in 'bool stringModule:
   216 |     bool processSerialCommand_MuteControl(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false,<br />
       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
 In file included from src/main.cpp:230:<br />
-<font color="#0000ff">src/stringmodule.cpp:703:6: warning: default argument given for parameter 4 of 'bool stringModule::processSerialCommand_MuteControl(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
-  703 | bool stringModule::processSerialCommand_MuteControl(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {<br />
+<font color="#0000ff">src/stringmodule.cpp:706:6: warning: default argument given for parameter 4 of 'bool stringModule::processSerialCommand_MuteControl(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
+  706 | bool stringModule::processSerialCommand_MuteControl(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {<br />
       |      ^~~~~~~~~~~~<br />
 In file included from src/stringmodule.cpp:26,<br />
                  from src/main.cpp:230:<br />
@@ -165,8 +165,8 @@ src/stringmodule.hpp:216:10: note: previous specification in 'bool stringModule:
   216 |     bool processSerialCommand_MuteControl(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false,<br />
       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
 In file included from src/main.cpp:230:<br />
-<font color="#0000ff">src/stringmodule.cpp:703:6: warning: default argument given for parameter 5 of 'bool stringModule::processSerialCommand_MuteControl(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
-  703 | bool stringModule::processSerialCommand_MuteControl(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {<br />
+<font color="#0000ff">src/stringmodule.cpp:706:6: warning: default argument given for parameter 5 of 'bool stringModule::processSerialCommand_MuteControl(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
+  706 | bool stringModule::processSerialCommand_MuteControl(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {<br />
       |      ^~~~~~~~~~~~<br />
 In file included from src/stringmodule.cpp:26,<br />
                  from src/main.cpp:230:<br />
@@ -174,8 +174,8 @@ src/stringmodule.hpp:216:10: note: previous specification in 'bool stringModule:
   216 |     bool processSerialCommand_MuteControl(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false,<br />
       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
 In file included from src/main.cpp:230:<br />
-<font color="#0000ff">src/stringmodule.cpp:819:6: warning: default argument given for parameter 3 of 'bool stringModule::processSerialCommand_StatusTesting(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
-  819 | bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {<br />
+<font color="#0000ff">src/stringmodule.cpp:825:6: warning: default argument given for parameter 3 of 'bool stringModule::processSerialCommand_StatusTesting(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
+  825 | bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {<br />
       |      ^~~~~~~~~~~~<br />
 In file included from src/stringmodule.cpp:26,<br />
                  from src/main.cpp:230:<br />
@@ -183,8 +183,8 @@ src/stringmodule.hpp:218:10: note: previous specification in 'bool stringModule:
   218 |     bool processSerialCommand_StatusTesting(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false,<br />
       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
 In file included from src/main.cpp:230:<br />
-<font color="#0000ff">src/stringmodule.cpp:819:6: warning: default argument given for parameter 4 of 'bool stringModule::processSerialCommand_StatusTesting(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
-  819 | bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {<br />
+<font color="#0000ff">src/stringmodule.cpp:825:6: warning: default argument given for parameter 4 of 'bool stringModule::processSerialCommand_StatusTesting(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
+  825 | bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {<br />
       |      ^~~~~~~~~~~~<br />
 In file included from src/stringmodule.cpp:26,<br />
                  from src/main.cpp:230:<br />
@@ -192,8 +192,8 @@ src/stringmodule.hpp:218:10: note: previous specification in 'bool stringModule:
   218 |     bool processSerialCommand_StatusTesting(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false,<br />
       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
 In file included from src/main.cpp:230:<br />
-<font color="#0000ff">src/stringmodule.cpp:819:6: warning: default argument given for parameter 5 of 'bool stringModule::processSerialCommand_StatusTesting(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
-  819 | bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {<br />
+<font color="#0000ff">src/stringmodule.cpp:825:6: warning: default argument given for parameter 5 of 'bool stringModule::processSerialCommand_StatusTesting(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
+  825 | bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {<br />
       |      ^~~~~~~~~~~~<br />
 In file included from src/stringmodule.cpp:26,<br />
                  from src/main.cpp:230:<br />
@@ -201,8 +201,8 @@ src/stringmodule.hpp:218:10: note: previous specification in 'bool stringModule:
   218 |     bool processSerialCommand_StatusTesting(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false,<br />
       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
 In file included from src/main.cpp:230:<br />
-<font color="#0000ff">src/stringmodule.cpp:868:6: warning: default argument given for parameter 3 of 'bool stringModule::processSerialCommand_BowActuator(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
-  868 | bool stringModule::processSerialCommand_BowActuator(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false,<br />
+<font color="#0000ff">src/stringmodule.cpp:874:6: warning: default argument given for parameter 3 of 'bool stringModule::processSerialCommand_BowActuator(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
+  874 | bool stringModule::processSerialCommand_BowActuator(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false,<br />
       |      ^~~~~~~~~~~~<br />
 In file included from src/stringmodule.cpp:26,<br />
                  from src/main.cpp:230:<br />
@@ -210,8 +210,8 @@ src/stringmodule.hpp:220:10: note: previous specification in 'bool stringModule:
   220 |     bool processSerialCommand_BowActuator(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false,<br />
       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
 In file included from src/main.cpp:230:<br />
-<font color="#0000ff">src/stringmodule.cpp:868:6: warning: default argument given for parameter 4 of 'bool stringModule::processSerialCommand_BowActuator(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
-  868 | bool stringModule::processSerialCommand_BowActuator(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false,<br />
+<font color="#0000ff">src/stringmodule.cpp:874:6: warning: default argument given for parameter 4 of 'bool stringModule::processSerialCommand_BowActuator(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
+  874 | bool stringModule::processSerialCommand_BowActuator(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false,<br />
       |      ^~~~~~~~~~~~<br />
 In file included from src/stringmodule.cpp:26,<br />
                  from src/main.cpp:230:<br />
@@ -219,8 +219,8 @@ src/stringmodule.hpp:220:10: note: previous specification in 'bool stringModule:
   220 |     bool processSerialCommand_BowActuator(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false,<br />
       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
 In file included from src/main.cpp:230:<br />
-<font color="#0000ff">src/stringmodule.cpp:868:6: warning: default argument given for parameter 5 of 'bool stringModule::processSerialCommand_BowActuator(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
-  868 | bool stringModule::processSerialCommand_BowActuator(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false,<br />
+<font color="#0000ff">src/stringmodule.cpp:874:6: warning: default argument given for parameter 5 of 'bool stringModule::processSerialCommand_BowActuator(commandItem*, std::vector&lt;commandResponse&gt;*, bool, bool, commandList*)' [-fpermissive]</font><br />
+  874 | bool stringModule::processSerialCommand_BowActuator(commandItem *_commandItem, std::vector&lt;commandResponse&gt; *commandResponses, bool request = false, bool delegated = false,<br />
       |      ^~~~~~~~~~~~<br />
 In file included from src/stringmodule.cpp:26,<br />
                  from src/main.cpp:230:<br />
@@ -230,25 +230,21 @@ src/stringmodule.hpp:220:10: note: previous specification in 'bool stringModule:
 In file included from src/controlReader.cpp:19,<br />
                  from src/main.cpp:253:<br />
 src/controlReader.h: In member function 'bool averager::addData(int16_t)':<br />
-<font color="#0000ff">src/controlReader.h:95:44: warning: comparison of integer expressions of different signedness: 'long unsigned int' and 'int16_t' {aka 'short int'} [-Wsign-compare]</font><br />
-   95 |                         if (triggerDelayEM &gt;= triggerDelay) {<br />
+<font color="#0000ff">src/controlReader.h:96:44: warning: comparison of integer expressions of different signedness: 'long unsigned int' and 'int16_t' {aka 'short int'} [-Wsign-compare]</font><br />
+   96 |                         if (triggerDelayEM &gt;= triggerDelay) {<br />
       |                             ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~<br />
 In file included from src/main.cpp:253:<br />
 src/controlReader.cpp: In member function 'void controlReader::readData()':<br />
-<font color="#0000ff">src/controlReader.cpp:142:63: warning: comparison of integer expressions of different signedness: 'uint32_t' {aka 'long unsigned int'} and 'long int' [-Wsign-compare]</font><br />
-  142 |     if ((adsErrorReported || ads2ErrorReported) &amp;&amp; ((millis() &gt; (adsReinitCountStart + adsReinitializeTimeout)))) {<br />
+<font color="#0000ff">src/controlReader.cpp:117:63: warning: comparison of integer expressions of different signedness: 'uint32_t' {aka 'long unsigned int'} and 'long int' [-Wsign-compare]</font><br />
+  117 |     if ((adsErrorReported || ads2ErrorReported) &amp;&amp; ((millis() &gt; (adsReinitCountStart + adsReinitializeTimeout)))) {<br />
       |                                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
 In file included from src/main.cpp:253:<br />
-<font color="#0000ff">src/controlReader.cpp:216:27: warning: comparison of integer expressions of different signedness: 'uint32_t' {aka 'long unsigned int'} and 'long int' [-Wsign-compare]</font><br />
-  216 |             if ((millis() &gt; (ads2ConversionStart + ads2TimeOut)) &amp;&amp; (!ads2ErrorReported)) {<br />
+<font color="#0000ff">src/controlReader.cpp:191:27: warning: comparison of integer expressions of different signedness: 'uint32_t' {aka 'long unsigned int'} and 'long int' [-Wsign-compare]</font><br />
+  191 |             if ((millis() &gt; (ads2ConversionStart + ads2TimeOut)) &amp;&amp; (!ads2ErrorReported)) {<br />
       |                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
-<font color="#0000ff">src/controlReader.cpp:292:27: warning: comparison of integer expressions of different signedness: 'uint32_t' {aka 'long unsigned int'} and 'long int' [-Wsign-compare]</font><br />
-  292 |             if ((millis() &gt; (adsConversionStart + adsTimeOut)) &amp;&amp; (!adsErrorReported)) {<br />
+<font color="#0000ff">src/controlReader.cpp:267:27: warning: comparison of integer expressions of different signedness: 'uint32_t' {aka 'long unsigned int'} and 'long int' [-Wsign-compare]</font><br />
+  267 |             if ((millis() &gt; (adsConversionStart + adsTimeOut)) &amp;&amp; (!adsErrorReported)) {<br />
       |                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
-src/controlReader.cpp: In member function 'bool controlReader::setADCCommands(uint8_t, String)':<br />
-<font color="#0000ff">src/controlReader.cpp:309:22: warning: comparison with string literal results in unspecified behavior [-Waddress]</font><br />
-  309 |     if ((commands[0] == "'") || (commands[0] == '"')) {<br />
-<font color="#0000ff">src/controlReader.cpp:309:22: warning: ISO C++ forbids comparison between pointer and integer [-fpermissive]</font><br />
 In file included from src/main.cpp:256:<br />
 src/settingshandler.cpp: In function 'String dumpData()':<br />
 <font color="#0000ff">src/settingshandler.cpp:25:23: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector&lt;configuration&gt;::size_type' {aka 'unsigned int'} [-Wsign-compare]</font><br />
@@ -309,8 +305,8 @@ arm-none-eabi-size bin/Release/EkdahlFarCB.elf<br />
 arm-none-eabi-objcopy -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0 bin/Release/EkdahlFarCB.elf bin/Release/EkdahlFarCB.eep<br />
 arm-none-eabi-objcopy -O ihex -R .eeprom bin/Release/EkdahlFarCB.elf bin/Release/EkdahlFarCB.hex<br />
 arm-none-eabi-objdump -d bin/Release/EkdahlFarCB.elf &gt; bin/Release/EkdahlFarCB.lst<br />
-<font color="#0000ff">Process terminated with status 0 (0 minute(s), 5 second(s))</font><br />
-<font color="#0000ff">0 error(s), 45 warning(s) (0 minute(s), 5 second(s))</font><br />
+<font color="#0000ff">Process terminated with status 0 (0 minute(s), 4 second(s))</font><br />
+<font color="#0000ff">0 error(s), 43 warning(s) (0 minute(s), 4 second(s))</font><br />
 </tt>
 </body>
 </html>

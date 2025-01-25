@@ -235,7 +235,7 @@ std::vector <stringModule> stringModuleArray;
 
 #include "isrclasswrapper.cpp"
 
-/*! \brietf Interrupt callback function for measuring bowing speed of string unit
+/*! \brief Interrupt callback function for measuring bowing speed of string unit
  *
  *  fmPinStateChangedISR will be called whenever an Interrupt event happens on the pin associated. The pin associated is in turn connected to the reflection sensor output
  *  of a string unit. The function also includes the setting up of a timeout function in case of no bow movement as the interrupt will never be triggered in that case.

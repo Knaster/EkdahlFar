@@ -125,8 +125,8 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  lib/MIDI/midi_Defs.h lib/MIDI/midi_Namespace.h lib/MIDI/midi_Platform.h \
  lib/MIDI/midi_Settings.h lib/MIDI/midi_Message.h lib/MIDI/serialMIDI.h \
  lib/MIDI/MIDI.hpp src/isrclasswrapper.cpp src/controlReader.cpp \
- src/controlReader.h lib/Adafruit_ADS1X15/Adafruit_ADS1X15.h \
- lib/Adafruit_BusIO/Adafruit_I2CDevice.h lib/Wire/Wire.h \
- lib/Wire/WireIMXRT.h src/settingshandler.cpp lib/EEPROM/EEPROM.h \
- lib/teensy4/avr/eeprom.h lib/teensy4/avr/io.h \
+ src/controlReader.h lib/Wire/Wire.h lib/Wire/WireIMXRT.h \
+ lib/Adafruit_ADS1X15/Adafruit_ADS1X15.h \
+ lib/Adafruit_BusIO/Adafruit_I2CDevice.h src/settingshandler.cpp \
+ lib/EEPROM/EEPROM.h lib/teensy4/avr/eeprom.h lib/teensy4/avr/io.h \
  lib/teensy4/avr/../avr_emulation.h src/maincommandhandler.cpp
