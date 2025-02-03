@@ -29,7 +29,7 @@
 BowActuators::BowActuators(CalibrationData *t_calibrationDataConnect)
 {
     m_calibrationDataConnect = t_calibrationDataConnect;
-    m_bowActuator.push_back({0, 65535, 0});
+    m_bowActuator.push_back({0, 65535, 0, "default"});
 }
 
 BowActuators::~BowActuators()
@@ -38,7 +38,7 @@ BowActuators::~BowActuators()
 }
 
 uint8_t BowActuators::addBowActuator() {
-    m_bowActuator.push_back({0, 65535, 0});
+    m_bowActuator.push_back({0, 65535, 0, "new"});
     return m_bowActuator.size() - 1;
 }
 
@@ -81,10 +81,29 @@ bool BowActuators::loadBowActuator() {
     return true;
 }
 
+bool BowActuators::loadBowActuator(uint8_t t_actuator) {
+    m_currentBowActuator = t_actuator;
+    loadBowActuator();
+    return true;
+}
+/*
 bool BowActuators::saveBowActuator() {
     m_bowActuator[m_currentBowActuator].firstTouchPressure = m_calibrationDataConnect->firstTouchPressure;
     m_bowActuator[m_currentBowActuator].stallPressure = m_calibrationDataConnect->stallPressure;
     m_bowActuator[m_currentBowActuator].restPosition = m_calibrationDataConnect->restPosition;
+    return true;
+};
+*/
+bool BowActuators::saveBowActuator(uint16_t actuator, String name) {
+    if (actuator > m_bowActuator.size() - 1) {
+        debugPrintln("Inserting new actuator", Debug);
+        m_bowActuator.push_back({0, 65535, 0, "new"});
+        actuator = m_bowActuator.size() - 1;
+    }
+    m_bowActuator[actuator].firstTouchPressure = m_calibrationDataConnect->firstTouchPressure;
+    m_bowActuator[actuator].stallPressure = m_calibrationDataConnect->stallPressure;
+    m_bowActuator[actuator].restPosition = m_calibrationDataConnect->restPosition;
+    m_bowActuator[actuator].id = name;
     return true;
 };
 
@@ -151,7 +170,8 @@ String BowActuators::dumpData() {
         dump += "bad:" + String(i) + ":" + String(m_bowActuator[i].firstTouchPressure) + ":" + String(m_bowActuator[i].stallPressure) + ":" +
             String(m_bowActuator[i].restPosition) + ":" + delimitExpression(m_bowActuator[i].id, true) + ",";
     }
-    dump += "bas:" + String(m_currentBowActuator) + ",bal,";
+    //dump += "bas:" + String(m_currentBowActuator) + ",bal,";
+    dump += "ba:" + String(m_currentBowActuator) + ",";
     return dump;
 }
 #endif

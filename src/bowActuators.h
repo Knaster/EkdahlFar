@@ -43,7 +43,9 @@ class BowActuators
         uint8_t getBowActuator();
         uint8_t getBowActuatorCount();
         bool loadBowActuator();
-        bool saveBowActuator();
+        bool loadBowActuator(uint8_t t_actuator);
+        //bool saveBowActuator();
+        bool saveBowActuator(uint16_t actuator, String name);
         bool setBowActuatorFirstTouchPressure(uint16_t t_firstTouchPressure);
         bool setBowActuatorStallPressure(uint16_t t_stallPressure);
         bool setBowActuatorRestPosition(uint16_t t_restPosition);

@@ -62,13 +62,15 @@ serialCommandItem serialCommandsStringModule[] = {
     //bowcontrolharmonicseries, bchs //harmonicseries, hs
     { "bowharmonicseries", "bhs", "int", "Get/set the current harmonic series" },
     //bowcontrolharmoniclist, bchl //harmoniclist, hl
-    { "bowharmonicserieslist", "bhsl", "slot:name:ratios", "Get/set the harmonic ratios and name in the given slot" },
+    //{ "bowharmonicserieslist", "bhsl", "slot:name:ratios", "Get/set the harmonic ratios and name in the given slot" },
+    { "bowharmonicseriesdata", "bhsd", "slot:name:ratios", "Sets all data for the harmonic series in the given slot" },
     //bowcontrolharmonicratio, bchr setharmonic, sh
     { "bowharmonicseriesratio", "bhsr", "harmonic:ratio", "Sets the ratio of the given harmonic in current harmonic series, will increase the list size if needed to adress the harmonic" },
     { "bowharmonicseriesratioremove", "bhsrr", "ratio", "Remove the harmmonic ratio given in the current series and shift any ratios accordingly. Cannot remove all ratios"},
     //bowcontrolharmoniccount, bchc //harmoniccount, hc
     { "bowharmonicseriescount", "bhsc", "-", "Returns the number of harmonic series in the list and their IDs"},
-    { "bowharmonicseriessave", "bhss", "name:series", "Saves the current harmonic series in the slot given, or if the slot is out of range, creates a new one at the end of the list"},
+    //{ "bowharmonicseriessave", "bhss", "name:series", "Saves the current harmonic series in the slot given, or if the slot is out of range, creates a new one at the end of the list"},
+    { "bowharmonicseriessave", "bhss", "series:name", "Saves the current harmonic series in the slot given, or if the slot is out of range, creates a new one at the end of the list"},
     { "bowharmonicseriesremove", "bhsrm", "series", "Remove the series given and shift any series accordingly. Cannot remove all series"},
 
     //status, s
@@ -85,11 +87,11 @@ serialCommandItem serialCommandsStringModule[] = {
     //calibratespeed, cms
     { "bowcalibratespeed", "bcs", "-", "Finds the minimum and maximum bow speed of the selected bow" },
     //calibratespeedpid, cmsp
-    { "bowcalibratespeedpid", "bcsp", "-", "Finds the minimum and maximum bow speed of the selected bow using the PID" },
+//    { "bowcalibratespeedpid", "bcsp", "-", "Finds the minimum and maximum bow speed of the selected bow using the PID" },
     //calibratepressure, cmp
     { "bowcalibratepressure", "bcp", "-", "Finds the minimum and maximum bow pressure of the selected bow" },
     //stablethreshold, st
-    { "bowcalibratestablethreshold", "bcst", "float", "Sets the timeout value for the bow frequency stability check for the selected bow" },
+//    { "bowcalibratestablethreshold", "bcst", "float", "Sets the timeout value for the bow frequency stability check for the selected bow" },
 
     //run, run
     { "bowmotorrun", "bmr", "1|0", "Set bow motor run on/off" },
@@ -113,7 +115,7 @@ serialCommandItem serialCommandsStringModule[] = {
     { "bowmotorfaultcommands", "bmfc", "command list", "Commands to execute when a motor fault is tripped - !WARNING! Can ruin your instrument if changed" },
     { "bowmotoroverpowercommands", "bmopc", "command list", "Commands to execute when motor is over the power limit - !WARNING! Can ruin your instrument if changed" },
     //bowmininertiapwm, biiw
-    { "bowmotormininertialpwm", "bmmip", "0 - 65535", "Bow minimal PWM to keep inertia"},
+//    { "bowmotormininertialpwm", "bmmip", "0 - 65535", "Bow minimal PWM to keep inertia"},
 
 /*
     //recoverrate, rr
@@ -166,18 +168,19 @@ serialCommandItem serialCommandsStringModule[] = {
     { "mutehome", "mh", "-", "Rehome mute" },
     { "mutecalibrate", "mca", "-", "Calibrate mute settings"},
 
-    { "bowactuatoradd", "baa", "-", "Add new bow actuator"},
+    { "bowactuator", "ba", "actuator", "Sets and loads the actuator given"},
+//    { "bowactuatoradd", "baa", "-", "Add new bow actuator"},
     { "bowactuatorremove", "bar", "actuator", "Remove bow actuator"},
-    { "bowactuatorset", "bas", "actuator", "Set current bow actuator"},
-    { "bowactuatorload", "bal", "-", "Load parameters from current bow actuator"},
-    { "bowactuatorsave", "bav", "-", "Save current bow parameters into currently selected bow actuator" },
-    { "bowactuatordata", "bad", "actuator:engagepressure:stallpressure:resposition:id", "Set data of bow actuator [actuator]" },
+//    { "bowactuatorset", "bas", "actuator", "Set current bow actuator"},
+//    { "bowactuatorload", "bal", "-", "Load parameters from current bow actuator"},
+    { "bowactuatorsave", "bas", "-", "Save current bow parameters into currently selected bow actuator" },
+    { "bowactuatordata", "bad", "actuator:engagepressure:stallpressure:restposition:id", "Set data of bow actuator [actuator]" },
     { "bowactuatorcount", "bac", "-", "Returns the amount of saved bow actuators"},
-    { "bowactuatorid", "bai", "-", "Sets the ID of the current bow actuator"},
-    { "bowactuatorsavestall", "bass", "-", "Save current position as bow actuator stall position"}, //NEW - ADD
+//    { "bowactuatorid", "bai", "id", "Sets the ID of the current bow actuator"},
+/*    { "bowactuatorsavestall", "bass", "-", "Save current position as bow actuator stall position"}, //NEW - ADD
     { "bowactuatorsavefirsttouch", "basft", "-", "Save current position as bow actuator first touch position"}, //NEW - ADD
     { "bowactuatorsaverest", "basr", "-", "Save current position as bow actuator rest position"}, //NEW - ADD
-
+*/
     { "nooperation", "nop", "-", "Do absolutely, positively, nothing"}
 };
 

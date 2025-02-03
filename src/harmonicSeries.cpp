@@ -77,7 +77,7 @@ public:
     String dumpData() {
         String dump = "";
         for (int i = 0; i < int(series.size()); i++) {
-            dump += "bhsl:" + String(i) + ":" + String(series[i].Id);
+            dump += "bhsd:" + String(i) + ":" + String(series[i].Id);
             for (int j = 0; j < int(series[i].ratio.size()); j++) {
                 dump += ":" + String(series[i].ratio[j], 5);
             }

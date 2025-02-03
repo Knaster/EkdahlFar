@@ -67,7 +67,7 @@ void bowControl::setBowCurrentLimit(float inBowCurrentLimit) {
 float bowControl::getBowCurrentLimit() {
     return bowCurrentLimit;
 }
-
+/*
 /// Check if the bow is holding a stable frequency
 int bowControl::isBowStable() {
     if (elapsedSinceLastTarget < elapsedTimeThreshold) { return -1; }
@@ -79,7 +79,7 @@ int bowControl::isBowStable() {
         return 1;
     }
 }
-
+*/
     /// Resets the PID integral
 void bowControl::pidReset() {
     integral = 0;
@@ -103,7 +103,7 @@ void bowControl::setPIDTargetUnsafe(float _pidTargetSpeed) {
     inRelapse = false;
     bowIOConnect->tiltAdjust = 0;
     pidTargetSpeed = _pidTargetSpeed;
-    elapsedSinceLastTarget = 0;
+//    elapsedSinceLastTarget = 0;
     bowShutoffTimedout = false;
     bowShutoffMotorDisabled = false;
 }

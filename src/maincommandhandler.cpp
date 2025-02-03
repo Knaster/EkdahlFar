@@ -89,12 +89,12 @@ serialCommandItem serialCommandsMain[] = {
   { "midiallnotesoff", "mano", "1|0", "Clear the entire buffer of MIDI notes held"},
 
   { "adccommandmap", "acm", "channel:command string", "Sets the command string invoked when the value on ADC channel [channel] changes"},
-  { "adcdefaults", "acd", "Reverts all ADC command strings to default values" },
+  { "adcdefaults", "acd", "-" "Reverts all ADC command strings to default values" },
   { "adcread", "adcr", "channel:value", "Sent when a new value is presented on one of the ADC channels, cannot be invoked" },
   { "adcsettings", "adcs", "channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout", "Explain ADC settings here"},
 
   { "expressionparserevaluate", "epev", "expression", "Evaluates an arithmetric expression and sends back the output"},
-  { "expressionparserdeadbandthreshold", "epdbt", "float", "Sets the threshold for the deadband function in the expression parser"},
+//  { "expressionparserdeadbandthreshold", "epdbt", "float", "Sets the threshold for the deadband function in the expression parser"},
 
   { "testadclatency", "tal", "0-65535", "Test ADC Latency" },
   { "testadclatencyreturn", "talr", "-", "Return from test" },
@@ -481,7 +481,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         //testCommands.addCommands;
         testCommands.parseCommandExpressions(expFunctions, expFunctionCount);
         commandResponses->push_back({ "Evaluation result: " + String(testCommands.item[0].argument[0]), debugPrintType::InfoRequest});
-    } else
+/*    } else
     if (_commandItem->command == "expressionparserdeadbandthreshold") {
         if (request) {
             commandResponses->push_back({ "epdbt:" + String(epDeadbandThreshold), InfoRequest});
@@ -490,7 +490,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             //controlRead->setADCCommands(channel, _commandItem->argument[1]);
             epDeadbandThreshold = _commandItem->argument[0].toFloat();
             commandResponses->push_back({ "Setting expression parser deadband thershold to " + String(epDeadbandThreshold), debugPrintType::Command});
-        }
+        }*/
     } else {
         return false;
     }

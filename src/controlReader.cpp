@@ -334,7 +334,7 @@ void controlReader::setDefaults() {
 
 String controlReader::dumpData() {
 //    if (!adsInit) { return ""; }
-    String saveData = "epdbt:" + String(epDeadbandThreshold) + ",";
+    String saveData = ""; // "epdbt:" + String(epDeadbandThreshold) + ",";
     for (uint8_t i = 0; i < 8; i++) {
         saveData += "acm:" + String(i) + ":" + delimitExpression(cvInputCommands[i], true) + ",";
         saveData += "adcs:" + String(i) + ":" + averages[i].dataAverageLength + ":" + averages[i].interruptedErrorThreshold + ":" + averages[i].continuousErrorThreshold + ":" + averages[i].continuousTimeout + ",";

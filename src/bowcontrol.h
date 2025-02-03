@@ -46,8 +46,8 @@ protected:
     float pidTargetSpeed = 0;                 ///< PID target speed
 
 public:
-    elapsedMillis elapsedSinceLastTarget;     ///< Time elapsed since last change in bowing speed or pressure
-    char elapsedTimeThreshold = 40;           ///< Time in ms that elapses in between each bow speed stability check
+//    elapsedMillis elapsedSinceLastTarget;     ///< Time elapsed since last change in bowing speed or pressure
+//    char elapsedTimeThreshold = 40;           ///< Time in ms that elapses in between each bow speed stability check
 //    float recoverRate = 0.05;                 ///< Rate at which the Tilt PWM recovers when it has been decreased in order to avoid bow motor stall and oscillation
     bool inRecovery = false;                  ///< Set to true when bow recovery has started
     bool inRelapse = false;                   ///< Set to true when bow recovery has occurred and it has recovered too much, aka triggered bow instability again.
