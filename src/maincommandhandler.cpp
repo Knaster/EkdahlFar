@@ -99,6 +99,7 @@ serialCommandItem serialCommandsMain[] = {
   { "testadclatency", "tal", "0-65535", "Test ADC Latency" },
   { "testadclatencyreturn", "talr", "-", "Return from test" },
   { "testadcminmax", "tamm", "channel", "Measure min/max value for a given channel and resets the counter" },
+  { "reset", "rst", "0|1", "Resets the Ekdahl FAR, conditional"}
 };
 
 bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {
@@ -352,13 +353,18 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
                 configArray.push_back(configuration());
                 response += "Added configuration no " + String(configArray.size() - 1) + "\n";
             }
-            response += "Setting current configuration to " + String(currentConfig);
-            commandResponses->push_back({ response, debugPrintType::Command});
+            //response += "Setting current configuration to " + String(currentConfig);
+            //commandResponses->push_back({ response, debugPrintType::Command});
+            commandResponses->push_back({ "mcf: " + String(currentConfig), InfoRequest});
         }
     } else
     if (_commandItem->command == "midiconfigurationadd") {
+        if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         configArray.push_back(configuration());
-        commandResponses->push_back({ "Added configuration no " + String(configArray.size() - 1), InfoRequest });
+        uint16_t index = configArray.size() - 1;
+        *configArray[index].name = _commandItem->argument[0];
+        //commandResponses->push_back({ "Added configuration no " + String(configArray.size() - 1), InfoRequest });
+        commandResponses->push_back({ "mcfa:" + String(index), InfoRequest });
     } else
     if (_commandItem->command == "midiconfigurationremove") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
@@ -463,34 +469,23 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             commandResponses->push_back({ "Setting adc channel " + String(channel) + " settings to " + controlRead->getADCAveragerSettings(channel), debugPrintType::Command});
         }
     } else
-
     if (_commandItem->command == "expressionparserevaluate") {
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         updateLocalVariables();
 
         commandList testCommands("ev:" + _commandItem->argument[0]);
-/*
-        String expression =_commandItem->argument[0];
-        debugPrintln("index of \" " + String(expression.indexOf("\"")) + ", ' " + String(expression.indexOf("'")), debugPrintType::Debug);
-        if ((expression.indexOf("\"") != -1) || (expression.indexOf("'") != -1)) {
-            expression = expression.substring(1, expression.length() - 1);
-            debugPrintln("Cleaned expression " + expression, debugPrintType::Debug);
-        }
-        commandList testCommands("ev:" + expression);
-*/
-        //testCommands.addCommands;
         testCommands.parseCommandExpressions(expFunctions, expFunctionCount);
         commandResponses->push_back({ "Evaluation result: " + String(testCommands.item[0].argument[0]), debugPrintType::InfoRequest});
-/*    } else
-    if (_commandItem->command == "expressionparserdeadbandthreshold") {
+    } else
+    if (_commandItem->command == "reset") {
         if (request) {
-            commandResponses->push_back({ "epdbt:" + String(epDeadbandThreshold), InfoRequest});
-        } else {
-            if (!checkArgumentsMin(_commandItem, commandResponses, 1)) { return false; }
-            //controlRead->setADCCommands(channel, _commandItem->argument[1]);
-            epDeadbandThreshold = _commandItem->argument[0].toFloat();
-            commandResponses->push_back({ "Setting expression parser deadband thershold to " + String(epDeadbandThreshold), debugPrintType::Command});
-        }*/
+            return true;
+        }
+        if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+        if (_commandItem->argument[0].toInt() == 1) {
+            debugPrintln("Resetting..", Debug);
+            reset();
+        }
     } else {
         return false;
     }

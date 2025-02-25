@@ -328,7 +328,13 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
         }
     } else
     if (_commandItem->command == "bowcalibrateall") {
-        calibrateArray[currentBowSerial].calibrateAll();
+        if (calibrateArray[currentBowSerial].calibrateAll() & calibrateMuteArray[currentBowSerial].calibrateAll()) {
+            commandResponses->push_back({"bca:ok", InfoRequest});
+        } else {
+            commandResponses->push_back({"bca:error", InfoRequest});
+        }
+
+
     } else
     if (_commandItem->command == "bowcalibratepressure") {
         //debugPrintln("Finding min/max pressure", Command);
@@ -456,7 +462,8 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
             bowControlArray[currentBowSerial].currentHarmonicSeries = hs;
             bowControlArray[currentBowSerial].currentHarmonicSeriesData = bowControlArray[currentBowSerial].harmonicSeriesList.series[hs];*/
             bowControlArray[currentBowSerial].loadHarmonicSeries(hs);
-            commandResponses->push_back({"Setting harmonic series to " + String(bowControlArray[currentBowSerial].currentHarmonicSeries), Command});
+            //commandResponses->push_back({"Setting harmonic series to " + String(bowControlArray[currentBowSerial].currentHarmonicSeries), Command});
+            commandResponses->push_back({ "bhs:" + String(bowControlArray[currentBowSerial].currentHarmonicSeries), InfoRequest });
         }
     } else
 /*    if (_commandItem->command == "bowharmonicserieslist") {

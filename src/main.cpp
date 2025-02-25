@@ -272,6 +272,11 @@ void updateServoStepperMute0() {
     }
 }
 
+void reset() {
+    SCB_AIRCR = 0x05FA0004;
+    asm volatile ("dsb");
+}
+
 void setup() {
     Serial.begin(115200);
     ssOutput.connect(Serial);
@@ -350,6 +355,8 @@ void setup() {
                         //C  C#       D      D#   E     F       F#       G    G#   A        A#   B
     stringModuleArray[0].bowControlArray[0].harmonicSeriesList.addHarmonicSeries("\"Just intonation\"", justSeries);
     stringModuleArray[0].bowControlArray[0].harmonicSeriesList.addHarmonicSeries("\"Equal temperament\"", equalSeries);
+    // Load first harmonic series in case
+    commands->addCommands("bhs:0");
 
     controlRead = new controlReader(17, 16);
     //controlRead->cvInputCommands[0] = "m:0,f:" + String(stringModuleArray[0].calibrationDataArray[0].fundamentalFrequency) + "*2^(1 / 15878 * value)";
