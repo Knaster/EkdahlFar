@@ -60,6 +60,7 @@ bool calibrateMute::findMuteLevels() {
 
     debugPrintln("Starting the mute level calibration", debugPrintType::TextInfo);
 
+    // Home mute and set mute and bow position at zero and turn off bow
     m_muteConnect->homeMute();
     servoStepper *ss = m_muteConnect->stepServoStepper;
 
@@ -70,11 +71,19 @@ bool calibrateMute::findMuteLevels() {
     m_bowControlConnect->bowRest(1);
     m_bowIOConnect->stepServoStepper->completeTask();
 
-    delay(1000);
+    // Find the pickup output level that is considered silence
+
+    delay(3000);
     levelSilence = findLevel();
     if (levelSilence == 0) { levelSilence = 0.01; }
 
     debugPrintln("Silence level is set to " + String(levelSilence), debugPrintType::TextInfo);
+    if (levelSilence >= (minFundamentalAmplitude / 2)) {
+        debugPrintln("Silence level is too low!", debugPrintType::Error);
+        return false;
+    }
+
+    // Enable bow and play the fundamental, set the test pressure to in between max & min pressure
 
     m_bowControlConnect->PIDon = true;
     m_bowControlConnect->run = 1;
@@ -82,12 +91,19 @@ bool calibrateMute::findMuteLevels() {
     m_bowControlConnect->setHarmonic(0);
 
     uint16_t testPressure = m_bowControlConnect->calibrationDataConnect->firstTouchPressure +
-        ((m_bowControlConnect->calibrationDataConnect->stallPressure - m_bowControlConnect->calibrationDataConnect->firstTouchPressure) / 2);
+        ((m_bowControlConnect->calibrationDataConnect->stallPressure - m_bowControlConnect->calibrationDataConnect->firstTouchPressure) / 4);
     debugPrintln("Setting tilt to " + String(testPressure), debugPrintType::TextInfo);
     m_bowIOConnect->setTiltPWM(testPressure);
     m_bowIOConnect->waitForTiltToComplete();
     delay(2500);
-    levelFundamental = findLevel();
+
+    // Wait for the bow to settle and then reord the fundamental level
+    do {
+        testPressure += 100;
+        m_bowIOConnect->setTiltPWM(testPressure);
+        levelFundamental = findLevel();
+        debugPrintln("Fundamental level " + String(levelFundamental), debugPrintType::Debug);
+    } while(levelFundamental < minFundamentalAmplitude);
     debugPrintln("Pickup fundamental ampltiude is " + String(levelFundamental), debugPrintType::TextInfo);
 
 
@@ -111,6 +127,11 @@ bool calibrateMute::findMuteLevels() {
         if (level < minAmplitude) { break; }
         if (level < levelSilence) { break; }
     } while ((mutePos < stallPosition) && ((level >= minAmplitude) || (level >= levelSilence)));
+
+    if (mutePos == levelStepSize) {
+        debugPrintln("Error finding mute level", debugPrintType::Error);
+        return false;
+    }
 
     m_muteConnect->setFullMutePosition(mutePos);
     m_muteConnect->setHalfMutePosition(mutePos / 2);

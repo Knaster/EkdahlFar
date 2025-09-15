@@ -82,7 +82,7 @@ private:
 
 public:
 
-    uint16_t maxTestPressure = 50000;
+    uint16_t maxTestPressure = 60000;
     uint16_t pressureTestRetract = 7500;
     bool findMinMaxPressure();
     bool findMinMaxSpeedPWM();

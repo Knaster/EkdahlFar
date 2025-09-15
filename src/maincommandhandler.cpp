@@ -99,7 +99,8 @@ serialCommandItem serialCommandsMain[] = {
   { "testadclatency", "tal", "0-65535", "Test ADC Latency" },
   { "testadclatencyreturn", "talr", "-", "Return from test" },
   { "testadcminmax", "tamm", "channel", "Measure min/max value for a given channel and resets the counter" },
-  { "reset", "rst", "0|1", "Resets the Ekdahl FAR, conditional"}
+  { "reset", "rst", "0|1", "Resets the Ekdahl FAR, conditional"},
+  { "nick", "nick", "string", "Sets the nickname of this unit" }
 };
 
 bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {
@@ -380,7 +381,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         if (removeConfig <= currentConfig) { currentConfig -=1; }
 
         configArray.erase(configArray.begin() + removeConfig);
-        commandResponses->push_back({ "Removed configuration " + String(removeConfig), debugPrintType::Command});
+        commandResponses->push_back({ "mcfr:" + String(removeConfig), debugPrintType::InfoRequest});
     } else
     if (_commandItem->command == "midiconfigurationcount") {
         commandResponses->push_back({ "mcfc:" + String(configArray.size()), InfoRequest });
@@ -402,7 +403,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
                 return false;
             }
             configArray[currentConfig].midiRxChannel = _commandItem->argument[0].toInt();
-            commandResponses->push_back({ "Setting MIDI receive channel to " + String(configArray[currentConfig].midiRxChannel), debugPrintType::Command});
+            commandResponses->push_back({ "mrc:" + String(configArray[currentConfig].midiRxChannel), debugPrintType::InfoRequest});
         }
     } else
 /*    if (_commandItem->command == "midisustain") {
@@ -486,6 +487,15 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             debugPrintln("Resetting..", Debug);
             reset();
         }
+    } else
+    if (_commandItem->command == "nick") {
+        if (request) {
+            commandResponses->push_back({ "nick:" + nickName, debugPrintType::InfoRequest});
+            return true;
+        }
+        if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+        nickName = String(_commandItem->argument[0]).trim();
+        commandResponses->push_back({ "nick:" + nickName, debugPrintType::Command});
     } else {
         return false;
     }

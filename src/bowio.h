@@ -152,6 +152,11 @@ public:
     elapsedMillis lastBowOverPowerEvent;
     uint32_t bowOverPowerDuration = 100; // If bow over power events are going past the duration (in ms), signal the over power event
 
+    bool emergencyBowDisable(uint16_t coolDown);    // Emergency disable of power with a required cooldown period before bow is allowed to be started again
+    uint32_t emergencyCoolDownEvent;
+    uint16_t emergencyCoolDownPeriod = 1000;
+    bool emergencyCoolDown = false;
+
     bool homeBow(bool invert = false);
 };
 

@@ -248,6 +248,9 @@ bool calibrate::findMinMaxPressure() {
         } else {
             calibrationData->restPosition =  0;
         }
+        debugPrintln("Good results acquired, setting firstTouchPressure to " + String(calibrationData->firstTouchPressure) + " and restPosition to " + String(calibrationData->restPosition), debugPrintType::Debug);
+    } else {
+        debugPrintln("Results invalid, not modifying data" , debugPrintType::Error);
     }
 
     bowIOConnect->stepServoStepper->autoCorrectPosition = autoCorrectPositionSave;
@@ -440,9 +443,9 @@ String calibrate::dumpData() {
     String dump = "";
     dump += "bmsi:" + String(calibrationData->minHz) + ",";
     dump += "bmsx:" + String(calibrationData->maxHz) + ",";
-    dump += "bppe:" + String(calibrationData->firstTouchPressure) + ",";
-    dump += "bppx:" + String(calibrationData->stallPressure) + ",";
-    dump += "bppr:" + String(calibrationData->restPosition) + ",";
+//    dump += "bppe:" + String(calibrationData->firstTouchPressure) + ",";
+//    dump += "bppx:" + String(calibrationData->stallPressure) + ",";
+//    dump += "bppr:" + String(calibrationData->restPosition) + ",";
     dump += "bcu:" + String(calibrationData->fundamentalFrequency) + ",";
     return dump;
 }

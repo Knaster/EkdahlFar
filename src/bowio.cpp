@@ -55,6 +55,16 @@ bool bowIO::disableBowPower() {
 }
 
 bool bowIO::enableBowPower() {
+    if (emergencyCoolDown) {
+        debugPrintln("Cooldown event at " + String(emergencyCoolDownEvent) + " with duration " + String(emergencyCoolDownPeriod) + ", current time " + String(millis()), Debug);
+        if (millis() > (emergencyCoolDownEvent + emergencyCoolDownPeriod)) {
+            debugPrintln("Cool down event passed, resetting", Debug);
+            emergencyCoolDown = false;
+        } else {
+            debugPrintln("Cool down event in effect, ignoring", Debug);
+            return false;
+        }
+    }
     digitalWrite(bowMotorDCDCEnPin, 1);
     return true;
 }
@@ -451,6 +461,16 @@ bool bowIO::bowOverPower() {
         transientOverPower = false;
         return false;
     }
+}
+
+// Emergency disable of power with a required cooldown period before bow is allowed to be started again
+bool bowIO::emergencyBowDisable(uint16_t coolDown) {
+    if (emergencyCoolDown) { return false; }
+    emergencyCoolDownEvent = millis();
+    emergencyCoolDown = true;
+    debugPrintln("Emergency disable! Setting cool down to " + String(emergencyCoolDownEvent), Debug);
+    disableBowPower();
+    return true;
 }
 
 bool bowIO::getMotorFault() {

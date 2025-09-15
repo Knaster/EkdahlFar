@@ -200,6 +200,7 @@ int freeram() {
 //uint16_t currentEEPROMOffset = 0;
 
 String customStartupParameters = "";
+String nickName = "";
 
 #include "eepromhelpers.cpp"
 
@@ -333,8 +334,8 @@ void setup() {
 //    stringModuleArray[moduleIndex].EEPROM_offset = currentEEPROMOffset;
 //    debugPrintln("Loading string data from offset " + String(stringModuleArray[moduleIndex].EEPROM_offset), Debug);
 
-    stringModuleArray[0].calibrationDataArray[0].firstTouchPressure = 0;
-    stringModuleArray[0].calibrationDataArray[0].stallPressure = 55000;
+//    stringModuleArray[0].calibrationDataArray[0].firstTouchPressure = 0;
+//    stringModuleArray[0].calibrationDataArray[0].stallPressure = 55000;
 
     stringModuleArray[0].bowIOArray[0].enableBowPower();
 
@@ -342,6 +343,7 @@ void setup() {
     stringModuleArray[0].muteArray[0].stepServoStepper->stepIntervalCallback = &updateServoStepperMute0;
     stringModuleArray[0].bowIOArray[0].getTMC2209Info();
     stringModuleArray[0].muteArray[0].getTMC2209Info();
+
     if (stringModuleArray[0].bowIOArray[0].stepServoStepper->homing == servoStepper::UNHOMED) {
         stringModuleArray[0].bowIOArray[0].homeBow();
     }

@@ -29,7 +29,10 @@
 BowActuators::BowActuators(CalibrationData *t_calibrationDataConnect)
 {
     m_calibrationDataConnect = t_calibrationDataConnect;
-    m_bowActuator.push_back({0, 65535, 0, "default"});
+    m_currentBowActuator = 0;
+    //m_bowActuator.push_back({0, 65535, 0, "default"});
+    setBowActuatorData(0, 2000, 50000, 0, "default");
+    loadBowActuator();
 }
 
 BowActuators::~BowActuators()
@@ -82,6 +85,7 @@ bool BowActuators::loadBowActuator() {
 }
 
 bool BowActuators::loadBowActuator(uint8_t t_actuator) {
+    if (t_actuator >= m_bowActuator.size()) { return false; }
     m_currentBowActuator = t_actuator;
     loadBowActuator();
     return true;

@@ -20,6 +20,7 @@
 
 String dumpData() {
     String saveData = "ver:" + currentFirmwareVersion + ","; // "ver:1,";
+    saveData += "nick:" + nickName + ",";
     uint8_t saveCurrentConfig = currentConfig;
     debugPrintln("Saving configurations", debugPrintType::Debug);
     for (int i = 0; i < (configArray.size()); i++) {

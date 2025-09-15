@@ -42,7 +42,7 @@ bool stringModule::addBow(char motorRevPin, char motorVoltagePin, char motorDCDC
     bowControlArray.push_back(*_bowControl);
 
     bowControlArray[arrayIndex].commandsMotorFault = "bmr:0,bpr:1";
-    bowControlArray[arrayIndex].commandsOverPowerCurrent = "bmr:0,bpr:1";
+    bowControlArray[arrayIndex].commandsOverPowerCurrent = "bmr:0,bpr:1,bmes:1000";
 
     calibrate* _calibrate = new calibrate(bowIOArray[arrayIndex], calibrationDataArray[arrayIndex], bowControlArray[arrayIndex]);
     calibrateArray.push_back(*_calibrate);
@@ -408,7 +408,7 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             calibrationDataArray[currentBowSerial].minHz = _commandItem->argument[0].toFloat(); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
-            commandResponses->push_back({"Setting min bow frequency to " + String(calibrationDataArray[currentBowSerial].minHz), Command});
+            commandResponses->push_back({"bmsi:" + String(calibrationDataArray[currentBowSerial].minHz), InfoRequest});
         }
     } else
     if (_commandItem->command == "bowmotormininertialpwm") {
@@ -417,7 +417,7 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             calibrationDataArray[currentBowSerial].minInertialPWM = _commandItem->argument[0].toFloat(); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
-            commandResponses->push_back({"Setting min bow inertial PWM to " + String(calibrationDataArray[currentBowSerial].minInertialPWM), Command});
+            commandResponses->push_back({"bmip:" + String(calibrationDataArray[currentBowSerial].minInertialPWM), InfoRequest});
         }
     } else
     if (_commandItem->command == "bowpressurepositionmax") {
@@ -426,7 +426,7 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             calibrationDataArray[currentBowSerial].stallPressure = _commandItem->argument[0].toInt(); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
-            commandResponses->push_back({"Setting max bow pressure to " + String(calibrationDataArray[currentBowSerial].stallPressure), Command});
+            commandResponses->push_back({"bppx:" + String(calibrationDataArray[currentBowSerial].stallPressure), InfoRequest});
         }
     } else
     if (_commandItem->command == "bowpressurepositionengage") {
@@ -435,7 +435,7 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
             calibrationDataArray[currentBowSerial].firstTouchPressure = _commandItem->argument[0].toInt(); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
-            commandResponses->push_back({"Setting min bow pressure to " + String(calibrationDataArray[currentBowSerial].firstTouchPressure), Command});
+            commandResponses->push_back({"bppe:" + String(calibrationDataArray[currentBowSerial].firstTouchPressure), InfoRequest});
         }
     } else
     if (_commandItem->command == "bowpressurepositionrest") {
@@ -679,7 +679,14 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
             commandResponses->push_back({"Setting bow over power commands to " + String(bowControlArray[currentBowSerial].commandsOverPowerCurrent), Command});
         }
     } else
-
+    if (_commandItem->command == "bowmotoremergencystop") {
+        if (request) {
+        } else {
+            if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
+            bowIOArray[currentBowSerial].emergencyBowDisable(_commandItem->argument[0].toInt());
+            commandResponses->push_back({"EMERGENCY STOP! Cooling down for " + _commandItem->argument[0] + " ms", Command});
+        }
+    } else
     if (_commandItem->command == "bowcontrolharmonicshiftrange") {
         if (request) {
             commandResponses->push_back({ "bchsr:" + String(bowControlArray[currentBowSerial].getHarmonicShiftRange()), InfoRequest });

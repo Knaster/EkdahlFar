@@ -25,10 +25,11 @@ public:
     bowIO *m_bowIOConnect;
     bowControl *m_bowControlConnect;
 
-    uint16_t maxTestStep = 50000;
+    uint16_t maxTestStep = 60000;
 
     #define maxStepRetract 2000
     #define minAmplitude 0.01
+    #define minFundamentalAmplitude 0.3
 
     calibrateMute(mute &t_Mute, bowIO &t_bowIO, bowControl &t_bowControl);
 

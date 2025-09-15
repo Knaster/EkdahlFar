@@ -69,7 +69,7 @@ void controlReader::resetAds() {
     adsInit = false;
 
     if (!ads.begin(0x48, &Wire)) {
-        debugPrintln("Failed to initialize ADS.", debugPrintType::Debug);
+        debugPrintln("Failed to initialize ADS.", debugPrintType::Error);
         return;
     } else {
         ads.setGain(GAIN_ONE);    //GAIN_TWOTHIRDS
@@ -78,7 +78,7 @@ void controlReader::resetAds() {
     }
 
     if (!ads2.begin(0x49, &Wire)) {
-        debugPrintln("Failed to initialize ADS2", debugPrintType::Debug);
+        debugPrintln("Failed to initialize ADS2", debugPrintType::Error);
         return;
     }
 
@@ -327,7 +327,7 @@ void controlReader::setDefaults() {
     cvInputCommands.push_back("bchsh:\"deadband((value-32600)*0.49064, 250)\"");//    cvInputCommands.push_back("msp:value");
     cvInputCommands.push_back("bpb:value");
     cvInputCommands.push_back("se:value");
-    cvInputCommands.push_back("bmr:1,bpid:1,bcsm:0,bpe:bool(value-1000),bpr:ibool(value-1000),bph:ibool(value-1000)");
+    cvInputCommands.push_back("bmr:bool(value-10000),bpid:1,bcsm:0,bpe:bool(value-10000),bpr:ibool(value-10000),bph:ibool(value-10000)");
     cvInputCommands.push_back("sfm:\"deadband(1/65535*value,0.002)\"");
     cvInputCommands.push_back("msp:value");//    cvInputCommands.push_back("");
 }

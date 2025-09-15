@@ -114,6 +114,7 @@ serialCommandItem serialCommandsStringModule[] = {
     { "bowmotorpowerlimit", "bmpl", "0-255", "Bow motor power limit (W) - !WARNING! Can ruin your instrument if changed" },
     { "bowmotorfaultcommands", "bmfc", "command list", "Commands to execute when a motor fault is tripped - !WARNING! Can ruin your instrument if changed" },
     { "bowmotoroverpowercommands", "bmopc", "command list", "Commands to execute when motor is over the power limit - !WARNING! Can ruin your instrument if changed" },
+    { "bowmotoremergencystop", "bmes", "ms (0-65535)", "Immediately stops the bowing motor and doesn't allow it to start again until the cool down period given in the first argument has lapsed (milliseconds)"},
     //bowmininertiapwm, biiw
 //    { "bowmotormininertialpwm", "bmmip", "0 - 65535", "Bow minimal PWM to keep inertia"},
 

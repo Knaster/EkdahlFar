@@ -44,7 +44,7 @@ class averager
         uint16_t interruptedErrorThreshold = 40; //PCB5 test - 20
 
         bool trigger = false;                   // Set to true to enable a pDataChanged whenever the data goes above or below the value given by triggerThreshold
-        uint16_t triggerThreshold = 100;           // Threshold which at to trigger a data change
+        uint16_t triggerThreshold = 250;           // Threshold which at to trigger a data change
         int16_t triggerDelay = 3000;               // Delay from trigger to sampling, given in uS
         elapsedMicros triggerDelayEM;
         bool triggerDelayEngage = false;        // Flag to indicate trigger has been received and sampling delay engaged
@@ -103,6 +103,7 @@ class averager
 //                        if (((value <= triggerThreshold) && (temp > triggerThreshold)  ))
                     } else
                     if (((value <= triggerThreshold) && (temp > triggerThreshold)) || ((value >= triggerThreshold) && (temp < triggerThreshold))) {
+                        debugPrintln("Value " + String(value) + " and average " + String(temp) + " over threshold " + String(triggerThreshold), Debug);
                         if (triggerDelay == 0) {
                             pDataChanged = true;
                             timeSinceChange = 0;

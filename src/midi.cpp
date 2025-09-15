@@ -232,15 +232,18 @@ void OnNoteOn(byte channel, byte note, byte velocity) {
 }
 
 /// Handle poly aftertouch message
-void OnAfterTouchPoly(byte channel, byte note, byte velocity) {
+void OnAfterTouchPoly(byte channel, byte note, byte pressure) {
     if ((configArray[currentConfig].midiRxChannel != channel) && (configArray[currentConfig].midiRxChannel < 17) &&
         (configArray[currentConfig].midiRxChannel > 0)) { return; }
-
+/*
     if (velocity == 127) {
         stringModuleArray[0].solenoidArray[0].solenoidEngage();
     }
+*/
+    dchannel = channel; dpressure = pressure; dnote = note;
+    processLocalMessage(configArray[currentConfig].polyAftertouch);
 
-    debugPrintln("PolyAT on channel " + String(channel) + " note " + String(note) + " value " + String(velocity), USB);
+    debugPrintln("PolyAT on channel " + String(channel) + " note " + String(note) + " value " + String(pressure), USB);
 //  setPressure7bit(velocity);
 }
 
@@ -339,6 +342,7 @@ void initMidi() {
 
     Serial1.begin(31250, SERIAL_8N1);
     MIDI.begin();
+    MIDI.setInputChannel(MIDI_CHANNEL_OMNI);
     MIDI.setHandleNoteOff(OnNoteOff);
     MIDI.setHandleNoteOn(OnNoteOn);
     MIDI.setHandleAfterTouchPoly(OnAfterTouchPoly);
@@ -347,5 +351,6 @@ void initMidi() {
     MIDI.setHandleAfterTouchChannel(OnChannelAftertouch);
     MIDI.setHandleProgramChange(OnProgramChange);
 
+    debugPrintln("MIDI initialized.", TextInfo);
 }
 #endif
