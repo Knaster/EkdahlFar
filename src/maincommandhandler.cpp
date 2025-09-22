@@ -111,7 +111,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             if (!validateNumber(_commandItem->argument[0].toInt(), 0, stringModuleArray.size())) { return false; }
             currentStringModule = _commandItem->argument[0].toInt();
 //            freqReportChannel = currentStringModule;
-            commandResponses->push_back({"Setting current string module to " + String(currentStringModule), Command});
+            commandResponses->push_back({"m:" + String(currentStringModule), InfoRequest});
         }
     } else
 /*    if (_commandItem->command == "debugrunningstatus") {
@@ -125,13 +125,13 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         for (int i=0; i<debugPrintTypes; i++ ) {
             if (debugPrintTypeName[i] == _commandItem->argument[0]) {
                 debugPrintEnabled[i] = _commandItem->argument[1].toInt();
-                commandResponses->push_back({"Setting " + debugPrintTypeName[i] + " echo to " + String(debugPrintEnabled[i]), Command});
+                commandResponses->push_back({"dp" + debugPrintTypeName[i] + ":" + String(debugPrintEnabled[i]), InfoRequest});
                 found = true;
                 break;
             }
         }
         if (!found) {
-            commandResponses->push_back({"Print type not found", Command});
+            commandResponses->push_back({"Print type not found", Error});
         }
     } else
 /*    if (_commandItem->command == "freqreport") {
@@ -147,7 +147,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
                 firmwareChanged = true;
                 commandResponses->push_back({"Firmware version changed! Previous version: " + _commandItem->argument[0], InfoRequest});
             }
-            commandResponses->push_back({"Current firmware version: " + currentFirmwareVersion, InfoRequest});
+            commandResponses->push_back({"version:" + currentFirmwareVersion, InfoRequest});
         }
     } else
     if (_commandItem->command == "globaluservariable") {
@@ -155,8 +155,8 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         if (!validateNumber(_commandItem->argument[0].toInt(), 0, userVariableMax)) { return false; }
 
         int userVariable = _commandItem->argument[0].toInt();
-            duv[userVariable] = _commandItem->argument[1].toFloat();
-            commandResponses->push_back({"Set user variable " + String(userVariable) + " to " + String(duv[userVariable]), Command});
+        if (!request) { duv[userVariable] = _commandItem->argument[1].toFloat(); }
+        commandResponses->push_back({"guv:" + String(userVariable) + ":" + String(duv[userVariable]), InfoRequest});
     } else
     if (_commandItem->command == "midieventhandler") {
         if (request) {
@@ -234,12 +234,12 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             if (_commandItem->argument[0] == "noteon") {
 //                *configArray[currentConfig].noteOn = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
                 *configArray[currentConfig].noteOn = stripQuotes(_commandItem->argument[1]);
-                commandResponses->push_back({"Setting noteOn event handler to " + *configArray[currentConfig].noteOn, Command});
+                commandResponses->push_back({"mev:noteon:" + delimitExpression(*configArray[currentConfig].noteOn, true), InfoRequest});
             } else
             if (_commandItem->argument[0] == "noteoff") {
                 //*configArray[currentConfig].noteOff = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
                 *configArray[currentConfig].noteOff = stripQuotes(_commandItem->argument[1]);
-                commandResponses->push_back({"Setting noteOff event handler to " + *configArray[currentConfig].noteOff, Command});
+                commandResponses->push_back({"mev:noteoff:" + delimitExpression(*configArray[currentConfig].noteOff, true), InfoRequest});
             } else
             if (_commandItem->argument[0] == "cc") {
                 if (!checkArguments(_commandItem, commandResponses, 3)) { return false; }
@@ -249,28 +249,27 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
                 configArray[currentConfig].setCC(_commandItem->argument[1].toInt(), sTemp);
 //                commandResponses->push_back({"Setting CC " + String(_commandItem->argument[1].toInt()) + " event handler to " +
 //                    _commandItem->argument[2].substring(1, _commandItem->argument[2].length() - 1), Command});
-                commandResponses->push_back({"Setting CC " + String(_commandItem->argument[1].toInt()) + " event handler to " +
-                    *sTemp, Command});
+                commandResponses->push_back({"mev:cc:" + String(_commandItem->argument[1].toInt()) + ":" + delimitExpression(*sTemp, true), InfoRequest});
             } else
             if (_commandItem->argument[0] == "pat") {
                 //*configArray[currentConfig].polyAftertouch = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
                 *configArray[currentConfig].polyAftertouch = stripQuotes(_commandItem->argument[1]);
-                commandResponses->push_back({"Setting polyAfterTouch event handler to " + *configArray[currentConfig].polyAftertouch, Command});
+                commandResponses->push_back({"mev:pat:" + delimitExpression(*configArray[currentConfig].polyAftertouch, true), InfoRequest});
             } else
             if (_commandItem->argument[0] == "cat") {
                 //*configArray[currentConfig].channelAftertouch = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
                 *configArray[currentConfig].channelAftertouch = stripQuotes(_commandItem->argument[1]);
-                commandResponses->push_back({"Setting channelAfterTouch event handler to " + *configArray[currentConfig].channelAftertouch, Command});
+                commandResponses->push_back({"mev:cat:" + delimitExpression(*configArray[currentConfig].channelAftertouch, true), InfoRequest});
             } else
             if (_commandItem->argument[0] == "pb") {
                 //*configArray[currentConfig].pitchBend = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
                 *configArray[currentConfig].pitchBend =  stripQuotes( _commandItem->argument[1]);
-                commandResponses->push_back({"Setting pitchBend event handler to " + *configArray[currentConfig].pitchBend, Command});
+                commandResponses->push_back({"mev:pb:" + delimitExpression(*configArray[currentConfig].pitchBend, true), InfoRequest});
             } else
             if (_commandItem->argument[0] == "pc") {
                 //*configArray[currentConfig].programChange = _commandItem->argument[1].substring(1, _commandItem->argument[1].length() - 1);
                 *configArray[currentConfig].programChange = stripQuotes(_commandItem->argument[1]);
-                commandResponses->push_back({"Setting programChange event handler to " + *configArray[currentConfig].programChange, Command});
+                commandResponses->push_back({"mev:pc:" + delimitExpression(*configArray[currentConfig].programChange, true), InfoRequest});
             } else {
                 commandResponses->push_back({"Unknown event " + _commandItem->argument[0], Error});
             }
@@ -280,19 +279,22 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         if (!validateNumber(_commandItem->argument[0].toInt(), 0, 127)) { return false; }
         if (configArray[currentConfig].removeCC(_commandItem->argument[0].toInt())) {
-            commandResponses->push_back({"Event handler for CC " + _commandItem->argument[0] + " removed", Command});
+            commandResponses->push_back({"mevcr:" + _commandItem->argument[0], InfoRequest});
         } else {
             commandResponses->push_back({"Unknown CC " + _commandItem->argument[0], Error});
         }
     } else
     if (_commandItem->command == "globalsaveallparameters") {
         saveAllParams();
+        commandResponses->push_back({"gsap:1", InfoRequest});
     } else
     if (_commandItem->command == "globalloadallparameters") {
         loadAllParams();
+        commandResponses->push_back({"glap:1", InfoRequest});
     } else
     if (_commandItem->command == "globalresetallparameters") {
         resetAllParams();
+        commandResponses->push_back({"grap:1", InfoRequest});
     } else
     if (_commandItem->command == "test") {
     } else
@@ -339,7 +341,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
 //            _commandItem->argument[0].replace("'", "");
 //            *(configArray[currentConfig].name) = _commandItem->argument[0];
             *(configArray[currentConfig].name) = stripQuotes(_commandItem->argument[0]);
-            commandResponses->push_back({ "Set configuration name to " + *(configArray[currentConfig].name), InfoRequest });
+            commandResponses->push_back({ "mcfn:" + *(configArray[currentConfig].name), InfoRequest });
         }
     } else
     if (_commandItem->command == "midiconfiguration") {
@@ -392,7 +394,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
     } else
     if (_commandItem->command == "midiconfigurationdefaults") {
         configArray[currentConfig].setDefaults();
-        commandResponses->push_back({ "Configuration reverted to defaults", debugPrintType::Command});
+        commandResponses->push_back({ "mcfd:1", debugPrintType::InfoRequest});
     } else
     if (_commandItem->command == "midireceivechannel") {
         if (request) {
@@ -419,7 +421,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         if (_commandItem->argument[0].toInt() == 1) {
             midiAllNotesOff();
-            commandResponses->push_back({ "All MIDI notes off", debugPrintType::Command});
+            commandResponses->push_back({ "mano:1", debugPrintType::InfoRequest});
         }
     } else
     if (_commandItem->command == "adcread") {
@@ -452,7 +454,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
     } else
     if (_commandItem->command == "adcdefaults") {
         controlRead->setDefaults();
-        commandResponses->push_back({ "Reverted adc channel commands", debugPrintType::Command});
+        commandResponses->push_back({ "acd:1", debugPrintType::InfoRequest});
     } else
 
 // { "adcsettings", "adcs", "channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout"
@@ -467,7 +469,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             if (!checkArguments(_commandItem, commandResponses, 5)) { return false; }
             if (!controlRead->setADCAveragerSettings(_commandItem->argument[0].toInt(), _commandItem->argument[1].toInt(), _commandItem->argument[2].toInt(), _commandItem->argument[3].toInt(),
                 _commandItem->argument[4].toInt())) { return false; }
-            commandResponses->push_back({ "Setting adc channel " + String(channel) + " settings to " + controlRead->getADCAveragerSettings(channel), debugPrintType::Command});
+            commandResponses->push_back({ "adcs:" + String(channel) + ":" + controlRead->getADCAveragerSettings(channel), debugPrintType::InfoRequest});
         }
     } else
     if (_commandItem->command == "expressionparserevaluate") {
@@ -476,7 +478,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
 
         commandList testCommands("ev:" + _commandItem->argument[0]);
         testCommands.parseCommandExpressions(expFunctions, expFunctionCount);
-        commandResponses->push_back({ "Evaluation result: " + String(testCommands.item[0].argument[0]), debugPrintType::InfoRequest});
+        commandResponses->push_back({ "ev: " + String(testCommands.item[0].argument[0]), debugPrintType::InfoRequest});
     } else
     if (_commandItem->command == "reset") {
         if (request) {
@@ -484,7 +486,6 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         }
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         if (_commandItem->argument[0].toInt() == 1) {
-            debugPrintln("Resetting..", Debug);
             reset();
         }
     } else
@@ -495,7 +496,7 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
         }
         if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
         nickName = String(_commandItem->argument[0]).trim();
-        commandResponses->push_back({ "nick:" + nickName, debugPrintType::Command});
+        commandResponses->push_back({ "nick:" + nickName, debugPrintType::InfoRequest});
     } else {
         return false;
     }
