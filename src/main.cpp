@@ -160,7 +160,6 @@
 #include <SafeStringReader.h>
 #include <SafeStringStream.h>
 #include <SerialComs.h>
-#include <loopTimer.h>
 #include <millisDelay.h>
 
 createBufferedOutput(ssOutput, 8192, DROP_UNTIL_EMPTY); ///< SafeString buffer creation
@@ -183,7 +182,7 @@ createSafeStringReader(slaveSerialRead1, 256, "\r\n");       ///< SafeString rea
 elapsedMicros testMeasurement;  ///< Used for various internal tests
 bool testMeasurementOngoing = false;
 
-#include "debugprint.h"
+#include "debugprint.hpp"
 
 extern unsigned long _heap_start;
 extern unsigned long _heap_end;
@@ -210,7 +209,7 @@ String delimitExpression(String expression, bool force = false);
 int currentConfig = 0;
 std::vector<configuration> configArray;
 
-#include "commandparser.h"
+#include "commandparser.hpp"
 commandList *commands;
 
 #define masterRx 0
@@ -220,7 +219,7 @@ commandList *commands;
 
 #include "bowio.cpp"
 class CalibrationData;
-#include "bowActuators.h"
+#include "bowActuators.hpp"
 class bowControl;
 #include "bowcontrol.cpp"
 #include "calibrate.cpp"
@@ -243,13 +242,6 @@ std::vector <stringModule> stringModuleArray;
  */
 /// Interrupt call
 
-/// Interrupt callback function tied to the ~FAULT output of the motor driver of a string unit
-//bool motorDriverFaultFlag = false;
-void motorDriverFault() {
-  //motorDriverFaultFlag = true;
-  debugPrintln("Fault!", Error);
-}
-
 
 #include "controlReader.cpp"
 controlReader *controlRead;
@@ -261,15 +253,20 @@ controlReader *controlRead;
  */
 
 void updateServoStepperPressure0() {
-    if (stringModuleArray[0].bowIOArray[0].stepServoStepper != nullptr) {
-        stringModuleArray[0].bowIOArray[0].stepServoStepper->updatePosition();
+    if (stringModuleArray[0].bowIOArray[0].tmc2209ServoStepper->stepServoStepper != nullptr) {
+        stringModuleArray[0].bowIOArray[0].tmc2209ServoStepper->stepServoStepper->updatePosition();
+    } else {
+        debugPrintln("No callback!", Error);
     }
 }
 
 
 void updateServoStepperMute0() {
-    if (stringModuleArray[0].muteArray[0].stepServoStepper != nullptr) {
+/*    if (stringModuleArray[0].muteArray[0].stepServoStepper != nullptr) {
         stringModuleArray[0].muteArray[0].stepServoStepper->updatePosition();
+    }*/
+    if (stringModuleArray[0].muteArray[0].tmc2209ServoStepper->stepServoStepper != nullptr) {
+        stringModuleArray[0].muteArray[0].tmc2209ServoStepper->stepServoStepper->updatePosition();
     }
 }
 
@@ -316,38 +313,30 @@ void setup() {
 
     int moduleIndex = stringModuleArray.size() - 1;
 
-    // Using TCM2209 #1 (pin 22 is used instead of 6 due to broken teensy, change!!)
-//    stringModuleArray[moduleIndex].addBow(2, 14, 15, 12, 23, 11, 4, 10, 9, &Serial2, 22, 5);
-//    stringModuleArray[moduleIndex].addBow(2, 14, 15, 12, 23, 11, -1, 10, 9, &Serial2, 22, 5);
     stringModuleArray[moduleIndex].addBow(2, 14, 15, 12, 23, 11, -1, 10, 9, &Serial2, 6, 5);
-      // Using TCM2209 #2
-    //stringModuleArray[moduleIndex].addBow(2, 14, 15, 12, 23, 17, 19, 18, &Serial5, 13, 22);
     stringModuleArray[moduleIndex].bowIOArray[0].setSpeedPWM(0);
     stringModuleArray[moduleIndex].addSolenoid(3);
-//    stringModuleArray[moduleIndex].addMute(17, 19, 18, &Serial5, 13);
     stringModuleArray[moduleIndex].addMute(-1, 5, 4, &Serial5, 13);
 
     tachoISR_assignInterrupt(stringModuleArray[moduleIndex].bowIOArray[0].reflectorInterruptPin, &stringModuleArray[moduleIndex].bowControlArray[0]);
     pidISR_assignInterrupt(&stringModuleArray[moduleIndex].bowControlArray[0]);
-//    attachInterrupt(digitalPinToInterrupt(11), motorDriverFault, CHANGE);
-
-//    stringModuleArray[moduleIndex].EEPROM_offset = currentEEPROMOffset;
-//    debugPrintln("Loading string data from offset " + String(stringModuleArray[moduleIndex].EEPROM_offset), Debug);
-
-//    stringModuleArray[0].calibrationDataArray[0].firstTouchPressure = 0;
-//    stringModuleArray[0].calibrationDataArray[0].stallPressure = 55000;
 
     stringModuleArray[0].bowIOArray[0].enableBowPower();
 
-    stringModuleArray[0].bowIOArray[0].stepServoStepper->stepIntervalCallback = &updateServoStepperPressure0;
-    stringModuleArray[0].muteArray[0].stepServoStepper->stepIntervalCallback = &updateServoStepperMute0;
+    stringModuleArray[0].bowIOArray[0].tmc2209ServoStepper->stepServoStepper->stepIntervalCallback = &updateServoStepperPressure0;
+//    stringModuleArray[0].muteArray[0].stepServoStepper->stepIntervalCallback = &updateServoStepperMute0;
+    stringModuleArray[0].muteArray[0].tmc2209ServoStepper->stepServoStepper->stepIntervalCallback = &updateServoStepperMute0;
     stringModuleArray[0].bowIOArray[0].getTMC2209Info();
     stringModuleArray[0].muteArray[0].getTMC2209Info();
 
-    if (stringModuleArray[0].bowIOArray[0].stepServoStepper->homing == servoStepper::UNHOMED) {
+    if (stringModuleArray[0].bowIOArray[0].tmc2209ServoStepper->stepServoStepper->getHomingStage() == servoStepper::UNHOMED) {
         stringModuleArray[0].bowIOArray[0].homeBow();
     }
-    if (stringModuleArray[0].muteArray[0].stepServoStepper->homing == servoStepper::UNHOMED) {
+/*    if (stringModuleArray[0].muteArray[0].stepServoStepper->getHomingStage() == servoStepper::UNHOMED) {
+        stringModuleArray[0].muteArray[0].homeMute();
+    }
+*/
+    if (stringModuleArray[0].muteArray[0].tmc2209ServoStepper->stepServoStepper->getHomingStage() == servoStepper::UNHOMED) {
         stringModuleArray[0].muteArray[0].homeMute();
     }
 
@@ -456,8 +445,8 @@ void loop() {
         processSerialCommands();
     }
 
-    if (stringModuleArray[0].bowIOArray[0].stepServoStepper->intDrivenMsgFlag) {
-        debugRaw(stringModuleArray[0].bowIOArray[0].stepServoStepper->intDrivenMsg);
-        stringModuleArray[0].bowIOArray[0].stepServoStepper->intDrivenMsgFlag = false;
+    if (stringModuleArray[0].bowIOArray[0].tmc2209ServoStepper->stepServoStepper->intDrivenMsgFlag) {
+        debugRaw(stringModuleArray[0].bowIOArray[0].tmc2209ServoStepper->stepServoStepper->intDrivenMsg);
+        stringModuleArray[0].bowIOArray[0].tmc2209ServoStepper->stepServoStepper->intDrivenMsgFlag = false;
     }
 }

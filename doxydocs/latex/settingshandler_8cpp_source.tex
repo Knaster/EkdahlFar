@@ -1,0 +1,76 @@
+\doxysection{settingshandler.\+cpp}
+\hypertarget{settingshandler_8cpp_source}{}\label{settingshandler_8cpp_source}\index{settingshandler.cpp@{settingshandler.cpp}}
+\mbox{\hyperlink{settingshandler_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <EEPROM.h>}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ String\ \mbox{\hyperlink{settingshandler_8cpp_a046d4c46537d3b0f2aab95d06f33174d}{dumpData}}()\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ String\ saveData\ =\ \textcolor{stringliteral}{"{}ver:"{}}\ +\ \mbox{\hyperlink{automaticversion_8hpp_a7580b394441d49b9d0d1e40d57449d5d}{currentFirmwareVersion}}\ +\ \textcolor{stringliteral}{"{},"{}};\ \textcolor{comment}{//\ "{}ver:1,"{};}}
+\DoxyCodeLine{00023\ \ \ \ \ saveData\ +=\ \textcolor{stringliteral}{"{}nick:"{}}\ +\ \mbox{\hyperlink{main_8cpp_af98373428ba06a19feb1859d77b9f9d2}{nickName}}\ +\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00024\ \ \ \ \ uint8\_t\ saveCurrentConfig\ =\ \mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}};}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\ configurations"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}.size());\ i++)\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ saveData\ +=\ \textcolor{stringliteral}{"{}mcf:"{}}\ +\ String(i)\ +\ \textcolor{stringliteral}{"{},"{}}\ +\ \mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[i].dumpData();}
+\DoxyCodeLine{00028\ \ \ \ \ \}}
+\DoxyCodeLine{00029\ \ \ \ \ saveData\ +=\ \textcolor{stringliteral}{"{}mcf:"{}}\ +\ String(saveCurrentConfig)\ +\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\ cv\ mapping"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00032\ \ \ \ \ saveData\ +=\ \mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{controlRead}}-\/>\mbox{\hyperlink{classcontrolReader_ac3f4730b8d6f98b0e66c546e5ce1192e}{dumpData}}();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\ calibration\ data"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00035\ \ \ \ \ saveData\ +=\ \textcolor{stringliteral}{"{}m:0,"{}}\ +\ \mbox{\hyperlink{main_8cpp_aacbb4662d46136722bc7069351a1a30f}{stringModuleArray}}[0].calibrateArray[0].dumpData();}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\ harmonic\ series"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00037\ \ \ \ \ saveData\ +=\ \mbox{\hyperlink{main_8cpp_aacbb4662d46136722bc7069351a1a30f}{stringModuleArray}}[0].bowControlArray[0].harmonicSeriesList.dumpData();}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\ mute\ data"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00039\ \ \ \ \ saveData\ +=\ \mbox{\hyperlink{main_8cpp_aacbb4662d46136722bc7069351a1a30f}{stringModuleArray}}[0].muteArray[0].dumpData();}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\ bow\ control\ data"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00041\ \ \ \ \ saveData\ +=\ \mbox{\hyperlink{main_8cpp_aacbb4662d46136722bc7069351a1a30f}{stringModuleArray}}[0].bowControlArray[0].dumpData();}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\ bow\ IO\ data"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00043\ \ \ \ \ saveData\ +=\ \mbox{\hyperlink{main_8cpp_aacbb4662d46136722bc7069351a1a30f}{stringModuleArray}}[0].bowIOArray[0].dumpData();}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\ solenoid\ data"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00045\ \ \ \ \ saveData\ +=\ \mbox{\hyperlink{main_8cpp_aacbb4662d46136722bc7069351a1a30f}{stringModuleArray}}[0].solenoidArray[0].dumpData();}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\ actuator\ data"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00047\ \ \ \ \ saveData\ +=\ \mbox{\hyperlink{main_8cpp_aacbb4662d46136722bc7069351a1a30f}{stringModuleArray}}[0].bowControlArray[0].bowActuators-\/>dumpData();}
+\DoxyCodeLine{00048\ \ \ \ \ saveData\ +=\ \textcolor{stringliteral}{"{}nop"{}};}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{return}\ saveData;}
+\DoxyCodeLine{00050\ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{settingshandler_8cpp_ae0121269d2cc5beaea756f4a70fa416d}{resetAllParams}}()\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ String\ saveData\ =\ \textcolor{stringliteral}{"{}ver:"{}}\ +\ \mbox{\hyperlink{automaticversion_8hpp_a7580b394441d49b9d0d1e40d57449d5d}{currentFirmwareVersion}}\ +\ \textcolor{stringliteral}{"{},"{}};\ \textcolor{comment}{//\ "{}ver:1,"{};}}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\(\backslash\)n"{}}\ +\ saveData\ +\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}\ +\ \textcolor{stringliteral}{"{}Total:\ "{}}\ +\ String(\mbox{\hyperlink{eepromhelpers_8cpp_aa24ecf0d4c0610d752b0e8e5aa887486}{EEPROMSaveString}}(\&saveData,\ 0))\ +\ \textcolor{stringliteral}{"{}\ bytes"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}});}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00056\ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{settingshandler_8cpp_ace3c5429a7600071f43b7c8c4462a23d}{saveAllParams}}()\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ String\ saveData\ =\ \mbox{\hyperlink{settingshandler_8cpp_a046d4c46537d3b0f2aab95d06f33174d}{dumpData}}();}
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\(\backslash\)n"{}}\ +\ saveData\ +\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}\ +\ \textcolor{stringliteral}{"{}Total:\ "{}}\ +\ String(\mbox{\hyperlink{eepromhelpers_8cpp_aa24ecf0d4c0610d752b0e8e5aa887486}{EEPROMSaveString}}(\&saveData,\ 0))\ +\ \textcolor{stringliteral}{"{}\ bytes"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}});}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00062\ \}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{settingshandler_8cpp_a4c39676e517471f401dcca5aff39686c}{loadAllParams}}()\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ String\ loadData;\ \textcolor{comment}{//\ \ =\ new\ String();}}
+\DoxyCodeLine{00066\ \ \ \ \ uint32\_t\ datal\ =\ \mbox{\hyperlink{eepromhelpers_8cpp_a030652f23e30526a2b56af8de9d3e4dc}{EEPROMLoadString}}(\&loadData,\ 0);}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(loadData\ +\ \textcolor{stringliteral}{"{}\(\backslash\)nLoaded\ "{}}\ +\ String(datal)\ +\ \textcolor{stringliteral}{"{}\ bytes\ of\ data"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}});}
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}}-\/>\mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{addCommands}}(loadData);}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00070\ \}}
+
+\end{DoxyCode}

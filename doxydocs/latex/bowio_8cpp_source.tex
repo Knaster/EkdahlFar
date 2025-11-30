@@ -1,0 +1,466 @@
+\doxysection{bowio.\+cpp}
+\hypertarget{bowio_8cpp_source}{}\label{bowio_8cpp_source}\index{bowio.cpp@{bowio.cpp}}
+\mbox{\hyperlink{bowio_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#ifndef\ BOWIO\_C}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ BOWIO\_C}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bowio_8h}{bowio.h}}"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ BITDEPTH\ 16}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ BITDIV\ 1\ }\textcolor{comment}{//\ =\ 2\string^(16-\/BITDEPTH)}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ DCDCLOWERBOUND\ 1.2}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ DCDCUPPERBOUND\ 9}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a5862fd84eae540cec06f7cf6b01b2724}{bowIO::setBowMotorVoltage}}(\textcolor{keywordtype}{float}\ voltage)\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{classbowIO_a4898e1b1bb2261a8d5a162377e8f4529}{bowMotorVoltage}}\ =\ voltage;}
+\DoxyCodeLine{00039\ \ \ \ \ voltage\ -\/=\ \mbox{\hyperlink{bowio_8cpp_a327257b8ff6350cc542a9c18119727fa}{DCDCLOWERBOUND}};}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{float}\ t\ =\ (65536\ /\ (\mbox{\hyperlink{bowio_8cpp_acc22b205180c4410508cbc7e6382e77a}{DCDCUPPERBOUND}}\ -\/\ \mbox{\hyperlink{bowio_8cpp_a327257b8ff6350cc542a9c18119727fa}{DCDCLOWERBOUND}}))\ *\ voltage;}
+\DoxyCodeLine{00041\ \ \ \ \ uint16\_t\ pwm\ =\ 65536\ -\/\ ((uint16\_t)\ t);}
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ \ \ \ debugPrintln("{}Voltage\ PWM\ "{}\ +\ String(pwm),\ Debug);}}
+\DoxyCodeLine{00043\ \ \ \ \ analogWrite(\mbox{\hyperlink{classbowIO_a5ef03477cae4e221c63371c8596382a5}{bowMotorVoltagePin}},\ pwm);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00045\ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowIO_a52974e4eccc141a2971174983d50dc12}{bowIO::getBowMotorVoltage}}()\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classbowIO_a4898e1b1bb2261a8d5a162377e8f4529}{bowMotorVoltage}};}
+\DoxyCodeLine{00049\ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_af543966b009896f0e529909262be4c87}{bowIO::disableBowPower}}()\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ digitalWrite(\mbox{\hyperlink{classbowIO_a71c9fc86984dee46a8c99aa8f8400b40}{bowMotorDCDCEnPin}},\ 0);}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00055\ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a93f89060d1b63b5433dda54836075efa}{bowIO::enableBowPower}}()\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_a1445e6b0237c568d3fdf19fd710d585e}{emergencyCoolDown}})\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Cooldown\ event\ at\ "{}}\ +\ String(\mbox{\hyperlink{classbowIO_ad74acda96a684931e59b63cb22a4610c}{emergencyCoolDownEvent}})\ +\ \textcolor{stringliteral}{"{}\ with\ duration\ "{}}\ +\ String(\mbox{\hyperlink{classbowIO_ad85cc8a8b92f106e1def85add4121c66}{emergencyCoolDownPeriod}})\ +\ \textcolor{stringliteral}{"{},\ current\ time\ "{}}\ +\ String(millis()),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (millis()\ >\ (\mbox{\hyperlink{classbowIO_ad74acda96a684931e59b63cb22a4610c}{emergencyCoolDownEvent}}\ +\ \mbox{\hyperlink{classbowIO_ad85cc8a8b92f106e1def85add4121c66}{emergencyCoolDownPeriod}}))\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Cool\ down\ event\ passed,\ resetting"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classbowIO_a1445e6b0237c568d3fdf19fd710d585e}{emergencyCoolDown}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Cool\ down\ event\ in\ effect,\ ignoring"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \}}
+\DoxyCodeLine{00068\ \ \ \ \ digitalWrite(\mbox{\hyperlink{classbowIO_a71c9fc86984dee46a8c99aa8f8400b40}{bowMotorDCDCEnPin}},\ 1);}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00070\ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a090ba4c4cb860b6aa26cd80d6bc079e1}{bowIO::homeBow}}(\textcolor{keywordtype}{bool}\ invert\ =\ \textcolor{keyword}{false})\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Starting\ home"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{classbowIO_abc16b006f225a37cffc0257f9fb32ffc}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a5de698c0807fbb76b5139ee8d9d27449}{setHomingOffset}}(6000);}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{classbowIO_abb214efac59651f9588b11ebb35457cf}{stepTMC2209Driver}}-\/>setRunCurrent(\mbox{\hyperlink{classbowIO_ad1228b53e70ce9fa5a59cb76d29a7cc8}{stepHomeCurrentPercent}});}
+\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{classbowIO_abc16b006f225a37cffc0257f9fb32ffc}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a5b83203a3efaeceaaa8bdbaab37624a6}{eStop}}();}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordflow}{if}\ (!invert)\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classbowIO_abc16b006f225a37cffc0257f9fb32ffc}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a30df0093cfd5951322cb0bdf857e4209}{home}}(\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{servoStepper::eStepDirection::FORWARD}},5,5,\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{servoStepper::eStepDirection::REVERSE}});\ \textcolor{comment}{//\ ,5,5}}
+\DoxyCodeLine{00080\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classbowIO_abc16b006f225a37cffc0257f9fb32ffc}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a30df0093cfd5951322cb0bdf857e4209}{home}}(\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{servoStepper::eStepDirection::REVERSE}},5,5,\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{servoStepper::eStepDirection::FORWARD}});\ \textcolor{comment}{//\ ,5,5}}
+\DoxyCodeLine{00082\ \ \ \ \ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_abc16b006f225a37cffc0257f9fb32ffc}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{completeTask}}(5000))\ \{\ \ \ \ \textcolor{comment}{//2000}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Homed"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00086\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Homing\ FAILED!"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ \textcolor{comment}{//\ \ \ \ return\ true;}}
+\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{classbowIO_abb214efac59651f9588b11ebb35457cf}{stepTMC2209Driver}}-\/>setRunCurrent(\mbox{\hyperlink{classbowIO_acb563b005278378a29e3a49e36b4b367}{stepRunCurrentPercent}});}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{comment}{//\ \ \ \ stepServoStepper-\/>setSpeed(20);}}
+\DoxyCodeLine{00094\ \ \ \ \ \mbox{\hyperlink{classbowIO_abc16b006f225a37cffc0257f9fb32ffc}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a65a7de2492de7c71e3b2bf9cc5b1f9fd}{setPosition}}(0);}
+\DoxyCodeLine{00095\ \ \ \ \ \mbox{\hyperlink{classbowIO_abc16b006f225a37cffc0257f9fb32ffc}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{completeTask}}();}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00097\ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \mbox{\hyperlink{classbowIO_a83516a820794abb85aab7ac3c636e43b}{bowIO::bowIO}}(\textcolor{keywordtype}{char}\ motorRevPin,\ \textcolor{keywordtype}{char}\ motorVoltagePin,\ \textcolor{keywordtype}{char}\ motorDCDCEnPin,\ \textcolor{keywordtype}{char}\ tachoPin,\ \textcolor{keywordtype}{char}\ currentSensePin,\ \textcolor{keywordtype}{char}\ motorFaultPin,\ \textcolor{keywordtype}{char}\ stepEnPin,\ \textcolor{keywordtype}{char}\ stepDirPin,\ \textcolor{keywordtype}{char}\ stepStepPin,\ HardwareSerial\ *stepSerialPort,\ \textcolor{keywordtype}{char}\ stepHomeSensorPin,\ \textcolor{keywordtype}{char}\ stepCorrectionSensorPin)\ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{classbowIO_a23ab12e09c4622de7ecfaf40192884ca}{bowMotorRevPin}}\ =\ motorRevPin;}
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{classbowIO_abc53e811dffa77fee38c10a3c9a1fac3}{reflectorInterruptPin}}\ =\ tachoPin;}
+\DoxyCodeLine{00102\ \ \ \ \ \mbox{\hyperlink{classbowIO_a27b8883e2e4be45be2aa3d72088526b8}{bowCurrentSensePin}}\ =\ currentSensePin;}
+\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{classbowIO_ac58364f8bdc54db6e57c9fccd128657d}{bowMotorFaultPin}}\ =\ motorFaultPin;}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ pinMode(\mbox{\hyperlink{classbowIO_a23ab12e09c4622de7ecfaf40192884ca}{bowMotorRevPin}},\ OUTPUT);}
+\DoxyCodeLine{00106\ \ \ \ \ pinMode(\mbox{\hyperlink{classbowIO_abc53e811dffa77fee38c10a3c9a1fac3}{reflectorInterruptPin}},\ INPUT);}
+\DoxyCodeLine{00107\ \ \ \ \ pinMode(\mbox{\hyperlink{classbowIO_a27b8883e2e4be45be2aa3d72088526b8}{bowCurrentSensePin}},\ INPUT);}
+\DoxyCodeLine{00108\ \ \ \ \ pinMode(\mbox{\hyperlink{classbowIO_ac58364f8bdc54db6e57c9fccd128657d}{bowMotorFaultPin}},\ INPUT);}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \mbox{\hyperlink{classbowIO_a539fd24fe9ec97a49af254daf2624ef5}{bowMotorPWM}}\ =\ \textcolor{keyword}{new}\ Teensy\_PWM(\mbox{\hyperlink{classbowIO_a23ab12e09c4622de7ecfaf40192884ca}{bowMotorRevPin}},\ 20000,\ 0);}
+\DoxyCodeLine{00111\ \ \ \ \ \mbox{\hyperlink{classbowIO_a539fd24fe9ec97a49af254daf2624ef5}{bowMotorPWM}}-\/>setResolution(\mbox{\hyperlink{bowio_8cpp_aabc9a481c4343f3d15542d6d7b46e2cf}{BITDEPTH}});}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \mbox{\hyperlink{classbowIO_a71c9fc86984dee46a8c99aa8f8400b40}{bowMotorDCDCEnPin}}\ =\ motorDCDCEnPin;}
+\DoxyCodeLine{00114\ \ \ \ \ \mbox{\hyperlink{classbowIO_a5ef03477cae4e221c63371c8596382a5}{bowMotorVoltagePin}}\ =\ motorVoltagePin;}
+\DoxyCodeLine{00115\ \ \ \ \ pinMode(motorDCDCEnPin,\ OUTPUT);}
+\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{classbowIO_af543966b009896f0e529909262be4c87}{disableBowPower}}();}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \mbox{\hyperlink{classbowIO_a6e876e9d929f90c6e064d994bdf89ea1}{bowMotorVoltagePWM}}\ =\ \textcolor{keyword}{new}\ Teensy\_PWM(motorVoltagePin,\ 20000,\ 0);}
+\DoxyCodeLine{00119\ \ \ \ \ \mbox{\hyperlink{classbowIO_a6e876e9d929f90c6e064d994bdf89ea1}{bowMotorVoltagePWM}}-\/>setResolution(16);}
+\DoxyCodeLine{00120\ \ \ \ \ \mbox{\hyperlink{classbowIO_a5862fd84eae540cec06f7cf6b01b2724}{setBowMotorVoltage}}(\mbox{\hyperlink{classbowIO_a4898e1b1bb2261a8d5a162377e8f4529}{bowMotorVoltage}});}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ analogWrite(\mbox{\hyperlink{classbowIO_a23ab12e09c4622de7ecfaf40192884ca}{bowMotorRevPin}},\ 1);}
+\DoxyCodeLine{00123\ \ \ \ \ \mbox{\hyperlink{classbowIO_aa614cecda8ea9c77d0fd85987a8e26e8}{setSpeedPWM}}(0);}
+\DoxyCodeLine{00124\ \ \ \ \ \mbox{\hyperlink{classbowIO_a105d8980fb4e0596755e8d337144aae6}{setTiltPWM}}(0);}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ \mbox{\hyperlink{classbowIO_ae3c60c3f3279a2ec0cf86bbb1dd2165e}{stepSerialStream}}\ =\ stepSerialPort;}
+\DoxyCodeLine{00127\ \ \ \ \ \mbox{\hyperlink{classbowIO_abc16b006f225a37cffc0257f9fb32ffc}{stepServoStepper}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classservoStepper}{servoStepper}}(\mbox{\hyperlink{classbowIO_ae92a6bcdfce4dc597ea4335ee0176b9f}{stepStepPin}},\ stepDirPin,\ stepHomeSensorPin);\ \textcolor{comment}{//,\ stepEnPin);}}
+\DoxyCodeLine{00128\ \ \ \ \ \mbox{\hyperlink{classbowIO_abb214efac59651f9588b11ebb35457cf}{stepTMC2209Driver}}\ =\ \textcolor{keyword}{new}\ TMC2209();}
+\DoxyCodeLine{00129\ \ \ \ \ \mbox{\hyperlink{classbowIO_a589985b295184b0e30ceb431cde58b3b}{setupTMC2209}}();}
+\DoxyCodeLine{00130\ \textcolor{comment}{//\ \ \ \ stepServoStepper-\/>setHomingOffset(22500);}}
+\DoxyCodeLine{00131\ \ \ \ \ \mbox{\hyperlink{classbowIO_a090ba4c4cb860b6aa26cd80d6bc079e1}{homeBow}}();}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{comment}{//stepServoStepper-\/>setSpeed(20);}}
+\DoxyCodeLine{00133\ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00140\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_ab0bb402f5ebc7607c4e3f473f58e914a}{bowIO::addTachoFreq}}(\textcolor{keywordtype}{float}\ freq)\ \{}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordflow}{if}\ ((freq\ >=\ \mbox{\hyperlink{bowio_8h_a917bdbed5a360e07cbaf3b5566c683ce}{tachoFreqPerimssibleMAX}})\ ||\ (freq\ <=\ \mbox{\hyperlink{bowio_8h_a4fe38822f8268415b5178beda7fe09ea}{tachoFreqPerimssibleMIN}}))\ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ freq\ =\ 0;}
+\DoxyCodeLine{00143\ \ \ \ \ \}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{classbowIO_a750ea0e143a2b1af9d516eec58471d16}{tachoFreq}}[\mbox{\hyperlink{classbowIO_a5e067579c5f2e56d0d28714a0d3293ed}{tachoFreqIndex}}]\ =\ freq;}
+\DoxyCodeLine{00146\ \ \ \ \ \mbox{\hyperlink{classbowIO_a5e067579c5f2e56d0d28714a0d3293ed}{tachoFreqIndex}}++;}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_acdfcfab19f374b4ef843654237d40248}{tachoFreqCount}}\ <\ \mbox{\hyperlink{bowio_8h_a24d78bb2c53ff0ee3960b1424380af6d}{tachoFreqLength}})\ \{\ \mbox{\hyperlink{classbowIO_acdfcfab19f374b4ef843654237d40248}{tachoFreqCount}}++;\ \}}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_a5e067579c5f2e56d0d28714a0d3293ed}{tachoFreqIndex}}\ >=\ \mbox{\hyperlink{bowio_8h_a24d78bb2c53ff0ee3960b1424380af6d}{tachoFreqLength}})\ \{\ \mbox{\hyperlink{classbowIO_a5e067579c5f2e56d0d28714a0d3293ed}{tachoFreqIndex}}\ =\ 0;\ \}}
+\DoxyCodeLine{00149\ \}}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00152\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowIO_a685e1ba9c2a8a77ac8286a229e8a7f0c}{bowIO::getLastTachoFreq}}()\ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_a5e067579c5f2e56d0d28714a0d3293ed}{tachoFreqIndex}}\ <\ 1)\ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classbowIO_a750ea0e143a2b1af9d516eec58471d16}{tachoFreq}}[\mbox{\hyperlink{bowio_8h_a24d78bb2c53ff0ee3960b1424380af6d}{tachoFreqLength}}\ -\/\ 1];}
+\DoxyCodeLine{00155\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classbowIO_a750ea0e143a2b1af9d516eec58471d16}{tachoFreq}}[\mbox{\hyperlink{classbowIO_a5e067579c5f2e56d0d28714a0d3293ed}{tachoFreqIndex}}\ -\/\ 1];}
+\DoxyCodeLine{00157\ \ \ \ \ \}}
+\DoxyCodeLine{00158\ \}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_a63fefac92798add272f8ac75b6bdd432}{bowIO::clearTachoData}}()\ \{}
+\DoxyCodeLine{00161\ \ \ \ \ \mbox{\hyperlink{classbowIO_acdfcfab19f374b4ef843654237d40248}{tachoFreqCount}}\ =\ 0;}
+\DoxyCodeLine{00162\ \ \ \ \ \mbox{\hyperlink{classbowIO_a5e067579c5f2e56d0d28714a0d3293ed}{tachoFreqIndex}}\ =\ 0;}
+\DoxyCodeLine{00163\ \}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00172\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowIO_a4f7ef490b19cc4d9d6e3bd2e65d77061}{bowIO::averageFreq}}()\ \{}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_acdfcfab19f374b4ef843654237d40248}{tachoFreqCount}}\ <\ \mbox{\hyperlink{bowio_8h_a24d78bb2c53ff0ee3960b1424380af6d}{tachoFreqLength}})\ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{comment}{//return\ -\/1;}}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_a750ea0e143a2b1af9d516eec58471d16}{tachoFreq}}[\mbox{\hyperlink{classbowIO_a5e067579c5f2e56d0d28714a0d3293ed}{tachoFreqIndex}}]\ ==\ 0)\ \{}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}AverageFreq:\ error,\ not\ enough\ point\ stored."{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a8d73849a4fff2c301f96a1748b8b9865}{Priority}});}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//return\ tachoOldAverage;}}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00182\ \ \ \ \ \}}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordtype}{float}\ localBuffer[\mbox{\hyperlink{bowio_8h_a24d78bb2c53ff0ee3960b1424380af6d}{tachoFreqLength}}];}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<\mbox{\hyperlink{bowio_8h_a24d78bb2c53ff0ee3960b1424380af6d}{tachoFreqLength}};\ i++)\ \{\ localBuffer[i]\ =\ \mbox{\hyperlink{classbowIO_a750ea0e143a2b1af9d516eec58471d16}{tachoFreq}}[i];\ \}}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{comment}{//\ Sort\ the\ buffer\ so\ that\ middle\ will\ be\ median}}
+\DoxyCodeLine{00188\ \ \ \ \ std::sort(localBuffer,\ localBuffer\ +\ \mbox{\hyperlink{bowio_8h_a24d78bb2c53ff0ee3960b1424380af6d}{tachoFreqLength}});}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{comment}{//\ Take\ out\ the\ median\ value}}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordtype}{float}\ median\ =\ localBuffer[\mbox{\hyperlink{bowio_8h_a24d78bb2c53ff0ee3960b1424380af6d}{tachoFreqLength}}\ /\ 2];}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keywordtype}{float}\ average\ =\ 0;}
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordtype}{int}\ averageCount\ =\ \mbox{\hyperlink{bowio_8h_a24d78bb2c53ff0ee3960b1424380af6d}{tachoFreqLength}};}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i\ <\ \mbox{\hyperlink{bowio_8h_a24d78bb2c53ff0ee3960b1424380af6d}{tachoFreqLength}};\ i++)\ \{}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((localBuffer[i]\ >\ (median\ +\ \mbox{\hyperlink{bowio_8h_a07bc3185c052a70c9ae3ce08b44c0fd3}{permissibleFreqDeviation}}))\ ||\ (localBuffer[i]\ <\ (median\ -\/\ \mbox{\hyperlink{bowio_8h_a07bc3185c052a70c9ae3ce08b44c0fd3}{permissibleFreqDeviation}})))\ \{}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ averageCount-\/-\/;}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ average\ +=\ localBuffer[i];}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00201\ \ \ \ \ \}}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \ \ average\ /=\ averageCount;}
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{comment}{//\ oldAverage\ =\ average;\ //\ moved\ to\ below}}
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keywordflow}{if}\ ((average\ <\ 0)\ ||\ (average\ >\ 1000))\ \{}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a12ba011dd5b1adf8f77184369290a419}{debugPrint}}(\textcolor{stringliteral}{"{}AverageFreq:\ error,\ data\ out\ of\ range\ "{}}\ +\ String(average)\ +\ \textcolor{stringliteral}{"{}\ with\ data\ points\ "{}}\ +\ String(averageCount),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a12ba011dd5b1adf8f77184369290a419}{debugPrint}}(\textcolor{stringliteral}{"{}Series\ "{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<\mbox{\hyperlink{bowio_8h_a24d78bb2c53ff0ee3960b1424380af6d}{tachoFreqLength}};\ i++)\ \{\ \mbox{\hyperlink{debugprint_8h_a12ba011dd5b1adf8f77184369290a419}{debugPrint}}(String(localBuffer[i])\ +\ \textcolor{stringliteral}{"{},\ "{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});\ \}}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}."{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \textcolor{comment}{//average\ =\ -\/1;}}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ average\ =\ \mbox{\hyperlink{classbowIO_a72d569f27a8d29af7549e189d96e3159}{tachoOldAverage}};}
+\DoxyCodeLine{00213\ \ \ \ \ \}}
+\DoxyCodeLine{00214\ \ \ \ \ \mbox{\hyperlink{classbowIO_a72d569f27a8d29af7549e189d96e3159}{tachoOldAverage}}\ =\ average;\ \textcolor{comment}{//\ was\ above\ before,\ check\ if\ problem}}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordflow}{return}\ average;}
+\DoxyCodeLine{00217\ \}}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00220\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_aa6270522a1d74af01e1328d6d9f25d5d}{bowIO::setSpeedPWMSafe}}(uint16\_t\ speed)\ \{}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keywordtype}{int}\ a\ =\ speed;}
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{comment}{//\ \ digitalWrite(ZXBMFwdPin,\ 1);}}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{comment}{//\ ramp\ the\ speed\ if\ going\ up,\ driver\ doesn't\ like\ sudden\ fast\ changes}}
+\DoxyCodeLine{00224\ \ \ \ \ analogWrite(\mbox{\hyperlink{classbowIO_a23ab12e09c4622de7ecfaf40192884ca}{bowMotorRevPin}},\ 65535\ -\/\ a);}
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_a8f107cf299b70a0b1b15a1bc1553d94c}{lastBowMotorPWM}}\ <\ a)\ \{}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=\mbox{\hyperlink{classbowIO_a8f107cf299b70a0b1b15a1bc1553d94c}{lastBowMotorPWM}};\ i<a;\ i++)\ \{}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ delayMicroseconds(5);\ \textcolor{comment}{//5}}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ analogWrite(\mbox{\hyperlink{classbowIO_a23ab12e09c4622de7ecfaf40192884ca}{bowMotorRevPin}},\ 65535\ -\/\ i);}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00230\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=\mbox{\hyperlink{classbowIO_a8f107cf299b70a0b1b15a1bc1553d94c}{lastBowMotorPWM}};\ i>a;\ i-\/-\/)\ \{}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ delayMicroseconds(5);\ \textcolor{comment}{//5}}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ analogWrite(\mbox{\hyperlink{classbowIO_a23ab12e09c4622de7ecfaf40192884ca}{bowMotorRevPin}},\ 65535\ -\/\ i);}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00235\ \ \ \ \ \}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \ \ \ \ \mbox{\hyperlink{classbowIO_a8f107cf299b70a0b1b15a1bc1553d94c}{lastBowMotorPWM}}\ =\ a;}
+\DoxyCodeLine{00238\ \}}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00242\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_aa614cecda8ea9c77d0fd85987a8e26e8}{bowIO::setSpeedPWM}}(uint16\_t\ speed)\ \{}
+\DoxyCodeLine{00243\ \textcolor{comment}{/*\ \ \ \ if\ (speed\ !=\ lastBowMotorPWM)\ \{}}
+\DoxyCodeLine{00244\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Setting\ bow\ motor\ PWM\ to\ "{}\ +\ String(speed),\ Hardware);}}
+\DoxyCodeLine{00245\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00246\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordtype}{int}\ a\ =\ speed;}
+\DoxyCodeLine{00248\ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Changing\ pin\ "{}\ +\ String(((int)\ ZXBMRevPin))\ +\ "{}\ to\ "{}\ +\ String(65535\ -\/\ a),\ Hardware);}}
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{comment}{//analogWrite(ZXBMRevPin,\ (65535\ -\/\ a)\ /\ BITDIV);}}
+\DoxyCodeLine{00250\ \ \ \ \ \mbox{\hyperlink{classbowIO_a539fd24fe9ec97a49af254daf2624ef5}{bowMotorPWM}}-\/>setPWM\_manual(\mbox{\hyperlink{classbowIO_a23ab12e09c4622de7ecfaf40192884ca}{bowMotorRevPin}},\ (65535\ -\/\ a)\ /\ \mbox{\hyperlink{bowio_8cpp_ae9e5cef2db1cfd3d4fcc86f4ec73458b}{BITDIV}});}
+\DoxyCodeLine{00251\ \ \ \ \ \mbox{\hyperlink{classbowIO_a8f107cf299b70a0b1b15a1bc1553d94c}{lastBowMotorPWM}}\ =\ a;}
+\DoxyCodeLine{00252\ \}}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ uint16\_t\ \mbox{\hyperlink{classbowIO_a8593c08923868a21d8bdc463ef14e0b1}{bowIO::getSpeedPWM}}()\ \{}
+\DoxyCodeLine{00255\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classbowIO_a8f107cf299b70a0b1b15a1bc1553d94c}{lastBowMotorPWM}};}
+\DoxyCodeLine{00256\ \}}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00262\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_a105d8980fb4e0596755e8d337144aae6}{bowIO::setTiltPWM}}(uint16\_t\ tilt)\ \{}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \textcolor{comment}{/*\ \ \ \ int\ a\ =\ SERVO\_MIN\ +\ (((float)\ (SERVO\_MAX\ -\/\ SERVO\_MIN)\ *\ (65535\ -\/\ tilt)\ /\ 65535));}}
+\DoxyCodeLine{00265\ \textcolor{comment}{\ \ \ \ a\ -\/=\ tiltAdjust;}}
+\DoxyCodeLine{00266\ \textcolor{comment}{\ \ \ \ if\ (lastTilt\ !=\ a)\ \{}}
+\DoxyCodeLine{00267\ \textcolor{comment}{\ \ \ \ \ \ \ \ lastTilt\ =\ a;}}
+\DoxyCodeLine{00268\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Tilt\ "{}\ +\ String(a)\ +\ "{}\ ("{}\ +\ String(tilt)\ +\ "{})"{},\ Hardware);}}
+\DoxyCodeLine{00269\ \textcolor{comment}{\ \ \ \ \ \ \ \ //pwmShield-\/>setPWM(tiltPWMChannel,\ 0,\ a);}}
+\DoxyCodeLine{00270\ \textcolor{comment}{\ \ \ \ \ \ \ \ hwTiltPos\ =\ a;}}
+\DoxyCodeLine{00271\ \textcolor{comment}{\ \ \ \ \}*/}}
+\DoxyCodeLine{00272\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00273\ \textcolor{comment}{\ \ \ \ if\ (stepper\ !=\ NULL)\ \{}}
+\DoxyCodeLine{00274\ \textcolor{comment}{\ \ \ \ stepper-\/>setPosition(tilt);}}
+\DoxyCodeLine{00275\ \textcolor{comment}{\ \ \ \ \}*/}}
+\DoxyCodeLine{00276\ \ \ \ \ \textcolor{comment}{//\ \ Serial1.print(tilt);}}
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{comment}{//\ \ Serial1.write(25);}}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00279\ \textcolor{preprocessor}{\#ifdef\ EFARMASTER}}
+\DoxyCodeLine{00280\ \textcolor{comment}{/*\ \ \ \ if\ (delegateTilt)\ \{}}
+\DoxyCodeLine{00281\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Delegating\ value\ "{}\ +\ String(tilt),\ Debug);}}
+\DoxyCodeLine{00282\ \textcolor{comment}{\ \ \ \ \ \ \ \ stepSerialOut.write(tilt\ >>\ 8);}}
+\DoxyCodeLine{00283\ \textcolor{comment}{\ \ \ \ \ \ \ \ stepSerialOut.write(tilt\ \&\ 0xFF);}}
+\DoxyCodeLine{00284\ \textcolor{comment}{\ \ \ \ \}*/}}
+\DoxyCodeLine{00285\ \textcolor{preprocessor}{\#elif\ EFARSLAVE}}
+\DoxyCodeLine{00286\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_abc16b006f225a37cffc0257f9fb32ffc}{stepServoStepper}}\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00287\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Setting\ stepper\ tilt\ to\ "{}\ +\ String(tilt\ -\/\ tiltAdjust),\ Hardware);}}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Setting\ stepper\ tilt\ to\ "{}}\ +\ String(tilt),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4aa1e0ed72a417f9c6ec63b58d565357f3}{Hardware}});}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classbowIO_abc16b006f225a37cffc0257f9fb32ffc}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a65a7de2492de7c71e3b2bf9cc5b1f9fd}{setPosition}}(tilt);}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classbowIO_acee6375445970bc0ecbf706d2c8e6e52}{lastTilt}}\ =\ tilt;}
+\DoxyCodeLine{00291\ \ \ \ \ \}}
+\DoxyCodeLine{00292\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00293\ \}}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a8d4057a6d30a1394038afbe2e2752286}{bowIO::waitForTiltToComplete}}(uint16\_t\ timeout)\ \{}
+\DoxyCodeLine{00296\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classbowIO_abc16b006f225a37cffc0257f9fb32ffc}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{completeTask}}(timeout);}
+\DoxyCodeLine{00297\ \}}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00301\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_ad696a1be1319731a12945db354dac833}{bowIO::tachoISRHandler}}()\ \{}
+\DoxyCodeLine{00302\ \ \ \ \ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}nop"{}});}
+\DoxyCodeLine{00303\ \ \ \ \ \textcolor{comment}{//char\ state\ =\ digitalRead(reflectorInterruptPin);}}
+\DoxyCodeLine{00304\ \ \ \ \ uint8\_t\ state\ =\ digitalRead(\mbox{\hyperlink{classbowIO_abc53e811dffa77fee38c10a3c9a1fac3}{reflectorInterruptPin}});}
+\DoxyCodeLine{00305\ \ \ \ \ \textcolor{keywordflow}{if}\ (state\ ==\ \mbox{\hyperlink{classbowIO_a03334bc47218cd2bcdc1af4d3397efd7}{lastReflectorISRState}})\ \{\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keywordflow}{if}\ (state\ ==\ 0)\ \{}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classbowIO_a81178d84fd24fd44e0460dfcfdb16149}{reflectorCyclePeriod}}\ =\ \mbox{\hyperlink{classbowIO_a8524be5ec6375822275113db99378ed0}{reflectorCounter}};}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classbowIO_a8524be5ec6375822275113db99378ed0}{reflectorCounter}}\ =\ 0;}
+\DoxyCodeLine{00309\ \ \ \ \ \}}
+\DoxyCodeLine{00310\ \ \ \ \ \mbox{\hyperlink{classbowIO_ab0bb402f5ebc7607c4e3f473f58e914a}{addTachoFreq}}(((\textcolor{keywordtype}{double})\ 1000000\ /\ \mbox{\hyperlink{classbowIO_a81178d84fd24fd44e0460dfcfdb16149}{reflectorCyclePeriod}}));}
+\DoxyCodeLine{00311\ \ \ \ \ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}dsb"{}});}
+\DoxyCodeLine{00312\ \ \ \ \ \mbox{\hyperlink{classbowIO_a03334bc47218cd2bcdc1af4d3397efd7}{lastReflectorISRState}}\ =\ state;}
+\DoxyCodeLine{00313\ \}}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00316\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_ab579e762084f1b384c5a6c1b968cd769}{bowIO::checkTimeout}}()\ \{}
+\DoxyCodeLine{00317\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_a8524be5ec6375822275113db99378ed0}{reflectorCounter}}\ >\ \mbox{\hyperlink{classbowIO_ac44fcb0bdfac398a9ebf3a8e2c811f71}{reflectorZeroTimeoutValue}})\ \{}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classbowIO_ab0bb402f5ebc7607c4e3f473f58e914a}{addTachoFreq}}(0);}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00320\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00322\ \ \ \ \ \}}
+\DoxyCodeLine{00323\ \}}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_a6bb3298b28dd27eb77287589ab5b9e82}{bowIO::updateBow}}()\ \{}
+\DoxyCodeLine{00326\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00327\ \textcolor{comment}{\ \ \ \ if\ (stepServoStepper\ !=\ nullptr)\ \{}}
+\DoxyCodeLine{00328\ \textcolor{comment}{\ \ \ \ \ \ \ \ stepServoStepper-\/>updatePosition();}}
+\DoxyCodeLine{00329\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00330\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00331\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_a147462aa41b453a7096c94f93be3d38b}{bowOverPower}}())\ \{}
+\DoxyCodeLine{00332\ }
+\DoxyCodeLine{00333\ \ \ \ \ \}}
+\DoxyCodeLine{00334\ \}}
+\DoxyCodeLine{00335\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00336\ \textcolor{comment}{bool\ bowIO::createStepper(byte\ \_pinStep,\ byte\ \_pinDir,\ byte\ \_pinHome)\ \{}}
+\DoxyCodeLine{00337\ \textcolor{comment}{\ \ \ \ stepper\ =\ new\ farStepper(\_pinStep,\ \_pinDir,\ \_pinHome);}}
+\DoxyCodeLine{00338\ \textcolor{comment}{\ \ \ \ return\ true;}}
+\DoxyCodeLine{00339\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00340\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00341\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a589985b295184b0e30ceb431cde58b3b}{bowIO::setupTMC2209}}()\ \{}
+\DoxyCodeLine{00342\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_abb214efac59651f9588b11ebb35457cf}{stepTMC2209Driver}}\ ==\ \textcolor{keyword}{nullptr})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00344\ \ \ \ \ \mbox{\hyperlink{classbowIO_abb214efac59651f9588b11ebb35457cf}{stepTMC2209Driver}}-\/>setup(*\mbox{\hyperlink{classbowIO_ae3c60c3f3279a2ec0cf86bbb1dd2165e}{stepSerialStream}});}
+\DoxyCodeLine{00345\ \ \ \ \ delay(\mbox{\hyperlink{classbowIO_a4235f50ad4a21a879df925da06e96ce3}{stepConnectDelay}});}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00347\ \ \ \ \ pinMode(\mbox{\hyperlink{classbowIO_a75b7c1efad167cc2f0633930c7f57760}{stepEnPin}},\ OUTPUT);}
+\DoxyCodeLine{00348\ \ \ \ \ digitalWrite(\mbox{\hyperlink{classbowIO_a75b7c1efad167cc2f0633930c7f57760}{stepEnPin}},\ 0);}
+\DoxyCodeLine{00349\ }
+\DoxyCodeLine{00350\ \ \ \ \ \mbox{\hyperlink{classbowIO_abb214efac59651f9588b11ebb35457cf}{stepTMC2209Driver}}-\/>setRunCurrent(\mbox{\hyperlink{classbowIO_acb563b005278378a29e3a49e36b4b367}{stepRunCurrentPercent}});}
+\DoxyCodeLine{00351\ \ \ \ \ \mbox{\hyperlink{classbowIO_abb214efac59651f9588b11ebb35457cf}{stepTMC2209Driver}}-\/>setMicrostepsPerStep(\mbox{\hyperlink{classbowIO_aaa0c90edf8a14856b5fd49d90d6df3fb}{stepMicrostepping}});}
+\DoxyCodeLine{00352\ \ \ \ \ \mbox{\hyperlink{classbowIO_abb214efac59651f9588b11ebb35457cf}{stepTMC2209Driver}}-\/>disableStealthChop();}
+\DoxyCodeLine{00353\ \ \ \ \ \mbox{\hyperlink{classbowIO_abb214efac59651f9588b11ebb35457cf}{stepTMC2209Driver}}-\/>setHoldCurrent(1);}
+\DoxyCodeLine{00354\ \ \ \ \ \mbox{\hyperlink{classbowIO_abb214efac59651f9588b11ebb35457cf}{stepTMC2209Driver}}-\/>enable();}
+\DoxyCodeLine{00355\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00356\ \}}
+\DoxyCodeLine{00357\ }
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00359\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_a76c490095ad46b62c107b738a423c321}{bowIO::getTMC2209Info}}()\ \{}
+\DoxyCodeLine{00360\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}*************************"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00361\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}getSettings()"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00362\ \ \ \ \ TMC2209::Settings\ settings\ =\ \mbox{\hyperlink{classbowIO_abb214efac59651f9588b11ebb35457cf}{stepTMC2209Driver}}-\/>getSettings();}
+\DoxyCodeLine{00363\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.is\_communicating\ =\ "{}}\ +\ String(settings.is\_communicating),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00364\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.is\_setup\ =\ "{}}\ +\ String(settings.is\_setup),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00365\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.software\_enabled\ =\ "{}}\ +\ String(settings.software\_enabled),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00366\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.microsteps\_per\_step\ =\ "{}}\ +\ String(settings.microsteps\_per\_step),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00367\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.inverse\_motor\_direction\_enabled\ =\ "{}}\ +\ String(settings.inverse\_motor\_direction\_enabled),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00368\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.stealth\_chop\_enabled\ =\ "{}}\ +\ String(settings.stealth\_chop\_enabled),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00369\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.standstill\_mode\ =\ "{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00370\ \ \ \ \ \textcolor{keywordflow}{switch}\ (settings.standstill\_mode)}
+\DoxyCodeLine{00371\ \ \ \ \ \{}
+\DoxyCodeLine{00372\ \ \ \ \ \textcolor{keywordflow}{case}\ TMC2209::NORMAL:}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}normal"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00375\ \ \ \ \ \textcolor{keywordflow}{case}\ TMC2209::FREEWHEELING:}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}freewheeling"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00378\ \ \ \ \ \textcolor{keywordflow}{case}\ TMC2209::STRONG\_BRAKING:}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}strong\_braking"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00381\ \ \ \ \ \textcolor{keywordflow}{case}\ TMC2209::BRAKING:}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}braking"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00384\ \ \ \ \ \}}
+\DoxyCodeLine{00385\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.irun\_percent\ =\ "{}}\ +\ String(settings.irun\_percent),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00386\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.irun\_register\_value\ =\ "{}}\ +\ String(settings.irun\_register\_value),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00387\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.ihold\_percent\ =\ "{}}\ +\ String(settings.ihold\_percent),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00388\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.ihold\_register\_value\ =\ "{}}\ +\ String(settings.ihold\_register\_value),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00389\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.iholddelay\_percent\ =\ "{}}\ +\ String(settings.iholddelay\_percent),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00390\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.iholddelay\_register\_value\ =\ "{}}\ +\ String(settings.iholddelay\_register\_value),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00391\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.automatic\_current\_scaling\_enabled\ =\ "{}}\ +\ String(settings.automatic\_current\_scaling\_enabled),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00392\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.automatic\_gradient\_adaptation\_enabled\ =\ "{}}\ +\ String(settings.automatic\_gradient\_adaptation\_enabled),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00393\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.pwm\_offset\ =\ "{}}\ +\ String(settings.pwm\_offset),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00394\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.pwm\_gradient\ =\ "{}}\ +\ String(settings.pwm\_gradient),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00395\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.cool\_step\_enabled\ =\ "{}}\ +\ String(settings.cool\_step\_enabled),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00396\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.analog\_current\_scaling\_enabled\ =\ "{}}\ +\ String(settings.analog\_current\_scaling\_enabled),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00397\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.internal\_sense\_resistors\_enabled\ =\ "{}}\ +\ String(settings.internal\_sense\_resistors\_enabled),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00398\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}*************************"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00399\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00400\ }
+\DoxyCodeLine{00401\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}*************************"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00402\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}hardwareDisabled()"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00403\ \ \ \ \ \textcolor{keywordtype}{bool}\ hardware\_disabled\ =\ \mbox{\hyperlink{classbowIO_abb214efac59651f9588b11ebb35457cf}{stepTMC2209Driver}}-\/>hardwareDisabled();}
+\DoxyCodeLine{00404\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a12ba011dd5b1adf8f77184369290a419}{debugPrint}}(\textcolor{stringliteral}{"{}hardware\_disabled\ =\ "{}}\ +\ String(hardware\_disabled),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00405\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}*************************"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00406\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00407\ }
+\DoxyCodeLine{00408\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}*************************"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00409\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}getStatus()"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00410\ \ \ \ \ TMC2209::Status\ status\ =\ \mbox{\hyperlink{classbowIO_abb214efac59651f9588b11ebb35457cf}{stepTMC2209Driver}}-\/>getStatus();}
+\DoxyCodeLine{00411\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.over\_temperature\_warning\ =\ "{}}\ +\ String(status.over\_temperature\_warning),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00412\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.over\_temperature\_shutdown\ =\ "{}}\ +\ String(status.over\_temperature\_shutdown),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00413\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.short\_to\_ground\_a\ =\ "{}}\ +\ String(status.short\_to\_ground\_a),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00414\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.short\_to\_ground\_b\ =\ "{}}\ +\ String(status.short\_to\_ground\_b),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00415\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.low\_side\_short\_a\ =\ "{}}\ +\ String(status.low\_side\_short\_a),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00416\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.low\_side\_short\_b\ =\ "{}}\ +\ String(status.low\_side\_short\_b),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00417\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.open\_load\_a\ =\ "{}}\ +\ String(status.open\_load\_a),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00418\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.open\_load\_b\ =\ "{}}\ +\ String(status.open\_load\_b),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00419\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.over\_temperature\_120c\ =\ "{}}\ +\ String(status.over\_temperature\_120c),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00420\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.over\_temperature\_143c\ =\ "{}}\ +\ String(status.over\_temperature\_143c),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00421\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.over\_temperature\_150c\ =\ "{}}\ +\ String(status.over\_temperature\_150c),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00422\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.over\_temperature\_157c\ =\ "{}}\ +\ String(status.over\_temperature\_157c),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00423\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.current\_scaling\ =\ "{}}\ +\ String(status.current\_scaling),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00424\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.stealth\_chop\_mode\ =\ "{}}\ +\ String(status.stealth\_chop\_mode),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00425\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.standstill\ =\ "{}}\ +\ String(status.standstill),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00426\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}*************************"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00427\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00428\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00429\ \}}
+\DoxyCodeLine{00430\ }
+\DoxyCodeLine{00431\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowIO_a563fccfa0253235dfdb061135c9ddbd8}{bowIO::getBowCurrent}}()\ \{}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ analogRead(\mbox{\hyperlink{classbowIO_a27b8883e2e4be45be2aa3d72088526b8}{bowCurrentSensePin}})\ *\ 3.3\ /\ 4096;}
+\DoxyCodeLine{00433\ \}}
+\DoxyCodeLine{00434\ }
+\DoxyCodeLine{00435\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a25eabc5e7b0c82b2d117586d155aae66}{bowIO::bowOverCurrent}}()\ \{}
+\DoxyCodeLine{00436\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_a563fccfa0253235dfdb061135c9ddbd8}{getBowCurrent}}()\ >=\ \mbox{\hyperlink{classbowIO_ad5e3d0d8112aa11a71103da59c0b9f37}{bowMotorCurrentLimit}})\ \{}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00438\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00440\ \ \ \ \ \}}
+\DoxyCodeLine{00441\ \}}
+\DoxyCodeLine{00442\ }
+\DoxyCodeLine{00443\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a147462aa41b453a7096c94f93be3d38b}{bowIO::bowOverPower}}()\ \{}
+\DoxyCodeLine{00444\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_a563fccfa0253235dfdb061135c9ddbd8}{getBowCurrent}}()\ >=\ (\mbox{\hyperlink{classbowIO_a3cb7ce3224903a11ad4dcb47cf1932e5}{bowMotorWattage}}\ /\ \mbox{\hyperlink{classbowIO_a4898e1b1bb2261a8d5a162377e8f4529}{bowMotorVoltage}}))\ \{}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ we\ have\ already\ set\ the\ internal\ over-\/power\ flag}}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_ae3e77ef140722811625e332893d49cf9}{transientOverPower}})\ \{}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ And\ that\ was\ set\ more\ than\ the\ allowed\ time-\/span\ ago,\ aka\ the\ over-\/power\ event\ has\ been\ going\ on\ for\ X\ ms}}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_ab727c8be7d25fd0a28a3a8a2342942f2}{lastBowOverPowerEvent}}\ >\ \mbox{\hyperlink{classbowIO_a2e31bad3796820041267074775c177c4}{bowOverPowerDuration}})\ \{}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Signal\ the\ external\ over\ power\ flag}}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classbowIO_acc60f3a0b373a28fb864a4ac352a60fa}{bowOverPowerFlag}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ this\ is\ a\ new\ over-\/power\ event\ set\ the\ flag\ and\ clear\ the\ event-\/time}}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classbowIO_ae3e77ef140722811625e332893d49cf9}{transientOverPower}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classbowIO_ab727c8be7d25fd0a28a3a8a2342942f2}{lastBowOverPowerEvent}}\ =\ 0;}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00458\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00459\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clear\ everything\ if\ we\ no\ longer\ have\ an\ over\ power\ event}}
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classbowIO_acc60f3a0b373a28fb864a4ac352a60fa}{bowOverPowerFlag}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classbowIO_ae3e77ef140722811625e332893d49cf9}{transientOverPower}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00463\ \ \ \ \ \}}
+\DoxyCodeLine{00464\ \}}
+\DoxyCodeLine{00465\ }
+\DoxyCodeLine{00466\ \textcolor{comment}{//\ Emergency\ disable\ of\ power\ with\ a\ required\ cooldown\ period\ before\ bow\ is\ allowed\ to\ be\ started\ again}}
+\DoxyCodeLine{00467\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a49e01939c12fc4b187a4541b79d53a1c}{bowIO::emergencyBowDisable}}(uint16\_t\ coolDown)\ \{}
+\DoxyCodeLine{00468\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classbowIO_a1445e6b0237c568d3fdf19fd710d585e}{emergencyCoolDown}})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00469\ \ \ \ \ \mbox{\hyperlink{classbowIO_ad74acda96a684931e59b63cb22a4610c}{emergencyCoolDownEvent}}\ =\ millis();}
+\DoxyCodeLine{00470\ \ \ \ \ \mbox{\hyperlink{classbowIO_a1445e6b0237c568d3fdf19fd710d585e}{emergencyCoolDown}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00471\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Emergency\ disable!\ Setting\ cool\ down\ to\ "{}}\ +\ String(\mbox{\hyperlink{classbowIO_ad74acda96a684931e59b63cb22a4610c}{emergencyCoolDownEvent}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00472\ \ \ \ \ \mbox{\hyperlink{classbowIO_af543966b009896f0e529909262be4c87}{disableBowPower}}();}
+\DoxyCodeLine{00473\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00474\ \}}
+\DoxyCodeLine{00475\ }
+\DoxyCodeLine{00476\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a951120e99c2120a3c7e07181cafc621a}{bowIO::getMotorFault}}()\ \{}
+\DoxyCodeLine{00477\ \ \ \ \ \textcolor{keywordflow}{if}\ (digitalRead(\mbox{\hyperlink{classbowIO_ac58364f8bdc54db6e57c9fccd128657d}{bowMotorFaultPin}})\ ==\ 0)\ \{\ \ \ \ \textcolor{comment}{//\ changed\ 2024-\/05-\/07}}
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \ \textcolor{keyword}{true};}
+\DoxyCodeLine{00479\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00481\ \ \ \ \ \}}
+\DoxyCodeLine{00482\ \}}
+\DoxyCodeLine{00483\ }
+\DoxyCodeLine{00484\ String\ \mbox{\hyperlink{classbowIO_a10371f6b9c9c3f2a4690040d144c2320}{bowIO::dumpData}}()\ \{}
+\DoxyCodeLine{00485\ \ \ \ \ String\ dump;}
+\DoxyCodeLine{00486\ \ \ \ \ dump\ =\ \textcolor{stringliteral}{"{}bmv:"{}}\ +\ String(\mbox{\hyperlink{classbowIO_a4898e1b1bb2261a8d5a162377e8f4529}{bowMotorVoltage}})\ +\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00487\ \ \ \ \ \textcolor{keywordflow}{return}\ dump;}
+\DoxyCodeLine{00488\ \}}
+\DoxyCodeLine{00489\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

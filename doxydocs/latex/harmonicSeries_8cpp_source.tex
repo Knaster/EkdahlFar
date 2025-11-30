@@ -1,0 +1,96 @@
+\doxysection{harmonic\+Series.\+cpp}
+\hypertarget{harmonicSeries_8cpp_source}{}\label{harmonicSeries_8cpp_source}\index{harmonicSeries.cpp@{harmonicSeries.cpp}}
+\mbox{\hyperlink{harmonicSeries_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ HARMONICSERIES\_C}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ HARMONICSERIES\_C}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <WProgram.h>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{harmonicSeries_8h}{harmonicSeries.h}}"{}}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classharmonicSeries}{harmonicSeries}}\ \{}
+\DoxyCodeLine{00028\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ std::vector<float>\ \mbox{\hyperlink{classharmonicSeries_a468a5cbe720ec505f4d16fae0cacec08}{ratio}};}
+\DoxyCodeLine{00030\ \ \ \ \ String\ \mbox{\hyperlink{classharmonicSeries_a85fbf378603d4c2f45f9d2865e06c9f0}{Id}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classharmonicSeries_a370df91ffa5ca6600cad8b98bf12b5b9}{setHarmonic}}(uint16\_t\ harmonic,\ \textcolor{keywordtype}{float}\ \_ratio)\ \{}
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Setting\ Harmonic\ "{}\ +\ String(harmonic)\ +"{},\ size\ "{}\ +\ String(ratio.size()),\ Debug);}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (harmonic\ >=\ \mbox{\hyperlink{classharmonicSeries_a468a5cbe720ec505f4d16fae0cacec08}{ratio}}.size())\ \{}
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Increasing\ size"{},\ Debug);}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classharmonicSeries_a468a5cbe720ec505f4d16fae0cacec08}{ratio}}.push\_back(0);}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classharmonicSeries_a468a5cbe720ec505f4d16fae0cacec08}{ratio}}[harmonic]\ =\ \_ratio;}
+\DoxyCodeLine{00039\ \ \ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classharmonicSeries_a5814510d22ec418d8b877b72c6cc1117}{harmonicSeries}}()\ \{}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classHarmonicSeriesList}{HarmonicSeriesList}}\ \{}
+\DoxyCodeLine{00047\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00048\ \ \ \ \ std::vector<harmonicSeries>\ \mbox{\hyperlink{classHarmonicSeriesList_a05852a7681aa0a93dfe868e325b1a606}{series}};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classHarmonicSeriesList_a7c71abff4db71f6d336b524770535800}{addHarmonicSeries}}()\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classharmonicSeries}{harmonicSeries}}\ hs;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesList_a05852a7681aa0a93dfe868e325b1a606}{series}}.push\_back(hs);}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classHarmonicSeriesList_a7fad7808756516741e49b872d950199f}{addHarmonicSeries}}(String\ Id,\ \textcolor{keywordtype}{float}\ frequency[])\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classharmonicSeries}{harmonicSeries}}\ hs;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ hs.\mbox{\hyperlink{classharmonicSeries_a85fbf378603d4c2f45f9d2865e06c9f0}{Id}}\ =\ Id;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<12;\ i++)\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ hs.\mbox{\hyperlink{classharmonicSeries_a370df91ffa5ca6600cad8b98bf12b5b9}{setHarmonic}}(i,\ frequency[i]);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesList_a05852a7681aa0a93dfe868e325b1a606}{series}}.push\_back(hs);}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classHarmonicSeriesList_a8b313f5a3528be64c17de1003a04e207}{addHarmonicSeries}}(String\ Id,\ std::vector<float>\ ratio)\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classharmonicSeries}{harmonicSeries}}\ hs;}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ hs.\mbox{\hyperlink{classharmonicSeries_a85fbf378603d4c2f45f9d2865e06c9f0}{Id}}\ =\ Id;}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<12;\ i++)\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ hs.\mbox{\hyperlink{classharmonicSeries_a370df91ffa5ca6600cad8b98bf12b5b9}{setHarmonic}}(i,\ ratio[i]);}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesList_a05852a7681aa0a93dfe868e325b1a606}{series}}.push\_back(hs);}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ String\ \mbox{\hyperlink{classHarmonicSeriesList_a635f07883f73ef624e0548fcb58713d7}{dumpData}}()\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ String\ dump\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ int(\mbox{\hyperlink{classHarmonicSeriesList_a05852a7681aa0a93dfe868e325b1a606}{series}}.size());\ i++)\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}bhsd:"{}}\ +\ String(i)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesList_a05852a7681aa0a93dfe868e325b1a606}{series}}[i].Id);}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ int(\mbox{\hyperlink{classHarmonicSeriesList_a05852a7681aa0a93dfe868e325b1a606}{series}}[i].ratio.size());\ j++)\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesList_a05852a7681aa0a93dfe868e325b1a606}{series}}[i].ratio[j],\ 5);}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ dump;}
+\DoxyCodeLine{00087\ \ \ \ \ \}}
+\DoxyCodeLine{00088\ \};}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

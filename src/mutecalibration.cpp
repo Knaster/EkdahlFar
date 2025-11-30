@@ -62,14 +62,15 @@ bool calibrateMute::findMuteLevels() {
 
     // Home mute and set mute and bow position at zero and turn off bow
     m_muteConnect->homeMute();
-    servoStepper *ss = m_muteConnect->stepServoStepper;
+//    servoStepper *ss = m_muteConnect->stepServoStepper;
+    servoStepper *ss = m_muteConnect->tmc2209ServoStepper->stepServoStepper;
 
 //    audioFilterBiquad->setLowpass(0, m_bowControlConnect->calibrationDataConnect->fundamentalFrequency, 0.707);
 
     m_bowIOConnect->disableBowPower();
     m_bowControlConnect->run = 0;
     m_bowControlConnect->bowRest(1);
-    m_bowIOConnect->stepServoStepper->completeTask();
+    m_bowIOConnect->tmc2209ServoStepper->stepServoStepper->completeTask();
 
     // Find the pickup output level that is considered silence
 
@@ -79,7 +80,7 @@ bool calibrateMute::findMuteLevels() {
 
     debugPrintln("Silence level is set to " + String(levelSilence), debugPrintType::TextInfo);
     if (levelSilence >= (minFundamentalAmplitude / 2)) {
-        debugPrintln("Silence level is too low!", debugPrintType::Error);
+        debugPrintln("Silence level is too high!", debugPrintType::Error);
         return false;
     }
 
@@ -94,23 +95,28 @@ bool calibrateMute::findMuteLevels() {
         ((m_bowControlConnect->calibrationDataConnect->stallPressure - m_bowControlConnect->calibrationDataConnect->firstTouchPressure) / 4);
     debugPrintln("Setting tilt to " + String(testPressure), debugPrintType::TextInfo);
     m_bowIOConnect->setTiltPWM(testPressure);
+    debugPrintln("Waiting for Pressure setting to finish.", debugPrintType::TextInfo);
     m_bowIOConnect->waitForTiltToComplete();
+    debugPrintln("Pause for a little..", debugPrintType::TextInfo);
     delay(2500);
 
+    debugPrintln("Starting fundamental level test, need to reach " + String(minFundamentalAmplitude), debugPrintType::TextInfo);
     // Wait for the bow to settle and then reord the fundamental level
     do {
         testPressure += 100;
         m_bowIOConnect->setTiltPWM(testPressure);
         levelFundamental = findLevel();
-        debugPrintln("Fundamental level " + String(levelFundamental), debugPrintType::Debug);
-    } while(levelFundamental < minFundamentalAmplitude);
+        debugPrintln("Fundamental level " + String(levelFundamental), debugPrintType::TextInfo);
+    } while((levelFundamental < minFundamentalAmplitude) && (testPressure < m_bowControlConnect->calibrationDataConnect->stallPressure));
+
+    if (levelFundamental < minFundamentalAmplitude) {
+        debugPrintln("Pickup volume too low!", debugPrintType::Error);
+        return false;
+    }
+
     debugPrintln("Pickup fundamental ampltiude is " + String(levelFundamental), debugPrintType::TextInfo);
 
-
     #define levelStepSize 100
-//    #define levelArrayCount ((65535 / levelStepSize) + 1)
-//    float levelArray[levelArrayCount];
-//    uint16_t levelIndex = 0;
 
     float level = 0;
     uint16_t mutePos = 0;
@@ -119,9 +125,6 @@ bool calibrateMute::findMuteLevels() {
         ss->completeTask();
         mutePos += levelStepSize;
         level = findLevel();
-
-//        levelArray[levelIndex] = level;
-//        levelIndex++;
 
         debugPrintln("Level " + String(level) + " at position " + String(mutePos), debugPrintType::TextInfo);
         if (level < minAmplitude) { break; }
@@ -136,30 +139,13 @@ bool calibrateMute::findMuteLevels() {
     m_muteConnect->setFullMutePosition(mutePos);
     m_muteConnect->setHalfMutePosition(mutePos / 2);
     debugPrintln("Full mute set at " + String(m_muteConnect->getFullMutePosition()), debugPrintType::TextInfo);
-/*
-    uint16_t halfMute = 0;
 
-    float maxLevel = 0;
-    uint16_t maxLevelStep = 0;
-
-    for (int i = (mutePos / levelStepSize); i > 0; i--) {
-        if ((levelArray[i] >= levelFundamental) && (halfMute == 0)) { halfMute = i * levelStepSize; }
-        if (maxLevel < levelArray[i]) {
-            maxLevel = levelArray[i];
-            maxLevelStep = i * levelStepSize;
-        }
-    }
-
-    m_muteConnect->setHalfMutePosition(halfMute);
-    m_muteConnect->setRestPosition(maxLevelStep);
-    debugPrintln("Half mute set at " + String(halfMute) + ", rest position set to " + String(maxLevelStep), debugPrintType::TextInfo);
-*/
     debugPrintln("Finished level set", debugPrintType::TextInfo);
 
     m_bowControlConnect->run = 0;
     m_bowControlConnect->bowRest(1);
     m_bowIOConnect->disableBowPower();
-    m_bowIOConnect->stepServoStepper->completeTask();
+    m_bowIOConnect->tmc2209ServoStepper->stepServoStepper->completeTask();
 
 //    audioFilterBiquad->setLowpass(0, noteFreqCutoff, 0.707);
     debugPrintEnabled[debugPrintType::Debug] = debugReport;
@@ -174,7 +160,9 @@ bool calibrateMute::findMuteStall() {
     debugPrintln("Starting mute stall calibration", debugPrintType::TextInfo);
 
     m_muteConnect->homeMute();
-    servoStepper *ss = m_muteConnect->stepServoStepper;
+//    servoStepper *ss = m_muteConnect->stepServoStepper;
+    servoStepper *ss = m_muteConnect->tmc2209ServoStepper->stepServoStepper;
+
 /*
     debugPrintln("Mute home positions: rising, forward " +
         String(ss->homingPoint[ss->eEdgeType::EDGERISING][ss->eStepDirection::FORWARD]) +
@@ -191,7 +179,7 @@ bool calibrateMute::findMuteStall() {
         debugPrintln("Failed at going to max pressure", debugPrintType::TextInfo);
         return false;
     }
-    bool initialHomingSensed = ss->homingSensed;
+    bool initialHomingSensed = ss->getHomingSensed();
 
     debugPrintln("Starting at max with homing sense " + String(initialHomingSensed), debugPrintType::TextInfo);
 
@@ -201,18 +189,18 @@ bool calibrateMute::findMuteStall() {
         ss->setPosition(i);
         ss->completeTask();
         if (i == 0) {
-            debugPrintln("Edge detection failed with edge " + String(ss->homingSensed), debugPrintType::Error);
+            debugPrintln("Edge detection failed with edge " + String(ss->getHomingSensed()), debugPrintType::Error);
             return false;
         }
-    } while (ss->homingSensed == initialHomingSensed);
+    } while (ss->getHomingSensed() == initialHomingSensed);
 
 
-    debugPrintln("Homing sense changed to " + String(ss->homingSensed) + " direction " + String(ss->moveDirection) + " step no " + String(ss->currentStep), debugPrintType::TextInfo);
+    debugPrintln("Homing sense changed to " + String(ss->getHomingSensed()) + " direction " + String(ss->getMoveDirection()) + " step no " + String(ss->getCurrentStep()), debugPrintType::TextInfo);
 
     servoStepper::eEdgeType edge;
     if (initialHomingSensed == homeSenseInactive) { edge = ss->eEdgeType::EDGERISING; } else { edge = ss->eEdgeType::EDGEFALLING; };
-    uint16_t homingPoint = ss->homingPoint[edge][ss->eStepDirection::REVERSE];
-    int32_t homingDifference = ss->currentStep - homingPoint;
+    uint16_t homingPoint = ss->getHomingPoint(edge, ss->eStepDirection::REVERSE);
+    int32_t homingDifference = ss->getCurrentStep() - homingPoint;
     float mult = 65535 / (stepsPerRevolution * microSteps);
     int32_t maxPosition = maxTestStep - (homingDifference * mult) - maxStepRetract;
 

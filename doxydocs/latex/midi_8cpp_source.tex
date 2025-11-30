@@ -1,0 +1,333 @@
+\doxysection{midi.\+cpp}
+\hypertarget{midi_8cpp_source}{}\label{midi_8cpp_source}\index{midi.cpp@{midi.cpp}}
+\mbox{\hyperlink{midi_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#ifndef\ MIDI\_H}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ MIDI\_H}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#include\ <MIDI.h>}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{midi_8cpp_a86e27933d2680a2f0fe44c77716b48b9}{noteCount}}\ =\ 0;\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00042\ \textcolor{comment}{//bool\ sustain\ =\ true;\ \ \ \ \ \ \ ///<\ State\ of\ sustain\ pedal}}
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{midi_8cpp_ae8a3ecedd527c653a15db37f02dda9b2}{monoMode}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00044\ \textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{midi_8cpp_a07a5a8cf79cfd013892fd6d686ff6024}{pitchBend}}\ =\ 0;\ \ }
+\DoxyCodeLine{00045\ \textcolor{comment}{//uint8\_t\ midiRxChannel\ =\ 0x7F;}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_afe77cbca418de1f23989ea0572954c2f}{dnote}};}
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_aa2816efa610ba96e26646ca2d25f0cba}{dchannel}};}
+\DoxyCodeLine{00050\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_a363d3e781f267bacd53748c7f8752a4a}{dvelocity}};}
+\DoxyCodeLine{00051\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_a43fd958e8f9b57cb0a7710fd2fc7a62a}{dnotecount}};}
+\DoxyCodeLine{00052\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_aa57ea4be85a9ab70734ba96f316234b3}{dpressure}};}
+\DoxyCodeLine{00053\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_ab88920172b5a32b077bd95bb1f3d6f8e}{dvalue}};}
+\DoxyCodeLine{00054\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_a2230b468d53b40b5e940c8dc818345c6}{dpitch}};}
+\DoxyCodeLine{00055\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_a298e941b7f939b9387cfe86b767f401c}{dprogram}};}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#define\ userVariableMax\ 10}}
+\DoxyCodeLine{00057\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[\mbox{\hyperlink{midi_8cpp_ac95cb2b2f0097507ba0b2e1666593a4a}{userVariableMax}}]\ =\ \{\ 0,0,0,0,0,0,0,0,0,0\ \};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ mapSize\ 12\ \ \ \ }\textcolor{comment}{//\ C\ \ C\#\ D\ \ D\#\ E\ \ F\ \ F\#\ G\ \ G\#\ A\ \ A\#\ B}}
+\DoxyCodeLine{00060\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_a4e0fa8899ed6b9f1bde2bc03de889626}{dMap}}[\mbox{\hyperlink{midi_8cpp_af5f9f8958f0af48944f91c92f074fbc8}{mapSize}}]\ =\ \{\ 1,\ 1,\ 0,\ 1,\ 2,\ 1,\ 0,\ 0,\ 1,\ 0,\ 1,\ 2\ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_ad0dc2236017f1b8b833b71760eccef64}{mapKeys}}(\textcolor{keywordtype}{double}\ key)\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{int}\ mapIndex\ =\ (((int)\ key)\ \%\ 12);}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Map\ index\ "{}\ +\ String(mapIndex),\ Debug);}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordflow}{if}\ ((mapIndex\ <\ 0)\ ||\ (mapIndex\ >=\ \mbox{\hyperlink{midi_8cpp_af5f9f8958f0af48944f91c92f074fbc8}{mapSize}}))\ \{\ \textcolor{keywordflow}{return}\ 0;\ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{midi_8cpp_a4e0fa8899ed6b9f1bde2bc03de889626}{dMap}}[mapIndex];}
+\DoxyCodeLine{00067\ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_aa65a82429d9b5c75e567ec3c506cc8ab}{expBool}}(\textcolor{keywordtype}{double}\ input)\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordflow}{if}\ (input\ <=\ 0)\ \{\ \textcolor{keywordflow}{return}\ 0;\ \}\ \textcolor{keywordflow}{else}\ \{\ \textcolor{keywordflow}{return}\ 1;\ \};}
+\DoxyCodeLine{00071\ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_a2479e1cbea7ce980c56a174fcd961618}{expIBool}}(\textcolor{keywordtype}{double}\ input)\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordflow}{if}\ (input\ <=\ 0)\ \{\ \textcolor{keywordflow}{return}\ 1;\ \}\ \textcolor{keywordflow}{else}\ \{\ \textcolor{keywordflow}{return}\ 0;\ \};}
+\DoxyCodeLine{00075\ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_af5e1f0ee8723368b23970791f61b2c4f}{epDeadbandThreshold}}\ =\ 250;}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_a388bc023d8f14fc6690e68b2ea225ee6}{deadbando}}(\textcolor{keywordtype}{double}\ value)\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{double}\ target\ =\ 0;}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{comment}{//if\ ((value\ <\ (target\ +\ epDeadbandThreshold))\ \&\&\ (value\ >\ (target\ -\/\ epDeadbandThreshold)))\ \{\ return\ target;\ \}\ else\ \{\ return\ value;\ \};}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{if}\ ((value\ <\ (target\ +\ \mbox{\hyperlink{midi_8cpp_af5e1f0ee8723368b23970791f61b2c4f}{epDeadbandThreshold}}))\ \&\&\ (value\ >\ (target\ -\/\ \mbox{\hyperlink{midi_8cpp_af5e1f0ee8723368b23970791f61b2c4f}{epDeadbandThreshold}})))\ \{\ \textcolor{keywordflow}{return}\ target;\ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ >\ target)\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value\ -\/\ \mbox{\hyperlink{midi_8cpp_af5e1f0ee8723368b23970791f61b2c4f}{epDeadbandThreshold}};}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value\ +\ \mbox{\hyperlink{midi_8cpp_af5e1f0ee8723368b23970791f61b2c4f}{epDeadbandThreshold}};}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \};}
+\DoxyCodeLine{00090\ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_a83c3664ed903282b7f92a3aff08c490e}{deadband}}(\textcolor{keywordtype}{double}\ value,\ \textcolor{keywordtype}{double}\ threshold)\ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{double}\ target\ =\ 0;}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{comment}{//if\ ((value\ <\ (target\ +\ epDeadbandThreshold))\ \&\&\ (value\ >\ (target\ -\/\ epDeadbandThreshold)))\ \{\ return\ target;\ \}\ else\ \{\ return\ value;\ \};}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{if}\ ((value\ <\ (target\ +\ threshold))\ \&\&\ (value\ >\ (target\ -\/\ threshold)))\ \{\ \textcolor{keywordflow}{return}\ target;\ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ >\ target)\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value\ -\/\ threshold;}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value\ +\ threshold;}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \};}
+\DoxyCodeLine{00103\ \}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_add91d24a5eea2bc734c1f083b2a0870b}{epZeroThreshold}}\ =\ 200;}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{midi_8cpp_a5b0d481dccbf26639bb146d72d50a53b}{zeroThreshold}}(\textcolor{keywordtype}{double}\ value)\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ <\ \mbox{\hyperlink{midi_8cpp_add91d24a5eea2bc734c1f083b2a0870b}{epZeroThreshold}})\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00111\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{00113\ \ \ \ \ \}}
+\DoxyCodeLine{00114\ \}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#define\ expFunctionCount\ 24}}
+\DoxyCodeLine{00117\ te\_variable\ \mbox{\hyperlink{midi_8cpp_aa4d63739eecbd3c853237b269801a7cb}{expFunctions}}[\mbox{\hyperlink{midi_8cpp_aa6eb5580c71ee23146ac858f01b19c60}{expFunctionCount}}]\ =\ \{\{\ \textcolor{stringliteral}{"{}channel"{}},\ \&\mbox{\hyperlink{midi_8cpp_aa2816efa610ba96e26646ca2d25f0cba}{dchannel}}\ \}\ ,\ \{\ \textcolor{stringliteral}{"{}note"{}},\ \&\mbox{\hyperlink{midi_8cpp_afe77cbca418de1f23989ea0572954c2f}{dnote}}\ \},\ \{\ \textcolor{stringliteral}{"{}velocity"{}},\ \&\mbox{\hyperlink{midi_8cpp_a363d3e781f267bacd53748c7f8752a4a}{dvelocity}}\ \},\ \{\ \textcolor{stringliteral}{"{}notecount"{}},\ \&\mbox{\hyperlink{midi_8cpp_a43fd958e8f9b57cb0a7710fd2fc7a62a}{dnotecount}}\},}
+\DoxyCodeLine{00118\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bool"{}},\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*)\ \mbox{\hyperlink{midi_8cpp_aa65a82429d9b5c75e567ec3c506cc8ab}{expBool}},\ TE\_FUNCTION1\ \},\ \{\ \textcolor{stringliteral}{"{}ibool"{}},\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*)\ \mbox{\hyperlink{midi_8cpp_a2479e1cbea7ce980c56a174fcd961618}{expIBool}},\ TE\_FUNCTION1\ \},\ \{\ \textcolor{stringliteral}{"{}pressure"{}},\ \&\mbox{\hyperlink{midi_8cpp_aa57ea4be85a9ab70734ba96f316234b3}{dpressure}}\},\ \{\ \textcolor{stringliteral}{"{}value"{}},\ \&\mbox{\hyperlink{midi_8cpp_ab88920172b5a32b077bd95bb1f3d6f8e}{dvalue}}\ \},}
+\DoxyCodeLine{00119\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}mapkeys"{}},\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*)\ \mbox{\hyperlink{midi_8cpp_ad0dc2236017f1b8b833b71760eccef64}{mapKeys}},\ TE\_FUNCTION1\ \},\ \{\ \textcolor{stringliteral}{"{}pitch"{}},\ \&\mbox{\hyperlink{midi_8cpp_a2230b468d53b40b5e940c8dc818345c6}{dpitch}}\ \},\ \{\ \textcolor{stringliteral}{"{}program"{}},\ \&\mbox{\hyperlink{midi_8cpp_a298e941b7f939b9387cfe86b767f401c}{dprogram}}\ \},\ \{\ \textcolor{stringliteral}{"{}deadbando"{}},\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*)\ \mbox{\hyperlink{midi_8cpp_a388bc023d8f14fc6690e68b2ea225ee6}{deadbando}},\ TE\_FUNCTION1\ \},}
+\DoxyCodeLine{00120\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}deadband"{}},\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*)\ \mbox{\hyperlink{midi_8cpp_a83c3664ed903282b7f92a3aff08c490e}{deadband}},\ TE\_FUNCTION2\ \},\ \{\ \textcolor{stringliteral}{"{}zerothreshold"{}},\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*)\ \mbox{\hyperlink{midi_8cpp_a5b0d481dccbf26639bb146d72d50a53b}{zeroThreshold}},\ TE\_FUNCTION1\ \},}
+\DoxyCodeLine{00121\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}uv0"{}},\ \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[0]\},\ \{\ \textcolor{stringliteral}{"{}uv1"{}},\ \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[1]\},\ \{\ \textcolor{stringliteral}{"{}uv2"{}},\ \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[2]\},\ \{\ \textcolor{stringliteral}{"{}uv3"{}},\ \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[3]\},\ \{\ \textcolor{stringliteral}{"{}uv4"{}},\ \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[4]\},}
+\DoxyCodeLine{00122\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}uv5"{}},\ \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[5]\},\ \{\ \textcolor{stringliteral}{"{}uv6"{}},\ \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[6]\},\ \{\ \textcolor{stringliteral}{"{}uv7"{}},\ \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[7]\},\ \{\ \textcolor{stringliteral}{"{}uv8"{}},\ \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[8]\},\ \{\ \textcolor{stringliteral}{"{}uv9"{}},\ \&\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[9]\}\ \};}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{midi_8cpp_ad49be36e31ac13009fbc84e03bb78cdc}{updateLocalVariables}}()\ \{}
+\DoxyCodeLine{00125\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a43fd958e8f9b57cb0a7710fd2fc7a62a}{dnotecount}}\ =\ \mbox{\hyperlink{midi_8cpp_a86e27933d2680a2f0fe44c77716b48b9}{noteCount}};}
+\DoxyCodeLine{00126\ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{processLocalMessage}}(String\ *message)\ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_ad49be36e31ac13009fbc84e03bb78cdc}{updateLocalVariables}}();}
+\DoxyCodeLine{00130\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}}-\/>\mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{addCommands}}(*message);}
+\DoxyCodeLine{00131\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}}-\/>\mbox{\hyperlink{classcommandList_af42de049662f915fd12f8ed92477c03f}{parseCommandExpressions}}(\mbox{\hyperlink{midi_8cpp_aa4d63739eecbd3c853237b269801a7cb}{expFunctions}},\ \mbox{\hyperlink{midi_8cpp_aa6eb5580c71ee23146ac858f01b19c60}{expFunctionCount}});}
+\DoxyCodeLine{00132\ \}}
+\DoxyCodeLine{00136\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structnoteMsg}{noteMsg}}\ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structnoteMsg_af08a45a930c09da478765a46f355c90e}{channel}}\ =\ -\/1;}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structnoteMsg_a0e74b207ccf427dc34a04df2686fa501}{note}}\ =\ -\/1;}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structnoteMsg_ab465b72dedecef1146ca0c584ef5c48f}{velocity}}\ =\ -\/1;}
+\DoxyCodeLine{00140\ \};}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ std::vector<noteMsg>\ \mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}};}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ int8\_t\ \mbox{\hyperlink{midi_8cpp_a4989ed85e805ad55b1a49073de2380f9}{findNote}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ note)\ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ int(\mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}.size());\ i++)\ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}[i].note\ ==\ note)\ \&\&\ (\mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}[i].channel\ ==\ channel))\ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ i;}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00149\ \ \ \ \ \}}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00151\ \}}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{midi_8cpp_a73939c2904328a68f8ff33cdb29358d6}{removeNote}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ note)\ \{}
+\DoxyCodeLine{00154\ \ \ \ \ int8\_t\ i\ =\ \mbox{\hyperlink{midi_8cpp_a4989ed85e805ad55b1a49073de2380f9}{findNote}}(channel,\ note);}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Couldn't\ find\ note\ "{}}\ +\ String(note),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00158\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}.erase(\mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}.begin()\ +\ i);}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Removing\ note\ "{}}\ +\ String(note),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00162\ \ \ \ \ \}}
+\DoxyCodeLine{00163\ \};}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{midi_8cpp_adae513bd93c17269a7aa93788cb85a8d}{addNote}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ note,\ \textcolor{keywordtype}{byte}\ velocity)\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \mbox{\hyperlink{structnoteMsg}{noteMsg}}\ local;}
+\DoxyCodeLine{00167\ \ \ \ \ local.\mbox{\hyperlink{structnoteMsg_a0e74b207ccf427dc34a04df2686fa501}{note}}\ =\ note;}
+\DoxyCodeLine{00168\ \ \ \ \ local.\mbox{\hyperlink{structnoteMsg_af08a45a930c09da478765a46f355c90e}{channel}}\ =\ channel;}
+\DoxyCodeLine{00169\ \ \ \ \ local.\mbox{\hyperlink{structnoteMsg_ab465b72dedecef1146ca0c584ef5c48f}{velocity}}\ =\ velocity;}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{midi_8cpp_a73939c2904328a68f8ff33cdb29358d6}{removeNote}}(channel,\ note))\ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Note\ added\ twice!!"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});}
+\DoxyCodeLine{00172\ \ \ \ \ \}}
+\DoxyCodeLine{00173\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}.push\_back(local);}
+\DoxyCodeLine{00174\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Adding\ note\ "{}}\ +\ String(note)\ +\ \textcolor{stringliteral}{"{}\ (note\ no\ "{}}\ +\ String(\mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}.size())\ +\ \textcolor{stringliteral}{"{})"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00175\ \};}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00179\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{midi_8cpp_a24101d1e9fbfa918d5da035c6ca023a2}{setNote}}()\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Set\ note"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00181\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_aa2816efa610ba96e26646ca2d25f0cba}{dchannel}}\ =\ \mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}[\mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}.size()\ -\/\ 1].channel;}
+\DoxyCodeLine{00182\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_afe77cbca418de1f23989ea0572954c2f}{dnote}}\ =\ \mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}[\mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}.size()\ -\/\ 1].note;}
+\DoxyCodeLine{00183\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a363d3e781f267bacd53748c7f8752a4a}{dvelocity}}\ =\ \mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}[\mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}.size()\ -\/\ 1].velocity;}
+\DoxyCodeLine{00184\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{processLocalMessage}}(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].noteOn);}
+\DoxyCodeLine{00185\ \}}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \textcolor{comment}{//\ Set\ all\ notes\ bottoms\ up\ so\ that\ the\ que\ doesn't\ need\ to\ know\ which\ message\ goes\ to\ which\ string\ but\ so\ that\ any\ existing\ notes\ are\ still\ held}}
+\DoxyCodeLine{00188\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{midi_8cpp_af56bc32ff0a53e0ca759d30779c3dd34}{setNotes}}()\ \{}
+\DoxyCodeLine{00189\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Set\ notes"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ int(\mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}.size());\ i\ ++)\ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_aa2816efa610ba96e26646ca2d25f0cba}{dchannel}}\ =\ \mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}[i].channel;}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_afe77cbca418de1f23989ea0572954c2f}{dnote}}\ =\ \mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}[i].note;}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a363d3e781f267bacd53748c7f8752a4a}{dvelocity}}\ =\ \mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}[i].velocity;}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{processLocalMessage}}(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].noteOn);}
+\DoxyCodeLine{00195\ \ \ \ \ \}}
+\DoxyCodeLine{00196\ \}}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00199\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{midi_8cpp_a1d306bc8c6590fb58aa505fa4ce488ed}{OnNoteOff}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ note,\ \textcolor{keywordtype}{byte}\ velocity)\ \{}
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ !=\ channel)\ \&\&\ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ <\ 17)\ \&\&}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ >\ 0))\ \{\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a86e27933d2680a2f0fe44c77716b48b9}{noteCount}}-\/-\/;}
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{midi_8cpp_a86e27933d2680a2f0fe44c77716b48b9}{noteCount}}\ <\ 0)\ \{\ \mbox{\hyperlink{midi_8cpp_a86e27933d2680a2f0fe44c77716b48b9}{noteCount}}\ =\ 0;\ \}}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a73939c2904328a68f8ff33cdb29358d6}{removeNote}}(channel,\ note);}
+\DoxyCodeLine{00207\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_aa2816efa610ba96e26646ca2d25f0cba}{dchannel}}\ =\ channel;\ \mbox{\hyperlink{midi_8cpp_afe77cbca418de1f23989ea0572954c2f}{dnote}}\ =\ note;\ \mbox{\hyperlink{midi_8cpp_a363d3e781f267bacd53748c7f8752a4a}{dvelocity}}\ =\ velocity;}
+\DoxyCodeLine{00208\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{processLocalMessage}}(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].noteOff);}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}.size()\ >\ 0)\ \&\&\ (\mbox{\hyperlink{midi_8cpp_ae8a3ecedd527c653a15db37f02dda9b2}{monoMode}}))\ \{}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_af56bc32ff0a53e0ca759d30779c3dd34}{setNotes}}();}
+\DoxyCodeLine{00212\ \ \ \ \ \}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}NoteOff\ with\ note\ "{}}\ +\ String(note)\ +\ \textcolor{stringliteral}{"{}\ at\ velocity\ "{}}\ +\ String(velocity),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a65f6b55fdc64778bf10632a795b97761}{USB}});}
+\DoxyCodeLine{00215\ \}}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00218\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{midi_8cpp_a6ea39bb57136b23ae0f97b4b2502fec0}{OnNoteOn}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ note,\ \textcolor{keywordtype}{byte}\ velocity)\ \{}
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ !=\ channel)\ \&\&\ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ <\ 17)\ \&\&}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ >\ 0))\ \{\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}NoteOn\ with\ note\ "{}}\ +\ String(note)\ +\ \textcolor{stringliteral}{"{}\ at\ velocity\ "{}}\ +\ String(velocity),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a65f6b55fdc64778bf10632a795b97761}{USB}});}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keywordflow}{if}\ (velocity\ ==\ 0)\ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a1d306bc8c6590fb58aa505fa4ce488ed}{OnNoteOff}}(channel,\ note,\ velocity);}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00226\ \ \ \ \ \}}
+\DoxyCodeLine{00227\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_adae513bd93c17269a7aa93788cb85a8d}{addNote}}(channel,\ note,\ velocity);}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a24101d1e9fbfa918d5da035c6ca023a2}{setNote}}();}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a86e27933d2680a2f0fe44c77716b48b9}{noteCount}}++;}
+\DoxyCodeLine{00232\ \}}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00235\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{midi_8cpp_a6ce2846228c4f88537b8e70ca392f0d4}{OnAfterTouchPoly}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ note,\ \textcolor{keywordtype}{byte}\ pressure)\ \{}
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ !=\ channel)\ \&\&\ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ <\ 17)\ \&\&}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ >\ 0))\ \{\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{00238\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00239\ \textcolor{comment}{\ \ \ \ if\ (velocity\ ==\ 127)\ \{}}
+\DoxyCodeLine{00240\ \textcolor{comment}{\ \ \ \ \ \ \ \ stringModuleArray[0].solenoidArray[0].solenoidEngage();}}
+\DoxyCodeLine{00241\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00242\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00243\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_aa2816efa610ba96e26646ca2d25f0cba}{dchannel}}\ =\ channel;\ \mbox{\hyperlink{midi_8cpp_aa57ea4be85a9ab70734ba96f316234b3}{dpressure}}\ =\ pressure;\ \mbox{\hyperlink{midi_8cpp_afe77cbca418de1f23989ea0572954c2f}{dnote}}\ =\ note;}
+\DoxyCodeLine{00244\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{processLocalMessage}}(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].polyAftertouch);}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}PolyAT\ on\ channel\ "{}}\ +\ String(channel)\ +\ \textcolor{stringliteral}{"{}\ note\ "{}}\ +\ String(note)\ +\ \textcolor{stringliteral}{"{}\ value\ "{}}\ +\ String(pressure),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a65f6b55fdc64778bf10632a795b97761}{USB}});}
+\DoxyCodeLine{00247\ \textcolor{comment}{//\ \ setPressure7bit(velocity);}}
+\DoxyCodeLine{00248\ \}}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00251\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{midi_8cpp_a5431e7bcaf327c6932c39854ad638b20}{OnChannelAftertouch}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ pressure)\ \{}
+\DoxyCodeLine{00252\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ !=\ channel)\ \&\&\ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ <\ 17)\ \&\&}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ >\ 0))\ \{\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_aa2816efa610ba96e26646ca2d25f0cba}{dchannel}}\ =\ channel;\ \mbox{\hyperlink{midi_8cpp_aa57ea4be85a9ab70734ba96f316234b3}{dpressure}}\ =\ pressure;}
+\DoxyCodeLine{00256\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{processLocalMessage}}(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].channelAftertouch);}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00258\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}ChannelAT\ on\ channel\ "{}}\ +\ String(channel)\ +\ \textcolor{stringliteral}{"{}\ value\ "{}}\ +\ String(pressure),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a65f6b55fdc64778bf10632a795b97761}{USB}});}
+\DoxyCodeLine{00259\ \}}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00262\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{midi_8cpp_a0811c03903ea2e31dd0f96b5781955d9}{OnControlChange}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ control,\ \textcolor{keywordtype}{byte}\ value)\ \{}
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ !=\ channel)\ \&\&\ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ <\ 17)\ \&\&}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ >\ 0))\ \{\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Control\ change\ on\ channel\ "{}}\ +\ String(channel)\ +\ \textcolor{stringliteral}{"{}\ control\ "{}}\ +\ String(control)\ +\ \textcolor{stringliteral}{"{}\ value\ "{}}\ +\ String(value),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a65f6b55fdc64778bf10632a795b97761}{USB}});}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ int(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].controlChange.size());\ i++)\ \{}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].controlChange[i].control\ ==\ control)\ \{}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_afe77cbca418de1f23989ea0572954c2f}{dnote}}\ =\ 0;\ \mbox{\hyperlink{midi_8cpp_a363d3e781f267bacd53748c7f8752a4a}{dvelocity}}\ =\ 0;}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_aa2816efa610ba96e26646ca2d25f0cba}{dchannel}}\ =\ channel;\ \mbox{\hyperlink{midi_8cpp_ab88920172b5a32b077bd95bb1f3d6f8e}{dvalue}}\ =\ value;}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{processLocalMessage}}(\&\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].controlChange[i].command);}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln(configArray[currentConfig].controlChange[i].command,\ Debug);}}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00275\ \ \ \ \ \}}
+\DoxyCodeLine{00276\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00277\ \textcolor{comment}{\ \ \ \ if\ (control\ ==\ 64)\ \{\ \ //\ Sustain}}
+\DoxyCodeLine{00278\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (value\ ==\ 0)\ \{}}
+\DoxyCodeLine{00279\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ sustain\ =\ false;}}
+\DoxyCodeLine{00280\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00281\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ sustain\ =\ true;}}
+\DoxyCodeLine{00282\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00283\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Setting\ sustain\ to\ "{}\ +\ String(sustain),\ USB);}}
+\DoxyCodeLine{00284\ \textcolor{comment}{\ \ \ \ \}\ else*/}}
+\DoxyCodeLine{00285\ \textcolor{comment}{/*\ \ \ \ if\ (control\ ==\ 123)\ \{\ \ ///\ All\ notes\ off}}
+\DoxyCodeLine{00286\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (noteCount\ !=\ 0)\ \{}}
+\DoxyCodeLine{00287\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}All\ notes\ not\ removed!"{},\ Error);}}
+\DoxyCodeLine{00288\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ noteCount\ =\ 0;}}
+\DoxyCodeLine{00289\ \textcolor{comment}{}}
+\DoxyCodeLine{00290\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ dchannel\ =\ notesHeld[0].channel;\ dnote\ =\ notesHeld[0].note;\ dvelocity\ =\ notesHeld[0].velocity;}}
+\DoxyCodeLine{00291\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ processLocalMessage(configArray[currentConfig].noteOff);}}
+\DoxyCodeLine{00292\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ notesHeld.clear();}}
+\DoxyCodeLine{00293\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00294\ \textcolor{comment}{\ \ \ \ \}*/}}
+\DoxyCodeLine{00295\ \}}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00297\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{midi_8cpp_a3380d03f7876fabe1bba4bb9baf6fbd8}{midiAllNotesOff}}()\ \{}
+\DoxyCodeLine{00298\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{midi_8cpp_a86e27933d2680a2f0fe44c77716b48b9}{noteCount}}\ !=\ 0)\ \{}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}All\ notes\ not\ removed!"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a86e27933d2680a2f0fe44c77716b48b9}{noteCount}}\ =\ 0;}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_aa2816efa610ba96e26646ca2d25f0cba}{dchannel}}\ =\ \mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}[0].channel;\ \mbox{\hyperlink{midi_8cpp_afe77cbca418de1f23989ea0572954c2f}{dnote}}\ =\ \mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}[0].note;\ \mbox{\hyperlink{midi_8cpp_a363d3e781f267bacd53748c7f8752a4a}{dvelocity}}\ =\ \mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}[0].velocity;}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{processLocalMessage}}(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].noteOff);}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a1554d7cca07515767222c66e2dbb4eca}{notesHeld}}.clear();}
+\DoxyCodeLine{00305\ \ \ \ \ \}}
+\DoxyCodeLine{00306\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}All\ notes\ off"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a65f6b55fdc64778bf10632a795b97761}{USB}});}
+\DoxyCodeLine{00307\ \}}
+\DoxyCodeLine{00308\ }
+\DoxyCodeLine{00310\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{midi_8cpp_ac56e8c5c671d4bcf1cc4d5e0b3b7e311}{OnPitchBend}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{int}\ pitch)\ \{}
+\DoxyCodeLine{00311\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ !=\ channel)\ \&\&\ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ <\ 17)\ \&\&}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ >\ 0))\ \{\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00314\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_aa2816efa610ba96e26646ca2d25f0cba}{dchannel}}\ =\ channel;}
+\DoxyCodeLine{00315\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a2230b468d53b40b5e940c8dc818345c6}{dpitch}}\ =\ pitch;}
+\DoxyCodeLine{00316\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{processLocalMessage}}(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].\mbox{\hyperlink{midi_8cpp_a07a5a8cf79cfd013892fd6d686ff6024}{pitchBend}});}
+\DoxyCodeLine{00317\ \ \ \ \ \textcolor{comment}{//stringModuleArray[0].bowControlArray[0].setHarmonicShift(pitch\ *\ 2);}}
+\DoxyCodeLine{00318\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Pitch\ bend\ on\ channel\ "{}}\ +\ String(channel)\ +\ \textcolor{stringliteral}{"{}\ value\ "{}}\ +\ String(pitch),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a65f6b55fdc64778bf10632a795b97761}{USB}});}
+\DoxyCodeLine{00319\ \}}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00321\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{midi_8cpp_a293b5dd663597fd5b9320359cecd69cb}{OnProgramChange}}(uint8\_t\ channel,\ uint8\_t\ program)\ \{}
+\DoxyCodeLine{00322\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ !=\ channel)\ \&\&\ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ <\ 17)\ \&\&}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ >\ 0))\ \{\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_aa2816efa610ba96e26646ca2d25f0cba}{dchannel}}\ =\ channel;}
+\DoxyCodeLine{00326\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a298e941b7f939b9387cfe86b767f401c}{dprogram}}\ =\ program;}
+\DoxyCodeLine{00327\ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{processLocalMessage}}(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].programChange);}
+\DoxyCodeLine{00328\ }
+\DoxyCodeLine{00329\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Program\ change\ on\ channel\ "{}}\ +\ String(channel)\ +\ \textcolor{stringliteral}{"{}\ program\ "{}}\ +\ String(program),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a65f6b55fdc64778bf10632a795b97761}{USB}});}
+\DoxyCodeLine{00330\ \}}
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ \mbox{\hyperlink{midi_8cpp_a4f285cfbd546caab5a80e0dff7235b85}{MIDI\_CREATE\_INSTANCE}}(HardwareSerial,\ Serial1,\ MIDI);}
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00334\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{midi_8cpp_a1a8f758a45526463dbe01077f13a3bc5}{initMidi}}()\ \{}
+\DoxyCodeLine{00335\ \ \ \ \ usbMIDI.setHandleNoteOff(\mbox{\hyperlink{midi_8cpp_a1d306bc8c6590fb58aa505fa4ce488ed}{OnNoteOff}});}
+\DoxyCodeLine{00336\ \ \ \ \ usbMIDI.setHandleNoteOn(\mbox{\hyperlink{midi_8cpp_a6ea39bb57136b23ae0f97b4b2502fec0}{OnNoteOn}});}
+\DoxyCodeLine{00337\ \ \ \ \ usbMIDI.setHandleAfterTouchPoly(\mbox{\hyperlink{midi_8cpp_a6ce2846228c4f88537b8e70ca392f0d4}{OnAfterTouchPoly}});}
+\DoxyCodeLine{00338\ \ \ \ \ usbMIDI.setHandleControlChange(\mbox{\hyperlink{midi_8cpp_a0811c03903ea2e31dd0f96b5781955d9}{OnControlChange}});}
+\DoxyCodeLine{00339\ \ \ \ \ usbMIDI.setHandlePitchChange(\mbox{\hyperlink{midi_8cpp_ac56e8c5c671d4bcf1cc4d5e0b3b7e311}{OnPitchBend}});}
+\DoxyCodeLine{00340\ \ \ \ \ usbMIDI.setHandleAfterTouch(\mbox{\hyperlink{midi_8cpp_a5431e7bcaf327c6932c39854ad638b20}{OnChannelAftertouch}});}
+\DoxyCodeLine{00341\ \ \ \ \ usbMIDI.setHandleProgramChange(\mbox{\hyperlink{midi_8cpp_a293b5dd663597fd5b9320359cecd69cb}{OnProgramChange}});}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00343\ \ \ \ \ Serial1.begin(31250,\ SERIAL\_8N1);}
+\DoxyCodeLine{00344\ \ \ \ \ MIDI.begin();}
+\DoxyCodeLine{00345\ \ \ \ \ MIDI.setInputChannel(MIDI\_CHANNEL\_OMNI);}
+\DoxyCodeLine{00346\ \ \ \ \ MIDI.setHandleNoteOff(\mbox{\hyperlink{midi_8cpp_a1d306bc8c6590fb58aa505fa4ce488ed}{OnNoteOff}});}
+\DoxyCodeLine{00347\ \ \ \ \ MIDI.setHandleNoteOn(\mbox{\hyperlink{midi_8cpp_a6ea39bb57136b23ae0f97b4b2502fec0}{OnNoteOn}});}
+\DoxyCodeLine{00348\ \ \ \ \ MIDI.setHandleAfterTouchPoly(\mbox{\hyperlink{midi_8cpp_a6ce2846228c4f88537b8e70ca392f0d4}{OnAfterTouchPoly}});}
+\DoxyCodeLine{00349\ \ \ \ \ MIDI.setHandleControlChange(\mbox{\hyperlink{midi_8cpp_a0811c03903ea2e31dd0f96b5781955d9}{OnControlChange}});}
+\DoxyCodeLine{00350\ \ \ \ \ MIDI.setHandlePitchBend(\mbox{\hyperlink{midi_8cpp_ac56e8c5c671d4bcf1cc4d5e0b3b7e311}{OnPitchBend}});}
+\DoxyCodeLine{00351\ \ \ \ \ MIDI.setHandleAfterTouchChannel(\mbox{\hyperlink{midi_8cpp_a5431e7bcaf327c6932c39854ad638b20}{OnChannelAftertouch}});}
+\DoxyCodeLine{00352\ \ \ \ \ MIDI.setHandleProgramChange(\mbox{\hyperlink{midi_8cpp_a293b5dd663597fd5b9320359cecd69cb}{OnProgramChange}});}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}MIDI\ initialized."{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{TextInfo}});}
+\DoxyCodeLine{00355\ \}}
+\DoxyCodeLine{00356\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,61 @@
+\doxysection{configuration.\+h}
+\hypertarget{configuration_8h_source}{}\label{configuration_8h_source}\index{configuration.h@{configuration.h}}
+\mbox{\hyperlink{configuration_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ CONFIGURATION\_H}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ CONFIGURATION\_H}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classconfiguration}{configuration}}\ \{}
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ String\ *\mbox{\hyperlink{classconfiguration_a752b266ab819b05402a010b74d6961b3}{name}};}
+\DoxyCodeLine{00027\ \ \ \ \ String\ *\mbox{\hyperlink{classconfiguration_a36a671b6f1e684b991f3cdb5fed48a75}{noteOn}};}
+\DoxyCodeLine{00028\ \ \ \ \ String\ *\mbox{\hyperlink{classconfiguration_af44d3f003c6bba79474aab5d38bf0637}{noteOff}};}
+\DoxyCodeLine{00029\ \ \ \ \ String\ *\mbox{\hyperlink{classconfiguration_a93310aedd288a327b3574078875ad019}{polyAftertouch}};}
+\DoxyCodeLine{00030\ \ \ \ \ String\ *\mbox{\hyperlink{classconfiguration_aa4348734e37e66795f4e06d27c2955fc}{programChange}};}
+\DoxyCodeLine{00031\ \ \ \ \ String\ *\mbox{\hyperlink{classconfiguration_a81bb79062036d8ef1219f893e5edd46e}{channelAftertouch}};}
+\DoxyCodeLine{00032\ \ \ \ \ String\ *\mbox{\hyperlink{classconfiguration_acdd444bd1c83d1ec202fe38cfd52bbc6}{pitchBend}};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classconfiguration_a1e915fd6a01b6df31be57ed60bec4374}{midiRxChannel}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ \ \ \ uint16\_t\ EEPROM\_offset\ =\ 0;}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structconfiguration_1_1__controlChange}{\_controlChange}}\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ \mbox{\hyperlink{structconfiguration_1_1__controlChange_a60d568463ee5498f86fee635e35dea88}{control}};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ String\ \mbox{\hyperlink{structconfiguration_1_1__controlChange_a09a410918c34021a37f488c597fb96f4}{command}};}
+\DoxyCodeLine{00041\ \ \ \ \ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ std::vector<\_controlChange>\ \mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classconfiguration_ad4446282343ce7dd8a67ffbc15f1d575}{configuration}}();}
+\DoxyCodeLine{00046\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classconfiguration_a2ad0e61c381ac3f835ef503e0ef235ab}{setCC}}(uint8\_t\ controller,\ String\ *command);}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classconfiguration_a323c0abd33143110539eba665c276b2d}{removeCC}}(uint8\_t\ controller);}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classconfiguration_a148b31746119e5bcf0c7ddcf4f3ffcd9}{setDefaultBaseParameters}}();}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classconfiguration_ae0927e2179097259e7fd3bf61bea1b11}{setDefaultCCs}}();}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classconfiguration_acd5b3b9293e0277d8ddaaad5b666c1d9}{setDefaults}}();}
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ \ \ \ uint16\_t\ saveParams();}}
+\DoxyCodeLine{00052\ \textcolor{comment}{//\ \ \ \ uint16\_t\ loadParams(uint8\_t\ EEPROMVersion);}}
+\DoxyCodeLine{00053\ \ \ \ \ String\ \mbox{\hyperlink{classconfiguration_a5d444f0c115c9e5c8e4149408c75a0ca}{dumpData}}();}
+\DoxyCodeLine{00054\ \};}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,663 @@
+\doxysection{servostepper.\+h}
+\hypertarget{servostepper_8h_source}{}\label{servostepper_8h_source}\index{servostepper.h@{servostepper.h}}
+\mbox{\hyperlink{servostepper_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ SERVOSTEPPER\_H}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ SERVOSTEPPER\_H}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classservoStepper}{servoStepper}}\ \{}
+\DoxyCodeLine{00034\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{eStepDirection}}\ \{\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{REVERSE}}\ =\ 1,\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{FORWARD}}\ =\ 0\ \};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42}{eHomingStage}}\ \{\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42ad7b55eed63ef10b2add929ccc94eaaa9}{UNHOMED}},\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a9406b576f5985eb0bc2f49da6a4ad336}{HOMED}},\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a505fadaa06649853019b1b4dc6cc2eb5}{FIRSTHOMINGRISING}},\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42ae40250a983d27f9d38adf9d10beab90b}{SECONDHOMINGFALLING}},\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42af6d30c9ff1f19b7bec2557deeebaf9bf}{SECONDHOMINGRISING}},\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a4c287b2fc3feb84f7148d099d52b7e3e}{FIRSTHOMINGFALLING}},\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42acbed0dc60a71217c92d5af06a2a5c80f}{MOVEPASTHOMESWITCH}},\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a8cf3a73bb6d3c91bf1d4dd9e47264a10}{MOVETOHOMESWITCH}},\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a0af78a28f0bed73e3e49e45b30000511}{GOTOOFFSET}}\ \};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057da}{eEdgeType}}\ \{\ \mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057daa936595004e6457bd5213f923f0234e2a}{EDGERISING}}\ =\ 1,\ \mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057daaddee3394b72af39e200858af955489a8}{EDGEFALLING}}\ =\ 0\ \};}
+\DoxyCodeLine{00038\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00039\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classservoStepper_a17b0bdce79f91acee51fd57a71906444}{pinStep}};}
+\DoxyCodeLine{00040\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classservoStepper_a03ab7d33858f698587e4a9704cb321bd}{pinDir}};}
+\DoxyCodeLine{00041\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classservoStepper_a0753a0f4c51819d1160649f2049dd4bf}{pinHomeSense}};}
+\DoxyCodeLine{00042\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classservoStepper_abd1bbdb87eb98a9906215f9dc5108abe}{pinVref}}\ =\ -\/1;}
+\DoxyCodeLine{00043\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classservoStepper_a628c5fe63b3e05ee4ef76a8e9bcfc4a4}{pinEn}}\ =\ -\/1;}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42}{eHomingStage}}\ \mbox{\hyperlink{classservoStepper_aaeec33f9238f23b40f43b8c89cc84d0c}{homing}}\ =\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42ad7b55eed63ef10b2add929ccc94eaaa9}{UNHOMED}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{eStepDirection}}\ \mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}\ =\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{eStepDirection::REVERSE}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[2][2];\ \textcolor{comment}{//\ index\ by\ eEdgeType,\ eStepDirection,\ homing\ point\ given\ in\ STEPS\ (with\ microstepping)}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\ \ \ \ \#define\ stepsPerRevolution\ 200}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\ \ \ \ \#define\ microSteps\ 32}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\ \ \ \ \#define\ valuePerRotation\ (stepsPerRevolution\ *\ microSteps)\ /\ 65535}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\ \ \ \ \#define\ dirChangeMultiplier\ 1\ }\textcolor{comment}{//5}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\ \ \ \ \#define\ homeSenseActive\ 0}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\ \ \ \ \#define\ homeSenseInactive\ 1}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classservoStepper_aed902bec2725fcf75e3f82d19315dfd4}{homingSpeedRough}}\ =\ 10;}
+\DoxyCodeLine{00061\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classservoStepper_af156c423af8217472fb988b128029827}{homingSpeedFine}}\ =\ 5;}
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{eStepDirection}}\ \mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}}\ =\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{eStepDirection::REVERSE}};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{eStepDirection}}\ \mbox{\hyperlink{classservoStepper_a9c8a82d5e9c78f0afa91ceb73cda10e1}{homingOffsetDirection}}\ =\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{eStepDirection::FORWARD}};}
+\DoxyCodeLine{00065\ \ \ \ \ int16\_t\ \mbox{\hyperlink{classservoStepper_a9299674dd6d8b2ee02a3591792597f7a}{homingOffset}}\ =\ 0;}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ int16\_t\ \mbox{\hyperlink{classservoStepper_aa3a879518462b28ee83c3c501c1378c9}{homingStepsThreshold}}\ =\ (\mbox{\hyperlink{servostepper_8h_a3f6ba33716d8ab9664efd36f48fc0663}{stepsPerRevolution}}\ /\ 2)\ *\ \mbox{\hyperlink{servostepper_8h_a6fe78f5adf18de498acaac123384db1a}{microSteps}};\ \ \ \textcolor{comment}{//\ (stepsPerRevolution\ /\ 3)\ *\ microSteps;}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{comment}{//\ \ \ \ uint16\_t\ maxSpeed\ =\ 20;}}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classservoStepper_a2b0f23cba5196c099bf80f41a24f7ae4}{speedRPM}}\ =\ 10;}
+\DoxyCodeLine{00071\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classservoStepper_abed34731aa570aa563564d8bc27bbce7}{speedUPeriod}};\ \ \ \ \ \ \textcolor{comment}{//\ Period\ in\ uS\ for\ the\ given\ RPM,\ does\ NOT\ account\ for\ acceleration/decelration}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classservoStepper_a3e1e00e108bec142df788d2dbb8188ba}{dirChange}}\ =\ 0;\ \ \ \ \ \textcolor{comment}{//\ Indicate\ whether\ direction\ has\ changed}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ elapsedMicros\ \mbox{\hyperlink{classservoStepper_aaa70849e320f845a283e3ae01f084d3e}{updatePeriod}};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ =\ 0;}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_a3745cef53a72bc7c6af8764062979a76}{homingSensed}};}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_ac137cc8980a2d1837378410b6227842a}{homingSensedChanged}};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}}\ =\ 0;\ \ \ \ \ \ \textcolor{comment}{//\ Current\ target\ position}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{comment}{//\ \ \ \ int16\_t\ homingSteps\ =\ 0;\ \ \ \ //\ Debug\ variable\ for\ measuring\ accuracy\ of\ position}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{comment}{//\ params\ for\ serial\ control\ DRV8825:\ speed\ 25,\ multiplier\ 0.2,\ steps\ 30}}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{comment}{//\ noiseless\ params\ for\ TMC2209\ 30\ /\ 0.1}}
+\DoxyCodeLine{00087\ \ \ \ \ int16\_t\ \mbox{\hyperlink{classservoStepper_a9865260181e203c85a46bc5caeeeb662}{currentAccelStep}}\ =\ 0;}
+\DoxyCodeLine{00088\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classservoStepper_a1883b61564ace7a8797983f7965592e6}{uAccelPeriod}}\ =\ 0;}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}}\ =\ \textcolor{keyword}{true};\ \ \ \ \ \textcolor{comment}{//\ Flag\ indicating\ that\ a\ new\ step\ has\ been\ issued,\ used\ to\ indicate\ invocation\ of\ calculateAcceleration}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_a73dc65d535b94ea9429756164cc0f745}{turnAround}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00093\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classservoStepper_ac05330644fb45e70fb5e33ffc96c0081}{turnAroundPosition}}\ =\ 0;}
+\DoxyCodeLine{00094\ \ \ \ \ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{eStepDirection}}\ \mbox{\hyperlink{classservoStepper_ab04d4e3c9ed825d5d00ab325ef528e07}{turnAroundDirection}}\ =\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{eStepDirection::REVERSE}};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_a64601bfc98656bc629953d6ca7a249b0}{invertDirection}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ IntervalTimer\ \mbox{\hyperlink{classservoStepper_a7e22e14773073f92d8670fd66762853d}{stepInterval}};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_a1744eedcff7b7b7ba19c8262938563d0}{isMoving}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ String\ \mbox{\hyperlink{classservoStepper_a1ce32e635777e6e5ce904dfc3a935e8a}{intDrivenMsgP}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_a4c13475c378d9d3d45570c4dc3ba3a07}{inhibitInterrupt}}\ =\ \textcolor{keyword}{false};\ \ \textcolor{comment}{//\ Used\ by\ statically\ called\ functions\ when\ changing\ position\ parameters\ so\ that\ the\ interrupt\ won't\ fuck\ shit\ up}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_afad39eb0e3b738035e7a81cfdc87a26d}{autoCorrectPosition}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classservoStepper_a2479d6b10fc0be2b9e830c545994409b}{stepperID}}\ =\ -\/1;}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classservoStepper_a5972ca159e1117e9816b9b33fe6f0342}{accelerationMultiplier}}\ =\ 0.1;\ \ \ \ \ \textcolor{comment}{//\ latest\ 0.1\ -\/-\/\ 0.2\ min\ for\ serial\ control\ @\ speed\ 20}}
+\DoxyCodeLine{00112\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classservoStepper_aea134299b06f53f581a20c4c16ab963e}{accelerationSteps}}\ =\ 35;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ 30\ min\ for\ serial\ control\ @\ speed\ 20}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_a4d77b0b31e409b487aeff3dc292c615f}{outputDebugData}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ String\ \mbox{\hyperlink{classservoStepper_a23a921036b9cf600e2a96d510788b722}{intDrivenMsg}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_a6ce149fe254e8fa5c1b93d73d16b11e5}{reachedTarget}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{classservoStepper_a9354943971fa185957e25c1b2106b3ac}{stepIntervalCallback}};}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_a12db281a4ffca912600b304246a0006a}{intDrivenMsgFlag}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00123\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00124\ \textcolor{comment}{//\ \ \ \ servoStepper(byte\ \_pinStep,\ byte\ \_pinDir,\ byte\ \_pinHomeSense,\ byte\ \_pinFault\ =\ -\/1,\ void\ (*faultCallback)(void)\ =\ NULL,\ byte\ \_pinEn\ =\ -\/1,\ byte\ \_pinVref\ =\ -\/1,\ byte\ current\ =\ 0.2)\ \{}}
+\DoxyCodeLine{00125\ \ \ \ \ \mbox{\hyperlink{classservoStepper_add036b7f2f70ed5e6590b2eea3ba5a69}{servoStepper}}(\textcolor{keywordtype}{byte}\ inPinStep,\ \textcolor{keywordtype}{byte}\ inPinDir,\ \textcolor{keywordtype}{byte}\ inPinHomeSense,\ \textcolor{keywordtype}{void}\ *inStepIntervalCallback\ =\ \textcolor{keyword}{nullptr})\ \{\ \textcolor{comment}{//,\ byte\ inPinEn\ =\ -\/1)\ \{}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a17b0bdce79f91acee51fd57a71906444}{pinStep}}\ =\ inPinStep;}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a03ab7d33858f698587e4a9704cb321bd}{pinDir}}\ =\ inPinDir;}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a0753a0f4c51819d1160649f2049dd4bf}{pinHomeSense}}\ =\ inPinHomeSense;}
+\DoxyCodeLine{00129\ \textcolor{comment}{//\ \ \ \ \ \ \ \ pinEn\ =\ inPinEn;}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ pinMode(\mbox{\hyperlink{classservoStepper_a17b0bdce79f91acee51fd57a71906444}{pinStep}},\ OUTPUT);}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ pinMode(\mbox{\hyperlink{classservoStepper_a03ab7d33858f698587e4a9704cb321bd}{pinDir}},\ OUTPUT);}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ pinMode(\mbox{\hyperlink{classservoStepper_a0753a0f4c51819d1160649f2049dd4bf}{pinHomeSense}},\ INPUT\_PULLDOWN);}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ digitalWrite(\mbox{\hyperlink{classservoStepper_a17b0bdce79f91acee51fd57a71906444}{pinStep}},\ 0);}
+\DoxyCodeLine{00136\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00137\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (pinEn\ !=\ -\/1)\ \{}}
+\DoxyCodeLine{00138\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ pinMode(pinEn,\ OUTPUT);}}
+\DoxyCodeLine{00139\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ digitalWrite(pinEn,\ 0);}}
+\DoxyCodeLine{00140\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00141\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a9354943971fa185957e25c1b2106b3ac}{stepIntervalCallback}}\ =\ inStepIntervalCallback;}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a97b04e23af09fdcf769ab2dbf75990ab}{getHomingChange}}();}
+\DoxyCodeLine{00145\ \ \ \ \ \}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_acac2b7ede284e6e575793cf2a319f799}{tsDebugPrintln}}(String\ m\_msg,\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4}{debugPrintType}}\ m\_dpType)\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8h_a02212746d4c3138ec12bc5d582e5dc8f}{debugPrintCheckType}}(m\_dpType))\ \{}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a1ce32e635777e6e5ce904dfc3a935e8a}{intDrivenMsgP}}\ +=\ \textcolor{stringliteral}{"{}["{}}\ +\ \mbox{\hyperlink{debugprint_8h_a325006d92e4f547b1b983336d5be8b08}{debugPrintTypeNameShort}}[m\_dpType]\ +\ \textcolor{stringliteral}{"{}]"{}}\ +\ m\_msg;}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \}}
+\DoxyCodeLine{00152\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00153\ \textcolor{comment}{\ \ \ \ bool\ setMaxSpeed(uint16\_t\ inSpeedRPM)\ \{}}
+\DoxyCodeLine{00154\ \textcolor{comment}{\ \ \ \ \ \ \ \ maxSpeed\ =\ inSpeedRPM;}}
+\DoxyCodeLine{00155\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ true;}}
+\DoxyCodeLine{00156\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00157\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_a756180269e0983c5a5f30c0dbc0539e3}{setSpeed}}(\textcolor{keywordtype}{float}\ inSpeedRPM)\ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a2b0f23cba5196c099bf80f41a24f7ae4}{speedRPM}}\ =\ inSpeedRPM;}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_abed34731aa570aa563564d8bc27bbce7}{speedUPeriod}}\ =\ 1000000\ /\ (\mbox{\hyperlink{classservoStepper_a2b0f23cba5196c099bf80f41a24f7ae4}{speedRPM}}\ *\ 60)\ /\ \mbox{\hyperlink{servostepper_8h_a6fe78f5adf18de498acaac123384db1a}{microSteps}};}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00162\ \ \ \ \ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classservoStepper_a7c2afea62b38dee42d9062d73eefdc75}{getSpeed}}()\ \{}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classservoStepper_a2b0f23cba5196c099bf80f41a24f7ae4}{speedRPM}};}
+\DoxyCodeLine{00166\ \ \ \ \ \}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_a956548f11365d2125448516fc53203fd}{getIsMoving}}()\ \{}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classservoStepper_a1744eedcff7b7b7ba19c8262938563d0}{isMoving}};}
+\DoxyCodeLine{00170\ \ \ \ \ \}}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_ad79f81cac6e020bde6984fd441371605}{getHomingSensed}}()\ \{}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classservoStepper_a3745cef53a72bc7c6af8764062979a76}{homingSensed}};}
+\DoxyCodeLine{00174\ \ \ \ \ \}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \ \ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{eStepDirection}}\ \mbox{\hyperlink{classservoStepper_aee3bf6486d198d08cc378102cb017572}{getMoveDirection}}()\ \{}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}};}
+\DoxyCodeLine{00178\ \ \ \ \ \}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classservoStepper_a5ede814e327f2803b816f898bb669cce}{getCurrentStep}}()\ \{}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}};}
+\DoxyCodeLine{00182\ \ \ \ \ \}}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classservoStepper_aa37a01a450f75e97f0948dbc7c22ce31}{getHomingPoint}}(uint8\_t\ x,\ uint8\_t\ y)\ \{}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[x][y];}
+\DoxyCodeLine{00186\ \ \ \ \ \}}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \ \ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42}{eHomingStage}}\ \mbox{\hyperlink{classservoStepper_a704d1249aa4b752da990c7d62d612b18}{getHomingStage}}()\ \{}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classservoStepper_aaeec33f9238f23b40f43b8c89cc84d0c}{homing}};}
+\DoxyCodeLine{00190\ \ \ \ \ \}}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_a2bf706707316fe6953dd80b462329264}{setDirection}}(\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{eStepDirection}}\ inDirection)\ \{}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tDirection\ =\ inDirection;}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a64601bfc98656bc629953d6ca7a249b0}{invertDirection}})\ \{}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tDirection\ ==\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{eStepDirection::FORWARD}})\ \{}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tDirection\ =\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{eStepDirection::REVERSE}};}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tDirection\ =\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{eStepDirection::FORWARD}};}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ digitalWrite(\mbox{\hyperlink{classservoStepper_a03ab7d33858f698587e4a9704cb321bd}{pinDir}},\ tDirection);}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}\ =\ inDirection;}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{comment}{//if\ (outputDebugData)\ \{\ DebugPrintln("{}setDirection:\ original\ "{}\ +\ String(inDirection)\ +\ "{}\ final\ "{}\ +\ String(tDirection),\ debugPrintType::Debug);\ \}}}
+\DoxyCodeLine{00205\ \ \ \ \ \}}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \ \ \ \ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{eStepDirection}}\ \mbox{\hyperlink{classservoStepper_a8f11cc27e61d5cf2a8bbe79843f6198c}{notDirection}}(\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{eStepDirection}}\ inDirection)\ \{}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inDirection\ ==\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{eStepDirection::FORWARD}})\ \{}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{eStepDirection::REVERSE}};}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{eStepDirection::FORWARD}};}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00213\ \ \ \ \ \}}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_aa2ba385db7d51af709ada204f4513e3e}{calculateAcceleration}}()\ \{}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ stepsFromEnd\ =\ 0;}
+\DoxyCodeLine{00217\ \textcolor{comment}{//\ \ \ \ \ \ \ \ int\ stepsFromStart\ =\ 0;}}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}\ ==\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{eStepDirection::FORWARD}})\ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ stepsFromEnd\ =\ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}}\ -\/\ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}};}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ stepsFromEnd\ =\ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ -\/\ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}};}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stepsFromEnd\ <=\ \mbox{\hyperlink{classservoStepper_aea134299b06f53f581a20c4c16ab963e}{accelerationSteps}})\ \{}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a9865260181e203c85a46bc5caeeeb662}{currentAccelStep}}-\/-\/;}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a9865260181e203c85a46bc5caeeeb662}{currentAccelStep}}++;}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a9865260181e203c85a46bc5caeeeb662}{currentAccelStep}}\ <\ 0)\ \{\ \mbox{\hyperlink{classservoStepper_a9865260181e203c85a46bc5caeeeb662}{currentAccelStep}}\ =\ 0;\ \}}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a9865260181e203c85a46bc5caeeeb662}{currentAccelStep}}\ >\ \mbox{\hyperlink{classservoStepper_aea134299b06f53f581a20c4c16ab963e}{accelerationSteps}})\ \{\ \mbox{\hyperlink{classservoStepper_a9865260181e203c85a46bc5caeeeb662}{currentAccelStep}}\ =\ \mbox{\hyperlink{classservoStepper_aea134299b06f53f581a20c4c16ab963e}{accelerationSteps}};\ \}}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a1883b61564ace7a8797983f7965592e6}{uAccelPeriod}}\ =\ \mbox{\hyperlink{classservoStepper_abed34731aa570aa563564d8bc27bbce7}{speedUPeriod}}\ +\ \mbox{\hyperlink{classservoStepper_abed34731aa570aa563564d8bc27bbce7}{speedUPeriod}}\ *\ (\mbox{\hyperlink{classservoStepper_aea134299b06f53f581a20c4c16ab963e}{accelerationSteps}}\ -\/\ \mbox{\hyperlink{classservoStepper_a9865260181e203c85a46bc5caeeeb662}{currentAccelStep}})\ *\ \mbox{\hyperlink{classservoStepper_a5972ca159e1117e9816b9b33fe6f0342}{accelerationMultiplier}};}
+\DoxyCodeLine{00235\ \ \ \ \ \}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_a97b04e23af09fdcf769ab2dbf75990ab}{getHomingChange}}()\ \{}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ newValue\ =\ digitalRead(\mbox{\hyperlink{classservoStepper_a0753a0f4c51819d1160649f2049dd4bf}{pinHomeSense}});}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a3745cef53a72bc7c6af8764062979a76}{homingSensed}}\ !=\ newValue)\ \{}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a3745cef53a72bc7c6af8764062979a76}{homingSensed}}\ =\ newValue;}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_ac137cc8980a2d1837378410b6227842a}{homingSensedChanged}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_ac137cc8980a2d1837378410b6227842a}{homingSensedChanged}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00246\ \ \ \ \ \}}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_aeecabbc0f2f57edd9bb49740b1b9a1bc}{stepNext}}(uint16\_t\ period)\ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_aaa70849e320f845a283e3ae01f084d3e}{updatePeriod}}\ <\ (period))\ \{\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ digitalWrite(\mbox{\hyperlink{classservoStepper_a17b0bdce79f91acee51fd57a71906444}{pinStep}},\ 255);}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ delayMicroseconds(2);}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ digitalWrite(\mbox{\hyperlink{classservoStepper_a17b0bdce79f91acee51fd57a71906444}{pinStep}},\ 0);}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}\ ==\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{eStepDirection::FORWARD}})\ \{}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}++;}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}-\/-\/;}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aaa70849e320f845a283e3ae01f084d3e}{updatePeriod}}\ =\ 0;}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00263\ \ \ \ \ \}}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_a6ac51a96a27dfaccd4b88da6bc4021b7}{stepNext}}()\ \{}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a6ac51a96a27dfaccd4b88da6bc4021b7}{stepNext}}(\mbox{\hyperlink{classservoStepper_abed34731aa570aa563564d8bc27bbce7}{speedUPeriod}});}
+\DoxyCodeLine{00267\ \ \ \ \ \}}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \ \ \ \ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{eStepDirection}}\ \mbox{\hyperlink{classservoStepper_a6e907b5b11ec3a35b96e98c3f0c88e0f}{getDirectionTo}}(uint16\_t\ position)\ \{}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ <\ position)\ \{}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{eStepDirection::FORWARD}};}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ >\ position)\ \{}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{eStepDirection::REVERSE}};}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{eStepDirection::FORWARD}};}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00278\ \ \ \ \ \}}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00282\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_a981bafbfa5bf82c13a4e620aab894dc2}{updatePosition}}(\textcolor{keywordtype}{bool}\ interruptDriven\ =\ \textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a12db281a4ffca912600b304246a0006a}{intDrivenMsgFlag}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a1ce32e635777e6e5ce904dfc3a935e8a}{intDrivenMsgP}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(interruptDriven\ \&\&\ \mbox{\hyperlink{classservoStepper_a4c13475c378d9d3d45570c4dc3ba3a07}{inhibitInterrupt}}))\ \{}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a97b04e23af09fdcf769ab2dbf75990ab}{getHomingChange}}();}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(\mbox{\hyperlink{classservoStepper_aaeec33f9238f23b40f43b8c89cc84d0c}{homing}})\ \{}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a9406b576f5985eb0bc2f49da6a4ad336}{eHomingStage::HOMED}}:}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_af927425c748666b146956f455effbcad}{updatePositionMove}}();}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42ad7b55eed63ef10b2add929ccc94eaaa9}{eHomingStage::UNHOMED}}:}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a505fadaa06649853019b1b4dc6cc2eb5}{eHomingStage::FIRSTHOMINGRISING}}:}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a5d38d0a8e3d48c6f94736515247d0c32}{updatePositionFirstHomingRising}}();}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42ae40250a983d27f9d38adf9d10beab90b}{eHomingStage::SECONDHOMINGFALLING}}:}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aba059b166e86d21121671db3530db43a}{updatePositionSecondHomingFalling}}();}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42af6d30c9ff1f19b7bec2557deeebaf9bf}{eHomingStage::SECONDHOMINGRISING}}:}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a1a7fb59f63dd2f6cf7f513ceb11a293e}{updatePositionSecondHomingRising}}();}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a4c287b2fc3feb84f7148d099d52b7e3e}{eHomingStage::FIRSTHOMINGFALLING}}:}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_ad2792b0bdfa52d1caf01fddabdb88b4c}{updatePositionFirstHomingFalling}}();}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42acbed0dc60a71217c92d5af06a2a5c80f}{eHomingStage::MOVEPASTHOMESWITCH}}:}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a131155bf76281c013cb17abaea38d0c9}{updatePositionMovePastHomeSwitch}}();}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a8cf3a73bb6d3c91bf1d4dd9e47264a10}{eHomingStage::MOVETOHOMESWITCH}}:}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a6d11d8308b5d1ffad77f5df3331d99a6}{updatePositionMoveToHomeSwitch}}();}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a0af78a28f0bed73e3e49e45b30000511}{eHomingStage::GOTOOFFSET}}:}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a461c43ca0fd0232c93fc18a7bd493d9f}{updatePositionGotoOffset}}();}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_acac2b7ede284e6e575793cf2a319f799}{tsDebugPrintln}}(\textcolor{stringliteral}{"{}Interrupt\ inhibited\ because\ interruptDriven\ "{}}\ +\ String(interruptDriven)\ +\ \textcolor{stringliteral}{"{}\ and\ inhibitInterrupt\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a4c13475c378d9d3d45570c4dc3ba3a07}{inhibitInterrupt}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a23a921036b9cf600e2a96d510788b722}{intDrivenMsg}}\ =\ \mbox{\hyperlink{classservoStepper_a1ce32e635777e6e5ce904dfc3a935e8a}{intDrivenMsgP}};}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a23a921036b9cf600e2a96d510788b722}{intDrivenMsg}}\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ \mbox{\hyperlink{classservoStepper_a12db281a4ffca912600b304246a0006a}{intDrivenMsgFlag}}\ =\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00323\ \ \ \ \ \}}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_af927425c748666b146956f455effbcad}{updatePositionMove}}()\ \{}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a1744eedcff7b7b7ba19c8262938563d0}{isMoving}})\ \{}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_afad39eb0e3b738035e7a81cfdc87a26d}{autoCorrectPosition}})\ \{\ \mbox{\hyperlink{classservoStepper_ad91fe477516c66c204e6450732216f1d}{correctPosition}}();\ \}}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((\mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ <\ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}})\ \&\&\ (\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}\ ==\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{REVERSE}}))\ ||\ ((\mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ >\ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}})\ \&\&\ (\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}\ ==\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{FORWARD}})))\ \{}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_acac2b7ede284e6e575793cf2a319f799}{tsDebugPrintln}}(\textcolor{stringliteral}{"{}ERROR!\ direction,\ currentStep\ and\ movingTo\ does\ not\ match!!"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_acac2b7ede284e6e575793cf2a319f799}{tsDebugPrintln}}(\textcolor{stringliteral}{"{}updatePositionMove:\ moving\ to\ target\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}})\ +\ \textcolor{stringliteral}{"{}\ current\ step\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}})\ +\ \textcolor{stringliteral}{"{}\ direction\ "{}}\ +\ (\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ ==\ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}})\ \{}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classservoStepper_a4d77b0b31e409b487aeff3dc292c615f}{outputDebugData}})\ \&\&\ (\mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}}))\ \{\ \mbox{\hyperlink{classservoStepper_acac2b7ede284e6e575793cf2a319f799}{tsDebugPrintln}}(\textcolor{stringliteral}{"{}updatePositionMove:\ reached\ target\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});\ \}}
+\DoxyCodeLine{00338\ }
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a73dc65d535b94ea9429756164cc0f745}{turnAround}})\ \{}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a4d77b0b31e409b487aeff3dc292c615f}{outputDebugData}})\ \{\ \mbox{\hyperlink{classservoStepper_acac2b7ede284e6e575793cf2a319f799}{tsDebugPrintln}}(\textcolor{stringliteral}{"{}updatePositionMove:\ reached\ turnAround"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});\ \}}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}}\ =\ \mbox{\hyperlink{classservoStepper_ac05330644fb45e70fb5e33ffc96c0081}{turnAroundPosition}};}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a2bf706707316fe6953dd80b462329264}{setDirection}}(\mbox{\hyperlink{classservoStepper_ab04d4e3c9ed825d5d00ab325ef528e07}{turnAroundDirection}});}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a73dc65d535b94ea9429756164cc0f745}{turnAround}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a6ce149fe254e8fa5c1b93d73d16b11e5}{reachedTarget}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00346\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Setting\ reached\ target\ to\ true"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a1744eedcff7b7b7ba19c8262938563d0}{isMoving}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//if\ ((outputDebugData)\ \&\&\ (hasStepped))\ \{\ debugPrintln("{}updatePositionMove:\ moving\ to\ target\ "{}\ +\ String(movingTo)\ +\ "{}\ current\ step\ "{}\ +\ String(currentStep)\ +\ "{}\ direction\ "{}\ +\ (moveDirection),\ debugPrintType::Debug);\ \}}}
+\DoxyCodeLine{00351\ }
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}})\ \{}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aa2ba385db7d51af709ada204f4513e3e}{calculateAcceleration}}();}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a6ac51a96a27dfaccd4b88da6bc4021b7}{stepNext}}(\mbox{\hyperlink{classservoStepper_a1883b61564ace7a8797983f7965592e6}{uAccelPeriod}});}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a9354943971fa185957e25c1b2106b3ac}{stepIntervalCallback}}\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a7e22e14773073f92d8670fd66762853d}{stepInterval}}.begin(\mbox{\hyperlink{classservoStepper_a9354943971fa185957e25c1b2106b3ac}{stepIntervalCallback}},\ ((\textcolor{keywordtype}{double})\ \mbox{\hyperlink{classservoStepper_a1883b61564ace7a8797983f7965592e6}{uAccelPeriod}}));}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00363\ \ \ \ \ \}}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00365\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_ad91fe477516c66c204e6450732216f1d}{correctPosition}}()\ \{}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_ac137cc8980a2d1837378410b6227842a}{homingSensedChanged}})\ \{}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//eStepDirection\ homePointDirection;}}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057da}{eEdgeType}}\ edgeDirection;}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a3745cef53a72bc7c6af8764062979a76}{homingSensed}})\ \{}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//homePointDirection\ =\ notDirection(moveDirection);}}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ edgeDirection\ =\ \mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057daaddee3394b72af39e200858af955489a8}{eEdgeType::EDGEFALLING}};}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//homePointDirection\ =\ moveDirection;}}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ edgeDirection\ =\ \mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057daa936595004e6457bd5213f923f0234e2a}{eEdgeType::EDGERISING}};}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00376\ }
+\DoxyCodeLine{00377\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ if\ (currentStep\ !=\ homingPoint[homePointDirection])\ \{}}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ !=\ \mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[edgeDirection][\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}])\ \{}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Got\ position\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}})\ +\ \textcolor{stringliteral}{"{}\ should\ have\ position\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[edgeDirection][\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}])\ +}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ edge\ "{}}\ +\ String(edgeDirection)\ +\ \textcolor{stringliteral}{"{}\ direction\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}})\ +\ \textcolor{stringliteral}{"{}\ movingTo\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}})\ +\ \textcolor{stringliteral}{"{}\ -\/\ Correcting\ :\ stepID\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a2479d6b10fc0be2b9e830c545994409b}{stepperID}}),}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00382\ }
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ say\ we're\ moving\ to\ 1800,\ the\ step\ THINKS\ it\ is\ at\ 1795\ but\ corrects\ to\ 1805\ and\ corrects\ it\ to\ there}}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ then\ movingTo\ will\ miss\ the\ target}}
+\DoxyCodeLine{00385\ }
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}\ ==\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{eStepDirection::FORWARD}})\ \&\&\ (\mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[edgeDirection][\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}]\ >\ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}}))\ \{}
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}This\ should\ become\ a\ problem\ :\ stepID\ "{}}\ \ +\ String(\mbox{\hyperlink{classservoStepper_a2479d6b10fc0be2b9e830c545994409b}{stepperID}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}}\ =\ \mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[edgeDirection][\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}];}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00390\ }
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}\ ==\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{eStepDirection::REVERSE}})\ \&\&\ (\mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[edgeDirection][\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}]\ <\ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}}))\ \{}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}This\ should\ become\ a\ problem\ :\ stepID\ "{}}\ \ +\ String(\mbox{\hyperlink{classservoStepper_a2479d6b10fc0be2b9e830c545994409b}{stepperID}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}}\ =\ \mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[edgeDirection][\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}];}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00395\ }
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ =\ \mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[edgeDirection][\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}];}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00399\ \ \ \ \ \}}
+\DoxyCodeLine{00400\ }
+\DoxyCodeLine{00401\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00402\ }
+\DoxyCodeLine{00403\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_a65a7de2492de7c71e3b2bf9cc5b1f9fd}{setPosition}}(uint16\_t\ position)\ \{}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ uint16\_t\ wantToMoveTo\ =\ ((float)\ \mbox{\hyperlink{servostepper_8h_afede2097a25e7d6451771f11e431a6e1}{valuePerRotation}}\ *\ position);}
+\DoxyCodeLine{00405\ }
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a4d77b0b31e409b487aeff3dc292c615f}{outputDebugData}})\ \{\ \mbox{\hyperlink{classservoStepper_acac2b7ede284e6e575793cf2a319f799}{tsDebugPrintln}}(\textcolor{stringliteral}{"{}setPosition:\ wantToMoveTo\ "{}}\ +\ String(wantToMoveTo),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});\ \}}
+\DoxyCodeLine{00407\ }
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((wantToMoveTo\ ==\ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}})\ \&\&\ (\mbox{\hyperlink{classservoStepper_a1744eedcff7b7b7ba19c8262938563d0}{isMoving}}))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00409\ }
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a4c13475c378d9d3d45570c4dc3ba3a07}{inhibitInterrupt}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00411\ }
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a1744eedcff7b7b7ba19c8262938563d0}{isMoving}})\ \{}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}\ ==\ \mbox{\hyperlink{classservoStepper_a6e907b5b11ec3a35b96e98c3f0c88e0f}{getDirectionTo}}(wantToMoveTo))\ \{}
+\DoxyCodeLine{00414\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (outputDebugData)\ \{\ debugPrintln("{}setPosition:\ moving\ the\ same\ direction"{},\ debugPrintType::Debug);\ \}}}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a73dc65d535b94ea9429756164cc0f745}{turnAround}})\ \{}
+\DoxyCodeLine{00416\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (outputDebugData)\ \{\ debugPrintln("{}setPosition:\ Is\ in\ turn\ around,\ you\ have\ to\ do\ something\ here!!"{},\ debugPrintType::Debug);\ \}}}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a73dc65d535b94ea9429756164cc0f745}{turnAround}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00420\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (outputDebugData)\ \{\ debugPrintln("{}setPosition:\ moving\ the\ opposite\ direction"{},\ debugPrintType::Debug);\ \}}}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a73dc65d535b94ea9429756164cc0f745}{turnAround}})\ \{}
+\DoxyCodeLine{00422\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (outputDebugData)\ \{\ debugPrintln("{}setPosition:\ Is\ in\ turn\ around,\ you\ have\ to\ do\ something\ here!!"{},\ debugPrintType::Debug);\ \}}}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_ac05330644fb45e70fb5e33ffc96c0081}{turnAroundPosition}}\ =\ wantToMoveTo;}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_ab04d4e3c9ed825d5d00ab325ef528e07}{turnAroundDirection}}\ =\ \mbox{\hyperlink{classservoStepper_a6e907b5b11ec3a35b96e98c3f0c88e0f}{getDirectionTo}}(wantToMoveTo);}
+\DoxyCodeLine{00426\ }
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((!\mbox{\hyperlink{classservoStepper_a73dc65d535b94ea9429756164cc0f745}{turnAround}})\ \&\&\ ((\mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ +\ \mbox{\hyperlink{classservoStepper_aea134299b06f53f581a20c4c16ab963e}{accelerationSteps}})\ >\ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}}))\ \{}
+\DoxyCodeLine{00428\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (outputDebugData)\ \{\ debugPrintln("{}setPosition:\ Odd\ thing\ here,\ maybe\ at\ fault?"{},\ debugPrintType::Debug);\ \}}}
+\DoxyCodeLine{00429\ }
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}}\ ==\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{eStepDirection::FORWARD}})\ \{}
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}}\ =\ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ +\ \mbox{\hyperlink{classservoStepper_aea134299b06f53f581a20c4c16ab963e}{accelerationSteps}};}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}}\ =\ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ -\/\ \mbox{\hyperlink{classservoStepper_aea134299b06f53f581a20c4c16ab963e}{accelerationSteps}};}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a73dc65d535b94ea9429756164cc0f745}{turnAround}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a4c13475c378d9d3d45570c4dc3ba3a07}{inhibitInterrupt}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a9865260181e203c85a46bc5caeeeb662}{currentAccelStep}}\ =\ 0;}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}}\ =\ wantToMoveTo;}
+\DoxyCodeLine{00444\ }
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a2bf706707316fe6953dd80b462329264}{setDirection}}(\mbox{\hyperlink{classservoStepper_a6e907b5b11ec3a35b96e98c3f0c88e0f}{getDirectionTo}}(\mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}}));}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a1744eedcff7b7b7ba19c8262938563d0}{isMoving}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00447\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Setting\ reached\ target\ to\ false"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a6ce149fe254e8fa5c1b93d73d16b11e5}{reachedTarget}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a981bafbfa5bf82c13a4e620aab894dc2}{updatePosition}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a4c13475c378d9d3d45570c4dc3ba3a07}{inhibitInterrupt}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00452\ \ \ \ \ \}}
+\DoxyCodeLine{00453\ }
+\DoxyCodeLine{00454\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_a5de698c0807fbb76b5139ee8d9d27449}{setHomingOffset}}(uint16\_t\ offset)\ \{}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a9299674dd6d8b2ee02a3591792597f7a}{homingOffset}}\ =\ ((uint32\_t)\ (\mbox{\hyperlink{servostepper_8h_a6fe78f5adf18de498acaac123384db1a}{microSteps}}\ *\ 200)\ *\ offset\ /\ 65536);}
+\DoxyCodeLine{00456\ \ \ \ \ \}}
+\DoxyCodeLine{00457\ }
+\DoxyCodeLine{00458\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_a5b83203a3efaeceaaa8bdbaab37624a6}{eStop}}()\ \{}
+\DoxyCodeLine{00459\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a1744eedcff7b7b7ba19c8262938563d0}{isMoving}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aaeec33f9238f23b40f43b8c89cc84d0c}{homing}}\ =\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42ad7b55eed63ef10b2add929ccc94eaaa9}{eHomingStage::UNHOMED}};}
+\DoxyCodeLine{00461\ \ \ \ \ \}}
+\DoxyCodeLine{00462\ }
+\DoxyCodeLine{00463\ \textcolor{comment}{\ \ \ \ /*****\ HOMING\ COMMANDS\ ONLY\ PAST\ THIS\ POINT\ ******}}
+\DoxyCodeLine{00464\ \textcolor{comment}{}}
+\DoxyCodeLine{00465\ \textcolor{comment}{}}
+\DoxyCodeLine{00466\ \textcolor{comment}{\ \ \ \ \ \ \ \ Homing\ sequence:}}
+\DoxyCodeLine{00467\ \textcolor{comment}{}}
+\DoxyCodeLine{00468\ \textcolor{comment}{\ \ \ \ \ \ \ \ 1)\ if\ homingswitch\ is\ not\ active,\ go\ to\ 2.1}}
+\DoxyCodeLine{00469\ \textcolor{comment}{\ \ \ \ \ \ \ \ 1.1)\ if\ homingswitch\ is\ active\ go\ in\ the\ opposite\ direction\ oh\ homingDirection\ until\ the\ homingswitch\ is\ inactive\ and\ then\ continue\ to\ 1}}
+\DoxyCodeLine{00470\ \textcolor{comment}{\ \ \ \ \ \ \ \ 2)\ move\ in\ homingDirection\ until\ homingswitch\ is\ homeSenseActive}}
+\DoxyCodeLine{00471\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ 2.1)\ if\ the\ amount\ of\ steps\ surpass\ that\ of\ homingStepsThreshold,\ go\ in\ the\ opposite\ direction\ of\ homingDirection\ until\ the\ homingswitch\ is\ active\ and\ then}}
+\DoxyCodeLine{00472\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ continue\ to\ 1.1}}
+\DoxyCodeLine{00473\ \textcolor{comment}{\ \ \ \ \ \ \ \ 3)\ record\ position\ as\ homingPoint:RISING,homingDirection\ =\ homingOffset\ (currentStep\ =\ homingOffset)}}
+\DoxyCodeLine{00474\ \textcolor{comment}{\ \ \ \ \ \ \ \ 4)\ move\ forward\ in\ homingDirection\ until\ homingswitch\ is\ homeSenseInactive}}
+\DoxyCodeLine{00475\ \textcolor{comment}{\ \ \ \ \ \ \ \ 5)\ record\ position\ as\ homingPoint:FALLING,homingDirection\ =\ currentStep}}
+\DoxyCodeLine{00476\ \textcolor{comment}{\ \ \ \ \ \ \ \ 6)\ move\ forward\ past\ this\ point\ seconHomeOverStep\ number\ of\ steps}}
+\DoxyCodeLine{00477\ \textcolor{comment}{\ \ \ \ \ \ \ \ 7)\ move\ backwards\ in\ !homingDirection\ until\ homingSwitch\ is\ homeSenseActive}}
+\DoxyCodeLine{00478\ \textcolor{comment}{\ \ \ \ \ \ \ \ 8)\ record\ position\ as\ homingPoint:RISING,!homingDirection\ =\ currentStep}}
+\DoxyCodeLine{00479\ \textcolor{comment}{\ \ \ \ \ \ \ \ 9)\ move\ backwards\ in\ !homingDirection\ until\ homingSwitch\ is\ homeSenseInActive}}
+\DoxyCodeLine{00480\ \textcolor{comment}{\ \ \ \ \ \ \ \ 10)\ record\ position\ as\ homingPoint:FALLING,!homingDirection\ =\ currentStep}}
+\DoxyCodeLine{00481\ \textcolor{comment}{\ \ \ \ \ \ \ \ 11)\ move\ to\ offset\ position}}
+\DoxyCodeLine{00482\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00483\ }
+\DoxyCodeLine{00484\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00485\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_a5d38d0a8e3d48c6f94736515247d0c32}{updatePositionFirstHomingRising}}()\ \{}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (abs(\mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}})\ >\ \mbox{\hyperlink{classservoStepper_aa3a879518462b28ee83c3c501c1378c9}{homingStepsThreshold}})\ \{}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Homing\ past\ steps\ threshold,\ reverting\ back\ to\ switch\ :\ stepID\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a2479d6b10fc0be2b9e830c545994409b}{stepperID}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a2bf706707316fe6953dd80b462329264}{setDirection}}(\mbox{\hyperlink{classservoStepper_a8f11cc27e61d5cf2a8bbe79843f6198c}{notDirection}}(\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}}));}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aaeec33f9238f23b40f43b8c89cc84d0c}{homing}}\ =\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a8cf3a73bb6d3c91bf1d4dd9e47264a10}{eHomingStage::MOVETOHOMESWITCH}};}
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00491\ }
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classservoStepper_ac137cc8980a2d1837378410b6227842a}{homingSensedChanged}})\ \&\&\ (\mbox{\hyperlink{classservoStepper_a3745cef53a72bc7c6af8764062979a76}{homingSensed}}\ ==\ \mbox{\hyperlink{servostepper_8h_a004d1eb6b85443b05e1231f64dd0df6c}{homeSenseActive}}))\ \{}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a9c8a82d5e9c78f0afa91ceb73cda10e1}{homingOffsetDirection}}\ ==\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{eStepDirection::FORWARD}})\ \{}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ =\ -\/\mbox{\hyperlink{classservoStepper_a9299674dd6d8b2ee02a3591792597f7a}{homingOffset}};}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ =\ \mbox{\hyperlink{classservoStepper_a9299674dd6d8b2ee02a3591792597f7a}{homingOffset}};}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[\mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057daa936595004e6457bd5213f923f0234e2a}{eEdgeType::EDGERISING}}][\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}}]\ =\ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}};}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Setting\ first\ homing\ rising\ point\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}})\ +\ \textcolor{stringliteral}{"{}\ to\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[\mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057daa936595004e6457bd5213f923f0234e2a}{eEdgeType::EDGERISING}}][\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}}])\ +}
+\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ stepID\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a2479d6b10fc0be2b9e830c545994409b}{stepperID}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00501\ }
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//setDirection(homingOffsetDirection);}}
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//homing\ =\ eHomingStage::GOTOOFFSET;}}
+\DoxyCodeLine{00504\ }
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}[firsthomerising]\ Next\ direction\ is\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}})\ +\ \textcolor{stringliteral}{"{},\ direction\ inversion\ is\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a64601bfc98656bc629953d6ca7a249b0}{invertDirection}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00506\ }
+\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aaeec33f9238f23b40f43b8c89cc84d0c}{homing}}\ =\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42ae40250a983d27f9d38adf9d10beab90b}{eHomingStage::SECONDHOMINGFALLING}};}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a6ac51a96a27dfaccd4b88da6bc4021b7}{stepNext}}();}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}})\ \{}
+\DoxyCodeLine{00511\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ homingSteps-\/-\/;}}
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00514\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00515\ \ \ \ \ \}}
+\DoxyCodeLine{00516\ }
+\DoxyCodeLine{00517\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_aeb2ec33ba06c84ab9a4ae24927389150}{foundSecondHomeFalling}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00518\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classservoStepper_ad981181ba349dab9d8ff9cc1b0464b2b}{secondHomeFallingSteps}}\ =\ 0;}
+\DoxyCodeLine{00519\ \textcolor{preprocessor}{\ \ \ \ \#define\ secondHomeOverStep\ 20*32}}
+\DoxyCodeLine{00520\ }
+\DoxyCodeLine{00521\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_aba059b166e86d21121671db3530db43a}{updatePositionSecondHomingFalling}}()\ \{}
+\DoxyCodeLine{00522\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ??????????????\ WTF\ IS\ THIS\ ???????\ if\ statement\ makes\ no\ sense}}
+\DoxyCodeLine{00523\ \textcolor{comment}{//\ \ \ \ \ \ \ \ if\ ((foundSecondHomeFalling)\ \&\&\ (abs(currentStep\ -\/\ foundSecondHomeFalling)\ >\ secondHomeOverStep))\ \{\ \ \ //\ removed\ 2024-\/04-\/18}}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classservoStepper_aeb2ec33ba06c84ab9a4ae24927389150}{foundSecondHomeFalling}})\ \&\&\ (\mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ >\ \mbox{\hyperlink{servostepper_8h_af01638a8ef574abe19fcc5bfab1b3a28}{secondHomeOverStep}}))\ \{}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Second\ home\ overstep\ "{}}\ +\ String(\mbox{\hyperlink{servostepper_8h_af01638a8ef574abe19fcc5bfab1b3a28}{secondHomeOverStep}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Done\ over\ stepping,\ going\ to\ next\ step\ :\ stepID\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a2479d6b10fc0be2b9e830c545994409b}{stepperID}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a2bf706707316fe6953dd80b462329264}{setDirection}}(\mbox{\hyperlink{classservoStepper_a8f11cc27e61d5cf2a8bbe79843f6198c}{notDirection}}(\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}}));}
+\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aaeec33f9238f23b40f43b8c89cc84d0c}{homing}}\ =\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42af6d30c9ff1f19b7bec2557deeebaf9bf}{eHomingStage::SECONDHOMINGRISING}};}
+\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aeb2ec33ba06c84ab9a4ae24927389150}{foundSecondHomeFalling}}\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ Added\ 2024-\/04-\/18}}
+\DoxyCodeLine{00530\ }
+\DoxyCodeLine{00531\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}[secondhomefalling]\ Next\ direction\ is\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{moveDirection}})\ +\ \textcolor{stringliteral}{"{},\ direction\ inversion\ is\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a64601bfc98656bc629953d6ca7a249b0}{invertDirection}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00532\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00533\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classservoStepper_ac137cc8980a2d1837378410b6227842a}{homingSensedChanged}})\ \&\&\ (\mbox{\hyperlink{classservoStepper_a3745cef53a72bc7c6af8764062979a76}{homingSensed}}\ ==\ \mbox{\hyperlink{servostepper_8h_a3b55e293db0958e31aea2403eb0a8036}{homeSenseInactive}}))\ \{}
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[\mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057daaddee3394b72af39e200858af955489a8}{eEdgeType::EDGEFALLING}}][\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}}]\ =\ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}};}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Setting\ second\ homing\ falling\ point\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}})\ +\ \textcolor{stringliteral}{"{}\ to\ "{}}\ +}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String(\mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[\mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057daaddee3394b72af39e200858af955489a8}{eEdgeType::EDGEFALLING}}][\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}}])\ +\ \textcolor{stringliteral}{"{}\ :\ stepID\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a2479d6b10fc0be2b9e830c545994409b}{stepperID}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00537\ }
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aeb2ec33ba06c84ab9a4ae24927389150}{foundSecondHomeFalling}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_ad981181ba349dab9d8ff9cc1b0464b2b}{secondHomeFallingSteps}}\ =\ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}};}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a6ac51a96a27dfaccd4b88da6bc4021b7}{stepNext}}();}
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}})\ \{}
+\DoxyCodeLine{00543\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ homingSteps-\/-\/;}}
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00547\ \ \ \ \ \}}
+\DoxyCodeLine{00548\ }
+\DoxyCodeLine{00549\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_a1a7fb59f63dd2f6cf7f513ceb11a293e}{updatePositionSecondHomingRising}}()\ \{}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classservoStepper_ac137cc8980a2d1837378410b6227842a}{homingSensedChanged}})\ \&\&\ (\mbox{\hyperlink{classservoStepper_a3745cef53a72bc7c6af8764062979a76}{homingSensed}}\ ==\ \mbox{\hyperlink{servostepper_8h_a004d1eb6b85443b05e1231f64dd0df6c}{homeSenseActive}}))\ \{}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[\mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057daa936595004e6457bd5213f923f0234e2a}{eEdgeType::EDGERISING}}][\mbox{\hyperlink{classservoStepper_a8f11cc27e61d5cf2a8bbe79843f6198c}{notDirection}}(\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}})]\ =\ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ -\/\ 1;}
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Setting\ second\ homing\ rising\ point\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a8f11cc27e61d5cf2a8bbe79843f6198c}{notDirection}}(\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}}))\ +\ \textcolor{stringliteral}{"{}\ to\ "{}}\ +}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String(\mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[\mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057daa936595004e6457bd5213f923f0234e2a}{eEdgeType::EDGERISING}}][\mbox{\hyperlink{classservoStepper_a8f11cc27e61d5cf2a8bbe79843f6198c}{notDirection}}(\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}})])\ +\ \textcolor{stringliteral}{"{}\ :\ stepID\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a2479d6b10fc0be2b9e830c545994409b}{stepperID}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00554\ }
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aaeec33f9238f23b40f43b8c89cc84d0c}{homing}}\ =\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a4c287b2fc3feb84f7148d099d52b7e3e}{eHomingStage::FIRSTHOMINGFALLING}};}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a6ac51a96a27dfaccd4b88da6bc4021b7}{stepNext}}();}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}})\ \{}
+\DoxyCodeLine{00559\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ homingSteps-\/-\/;}}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00563\ \ \ \ \ \}}
+\DoxyCodeLine{00564\ }
+\DoxyCodeLine{00565\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_ad2792b0bdfa52d1caf01fddabdb88b4c}{updatePositionFirstHomingFalling}}()\ \{}
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classservoStepper_ac137cc8980a2d1837378410b6227842a}{homingSensedChanged}})\ \&\&\ (\mbox{\hyperlink{classservoStepper_a3745cef53a72bc7c6af8764062979a76}{homingSensed}}\ ==\ \mbox{\hyperlink{servostepper_8h_a3b55e293db0958e31aea2403eb0a8036}{homeSenseInactive}}))\ \{}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[\mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057daaddee3394b72af39e200858af955489a8}{eEdgeType::EDGEFALLING}}][\mbox{\hyperlink{classservoStepper_a8f11cc27e61d5cf2a8bbe79843f6198c}{notDirection}}(\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}})]\ =\ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ -\/\ 1;}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Setting\ first\ homing\ falling\ point\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a8f11cc27e61d5cf2a8bbe79843f6198c}{notDirection}}(\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}}))\ +\ \textcolor{stringliteral}{"{}\ to\ "{}}\ +}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String(\mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homingPoint}}[\mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057daaddee3394b72af39e200858af955489a8}{eEdgeType::EDGEFALLING}}][\mbox{\hyperlink{classservoStepper_a8f11cc27e61d5cf2a8bbe79843f6198c}{notDirection}}(\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}})])\ +\ \textcolor{stringliteral}{"{}\ :\ stepID\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a2479d6b10fc0be2b9e830c545994409b}{stepperID}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00570\ }
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aaeec33f9238f23b40f43b8c89cc84d0c}{homing}}\ =\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a0af78a28f0bed73e3e49e45b30000511}{eHomingStage::GOTOOFFSET}};}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}}\ =\ 0;}
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Moving\ to\ offset\ "{}\ +\ String(movingTo),\ debugPrintType::Debug);}}
+\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a6ac51a96a27dfaccd4b88da6bc4021b7}{stepNext}}();}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}})\ \{}
+\DoxyCodeLine{00577\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ homingSteps-\/-\/;}}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00581\ \ \ \ \ \}}
+\DoxyCodeLine{00582\ }
+\DoxyCodeLine{00583\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_a461c43ca0fd0232c93fc18a7bd493d9f}{updatePositionGotoOffset}}()\ \{}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ ==\ \mbox{\hyperlink{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}{movingTo}})\ \{}
+\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a1744eedcff7b7b7ba19c8262938563d0}{isMoving}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aaeec33f9238f23b40f43b8c89cc84d0c}{homing}}\ =\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a9406b576f5985eb0bc2f49da6a4ad336}{eHomingStage::HOMED}};}
+\DoxyCodeLine{00587\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a6ac51a96a27dfaccd4b88da6bc4021b7}{stepNext}}();}
+\DoxyCodeLine{00589\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00590\ \ \ \ \ \}}
+\DoxyCodeLine{00591\ }
+\DoxyCodeLine{00592\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_a131155bf76281c013cb17abaea38d0c9}{updatePositionMovePastHomeSwitch}}()\ \{}
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classservoStepper_ac137cc8980a2d1837378410b6227842a}{homingSensedChanged}})\ \&\&\ (\mbox{\hyperlink{classservoStepper_a3745cef53a72bc7c6af8764062979a76}{homingSensed}}\ ==\ \mbox{\hyperlink{servostepper_8h_a3b55e293db0958e31aea2403eb0a8036}{homeSenseInactive}}))\ \{}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a2bf706707316fe6953dd80b462329264}{setDirection}}(\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}});}
+\DoxyCodeLine{00595\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aaeec33f9238f23b40f43b8c89cc84d0c}{homing}}\ =\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a505fadaa06649853019b1b4dc6cc2eb5}{eHomingStage::FIRSTHOMINGRISING}};}
+\DoxyCodeLine{00596\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ =\ 0;}
+\DoxyCodeLine{00597\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Past\ homing\ switch,\ resuming\ home\ :\ stepID\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a2479d6b10fc0be2b9e830c545994409b}{stepperID}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00598\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00599\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a6ac51a96a27dfaccd4b88da6bc4021b7}{stepNext}}();}
+\DoxyCodeLine{00600\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}})\ \{}
+\DoxyCodeLine{00601\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ homingSteps-\/-\/;}}
+\DoxyCodeLine{00602\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00604\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00605\ \ \ \ \ \}}
+\DoxyCodeLine{00606\ }
+\DoxyCodeLine{00607\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_a6d11d8308b5d1ffad77f5df3331d99a6}{updatePositionMoveToHomeSwitch}}()\ \{}
+\DoxyCodeLine{00608\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classservoStepper_ac137cc8980a2d1837378410b6227842a}{homingSensedChanged}})\ \&\&\ (\mbox{\hyperlink{classservoStepper_a3745cef53a72bc7c6af8764062979a76}{homingSensed}}\ ==\ \mbox{\hyperlink{servostepper_8h_a004d1eb6b85443b05e1231f64dd0df6c}{homeSenseActive}}))\ \{}
+\DoxyCodeLine{00609\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a2bf706707316fe6953dd80b462329264}{setDirection}}(\mbox{\hyperlink{classservoStepper_a8f11cc27e61d5cf2a8bbe79843f6198c}{notDirection}}(\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}}));}
+\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aaeec33f9238f23b40f43b8c89cc84d0c}{homing}}\ =\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42acbed0dc60a71217c92d5af06a2a5c80f}{eHomingStage::MOVEPASTHOMESWITCH}};}
+\DoxyCodeLine{00611\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}At\ homing\ switch,\ moving\ past\ :\ stepID\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a2479d6b10fc0be2b9e830c545994409b}{stepperID}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00612\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00613\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a6ac51a96a27dfaccd4b88da6bc4021b7}{stepNext}}();}
+\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}})\ \{}
+\DoxyCodeLine{00615\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ homingSteps-\/-\/;}}
+\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_ac73ff0a4a2b40355ed79563848a0077c}{hasStepped}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00617\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00618\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00619\ \ \ \ \ \}}
+\DoxyCodeLine{00620\ }
+\DoxyCodeLine{00621\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00622\ }
+\DoxyCodeLine{00623\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_a30df0093cfd5951322cb0bdf857e4209}{home}}(\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{eStepDirection}}\ inHomingDirection\ =\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{eStepDirection::REVERSE}},\ uint8\_t\ inHomingSpeedRough\ =\ 10,\ uint8\_t\ inHomingSpeedFine\ =\ 5,}
+\DoxyCodeLine{00624\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{eStepDirection}}\ inOffsetDirection\ =\ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{eStepDirection::FORWARD}})\ \{}
+\DoxyCodeLine{00625\ }
+\DoxyCodeLine{00626\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a1744eedcff7b7b7ba19c8262938563d0}{isMoving}})\ \{}
+\DoxyCodeLine{00627\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Moving!!!\ Not\ homing"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00628\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00629\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00630\ }
+\DoxyCodeLine{00631\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}}\ =\ inHomingDirection;}
+\DoxyCodeLine{00632\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aed902bec2725fcf75e3f82d19315dfd4}{homingSpeedRough}}\ =\ inHomingSpeedRough;}
+\DoxyCodeLine{00633\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_af156c423af8217472fb988b128029827}{homingSpeedFine}}\ =\ inHomingSpeedFine;}
+\DoxyCodeLine{00634\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a9c8a82d5e9c78f0afa91ceb73cda10e1}{homingOffsetDirection}}\ =\ inOffsetDirection;}
+\DoxyCodeLine{00635\ }
+\DoxyCodeLine{00636\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a5f647075c066cd05f2aa6c8061c57ce1}{currentStep}}\ =\ 0;\ \textcolor{comment}{//\ Reset\ current\ step}}
+\DoxyCodeLine{00637\ }
+\DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Homing\ direction\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}})\ +\ \textcolor{stringliteral}{"{}\ homing\ speed\ r\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_aed902bec2725fcf75e3f82d19315dfd4}{homingSpeedRough}})\ +\ \textcolor{stringliteral}{"{}\ homing\ speed\ f\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_af156c423af8217472fb988b128029827}{homingSpeedFine}})\ +}
+\DoxyCodeLine{00639\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ homing\ ofs.\ dir.\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a9c8a82d5e9c78f0afa91ceb73cda10e1}{homingOffsetDirection}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00640\ }
+\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a756180269e0983c5a5f30c0dbc0539e3}{setSpeed}}(\mbox{\hyperlink{classservoStepper_aed902bec2725fcf75e3f82d19315dfd4}{homingSpeedRough}});}
+\DoxyCodeLine{00642\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a3745cef53a72bc7c6af8764062979a76}{homingSensed}}\ ==\ \mbox{\hyperlink{servostepper_8h_a004d1eb6b85443b05e1231f64dd0df6c}{homeSenseActive}})\ \{}
+\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aaeec33f9238f23b40f43b8c89cc84d0c}{homing}}\ =\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42acbed0dc60a71217c92d5af06a2a5c80f}{eHomingStage::MOVEPASTHOMESWITCH}};}
+\DoxyCodeLine{00644\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a2bf706707316fe6953dd80b462329264}{setDirection}}(\mbox{\hyperlink{classservoStepper_a8f11cc27e61d5cf2a8bbe79843f6198c}{notDirection}}(\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}}));}
+\DoxyCodeLine{00645\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}On\ homing\ switch,\ moving\ :\ stepID\ "{}}\ +\ String(\mbox{\hyperlink{classservoStepper_a2479d6b10fc0be2b9e830c545994409b}{stepperID}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00646\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00647\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_aaeec33f9238f23b40f43b8c89cc84d0c}{homing}}\ =\ \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a505fadaa06649853019b1b4dc6cc2eb5}{eHomingStage::FIRSTHOMINGRISING}};}
+\DoxyCodeLine{00648\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a2bf706707316fe6953dd80b462329264}{setDirection}}(\mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homingDirection}});}
+\DoxyCodeLine{00649\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00650\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a1744eedcff7b7b7ba19c8262938563d0}{isMoving}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00651\ \textcolor{comment}{//\ \ \ \ \ \ \ \ homingSteps\ =\ 0;}}
+\DoxyCodeLine{00652\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00653\ \ \ \ \ \}}
+\DoxyCodeLine{00654\ }
+\DoxyCodeLine{00655\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{completeTask}}(uint16\_t\ timeout\ =\ 3000)\ \{}
+\DoxyCodeLine{00656\ \ \ \ \ \ \ \ \ elapsedMillis\ timeOutElapse;}
+\DoxyCodeLine{00657\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00658\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a981bafbfa5bf82c13a4e620aab894dc2}{updatePosition}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ ((\mbox{\hyperlink{classservoStepper_a1744eedcff7b7b7ba19c8262938563d0}{isMoving}})\ \&\&\ (timeOutElapse\ <\ timeout));}
+\DoxyCodeLine{00660\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a1744eedcff7b7b7ba19c8262938563d0}{isMoving}})\ \{}
+\DoxyCodeLine{00661\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a5b83203a3efaeceaaa8bdbaab37624a6}{eStop}}();}
+\DoxyCodeLine{00662\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00663\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00664\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00665\ \ \ \ \ \}}
+\DoxyCodeLine{00666\ \};}
+\DoxyCodeLine{00667\ }
+\DoxyCodeLine{00668\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

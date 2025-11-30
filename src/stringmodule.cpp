@@ -21,7 +21,7 @@
 
 #include "avr_functions.h"
 #include <vector>
-#include "bowio.h"
+#include "bowio.hpp"
 
 #include "stringmodule.hpp"
 
@@ -32,7 +32,7 @@ bool stringModule::addBow(char motorRevPin, char motorVoltagePin, char motorDCDC
     calibrationDataArray.push_back(*calibrationData);
 
     bowIO* _bowIO = new bowIO(motorRevPin, motorVoltagePin, motorDCDCEn, tachoPin, currentSensePin, motorFaultPin, stepEnPin, stepDirPin, stepStepPin, stepSerialPort, stepHomeSensorPin, stepCorrectionSensorPin);
-    _bowIO->stepServoStepper->stepperID = 1;
+    _bowIO->tmc2209ServoStepper->stepServoStepper->stepperID = 1;
     bowIOArray.push_back(*_bowIO);
 
     int arrayIndex = bowIOArray.size() - 1;
@@ -64,7 +64,8 @@ bool stringModule::addMute(char stepEnPin, char stepDirPin, char stepStepPin, Ha
     muteArray.push_back(*mmute);
 
     mmute->setTilt(0);
-    mmute->stepServoStepper->stepperID = 2;
+//    mmute->stepServoStepper->stepperID = 2;
+    mmute->tmc2209ServoStepper->stepServoStepper->stepperID = 2;
 
     int arrayIndex = bowIOArray.size() - 1;
 
@@ -75,13 +76,13 @@ bool stringModule::addMute(char stepEnPin, char stepDirPin, char stepStepPin, Ha
     int arrayIndex = bowIOArray.size() - 1;
     if (arrayIndex < 0) {
         debugPrintln("arrayIndex below zero in addMute", debugPrintType::Error);
-        return false;
+        return false;asdsa
     }
 */
     return true;
 }
 
-bool stringModule::processSerialCommand_GeneralControl(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {
+bool stringModule::processSerialCommand_GeneralControl(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegated, commandList *delegatedCommands) {
     if (_commandItem->command == "bow") {
         if (request) {
             commandResponses->push_back({ "b:" + String(currentBowSerial), InfoRequest });
@@ -276,7 +277,7 @@ bool stringModule::processSerialCommand_GeneralControl(commandItem *_commandItem
     return true;
 }
 
-bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {
+bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegated, commandList *delegatedCommands) {
     if (_commandItem->command == "bowpidki") {
         if (request) {
             commandResponses->push_back({ "bpki:" + String(bowControlArray[currentBowSerial].Ki), InfoRequest });
@@ -762,7 +763,7 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
     return true;
 }
 
-bool stringModule::processSerialCommand_MuteControl(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {
+bool stringModule::processSerialCommand_MuteControl(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
     if (currentBowSerial >= int(muteArray.size())) {
         return false;
     }
@@ -889,7 +890,7 @@ bool stringModule::processSerialCommand_MuteControl(commandItem *_commandItem, s
     return true;
 }
 
-bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false, commandList *delegatedCommands = nullptr) {
+bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegated, commandList *delegatedCommands) {
     if (_commandItem->command == "bowstatus") {
         commandResponses->push_back({"Set frequency " + String(bowControlArray[currentBowSerial].getPIDTarget()) + " Hz, ", TextInfo});
         commandResponses->push_back({"Read frequency " + String(bowIOArray[currentBowSerial].averageFreq()) + " Hz", TextInfo});
@@ -938,8 +939,8 @@ bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem,
     { "bowactuatorload", "bal", "-", "Load parameters from current bow actuator"},
     { "bowactuatorsave", "bav", "-", "Save current bow parameters into currently selected bow actuator" }
 */
-bool stringModule::processSerialCommand_BowActuator(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegated = false,
-    commandList *delegatedCommands = nullptr) {
+bool stringModule::processSerialCommand_BowActuator(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegated,
+    commandList *delegatedCommands) {
 
     if (_commandItem->command == "bowactuator") {
         if (request) {

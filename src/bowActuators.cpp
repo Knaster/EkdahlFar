@@ -24,7 +24,7 @@
 */
 
 #include <vector>
-#include "bowActuators.h"
+#include "bowActuators.hpp"
 
 BowActuators::BowActuators(CalibrationData *t_calibrationDataConnect)
 {

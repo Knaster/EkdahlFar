@@ -1,0 +1,136 @@
+\doxysection{isrclasswrapper.\+cpp}
+\hypertarget{isrclasswrapper_8cpp_source}{}\label{isrclasswrapper_8cpp_source}\index{isrclasswrapper.cpp@{isrclasswrapper.cpp}}
+\mbox{\hyperlink{isrclasswrapper_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ tachoISR\_bowControlArrayMax\ 8}}
+\DoxyCodeLine{00022\ \mbox{\hyperlink{classbowControl}{bowControl}}*\ \mbox{\hyperlink{isrclasswrapper_8cpp_aa20ea82903440514539b35acb7f8d963}{tachoISR\_bowControlArray}}[\mbox{\hyperlink{isrclasswrapper_8cpp_a09ddef76f38af822146ca94d8b1bf211}{tachoISR\_bowControlArrayMax}}];}
+\DoxyCodeLine{00023\ uint8\_t\ \mbox{\hyperlink{isrclasswrapper_8cpp_ad65e434981ca88063b72a964afc2535a}{tachoISR\_bowControlCounter}}\ =\ 0;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{isrclasswrapper_8cpp_af622fb0058a535402ca7faf567eec768}{tachoISR\_ISR0}}()\ \{\ \mbox{\hyperlink{isrclasswrapper_8cpp_aa20ea82903440514539b35acb7f8d963}{tachoISR\_bowControlArray}}[0]-\/>\mbox{\hyperlink{classbowControl_aaddf2f2f0acdb9c8edf8a35faa72e88b}{bowIOConnect}}-\/>\mbox{\hyperlink{classbowIO_ad696a1be1319731a12945db354dac833}{tachoISRHandler}}();\ \}\ \textcolor{comment}{//\ debugPrintln("{}Tacho\ ISR\ 0\ triggered"{},\ Debug);\ \}}}
+\DoxyCodeLine{00026\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{isrclasswrapper_8cpp_a78f3befccedcebb06f6ade5cae0eb67f}{tachoISR\_ISR1}}()\ \{\ \mbox{\hyperlink{isrclasswrapper_8cpp_aa20ea82903440514539b35acb7f8d963}{tachoISR\_bowControlArray}}[1]-\/>\mbox{\hyperlink{classbowControl_aaddf2f2f0acdb9c8edf8a35faa72e88b}{bowIOConnect}}-\/>\mbox{\hyperlink{classbowIO_ad696a1be1319731a12945db354dac833}{tachoISRHandler}}();\ \}\ \textcolor{comment}{//\ debugPrintln("{}Tacho\ ISR\ 1\ triggered"{},\ Debug);\}}}
+\DoxyCodeLine{00027\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{isrclasswrapper_8cpp_ac97f341113f8b681f3651c3336837333}{tachoISR\_ISR2}}()\ \{\ \mbox{\hyperlink{isrclasswrapper_8cpp_aa20ea82903440514539b35acb7f8d963}{tachoISR\_bowControlArray}}[2]-\/>\mbox{\hyperlink{classbowControl_aaddf2f2f0acdb9c8edf8a35faa72e88b}{bowIOConnect}}-\/>\mbox{\hyperlink{classbowIO_ad696a1be1319731a12945db354dac833}{tachoISRHandler}}();\ \}\ \textcolor{comment}{//\ debugPrintln("{}Tacho\ ISR\ 2\ triggered"{},\ Debug);\}}}
+\DoxyCodeLine{00028\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{isrclasswrapper_8cpp_a7a7c778a798f84f8aa8625969655e631}{tachoISR\_ISR3}}()\ \{\ \mbox{\hyperlink{isrclasswrapper_8cpp_aa20ea82903440514539b35acb7f8d963}{tachoISR\_bowControlArray}}[3]-\/>\mbox{\hyperlink{classbowControl_aaddf2f2f0acdb9c8edf8a35faa72e88b}{bowIOConnect}}-\/>\mbox{\hyperlink{classbowIO_ad696a1be1319731a12945db354dac833}{tachoISRHandler}}();\ \}\ \textcolor{comment}{//\ debugPrintln("{}Tacho\ ISR\ 3\ triggered"{},\ Debug);\}}}
+\DoxyCodeLine{00029\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{isrclasswrapper_8cpp_abe3e1302be0ec38b58817c23ffdc0d16}{tachoISR\_ISR4}}()\ \{\ \mbox{\hyperlink{isrclasswrapper_8cpp_aa20ea82903440514539b35acb7f8d963}{tachoISR\_bowControlArray}}[4]-\/>\mbox{\hyperlink{classbowControl_aaddf2f2f0acdb9c8edf8a35faa72e88b}{bowIOConnect}}-\/>\mbox{\hyperlink{classbowIO_ad696a1be1319731a12945db354dac833}{tachoISRHandler}}();\ \}\ \textcolor{comment}{//\ debugPrintln("{}Tacho\ ISR\ 4\ triggered"{},\ Debug);\}}}
+\DoxyCodeLine{00030\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{isrclasswrapper_8cpp_a89eb1136834ac698d4fd2878ebffde61}{tachoISR\_ISR5}}()\ \{\ \mbox{\hyperlink{isrclasswrapper_8cpp_aa20ea82903440514539b35acb7f8d963}{tachoISR\_bowControlArray}}[5]-\/>\mbox{\hyperlink{classbowControl_aaddf2f2f0acdb9c8edf8a35faa72e88b}{bowIOConnect}}-\/>\mbox{\hyperlink{classbowIO_ad696a1be1319731a12945db354dac833}{tachoISRHandler}}();\ \}\ \textcolor{comment}{//\ debugPrintln("{}Tacho\ ISR\ 5\ triggered"{},\ Debug);\}}}
+\DoxyCodeLine{00031\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{isrclasswrapper_8cpp_a208326e9bba400c5c4d9bea6a46bb266}{tachoISR\_ISR6}}()\ \{\ \mbox{\hyperlink{isrclasswrapper_8cpp_aa20ea82903440514539b35acb7f8d963}{tachoISR\_bowControlArray}}[6]-\/>\mbox{\hyperlink{classbowControl_aaddf2f2f0acdb9c8edf8a35faa72e88b}{bowIOConnect}}-\/>\mbox{\hyperlink{classbowIO_ad696a1be1319731a12945db354dac833}{tachoISRHandler}}();\ \}\ \textcolor{comment}{//\ debugPrintln("{}Tacho\ ISR\ 6\ triggered"{},\ Debug);\}}}
+\DoxyCodeLine{00032\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{isrclasswrapper_8cpp_a2ae88460e88dfef62e4b72c12b4e1465}{tachoISR\_ISR7}}()\ \{\ \mbox{\hyperlink{isrclasswrapper_8cpp_aa20ea82903440514539b35acb7f8d963}{tachoISR\_bowControlArray}}[7]-\/>\mbox{\hyperlink{classbowControl_aaddf2f2f0acdb9c8edf8a35faa72e88b}{bowIOConnect}}-\/>\mbox{\hyperlink{classbowIO_ad696a1be1319731a12945db354dac833}{tachoISRHandler}}();\ \}\ \textcolor{comment}{//\ debugPrintln("{}Tacho\ ISR\ 7\ triggered"{},\ Debug);\}}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{isrclasswrapper_8cpp_a77538bf70530bf93252d1e29781c63ff}{tachoISR\_assignInterrupt}}(uint8\_t\ interruptPin,\ \mbox{\hyperlink{classbowControl}{bowControl}}\ *bowControlObject)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{isrclasswrapper_8cpp_ad65e434981ca88063b72a964afc2535a}{tachoISR\_bowControlCounter}}\ >=\ \mbox{\hyperlink{isrclasswrapper_8cpp_a09ddef76f38af822146ca94d8b1bf211}{tachoISR\_bowControlArrayMax}})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{isrclasswrapper_8cpp_aa20ea82903440514539b35acb7f8d963}{tachoISR\_bowControlArray}}[\mbox{\hyperlink{isrclasswrapper_8cpp_ad65e434981ca88063b72a964afc2535a}{tachoISR\_bowControlCounter}}]\ =\ bowControlObject;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{switch}(\mbox{\hyperlink{isrclasswrapper_8cpp_ad65e434981ca88063b72a964afc2535a}{tachoISR\_bowControlCounter}})\ \ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{case}\ 0:}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ attachInterrupt(digitalPinToInterrupt(interruptPin),\ \mbox{\hyperlink{isrclasswrapper_8cpp_af622fb0058a535402ca7faf567eec768}{tachoISR\_ISR0}},\ CHANGE);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Assigning\ ISR0"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ attachInterrupt(digitalPinToInterrupt(interruptPin),\ \mbox{\hyperlink{isrclasswrapper_8cpp_a78f3befccedcebb06f6ade5cae0eb67f}{tachoISR\_ISR1}},\ CHANGE);}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ attachInterrupt(digitalPinToInterrupt(interruptPin),\ \mbox{\hyperlink{isrclasswrapper_8cpp_ac97f341113f8b681f3651c3336837333}{tachoISR\_ISR2}},\ CHANGE);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{case}\ 3:}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ attachInterrupt(digitalPinToInterrupt(interruptPin),\ \mbox{\hyperlink{isrclasswrapper_8cpp_a7a7c778a798f84f8aa8625969655e631}{tachoISR\_ISR3}},\ CHANGE);}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{case}\ 4:}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ attachInterrupt(digitalPinToInterrupt(interruptPin),\ \mbox{\hyperlink{isrclasswrapper_8cpp_abe3e1302be0ec38b58817c23ffdc0d16}{tachoISR\_ISR4}},\ CHANGE);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordflow}{case}\ 5:}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ attachInterrupt(digitalPinToInterrupt(interruptPin),\ \mbox{\hyperlink{isrclasswrapper_8cpp_a89eb1136834ac698d4fd2878ebffde61}{tachoISR\_ISR5}},\ CHANGE);}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{case}\ 6:}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ attachInterrupt(digitalPinToInterrupt(interruptPin),\ \mbox{\hyperlink{isrclasswrapper_8cpp_a208326e9bba400c5c4d9bea6a46bb266}{tachoISR\_ISR6}},\ CHANGE);}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{case}\ 7:}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ attachInterrupt(digitalPinToInterrupt(interruptPin),\ \mbox{\hyperlink{isrclasswrapper_8cpp_a2ae88460e88dfef62e4b72c12b4e1465}{tachoISR\_ISR7}},\ CHANGE);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00066\ \}}
+\DoxyCodeLine{00067\ \mbox{\hyperlink{isrclasswrapper_8cpp_ad65e434981ca88063b72a964afc2535a}{tachoISR\_bowControlCounter}}++;}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00070\ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#define\ pidISR\_bowControlArrayMax\ 8}}
+\DoxyCodeLine{00073\ \mbox{\hyperlink{classbowControl}{bowControl}}*\ \mbox{\hyperlink{isrclasswrapper_8cpp_ad0a15780f0558a387ce6c360782ee59a}{pidISR\_bowControlArray}}[\mbox{\hyperlink{isrclasswrapper_8cpp_adcc256848645528a5b1723c4bf8ca343}{pidISR\_bowControlArrayMax}}];}
+\DoxyCodeLine{00074\ uint8\_t\ \mbox{\hyperlink{isrclasswrapper_8cpp_a525a8ecb41defd5194558a43dcdfce85}{pidISR\_bowControlCounter}}\ =\ 0;}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{isrclasswrapper_8cpp_acd59c11b9dd282bb04376f7db98dfa9a}{pid\_ISR0}}()\ \{\ \mbox{\hyperlink{isrclasswrapper_8cpp_ad0a15780f0558a387ce6c360782ee59a}{pidISR\_bowControlArray}}[0]-\/>\mbox{\hyperlink{classbowControl_a1069d2ab76476da2e1fa7e90b8914e11}{pidInterruptCaller}}();\ \}}
+\DoxyCodeLine{00077\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{isrclasswrapper_8cpp_a2da6c389452f1f2c21186cb66410fca6}{pid\_ISR1}}()\ \{\ \mbox{\hyperlink{isrclasswrapper_8cpp_ad0a15780f0558a387ce6c360782ee59a}{pidISR\_bowControlArray}}[1]-\/>\mbox{\hyperlink{classbowControl_a1069d2ab76476da2e1fa7e90b8914e11}{pidInterruptCaller}}();\ \}}
+\DoxyCodeLine{00078\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{isrclasswrapper_8cpp_af2adef4a623f706a77dc916b1283ae86}{pid\_ISR2}}()\ \{\ \mbox{\hyperlink{isrclasswrapper_8cpp_ad0a15780f0558a387ce6c360782ee59a}{pidISR\_bowControlArray}}[2]-\/>\mbox{\hyperlink{classbowControl_a1069d2ab76476da2e1fa7e90b8914e11}{pidInterruptCaller}}();\ \}}
+\DoxyCodeLine{00079\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{isrclasswrapper_8cpp_a52ce2c95992521b45c342ee27fd80294}{pid\_ISR3}}()\ \{\ \mbox{\hyperlink{isrclasswrapper_8cpp_ad0a15780f0558a387ce6c360782ee59a}{pidISR\_bowControlArray}}[3]-\/>\mbox{\hyperlink{classbowControl_a1069d2ab76476da2e1fa7e90b8914e11}{pidInterruptCaller}}();\ \}}
+\DoxyCodeLine{00080\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{isrclasswrapper_8cpp_a55eb20465c7841c734de8cf883a35a92}{pid\_ISR4}}()\ \{\ \mbox{\hyperlink{isrclasswrapper_8cpp_ad0a15780f0558a387ce6c360782ee59a}{pidISR\_bowControlArray}}[4]-\/>\mbox{\hyperlink{classbowControl_a1069d2ab76476da2e1fa7e90b8914e11}{pidInterruptCaller}}();\ \}}
+\DoxyCodeLine{00081\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{isrclasswrapper_8cpp_ac030305cd86b2989beb6f1b4236d67b5}{pid\_ISR5}}()\ \{\ \mbox{\hyperlink{isrclasswrapper_8cpp_ad0a15780f0558a387ce6c360782ee59a}{pidISR\_bowControlArray}}[5]-\/>\mbox{\hyperlink{classbowControl_a1069d2ab76476da2e1fa7e90b8914e11}{pidInterruptCaller}}();\ \}}
+\DoxyCodeLine{00082\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{isrclasswrapper_8cpp_aa4a1d0f8fb49fcda81d16b01442aeead}{pid\_ISR6}}()\ \{\ \mbox{\hyperlink{isrclasswrapper_8cpp_ad0a15780f0558a387ce6c360782ee59a}{pidISR\_bowControlArray}}[6]-\/>\mbox{\hyperlink{classbowControl_a1069d2ab76476da2e1fa7e90b8914e11}{pidInterruptCaller}}();\ \}}
+\DoxyCodeLine{00083\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{isrclasswrapper_8cpp_a08c04a512994787a5bd86d62d351817b}{pid\_ISR7}}()\ \{\ \mbox{\hyperlink{isrclasswrapper_8cpp_ad0a15780f0558a387ce6c360782ee59a}{pidISR\_bowControlArray}}[7]-\/>\mbox{\hyperlink{classbowControl_a1069d2ab76476da2e1fa7e90b8914e11}{pidInterruptCaller}}();\ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ IntervalTimer\ \mbox{\hyperlink{isrclasswrapper_8cpp_a1d7d2c77b2f43378e554b1fb506d5b1f}{pidInterrupt0}};}
+\DoxyCodeLine{00086\ IntervalTimer\ \mbox{\hyperlink{isrclasswrapper_8cpp_a4f5d2523f4d93b491586757744b6e157}{pidInterrupt1}};}
+\DoxyCodeLine{00087\ IntervalTimer\ \mbox{\hyperlink{isrclasswrapper_8cpp_a48aa4ca77f49836a47b5ce08fd1bc883}{pidInterrupt2}};}
+\DoxyCodeLine{00088\ IntervalTimer\ \mbox{\hyperlink{isrclasswrapper_8cpp_af5970c4e5c158d5b06c5730f8f08eaf8}{pidInterrupt3}};}
+\DoxyCodeLine{00089\ IntervalTimer\ \mbox{\hyperlink{isrclasswrapper_8cpp_a9efbbf3d1220c89f3963f6382dd5eb92}{pidInterrupt4}};}
+\DoxyCodeLine{00090\ IntervalTimer\ \mbox{\hyperlink{isrclasswrapper_8cpp_afd814dc96e3881382407e6d58561f24e}{pidInterrupt5}};}
+\DoxyCodeLine{00091\ IntervalTimer\ \mbox{\hyperlink{isrclasswrapper_8cpp_a95f9e3c4a97708ab82fd14211b9f1bd2}{pidInterrupt6}};}
+\DoxyCodeLine{00092\ IntervalTimer\ \mbox{\hyperlink{isrclasswrapper_8cpp_ad20132da763e4f145b94eb0e53fda42b}{pidInterrupt7}};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{isrclasswrapper_8cpp_a83fb51cb17c291e7eca40fdd288c0695}{pidISR\_assignInterrupt}}(\mbox{\hyperlink{classbowControl}{bowControl}}\ *bowControlObject)\ \{}
+\DoxyCodeLine{00095\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{isrclasswrapper_8cpp_a525a8ecb41defd5194558a43dcdfce85}{pidISR\_bowControlCounter}}\ >=\ \mbox{\hyperlink{isrclasswrapper_8cpp_adcc256848645528a5b1723c4bf8ca343}{pidISR\_bowControlArrayMax}})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00096\ \ \ \mbox{\hyperlink{isrclasswrapper_8cpp_ad0a15780f0558a387ce6c360782ee59a}{pidISR\_bowControlArray}}[\mbox{\hyperlink{isrclasswrapper_8cpp_a525a8ecb41defd5194558a43dcdfce85}{pidISR\_bowControlCounter}}]\ =\ bowControlObject;}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \textcolor{keywordflow}{switch}(\mbox{\hyperlink{isrclasswrapper_8cpp_a525a8ecb41defd5194558a43dcdfce85}{pidISR\_bowControlCounter}})\ \ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordflow}{case}\ 0:}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \mbox{\hyperlink{isrclasswrapper_8cpp_a1d7d2c77b2f43378e554b1fb506d5b1f}{pidInterrupt0}}.begin(\mbox{\hyperlink{isrclasswrapper_8cpp_acd59c11b9dd282bb04376f7db98dfa9a}{pid\_ISR0}},\ bowControlObject-\/>\mbox{\hyperlink{classbowControl_aa11b77b46796ace01ef089ed5d7e96dd}{pidUpdateInterval}});}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \mbox{\hyperlink{isrclasswrapper_8cpp_a4f5d2523f4d93b491586757744b6e157}{pidInterrupt1}}.begin(\mbox{\hyperlink{isrclasswrapper_8cpp_a2da6c389452f1f2c21186cb66410fca6}{pid\_ISR1}},\ bowControlObject-\/>\mbox{\hyperlink{classbowControl_aa11b77b46796ace01ef089ed5d7e96dd}{pidUpdateInterval}});}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \mbox{\hyperlink{isrclasswrapper_8cpp_a48aa4ca77f49836a47b5ce08fd1bc883}{pidInterrupt2}}.begin(\mbox{\hyperlink{isrclasswrapper_8cpp_af2adef4a623f706a77dc916b1283ae86}{pid\_ISR2}},\ bowControlObject-\/>\mbox{\hyperlink{classbowControl_aa11b77b46796ace01ef089ed5d7e96dd}{pidUpdateInterval}});}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordflow}{case}\ 3:}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \mbox{\hyperlink{isrclasswrapper_8cpp_af5970c4e5c158d5b06c5730f8f08eaf8}{pidInterrupt3}}.begin(\mbox{\hyperlink{isrclasswrapper_8cpp_a52ce2c95992521b45c342ee27fd80294}{pid\_ISR3}},\ bowControlObject-\/>\mbox{\hyperlink{classbowControl_aa11b77b46796ace01ef089ed5d7e96dd}{pidUpdateInterval}});}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{case}\ 4:}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \mbox{\hyperlink{isrclasswrapper_8cpp_a9efbbf3d1220c89f3963f6382dd5eb92}{pidInterrupt4}}.begin(\mbox{\hyperlink{isrclasswrapper_8cpp_a55eb20465c7841c734de8cf883a35a92}{pid\_ISR4}},\ bowControlObject-\/>\mbox{\hyperlink{classbowControl_aa11b77b46796ace01ef089ed5d7e96dd}{pidUpdateInterval}});}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordflow}{case}\ 5:}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \mbox{\hyperlink{isrclasswrapper_8cpp_afd814dc96e3881382407e6d58561f24e}{pidInterrupt5}}.begin(\mbox{\hyperlink{isrclasswrapper_8cpp_ac030305cd86b2989beb6f1b4236d67b5}{pid\_ISR5}},\ bowControlObject-\/>\mbox{\hyperlink{classbowControl_aa11b77b46796ace01ef089ed5d7e96dd}{pidUpdateInterval}});}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordflow}{case}\ 6:}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \mbox{\hyperlink{isrclasswrapper_8cpp_a95f9e3c4a97708ab82fd14211b9f1bd2}{pidInterrupt6}}.begin(\mbox{\hyperlink{isrclasswrapper_8cpp_aa4a1d0f8fb49fcda81d16b01442aeead}{pid\_ISR6}},\ bowControlObject-\/>\mbox{\hyperlink{classbowControl_aa11b77b46796ace01ef089ed5d7e96dd}{pidUpdateInterval}});}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordflow}{case}\ 7:}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \mbox{\hyperlink{isrclasswrapper_8cpp_ad20132da763e4f145b94eb0e53fda42b}{pidInterrupt7}}.begin(\mbox{\hyperlink{isrclasswrapper_8cpp_a08c04a512994787a5bd86d62d351817b}{pid\_ISR7}},\ bowControlObject-\/>\mbox{\hyperlink{classbowControl_aa11b77b46796ace01ef089ed5d7e96dd}{pidUpdateInterval}});}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00125\ \ \ \}}
+\DoxyCodeLine{00126\ \ \ \mbox{\hyperlink{isrclasswrapper_8cpp_a525a8ecb41defd5194558a43dcdfce85}{pidISR\_bowControlCounter}}++;}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00129\ \}}
+\DoxyCodeLine{00130\ }
+
+\end{DoxyCode}

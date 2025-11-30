@@ -1,0 +1,150 @@
+\doxysection{automaticversion.\+hpp}
+\hypertarget{automaticversion_8hpp_source}{}\label{automaticversion_8hpp_source}\index{automaticversion.hpp@{automaticversion.hpp}}
+\mbox{\hyperlink{automaticversion_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Gotten\ from\ https://stackoverflow.com/questions/11697820/how-\/to-\/use-\/date-\/and-\/time-\/predefined-\/macros-\/in-\/as-\/two-\/integers-\/then-\/stri}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ source\ file\ version\_num.h}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ VERSION\_NUM\_H}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ VERSION\_NUM\_H}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ VERSION\_MAJOR\ 0}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ VERSION\_MINOR\ 1}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ VERSION\_NUM\_H}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ source\ file\ build\_defs.h}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ BUILD\_DEFS\_H}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ BUILD\_DEFS\_H}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ Example\ of\ \_\_DATE\_\_\ string:\ "{}Jul\ 27\ 2012"{}}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 01234567890}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ BUILD\_YEAR\_CH0\ (\_\_DATE\_\_[\ 7])}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ BUILD\_YEAR\_CH1\ (\_\_DATE\_\_[\ 8])}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ BUILD\_YEAR\_CH2\ (\_\_DATE\_\_[\ 9])}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ BUILD\_YEAR\_CH3\ (\_\_DATE\_\_[10])}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ BUILD\_MONTH\_IS\_JAN\ (\_\_DATE\_\_[0]\ ==\ 'J'\ \&\&\ \_\_DATE\_\_[1]\ ==\ 'a'\ \&\&\ \_\_DATE\_\_[2]\ ==\ 'n')}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ BUILD\_MONTH\_IS\_FEB\ (\_\_DATE\_\_[0]\ ==\ 'F')}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ BUILD\_MONTH\_IS\_MAR\ (\_\_DATE\_\_[0]\ ==\ 'M'\ \&\&\ \_\_DATE\_\_[1]\ ==\ 'a'\ \&\&\ \_\_DATE\_\_[2]\ ==\ 'r')}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ BUILD\_MONTH\_IS\_APR\ (\_\_DATE\_\_[0]\ ==\ 'A'\ \&\&\ \_\_DATE\_\_[1]\ ==\ 'p')}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ BUILD\_MONTH\_IS\_MAY\ (\_\_DATE\_\_[0]\ ==\ 'M'\ \&\&\ \_\_DATE\_\_[1]\ ==\ 'a'\ \&\&\ \_\_DATE\_\_[2]\ ==\ 'y')}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ BUILD\_MONTH\_IS\_JUN\ (\_\_DATE\_\_[0]\ ==\ 'J'\ \&\&\ \_\_DATE\_\_[1]\ ==\ 'u'\ \&\&\ \_\_DATE\_\_[2]\ ==\ 'n')}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ BUILD\_MONTH\_IS\_JUL\ (\_\_DATE\_\_[0]\ ==\ 'J'\ \&\&\ \_\_DATE\_\_[1]\ ==\ 'u'\ \&\&\ \_\_DATE\_\_[2]\ ==\ 'l')}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ BUILD\_MONTH\_IS\_AUG\ (\_\_DATE\_\_[0]\ ==\ 'A'\ \&\&\ \_\_DATE\_\_[1]\ ==\ 'u')}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ BUILD\_MONTH\_IS\_SEP\ (\_\_DATE\_\_[0]\ ==\ 'S')}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ BUILD\_MONTH\_IS\_OCT\ (\_\_DATE\_\_[0]\ ==\ 'O')}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#define\ BUILD\_MONTH\_IS\_NOV\ (\_\_DATE\_\_[0]\ ==\ 'N')}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ BUILD\_MONTH\_IS\_DEC\ (\_\_DATE\_\_[0]\ ==\ 'D')}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ BUILD\_MONTH\_CH0\ \(\backslash\)}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\ \ \ \ ((BUILD\_MONTH\_IS\_OCT\ ||\ BUILD\_MONTH\_IS\_NOV\ ||\ BUILD\_MONTH\_IS\_DEC)\ ?\ '1'\ :\ '0')}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ BUILD\_MONTH\_CH1\ \(\backslash\)}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\ \ \ \ (\ \(\backslash\)}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (BUILD\_MONTH\_IS\_JAN)\ ?\ '1'\ :\ \(\backslash\)}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (BUILD\_MONTH\_IS\_FEB)\ ?\ '2'\ :\ \(\backslash\)}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (BUILD\_MONTH\_IS\_MAR)\ ?\ '3'\ :\ \(\backslash\)}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (BUILD\_MONTH\_IS\_APR)\ ?\ '4'\ :\ \(\backslash\)}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (BUILD\_MONTH\_IS\_MAY)\ ?\ '5'\ :\ \(\backslash\)}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (BUILD\_MONTH\_IS\_JUN)\ ?\ '6'\ :\ \(\backslash\)}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (BUILD\_MONTH\_IS\_JUL)\ ?\ '7'\ :\ \(\backslash\)}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (BUILD\_MONTH\_IS\_AUG)\ ?\ '8'\ :\ \(\backslash\)}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (BUILD\_MONTH\_IS\_SEP)\ ?\ '9'\ :\ \(\backslash\)}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (BUILD\_MONTH\_IS\_OCT)\ ?\ '0'\ :\ \(\backslash\)}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (BUILD\_MONTH\_IS\_NOV)\ ?\ '1'\ :\ \(\backslash\)}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (BUILD\_MONTH\_IS\_DEC)\ ?\ '2'\ :\ \(\backslash\)}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ }\textcolor{comment}{/*\ error\ default\ */}\textcolor{preprocessor}{\ \ \ \ '?'\ \(\backslash\)}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\ \ \ \ )}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#define\ BUILD\_DAY\_CH0\ ((\_\_DATE\_\_[4]\ >=\ '0')\ ?\ (\_\_DATE\_\_[4])\ :\ '0')}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#define\ BUILD\_DAY\_CH1\ (\_\_DATE\_\_[\ 5])}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{comment}{//\ Example\ of\ \_\_TIME\_\_\ string:\ "{}21:06:19"{}}}
+\DoxyCodeLine{00072\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 01234567}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#define\ BUILD\_HOUR\_CH0\ (\_\_TIME\_\_[0])}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#define\ BUILD\_HOUR\_CH1\ (\_\_TIME\_\_[1])}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#define\ BUILD\_MIN\_CH0\ (\_\_TIME\_\_[3])}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#define\ BUILD\_MIN\_CH1\ (\_\_TIME\_\_[4])}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ BUILD\_SEC\_CH0\ (\_\_TIME\_\_[6])}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ BUILD\_SEC\_CH1\ (\_\_TIME\_\_[7])}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#if\ VERSION\_MAJOR\ >\ 100}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#define\ VERSION\_MAJOR\_INIT\ \(\backslash\)}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\ \ \ \ ((VERSION\_MAJOR\ /\ 100)\ +\ '0'),\ \(\backslash\)}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\ \ \ \ (((VERSION\_MAJOR\ \%\ 100)\ /\ 10)\ +\ '0'),\ \(\backslash\)}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\ \ \ \ ((VERSION\_MAJOR\ \%\ 10)\ +\ '0')}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#elif\ VERSION\_MAJOR\ >\ 10}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#define\ VERSION\_MAJOR\_INIT\ \(\backslash\)}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\ \ \ \ ((VERSION\_MAJOR\ /\ 10)\ +\ '0'),\ \(\backslash\)}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\ \ \ \ ((VERSION\_MAJOR\ \%\ 10)\ +\ '0')}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#define\ VERSION\_MAJOR\_INIT\ \(\backslash\)}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\ \ \ \ (VERSION\_MAJOR\ +\ '0')}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#if\ VERSION\_MINOR\ >\ 100}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#define\ VERSION\_MINOR\_INIT\ \(\backslash\)}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\ \ \ \ ((VERSION\_MINOR\ /\ 100)\ +\ '0'),\ \(\backslash\)}}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\ \ \ \ (((VERSION\_MINOR\ \%\ 100)\ /\ 10)\ +\ '0'),\ \(\backslash\)}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\ \ \ \ ((VERSION\_MINOR\ \%\ 10)\ +\ '0')}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#elif\ VERSION\_MINOR\ >\ 10}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#define\ VERSION\_MINOR\_INIT\ \(\backslash\)}}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\ \ \ \ ((VERSION\_MINOR\ /\ 10)\ +\ '0'),\ \(\backslash\)}}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\ \ \ \ ((VERSION\_MINOR\ \%\ 10)\ +\ '0')}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#define\ VERSION\_MINOR\_INIT\ \(\backslash\)}}
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\ \ \ \ (VERSION\_MINOR\ +\ '0')}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BUILD\_DEFS\_H}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{automaticversion_8hpp_ab2ab8689a8f8ee180483ed204e3eaa4c}{completeVersion}}[]\ =}
+\DoxyCodeLine{00129\ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \mbox{\hyperlink{automaticversion_8hpp_a9a6e4b16934b64a76320ab8311ee89e5}{VERSION\_MAJOR\_INIT}},}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{charliteral}{'.'},}
+\DoxyCodeLine{00132\ \ \ \ \ \mbox{\hyperlink{automaticversion_8hpp_ae7b1bf4e4cd95c0bcf4eec71a7ed1f0d}{VERSION\_MINOR\_INIT}},}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{charliteral}{'a'},}
+\DoxyCodeLine{00134\ \ \ \ \ \mbox{\hyperlink{automaticversion_8hpp_a37355ed6923f656ef2e87b97dfe61002}{BUILD\_YEAR\_CH0}},\ \mbox{\hyperlink{automaticversion_8hpp_a12cd7296a55ada4f58e671e94c0fc8e5}{BUILD\_YEAR\_CH1}},\ \mbox{\hyperlink{automaticversion_8hpp_a0dc4daf505e32c1c1c572cf220f7790b}{BUILD\_YEAR\_CH2}},\ \mbox{\hyperlink{automaticversion_8hpp_a0838cf5a74ef5c3c8b4d3ff678e0ec6f}{BUILD\_YEAR\_CH3}},}
+\DoxyCodeLine{00135\ \ \ \ \ \mbox{\hyperlink{automaticversion_8hpp_af0ead8059f10e2bd0e9f37fe8bc5cafa}{BUILD\_MONTH\_CH0}},\ \mbox{\hyperlink{automaticversion_8hpp_a129ec840cf6664b51552e5168662eac7}{BUILD\_MONTH\_CH1}},}
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{automaticversion_8hpp_a66944c1a3d399cabfc5217eba6ce7632}{BUILD\_DAY\_CH0}},\ \mbox{\hyperlink{automaticversion_8hpp_aa6022cf79a6ae91691c1568b2a224b7f}{BUILD\_DAY\_CH1}},}
+\DoxyCodeLine{00137\ \ \ \ \ \mbox{\hyperlink{automaticversion_8hpp_ad0e59dc45582e456f7b3835d4f0ea1bf}{BUILD\_HOUR\_CH0}},\ \mbox{\hyperlink{automaticversion_8hpp_a126533d78d3d7bfea860579e438b8d2c}{BUILD\_HOUR\_CH1}},}
+\DoxyCodeLine{00138\ \ \ \ \ \mbox{\hyperlink{automaticversion_8hpp_a1ac04da95767d8b94290454f5a23af7c}{BUILD\_MIN\_CH0}},\ \mbox{\hyperlink{automaticversion_8hpp_a3d96e5a7c30f62021ff0978798865d19}{BUILD\_MIN\_CH1}},}
+\DoxyCodeLine{00139\ \ \ \ \ \mbox{\hyperlink{automaticversion_8hpp_a3e48ab7b93e848aa024eceb95658d388}{BUILD\_SEC\_CH0}},\ \mbox{\hyperlink{automaticversion_8hpp_ab1399326583005d9a9aa6b71d20ddf90}{BUILD\_SEC\_CH1}},}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{charliteral}{'\(\backslash\)0'}}
+\DoxyCodeLine{00141\ \};}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ String\ \mbox{\hyperlink{automaticversion_8hpp_a7580b394441d49b9d0d1e40d57449d5d}{currentFirmwareVersion}};}
+\DoxyCodeLine{00144\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{automaticversion_8hpp_a26d0bc41e0e78388f09961d7491fb38f}{firmwareChanged}}\ =\ \textcolor{keyword}{false};}
+
+\end{DoxyCode}

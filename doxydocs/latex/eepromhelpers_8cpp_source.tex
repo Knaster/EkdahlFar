@@ -1,0 +1,58 @@
+\doxysection{eepromhelpers.\+cpp}
+\hypertarget{eepromhelpers_8cpp_source}{}\label{eepromhelpers_8cpp_source}\index{eepromhelpers.cpp@{eepromhelpers.cpp}}
+\mbox{\hyperlink{eepromhelpers_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ uint32\_t\ \mbox{\hyperlink{eepromhelpers_8cpp_aa24ecf0d4c0610d752b0e8e5aa887486}{EEPROMSaveString}}(String\ *data,\ uint32\_t\ EEPROM\_offset)\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{//eeprom\_write\_byte(EEPROM\_offset,\ data-\/>length());}}
+\DoxyCodeLine{00021\ \ \ \ \ uint32\_t\ datal\ =\ data-\/>length();}
+\DoxyCodeLine{00022\ \ \ \ \ eeprom\_write\_dword(0,\ datal);}
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ \ \ \ eeprom\_read\_block(const\ void\ *addr)}}
+\DoxyCodeLine{00024\ \ \ \ \ eeprom\_write\_block(data-\/>c\_str(),\ (\textcolor{keywordtype}{void}*)\ (EEPROM\_offset\ +\ 4),\ data-\/>length()\ +\ 1);\ \textcolor{comment}{//\ Save\ one\ above\ length\ so\ the\ trailing\ NULL\ is\ included}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{return}\ 2\ +\ data-\/>length();}
+\DoxyCodeLine{00026\ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ uint32\_t\ \mbox{\hyperlink{eepromhelpers_8cpp_a030652f23e30526a2b56af8de9d3e4dc}{EEPROMLoadString}}(String\ *data,\ uint32\_t\ EEPROM\_offset)\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ uint32\_t\ datal\ =\ 0;}
+\DoxyCodeLine{00030\ \ \ \ \ eeprom\_read\_block(\&datal,\ (\textcolor{keywordtype}{void}*)\ (EEPROM\_offset)\ ,\ 1);}
+\DoxyCodeLine{00031\ \ \ \ \ datal\ =\ eeprom\_read\_dword(0);}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{if}\ (datal\ !=\ 0)\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ text[datal\ +\ 1];\ \ \textcolor{comment}{//\ Make\ enough\ room\ for\ the\ Text\ +\ NULL}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ eeprom\_read\_block(\&text,\ (\textcolor{keywordtype}{void}*)\ (EEPROM\_offset\ +\ 4),\ datal\ +\ 1);\ \textcolor{comment}{//\ save\ text\ +\ NULL}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ *data\ =\ text;}
+\DoxyCodeLine{00036\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ *data\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00038\ \ \ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{return}\ datal\ +\ 2;\ \ \textcolor{comment}{//\ +1\ for\ intial\ length\ byte,\ +1\ for\ trailing\ NULL}}
+\DoxyCodeLine{00041\ \}}
+\DoxyCodeLine{00042\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00043\ \textcolor{comment}{void\ debugPrintEEPROM(uint16\_t\ offset,\ uint16\_t\ count)\ \{}}
+\DoxyCodeLine{00044\ \textcolor{comment}{\ \ uint8\_t\ b1;}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ for\ (int\ i=offset;\ i<(offset+count);\ i++)\ \{}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ \ \ \ b1\ =\ eeprom\_read\_byte(i);}}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ \ \ \ \ debugPrint(String(b1)\ +\ "{}\ "{},\ Debug);}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \ \}}}
+\DoxyCodeLine{00049\ \textcolor{comment}{\ \ debugPrintln(String(b1)\ +\ "{}\ "{},\ Debug);}}
+\DoxyCodeLine{00050\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00051\ \textcolor{comment}{}}
+\DoxyCodeLine{00052\ \textcolor{comment}{*/}}
+
+\end{DoxyCode}

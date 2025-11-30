@@ -19,11 +19,12 @@
 #ifndef MUTE_C
 #define MUTE_C
 
-#include "servostepper.h"
-#include "mute.h"
+#include "tmc2209_servostepper.cpp"
+#include "mute.hpp"
 
 mute::mute(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin) {
-    stepSerialStream = stepSerialPort;
+    tmc2209ServoStepper = new Tmc2209ServoStepper(stepDirPin, stepStepPin, stepSerialPort, stepHomeSensorPin);
+/*    stepSerialStream = stepSerialPort;
     stepServoStepper = new servoStepper(stepStepPin, stepDirPin, stepHomeSensorPin); //, stepEnPin);
     stepTMC2209Driver = new TMC2209();
     setupTMC2209();
@@ -39,11 +40,11 @@ mute::mute(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *st
     stepTMC2209Driver->setRunCurrent(stepRunCurrentPercent);
     stepServoStepper->setPosition(0);
     stepServoStepper->completeTask();
-    stepServoStepper->setSpeed(15);
+    stepServoStepper->setSpeed(15);*/
 }
 
 bool mute::setupTMC2209() {
-    if (stepTMC2209Driver == nullptr) { return false; }
+/*    if (stepTMC2209Driver == nullptr) { return false; }
 
     stepTMC2209Driver->setup(*stepSerialStream);
     delay(stepConnectDelay);
@@ -56,12 +57,13 @@ bool mute::setupTMC2209() {
     stepTMC2209Driver->disableStealthChop();
     stepTMC2209Driver->setHoldCurrent(10);
     stepTMC2209Driver->enable();
-    return true;
+    return true;*/
+    return tmc2209ServoStepper->setupTMC2209();
 }
 
 
 void mute::getTMC2209Info() {
-    debugPrintln("*************************", Debug);
+/*    debugPrintln("*************************", Debug);
     debugPrintln("getSettings()", Debug);
     TMC2209::Settings settings = stepTMC2209Driver->getSettings();
     debugPrintln("settings.is_communicating = " + String(settings.is_communicating), Debug);
@@ -129,33 +131,21 @@ void mute::getTMC2209Info() {
     debugPrintln("status.standstill = " + String(status.standstill), Debug);
     debugPrintln("*************************", Debug);
     debugPrintln("", Debug);
-    return;
+    return;*/
+    return tmc2209ServoStepper->getTMC2209Info();
 }
 
 bool mute::setTilt(uint16_t tilt) {
-    // Edited 2024-07-28
-    //int a = tilt;
-//    uint32_t a = ((float) (((float) tilt) / (65535 / fullMutePosition))) ;
-
-
-//    unsigned int tiltPWM = calibrationDataConnect->firstTouchPressure +
-//        ((double)(calibrationDataConnect->stallPressure - calibrationDataConnect->firstTouchPressure)
-//        / 65535 * ((double)(baselineTiltPWM + modifierTiltPWM)));
-
     uint32_t a = restPosition + ((double)(fullMutePosition - restPosition) / 65535 * ((double)tilt));
-
 
     if (a < 0) { a = 0; }
     if (a > 65535) { a = 65535; }
     if (a > fullMutePosition) { a = fullMutePosition; }
     debugPrintln("Setting mute tilt to " + String(a) + ", full mute position " + String(fullMutePosition), debugPrintType::Hardware);
 
-//  Edited 2024-07-28
-//    if ((lastTilt != a) && (tilt <= muteMaxPosition)) {
-//    if ((lastTilt != a) && (tilt <= fullMutePosition)) {
-        lastTilt = a;
-        mutePosition = emutePosition::mpUndefined;
-        hwMutePos = a;
+    lastTilt = a;
+    mutePosition = emutePosition::mpUndefined;
+    hwMutePos = a;
     return true;
 }
 
@@ -259,11 +249,13 @@ String mute::dumpData() {
 
 void mute::updateMute() {
     if (hwMutePos != hwLastMutePos) {
-        stepServoStepper->setPosition(hwMutePos);
+//        stepServoStepper->setPosition(hwMutePos);
+        tmc2209ServoStepper->stepServoStepper->setPosition(hwMutePos);
         hwLastMutePos = hwMutePos;
     }
 
-    if ((backOffTime > 0) && (mutePosition == mpFull) && (backOffTimer > backOffTime) && (!stepServoStepper->isMoving)) {
+//    if ((backOffTime > 0) && (mutePosition == mpFull) && (backOffTimer > backOffTime) && (!stepServoStepper->getIsMoving())) {
+    if ((backOffTime > 0) && (mutePosition == mpFull) && (backOffTimer > backOffTime) && (!tmc2209ServoStepper->stepServoStepper->getIsMoving())) {
         debugPrintln("Backing off mute", debugPrintType::Debug);
         rest();
     }
@@ -271,8 +263,8 @@ void mute::updateMute() {
 }
 
 
-bool mute::homeMute(bool invert = false) {
-    debugPrintln("Starting home", Debug);
+bool mute::homeMute(bool invert) {
+/*    debugPrintln("Starting home", Debug);
 
     stepServoStepper->setHomingOffset(6000);
     stepTMC2209Driver->setRunCurrent(stepHomeCurrentPercent);
@@ -294,7 +286,8 @@ bool mute::homeMute(bool invert = false) {
 //    stepServoStepper->setSpeed(20);
     stepServoStepper->setPosition(0);
     stepServoStepper->completeTask();
-    return true;
+    return true;*/
+    return tmc2209ServoStepper->home(invert);
 }
 
 #endif

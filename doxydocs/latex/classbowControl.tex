@@ -1,5 +1,5 @@
-\hypertarget{classbowControl}{}\doxysection{bow\+Control Class Reference}
-\label{classbowControl}\index{bowControl@{bowControl}}
+\doxysection{bow\+Control Class Reference}
+\hypertarget{classbowControl}{}\label{classbowControl}\index{bowControl@{bowControl}}
 
 
 {\ttfamily \#include $<$bowcontrol.\+h$>$}
@@ -13,7 +13,7 @@ Collaboration diagram for bow\+Control\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl__coll__graph}
 \end{center}
 \end{figure}
-\doxysubsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classbowControl_a4114939e6e9d417415aef69c8c909a7a}{bow\+Control}} (\mbox{\hyperlink{classbowIO}{bow\+IO}} \&\+\_\+bow\+IO, \mbox{\hyperlink{structCalibrationData}{Calibration\+Data}} \&\+\_\+\+\_\+calibration\+Data)
@@ -23,7 +23,7 @@ void \mbox{\hyperlink{classbowControl_a797e74de62f9ba4d9dff86fa9dda59b9}{set\+Bo
 float \mbox{\hyperlink{classbowControl_adb36e8c79d731f20d06b6ebd1d6c96ea}{get\+Bow\+Current\+Limit}} ()
 \item 
 int \mbox{\hyperlink{classbowControl_a6ac5163fe5784a5e1812908b217da50f}{is\+Bow\+Stable}} ()
-\begin{DoxyCompactList}\small\item\em Check if the bow is holding a stable frequency. \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{classbowControl_a72b5961eabb460cb97784bd91312a762}{pid\+Reset}} ()
 \begin{DoxyCompactList}\small\item\em Resets the PID integral. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classbowControl_a01e1c268fc72ea56af7234fb8827934d}{set\+PIDTarget}} (float \+\_\+pid\+Target\+Speed)
@@ -86,7 +86,11 @@ bool \mbox{\hyperlink{classbowControl_af3c67773447df63befb6af1bfc978e03}{set\+Ha
 \item 
 int \mbox{\hyperlink{classbowControl_ad07d3247caf8f4bd20cf1cac8dbf5daf}{get\+Harmonic}} ()
 \item 
-void \mbox{\hyperlink{classbowControl_a2499bd6950020ae94621282f1c86c711}{update\+Harmonic\+Data}} ()
+bool \mbox{\hyperlink{classbowControl_af259a733e5b1b0bcd7d926eb863689e5}{set\+Harmonic\+Add}} (int \+\_\+harmonic)
+\item 
+int \mbox{\hyperlink{classbowControl_a651f95ef3ffb593b25a30eee2d12bb6c}{get\+Harmonic\+Add}} ()
+\item 
+bool \mbox{\hyperlink{classbowControl_a210960a7b6309730b6e2d255652ac218}{update\+Harmonic\+Data}} ()
 \item 
 bool \mbox{\hyperlink{classbowControl_a6230fd2d93f18d14fac47f03969beea2}{set\+Base\+Note}} (int in\+Base\+Note)
 \item 
@@ -95,15 +99,17 @@ void \mbox{\hyperlink{classbowControl_ac4e9c27470227a129acdf20603ba2259}{measure
 String \mbox{\hyperlink{classbowControl_a42eab3d685cd13f718c71aee11e5714f}{dump\+Data}} ()
 \item 
 void \mbox{\hyperlink{classbowControl_ac763e2c7400be2248ffad2e13462d60a}{update\+String}} ()
-\begin{DoxyCompactList}\small\item\em Handles Tilt PWM updates, zero-\/speed bow state and motor faults / oscillations. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
+\begin{DoxyCompactList}\small\item\em Handles Tilt PWM updates, zero-\/speed bow state and motor faults / oscillations. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbowControl_a23da346b759daad57a89cbcab3762df1}{load\+Harmonic\+Series}} (int i)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classbowIO}{bow\+IO}} $\ast$ \mbox{\hyperlink{classbowControl_aaddf2f2f0acdb9c8edf8a35faa72e88b}{bow\+IOConnect}}
-\begin{DoxyCompactList}\small\item\em Pointer to associated \mbox{\hyperlink{classbowIO}{bow\+IO}} object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structCalibrationData}{Calibration\+Data}} $\ast$ \mbox{\hyperlink{classbowControl_a1ca492c797dc01e00ab2f80a88fc367c}{calibration\+Data\+Connect}}
+\mbox{\hyperlink{classbowIO}{bow\+IO}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classbowControl_aaddf2f2f0acdb9c8edf8a35faa72e88b}{bow\+IOConnect}}
+\begin{DoxyCompactList}\small\item\em Pointer to associated \doxylink{classbowIO}{bow\+IO} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structCalibrationData}{Calibration\+Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classbowControl_a1ca492c797dc01e00ab2f80a88fc367c}{calibration\+Data\+Connect}}
 \begin{DoxyCompactList}\small\item\em Pointer to associated \+\_\+calibration\+Data object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classBowActuators}{Bow\+Actuators}} $\ast$ \mbox{\hyperlink{classbowControl_a80ad832b525e1fcf51e45ae454aa09be}{bow\+Actuators}}
+\mbox{\hyperlink{classBowActuators}{Bow\+Actuators}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classbowControl_a80ad832b525e1fcf51e45ae454aa09be}{bow\+Actuators}}
 \item 
 float \mbox{\hyperlink{classbowControl_a31bb75cf63d04d3344db0bfd4aed0dc7}{Kp}} = 500
 \begin{DoxyCompactList}\small\item\em PID P multiplier 100. \end{DoxyCompactList}\item 
@@ -127,10 +133,6 @@ float \mbox{\hyperlink{classbowControl_adf3b889ba6d172cfcc4102f70e276b6e}{Kd\+Te
 \begin{DoxyCompactList}\small\item\em Calculated D term. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{classbowControl_a38370e9e787a86ef3952aabf4ef8ac85}{integral}} = 0.\+0
 \begin{DoxyCompactList}\small\item\em Contains the integral used by the PID. \end{DoxyCompactList}\item 
-elapsed\+Millis \mbox{\hyperlink{classbowControl_ac63382008b2bcf28eba2584a9d1c0338}{elapsed\+Since\+Last\+Target}}
-\begin{DoxyCompactList}\small\item\em Time elapsed since last change in bowing speed or pressure. \end{DoxyCompactList}\item 
-char \mbox{\hyperlink{classbowControl_a11d8c7f71ade3acdd16e89d8473e7a26}{elapsed\+Time\+Threshold}} = 40
-\begin{DoxyCompactList}\small\item\em Time in ms that elapses in between each bow speed stability check. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classbowControl_aa3bbd0973cc2b096b3b49fca6af6e58c}{in\+Recovery}} = false
 \begin{DoxyCompactList}\small\item\em Set to true when bow recovery has started. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classbowControl_ae1bbe11e9421bf5e875dca7d964f56dd}{in\+Relapse}} = false
@@ -167,6 +169,8 @@ bool \mbox{\hyperlink{classbowControl_a41b68cfab4948911050b02116490f021}{bow\+Sh
 \item 
 \mbox{\hyperlink{bowcontrol_8h_a08216a942f96ea84df79ef77a0554dd8}{\+\_\+speed\+Mode}} \mbox{\hyperlink{classbowControl_aea27c1e59266aa9d321fcdf859fe4dff}{speed\+Mode}} = \mbox{\hyperlink{bowcontrol_8h_a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389}{Automatic}}
 \item 
+\mbox{\hyperlink{classharmonicSeries}{harmonic\+Series}} \mbox{\hyperlink{classbowControl_a7727c69514e72cedaf9bea49ac51fe3a}{current\+Harmonic\+Series\+Data}}
+\item 
 \mbox{\hyperlink{classHarmonicSeriesList}{Harmonic\+Series\+List}} \mbox{\hyperlink{classbowControl_aff3d711d47ddb95b8cd61f64272c5c4b}{harmonic\+Series\+List}}
 \item 
 uint8\+\_\+t \mbox{\hyperlink{classbowControl_accc6c95233ced4ae0846c30fb49804f4}{current\+Harmonic\+Series}} = 0
@@ -179,18 +183,18 @@ float \mbox{\hyperlink{classbowControl_a9565655dd3613dd02a43515e0e1e7b0f}{bow\+S
 \item 
 bool \mbox{\hyperlink{classbowControl_a10861de9ca3688546f266128afc1640c}{reached\+Engage}} = false
 \item 
-String \mbox{\hyperlink{classbowControl_a8b72b42733233ae00c8780fc6ac3dddf}{commands\+Over\+Power\+Current}} = \char`\"{}\char`\"{}
+String \mbox{\hyperlink{classbowControl_a8b72b42733233ae00c8780fc6ac3dddf}{commands\+Over\+Power\+Current}} = "{}"{}
 \item 
-String \mbox{\hyperlink{classbowControl_a8869baca382bd6a9c6885e4eaaab7a46}{commands\+Motor\+Fault}} = \char`\"{}\char`\"{}
+String \mbox{\hyperlink{classbowControl_a8869baca382bd6a9c6885e4eaaab7a46}{commands\+Motor\+Fault}} = "{}"{}
 \item 
 bool \mbox{\hyperlink{classbowControl_a369062f44a2d3dea1e816ae463726a5c}{output\+Debug\+Data}} = true
 \end{DoxyCompactItemize}
-\doxysubsection*{Protected Attributes}
+\doxysubsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 float \mbox{\hyperlink{classbowControl_a243aaf296cdc56ba9fb85df64f11b40a}{pid\+Target\+Speed}} = 0
 \begin{DoxyCompactList}\small\item\em PID target speed. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Private Attributes}
+\doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 unsigned long \mbox{\hyperlink{classbowControl_a83a47b5dc58ede5ae709f09efd4fc1f9}{previous\+Time}} = 0
@@ -211,6 +215,8 @@ int \mbox{\hyperlink{classbowControl_a6af3944576e948ccc850d9189bd231af}{harmonic
 \item 
 int \mbox{\hyperlink{classbowControl_ac2d2071e4b2fcbc39e58900d44f32436}{harmonic}} = 0
 \begin{DoxyCompactList}\small\item\em Current harmonic. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classbowControl_a835a5475fbed54fdb7abf7b07aa4d788}{harmonic\+Add}} = 0
+\item 
 bool \mbox{\hyperlink{classbowControl_a820457c7cf5667230bdfa9ccbf54d112}{\+\_\+hold}} = false
 \item 
 float \mbox{\hyperlink{classbowControl_a8ddd8c170720f487d58508822593609b}{bow\+Current\+Limit}} = 1.\+5
@@ -220,7 +226,7 @@ float \mbox{\hyperlink{classbowControl_a37af74a65fc919ea50452fc6543516c2}{pid\+P
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classbowControl_a4114939e6e9d417415aef69c8c909a7a}\label{classbowControl_a4114939e6e9d417415aef69c8c909a7a}} 
+\Hypertarget{classbowControl_a4114939e6e9d417415aef69c8c909a7a}\label{classbowControl_a4114939e6e9d417415aef69c8c909a7a} 
 \index{bowControl@{bowControl}!bowControl@{bowControl}}
 \index{bowControl@{bowControl}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowControl()}{bowControl()}}
@@ -233,7 +239,7 @@ Constructor.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classbowControl_a5d21d51a35a669a6ea6f911979b08486}\label{classbowControl_a5d21d51a35a669a6ea6f911979b08486}} 
+\Hypertarget{classbowControl_a5d21d51a35a669a6ea6f911979b08486}\label{classbowControl_a5d21d51a35a669a6ea6f911979b08486} 
 \index{bowControl@{bowControl}!bowEngage@{bowEngage}}
 \index{bowEngage@{bowEngage}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowEngage()}{bowEngage()}}
@@ -246,7 +252,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_a5d21d51a35a669a6ea6f911979b08486_cgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_a18fb846153772a36f52fbef6dc149eb7}\label{classbowControl_a18fb846153772a36f52fbef6dc149eb7}} 
+\Hypertarget{classbowControl_a18fb846153772a36f52fbef6dc149eb7}\label{classbowControl_a18fb846153772a36f52fbef6dc149eb7} 
 \index{bowControl@{bowControl}!bowMute@{bowMute}}
 \index{bowMute@{bowMute}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowMute()}{bowMute()}}
@@ -263,7 +269,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_a18fb846153772a36f52fbef6dc149eb7_cgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_a4975e60429561b3c949047bda5178e0e}\label{classbowControl_a4975e60429561b3c949047bda5178e0e}} 
+\Hypertarget{classbowControl_a4975e60429561b3c949047bda5178e0e}\label{classbowControl_a4975e60429561b3c949047bda5178e0e} 
 \index{bowControl@{bowControl}!bowRest@{bowRest}}
 \index{bowRest@{bowRest}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowRest()}{bowRest()}}
@@ -283,7 +289,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_a4975e60429561b3c949047bda5178e0e_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_a1331f6ad235067eb39c93dda01e7a7ba}\label{classbowControl_a1331f6ad235067eb39c93dda01e7a7ba}} 
+\Hypertarget{classbowControl_a1331f6ad235067eb39c93dda01e7a7ba}\label{classbowControl_a1331f6ad235067eb39c93dda01e7a7ba} 
 \index{bowControl@{bowControl}!calculateBaselineModifierPressure@{calculateBaselineModifierPressure}}
 \index{calculateBaselineModifierPressure@{calculateBaselineModifierPressure}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{calculateBaselineModifierPressure()}{calculateBaselineModifierPressure()}}
@@ -307,7 +313,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_a1331f6ad235067eb39c93dda01e7a7ba_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_a4ac57214cead955255ff25b37d89f730}\label{classbowControl_a4ac57214cead955255ff25b37d89f730}} 
+\Hypertarget{classbowControl_a4ac57214cead955255ff25b37d89f730}\label{classbowControl_a4ac57214cead955255ff25b37d89f730} 
 \index{bowControl@{bowControl}!calculateHarmonicShift@{calculateHarmonicShift}}
 \index{calculateHarmonicShift@{calculateHarmonicShift}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{calculateHarmonicShift()}{calculateHarmonicShift()}}
@@ -331,7 +337,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_a4ac57214cead955255ff25b37d89f730_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_a7845c424d2495a820b8171d316408e77}\label{classbowControl_a7845c424d2495a820b8171d316408e77}} 
+\Hypertarget{classbowControl_a7845c424d2495a820b8171d316408e77}\label{classbowControl_a7845c424d2495a820b8171d316408e77} 
 \index{bowControl@{bowControl}!checkMotorFault@{checkMotorFault}}
 \index{checkMotorFault@{checkMotorFault}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{checkMotorFault()}{checkMotorFault()}}
@@ -348,55 +354,61 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=312pt]{classbowControl_a7845c424d2495a820b8171d316408e77_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_a42eab3d685cd13f718c71aee11e5714f}\label{classbowControl_a42eab3d685cd13f718c71aee11e5714f}} 
+\Hypertarget{classbowControl_a42eab3d685cd13f718c71aee11e5714f}\label{classbowControl_a42eab3d685cd13f718c71aee11e5714f} 
 \index{bowControl@{bowControl}!dumpData@{dumpData}}
 \index{dumpData@{dumpData}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
 {\footnotesize\ttfamily String bow\+Control\+::dump\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classbowControl_adb36e8c79d731f20d06b6ebd1d6c96ea}\label{classbowControl_adb36e8c79d731f20d06b6ebd1d6c96ea}} 
+\Hypertarget{classbowControl_adb36e8c79d731f20d06b6ebd1d6c96ea}\label{classbowControl_adb36e8c79d731f20d06b6ebd1d6c96ea} 
 \index{bowControl@{bowControl}!getBowCurrentLimit@{getBowCurrentLimit}}
 \index{getBowCurrentLimit@{getBowCurrentLimit}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getBowCurrentLimit()}{getBowCurrentLimit()}}
 {\footnotesize\ttfamily float bow\+Control\+::get\+Bow\+Current\+Limit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classbowControl_a3ed5cc1c0c48effd02d4b7031663569f}\label{classbowControl_a3ed5cc1c0c48effd02d4b7031663569f}} 
+\Hypertarget{classbowControl_a3ed5cc1c0c48effd02d4b7031663569f}\label{classbowControl_a3ed5cc1c0c48effd02d4b7031663569f} 
 \index{bowControl@{bowControl}!getBowPower@{getBowPower}}
 \index{getBowPower@{getBowPower}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getBowPower()}{getBowPower()}}
 {\footnotesize\ttfamily uint16\+\_\+t bow\+Control\+::get\+Bow\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classbowControl_ad07d3247caf8f4bd20cf1cac8dbf5daf}\label{classbowControl_ad07d3247caf8f4bd20cf1cac8dbf5daf}} 
+\Hypertarget{classbowControl_ad07d3247caf8f4bd20cf1cac8dbf5daf}\label{classbowControl_ad07d3247caf8f4bd20cf1cac8dbf5daf} 
 \index{bowControl@{bowControl}!getHarmonic@{getHarmonic}}
 \index{getHarmonic@{getHarmonic}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getHarmonic()}{getHarmonic()}}
 {\footnotesize\ttfamily int bow\+Control\+::get\+Harmonic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classbowControl_a0c451b2b69b74dd056fb0e41970d94b3}\label{classbowControl_a0c451b2b69b74dd056fb0e41970d94b3}} 
+\Hypertarget{classbowControl_a651f95ef3ffb593b25a30eee2d12bb6c}\label{classbowControl_a651f95ef3ffb593b25a30eee2d12bb6c} 
+\index{bowControl@{bowControl}!getHarmonicAdd@{getHarmonicAdd}}
+\index{getHarmonicAdd@{getHarmonicAdd}!bowControl@{bowControl}}
+\doxysubsubsection{\texorpdfstring{getHarmonicAdd()}{getHarmonicAdd()}}
+{\footnotesize\ttfamily int bow\+Control\+::get\+Harmonic\+Add (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classbowControl_a0c451b2b69b74dd056fb0e41970d94b3}\label{classbowControl_a0c451b2b69b74dd056fb0e41970d94b3} 
 \index{bowControl@{bowControl}!getHarmonicShift@{getHarmonicShift}}
 \index{getHarmonicShift@{getHarmonicShift}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getHarmonicShift()}{getHarmonicShift()}}
 {\footnotesize\ttfamily int bow\+Control\+::get\+Harmonic\+Shift (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classbowControl_ad6eb8cba264e21be1af99b5cb0831fbb}\label{classbowControl_ad6eb8cba264e21be1af99b5cb0831fbb}} 
+\Hypertarget{classbowControl_ad6eb8cba264e21be1af99b5cb0831fbb}\label{classbowControl_ad6eb8cba264e21be1af99b5cb0831fbb} 
 \index{bowControl@{bowControl}!getHarmonicShift5@{getHarmonicShift5}}
 \index{getHarmonicShift5@{getHarmonicShift5}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getHarmonicShift5()}{getHarmonicShift5()}}
 {\footnotesize\ttfamily int bow\+Control\+::get\+Harmonic\+Shift5 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classbowControl_a830df83b0abd9c5a6814f1938ca5411f}\label{classbowControl_a830df83b0abd9c5a6814f1938ca5411f}} 
+\Hypertarget{classbowControl_a830df83b0abd9c5a6814f1938ca5411f}\label{classbowControl_a830df83b0abd9c5a6814f1938ca5411f} 
 \index{bowControl@{bowControl}!getHarmonicShiftRange@{getHarmonicShiftRange}}
 \index{getHarmonicShiftRange@{getHarmonicShiftRange}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getHarmonicShiftRange()}{getHarmonicShiftRange()}}
 {\footnotesize\ttfamily int bow\+Control\+::get\+Harmonic\+Shift\+Range (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classbowControl_a7037df2d31d666e40589606f676779a0}\label{classbowControl_a7037df2d31d666e40589606f676779a0}} 
+\Hypertarget{classbowControl_a7037df2d31d666e40589606f676779a0}\label{classbowControl_a7037df2d31d666e40589606f676779a0} 
 \index{bowControl@{bowControl}!getPIDPeakError@{getPIDPeakError}}
 \index{getPIDPeakError@{getPIDPeakError}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getPIDPeakError()}{getPIDPeakError()}}
 {\footnotesize\ttfamily float bow\+Control\+::get\+PIDPeak\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classbowControl_a87c3fd0196aa8366ced3d814be5b1cc9}\label{classbowControl_a87c3fd0196aa8366ced3d814be5b1cc9}} 
+\Hypertarget{classbowControl_a87c3fd0196aa8366ced3d814be5b1cc9}\label{classbowControl_a87c3fd0196aa8366ced3d814be5b1cc9} 
 \index{bowControl@{bowControl}!getPIDTarget@{getPIDTarget}}
 \index{getPIDTarget@{getPIDTarget}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getPIDTarget()}{getPIDTarget()}}
@@ -413,36 +425,31 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_a87c3fd0196aa8366ced3d814be5b1cc9_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_ad1ef4215aee9eeafe78abaf3655b1c73}\label{classbowControl_ad1ef4215aee9eeafe78abaf3655b1c73}} 
+\Hypertarget{classbowControl_ad1ef4215aee9eeafe78abaf3655b1c73}\label{classbowControl_ad1ef4215aee9eeafe78abaf3655b1c73} 
 \index{bowControl@{bowControl}!getPressureBaseline@{getPressureBaseline}}
 \index{getPressureBaseline@{getPressureBaseline}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getPressureBaseline()}{getPressureBaseline()}}
 {\footnotesize\ttfamily uint16\+\_\+t bow\+Control\+::get\+Pressure\+Baseline (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classbowControl_aa96a7e6814366f543a3d42503a24e0bb}\label{classbowControl_aa96a7e6814366f543a3d42503a24e0bb}} 
+\Hypertarget{classbowControl_aa96a7e6814366f543a3d42503a24e0bb}\label{classbowControl_aa96a7e6814366f543a3d42503a24e0bb} 
 \index{bowControl@{bowControl}!getPressureModifier@{getPressureModifier}}
 \index{getPressureModifier@{getPressureModifier}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{getPressureModifier()}{getPressureModifier()}}
 {\footnotesize\ttfamily uint16\+\_\+t bow\+Control\+::get\+Pressure\+Modifier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classbowControl_a6ac5163fe5784a5e1812908b217da50f}\label{classbowControl_a6ac5163fe5784a5e1812908b217da50f}} 
+\Hypertarget{classbowControl_a6ac5163fe5784a5e1812908b217da50f}\label{classbowControl_a6ac5163fe5784a5e1812908b217da50f} 
 \index{bowControl@{bowControl}!isBowStable@{isBowStable}}
 \index{isBowStable@{isBowStable}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{isBowStable()}{isBowStable()}}
 {\footnotesize\ttfamily int bow\+Control\+::is\+Bow\+Stable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+\Hypertarget{classbowControl_a23da346b759daad57a89cbcab3762df1}\label{classbowControl_a23da346b759daad57a89cbcab3762df1} 
+\index{bowControl@{bowControl}!loadHarmonicSeries@{loadHarmonicSeries}}
+\index{loadHarmonicSeries@{loadHarmonicSeries}!bowControl@{bowControl}}
+\doxysubsubsection{\texorpdfstring{loadHarmonicSeries()}{loadHarmonicSeries()}}
+{\footnotesize\ttfamily bool bow\+Control\+::load\+Harmonic\+Series (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
 
-
-Check if the bow is holding a stable frequency. 
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classbowControl_a6ac5163fe5784a5e1812908b217da50f_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{classbowControl_ac4e9c27470227a129acdf20603ba2259}\label{classbowControl_ac4e9c27470227a129acdf20603ba2259}} 
+\Hypertarget{classbowControl_ac4e9c27470227a129acdf20603ba2259}\label{classbowControl_ac4e9c27470227a129acdf20603ba2259} 
 \index{bowControl@{bowControl}!measureTimeToTarget@{measureTimeToTarget}}
 \index{measureTimeToTarget@{measureTimeToTarget}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{measureTimeToTarget()}{measureTimeToTarget()}}
@@ -455,7 +462,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_ac4e9c27470227a129acdf20603ba2259_cgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_a0b9ab5ef98479470107f0dbf32120304}\label{classbowControl_a0b9ab5ef98479470107f0dbf32120304}} 
+\Hypertarget{classbowControl_a0b9ab5ef98479470107f0dbf32120304}\label{classbowControl_a0b9ab5ef98479470107f0dbf32120304} 
 \index{bowControl@{bowControl}!motorFaultDetected@{motorFaultDetected}}
 \index{motorFaultDetected@{motorFaultDetected}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{motorFaultDetected()}{motorFaultDetected()}}
@@ -465,7 +472,7 @@ Here is the call graph for this function\+:\nopagebreak
 
 To be called when a motor FAULT interrupt occurs, adds one occurance to motor\+Fault. 
 
-\mbox{\Hypertarget{classbowControl_a51d03db7ff6ba45e3643b3cfb047c081}\label{classbowControl_a51d03db7ff6ba45e3643b3cfb047c081}} 
+\Hypertarget{classbowControl_a51d03db7ff6ba45e3643b3cfb047c081}\label{classbowControl_a51d03db7ff6ba45e3643b3cfb047c081} 
 \index{bowControl@{bowControl}!pidControl@{pidControl}}
 \index{pidControl@{pidControl}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{pidControl()}{pidControl()}}
@@ -491,7 +498,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_a51d03db7ff6ba45e3643b3cfb047c081_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_a1069d2ab76476da2e1fa7e90b8914e11}\label{classbowControl_a1069d2ab76476da2e1fa7e90b8914e11}} 
+\Hypertarget{classbowControl_a1069d2ab76476da2e1fa7e90b8914e11}\label{classbowControl_a1069d2ab76476da2e1fa7e90b8914e11} 
 \index{bowControl@{bowControl}!pidInterruptCaller@{pidInterruptCaller}}
 \index{pidInterruptCaller@{pidInterruptCaller}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{pidInterruptCaller()}{pidInterruptCaller()}}
@@ -515,7 +522,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_a1069d2ab76476da2e1fa7e90b8914e11_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_a72b5961eabb460cb97784bd91312a762}\label{classbowControl_a72b5961eabb460cb97784bd91312a762}} 
+\Hypertarget{classbowControl_a72b5961eabb460cb97784bd91312a762}\label{classbowControl_a72b5961eabb460cb97784bd91312a762} 
 \index{bowControl@{bowControl}!pidReset@{pidReset}}
 \index{pidReset@{pidReset}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{pidReset()}{pidReset()}}
@@ -532,25 +539,25 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_a72b5961eabb460cb97784bd91312a762_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_a6230fd2d93f18d14fac47f03969beea2}\label{classbowControl_a6230fd2d93f18d14fac47f03969beea2}} 
+\Hypertarget{classbowControl_a6230fd2d93f18d14fac47f03969beea2}\label{classbowControl_a6230fd2d93f18d14fac47f03969beea2} 
 \index{bowControl@{bowControl}!setBaseNote@{setBaseNote}}
 \index{setBaseNote@{setBaseNote}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setBaseNote()}{setBaseNote()}}
 {\footnotesize\ttfamily bool bow\+Control\+::set\+Base\+Note (\begin{DoxyParamCaption}\item[{int}]{in\+Base\+Note }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classbowControl_a797e74de62f9ba4d9dff86fa9dda59b9}\label{classbowControl_a797e74de62f9ba4d9dff86fa9dda59b9}} 
+\Hypertarget{classbowControl_a797e74de62f9ba4d9dff86fa9dda59b9}\label{classbowControl_a797e74de62f9ba4d9dff86fa9dda59b9} 
 \index{bowControl@{bowControl}!setBowCurrentLimit@{setBowCurrentLimit}}
 \index{setBowCurrentLimit@{setBowCurrentLimit}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setBowCurrentLimit()}{setBowCurrentLimit()}}
 {\footnotesize\ttfamily void bow\+Control\+::set\+Bow\+Current\+Limit (\begin{DoxyParamCaption}\item[{float}]{in\+Bow\+Current\+Limit }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classbowControl_a3242c3c20eb2ba2654ea501413b8af22}\label{classbowControl_a3242c3c20eb2ba2654ea501413b8af22}} 
+\Hypertarget{classbowControl_a3242c3c20eb2ba2654ea501413b8af22}\label{classbowControl_a3242c3c20eb2ba2654ea501413b8af22} 
 \index{bowControl@{bowControl}!setBowPower@{setBowPower}}
 \index{setBowPower@{setBowPower}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setBowPower()}{setBowPower()}}
 {\footnotesize\ttfamily void bow\+Control\+::set\+Bow\+Power (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{power }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classbowControl_a755a6cc1d1de5684cc77ddd6805960d8}\label{classbowControl_a755a6cc1d1de5684cc77ddd6805960d8}} 
+\Hypertarget{classbowControl_a755a6cc1d1de5684cc77ddd6805960d8}\label{classbowControl_a755a6cc1d1de5684cc77ddd6805960d8} 
 \index{bowControl@{bowControl}!setBowPressureSafe@{setBowPressureSafe}}
 \index{setBowPressureSafe@{setBowPressureSafe}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setBowPressureSafe()}{setBowPressureSafe()}}
@@ -570,7 +577,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_a755a6cc1d1de5684cc77ddd6805960d8_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_af3c67773447df63befb6af1bfc978e03}\label{classbowControl_af3c67773447df63befb6af1bfc978e03}} 
+\Hypertarget{classbowControl_af3c67773447df63befb6af1bfc978e03}\label{classbowControl_af3c67773447df63befb6af1bfc978e03} 
 \index{bowControl@{bowControl}!setHarmonic@{setHarmonic}}
 \index{setHarmonic@{setHarmonic}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setHarmonic()}{setHarmonic()}}
@@ -590,7 +597,20 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_af3c67773447df63befb6af1bfc978e03_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_a66a65845cd700b99f46929c6b861dc32}\label{classbowControl_a66a65845cd700b99f46929c6b861dc32}} 
+\Hypertarget{classbowControl_af259a733e5b1b0bcd7d926eb863689e5}\label{classbowControl_af259a733e5b1b0bcd7d926eb863689e5} 
+\index{bowControl@{bowControl}!setHarmonicAdd@{setHarmonicAdd}}
+\index{setHarmonicAdd@{setHarmonicAdd}!bowControl@{bowControl}}
+\doxysubsubsection{\texorpdfstring{setHarmonicAdd()}{setHarmonicAdd()}}
+{\footnotesize\ttfamily bool bow\+Control\+::set\+Harmonic\+Add (\begin{DoxyParamCaption}\item[{int}]{\+\_\+harmonic }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classbowControl_af259a733e5b1b0bcd7d926eb863689e5_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classbowControl_a66a65845cd700b99f46929c6b861dc32}\label{classbowControl_a66a65845cd700b99f46929c6b861dc32} 
 \index{bowControl@{bowControl}!setHarmonicShift@{setHarmonicShift}}
 \index{setHarmonicShift@{setHarmonicShift}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setHarmonicShift()}{setHarmonicShift()}}
@@ -603,7 +623,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_a66a65845cd700b99f46929c6b861dc32_cgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_aa8a077b5a6748a34435f44fb10f600c2}\label{classbowControl_aa8a077b5a6748a34435f44fb10f600c2}} 
+\Hypertarget{classbowControl_aa8a077b5a6748a34435f44fb10f600c2}\label{classbowControl_aa8a077b5a6748a34435f44fb10f600c2} 
 \index{bowControl@{bowControl}!setHarmonicShift5@{setHarmonicShift5}}
 \index{setHarmonicShift5@{setHarmonicShift5}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setHarmonicShift5()}{setHarmonicShift5()}}
@@ -616,13 +636,13 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_aa8a077b5a6748a34435f44fb10f600c2_cgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_af18ade3891de3aedee1b66a55507c96d}\label{classbowControl_af18ade3891de3aedee1b66a55507c96d}} 
+\Hypertarget{classbowControl_af18ade3891de3aedee1b66a55507c96d}\label{classbowControl_af18ade3891de3aedee1b66a55507c96d} 
 \index{bowControl@{bowControl}!setHarmonicShiftRange@{setHarmonicShiftRange}}
 \index{setHarmonicShiftRange@{setHarmonicShiftRange}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setHarmonicShiftRange()}{setHarmonicShiftRange()}}
 {\footnotesize\ttfamily bool bow\+Control\+::set\+Harmonic\+Shift\+Range (\begin{DoxyParamCaption}\item[{int}]{in\+Harmonic\+Shift\+Range }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classbowControl_a0604ef0ed9ad083fcedf9455488fc3ff}\label{classbowControl_a0604ef0ed9ad083fcedf9455488fc3ff}} 
+\Hypertarget{classbowControl_a0604ef0ed9ad083fcedf9455488fc3ff}\label{classbowControl_a0604ef0ed9ad083fcedf9455488fc3ff} 
 \index{bowControl@{bowControl}!setHold@{setHold}}
 \index{setHold@{setHold}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setHold()}{setHold()}}
@@ -635,7 +655,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_a0604ef0ed9ad083fcedf9455488fc3ff_cgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_a1b013c4b7fc5a76fca5a291e7bb20b60}\label{classbowControl_a1b013c4b7fc5a76fca5a291e7bb20b60}} 
+\Hypertarget{classbowControl_a1b013c4b7fc5a76fca5a291e7bb20b60}\label{classbowControl_a1b013c4b7fc5a76fca5a291e7bb20b60} 
 \index{bowControl@{bowControl}!setManualTilt@{setManualTilt}}
 \index{setManualTilt@{setManualTilt}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setManualTilt()}{setManualTilt()}}
@@ -648,7 +668,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_a1b013c4b7fc5a76fca5a291e7bb20b60_cgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_a01e1c268fc72ea56af7234fb8827934d}\label{classbowControl_a01e1c268fc72ea56af7234fb8827934d}} 
+\Hypertarget{classbowControl_a01e1c268fc72ea56af7234fb8827934d}\label{classbowControl_a01e1c268fc72ea56af7234fb8827934d} 
 \index{bowControl@{bowControl}!setPIDTarget@{setPIDTarget}}
 \index{setPIDTarget@{setPIDTarget}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setPIDTarget()}{setPIDTarget()}}
@@ -672,7 +692,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_a01e1c268fc72ea56af7234fb8827934d_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_aba8eec50e9879efc7e57b185de43a3d1}\label{classbowControl_aba8eec50e9879efc7e57b185de43a3d1}} 
+\Hypertarget{classbowControl_aba8eec50e9879efc7e57b185de43a3d1}\label{classbowControl_aba8eec50e9879efc7e57b185de43a3d1} 
 \index{bowControl@{bowControl}!setPIDTargetUnsafe@{setPIDTargetUnsafe}}
 \index{setPIDTargetUnsafe@{setPIDTargetUnsafe}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setPIDTargetUnsafe()}{setPIDTargetUnsafe()}}
@@ -689,7 +709,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_aba8eec50e9879efc7e57b185de43a3d1_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_a96856216a20f2565d764d5d7a5979cba}\label{classbowControl_a96856216a20f2565d764d5d7a5979cba}} 
+\Hypertarget{classbowControl_a96856216a20f2565d764d5d7a5979cba}\label{classbowControl_a96856216a20f2565d764d5d7a5979cba} 
 \index{bowControl@{bowControl}!setPressureBaseline@{setPressureBaseline}}
 \index{setPressureBaseline@{setPressureBaseline}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setPressureBaseline()}{setPressureBaseline()}}
@@ -702,7 +722,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_a96856216a20f2565d764d5d7a5979cba_cgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_af4eb41e57168f9e84845de536779160d}\label{classbowControl_af4eb41e57168f9e84845de536779160d}} 
+\Hypertarget{classbowControl_af4eb41e57168f9e84845de536779160d}\label{classbowControl_af4eb41e57168f9e84845de536779160d} 
 \index{bowControl@{bowControl}!setPressureModifier@{setPressureModifier}}
 \index{setPressureModifier@{setPressureModifier}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{setPressureModifier()}{setPressureModifier()}}
@@ -715,20 +735,27 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classbowControl_af4eb41e57168f9e84845de536779160d_cgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_a2499bd6950020ae94621282f1c86c711}\label{classbowControl_a2499bd6950020ae94621282f1c86c711}} 
+\Hypertarget{classbowControl_a210960a7b6309730b6e2d255652ac218}\label{classbowControl_a210960a7b6309730b6e2d255652ac218} 
 \index{bowControl@{bowControl}!updateHarmonicData@{updateHarmonicData}}
 \index{updateHarmonicData@{updateHarmonicData}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{updateHarmonicData()}{updateHarmonicData()}}
-{\footnotesize\ttfamily void bow\+Control\+::update\+Harmonic\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool bow\+Control\+::update\+Harmonic\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classbowControl_a2499bd6950020ae94621282f1c86c711_cgraph}
+\includegraphics[width=350pt]{classbowControl_a210960a7b6309730b6e2d255652ac218_cgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classbowControl_ac763e2c7400be2248ffad2e13462d60a}\label{classbowControl_ac763e2c7400be2248ffad2e13462d60a}} 
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classbowControl_a210960a7b6309730b6e2d255652ac218_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classbowControl_ac763e2c7400be2248ffad2e13462d60a}\label{classbowControl_ac763e2c7400be2248ffad2e13462d60a} 
 \index{bowControl@{bowControl}!updateString@{updateString}}
 \index{updateString@{updateString}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{updateString()}{updateString()}}
@@ -750,13 +777,13 @@ Here is the call graph for this function\+:\nopagebreak
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classbowControl_a820457c7cf5667230bdfa9ccbf54d112}\label{classbowControl_a820457c7cf5667230bdfa9ccbf54d112}} 
+\Hypertarget{classbowControl_a820457c7cf5667230bdfa9ccbf54d112}\label{classbowControl_a820457c7cf5667230bdfa9ccbf54d112} 
 \index{bowControl@{bowControl}!\_hold@{\_hold}}
 \index{\_hold@{\_hold}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{\_hold}{\_hold}}
 {\footnotesize\ttfamily bool bow\+Control\+::\+\_\+hold = false\hspace{0.3cm}{\ttfamily [private]}}
 
-\mbox{\Hypertarget{classbowControl_afcd061f5ac1b2b3183482ad4316326f7}\label{classbowControl_afcd061f5ac1b2b3183482ad4316326f7}} 
+\Hypertarget{classbowControl_afcd061f5ac1b2b3183482ad4316326f7}\label{classbowControl_afcd061f5ac1b2b3183482ad4316326f7} 
 \index{bowControl@{bowControl}!baselineTiltPWM@{baselineTiltPWM}}
 \index{baselineTiltPWM@{baselineTiltPWM}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{baselineTiltPWM}{baselineTiltPWM}}
@@ -766,93 +793,93 @@ Here is the call graph for this function\+:\nopagebreak
 
 The baseline tilt value used when engaging the bow with the string. 
 
-\mbox{\Hypertarget{classbowControl_a4d048030d0f7cb72d90926675d00e8c7}\label{classbowControl_a4d048030d0f7cb72d90926675d00e8c7}} 
+\Hypertarget{classbowControl_a4d048030d0f7cb72d90926675d00e8c7}\label{classbowControl_a4d048030d0f7cb72d90926675d00e8c7} 
 \index{bowControl@{bowControl}!baseNote@{baseNote}}
 \index{baseNote@{baseNote}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{baseNote}{baseNote}}
 {\footnotesize\ttfamily uint8\+\_\+t bow\+Control\+::base\+Note = 64}
 
-\mbox{\Hypertarget{classbowControl_a80ad832b525e1fcf51e45ae454aa09be}\label{classbowControl_a80ad832b525e1fcf51e45ae454aa09be}} 
+\Hypertarget{classbowControl_a80ad832b525e1fcf51e45ae454aa09be}\label{classbowControl_a80ad832b525e1fcf51e45ae454aa09be} 
 \index{bowControl@{bowControl}!bowActuators@{bowActuators}}
 \index{bowActuators@{bowActuators}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowActuators}{bowActuators}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classBowActuators}{Bow\+Actuators}}$\ast$ bow\+Control\+::bow\+Actuators}
+{\footnotesize\ttfamily \mbox{\hyperlink{classBowActuators}{Bow\+Actuators}}\texorpdfstring{$\ast$}{*} bow\+Control\+::bow\+Actuators}
 
-\mbox{\Hypertarget{classbowControl_a8ddd8c170720f487d58508822593609b}\label{classbowControl_a8ddd8c170720f487d58508822593609b}} 
+\Hypertarget{classbowControl_a8ddd8c170720f487d58508822593609b}\label{classbowControl_a8ddd8c170720f487d58508822593609b} 
 \index{bowControl@{bowControl}!bowCurrentLimit@{bowCurrentLimit}}
 \index{bowCurrentLimit@{bowCurrentLimit}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowCurrentLimit}{bowCurrentLimit}}
 {\footnotesize\ttfamily float bow\+Control\+::bow\+Current\+Limit = 1.\+5\hspace{0.3cm}{\ttfamily [private]}}
 
-\mbox{\Hypertarget{classbowControl_aaddf2f2f0acdb9c8edf8a35faa72e88b}\label{classbowControl_aaddf2f2f0acdb9c8edf8a35faa72e88b}} 
+\Hypertarget{classbowControl_aaddf2f2f0acdb9c8edf8a35faa72e88b}\label{classbowControl_aaddf2f2f0acdb9c8edf8a35faa72e88b} 
 \index{bowControl@{bowControl}!bowIOConnect@{bowIOConnect}}
 \index{bowIOConnect@{bowIOConnect}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowIOConnect}{bowIOConnect}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classbowIO}{bow\+IO}}$\ast$ bow\+Control\+::bow\+IOConnect}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbowIO}{bow\+IO}}\texorpdfstring{$\ast$}{*} bow\+Control\+::bow\+IOConnect}
 
 
 
-Pointer to associated \mbox{\hyperlink{classbowIO}{bow\+IO}} object. 
+Pointer to associated \doxylink{classbowIO}{bow\+IO} object. 
 
-\mbox{\Hypertarget{classbowControl_a41b68cfab4948911050b02116490f021}\label{classbowControl_a41b68cfab4948911050b02116490f021}} 
+\Hypertarget{classbowControl_a41b68cfab4948911050b02116490f021}\label{classbowControl_a41b68cfab4948911050b02116490f021} 
 \index{bowControl@{bowControl}!bowShutoffMotorDisabled@{bowShutoffMotorDisabled}}
 \index{bowShutoffMotorDisabled@{bowShutoffMotorDisabled}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowShutoffMotorDisabled}{bowShutoffMotorDisabled}}
 {\footnotesize\ttfamily bool bow\+Control\+::bow\+Shutoff\+Motor\+Disabled = false}
 
-\mbox{\Hypertarget{classbowControl_aa2253a04ce098480bb52b9daa95f02c6}\label{classbowControl_aa2253a04ce098480bb52b9daa95f02c6}} 
+\Hypertarget{classbowControl_aa2253a04ce098480bb52b9daa95f02c6}\label{classbowControl_aa2253a04ce098480bb52b9daa95f02c6} 
 \index{bowControl@{bowControl}!bowShutoffTimedout@{bowShutoffTimedout}}
 \index{bowShutoffTimedout@{bowShutoffTimedout}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowShutoffTimedout}{bowShutoffTimedout}}
 {\footnotesize\ttfamily bool bow\+Control\+::bow\+Shutoff\+Timedout = false}
 
-\mbox{\Hypertarget{classbowControl_aed5c87b2f8c9a9dd0ece68b59091da59}\label{classbowControl_aed5c87b2f8c9a9dd0ece68b59091da59}} 
+\Hypertarget{classbowControl_aed5c87b2f8c9a9dd0ece68b59091da59}\label{classbowControl_aed5c87b2f8c9a9dd0ece68b59091da59} 
 \index{bowControl@{bowControl}!bowShutoffTimeout@{bowShutoffTimeout}}
 \index{bowShutoffTimeout@{bowShutoffTimeout}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowShutoffTimeout}{bowShutoffTimeout}}
 {\footnotesize\ttfamily uint16\+\_\+t bow\+Control\+::bow\+Shutoff\+Timeout = 1000}
 
-\mbox{\Hypertarget{classbowControl_a17cd96cf9b4809be37ff50d970d7fdb5}\label{classbowControl_a17cd96cf9b4809be37ff50d970d7fdb5}} 
+\Hypertarget{classbowControl_a17cd96cf9b4809be37ff50d970d7fdb5}\label{classbowControl_a17cd96cf9b4809be37ff50d970d7fdb5} 
 \index{bowControl@{bowControl}!bowShutoffTimer@{bowShutoffTimer}}
 \index{bowShutoffTimer@{bowShutoffTimer}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowShutoffTimer}{bowShutoffTimer}}
 {\footnotesize\ttfamily elapsed\+Millis bow\+Control\+::bow\+Shutoff\+Timer}
 
-\mbox{\Hypertarget{classbowControl_a77f759d743f371d73ae0546fc530bbc2}\label{classbowControl_a77f759d743f371d73ae0546fc530bbc2}} 
+\Hypertarget{classbowControl_a77f759d743f371d73ae0546fc530bbc2}\label{classbowControl_a77f759d743f371d73ae0546fc530bbc2} 
 \index{bowControl@{bowControl}!bowSpeedToEngage@{bowSpeedToEngage}}
 \index{bowSpeedToEngage@{bowSpeedToEngage}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowSpeedToEngage}{bowSpeedToEngage}}
 {\footnotesize\ttfamily float bow\+Control\+::bow\+Speed\+To\+Engage = 10}
 
-\mbox{\Hypertarget{classbowControl_a9565655dd3613dd02a43515e0e1e7b0f}\label{classbowControl_a9565655dd3613dd02a43515e0e1e7b0f}} 
+\Hypertarget{classbowControl_a9565655dd3613dd02a43515e0e1e7b0f}\label{classbowControl_a9565655dd3613dd02a43515e0e1e7b0f} 
 \index{bowControl@{bowControl}!bowSpeedWhileEngaged@{bowSpeedWhileEngaged}}
 \index{bowSpeedWhileEngaged@{bowSpeedWhileEngaged}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{bowSpeedWhileEngaged}{bowSpeedWhileEngaged}}
 {\footnotesize\ttfamily float bow\+Control\+::bow\+Speed\+While\+Engaged = 10}
 
-\mbox{\Hypertarget{classbowControl_a1ca492c797dc01e00ab2f80a88fc367c}\label{classbowControl_a1ca492c797dc01e00ab2f80a88fc367c}} 
+\Hypertarget{classbowControl_a1ca492c797dc01e00ab2f80a88fc367c}\label{classbowControl_a1ca492c797dc01e00ab2f80a88fc367c} 
 \index{bowControl@{bowControl}!calibrationDataConnect@{calibrationDataConnect}}
 \index{calibrationDataConnect@{calibrationDataConnect}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{calibrationDataConnect}{calibrationDataConnect}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structCalibrationData}{Calibration\+Data}}$\ast$ bow\+Control\+::calibration\+Data\+Connect}
+{\footnotesize\ttfamily \mbox{\hyperlink{structCalibrationData}{Calibration\+Data}}\texorpdfstring{$\ast$}{*} bow\+Control\+::calibration\+Data\+Connect}
 
 
 
 Pointer to associated \+\_\+calibration\+Data object. 
 
-\mbox{\Hypertarget{classbowControl_a8869baca382bd6a9c6885e4eaaab7a46}\label{classbowControl_a8869baca382bd6a9c6885e4eaaab7a46}} 
+\Hypertarget{classbowControl_a8869baca382bd6a9c6885e4eaaab7a46}\label{classbowControl_a8869baca382bd6a9c6885e4eaaab7a46} 
 \index{bowControl@{bowControl}!commandsMotorFault@{commandsMotorFault}}
 \index{commandsMotorFault@{commandsMotorFault}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{commandsMotorFault}{commandsMotorFault}}
-{\footnotesize\ttfamily String bow\+Control\+::commands\+Motor\+Fault = \char`\"{}\char`\"{}}
+{\footnotesize\ttfamily String bow\+Control\+::commands\+Motor\+Fault = "{}"{}}
 
-\mbox{\Hypertarget{classbowControl_a8b72b42733233ae00c8780fc6ac3dddf}\label{classbowControl_a8b72b42733233ae00c8780fc6ac3dddf}} 
+\Hypertarget{classbowControl_a8b72b42733233ae00c8780fc6ac3dddf}\label{classbowControl_a8b72b42733233ae00c8780fc6ac3dddf} 
 \index{bowControl@{bowControl}!commandsOverPowerCurrent@{commandsOverPowerCurrent}}
 \index{commandsOverPowerCurrent@{commandsOverPowerCurrent}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{commandsOverPowerCurrent}{commandsOverPowerCurrent}}
-{\footnotesize\ttfamily String bow\+Control\+::commands\+Over\+Power\+Current = \char`\"{}\char`\"{}}
+{\footnotesize\ttfamily String bow\+Control\+::commands\+Over\+Power\+Current = "{}"{}}
 
-\mbox{\Hypertarget{classbowControl_a2c0dcfc6716cd9b7a4bfd6835e7d8f52}\label{classbowControl_a2c0dcfc6716cd9b7a4bfd6835e7d8f52}} 
+\Hypertarget{classbowControl_a2c0dcfc6716cd9b7a4bfd6835e7d8f52}\label{classbowControl_a2c0dcfc6716cd9b7a4bfd6835e7d8f52} 
 \index{bowControl@{bowControl}!currentHarmonicFreq@{currentHarmonicFreq}}
 \index{currentHarmonicFreq@{currentHarmonicFreq}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{currentHarmonicFreq}{currentHarmonicFreq}}
@@ -862,19 +889,25 @@ Pointer to associated \+\_\+calibration\+Data object.
 
 Base frequency of current harmonic. 
 
-\mbox{\Hypertarget{classbowControl_accc6c95233ced4ae0846c30fb49804f4}\label{classbowControl_accc6c95233ced4ae0846c30fb49804f4}} 
+\Hypertarget{classbowControl_accc6c95233ced4ae0846c30fb49804f4}\label{classbowControl_accc6c95233ced4ae0846c30fb49804f4} 
 \index{bowControl@{bowControl}!currentHarmonicSeries@{currentHarmonicSeries}}
 \index{currentHarmonicSeries@{currentHarmonicSeries}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{currentHarmonicSeries}{currentHarmonicSeries}}
 {\footnotesize\ttfamily uint8\+\_\+t bow\+Control\+::current\+Harmonic\+Series = 0}
 
-\mbox{\Hypertarget{classbowControl_af667ca77b3a2eb48903a40a25010f35f}\label{classbowControl_af667ca77b3a2eb48903a40a25010f35f}} 
+\Hypertarget{classbowControl_a7727c69514e72cedaf9bea49ac51fe3a}\label{classbowControl_a7727c69514e72cedaf9bea49ac51fe3a} 
+\index{bowControl@{bowControl}!currentHarmonicSeriesData@{currentHarmonicSeriesData}}
+\index{currentHarmonicSeriesData@{currentHarmonicSeriesData}!bowControl@{bowControl}}
+\doxysubsubsection{\texorpdfstring{currentHarmonicSeriesData}{currentHarmonicSeriesData}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classharmonicSeries}{harmonic\+Series}} bow\+Control\+::current\+Harmonic\+Series\+Data}
+
+\Hypertarget{classbowControl_af667ca77b3a2eb48903a40a25010f35f}\label{classbowControl_af667ca77b3a2eb48903a40a25010f35f} 
 \index{bowControl@{bowControl}!currentHarmonicShift5@{currentHarmonicShift5}}
 \index{currentHarmonicShift5@{currentHarmonicShift5}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{currentHarmonicShift5}{currentHarmonicShift5}}
 {\footnotesize\ttfamily float bow\+Control\+::current\+Harmonic\+Shift5 = 0\hspace{0.3cm}{\ttfamily [private]}}
 
-\mbox{\Hypertarget{classbowControl_a2156111d85359edf2c3df75645d796b7}\label{classbowControl_a2156111d85359edf2c3df75645d796b7}} 
+\Hypertarget{classbowControl_a2156111d85359edf2c3df75645d796b7}\label{classbowControl_a2156111d85359edf2c3df75645d796b7} 
 \index{bowControl@{bowControl}!currentHarmonicShiftFreq@{currentHarmonicShiftFreq}}
 \index{currentHarmonicShiftFreq@{currentHarmonicShiftFreq}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{currentHarmonicShiftFreq}{currentHarmonicShiftFreq}}
@@ -884,33 +917,13 @@ Base frequency of current harmonic.
 
 Calculated frequency with harmonic shift. 
 
-\mbox{\Hypertarget{classbowControl_ac63382008b2bcf28eba2584a9d1c0338}\label{classbowControl_ac63382008b2bcf28eba2584a9d1c0338}} 
-\index{bowControl@{bowControl}!elapsedSinceLastTarget@{elapsedSinceLastTarget}}
-\index{elapsedSinceLastTarget@{elapsedSinceLastTarget}!bowControl@{bowControl}}
-\doxysubsubsection{\texorpdfstring{elapsedSinceLastTarget}{elapsedSinceLastTarget}}
-{\footnotesize\ttfamily elapsed\+Millis bow\+Control\+::elapsed\+Since\+Last\+Target}
-
-
-
-Time elapsed since last change in bowing speed or pressure. 
-
-\mbox{\Hypertarget{classbowControl_acbc8b8ed2e2a7fa77311ad90b0a8fae9}\label{classbowControl_acbc8b8ed2e2a7fa77311ad90b0a8fae9}} 
+\Hypertarget{classbowControl_acbc8b8ed2e2a7fa77311ad90b0a8fae9}\label{classbowControl_acbc8b8ed2e2a7fa77311ad90b0a8fae9} 
 \index{bowControl@{bowControl}!elapsedSinceMute@{elapsedSinceMute}}
 \index{elapsedSinceMute@{elapsedSinceMute}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{elapsedSinceMute}{elapsedSinceMute}}
 {\footnotesize\ttfamily elapsed\+Millis bow\+Control\+::elapsed\+Since\+Mute}
 
-\mbox{\Hypertarget{classbowControl_a11d8c7f71ade3acdd16e89d8473e7a26}\label{classbowControl_a11d8c7f71ade3acdd16e89d8473e7a26}} 
-\index{bowControl@{bowControl}!elapsedTimeThreshold@{elapsedTimeThreshold}}
-\index{elapsedTimeThreshold@{elapsedTimeThreshold}!bowControl@{bowControl}}
-\doxysubsubsection{\texorpdfstring{elapsedTimeThreshold}{elapsedTimeThreshold}}
-{\footnotesize\ttfamily char bow\+Control\+::elapsed\+Time\+Threshold = 40}
-
-
-
-Time in ms that elapses in between each bow speed stability check. 
-
-\mbox{\Hypertarget{classbowControl_ac2d2071e4b2fcbc39e58900d44f32436}\label{classbowControl_ac2d2071e4b2fcbc39e58900d44f32436}} 
+\Hypertarget{classbowControl_ac2d2071e4b2fcbc39e58900d44f32436}\label{classbowControl_ac2d2071e4b2fcbc39e58900d44f32436} 
 \index{bowControl@{bowControl}!harmonic@{harmonic}}
 \index{harmonic@{harmonic}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{harmonic}{harmonic}}
@@ -920,13 +933,19 @@ Time in ms that elapses in between each bow speed stability check.
 
 Current harmonic. 
 
-\mbox{\Hypertarget{classbowControl_aff3d711d47ddb95b8cd61f64272c5c4b}\label{classbowControl_aff3d711d47ddb95b8cd61f64272c5c4b}} 
+\Hypertarget{classbowControl_a835a5475fbed54fdb7abf7b07aa4d788}\label{classbowControl_a835a5475fbed54fdb7abf7b07aa4d788} 
+\index{bowControl@{bowControl}!harmonicAdd@{harmonicAdd}}
+\index{harmonicAdd@{harmonicAdd}!bowControl@{bowControl}}
+\doxysubsubsection{\texorpdfstring{harmonicAdd}{harmonicAdd}}
+{\footnotesize\ttfamily int bow\+Control\+::harmonic\+Add = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classbowControl_aff3d711d47ddb95b8cd61f64272c5c4b}\label{classbowControl_aff3d711d47ddb95b8cd61f64272c5c4b} 
 \index{bowControl@{bowControl}!harmonicSeriesList@{harmonicSeriesList}}
 \index{harmonicSeriesList@{harmonicSeriesList}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{harmonicSeriesList}{harmonicSeriesList}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classHarmonicSeriesList}{Harmonic\+Series\+List}} bow\+Control\+::harmonic\+Series\+List}
 
-\mbox{\Hypertarget{classbowControl_a26ddde921eb977af08b17b5ece648c8b}\label{classbowControl_a26ddde921eb977af08b17b5ece648c8b}} 
+\Hypertarget{classbowControl_a26ddde921eb977af08b17b5ece648c8b}\label{classbowControl_a26ddde921eb977af08b17b5ece648c8b} 
 \index{bowControl@{bowControl}!harmonicShift@{harmonicShift}}
 \index{harmonicShift@{harmonicShift}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{harmonicShift}{harmonicShift}}
@@ -936,13 +955,13 @@ Current harmonic.
 
 Harmonic shift given as one 16-\/bit integer. 
 
-\mbox{\Hypertarget{classbowControl_a6af3944576e948ccc850d9189bd231af}\label{classbowControl_a6af3944576e948ccc850d9189bd231af}} 
+\Hypertarget{classbowControl_a6af3944576e948ccc850d9189bd231af}\label{classbowControl_a6af3944576e948ccc850d9189bd231af} 
 \index{bowControl@{bowControl}!harmonicShift5@{harmonicShift5}}
 \index{harmonicShift5@{harmonicShift5}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{harmonicShift5}{harmonicShift5}}
 {\footnotesize\ttfamily int bow\+Control\+::harmonic\+Shift5 = 0\hspace{0.3cm}{\ttfamily [private]}}
 
-\mbox{\Hypertarget{classbowControl_a5eee7e75d692d75c64172110c69e722c}\label{classbowControl_a5eee7e75d692d75c64172110c69e722c}} 
+\Hypertarget{classbowControl_a5eee7e75d692d75c64172110c69e722c}\label{classbowControl_a5eee7e75d692d75c64172110c69e722c} 
 \index{bowControl@{bowControl}!harmonicShiftRange@{harmonicShiftRange}}
 \index{harmonicShiftRange@{harmonicShiftRange}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{harmonicShiftRange}{harmonicShiftRange}}
@@ -952,7 +971,7 @@ Harmonic shift given as one 16-\/bit integer.
 
 Harmonic shift range for one 16-\/bit integer (full range up and down) 
 
-\mbox{\Hypertarget{classbowControl_aa3bbd0973cc2b096b3b49fca6af6e58c}\label{classbowControl_aa3bbd0973cc2b096b3b49fca6af6e58c}} 
+\Hypertarget{classbowControl_aa3bbd0973cc2b096b3b49fca6af6e58c}\label{classbowControl_aa3bbd0973cc2b096b3b49fca6af6e58c} 
 \index{bowControl@{bowControl}!inRecovery@{inRecovery}}
 \index{inRecovery@{inRecovery}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{inRecovery}{inRecovery}}
@@ -962,7 +981,7 @@ Harmonic shift range for one 16-\/bit integer (full range up and down)
 
 Set to true when bow recovery has started. 
 
-\mbox{\Hypertarget{classbowControl_ae1bbe11e9421bf5e875dca7d964f56dd}\label{classbowControl_ae1bbe11e9421bf5e875dca7d964f56dd}} 
+\Hypertarget{classbowControl_ae1bbe11e9421bf5e875dca7d964f56dd}\label{classbowControl_ae1bbe11e9421bf5e875dca7d964f56dd} 
 \index{bowControl@{bowControl}!inRelapse@{inRelapse}}
 \index{inRelapse@{inRelapse}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{inRelapse}{inRelapse}}
@@ -972,7 +991,7 @@ Set to true when bow recovery has started.
 
 This prevents the bow from recovering any more, preventing future instabilities. 
 
-Set to true when bow recovery has occurred and it has recovered too much, aka triggered bow instability again. \mbox{\Hypertarget{classbowControl_a38370e9e787a86ef3952aabf4ef8ac85}\label{classbowControl_a38370e9e787a86ef3952aabf4ef8ac85}} 
+Set to true when bow recovery has occurred and it has recovered too much, aka triggered bow instability again. \Hypertarget{classbowControl_a38370e9e787a86ef3952aabf4ef8ac85}\label{classbowControl_a38370e9e787a86ef3952aabf4ef8ac85} 
 \index{bowControl@{bowControl}!integral@{integral}}
 \index{integral@{integral}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{integral}{integral}}
@@ -982,7 +1001,7 @@ Set to true when bow recovery has occurred and it has recovered too much, aka tr
 
 Contains the integral used by the PID. 
 
-\mbox{\Hypertarget{classbowControl_ac509e827e903c5baa16e097f1b302a56}\label{classbowControl_ac509e827e903c5baa16e097f1b302a56}} 
+\Hypertarget{classbowControl_ac509e827e903c5baa16e097f1b302a56}\label{classbowControl_ac509e827e903c5baa16e097f1b302a56} 
 \index{bowControl@{bowControl}!integratorIgnoreBelow@{integratorIgnoreBelow}}
 \index{integratorIgnoreBelow@{integratorIgnoreBelow}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{integratorIgnoreBelow}{integratorIgnoreBelow}}
@@ -992,7 +1011,7 @@ Contains the integral used by the PID.
 
 The PID will ignore any integral errors under this threshold 0.\+4. 
 
-\mbox{\Hypertarget{classbowControl_abcb1f9a4982b4a61b86ce773a1927f74}\label{classbowControl_abcb1f9a4982b4a61b86ce773a1927f74}} 
+\Hypertarget{classbowControl_abcb1f9a4982b4a61b86ce773a1927f74}\label{classbowControl_abcb1f9a4982b4a61b86ce773a1927f74} 
 \index{bowControl@{bowControl}!Kd@{Kd}}
 \index{Kd@{Kd}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{Kd}{Kd}}
@@ -1002,7 +1021,7 @@ The PID will ignore any integral errors under this threshold 0.\+4.
 
 PID D multiplier 40. 
 
-\mbox{\Hypertarget{classbowControl_adf3b889ba6d172cfcc4102f70e276b6e}\label{classbowControl_adf3b889ba6d172cfcc4102f70e276b6e}} 
+\Hypertarget{classbowControl_adf3b889ba6d172cfcc4102f70e276b6e}\label{classbowControl_adf3b889ba6d172cfcc4102f70e276b6e} 
 \index{bowControl@{bowControl}!KdTerm@{KdTerm}}
 \index{KdTerm@{KdTerm}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{KdTerm}{KdTerm}}
@@ -1012,7 +1031,7 @@ PID D multiplier 40.
 
 Calculated D term. 
 
-\mbox{\Hypertarget{classbowControl_a2b1cb030a9257e7f45d810e41b1132c2}\label{classbowControl_a2b1cb030a9257e7f45d810e41b1132c2}} 
+\Hypertarget{classbowControl_a2b1cb030a9257e7f45d810e41b1132c2}\label{classbowControl_a2b1cb030a9257e7f45d810e41b1132c2} 
 \index{bowControl@{bowControl}!Ki@{Ki}}
 \index{Ki@{Ki}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{Ki}{Ki}}
@@ -1022,7 +1041,7 @@ Calculated D term.
 
 PID I multiplier 2. 
 
-\mbox{\Hypertarget{classbowControl_a40a325aaf9a2f9d19aa79205b5f6e7a9}\label{classbowControl_a40a325aaf9a2f9d19aa79205b5f6e7a9}} 
+\Hypertarget{classbowControl_a40a325aaf9a2f9d19aa79205b5f6e7a9}\label{classbowControl_a40a325aaf9a2f9d19aa79205b5f6e7a9} 
 \index{bowControl@{bowControl}!KiTerm@{KiTerm}}
 \index{KiTerm@{KiTerm}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{KiTerm}{KiTerm}}
@@ -1032,7 +1051,7 @@ PID I multiplier 2.
 
 Calculated I term. 
 
-\mbox{\Hypertarget{classbowControl_a31bb75cf63d04d3344db0bfd4aed0dc7}\label{classbowControl_a31bb75cf63d04d3344db0bfd4aed0dc7}} 
+\Hypertarget{classbowControl_a31bb75cf63d04d3344db0bfd4aed0dc7}\label{classbowControl_a31bb75cf63d04d3344db0bfd4aed0dc7} 
 \index{bowControl@{bowControl}!Kp@{Kp}}
 \index{Kp@{Kp}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{Kp}{Kp}}
@@ -1042,7 +1061,7 @@ Calculated I term.
 
 PID P multiplier 100. 
 
-\mbox{\Hypertarget{classbowControl_ad2116efce16f57643e4682dbcacbbe8b}\label{classbowControl_ad2116efce16f57643e4682dbcacbbe8b}} 
+\Hypertarget{classbowControl_ad2116efce16f57643e4682dbcacbbe8b}\label{classbowControl_ad2116efce16f57643e4682dbcacbbe8b} 
 \index{bowControl@{bowControl}!KpTerm@{KpTerm}}
 \index{KpTerm@{KpTerm}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{KpTerm}{KpTerm}}
@@ -1052,7 +1071,7 @@ PID P multiplier 100.
 
 Calculated P term. 
 
-\mbox{\Hypertarget{classbowControl_a30e659701021d55d06a875d9f34b3228}\label{classbowControl_a30e659701021d55d06a875d9f34b3228}} 
+\Hypertarget{classbowControl_a30e659701021d55d06a875d9f34b3228}\label{classbowControl_a30e659701021d55d06a875d9f34b3228} 
 \index{bowControl@{bowControl}!lastTiltPWM@{lastTiltPWM}}
 \index{lastTiltPWM@{lastTiltPWM}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{lastTiltPWM}{lastTiltPWM}}
@@ -1062,7 +1081,7 @@ Calculated P term.
 
 Last Tilt PWM value set, used as a full unsigned 16-\/bit value. 
 
-\mbox{\Hypertarget{classbowControl_a16ce07c4b7a3eaefa2a82a7945ca4ce7}\label{classbowControl_a16ce07c4b7a3eaefa2a82a7945ca4ce7}} 
+\Hypertarget{classbowControl_a16ce07c4b7a3eaefa2a82a7945ca4ce7}\label{classbowControl_a16ce07c4b7a3eaefa2a82a7945ca4ce7} 
 \index{bowControl@{bowControl}!manualSpeedPWM@{manualSpeedPWM}}
 \index{manualSpeedPWM@{manualSpeedPWM}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{manualSpeedPWM}{manualSpeedPWM}}
@@ -1072,7 +1091,7 @@ Last Tilt PWM value set, used as a full unsigned 16-\/bit value.
 
 Manual change to the current bowing speed PWM. 
 
-\mbox{\Hypertarget{classbowControl_addb7f6f29b5f645cbf52dfaa090c735d}\label{classbowControl_addb7f6f29b5f645cbf52dfaa090c735d}} 
+\Hypertarget{classbowControl_addb7f6f29b5f645cbf52dfaa090c735d}\label{classbowControl_addb7f6f29b5f645cbf52dfaa090c735d} 
 \index{bowControl@{bowControl}!manualTiltPWM@{manualTiltPWM}}
 \index{manualTiltPWM@{manualTiltPWM}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{manualTiltPWM}{manualTiltPWM}}
@@ -1082,7 +1101,7 @@ Manual change to the current bowing speed PWM.
 
 Manual change to the current Tilt PWM. 
 
-\mbox{\Hypertarget{classbowControl_a7bc01a8f9a74f227bbff9f419d1789c1}\label{classbowControl_a7bc01a8f9a74f227bbff9f419d1789c1}} 
+\Hypertarget{classbowControl_a7bc01a8f9a74f227bbff9f419d1789c1}\label{classbowControl_a7bc01a8f9a74f227bbff9f419d1789c1} 
 \index{bowControl@{bowControl}!modifierTiltPWM@{modifierTiltPWM}}
 \index{modifierTiltPWM@{modifierTiltPWM}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{modifierTiltPWM}{modifierTiltPWM}}
@@ -1092,7 +1111,7 @@ Manual change to the current Tilt PWM.
 
 The modifier tilt value used in conjunction with the baseline\+Tilt\+PWM when engaing the bow with the string. 
 
-\mbox{\Hypertarget{classbowControl_aab9dc396134241a4303acec3be3585c5}\label{classbowControl_aab9dc396134241a4303acec3be3585c5}} 
+\Hypertarget{classbowControl_aab9dc396134241a4303acec3be3585c5}\label{classbowControl_aab9dc396134241a4303acec3be3585c5} 
 \index{bowControl@{bowControl}!motorFault@{motorFault}}
 \index{motorFault@{motorFault}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{motorFault}{motorFault}}
@@ -1102,7 +1121,7 @@ The modifier tilt value used in conjunction with the baseline\+Tilt\+PWM when en
 
 Contains the number of motor faults since the last check. 
 
-\mbox{\Hypertarget{classbowControl_a8e7fd35de30ce28f5e6a5d64d9a80bcd}\label{classbowControl_a8e7fd35de30ce28f5e6a5d64d9a80bcd}} 
+\Hypertarget{classbowControl_a8e7fd35de30ce28f5e6a5d64d9a80bcd}\label{classbowControl_a8e7fd35de30ce28f5e6a5d64d9a80bcd} 
 \index{bowControl@{bowControl}!muteForce@{muteForce}}
 \index{muteForce@{muteForce}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{muteForce}{muteForce}}
@@ -1112,7 +1131,7 @@ Contains the number of motor faults since the last check.
 
 Amount of PWM to add to the maximum allowed tilt PWM to accomplish mute. 
 
-\mbox{\Hypertarget{classbowControl_a04b7c70b2776c8717ba627c6e85c16a6}\label{classbowControl_a04b7c70b2776c8717ba627c6e85c16a6}} 
+\Hypertarget{classbowControl_a04b7c70b2776c8717ba627c6e85c16a6}\label{classbowControl_a04b7c70b2776c8717ba627c6e85c16a6} 
 \index{bowControl@{bowControl}!mutePeriod@{mutePeriod}}
 \index{mutePeriod@{mutePeriod}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{mutePeriod}{mutePeriod}}
@@ -1122,13 +1141,13 @@ Amount of PWM to add to the maximum allowed tilt PWM to accomplish mute.
 
 How long to perform mute action before going back to rest. 
 
-\mbox{\Hypertarget{classbowControl_a369062f44a2d3dea1e816ae463726a5c}\label{classbowControl_a369062f44a2d3dea1e816ae463726a5c}} 
+\Hypertarget{classbowControl_a369062f44a2d3dea1e816ae463726a5c}\label{classbowControl_a369062f44a2d3dea1e816ae463726a5c} 
 \index{bowControl@{bowControl}!outputDebugData@{outputDebugData}}
 \index{outputDebugData@{outputDebugData}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{outputDebugData}{outputDebugData}}
 {\footnotesize\ttfamily bool bow\+Control\+::output\+Debug\+Data = true}
 
-\mbox{\Hypertarget{classbowControl_a693899ad1b80b1cfb8dfaa6634cc09be}\label{classbowControl_a693899ad1b80b1cfb8dfaa6634cc09be}} 
+\Hypertarget{classbowControl_a693899ad1b80b1cfb8dfaa6634cc09be}\label{classbowControl_a693899ad1b80b1cfb8dfaa6634cc09be} 
 \index{bowControl@{bowControl}!pidMaxError@{pidMaxError}}
 \index{pidMaxError@{pidMaxError}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{pidMaxError}{pidMaxError}}
@@ -1138,7 +1157,7 @@ How long to perform mute action before going back to rest.
 
 Max PID error per loop, essentially sets acceleration. 
 
-\mbox{\Hypertarget{classbowControl_a1384f16c70c89e454ec88e5af1852a91}\label{classbowControl_a1384f16c70c89e454ec88e5af1852a91}} 
+\Hypertarget{classbowControl_a1384f16c70c89e454ec88e5af1852a91}\label{classbowControl_a1384f16c70c89e454ec88e5af1852a91} 
 \index{bowControl@{bowControl}!PIDon@{PIDon}}
 \index{PIDon@{PIDon}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{PIDon}{PIDon}}
@@ -1148,13 +1167,13 @@ Max PID error per loop, essentially sets acceleration.
 
 Set to true if the PID is turned on. 
 
-\mbox{\Hypertarget{classbowControl_a37af74a65fc919ea50452fc6543516c2}\label{classbowControl_a37af74a65fc919ea50452fc6543516c2}} 
+\Hypertarget{classbowControl_a37af74a65fc919ea50452fc6543516c2}\label{classbowControl_a37af74a65fc919ea50452fc6543516c2} 
 \index{bowControl@{bowControl}!pidPeakError@{pidPeakError}}
 \index{pidPeakError@{pidPeakError}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{pidPeakError}{pidPeakError}}
 {\footnotesize\ttfamily float bow\+Control\+::pid\+Peak\+Error = 0\hspace{0.3cm}{\ttfamily [private]}}
 
-\mbox{\Hypertarget{classbowControl_a243aaf296cdc56ba9fb85df64f11b40a}\label{classbowControl_a243aaf296cdc56ba9fb85df64f11b40a}} 
+\Hypertarget{classbowControl_a243aaf296cdc56ba9fb85df64f11b40a}\label{classbowControl_a243aaf296cdc56ba9fb85df64f11b40a} 
 \index{bowControl@{bowControl}!pidTargetSpeed@{pidTargetSpeed}}
 \index{pidTargetSpeed@{pidTargetSpeed}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{pidTargetSpeed}{pidTargetSpeed}}
@@ -1164,7 +1183,7 @@ Set to true if the PID is turned on.
 
 PID target speed. 
 
-\mbox{\Hypertarget{classbowControl_aa11b77b46796ace01ef089ed5d7e96dd}\label{classbowControl_aa11b77b46796ace01ef089ed5d7e96dd}} 
+\Hypertarget{classbowControl_aa11b77b46796ace01ef089ed5d7e96dd}\label{classbowControl_aa11b77b46796ace01ef089ed5d7e96dd} 
 \index{bowControl@{bowControl}!pidUpdateInterval@{pidUpdateInterval}}
 \index{pidUpdateInterval@{pidUpdateInterval}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{pidUpdateInterval}{pidUpdateInterval}}
@@ -1174,7 +1193,7 @@ PID target speed.
 
 The interval at which the PID is being called, given in uS. 
 
-\mbox{\Hypertarget{classbowControl_a14a6f6577887d4feed8a0bc2ab63adf4}\label{classbowControl_a14a6f6577887d4feed8a0bc2ab63adf4}} 
+\Hypertarget{classbowControl_a14a6f6577887d4feed8a0bc2ab63adf4}\label{classbowControl_a14a6f6577887d4feed8a0bc2ab63adf4} 
 \index{bowControl@{bowControl}!previousError@{previousError}}
 \index{previousError@{previousError}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{previousError}{previousError}}
@@ -1184,7 +1203,7 @@ The interval at which the PID is being called, given in uS.
 
 Contains the last frequency error calculated by the PID, given in Hertz. 
 
-\mbox{\Hypertarget{classbowControl_a83a47b5dc58ede5ae709f09efd4fc1f9}\label{classbowControl_a83a47b5dc58ede5ae709f09efd4fc1f9}} 
+\Hypertarget{classbowControl_a83a47b5dc58ede5ae709f09efd4fc1f9}\label{classbowControl_a83a47b5dc58ede5ae709f09efd4fc1f9} 
 \index{bowControl@{bowControl}!previousTime@{previousTime}}
 \index{previousTime@{previousTime}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{previousTime}{previousTime}}
@@ -1194,13 +1213,13 @@ Contains the last frequency error calculated by the PID, given in Hertz.
 
 This contains the last time stamp that update\+String has been processed. 
 
-\mbox{\Hypertarget{classbowControl_a10861de9ca3688546f266128afc1640c}\label{classbowControl_a10861de9ca3688546f266128afc1640c}} 
+\Hypertarget{classbowControl_a10861de9ca3688546f266128afc1640c}\label{classbowControl_a10861de9ca3688546f266128afc1640c} 
 \index{bowControl@{bowControl}!reachedEngage@{reachedEngage}}
 \index{reachedEngage@{reachedEngage}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{reachedEngage}{reachedEngage}}
 {\footnotesize\ttfamily bool bow\+Control\+::reached\+Engage = false}
 
-\mbox{\Hypertarget{classbowControl_a00fa8313da3753909d1186b540b8a536}\label{classbowControl_a00fa8313da3753909d1186b540b8a536}} 
+\Hypertarget{classbowControl_a00fa8313da3753909d1186b540b8a536}\label{classbowControl_a00fa8313da3753909d1186b540b8a536} 
 \index{bowControl@{bowControl}!run@{run}}
 \index{run@{run}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{run}{run}}
@@ -1210,13 +1229,13 @@ This contains the last time stamp that update\+String has been processed.
 
 Set to \textquotesingle{}1\textquotesingle{} if the bowing wheel is running. 
 
-\mbox{\Hypertarget{classbowControl_aea27c1e59266aa9d321fcdf859fe4dff}\label{classbowControl_aea27c1e59266aa9d321fcdf859fe4dff}} 
+\Hypertarget{classbowControl_aea27c1e59266aa9d321fcdf859fe4dff}\label{classbowControl_aea27c1e59266aa9d321fcdf859fe4dff} 
 \index{bowControl@{bowControl}!speedMode@{speedMode}}
 \index{speedMode@{speedMode}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{speedMode}{speedMode}}
 {\footnotesize\ttfamily \mbox{\hyperlink{bowcontrol_8h_a08216a942f96ea84df79ef77a0554dd8}{\+\_\+speed\+Mode}} bow\+Control\+::speed\+Mode = \mbox{\hyperlink{bowcontrol_8h_a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389}{Automatic}}}
 
-\mbox{\Hypertarget{classbowControl_abe66ed8d74fb825c2bea3daccb157db0}\label{classbowControl_abe66ed8d74fb825c2bea3daccb157db0}} 
+\Hypertarget{classbowControl_abe66ed8d74fb825c2bea3daccb157db0}\label{classbowControl_abe66ed8d74fb825c2bea3daccb157db0} 
 \index{bowControl@{bowControl}!tiltMode@{tiltMode}}
 \index{tiltMode@{tiltMode}!bowControl@{bowControl}}
 \doxysubsubsection{\texorpdfstring{tiltMode}{tiltMode}}

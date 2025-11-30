@@ -21,7 +21,7 @@
 
 #include <WProgram.h>
 #include "avr_functions.h"
-#include "configuration.h"
+#include "configuration.hpp"
 
 configuration::configuration() {
     #define noteOnSingle "m:uv0,b:0,bchb:note,bmr:1,bpid:1,bpe:1,se:(velocity*512)*(1-notecount),bcsm:0" //"m:uv0,b:0,hb:note,run:1,pid:1,engage:1,muterest,ssm:0"

@@ -1,0 +1,102 @@
+\doxysection{solenoid.\+cpp}
+\hypertarget{solenoid_8cpp_source}{}\label{solenoid_8cpp_source}\index{solenoid.cpp@{solenoid.cpp}}
+\mbox{\hyperlink{solenoid_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ SOLENOID\_C}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ SOLENOID\_C}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}Teensy\_PWM.h"{}}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsolenoid}{solenoid}}\ \{}
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classsolenoid_ad71fc85680b3fc955d83264bb92dc80b}{solenoidPin}};\ \ \ \ \ }
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ Teensy\_PWM\ *\mbox{\hyperlink{classsolenoid_a2fccb70eddf3d9661dc99debe4b17447}{solenoidPWM}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classsolenoid_a63160f6edecc700f4e3cdaf278e03ccf}{solenoid}}(\textcolor{keywordtype}{char}\ \_solenoidPin)\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{classsolenoid_ad71fc85680b3fc955d83264bb92dc80b}{solenoidPin}}\ =\ \_solenoidPin;}
+\DoxyCodeLine{00033\ \ \ \ \ pinMode(\mbox{\hyperlink{classsolenoid_ad71fc85680b3fc955d83264bb92dc80b}{solenoidPin}},\ OUTPUT);}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//digitalWrite(solenoidPin,\ 1);}}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classsolenoid_a2fccb70eddf3d9661dc99debe4b17447}{solenoidPWM}}\ =\ \textcolor{keyword}{new}\ Teensy\_PWM(\mbox{\hyperlink{classsolenoid_ad71fc85680b3fc955d83264bb92dc80b}{solenoidPin}},\ 20000,\ 0);}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsolenoid_a4fca184d2b4e10a9bd02b1290f4dc368}{solenoidEngaged}}\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classsolenoid_a2c6a1e660fcb4f51a6b556c1815767a3}{solenoidEngageTime}}\ =\ 0;\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classsolenoid_a5444f488ba4bef480704dc7c21ef1463}{solenoidEngageDuration}}\ =\ 15000;\ \ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classsolenoid_ae035d0d4b493dbdff67f1bd34455bf81}{forceMax}}\ =\ 65535;}
+\DoxyCodeLine{00043\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classsolenoid_a4af25a31cc8a8ab5406ba5ff07babe47}{forceMin}}\ =\ 0;}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classsolenoid_a6e52fb5a39303f154645fc8d6acd58a0}{forceMultiplier}}\ =\ 1;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsolenoid_aa21082b6a76e11ce41e7931d0f94dec0}{solenoidEngage}}(\textcolor{keywordtype}{int}\ force)\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (force\ <=\ 0)\ \{\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (force\ >\ 65535)\ \{\ force\ =\ 65535;\ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ forceMultiplied\ =\ ((float)\ force)\ *\ \mbox{\hyperlink{classsolenoid_a6e52fb5a39303f154645fc8d6acd58a0}{forceMultiplier}};}
+\DoxyCodeLine{00052\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}forceMultiplied\ "{}\ +\ String(forceMultiplied)\ +\ "{}\ forceMultiplier\ "{}\ +\ String(forceMultiplier)\ +\ "{}\ force\ "{}\ +\ String(force),\ Debug);}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (forceMultiplied\ ==\ 0)\ \{\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ actualForce\ =\ \mbox{\hyperlink{classsolenoid_a4af25a31cc8a8ab5406ba5ff07babe47}{forceMin}}\ +\ ((float)\ (\mbox{\hyperlink{classsolenoid_ae035d0d4b493dbdff67f1bd34455bf81}{forceMax}}\ -\/\ \mbox{\hyperlink{classsolenoid_a4af25a31cc8a8ab5406ba5ff07babe47}{forceMin}}))\ /\ 65535\ *\ forceMultiplied;}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classsolenoid_a2c6a1e660fcb4f51a6b556c1815767a3}{solenoidEngageTime}}\ =\ micros();}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ analogWrite(solenoidPin,\ force);}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ analogWrite(\mbox{\hyperlink{classsolenoid_ad71fc85680b3fc955d83264bb92dc80b}{solenoidPin}},\ \textcolor{keywordtype}{int}(actualForce));}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classsolenoid_a4fca184d2b4e10a9bd02b1290f4dc368}{solenoidEngaged}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Egaging\ solenoid\ with\ force\ "{}}\ +\ String(actualForce),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4aa1e0ed72a417f9c6ec63b58d565357f3}{Hardware}});}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsolenoid_a001f939687b6fc07c9d1761ece7bdfb5}{solenoidEngage}}()\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classsolenoid_a001f939687b6fc07c9d1761ece7bdfb5}{solenoidEngage}}(65535);}
+\DoxyCodeLine{00068\ \ \ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsolenoid_aa9c373f9aa46c11d7c754a4dee2956d0}{solenoidDisengage}}()\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ analogWrite(\mbox{\hyperlink{classsolenoid_ad71fc85680b3fc955d83264bb92dc80b}{solenoidPin}},\ 0);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Disengaging\ solenoid"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4aa1e0ed72a417f9c6ec63b58d565357f3}{Hardware}});}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classsolenoid_a4fca184d2b4e10a9bd02b1290f4dc368}{solenoidEngaged}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsolenoid_a0356c78bc3471f6ca8835eb02b4e3538}{solenoidDisengage}}(\textcolor{keywordtype}{int}\ value)\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ >\ 0\ )\ \{\ \mbox{\hyperlink{classsolenoid_aa9c373f9aa46c11d7c754a4dee2956d0}{solenoidDisengage}}();\ \}}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsolenoid_a8846508bc47ec4408e84bad43ed5b468}{updateSolenoid}}()\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{main_8cpp_af205655c0c86fc6aaf4c8450d8243938}{currentTime}}\ =\ micros();}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classsolenoid_a4fca184d2b4e10a9bd02b1290f4dc368}{solenoidEngaged}})\ \&\&\ (\mbox{\hyperlink{main_8cpp_af205655c0c86fc6aaf4c8450d8243938}{currentTime}}\ -\/\ \mbox{\hyperlink{classsolenoid_a2c6a1e660fcb4f51a6b556c1815767a3}{solenoidEngageTime}}\ >\ \mbox{\hyperlink{classsolenoid_a5444f488ba4bef480704dc7c21ef1463}{solenoidEngageDuration}})\ \&\&\ (\mbox{\hyperlink{classsolenoid_a5444f488ba4bef480704dc7c21ef1463}{solenoidEngageDuration}}\ !=\ 0))\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classsolenoid_aa9c373f9aa46c11d7c754a4dee2956d0}{solenoidDisengage}}();}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00088\ \ \ \ \ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ String\ \mbox{\hyperlink{classsolenoid_ab1ef0174b9fc7376449bc0dabfaf918f}{dumpData}}()\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ String\ dump\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}sxf:"{}}\ +\ String(\mbox{\hyperlink{classsolenoid_ae035d0d4b493dbdff67f1bd34455bf81}{forceMax}})\ +\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}sif:"{}}\ +\ String(\mbox{\hyperlink{classsolenoid_a4af25a31cc8a8ab5406ba5ff07babe47}{forceMin}})\ +\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ dump;}
+\DoxyCodeLine{00095\ \ \ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

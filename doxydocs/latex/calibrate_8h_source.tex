@@ -1,0 +1,94 @@
+\doxysection{calibrate.\+h}
+\hypertarget{calibrate_8h_source}{}\label{calibrate_8h_source}\index{calibrate.h@{calibrate.h}}
+\mbox{\hyperlink{calibrate_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <sys/\_stdint.h>}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ CALIBRATE\_H}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ CALIBRATE\_H}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structCalibrationData}{CalibrationData}}\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structCalibrationData_adc539886c07176c04ed8bb02d185b09c}{minHz}}\ =\ 19.05;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00026\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structCalibrationData_a4fee79f4cad856d28f6372abc3aba90a}{minSpeedPWM}}\ =\ 10619;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structCalibrationData_aeccd1f1f91581351fbd5e76eb5b48eb9}{maxHz}}\ =\ 539.49;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structCalibrationData_a9f72d0c5443474d421b40c9ff16c6941}{maxSpeedPWM}}\ =\ 64564;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structCalibrationData_a96ca8d950e31c3904de2396583ee7db3}{minInertialPWM}}\ =\ 10619;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structCalibrationData_acd0de95cff2c97a3334474622271df67}{firstTouchPressure}}\ =\ 16460;\ \ \ \ \ }
+\DoxyCodeLine{00034\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structCalibrationData_aac59ac28009041fe044ebdb8e58e73dc}{stallPressure}}\ =\ 51063;\ \ \ \ \ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structCalibrationData_a8e1ad5a082bec8c00b3187bb877f3283}{fundamentalFrequency}}\ =\ 66;\ \ \ \ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ int16\_t\ \mbox{\hyperlink{structCalibrationData_a549e4ea88c1c92b17fe33ff472c70735}{lowerHarmonic}}\ =\ -\/48;}
+\DoxyCodeLine{00039\ \ \ \ \ int16\_t\ \mbox{\hyperlink{structCalibrationData_a5159590e96c2bc7182c63d3b42c8b18d}{upperHarmonic}}\ =\ 49;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structCalibrationData_a2ee8a816319c671a7a92ed132ac06329}{maxHzPIDFullPressure}}\ =\ -\/1;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structCalibrationData_a99ce3a41280a4b48d3f333c58f0ba1c0}{restPosition}}\ =\ 0;}
+\DoxyCodeLine{00044\ \};\ \textcolor{comment}{//\ calibrationData;}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcalibrate}{calibrate}}\ \{}
+\DoxyCodeLine{00055\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{classbowIO}{bowIO}}\ *\mbox{\hyperlink{classcalibrate_a14b2f0b41944890ea89c8528823c4c00}{bowIOConnect}};\ \ }
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{classbowControl}{bowControl}}\ *\mbox{\hyperlink{classcalibrate_af8ad4af07753d4e21fa3b96e40d6c74e}{bowControlConnect}};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\ \ \ \ \#define\ testDelay\ 1\ }}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\ \ \ \ \#define\ deviation\ 2\ }}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\ \ \ \ \#define\ minTestFreq\ 1}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\ \ \ \ \#define\ maxTestFreq\ 1000}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\ \ \ \ \#define\ minPermissibleBowSpeedForCalibration\ 20}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\ \ \ \ \#define\ maxPowerUseMultiplierDuringCalibration\ 0.75}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{comment}{//\ \ \ \ int\ EEPROM\_offset\ =\ 0;}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{structCalibrationData}{CalibrationData}}\ *\mbox{\hyperlink{classcalibrate_a65a3293c475c0cd57131a883c11d9436}{calibrationData}};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{classcalibrate}{calibrate}}(\mbox{\hyperlink{classbowIO}{bowIO}}\ \&\_bowIO,\ \mbox{\hyperlink{structCalibrationData}{CalibrationData}}\ \&\_\_calibrationData,\ \mbox{\hyperlink{classbowControl}{bowControl}}\ \&\_bowControl);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcalibrate_af3c73bf75c5b8a2d942615d34669bf53}{startAudioAnalyzing}}();}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcalibrate_a928e7a5c8b36e55c34878bdba55df4ee}{stopAudioAnalyzing}}();}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrate_a6e708417f14acd978c8d2a38f5849074}{waitForBowToStabilize}}(uint16\_t\ maxIterations);}
+\DoxyCodeLine{00079\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrate_a157d35f3855c4707cfe0d697bd557a8b}{findMinPressure}}();}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrate_ac7f4beb3939af5f301ee39f3b59bc74c}{findMaxPressure}}();}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classcalibrate_a74535f13b751adcb657029ef0088e09c}{maxTestPressure}}\ =\ 60000;}
+\DoxyCodeLine{00086\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classcalibrate_ae1209ef38c0013fcead07f8a98021cd3}{pressureTestRetract}}\ =\ 7500;}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrate_a8901c66131f46a26940c4ccd5d410996}{findMinMaxPressure}}();}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrate_a6654b82c8a1dbb55502cdfb4ef6a7b1f}{findMinMaxSpeedPWM}}();}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrate_ab7f48f8f5de0d0e6ae30c0be6ca4843d}{findMinMaxSpeedPID}}();}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrate_ae571678a639c870844b02cfecf3ec2b4}{calibrateAll}}();}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ String\ \mbox{\hyperlink{classcalibrate_a37b5afce3d7146dd5d12f82ddb00e7af}{dumpData}}();}
+\DoxyCodeLine{00095\ \};}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

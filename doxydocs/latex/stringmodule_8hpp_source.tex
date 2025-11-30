@@ -1,0 +1,235 @@
+\doxysection{stringmodule.\+hpp}
+\hypertarget{stringmodule_8hpp_source}{}\label{stringmodule_8hpp_source}\index{stringmodule.hpp@{stringmodule.hpp}}
+\mbox{\hyperlink{stringmodule_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ STRINGMODULE\_HPP}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ STRINGMODULE\_HPP}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ \mbox{\hyperlink{stringmodule_8hpp_a57d17c2e3d30e2b18abf9a470e8df188}{serialCommandsStringModule}}[]\ =\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bow"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}0-\/15"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ currently\ selected\ bow"{}}\},}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{comment}{//pid}}
+\DoxyCodeLine{00026\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpid"{}},\ \textcolor{stringliteral}{"{}bpid"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ bow\ PID\ on/off"{}}\ \},}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{//pidki,\ ki}}
+\DoxyCodeLine{00028\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidki"{}},\ \textcolor{stringliteral}{"{}bpki"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ Ki\ parameter\ of\ the\ PID\ of\ the\ selected\ bow"{}}\ \},}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//pidkp,\ kp}}
+\DoxyCodeLine{00030\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidkp"{}},\ \textcolor{stringliteral}{"{}bpkp"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ Kp\ parameter\ of\ the\ PID\ of\ the\ selected\ bow"{}}\ \},}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{//pidkd,\ kd}}
+\DoxyCodeLine{00032\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidkd"{}},\ \textcolor{stringliteral}{"{}bpkd"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ Kd\ parameter\ of\ the\ PID\ of\ the\ selected\ bow"{}}\ \},}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{comment}{//integratorerror,\ ie}}
+\DoxyCodeLine{00034\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidintegratorerror"{}},\ \textcolor{stringliteral}{"{}bpie"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ lower\ threshold\ of\ error\ values\ for\ the\ PID\ integrator\ to\ ignore\ of\ the\ selected\ bow"{}}\ \},}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{comment}{//pidr,\ pidr}}
+\DoxyCodeLine{00036\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidr"{}},\ \textcolor{stringliteral}{"{}bpir"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Resets\ the\ PID\ of\ the\ selected\ bow"{}}\ \},}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//pidmaxerror,\ pme}}
+\DoxyCodeLine{00038\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidmaxerror"{}},\ \textcolor{stringliteral}{"{}bpme"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Maximum\ error\ to\ correct\ in\ each\ PID\ loop,\ essentially\ sets\ acceleration"{}}\ \},}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//pidpeakerror,\ pidperr}}
+\DoxyCodeLine{00040\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidpeakerror"{}},\ \textcolor{stringliteral}{"{}bpperr"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Get\ latest\ PID\ peak\ error"{}}\},}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{comment}{//frequency,\ f}}
+\DoxyCodeLine{00043\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolfrequency"{}},\ \textcolor{stringliteral}{"{}bcf"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ speed\ frequency\ in\ hertz,\ requires\ that\ PID\ is\ turned\ on"{}}\ \},}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//fundamental,\ u}}
+\DoxyCodeLine{00045\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolfundamental"{}},\ \textcolor{stringliteral}{"{}bcu"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Bow\ fundamental\ frequency,\ all\ harmonics\ are\ calculated\ from\ this\ number"{}}\ \},}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{comment}{//harmonic,\ h}}
+\DoxyCodeLine{00047\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolharmonic"{}},\ \textcolor{stringliteral}{"{}bch"{}},\ \textcolor{stringliteral}{"{}int"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ speed\ in\ terms\ of\ a\ harmonic\ number.\ A\ ratio\ is\ taken\ from\ the\ given\ harmonic\ in\ the\ current\ harmonic\ list,\ the\ ratio\ is\ then\ multiplied\ by\ the\ bow\ fundamental\ frequency"{}}\ \},}
+\DoxyCodeLine{00048\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolharmonicadd"{}},\ \textcolor{stringliteral}{"{}bcha"{}},\ \textcolor{stringliteral}{"{}int"{}},\ \textcolor{stringliteral}{"{}Additative\ version\ of\ bowcontrolharmonic,\ the\ number\ is\ given\ is\ added\ to\ the\ harmonic\ given"{}}\ \},}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{comment}{//harmonicbase,\ hb}}
+\DoxyCodeLine{00050\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolharmonicbase"{}},\ \textcolor{stringliteral}{"{}bchb"{}},\ \textcolor{stringliteral}{"{}int"{}},\ \textcolor{stringliteral}{"{}Same\ as\ bowcontrolharmonic\ but\ where\ the\ harmonic\ number\ is\ based\ on\ a\ MIDI\ note\ given\ by\ bowcontrolbasenote"{}}\ \},}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{comment}{//setbasenote,\ sbn}}
+\DoxyCodeLine{00052\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolharmonicbasenote"{}},\ \textcolor{stringliteral}{"{}bchbn"{}},\ \textcolor{stringliteral}{"{}0-\/127"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ MIDI\ base\ note\ of\ the\ string,\ used\ in\ conjunction\ with\ bowcontrolharmonicbase"{}}\},}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{//setharmonicshift,\ shs}}
+\DoxyCodeLine{00054\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolharmonicshift"{}},\ \textcolor{stringliteral}{"{}bchsh"{}},\ \textcolor{stringliteral}{"{}-\/32767-\/32767"{}},\ \textcolor{stringliteral}{"{}Setting\ shift\ from\ the\ currently\ playing\ harmonic\ where\ 32767\ equals\ the\ entire\ harmonic\ shift\ range\ shifted\ up"{}}\ \},}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{comment}{//harmonicshiftrange,\ hsr}}
+\DoxyCodeLine{00056\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolharmonicshiftrange"{}},\ \textcolor{stringliteral}{"{}bchsr"{}},\ \textcolor{stringliteral}{"{}0-\/36"{}},\ \textcolor{stringliteral}{"{}Set\ the\ number\ of\ harmonic\ numbers\ that\ constitutes\ the\ entire\ harmonic\ shift"{}}\ \},}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{comment}{//setharmonicshift5,\ shs5}}
+\DoxyCodeLine{00058\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolharmonicshift5"{}},\ \textcolor{stringliteral}{"{}bchs5"{}},\ \textcolor{stringliteral}{"{}-\/32767-\/32767"{}},\ \textcolor{stringliteral}{"{}Setting\ shift\ from\ the\ currently\ playing\ harmonic\ over\ 5\ octaves\ where\ 32767\ equals\ 5\ octaves\ shift\ up\ from\ the\ fundamental"{}}\ \},}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{comment}{//setspeedmode,\ ssm}}
+\DoxyCodeLine{00060\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolspeedmode"{}},\ \textcolor{stringliteral}{"{}bcsm"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ speed\ mode,\ 0\ =\ Automatic\ and\ 1\ =\ Manual"{}}\ \},}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{//bowcontrolharmonicseries,\ bchs\ //harmonicseries,\ hs}}
+\DoxyCodeLine{00063\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowharmonicseries"{}},\ \textcolor{stringliteral}{"{}bhs"{}},\ \textcolor{stringliteral}{"{}int"{}},\ \textcolor{stringliteral}{"{}Get/set\ the\ current\ harmonic\ series"{}}\ \},}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{comment}{//bowcontrolharmoniclist,\ bchl\ //harmoniclist,\ hl}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{//\{\ "{}bowharmonicserieslist"{},\ "{}bhsl"{},\ "{}slot:name:ratios"{},\ "{}Get/set\ the\ harmonic\ ratios\ and\ name\ in\ the\ given\ slot"{}\ \},}}
+\DoxyCodeLine{00066\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowharmonicseriesdata"{}},\ \textcolor{stringliteral}{"{}bhsd"{}},\ \textcolor{stringliteral}{"{}slot:name:ratios"{}},\ \textcolor{stringliteral}{"{}Sets\ all\ data\ for\ the\ harmonic\ series\ in\ the\ given\ slot"{}}\ \},}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{comment}{//bowcontrolharmonicratio,\ bchr\ setharmonic,\ sh}}
+\DoxyCodeLine{00068\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowharmonicseriesratio"{}},\ \textcolor{stringliteral}{"{}bhsr"{}},\ \textcolor{stringliteral}{"{}harmonic:ratio"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ ratio\ of\ the\ given\ harmonic\ in\ current\ harmonic\ series,\ will\ increase\ the\ list\ size\ if\ needed\ to\ adress\ the\ harmonic"{}}\ \},}
+\DoxyCodeLine{00069\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowharmonicseriesratioremove"{}},\ \textcolor{stringliteral}{"{}bhsrr"{}},\ \textcolor{stringliteral}{"{}ratio"{}},\ \textcolor{stringliteral}{"{}Remove\ the\ harmmonic\ ratio\ given\ in\ the\ current\ series\ and\ shift\ any\ ratios\ accordingly.\ Cannot\ remove\ all\ ratios"{}}\},}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{comment}{//bowcontrolharmoniccount,\ bchc\ //harmoniccount,\ hc}}
+\DoxyCodeLine{00071\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowharmonicseriescount"{}},\ \textcolor{stringliteral}{"{}bhsc"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Returns\ the\ number\ of\ harmonic\ series\ in\ the\ list\ and\ their\ IDs"{}}\},}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{comment}{//\{\ "{}bowharmonicseriessave"{},\ "{}bhss"{},\ "{}name:series"{},\ "{}Saves\ the\ current\ harmonic\ series\ in\ the\ slot\ given,\ or\ if\ the\ slot\ is\ out\ of\ range,\ creates\ a\ new\ one\ at\ the\ end\ of\ the\ list"{}\},}}
+\DoxyCodeLine{00073\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowharmonicseriessave"{}},\ \textcolor{stringliteral}{"{}bhss"{}},\ \textcolor{stringliteral}{"{}series:name"{}},\ \textcolor{stringliteral}{"{}Saves\ the\ current\ harmonic\ series\ in\ the\ slot\ given,\ or\ if\ the\ slot\ is\ out\ of\ range,\ creates\ a\ new\ one\ at\ the\ end\ of\ the\ list"{}}\},}
+\DoxyCodeLine{00074\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowharmonicseriesremove"{}},\ \textcolor{stringliteral}{"{}bhsrm"{}},\ \textcolor{stringliteral}{"{}series"{}},\ \textcolor{stringliteral}{"{}Remove\ the\ series\ given\ and\ shift\ any\ series\ accordingly.\ Cannot\ remove\ all\ series"{}}\},}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{comment}{//status,\ s}}
+\DoxyCodeLine{00077\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowstatus"{}},\ \textcolor{stringliteral}{"{}bs"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Prints\ status\ information\ for\ the\ selected\ bow"{}}\ \},}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{comment}{//stringfrequency,\ sf}}
+\DoxyCodeLine{00079\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}pickupstringfrequency"{}},\ \textcolor{stringliteral}{"{}psf"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Returns\ the\ fundamental\ tone\ calculated\ from\ the\ current\ audio\ signal\ if\ appliccable"{}}\},}
+\DoxyCodeLine{00080\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}pickupaudiopeak"{}},\ \textcolor{stringliteral}{"{}pap"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Returns\ the\ peak\ amplitude\ of\ the\ current\ audio\ signal"{}}\},}
+\DoxyCodeLine{00081\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}pickupaudiorms"{}},\ \textcolor{stringliteral}{"{}par"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Returns\ the\ RMS\ amplitude\ of\ the\ current\ audio\ signal"{}}\},}
+\DoxyCodeLine{00082\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowdebugmeasuretimetotarget"{}},\ \textcolor{stringliteral}{"{}bdmtt"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Measure\ the\ time\ it\ takes\ to\ change\ from\ the\ current\ frequency\ to\ the\ target\ frequency"{}}\ \},}
+\DoxyCodeLine{00083\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowhome"{}},\ \textcolor{stringliteral}{"{}bh"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Homing\ bow,\ used\ at\ startup\ and\ in\ case\ of\ the\ bow\ loosing\ position"{}}\ \},}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{comment}{//calibrateall,\ ca}}
+\DoxyCodeLine{00086\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcalibrateall"{}},\ \textcolor{stringliteral}{"{}bca"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Performs\ all\ calibration\ routines\ on\ the\ selected\ bow,\ see\ below\ for\ routines\ performed"{}}\ \},}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{comment}{//calibratespeed,\ cms}}
+\DoxyCodeLine{00088\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcalibratespeed"{}},\ \textcolor{stringliteral}{"{}bcs"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Finds\ the\ minimum\ and\ maximum\ bow\ speed\ of\ the\ selected\ bow"{}}\ \},}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{//calibratespeedpid,\ cmsp}}
+\DoxyCodeLine{00090\ \textcolor{comment}{//\ \ \ \ \{\ "{}bowcalibratespeedpid"{},\ "{}bcsp"{},\ "{}-\/"{},\ "{}Finds\ the\ minimum\ and\ maximum\ bow\ speed\ of\ the\ selected\ bow\ using\ the\ PID"{}\ \},}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{//calibratepressure,\ cmp}}
+\DoxyCodeLine{00092\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcalibratepressure"{}},\ \textcolor{stringliteral}{"{}bcp"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Finds\ the\ minimum\ and\ maximum\ bow\ pressure\ of\ the\ selected\ bow"{}}\ \},}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{comment}{//stablethreshold,\ st}}
+\DoxyCodeLine{00094\ \textcolor{comment}{//\ \ \ \ \{\ "{}bowcalibratestablethreshold"{},\ "{}bcst"{},\ "{}float"{},\ "{}Sets\ the\ timeout\ value\ for\ the\ bow\ frequency\ stability\ check\ for\ the\ selected\ bow"{}\ \},}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{comment}{//run,\ run}}
+\DoxyCodeLine{00097\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorrun"{}},\ \textcolor{stringliteral}{"{}bmr"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Set\ bow\ motor\ run\ on/off"{}}\ \},}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{comment}{//setbowpower,\ sbp}}
+\DoxyCodeLine{00099\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotordirectpwm"{}},\ \textcolor{stringliteral}{"{}bmdp"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ direct\ power\ in\ 16-\/bit\ PWM\ values,\ requires\ that\ the\ PID\ is\ turned\ off"{}}\ \},}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{comment}{//setbowtimeout,\ sbt}}
+\DoxyCodeLine{00101\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotortimeout"{}},\ \textcolor{stringliteral}{"{}bmt"{}},\ \textcolor{stringliteral}{"{}ms(0-\/65535)"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ shutdown\ timeout\ after\ bow\ having\ been\ put\ into\ the\ rest\ position"{}}\ \},}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{comment}{//bowmaxspeed,\ bxs}}
+\DoxyCodeLine{00103\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorspeedmax"{}},\ \textcolor{stringliteral}{"{}bmsx"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ maximum\ speed\ limit"{}}\ \},}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{comment}{//bowminspeed,\ bis}}
+\DoxyCodeLine{00105\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorspeedmin"{}},\ \textcolor{stringliteral}{"{}bmsi"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ minimum\ speed\ limit"{}}\},}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{comment}{//bowvoltage,\ bv}}
+\DoxyCodeLine{00107\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorvoltage"{}},\ \textcolor{stringliteral}{"{}bmv"{}},\ \textcolor{stringliteral}{"{}1.2-\/9"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ voltage"{}}\},}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{comment}{//bowfrequency,\ bf}}
+\DoxyCodeLine{00109\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorfrequency"{}},\ \textcolor{stringliteral}{"{}bmf"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ reported\ frequency"{}}\},}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{comment}{//bowcurrent,\ bc}}
+\DoxyCodeLine{00111\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorcurrent"{}},\ \textcolor{stringliteral}{"{}bmc"{}},\ \textcolor{stringliteral}{"{}0-\/3"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ reported\ current\ use"{}}\ \},}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{comment}{//bowcurrentlimit,\ bcl}}
+\DoxyCodeLine{00113\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorcurrentlimit"{}},\ \textcolor{stringliteral}{"{}bmcl"{}},\ \textcolor{stringliteral}{"{}0-\/3"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ current\ limit\ (A)-\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}}\ \},}
+\DoxyCodeLine{00114\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorpowerlimit"{}},\ \textcolor{stringliteral}{"{}bmpl"{}},\ \textcolor{stringliteral}{"{}0-\/255"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ power\ limit\ (W)\ -\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}}\ \},}
+\DoxyCodeLine{00115\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorfaultcommands"{}},\ \textcolor{stringliteral}{"{}bmfc"{}},\ \textcolor{stringliteral}{"{}command\ list"{}},\ \textcolor{stringliteral}{"{}Commands\ to\ execute\ when\ a\ motor\ fault\ is\ tripped\ -\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}}\ \},}
+\DoxyCodeLine{00116\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotoroverpowercommands"{}},\ \textcolor{stringliteral}{"{}bmopc"{}},\ \textcolor{stringliteral}{"{}command\ list"{}},\ \textcolor{stringliteral}{"{}Commands\ to\ execute\ when\ motor\ is\ over\ the\ power\ limit\ -\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}}\ \},}
+\DoxyCodeLine{00117\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotoremergencystop"{}},\ \textcolor{stringliteral}{"{}bmes"{}},\ \textcolor{stringliteral}{"{}ms\ (0-\/65535)"{}},\ \textcolor{stringliteral}{"{}Immediately\ stops\ the\ bowing\ motor\ and\ doesn't\ allow\ it\ to\ start\ again\ until\ the\ cool\ down\ period\ given\ in\ the\ first\ argument\ has\ lapsed\ (milliseconds)"{}}\},}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{comment}{//bowmininertiapwm,\ biiw}}
+\DoxyCodeLine{00119\ \textcolor{comment}{//\ \ \ \ \{\ "{}bowmotormininertialpwm"{},\ "{}bmmip"{},\ "{}0\ -\/\ 65535"{},\ "{}Bow\ minimal\ PWM\ to\ keep\ inertia"{}\},}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00122\ \textcolor{comment}{\ \ \ \ //recoverrate,\ rr}}
+\DoxyCodeLine{00123\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpressurerecoverrate"{},\ "{}bprr"{},\ "{}float"{},\ "{}Bow\ pressure\ recover\ rate\ for\ the\ selected\ bow"{}\ \},*/}}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{comment}{//setpressurebaseline,\ spb}}
+\DoxyCodeLine{00125\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurebaseline"{}},\ \textcolor{stringliteral}{"{}bpb"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ baseline,\ modulation\ is\ added\ to\ this\ point\ upward"{}}\ \},}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{comment}{//setpressuremodifier,\ spm}}
+\DoxyCodeLine{00127\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressuremodifier"{}},\ \textcolor{stringliteral}{"{}bpm"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ modulation,\ added\ to\ the\ baseline"{}}\ \},}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{comment}{//rest,\ rest}}
+\DoxyCodeLine{00129\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurerest"{}},\ \textcolor{stringliteral}{"{}bpr"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Puts\ the\ bow\ pressure\ in\ the\ resting\ position\ (conditional)"{}}\ \},}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{comment}{//engage,\ engage}}
+\DoxyCodeLine{00131\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressureengage"{}},\ \textcolor{stringliteral}{"{}bpe"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Puts\ the\ bow\ pressure\ in\ the\ engage\ position\ (conditional)"{}}\ \},}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{comment}{//bowmaxpressure,\ bxp}}
+\DoxyCodeLine{00133\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurepositionmax"{}},\ \textcolor{stringliteral}{"{}bppx"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ stall/maximum\ position"{}}\},}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{comment}{//bowminpressure,\ bip}}
+\DoxyCodeLine{00135\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurepositionengage"{}},\ \textcolor{stringliteral}{"{}bppe"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ touch/minimum\ position"{}}\},}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{comment}{//bowrestposition,\ brp}}
+\DoxyCodeLine{00137\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurepositionrest"{}},\ \textcolor{stringliteral}{"{}bppr"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ rest\ position"{}}\},}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{comment}{//bowengagespeed,\ bes}}
+\DoxyCodeLine{00139\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressureengagespeed"{}},\ \textcolor{stringliteral}{"{}bpes"{}},\ \textcolor{stringliteral}{"{}1\ -\/\ 100?"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ movement\ speed\ when\ engaging\ or\ disengaging"{}}\},}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{comment}{//bowmodulationspeed,\ bms}}
+\DoxyCodeLine{00141\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressuremodulationspeed"{}},\ \textcolor{stringliteral}{"{}bpms"{}},\ \textcolor{stringliteral}{"{}0.1\ -\/\ 10"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ movement\ speed\ while\ engaged"{}}\},}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurehold"{}},\ \textcolor{stringliteral}{"{}bph"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Sets\ bow\ hold\ on/off"{}}\ \},}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{comment}{//\ solenoid,\ solenoid}}
+\DoxyCodeLine{00146\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}solenoid"{}},\ \textcolor{stringliteral}{"{}so"{}},\ \textcolor{stringliteral}{"{}int"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ currently\ selected\ solenoid"{}}\ \},}
+\DoxyCodeLine{00147\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}solenoidengage"{}},\ \textcolor{stringliteral}{"{}se"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ solenoid\ engagement\ of\ the\ current\ bow\ using\ the\ 1st\ argument\ as\ hardness"{}}\ \},}
+\DoxyCodeLine{00148\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}solenoiddisengage"{}},\ \textcolor{stringliteral}{"{}sd"{}},\ \textcolor{stringliteral}{"{}0-\/1"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ solenoid\ disengagement\ of\ the\ current\ bow,\ an\ argument\ of\ '0'\ will\ leave\ the\ solenoid\ at\ its\ current\ state\ while\ any\ other\ value\ will\ disengage\ the\ solenoid"{}}\ \},}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{comment}{//\ setsolenoidmaxforce,\ ssxf}}
+\DoxyCodeLine{00150\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}solenoidmaxforce"{}},\ \textcolor{stringliteral}{"{}sxf"{}},\ \textcolor{stringliteral}{"{}0\ -\/\ 65535"{}},\ \textcolor{stringliteral}{"{}Set\ solenoid\ maximum\ usable\ force"{}}\ \},}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{comment}{//\ setsolenoidminforce,\ ssif}}
+\DoxyCodeLine{00152\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}solenoidminforce"{}},\ \textcolor{stringliteral}{"{}sif"{}},\ \textcolor{stringliteral}{"{}0\ -\/\ 65535"{}},\ \textcolor{stringliteral}{"{}Set\ solenoid\ minimum\ usable\ force"{}}\ \},}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{comment}{//\ setsolenoidforcemultiplier,\ ssfm}}
+\DoxyCodeLine{00154\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}solenoidforcemultiplier"{}},\ \textcolor{stringliteral}{"{}sfm"{}},\ \textcolor{stringliteral}{"{}0\ -\/\ 1"{}},\ \textcolor{stringliteral}{"{}Set\ solenoid\ force\ multiplier"{}}\ \},}
+\DoxyCodeLine{00155\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}solenoidengageduration"{}},\ \textcolor{stringliteral}{"{}sed"{}},\ \textcolor{stringliteral}{"{}uS"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ duration\ of\ the\ solenoid\ hit\ in\ uS,\ if\ a\ value\ of\ 0\ is\ set\ the\ solenoid\ will\ not\ disengage\ until\ a\ solenoiddisengage\ command\ has\ been\ given"{}}\},}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}mutesetposition"{}},\ \textcolor{stringliteral}{"{}msp"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Set\ mute\ position"{}}\ \},}
+\DoxyCodeLine{00158\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}mutefullmute"{}},\ \textcolor{stringliteral}{"{}mfm"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Put\ mute\ in\ full\ mute\ position\ (conditional)"{}}\ \},}
+\DoxyCodeLine{00159\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}mutehalfmute"{}},\ \textcolor{stringliteral}{"{}mhm"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Put\ mute\ in\ half\ mute\ position\ (conditional)"{}}\ \},}
+\DoxyCodeLine{00160\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}muterest"{}},\ \textcolor{stringliteral}{"{}mr"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Put\ mute\ in\ rest\ position\ (conditional)"{}}\ \},}
+\DoxyCodeLine{00161\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}mutesavefull"{}},\ \textcolor{stringliteral}{"{}msf"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Save\ current\ mute\ position\ as\ full\ mute\ position\ (conditional)"{}}\ \},}
+\DoxyCodeLine{00162\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}mutesavehalf"{}},\ \textcolor{stringliteral}{"{}msh"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Save\ current\ mute\ position\ as\ half\ mute\ position\ (conditional)"{}}\ \},}
+\DoxyCodeLine{00163\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}mutesaverest"{}},\ \textcolor{stringliteral}{"{}msr"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Save\ current\ mute\ position\ as\ mute\ rest\ position\ (conditional)"{}}\ \},}
+\DoxyCodeLine{00164\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}mutefullmuteposition"{}},\ \textcolor{stringliteral}{"{}mfmp"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Mute\ full\ mute\ position"{}}\},}
+\DoxyCodeLine{00165\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}mutehalfmuteposition"{}},\ \textcolor{stringliteral}{"{}mhmp"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Mute\ half\ mute\ position"{}}\},}
+\DoxyCodeLine{00166\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}muterestposition"{}},\ \textcolor{stringliteral}{"{}mrp"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Mute\ rest\ position"{}}\},}
+\DoxyCodeLine{00167\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}mutesustain"{}},\ \textcolor{stringliteral}{"{}ms"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Setting\ sustain\ on\ (1)\ or\ off\ (0)"{}}\ \},}
+\DoxyCodeLine{00168\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}mutebackoff"{}},\ \textcolor{stringliteral}{"{}mbo"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Setting\ the\ time\ that\ the\ mute\ stays\ in\ the\ mutefullmute\ position\ before\ automatically\ going\ into\ rest,\ set\ in\ mS"{}}\},}
+\DoxyCodeLine{00169\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}mutehome"{}},\ \textcolor{stringliteral}{"{}mh"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Rehome\ mute"{}}\ \},}
+\DoxyCodeLine{00170\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}mutecalibrate"{}},\ \textcolor{stringliteral}{"{}mca"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Calibrate\ mute\ settings"{}}\},}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowactuator"{}},\ \textcolor{stringliteral}{"{}ba"{}},\ \textcolor{stringliteral}{"{}actuator"{}},\ \textcolor{stringliteral}{"{}Sets\ and\ loads\ the\ actuator\ given"{}}\},}
+\DoxyCodeLine{00173\ \textcolor{comment}{//\ \ \ \ \{\ "{}bowactuatoradd"{},\ "{}baa"{},\ "{}-\/"{},\ "{}Add\ new\ bow\ actuator"{}\},}}
+\DoxyCodeLine{00174\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowactuatorremove"{}},\ \textcolor{stringliteral}{"{}bar"{}},\ \textcolor{stringliteral}{"{}actuator"{}},\ \textcolor{stringliteral}{"{}Remove\ bow\ actuator"{}}\},}
+\DoxyCodeLine{00175\ \textcolor{comment}{//\ \ \ \ \{\ "{}bowactuatorset"{},\ "{}bas"{},\ "{}actuator"{},\ "{}Set\ current\ bow\ actuator"{}\},}}
+\DoxyCodeLine{00176\ \textcolor{comment}{//\ \ \ \ \{\ "{}bowactuatorload"{},\ "{}bal"{},\ "{}-\/"{},\ "{}Load\ parameters\ from\ current\ bow\ actuator"{}\},}}
+\DoxyCodeLine{00177\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowactuatorsave"{}},\ \textcolor{stringliteral}{"{}bas"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Save\ current\ bow\ parameters\ into\ currently\ selected\ bow\ actuator"{}}\ \},}
+\DoxyCodeLine{00178\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowactuatordata"{}},\ \textcolor{stringliteral}{"{}bad"{}},\ \textcolor{stringliteral}{"{}actuator:engagepressure:stallpressure:restposition:id"{}},\ \textcolor{stringliteral}{"{}Set\ data\ of\ bow\ actuator\ [actuator]"{}}\ \},}
+\DoxyCodeLine{00179\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowactuatorcount"{}},\ \textcolor{stringliteral}{"{}bac"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Returns\ the\ amount\ of\ saved\ bow\ actuators"{}}\},}
+\DoxyCodeLine{00180\ \textcolor{comment}{//\ \ \ \ \{\ "{}bowactuatorid"{},\ "{}bai"{},\ "{}id"{},\ "{}Sets\ the\ ID\ of\ the\ current\ bow\ actuator"{}\},}}
+\DoxyCodeLine{00181\ \textcolor{comment}{/*\ \ \ \ \{\ "{}bowactuatorsavestall"{},\ "{}bass"{},\ "{}-\/"{},\ "{}Save\ current\ position\ as\ bow\ actuator\ stall\ position"{}\},\ //NEW\ -\/\ ADD}}
+\DoxyCodeLine{00182\ \textcolor{comment}{\ \ \ \ \{\ "{}bowactuatorsavefirsttouch"{},\ "{}basft"{},\ "{}-\/"{},\ "{}Save\ current\ position\ as\ bow\ actuator\ first\ touch\ position"{}\},\ //NEW\ -\/\ ADD}}
+\DoxyCodeLine{00183\ \textcolor{comment}{\ \ \ \ \{\ "{}bowactuatorsaverest"{},\ "{}basr"{},\ "{}-\/"{},\ "{}Save\ current\ position\ as\ bow\ actuator\ rest\ position"{}\},\ //NEW\ -\/\ ADD}}
+\DoxyCodeLine{00184\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00185\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}nooperation"{}},\ \textcolor{stringliteral}{"{}nop"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Do\ absolutely,\ positively,\ nothing"{}}\}}
+\DoxyCodeLine{00186\ \};}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classstringModule}{stringModule}}\ \{}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00190\ \ \ \ \ std::vector<bowIO>\ \mbox{\hyperlink{classstringModule_a30e0bcd8769adeaecca7f2ba5e1f5f32}{bowIOArray}};}
+\DoxyCodeLine{00191\ \ \ \ \ std::vector<bowControl>\ \mbox{\hyperlink{classstringModule_a253a863c94928bb8d6e5182f4a2c8320}{bowControlArray}};}
+\DoxyCodeLine{00192\ \ \ \ \ std::vector<CalibrationData>\ \mbox{\hyperlink{classstringModule_a683500a505f3f4cdcf592142b5c8711d}{calibrationDataArray}};}
+\DoxyCodeLine{00193\ \ \ \ \ std::vector<calibrate>\ \mbox{\hyperlink{classstringModule_a6e4d0a539d96b08a12be40479c18de4f}{calibrateArray}};}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \ \ std::vector<solenoid>\ \mbox{\hyperlink{classstringModule_a3efba2d94301131466549e783a24623c}{solenoidArray}};}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ \ \ std::vector<mute>\ \mbox{\hyperlink{classstringModule_ac21fd840807f137b8ce5384e1dea3ee3}{muteArray}};}
+\DoxyCodeLine{00198\ \ \ \ \ std::vector<calibrateMute>\ \mbox{\hyperlink{classstringModule_a5dab3a72fceb5aac97140e8acd462770}{calibrateMuteArray}};}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \textcolor{comment}{//\ \ \ \ int\ EEPROM\_offset\ =\ 0;}}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classstringModule_a7fb66cceefcbed37d29993401fcfe38b}{currentBowSerial}}\ =\ 0;}
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classstringModule_a7a05b447369edd8b38c8efaabb636225}{currentSolenoidSerial}}\ =\ 0;}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \ \ \ BufferedOutput\ *\mbox{\hyperlink{classstringModule_a86952c16617365c3f5a79613d8215170}{slaveSerialOut}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00206\ \ \ \ \ SafeStringReader\ *\mbox{\hyperlink{classstringModule_a4cb3706886fe89b9b654878d9d428ea4}{slaveSerialRead}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \ \ \mbox{\hyperlink{classstringModule_a8d2813e57f62a901fe0ca8c348112a78}{stringModule}}();}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classstringModule_a6be6dd0b987fed725a84cd3b6417aaf7}{updateString}}();}
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classstringModule_a52a5b213e054d030023de05b46769555}{addBow}}(\textcolor{keywordtype}{char}\ motorRevPin,\ \textcolor{keywordtype}{char}\ motorVoltagePin,\ \textcolor{keywordtype}{char}\ motorDCDCEn,\ \textcolor{keywordtype}{char}\ tachoPin,\ \textcolor{keywordtype}{char}\ currentSensePin,\ \textcolor{keywordtype}{char}\ motorFaultPin,\ \textcolor{keywordtype}{char}\ stepEnPin,\ \textcolor{keywordtype}{char}\ stepDirPin,}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ stepStepPin,\ HardwareSerial\ *stepSerialPort,\ \textcolor{keywordtype}{char}\ stepHomeSensorPin,\ \textcolor{keywordtype}{char}\ stepCorrectionSensorPin);}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classstringModule_a383d333da12d8b196c3a0a3085f466c9}{addSolenoid}}(\textcolor{keywordtype}{char}\ \_solenoidPin);}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classstringModule_ab627523a631c2d63089092e18f430e63}{writeToSlave}}(String\ command);}
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classstringModule_ae900a34fa51bb9cdf8e0db8ad54698ee}{addMute}}(\textcolor{keywordtype}{char}\ stepEnPin,\ \textcolor{keywordtype}{char}\ stepDirPin,\ \textcolor{keywordtype}{char}\ stepStepPin,\ HardwareSerial\ *stepSerialPort,\ \textcolor{keywordtype}{char}\ stepHomeSensorPin);}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classstringModule_a1c4a46d4d4304047bdb682124e4b7c75}{processSerialCommand\_GeneralControl}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegated\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classstringModule_abeee7163a63d261fed0f7a92622d86de}{processSerialCommand\_CalibrationsSettings}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegated\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classstringModule_a6d98b93184bfe0426df837453db67143}{processSerialCommand\_MuteControl}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegated\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classstringModule_a2e3deb9ec1e55ddadba3cce25fdde5e2}{processSerialCommand\_StatusTesting}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegated\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classstringModule_a51411f820b0092854766bdbe0fbda616}{processSerialCommand\_BowActuator}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegated\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classstringModule_aa7efea7570178b24f2ecc1fefc22c8fb}{processRequestCommand}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ delegated);}
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classstringModule_a5e7353fae7c3d63c8315b485c1ad1626}{processSerialCommand}}(\mbox{\hyperlink{classcommandList}{commandList}}\ *\mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}},\ uint16\_t\ *index,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ delegated);}
+\DoxyCodeLine{00228\ \};}
+\DoxyCodeLine{00229\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

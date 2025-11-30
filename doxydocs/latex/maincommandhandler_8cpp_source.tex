@@ -1,0 +1,606 @@
+\doxysection{maincommandhandler.\+cpp}
+\hypertarget{maincommandhandler_8cpp_source}{}\label{maincommandhandler_8cpp_source}\index{maincommandhandler.cpp@{maincommandhandler.cpp}}
+\mbox{\hyperlink{maincommandhandler_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ \mbox{\hyperlink{maincommandhandler_8cpp_ab2005e41c34ec68066c2517708623f46}{serialCommandsMain}}[]\ =\ \{}
+\DoxyCodeLine{00020\ \ \ \{\ \textcolor{stringliteral}{"{}requestinfo"{}},\ \textcolor{stringliteral}{"{}rqi"{}},\ \textcolor{stringliteral}{"{}command"{}},\ \textcolor{stringliteral}{"{}Retrives\ rather\ than\ sets\ data\ associated\ with\ a\ command,\ if\ appliccable"{}}\},}
+\DoxyCodeLine{00021\ \ \ \{\ \textcolor{stringliteral}{"{}module"{}},\ \textcolor{stringliteral}{"{}m"{}},\ \textcolor{stringliteral}{"{}0-\/15"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ currently\ active\ string\ module"{}}\},}
+\DoxyCodeLine{00022\ \ \ \{\ \textcolor{stringliteral}{"{}modulecount"{}},\ \textcolor{stringliteral}{"{}mc"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Returns\ the\ number\ of\ string\ modules\ detected"{}}\},}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \textcolor{comment}{//\{\ "{}debugrunningstatus"{},\ "{}drs"{},\ "{}0|1"{},\ "{}Turns\ on\ or\ off\ continuous\ status\ updates"{}\ \},\ \ //\ runningstatus,\ rs}}
+\DoxyCodeLine{00025\ \ \ \{\ \textcolor{stringliteral}{"{}debugprint"{}},\ \textcolor{stringliteral}{"{}dp"{}},\ \textcolor{stringliteral}{"{}command|usb|hardware|undefined|priority|error|inforequest|expressionparser|debug:1|0"{}},\ \textcolor{stringliteral}{"{}Turns\ on\ or\ off\ serial\ feedback\ for\ the\ given\ item"{}}\},}
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ \ \{\ "{}debugfreqreport"{},\ "{}dfr"{},\ "{}0|1"{},\ "{}Sets\ string\ frequency\ reporting\ on\ off"{}\ \},\ \ \ \ //\ freqreport,\ fr}}
+\DoxyCodeLine{00027\ \ \ \{\ \textcolor{stringliteral}{"{}version"{}},\ \textcolor{stringliteral}{"{}ver"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Gets\ the\ current\ firmware\ version"{}}\},}
+\DoxyCodeLine{00028\ \ \ \{\ \textcolor{stringliteral}{"{}globalsaveallparameters"{}},\ \textcolor{stringliteral}{"{}gsap"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Saves\ all\ avaliable\ parameters"{}}\},\ \ \textcolor{comment}{//\ saveallparameters}}
+\DoxyCodeLine{00029\ \ \ \{\ \textcolor{stringliteral}{"{}globalloadallparameters"{}},\ \textcolor{stringliteral}{"{}glap"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Loads\ all\ avaliable\ parameters"{}}\},\ \ \textcolor{comment}{//\ loadallparameters}}
+\DoxyCodeLine{00030\ \ \ \{\ \textcolor{stringliteral}{"{}globalresetallparameters"{}},\ \textcolor{stringliteral}{"{}grap"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Resets\ all\ saved\ parameters"{}}\},}
+\DoxyCodeLine{00031\ \ \ \{\ \textcolor{stringliteral}{"{}globaluservariable"{}},\ \textcolor{stringliteral}{"{}guv"{}},\ \textcolor{stringliteral}{"{}variable(0-\/9):value"{}},\ \textcolor{stringliteral}{"{}Set\ user\ variable\ 0-\/9\ to\ value"{}}\},\ \ \textcolor{comment}{//\ uservariable,\ uv}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ \ \ \ Saving\ custom\ data:}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ \ \ \ \ \ \ litterals\ -\/\ example:}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ gcsl:"{}adcsettings:5:2:10:3:10,\ adcsettings:0:2:10:3:10"{}}}
+\DoxyCodeLine{00037\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ -\/\ when\ invoked:}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ litteralvariable\ =\ "{}adcsettings:5:2:10:3:10,\ adcsettings:0:2:10:3:10"{}}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parse\ the\ command\ list\ in\ litteralvariable\ and\ execute\ all\ commands}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ -\/\ when\ saved}}
+\DoxyCodeLine{00041\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ save\ as\ 'gscl:"{}'\ +\ litteralvariable\ +\ '"{}'}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ -\/\ at\ startup:}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\ when\ invoked}}
+\DoxyCodeLine{00044\ \textcolor{comment}{}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ \ \ \ \ \ rqis\ -\/\ examples}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ gscr:"{}adcsetting:5,\ adcsetting:0"{}}}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ -\/\ when\ invoked}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rqivariable\ =\ argument[0]\ =\ "{}adcsetting:5,\ adcsetting:0"{}}}
+\DoxyCodeLine{00049\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ argument[1]\ exists\ and\ isn't\ null}}
+\DoxyCodeLine{00050\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parse\ argument[1]\ as\ a\ commandlist\ and\ execute\ all\ commands}}
+\DoxyCodeLine{00051\ \textcolor{comment}{}}
+\DoxyCodeLine{00052\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ -\/\ when\ saved}}
+\DoxyCodeLine{00053\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parse\ rqivariable\ command\ list\ and\ do\ an\ rqi\ on\ all\ commands\ and\ save\ the\ outcome:}}
+\DoxyCodeLine{00054\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rqi:adcsettings:5\ \ \ -\/>\ rqivariableoutput\ =\ "{}adcsettings:5:2:10:3:10"{}}}
+\DoxyCodeLine{00055\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rqi:adcsettings:0\ \ \ -\/>\ rqivariableoutput\ +=\ "{},\ "{}\ +\ "{}adcsettings:0:2:10:3:10"{}}}
+\DoxyCodeLine{00056\ \textcolor{comment}{}}
+\DoxyCodeLine{00057\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ save\ as\ 'gscr:\ "{}'\ +\ rqivariable\ +\ '"{},\ "{}'\ +\ rqivariableoutput\ +\ '"{}'\ which\ becomes}}
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 'gscr:"{}adcsetting:5,\ adcsetting:0"{}:"{}adcsettings:5:2:10:3:10,\ adcsettings:0:2:10:3:10"{}'}}
+\DoxyCodeLine{00059\ \textcolor{comment}{}}
+\DoxyCodeLine{00060\ \textcolor{comment}{\ \ \ \ \ \ \ \ rqis\ -\/\ example\ 2,\ with\ saved\ data\ 'gscr:"{}adcsetting:5"{}:"{}adcsettings:5:2:10:3:10"{}'}}
+\DoxyCodeLine{00061\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ -\/\ startup:}}
+\DoxyCodeLine{00062\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rqivariable\ =\ "{}adcsetting:5"{}}}
+\DoxyCodeLine{00063\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ execute\ "{}adcsettings:5:2:10:3:10"{}}}
+\DoxyCodeLine{00064\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ -\/\ when\ working}}
+\DoxyCodeLine{00065\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ executing\ "{}adcsettings:5:1:5:2:10"{}}}
+\DoxyCodeLine{00066\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ -\/\ later\ saving}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parsing\ rqivariable\ and\ doing\ an\ rqi\ on\ the\ outcome:}}
+\DoxyCodeLine{00068\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rqi:adcsetting:5\ \ \ \ -\/>\ rqivariableoutput\ =\ "{}adcsettings:5:1:5:2:10"{}}}
+\DoxyCodeLine{00069\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ save\ as\ 'gscr:"{}adcsetting:5"{}:"{}adcsettings:5:1:5:2:10"{}'}}
+\DoxyCodeLine{00070\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ -\/\ rebooting}}
+\DoxyCodeLine{00071\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rqivariable\ =\ "{}adcsetting:5"{}}}
+\DoxyCodeLine{00072\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ executing\ "{}adcsetting:5:1:5:2:10"{}}}
+\DoxyCodeLine{00073\ \textcolor{comment}{}}
+\DoxyCodeLine{00074\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{comment}{//\ \ \{\ "{}globalcustomstartuplitterals"{},\ "{}gcsl"{},\ "{}string"{},\ "{}Save\ the\ command\ string\ and\ execute\ at\ startup"{}\ \},}}
+\DoxyCodeLine{00077\ \textcolor{comment}{//\ \ \{\ "{}globalcustomstartuprqis"{},\ "{}gcsr"{},\ "{}string"{},\ "{}A\ list\ of\ commands\ to,\ when\ saving\ parameters,\ perform\ the\ 'requestinfo'\ command\ on\ and\ add\ to\ the\ "{}\ \},}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \{\ \textcolor{stringliteral}{"{}midiconfiguration"{}},\ \textcolor{stringliteral}{"{}mcf"{}},\ \textcolor{stringliteral}{"{}int"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ current\ MIDI\ configuration"{}}\ \},\ \textcolor{comment}{//\ setconfiguration,\ scf}}
+\DoxyCodeLine{00080\ \ \ \{\ \textcolor{stringliteral}{"{}midiconfigurationadd"{}},\ \textcolor{stringliteral}{"{}mcfa"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Adds\ a\ new\ MIDI\ configuration"{}}\ \},\ \textcolor{comment}{//\ addconfiguration,\ acf}}
+\DoxyCodeLine{00081\ \ \ \{\ \textcolor{stringliteral}{"{}midiconfigurationremove"{}},\ \textcolor{stringliteral}{"{}mcfr"{}},\ \textcolor{stringliteral}{"{}int"{}},\ \textcolor{stringliteral}{"{}Remove\ the\ specified\ MIDI\ configuration"{}}\ \},\ \ \textcolor{comment}{//\ removeconfiguration,\ rcf}}
+\DoxyCodeLine{00082\ \ \ \{\ \textcolor{stringliteral}{"{}midiconfigurationcount"{}},\ \textcolor{stringliteral}{"{}mcfc"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Returns\ the\ number\ of\ MIDI\ configurations"{}}\ \},\ \ \ \textcolor{comment}{//\ numberofconfigurations,\ ?}}
+\DoxyCodeLine{00083\ \ \ \{\ \textcolor{stringliteral}{"{}midiconfigurationname"{}},\ \textcolor{stringliteral}{"{}mcfn"{}},\ \textcolor{stringliteral}{"{}string"{}},\ \textcolor{stringliteral}{"{}Set\ the\ name\ of\ the\ MIDI\ configuration\ (for\ request,\ argument\ is\ index\ of\ configuration\ to\ return\ name\ for\ (optional))"{}}\ \},}
+\DoxyCodeLine{00084\ \ \ \{\ \textcolor{stringliteral}{"{}midieventhandler"{}},\ \textcolor{stringliteral}{"{}mev"{}},\ \textcolor{stringliteral}{"{}noteon|noteoff|pat|cc:(0-\/127)|cat|pb|pc"{}},\ \textcolor{stringliteral}{"{}Set\ the\ MIDI\ event\ handling\ string\ in\ the\ current\ configuration"{}}\},\ \ \ \textcolor{comment}{//\ eventhandler,\ ev}}
+\DoxyCodeLine{00085\ \ \ \{\ \textcolor{stringliteral}{"{}midieventhandlerccremove"{}},\ \textcolor{stringliteral}{"{}mevcr"{}},\ \textcolor{stringliteral}{"{}cc(0-\/127)"{}},\ \textcolor{stringliteral}{"{}remove\ CC\ from\ list"{}}\},\ \ \ \textcolor{comment}{//\ eventhandlerccremove,\ evccr}}
+\DoxyCodeLine{00086\ \ \ \{\ \textcolor{stringliteral}{"{}midiconfigurationdefaults"{}},\ \textcolor{stringliteral}{"{}mcfd"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Reverts\ the\ current\ configuration\ to\ default\ values\ and\ CCs"{}}\},}
+\DoxyCodeLine{00087\ \ \ \{\ \textcolor{stringliteral}{"{}midireceivechannel"{}},\ \textcolor{stringliteral}{"{}mrc"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ MIDI\ receive\ channel\ of\ the\ current\ configuration.\ 1-\/16\ sets\ specific\ channel,\ any\ other\ value\ for\ OMNI"{}}\},}
+\DoxyCodeLine{00088\ \textcolor{comment}{//\ \ \{\ "{}midisustain"{},\ "{}msu"{},\ "{}1|0"{},\ "{}Turn\ sustain\ on\ for\ MIDI\ notes,\ aka\ ignore\ NOTE\ OFF\ messages\ and\ whatever\ commands\ they\ have"{}\},}}
+\DoxyCodeLine{00089\ \ \ \{\ \textcolor{stringliteral}{"{}midiallnotesoff"{}},\ \textcolor{stringliteral}{"{}mano"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Clear\ the\ entire\ buffer\ of\ MIDI\ notes\ held"{}}\},}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \{\ \textcolor{stringliteral}{"{}adccommandmap"{}},\ \textcolor{stringliteral}{"{}acm"{}},\ \textcolor{stringliteral}{"{}channel:command\ string"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ command\ string\ invoked\ when\ the\ value\ on\ ADC\ channel\ [channel]\ changes"{}}\},}
+\DoxyCodeLine{00092\ \ \ \{\ \textcolor{stringliteral}{"{}adcdefaults"{}},\ \textcolor{stringliteral}{"{}acd"{}},\ \textcolor{stringliteral}{"{}-\/"{}}\ \textcolor{stringliteral}{"{}Reverts\ all\ ADC\ command\ strings\ to\ default\ values"{}}\ \},}
+\DoxyCodeLine{00093\ \ \ \{\ \textcolor{stringliteral}{"{}adcread"{}},\ \textcolor{stringliteral}{"{}adcr"{}},\ \textcolor{stringliteral}{"{}channel:value"{}},\ \textcolor{stringliteral}{"{}Sent\ when\ a\ new\ value\ is\ presented\ on\ one\ of\ the\ ADC\ channels,\ cannot\ be\ invoked"{}}\ \},}
+\DoxyCodeLine{00094\ \ \ \{\ \textcolor{stringliteral}{"{}adcsettings"{}},\ \textcolor{stringliteral}{"{}adcs"{}},\ \textcolor{stringliteral}{"{}channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout"{}},\ \textcolor{stringliteral}{"{}Explain\ ADC\ settings\ here"{}}\},}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \{\ \textcolor{stringliteral}{"{}expressionparserevaluate"{}},\ \textcolor{stringliteral}{"{}epev"{}},\ \textcolor{stringliteral}{"{}expression"{}},\ \textcolor{stringliteral}{"{}Evaluates\ an\ arithmetric\ expression\ and\ sends\ back\ the\ output"{}}\},}
+\DoxyCodeLine{00097\ \textcolor{comment}{//\ \ \{\ "{}expressionparserdeadbandthreshold"{},\ "{}epdbt"{},\ "{}float"{},\ "{}Sets\ the\ threshold\ for\ the\ deadband\ function\ in\ the\ expression\ parser"{}\},}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \{\ \textcolor{stringliteral}{"{}testadclatency"{}},\ \textcolor{stringliteral}{"{}tal"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Test\ ADC\ Latency"{}}\ \},}
+\DoxyCodeLine{00100\ \ \ \{\ \textcolor{stringliteral}{"{}testadclatencyreturn"{}},\ \textcolor{stringliteral}{"{}talr"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Return\ from\ test"{}}\ \},}
+\DoxyCodeLine{00101\ \ \ \{\ \textcolor{stringliteral}{"{}testadcminmax"{}},\ \textcolor{stringliteral}{"{}tamm"{}},\ \textcolor{stringliteral}{"{}channel"{}},\ \textcolor{stringliteral}{"{}Measure\ min/max\ value\ for\ a\ given\ channel\ and\ resets\ the\ counter"{}}\ \},}
+\DoxyCodeLine{00102\ \ \ \{\ \textcolor{stringliteral}{"{}reset"{}},\ \textcolor{stringliteral}{"{}rst"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Resets\ the\ Ekdahl\ FAR,\ conditional"{}}\},}
+\DoxyCodeLine{00103\ \ \ \{\ \textcolor{stringliteral}{"{}nick"{}},\ \textcolor{stringliteral}{"{}nick"{}},\ \textcolor{stringliteral}{"{}string"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ nickname\ of\ this\ unit"{}}\ \}}
+\DoxyCodeLine{00104\ \};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{maincommandhandler_8cpp_a6a701a3672b1102daa613c87c7601970}{processMainCommands}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegated\ =\ \textcolor{keyword}{false},\ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}module"{}})\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt(),\ 0,\ \mbox{\hyperlink{main_8cpp_aacbb4662d46136722bc7069351a1a30f}{stringModuleArray}}.size()))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a0652452d3c6986b4f212f9a4cd94f213}{currentStringModule}}\ =\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
+\DoxyCodeLine{00113\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ freqReportChannel\ =\ currentStringModule;}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}m:"{}}\ +\ String(\mbox{\hyperlink{main_8cpp_a0652452d3c6986b4f212f9a4cd94f213}{currentStringModule}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00116\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00117\ \textcolor{comment}{/*\ \ \ \ if\ (\_commandItem-\/>command\ ==\ "{}debugrunningstatus"{})\ \{}}
+\DoxyCodeLine{00118\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!checkArguments(\_commandItem,\ commandResponses,\ 1))\ \{\ return\ false;\ \}}}
+\DoxyCodeLine{00119\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (\_commandItem-\/>argument[0]\ ==\ 1)\ \{\ fContinuous\ =\ true;\ \}\ else\ \{\ fContinuous\ =\ false;\ \}}}
+\DoxyCodeLine{00120\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}Setting\ show\ running\ status\ to\ "{}\ +\ String(fContinuous),\ Command\});}}
+\DoxyCodeLine{00121\ \textcolor{comment}{\ \ \ \ \}\ \ else*/}}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}debugprint"{}})\ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 2))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ found\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<\mbox{\hyperlink{debugprint_8h_a9b9f43fa932668c3ae692f0f2a8655e0}{debugPrintTypes}};\ i++\ )\ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8h_acbab4b58032141437b697b6071034ed6}{debugPrintTypeName}}[i]\ ==\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0])\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[i]\ =\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1].toInt();}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}dp"{}}\ +\ \mbox{\hyperlink{debugprint_8h_acbab4b58032141437b697b6071034ed6}{debugPrintTypeName}}[i]\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{debugprint_8h_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[i]),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ found\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!found)\ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Print\ type\ not\ found"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00136\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00137\ \textcolor{comment}{/*\ \ \ \ if\ (\_commandItem-\/>command\ ==\ "{}freqreport"{})\ \{}}
+\DoxyCodeLine{00138\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!checkArguments(\_commandItem,\ commandResponses,\ 1))\ \{\ return\ false;\ \}}}
+\DoxyCodeLine{00139\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (\_commandItem-\/>argument[0]\ ==\ 1)\ \{\ freqReport\ =\ true;\ \}\ else\ \{\ freqReport\ =\ false;\ \}}}
+\DoxyCodeLine{00140\ \textcolor{comment}{\ \ \ \ \}\ else*/}}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}version"{}})\ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}ver:"{}}\ +\ \mbox{\hyperlink{automaticversion_8hpp_a7580b394441d49b9d0d1e40d57449d5d}{currentFirmwareVersion}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{automaticversion_8hpp_a7580b394441d49b9d0d1e40d57449d5d}{currentFirmwareVersion}}\ !=\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]))\ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{automaticversion_8hpp_a26d0bc41e0e78388f09961d7491fb38f}{firmwareChanged}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Firmware\ version\ changed!\ Previous\ version:\ "{}}\ +\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0],\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}version:"{}}\ +\ \mbox{\hyperlink{automaticversion_8hpp_a7580b394441d49b9d0d1e40d57449d5d}{currentFirmwareVersion}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00152\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}globaluservariable"{}})\ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 2))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt(),\ 0,\ \mbox{\hyperlink{midi_8cpp_ac95cb2b2f0097507ba0b2e1666593a4a}{userVariableMax}}))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ userVariable\ =\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{\ \mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[userVariable]\ =\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1].toFloat();\ \}}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}guv:"{}}\ +\ String(userVariable)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{midi_8cpp_ad31c4c0ab2326a2058452d0a2ee7626b}{duv}}[userVariable]),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00160\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}midieventhandler"{}})\ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ check\ =\ 10;}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1,\ \textcolor{keyword}{true}))\ \{}
+\DoxyCodeLine{00165\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ check\ =\ 10;}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ else\ \{*/}}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]\ ==\ \textcolor{stringliteral}{"{}noteon"{}})\ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ check\ =\ 1;}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]\ ==\ \textcolor{stringliteral}{"{}noteoff"{}})\ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ check\ =\ 2;}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]\ ==\ \textcolor{stringliteral}{"{}cc"{}})\ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ check\ =\ 3;}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]\ ==\ \textcolor{stringliteral}{"{}pat"{}})\ \{}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ check\ =\ 4;}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]\ ==\ \textcolor{stringliteral}{"{}pb"{}})\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ check\ =\ 5;}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]\ ==\ \textcolor{stringliteral}{"{}cat"{}})\ \{}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ check\ =\ 6;}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]\ ==\ \textcolor{stringliteral}{"{}pc"{}})\ \{}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ check\ =\ 7;}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ String\ response\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((check\ ==\ 1)\ ||\ (check\ ==\ 10))\ \{}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//response\ +=\ "{}mev:noteon:\(\backslash\)"{}"{}\ +\ (*configArray[currentConfig].noteOn)\ +\ "{}\(\backslash\)"{}"{};}}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}mev:noteon:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(*\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].noteOn,\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (check\ ==\ 10)\ \{\ response\ +=\ \textcolor{stringliteral}{"{},"{}};\ \}}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((check\ ==\ 2)\ ||\ (check\ ==\ 10))\ \{}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//response\ +=\ "{}mev:noteoff:\(\backslash\)"{}"{}\ +\ (*configArray[currentConfig].noteOff)\ +\ "{}\(\backslash\)"{}"{};}}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}mev:noteoff:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(*\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].noteOff,\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (check\ ==\ 10)\ \{\ response\ +=\ \textcolor{stringliteral}{"{},"{}};\ \}}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((check\ ==\ 3)\ ||\ (check\ ==\ 10))\ \{}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ int(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].controlChange.size());\ i++)\ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//response\ +=\ "{}mev:cc:"{}\ +\ String(configArray[currentConfig].controlChange[i].control)\ +\ "{}:\(\backslash\)"{}"{}\ +\ (configArray[currentConfig].controlChange[i].command)\ +\ "{}\(\backslash\)"{}"{};}}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}mev:cc:"{}}\ +\ String(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].controlChange[i].control)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].controlChange[i].command,\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((check\ ==\ 4)\ ||\ (check\ ==\ 10))\ \{}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//response\ +=\ "{}mev:pat:\(\backslash\)"{}"{}\ +\ (*configArray[currentConfig].polyAftertouch)\ +\ "{}\(\backslash\)"{}"{};}}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}mev:pat:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(*\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].polyAftertouch,\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (check\ ==\ 10)\ \{\ response\ +=\ \textcolor{stringliteral}{"{},"{}};\ \}}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((check\ ==\ 5)\ ||\ (check\ ==\ 10))\ \{}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//response\ +=\ "{}mev:pb:\(\backslash\)"{}"{}\ +\ (*configArray[currentConfig].pitchBend)\ +\ "{}\(\backslash\)"{}"{};}}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}mev:pb:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(*\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].\mbox{\hyperlink{midi_8cpp_a07a5a8cf79cfd013892fd6d686ff6024}{pitchBend}},\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (check\ ==\ 10)\ \{\ response\ +=\ \textcolor{stringliteral}{"{},"{}};\ \}}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((check\ ==\ 6)\ ||\ (check\ ==\ 10))\ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//response\ +=\ "{}mev:cat:\(\backslash\)"{}"{}\ +\ (*configArray[currentConfig].channelAftertouch)\ +\ "{}\(\backslash\)"{}"{};}}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}mev:cat:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(*\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].channelAftertouch,\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (check\ ==\ 10)\ \{\ response\ +=\ \textcolor{stringliteral}{"{},"{}};\ \}}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((check\ ==\ 7)\ ||\ (check\ ==\ 10))\ \{}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//response\ +=\ "{}mev:pc:\(\backslash\)"{}"{}\ +\ (*configArray[currentConfig].programChange)\ +\ "{}\(\backslash\)"{}"{};}}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}mev:pc:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(*\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].programChange,\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (check\ ==\ 10)\ \{\ response\ +=\ \textcolor{stringliteral}{"{},"{}};\ \}}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (response\ ==\ \textcolor{stringliteral}{"{}"{}})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{response,\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_a0af0c008c80e8b315e813ac91855b997}{checkArgumentsMin}}(\_commandItem,\ commandResponses,\ 2))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]\ ==\ \textcolor{stringliteral}{"{}noteon"{}})\ \{}
+\DoxyCodeLine{00235\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *configArray[currentConfig].noteOn\ =\ \_commandItem-\/>argument[1].substring(1,\ \_commandItem-\/>argument[1].length()\ -\/\ 1);}}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].noteOn\ =\ \mbox{\hyperlink{commandparser_8h_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1]);}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}mev:noteon:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(*\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].noteOn,\ \textcolor{keyword}{true}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]\ ==\ \textcolor{stringliteral}{"{}noteoff"{}})\ \{}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//*configArray[currentConfig].noteOff\ =\ \_commandItem-\/>argument[1].substring(1,\ \_commandItem-\/>argument[1].length()\ -\/\ 1);}}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].noteOff\ =\ \mbox{\hyperlink{commandparser_8h_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1]);}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}mev:noteoff:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(*\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].noteOff,\ \textcolor{keyword}{true}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]\ ==\ \textcolor{stringliteral}{"{}cc"{}})\ \{}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 3))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1].toInt(),\ 0,\ 127))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//String\ *sTemp\ =\ new\ String(\_commandItem-\/>argument[2].substring(1,\ \_commandItem-\/>argument[2].length()\ -\/\ 1));}}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ *sTemp\ =\ \textcolor{keyword}{new}\ String(\mbox{\hyperlink{commandparser_8h_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[2]));}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].setCC(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1].toInt(),\ sTemp);}
+\DoxyCodeLine{00250\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}Setting\ CC\ "{}\ +\ String(\_commandItem-\/>argument[1].toInt())\ +\ "{}\ event\ handler\ to\ "{}\ +}}
+\DoxyCodeLine{00251\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_commandItem-\/>argument[2].substring(1,\ \_commandItem-\/>argument[2].length()\ -\/\ 1),\ Command\});}}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}mev:cc:"{}}\ +\ String(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1].toInt())\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(*sTemp,\ \textcolor{keyword}{true}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]\ ==\ \textcolor{stringliteral}{"{}pat"{}})\ \{}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//*configArray[currentConfig].polyAftertouch\ =\ \_commandItem-\/>argument[1].substring(1,\ \_commandItem-\/>argument[1].length()\ -\/\ 1);}}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].polyAftertouch\ =\ \mbox{\hyperlink{commandparser_8h_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1]);}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}mev:pat:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(*\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].polyAftertouch,\ \textcolor{keyword}{true}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]\ ==\ \textcolor{stringliteral}{"{}cat"{}})\ \{}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//*configArray[currentConfig].channelAftertouch\ =\ \_commandItem-\/>argument[1].substring(1,\ \_commandItem-\/>argument[1].length()\ -\/\ 1);}}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].channelAftertouch\ =\ \mbox{\hyperlink{commandparser_8h_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1]);}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}mev:cat:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(*\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].channelAftertouch,\ \textcolor{keyword}{true}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]\ ==\ \textcolor{stringliteral}{"{}pb"{}})\ \{}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//*configArray[currentConfig].pitchBend\ =\ \_commandItem-\/>argument[1].substring(1,\ \_commandItem-\/>argument[1].length()\ -\/\ 1);}}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].pitchBend\ =\ \ \mbox{\hyperlink{commandparser_8h_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1]);}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}mev:pb:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(*\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].\mbox{\hyperlink{midi_8cpp_a07a5a8cf79cfd013892fd6d686ff6024}{pitchBend}},\ \textcolor{keyword}{true}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]\ ==\ \textcolor{stringliteral}{"{}pc"{}})\ \{}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//*configArray[currentConfig].programChange\ =\ \_commandItem-\/>argument[1].substring(1,\ \_commandItem-\/>argument[1].length()\ -\/\ 1);}}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].programChange\ =\ \mbox{\hyperlink{commandparser_8h_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1]);}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}mev:pc:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(*\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].programChange,\ \textcolor{keyword}{true}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Unknown\ event\ "{}}\ +\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0],\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00277\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00278\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}midieventhandlerccremove"{}})\ \{}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt(),\ 0,\ 127))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].removeCC(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()))\ \{}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}mevcr:"{}}\ +\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0],\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Unknown\ CC\ "{}}\ +\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0],\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00286\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00287\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}globalsaveallparameters"{}})\ \{}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{settingshandler_8cpp_ace3c5429a7600071f43b7c8c4462a23d}{saveAllParams}}();}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}gsap:1"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00290\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00291\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}globalloadallparameters"{}})\ \{}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{settingshandler_8cpp_a4c39676e517471f401dcca5aff39686c}{loadAllParams}}();}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}glap:1"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00294\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}globalresetallparameters"{}})\ \{}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{settingshandler_8cpp_ae0121269d2cc5beaea756f4a70fa416d}{resetAllParams}}();}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}grap:1"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00298\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00299\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}test"{}})\ \{}
+\DoxyCodeLine{00300\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00301\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}testadclatency"{}})\ \{}
+\DoxyCodeLine{00302\ \ \ \textcolor{comment}{//\ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}Starting\ ADC\ latency\ test"{},\ InfoRequest\});}}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00304\ \textcolor{comment}{//\ \ \ \ \ \ \ \ if\ (!validateNumber(\_commandItem-\/>argument[0].toInt(),\ 0,\ 65535))\ \{\ return\ false;\ \}}}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a74a971e8a878363938ad6d1426e8255c}{testMeasurement}}\ =\ 0;}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a651d0075db9c3f29b556e9dd764b41c2}{testMeasurementOngoing}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ analogWrite(3,\ \textcolor{keywordtype}{int}(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()));}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Starting\ ADC\ latency\ test"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00309\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00310\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}testadclatencyreturn"{}})\ \{}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a651d0075db9c3f29b556e9dd764b41c2}{testMeasurementOngoing}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Returned\ from\ ADC\ latency\ test\ in\ "{}}\ +\ String(\mbox{\hyperlink{main_8cpp_a74a971e8a878363938ad6d1426e8255c}{testMeasurement}})\ +\ \textcolor{stringliteral}{"{}\ uS"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00313\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00314\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}testadcminmax"{}})\ \{}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}tamm:"{}}\ +\ String(\mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{controlRead}}-\/>\mbox{\hyperlink{classcontrolReader_a13e402f8e77682ebcac691e3bdd3f974}{testChannel}})\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{controlRead}}-\/>\mbox{\hyperlink{classcontrolReader_a89c7532c825bce8a0a0d788106554671}{testMin}})\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{controlRead}}-\/>\mbox{\hyperlink{classcontrolReader_aee456916defbbaffc8aad1210b7d4256}{testMax}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ testChannel\ =\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((testChannel\ <\ 0)\ ||\ (testChannel\ >\ 7))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{controlRead}}-\/>\mbox{\hyperlink{classcontrolReader_a6ee96b5723f96f2cfbbd5d84698e8ae9}{setADCMinMaxTestChannel}}(testChannel);}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}Starting\ ADC\ min/max\ test\ on\ channel\ "{}}\ +\ String(\mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{controlRead}}-\/>\mbox{\hyperlink{classcontrolReader_a13e402f8e77682ebcac691e3bdd3f974}{testChannel}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00324\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00325\ }
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}modulecount"{}})\ \{}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}mc:"{}}\ +\ String(\mbox{\hyperlink{main_8cpp_aacbb4662d46136722bc7069351a1a30f}{stringModuleArray}}.size()),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00329\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00330\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}midiconfigurationname"{}})\ \{}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ \ \ int8\_t\ conf\ =\ \mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}};}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1,\ \textcolor{keyword}{true}))\ \{}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conf\ =\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((conf\ <\ 0)\ ||\ (conf\ >=\ \mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}.size()))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}mcfn:"{}}\ +\ String(conf)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ *(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[conf].name),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00340\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \_commandItem-\/>argument[0].replace("{}\(\backslash\)"{}"{},\ "{}"{});}}
+\DoxyCodeLine{00341\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \_commandItem-\/>argument[0].replace("{}'"{},\ "{}"{});}}
+\DoxyCodeLine{00342\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ *(configArray[currentConfig].name)\ =\ \_commandItem-\/>argument[0];}}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ *(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].name)\ =\ \mbox{\hyperlink{commandparser_8h_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]);}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}mcfn:"{}}\ +\ *(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].name),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00346\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00347\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}midiconfiguration"{}})\ \{}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}mcf:"{}}\ +\ String(\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//if\ (!validateNumber(\_commandItem-\/>argument[0].toInt(),\ 0,\ configArray.size()\ -\/\ 1))\ \{\ return\ false;\ \}}}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}\ =\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ String\ response\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}\ >\ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}.size()\ -\/\ 1))\ \{}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}.push\_back(\mbox{\hyperlink{classconfiguration}{configuration}}());}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}Added\ configuration\ no\ "{}}\ +\ String(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}.size()\ -\/\ 1)\ +\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//response\ +=\ "{}Setting\ current\ configuration\ to\ "{}\ +\ String(currentConfig);}}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//commandResponses-\/>push\_back(\{\ response,\ debugPrintType::Command\});}}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}mcf:\ "{}}\ +\ String(\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00363\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00364\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}midiconfigurationadd"{}})\ \{}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}.push\_back(\mbox{\hyperlink{classconfiguration}{configuration}}());}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ uint16\_t\ index\ =\ \mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}.size()\ -\/\ 1;}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[index].name\ =\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0];}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \textcolor{comment}{//commandResponses-\/>push\_back(\{\ "{}Added\ configuration\ no\ "{}\ +\ String(configArray.size()\ -\/\ 1),\ InfoRequest\ \});}}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}mcfa:"{}}\ +\ String(index),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00371\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00372\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}midiconfigurationremove"{}})\ \{}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt(),\ 0,\ \mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}.size()\ -\/\ 1))\ \{}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}Configuration\ out\ of\ range"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}}\});}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}.size()\ ==\ 1)\ \{}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}Cannot\ remove\ all\ configurations"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}}\});}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ uint8\_t\ removeConfig\ =\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (removeConfig\ <=\ \mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}})\ \{\ \mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}\ -\/=1;\ \}}
+\DoxyCodeLine{00384\ }
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}.erase(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}.begin()\ +\ removeConfig);}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}mcfr:"{}}\ +\ String(removeConfig),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\});}
+\DoxyCodeLine{00387\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00388\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}midiconfigurationcount"{}})\ \{}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}mcfc:"{}}\ +\ String(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}.size()),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00390\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00391\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}free"{}})\ \{}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \textcolor{comment}{//printHeapStats();}}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}free:"{}}\ +\ String(\mbox{\hyperlink{main_8cpp_afc3e7d08d802f694ab6a85e9908048f4}{freeram}}()),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00394\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00395\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}midiconfigurationdefaults"{}})\ \{}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].setDefaults();}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}mcfd:1"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\});}
+\DoxyCodeLine{00398\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00399\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}midireceivechannel"{}})\ \{}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}mrc:"{}}\ +\ String(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt(),\ 0,\ 255))\ \{}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel\ =\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}mrc:"{}}\ +\ String(\mbox{\hyperlink{main_8cpp_abb8915aa4f8893abeb296761ffcff439}{configArray}}[\mbox{\hyperlink{main_8cpp_a7c75720b545dc66a5f1424b0afbb45fb}{currentConfig}}].midiRxChannel),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\});}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00410\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00411\ \textcolor{comment}{/*\ \ \ \ if\ (\_commandItem-\/>command\ ==\ "{}midisustain"{})\ \{}}
+\DoxyCodeLine{00412\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!checkArguments(\_commandItem,\ commandResponses,\ 1))\ \{\ return\ false;\ \}}}
+\DoxyCodeLine{00413\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (\_commandItem-\/>argument[0].toInt()\ ==\ 1)\ \{}}
+\DoxyCodeLine{00414\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ sustain\ =\ true;}}
+\DoxyCodeLine{00415\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00416\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ sustain\ =\ false;}}
+\DoxyCodeLine{00417\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00418\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}MIDI\ sustain\ set\ to\ "{}\ +\ String(sustain),\ debugPrintType::Command\});}}
+\DoxyCodeLine{00419\ \textcolor{comment}{\ \ \ \ \}\ else*/}}
+\DoxyCodeLine{00420\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}midiallnotesoff"{}})\ \{}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()\ ==\ 1)\ \{}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a3380d03f7876fabe1bba4bb9baf6fbd8}{midiAllNotesOff}}();}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}mano:1"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\});}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00426\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00427\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}adcread"{}})\ \{}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((i\ <\ 0)\ ||\ (i\ >\ 7))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00431\ }
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ int32\_t\ convertedValue;}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ <\ 5)\ \{}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \ \ \ \ convertedValue\ =\ (int32\_t)\ ((\textcolor{keywordtype}{float})\ \mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{controlRead}}-\/>\mbox{\hyperlink{classcontrolReader_a5d8f4d63ea42b5416b5c23e8511da343}{getData}}(i)\ *\ ((float)\ 65536\ /\ 32767));}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \ \ \ \ convertedValue\ =\ (int32\_t)\ ((\textcolor{keywordtype}{float})\ \mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{controlRead}}-\/>\mbox{\hyperlink{classcontrolReader_a5d8f4d63ea42b5416b5c23e8511da343}{getData}}(i)\ *\ ((float)\ 65536\ /\ 2048));}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (convertedValue\ >\ 65535)\ \{\ convertedValue\ =\ 65535;\ \}}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}adcr:"{}}\ +\ String(i)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(convertedValue)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{controlRead}}-\/>\mbox{\hyperlink{classcontrolReader_a5d8f4d63ea42b5416b5c23e8511da343}{getData}}(i)),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\});}
+\DoxyCodeLine{00440\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00441\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}adccommandmap"{}})\ \{}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_a0af0c008c80e8b315e813ac91855b997}{checkArgumentsMin}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ uint8\_t\ channel\ =\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
+\DoxyCodeLine{00444\ }
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//commandResponses-\/>push\_back(\{\ "{}acm:"{}\ +\ String(channel)\ +\ "{}:'"{}\ +\ String(controlRead-\/>cvInputCommands[channel])\ +\ "{}'"{},\ InfoRequest\});}}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}acm:"{}}\ +\ String(channel)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(\mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{controlRead}}-\/>\mbox{\hyperlink{classcontrolReader_a6bd8645dec8967566cd2239a03c1084f}{cvInputCommands}}[channel],\ \textcolor{keyword}{true}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 2))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{controlRead}}-\/>\mbox{\hyperlink{classcontrolReader_a9e35f60815712a522c5fcdff86d65731}{setADCCommands}}(channel,\ \mbox{\hyperlink{commandparser_8h_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1]));}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//commandResponses-\/>push\_back(\{\ "{}Setting\ adc\ channel\ "{}\ +\ String(channel)\ +\ "{}\ command\ string\ to\ "{}\ +\ controlRead-\/>cvInputCommands[channel],\ debugPrintType::Command\});}}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}acm:"{}}\ +\ String(channel)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(\mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{controlRead}}-\/>\mbox{\hyperlink{classcontrolReader_a6bd8645dec8967566cd2239a03c1084f}{cvInputCommands}}[channel],\ \textcolor{keyword}{true}),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00454\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00455\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}adcdefaults"{}})\ \{}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{controlRead}}-\/>\mbox{\hyperlink{classcontrolReader_a1aa43685a096d06ba563877a8dc41d6b}{setDefaults}}();}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}acd:1"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\});}
+\DoxyCodeLine{00458\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00459\ }
+\DoxyCodeLine{00460\ \textcolor{comment}{//\ \{\ "{}adcsettings"{},\ "{}adcs"{},\ "{}channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout"{}}}
+\DoxyCodeLine{00461\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}adcsettings"{}})\ \{}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_a0af0c008c80e8b315e813ac91855b997}{checkArgumentsMin}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ uint8\_t\ channel\ =\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
+\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (channel\ >\ 7)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00465\ }
+\DoxyCodeLine{00466\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}adcs:"{}}\ +\ String(channel)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{controlRead}}-\/>\mbox{\hyperlink{classcontrolReader_abf91e7188551dc76f5d803d1af07ab25}{getADCAveragerSettings}}(channel),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00468\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 5))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{controlRead}}-\/>\mbox{\hyperlink{classcontrolReader_aef9ed809dd3aa9a2b176bda6e4849f0c}{setADCAveragerSettings}}(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt(),\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1].toInt(),\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[2].toInt(),\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[3].toInt(),}
+\DoxyCodeLine{00471\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[4].toInt()))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}adcs:"{}}\ +\ String(channel)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{controlRead}}-\/>\mbox{\hyperlink{classcontrolReader_abf91e7188551dc76f5d803d1af07ab25}{getADCAveragerSettings}}(channel),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\});}
+\DoxyCodeLine{00473\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00474\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00475\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}expressionparserevaluate"{}})\ \{}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_ad49be36e31ac13009fbc84e03bb78cdc}{updateLocalVariables}}();}
+\DoxyCodeLine{00478\ }
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ testCommands(\textcolor{stringliteral}{"{}ev:"{}}\ +\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]);}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ testCommands.\mbox{\hyperlink{classcommandList_af42de049662f915fd12f8ed92477c03f}{parseCommandExpressions}}(\mbox{\hyperlink{midi_8cpp_aa4d63739eecbd3c853237b269801a7cb}{expFunctions}},\ \mbox{\hyperlink{midi_8cpp_aa6eb5580c71ee23146ac858f01b19c60}{expFunctionCount}});}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}ev:\ "{}}\ +\ String(testCommands.\mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[0].argument[0]),\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\});}
+\DoxyCodeLine{00482\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00483\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}reset"{}})\ \{}
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()\ ==\ 1)\ \{}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_ad20897c5c8bd47f5d4005989bead0e55}{reset}}();}
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00491\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00492\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}nick"{}})\ \{}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}nick:"{}}\ +\ \mbox{\hyperlink{main_8cpp_af98373428ba06a19feb1859d77b9f9d2}{nickName}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\});}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_af98373428ba06a19feb1859d77b9f9d2}{nickName}}\ =\ String(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0]).trim();}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}nick:"{}}\ +\ \mbox{\hyperlink{main_8cpp_af98373428ba06a19feb1859d77b9f9d2}{nickName}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\});}
+\DoxyCodeLine{00500\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00502\ \ \ \ \ \}}
+\DoxyCodeLine{00503\ }
+\DoxyCodeLine{00504\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00505\ \}}
+\DoxyCodeLine{00506\ }
+\DoxyCodeLine{00507\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{maincommandhandler_8cpp_a790137af39ef07a71a8e79396dafd28f}{processRequestCommand}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ delegated)\ \{}
+\DoxyCodeLine{00508\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_a0af0c008c80e8b315e813ac91855b997}{checkArgumentsMin}}(\_commandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00509\ \ \ \ \ String\ command\ =\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0];}
+\DoxyCodeLine{00510\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ int(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{maincommandhandler_8cpp_ab2005e41c34ec68066c2517708623f46}{serialCommandsMain}})\ /\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}));\ i++)\ \{}
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{maincommandhandler_8cpp_ab2005e41c34ec68066c2517708623f46}{serialCommandsMain}}[i].shortCommand\ ==\ command)\ \{}
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \ \ \ \ \ \ command\ =\ \mbox{\hyperlink{maincommandhandler_8cpp_ab2005e41c34ec68066c2517708623f46}{serialCommandsMain}}[i].\mbox{\hyperlink{structserialCommandItem_acfc1dd4408fcc9ebfb66f7f40fcc8efb}{longCommand}};}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00514\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00515\ \ \ \ \ \}}
+\DoxyCodeLine{00516\ }
+\DoxyCodeLine{00517\ \ \ \ \ \mbox{\hyperlink{classcommandItem}{commandItem}}\ requestItem(command);}
+\DoxyCodeLine{00518\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ i\ =\ 1;\ i\ <\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size();\ i++)\ \{}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ requestItem.\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.push\_back(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[i]);}
+\DoxyCodeLine{00520\ \ \ \ \ \}}
+\DoxyCodeLine{00521\ }
+\DoxyCodeLine{00522\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{maincommandhandler_8cpp_a6a701a3672b1102daa613c87c7601970}{processMainCommands}}(\&requestItem,\ commandResponses,\ \textcolor{keyword}{true},\ delegated))\ \{}
+\DoxyCodeLine{00523\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00524\ \ \ \ \ \{}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00526\ \ \ \ \ \}}
+\DoxyCodeLine{00527\ }
+\DoxyCodeLine{00528\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00529\ \}}
+\DoxyCodeLine{00530\ }
+\DoxyCodeLine{00531\ }
+\DoxyCodeLine{00532\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{maincommandhandler_8cpp_aa8ffdf555ac7c84e88dd4ad41098e41a}{processSerialCommands}}()\ \{}
+\DoxyCodeLine{00533\ \ \ \ \ \textcolor{keywordflow}{if}\ (ssReader.read())\ \{}
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}}-\/>\mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{addCommands}}(ssReader.c\_str());}
+\DoxyCodeLine{00535\ \ \ \ \ \}}
+\DoxyCodeLine{00536\ }
+\DoxyCodeLine{00537\ \ \ \ \ std::vector\ <commandResponse>\ commandResponses;}
+\DoxyCodeLine{00538\ }
+\DoxyCodeLine{00539\ \ \ \ \ uint16\_t\ i\ =\ 0;}
+\DoxyCodeLine{00540\ \ \ \ \ \textcolor{keywordflow}{while}\ (i\ <\ commands-\/>item.size())\ \{}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem\ =\ \&\mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}}-\/>\mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[i];}
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{commandparser_8h_a411a6ce822a8546287a361612587bc36}{processCommandItems}}(\_commandItem,\ \mbox{\hyperlink{maincommandhandler_8cpp_ab2005e41c34ec68066c2517708623f46}{serialCommandsMain}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{maincommandhandler_8cpp_ab2005e41c34ec68066c2517708623f46}{serialCommandsMain}})\ /\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}));}
+\DoxyCodeLine{00543\ }
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{maincommandhandler_8cpp_a6a701a3672b1102daa613c87c7601970}{processMainCommands}}(\_commandItem,\ \&commandResponses,\ \textcolor{keyword}{false}))\ \{}
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}requestinfo"{}})\ \{}
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8h_a0af0c008c80e8b315e813ac91855b997}{checkArgumentsMin}}(\_commandItem,\ \&commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{break};\ \}}
+\DoxyCodeLine{00548\ }
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{maincommandhandler_8cpp_a790137af39ef07a71a8e79396dafd28f}{processRequestCommand}}(\_commandItem,\ \&commandResponses,\ \textcolor{keyword}{false}))\ \{}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<commandResponse>\ moduleResponses;}
+\DoxyCodeLine{00551\ }
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{main_8cpp_aacbb4662d46136722bc7069351a1a30f}{stringModuleArray}}[\mbox{\hyperlink{main_8cpp_a0652452d3c6986b4f212f9a4cd94f213}{currentStringModule}}].processSerialCommand(\mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}},\ \&i,\ \&moduleResponses,\ \textcolor{keyword}{false}))\ \{}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ error\ =\ \textcolor{stringliteral}{"{}Unknown\ sequence\ "{}}\ +\ String(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}});}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ i\ =\ 0;\ i\ <\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size();\ i++)\ \{}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\ +=\ \textcolor{stringliteral}{"{}:"{}}\ +\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[i];}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses.push\_back(\{error,\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}}\});}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln(error,\ Error);}}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Unknown\ command\ "{}\ +\ String(\_commandItem-\/>command),\ Error);}}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00561\ }
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ int(moduleResponses.size());\ i++)\ \{}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses.push\_back(\{\textcolor{stringliteral}{"{}m:"{}}\ +\ String(\mbox{\hyperlink{main_8cpp_a0652452d3c6986b4f212f9a4cd94f213}{currentStringModule}})\ +\ \textcolor{stringliteral}{"{},"{}}\ +\ moduleResponses[i].response,\ moduleResponses[i].responseType\});}
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<commandResponse>\ moduleResponses;}
+\DoxyCodeLine{00569\ }
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}help"{}})\ \{}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ help\ =\ \textcolor{stringliteral}{"{}:\(\backslash\)"{}Below\ is\ a\ list\ of\ avaliable\ commands\ given\ in\ both\ short\ and\ long\ form,\ either\ works.\ The\ number\ and\ type(s)\ of\ arguments\ are\ listed\ afterwards\ and\ a\ brief\ description.\ Command\ usage:\ command:argument1:argument2\ [etc]\(\backslash\)"{}"{}};}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses.push\_back(\{help,\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a2c1b595c80ad4c1b7452f5ef8887ffba}{debugPrintType::Help}}\});}
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{commandparser_8h_a55f22cf254c21b7922ea450b24b48dd2}{addCommandHelp}}(\mbox{\hyperlink{maincommandhandler_8cpp_ab2005e41c34ec68066c2517708623f46}{serialCommandsMain}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{maincommandhandler_8cpp_ab2005e41c34ec68066c2517708623f46}{serialCommandsMain}})\ /\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}),\ \&commandResponses,\textcolor{stringliteral}{"{}[glo]:"{}});}
+\DoxyCodeLine{00574\ }
+\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{main_8cpp_aacbb4662d46136722bc7069351a1a30f}{stringModuleArray}}[\mbox{\hyperlink{main_8cpp_a0652452d3c6986b4f212f9a4cd94f213}{currentStringModule}}].processSerialCommand(\mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}},\ \&i,\ \&commandResponses,\ \textcolor{keyword}{false}))\ \{}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ error\ =\ \textcolor{stringliteral}{"{}Unknown\ sequence\ "{}}\ +\ String(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}});}
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ i\ =\ 0;\ i\ <\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size();\ i++)\ \{}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\ +=\ \textcolor{stringliteral}{"{}:"{}}\ +\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[i];}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses.push\_back(\{error,\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}}\});}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{main_8cpp_aacbb4662d46136722bc7069351a1a30f}{stringModuleArray}}[\mbox{\hyperlink{main_8cpp_a0652452d3c6986b4f212f9a4cd94f213}{currentStringModule}}].processSerialCommand(\mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}},\ \&i,\ \&moduleResponses,\ \textcolor{keyword}{false}))\ \{}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ int(moduleResponses.size());\ i++)\ \{}
+\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses.push\_back(\{\textcolor{stringliteral}{"{}m:"{}}\ +\ String(\mbox{\hyperlink{main_8cpp_a0652452d3c6986b4f212f9a4cd94f213}{currentStringModule}})\ +\ \textcolor{stringliteral}{"{},"{}}\ +\ moduleResponses[i].response,\ moduleResponses[i].responseType\});}
+\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00587\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses.push\_back(\{\textcolor{stringliteral}{"{}Command\ not\ found\ -\/"{}}\ +\ \_commandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ +\ \textcolor{stringliteral}{"{}-\/"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}}\});}
+\DoxyCodeLine{00589\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00590\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ i++;}
+\DoxyCodeLine{00592\ \ \ \ \ \}}
+\DoxyCodeLine{00593\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}}-\/>\mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}.clear();}
+\DoxyCodeLine{00594\ }
+\DoxyCodeLine{00595\ \ \ \ \ \textcolor{keywordflow}{for}\ (i=0;\ i<commandResponses.size();\ i++)\ \{}
+\DoxyCodeLine{00596\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(commandResponses[i].response,\ commandResponses[i].responseType);}
+\DoxyCodeLine{00597\ \ \ \ \ \}}
+\DoxyCodeLine{00598\ \}}
+\DoxyCodeLine{00599\ }
+\DoxyCodeLine{00600\ }
+
+\end{DoxyCode}

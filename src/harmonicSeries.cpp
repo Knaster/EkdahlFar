@@ -22,7 +22,7 @@
 #include <WProgram.h>
 #include <vector>
 
-#include "harmonicSeries.h"
+#include "harmonicSeries.hpp"
 
 class harmonicSeries {
 public:

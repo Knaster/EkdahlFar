@@ -24,8 +24,8 @@
 #include <stdint.h>
 #include <sys/types.h>
 
-#include "calibrate.h"
-#include "bowcontrol.h"
+#include "calibrate.hpp"
+#include "bowcontrol.hpp"
 
 /**
  * @file bowcontrol.cpp
@@ -185,16 +185,19 @@ int bowControl::checkMotorFault() {
 void bowControl::setBowPressureSafe(uint16_t tilt) {
     if (tilt > calibrationDataConnect->stallPressure) { tilt = calibrationDataConnect->stallPressure; }
 
-    if ((tiltMode == Engage) && (bowIOConnect->stepServoStepper->reachedTarget))  {
+//    if ((tiltMode == Engage) && (bowIOConnect->stepServoStepper->reachedTarget))  {
+    if ((tiltMode == Engage) && (bowIOConnect->tmc2209ServoStepper->stepServoStepper->reachedTarget))  {
         reachedEngage = true;
         if (outputDebugData) { debugPrintln("Reached engage", debugPrintType::Debug); }
     }
 
     if ((tiltMode == Engage) && (reachedEngage)) {
-        bowIOConnect->stepServoStepper->setSpeed(bowSpeedWhileEngaged);
+//        bowIOConnect->stepServoStepper->setSpeed(bowSpeedWhileEngaged);
+        bowIOConnect->tmc2209ServoStepper->stepServoStepper->setSpeed(bowSpeedWhileEngaged);
         if (outputDebugData) { debugPrintln("Setting pressure speed to slow", debugPrintType::Debug); }
     } else {
-        bowIOConnect->stepServoStepper->setSpeed(bowSpeedToEngage);
+//        bowIOConnect->stepServoStepper->setSpeed(bowSpeedToEngage);
+        bowIOConnect->tmc2209ServoStepper->stepServoStepper->setSpeed(bowSpeedToEngage);
         if (outputDebugData) { debugPrintln("Setting pressure speed to high", debugPrintType::Debug); }
     }
 
@@ -287,7 +290,8 @@ bool bowControl::bowEngage(int enact) {
     if (enact == 0) { return false; }
     reachedEngage = false;
     // UGLY 2024-03-10
-    bowIOConnect->stepServoStepper->reachedTarget = false;
+//    bowIOConnect->stepServoStepper->reachedTarget = false;
+    bowIOConnect->tmc2209ServoStepper->stepServoStepper->reachedTarget = false;
     tiltMode = Engage;
     return calculateBaselineModifierPressure();
 }

@@ -1,0 +1,187 @@
+\doxysection{bow\+Actuators.\+cpp}
+\hypertarget{bowActuators_8cpp_source}{}\label{bowActuators_8cpp_source}\index{bowActuators.cpp@{bowActuators.cpp}}
+\mbox{\hyperlink{bowActuators_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ BOWACTUATORS\_C}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ BOWACTUATORS\_C}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ \ \ \ Conforming\ to\ STD\ C++\ naming\ conventions\ with\ the\ exception\ of\ where\ external\ non-\/conforming\ items\ are\ referenced}}
+\DoxyCodeLine{00024\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bowActuators_8h}{bowActuators.h}}"{}}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \mbox{\hyperlink{classBowActuators_af9226b544c6462083e44feef83fd4ce6}{BowActuators::BowActuators}}(\mbox{\hyperlink{structCalibrationData}{CalibrationData}}\ *t\_calibrationDataConnect)}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a2796710c9bb339eb176ced7406707ce9}{m\_calibrationDataConnect}}\ =\ t\_calibrationDataConnect;}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}}\ =\ 0;}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{comment}{//m\_bowActuator.push\_back(\{0,\ 65535,\ 0,\ "{}default"{}\});}}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a59d4d69e439bc4ab555e1d0675ea7f8a}{setBowActuatorData}}(0,\ 2000,\ 50000,\ 0,\ \textcolor{stringliteral}{"{}default"{}});}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classBowActuators_aca66bec1b595b531d9ba06ef99b4e31d}{loadBowActuator}}();}
+\DoxyCodeLine{00036\ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \mbox{\hyperlink{classBowActuators_addd42fd750a1685b4b6e0a550c94eb2f}{BowActuators::\string~BowActuators}}()}
+\DoxyCodeLine{00039\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{//dtor}}
+\DoxyCodeLine{00041\ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ uint8\_t\ \mbox{\hyperlink{classBowActuators_a98f6a860981a16e1af23b6356adff117}{BowActuators::addBowActuator}}()\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.push\_back(\{0,\ 65535,\ 0,\ \textcolor{stringliteral}{"{}new"{}}\});}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.size()\ -\/\ 1;}
+\DoxyCodeLine{00046\ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowActuators_aecd8def24b0739a29c639b340416553f}{BowActuators::removeBowActuator}}(uint8\_t\ t\_actuator)\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{if}\ (t\_actuator\ >=\ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.size())\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.erase(\mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.begin()\ +\ t\_actuator);}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}}\ >=\ t\_actuator)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}}\ =\ 0;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Removed\ active\ bow\ actuator,\ resetting\ to\ actuator\ 0"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00056\ \ \ \ \ \}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00058\ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ uint8\_t\ \mbox{\hyperlink{classBowActuators_a722fd3108f11784c4dd923037b8fb4d4}{BowActuators::setBowActuator}}(uint8\_t\ t\_actuator)\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{if}\ (t\_actuator\ >=\ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.size())\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Actuator\ over\ current\ size,\ increasing\ buffer"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{comment}{//m\_currentBowActuator\ =\ bowActuator.size()\ -\/\ 1;}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Actuator\ over\ current\ size!"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00066\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}}\ =\ t\_actuator;}
+\DoxyCodeLine{00068\ \ \ \ \ \}}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}};}
+\DoxyCodeLine{00070\ \};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ uint8\_t\ \mbox{\hyperlink{classBowActuators_aae3d27f683338656876e148e16f1cad1}{BowActuators::getBowActuator}}()\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}};}
+\DoxyCodeLine{00074\ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ uint8\_t\ \mbox{\hyperlink{classBowActuators_a4dd3d690d0979edba31086d5f154838a}{BowActuators::getBowActuatorCount}}()\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.size();}
+\DoxyCodeLine{00078\ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowActuators_aca66bec1b595b531d9ba06ef99b4e31d}{BowActuators::loadBowActuator}}()\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a2796710c9bb339eb176ced7406707ce9}{m\_calibrationDataConnect}}-\/>\mbox{\hyperlink{structCalibrationData_acd0de95cff2c97a3334474622271df67}{firstTouchPressure}}\ =\ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[\mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}}].firstTouchPressure;}
+\DoxyCodeLine{00082\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a2796710c9bb339eb176ced7406707ce9}{m\_calibrationDataConnect}}-\/>\mbox{\hyperlink{structCalibrationData_aac59ac28009041fe044ebdb8e58e73dc}{stallPressure}}\ =\ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[\mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}}].stallPressure;}
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a2796710c9bb339eb176ced7406707ce9}{m\_calibrationDataConnect}}-\/>\mbox{\hyperlink{structCalibrationData_a99ce3a41280a4b48d3f333c58f0ba1c0}{restPosition}}\ =\ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[\mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}}].restPosition;}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00085\ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowActuators_aca66bec1b595b531d9ba06ef99b4e31d}{BowActuators::loadBowActuator}}(uint8\_t\ t\_actuator)\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{if}\ (t\_actuator\ >=\ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.size())\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}}\ =\ t\_actuator;}
+\DoxyCodeLine{00090\ \ \ \ \ \mbox{\hyperlink{classBowActuators_aca66bec1b595b531d9ba06ef99b4e31d}{loadBowActuator}}();}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00092\ \}}
+\DoxyCodeLine{00093\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00094\ \textcolor{comment}{bool\ BowActuators::saveBowActuator()\ \{}}
+\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ \ m\_bowActuator[m\_currentBowActuator].firstTouchPressure\ =\ m\_calibrationDataConnect-\/>firstTouchPressure;}}
+\DoxyCodeLine{00096\ \textcolor{comment}{\ \ \ \ m\_bowActuator[m\_currentBowActuator].stallPressure\ =\ m\_calibrationDataConnect-\/>stallPressure;}}
+\DoxyCodeLine{00097\ \textcolor{comment}{\ \ \ \ m\_bowActuator[m\_currentBowActuator].restPosition\ =\ m\_calibrationDataConnect-\/>restPosition;}}
+\DoxyCodeLine{00098\ \textcolor{comment}{\ \ \ \ return\ true;}}
+\DoxyCodeLine{00099\ \textcolor{comment}{\};}}
+\DoxyCodeLine{00100\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00101\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowActuators_a155a8d928234d3d1aa4a9a411c66bbca}{BowActuators::saveBowActuator}}(uint16\_t\ actuator,\ String\ name)\ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordflow}{if}\ (actuator\ >\ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.size()\ -\/\ 1)\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Inserting\ new\ actuator"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.push\_back(\{0,\ 65535,\ 0,\ \textcolor{stringliteral}{"{}new"{}}\});}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ actuator\ =\ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.size()\ -\/\ 1;}
+\DoxyCodeLine{00106\ \ \ \ \ \}}
+\DoxyCodeLine{00107\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[actuator].firstTouchPressure\ =\ \mbox{\hyperlink{classBowActuators_a2796710c9bb339eb176ced7406707ce9}{m\_calibrationDataConnect}}-\/>\mbox{\hyperlink{structCalibrationData_acd0de95cff2c97a3334474622271df67}{firstTouchPressure}};}
+\DoxyCodeLine{00108\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[actuator].stallPressure\ =\ \mbox{\hyperlink{classBowActuators_a2796710c9bb339eb176ced7406707ce9}{m\_calibrationDataConnect}}-\/>\mbox{\hyperlink{structCalibrationData_aac59ac28009041fe044ebdb8e58e73dc}{stallPressure}};}
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[actuator].restPosition\ =\ \mbox{\hyperlink{classBowActuators_a2796710c9bb339eb176ced7406707ce9}{m\_calibrationDataConnect}}-\/>\mbox{\hyperlink{structCalibrationData_a99ce3a41280a4b48d3f333c58f0ba1c0}{restPosition}};}
+\DoxyCodeLine{00110\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[actuator].id\ =\ name;}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00112\ \};}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowActuators_a51f5eef7af845d4498124d99bf8ffd6d}{BowActuators::setBowActuatorFirstTouchPressure}}(uint16\_t\ t\_firstTouchPressure)\ \ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[\mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}}].firstTouchPressure\ =\ t\_firstTouchPressure;}
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00117\ \};}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowActuators_abb0849950ffa454c4eaaafd8e739e40f}{BowActuators::setBowActuatorStallPressure}}(uint16\_t\ t\_stallPressure)\ \ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[\mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}}].stallPressure\ =\ t\_stallPressure;}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00122\ \};}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowActuators_a3d37c331e6377d74aabc0795cae83237}{BowActuators::setBowActuatorRestPosition}}(uint16\_t\ t\_restPosition)\ \{}
+\DoxyCodeLine{00125\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[\mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}}].restPosition\ =\ t\_restPosition;}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00127\ \};}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowActuators_ae3a7ac43f18884f37d9654d6d04c5063}{BowActuators::setBowActuatorID}}(String\ t\_id)\ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[\mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}}].id\ =\ t\_id;}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00132\ \}}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ uint16\_t\ \mbox{\hyperlink{classBowActuators_ad26edf6a149cd97bfc0d63bae03e3369}{BowActuators::getBowActuatorFirstTouchPressure}}(int8\_t\ t\_bowActuatorIndex)\ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordflow}{if}\ ((t\_bowActuatorIndex\ <\ 0)\ ||\ (t\_bowActuatorIndex\ >\ (\mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.size()\ -\/1)))\ \{\ t\_bowActuatorIndex\ =\ \mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}};\ \}}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[t\_bowActuatorIndex].firstTouchPressure;}
+\DoxyCodeLine{00137\ \}}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ uint16\_t\ \mbox{\hyperlink{classBowActuators_a4b18114d484c2f78e1ce0eb2c35c685a}{BowActuators::getBowActuatorStallPressure}}(int8\_t\ t\_bowActuatorIndex)\ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordflow}{if}\ ((t\_bowActuatorIndex\ <\ 0)\ ||\ (t\_bowActuatorIndex\ >\ (\mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.size()\ -\/1)))\ \{\ t\_bowActuatorIndex\ =\ \mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}};\ \}}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[t\_bowActuatorIndex].stallPressure;}
+\DoxyCodeLine{00142\ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ uint16\_t\ \mbox{\hyperlink{classBowActuators_a65e051bf792f21b7a4394d45b223612b}{BowActuators::getBowActuatorRestPosition}}(int8\_t\ t\_bowActuatorIndex)\ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordflow}{if}\ ((t\_bowActuatorIndex\ <\ 0)\ ||\ (t\_bowActuatorIndex\ >\ (\mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.size()\ -\/1)))\ \{\ t\_bowActuatorIndex\ =\ \mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}};\ \}}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[t\_bowActuatorIndex].restPosition;}
+\DoxyCodeLine{00147\ \}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ String\ \mbox{\hyperlink{classBowActuators_a0a3199c19a0aa6c897b0d3622db75ff9}{BowActuators::getBowActuatorID}}(int8\_t\ t\_bowActuatorIndex)\ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordflow}{if}\ ((t\_bowActuatorIndex\ <\ 0)\ ||\ (t\_bowActuatorIndex\ >\ (\mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.size()\ -\/1)))\ \{\ t\_bowActuatorIndex\ =\ \mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}};\ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[t\_bowActuatorIndex].id;}
+\DoxyCodeLine{00152\ \}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowActuators_a59d4d69e439bc4ab555e1d0675ea7f8a}{BowActuators::setBowActuatorData}}(int8\_t\ t\_bowActuatorIndex,\ uint16\_t\ t\_firstTouchPressure,\ uint16\_t\ t\_stallPressure,\ uint16\_t\ t\_restPosition,\ String\ t\_id)\ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordflow}{if}\ (t\_bowActuatorIndex\ >=\ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.size())\ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (t\_bowActuatorIndex\ ==\ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.size())\ \{}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Bow\ actuator\ index\ out\ of\ range\ by\ one,\ adding\ bow\ index"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ t\_bowActuatorIndex\ =\ \mbox{\hyperlink{classBowActuators_a98f6a860981a16e1af23b6356adff117}{addBowActuator}}();}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8h_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Bow\ actuator\ index\ out\ of\ range\ by\ more\ than\ one"{}},\ \mbox{\hyperlink{debugprint_8h_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00163\ \ \ \ \ \}}
+\DoxyCodeLine{00164\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[t\_bowActuatorIndex].stallPressure\ =\ t\_stallPressure;}
+\DoxyCodeLine{00165\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[t\_bowActuatorIndex].firstTouchPressure\ =\ t\_firstTouchPressure;}
+\DoxyCodeLine{00166\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[t\_bowActuatorIndex].restPosition\ =\ t\_restPosition;}
+\DoxyCodeLine{00167\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[t\_bowActuatorIndex].id\ =\ t\_id;}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00169\ \};}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ String\ \mbox{\hyperlink{classBowActuators_a0f7998db6eb3b67544ac8ed6be44a43d}{BowActuators::dumpData}}()\ \{}
+\DoxyCodeLine{00172\ \ \ \ \ String\ dump\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ i\ =\ 0;\ i\ <\ (\mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}.size());\ i++)\ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}bad:"{}}\ +\ String(i)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[i].firstTouchPressure)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[i].stallPressure)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ String(\mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[i].restPosition)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{commandparser_8h_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(\mbox{\hyperlink{classBowActuators_a387e070191587f05da71108018a6e71e}{m\_bowActuator}}[i].\textcolor{keywordtype}{id},\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00176\ \ \ \ \ \}}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{comment}{//dump\ +=\ "{}bas:"{}\ +\ String(m\_currentBowActuator)\ +\ "{},bal,"{};}}
+\DoxyCodeLine{00178\ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}ba:"{}}\ +\ String(\mbox{\hyperlink{classBowActuators_afa08e99cc93f16cf575fa0004607e5f5}{m\_currentBowActuator}})\ +\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordflow}{return}\ dump;}
+\DoxyCodeLine{00180\ \}}
+\DoxyCodeLine{00181\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

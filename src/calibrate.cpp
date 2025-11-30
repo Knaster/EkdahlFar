@@ -26,7 +26,7 @@
 #ifndef CALIBRATE_C
 #define CALIBRATE_C
 
-#include "calibrate.h"
+#include "calibrate.hpp"
 
 /// Class constructor. Binds to the associated bowIO class and reads any existing EEPROM data into calibrationData
 calibrate::calibrate(bowIO &_bowIO, CalibrationData &__calibrationData, bowControl &_bowControl) {
@@ -219,16 +219,16 @@ bool calibrate::findMaxPressure() {
 
 bool calibrate::findMinMaxPressure() {
     // Save the current state of the stepper auto-correction setting and restore before exiting
-    bool autoCorrectPositionSave = bowIOConnect->stepServoStepper->autoCorrectPosition;
-    bowIOConnect->stepServoStepper->autoCorrectPosition = false;
+    bool autoCorrectPositionSave = bowIOConnect->tmc2209ServoStepper->stepServoStepper->autoCorrectPosition;
+    bowIOConnect->tmc2209ServoStepper->stepServoStepper->autoCorrectPosition = false;
 
     bool PIDOn = bowControlConnect->PIDon;
     bowControlConnect->PIDon = 0;
 //    bowControlConnect->run = 1;
     bowIOConnect->enableBowPower();
 
-    uint16_t speed = bowIOConnect->stepServoStepper->speedRPM;
-    bowIOConnect->stepServoStepper->setSpeed(5);
+    uint16_t speed = bowIOConnect->tmc2209ServoStepper->stepServoStepper->getSpeed();
+    bowIOConnect->tmc2209ServoStepper->stepServoStepper->setSpeed(5);
 
     //bool result = findMinPressure() && findMaxPressure();
     bool result = findMinPressure();
@@ -253,8 +253,8 @@ bool calibrate::findMinMaxPressure() {
         debugPrintln("Results invalid, not modifying data" , debugPrintType::Error);
     }
 
-    bowIOConnect->stepServoStepper->autoCorrectPosition = autoCorrectPositionSave;
-    bowIOConnect->stepServoStepper->setSpeed(speed);
+    bowIOConnect->tmc2209ServoStepper->stepServoStepper->autoCorrectPosition = autoCorrectPositionSave;
+    bowIOConnect->tmc2209ServoStepper->stepServoStepper->setSpeed(speed);
     bowControlConnect->run = 0;
     bowControlConnect->PIDon = PIDOn;
 
@@ -272,7 +272,7 @@ bool calibrate::findMinMaxPressure() {
  *
  */
 bool calibrate::findMinMaxSpeedPWM() {
-    bool finished = false;
+//    bool finished = false;
     int speed = 0;
     uint32_t i =0;
     float bowMotorWattage = bowIOConnect->bowMotorWattage;

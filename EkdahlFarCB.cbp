@@ -70,6 +70,7 @@
 		<Compiler>
 			<Add option="-mthumb" />
 			<Add option="-Os" />
+			<Add option="-Wunreachable-code" />
 			<Add option="-Wall" />
 			<Add option="-std=gnu++14" />
 			<Add option="-g" />
@@ -86,6 +87,10 @@
 			<Add option="-fno-threadsafe-statics" />
 			<Add option="-felide-constructors" />
 			<Add option="-Wno-error=narrowing" />
+			<Add option="-Wunused" />
+			<Add option="-Wunused-function" />
+			<Add option="-Wunused-variable" />
+			<Add option="-Wno-sign-compare" />
 			<Add option="-D__IMXRT1062__" />
 			<Add option="-DTEENSYDUINO=158" />
 			<Add option="-DARDUINO_TEENSY40" />
@@ -1028,34 +1033,34 @@
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/bowActuators.h" />
+		<Unit filename="src/bowActuators.hpp" />
 		<Unit filename="src/bowcontrol.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/bowcontrol.h" />
+		<Unit filename="src/bowcontrol.hpp" />
 		<Unit filename="src/bowio.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/bowio.h" />
+		<Unit filename="src/bowio.hpp" />
 		<Unit filename="src/calibrate.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/calibrate.h" />
-		<Unit filename="src/commandparser.h" />
+		<Unit filename="src/calibrate.hpp" />
+		<Unit filename="src/commandparser.hpp" />
 		<Unit filename="src/configuration.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/configuration.h" />
+		<Unit filename="src/configuration.hpp" />
 		<Unit filename="src/controlReader.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/controlReader.h" />
-		<Unit filename="src/debugprint.h" />
+		<Unit filename="src/controlReader.hpp" />
+		<Unit filename="src/debugprint.hpp" />
 		<Unit filename="src/eepromhelpers.cpp">
 			<Option compile="0" />
 			<Option link="0" />
@@ -1064,7 +1069,7 @@
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/harmonicSeries.h" />
+		<Unit filename="src/harmonicSeries.hpp" />
 		<Unit filename="src/isrclasswrapper.cpp">
 			<Option compile="0" />
 			<Option link="0" />
@@ -1082,7 +1087,7 @@
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/mute.h" />
+		<Unit filename="src/mute.hpp" />
 		<Unit filename="src/mutecalibration.cpp">
 			<Option compile="0" />
 			<Option link="0" />
@@ -1091,7 +1096,7 @@
 		<Unit filename="src/name.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="src/servostepper.h" />
+		<Unit filename="src/servostepper.hpp" />
 		<Unit filename="src/settingshandler.cpp">
 			<Option compile="0" />
 			<Option link="0" />
@@ -1105,6 +1110,11 @@
 			<Option link="0" />
 		</Unit>
 		<Unit filename="src/stringmodule.hpp" />
+		<Unit filename="src/tmc2209_servostepper.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src/tmc2209_servostepper.hpp" />
 		<Unit filename="trashcollection.txt" />
 		<Extensions />
 	</Project>

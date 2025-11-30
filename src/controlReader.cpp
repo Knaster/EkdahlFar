@@ -16,7 +16,7 @@
  *
  * Copyright (C) 2024 Karl Ekdahl
  */
-#include "controlReader.h"
+#include "controlReader.hpp"
 
 volatile bool adsNewData = false;
 volatile bool adsNewData2 = false;

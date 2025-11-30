@@ -26,7 +26,7 @@
 #ifndef BOWIO_C
 #define BOWIO_C
 
-#include "bowio.h"
+#include "bowio.hpp"
 
 #define BITDEPTH 16
 #define BITDIV 1 // = 2^(16-BITDEPTH)
@@ -39,7 +39,6 @@ bool bowIO::setBowMotorVoltage(float voltage) {
     voltage -= DCDCLOWERBOUND;
     float t = (65536 / (DCDCUPPERBOUND - DCDCLOWERBOUND)) * voltage;
     uint16_t pwm = 65536 - ((uint16_t) t);
-//    debugPrintln("Voltage PWM " + String(pwm), Debug);
     analogWrite(bowMotorVoltagePin, pwm);
     return true;
 }
@@ -69,7 +68,8 @@ bool bowIO::enableBowPower() {
     return true;
 }
 
-bool bowIO::homeBow(bool invert = false) {
+bool bowIO::homeBow(bool invert) {
+/*
     debugPrintln("Starting home", Debug);
 
     stepServoStepper->setHomingOffset(6000);
@@ -87,13 +87,14 @@ bool bowIO::homeBow(bool invert = false) {
         debugPrintln("Homing FAILED!", Error);
         return false;
     }
-//    return true;
     stepTMC2209Driver->setRunCurrent(stepRunCurrentPercent);
 
-//    stepServoStepper->setSpeed(20);
     stepServoStepper->setPosition(0);
     stepServoStepper->completeTask();
+
     return true;
+*/
+    return tmc2209ServoStepper->home(invert);
 }
 
 bowIO::bowIO(char motorRevPin, char motorVoltagePin, char motorDCDCEnPin, char tachoPin, char currentSensePin, char motorFaultPin, char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin, char stepCorrectionSensorPin) {
@@ -122,14 +123,13 @@ bowIO::bowIO(char motorRevPin, char motorVoltagePin, char motorDCDCEnPin, char t
     analogWrite(bowMotorRevPin, 1);
     setSpeedPWM(0);
     setTiltPWM(0);
-
+/*
     stepSerialStream = stepSerialPort;
     stepServoStepper = new servoStepper(stepStepPin, stepDirPin, stepHomeSensorPin); //, stepEnPin);
     stepTMC2209Driver = new TMC2209();
-    setupTMC2209();
-//    stepServoStepper->setHomingOffset(22500);
+    setupTMC2209();*/
+    tmc2209ServoStepper = new Tmc2209ServoStepper(stepDirPin, stepStepPin, stepSerialPort, stepHomeSensorPin);
     homeBow();
-    //stepServoStepper->setSpeed(20);
 }
 
 /** \brief Adds a tachometer value to the tachometer buffer, given in Hertz
@@ -171,12 +171,10 @@ void bowIO::clearTachoData() {
  */
 float bowIO::averageFreq() {
     if (tachoFreqCount < tachoFreqLength) {
-    //return -1;
         if (tachoFreq[tachoFreqIndex] == 0) {
             return 0;
         } else {
             debugPrintln("AverageFreq: error, not enough point stored.", Priority);
-            //return tachoOldAverage;
             return -1;
         }
     }
@@ -219,7 +217,6 @@ float bowIO::averageFreq() {
 /// Ramps the bow speed PWM from the last PWM value given to the value given in speed, blocking, only use for testing purposes
 void bowIO::setSpeedPWMSafe(uint16_t speed) {
     int a = speed;
-    //  digitalWrite(ZXBMFwdPin, 1);
     // ramp the speed if going up, driver doesn't like sudden fast changes
     analogWrite(bowMotorRevPin, 65535 - a);
     if (lastBowMotorPWM < a) {
@@ -240,13 +237,7 @@ void bowIO::setSpeedPWMSafe(uint16_t speed) {
 
 /// Sets the bow speed PWM using a unsigned 16-bit int (RAW)
 void bowIO::setSpeedPWM(uint16_t speed) {
-/*    if (speed != lastBowMotorPWM) {
-        debugPrintln("Setting bow motor PWM to " + String(speed), Hardware);
-    }
-*/
     int a = speed;
-    //debugPrintln("Changing pin " + String(((int) ZXBMRevPin)) + " to " + String(65535 - a), Hardware);
-    //analogWrite(ZXBMRevPin, (65535 - a) / BITDIV);
     bowMotorPWM->setPWM_manual(bowMotorRevPin, (65535 - a) / BITDIV);
     lastBowMotorPWM = a;
 }
@@ -260,47 +251,24 @@ uint16_t bowIO::getSpeedPWM() {
  *  Recalculated internally to use SERVO_MIN and SERVO_MAX as lower and upper bound respectively
  */
 void bowIO::setTiltPWM(uint16_t tilt) {
-
-/*    int a = SERVO_MIN + (((float) (SERVO_MAX - SERVO_MIN) * (65535 - tilt) / 65535));
-    a -= tiltAdjust;
-    if (lastTilt != a) {
-        lastTilt = a;
-        debugPrintln("Tilt " + String(a) + " (" + String(tilt) + ")", Hardware);
-        //pwmShield->setPWM(tiltPWMChannel, 0, a);
-        hwTiltPos = a;
-    }*/
-    /*
-    if (stepper != NULL) {
-    stepper->setPosition(tilt);
-    }*/
-    //  Serial1.print(tilt);
-    //  Serial1.write(25);
-
-#ifdef EFARMASTER
-/*    if (delegateTilt) {
-        debugPrintln("Delegating value " + String(tilt), Debug);
-        stepSerialOut.write(tilt >> 8);
-        stepSerialOut.write(tilt & 0xFF);
-    }*/
-#elif EFARSLAVE
-    if (stepServoStepper != nullptr) {
-//        debugPrintln("Setting stepper tilt to " + String(tilt - tiltAdjust), Hardware);
+    //if (stepServoStepper != nullptr) {
+    if ((tmc2209ServoStepper != nullptr) && (tmc2209ServoStepper->stepServoStepper != nullptr)) {
         debugPrintln("Setting stepper tilt to " + String(tilt), Hardware);
-        stepServoStepper->setPosition(tilt);
+        //stepServoStepper->setPosition(tilt);
+        tmc2209ServoStepper->stepServoStepper->setPosition(tilt);
         lastTilt = tilt;
     }
-#endif
 }
 
 bool bowIO::waitForTiltToComplete(uint16_t timeout) {
-    return stepServoStepper->completeTask(timeout);
+    //return stepServoStepper->completeTask(timeout);
+    return tmc2209ServoStepper->stepServoStepper->completeTask(timeout);
 }
 
 
 /// Secondary callback handler for tachometer events
 void bowIO::tachoISRHandler() {
     asm("nop");
-    //char state = digitalRead(reflectorInterruptPin);
     uint8_t state = digitalRead(reflectorInterruptPin);
     if (state == lastReflectorISRState) { return; }
     if (state == 0) {
@@ -323,23 +291,13 @@ bool bowIO::checkTimeout() {
 }
 
 void bowIO::updateBow() {
-/*
-    if (stepServoStepper != nullptr) {
-        stepServoStepper->updatePosition();
-    }
-    */
     if (bowOverPower()) {
 
     }
 }
-/*
-bool bowIO::createStepper(byte _pinStep, byte _pinDir, byte _pinHome) {
-    stepper = new farStepper(_pinStep, _pinDir, _pinHome);
-    return true;
-}
-*/
+
 bool bowIO::setupTMC2209() {
-    if (stepTMC2209Driver == nullptr) { return false; }
+/*    if (stepTMC2209Driver == nullptr) { return false; }
 
     stepTMC2209Driver->setup(*stepSerialStream);
     delay(stepConnectDelay);
@@ -352,12 +310,12 @@ bool bowIO::setupTMC2209() {
     stepTMC2209Driver->disableStealthChop();
     stepTMC2209Driver->setHoldCurrent(1);
     stepTMC2209Driver->enable();
-    return true;
+    return true;*/
+    return tmc2209ServoStepper->setupTMC2209();
 }
 
-
 void bowIO::getTMC2209Info() {
-    debugPrintln("*************************", Debug);
+/*    debugPrintln("*************************", Debug);
     debugPrintln("getSettings()", Debug);
     TMC2209::Settings settings = stepTMC2209Driver->getSettings();
     debugPrintln("settings.is_communicating = " + String(settings.is_communicating), Debug);
@@ -425,7 +383,8 @@ void bowIO::getTMC2209Info() {
     debugPrintln("status.standstill = " + String(status.standstill), Debug);
     debugPrintln("*************************", Debug);
     debugPrintln("", Debug);
-    return;
+    return;*/
+    return tmc2209ServoStepper->getTMC2209Info();
 }
 
 float bowIO::getBowCurrent() {

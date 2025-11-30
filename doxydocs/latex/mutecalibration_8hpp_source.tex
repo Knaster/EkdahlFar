@@ -1,0 +1,63 @@
+\doxysection{mutecalibration.\+hpp}
+\hypertarget{mutecalibration_8hpp_source}{}\label{mutecalibration_8hpp_source}\index{mutecalibration.hpp@{mutecalibration.hpp}}
+\mbox{\hyperlink{mutecalibration_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ MUTECALIBRATION\_HPP}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ MUTECALIBRATION\_HPP}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcalibrateMute}{calibrateMute}}\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classmute}{mute}}\ *\mbox{\hyperlink{classcalibrateMute_a835009d19f40da94cda14ea3764562ee}{m\_muteConnect}};}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classbowIO}{bowIO}}\ *\mbox{\hyperlink{classcalibrateMute_a86ecd5a8202a01bc74c0d94c75471fa3}{m\_bowIOConnect}};}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classbowControl}{bowControl}}\ *\mbox{\hyperlink{classcalibrateMute_abd6d3a8ed866d1855c8384a7415a4b4f}{m\_bowControlConnect}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classcalibrateMute_afe47cc4d6497d0344998b53fa1f83d47}{maxTestStep}}\ =\ 60000;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\ \ \ \ \#define\ maxStepRetract\ 2000}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\ \ \ \ \#define\ minAmplitude\ 0.01}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\ \ \ \ \#define\ minFundamentalAmplitude\ 0.3}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute}{calibrateMute}}(\mbox{\hyperlink{classmute}{mute}}\ \&t\_Mute,\ \mbox{\hyperlink{classbowIO}{bowIO}}\ \&t\_bowIO,\ \mbox{\hyperlink{classbowControl}{bowControl}}\ \&t\_bowControl);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrateMute_a002008084f55858802be9827063d0e9f}{calibrateAll}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classcalibrateMute_a4f1cda25c16da959cbcd3671f06561b9}{levelSilence}}\ =\ 0;}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classcalibrateMute_a9401e20a3fe3fb0d8440755320251358}{levelFundamental}}\ =\ 0;}
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ \ \ \ float\ levelFundamentalRMS\ =\ 0;}}
+\DoxyCodeLine{00042\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classcalibrateMute_a74d8e374d97cc1a77d5e7a2e77260e68}{stallPosition}}\ =\ 0;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classcalibrateMute_a593fd649dc0ca4e299ffe413e66712ca}{findLevel}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrateMute_af16fcc7c096ea2f830319fced315428a}{findLevelSilence}}();}
+\DoxyCodeLine{00047\ \textcolor{comment}{//\ \ \ \ bool\ findlevelFundamentalPeak();}}
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ \ \ \ bool\ findLevelFundamentalRMS();}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrateMute_a7519919b67f300e574d3ad7badcf7f57}{findMuteLevels}}();}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrateMute_a4e6ae0e164043685de04408911947106}{findMuteStall}}();}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrateMute_a98cd0f2fdf0b1801b2ea943874072f53}{findMuteFirstContact}}();}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrateMute_a07470f67c1708ab459ef3d490123ba42}{findMuteSilence}}();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
