@@ -34,71 +34,18 @@
 #define DCDCLOWERBOUND 1.2
 #define DCDCUPPERBOUND 9
 
-bool bowIO::setBowMotorVoltage(float voltage) {
-    bowMotorVoltage = voltage;
-    voltage -= DCDCLOWERBOUND;
-    float t = (65536 / (DCDCUPPERBOUND - DCDCLOWERBOUND)) * voltage;
-    uint16_t pwm = 65536 - ((uint16_t) t);
-    analogWrite(bowMotorVoltagePin, pwm);
-    return true;
-}
+bool bowIO::setBowMotorVoltage(float voltage) { return dcMotorControl->setMotorVoltage(voltage); }
 
-float bowIO::getBowMotorVoltage() {
-    return bowMotorVoltage;
-}
+float bowIO::getBowMotorVoltage() { return dcMotorControl->getMotorVoltage(); }
 
+bool bowIO::disableBowPower() { return dcMotorControl->disableMotorPower(); }
 
-bool bowIO::disableBowPower() {
-    digitalWrite(bowMotorDCDCEnPin, 0);
-    return true;
-}
+bool bowIO::enableBowPower() { return dcMotorControl->enableMotorPower(); }
 
-bool bowIO::enableBowPower() {
-    if (emergencyCoolDown) {
-        debugPrintln("Cooldown event at " + String(emergencyCoolDownEvent) + " with duration " + String(emergencyCoolDownPeriod) + ", current time " + String(millis()), Debug);
-        if (millis() > (emergencyCoolDownEvent + emergencyCoolDownPeriod)) {
-            debugPrintln("Cool down event passed, resetting", Debug);
-            emergencyCoolDown = false;
-        } else {
-            debugPrintln("Cool down event in effect, ignoring", Debug);
-            return false;
-        }
-    }
-    digitalWrite(bowMotorDCDCEnPin, 1);
-    return true;
-}
-
-bool bowIO::homeBow(bool invert) {
-/*
-    debugPrintln("Starting home", Debug);
-
-    stepServoStepper->setHomingOffset(6000);
-    stepTMC2209Driver->setRunCurrent(stepHomeCurrentPercent);
-    stepServoStepper->eStop();
-    if (!invert) {
-        stepServoStepper->home(servoStepper::eStepDirection::FORWARD,5,5,servoStepper::eStepDirection::REVERSE); // ,5,5
-    } else {
-        stepServoStepper->home(servoStepper::eStepDirection::REVERSE,5,5,servoStepper::eStepDirection::FORWARD); // ,5,5
-    }
-
-    if (stepServoStepper->completeTask(5000)) {    //2000
-        debugPrintln("Homed", Debug);
-    } else {
-        debugPrintln("Homing FAILED!", Error);
-        return false;
-    }
-    stepTMC2209Driver->setRunCurrent(stepRunCurrentPercent);
-
-    stepServoStepper->setPosition(0);
-    stepServoStepper->completeTask();
-
-    return true;
-*/
-    return tmc2209ServoStepper->home(invert);
-}
+bool bowIO::homeBow(bool invert) { return tmc2209ServoStepper->home(invert); }
 
 bowIO::bowIO(char motorRevPin, char motorVoltagePin, char motorDCDCEnPin, char tachoPin, char currentSensePin, char motorFaultPin, char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin, char stepCorrectionSensorPin) {
-    bowMotorRevPin = motorRevPin;
+/*    bowMotorRevPin = motorRevPin;
     reflectorInterruptPin = tachoPin;
     bowCurrentSensePin = currentSensePin;
     bowMotorFaultPin = motorFaultPin;
@@ -121,7 +68,9 @@ bowIO::bowIO(char motorRevPin, char motorVoltagePin, char motorDCDCEnPin, char t
     setBowMotorVoltage(bowMotorVoltage);
 
     analogWrite(bowMotorRevPin, 1);
-    setSpeedPWM(0);
+    setSpeedPWM(0);*/
+    dcMotorControl = new DCMotorControl(motorRevPin, motorVoltagePin, motorDCDCEnPin, tachoPin, currentSensePin, motorFaultPin);
+
     setTiltPWM(0);
 /*
     stepSerialStream = stepSerialPort;
@@ -137,6 +86,7 @@ bowIO::bowIO(char motorRevPin, char motorVoltagePin, char motorDCDCEnPin, char t
  *  Advances the tachoFreq index counter tachoFreqIndex and increases tachFreqCount if it has not yet reached tachoFreqLength.
  *  Values outside of the range defined by tachoFreqPermissibleMAX and tachoFreqPermissibleMIN are set to 0
  */
+ /*
 void bowIO::addTachoFreq(float freq) {
     if ((freq >= tachoFreqPerimssibleMAX) || (freq <= tachoFreqPerimssibleMIN)) {
         freq = 0;
@@ -147,19 +97,21 @@ void bowIO::addTachoFreq(float freq) {
     if (tachoFreqCount < tachoFreqLength) { tachoFreqCount++; }
     if (tachoFreqIndex >= tachoFreqLength) { tachoFreqIndex = 0; }
 }
-
+*/
 /// Returns the last added tachometer value
 float bowIO::getLastTachoFreq() {
-    if (tachoFreqIndex < 1) {
+/*    if (tachoFreqIndex < 1) {
         return tachoFreq[tachoFreqLength - 1];
     } else {
         return tachoFreq[tachoFreqIndex - 1];
-    }
+    }*/
+    return dcMotorControl->getLastTachoFreq();
 }
 
 void bowIO::clearTachoData() {
-    tachoFreqCount = 0;
-    tachoFreqIndex = 0;
+/*    tachoFreqCount = 0;
+    tachoFreqIndex = 0;*/
+    dcMotorControl->clearTachoData();
 }
 
 /** \brief Returns the average bow speed frequency
@@ -170,7 +122,7 @@ void bowIO::clearTachoData() {
  *
  */
 float bowIO::averageFreq() {
-    if (tachoFreqCount < tachoFreqLength) {
+/*    if (tachoFreqCount < tachoFreqLength) {
         if (tachoFreq[tachoFreqIndex] == 0) {
             return 0;
         } else {
@@ -211,12 +163,13 @@ float bowIO::averageFreq() {
     }
     tachoOldAverage = average; // was above before, check if problem
 
-    return average;
+    return average;*/
+    return dcMotorControl->averageFreq();
 }
 
 /// Ramps the bow speed PWM from the last PWM value given to the value given in speed, blocking, only use for testing purposes
 void bowIO::setSpeedPWMSafe(uint16_t speed) {
-    int a = speed;
+/*    int a = speed;
     // ramp the speed if going up, driver doesn't like sudden fast changes
     analogWrite(bowMotorRevPin, 65535 - a);
     if (lastBowMotorPWM < a) {
@@ -231,19 +184,27 @@ void bowIO::setSpeedPWMSafe(uint16_t speed) {
         };
     }
 
-    lastBowMotorPWM = a;
+    lastBowMotorPWM = a;*/
+    dcMotorControl->setSpeedPWMSafe(speed);
 }
 
 
 /// Sets the bow speed PWM using a unsigned 16-bit int (RAW)
 void bowIO::setSpeedPWM(uint16_t speed) {
-    int a = speed;
+/*    int a = speed;
     bowMotorPWM->setPWM_manual(bowMotorRevPin, (65535 - a) / BITDIV);
-    lastBowMotorPWM = a;
+    lastBowMotorPWM = a;*/
+    dcMotorControl->setSpeedPWM(speed);
 }
 
 uint16_t bowIO::getSpeedPWM() {
-    return lastBowMotorPWM;
+    return 0;
+    //return lastBowMotorPWM;
+    if (dcMotorControl == nullptr) {
+        debugPrintln("NULL", debugPrintType::Error);
+        return 0;
+    }
+    return dcMotorControl->getSpeedPWM();
 }
 
 /** \brief Sets the tilt servo PWM value using a unsigned 16-bit int (RECALCULATED)
@@ -268,7 +229,7 @@ bool bowIO::waitForTiltToComplete(uint16_t timeout) {
 
 /// Secondary callback handler for tachometer events
 void bowIO::tachoISRHandler() {
-    asm("nop");
+/*    asm("nop");
     uint8_t state = digitalRead(reflectorInterruptPin);
     if (state == lastReflectorISRState) { return; }
     if (state == 0) {
@@ -277,40 +238,29 @@ void bowIO::tachoISRHandler() {
     }
     addTachoFreq(((double) 1000000 / reflectorCyclePeriod));
     asm("dsb");
-    lastReflectorISRState = state;
+    lastReflectorISRState = state;*/
+    dcMotorControl->tachoISRHandler();
 }
 
 /// Check whether bow has timed out and add a value of 0 Hertz if so
 bool bowIO::checkTimeout() {
-    if (reflectorCounter > reflectorZeroTimeoutValue) {
+/*    if (reflectorCounter > reflectorZeroTimeoutValue) {
         addTachoFreq(0);
         return true;
     } else {
         return false;
-    }
+    }*/
+    return dcMotorControl->checkTimeout();
 }
 
-void bowIO::updateBow() {
-    if (bowOverPower()) {
+//void bowIO::updateBow() {
+/*    if (bowOverPower()) {
 
-    }
-}
+    }*/
+//    dcMotorControl->updateBow();
+//}
 
 bool bowIO::setupTMC2209() {
-/*    if (stepTMC2209Driver == nullptr) { return false; }
-
-    stepTMC2209Driver->setup(*stepSerialStream);
-    delay(stepConnectDelay);
-
-    pinMode(stepEnPin, OUTPUT);
-    digitalWrite(stepEnPin, 0);
-
-    stepTMC2209Driver->setRunCurrent(stepRunCurrentPercent);
-    stepTMC2209Driver->setMicrostepsPerStep(stepMicrostepping);
-    stepTMC2209Driver->disableStealthChop();
-    stepTMC2209Driver->setHoldCurrent(1);
-    stepTMC2209Driver->enable();
-    return true;*/
     return tmc2209ServoStepper->setupTMC2209();
 }
 
@@ -388,19 +338,21 @@ void bowIO::getTMC2209Info() {
 }
 
 float bowIO::getBowCurrent() {
-      return analogRead(bowCurrentSensePin) * 3.3 / 4096;
+//      return analogRead(bowCurrentSensePin) * 3.3 / 4096;
+    return dcMotorControl->getCurrent();
 }
 
 bool bowIO::bowOverCurrent() {
-    if (getBowCurrent() >= bowMotorCurrentLimit) {
+/*    if (getBowCurrent() >= bowMotorCurrentLimit) {
         return true;
     } else {
         return false;
-    }
+    }*/
+    return dcMotorControl->overCurrent();
 }
 
 bool bowIO::bowOverPower() {
-    if (getBowCurrent() >= (bowMotorWattage / bowMotorVoltage)) {
+/*    if (getBowCurrent() >= (bowMotorWattage / bowMotorVoltage)) {
         // If we have already set the internal over-power flag
         if (transientOverPower) {
             // And that was set more than the allowed time-span ago, aka the over-power event has been going on for X ms
@@ -419,30 +371,34 @@ bool bowIO::bowOverPower() {
         bowOverPowerFlag = false;
         transientOverPower = false;
         return false;
-    }
+    }*/
+    return dcMotorControl->overPower();
 }
 
 // Emergency disable of power with a required cooldown period before bow is allowed to be started again
 bool bowIO::emergencyBowDisable(uint16_t coolDown) {
-    if (emergencyCoolDown) { return false; }
+/*    if (emergencyCoolDown) { return false; }
     emergencyCoolDownEvent = millis();
     emergencyCoolDown = true;
     debugPrintln("Emergency disable! Setting cool down to " + String(emergencyCoolDownEvent), Debug);
     disableBowPower();
-    return true;
+    return true;*/
+    return dcMotorControl->emergencyDisable(coolDown);
 }
 
 bool bowIO::getMotorFault() {
-    if (digitalRead(bowMotorFaultPin) == 0) {    // changed 2024-05-07
+/*    if (digitalRead(bowMotorFaultPin) == 0) {    // changed 2024-05-07
         return  true;
     } else {
         return false;
-    }
+    }*/
+    return dcMotorControl->getMotorFault();
 }
 
 String bowIO::dumpData() {
     String dump;
-    dump = "bmv:" + String(bowMotorVoltage) + ",";
+//    dump = "bmv:" + String(bowMotorVoltage) + ",";
+    dump = "bmv:" + String(dcMotorControl->getMotorVoltage()) + ",";
     return dump;
 }
 #endif

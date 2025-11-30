@@ -25,6 +25,7 @@
 #include <TMC2209.cpp>
 #include "servostepper.hpp"
 #include "tmc2209_servostepper.cpp"
+#include "dcmotorcontrol.cpp"
 
 /**
  * @file bowio.h
@@ -34,7 +35,7 @@
 
 /// The bowIO class deals with interfacing with the hardware of a string unit
 class bowIO {
-    Teensy_PWM* bowMotorPWM;
+/*    Teensy_PWM* bowMotorPWM;
 
     #define tachoFreqLength 10              ///< Sets the amount of tachometer values to store in the buffer
     double tachoFreq[tachoFreqLength];      ///< Tachometer buffer, used as a circular storage point of tachometer values for averaging
@@ -53,44 +54,33 @@ class bowIO {
     unsigned long reflectorZeroTimeoutValue = 50000; ///< Threshold at which the bow movement is considered zero, given in uS (was 500,000 for 0.5Hz, now 50,000 for 20Hz)
 
     int lastBowMotorPWM = 0;                ///< Holds the last PWM speed value sent to the bowing wheel
-
+*/
 public:
     uint16_t lastTilt = 0;                  ///< Last tilt value set
-
+/*
     char bowMotorRevPin;                    ///< Pin for motor driver reverse PWM
     char reflectorInterruptPin;             ///< Pin for reflection sensor output
     char bowMotorFaultPin;                  ///< Pin for motor driver ~FAULT signal
     uint8_t bowCurrentSensePin;             ///< Pin for motor current sense
-
+*/
     float bowMotorCurrentLimit = 1.75;       ///< Limit for tripping bow current draw error
     float bowMotorWattage = 12.84;
 
 //    servoStepper *stepServoStepper = nullptr;
     Tmc2209ServoStepper *tmc2209ServoStepper = nullptr;
+    DCMotorControl *dcMotorControl = nullptr;
 private:
-    void addTachoFreq(float freq);
-/*
-    HardwareSerial *stepSerialStream;       ///< Serial port for tilt stepper
-    const long stepBaudRate = 115200;       ///< Baud rate for tilt stepper serial
-    const int stepConnectDelay = 200;       ///< Delay in between connecting to stepper and issuing commandss
-    const uint8_t stepRunCurrentPercent = 40;   ///< Stepper current during run phase
-    const uint8_t stepHomeCurrentPercent = 20;
+//    void addTachoFreq(float freq);
 
-    const char stepMicrostepping = 32;      ///< Tilt stepper micro stepping
-    char stepEnPin;                         ///< Pin for tilt stepper driver enable
-    char stepperDirPin;                     ///< Pin for tilt stepper driver direction
-    char stepStepPin;                       ///< Pin for tilt stepper driver step
-    TMC2209 *stepTMC2209Driver = nullptr;   ///< Tilt stepper driver class pointer
-*/
     bool setupTMC2209();
-
+/*
     uint8_t bowMotorDCDCEnPin;
     bool bowMotorDCDCEn = false;
     uint8_t bowMotorVoltagePin;
     Teensy_PWM *bowMotorVoltagePWM;
 
     float bowMotorVoltage = 6.6;
-
+*/
 public:
     float tiltAdjust = 0;     ///< Adjustment to the tilt value to avoid bow stalling and oscillation
 
@@ -108,9 +98,9 @@ public:
     bool waitForTiltToComplete(uint16_t timeout = 3000);
     void tachoISRHandler();
     bool checkTimeout();
-    void updateBow();
+//    void updateBow();
 
-    bool createStepper(byte _pinStep, byte _pinDir, byte _pinHome);
+//    bool createStepper(byte _pinStep, byte _pinDir, byte _pinHome);
     bool setBowMotorVoltage(float voltage);
     float getBowMotorVoltage();
     bool disableBowPower();
@@ -124,15 +114,15 @@ public:
 
     String dumpData();
 
-    bool bowOverPowerFlag = false;       // External flag to show a over-power event has happend, taking into account the duration of the event etc.
-    bool transientOverPower = false;  // Set to true at first over-power event, cleared if bow is not over power
-    elapsedMillis lastBowOverPowerEvent;
-    uint32_t bowOverPowerDuration = 100; // If bow over power events are going past the duration (in ms), signal the over power event
+//    bool bowOverPowerFlag = false;       // External flag to show a over-power event has happend, taking into account the duration of the event etc.
+//    bool transientOverPower = false;  // Set to true at first over-power event, cleared if bow is not over power
+//    elapsedMillis lastBowOverPowerEvent;
+//    uint32_t bowOverPowerDuration = 100; // If bow over power events are going past the duration (in ms), signal the over power event
 
     bool emergencyBowDisable(uint16_t coolDown);    // Emergency disable of power with a required cooldown period before bow is allowed to be started again
-    uint32_t emergencyCoolDownEvent;
-    uint16_t emergencyCoolDownPeriod = 1000;
-    bool emergencyCoolDown = false;
+//    uint32_t emergencyCoolDownEvent;
+//    uint16_t emergencyCoolDownPeriod = 1000;
+//    bool emergencyCoolDown = false;
 
     bool homeBow(bool invert = false);
 };

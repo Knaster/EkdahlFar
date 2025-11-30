@@ -1,9 +1,9 @@
 var searchData=
 [
   ['uaccelperiod_0',['uAccelPeriod',['../classservoStepper.html#a1883b61564ace7a8797983f7965592e6',1,'servoStepper']]],
-  ['undefined_1',['Undefined',['../debugprint_8h.html#a7f327d12d94173c3c786ded0b10d2be4a18f893264a00711081b62de694f99db4',1,'debugprint.h']]],
+  ['undefined_1',['Undefined',['../debugprint_8hpp.html#a7f327d12d94173c3c786ded0b10d2be4a18f893264a00711081b62de694f99db4',1,'debugprint.hpp']]],
   ['unhomed_2',['UNHOMED',['../classservoStepper.html#a3b3c9d6b2584f11fae8c214da48eab42ad7b55eed63ef10b2add929ccc94eaaa9',1,'servoStepper']]],
-  ['updatebow_3',['updateBow',['../classbowIO.html#a6bb3298b28dd27eb77287589ab5b9e82',1,'bowIO']]],
+  ['updatebow_3',['updatebow',['../classDCMotorControl.html#ab4d2a22b4212766ed9420dc129e9b484',1,'DCMotorControl::updateBow()'],['../classbowIO.html#a6bb3298b28dd27eb77287589ab5b9e82',1,'bowIO::updateBow()']]],
   ['updateharmonicdata_4',['updateHarmonicData',['../classbowControl.html#a210960a7b6309730b6e2d255652ac218',1,'bowControl']]],
   ['updatelocalvariables_5',['updateLocalVariables',['../midi_8cpp.html#ad49be36e31ac13009fbc84e03bb78cdc',1,'midi.cpp']]],
   ['updatemute_6',['updateMute',['../classmute.html#ae445f099349b08eda3cd31d1e08e4f75',1,'mute']]],
@@ -23,7 +23,7 @@ var searchData=
   ['updatesolenoid_20',['updateSolenoid',['../classsolenoid.html#a8846508bc47ec4408e84bad43ed5b468',1,'solenoid']]],
   ['updatestring_21',['updatestring',['../classstringModule.html#a6be6dd0b987fed725a84cd3b6417aaf7',1,'stringModule::updateString()'],['../classbowControl.html#ac763e2c7400be2248ffad2e13462d60a',1,'bowControl::updateString()']]],
   ['upperharmonic_22',['upperHarmonic',['../structCalibrationData.html#a5159590e96c2bc7182c63d3b42c8b18d',1,'CalibrationData']]],
-  ['usb_23',['USB',['../debugprint_8h.html#a7f327d12d94173c3c786ded0b10d2be4a65f6b55fdc64778bf10632a795b97761',1,'debugprint.h']]],
+  ['usb_23',['USB',['../debugprint_8hpp.html#a7f327d12d94173c3c786ded0b10d2be4a65f6b55fdc64778bf10632a795b97761',1,'debugprint.hpp']]],
   ['usb_5fstring_5fmanufacturer_5fname_24',['usb_string_manufacturer_name',['../name_8c.html#aa8457ef11f394fd7531cb8fdee9c81c8',1,'name.c']]],
   ['usb_5fstring_5fproduct_5fname_25',['usb_string_product_name',['../name_8c.html#ac306526ea4c665592e1c51d6253cbad7',1,'name.c']]],
   ['usb_5fstring_5fserial_5fnumber_26',['usb_string_serial_number',['../name_8c.html#ad12fc4a657b6d8e7c5f04c8e2f1026ed',1,'name.c']]],

@@ -1,0 +1,171 @@
+\doxysection{bowcontrol.\+hpp}
+\hypertarget{bowcontrol_8hpp_source}{}\label{bowcontrol_8hpp_source}\index{bowcontrol.hpp@{bowcontrol.hpp}}
+\mbox{\hyperlink{bowcontrol_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ BOWCONTROL\_H}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ BOWCONTROL\_H}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0c}{\_tiltMode}}\ \{\ \mbox{\hyperlink{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca661e967c4cfe56fd40a290550b64d8dc}{Rest}},\ \mbox{\hyperlink{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0caffb89f6a29dafbca91038396476c4324}{Engage}},\ \mbox{\hyperlink{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca9637c4eff490f4d2f4efcd32e0689c46}{Mute}}\ \};}
+\DoxyCodeLine{00024\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{bowcontrol_8hpp_a08216a942f96ea84df79ef77a0554dd8}{\_speedMode}}\ \{\ \mbox{\hyperlink{bowcontrol_8hpp_a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389}{Automatic}},\ \mbox{\hyperlink{bowcontrol_8hpp_a08216a942f96ea84df79ef77a0554dd8acad5010fb34447633f3139d69698a0f0}{Manual}}\ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classbowControl}{bowControl}}\ \{}
+\DoxyCodeLine{00027\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classbowIO}{bowIO}}\ *\mbox{\hyperlink{classbowControl_aaddf2f2f0acdb9c8edf8a35faa72e88b}{bowIOConnect}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{structCalibrationData}{CalibrationData}}\ *\mbox{\hyperlink{classbowControl_a1ca492c797dc01e00ab2f80a88fc367c}{calibrationDataConnect}};\ }
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classBowActuators}{BowActuators}}\ *\mbox{\hyperlink{classbowControl_a80ad832b525e1fcf51e45ae454aa09be}{bowActuators}};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_a31bb75cf63d04d3344db0bfd4aed0dc7}{Kp}}\ =\ 500;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_a2b1cb030a9257e7f45d810e41b1132c2}{Ki}}\ =\ 7;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_abcb1f9a4982b4a61b86ce773a1927f74}{Kd}}\ =\ 200;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_a14a6f6577887d4feed8a0bc2ab63adf4}{previousError}}\ =\ 0.0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_ac509e827e903c5baa16e097f1b302a56}{integratorIgnoreBelow}}\ =\ 0.1;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classbowControl_aa11b77b46796ace01ef089ed5d7e96dd}{pidUpdateInterval}}\ =\ 1000;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_a693899ad1b80b1cfb8dfaa6634cc09be}{pidMaxError}}\ =\ 50;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_ad2116efce16f57643e4682dbcacbbe8b}{KpTerm}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_a40a325aaf9a2f9d19aa79205b5f6e7a9}{KiTerm}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_adf3b889ba6d172cfcc4102f70e276b6e}{KdTerm}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_a38370e9e787a86ef3952aabf4ef8ac85}{integral}}\ =\ 0.0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_a243aaf296cdc56ba9fb85df64f11b40a}{pidTargetSpeed}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00049\ \textcolor{comment}{//\ \ \ \ elapsedMillis\ elapsedSinceLastTarget;\ \ \ \ \ ///<\ Time\ elapsed\ since\ last\ change\ in\ bowing\ speed\ or\ pressure}}
+\DoxyCodeLine{00050\ \textcolor{comment}{//\ \ \ \ char\ elapsedTimeThreshold\ =\ 40;\ \ \ \ \ \ \ \ \ \ \ ///<\ Time\ in\ ms\ that\ elapses\ in\ between\ each\ bow\ speed\ stability\ check}}
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ \ \ \ float\ recoverRate\ =\ 0.05;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ///<\ Rate\ at\ which\ the\ Tilt\ PWM\ recovers\ when\ it\ has\ been\ decreased\ in\ order\ to\ avoid\ bow\ motor\ stall\ and\ oscillation}}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_aa3bbd0973cc2b096b3b49fca6af6e58c}{inRecovery}}\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_ae1bbe11e9421bf5e875dca7d964f56dd}{inRelapse}}\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classbowControl_a83a47b5dc58ede5ae709f09efd4fc1f9}{previousTime}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowControl_aab9dc396134241a4303acec3be3585c5}{motorFault}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\ \ \ \ \#define\ stringUpdateInterval\ =\ 10000\ \ \ \ \ \ }}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowControl_a00fa8313da3753909d1186b540b8a536}{run}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a1384f16c70c89e454ec88e5af1852a91}{PIDon}}\ =\ \textcolor{keyword}{true};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classbowControl_addb7f6f29b5f645cbf52dfaa090c735d}{manualTiltPWM}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00065\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classbowControl_a16ce07c4b7a3eaefa2a82a7945ca4ce7}{manualSpeedPWM}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00066\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classbowControl_a30e659701021d55d06a875d9f34b3228}{lastTiltPWM}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classbowControl_afcd061f5ac1b2b3183482ad4316326f7}{baselineTiltPWM}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00069\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classbowControl_a7bc01a8f9a74f227bbff9f419d1789c1}{modifierTiltPWM}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0c}{\_tiltMode}}\ \mbox{\hyperlink{classbowControl_abe66ed8d74fb825c2bea3daccb157db0}{tiltMode}}\ =\ \mbox{\hyperlink{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca661e967c4cfe56fd40a290550b64d8dc}{Rest}};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ elapsedMillis\ \mbox{\hyperlink{classbowControl_acbc8b8ed2e2a7fa77311ad90b0a8fae9}{elapsedSinceMute}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00073\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classbowControl_a04b7c70b2776c8717ba627c6e85c16a6}{mutePeriod}}\ =\ 350;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00074\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classbowControl_a8e7fd35de30ce28f5e6a5d64d9a80bcd}{muteForce}}\ =\ 3000;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ elapsedMillis\ \mbox{\hyperlink{classbowControl_a17cd96cf9b4809be37ff50d970d7fdb5}{bowShutoffTimer}};}
+\DoxyCodeLine{00077\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classbowControl_aed5c87b2f8c9a9dd0ece68b59091da59}{bowShutoffTimeout}}\ =\ 1000;}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_aa2253a04ce098480bb52b9daa95f02c6}{bowShutoffTimedout}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a41b68cfab4948911050b02116490f021}{bowShutoffMotorDisabled}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{bowcontrol_8hpp_a08216a942f96ea84df79ef77a0554dd8}{\_speedMode}}\ \mbox{\hyperlink{classbowControl_aea27c1e59266aa9d321fcdf859fe4dff}{speedMode}}\ =\ \mbox{\hyperlink{bowcontrol_8hpp_a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389}{Automatic}};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{comment}{//\ \ \ \ BufferedOutput\ *slaveSerialOut\ =\ nullptr;}}
+\DoxyCodeLine{00083\ \textcolor{comment}{//\ \ \ \ SafeStringReader\ *slaveSerialRead\ =\ nullptr;}}
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{classharmonicSeries}{harmonicSeries}}\ \mbox{\hyperlink{classbowControl_a7727c69514e72cedaf9bea49ac51fe3a}{currentHarmonicSeriesData}};}
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesList}{HarmonicSeriesList}}\ \mbox{\hyperlink{classbowControl_aff3d711d47ddb95b8cd61f64272c5c4b}{harmonicSeriesList}};}
+\DoxyCodeLine{00086\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classbowControl_accc6c95233ced4ae0846c30fb49804f4}{currentHarmonicSeries}}\ =\ 0;}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classbowControl_a4d048030d0f7cb72d90926675d00e8c7}{baseNote}}\ =\ 64;}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_a77f759d743f371d73ae0546fc530bbc2}{bowSpeedToEngage}}\ =\ 10;}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_a9565655dd3613dd02a43515e0e1e7b0f}{bowSpeedWhileEngaged}}\ =\ 10;}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a10861de9ca3688546f266128afc1640c}{reachedEngage}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ String\ \mbox{\hyperlink{classbowControl_a8b72b42733233ae00c8780fc6ac3dddf}{commandsOverPowerCurrent}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00095\ \ \ \ \ String\ \mbox{\hyperlink{classbowControl_a8869baca382bd6a9c6885e4eaaab7a46}{commandsMotorFault}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a369062f44a2d3dea1e816ae463726a5c}{outputDebugData}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_a2c0dcfc6716cd9b7a4bfd6835e7d8f52}{currentHarmonicFreq}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_a2156111d85359edf2c3df75645d796b7}{currentHarmonicShiftFreq}}\ =\ 0;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_af667ca77b3a2eb48903a40a25010f35f}{currentHarmonicShift5}}\ =\ 0;}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowControl_a5eee7e75d692d75c64172110c69e722c}{harmonicShiftRange}}\ =\ 12;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowControl_a26ddde921eb977af08b17b5ece648c8b}{harmonicShift}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowControl_a6af3944576e948ccc850d9189bd231af}{harmonicShift5}}\ =\ 0;}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowControl_ac2d2071e4b2fcbc39e58900d44f32436}{harmonic}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowControl_a835a5475fbed54fdb7abf7b07aa4d788}{harmonicAdd}}\ =\ 0;}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a820457c7cf5667230bdfa9ccbf54d112}{\_hold}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_a8ddd8c170720f487d58508822593609b}{bowCurrentLimit}}\ =\ 1.5;}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_a37af74a65fc919ea50452fc6543516c2}{pidPeakError}}\ =\ 0;}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00115\ \ \ \ \ \mbox{\hyperlink{classbowControl}{bowControl}}(\mbox{\hyperlink{classbowIO}{bowIO}}\ \&\_bowIO,\ \mbox{\hyperlink{structCalibrationData}{CalibrationData}}\ \&\_\_calibrationData);}
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowControl_a797e74de62f9ba4d9dff86fa9dda59b9}{setBowCurrentLimit}}(\textcolor{keywordtype}{float}\ inBowCurrentLimit);}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_adb36e8c79d731f20d06b6ebd1d6c96ea}{getBowCurrentLimit}}();}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowControl_a6ac5163fe5784a5e1812908b217da50f}{isBowStable}}();}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowControl_a72b5961eabb460cb97784bd91312a762}{pidReset}}();}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a01e1c268fc72ea56af7234fb8827934d}{setPIDTarget}}(\textcolor{keywordtype}{float}\ \_pidTargetSpeed);}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowControl_aba8eec50e9879efc7e57b185de43a3d1}{setPIDTargetUnsafe}}(\textcolor{keywordtype}{float}\ \_pidTargetSpeed);}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_a87c3fd0196aa8366ced3d814be5b1cc9}{getPIDTarget}}();}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowControl_a51d03db7ff6ba45e3643b3cfb047c081}{pidControl}}();}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowControl_a1069d2ab76476da2e1fa7e90b8914e11}{pidInterruptCaller}}();}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowControl_a7037df2d31d666e40589606f676779a0}{getPIDPeakError}}();}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowControl_a0b9ab5ef98479470107f0dbf32120304}{motorFaultDetected}}();}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowControl_a7845c424d2495a820b8171d316408e77}{checkMotorFault}}();}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowControl_a755a6cc1d1de5684cc77ddd6805960d8}{setBowPressureSafe}}(uint16\_t\ tilt);}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a1331f6ad235067eb39c93dda01e7a7ba}{calculateBaselineModifierPressure}}();}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowControl_a96856216a20f2565d764d5d7a5979cba}{setPressureBaseline}}(uint16\_t\ baseline);}
+\DoxyCodeLine{00133\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classbowControl_ad1ef4215aee9eeafe78abaf3655b1c73}{getPressureBaseline}}();}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowControl_af4eb41e57168f9e84845de536779160d}{setPressureModifier}}(uint16\_t\ modifier);}
+\DoxyCodeLine{00135\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classbowControl_aa96a7e6814366f543a3d42503a24e0bb}{getPressureModifier}}();}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowControl_a3242c3c20eb2ba2654ea501413b8af22}{setBowPower}}(uint16\_t\ power);}
+\DoxyCodeLine{00137\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classbowControl_a3ed5cc1c0c48effd02d4b7031663569f}{getBowPower}}();}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a1b013c4b7fc5a76fca5a291e7bb20b60}{setManualTilt}}(uint16\_t\ tilt);}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a4975e60429561b3c949047bda5178e0e}{bowRest}}(\textcolor{keywordtype}{int}\ enact);}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a0604ef0ed9ad083fcedf9455488fc3ff}{setHold}}(\textcolor{keywordtype}{bool}\ hold);}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a5d21d51a35a669a6ea6f911979b08486}{bowEngage}}(\textcolor{keywordtype}{int}\ enact);}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a18fb846153772a36f52fbef6dc149eb7}{bowMute}}(\textcolor{keywordtype}{int}\ enact);}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a4ac57214cead955255ff25b37d89f730}{calculateHarmonicShift}}();}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a66a65845cd700b99f46929c6b861dc32}{setHarmonicShift}}(\textcolor{keywordtype}{int}\ inHarmonicShift);}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_aa8a077b5a6748a34435f44fb10f600c2}{setHarmonicShift5}}(\textcolor{keywordtype}{int}\ inHarmonicShift5);}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowControl_a0c451b2b69b74dd056fb0e41970d94b3}{getHarmonicShift}}();}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowControl_ad6eb8cba264e21be1af99b5cb0831fbb}{getHarmonicShift5}}();}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_af18ade3891de3aedee1b66a55507c96d}{setHarmonicShiftRange}}(\textcolor{keywordtype}{int}\ inHarmonicShiftRange);}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowControl_a830df83b0abd9c5a6814f1938ca5411f}{getHarmonicShiftRange}}();}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_af3c67773447df63befb6af1bfc978e03}{setHarmonic}}(\textcolor{keywordtype}{int}\ \_harmonic);}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowControl_ad07d3247caf8f4bd20cf1cac8dbf5daf}{getHarmonic}}();}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_af259a733e5b1b0bcd7d926eb863689e5}{setHarmonicAdd}}(\textcolor{keywordtype}{int}\ \_harmonic);}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowControl_a651f95ef3ffb593b25a30eee2d12bb6c}{getHarmonicAdd}}();}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a210960a7b6309730b6e2d255652ac218}{updateHarmonicData}}();}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a6230fd2d93f18d14fac47f03969beea2}{setBaseNote}}(\textcolor{keywordtype}{int}\ inBaseNote);}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowControl_ac4e9c27470227a129acdf20603ba2259}{measureTimeToTarget}}(\textcolor{keywordtype}{float}\ \_pidTargetSpeed);}
+\DoxyCodeLine{00161\ \ \ \ \ String\ \mbox{\hyperlink{classbowControl_a42eab3d685cd13f718c71aee11e5714f}{dumpData}}();}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowControl_ac763e2c7400be2248ffad2e13462d60a}{updateString}}();}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowControl_a23da346b759daad57a89cbcab3762df1}{loadHarmonicSeries}}(\textcolor{keywordtype}{int}\ i);}
+\DoxyCodeLine{00165\ \};}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

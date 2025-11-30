@@ -2,15 +2,16 @@
 \hypertarget{classmute}{}\label{classmute}\index{mute@{mute}}
 
 
-{\ttfamily \#include $<$mute.\+h$>$}
+{\ttfamily \#include $<$mute.\+hpp$>$}
 
 
 
-Collaboration diagram for mute\+:\nopagebreak
+Collaboration diagram for mute\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=211pt]{classmute__coll__graph}
+\includegraphics[width=256pt]{classmute__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Public Types}
@@ -25,7 +26,7 @@ enum \mbox{\hyperlink{classmute_addfeb04122f662fb55dc68c5d9814437}{emute\+Positi
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classmute_ae4ced3b976dd9b3ddedfe8a8163f4a6a}{mute}} (char \mbox{\hyperlink{classmute_ae061f9d61cba0631d953cf96c1b129ce}{step\+En\+Pin}}, char step\+Dir\+Pin, char \mbox{\hyperlink{classmute_ac5358577e2024e82a43b87356fdfe808}{step\+Step\+Pin}}, Hardware\+Serial \texorpdfstring{$\ast$}{*}step\+Serial\+Port, char step\+Home\+Sensor\+Pin)
+\mbox{\hyperlink{classmute_ae4ced3b976dd9b3ddedfe8a8163f4a6a}{mute}} (char step\+En\+Pin, char step\+Dir\+Pin, char step\+Step\+Pin, Hardware\+Serial \texorpdfstring{$\ast$}{*}step\+Serial\+Port, char step\+Home\+Sensor\+Pin)
 \item 
 bool \mbox{\hyperlink{classmute_a76330686e9f7c818e2faa6c320f2e7b6}{setup\+TMC2209}} ()
 \item 
@@ -82,7 +83,7 @@ elapsed\+Millis \mbox{\hyperlink{classmute_afeaa0168890253259c1e30fd4ea4dcd2}{ba
 \item 
 \mbox{\hyperlink{classmute_addfeb04122f662fb55dc68c5d9814437}{emute\+Position}} \mbox{\hyperlink{classmute_a449c9f6158309fe66b59df762ce42c94}{mute\+Position}} = \mbox{\hyperlink{classmute_addfeb04122f662fb55dc68c5d9814437a25edb09c84018fe6ae55dd3778dc4616}{mp\+Undefined}}
 \item 
-\mbox{\hyperlink{classservoStepper}{servo\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmute_ae1f6cbdb8dcf6ac6008d4b59c7a0123e}{step\+Servo\+Stepper}} = nullptr
+\mbox{\hyperlink{classTmc2209ServoStepper}{Tmc2209\+Servo\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmute_ac01f700b833dea7842385a17c6580ff4}{tmc2209\+Servo\+Stepper}} = nullptr
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -98,27 +99,7 @@ uint16\+\_\+t \mbox{\hyperlink{classmute_adc637f8667b5124aa0c7b2f37d1900c0}{half
 bool \mbox{\hyperlink{classmute_ab9699d08ed154ece472ebe62b4e141f0}{sustain}} = false
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classmute_a9170951ebc077ecd2f4cffa75dfc5505}{mute\+Max\+Position}} = 59000
-\item 
-Hardware\+Serial \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmute_a277299c2112fbf0dd9f0f5fff588677f}{step\+Serial\+Stream}}
-\begin{DoxyCompactList}\small\item\em Serial port for tilt stepper. \end{DoxyCompactList}\item 
-const long \mbox{\hyperlink{classmute_a287a11ca06b6b4d1fb6d3b51c14decce}{step\+Baud\+Rate}} = 115200
-\begin{DoxyCompactList}\small\item\em Baud rate for tilt stepper serial. \end{DoxyCompactList}\item 
-const int \mbox{\hyperlink{classmute_a5ab1822665131abeccd001d04b71df9e}{step\+Connect\+Delay}} = 200
-\begin{DoxyCompactList}\small\item\em Delay in between connecting to stepper and issuing commandss. \end{DoxyCompactList}\item 
-const uint8\+\_\+t \mbox{\hyperlink{classmute_ac8dcf6930d2d3eda83b2362ca95d7730}{step\+Run\+Current\+Percent}} = 40
-\begin{DoxyCompactList}\small\item\em Stepper current during run phase. \end{DoxyCompactList}\item 
-const uint8\+\_\+t \mbox{\hyperlink{classmute_a9ba529afa13fa80787a810b5a3fbc7a1}{step\+Home\+Current\+Percent}} = 20
-\item 
-const char \mbox{\hyperlink{classmute_a1c4f1af94bdaca6ace038062e16dd86c}{step\+Microstepping}} = 32
-\begin{DoxyCompactList}\small\item\em Tilt stepper micro stepping. \end{DoxyCompactList}\item 
-char \mbox{\hyperlink{classmute_ae061f9d61cba0631d953cf96c1b129ce}{step\+En\+Pin}}
-\begin{DoxyCompactList}\small\item\em Pin for tilt stepper driver enable. \end{DoxyCompactList}\item 
-char \mbox{\hyperlink{classmute_ae437f0d98a3ca36557190d48bbbd0de6}{stepper\+Dir\+Pin}}
-\begin{DoxyCompactList}\small\item\em Pin for tilt stepper driver direction. \end{DoxyCompactList}\item 
-char \mbox{\hyperlink{classmute_ac5358577e2024e82a43b87356fdfe808}{step\+Step\+Pin}}
-\begin{DoxyCompactList}\small\item\em Pin for tilt stepper driver step. \end{DoxyCompactList}\item 
-TMC2209 \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmute_a533c877970ce0b6b2f05dac913e1fa9e}{step\+TMC2209\+Driver}} = nullptr
-\begin{DoxyCompactList}\small\item\em Tilt stepper driver class pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Member Enumeration Documentation}
@@ -155,13 +136,6 @@ mp\+Half&\\
 \doxysubsubsection{\texorpdfstring{mute()}{mute()}}
 {\footnotesize\ttfamily mute\+::mute (\begin{DoxyParamCaption}\item[{char}]{step\+En\+Pin,  }\item[{char}]{step\+Dir\+Pin,  }\item[{char}]{step\+Step\+Pin,  }\item[{Hardware\+Serial \texorpdfstring{$\ast$}{*}}]{step\+Serial\+Port,  }\item[{char}]{step\+Home\+Sensor\+Pin }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classmute_ae4ced3b976dd9b3ddedfe8a8163f4a6a_cgraph}
-\end{center}
-\end{figure}
 
 
 \doxysubsection{Member Function Documentation}
@@ -220,7 +194,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{getTMC2209Info()}{getTMC2209Info()}}
 {\footnotesize\ttfamily void mute\+::get\+TMC2209\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -239,7 +214,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{homeMute()}{homeMute()}}
 {\footnotesize\ttfamily bool mute\+::home\+Mute (\begin{DoxyParamCaption}\item[{bool}]{invert = {\ttfamily false} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -272,7 +248,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{saveFullMute()}{saveFullMute()}}
 {\footnotesize\ttfamily bool mute\+::save\+Full\+Mute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -285,7 +262,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{saveHalfMute()}{saveHalfMute()}}
 {\footnotesize\ttfamily bool mute\+::save\+Half\+Mute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -298,7 +276,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{saveRest()}{saveRest()}}
 {\footnotesize\ttfamily bool mute\+::save\+Rest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -349,7 +328,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{setTilt()}{setTilt()}}
 {\footnotesize\ttfamily bool mute\+::set\+Tilt (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{tilt }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -369,11 +349,12 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{setupTMC2209()}{setupTMC2209()}}
 {\footnotesize\ttfamily bool mute\+::setup\+TMC2209 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=311pt]{classmute_a76330686e9f7c818e2faa6c320f2e7b6_icgraph}
+\includegraphics[width=350pt]{classmute_a76330686e9f7c818e2faa6c320f2e7b6_cgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classmute_ae445f099349b08eda3cd31d1e08e4f75}\label{classmute_ae445f099349b08eda3cd31d1e08e4f75} 
@@ -382,7 +363,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{updateMute()}{updateMute()}}
 {\footnotesize\ttfamily void mute\+::update\+Mute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -452,117 +434,21 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{restPosition}{restPosition}}
 {\footnotesize\ttfamily uint16\+\_\+t mute\+::rest\+Position = 0\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{classmute_a287a11ca06b6b4d1fb6d3b51c14decce}\label{classmute_a287a11ca06b6b4d1fb6d3b51c14decce} 
-\index{mute@{mute}!stepBaudRate@{stepBaudRate}}
-\index{stepBaudRate@{stepBaudRate}!mute@{mute}}
-\doxysubsubsection{\texorpdfstring{stepBaudRate}{stepBaudRate}}
-{\footnotesize\ttfamily const long mute\+::step\+Baud\+Rate = 115200\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Baud rate for tilt stepper serial. 
-
-\Hypertarget{classmute_a5ab1822665131abeccd001d04b71df9e}\label{classmute_a5ab1822665131abeccd001d04b71df9e} 
-\index{mute@{mute}!stepConnectDelay@{stepConnectDelay}}
-\index{stepConnectDelay@{stepConnectDelay}!mute@{mute}}
-\doxysubsubsection{\texorpdfstring{stepConnectDelay}{stepConnectDelay}}
-{\footnotesize\ttfamily const int mute\+::step\+Connect\+Delay = 200\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Delay in between connecting to stepper and issuing commandss. 
-
-\Hypertarget{classmute_ae061f9d61cba0631d953cf96c1b129ce}\label{classmute_ae061f9d61cba0631d953cf96c1b129ce} 
-\index{mute@{mute}!stepEnPin@{stepEnPin}}
-\index{stepEnPin@{stepEnPin}!mute@{mute}}
-\doxysubsubsection{\texorpdfstring{stepEnPin}{stepEnPin}}
-{\footnotesize\ttfamily char mute\+::step\+En\+Pin\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Pin for tilt stepper driver enable. 
-
-\Hypertarget{classmute_a9ba529afa13fa80787a810b5a3fbc7a1}\label{classmute_a9ba529afa13fa80787a810b5a3fbc7a1} 
-\index{mute@{mute}!stepHomeCurrentPercent@{stepHomeCurrentPercent}}
-\index{stepHomeCurrentPercent@{stepHomeCurrentPercent}!mute@{mute}}
-\doxysubsubsection{\texorpdfstring{stepHomeCurrentPercent}{stepHomeCurrentPercent}}
-{\footnotesize\ttfamily const uint8\+\_\+t mute\+::step\+Home\+Current\+Percent = 20\hspace{0.3cm}{\ttfamily [private]}}
-
-\Hypertarget{classmute_a1c4f1af94bdaca6ace038062e16dd86c}\label{classmute_a1c4f1af94bdaca6ace038062e16dd86c} 
-\index{mute@{mute}!stepMicrostepping@{stepMicrostepping}}
-\index{stepMicrostepping@{stepMicrostepping}!mute@{mute}}
-\doxysubsubsection{\texorpdfstring{stepMicrostepping}{stepMicrostepping}}
-{\footnotesize\ttfamily const char mute\+::step\+Microstepping = 32\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Tilt stepper micro stepping. 
-
-\Hypertarget{classmute_ae437f0d98a3ca36557190d48bbbd0de6}\label{classmute_ae437f0d98a3ca36557190d48bbbd0de6} 
-\index{mute@{mute}!stepperDirPin@{stepperDirPin}}
-\index{stepperDirPin@{stepperDirPin}!mute@{mute}}
-\doxysubsubsection{\texorpdfstring{stepperDirPin}{stepperDirPin}}
-{\footnotesize\ttfamily char mute\+::stepper\+Dir\+Pin\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Pin for tilt stepper driver direction. 
-
-\Hypertarget{classmute_ac8dcf6930d2d3eda83b2362ca95d7730}\label{classmute_ac8dcf6930d2d3eda83b2362ca95d7730} 
-\index{mute@{mute}!stepRunCurrentPercent@{stepRunCurrentPercent}}
-\index{stepRunCurrentPercent@{stepRunCurrentPercent}!mute@{mute}}
-\doxysubsubsection{\texorpdfstring{stepRunCurrentPercent}{stepRunCurrentPercent}}
-{\footnotesize\ttfamily const uint8\+\_\+t mute\+::step\+Run\+Current\+Percent = 40\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Stepper current during run phase. 
-
-\Hypertarget{classmute_a277299c2112fbf0dd9f0f5fff588677f}\label{classmute_a277299c2112fbf0dd9f0f5fff588677f} 
-\index{mute@{mute}!stepSerialStream@{stepSerialStream}}
-\index{stepSerialStream@{stepSerialStream}!mute@{mute}}
-\doxysubsubsection{\texorpdfstring{stepSerialStream}{stepSerialStream}}
-{\footnotesize\ttfamily Hardware\+Serial\texorpdfstring{$\ast$}{*} mute\+::step\+Serial\+Stream\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Serial port for tilt stepper. 
-
-\Hypertarget{classmute_ae1f6cbdb8dcf6ac6008d4b59c7a0123e}\label{classmute_ae1f6cbdb8dcf6ac6008d4b59c7a0123e} 
-\index{mute@{mute}!stepServoStepper@{stepServoStepper}}
-\index{stepServoStepper@{stepServoStepper}!mute@{mute}}
-\doxysubsubsection{\texorpdfstring{stepServoStepper}{stepServoStepper}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classservoStepper}{servo\+Stepper}}\texorpdfstring{$\ast$}{*} mute\+::step\+Servo\+Stepper = nullptr}
-
-\Hypertarget{classmute_ac5358577e2024e82a43b87356fdfe808}\label{classmute_ac5358577e2024e82a43b87356fdfe808} 
-\index{mute@{mute}!stepStepPin@{stepStepPin}}
-\index{stepStepPin@{stepStepPin}!mute@{mute}}
-\doxysubsubsection{\texorpdfstring{stepStepPin}{stepStepPin}}
-{\footnotesize\ttfamily char mute\+::step\+Step\+Pin\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Pin for tilt stepper driver step. 
-
-\Hypertarget{classmute_a533c877970ce0b6b2f05dac913e1fa9e}\label{classmute_a533c877970ce0b6b2f05dac913e1fa9e} 
-\index{mute@{mute}!stepTMC2209Driver@{stepTMC2209Driver}}
-\index{stepTMC2209Driver@{stepTMC2209Driver}!mute@{mute}}
-\doxysubsubsection{\texorpdfstring{stepTMC2209Driver}{stepTMC2209Driver}}
-{\footnotesize\ttfamily TMC2209\texorpdfstring{$\ast$}{*} mute\+::step\+TMC2209\+Driver = nullptr\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Tilt stepper driver class pointer. 
-
 \Hypertarget{classmute_ab9699d08ed154ece472ebe62b4e141f0}\label{classmute_ab9699d08ed154ece472ebe62b4e141f0} 
 \index{mute@{mute}!sustain@{sustain}}
 \index{sustain@{sustain}!mute@{mute}}
 \doxysubsubsection{\texorpdfstring{sustain}{sustain}}
 {\footnotesize\ttfamily bool mute\+::sustain = false\hspace{0.3cm}{\ttfamily [private]}}
 
+\Hypertarget{classmute_ac01f700b833dea7842385a17c6580ff4}\label{classmute_ac01f700b833dea7842385a17c6580ff4} 
+\index{mute@{mute}!tmc2209ServoStepper@{tmc2209ServoStepper}}
+\index{tmc2209ServoStepper@{tmc2209ServoStepper}!mute@{mute}}
+\doxysubsubsection{\texorpdfstring{tmc2209ServoStepper}{tmc2209ServoStepper}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTmc2209ServoStepper}{Tmc2209\+Servo\+Stepper}}\texorpdfstring{$\ast$}{*} mute\+::tmc2209\+Servo\+Stepper = nullptr}
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{mute_8h}{mute.\+h}}\item 
+\mbox{\hyperlink{mute_8hpp}{mute.\+hpp}}\item 
 \mbox{\hyperlink{mute_8cpp}{mute.\+cpp}}\end{DoxyCompactItemize}

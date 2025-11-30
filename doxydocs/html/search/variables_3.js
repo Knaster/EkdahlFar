@@ -31,10 +31,11 @@ var searchData=
   ['currentharmonicseriesdata_28',['currentHarmonicSeriesData',['../classbowControl.html#a7727c69514e72cedaf9bea49ac51fe3a',1,'bowControl']]],
   ['currentharmonicshift5_29',['currentHarmonicShift5',['../classbowControl.html#af667ca77b3a2eb48903a40a25010f35f',1,'bowControl']]],
   ['currentharmonicshiftfreq_30',['currentHarmonicShiftFreq',['../classbowControl.html#a2156111d85359edf2c3df75645d796b7',1,'bowControl']]],
-  ['currentsolenoidserial_31',['currentSolenoidSerial',['../classstringModule.html#a7a05b447369edd8b38c8efaabb636225',1,'stringModule']]],
-  ['currentstep_32',['currentStep',['../classservoStepper.html#a5f647075c066cd05f2aa6c8061c57ce1',1,'servoStepper']]],
-  ['currentstringmodule_33',['currentStringModule',['../main_8cpp.html#a0652452d3c6986b4f212f9a4cd94f213',1,'main.cpp']]],
-  ['currenttime_34',['currentTime',['../main_8cpp.html#af205655c0c86fc6aaf4c8450d8243938',1,'main.cpp']]],
-  ['customstartupparameters_35',['customStartupParameters',['../main_8cpp.html#af9f3e3acdcf4bf93bbe8015c4f666f26',1,'main.cpp']]],
-  ['cvinputcommands_36',['cvInputCommands',['../classcontrolReader.html#a6bd8645dec8967566cd2239a03c1084f',1,'controlReader']]]
+  ['currentsensepin_31',['currentSensePin',['../classDCMotorControl.html#a554d2c46d2849ad58a40b2c986c724d3',1,'DCMotorControl']]],
+  ['currentsolenoidserial_32',['currentSolenoidSerial',['../classstringModule.html#a7a05b447369edd8b38c8efaabb636225',1,'stringModule']]],
+  ['currentstep_33',['currentStep',['../classservoStepper.html#a5f647075c066cd05f2aa6c8061c57ce1',1,'servoStepper']]],
+  ['currentstringmodule_34',['currentStringModule',['../main_8cpp.html#a0652452d3c6986b4f212f9a4cd94f213',1,'main.cpp']]],
+  ['currenttime_35',['currentTime',['../main_8cpp.html#af205655c0c86fc6aaf4c8450d8243938',1,'main.cpp']]],
+  ['customstartupparameters_36',['customStartupParameters',['../main_8cpp.html#af9f3e3acdcf4bf93bbe8015c4f666f26',1,'main.cpp']]],
+  ['cvinputcommands_37',['cvInputCommands',['../classcontrolReader.html#a6bd8645dec8967566cd2239a03c1084f',1,'controlReader']]]
 ];

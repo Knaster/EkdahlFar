@@ -1,0 +1,92 @@
+\doxysection{dcmotorcontrol.\+hpp}
+\hypertarget{dcmotorcontrol_8hpp_source}{}\label{dcmotorcontrol_8hpp_source}\index{dcmotorcontrol.hpp@{dcmotorcontrol.hpp}}
+\mbox{\hyperlink{dcmotorcontrol_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DCMOTORCONTROL\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DCMOTORCONTROL\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ BITDEPTH\ 16}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#define\ BITDIV\ 1\ }\textcolor{comment}{//\ =\ 2\string^(16-\/BITDEPTH)}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ DCDCLOWERBOUND\ 1.2}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ DCDCUPPERBOUND\ 9}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classDCMotorControl}{DCMotorControl}}\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00012\ \ \ \ \ Teensy\_PWM*\ \mbox{\hyperlink{classDCMotorControl_a4dade4206b26b273383cd1e721a057d0}{motorPWM}};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ \ \ \#define\ tachoFreqLength\ 10\ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classDCMotorControl_a0faa4d2cb8bd582a4db8e79e6e9da849}{tachoFreq}}[\mbox{\hyperlink{dcmotorcontrol_8hpp_a24d78bb2c53ff0ee3960b1424380af6d}{tachoFreqLength}}];\ \ \ \ \ \ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classDCMotorControl_aa423255c98c674280dafd0a418fe45d6}{tachoFreqCount}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classDCMotorControl_a38fec752bae29f31fd61b9e318bdaf96}{tachoFreqIndex}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\ \ \ \ \#define\ tachoFreqPerimssibleMIN\ 10\ \ \ \ \ \ }}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\ \ \ \ \#define\ tachoFreqPerimssibleMAX\ 100000\ \ }}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\ \ \ \ \#define\ permissibleFreqDeviation\ 10\ \ \ \ \ }}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classDCMotorControl_aaed2cbdafea785953e9ccba9bb0d5fef}{tachoOldAverage}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classDCMotorControl_af4ef0ddb65548e4d8f539af48d1ac1b6}{lastReflectorISRState}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classDCMotorControl_afedf6dddebcdfac19ee8c7d8ffd4b413}{reflectorCyclePeriod}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00026\ \ \ \ \ elapsedMicros\ \mbox{\hyperlink{classDCMotorControl_ad94e00bad987cbab3183c4a6db0280ee}{reflectorCounter}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classDCMotorControl_aab57b71648471c0269f805db52874c60}{reflectorZeroTimeoutValue}}\ =\ 50000;\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classDCMotorControl_a40d71d442ca13aaf59730e245bd06b37}{lastMotorPWM}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classDCMotorControl_aa734fcd2acbf7aea0b73d4a884ad7c12}{motorRevPin}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classDCMotorControl_a021b48c5d7ff1309f43d70efcddba029}{reflectorInterruptPin}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classDCMotorControl_abb92cb437f75e53b5274607155e83311}{motorFaultPin}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classDCMotorControl_a554d2c46d2849ad58a40b2c986c724d3}{currentSensePin}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classDCMotorControl_af73acb17c640c01cfe420d6acb43b37d}{motorCurrentLimit}}\ =\ 1.75;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classDCMotorControl_ab320a5746069e3bda638451c4617394a}{motorWattage}}\ =\ 12.84;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDCMotorControl_a9b349799230e293a1b3e7c6c6ed132d0}{overPowerFlag}}\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \textcolor{comment}{//\ External\ flag\ to\ show\ a\ over-\/power\ event\ has\ happend,\ taking\ into\ account\ the\ duration\ of\ the\ event\ etc.}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDCMotorControl_a3962e1db6f238d51dbde731cc4191f56}{transientOverPower}}\ =\ \textcolor{keyword}{false};\ \ \textcolor{comment}{//\ Set\ to\ true\ at\ first\ over-\/power\ event,\ cleared\ if\ bow\ is\ not\ over\ power}}
+\DoxyCodeLine{00043\ \ \ \ \ elapsedMillis\ \mbox{\hyperlink{classDCMotorControl_a038a4764bed09abe3910af18a0412b02}{lastOverPowerEvent}};}
+\DoxyCodeLine{00044\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classDCMotorControl_a3b2b8a9cbdf7f5fff47d90e2ef2db815}{overPowerDuration}}\ =\ 100;\ \textcolor{comment}{//\ If\ bow\ over\ power\ events\ are\ going\ past\ the\ duration\ (in\ ms),\ signal\ the\ over\ power\ event}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classDCMotorControl_a3166cdcc795f8076911257f08d284dbe}{emergencyCoolDownEvent}};}
+\DoxyCodeLine{00047\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classDCMotorControl_a4661d598ac4fd485a7f66a1340fda51d}{emergencyCoolDownPeriod}}\ =\ 1000;}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDCMotorControl_aa6e5ee45b4d58d734178ebaa5af817c4}{emergencyCoolDown}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDCMotorControl_a6f6d1f21ab4ae77b6883762702d0a2d6}{addTachoFreq}}(\textcolor{keywordtype}{float}\ freq);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classDCMotorControl_a161349a65dc4f5fdde1d363281af2d89}{motorDCDCEnPin}};}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDCMotorControl_a2ece60b85ef38aa589d91450fa47808c}{motorDCDCEn}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00056\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classDCMotorControl_a73aa2a0d88d92fbab1a8f1a784d978fa}{motorVoltagePin}};}
+\DoxyCodeLine{00057\ \ \ \ \ Teensy\_PWM\ *\mbox{\hyperlink{classDCMotorControl_a48757acd7b46d7826fd6e6befb09d137}{motorVoltagePWM}};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classDCMotorControl_ac92f52c033822093766931e5fd4e4659}{motorVoltage}}\ =\ 6.6;}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDCMotorControl_a7d139fb42beeeece687be6968ab7ebc9}{setMotorVoltage}}(\textcolor{keywordtype}{float}\ voltage);}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classDCMotorControl_a4fa179f0bdf8fa5a4ad7568832e07589}{getMotorVoltage}}();}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDCMotorControl_ad45596053d5c1d91e50f574a2373479a}{disableMotorPower}}();}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDCMotorControl_ad85e1b63df6744986e6f9a2cec9c0ce2}{enableMotorPower}}();}
+\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{classDCMotorControl}{DCMotorControl}}(\textcolor{keywordtype}{char}\ inMotorRevPin,\ \textcolor{keywordtype}{char}\ inMotorVoltagePin,\ \textcolor{keywordtype}{char}\ inMotorDCDCEnPin,\ \textcolor{keywordtype}{char}\ inTachoPin,\ \textcolor{keywordtype}{char}\ inCurrentSensePin,\ \textcolor{keywordtype}{char}\ inMotorFaultPin);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classDCMotorControl_af997b8b142cfd4dab61675f685b11e32}{getLastTachoFreq}}();}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDCMotorControl_af4d01d28e70b5fbebb838b086316785c}{clearTachoData}}();}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classDCMotorControl_a9afd73bea4533db183caba84babc2ae8}{averageFreq}}();}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDCMotorControl_a2a888a8e82115d709ca2b8204a9d480d}{setSpeedPWMSafe}}(uint16\_t\ speed);}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDCMotorControl_a097df1a3dae34be3cc5f79e4f9661396}{setSpeedPWM}}(uint16\_t\ speed);}
+\DoxyCodeLine{00073\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classDCMotorControl_aed8ce9c5b23c8b1acbbcaeeebdaf4eed}{getSpeedPWM}}();}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDCMotorControl_ab7fdf0c3a47c2171a604464ebc785700}{tachoISRHandler}}();}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDCMotorControl_adee23e43e4e2f868d5bbc5333b86180b}{checkTimeout}}();}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDCMotorControl_ab4d2a22b4212766ed9420dc129e9b484}{updateBow}}();}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classDCMotorControl_add0ae1d944d666b3e04cdaa4a8b3ed74}{getCurrent}}();}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDCMotorControl_a7f5a03032533430c3901fb4fb2b9fc76}{overCurrent}}();}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDCMotorControl_af66db2bb0b636642383ff883aa3d803e}{overPower}}();}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDCMotorControl_af86d6d3df47fefe86b36d0ab7c2f9cd2}{emergencyDisable}}(uint16\_t\ coolDown);}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classDCMotorControl_ab8b71fef2e8899370e4d0d249edc2576}{getMotorFault}}();}
+\DoxyCodeLine{00082\ \};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ }
+
+\end{DoxyCode}

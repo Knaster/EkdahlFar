@@ -4,7 +4,7 @@ var searchData=
   ['maincommandhandler_2ecpp_1',['maincommandhandler.cpp',['../maincommandhandler_8cpp.html',1,'']]],
   ['midi_2ecpp_2',['midi.cpp',['../midi_8cpp.html',1,'']]],
   ['mute_2ecpp_3',['mute.cpp',['../mute_8cpp.html',1,'']]],
-  ['mute_2eh_4',['mute.h',['../mute_8h.html',1,'']]],
+  ['mute_2ehpp_4',['mute.hpp',['../mute_8hpp.html',1,'']]],
   ['mutecalibration_2ecpp_5',['mutecalibration.cpp',['../mutecalibration_8cpp.html',1,'']]],
   ['mutecalibration_2ehpp_6',['mutecalibration.hpp',['../mutecalibration_8hpp.html',1,'']]]
 ];

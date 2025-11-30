@@ -1,0 +1,83 @@
+\doxysection{bowio.\+hpp File Reference}
+\hypertarget{bowio_8hpp}{}\label{bowio_8hpp}\index{bowio.hpp@{bowio.hpp}}
+{\ttfamily \#include "{}WProgram.\+h"{}}\newline
+{\ttfamily \#include "{}Teensy\+\_\+\+PWM.\+h"{}}\newline
+{\ttfamily \#include $<$TMC2209.\+cpp$>$}\newline
+{\ttfamily \#include "{}servostepper.\+hpp"{}}\newline
+{\ttfamily \#include "{}tmc2209\+\_\+servostepper.\+cpp"{}}\newline
+{\ttfamily \#include "{}dcmotorcontrol.\+cpp"{}}\newline
+Include dependency graph for bowio.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{bowio_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{bowio_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classbowIO}{bow\+IO}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{classbowIO}{bow\+IO} class deals with interfacing with the hardware of a string unit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{bowio_8hpp_a24d78bb2c53ff0ee3960b1424380af6d}{tacho\+Freq\+Length}}~10
+\begin{DoxyCompactList}\small\item\em Sets the amount of tachometer values to store in the buffer. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{bowio_8hpp_a4fe38822f8268415b5178beda7fe09ea}{tacho\+Freq\+Perimssible\+MIN}}~10
+\begin{DoxyCompactList}\small\item\em Minimum tachometer value acceptable, given in Hertz. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{bowio_8hpp_a917bdbed5a360e07cbaf3b5566c683ce}{tacho\+Freq\+Perimssible\+MAX}}~100000
+\begin{DoxyCompactList}\small\item\em Maximum tachometer value acceptable, given in Hertz. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{bowio_8hpp_a07bc3185c052a70c9ae3ce08b44c0fd3}{permissible\+Freq\+Deviation}}~10
+\begin{DoxyCompactList}\small\item\em Maximum permissible deviation from median value when averaging tachometer values, given in Hertz. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{bowio_8hpp_a07bc3185c052a70c9ae3ce08b44c0fd3}\label{bowio_8hpp_a07bc3185c052a70c9ae3ce08b44c0fd3} 
+\index{bowio.hpp@{bowio.hpp}!permissibleFreqDeviation@{permissibleFreqDeviation}}
+\index{permissibleFreqDeviation@{permissibleFreqDeviation}!bowio.hpp@{bowio.hpp}}
+\doxysubsubsection{\texorpdfstring{permissibleFreqDeviation}{permissibleFreqDeviation}}
+{\footnotesize\ttfamily \#define permissible\+Freq\+Deviation~10}
+
+
+
+Maximum permissible deviation from median value when averaging tachometer values, given in Hertz. 
+
+\Hypertarget{bowio_8hpp_a24d78bb2c53ff0ee3960b1424380af6d}\label{bowio_8hpp_a24d78bb2c53ff0ee3960b1424380af6d} 
+\index{bowio.hpp@{bowio.hpp}!tachoFreqLength@{tachoFreqLength}}
+\index{tachoFreqLength@{tachoFreqLength}!bowio.hpp@{bowio.hpp}}
+\doxysubsubsection{\texorpdfstring{tachoFreqLength}{tachoFreqLength}}
+{\footnotesize\ttfamily \#define tacho\+Freq\+Length~10}
+
+
+
+Sets the amount of tachometer values to store in the buffer. 
+
+\Hypertarget{bowio_8hpp_a917bdbed5a360e07cbaf3b5566c683ce}\label{bowio_8hpp_a917bdbed5a360e07cbaf3b5566c683ce} 
+\index{bowio.hpp@{bowio.hpp}!tachoFreqPerimssibleMAX@{tachoFreqPerimssibleMAX}}
+\index{tachoFreqPerimssibleMAX@{tachoFreqPerimssibleMAX}!bowio.hpp@{bowio.hpp}}
+\doxysubsubsection{\texorpdfstring{tachoFreqPerimssibleMAX}{tachoFreqPerimssibleMAX}}
+{\footnotesize\ttfamily \#define tacho\+Freq\+Perimssible\+MAX~100000}
+
+
+
+Maximum tachometer value acceptable, given in Hertz. 
+
+\Hypertarget{bowio_8hpp_a4fe38822f8268415b5178beda7fe09ea}\label{bowio_8hpp_a4fe38822f8268415b5178beda7fe09ea} 
+\index{bowio.hpp@{bowio.hpp}!tachoFreqPerimssibleMIN@{tachoFreqPerimssibleMIN}}
+\index{tachoFreqPerimssibleMIN@{tachoFreqPerimssibleMIN}!bowio.hpp@{bowio.hpp}}
+\doxysubsubsection{\texorpdfstring{tachoFreqPerimssibleMIN}{tachoFreqPerimssibleMIN}}
+{\footnotesize\ttfamily \#define tacho\+Freq\+Perimssible\+MIN~10}
+
+
+
+Minimum tachometer value acceptable, given in Hertz. 
+

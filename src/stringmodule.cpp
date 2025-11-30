@@ -280,43 +280,43 @@ bool stringModule::processSerialCommand_GeneralControl(commandItem *_commandItem
 bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegated, commandList *delegatedCommands) {
     if (_commandItem->command == "bowpidki") {
         if (request) {
-            commandResponses->push_back({ "bpki:" + String(bowControlArray[currentBowSerial].Ki), InfoRequest });
+            commandResponses->push_back({ "bpki:" + String(bowControlArray[currentBowSerial].pidController->Ki), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
-            bowControlArray[currentBowSerial].Ki = _commandItem->argument[0].toFloat();
-            commandResponses->push_back({"bpki:" + String(bowControlArray[currentBowSerial].Ki), InfoRequest});
+            bowControlArray[currentBowSerial].pidController->Ki = _commandItem->argument[0].toFloat();
+            commandResponses->push_back({"bpki:" + String(bowControlArray[currentBowSerial].pidController->Ki), InfoRequest});
         }
     } else
     if (_commandItem->command == "bowpidkp") {
         if (request) {
-            commandResponses->push_back({ "bpkp:" + String(bowControlArray[currentBowSerial].Kp), InfoRequest });
+            commandResponses->push_back({ "bpkp:" + String(bowControlArray[currentBowSerial].pidController->Kp), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
-            bowControlArray[currentBowSerial].Kp = _commandItem->argument[0].toFloat(); //String(serialCommand.substring(2,serialCommand.length())).toFloat();
-            commandResponses->push_back({"bpkp:" + String(bowControlArray[currentBowSerial].Kp), InfoRequest});
+            bowControlArray[currentBowSerial].pidController->Kp = _commandItem->argument[0].toFloat(); //String(serialCommand.substring(2,serialCommand.length())).toFloat();
+            commandResponses->push_back({"bpkp:" + String(bowControlArray[currentBowSerial].pidController->Kp), InfoRequest});
         }
     } else
     if (_commandItem->command == "bowpidkd") {
         if (request) {
-            commandResponses->push_back({ "bpkd:" + String(bowControlArray[currentBowSerial].Kd), InfoRequest });
+            commandResponses->push_back({ "bpkd:" + String(bowControlArray[currentBowSerial].pidController->Kd), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
-            bowControlArray[currentBowSerial].Kd = _commandItem->argument[0].toFloat(); //String(serialCommand.substring(2,serialCommand.length())).toFloat();
-            commandResponses->push_back({"bpkd:" + String(bowControlArray[currentBowSerial].Kd), InfoRequest});
+            bowControlArray[currentBowSerial].pidController->Kd = _commandItem->argument[0].toFloat(); //String(serialCommand.substring(2,serialCommand.length())).toFloat();
+            commandResponses->push_back({"bpkd:" + String(bowControlArray[currentBowSerial].pidController->Kd), InfoRequest});
         }
     } else
     if (_commandItem->command == "bowpidr") {
         commandResponses->push_back({"Resetting PID", Command});
-        bowControlArray[currentBowSerial].previousError = 0;
-        bowControlArray[currentBowSerial].pidReset();
+        bowControlArray[currentBowSerial].pidController->previousError = 0;
+        bowControlArray[currentBowSerial].pidController->pidReset();
     }  else
     if (_commandItem->command == "bowpidintegratorerror") {
         if (request) {
-            commandResponses->push_back({ "bpie:" + String(bowControlArray[currentBowSerial].integratorIgnoreBelow), InfoRequest });
+            commandResponses->push_back({ "bpie:" + String(bowControlArray[currentBowSerial].pidController->integratorIgnoreBelow), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
-            bowControlArray[currentBowSerial].integratorIgnoreBelow = _commandItem->argument[0].toFloat(); //String(serialCommand.substring(2,serialCommand.length())).toFloat();
-            commandResponses->push_back({"bpie:" + String(bowControlArray[currentBowSerial].integratorIgnoreBelow), InfoRequest});
+            bowControlArray[currentBowSerial].pidController->integratorIgnoreBelow = _commandItem->argument[0].toFloat(); //String(serialCommand.substring(2,serialCommand.length())).toFloat();
+            commandResponses->push_back({"bpie:" + String(bowControlArray[currentBowSerial].pidController->integratorIgnoreBelow), InfoRequest});
         }
     } else
     if (_commandItem->command == "bowcontrolfundamental") {
@@ -381,11 +381,11 @@ bool stringModule::processSerialCommand_CalibrationsSettings(commandItem *_comma
     } else*/
     if (_commandItem->command == "bowpidmaxerror") {
         if (request) {
-            commandResponses->push_back({ "bpme:" + String(bowControlArray[currentBowSerial].pidMaxError), InfoRequest });
+            commandResponses->push_back({ "bpme:" + String(bowControlArray[currentBowSerial].pidController->pidMaxError), InfoRequest });
         } else {
             if (!checkArguments(_commandItem, commandResponses, 1)) { return false; }
-            bowControlArray[currentBowSerial].pidMaxError = _commandItem->argument[0].toInt();
-            commandResponses->push_back({"bpme:" + String(bowControlArray[currentBowSerial].pidMaxError), InfoRequest});
+            bowControlArray[currentBowSerial].pidController->pidMaxError = _commandItem->argument[0].toInt();
+            commandResponses->push_back({"bpme:" + String(bowControlArray[currentBowSerial].pidController->pidMaxError), InfoRequest});
         }
     } else
     if (_commandItem->command == "bowmotortimeout") {
@@ -894,11 +894,11 @@ bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem,
     if (_commandItem->command == "bowstatus") {
         commandResponses->push_back({"Set frequency " + String(bowControlArray[currentBowSerial].getPIDTarget()) + " Hz, ", TextInfo});
         commandResponses->push_back({"Read frequency " + String(bowIOArray[currentBowSerial].averageFreq()) + " Hz", TextInfo});
-        commandResponses->push_back({" P gain " + String(bowControlArray[currentBowSerial].Kp), TextInfo});
-        commandResponses->push_back({" I gain " + String(bowControlArray[currentBowSerial].Ki), TextInfo});
-        commandResponses->push_back({" D gain " + String(bowControlArray[currentBowSerial].Kd), TextInfo});
-        commandResponses->push_back({" ignore below " + String(bowControlArray[currentBowSerial].integratorIgnoreBelow), TextInfo});
-        commandResponses->push_back({" max error " + String(bowControlArray[currentBowSerial].pidMaxError), TextInfo});
+        commandResponses->push_back({" P gain " + String(bowControlArray[currentBowSerial].pidController->Kp), TextInfo});
+        commandResponses->push_back({" I gain " + String(bowControlArray[currentBowSerial].pidController->Ki), TextInfo});
+        commandResponses->push_back({" D gain " + String(bowControlArray[currentBowSerial].pidController->Kd), TextInfo});
+        commandResponses->push_back({" ignore below " + String(bowControlArray[currentBowSerial].pidController->integratorIgnoreBelow), TextInfo});
+        commandResponses->push_back({" max error " + String(bowControlArray[currentBowSerial].pidController->pidMaxError), TextInfo});
     } else
     if (_commandItem->command == "bowdebugmeasuretimetotarget") {
         bowControlArray[currentBowSerial].measureTimeToTarget(_commandItem->argument[0].toInt());
@@ -924,7 +924,7 @@ bool stringModule::processSerialCommand_StatusTesting(commandItem *_commandItem,
     }  else
     if (_commandItem->command == "bowpidpeakerror") {
         if (request) {
-            commandResponses->push_back({ "bpperr:" + String(bowControlArray[currentBowSerial].getPIDPeakError()), InfoRequest });
+            commandResponses->push_back({ "bpperr:" + String(bowControlArray[currentBowSerial].pidController->getPIDPeakError()), InfoRequest });
         }
     }  else
     if (_commandItem->command == "nooperation") {

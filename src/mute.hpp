@@ -42,42 +42,36 @@ public:
     emutePosition mutePosition = mpUndefined;
 
     Tmc2209ServoStepper *tmc2209ServoStepper = nullptr;
-//    servoStepper *stepServoStepper = nullptr;
-private:
-/*    HardwareSerial *stepSerialStream;           ///< Serial port for tilt stepper
-    const long stepBaudRate = 115200;           ///< Baud rate for tilt stepper serial
-    const int stepConnectDelay = 200;           ///< Delay in between connecting to stepper and issuing commandss
-    const uint8_t stepRunCurrentPercent = 40;   ///< Stepper current during run phase
-    const uint8_t stepHomeCurrentPercent = 20;
-    const char stepMicrostepping = 32;          ///< Tilt stepper micro stepping
-    char stepEnPin;                             ///< Pin for tilt stepper driver enable
-    char stepperDirPin;                         ///< Pin for tilt stepper driver direction
-    char stepStepPin;                           ///< Pin for tilt stepper driver step
-    TMC2209 *stepTMC2209Driver = nullptr;       ///< Tilt stepper driver class pointer
-*/
 
 public:
     mute(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin);
+
     bool setupTMC2209();
     void getTMC2209Info();
+    bool homeMute(bool invert = false);
+
     bool setTilt(uint16_t tilt);
     uint16_t getTilt();
+
     bool rest();
     bool fullMute();
     bool halfMute();
+
     bool setRestPosition(uint16_t inRestPosition);
     uint16_t getRestPosition();
     bool setFullMutePosition(uint16_t inFullMutePosition);
     uint16_t getFullMutePosition();
     bool setHalfMutePosition(uint16_t inHalfMutePosition);
     uint16_t getHalfMutePosition();
+
     bool saveRest();
     bool saveFullMute();
     bool saveHalfMute();
+
     bool setSustain(bool inSustain);
     bool getSustain();
+
     String dumpData();
     void updateMute();
-    bool homeMute(bool invert = false);
 };
 #endif

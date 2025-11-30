@@ -9,6 +9,7 @@ var searchData=
   ['tachoisr_5fisr5_6',['tachoISR_ISR5',['../isrclasswrapper_8cpp.html#a89eb1136834ac698d4fd2878ebffde61',1,'isrclasswrapper.cpp']]],
   ['tachoisr_5fisr6_7',['tachoISR_ISR6',['../isrclasswrapper_8cpp.html#a208326e9bba400c5c4d9bea6a46bb266',1,'isrclasswrapper.cpp']]],
   ['tachoisr_5fisr7_8',['tachoISR_ISR7',['../isrclasswrapper_8cpp.html#a2ae88460e88dfef62e4b72c12b4e1465',1,'isrclasswrapper.cpp']]],
-  ['tachoisrhandler_9',['tachoISRHandler',['../classbowIO.html#ad696a1be1319731a12945db354dac833',1,'bowIO']]],
-  ['tsdebugprintln_10',['tsDebugPrintln',['../classservoStepper.html#acac2b7ede284e6e575793cf2a319f799',1,'servoStepper']]]
+  ['tachoisrhandler_9',['tachoisrhandler',['../classbowIO.html#ad696a1be1319731a12945db354dac833',1,'bowIO::tachoISRHandler()'],['../classDCMotorControl.html#ab7fdf0c3a47c2171a604464ebc785700',1,'DCMotorControl::tachoISRHandler()']]],
+  ['tmc2209servostepper_10',['Tmc2209ServoStepper',['../classTmc2209ServoStepper.html#af2f0449ed69854f4c22be9631bfe2877',1,'Tmc2209ServoStepper']]],
+  ['tsdebugprintln_11',['tsDebugPrintln',['../classservoStepper.html#acac2b7ede284e6e575793cf2a319f799',1,'servoStepper']]]
 ];

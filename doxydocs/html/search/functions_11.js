@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['updatebow_0',['updateBow',['../classbowIO.html#a6bb3298b28dd27eb77287589ab5b9e82',1,'bowIO']]],
+  ['updatebow_0',['updatebow',['../classDCMotorControl.html#ab4d2a22b4212766ed9420dc129e9b484',1,'DCMotorControl::updateBow()'],['../classbowIO.html#a6bb3298b28dd27eb77287589ab5b9e82',1,'bowIO::updateBow()']]],
   ['updateharmonicdata_1',['updateHarmonicData',['../classbowControl.html#a210960a7b6309730b6e2d255652ac218',1,'bowControl']]],
   ['updatelocalvariables_2',['updateLocalVariables',['../midi_8cpp.html#ad49be36e31ac13009fbc84e03bb78cdc',1,'midi.cpp']]],
   ['updatemute_3',['updateMute',['../classmute.html#ae445f099349b08eda3cd31d1e08e4f75',1,'mute']]],

@@ -119,12 +119,13 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  lib/Teensy_PWM/src/PWM_Generic_Debug.h lib/TMC2209/src/TMC2209.cpp \
  lib/TMC2209/src/TMC2209.h src/servostepper.hpp \
  src/tmc2209_servostepper.cpp src/tmc2209_servostepper.hpp \
- src/bowActuators.hpp src/bowcontrol.cpp lib/teensy4/elapsedMillis.h \
- src/calibrate.hpp src/bowcontrol.hpp src/calibrate.cpp \
- src/bowActuators.cpp src/solenoid.cpp src/mute.cpp src/mute.hpp \
- src/mutecalibration.cpp src/mutecalibration.hpp src/stringmodule.cpp \
- src/stringmodule.hpp src/midi.cpp lib/MIDI/MIDI.h lib/MIDI/midi_Defs.h \
- lib/MIDI/midi_Namespace.h lib/MIDI/midi_Platform.h \
+ src/dcmotorcontrol.cpp src/dcmotorcontrol.hpp src/bowActuators.hpp \
+ src/bowcontrol.cpp lib/teensy4/elapsedMillis.h src/calibrate.hpp \
+ src/bowcontrol.hpp src/pidcontroller.cpp src/pidcontroller.hpp \
+ src/calibrate.cpp src/bowActuators.cpp src/solenoid.cpp src/mute.cpp \
+ src/mute.hpp src/mutecalibration.cpp src/mutecalibration.hpp \
+ src/stringmodule.cpp src/stringmodule.hpp src/midi.cpp lib/MIDI/MIDI.h \
+ lib/MIDI/midi_Defs.h lib/MIDI/midi_Namespace.h lib/MIDI/midi_Platform.h \
  lib/MIDI/midi_Settings.h lib/MIDI/midi_Message.h lib/MIDI/serialMIDI.h \
  lib/MIDI/MIDI.hpp src/isrclasswrapper.cpp src/controlReader.cpp \
  src/controlReader.hpp lib/Wire/Wire.h lib/Wire/WireIMXRT.h \

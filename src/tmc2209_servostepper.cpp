@@ -1,7 +1,7 @@
 #ifndef TMC2209_SERVOSTEPPER_C
 #define TMC2209_SERVOSTEPPER_C
 
-#include "servostepper.h    pp"
+#include "servostepper.hpp"
 #include "tmc2209_servostepper.hpp"
 
 Tmc2209ServoStepper::Tmc2209ServoStepper(char inStepDirPin, char inStepStepPin, HardwareSerial *inStepSerialPort, char inStepHomeSensorPin) {

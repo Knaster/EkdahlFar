@@ -1,0 +1,216 @@
+\doxysection{Tmc2209\+Servo\+Stepper Class Reference}
+\hypertarget{classTmc2209ServoStepper}{}\label{classTmc2209ServoStepper}\index{Tmc2209ServoStepper@{Tmc2209ServoStepper}}
+
+
+{\ttfamily \#include $<$tmc2209\+\_\+servostepper.\+hpp$>$}
+
+
+
+Collaboration diagram for Tmc2209\+Servo\+Stepper\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{classTmc2209ServoStepper__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTmc2209ServoStepper_af2f0449ed69854f4c22be9631bfe2877}{Tmc2209\+Servo\+Stepper}} (char in\+Step\+Dir\+Pin, char in\+Step\+Step\+Pin, Hardware\+Serial \texorpdfstring{$\ast$}{*}in\+Step\+Serial\+Port, char in\+Step\+Home\+Sensor\+Pin)
+\item 
+bool \mbox{\hyperlink{classTmc2209ServoStepper_a8b80efbb0d386c6100a3a74a0c80d513}{setup\+TMC2209}} ()
+\item 
+void \mbox{\hyperlink{classTmc2209ServoStepper_a4ef70b1a8a5fb8166d225b3e4f6ba63d}{get\+TMC2209\+Info}} ()
+\item 
+bool \mbox{\hyperlink{classTmc2209ServoStepper_acd55654b623910f5ed3af081148372b6}{home}} (bool invert)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classservoStepper}{servo\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{step\+Servo\+Stepper}} = nullptr
+\item 
+const uint8\+\_\+t \mbox{\hyperlink{classTmc2209ServoStepper_aebef7880b107a993d5d135a0a090ed77}{step\+Run\+Current\+Percent}} = 40
+\begin{DoxyCompactList}\small\item\em Stepper current during run phase. \end{DoxyCompactList}\item 
+const uint8\+\_\+t \mbox{\hyperlink{classTmc2209ServoStepper_a16e2994ba591b2b7f4611f5e598af58c}{step\+Home\+Current\+Percent}} = 20
+\item 
+const uint8\+\_\+t \mbox{\hyperlink{classTmc2209ServoStepper_a09fa8a6e9805a52fbc01cc03e641a6e1}{step\+Hold\+Current\+Percent}} = 10
+\item 
+const char \mbox{\hyperlink{classTmc2209ServoStepper_aa55e6b34de6dbbe81494e0ad3ce780d6}{step\+Microstepping}} = 32
+\begin{DoxyCompactList}\small\item\em Tilt stepper micro stepping. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Hardware\+Serial \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTmc2209ServoStepper_a4c2eff62dac49abb51f38d52da9de57c}{step\+Serial\+Stream}}
+\begin{DoxyCompactList}\small\item\em Serial port for tilt stepper. \end{DoxyCompactList}\item 
+const long \mbox{\hyperlink{classTmc2209ServoStepper_a7fc5d37b552bb8e7994c49e8293026c2}{step\+Baud\+Rate}} = 115200
+\begin{DoxyCompactList}\small\item\em Baud rate for tilt stepper serial. \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{classTmc2209ServoStepper_ae8acd38ce5711b82b86c07cbe7f4e208}{step\+Connect\+Delay}} = 200
+\begin{DoxyCompactList}\small\item\em Delay in between connecting to stepper and issuing commandss. \end{DoxyCompactList}\item 
+TMC2209 \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{step\+TMC2209\+Driver}} = nullptr
+\begin{DoxyCompactList}\small\item\em Tilt stepper driver class pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classTmc2209ServoStepper_af2f0449ed69854f4c22be9631bfe2877}\label{classTmc2209ServoStepper_af2f0449ed69854f4c22be9631bfe2877} 
+\index{Tmc2209ServoStepper@{Tmc2209ServoStepper}!Tmc2209ServoStepper@{Tmc2209ServoStepper}}
+\index{Tmc2209ServoStepper@{Tmc2209ServoStepper}!Tmc2209ServoStepper@{Tmc2209ServoStepper}}
+\doxysubsubsection{\texorpdfstring{Tmc2209ServoStepper()}{Tmc2209ServoStepper()}}
+{\footnotesize\ttfamily Tmc2209\+Servo\+Stepper\+::\+Tmc2209\+Servo\+Stepper (\begin{DoxyParamCaption}\item[{char}]{in\+Step\+Dir\+Pin,  }\item[{char}]{in\+Step\+Step\+Pin,  }\item[{Hardware\+Serial \texorpdfstring{$\ast$}{*}}]{in\+Step\+Serial\+Port,  }\item[{char}]{in\+Step\+Home\+Sensor\+Pin }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classTmc2209ServoStepper_af2f0449ed69854f4c22be9631bfe2877_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classTmc2209ServoStepper_a4ef70b1a8a5fb8166d225b3e4f6ba63d}\label{classTmc2209ServoStepper_a4ef70b1a8a5fb8166d225b3e4f6ba63d} 
+\index{Tmc2209ServoStepper@{Tmc2209ServoStepper}!getTMC2209Info@{getTMC2209Info}}
+\index{getTMC2209Info@{getTMC2209Info}!Tmc2209ServoStepper@{Tmc2209ServoStepper}}
+\doxysubsubsection{\texorpdfstring{getTMC2209Info()}{getTMC2209Info()}}
+{\footnotesize\ttfamily void Tmc2209\+Servo\+Stepper\+::get\+TMC2209\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classTmc2209ServoStepper_a4ef70b1a8a5fb8166d225b3e4f6ba63d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classTmc2209ServoStepper_a4ef70b1a8a5fb8166d225b3e4f6ba63d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classTmc2209ServoStepper_acd55654b623910f5ed3af081148372b6}\label{classTmc2209ServoStepper_acd55654b623910f5ed3af081148372b6} 
+\index{Tmc2209ServoStepper@{Tmc2209ServoStepper}!home@{home}}
+\index{home@{home}!Tmc2209ServoStepper@{Tmc2209ServoStepper}}
+\doxysubsubsection{\texorpdfstring{home()}{home()}}
+{\footnotesize\ttfamily bool Tmc2209\+Servo\+Stepper\+::home (\begin{DoxyParamCaption}\item[{bool}]{invert }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classTmc2209ServoStepper_acd55654b623910f5ed3af081148372b6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classTmc2209ServoStepper_acd55654b623910f5ed3af081148372b6_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classTmc2209ServoStepper_a8b80efbb0d386c6100a3a74a0c80d513}\label{classTmc2209ServoStepper_a8b80efbb0d386c6100a3a74a0c80d513} 
+\index{Tmc2209ServoStepper@{Tmc2209ServoStepper}!setupTMC2209@{setupTMC2209}}
+\index{setupTMC2209@{setupTMC2209}!Tmc2209ServoStepper@{Tmc2209ServoStepper}}
+\doxysubsubsection{\texorpdfstring{setupTMC2209()}{setupTMC2209()}}
+{\footnotesize\ttfamily bool Tmc2209\+Servo\+Stepper\+::setup\+TMC2209 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classTmc2209ServoStepper_a8b80efbb0d386c6100a3a74a0c80d513_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classTmc2209ServoStepper_a7fc5d37b552bb8e7994c49e8293026c2}\label{classTmc2209ServoStepper_a7fc5d37b552bb8e7994c49e8293026c2} 
+\index{Tmc2209ServoStepper@{Tmc2209ServoStepper}!stepBaudRate@{stepBaudRate}}
+\index{stepBaudRate@{stepBaudRate}!Tmc2209ServoStepper@{Tmc2209ServoStepper}}
+\doxysubsubsection{\texorpdfstring{stepBaudRate}{stepBaudRate}}
+{\footnotesize\ttfamily const long Tmc2209\+Servo\+Stepper\+::step\+Baud\+Rate = 115200\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Baud rate for tilt stepper serial. 
+
+\Hypertarget{classTmc2209ServoStepper_ae8acd38ce5711b82b86c07cbe7f4e208}\label{classTmc2209ServoStepper_ae8acd38ce5711b82b86c07cbe7f4e208} 
+\index{Tmc2209ServoStepper@{Tmc2209ServoStepper}!stepConnectDelay@{stepConnectDelay}}
+\index{stepConnectDelay@{stepConnectDelay}!Tmc2209ServoStepper@{Tmc2209ServoStepper}}
+\doxysubsubsection{\texorpdfstring{stepConnectDelay}{stepConnectDelay}}
+{\footnotesize\ttfamily const int Tmc2209\+Servo\+Stepper\+::step\+Connect\+Delay = 200\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Delay in between connecting to stepper and issuing commandss. 
+
+\Hypertarget{classTmc2209ServoStepper_a09fa8a6e9805a52fbc01cc03e641a6e1}\label{classTmc2209ServoStepper_a09fa8a6e9805a52fbc01cc03e641a6e1} 
+\index{Tmc2209ServoStepper@{Tmc2209ServoStepper}!stepHoldCurrentPercent@{stepHoldCurrentPercent}}
+\index{stepHoldCurrentPercent@{stepHoldCurrentPercent}!Tmc2209ServoStepper@{Tmc2209ServoStepper}}
+\doxysubsubsection{\texorpdfstring{stepHoldCurrentPercent}{stepHoldCurrentPercent}}
+{\footnotesize\ttfamily const uint8\+\_\+t Tmc2209\+Servo\+Stepper\+::step\+Hold\+Current\+Percent = 10}
+
+\Hypertarget{classTmc2209ServoStepper_a16e2994ba591b2b7f4611f5e598af58c}\label{classTmc2209ServoStepper_a16e2994ba591b2b7f4611f5e598af58c} 
+\index{Tmc2209ServoStepper@{Tmc2209ServoStepper}!stepHomeCurrentPercent@{stepHomeCurrentPercent}}
+\index{stepHomeCurrentPercent@{stepHomeCurrentPercent}!Tmc2209ServoStepper@{Tmc2209ServoStepper}}
+\doxysubsubsection{\texorpdfstring{stepHomeCurrentPercent}{stepHomeCurrentPercent}}
+{\footnotesize\ttfamily const uint8\+\_\+t Tmc2209\+Servo\+Stepper\+::step\+Home\+Current\+Percent = 20}
+
+\Hypertarget{classTmc2209ServoStepper_aa55e6b34de6dbbe81494e0ad3ce780d6}\label{classTmc2209ServoStepper_aa55e6b34de6dbbe81494e0ad3ce780d6} 
+\index{Tmc2209ServoStepper@{Tmc2209ServoStepper}!stepMicrostepping@{stepMicrostepping}}
+\index{stepMicrostepping@{stepMicrostepping}!Tmc2209ServoStepper@{Tmc2209ServoStepper}}
+\doxysubsubsection{\texorpdfstring{stepMicrostepping}{stepMicrostepping}}
+{\footnotesize\ttfamily const char Tmc2209\+Servo\+Stepper\+::step\+Microstepping = 32}
+
+
+
+Tilt stepper micro stepping. 
+
+\Hypertarget{classTmc2209ServoStepper_aebef7880b107a993d5d135a0a090ed77}\label{classTmc2209ServoStepper_aebef7880b107a993d5d135a0a090ed77} 
+\index{Tmc2209ServoStepper@{Tmc2209ServoStepper}!stepRunCurrentPercent@{stepRunCurrentPercent}}
+\index{stepRunCurrentPercent@{stepRunCurrentPercent}!Tmc2209ServoStepper@{Tmc2209ServoStepper}}
+\doxysubsubsection{\texorpdfstring{stepRunCurrentPercent}{stepRunCurrentPercent}}
+{\footnotesize\ttfamily const uint8\+\_\+t Tmc2209\+Servo\+Stepper\+::step\+Run\+Current\+Percent = 40}
+
+
+
+Stepper current during run phase. 
+
+\Hypertarget{classTmc2209ServoStepper_a4c2eff62dac49abb51f38d52da9de57c}\label{classTmc2209ServoStepper_a4c2eff62dac49abb51f38d52da9de57c} 
+\index{Tmc2209ServoStepper@{Tmc2209ServoStepper}!stepSerialStream@{stepSerialStream}}
+\index{stepSerialStream@{stepSerialStream}!Tmc2209ServoStepper@{Tmc2209ServoStepper}}
+\doxysubsubsection{\texorpdfstring{stepSerialStream}{stepSerialStream}}
+{\footnotesize\ttfamily Hardware\+Serial\texorpdfstring{$\ast$}{*} Tmc2209\+Servo\+Stepper\+::step\+Serial\+Stream\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Serial port for tilt stepper. 
+
+\Hypertarget{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}\label{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02} 
+\index{Tmc2209ServoStepper@{Tmc2209ServoStepper}!stepServoStepper@{stepServoStepper}}
+\index{stepServoStepper@{stepServoStepper}!Tmc2209ServoStepper@{Tmc2209ServoStepper}}
+\doxysubsubsection{\texorpdfstring{stepServoStepper}{stepServoStepper}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classservoStepper}{servo\+Stepper}}\texorpdfstring{$\ast$}{*} Tmc2209\+Servo\+Stepper\+::step\+Servo\+Stepper = nullptr}
+
+\Hypertarget{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}\label{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3} 
+\index{Tmc2209ServoStepper@{Tmc2209ServoStepper}!stepTMC2209Driver@{stepTMC2209Driver}}
+\index{stepTMC2209Driver@{stepTMC2209Driver}!Tmc2209ServoStepper@{Tmc2209ServoStepper}}
+\doxysubsubsection{\texorpdfstring{stepTMC2209Driver}{stepTMC2209Driver}}
+{\footnotesize\ttfamily TMC2209\texorpdfstring{$\ast$}{*} Tmc2209\+Servo\+Stepper\+::step\+TMC2209\+Driver = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Tilt stepper driver class pointer. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{tmc2209__servostepper_8hpp}{tmc2209\+\_\+servostepper.\+hpp}}\item 
+\mbox{\hyperlink{tmc2209__servostepper_8cpp}{tmc2209\+\_\+servostepper.\+cpp}}\end{DoxyCompactItemize}

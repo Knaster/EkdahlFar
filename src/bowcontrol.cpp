@@ -49,13 +49,13 @@
  * \todo THIS NEEDS TO CHANGE, values should be updated internally but only outputted depending on manual / automatic control
  */
 
-
-
 /// Constructor
-bowControl::bowControl(bowIO &_bowIO, CalibrationData &__calibrationData) {
-    bowIOConnect = &_bowIO;
-    calibrationDataConnect = &__calibrationData;
-    bowActuators = new BowActuators(&__calibrationData);
+
+bowControl::bowControl(bowIO &inBowIO, CalibrationData &inCalibrationData) {
+    bowIOConnect = &inBowIO;
+    calibrationDataConnect = &inCalibrationData;
+    bowActuators = new BowActuators(&inCalibrationData);
+    pidController = new PIDController(*calibrationDataConnect, *bowIOConnect);
 }
 
 #define pidErrorThreshold 5     ///< Threshold that will trigger a bow instability event, given in Hertz
@@ -67,50 +67,41 @@ void bowControl::setBowCurrentLimit(float inBowCurrentLimit) {
 float bowControl::getBowCurrentLimit() {
     return bowCurrentLimit;
 }
-/*
-/// Check if the bow is holding a stable frequency
-int bowControl::isBowStable() {
-    if (elapsedSinceLastTarget < elapsedTimeThreshold) { return -1; }
-    if (bowIOConnect->averageFreq() == 0) { return 1; }
-    if (previousError >= pidErrorThreshold) {
-        elapsedSinceLastTarget = 0;
-        return 0;
-    } else {
-        return 1;
-    }
-}
-*/
     /// Resets the PID integral
 void bowControl::pidReset() {
-    integral = 0;
+//    integral = 0;
+    pidController->pidReset();
 }
 
 /// Set PID target speed, check that it doesnt go above maxHz or below minHz
 bool bowControl::setPIDTarget(float _pidTargetSpeed) {
-    if (((_pidTargetSpeed > calibrationDataConnect->maxHz) || (_pidTargetSpeed < calibrationDataConnect->minHz)) && _pidTargetSpeed != 0) {
+/*    if (((_pidTargetSpeed > calibrationDataConnect->maxHz) || (_pidTargetSpeed < calibrationDataConnect->minHz)) && _pidTargetSpeed != 0) {
         debugPrintln("PID Target out of range!", Hardware);
         return false;
     }
     debugPrintln("Setting PID target to " + String(_pidTargetSpeed), Hardware);
     setPIDTargetUnsafe(_pidTargetSpeed);
     if (_pidTargetSpeed == 0) { pidReset(); }
-    return true;
+    return true;*/
+    return pidController->setPIDTarget(_pidTargetSpeed);
 }
 
 /// Set PID target speed without any safety checks, used by setPIDTarget
 void bowControl::setPIDTargetUnsafe(float _pidTargetSpeed) {
-    inRecovery = false;
+/*    inRecovery = false;
     inRelapse = false;
     bowIOConnect->tiltAdjust = 0;
     pidTargetSpeed = _pidTargetSpeed;
-//    elapsedSinceLastTarget = 0;
+//    elapsedSinceLastTarget = 0;*/
     bowShutoffTimedout = false;
     bowShutoffMotorDisabled = false;
+    pidController->setPIDTargetUnsafe(_pidTargetSpeed);
 }
 
 /// Returns the PID target speed
 float bowControl::getPIDTarget() {
-    return pidTargetSpeed;
+    //return pidTargetSpeed;
+    return pidController->getPIDTarget();
 }
 
 /// PID calculation function to be called at pidUpdateInterval, called by pidInterruptCaller
@@ -118,6 +109,7 @@ float bowControl::getPIDTarget() {
 /// \todo final check so PWM is never out of range min/max
 /// \todo startup injection of fundamental maybe?
 void bowControl::pidControl() {
+/*
     // Calculate the error between the target speed and the current speed
     float currentSpeed = bowIOConnect->getLastTachoFreq();
     float error = pidTargetSpeed - currentSpeed;
@@ -142,11 +134,6 @@ void bowControl::pidControl() {
     float output = KpTerm + KiTerm + KdTerm;
 
     if (output < 0) { output = 0; }
-    // This attempt at setting lowest speed doesn't work, makes you not be able to go beyond a certain key
-/*        if ((pidTargetSpeed > 0) && (output < calibrationDataConnect->minInertialPWM)) {
-        output = calibrationDataConnect->minInertialPWM;
-    }
-*/
     // If problem, check the following line - added 2023-10-22
     if (output > 65535) { output = 65535; }
 
@@ -154,20 +141,24 @@ void bowControl::pidControl() {
     bowIOConnect->setSpeedPWM(static_cast<uint16_t>(output));
 
     // Store the current error for the next iteration
-    previousError = error;
+    previousError = error;*/
+    pidController->pidControl();
 };
 
 /// This function is to be called every pidUpdateInterval
 void bowControl::pidInterruptCaller() {
-    if (PIDon && (run == 1) && (pidTargetSpeed > 0)) {
-        pidControl();
+//    if (PIDon && (run == 1) && (pidTargetSpeed > 0)) {
+    if (PIDon && (run == 1) && (pidController->pidTargetSpeed > 0)) {
+    //    pidControl();
+        pidController->pidControl();
     }
 }
 
 float bowControl::getPIDPeakError() {
-    float a = pidPeakError;
+/*    float a = pidPeakError;
     pidPeakError = 0;
-    return a;
+    return a;*/
+    return pidController->getPIDPeakError();
 }
 
 /// To be called when a motor FAULT interrupt occurs, adds one occurance to motorFault
@@ -295,7 +286,7 @@ bool bowControl::bowEngage(int enact) {
     tiltMode = Engage;
     return calculateBaselineModifierPressure();
 }
-
+/*
 /// Mute string by turning off the bowing wheel and forcing it into the string by means of setting the Tilt PWM
 bool bowControl::bowMute(int enact) {
     if (enact == 0) { return false; }
@@ -307,7 +298,7 @@ bool bowControl::bowMute(int enact) {
     elapsedSinceMute = 0;
     return true;
 }
-
+*/
 /// Calculate the final frequency using currentHarmonicFreq and currentHarmonicShiftFreq
 bool bowControl::calculateHarmonicShift() {
     int octave = currentHarmonicSeriesData.ratio.size();
@@ -464,10 +455,11 @@ void bowControl::measureTimeToTarget(float _pidTargetSpeed) {
 
 String bowControl::dumpData() {
     String dump = "";
-    dump += "bpki:" + String(Ki) + ",";
+/*    dump += "bpki:" + String(Ki) + ",";
     dump += "bpkp:" + String(Kp) + ",";
     dump += "bpkd:" + String(Kd) + ",";
-    dump += "bpie:" + String(integratorIgnoreBelow) + ",";
+    dump += "bpie:" + String(integratorIgnoreBelow) + ",";*/
+    dump = pidController->dumpData();
     dump += "bchbn:" + String(baseNote) + ",";
     dump += "bchsr:" + String(harmonicShiftRange) + ",";
     dump += "bpes:" + String(bowSpeedToEngage) + ",";
@@ -481,20 +473,11 @@ String bowControl::dumpData() {
 void bowControl::updateString() {
     unsigned long currentTime = micros();
 
-    bowIOConnect->updateBow();
+//    bowIOConnect->updateBow();
 
     // Process only if at the pidUpdateInterval
     if (currentTime - previousTime >= pidUpdateInterval) {
         previousTime = currentTime;
-
-        // Calculate the manual Tilt PWM
-        //unsigned int tiltPWM = calibrationDataConnect->minUsablePressure - 8000 +
-        //  ((double) (calibrationDataConnect->maxUsablePressure - calibrationDataConnect->minUsablePressure + 16000) / 65535 * manualTiltPWM);
-
-        /// \todo Replace with a proper motor fault
-/*        if (checkMotorFault()) {
-            debugPrintln("Motor driver Fault!", Error);
-        }*/
 
         if ((speedMode == Automatic) &&  (_hold == false) && (bowShutoffTimer >= bowShutoffTimeout) ) {
             if ((tiltMode == Rest) && (bowShutoffTimedout == false)) {
@@ -511,26 +494,29 @@ void bowControl::updateString() {
 
         if (run) {
             if (PIDon) {
-                if (pidTargetSpeed == 0) {
+//                if (pidTargetSpeed == 0) {
+                if (pidController->pidTargetSpeed == 0) {
                     bowIOConnect->setSpeedPWM(0);
                 }
             } else {
-                pidReset();
+//                pidReset();
+                pidController->pidReset();
                 bowIOConnect->setSpeedPWM(manualSpeedPWM);
             }
         }  else {
         // If the string module is not running, turn off the bowing wheel
-            pidReset();
+            //pidReset();
+            pidController->pidReset();
             bowIOConnect->setSpeedPWM(0);
         }
 
         // Check if the bowing wheel speed is zero
         bowIOConnect->checkTimeout();
-
+/*
         // Check if bow has been put into mute and been at the mute position for long enough
         if (((tiltMode == Mute) && (mutePeriod > 0)) && (elapsedSinceMute >= mutePeriod)) {
             bowRest(1);
-        }
+        }*/
     }
 };
 

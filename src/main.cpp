@@ -318,7 +318,9 @@ void setup() {
     stringModuleArray[moduleIndex].addSolenoid(3);
     stringModuleArray[moduleIndex].addMute(-1, 5, 4, &Serial5, 13);
 
-    tachoISR_assignInterrupt(stringModuleArray[moduleIndex].bowIOArray[0].reflectorInterruptPin, &stringModuleArray[moduleIndex].bowControlArray[0]);
+//    tachoISR_assignInterrupt(stringModuleArray[moduleIndex].bowIOArray[0].reflectorInterruptPin, &stringModuleArray[moduleIndex].bowControlArray[0]);
+
+    tachoISR_assignInterrupt(stringModuleArray[moduleIndex].bowIOArray[0].dcMotorControl->reflectorInterruptPin, &stringModuleArray[moduleIndex].bowControlArray[0]);
     pidISR_assignInterrupt(&stringModuleArray[moduleIndex].bowControlArray[0]);
 
     stringModuleArray[0].bowIOArray[0].enableBowPower();
@@ -401,6 +403,7 @@ elapsedMicros controlReaderInterval;
 
 void loop() {
     ssOutput.nextByteOut();
+
     usbMIDI.read();
     if (controlReaderInterval >= controlReadIntervalTime) {
         controlRead->readData();
@@ -420,13 +423,14 @@ void loop() {
 #endif
 
 #ifdef EFARSLAVE
+
     for (int i = 0; i < int(stringModuleArray.size()); i++) {
         stringModuleArray[i].updateString();
 
         for (int j=0; j<stringModuleArray[i].bowControlArray.size(); j++) {
             // If the motor is not running, ignore errors as it's likely that a motor simply isn't connected
             if (stringModuleArray[i].bowIOArray[j].getSpeedPWM() != 0) {
-                if (stringModuleArray[i].bowIOArray[j].bowOverPowerFlag) {
+                if (stringModuleArray[i].bowIOArray[j].dcMotorControl->overPowerFlag) {
                     debugPrintln("Bow over power!", debugPrintType::Error);
                     commands->addCommands(stringModuleArray[i].bowControlArray[j].commandsOverPowerCurrent);
                 }
@@ -437,6 +441,7 @@ void loop() {
             }
         }
     }
+
 #endif
 
     unsigned long currentTime = micros();

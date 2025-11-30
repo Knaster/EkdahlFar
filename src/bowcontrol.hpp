@@ -19,6 +19,8 @@
 #ifndef BOWCONTROL_H
 #define BOWCONTROL_H
 
+#include "pidcontroller.cpp"
+
 /// Sets the current bow mode
 enum _tiltMode { Rest, Engage, Mute };
 enum _speedMode { Automatic, Manual };
@@ -30,27 +32,30 @@ public:
 
     BowActuators *bowActuators;
 
+    PIDController *pidController = nullptr;
+
+    uint16_t pidUpdateInterval = 1000;        ///< The interval at which the PID is being called, given in uS
+/*
     float Kp = 500;                           ///< PID P multiplier 100
     float Ki = 7;                             ///< PID I multiplier 2
     float Kd = 200;                            ///< PID D multiplier 40
     float previousError = 0.0;                ///< Contains the last frequency error calculated by the PID, given in Hertz
     float integratorIgnoreBelow = 0.1;        ///< The PID will ignore any integral errors under this threshold 0.4
-    uint16_t pidUpdateInterval = 1000;        ///< The interval at which the PID is being called, given in uS
     float pidMaxError = 50;                   ///< Max PID error per loop, essentially sets acceleration
 
     float KpTerm = 0;                         ///< Calculated P term
     float KiTerm = 0;                         ///< Calculated I term
     float KdTerm = 0;                         ///< Calculated D term
-    float integral = 0.0;                     ///< Contains the integral used by the PID
+    float integral = 0.0;                     ///< Contains the integral used by the PID*/
 protected:
-    float pidTargetSpeed = 0;                 ///< PID target speed
+//    float pidTargetSpeed = 0;                 ///< PID target speed
 
 public:
 //    elapsedMillis elapsedSinceLastTarget;     ///< Time elapsed since last change in bowing speed or pressure
 //    char elapsedTimeThreshold = 40;           ///< Time in ms that elapses in between each bow speed stability check
 //    float recoverRate = 0.05;                 ///< Rate at which the Tilt PWM recovers when it has been decreased in order to avoid bow motor stall and oscillation
-    bool inRecovery = false;                  ///< Set to true when bow recovery has started
-    bool inRelapse = false;                   ///< Set to true when bow recovery has occurred and it has recovered too much, aka triggered bow instability again.
+//    bool inRecovery = false;                  ///< Set to true when bow recovery has started
+//    bool inRelapse = false;                   ///< Set to true when bow recovery has occurred and it has recovered too much, aka triggered bow instability again.
                                         ///< This prevents the bow from recovering any more, preventing future instabilities
 private:
     unsigned long previousTime = 0;           ///< This contains the last time stamp that updateString has been processed
@@ -68,11 +73,11 @@ public:
     uint16_t baselineTiltPWM = 0;             ///< The baseline tilt value used when engaging the bow with the string
     uint16_t modifierTiltPWM = 0;             ///< The modifier tilt value used in conjunction with the baselineTiltPWM when engaing the bow with the string
     _tiltMode tiltMode = Rest;
-
+/*
     elapsedMillis elapsedSinceMute;           ///<
     uint16_t mutePeriod = 350;                ///< How long to perform mute action before going back to rest
     uint16_t muteForce = 3000;                ///< Amount of PWM to add to the maximum allowed tilt PWM to accomplish mute
-
+*/
     elapsedMillis bowShutoffTimer;
     uint16_t bowShutoffTimeout = 1000;
     bool bowShutoffTimedout = false;
@@ -109,7 +114,7 @@ private:
     bool _hold = false;
 
     float bowCurrentLimit = 1.5;
-    float pidPeakError = 0;
+//    float pidPeakError = 0;
 
 public:
     bowControl(bowIO &_bowIO, CalibrationData &__calibrationData);
@@ -139,7 +144,7 @@ public:
     bool bowRest(int enact);
     bool setHold(bool hold);
     bool bowEngage(int enact);
-    bool bowMute(int enact);
+//    bool bowMute(int enact);
 
     bool calculateHarmonicShift();
     bool setHarmonicShift(int inHarmonicShift);

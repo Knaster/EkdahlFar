@@ -14,18 +14,17 @@
 {\ttfamily \#include $<$Safe\+String\+Reader.\+h$>$}\newline
 {\ttfamily \#include $<$Safe\+String\+Stream.\+h$>$}\newline
 {\ttfamily \#include $<$Serial\+Coms.\+h$>$}\newline
-{\ttfamily \#include $<$loop\+Timer.\+h$>$}\newline
 {\ttfamily \#include $<$millis\+Delay.\+h$>$}\newline
 {\ttfamily \#include $<$algorithm$>$}\newline
 {\ttfamily \#include $<$vector$>$}\newline
-{\ttfamily \#include "{}debugprint.\+h"{}}\newline
+{\ttfamily \#include "{}debugprint.\+hpp"{}}\newline
 {\ttfamily \#include "{}harmonic\+Series.\+cpp"{}}\newline
 {\ttfamily \#include "{}eepromhelpers.\+cpp"{}}\newline
 {\ttfamily \#include "{}configuration.\+cpp"{}}\newline
-{\ttfamily \#include "{}commandparser.\+h"{}}\newline
+{\ttfamily \#include "{}commandparser.\+hpp"{}}\newline
 {\ttfamily \#include "{}audioanalyze.\+h"{}}\newline
 {\ttfamily \#include "{}bowio.\+cpp"{}}\newline
-{\ttfamily \#include "{}bow\+Actuators.\+h"{}}\newline
+{\ttfamily \#include "{}bow\+Actuators.\+hpp"{}}\newline
 {\ttfamily \#include "{}bowcontrol.\+cpp"{}}\newline
 {\ttfamily \#include "{}calibrate.\+cpp"{}}\newline
 {\ttfamily \#include "{}bow\+Actuators.\+cpp"{}}\newline
@@ -38,7 +37,8 @@
 {\ttfamily \#include "{}control\+Reader.\+cpp"{}}\newline
 {\ttfamily \#include "{}settingshandler.\+cpp"{}}\newline
 {\ttfamily \#include "{}maincommandhandler.\+cpp"{}}\newline
-Include dependency graph for main.\+cpp\+:\nopagebreak
+Include dependency graph for main.\+cpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -71,8 +71,6 @@ int \mbox{\hyperlink{main_8cpp_afc3e7d08d802f694ab6a85e9908048f4}{freeram}} ()
 \item 
 String \mbox{\hyperlink{main_8cpp_ac7fc43fb1f213243ef62cd57653110cc}{delimit\+Expression}} (String expression, bool force=false)
 \item 
-void \mbox{\hyperlink{main_8cpp_aefb15016346e50493d9dc67f9c02c37d}{motor\+Driver\+Fault}} ()
-\begin{DoxyCompactList}\small\item\em Interrupt callback function for measuring bowing speed of string unit. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8cpp_a9757a20146502da88270d1534b09db95}{update\+Servo\+Stepper\+Pressure0}} ()
 \begin{DoxyCompactList}\small\item\em Initial setup function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8cpp_a8b43b6373262751806f58bda13204a9c}{update\+Servo\+Stepper\+Mute0}} ()
@@ -109,7 +107,7 @@ std\+::vector$<$ \mbox{\hyperlink{classconfiguration}{configuration}} $>$ \mbox{
 std\+::vector$<$ \mbox{\hyperlink{classstringModule}{string\+Module}} $>$ \mbox{\hyperlink{main_8cpp_aacbb4662d46136722bc7069351a1a30f}{string\+Module\+Array}}
 \item 
 \mbox{\hyperlink{classcontrolReader}{control\+Reader}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{control\+Read}}
-\item 
+\begin{DoxyCompactList}\small\item\em Interrupt callback function for measuring bowing speed of string unit. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{main_8cpp_a0652452d3c6986b4f212f9a4cd94f213}{current\+String\+Module}} = 0
 \item 
 unsigned long \mbox{\hyperlink{main_8cpp_a844366311ce26d965b0899b9a200b26b}{previous\+Time}} = 0
@@ -216,28 +214,12 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{loop()}{loop()}}
 {\footnotesize\ttfamily void loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{main_8cpp_afe461d27b9c48d5921c00d521181f12f_cgraph}
-\end{center}
-\end{figure}
-\Hypertarget{main_8cpp_aefb15016346e50493d9dc67f9c02c37d}\label{main_8cpp_aefb15016346e50493d9dc67f9c02c37d} 
-\index{main.cpp@{main.cpp}!motorDriverFault@{motorDriverFault}}
-\index{motorDriverFault@{motorDriverFault}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{motorDriverFault()}{motorDriverFault()}}
-{\footnotesize\ttfamily void motor\+Driver\+Fault (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Interrupt callback function for measuring bowing speed of string unit. 
-
-fm\+Pin\+State\+Changed\+ISR will be called whenever an Interrupt event happens on the pin associated. The pin associated is in turn connected to the reflection sensor output of a string unit. The function also includes the setting up of a timeout function in case of no bow movement as the interrupt will never be triggered in that case. Interrupt call Interrupt callback function tied to the \texorpdfstring{$\sim$}{\string~}\+FAULT output of the motor driver of a string unit Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{main_8cpp_aefb15016346e50493d9dc67f9c02c37d_cgraph}
 \end{center}
 \end{figure}
 \Hypertarget{main_8cpp_ad20897c5c8bd47f5d4005989bead0e55}\label{main_8cpp_ad20897c5c8bd47f5d4005989bead0e55} 
@@ -259,7 +241,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}}
 {\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -289,6 +272,14 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Initial setup function. 
 
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp_a9757a20146502da88270d1534b09db95_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -341,7 +332,11 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{controlRead}{controlRead}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classcontrolReader}{control\+Reader}}\texorpdfstring{$\ast$}{*} control\+Read}
 
-\Hypertarget{main_8cpp_a24894588b78d05d43473e8e72dc24cb2}\label{main_8cpp_a24894588b78d05d43473e8e72dc24cb2} 
+
+
+Interrupt callback function for measuring bowing speed of string unit. 
+
+fm\+Pin\+State\+Changed\+ISR will be called whenever an Interrupt event happens on the pin associated. The pin associated is in turn connected to the reflection sensor output of a string unit. The function also includes the setting up of a timeout function in case of no bow movement as the interrupt will never be triggered in that case. Interrupt call \Hypertarget{main_8cpp_a24894588b78d05d43473e8e72dc24cb2}\label{main_8cpp_a24894588b78d05d43473e8e72dc24cb2} 
 \index{main.cpp@{main.cpp}!controlReaderInterval@{controlReaderInterval}}
 \index{controlReaderInterval@{controlReaderInterval}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{controlReaderInterval}{controlReaderInterval}}

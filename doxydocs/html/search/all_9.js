@@ -1,7 +1,7 @@
 var searchData=
 [
   ['id_0',['id',['../structBowActuators_1_1BowActuator.html#a41cbdf4cbc959f94614fc5f0c2d2438d',1,'BowActuators::BowActuator::id'],['../classharmonicSeries.html#a85fbf378603d4c2f45f9d2865e06c9f0',1,'harmonicSeries::Id']]],
-  ['inforequest_1',['InfoRequest',['../debugprint_8h.html#a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6',1,'debugprint.h']]],
+  ['inforequest_1',['InfoRequest',['../debugprint_8hpp.html#a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6',1,'debugprint.hpp']]],
   ['inhibitinterrupt_2',['inhibitInterrupt',['../classservoStepper.html#a4c13475c378d9d3d45570c4dc3ba3a07',1,'servoStepper']]],
   ['initmidi_3',['initMidi',['../midi_8cpp.html#a1a8f758a45526463dbe01077f13a3bc5',1,'midi.cpp']]],
   ['inrecovery_4',['inRecovery',['../classbowControl.html#aa3bbd0973cc2b096b3b49fca6af6e58c',1,'bowControl']]],

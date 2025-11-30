@@ -322,8 +322,6 @@ bool processMainCommands(commandItem *_commandItem, std::vector<commandResponse>
             commandResponses->push_back({ "Starting ADC min/max test on channel " + String(controlRead->testChannel), InfoRequest });
         }
     } else
-
-
     if (_commandItem->command == "modulecount") {
         commandResponses->push_back({ "mc:" + String(stringModuleArray.size()), InfoRequest });
     } else

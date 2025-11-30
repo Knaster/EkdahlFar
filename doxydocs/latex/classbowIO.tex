@@ -7,21 +7,22 @@ The \doxylink{classbowIO}{bow\+IO} class deals with interfacing with the hardwar
 
 
 
-{\ttfamily \#include $<$bowio.\+h$>$}
+{\ttfamily \#include $<$bowio.\+hpp$>$}
 
 
 
-Collaboration diagram for bow\+IO\+:\nopagebreak
+Collaboration diagram for bow\+IO\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=211pt]{classbowIO__coll__graph}
+\includegraphics[width=256pt]{classbowIO__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classbowIO_a83516a820794abb85aab7ac3c636e43b}{bow\+IO}} (char motor\+Rev\+Pin, char motor\+Voltage\+Pin, char motor\+DCDCEn\+Pin, char tacho\+Pin, char current\+Sense\+Pin, char motor\+Fault\+Pin, char \mbox{\hyperlink{classbowIO_a75b7c1efad167cc2f0633930c7f57760}{step\+En\+Pin}}, char step\+Dir\+Pin, char \mbox{\hyperlink{classbowIO_ae92a6bcdfce4dc597ea4335ee0176b9f}{step\+Step\+Pin}}, Hardware\+Serial \texorpdfstring{$\ast$}{*}step\+Serial\+Port, char step\+Home\+Sensor\+Pin, char step\+Correction\+Sensor\+Pin)
+\mbox{\hyperlink{classbowIO_a83516a820794abb85aab7ac3c636e43b}{bow\+IO}} (char motor\+Rev\+Pin, char motor\+Voltage\+Pin, char motor\+DCDCEn\+Pin, char tacho\+Pin, char current\+Sense\+Pin, char motor\+Fault\+Pin, char step\+En\+Pin, char step\+Dir\+Pin, char step\+Step\+Pin, Hardware\+Serial \texorpdfstring{$\ast$}{*}step\+Serial\+Port, char step\+Home\+Sensor\+Pin, char step\+Correction\+Sensor\+Pin)
 \item 
 float \mbox{\hyperlink{classbowIO_a685e1ba9c2a8a77ac8286a229e8a7f0c}{get\+Last\+Tacho\+Freq}} ()
 \begin{DoxyCompactList}\small\item\em Returns the last added tachometer value. \end{DoxyCompactList}\item 
@@ -88,7 +89,7 @@ float \mbox{\hyperlink{classbowIO_ad5e3d0d8112aa11a71103da59c0b9f37}{bow\+Motor\
 \begin{DoxyCompactList}\small\item\em Limit for tripping bow current draw error. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{classbowIO_a3cb7ce3224903a11ad4dcb47cf1932e5}{bow\+Motor\+Wattage}} = 12.\+84
 \item 
-\mbox{\hyperlink{classservoStepper}{servo\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classbowIO_abc16b006f225a37cffc0257f9fb32ffc}{step\+Servo\+Stepper}} = nullptr
+\mbox{\hyperlink{classTmc2209ServoStepper}{Tmc2209\+Servo\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classbowIO_a802c5cbbe1a33a6a2e75b977993ddcee}{tmc2209\+Servo\+Stepper}} = nullptr
 \item 
 float \mbox{\hyperlink{classbowIO_a3710c97bb9e51a9f0b0f3b9ad5a98625}{tilt\+Adjust}} = 0
 \begin{DoxyCompactList}\small\item\em Adjustment to the tilt value to avoid bow stalling and oscillation. \end{DoxyCompactList}\item 
@@ -136,26 +137,6 @@ unsigned long \mbox{\hyperlink{classbowIO_ac44fcb0bdfac398a9ebf3a8e2c811f71}{ref
 \begin{DoxyCompactList}\small\item\em Threshold at which the bow movement is considered zero, given in uS (was 500,000 for 0.\+5\+Hz, now 50,000 for 20Hz) \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classbowIO_a8f107cf299b70a0b1b15a1bc1553d94c}{last\+Bow\+Motor\+PWM}} = 0
 \begin{DoxyCompactList}\small\item\em Holds the last PWM speed value sent to the bowing wheel. \end{DoxyCompactList}\item 
-Hardware\+Serial \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classbowIO_ae3c60c3f3279a2ec0cf86bbb1dd2165e}{step\+Serial\+Stream}}
-\begin{DoxyCompactList}\small\item\em Serial port for tilt stepper. \end{DoxyCompactList}\item 
-const long \mbox{\hyperlink{classbowIO_addc79c370469f263a12d3c501d5e2302}{step\+Baud\+Rate}} = 115200
-\begin{DoxyCompactList}\small\item\em Baud rate for tilt stepper serial. \end{DoxyCompactList}\item 
-const int \mbox{\hyperlink{classbowIO_a4235f50ad4a21a879df925da06e96ce3}{step\+Connect\+Delay}} = 200
-\begin{DoxyCompactList}\small\item\em Delay in between connecting to stepper and issuing commandss. \end{DoxyCompactList}\item 
-const uint8\+\_\+t \mbox{\hyperlink{classbowIO_acb563b005278378a29e3a49e36b4b367}{step\+Run\+Current\+Percent}} = 40
-\begin{DoxyCompactList}\small\item\em Stepper current during run phase. \end{DoxyCompactList}\item 
-const uint8\+\_\+t \mbox{\hyperlink{classbowIO_ad1228b53e70ce9fa5a59cb76d29a7cc8}{step\+Home\+Current\+Percent}} = 20
-\item 
-const char \mbox{\hyperlink{classbowIO_aaa0c90edf8a14856b5fd49d90d6df3fb}{step\+Microstepping}} = 32
-\begin{DoxyCompactList}\small\item\em Tilt stepper micro stepping. \end{DoxyCompactList}\item 
-char \mbox{\hyperlink{classbowIO_a75b7c1efad167cc2f0633930c7f57760}{step\+En\+Pin}}
-\begin{DoxyCompactList}\small\item\em Pin for tilt stepper driver enable. \end{DoxyCompactList}\item 
-char \mbox{\hyperlink{classbowIO_a5e37a843bf1be76e4f8c7c2ce01811ea}{stepper\+Dir\+Pin}}
-\begin{DoxyCompactList}\small\item\em Pin for tilt stepper driver direction. \end{DoxyCompactList}\item 
-char \mbox{\hyperlink{classbowIO_ae92a6bcdfce4dc597ea4335ee0176b9f}{step\+Step\+Pin}}
-\begin{DoxyCompactList}\small\item\em Pin for tilt stepper driver step. \end{DoxyCompactList}\item 
-TMC2209 \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classbowIO_abb214efac59651f9588b11ebb35457cf}{step\+TMC2209\+Driver}} = nullptr
-\begin{DoxyCompactList}\small\item\em Tilt stepper driver class pointer. \end{DoxyCompactList}\item 
 uint8\+\_\+t \mbox{\hyperlink{classbowIO_a71c9fc86984dee46a8c99aa8f8400b40}{bow\+Motor\+DCDCEn\+Pin}}
 \item 
 bool \mbox{\hyperlink{classbowIO_a479d2039d425958e967a4f67f224f034}{bow\+Motor\+DCDCEn}} = false
@@ -178,7 +159,8 @@ The \doxylink{classbowIO}{bow\+IO} class deals with interfacing with the hardwar
 \doxysubsubsection{\texorpdfstring{bowIO()}{bowIO()}}
 {\footnotesize\ttfamily bow\+IO\+::bow\+IO (\begin{DoxyParamCaption}\item[{char}]{motor\+Rev\+Pin,  }\item[{char}]{motor\+Voltage\+Pin,  }\item[{char}]{motor\+DCDCEn\+Pin,  }\item[{char}]{tacho\+Pin,  }\item[{char}]{current\+Sense\+Pin,  }\item[{char}]{motor\+Fault\+Pin,  }\item[{char}]{step\+En\+Pin,  }\item[{char}]{step\+Dir\+Pin,  }\item[{char}]{step\+Step\+Pin,  }\item[{Hardware\+Serial \texorpdfstring{$\ast$}{*}}]{step\+Serial\+Port,  }\item[{char}]{step\+Home\+Sensor\+Pin,  }\item[{char}]{step\+Correction\+Sensor\+Pin }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -224,7 +206,8 @@ Returns the average bow speed frequency.
 \end{DoxyEnumerate}
 \end{DoxyItemize}\begin{DoxyRefDesc}{Todo}
 \item[\mbox{\hyperlink{todo__todo000004}{Todo}}]What the fuck this wont work, move old\+Average = average to after this if statement and try again \end{DoxyRefDesc}
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -346,7 +329,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{emergencyBowDisable()}{emergencyBowDisable()}}
 {\footnotesize\ttfamily bool bow\+IO\+::emergency\+Bow\+Disable (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{cool\+Down }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -359,7 +343,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{enableBowPower()}{enableBowPower()}}
 {\footnotesize\ttfamily bool bow\+IO\+::enable\+Bow\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -434,7 +419,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{getTMC2209Info()}{getTMC2209Info()}}
 {\footnotesize\ttfamily void bow\+IO\+::get\+TMC2209\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -447,7 +433,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{homeBow()}{homeBow()}}
 {\footnotesize\ttfamily bool bow\+IO\+::home\+Bow (\begin{DoxyParamCaption}\item[{bool}]{invert = {\ttfamily false} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -518,7 +505,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Sets the tilt servo PWM value using a unsigned 16-\/bit int (RECALCULATED) 
 
-Recalculated internally to use SERVO\+\_\+\+MIN and SERVO\+\_\+\+MAX as lower and upper bound respectively Here is the call graph for this function\+:\nopagebreak
+Recalculated internally to use SERVO\+\_\+\+MIN and SERVO\+\_\+\+MAX as lower and upper bound respectively Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -538,11 +526,12 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{setupTMC2209()}{setupTMC2209()}}
 {\footnotesize\ttfamily bool bow\+IO\+::setup\+TMC2209 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=326pt]{classbowIO_a589985b295184b0e30ceb431cde58b3b_icgraph}
+\includegraphics[width=350pt]{classbowIO_a589985b295184b0e30ceb431cde58b3b_cgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classbowIO_ad696a1be1319731a12945db354dac833}\label{classbowIO_ad696a1be1319731a12945db354dac833} 
@@ -595,7 +584,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{waitForTiltToComplete()}{waitForTiltToComplete()}}
 {\footnotesize\ttfamily bool bow\+IO\+::wait\+For\+Tilt\+To\+Complete (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{timeout = {\ttfamily 3000} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -800,108 +790,6 @@ Pin for reflection sensor output.
 
 Threshold at which the bow movement is considered zero, given in uS (was 500,000 for 0.\+5\+Hz, now 50,000 for 20Hz) 
 
-\Hypertarget{classbowIO_addc79c370469f263a12d3c501d5e2302}\label{classbowIO_addc79c370469f263a12d3c501d5e2302} 
-\index{bowIO@{bowIO}!stepBaudRate@{stepBaudRate}}
-\index{stepBaudRate@{stepBaudRate}!bowIO@{bowIO}}
-\doxysubsubsection{\texorpdfstring{stepBaudRate}{stepBaudRate}}
-{\footnotesize\ttfamily const long bow\+IO\+::step\+Baud\+Rate = 115200\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Baud rate for tilt stepper serial. 
-
-\Hypertarget{classbowIO_a4235f50ad4a21a879df925da06e96ce3}\label{classbowIO_a4235f50ad4a21a879df925da06e96ce3} 
-\index{bowIO@{bowIO}!stepConnectDelay@{stepConnectDelay}}
-\index{stepConnectDelay@{stepConnectDelay}!bowIO@{bowIO}}
-\doxysubsubsection{\texorpdfstring{stepConnectDelay}{stepConnectDelay}}
-{\footnotesize\ttfamily const int bow\+IO\+::step\+Connect\+Delay = 200\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Delay in between connecting to stepper and issuing commandss. 
-
-\Hypertarget{classbowIO_a75b7c1efad167cc2f0633930c7f57760}\label{classbowIO_a75b7c1efad167cc2f0633930c7f57760} 
-\index{bowIO@{bowIO}!stepEnPin@{stepEnPin}}
-\index{stepEnPin@{stepEnPin}!bowIO@{bowIO}}
-\doxysubsubsection{\texorpdfstring{stepEnPin}{stepEnPin}}
-{\footnotesize\ttfamily char bow\+IO\+::step\+En\+Pin\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Pin for tilt stepper driver enable. 
-
-\Hypertarget{classbowIO_ad1228b53e70ce9fa5a59cb76d29a7cc8}\label{classbowIO_ad1228b53e70ce9fa5a59cb76d29a7cc8} 
-\index{bowIO@{bowIO}!stepHomeCurrentPercent@{stepHomeCurrentPercent}}
-\index{stepHomeCurrentPercent@{stepHomeCurrentPercent}!bowIO@{bowIO}}
-\doxysubsubsection{\texorpdfstring{stepHomeCurrentPercent}{stepHomeCurrentPercent}}
-{\footnotesize\ttfamily const uint8\+\_\+t bow\+IO\+::step\+Home\+Current\+Percent = 20\hspace{0.3cm}{\ttfamily [private]}}
-
-\Hypertarget{classbowIO_aaa0c90edf8a14856b5fd49d90d6df3fb}\label{classbowIO_aaa0c90edf8a14856b5fd49d90d6df3fb} 
-\index{bowIO@{bowIO}!stepMicrostepping@{stepMicrostepping}}
-\index{stepMicrostepping@{stepMicrostepping}!bowIO@{bowIO}}
-\doxysubsubsection{\texorpdfstring{stepMicrostepping}{stepMicrostepping}}
-{\footnotesize\ttfamily const char bow\+IO\+::step\+Microstepping = 32\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Tilt stepper micro stepping. 
-
-\Hypertarget{classbowIO_a5e37a843bf1be76e4f8c7c2ce01811ea}\label{classbowIO_a5e37a843bf1be76e4f8c7c2ce01811ea} 
-\index{bowIO@{bowIO}!stepperDirPin@{stepperDirPin}}
-\index{stepperDirPin@{stepperDirPin}!bowIO@{bowIO}}
-\doxysubsubsection{\texorpdfstring{stepperDirPin}{stepperDirPin}}
-{\footnotesize\ttfamily char bow\+IO\+::stepper\+Dir\+Pin\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Pin for tilt stepper driver direction. 
-
-\Hypertarget{classbowIO_acb563b005278378a29e3a49e36b4b367}\label{classbowIO_acb563b005278378a29e3a49e36b4b367} 
-\index{bowIO@{bowIO}!stepRunCurrentPercent@{stepRunCurrentPercent}}
-\index{stepRunCurrentPercent@{stepRunCurrentPercent}!bowIO@{bowIO}}
-\doxysubsubsection{\texorpdfstring{stepRunCurrentPercent}{stepRunCurrentPercent}}
-{\footnotesize\ttfamily const uint8\+\_\+t bow\+IO\+::step\+Run\+Current\+Percent = 40\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Stepper current during run phase. 
-
-\Hypertarget{classbowIO_ae3c60c3f3279a2ec0cf86bbb1dd2165e}\label{classbowIO_ae3c60c3f3279a2ec0cf86bbb1dd2165e} 
-\index{bowIO@{bowIO}!stepSerialStream@{stepSerialStream}}
-\index{stepSerialStream@{stepSerialStream}!bowIO@{bowIO}}
-\doxysubsubsection{\texorpdfstring{stepSerialStream}{stepSerialStream}}
-{\footnotesize\ttfamily Hardware\+Serial\texorpdfstring{$\ast$}{*} bow\+IO\+::step\+Serial\+Stream\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Serial port for tilt stepper. 
-
-\Hypertarget{classbowIO_abc16b006f225a37cffc0257f9fb32ffc}\label{classbowIO_abc16b006f225a37cffc0257f9fb32ffc} 
-\index{bowIO@{bowIO}!stepServoStepper@{stepServoStepper}}
-\index{stepServoStepper@{stepServoStepper}!bowIO@{bowIO}}
-\doxysubsubsection{\texorpdfstring{stepServoStepper}{stepServoStepper}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classservoStepper}{servo\+Stepper}}\texorpdfstring{$\ast$}{*} bow\+IO\+::step\+Servo\+Stepper = nullptr}
-
-\Hypertarget{classbowIO_ae92a6bcdfce4dc597ea4335ee0176b9f}\label{classbowIO_ae92a6bcdfce4dc597ea4335ee0176b9f} 
-\index{bowIO@{bowIO}!stepStepPin@{stepStepPin}}
-\index{stepStepPin@{stepStepPin}!bowIO@{bowIO}}
-\doxysubsubsection{\texorpdfstring{stepStepPin}{stepStepPin}}
-{\footnotesize\ttfamily char bow\+IO\+::step\+Step\+Pin\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Pin for tilt stepper driver step. 
-
-\Hypertarget{classbowIO_abb214efac59651f9588b11ebb35457cf}\label{classbowIO_abb214efac59651f9588b11ebb35457cf} 
-\index{bowIO@{bowIO}!stepTMC2209Driver@{stepTMC2209Driver}}
-\index{stepTMC2209Driver@{stepTMC2209Driver}!bowIO@{bowIO}}
-\doxysubsubsection{\texorpdfstring{stepTMC2209Driver}{stepTMC2209Driver}}
-{\footnotesize\ttfamily TMC2209\texorpdfstring{$\ast$}{*} bow\+IO\+::step\+TMC2209\+Driver = nullptr\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Tilt stepper driver class pointer. 
-
 \Hypertarget{classbowIO_a750ea0e143a2b1af9d516eec58471d16}\label{classbowIO_a750ea0e143a2b1af9d516eec58471d16} 
 \index{bowIO@{bowIO}!tachoFreq@{tachoFreq}}
 \index{tachoFreq@{tachoFreq}!bowIO@{bowIO}}
@@ -952,6 +840,12 @@ Holds the last calculate tachometer average, given in Hertz.
 
 Adjustment to the tilt value to avoid bow stalling and oscillation. 
 
+\Hypertarget{classbowIO_a802c5cbbe1a33a6a2e75b977993ddcee}\label{classbowIO_a802c5cbbe1a33a6a2e75b977993ddcee} 
+\index{bowIO@{bowIO}!tmc2209ServoStepper@{tmc2209ServoStepper}}
+\index{tmc2209ServoStepper@{tmc2209ServoStepper}!bowIO@{bowIO}}
+\doxysubsubsection{\texorpdfstring{tmc2209ServoStepper}{tmc2209ServoStepper}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTmc2209ServoStepper}{Tmc2209\+Servo\+Stepper}}\texorpdfstring{$\ast$}{*} bow\+IO\+::tmc2209\+Servo\+Stepper = nullptr}
+
 \Hypertarget{classbowIO_ae3e77ef140722811625e332893d49cf9}\label{classbowIO_ae3e77ef140722811625e332893d49cf9} 
 \index{bowIO@{bowIO}!transientOverPower@{transientOverPower}}
 \index{transientOverPower@{transientOverPower}!bowIO@{bowIO}}
@@ -962,5 +856,5 @@ Adjustment to the tilt value to avoid bow stalling and oscillation.
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{bowio_8h}{bowio.\+h}}\item 
+\mbox{\hyperlink{bowio_8hpp}{bowio.\+hpp}}\item 
 \mbox{\hyperlink{bowio_8cpp}{bowio.\+cpp}}\end{DoxyCompactItemize}
