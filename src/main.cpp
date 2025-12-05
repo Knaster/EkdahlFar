@@ -164,7 +164,7 @@
 
 createBufferedOutput(ssOutput, 8192, DROP_UNTIL_EMPTY); ///< SafeString buffer creation
 createSafeStringReader(ssReader, 8192, "\r\n");       ///< SafeString reader creation
-
+/*
 #ifdef EFARSLAVE
 createBufferedOutput(masterSerialOut, 8192, DROP_UNTIL_EMPTY); ///< SafeString buffer creation
 createSafeStringReader(masterSerialRead, 8192, "\r\n");       ///< SafeString reader creation
@@ -174,7 +174,7 @@ createSafeStringReader(slaveSerialRead1, 256, "\r\n");       ///< SafeString rea
 #endif
 
 #define masterSlaveBaudRate 2000000
-
+*/
 #include <algorithm> // for min/max
 #define clamp(v,i,x) min(max(v,i),x)
 #include <vector>
@@ -192,11 +192,7 @@ int freeram() {
   return (char *)&_heap_end - __brkval;
 }
 
-#include "harmonicSeries.cpp"
-
-//#define currentEEPROMVersion 0x02
-//#uint8_t readEEPROMVersion;
-//uint16_t currentEEPROMOffset = 0;
+//#include "harmonicSeries.cpp"
 
 String customStartupParameters = "";
 String nickName = "";
@@ -212,28 +208,29 @@ std::vector<configuration> configArray;
 #include "commandparser.hpp"
 commandList *commands;
 
-#define masterRx 0
-#define masterTx 1
+//#define masterRx 0
+//#define masterTx 1
 
 #include "audioanalyze.h"
 
-#include "bowio.cpp"
-class CalibrationData;
-#include "bowActuators.hpp"
-class bowControl;
-#include "bowcontrol.cpp"
-#include "calibrate.cpp"
-#include "bowActuators.cpp"
-#include "solenoid.cpp"
-#include "mute.cpp"
-#include "mutecalibration.cpp"
-#include "stringmodule.cpp"
+//#include "bowio.cpp"
+//class CalibrationData;
+//#include "bowActuators.hpp"
+//class bowControl;
+//#include "bowcontrol.cpp"
+//#include "calibrate.cpp"
+//#include "bowActuators.cpp"
+//#include "solenoid.cpp"
+//#include "mute.cpp"
+//#include "mutecontrol.cpp"
+//#include "mutecalibration.cpp"
+//#include "stringmodule.cpp"
 
-std::vector <stringModule> stringModuleArray;
+//std::vector <stringModule> stringModuleArray;
 
 #include "midi.cpp"
 
-#include "isrclasswrapper.cpp"
+//#include "isrclasswrapper.cpp"
 
 /*! \brief Interrupt callback function for measuring bowing speed of string unit
  *
@@ -243,8 +240,12 @@ std::vector <stringModule> stringModuleArray;
 /// Interrupt call
 
 
-#include "controlReader.cpp"
-controlReader *controlRead;
+//#include "controlReader.cpp"
+//ControlReader *controlRead;
+
+#include "farsingle.cpp"
+FARSingle *farSingle;
+#define controlRead farSingle->controlReader
 
 #include "settingshandler.cpp"
 
@@ -253,21 +254,20 @@ controlReader *controlRead;
  */
 
 void updateServoStepperPressure0() {
-    if (stringModuleArray[0].bowIOArray[0].tmc2209ServoStepper->stepServoStepper != nullptr) {
-        stringModuleArray[0].bowIOArray[0].tmc2209ServoStepper->stepServoStepper->updatePosition();
-    } else {
-        debugPrintln("No callback!", Error);
-    }
+    farSingle->updatePressureServo();
 }
 
 
 void updateServoStepperMute0() {
-/*    if (stringModuleArray[0].muteArray[0].stepServoStepper != nullptr) {
-        stringModuleArray[0].muteArray[0].stepServoStepper->updatePosition();
-    }*/
-    if (stringModuleArray[0].muteArray[0].tmc2209ServoStepper->stepServoStepper != nullptr) {
-        stringModuleArray[0].muteArray[0].tmc2209ServoStepper->stepServoStepper->updatePosition();
-    }
+    farSingle->updateMuteServo();
+}
+
+void updateTachometer0() {
+    farSingle->updateTachometer();
+}
+
+void updatePID0() {
+    farSingle->updatePID();
 }
 
 void reset() {
@@ -288,60 +288,34 @@ void setup() {
     configArray.push_back(defaultConfig);
     currentConfig = 0;
 
-    pinMode(masterRx, INPUT);
-    pinMode(masterTx, OUTPUT);
-
-#ifdef EFARMASTER
-    Serial1.begin(masterSlaveBaudRate); //2000000
-    stringModuleArray[0].slaveSerialOut = &slaveSerialOut1;
-    stringModuleArray[0].slaveSerialRead = &slaveSerialRead1;
-    //stringModuleArray[0].bowControlArray[0].slaveSerialOut = &slaveSerialOut1;
-    //stringModuleArray[0].bowControlArray[0].slaveSerialRead = &slaveSerialRead1;
-    slaveSerialOut1.connect(Serial1);
-    slaveSerialRead1.connect(Serial1);
-#elif EFARSLAVE
-/*    Serial1.begin(masterSlaveBaudRate); //2000000
-    masterSerialOut.connect(Serial1);
-    masterSerialRead.connect(Serial1);*/
-#endif // EFARMASTER
+//    pinMode(masterRx, INPUT);
+//    pinMode(masterTx, OUTPUT);
 
     commands = new commandList();
 
-#if EFARSLAVE
+    farSingle = new FARSingle(&updateServoStepperMute0, &updateServoStepperPressure0, &updateTachometer0, &updatePID0);
+
+/*
     stringModule _stringModule;
     stringModuleArray.push_back(_stringModule);
-
     int moduleIndex = stringModuleArray.size() - 1;
 
     stringModuleArray[moduleIndex].addBow(2, 14, 15, 12, 23, 11, -1, 10, 9, &Serial2, 6, 5);
-    stringModuleArray[moduleIndex].bowIOArray[0].setSpeedPWM(0);
+    stringModuleArray[moduleIndex].bowControlArrayX[0].setBowSpeedPWM(0);
     stringModuleArray[moduleIndex].addSolenoid(3);
     stringModuleArray[moduleIndex].addMute(-1, 5, 4, &Serial5, 13);
-
-//    tachoISR_assignInterrupt(stringModuleArray[moduleIndex].bowIOArray[0].reflectorInterruptPin, &stringModuleArray[moduleIndex].bowControlArray[0]);
-
     tachoISR_assignInterrupt(stringModuleArray[moduleIndex].bowIOArray[0].dcMotorControl->reflectorInterruptPin, &stringModuleArray[moduleIndex].bowControlArray[0]);
     pidISR_assignInterrupt(&stringModuleArray[moduleIndex].bowControlArray[0]);
-
-    stringModuleArray[0].bowIOArray[0].enableBowPower();
-
-    stringModuleArray[0].bowIOArray[0].tmc2209ServoStepper->stepServoStepper->stepIntervalCallback = &updateServoStepperPressure0;
-//    stringModuleArray[0].muteArray[0].stepServoStepper->stepIntervalCallback = &updateServoStepperMute0;
-    stringModuleArray[0].muteArray[0].tmc2209ServoStepper->stepServoStepper->stepIntervalCallback = &updateServoStepperMute0;
-    stringModuleArray[0].bowIOArray[0].getTMC2209Info();
+    stringModuleArray[0].bowControlArrayX[0].enableBowMotorPower();
+    stringModuleArray[0].bowControlArrayX[0].setStepIntervalCallback(&updateServoStepperPressure0);
+    stringModuleArray[0].muteArray[0].setStepIntervalCallback(&updateServoStepperMute0);
+    stringModuleArray[0].bowControlArrayX[0].getTMC2209Info();
     stringModuleArray[0].muteArray[0].getTMC2209Info();
+    stringModuleArray[0].bowControlArrayX[0].home();
 
-    if (stringModuleArray[0].bowIOArray[0].tmc2209ServoStepper->stepServoStepper->getHomingStage() == servoStepper::UNHOMED) {
-        stringModuleArray[0].bowIOArray[0].homeBow();
+    if (stringModuleArray[0].muteArray[0].getHomingStage() == eHomingStage::UNHOMED) {
+        stringModuleArray[0].muteArray[0].home();
     }
-/*    if (stringModuleArray[0].muteArray[0].stepServoStepper->getHomingStage() == servoStepper::UNHOMED) {
-        stringModuleArray[0].muteArray[0].homeMute();
-    }
-*/
-    if (stringModuleArray[0].muteArray[0].tmc2209ServoStepper->stepServoStepper->getHomingStage() == servoStepper::UNHOMED) {
-        stringModuleArray[0].muteArray[0].homeMute();
-    }
-
 
     float equalSeries[12] = { 1, 1.059463094, 1.122462048, 1.189207115, 1.25992105, 1.334839854, 1.414213562, 1.498307077, 1.587401052, 1.681792831, 1.781797436, 1.887748625 };
     float justSeries[12] = {1, 1.06667, 1.125, 1.2, 1.25, 1.3333, 1.40625, 1.5, 1.6, 1.66667, 1.8, 1.875 };
@@ -354,9 +328,9 @@ void setup() {
     controlRead = new controlReader(17, 16);
     //controlRead->cvInputCommands[0] = "m:0,f:" + String(stringModuleArray[0].calibrationDataArray[0].fundamentalFrequency) + "*2^(1 / 15878 * value)";
     //controlRead->cvInputCommands[0] = "m:0,h:value/1323.166667";
+*/
+    //loadAllParams();
 
-    loadAllParams();
-#endif
     initMidi();
 
     startAudioAnalyze();
@@ -406,52 +380,45 @@ void loop() {
 
     usbMIDI.read();
     if (controlReaderInterval >= controlReadIntervalTime) {
-        controlRead->readData();
+        farSingle->updateControlReader();
         controlReaderInterval = 0;
     }
     MIDI.read();
 
-#if EFARSLAVE
-// commented out in order to use the master serial for HW MIDI
-/*    masterSerialOut.nextByteOut();
-    if (masterSerialRead.read()) {
-        commands->addCommands(masterSerialRead.c_str());
-//        debugPrintln("Master reception: " + String(masterSerialRead.c_str()), Debug);
-    }*/
-#elif EFARMASTER
-    stringModuleArray[0].slaveSerialOut->nextByteOut();
-#endif
+    farSingle->update();
 
-#ifdef EFARSLAVE
-
+/*
     for (int i = 0; i < int(stringModuleArray.size()); i++) {
         stringModuleArray[i].updateString();
 
         for (int j=0; j<stringModuleArray[i].bowControlArray.size(); j++) {
             // If the motor is not running, ignore errors as it's likely that a motor simply isn't connected
-            if (stringModuleArray[i].bowIOArray[j].getSpeedPWM() != 0) {
-                if (stringModuleArray[i].bowIOArray[j].dcMotorControl->overPowerFlag) {
+            //if (stringModuleArray[i].bowIOArray[j].getSpeedPWM() != 0) {
+            if (stringModuleArray[i].bowControlArrayX[j].getBowSpeedPWM() != 0) {
+                if (stringModuleArray[i].bowControlArrayX[j].getBowOverPowerFlag()) {
                     debugPrintln("Bow over power!", debugPrintType::Error);
-                    commands->addCommands(stringModuleArray[i].bowControlArray[j].commandsOverPowerCurrent);
+                    commands->addCommands(stringModuleArray[i].bowControlArrayX[j].getCommandsOverPowerCurrent());
                 }
-                if (stringModuleArray[i].bowControlArray[j].checkMotorFault()) {
+                if (stringModuleArray[i].bowControlArrayX[j].getBowMotorFaultFlag()) {
                     debugPrintln("Bow motor fault!", debugPrintType::Error);
-                    commands->addCommands(stringModuleArray[i].bowControlArray[j].commandsMotorFault);
+                    commands->addCommands(stringModuleArray[i].bowControlArrayX[j].getCommandsMotorFault());
                 }
             }
         }
     }
 
-#endif
-
+*/
     unsigned long currentTime = micros();
     if (currentTime - previousTime >= commandUpadateInterval) {
         previousTime = currentTime;
         processSerialCommands();
     }
 
+
+/*
     if (stringModuleArray[0].bowIOArray[0].tmc2209ServoStepper->stepServoStepper->intDrivenMsgFlag) {
         debugRaw(stringModuleArray[0].bowIOArray[0].tmc2209ServoStepper->stepServoStepper->intDrivenMsg);
         stringModuleArray[0].bowIOArray[0].tmc2209ServoStepper->stepServoStepper->intDrivenMsgFlag = false;
     }
+    */
 }

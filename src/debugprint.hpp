@@ -16,6 +16,10 @@
  *
  * Copyright (C) 2024 Karl Ekdahl
  */
+
+ #ifndef DEBUGPRINT_H
+ #define DEBUGPRINT_H
+
 enum debugPrintType { Command, USB, Hardware, Undefined, Priority, Error, InfoRequest, EParser, Debug, TextInfo, Help};
 #define debugPrintTypes 11
 String debugPrintTypeName[debugPrintTypes] = { "command", "usb", "hardware" , "undefined", "priority", "error", "inforequest", "expressionparser", "debug", "textinfo", "help" };
@@ -57,3 +61,4 @@ struct commandResponse {
     String response;
     commandResponseType responseType;
 };
+#endif // DEBUGPRINT_H

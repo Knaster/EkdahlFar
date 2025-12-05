@@ -38,7 +38,7 @@ void IRS_GateChanged() {
     gateChanged = true;
 }
 */
-controlReader::controlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
+ControlReader::ControlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
 {
 //    ADC[0].init(1); // = new ADC(1);
 //    ADC[1].init(0); // = new ADC(0);
@@ -65,7 +65,7 @@ controlReader::controlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
 /*! \brief Tries to reconnect to the ADC converters
  */
 
-void controlReader::resetAds() {
+void ControlReader::resetAds() {
     adsInit = false;
 
     if (!ads.begin(0x48, &Wire)) {
@@ -111,7 +111,7 @@ void controlReader::handleADCData(uint16_t adcIndex) {
 Adafruit_ADS1X15
 }
 */
-void controlReader::readData() {
+void ControlReader::readData() {
     int16_t a;
 
     if ((adsErrorReported || ads2ErrorReported) && ((millis() > (adsReinitCountStart + adsReinitializeTimeout)))) {
@@ -274,7 +274,7 @@ void controlReader::readData() {
 }
 
 
-bool controlReader::setADCCommands(uint8_t channel, String commands) {
+bool ControlReader::setADCCommands(uint8_t channel, String commands) {
     if ((channel > 7)) { return false; }
 
     commands = stripQuotes(commands);
@@ -286,7 +286,7 @@ bool controlReader::setADCCommands(uint8_t channel, String commands) {
     return true;
 }
 
-bool controlReader::setADCAveragerSettings(uint8_t t_channel, uint8_t t_averages, uint16_t t_interruptErrorThreshold, uint16_t t_continuousErrorThreshold, uint16_t t_continuousTimeout) {
+bool ControlReader::setADCAveragerSettings(uint8_t t_channel, uint8_t t_averages, uint16_t t_interruptErrorThreshold, uint16_t t_continuousErrorThreshold, uint16_t t_continuousTimeout) {
     if ((t_channel > 7)) {
         return false;
     }
@@ -298,13 +298,13 @@ bool controlReader::setADCAveragerSettings(uint8_t t_channel, uint8_t t_averages
     return true;
 }
 
-String controlReader::getADCAveragerSettings(uint8_t t_channel) {
+String ControlReader::getADCAveragerSettings(uint8_t t_channel) {
     if (t_channel > 7) { return ""; }
     return String(averages[t_channel].dataAverageLength) + ":" + String(averages[t_channel].interruptedErrorThreshold) + ":" + String(averages[t_channel].continuousErrorThreshold) + ":" +
         String(averages[t_channel].continuousTimeout);
 }
 
-void controlReader::addTestData(uint16_t value) {
+void ControlReader::addTestData(uint16_t value) {
     if (testBegin) {
         testMin = value;
         testMax = value;
@@ -315,12 +315,12 @@ void controlReader::addTestData(uint16_t value) {
     }
 }
 
-void controlReader::setADCMinMaxTestChannel(uint8_t t_channel) {
+void ControlReader::setADCMinMaxTestChannel(uint8_t t_channel) {
     testChannel = t_channel;
     testBegin = true;
 }
 
-void controlReader::setDefaults() {
+void ControlReader::setDefaults() {
     cvInputCommands.clear();
     cvInputCommands.push_back("bcha:value/1327.716667-20");
     cvInputCommands.push_back("bchs5:\"deadband(value-32236, 20)/2.425\"");
@@ -332,7 +332,7 @@ void controlReader::setDefaults() {
     cvInputCommands.push_back("msp:value");//    cvInputCommands.push_back("");
 }
 
-String controlReader::dumpData() {
+String ControlReader::dumpData() {
 //    if (!adsInit) { return ""; }
     String saveData = ""; // "epdbt:" + String(epDeadbandThreshold) + ",";
     for (uint8_t i = 0; i < 8; i++) {
@@ -342,7 +342,7 @@ String controlReader::dumpData() {
     return saveData;
 }
 
-int32_t controlReader::getData(int16_t channel) {
+int32_t ControlReader::getData(int16_t channel) {
     if ((channel < 0) || (channel > 7)) {
         return -1;
     } else {
@@ -366,6 +366,6 @@ long controlReader::findAndSetNull(uint16_t ch) {
     };
 }
 */
-controlReader::~controlReader()
+ControlReader::~ControlReader()
 {
 }

@@ -19,12 +19,6 @@
 #ifndef BOWCONTROL_C
 #define BOWCONTROL_C
 
-#include "elapsedMillis.h"
-
-#include <stdint.h>
-#include <sys/types.h>
-
-#include "calibrate.hpp"
 #include "bowcontrol.hpp"
 
 /**
@@ -49,484 +43,173 @@
  * \todo THIS NEEDS TO CHANGE, values should be updated internally but only outputted depending on manual / automatic control
  */
 
-/// Constructor
+/***** NEW CLASS *****/
 
-bowControl::bowControl(bowIO &inBowIO, CalibrationData &inCalibrationData) {
-    bowIOConnect = &inBowIO;
-    calibrationDataConnect = &inCalibrationData;
-    bowActuators = new BowActuators(&inCalibrationData);
-    pidController = new PIDController(*calibrationDataConnect, *bowIOConnect);
+BowControl::BowControl(char motorRevPin, char motorVoltagePin, char motorDCDCEnPin, char tachoPin, char currentSensePin, char motorFaultPin,
+                       char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin) {
+
+    dcMotorControl = new DCMotorControl(motorRevPin, motorVoltagePin, motorDCDCEnPin, tachoPin, currentSensePin, motorFaultPin);
+    pidController = new PIDController(*dcMotorControl);
+    bowPressure = new BowPressure(stepEnPin, stepDirPin, stepStepPin, stepSerialPort, stepHomeSensorPin);
+//    bowActuators = new BowActuators(bowPressure);
 }
 
-#define pidErrorThreshold 5     ///< Threshold that will trigger a bow instability event, given in Hertz
+eProcessResult BowControl::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
+                           commandList *delegatedCommands = nullptr) {
 
-void bowControl::setBowCurrentLimit(float inBowCurrentLimit) {
-    bowCurrentLimit = inBowCurrentLimit;
-}
+    eProcessResult processResult;
 
-float bowControl::getBowCurrentLimit() {
-    return bowCurrentLimit;
-}
-    /// Resets the PID integral
-void bowControl::pidReset() {
-//    integral = 0;
-    pidController->pidReset();
-}
+    processCommandItems(inCommandItem, serialCommandsBowControl, sizeof(serialCommandsBowControl)  / sizeof(serialCommandItem));
 
-/// Set PID target speed, check that it doesnt go above maxHz or below minHz
-bool bowControl::setPIDTarget(float _pidTargetSpeed) {
-/*    if (((_pidTargetSpeed > calibrationDataConnect->maxHz) || (_pidTargetSpeed < calibrationDataConnect->minHz)) && _pidTargetSpeed != 0) {
-        debugPrintln("PID Target out of range!", Hardware);
-        return false;
-    }
-    debugPrintln("Setting PID target to " + String(_pidTargetSpeed), Hardware);
-    setPIDTargetUnsafe(_pidTargetSpeed);
-    if (_pidTargetSpeed == 0) { pidReset(); }
-    return true;*/
-    return pidController->setPIDTarget(_pidTargetSpeed);
-}
-
-/// Set PID target speed without any safety checks, used by setPIDTarget
-void bowControl::setPIDTargetUnsafe(float _pidTargetSpeed) {
-/*    inRecovery = false;
-    inRelapse = false;
-    bowIOConnect->tiltAdjust = 0;
-    pidTargetSpeed = _pidTargetSpeed;
-//    elapsedSinceLastTarget = 0;*/
-    bowShutoffTimedout = false;
-    bowShutoffMotorDisabled = false;
-    pidController->setPIDTargetUnsafe(_pidTargetSpeed);
-}
-
-/// Returns the PID target speed
-float bowControl::getPIDTarget() {
-    //return pidTargetSpeed;
-    return pidController->getPIDTarget();
-}
-
-/// PID calculation function to be called at pidUpdateInterval, called by pidInterruptCaller
-/// \todo add Integral injection and other pre-loading parameters to help bow start and change
-/// \todo final check so PWM is never out of range min/max
-/// \todo startup injection of fundamental maybe?
-void bowControl::pidControl() {
-/*
-    // Calculate the error between the target speed and the current speed
-    float currentSpeed = bowIOConnect->getLastTachoFreq();
-    float error = pidTargetSpeed - currentSpeed;
-
-    if (abs(error) > pidPeakError) { pidPeakError = abs(error); }
-
-    if (error > pidMaxError) { error = pidMaxError; }
-    if (error < -pidMaxError) { error = -pidMaxError; }
-
-    // Update the integral term
-    if ((error >= integratorIgnoreBelow) || (error <= -integratorIgnoreBelow)) { integral += error; }
-
-    // Calculate the PID control output
-    KpTerm = Kp * error;
-    KiTerm = Ki * integral;
-    KdTerm = Kd * (error - previousError);
-
-    // At incorrect Ki values the integral starts building,this doesn't really matter since
-    // the type cast makes the output wrap but it might cause trouble in the future so added this
-    if (KiTerm > 65535) { integral -= 65535;}
-
-    float output = KpTerm + KiTerm + KdTerm;
-
-    if (output < 0) { output = 0; }
-    // If problem, check the following line - added 2023-10-22
-    if (output > 65535) { output = 65535; }
-
-    // Set the motor speed using PWM
-    bowIOConnect->setSpeedPWM(static_cast<uint16_t>(output));
-
-    // Store the current error for the next iteration
-    previousError = error;*/
-    pidController->pidControl();
-};
-
-/// This function is to be called every pidUpdateInterval
-void bowControl::pidInterruptCaller() {
-//    if (PIDon && (run == 1) && (pidTargetSpeed > 0)) {
-    if (PIDon && (run == 1) && (pidController->pidTargetSpeed > 0)) {
-    //    pidControl();
-        pidController->pidControl();
-    }
-}
-
-float bowControl::getPIDPeakError() {
-/*    float a = pidPeakError;
-    pidPeakError = 0;
-    return a;*/
-    return pidController->getPIDPeakError();
-}
-
-/// To be called when a motor FAULT interrupt occurs, adds one occurance to motorFault
-void bowControl::motorFaultDetected() {
-    motorFault++;
-}
-
-/// Returns the number of motor faults that has happend since the last check and zeroes motorFault
-int bowControl::checkMotorFault() {
-    int a = motorFault;
-    motorFault = 0;
-    return a;
-}
-
-void bowControl::setBowPressureSafe(uint16_t tilt) {
-    if (tilt > calibrationDataConnect->stallPressure) { tilt = calibrationDataConnect->stallPressure; }
-
-//    if ((tiltMode == Engage) && (bowIOConnect->stepServoStepper->reachedTarget))  {
-    if ((tiltMode == Engage) && (bowIOConnect->tmc2209ServoStepper->stepServoStepper->reachedTarget))  {
-        reachedEngage = true;
-        if (outputDebugData) { debugPrintln("Reached engage", debugPrintType::Debug); }
+    if (inCommandItem->command == "help") {
+        addCommandHelp(serialCommandsBowControl, sizeof(serialCommandsBowControl) / sizeof(serialCommandItem), commandResponses,"");
     }
 
-    if ((tiltMode == Engage) && (reachedEngage)) {
-//        bowIOConnect->stepServoStepper->setSpeed(bowSpeedWhileEngaged);
-        bowIOConnect->tmc2209ServoStepper->stepServoStepper->setSpeed(bowSpeedWhileEngaged);
-        if (outputDebugData) { debugPrintln("Setting pressure speed to slow", debugPrintType::Debug); }
-    } else {
-//        bowIOConnect->stepServoStepper->setSpeed(bowSpeedToEngage);
-        bowIOConnect->tmc2209ServoStepper->stepServoStepper->setSpeed(bowSpeedToEngage);
-        if (outputDebugData) { debugPrintln("Setting pressure speed to high", debugPrintType::Debug); }
-    }
-
-    bowIOConnect->setTiltPWM(tilt);
-    return;
-}
-
-/// Calculate the tilt PWM value using baselineTiltPWM and modfierTiltPWM and send it to BowIO
-bool bowControl::calculateBaselineModifierPressure() {
-    unsigned int tiltPWM = calibrationDataConnect->firstTouchPressure +
-        ((double)(calibrationDataConnect->stallPressure - calibrationDataConnect->firstTouchPressure)
-        / 65535 * ((double)(baselineTiltPWM + modifierTiltPWM)));
-
-    setBowPressureSafe(tiltPWM);
-    return true;
-}
-
-/*
-    void writeToSlave(String command) {
-        if (slaveSerialOut != nullptr) {
-            slaveSerialOut->println(command.c_str());
+    if (inCommandItem->command == "bowmotorrun") {
+        if (request) {
+            commandResponses->push_back({ "bmr:" + String(run), InfoRequest });
         } else {
-            debugPrintln("Slave serial device is NULL", Error);
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            if (inCommandItem->argument[0].toInt() > 0) {
+                run = 1;
+                dcMotorControl->enableMotorPower();
+            } else {
+                run = 0;
+                dcMotorControl->disableMotorPower();
+            }
+            commandResponses->push_back({"bmr:" + String(run), InfoRequest});
         }
-    }
-*/
-void bowControl::setPressureBaseline(uint16_t baseline) {
-    baselineTiltPWM = baseline;
-#if EFARMASTER
-//    writeToSlave("spb:" + String(baseline));
-#elif EFARSLAVE
-    calculateBaselineModifierPressure();
-#endif
-}
-
-uint16_t bowControl::getPressureBaseline() {
-    return baselineTiltPWM;
-}
-
-void bowControl::setPressureModifier(uint16_t modifier) {
-    modifierTiltPWM = modifier;
-    if (tiltMode == Engage) {
-        calculateBaselineModifierPressure();
-    }
-}
-
-uint16_t bowControl::getPressureModifier() {
-    return modifierTiltPWM;
-}
-
-void bowControl::setBowPower(uint16_t power) {
-    manualSpeedPWM = power;
-}
-
-uint16_t bowControl::getBowPower() {
-    return manualSpeedPWM;
-}
-
-// set the manual tilt value and send it to BowIO
-bool bowControl::setManualTilt(uint16_t tilt) {
-    manualTiltPWM = tilt;
-    setBowPressureSafe(tilt);
-    if (outputDebugData) { debugPrintln("setManualTilt", Debug); }
-    return true;
-}
-
-bool bowControl::bowRest(int enact) {
-    if (enact == 0) { return false; }
-    tiltMode = Rest;
-    if (_hold) { return true; }
-
-    reachedEngage = false;
-
-    bowShutoffTimer = 0;
-    bowShutoffTimedout = false;         // added 2024-06-27
-    bowShutoffMotorDisabled = false;    // added 2024-06-27
-
-    setBowPressureSafe(calibrationDataConnect->restPosition);
-    return true;
-}
-
-bool bowControl::setHold(bool hold) {
-    _hold = !hold;
-    if (outputDebugData) { debugPrintln("Hold " + String(hold), Debug); }
-    if ((_hold == false) && (tiltMode == Rest)) { bowRest(1); }
-    return true;
-}
-
-bool bowControl::bowEngage(int enact) {
-    if (enact == 0) { return false; }
-    reachedEngage = false;
-    // UGLY 2024-03-10
-//    bowIOConnect->stepServoStepper->reachedTarget = false;
-    bowIOConnect->tmc2209ServoStepper->stepServoStepper->reachedTarget = false;
-    tiltMode = Engage;
-    return calculateBaselineModifierPressure();
-}
-/*
-/// Mute string by turning off the bowing wheel and forcing it into the string by means of setting the Tilt PWM
-bool bowControl::bowMute(int enact) {
-    if (enact == 0) { return false; }
-    pidTargetSpeed = 0;
-    bowIOConnect->setSpeedPWM(0);
-    setBowPressureSafe(calibrationDataConnect->firstTouchPressure + muteForce);
-    if (outputDebugData) { debugPrintln("bowMute", Debug); }
-    tiltMode = Mute;
-    elapsedSinceMute = 0;
-    return true;
-}
-*/
-/// Calculate the final frequency using currentHarmonicFreq and currentHarmonicShiftFreq
-bool bowControl::calculateHarmonicShift() {
-    int octave = currentHarmonicSeriesData.ratio.size();
-
- //   float freq = currentHarmonicFreq * pow(2, ((float) (((float) harmonicShiftRange) / 12) * harmonicShift / 32768 ));
- //   float freq5 = freq * pow(2, ((float) (((float) 60) / 12) * harmonicShift5 / 32768 ));
-    float freq = currentHarmonicFreq * pow(2, ((float) (((float) harmonicShiftRange) / octave) * harmonicShift / 32768 ));
-    float freq5 = freq * pow(2, ((float) (((float) (5 * octave)) / octave) * harmonicShift5 / 32768 ));
-    if (outputDebugData) { debugPrintln("Current freq " + String(currentHarmonicFreq) + " shifted freq " + String(freq) + " shifted freq 5 octaves " + String(freq5), Debug); }
-    currentHarmonicShiftFreq = clamp(freq5, calibrationDataConnect->minHz, calibrationDataConnect->maxHz);
-    if (currentHarmonicShiftFreq != freq5) { return false; }
-    return true;
-}
-
-bool bowControl::setHarmonicShift(int inHarmonicShift) {
-    harmonicShift = inHarmonicShift;
-    if (!calculateHarmonicShift()) { return false; }
-    if (!setPIDTarget(currentHarmonicShiftFreq)) { return false; };
-    if (outputDebugData) { debugPrintln("New shifted frequency is " + String (currentHarmonicShiftFreq), Debug); }
-    return true;
-}
-
-bool bowControl::setHarmonicShift5(int inHarmonicShift5) {
-    harmonicShift5 = inHarmonicShift5;
-    if (!calculateHarmonicShift()) { return false; }
-    if (!setPIDTarget(currentHarmonicShiftFreq)) { return false; };
-    if (outputDebugData) { debugPrintln("New shifted frequency is " + String (currentHarmonicShiftFreq), Debug); }
-    return true;
-}
-
-int bowControl::getHarmonicShift() {
-    return harmonicShift;
-}
-
-int bowControl::getHarmonicShift5() {
-    return harmonicShift5;
-}
-
-bool bowControl::setHarmonicShiftRange(int inHarmonicShiftRange) {
-    harmonicShiftRange = inHarmonicShiftRange;
-    return true;
-}
-
-int bowControl::getHarmonicShiftRange() {
-    return harmonicShiftRange;
-}
-
-bool bowControl::setHarmonic(int _harmonic) {
-    int __harmonic = clamp(_harmonic, calibrationDataConnect->lowerHarmonic, calibrationDataConnect->upperHarmonic);
-    if (__harmonic != _harmonic) { return false; }
-    harmonic = __harmonic;
-/*
-    int targetHarmonic = harmonic + harmonicAdd;
-
-    int harmonicCount = harmonicSeriesList.series[currentHarmonicSeries].frequency.size();
-    // Calculate where in the series the current harmonic resides (0-11)
-    int series = targetHarmonic % harmonicCount;
-    if (series < 0) { series = harmonicCount + series; }
-    // If harmonic is below 0 we need to reduce for the truncation to work properly
-    if (targetHarmonic < 0) { targetHarmonic -= (harmonicCount - 1); }
-    int octave = trunc(targetHarmonic / harmonicCount);
-
-    float freq = calibrationDataConnect->fundamentalFrequency * pow(2, octave) * harmonicSeriesList.series[currentHarmonicSeries].frequency[series]; // - 0.4;
-
-    if (outputDebugData) { debugPrintln("Setting harmonic to " + String(series) + " @ frequency " + String(freq), Debug); }
-
-    currentHarmonicFreq = freq;
-    calculateHarmonicShift();
-    if (!setPIDTarget(currentHarmonicShiftFreq)) { return false; };
-
-    return true;
-    */
-    return updateHarmonicData();
-}
-
-int bowControl::getHarmonic() {
-    return harmonic;
-}
-
-bool bowControl::setHarmonicAdd(int _harmonic) {
-    harmonicAdd = _harmonic;
-    return updateHarmonicData();
-}
-
-int bowControl::getHarmonicAdd() {
-    return harmonicAdd;
-}
-
-bool bowControl::updateHarmonicData() {
-    int targetHarmonic = harmonic + harmonicAdd;
-
-//    int harmonicCount = harmonicSeriesList.series[currentHarmonicSeries].ratio.size();
-    int harmonicCount = currentHarmonicSeriesData.ratio.size();
-    if (harmonicCount == 0) {
-        debugPrintln("Harmonic list empty!", debugPrintType::Error);
-        return false;
-    }
-    // Calculate where in the series the current harmonic resides (0-11)
-    int series = targetHarmonic % harmonicCount;
-    if (series < 0) { series = harmonicCount + series; }
-    // If harmonic is below 0 we need to reduce for the truncation to work properly
-    if (targetHarmonic < 0) { targetHarmonic -= (harmonicCount - 1); }
-    int octave = trunc(targetHarmonic / harmonicCount);
-
-    //float freq = calibrationDataConnect->fundamentalFrequency * pow(2, octave) * harmonicSeriesList.series[currentHarmonicSeries].ratio[series]; // - 0.4;
-    float freq = calibrationDataConnect->fundamentalFrequency * pow(2, octave) * currentHarmonicSeriesData.ratio[series]; // - 0.4;
-
-    if (outputDebugData) { debugPrintln("Setting harmonic data to " + String(series) + " @ frequency " + String(freq), Debug); }
-
-    currentHarmonicFreq = freq;
-    calculateHarmonicShift();
-
-    return setPIDTarget(currentHarmonicShiftFreq);
-}
-
-bool bowControl::setBaseNote(int inBaseNote) {
-    if ((inBaseNote < 0) || (inBaseNote > 127)) { return false; }
-    baseNote = uint8_t (inBaseNote);
-    return true;
-}
-
-void bowControl::measureTimeToTarget(float _pidTargetSpeed) {
-    elapsedMillis timeToTarget;
-    elapsedMicros overshootTime;
-    float startSpeed = getPIDTarget();
-
-    timeToTarget = 0;
-    float overshoot = 0;
-    float undershoot = -1;
-    float freq;
-    int iterations = 0;
-
-    setPIDTarget(_pidTargetSpeed);
-    while(iterations < 10) {
-        if (round(bowIOConnect->averageFreq()) == round(_pidTargetSpeed)) { iterations++; }
-
-        overshootTime = 0;
-        while (overshootTime < 10) {
-            freq = bowIOConnect->getLastTachoFreq();
-            if (freq > overshoot) { overshoot = freq; }
-            if ((freq < undershoot) || (undershoot = -1 )) { undershoot = freq; }
+    } else
+    if (inCommandItem->command == "bowpid") {
+        if (request) {
+            commandResponses->push_back({ "bpid:" + String(PIDon), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            if (inCommandItem->argument[0].toInt() > 0) { PIDon = true; } else { PIDon = false;}
+            commandResponses->push_back({"bpid:" + String(PIDon), InfoRequest});
         }
-        if (timeToTarget > 1000) {
-            debugPrintln("Couldn't get to target speed in time (reached " + String(bowIOConnect->averageFreq()) + " Hertz)", Error);
-            return;
+    } else
+    if (inCommandItem->command == "bowcontrolspeedmode") {
+        if (request) {
+            commandResponses->push_back({"bcsm:" + String(int(speedMode)), InfoRequest});
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            if (!validateNumber(inCommandItem->argument[0].toInt(), 0, 1)) { return eProcessResult::WrongArgumentValue; }
+            speedMode = (eSpeedMode) (inCommandItem->argument[0].toInt());
+            commandResponses->push_back({"bcsm:" + String(int(speedMode)), InfoRequest});
         }
+    } else
+    if (inCommandItem->command == "bowmotordirectpwm") {
+        if (request) {
+            commandResponses->push_back({ "bmdp:" + String(manualMotorPWM), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            manualMotorPWM = inCommandItem->argument[0].toInt();
+            commandResponses->push_back({"bmdp:" + String(manualMotorPWM), InfoRequest});
+        }
+        processResult = eProcessResult::Ok;
+    } else
+    if (inCommandItem->command == "bowmotortimeout") {
+        if (request) {
+            commandResponses->push_back({ "bmt:" + String(bowShutoffTimeout), InfoRequest });
+        } else {
+            bowShutoffTimeout = inCommandItem->argument[0].toInt();
+            commandResponses->push_back({"bmt:" + String(bowShutoffTimeout), InfoRequest});
+        }
+    } else {
+        processResult = bowPressure->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
+        if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
+
+        processResult = dcMotorControl->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
+        if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
+
+        processResult = pidController->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
     }
 
-    debugPrint("Going from " + String(startSpeed) + " -> " + String(_pidTargetSpeed) + " in " + String(timeToTarget) + "ms", InfoRequest);
-    if (_pidTargetSpeed > startSpeed) { debugPrintln(", overshoot " + String(overshoot), InfoRequest); }
-    if (_pidTargetSpeed < startSpeed) { debugPrintln(", undershoot " + String(undershoot), InfoRequest); }
-    //, max freq " + String(overshoot) + " Hz, min freq " + String(undershoot) + "Hz", InfoRequest);
+    return processResult;
 }
 
-String bowControl::dumpData() {
+eProcessResult BowControl::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
+                                commandList *delegatedCommands = nullptr) {
+
+    return eProcessResult::NotFound;
+}
+
+void BowControl::setBowSpeedPWM(uint16_t speed) {
+    pidController->setPIDTarget(speed);
+}
+
+String BowControl::dumpData() {
     String dump = "";
-/*    dump += "bpki:" + String(Ki) + ",";
-    dump += "bpkp:" + String(Kp) + ",";
-    dump += "bpkd:" + String(Kd) + ",";
-    dump += "bpie:" + String(integratorIgnoreBelow) + ",";*/
-    dump = pidController->dumpData();
-    dump += "bchbn:" + String(baseNote) + ",";
-    dump += "bchsr:" + String(harmonicShiftRange) + ",";
-    dump += "bpes:" + String(bowSpeedToEngage) + ",";
-    dump += "bpms:" + String(bowSpeedWhileEngaged) + ",";
     dump += "bmt:" + String(bowShutoffTimeout) + ",";
-    dump += "bhs:" + String(currentHarmonicSeries) + ",";
+    dump += dcMotorControl->dumpData() + ",";
+    dump += bowPressure->dumpData() + ",";
+    dump += pidController->dumpData() + ",";
     return dump;
 }
 
-/// Handles Tilt PWM updates, zero-speed bow state and motor faults / oscillations
-void bowControl::updateString() {
-    unsigned long currentTime = micros();
-
-//    bowIOConnect->updateBow();
-
-    // Process only if at the pidUpdateInterval
-    if (currentTime - previousTime >= pidUpdateInterval) {
-        previousTime = currentTime;
-
-        if ((speedMode == Automatic) &&  (_hold == false) && (bowShutoffTimer >= bowShutoffTimeout) ) {
-            if ((tiltMode == Rest) && (bowShutoffTimedout == false)) {
-                run = 0;
-                bowShutoffTimedout = true;
-                if (outputDebugData) { debugPrintln("Auto shutdown of motor", Debug); }
-            } else
-            if ((bowShutoffTimedout == true) && (bowShutoffMotorDisabled == false) && (bowIOConnect->averageFreq() == 0)) {
-                bowIOConnect->disableBowPower();
-                bowShutoffMotorDisabled = true;
-                if (outputDebugData) { debugPrintln("Auto shutdown of motor dc/dc converter", Debug); }
-            }
+void BowControl::updateMotorAutoShutdown() {
+    if ((speedMode == eSpeedMode::Automatic) && (bowPressure->getHold() == false)  && (bowShutoffTimer >= bowShutoffTimeout)) {
+        if ((bowPressure->getPressureMode() == ePressureMode::Rest) && (bowShutoffTimedout == false)) {
+            run = false;
+            bowShutoffTimedout = true;
+            debugPrintln("Auto shutdown of motor", debugPrintType::Debug);
+        } else
+        if ((bowShutoffTimedout == true) && (bowShutoffMotorDisabled == false) && (dcMotorControl->getAverageTachometerFreq() == 0)) {
+            dcMotorControl->disableMotorPower();
+            bowShutoffMotorDisabled = true;
+            debugPrintln("Auto shutdown of motor dc/dc converter", debugPrintType::Debug);
         }
+    }
+}
 
-        if (run) {
-            if (PIDon) {
-//                if (pidTargetSpeed == 0) {
-                if (pidController->pidTargetSpeed == 0) {
-                    bowIOConnect->setSpeedPWM(0);
-                }
-            } else {
-//                pidReset();
-                pidController->pidReset();
-                bowIOConnect->setSpeedPWM(manualSpeedPWM);
-            }
-        }  else {
-        // If the string module is not running, turn off the bowing wheel
-            //pidReset();
+void BowControl::updateRun_PID() {
+    if (run) {
+        if (PIDon) {
+            if (pidController->getPIDTarget() == 0) { dcMotorControl->setSpeedPWM(0); }
+        } else {
             pidController->pidReset();
-            bowIOConnect->setSpeedPWM(0);
+            dcMotorControl->setSpeedPWM(manualMotorPWM);
         }
+    }  else {
+        pidController->pidReset();
+        dcMotorControl->setSpeedPWM(0);
+    }
+}
 
+void BowControl::updateMotorStatus() {
+    if (dcMotorControl->getSpeedPWM() != 0) {
+        if (dcMotorControl->isOverPower() || dcMotorControl->isOverCurrent()) {
+            debugPrintln("Bow over power!", debugPrintType::Error);
+            commands->addCommands(commandsOverPowerCurrent);
+        }
+        if (dcMotorControl->getMotorFault()) {
+            debugPrintln("Bow motor fault!", debugPrintType::Error);
+            commands->addCommands(commandsMotorFault);
+        }
+    }
+}
+
+void BowControl::update() {
+    uint32_t currentTime = micros();
+
+    if (currentTime - lastUpdate >= pidUpdateInterval) {
+        lastUpdate = currentTime;
+
+        updateMotorAutoShutdown();
+        updateRun_PID();
+        updateMotorStatus();
         // Check if the bowing wheel speed is zero
-        bowIOConnect->checkTimeout();
-/*
-        // Check if bow has been put into mute and been at the mute position for long enough
-        if (((tiltMode == Mute) && (mutePeriod > 0)) && (elapsedSinceMute >= mutePeriod)) {
-            bowRest(1);
-        }*/
+        dcMotorControl->checkTachometerTimeout();
     }
-};
 
-bool bowControl::loadHarmonicSeries(int i) {
-    if ((i > (harmonicSeriesList.series.size() - 1)) || (i < 0)) {
-        return false;
+    bowPressure->update();
+}
+
+void BowControl::updatePID() {
+    if (PIDon && (run == 1) && (pidController->getPIDTarget() > 0)) {
+        pidController->pidControl();
     }
-    currentHarmonicSeries = i;
-    currentHarmonicSeriesData = harmonicSeriesList.series[i];
-    return true;
-};
+}
 
 #endif

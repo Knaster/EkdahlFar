@@ -22,38 +22,38 @@
 #include "tmc2209_servostepper.cpp"
 #include "mute.hpp"
 
-mute::mute(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin) {
+Mute::Mute(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin) {
     tmc2209ServoStepper = new Tmc2209ServoStepper(stepDirPin, stepStepPin, stepSerialPort, stepHomeSensorPin); }
 
-bool mute::setupTMC2209() { return tmc2209ServoStepper->setupTMC2209(); }
+bool Mute::setupTMC2209() { return tmc2209ServoStepper->setupTMC2209(); }
 
-void mute::getTMC2209Info() { return tmc2209ServoStepper->getTMC2209Info(); }
+void Mute::getTMC2209Info() { return tmc2209ServoStepper->getTMC2209Info(); }
 
-bool mute::homeMute(bool invert) { return tmc2209ServoStepper->home(invert); }
+bool Mute::homeMute(bool invert) { return tmc2209ServoStepper->home(invert); }
 
-bool mute::setTilt(uint16_t tilt) {
-    uint32_t a = restPosition + ((double)(fullMutePosition - restPosition) / 65535 * ((double)tilt));
+bool Mute::setPosition(uint16_t position) {
+    uint32_t a = restPosition + ((double)(fullMutePosition - restPosition) / 65535 * ((double)position));
 
     if (a < 0) { a = 0; }
     if (a > 65535) { a = 65535; }
     if (a > fullMutePosition) { a = fullMutePosition; }
     debugPrintln("Setting mute tilt to " + String(a) + ", full mute position " + String(fullMutePosition), debugPrintType::Hardware);
 
-    lastTilt = a;
+    lastPosition = a;
     mutePosition = emutePosition::mpUndefined;
     hwMutePos = a;
     return true;
 }
 
-uint16_t mute::getTilt() { return lastTilt; }
+uint16_t Mute::getPosition() { return lastPosition; }
 
-bool mute::rest() {
+bool Mute::rest() {
     hwMutePos = restPosition;
     mutePosition = mpRest;
     return true;
 }
 
-bool mute::fullMute() {
+bool Mute::fullMute() {
     mutePosition = mpFull;
     if (sustain) { return true; }
     hwMutePos = fullMutePosition;
@@ -61,43 +61,48 @@ bool mute::fullMute() {
     return true;
 }
 
-bool mute::halfMute() {
+bool Mute::halfMute() {
     hwMutePos = halfMutePosition;
     mutePosition = mpHalf;
     return true;
 }
 
-bool mute::setRestPosition(uint16_t inRestPosition) { restPosition = inRestPosition; return true; }
+bool Mute::setRestPosition(uint16_t inRestPosition) { restPosition = inRestPosition; return true; }
 
-uint16_t mute::getRestPosition() { return restPosition; }
+uint16_t Mute::getRestPosition() { return restPosition; }
 
-bool mute::setFullMutePosition(uint16_t inFullMutePosition) { fullMutePosition = inFullMutePosition; return true; }
+bool Mute::setFullMutePosition(uint16_t inFullMutePosition) { fullMutePosition = inFullMutePosition; return true; }
 
-uint16_t mute::getFullMutePosition() { return fullMutePosition; }
+uint16_t Mute::getFullMutePosition() { return fullMutePosition; }
 
-bool mute::setHalfMutePosition(uint16_t inHalfMutePosition) { halfMutePosition = inHalfMutePosition; return true; }
+bool Mute::setHalfMutePosition(uint16_t inHalfMutePosition) { halfMutePosition = inHalfMutePosition; return true; }
 
-uint16_t mute::getHalfMutePosition() { return halfMutePosition; }
+uint16_t Mute::getHalfMutePosition() { return halfMutePosition; }
 
-bool mute::saveRest() {
-    restPosition = lastTilt;
+bool Mute::setBackOffTime(uint16_t inBackOffTime) { backOffTime = inBackOffTime; return true; };
+
+uint16_t Mute::getBackOffTime() { return backOffTime; };
+
+
+bool Mute::saveRest() {
+    restPosition = lastPosition;
     debugPrintln("Saving mute rest as " + String(restPosition), Debug);
     return true;
 }
 
-bool mute::saveFullMute() {
-    fullMutePosition = lastTilt;
+bool Mute::saveFullMute() {
+    fullMutePosition = lastPosition;
     debugPrintln("Saving mute full as " + String(fullMutePosition), Debug);
     return true;
 }
 
-bool mute::saveHalfMute() {
-    halfMutePosition = lastTilt;
+bool Mute::saveHalfMute() {
+    halfMutePosition = lastPosition;
     debugPrintln("Saving mute half as " + String(halfMutePosition), Debug);
     return true;
 }
 
-bool mute::setSustain(bool inSustain) {
+bool Mute::setSustain(bool inSustain) {
     // If sustain is changed after keys are released, update mute position
     if ((inSustain == false) && (sustain == true)) {
         if (mutePosition == emutePosition::mpFull) {
@@ -113,20 +118,11 @@ bool mute::setSustain(bool inSustain) {
     return true;
 }
 
-bool mute::getSustain() {
+bool Mute::getSustain() {
     return sustain;
 }
 
-String mute::dumpData() {
-    String dump = "";
-    dump += "mfmp:" + String(fullMutePosition) + ",";
-    dump += "mhmp:" + String(halfMutePosition) + ",";
-    dump += "mrp:" + String(restPosition) + ",";
-    dump += "mbo:" + String(backOffTime) + ",";
-    return dump;
-}
-
-void mute::updateMute() {
+void Mute::updateMute() {
     if (hwMutePos != hwLastMutePos) {
         tmc2209ServoStepper->stepServoStepper->setPosition(hwMutePos);
         hwLastMutePos = hwMutePos;

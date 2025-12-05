@@ -1,6 +1,9 @@
 #ifndef TMC2209_SERVOSTEPPER_H
 #define TMC2209_SERVOSTEPPER_H
 
+#include "TMC2209.cpp"
+#include "servostepper.hpp"
+
 class Tmc2209ServoStepper {
 
 private:

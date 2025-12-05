@@ -329,10 +329,13 @@ bool skipToCommand(commandList *commands, uint16_t *index, String command) {
   return false;
 }
 */
+
+enum eProcessResult { NotFound =  0, Ok = 1, CommandFailed = 2, WrongArgumentCount = 3, WrongArgumentMinimum = 4, WrongArgumentValue = 5, PassThrough = 6 };
+
 bool checkArguments(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, uint8_t arguments, bool t_supressError = false) {
     if (_commandItem->argument.size() != arguments) {
         if (!t_supressError) {
-            commandResponses->push_back({"Wrong number of arguments " + String(_commandItem->argument.size()), Error});
+            commandResponses->push_back({"Wrong number of arguments, got " + String(_commandItem->argument.size()) + " expected " + String(arguments), Error});
         }
         return false;
     }

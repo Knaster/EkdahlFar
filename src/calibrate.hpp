@@ -54,8 +54,9 @@ struct CalibrationData {
 class calibrate {
 public:
 
-    bowIO *bowIOConnect;  ///< bowIO class associated with this calibration class
-    bowControl *bowControlConnect;
+//    bowIO *bowIOConnect;  ///< bowIO class associated with this calibration class
+//    bowControl *bowControlConnect;
+    BowControl *bowControlConnect;
 
     #define testDelay 1 ///< Delay used in conjunction with setTiltPWM for various tests
     #define deviation 2 ///< Acceptable bow speed deviation in Hertz for various tests
@@ -68,9 +69,11 @@ public:
 
 //    int EEPROM_offset = 0;
 
-    CalibrationData *calibrationData;
+//    CalibrationData *calibrationData;
 
-    calibrate(bowIO &_bowIO, CalibrationData &__calibrationData, bowControl &_bowControl);
+//    calibrate(bowIO &_bowIO, CalibrationData &__calibrationData, bowControl &_bowControl);
+
+    calibrate(BowControl &inBowControlConnect);
 
     void startAudioAnalyzing();
     void stopAudioAnalyzing();

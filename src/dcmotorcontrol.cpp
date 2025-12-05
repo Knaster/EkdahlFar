@@ -28,6 +28,101 @@ DCMotorControl::DCMotorControl(char inMotorRevPin, char inMotorVoltagePin, char 
 
     analogWrite(motorRevPin, 1);
     setSpeedPWM(0);
+
+    //attachInterrupt(digitalPinToInterrupt(inTachoPin), ((void*) (&(this->tachometerISRHandler))), CHANGE);
+}
+
+eProcessResult DCMotorControl::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
+                           commandList *delegatedCommands = nullptr) {
+
+    processCommandItems(inCommandItem, serialCommandsDCMotor, sizeof(serialCommandsDCMotor) / sizeof(serialCommandItem));
+
+    if (inCommandItem->command == "help") {
+        addCommandHelp(serialCommandsDCMotor, sizeof(serialCommandsDCMotor) / sizeof(serialCommandItem), commandResponses,"");
+        return eProcessResult::PassThrough;
+    } else
+    if (inCommandItem->command == "bowmotorvoltage") {
+        if (request) {
+            commandResponses->push_back({ "bmv:" + String(motorVoltage), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            setMotorVoltage(inCommandItem->argument[0].toFloat());
+            commandResponses->push_back({"bmv:" + String(motorVoltage), InfoRequest});
+        }
+    } else
+    if (inCommandItem->command == "bowmotorcurrent") {
+        if (request) {
+            commandResponses->push_back({ "bmc:" + String(getMotorCurrent()), InfoRequest });
+        }
+    } else
+    if (inCommandItem->command == "bowmotorcurrentlimit") {
+        if (request) {
+            commandResponses->push_back({ "bmcl:" + String(motorCurrentLimit), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            setMotorMaxCurrent(inCommandItem->argument[0].toFloat());
+            commandResponses->push_back({"bmcl" + String(motorCurrentLimit), InfoRequest});
+        }
+    } else
+    if (inCommandItem->command == "bowmotorpowerlimit") {
+        if (request) {
+            commandResponses->push_back({ "bmpl:" + String(motorPowerLimit), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            setMotorMaxPower(inCommandItem->argument[0].toFloat());
+            commandResponses->push_back({"bmpl:" + String(motorPowerLimit), InfoRequest});
+        }
+    } else
+    if (inCommandItem->command == "bowmotorspeedmax") {
+        if (request) {
+            commandResponses->push_back({ "bmsx:" + String(maxSpeedHz), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            setMaxSpeedHz(inCommandItem->argument[0].toFloat()); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
+            commandResponses->push_back({"bmsx:" + String(maxSpeedHz), InfoRequest});
+        }
+    } else
+    if (inCommandItem->command == "bowmotorspeedmin") {
+        if (request) {
+            commandResponses->push_back({ "bmsi:" + String(minSpeedHz), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            setMinSpeedHz(inCommandItem->argument[0].toFloat());
+            commandResponses->push_back({"bmsi:" + String(minSpeedHz), InfoRequest});
+        }
+    } else
+    if (inCommandItem->command == "bowmotorfrequency") {
+        if (request) {
+            commandResponses->push_back({ "bmf:" + String(getAverageTachometerFreq()), InfoRequest });
+        }
+    } else
+    if (inCommandItem->command == "bowmotoremergencystop") {
+        if (request) {
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            emergencyDisable(inCommandItem->argument[0].toInt());
+            commandResponses->push_back({"bmes:" + inCommandItem->argument[0], InfoRequest});
+            commandResponses->push_back({"EMERGENCY STOP! Cooling down for " + inCommandItem->argument[0] + " ms", Command});
+        }
+    } else {
+        return eProcessResult::NotFound;
+    }
+    return eProcessResult::Ok;
+}
+
+eProcessResult DCMotorControl::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
+                                commandList *delegatedCommands = nullptr) {
+    return eProcessResult::NotFound;
+}
+
+String DCMotorControl::dumpData() {
+    String dump = "";
+    dump += "bmv:" + String(motorVoltage) + ",";
+    dump += "bmcl:" + String(motorCurrentLimit) + ",";
+    dump += "bmpl:" + String(motorPowerLimit) + ",";
+    dump += "bmsx:" + String(maxSpeedHz) + ",";
+    dump += "bmsi:" + String(minSpeedHz);
+    return dump;
 }
 
 // *** POWER SUPPLY FUNCTIONS
@@ -83,7 +178,7 @@ void DCMotorControl::addTachoFreq(float freq) {
 }
 
 /// Returns the last added tachometer value
-float DCMotorControl::getLastTachoFreq() {
+float DCMotorControl::getLastTachometerFreq() {
     if (tachoFreqIndex < 1) {
         return tachoFreq[tachoFreqLength - 1];
     } else {
@@ -91,18 +186,20 @@ float DCMotorControl::getLastTachoFreq() {
     }
 }
 
-void DCMotorControl::clearTachoData() {
+void DCMotorControl::clearTachometerData() {
     tachoFreqCount = 0;
     tachoFreqIndex = 0;
 }
 
-/*
+/** \brief Returns the average bow speed frequency
+ *
  *  - Calculates the average bow speed frequency using the values stored in the tachometer buffer by
  *    -# finding the median of the buffer
  *    -# recalculating the average skipping values straying from the median by a frequency given by permissibleFreqDeviation
  *
  */
-float DCMotorControl::averageFreq() {
+
+float DCMotorControl::getAverageTachometerFreq() {
 
     if (tachoFreqCount < tachoFreqLength) {
         if (tachoFreq[tachoFreqIndex] == 0) {
@@ -149,7 +246,7 @@ float DCMotorControl::averageFreq() {
 }
 
 /// Secondary callback handler for tachometer events
-void DCMotorControl::tachoISRHandler() {
+void DCMotorControl::tachometerISRHandler() {
     asm("nop");
     uint8_t state = digitalRead(reflectorInterruptPin);
     if (state == lastReflectorISRState) { return; }
@@ -194,7 +291,7 @@ uint16_t DCMotorControl::getSpeedPWM() {
 }
 
 /// Check whether bow has timed out and add a value of 0 Hertz if so
-bool DCMotorControl::checkTimeout() {
+bool DCMotorControl::checkTachometerTimeout() {
     if (reflectorCounter > reflectorZeroTimeoutValue) {
         addTachoFreq(0);
         return true;
@@ -203,29 +300,35 @@ bool DCMotorControl::checkTimeout() {
     }
 }
 
-//void DCMotorControl::updateBow() {
-/*    if (overPower()) {
+void DCMotorControl::setMinSpeedHz(float inSpeed) { minSpeedHz = inSpeed; }
+float DCMotorControl::getMinSpeedHz() { return minSpeedHz; };
+void DCMotorControl::setMaxSpeedHz(float inSpeed) { maxSpeedHz = inSpeed; }
+float DCMotorControl::getMaxSpeedHz() { return maxSpeedHz; }
 
-    }*/
-//    return;
-//}
+void DCMotorControl::setMinSpeedPWM(uint16_t inSpeed) { minSpeedPWM = inSpeed; }
+uint16_t DCMotorControl::getMinSpeedPWM() { return minSpeedPWM; };
+void DCMotorControl::setMaxSpeedPWM(uint16_t inSpeed) { maxSpeedPWM = inSpeed; }
+uint16_t DCMotorControl::getMaxSpeedPWM() { return maxSpeedPWM; }
+
+void DCMotorControl::setMotorMaxPower(float watts) { motorPowerLimit = watts; }
+float DCMotorControl::getMotorMaxPower() { return motorPowerLimit; }
 
 //**** STATISTICS AND FAULT HANDLING
 
-float DCMotorControl::getCurrent() {
+float DCMotorControl::getMotorCurrent() {
       return analogRead(currentSensePin) * 3.3 / 4096;
 }
 
-bool DCMotorControl::overCurrent() {
-    if (getCurrent() >= motorCurrentLimit) {
+bool DCMotorControl::isOverCurrent() {
+    if (getMotorCurrent() >= motorCurrentLimit) {
         return true;
     } else {
         return false;
     }
 }
 
-bool DCMotorControl::overPower() {
-    if (getCurrent() >= (motorWattage / motorVoltage)) {
+bool DCMotorControl::isOverPower() {
+    if (getMotorCurrent() >= (motorPowerLimit / motorVoltage)) {
         // If we have already set the internal over-power flag
         if (transientOverPower) {
             // And that was set more than the allowed time-span ago, aka the over-power event has been going on for X ms
@@ -264,6 +367,12 @@ bool DCMotorControl::getMotorFault() {
         return false;
     }
 }
+
+void DCMotorControl::setMotorMaxCurrent(float amps) {
+    motorCurrentLimit = amps;
+}
+
+float DCMotorControl::getMotorMaxCurrent() { return motorCurrentLimit; };
 
 #endif
 

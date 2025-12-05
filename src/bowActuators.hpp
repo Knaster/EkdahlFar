@@ -23,43 +23,78 @@
     Conforming to STD C++ naming conventions with the exception of where external non-conforming items are referenced
 */
 
+serialCommandItem serialCommandsBowActuators[] = {
+    { "bowactuator", "ba", "actuator", "Sets and loads the actuator given"},
+    { "bowactuatorremove", "bar", "actuator", "Remove bow actuator"},
+    { "bowactuatorsave", "bas", "-", "Save current bow parameters into currently selected bow actuator" },
+    { "bowactuatordata", "bad", "actuator:engagepressure:stallpressure:restposition:id", "Set data of bow actuator [actuator]" },
+    { "bowactuatorcount", "bac", "-", "Returns the amount of saved bow actuators"}
+};
+
+struct BowActuator {
+    uint16_t firstTouchPressure = 0;
+    uint16_t stallPressure = 65535;
+    uint16_t restPosition = 0;
+    String id;
+};
+
 class BowActuators
 {
-    public:
-        BowActuators(CalibrationData *t_calibrationDataConnect);
-        virtual ~BowActuators();
+public:
+//    BowActuators(CalibrationData *t_calibrationDataConnect);
+//    virtual ~BowActuators();
+    BowActuators(BowPressure *inBowPressure);
 
-        CalibrationData *m_calibrationDataConnect;
+    eProcessResult processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
+                               commandList *delegatedCommands = nullptr);
 
-        struct BowActuator {
-            uint16_t firstTouchPressure = 0;
-            uint16_t stallPressure = 65535;
-            uint16_t restPosition = 0;
-            String id;
-        };
-        uint8_t addBowActuator();
-        bool removeBowActuator(uint8_t t_actuator);
-        uint8_t setBowActuator(uint8_t t_actuator);
-        uint8_t getBowActuator();
-        uint8_t getBowActuatorCount();
-        bool loadBowActuator();
-        bool loadBowActuator(uint8_t t_actuator);
-        //bool saveBowActuator();
-        bool saveBowActuator(uint16_t actuator, String name);
-        bool setBowActuatorFirstTouchPressure(uint16_t t_firstTouchPressure);
-        bool setBowActuatorStallPressure(uint16_t t_stallPressure);
-        bool setBowActuatorRestPosition(uint16_t t_restPosition);
-        bool setBowActuatorID(String t_id);
-        uint16_t getBowActuatorFirstTouchPressure(int8_t t_bowActuatorIndex = -1);
-        uint16_t getBowActuatorStallPressure(int8_t t_bowActuatorIndex = -1);
-        uint16_t getBowActuatorRestPosition(int8_t t_bowActuatorIndex = -1);
-        String getBowActuatorID(int8_t t_bowActuatorIndex = -1);
-        bool setBowActuatorData(int8_t t_bowActuatorIndex, uint16_t t_firstTouchPressure, uint16_t t_stallPressure, uint16_t t_restPosition, String t_id);
-        String dumpData();
-    protected:
-        uint8_t m_currentBowActuator = 0;
-    private:
-        std::vector<BowActuator> m_bowActuator;
+    eProcessResult processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
+                                    commandList *delegatedCommands = nullptr);
+
+    String dumpData();
+private:
+//    CalibrationData *m_calibrationDataConnect;
+    BowPressure *bowPressure;
+
+    uint8_t m_currentBowActuator = 0;
+
+    std::vector<BowActuator> m_bowActuator;
+
+private:
+/***** Module specific commands mirroring serially attainable commands *****/
+    uint8_t addBowActuator();
+
+    bool removeBowActuator(uint8_t t_actuator);
+
+    uint8_t setBowActuator(uint8_t t_actuator);
+
+    uint8_t getBowActuator();
+
+    uint8_t getBowActuatorCount();
+
+    bool loadBowActuator();
+
+    bool loadBowActuator(uint8_t t_actuator);
+
+    bool saveBowActuator(uint16_t actuator, String name);
+
+    bool setBowActuatorFirstTouchPressure(uint16_t t_firstTouchPressure);
+
+    bool setBowActuatorStallPressure(uint16_t t_stallPressure);
+
+    bool setBowActuatorRestPosition(uint16_t t_restPosition);
+
+    bool setBowActuatorID(String t_id);
+
+    uint16_t getBowActuatorFirstTouchPressure(int8_t t_bowActuatorIndex = -1);
+
+    uint16_t getBowActuatorStallPressure(int8_t t_bowActuatorIndex = -1);
+
+    uint16_t getBowActuatorRestPosition(int8_t t_bowActuatorIndex = -1);
+
+    String getBowActuatorID(int8_t t_bowActuatorIndex = -1);
+
+    bool setBowActuatorData(int8_t t_bowActuatorIndex, uint16_t t_firstTouchPressure, uint16_t t_stallPressure, uint16_t t_restPosition, String t_id);
 };
 
 #endif // BOWACTUATORS_H

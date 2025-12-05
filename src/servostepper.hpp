@@ -29,13 +29,12 @@
  *  home() function
  *
  */
+enum eStepDirection { REVERSE = 1, FORWARD = 0 };
+enum eHomingStage { UNHOMED, HOMED, FIRSTHOMINGRISING, SECONDHOMINGFALLING, SECONDHOMINGRISING, FIRSTHOMINGFALLING, MOVEPASTHOMESWITCH, MOVETOHOMESWITCH, GOTOOFFSET };
+enum eEdgeType { EDGERISING = 1, EDGEFALLING = 0 };
 
 class servoStepper {
 public:
-    enum eStepDirection { REVERSE = 1, FORWARD = 0 };
-    enum eHomingStage { UNHOMED, HOMED, FIRSTHOMINGRISING, SECONDHOMINGFALLING, SECONDHOMINGRISING, FIRSTHOMINGFALLING, MOVEPASTHOMESWITCH, MOVETOHOMESWITCH, GOTOOFFSET };
-    enum eEdgeType { EDGERISING = 1, EDGEFALLING = 0 };
-
     bool autoCorrectPosition = false;
     int stepperID = -1;
 
@@ -110,7 +109,6 @@ private:
     eStepDirection turnAroundDirection = eStepDirection::REVERSE;
 
     bool invertDirection = true;
-
 
     bool inhibitInterrupt = false;  // Used by statically called functions when changing position parameters so that the interrupt won't fuck shit up
 public:

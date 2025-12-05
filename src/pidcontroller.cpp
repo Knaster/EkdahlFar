@@ -3,49 +3,135 @@
 
 #include "pidcontroller.hpp"
 
+eProcessResult PIDController::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
+                           commandList *delegatedCommands = nullptr) {
+
+    processCommandItems(inCommandItem, serialCommandsPID, sizeof(serialCommandsPID)  / sizeof(serialCommandItem));
+
+    if (inCommandItem->command == "help") {
+        addCommandHelp(serialCommandsPID, sizeof(serialCommandsPID) / sizeof(serialCommandItem), commandResponses,"");
+        return eProcessResult::PassThrough;
+    } else
+    if (inCommandItem->command == "bowpidtargetfreq") {
+        if (request) {
+            commandResponses->push_back({ "bptf:" + String(pidTargetSpeed), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            setPIDTarget(inCommandItem->argument[0].toFloat());
+            commandResponses->push_back({ "bptf:" + String(pidTargetSpeed), InfoRequest });
+        }
+    } else
+    if (inCommandItem->command == "bowpidki") {
+        if (request) {
+            commandResponses->push_back({ "bpki:" + String(Ki), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            Ki = inCommandItem->argument[0].toFloat();
+            commandResponses->push_back({"bpki:" + String(Ki), InfoRequest});
+        }
+    } else
+    if (inCommandItem->command == "bowpidkp") {
+        if (request) {
+            commandResponses->push_back({ "bpkp:" + String(Kp), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            Kp = inCommandItem->argument[0].toFloat();
+            commandResponses->push_back({"bpkp:" + String(Kp), InfoRequest});
+        }
+    } else
+    if (inCommandItem->command == "bowpidkd") {
+        if (request) {
+            commandResponses->push_back({ "bpkd:" + String(Kd), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            Kd = inCommandItem->argument[0].toFloat();
+            commandResponses->push_back({"bpkd:" + String(Kd), InfoRequest});
+        }
+    } else
+    if (inCommandItem->command == "bowpidr") {
+        if (!request) {
+            commandResponses->push_back({"bowpidr:1", InfoRequest});
+            previousError = 0;
+            pidReset();
+        }
+    }  else
+    if (inCommandItem->command == "bowpidintegratorerror") {
+        if (request) {
+            commandResponses->push_back({ "bpie:" + String(integratorIgnoreBelow), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            integratorIgnoreBelow = inCommandItem->argument[0].toFloat(); //String(serialCommand.substring(2,serialCommand.length())).toFloat();
+            commandResponses->push_back({"bpie:" + String(integratorIgnoreBelow), InfoRequest});
+        }
+    } else
+    if (inCommandItem->command == "bowpidmaxerror") {
+        if (request) {
+            commandResponses->push_back({ "bpme:" + String(pidMaxError), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            pidMaxError = inCommandItem->argument[0].toInt();
+            commandResponses->push_back({"bpme:" + String(pidMaxError), InfoRequest});
+        }
+    }  else
+    if (inCommandItem->command == "bowpidpeakerror") {
+        if (request) {
+            commandResponses->push_back({ "bpperr:" + String(pidPeakError), InfoRequest });
+        }
+    } else {
+        return eProcessResult::NotFound;
+    }
+    return eProcessResult::Ok;
+}
+
+/*
 PIDController::PIDController(CalibrationData &inCalibrationData, bowIO &inBowIO) {
     calibrationDataConnect = &inCalibrationData;
     bowIOConnect = &inBowIO;
 }
-
+*/
+PIDController::PIDController(DCMotorControl &inDCMotorControl) {
+    dcMotorControl = &inDCMotorControl;
+}
+/*
 /// Resets the PID integral
 void PIDController::pidReset() {
     integral = 0;
 }
-
+*/
 /// Set PID target speed, check that it doesnt go above maxHz or below minHz
-bool PIDController::setPIDTarget(float _pidTargetSpeed) {
-    if (((_pidTargetSpeed > calibrationDataConnect->maxHz) || (_pidTargetSpeed < calibrationDataConnect->minHz)) && _pidTargetSpeed != 0) {
+bool PIDController::setPIDTarget(float inPIDTargetSpeed) {
+//    if (((_pidTargetSpeed > calibrationDataConnect->maxHz) || (_pidTargetSpeed < calibrationDataConnect->minHz)) && _pidTargetSpeed != 0) {
+    if (((inPIDTargetSpeed > dcMotorControl->getMaxSpeedHz()) || (inPIDTargetSpeed < dcMotorControl->getMinSpeedHz())) && inPIDTargetSpeed != 0) {
     //if (((_pidTargetSpeed > *maxHz) || (_pidTargetSpeed < *minHz)) && _pidTargetSpeed != 0) {
         debugPrintln("PID Target out of range!", Hardware);
         return false;
     }
-    debugPrintln("Setting PID target to " + String(_pidTargetSpeed), Hardware);
-    setPIDTargetUnsafe(_pidTargetSpeed);
-    if (_pidTargetSpeed == 0) { pidReset(); }
+    debugPrintln("Setting PID target to " + String(inPIDTargetSpeed), Hardware);
+    setPIDTargetUnsafe(inPIDTargetSpeed);
+    if (inPIDTargetSpeed == 0) { pidReset(); }
     return true;
 }
-
+/*
 /// Set PID target speed without any safety checks, used by setPIDTarget
-void PIDController::setPIDTargetUnsafe(float _pidTargetSpeed) {
-    pidTargetSpeed = _pidTargetSpeed;
-//    bowShutoffTimedout = false;
-//    bowShutoffMotorDisabled = false;
+void PIDController::setPIDTargetUnsafe(float inPIDTargetSpeed) {
+    pidTargetSpeed = inPIDTargetSpeed;
 }
+*/
 
+/*
 /// Returns the PID target speed
 float PIDController::getPIDTarget() {
     return pidTargetSpeed;
 }
-
+*/
 /// PID calculation function to be called at pidUpdateInterval, called by pidInterruptCaller
 /// \todo add Integral injection and other pre-loading parameters to help bow start and change
 /// \todo final check so PWM is never out of range min/max
 /// \todo startup injection of fundamental maybe?
 void PIDController::pidControl() {
     // Calculate the error between the target speed and the current speed
-    float currentSpeed = bowIOConnect->getLastTachoFreq();
-//    float currentSpeed = getFrequency();
+//    float currentSpeed = bowIOConnect->dcMotorControl->getLastTachoFreq();
+    float currentSpeed = dcMotorControl->getLastTachometerFreq();
 
     float error = pidTargetSpeed - currentSpeed;
 
@@ -74,27 +160,20 @@ void PIDController::pidControl() {
     if (output > 65535) { output = 65535; }
 
     // Set the motor speed using PWM
-    bowIOConnect->setSpeedPWM(static_cast<uint16_t>(output));
-    //setFrequency(static_cast<uint16_t>(output));
+//    bowIOConnect->dcMotorControl->setSpeedPWM(static_cast<uint16_t>(output));
+    dcMotorControl->setSpeedPWM(static_cast<uint16_t>(output));
 
     // Store the current error for the next iteration
     previousError = error;
 };
 /*
-/// This function is to be called every pidUpdateInterval
-void PIDController::pidInterruptCaller() {
-    if (PIDon && (run == 1) && (pidTargetSpeed > 0)) {
-        pidControl();
-    }
-}
-*/
 float PIDController::getPIDPeakError() {
     float a = pidPeakError;
     pidPeakError = 0;
     return a;
 }
-
-void PIDController::measureTimeToTarget(float _pidTargetSpeed) {
+*/
+void PIDController::measureTimeToTarget(float inPIDTargetSpeed) {
     elapsedMillis timeToTarget;
     elapsedMicros overshootTime;
     float startSpeed = getPIDTarget();
@@ -105,25 +184,25 @@ void PIDController::measureTimeToTarget(float _pidTargetSpeed) {
     float freq;
     int iterations = 0;
 
-    setPIDTarget(_pidTargetSpeed);
+    setPIDTarget(inPIDTargetSpeed);
     while(iterations < 10) {
-        if (round(bowIOConnect->averageFreq()) == round(_pidTargetSpeed)) { iterations++; }
+        if (round(dcMotorControl->getAverageTachometerFreq()) == round(inPIDTargetSpeed)) { iterations++; }
 
         overshootTime = 0;
         while (overshootTime < 10) {
-            freq = bowIOConnect->getLastTachoFreq();
+            freq = dcMotorControl->getLastTachometerFreq();
             if (freq > overshoot) { overshoot = freq; }
             if ((freq < undershoot) || (undershoot = -1 )) { undershoot = freq; }
         }
         if (timeToTarget > 1000) {
-            debugPrintln("Couldn't get to target speed in time (reached " + String(bowIOConnect->averageFreq()) + " Hertz)", Error);
+            debugPrintln("Couldn't get to target speed in time (reached " + String(dcMotorControl->getAverageTachometerFreq()) + " Hertz)", Error);
             return;
         }
     }
 
-    debugPrint("Going from " + String(startSpeed) + " -> " + String(_pidTargetSpeed) + " in " + String(timeToTarget) + "ms", InfoRequest);
-    if (_pidTargetSpeed > startSpeed) { debugPrintln(", overshoot " + String(overshoot), InfoRequest); }
-    if (_pidTargetSpeed < startSpeed) { debugPrintln(", undershoot " + String(undershoot), InfoRequest); }
+    debugPrint("Going from " + String(startSpeed) + " -> " + String(inPIDTargetSpeed) + " in " + String(timeToTarget) + "ms", InfoRequest);
+    if (inPIDTargetSpeed > startSpeed) { debugPrintln(", overshoot " + String(overshoot), InfoRequest); }
+    if (inPIDTargetSpeed < startSpeed) { debugPrintln(", undershoot " + String(undershoot), InfoRequest); }
 }
 
 
@@ -133,6 +212,7 @@ String PIDController::dumpData() {
     dump += "bpkp:" + String(Kp) + ",";
     dump += "bpkd:" + String(Kd) + ",";
     dump += "bpie:" + String(integratorIgnoreBelow) + ",";
+    dump += "bpme:" + String(pidMaxError);
 
     return dump;
 }

@@ -21,7 +21,7 @@
 
 class calibrateMute {
 public:
-    mute *m_muteConnect;
+    MuteControl *m_muteConnect;
     bowIO *m_bowIOConnect;
     bowControl *m_bowControlConnect;
 
@@ -31,7 +31,7 @@ public:
     #define minAmplitude 0.01
     #define minFundamentalAmplitude 0.3
 
-    calibrateMute(mute &t_Mute, bowIO &t_bowIO, bowControl &t_bowControl);
+    calibrateMute(MuteControl &t_Mute, bowIO &t_bowIO, bowControl &t_bowControl);
 
     bool calibrateAll();
 

@@ -20,80 +20,154 @@
 #define SOLENOID_C
 
 #include "Teensy_PWM.h"
+#include "solenoid.hpp"
 
-class solenoid {
-public:
-
-    char solenoidPin;     ///< Pin for solenoid activation
-
-    Teensy_PWM *solenoidPWM;
-
-    solenoid(char _solenoidPin) {
+Solenoid::Solenoid(char _solenoidPin) {
     solenoidPin = _solenoidPin;
     pinMode(solenoidPin, OUTPUT);
-    //digitalWrite(solenoidPin, 1);
     solenoidPWM = new Teensy_PWM(solenoidPin, 20000, 0);
+}
+
+eProcessResult Solenoid::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
+
+    processCommandItems(inCommandItem, serialCommandsSolenoid, sizeof(serialCommandsSolenoid) / sizeof(serialCommandItem));
+
+    if (inCommandItem->command == "help") {
+        addCommandHelp(serialCommandsSolenoid, sizeof(serialCommandsSolenoid) / sizeof(serialCommandItem), commandResponses,"");
+        return eProcessResult::PassThrough;
+    } else
+    if (inCommandItem->command == "solenoidengage") {
+        if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        solenoidEngage(inCommandItem->argument[0].toInt());
+        commandResponses->push_back({"se:" + String(inCommandItem->argument[0].toInt()), InfoRequest});
+    } else
+    if (inCommandItem->command == "solenoiddisengage") {
+        solenoidDisengage();
+        commandResponses->push_back({"sd:" + String(inCommandItem->argument[0].toInt()), InfoRequest});
+    } else
+    if (inCommandItem->command == "solenoidengageduration") {
+        if (request) {
+            commandResponses->push_back({ "sed:" + String(solenoidEngageDuration), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            solenoidEngageDuration = inCommandItem->argument[0].toInt();
+            commandResponses->push_back({"sed:" + String(solenoidEngageDuration), InfoRequest});
+        }
+    } else
+    if (inCommandItem->command == "solenoidmaxforce") {
+        if (request) {
+            commandResponses->push_back({ "sxf:" + String(forceMax), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            setSolenoidMax(inCommandItem->argument[0].toInt());
+            commandResponses->push_back({"sfx:" + String(forceMax), InfoRequest});
+        }
+    } else
+    if (inCommandItem->command == "solenoidminforce") {
+        if (request) {
+            commandResponses->push_back({ "sif:" + String(forceMin), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            setSolenoidMin(inCommandItem->argument[0].toInt());
+            commandResponses->push_back({"sif:" + String(forceMin), InfoRequest});
+        }
+    } else
+    if (inCommandItem->command == "solenoidforcemultiplier") {
+        if (request) {
+            commandResponses->push_back({ "sfm:" + String(forceMultiplier), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            setSolenoidMultiplier(inCommandItem->argument[0].toFloat());
+            commandResponses->push_back({"sfm:" + String(forceMultiplier), InfoRequest});
+        }
+    } else {
+        return eProcessResult::NotFound;
     }
+    return eProcessResult::Ok;
+}
 
-    bool solenoidEngaged = false; ///< Current state of the pick solenoid
-    unsigned long solenoidEngageTime = 0; ///< Time at which the solenoid was engaged last
-    unsigned long solenoidEngageDuration = 15000;  ///< Duration of the solenoid engagement, given in uS
+eProcessResult Solenoid::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false, commandList *delegatedCommands = nullptr) {
+    return eProcessResult::NotFound;
+}
 
-    uint16_t forceMax = 65535;
-    uint16_t forceMin = 0;
-    float forceMultiplier = 1;
 
-    /// Engage solenoid with the given force
-    void solenoidEngage(int force) {
-        if (force <= 0) { return; }
-        if (force > 65535) { force = 65535; }
+/// Engage solenoid with the given force
+void Solenoid::solenoidEngage(int force) {
+    if (force <= 0) { return; }
+    if (force > 65535) { force = 65535; }
 
-        float forceMultiplied = ((float) force) * forceMultiplier;
-//        debugPrintln("forceMultiplied " + String(forceMultiplied) + " forceMultiplier " + String(forceMultiplier) + " force " + String(force), Debug);
-        if (forceMultiplied == 0) { return; }
+    float forceMultiplied = ((float) force) * forceMultiplier;
+    if (forceMultiplied == 0) { return; }
 
-        float actualForce = forceMin + ((float) (forceMax - forceMin)) / 65535 * forceMultiplied;
+    float actualForce = forceMin + ((float) (forceMax - forceMin)) / 65535 * forceMultiplied;
 
-        solenoidEngageTime = micros();
+    solenoidEngageTime = micros();
 
-        //    analogWrite(solenoidPin, force);
-        analogWrite(solenoidPin, int(actualForce));
-        solenoidEngaged = true;
-        debugPrintln("Egaging solenoid with force " + String(actualForce), Hardware);
-    }
+    analogWrite(solenoidPin, int(actualForce));
+    solenoidEngaged = true;
+    debugPrintln("Egaging solenoid with force " + String(actualForce), Hardware);
+}
 
-    /// Engage solenoid with maximum force
-    void solenoidEngage() {
-        solenoidEngage(65535);
-    }
+/// Engage solenoid with maximum force
+void Solenoid::solenoidEngage() {
+    solenoidEngage(65535);
+}
 
-    /// Disengage solenoid
-    void solenoidDisengage() {
-        analogWrite(solenoidPin, 0);
-        debugPrintln("Disengaging solenoid", Hardware);
-        solenoidEngaged = false;
-    }
+/// Disengage solenoid
+void Solenoid::solenoidDisengage() {
+    analogWrite(solenoidPin, 0);
+    debugPrintln("Disengaging solenoid", Hardware);
+    solenoidEngaged = false;
+}
 
-    void solenoidDisengage(int value) {
-        if (value > 0 ) { solenoidDisengage(); }
-    }
+bool Solenoid::setSolenoidMax(uint16_t inMax) {
+    if ((inMax <0) || (inMax > 65535)) { return false; }
+    forceMax = inMax;
+    return true;
+}
 
-    bool updateSolenoid() {
-        unsigned long currentTime = micros();
-        if ((solenoidEngaged) && (currentTime - solenoidEngageTime > solenoidEngageDuration) && (solenoidEngageDuration != 0)) {
-            solenoidDisengage();
-            return true;
-          }
-          return false;
-    }
+uint16_t Solenoid::getSolenoidMax() { return forceMax; }
 
-    String dumpData() {
-        String dump = "";
-        dump += "sxf:" + String(forceMax) + ",";
-        dump += "sif:" + String(forceMin) + ",";
-        return dump;
-    }
+bool Solenoid::setSolenoidMin(uint16_t inMin)  {
+    if ((inMin <0) || (inMin > 65535)) { return false; }
+    forceMin = inMin;
+    return true;
+}
 
-};
+uint16_t Solenoid::getSolenoidMin() { return forceMin; }
+
+bool Solenoid::setSolenoidMultiplier(float inMultiplier) {
+ {
+    if ((inMultiplier < 0) || (inMultiplier > 1)) { return false; }
+    forceMultiplier = inMultiplier;
+    return true;
+}}
+
+float Solenoid::getSolenoidMultiplier() { return forceMultiplier; }
+
+bool Solenoid::setSolenoidDuration(unsigned long inDuration)  {
+    if ((inDuration < 0) || (inDuration > 250000)) { return false; }
+    solenoidEngageDuration = inDuration;
+    return false;
+}
+
+unsigned long Solenoid::getSolenoidDuration() { return solenoidEngageDuration; }
+
+bool Solenoid::update() {
+    unsigned long currentTime = micros();
+    if ((solenoidEngaged) && (currentTime - solenoidEngageTime > solenoidEngageDuration) && (solenoidEngageDuration != 0)) {
+        solenoidDisengage();
+        return true;
+      }
+      return false;
+}
+
+String Solenoid::dumpData() {
+    String dump = "";
+    dump += "sxf:" + String(forceMax) + ",";
+    dump += "sif:" + String(forceMin) + ",";
+    return dump;
+}
+
 
 #endif

@@ -160,11 +160,11 @@ public:
     }
 };
 */
-class controlReader
+class ControlReader
 {
     public:
-        controlReader(uint8_t inDataReadyPin, uint8_t inGatePin);
-        virtual ~controlReader();
+        ControlReader(uint8_t inDataReadyPin, uint8_t inGatePin);
+        virtual ~ControlReader();
         void readData();
 
         std::vector<String> cvInputCommands;

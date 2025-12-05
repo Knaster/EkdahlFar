@@ -28,17 +28,16 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  lib/SafeString/src/SafeStringReader.h \
  lib/SafeString/src/SafeStringStream.h lib/SafeString/src/SerialComs.h \
  lib/SafeString/src/SafeStringReader.h lib/SafeString/src/millisDelay.h \
- src/debugprint.hpp src/harmonicSeries.cpp src/harmonicSeries.hpp \
- src/eepromhelpers.cpp src/configuration.cpp lib/teensy4/avr_functions.h \
- src/configuration.hpp src/commandparser.hpp lib/tinyexpr/src/tinyexpr.h \
- src/audioanalyze.h lib/Audio/Audio.h lib/teensy4/DMAChannel.h \
- lib/Audio/analyze_fft256.h lib/teensy4/AudioStream.h \
- lib/teensy4/arm_math.h lib/teensy4/core_cmInstr.h \
- lib/Audio/analyze_fft1024.h lib/Audio/analyze_print.h \
- lib/Audio/analyze_tonedetect.h lib/Audio/analyze_notefreq.h \
- lib/Audio/analyze_peak.h lib/Audio/analyze_rms.h \
- lib/Audio/async_input_spdif3.h lib/Audio/Resampler.h \
- lib/Audio/Quantizer.h lib/Audio/control_sgtl5000.h \
+ src/debugprint.hpp src/eepromhelpers.cpp src/configuration.cpp \
+ lib/teensy4/avr_functions.h src/configuration.hpp src/commandparser.hpp \
+ lib/tinyexpr/src/tinyexpr.h src/audioanalyze.h lib/Audio/Audio.h \
+ lib/teensy4/DMAChannel.h lib/Audio/analyze_fft256.h \
+ lib/teensy4/AudioStream.h lib/teensy4/arm_math.h \
+ lib/teensy4/core_cmInstr.h lib/Audio/analyze_fft1024.h \
+ lib/Audio/analyze_print.h lib/Audio/analyze_tonedetect.h \
+ lib/Audio/analyze_notefreq.h lib/Audio/analyze_peak.h \
+ lib/Audio/analyze_rms.h lib/Audio/async_input_spdif3.h \
+ lib/Audio/Resampler.h lib/Audio/Quantizer.h lib/Audio/control_sgtl5000.h \
  lib/Audio/AudioControl.h lib/Audio/control_wm8731.h \
  lib/Audio/control_ak4558.h lib/Audio/control_cs4272.h \
  lib/Audio/control_cs42448.h lib/Audio/control_tlv320aic3206.h \
@@ -114,21 +113,23 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  lib/Audio/synth_waveform.h lib/Audio/synth_dc.h \
  lib/Audio/synth_whitenoise.h lib/Audio/synth_pinknoise.h \
  lib/Audio/synth_karplusstrong.h lib/Audio/synth_simple_drum.h \
- lib/Audio/synth_pwm.h lib/Audio/synth_wavetable.h src/bowio.cpp \
- src/bowio.hpp lib/Teensy_PWM/src/Teensy_PWM.h \
- lib/Teensy_PWM/src/PWM_Generic_Debug.h lib/TMC2209/src/TMC2209.cpp \
- lib/TMC2209/src/TMC2209.h src/servostepper.hpp \
- src/tmc2209_servostepper.cpp src/tmc2209_servostepper.hpp \
- src/dcmotorcontrol.cpp src/dcmotorcontrol.hpp src/bowActuators.hpp \
- src/bowcontrol.cpp lib/teensy4/elapsedMillis.h src/calibrate.hpp \
- src/bowcontrol.hpp src/pidcontroller.cpp src/pidcontroller.hpp \
- src/calibrate.cpp src/bowActuators.cpp src/solenoid.cpp src/mute.cpp \
- src/mute.hpp src/mutecalibration.cpp src/mutecalibration.hpp \
- src/stringmodule.cpp src/stringmodule.hpp src/midi.cpp lib/MIDI/MIDI.h \
- lib/MIDI/midi_Defs.h lib/MIDI/midi_Namespace.h lib/MIDI/midi_Platform.h \
- lib/MIDI/midi_Settings.h lib/MIDI/midi_Message.h lib/MIDI/serialMIDI.h \
- lib/MIDI/MIDI.hpp src/isrclasswrapper.cpp src/controlReader.cpp \
- src/controlReader.hpp lib/Wire/Wire.h lib/Wire/WireIMXRT.h \
+ lib/Audio/synth_pwm.h lib/Audio/synth_wavetable.h src/midi.cpp \
+ lib/MIDI/MIDI.h lib/MIDI/midi_Defs.h lib/MIDI/midi_Namespace.h \
+ lib/MIDI/midi_Platform.h lib/MIDI/midi_Settings.h \
+ lib/MIDI/midi_Message.h lib/MIDI/serialMIDI.h lib/MIDI/MIDI.hpp \
+ src/farsingle.cpp src/farsingle.hpp src/mutecontrol.cpp \
+ src/mutecontrol.hpp src/mute.cpp src/tmc2209_servostepper.cpp \
+ src/tmc2209_servostepper.hpp lib/TMC2209/src/TMC2209.cpp \
+ lib/TMC2209/src/TMC2209.h src/servostepper.hpp src/mute.hpp \
+ src/solenoid.cpp lib/Teensy_PWM/src/Teensy_PWM.h \
+ lib/Teensy_PWM/src/PWM_Generic_Debug.h src/solenoid.hpp \
+ src/bowcontrol.cpp src/bowcontrol.hpp src/bowpressure.cpp \
+ src/bowpressure.hpp src/pidcontroller.cpp src/pidcontroller.hpp \
+ src/dcmotorcontrol.cpp src/dcmotorcontrol.hpp src/bowActuators.cpp \
+ src/bowActuators.hpp src/harmonicserieshandler.cpp \
+ src/harmonicserieshandler.hpp src/harmonicSeries.cpp \
+ src/harmonicSeries.hpp src/controlReader.cpp src/controlReader.hpp \
+ lib/Wire/Wire.h lib/Wire/WireIMXRT.h \
  lib/Adafruit_ADS1X15/Adafruit_ADS1X15.h \
  lib/Adafruit_BusIO/Adafruit_I2CDevice.h src/settingshandler.cpp \
  lib/EEPROM/EEPROM.h lib/teensy4/avr/eeprom.h lib/teensy4/avr/io.h \

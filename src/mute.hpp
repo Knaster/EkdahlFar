@@ -19,9 +19,9 @@
 #ifndef MUTE_H
 #define MUTE_H
 
-class mute {
+class Mute {
 private:
-    uint16_t lastTilt;
+    uint16_t lastPosition;
 
     uint16_t restPosition = 0;
     uint16_t fullMutePosition = 65535;
@@ -31,12 +31,12 @@ private:
 
     uint16_t muteMaxPosition = 59000;
 
+    uint16_t backOffTime = 0;
+    elapsedMillis backOffTimer;
+
 public:
     uint16_t hwMutePos = 0;
     uint16_t hwLastMutePos = 0;
-
-    uint16_t backOffTime = 0;
-    elapsedMillis backOffTimer;
 
     enum emutePosition {mpUndefined, mpRest, mpFull, mpHalf };
     emutePosition mutePosition = mpUndefined;
@@ -44,14 +44,14 @@ public:
     Tmc2209ServoStepper *tmc2209ServoStepper = nullptr;
 
 public:
-    mute(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin);
+    Mute(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin);
 
     bool setupTMC2209();
     void getTMC2209Info();
     bool homeMute(bool invert = false);
 
-    bool setTilt(uint16_t tilt);
-    uint16_t getTilt();
+    bool setPosition(uint16_t tilt);
+    uint16_t getPosition();
 
     bool rest();
     bool fullMute();
@@ -63,6 +63,8 @@ public:
     uint16_t getFullMutePosition();
     bool setHalfMutePosition(uint16_t inHalfMutePosition);
     uint16_t getHalfMutePosition();
+    bool setBackOffTime(uint16_t inBackoffTime);
+    uint16_t getBackOffTime();
 
     bool saveRest();
     bool saveFullMute();
@@ -71,7 +73,6 @@ public:
     bool setSustain(bool inSustain);
     bool getSustain();
 
-    String dumpData();
     void updateMute();
 };
 #endif

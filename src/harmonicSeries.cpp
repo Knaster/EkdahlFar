@@ -24,36 +24,34 @@
 
 #include "harmonicSeries.hpp"
 
-class harmonicSeries {
+class HarmonicSeries {
 public:
     std::vector<float> ratio;
     String Id;
 
     void setHarmonic(uint16_t harmonic, float _ratio) {
-//        debugPrintln("Setting Harmonic " + String(harmonic) +", size " + String(ratio.size()), Debug);
         while (harmonic >= ratio.size()) {
-//            debugPrintln("Increasing size", Debug);
-            ratio.push_back(0);
+            ratio.push_back({float(0)});
         }
         ratio[harmonic] = _ratio;
     }
 
-    harmonicSeries() {
+    HarmonicSeries() {
 
     }
 };
 
 class HarmonicSeriesList {
 public:
-    std::vector<harmonicSeries> series;
+    std::vector<HarmonicSeries> series;
 
     void addHarmonicSeries() {
-        harmonicSeries hs;
+        HarmonicSeries hs;
         series.push_back(hs);
     }
 
     void addHarmonicSeries(String Id, float frequency[]) {
-        harmonicSeries hs;
+        HarmonicSeries hs;
 
         hs.Id = Id;
         for (int i=0; i<12; i++) {
@@ -64,7 +62,7 @@ public:
     }
 
     void addHarmonicSeries(String Id, std::vector<float> ratio) {
-        harmonicSeries hs;
+        HarmonicSeries hs;
 
         hs.Id = Id;
         for (int i=0; i<12; i++) {

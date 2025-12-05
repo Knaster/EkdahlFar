@@ -1,7 +1,6 @@
 #ifndef TMC2209_SERVOSTEPPER_C
 #define TMC2209_SERVOSTEPPER_C
 
-#include "servostepper.hpp"
 #include "tmc2209_servostepper.hpp"
 
 Tmc2209ServoStepper::Tmc2209ServoStepper(char inStepDirPin, char inStepStepPin, HardwareSerial *inStepSerialPort, char inStepHomeSensorPin) {
@@ -10,16 +9,18 @@ Tmc2209ServoStepper::Tmc2209ServoStepper(char inStepDirPin, char inStepStepPin, 
     stepTMC2209Driver = new TMC2209();
     setupTMC2209();
     stepServoStepper->setHomingOffset(6000);
+/*
     debugPrintln("Starting home", Debug);
     stepTMC2209Driver->setRunCurrent(stepHomeCurrentPercent);
-    stepServoStepper->home(servoStepper::eStepDirection::FORWARD,5,5,servoStepper::eStepDirection::REVERSE);
+    stepServoStepper->home(eStepDirection::FORWARD,5,5,eStepDirection::REVERSE);
     if (stepServoStepper->completeTask(5000)) {
         debugPrintln("Homed", Debug);
     } else {
         debugPrintln("Homing FAILED!", Error);
     }
+    */
     stepTMC2209Driver->setRunCurrent(stepRunCurrentPercent);
-    stepServoStepper->setPosition(0);
+//    stepServoStepper->setPosition(0);
     stepServoStepper->completeTask();
     stepServoStepper->setSpeed(15);
 }
@@ -118,9 +119,9 @@ bool Tmc2209ServoStepper::home(bool invert) {
     stepTMC2209Driver->setRunCurrent(stepHomeCurrentPercent);
     stepServoStepper->eStop();
     if (!invert) {
-        stepServoStepper->home(servoStepper::eStepDirection::FORWARD,5,5,servoStepper::eStepDirection::REVERSE); // ,5,5
+        stepServoStepper->home(eStepDirection::FORWARD,5,5,eStepDirection::REVERSE); // ,5,5
     } else {
-        stepServoStepper->home(servoStepper::eStepDirection::REVERSE,5,5,servoStepper::eStepDirection::FORWARD); // ,5,5
+        stepServoStepper->home(eStepDirection::REVERSE,5,5,eStepDirection::FORWARD); // ,5,5
     }
 
     if (stepServoStepper->completeTask(5000)) {    //2000

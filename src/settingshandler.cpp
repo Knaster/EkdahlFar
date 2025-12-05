@@ -30,7 +30,7 @@ String dumpData() {
 
     debugPrintln("Saving cv mapping", debugPrintType::Debug);
     saveData += controlRead->dumpData();
-
+/*
     debugPrintln("Saving calibration data", debugPrintType::Debug);
     saveData += "m:0," + stringModuleArray[0].calibrateArray[0].dumpData();
     debugPrintln("Saving harmonic series", debugPrintType::Debug);
@@ -44,7 +44,9 @@ String dumpData() {
     debugPrintln("Saving solenoid data", debugPrintType::Debug);
     saveData += stringModuleArray[0].solenoidArray[0].dumpData();
     debugPrintln("Saving actuator data", debugPrintType::Debug);
-    saveData += stringModuleArray[0].bowControlArray[0].bowActuators->dumpData();
+    saveData += stringModuleArray[0].bowControlArray[0].bowActuators->dumpData();*/
+    debugPrintln("REPLACE ALL THE DUMPDATA SAVES", debugPrintType::Error);
+    saveData += farSingle->dumpData();
     saveData += "nop";
     return saveData;
 }
