@@ -57,12 +57,18 @@ BowControl::BowControl(char motorRevPin, char motorVoltagePin, char motorDCDCEnP
 eProcessResult BowControl::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
                            commandList *delegatedCommands = nullptr) {
 
-    eProcessResult processResult;
+    eProcessResult processResult = eProcessResult::Ok;
 
     processCommandItems(inCommandItem, serialCommandsBowControl, sizeof(serialCommandsBowControl)  / sizeof(serialCommandItem));
 
     if (inCommandItem->command == "help") {
         addCommandHelp(serialCommandsBowControl, sizeof(serialCommandsBowControl) / sizeof(serialCommandItem), commandResponses,"");
+    }
+
+    if (((inCommandItem->command == "bowpressurerest") || (inCommandItem->command == "bpr")) && !request) {
+        debugPrintln("Second rest", debugPrintType::Debug);
+        if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        if (inCommandItem->argument[0].toInt() == 1) { rest(); }
     }
 
     if (inCommandItem->command == "bowmotorrun") {
@@ -107,7 +113,6 @@ eProcessResult BowControl::processSerialCommand(commandItem *inCommandItem, std:
             manualMotorPWM = inCommandItem->argument[0].toInt();
             commandResponses->push_back({"bmdp:" + String(manualMotorPWM), InfoRequest});
         }
-        processResult = eProcessResult::Ok;
     } else
     if (inCommandItem->command == "bowmotortimeout") {
         if (request) {
@@ -134,11 +139,11 @@ eProcessResult BowControl::processSerialCommandHidden(commandItem *inCommandItem
 
     return eProcessResult::NotFound;
 }
-
+/*
 void BowControl::setBowSpeedPWM(uint16_t speed) {
     pidController->setPIDTarget(speed);
 }
-
+*/
 String BowControl::dumpData() {
     String dump = "";
     dump += "bmt:" + String(bowShutoffTimeout) + ",";
@@ -146,6 +151,12 @@ String BowControl::dumpData() {
     dump += bowPressure->dumpData() + ",";
     dump += pidController->dumpData() + ",";
     return dump;
+}
+
+void BowControl::rest() {
+    bowShutoffTimer = 0;
+    bowShutoffTimedout = false;         // added 2024-06-27
+    bowShutoffMotorDisabled = false;    // added 2024-06-27
 }
 
 void BowControl::updateMotorAutoShutdown() {

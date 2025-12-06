@@ -19,11 +19,11 @@
 #ifndef MUTECALIBRATION_HPP
 #define MUTECALIBRATION_HPP
 
-class calibrateMute {
+class CalibrateMute {
 public:
-    MuteControl *m_muteConnect;
-    bowIO *m_bowIOConnect;
-    bowControl *m_bowControlConnect;
+    MuteControl *muteControl;
+    BowControl *bowControl;
+    HarmonicSeriesHandler *harmonicSeriesHandler;
 
     uint16_t maxTestStep = 60000;
 
@@ -31,25 +31,22 @@ public:
     #define minAmplitude 0.01
     #define minFundamentalAmplitude 0.3
 
-    calibrateMute(MuteControl &t_Mute, bowIO &t_bowIO, bowControl &t_bowControl);
+    CalibrateMute(MuteControl &inMuteControl, BowControl &inBowControl, HarmonicSeriesHandler &inHarmonicSeriesHandler);
 
-    bool calibrateAll();
+    eCalibrationResult calibrateAll();
 
 private:
     float levelSilence = 0;
     float levelFundamental = 0;
-//    float levelFundamentalRMS = 0;
     uint16_t stallPosition = 0;
 
     float findLevel();
 
     bool findLevelSilence();
-//    bool findlevelFundamentalPeak();
-//    bool findLevelFundamentalRMS();
-    bool findMuteLevels();
+    eCalibrationResult findMuteLevels();
 
-    bool findMuteStall();
-    bool findMuteFirstContact();
+    eCalibrationResult findMuteStall();
+    eCalibrationResult findMuteFirstContact();
     bool findMuteSilence();
 
 };

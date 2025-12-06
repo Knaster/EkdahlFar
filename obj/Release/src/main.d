@@ -131,6 +131,8 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  src/harmonicSeries.hpp src/controlReader.cpp src/controlReader.hpp \
  lib/Wire/Wire.h lib/Wire/WireIMXRT.h \
  lib/Adafruit_ADS1X15/Adafruit_ADS1X15.h \
- lib/Adafruit_BusIO/Adafruit_I2CDevice.h src/settingshandler.cpp \
- lib/EEPROM/EEPROM.h lib/teensy4/avr/eeprom.h lib/teensy4/avr/io.h \
+ lib/Adafruit_BusIO/Adafruit_I2CDevice.h src/calibrationhelpers.hpp \
+ src/bowcalibration.cpp src/bowcalibration.hpp src/mutecalibration.cpp \
+ src/mutecalibration.hpp src/settingshandler.cpp lib/EEPROM/EEPROM.h \
+ lib/teensy4/avr/eeprom.h lib/teensy4/avr/io.h \
  lib/teensy4/avr/../avr_emulation.h src/maincommandhandler.cpp

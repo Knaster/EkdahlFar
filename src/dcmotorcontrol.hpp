@@ -11,10 +11,10 @@ const serialCommandItem serialCommandsDCMotor[] = {
     { "bowmotorcurrent", "bmc", "float", "Bow motor reported current use" },
     { "bowmotorcurrentlimit", "bmcl", "float", "Bow motor current limit (A)- !WARNING! Can ruin your instrument if changed" },
     { "bowmotorpowerlimit", "bmpl", "float", "Bow motor power limit (W) - !WARNING! Can ruin your instrument if changed" },
-    { "bowmotorspeedmax", "bmsx", "float", "Bow motor maximum speed limit" },
-    { "bowmotorspeedmin", "bmsi", "float", "Bow motor minimum speed limit"},
     { "bowmotorfrequency", "bmf", "-", "Bow motor reported frequency"},
-    { "bowmotoremergencystop", "bmes", "ms (0-65535)", "Immediately stops the bowing motor and doesn't allow it to start again until the cool down period given in the first argument has lapsed (milliseconds)"}
+    { "bowmotoremergencystop", "bmes", "ms (0-65535)", "Immediately stops the bowing motor and doesn't allow it to start again until the cool down period given in the first argument has lapsed (milliseconds)"},
+    { "bowmotorpwmmin", "bmpi", "-", "Bow motor minimum PWM (for calibration)"},
+    { "bowmotorpwmmax", "bmpx", "-", "Bow motor maximum PWM (for calibration)"}
 };
 
 class DCMotorControl {
@@ -59,9 +59,9 @@ private:
 
     uint16_t lastMotorPWM = 0;                          ///< Holds the last PWM speed value sent to the bowing wheel
 
-    float minSpeedHz = 20;
+//    float minSpeedHz = 20;
 
-    float maxSpeedHz = 550;
+//    float maxSpeedHz = 550;
 
     uint16_t minSpeedPWM = 0;
 
@@ -117,11 +117,11 @@ public:
     void setSpeedPWM(uint16_t speed);
 
     uint16_t getSpeedPWM();
-
+/*
     float getMinSpeedHz();
 
     float getMaxSpeedHz();
-
+*/
     uint16_t getMinSpeedPWM();
 
     uint16_t getMaxSpeedPWM();
@@ -157,10 +157,10 @@ public:
     bool emergencyDisable(uint16_t coolDown);
 
 /***** Hidden commands for modular use *****/
-    void setMinSpeedHz(float inSpeed);
+/*    void setMinSpeedHz(float inSpeed);
 
     void setMaxSpeedHz(float inSpeed);
-
+*/
     void setMinSpeedPWM(uint16_t inSpeed);
 
     void setMaxSpeedPWM(uint16_t inSpeed);

@@ -10,6 +10,9 @@ FARSingle::FARSingle(void *muteStepperCallback, void *pressureStepperCallback, v
     harmonicSeriesHandler = new HarmonicSeriesHandler();
     bowActuators = new BowActuators(bowControl->getBowPressureReference());
 
+    calibrateBow = new CalibrateBow(bowControl);
+    calibrateMute = new CalibrateMute(*muteControl, *bowControl, *harmonicSeriesHandler);
+
     bowControl->enableBowMotorPower();
     bowControl->getTMC2209Info();
     muteControl->getTMC2209Info();
@@ -36,21 +39,76 @@ FARSingle::FARSingle(void *muteStepperCallback, void *pressureStepperCallback, v
 eProcessResult FARSingle::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
                            commandList *delegatedCommands = nullptr) {
 
+    processCommandItems(inCommandItem, serialCommandsFarSingle, sizeof(serialCommandsFarSingle)  / sizeof(serialCommandItem));
+
     eProcessResult processResult;
+    eCalibrationResult calibrationResult;
 
-    processResult = muteControl->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-    if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
+    if (inCommandItem->command == "help") {
+        addCommandHelp(serialCommandsFarSingle, sizeof(serialCommandsFarSingle) / sizeof(serialCommandItem), commandResponses,"");
+    }
 
-    processResult = hammerControl->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-    if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
+    if (inCommandItem->command == "bowcalibratespeed") {
+        if (!request) {
+            calibrationResult = calibrateBow->findMinMaxSpeedPWM();
+            if (calibrationResult == CR_Ok) { processResult = eProcessResult::Ok; } else { exitWithError(calibrationResult); processResult = eProcessResult::CommandFailed; }
+            commandResponses->push_back({ "bcs", InfoRequest });
+        }
+    } else
+    if (inCommandItem->command == "bowcalibratepressure") {
+        if (!request) {
+            calibrationResult = calibrateBow->findMinMaxPressure();
+            if (calibrationResult == CR_Ok) { processResult = eProcessResult::Ok; } else { exitWithError(calibrationResult); processResult = eProcessResult::CommandFailed; }
+            commandResponses->push_back({ "bcp", InfoRequest });
+        }
+    } else
+    if (inCommandItem->command == "mutecalibrate") {
+        if (!request) {
+            calibrationResult = calibrateMute->calibrateAll();
+            if (calibrationResult == CR_Ok) { processResult = eProcessResult::Ok; } else { exitWithError(calibrationResult); processResult = eProcessResult::CommandFailed; }
+            commandResponses->push_back({ "mca", InfoRequest });
+        }
+    } else
+    if (inCommandItem->command == "bowcalibrateall") {
+        if (!request) {
+            if (calibrateBow->calibrateAll()) { processResult = eProcessResult::Ok; } else { processResult = eProcessResult::CommandFailed; }
+            commandResponses->push_back({ "bca", InfoRequest });
+        }
+    } else
+    if (inCommandItem->command == "mutecalibrate") {
+        if (!calibrateMute->calibrateAll()) {
+            commandResponses->push_back({"mca:1", InfoRequest});
+        } else {
+            commandResponses->push_back({"mca:0", InfoRequest});
+        }
+    } else
+    if (inCommandItem->command == "pickupstringfrequency") {
+        if (audioFrequencyAvaliable()) {
+            commandResponses->push_back({ "psf:" + String(audioFrequency(),1), InfoRequest });
+        } else {
+            commandResponses->push_back({ "psf: 0", InfoRequest });
+        }
+    }  else
+    if (inCommandItem->command == "pickupaudiopeak") {
+        commandResponses->push_back({ "pap:" + String(audioPeakAmplitude()), InfoRequest });
+    }  else
+    if (inCommandItem->command == "pickupaudiorms") {
+        commandResponses->push_back({ "par:" + String(audioRMSAmplitude()), InfoRequest });
+    } else {
+        processResult = muteControl->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
+        if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
 
-    processResult = bowControl->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-    if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
+        processResult = hammerControl->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
+        if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
 
-    processResult = bowActuators->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-    if (processResult != eProcessResult::NotFound) { return processResult; }
+        processResult = bowControl->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
+        if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
 
-    processResult = harmonicSeriesHandler->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
+        processResult = bowActuators->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
+        if (processResult != eProcessResult::NotFound) { return processResult; }
+
+        processResult = harmonicSeriesHandler->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
+    }
     return processResult;
 }
 

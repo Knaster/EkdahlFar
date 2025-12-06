@@ -22,6 +22,7 @@
 #include "bowpressure.cpp"
 #include "pidcontroller.cpp"
 
+
 /***** NEW CLASS *****/
 
 serialCommandItem serialCommandsBowControl[] = {
@@ -29,7 +30,7 @@ serialCommandItem serialCommandsBowControl[] = {
     { "bowmotortimeout", "bmt", "ms(0-65535)", "Bow motor shutdown timeout after bow having been put into the rest position" },
     { "bowmotordirectpwm", "bmdp", "0-65535", "Bow motor direct power in 16-bit PWM values, requires that the PID is turned off" },
     { "bowpid", "bpid", "1|0", "Sets the bow PID on/off" },
-    { "bowmotorrun", "bmr", "1|0", "Set bow motor run on/off" }
+    { "bowmotorrun", "bmr", "1|0", "Set bow motor run on/off" },
 };
 
 enum eSpeedMode { Automatic, Manual };
@@ -80,9 +81,11 @@ private:
 
 public:
 /***** Module specific commands mirroring serially attainable commands *****/
-    void setBowSpeedPWM(uint16_t speed);
+    //void setBowSpeedPWM(uint16_t speed);
 
-    uint16_t getBowSpeedPWM() { return dcMotorControl->getSpeedPWM(); }
+    //uint16_t getBowSpeedPWM() { return dcMotorControl->getSpeedPWM(); }
+
+    void setBowMotorDirectPWM(uint16_t speed) { dcMotorControl->setSpeedPWMSafe(speed); }
 
     void setBowSpeedHZ(float speed) { pidController->setPIDTarget(speed); }
 
@@ -91,6 +94,8 @@ public:
 #endif
 
     bool enableBowMotorPower() { return dcMotorControl->enableMotorPower(); }
+
+    bool disableBowMotorPower() { return dcMotorControl->disableMotorPower(); }
 
 /***** Hidden commands for modular use *****/
     void setCommandsOverPowerCurrent(String inCommands) { commandsOverPowerCurrent = inCommands; }
@@ -105,6 +110,75 @@ public:
 
     bool getBowMotorFaultFlag() { return dcMotorControl->getMotorFault(); }
 
+    float getAverageTachometerFreq() { return dcMotorControl->getAverageTachometerFreq(); }
+
+    bool checkTachometerTimeout() { return dcMotorControl->checkTachometerTimeout(); }
+
+    void setHardwarePressure(uint16_t speed) { bowPressure->setHardwarePressure(speed);}
+
+    bool waitForPressureToSettle(uint16_t timeout = 3000) { return bowPressure->completeTask(timeout); }
+
+    void setEngagePressure(uint16_t pressure) { bowPressure->setEngagePressure(pressure); }
+
+    void setRestPressure(uint16_t pressure) { bowPressure->setRestPressure(pressure); }
+
+    void setMaxPressure(uint16_t pressure) { bowPressure->setMaxPressure(pressure); }
+
+    uint16_t getEngagePressure() { return bowPressure->getEngagePressure(); }
+
+    uint16_t getRestPressure() { return bowPressure->getRestPressure(); }
+
+    uint16_t getMaxPressure() { return bowPressure->getMaxPressure(); }
+
+    bool bowMotorIsOverCurrent() { return dcMotorControl->isOverCurrent(); }
+
+    bool bowMotorIsOverPower() { return dcMotorControl->isOverPower(); }
+
+    bool getPressureAutocorrect() { return bowPressure->getAutoCorrect(); }
+
+    void setPressureAutocorrect(bool correct) { bowPressure->setAutoCorrect(correct); }
+
+    bool getPIDOn() { return PIDon; }
+
+    void setPIDOn(bool inPIDon) { PIDon = inPIDon;}
+
+    void setPressureMotorSpeed(float speed) { bowPressure->setSpeed(speed); }
+
+    float getPressureMotorSpeed() { return bowPressure->getSpeed(); }
+
+    void setRun(bool inRun) { run = inRun; }
+
+    bool getRun() { return run; }
+
+    uint16_t getBowMotorMaxPower() { return dcMotorControl->getMotorMaxPower(); }
+
+    void setBowMotorMaxPower(uint16_t power) { dcMotorControl->setMotorMaxPower(power); }
+
+    uint16_t getBowMotorMinPWM() { return dcMotorControl->getMinSpeedPWM(); }
+
+    void setBowMotorMinPWM(uint16_t pwm) { dcMotorControl->setMinSpeedPWM(pwm); }
+
+    uint16_t getBowMotorMaxPWM() { return dcMotorControl->getMaxSpeedPWM(); }
+
+    void setBowMotorMaxPWM(uint16_t pwm) { dcMotorControl->setMaxSpeedPWM(pwm); }
+
+    uint16_t getBowMotorMaxHz() { return pidController->getMaxSpeedHz(); }
+
+    void setBowMotorMaxHz(uint16_t frequency) { pidController->setMaxSpeedHz(frequency); }
+
+    uint16_t getBowMotorMinHz() { return pidController->getMinSpeedHz(); }
+
+    void setBowMotorMinHz(uint16_t frequency) { pidController->setMinSpeedHz(frequency); }
+
+    float getBowMotorPower() { return dcMotorControl->getMotorCurrent() * dcMotorControl->getMotorVoltage(); }
+
+    void setBowRest() { bowPressure->rest(true); }
+
+    void setBowEngage() { bowPressure->engage(true); }
+
+    void setSpeedMode(eSpeedMode inSpeedMode) { speedMode = inSpeedMode; }
+
+    void rest();
 #ifndef EXTERNAL_PRESSURE_CONTROLLER
     void getTMC2209Info() { bowPressure->getTMC2209Info(); }
 #endif // EXTERNAL_PRESSURE_CONTROLLER

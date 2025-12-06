@@ -54,42 +54,32 @@ public:
 
     void setPressureModifier(uint16_t modifier);
 
-    bool getHold();
-
     void setHold(bool inHold);
-
-    ePressureMode getPressureMode();
-
-    void setMaxPressure(uint16_t inMaxPressure);
-
-    uint16_t getMaxPressure();
-
-    void setEngagePressure(uint16_t inEngagePressure);
-
-    uint16_t getEngagePressure();
-
-    void setRestPressure(uint16_t inRestPressure);
-
-    uint16_t getRestPressure();
 
     bool rest(bool enact);
 
     bool engage(bool enact);
 
-    bool home(bool invert = false);
+    void setMaxPressure(uint16_t inMaxPressure) { maxPressure = inMaxPressure; }
+
+    uint16_t getMaxPressure() { return maxPressure; }
+
+    void setEngagePressure(uint16_t inEngagePressure) { engagePressure = inEngagePressure; }
+
+    uint16_t getEngagePressure() { return engagePressure; }
+
+    void setRestPressure(uint16_t inRestPressure) { restPressure = inRestPressure; }
+
+    uint16_t getRestPressure() { return restPressure; }
+
+    bool getHold() { return hold; }
+
+    ePressureMode getPressureMode() { return pressureMode; }
+
+    bool home(bool invert = false) { return tmc2209ServoStepper->home(invert); }
 
 /***** Hidden serial commands *****/
     void setHardwarePressure(uint16_t pressure);
-
-    bool completeTask(uint16_t timeout = 5000);
-
-    void setAutoCorrect(bool autoCorrect);
-
-    bool getAutoCorrect();
-
-    void setSpeed(float speed);
-
-    float getSpeed();
 
     bool getHomingSensed();
 
@@ -102,6 +92,16 @@ public:
     eHomingStage getHomingStage();
 
     void getTMC2209Info();
+
+    bool completeTask(uint16_t timeout = 3000) { return tmc2209ServoStepper->stepServoStepper->completeTask(timeout); }
+
+    void setAutoCorrect(bool autoCorrect) { tmc2209ServoStepper->stepServoStepper->autoCorrectPosition = autoCorrect; }
+
+    bool getAutoCorrect() {return tmc2209ServoStepper->stepServoStepper->autoCorrectPosition; };
+
+    void setSpeed(float speed) { tmc2209ServoStepper->stepServoStepper->setSpeed(speed); }
+
+    float getSpeed() { return tmc2209ServoStepper->stepServoStepper->getSpeed();}
 
 /***** Internal commands for stand-alone and semi-modular use *****/
     void update() {};          // Update function to be periodically called in order for backoff and other things to work

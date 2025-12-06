@@ -73,24 +73,6 @@ eProcessResult DCMotorControl::processSerialCommand(commandItem *inCommandItem, 
             commandResponses->push_back({"bmpl:" + String(motorPowerLimit), InfoRequest});
         }
     } else
-    if (inCommandItem->command == "bowmotorspeedmax") {
-        if (request) {
-            commandResponses->push_back({ "bmsx:" + String(maxSpeedHz), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setMaxSpeedHz(inCommandItem->argument[0].toFloat()); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
-            commandResponses->push_back({"bmsx:" + String(maxSpeedHz), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowmotorspeedmin") {
-        if (request) {
-            commandResponses->push_back({ "bmsi:" + String(minSpeedHz), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setMinSpeedHz(inCommandItem->argument[0].toFloat());
-            commandResponses->push_back({"bmsi:" + String(minSpeedHz), InfoRequest});
-        }
-    } else
     if (inCommandItem->command == "bowmotorfrequency") {
         if (request) {
             commandResponses->push_back({ "bmf:" + String(getAverageTachometerFreq()), InfoRequest });
@@ -104,6 +86,20 @@ eProcessResult DCMotorControl::processSerialCommand(commandItem *inCommandItem, 
             commandResponses->push_back({"bmes:" + inCommandItem->argument[0], InfoRequest});
             commandResponses->push_back({"EMERGENCY STOP! Cooling down for " + inCommandItem->argument[0] + " ms", Command});
         }
+    } else
+    if (inCommandItem->command == "bowmotorpwmmin") {
+        if (!request) {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            setMinSpeedPWM(inCommandItem->argument[0].toInt());
+        }
+        commandResponses->push_back({ "bmpi:" + String(minSpeedPWM), InfoRequest });
+    } else
+    if (inCommandItem->command == "bowmotorpwmmax") {
+        if (!request) {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            setMaxSpeedPWM(inCommandItem->argument[0].toInt());
+        }
+        commandResponses->push_back({ "bmpx:" + String(maxSpeedPWM), InfoRequest });
     } else {
         return eProcessResult::NotFound;
     }
@@ -120,8 +116,8 @@ String DCMotorControl::dumpData() {
     dump += "bmv:" + String(motorVoltage) + ",";
     dump += "bmcl:" + String(motorCurrentLimit) + ",";
     dump += "bmpl:" + String(motorPowerLimit) + ",";
-    dump += "bmsx:" + String(maxSpeedHz) + ",";
-    dump += "bmsi:" + String(minSpeedHz);
+    dump += "bmpi:" + String(minSpeedPWM) + ",";
+    dump += "bmpx:" + String(maxSpeedPWM);
     return dump;
 }
 
@@ -300,17 +296,16 @@ bool DCMotorControl::checkTachometerTimeout() {
     }
 }
 
-void DCMotorControl::setMinSpeedHz(float inSpeed) { minSpeedHz = inSpeed; }
-float DCMotorControl::getMinSpeedHz() { return minSpeedHz; };
-void DCMotorControl::setMaxSpeedHz(float inSpeed) { maxSpeedHz = inSpeed; }
-float DCMotorControl::getMaxSpeedHz() { return maxSpeedHz; }
-
 void DCMotorControl::setMinSpeedPWM(uint16_t inSpeed) { minSpeedPWM = inSpeed; }
+
 uint16_t DCMotorControl::getMinSpeedPWM() { return minSpeedPWM; };
+
 void DCMotorControl::setMaxSpeedPWM(uint16_t inSpeed) { maxSpeedPWM = inSpeed; }
+
 uint16_t DCMotorControl::getMaxSpeedPWM() { return maxSpeedPWM; }
 
 void DCMotorControl::setMotorMaxPower(float watts) { motorPowerLimit = watts; }
+
 float DCMotorControl::getMotorMaxPower() { return motorPowerLimit; }
 
 //**** STATISTICS AND FAULT HANDLING

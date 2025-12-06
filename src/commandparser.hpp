@@ -293,6 +293,7 @@ String printCommandHelp(serialCommandItem serialCommandArray[], int size) {
 /// Prints all help data for commands given in the serialCommandArray
 String addCommandHelp(serialCommandItem serialCommandArray[], int size, std::vector<commandResponse> *commandResponses, String prefix = "") {
     String help = "";
+    if (prefix == "") { prefix = "[unk]:"; }
     for (int i = 0; i<size; i++) {
 //        help += "[";
         help = prefix; // + "[";

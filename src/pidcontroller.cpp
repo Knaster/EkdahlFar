@@ -72,10 +72,29 @@ eProcessResult PIDController::processSerialCommand(commandItem *inCommandItem, s
             pidMaxError = inCommandItem->argument[0].toInt();
             commandResponses->push_back({"bpme:" + String(pidMaxError), InfoRequest});
         }
-    }  else
+    } else
     if (inCommandItem->command == "bowpidpeakerror") {
         if (request) {
             commandResponses->push_back({ "bpperr:" + String(pidPeakError), InfoRequest });
+            pidPeakError = 0;
+        }
+    } else
+    if (inCommandItem->command == "bowmotorspeedmax") {
+        if (request) {
+            commandResponses->push_back({ "bmsx:" + String(maxSpeedHz), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            setMaxSpeedHz(inCommandItem->argument[0].toFloat()); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
+            commandResponses->push_back({"bmsx:" + String(maxSpeedHz), InfoRequest});
+        }
+    } else
+    if (inCommandItem->command == "bowmotorspeedmin") {
+        if (request) {
+            commandResponses->push_back({ "bmsi:" + String(minSpeedHz), InfoRequest });
+        } else {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            setMinSpeedHz(inCommandItem->argument[0].toFloat());
+            commandResponses->push_back({"bmsi:" + String(minSpeedHz), InfoRequest});
         }
     } else {
         return eProcessResult::NotFound;
@@ -101,7 +120,7 @@ void PIDController::pidReset() {
 /// Set PID target speed, check that it doesnt go above maxHz or below minHz
 bool PIDController::setPIDTarget(float inPIDTargetSpeed) {
 //    if (((_pidTargetSpeed > calibrationDataConnect->maxHz) || (_pidTargetSpeed < calibrationDataConnect->minHz)) && _pidTargetSpeed != 0) {
-    if (((inPIDTargetSpeed > dcMotorControl->getMaxSpeedHz()) || (inPIDTargetSpeed < dcMotorControl->getMinSpeedHz())) && inPIDTargetSpeed != 0) {
+    if (((inPIDTargetSpeed > maxSpeedHz) || (inPIDTargetSpeed < minSpeedHz)) && inPIDTargetSpeed != 0) {
     //if (((_pidTargetSpeed > *maxHz) || (_pidTargetSpeed < *minHz)) && _pidTargetSpeed != 0) {
         debugPrintln("PID Target out of range!", Hardware);
         return false;
@@ -212,7 +231,9 @@ String PIDController::dumpData() {
     dump += "bpkp:" + String(Kp) + ",";
     dump += "bpkd:" + String(Kd) + ",";
     dump += "bpie:" + String(integratorIgnoreBelow) + ",";
-    dump += "bpme:" + String(pidMaxError);
+    dump += "bpme:" + String(pidMaxError) + ",";
+    dump += "bmsx:" + String(maxSpeedHz) + ",";
+    dump += "bmsi:" + String(minSpeedHz);
 
     return dump;
 }

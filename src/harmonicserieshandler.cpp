@@ -347,6 +347,7 @@ bool HarmonicSeriesHandler::checkFrequencyChanged() {
 
 String HarmonicSeriesHandler::dumpData() {
     String dump = "";
+    dump += "bcu:" + String(fundamentalFrequency) + ",";
     dump += "bchbn:" + String(baseNote) + ",";
     dump += "bchsr:" + String(harmonicShiftRange) + ",";
     dump += "bhs:" + String(currentHarmonicSeries) + ",";

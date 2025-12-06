@@ -21,27 +21,8 @@
 #ifndef CALIBRATE_H
 #define CALIBRATE_H
 
-struct CalibrationData {
-    float minHz = 19.05;                    ///< Minimum bow speed that the motor and controller can handle, in Hertz
-    uint16_t minSpeedPWM = 10619;           ///< PWM value used to obtain minHz \todo USED FOR CALIBRATION ONLY, REPLACE WITH LOCAL WHEN NEEDED
-
-    float maxHz = 539.49;                   ///< Maximum bow speed that the motor and controller can handle, in Hertz
-    uint16_t maxSpeedPWM = 64564;           ///< PWM value used to obtain maxHz \todo USED FOR CALIBRATION ONLY, REPLACE WITH LOCAL WHEN NEEDED
-
-    uint16_t minInertialPWM = 10619;
-
-    uint16_t firstTouchPressure = 16460;     ///< Minimum "usable" PWM value used for the tilt servo. Calculated as the first point of where the bow speed slows down i.e. touches the string
-    uint16_t stallPressure = 51063;     ///< Maximum "usable" PWM value used for the tilt servo. Calculated as the last point before the bow motor stalls
-
-    float fundamentalFrequency = 66;    ///< The fundamental frequency of the string in Hertz
-
-    int16_t lowerHarmonic = -48;
-    int16_t upperHarmonic = 49;
-
-    float maxHzPIDFullPressure = -1;
-
-    uint16_t restPosition = 0;
-}; // calibrationData;
+#include "debugprint.hpp"
+#include "calibrationhelpers.hpp"
 
 /** Class for finding out the physical limitations and properties of a bow string unit
   *
@@ -51,12 +32,10 @@ struct CalibrationData {
   *   - Setting the bow speed to the minimum speed limit obtained by previous routines and record the first bow pressure where the motor speed goes down, aka where the bow is touching the string
   *   - Setting the bow speed to the maximum speed limit obtained by previous routines and record at what pressure the motor stops completely (stalls)
   */
-class calibrate {
-public:
 
-//    bowIO *bowIOConnect;  ///< bowIO class associated with this calibration class
-//    bowControl *bowControlConnect;
-    BowControl *bowControlConnect;
+class CalibrateBow {
+public:
+    BowControl *bowControl;
 
     #define testDelay 1 ///< Delay used in conjunction with setTiltPWM for various tests
     #define deviation 2 ///< Acceptable bow speed deviation in Hertz for various tests
@@ -67,30 +46,20 @@ public:
     #define minPermissibleBowSpeedForCalibration 20
     #define maxPowerUseMultiplierDuringCalibration 0.75
 
-//    int EEPROM_offset = 0;
-
-//    CalibrationData *calibrationData;
-
-//    calibrate(bowIO &_bowIO, CalibrationData &__calibrationData, bowControl &_bowControl);
-
-    calibrate(BowControl &inBowControlConnect);
-
-    void startAudioAnalyzing();
-    void stopAudioAnalyzing();
+    CalibrateBow(BowControl *inBowControl);
 
     bool waitForBowToStabilize(uint16_t maxIterations);
 private:
-    bool findMinPressure();
-    bool findMaxPressure();
-
+    eCalibrationResult findMinPressure();
+    eCalibrationResult findMaxPressure();
+    eCalibrationResult safeExitWithResult(eCalibrationResult result, bool pidState = true);
 public:
 
     uint16_t maxTestPressure = 60000;
     uint16_t pressureTestRetract = 7500;
-    bool findMinMaxPressure();
-    bool findMinMaxSpeedPWM();
-    bool findMinMaxSpeedPID();
-
+    eCalibrationResult findMinMaxPressure();
+    eCalibrationResult findMinMaxSpeedPWM();
+    //eCalibrationResult findMinMaxSpeedPID();
 
     bool calibrateAll();
 

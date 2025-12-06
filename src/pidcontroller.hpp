@@ -13,6 +13,9 @@ const serialCommandItem serialCommandsPID[] = {
     { "bowpidmaxerror", "bpme", "float", "Maximum error to correct in each PID loop, essentially sets acceleration" },
     { "bowpidpeakerror", "bpperr", "float", "Get latest PID peak error"},
 
+    { "bowmotorspeedmax", "bmsx", "float", "Bow motor maximum speed limit" },
+    { "bowmotorspeedmin", "bmsi", "float", "Bow motor minimum speed limit"},
+
     { "bowpidtargetfreq", "bcf", "float", "Legacy command conversion" },
     { "bowpidtargetfreq", "bowcontrolfrequency", "float", "Legacy command conversion" }
 };
@@ -53,6 +56,9 @@ private:
     float pidTargetSpeed = 0;                 ///< PID target speed
     float pidPeakError = 0;
 
+    float minSpeedHz = 20;
+    float maxSpeedHz = 550;
+
 public:
     //PIDController(CalibrationData &inCalibrationData, bowIO &inBowIO);
  /***** Module specific commands mirroring serially attainable commands *****/
@@ -65,6 +71,14 @@ public:
     float getPIDPeakError();
 
     void measureTimeToTarget(float _pidTargetSpeed);
+
+    void setMinSpeedHz(float inSpeed) { minSpeedHz = inSpeed; }
+
+    float getMinSpeedHz() { return minSpeedHz; };
+
+    void setMaxSpeedHz(float inSpeed) { maxSpeedHz = inSpeed; }
+
+    float getMaxSpeedHz() { return maxSpeedHz; }
 
 /***** Hidden serial commands *****/
     void setPIDTargetUnsafe(float inPIDTargetSpeed) { pidTargetSpeed = inPIDTargetSpeed; };

@@ -51,7 +51,7 @@ public:
 
     uint16_t getPosition() { return mute->getPosition(); };
 
-    bool setFullMutePosition(uint16_t inFullMutePosition);
+    bool setFullMutePosition(uint16_t inFullMutePosition) { return mute->setFullMutePosition(inFullMutePosition);}
 
     uint16_t getFullMutePosition() { return mute->getFullMutePosition(); };
 

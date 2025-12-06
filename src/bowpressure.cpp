@@ -120,7 +120,7 @@ String BowPressure::dumpData() {
 
 void BowPressure::setHardwarePressure(uint16_t pressure) {
     if ((tmc2209ServoStepper != nullptr) && (tmc2209ServoStepper->stepServoStepper != nullptr)) {
-        debugPrintln("Setting pressure to " + String(pressure), Hardware);
+//        debugPrintln("Setting pressure to " + String(pressure), Hardware);
         tmc2209ServoStepper->stepServoStepper->setPosition(pressure);
         lastPressure = pressure;
     }
@@ -140,46 +140,20 @@ void BowPressure::setPressureModifier(uint16_t modifier) {
     }
 }
 
-void BowPressure::setMaxPressure(uint16_t inMaxPressure) { maxPressure = inMaxPressure; }
-
-uint16_t BowPressure::getMaxPressure() { return maxPressure; }
-
-void BowPressure::setEngagePressure(uint16_t inEngagePressure) { engagePressure = inEngagePressure; }
-
-uint16_t BowPressure::getEngagePressure() { return engagePressure; }
-
-void BowPressure::setRestPressure(uint16_t inRestPressure) { restPressure = inRestPressure; }
-
-uint16_t BowPressure::getRestPressure() { return restPressure; }
-
-
 bool BowPressure::rest(bool enact) {
     if (enact == 0) { return false; }
     pressureMode = ePressureMode::Rest;
     if (hold) { return true; }
 
     reachedEngage = false;
-/*
-    bowShutoffTimer = 0;
-    bowShutoffTimedout = false;         // added 2024-06-27
-    bowShutoffMotorDisabled = false;    // added 2024-06-27
-*/
     setPressureSafe(restPressure);
     return true;
 }
 
 void BowPressure::setHold(bool inHold) {
     hold = !inHold;
-//    if (outputDebugData) { debugPrintln("Hold " + String(hold), Debug); }
     if ((hold == false) && (pressureMode == Rest)) { rest(1); }
 }
-
-bool BowPressure::getHold() { return hold; }
-
-ePressureMode BowPressure::getPressureMode() { return pressureMode; }
-
-//void BowPressure::setPressureMode(ePressureMode inPressureMode) { pressureMode = inPressureMode; }
-
 
 bool BowPressure::engage(bool enact) {
     if (enact == 0) { return false; }
@@ -188,21 +162,6 @@ bool BowPressure::engage(bool enact) {
     pressureMode = ePressureMode::Engage;
     return calculateBaselineModifierPressure();
 }
-
-bool BowPressure::home(bool invert) { return tmc2209ServoStepper->home(invert); }
-
-//bool BowPressure::setHardwarePosition(uint16_t position) { return tmc2209ServoStepper->stepServoStepper->setPosition(position); }
-
-bool BowPressure::completeTask(uint16_t timeout) { return tmc2209ServoStepper->stepServoStepper->completeTask(timeout); }
-
-void BowPressure::setAutoCorrect(bool autoCorrect) { tmc2209ServoStepper->stepServoStepper->autoCorrectPosition = autoCorrect; }
-
-bool BowPressure::getAutoCorrect() {return tmc2209ServoStepper->stepServoStepper->autoCorrectPosition; };
-
-void BowPressure::setSpeed(float speed) { tmc2209ServoStepper->stepServoStepper->setSpeed(speed); }
-
-float BowPressure::getSpeed() { return tmc2209ServoStepper->stepServoStepper->getSpeed();}
-
 
 /*
 bool BowPressure::getHomingSensed() { return tmc2209ServoStepper->stepServoStepper->getHomingSensed(); };

@@ -329,7 +329,7 @@ void setup() {
     //controlRead->cvInputCommands[0] = "m:0,f:" + String(stringModuleArray[0].calibrationDataArray[0].fundamentalFrequency) + "*2^(1 / 15878 * value)";
     //controlRead->cvInputCommands[0] = "m:0,h:value/1323.166667";
 */
-    //loadAllParams();
+    loadAllParams();
 
     initMidi();
 

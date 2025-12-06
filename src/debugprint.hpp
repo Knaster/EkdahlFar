@@ -20,6 +20,9 @@
  #ifndef DEBUGPRINT_H
  #define DEBUGPRINT_H
 
+ #include <WProgram.h>
+ #include "string.h"
+
 enum debugPrintType { Command, USB, Hardware, Undefined, Priority, Error, InfoRequest, EParser, Debug, TextInfo, Help};
 #define debugPrintTypes 11
 String debugPrintTypeName[debugPrintTypes] = { "command", "usb", "hardware" , "undefined", "priority", "error", "inforequest", "expressionparser", "debug", "textinfo", "help" };

@@ -88,12 +88,19 @@ void stopAudioAnalyze() {
 }
 */
 bool audioFrequencyAvaliable() {
-    if (!audioAnalyzeStarted) { return false; }
+    if (!audioAnalyzeStarted) {
+        debugPrintln("Audio analyzation not started!", debugPrintType::Error);
+        return false;
+    }
     return audioNoteFreq->available();
 }
 
 float audioFrequency() {
-    if (!audioAnalyzeStarted || (audioNoteFreq->probability() < 0.9)) { return -1; }
+    if (!audioAnalyzeStarted) {
+        debugPrintln("Audio analyzation not started!", debugPrintType::Error);
+        return false;
+    }
+    if ((audioNoteFreq->probability() < 0.9)) { return -1; }
     return audioNoteFreq->read();
 }
 
@@ -121,7 +128,10 @@ float audioProbability() {
 }
 */
 float audioProcessorUsage() {
-    if (!audioAnalyzeStarted) { return -1; }
+    if (!audioAnalyzeStarted) {
+        debugPrintln("Audio analyzation not started!", debugPrintType::Error);
+        return -1;
+    }
     return audioNoteFreq->processorUsage();
 }
 
