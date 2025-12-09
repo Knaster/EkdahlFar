@@ -1,0 +1,552 @@
+\doxysection{Harmonic\+Series\+Handler Class Reference}
+\hypertarget{classHarmonicSeriesHandler}{}\label{classHarmonicSeriesHandler}\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+
+
+{\ttfamily \#include $<$harmonicserieshandler.\+hpp$>$}
+
+
+
+Collaboration diagram for Harmonic\+Series\+Handler\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{classHarmonicSeriesHandler__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHarmonicSeriesHandler_a71b2f84329c07f34a3d6e95e09190221}{Harmonic\+Series\+Handler}} ()
+\item 
+\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classHarmonicSeriesHandler_a06220884c93228a86ea1f524aae21843}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\item 
+\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classHarmonicSeriesHandler_a2bdc7b8878c93bc883d462e339dd7743}{process\+Serial\+Command\+Hidden}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\item 
+String \mbox{\hyperlink{classHarmonicSeriesHandler_a6fc4b36d42469f130de9e1e7be7f19c8}{dump\+Data}} ()
+\item 
+bool \mbox{\hyperlink{classHarmonicSeriesHandler_ae769737a2459f9704dd9eb1357343104}{set\+Harmonic\+Shift}} (int in\+Harmonic\+Shift)
+\item 
+bool \mbox{\hyperlink{classHarmonicSeriesHandler_abc241df1c3dd3e8f005d50b7895c4339}{set\+Harmonic\+Shift5}} (int in\+Harmonic\+Shift5)
+\item 
+int \mbox{\hyperlink{classHarmonicSeriesHandler_a291e7a1affee1773092526297c90a425}{get\+Harmonic\+Shift}} ()
+\item 
+int \mbox{\hyperlink{classHarmonicSeriesHandler_a592cc31106a795478ff66f8eabd0a24e}{get\+Harmonic\+Shift5}} ()
+\item 
+bool \mbox{\hyperlink{classHarmonicSeriesHandler_aaaf5d361c3220a3dc3cc477df74d5100}{set\+Harmonic\+Shift\+Range}} (int in\+Harmonic\+Shift\+Range)
+\item 
+int \mbox{\hyperlink{classHarmonicSeriesHandler_af8b94475d0f5bca4f4b4f5d8868daf53}{get\+Harmonic\+Shift\+Range}} ()
+\item 
+bool \mbox{\hyperlink{classHarmonicSeriesHandler_ab775bc9141cb72e66073da77f5be9817}{set\+Harmonic}} (int \+\_\+harmonic)
+\item 
+int \mbox{\hyperlink{classHarmonicSeriesHandler_ae5595b18fc15842426d7fab38462088c}{get\+Harmonic}} ()
+\item 
+bool \mbox{\hyperlink{classHarmonicSeriesHandler_a948584873518c7d24d9304d51fd52de2}{set\+Harmonic\+Add}} (int \+\_\+harmonic)
+\item 
+int \mbox{\hyperlink{classHarmonicSeriesHandler_a707614acd1d75704f57ab4875bd9862d}{get\+Harmonic\+Add}} ()
+\item 
+bool \mbox{\hyperlink{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da}{update\+Harmonic\+Data}} ()
+\item 
+bool \mbox{\hyperlink{classHarmonicSeriesHandler_afcb716f608764f2fc078e857bf1df049}{set\+Base\+Note}} (int in\+Base\+Note)
+\item 
+bool \mbox{\hyperlink{classHarmonicSeriesHandler_a342a5e5bb9add99b597d600a6ed12188}{load\+Harmonic\+Series}} (int i)
+\item 
+void \mbox{\hyperlink{classHarmonicSeriesHandler_a506b6abb6c7e48645e6b3ad662c469ec}{add\+Harmonic\+Series}} (String id, float frequencies\mbox{[}$\,$\mbox{]})
+\item 
+float \mbox{\hyperlink{classHarmonicSeriesHandler_aefbeacf5b5058bcc3ff0fed6486b4edb}{get\+Calculated\+Frequency}} ()
+\item 
+bool \mbox{\hyperlink{classHarmonicSeriesHandler_a69ca24dc5cdbe6467027bf1b48275e11}{check\+Frequency\+Changed}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classHarmonicSeriesHandler_ab3f2f36f18026e2c8880c23aacf0a25c}{calculate\+Harmonic\+Shift}} ()
+\item 
+bool \mbox{\hyperlink{classHarmonicSeriesHandler_a0c5dae4f8cf80d9d4796f7304c7b8981}{raise\+Frequency\+Changed}} ()
+\item 
+\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classHarmonicSeriesHandler_a70a57b37e472961067fd594491f5658d}{process\+Control\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\item 
+\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classHarmonicSeriesHandler_abf4dc24c627892cc6acb7f4d64c3b978}{process\+Harmonic\+Series\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHarmonicSeriesList}{Harmonic\+Series\+List}} \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonic\+Series\+List}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{current\+Harmonic\+Series}} = 0
+\item 
+float \mbox{\hyperlink{classHarmonicSeriesHandler_ab7e94991bfffdabd0d9049f658a16f4d}{fundamental\+Frequency}} = 66
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classHarmonicSeriesHandler_a165e439503d522582f48589facede47f}{base\+Note}} = 64
+\item 
+float \mbox{\hyperlink{classHarmonicSeriesHandler_afbf8da531e9d50bff3ff48088a98045d}{current\+Harmonic\+Freq}} = 0
+\begin{DoxyCompactList}\small\item\em Calculated base frequency of current harmonic. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classHarmonicSeriesHandler_adf400b812ed4ee0fdbff83500f6f1669}{current\+Harmonic\+Shift\+Freq}} = 0
+\begin{DoxyCompactList}\small\item\em Calculated frequency with harmonic shift. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classHarmonicSeriesHandler_adcb5e5ffd6a283d124936abca437ac85}{harmonic\+Shift\+Range}} = 12
+\begin{DoxyCompactList}\small\item\em Harmonic shift range for one 16-\/bit integer (full range up and down) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classHarmonicSeriesHandler_a70af6f2f1eb059517339969fc3100461}{harmonic\+Shift}} = 0
+\begin{DoxyCompactList}\small\item\em Harmonic shift given as one 16-\/bit integer. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classHarmonicSeriesHandler_a21386aa3a7245c6b7114320a5c1b5ac6}{harmonic\+Shift5}} = 0
+\item 
+int \mbox{\hyperlink{classHarmonicSeriesHandler_ac1799e16caa174b6cc9a081f33b795d4}{harmonic}} = 0
+\begin{DoxyCompactList}\small\item\em Current harmonic. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classHarmonicSeriesHandler_a092b27ba7e6d53298902cb953345d99b}{harmonic\+Add}} = 0
+\item 
+int16\+\_\+t \mbox{\hyperlink{classHarmonicSeriesHandler_a802667d02b9f8ce6c2cfecbe08a24af1}{lower\+Harmonic}} = -\/48
+\item 
+int16\+\_\+t \mbox{\hyperlink{classHarmonicSeriesHandler_a9c996baab64d406af9740e914264ad7a}{upper\+Harmonic}} = 49
+\item 
+bool \mbox{\hyperlink{classHarmonicSeriesHandler_a6c0ea250eca8743be2bc1031e4ce5af3}{frequency\+Changed}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classHarmonicSeriesHandler_a71b2f84329c07f34a3d6e95e09190221}\label{classHarmonicSeriesHandler_a71b2f84329c07f34a3d6e95e09190221} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{HarmonicSeriesHandler()}{HarmonicSeriesHandler()}}
+{\footnotesize\ttfamily Harmonic\+Series\+Handler\+::\+Harmonic\+Series\+Handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classHarmonicSeriesHandler_a506b6abb6c7e48645e6b3ad662c469ec}\label{classHarmonicSeriesHandler_a506b6abb6c7e48645e6b3ad662c469ec} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!addHarmonicSeries@{addHarmonicSeries}}
+\index{addHarmonicSeries@{addHarmonicSeries}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{addHarmonicSeries()}{addHarmonicSeries()}}
+{\footnotesize\ttfamily void Harmonic\+Series\+Handler\+::add\+Harmonic\+Series (\begin{DoxyParamCaption}\item[{String}]{id,  }\item[{float}]{frequencies\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_a506b6abb6c7e48645e6b3ad662c469ec_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_a506b6abb6c7e48645e6b3ad662c469ec_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeriesHandler_ab3f2f36f18026e2c8880c23aacf0a25c}\label{classHarmonicSeriesHandler_ab3f2f36f18026e2c8880c23aacf0a25c} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!calculateHarmonicShift@{calculateHarmonicShift}}
+\index{calculateHarmonicShift@{calculateHarmonicShift}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{calculateHarmonicShift()}{calculateHarmonicShift()}}
+{\footnotesize\ttfamily bool Harmonic\+Series\+Handler\+::calculate\+Harmonic\+Shift (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_ab3f2f36f18026e2c8880c23aacf0a25c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeriesHandler_a69ca24dc5cdbe6467027bf1b48275e11}\label{classHarmonicSeriesHandler_a69ca24dc5cdbe6467027bf1b48275e11} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!checkFrequencyChanged@{checkFrequencyChanged}}
+\index{checkFrequencyChanged@{checkFrequencyChanged}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{checkFrequencyChanged()}{checkFrequencyChanged()}}
+{\footnotesize\ttfamily bool Harmonic\+Series\+Handler\+::check\+Frequency\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_a69ca24dc5cdbe6467027bf1b48275e11_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeriesHandler_a6fc4b36d42469f130de9e1e7be7f19c8}\label{classHarmonicSeriesHandler_a6fc4b36d42469f130de9e1e7be7f19c8} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!dumpData@{dumpData}}
+\index{dumpData@{dumpData}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
+{\footnotesize\ttfamily String Harmonic\+Series\+Handler\+::dump\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_a6fc4b36d42469f130de9e1e7be7f19c8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_a6fc4b36d42469f130de9e1e7be7f19c8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeriesHandler_aefbeacf5b5058bcc3ff0fed6486b4edb}\label{classHarmonicSeriesHandler_aefbeacf5b5058bcc3ff0fed6486b4edb} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!getCalculatedFrequency@{getCalculatedFrequency}}
+\index{getCalculatedFrequency@{getCalculatedFrequency}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{getCalculatedFrequency()}{getCalculatedFrequency()}}
+{\footnotesize\ttfamily float Harmonic\+Series\+Handler\+::get\+Calculated\+Frequency (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_aefbeacf5b5058bcc3ff0fed6486b4edb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeriesHandler_ae5595b18fc15842426d7fab38462088c}\label{classHarmonicSeriesHandler_ae5595b18fc15842426d7fab38462088c} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!getHarmonic@{getHarmonic}}
+\index{getHarmonic@{getHarmonic}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{getHarmonic()}{getHarmonic()}}
+{\footnotesize\ttfamily int Harmonic\+Series\+Handler\+::get\+Harmonic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classHarmonicSeriesHandler_a707614acd1d75704f57ab4875bd9862d}\label{classHarmonicSeriesHandler_a707614acd1d75704f57ab4875bd9862d} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!getHarmonicAdd@{getHarmonicAdd}}
+\index{getHarmonicAdd@{getHarmonicAdd}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{getHarmonicAdd()}{getHarmonicAdd()}}
+{\footnotesize\ttfamily int Harmonic\+Series\+Handler\+::get\+Harmonic\+Add (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classHarmonicSeriesHandler_a291e7a1affee1773092526297c90a425}\label{classHarmonicSeriesHandler_a291e7a1affee1773092526297c90a425} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!getHarmonicShift@{getHarmonicShift}}
+\index{getHarmonicShift@{getHarmonicShift}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{getHarmonicShift()}{getHarmonicShift()}}
+{\footnotesize\ttfamily int Harmonic\+Series\+Handler\+::get\+Harmonic\+Shift (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classHarmonicSeriesHandler_a592cc31106a795478ff66f8eabd0a24e}\label{classHarmonicSeriesHandler_a592cc31106a795478ff66f8eabd0a24e} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!getHarmonicShift5@{getHarmonicShift5}}
+\index{getHarmonicShift5@{getHarmonicShift5}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{getHarmonicShift5()}{getHarmonicShift5()}}
+{\footnotesize\ttfamily int Harmonic\+Series\+Handler\+::get\+Harmonic\+Shift5 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classHarmonicSeriesHandler_af8b94475d0f5bca4f4b4f5d8868daf53}\label{classHarmonicSeriesHandler_af8b94475d0f5bca4f4b4f5d8868daf53} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!getHarmonicShiftRange@{getHarmonicShiftRange}}
+\index{getHarmonicShiftRange@{getHarmonicShiftRange}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{getHarmonicShiftRange()}{getHarmonicShiftRange()}}
+{\footnotesize\ttfamily int Harmonic\+Series\+Handler\+::get\+Harmonic\+Shift\+Range (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classHarmonicSeriesHandler_a342a5e5bb9add99b597d600a6ed12188}\label{classHarmonicSeriesHandler_a342a5e5bb9add99b597d600a6ed12188} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!loadHarmonicSeries@{loadHarmonicSeries}}
+\index{loadHarmonicSeries@{loadHarmonicSeries}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{loadHarmonicSeries()}{loadHarmonicSeries()}}
+{\footnotesize\ttfamily bool Harmonic\+Series\+Handler\+::load\+Harmonic\+Series (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_a342a5e5bb9add99b597d600a6ed12188_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeriesHandler_a70a57b37e472961067fd594491f5658d}\label{classHarmonicSeriesHandler_a70a57b37e472961067fd594491f5658d} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!processControlCommand@{processControlCommand}}
+\index{processControlCommand@{processControlCommand}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{processControlCommand()}{processControlCommand()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Harmonic\+Series\+Handler\+::process\+Control\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_a70a57b37e472961067fd594491f5658d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_a70a57b37e472961067fd594491f5658d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeriesHandler_abf4dc24c627892cc6acb7f4d64c3b978}\label{classHarmonicSeriesHandler_abf4dc24c627892cc6acb7f4d64c3b978} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!processHarmonicSeriesCommand@{processHarmonicSeriesCommand}}
+\index{processHarmonicSeriesCommand@{processHarmonicSeriesCommand}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{processHarmonicSeriesCommand()}{processHarmonicSeriesCommand()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Harmonic\+Series\+Handler\+::process\+Harmonic\+Series\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_abf4dc24c627892cc6acb7f4d64c3b978_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_abf4dc24c627892cc6acb7f4d64c3b978_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeriesHandler_a06220884c93228a86ea1f524aae21843}\label{classHarmonicSeriesHandler_a06220884c93228a86ea1f524aae21843} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!processSerialCommand@{processSerialCommand}}
+\index{processSerialCommand@{processSerialCommand}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{processSerialCommand()}{processSerialCommand()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Harmonic\+Series\+Handler\+::process\+Serial\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_a06220884c93228a86ea1f524aae21843_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_a06220884c93228a86ea1f524aae21843_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeriesHandler_a2bdc7b8878c93bc883d462e339dd7743}\label{classHarmonicSeriesHandler_a2bdc7b8878c93bc883d462e339dd7743} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!processSerialCommandHidden@{processSerialCommandHidden}}
+\index{processSerialCommandHidden@{processSerialCommandHidden}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{processSerialCommandHidden()}{processSerialCommandHidden()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Harmonic\+Series\+Handler\+::process\+Serial\+Command\+Hidden (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+\Hypertarget{classHarmonicSeriesHandler_a0c5dae4f8cf80d9d4796f7304c7b8981}\label{classHarmonicSeriesHandler_a0c5dae4f8cf80d9d4796f7304c7b8981} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!raiseFrequencyChanged@{raiseFrequencyChanged}}
+\index{raiseFrequencyChanged@{raiseFrequencyChanged}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{raiseFrequencyChanged()}{raiseFrequencyChanged()}}
+{\footnotesize\ttfamily bool Harmonic\+Series\+Handler\+::raise\+Frequency\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_a0c5dae4f8cf80d9d4796f7304c7b8981_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeriesHandler_afcb716f608764f2fc078e857bf1df049}\label{classHarmonicSeriesHandler_afcb716f608764f2fc078e857bf1df049} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!setBaseNote@{setBaseNote}}
+\index{setBaseNote@{setBaseNote}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{setBaseNote()}{setBaseNote()}}
+{\footnotesize\ttfamily bool Harmonic\+Series\+Handler\+::set\+Base\+Note (\begin{DoxyParamCaption}\item[{int}]{in\+Base\+Note }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_afcb716f608764f2fc078e857bf1df049_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeriesHandler_ab775bc9141cb72e66073da77f5be9817}\label{classHarmonicSeriesHandler_ab775bc9141cb72e66073da77f5be9817} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!setHarmonic@{setHarmonic}}
+\index{setHarmonic@{setHarmonic}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{setHarmonic()}{setHarmonic()}}
+{\footnotesize\ttfamily bool Harmonic\+Series\+Handler\+::set\+Harmonic (\begin{DoxyParamCaption}\item[{int}]{\+\_\+harmonic }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_ab775bc9141cb72e66073da77f5be9817_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_ab775bc9141cb72e66073da77f5be9817_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeriesHandler_a948584873518c7d24d9304d51fd52de2}\label{classHarmonicSeriesHandler_a948584873518c7d24d9304d51fd52de2} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!setHarmonicAdd@{setHarmonicAdd}}
+\index{setHarmonicAdd@{setHarmonicAdd}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{setHarmonicAdd()}{setHarmonicAdd()}}
+{\footnotesize\ttfamily bool Harmonic\+Series\+Handler\+::set\+Harmonic\+Add (\begin{DoxyParamCaption}\item[{int}]{\+\_\+harmonic }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_a948584873518c7d24d9304d51fd52de2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_a948584873518c7d24d9304d51fd52de2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeriesHandler_ae769737a2459f9704dd9eb1357343104}\label{classHarmonicSeriesHandler_ae769737a2459f9704dd9eb1357343104} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!setHarmonicShift@{setHarmonicShift}}
+\index{setHarmonicShift@{setHarmonicShift}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{setHarmonicShift()}{setHarmonicShift()}}
+{\footnotesize\ttfamily bool Harmonic\+Series\+Handler\+::set\+Harmonic\+Shift (\begin{DoxyParamCaption}\item[{int}]{in\+Harmonic\+Shift }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_ae769737a2459f9704dd9eb1357343104_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_ae769737a2459f9704dd9eb1357343104_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeriesHandler_abc241df1c3dd3e8f005d50b7895c4339}\label{classHarmonicSeriesHandler_abc241df1c3dd3e8f005d50b7895c4339} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!setHarmonicShift5@{setHarmonicShift5}}
+\index{setHarmonicShift5@{setHarmonicShift5}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{setHarmonicShift5()}{setHarmonicShift5()}}
+{\footnotesize\ttfamily bool Harmonic\+Series\+Handler\+::set\+Harmonic\+Shift5 (\begin{DoxyParamCaption}\item[{int}]{in\+Harmonic\+Shift5 }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_abc241df1c3dd3e8f005d50b7895c4339_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_abc241df1c3dd3e8f005d50b7895c4339_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeriesHandler_aaaf5d361c3220a3dc3cc477df74d5100}\label{classHarmonicSeriesHandler_aaaf5d361c3220a3dc3cc477df74d5100} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!setHarmonicShiftRange@{setHarmonicShiftRange}}
+\index{setHarmonicShiftRange@{setHarmonicShiftRange}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{setHarmonicShiftRange()}{setHarmonicShiftRange()}}
+{\footnotesize\ttfamily bool Harmonic\+Series\+Handler\+::set\+Harmonic\+Shift\+Range (\begin{DoxyParamCaption}\item[{int}]{in\+Harmonic\+Shift\+Range }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_aaaf5d361c3220a3dc3cc477df74d5100_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da}\label{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!updateHarmonicData@{updateHarmonicData}}
+\index{updateHarmonicData@{updateHarmonicData}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{updateHarmonicData()}{updateHarmonicData()}}
+{\footnotesize\ttfamily bool Harmonic\+Series\+Handler\+::update\+Harmonic\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classHarmonicSeriesHandler_a165e439503d522582f48589facede47f}\label{classHarmonicSeriesHandler_a165e439503d522582f48589facede47f} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!baseNote@{baseNote}}
+\index{baseNote@{baseNote}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{baseNote}{baseNote}}
+{\footnotesize\ttfamily uint8\+\_\+t Harmonic\+Series\+Handler\+::base\+Note = 64\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classHarmonicSeriesHandler_afbf8da531e9d50bff3ff48088a98045d}\label{classHarmonicSeriesHandler_afbf8da531e9d50bff3ff48088a98045d} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!currentHarmonicFreq@{currentHarmonicFreq}}
+\index{currentHarmonicFreq@{currentHarmonicFreq}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{currentHarmonicFreq}{currentHarmonicFreq}}
+{\footnotesize\ttfamily float Harmonic\+Series\+Handler\+::current\+Harmonic\+Freq = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculated base frequency of current harmonic. 
+
+\Hypertarget{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}\label{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!currentHarmonicSeries@{currentHarmonicSeries}}
+\index{currentHarmonicSeries@{currentHarmonicSeries}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{currentHarmonicSeries}{currentHarmonicSeries}}
+{\footnotesize\ttfamily uint8\+\_\+t Harmonic\+Series\+Handler\+::current\+Harmonic\+Series = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classHarmonicSeriesHandler_adf400b812ed4ee0fdbff83500f6f1669}\label{classHarmonicSeriesHandler_adf400b812ed4ee0fdbff83500f6f1669} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!currentHarmonicShiftFreq@{currentHarmonicShiftFreq}}
+\index{currentHarmonicShiftFreq@{currentHarmonicShiftFreq}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{currentHarmonicShiftFreq}{currentHarmonicShiftFreq}}
+{\footnotesize\ttfamily float Harmonic\+Series\+Handler\+::current\+Harmonic\+Shift\+Freq = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculated frequency with harmonic shift. 
+
+\Hypertarget{classHarmonicSeriesHandler_a6c0ea250eca8743be2bc1031e4ce5af3}\label{classHarmonicSeriesHandler_a6c0ea250eca8743be2bc1031e4ce5af3} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!frequencyChanged@{frequencyChanged}}
+\index{frequencyChanged@{frequencyChanged}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{frequencyChanged}{frequencyChanged}}
+{\footnotesize\ttfamily bool Harmonic\+Series\+Handler\+::frequency\+Changed = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classHarmonicSeriesHandler_ab7e94991bfffdabd0d9049f658a16f4d}\label{classHarmonicSeriesHandler_ab7e94991bfffdabd0d9049f658a16f4d} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!fundamentalFrequency@{fundamentalFrequency}}
+\index{fundamentalFrequency@{fundamentalFrequency}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{fundamentalFrequency}{fundamentalFrequency}}
+{\footnotesize\ttfamily float Harmonic\+Series\+Handler\+::fundamental\+Frequency = 66\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classHarmonicSeriesHandler_ac1799e16caa174b6cc9a081f33b795d4}\label{classHarmonicSeriesHandler_ac1799e16caa174b6cc9a081f33b795d4} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!harmonic@{harmonic}}
+\index{harmonic@{harmonic}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{harmonic}{harmonic}}
+{\footnotesize\ttfamily int Harmonic\+Series\+Handler\+::harmonic = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Current harmonic. 
+
+\Hypertarget{classHarmonicSeriesHandler_a092b27ba7e6d53298902cb953345d99b}\label{classHarmonicSeriesHandler_a092b27ba7e6d53298902cb953345d99b} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!harmonicAdd@{harmonicAdd}}
+\index{harmonicAdd@{harmonicAdd}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{harmonicAdd}{harmonicAdd}}
+{\footnotesize\ttfamily int Harmonic\+Series\+Handler\+::harmonic\+Add = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}\label{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!harmonicSeriesList@{harmonicSeriesList}}
+\index{harmonicSeriesList@{harmonicSeriesList}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{harmonicSeriesList}{harmonicSeriesList}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHarmonicSeriesList}{Harmonic\+Series\+List}} Harmonic\+Series\+Handler\+::harmonic\+Series\+List\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classHarmonicSeriesHandler_a70af6f2f1eb059517339969fc3100461}\label{classHarmonicSeriesHandler_a70af6f2f1eb059517339969fc3100461} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!harmonicShift@{harmonicShift}}
+\index{harmonicShift@{harmonicShift}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{harmonicShift}{harmonicShift}}
+{\footnotesize\ttfamily int Harmonic\+Series\+Handler\+::harmonic\+Shift = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Harmonic shift given as one 16-\/bit integer. 
+
+\Hypertarget{classHarmonicSeriesHandler_a21386aa3a7245c6b7114320a5c1b5ac6}\label{classHarmonicSeriesHandler_a21386aa3a7245c6b7114320a5c1b5ac6} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!harmonicShift5@{harmonicShift5}}
+\index{harmonicShift5@{harmonicShift5}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{harmonicShift5}{harmonicShift5}}
+{\footnotesize\ttfamily int Harmonic\+Series\+Handler\+::harmonic\+Shift5 = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classHarmonicSeriesHandler_adcb5e5ffd6a283d124936abca437ac85}\label{classHarmonicSeriesHandler_adcb5e5ffd6a283d124936abca437ac85} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!harmonicShiftRange@{harmonicShiftRange}}
+\index{harmonicShiftRange@{harmonicShiftRange}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{harmonicShiftRange}{harmonicShiftRange}}
+{\footnotesize\ttfamily int Harmonic\+Series\+Handler\+::harmonic\+Shift\+Range = 12\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Harmonic shift range for one 16-\/bit integer (full range up and down) 
+
+\Hypertarget{classHarmonicSeriesHandler_a802667d02b9f8ce6c2cfecbe08a24af1}\label{classHarmonicSeriesHandler_a802667d02b9f8ce6c2cfecbe08a24af1} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!lowerHarmonic@{lowerHarmonic}}
+\index{lowerHarmonic@{lowerHarmonic}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{lowerHarmonic}{lowerHarmonic}}
+{\footnotesize\ttfamily int16\+\_\+t Harmonic\+Series\+Handler\+::lower\+Harmonic = -\/48\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classHarmonicSeriesHandler_a9c996baab64d406af9740e914264ad7a}\label{classHarmonicSeriesHandler_a9c996baab64d406af9740e914264ad7a} 
+\index{HarmonicSeriesHandler@{HarmonicSeriesHandler}!upperHarmonic@{upperHarmonic}}
+\index{upperHarmonic@{upperHarmonic}!HarmonicSeriesHandler@{HarmonicSeriesHandler}}
+\doxysubsubsection{\texorpdfstring{upperHarmonic}{upperHarmonic}}
+{\footnotesize\ttfamily int16\+\_\+t Harmonic\+Series\+Handler\+::upper\+Harmonic = 49\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{harmonicserieshandler_8hpp}{harmonicserieshandler.\+hpp}}\item 
+\mbox{\hyperlink{harmonicserieshandler_8cpp}{harmonicserieshandler.\+cpp}}\end{DoxyCompactItemize}

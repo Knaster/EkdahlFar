@@ -36,23 +36,21 @@ public:
     String dumpData();
 
 /***** Module specific commands mirroring serially attainable commands *****/
-    void solenoidEngage(int force);
-    void solenoidEngage();
-    void solenoidDisengage();
 
-    bool setSolenoidMax(uint16_t inMax);
-    uint16_t getSolenoidMax();
-    bool setSolenoidMin(uint16_t inMin);
-    uint16_t getSolenoidMin();
-    bool setSolenoidMultiplier(float inMultiplier);
-    float getSolenoidMultiplier();
-    bool setSolenoidDuration(unsigned long inDuration);
-    unsigned long getSolenoidDuration();
 /***** Hidden commands for modular use *****/
 /***** Internal commands for stand-alone and semi-modular use *****/
     bool update();
 /***** Internal commands for debugging use, most likely to be removed *****/
 
+private:
+    void solenoidEngage(int force);
+    void solenoidEngage();
+    void solenoidDisengage();
+
+    bool setSolenoidMax(uint16_t inMax);
+    bool setSolenoidMin(uint16_t inMin);
+    bool setSolenoidMultiplier(float inMultiplier);
+    bool setSolenoidDuration(unsigned long inDuration);
 };
 
 #endif // SOLENOID_HPP

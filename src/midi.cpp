@@ -61,7 +61,6 @@ double dMap[mapSize] = { 1, 1, 0, 1, 2, 1, 0, 0, 1, 0, 1, 2 };
 
 double mapKeys(double key) {
     int mapIndex = (((int) key) % 12);
-    //debugPrintln("Map index " + String(mapIndex), Debug);
     if ((mapIndex < 0) || (mapIndex >= mapSize)) { return 0; }
     return dMap[mapIndex];
 }
@@ -78,7 +77,6 @@ double epDeadbandThreshold = 250;
 
 double deadbando(double value) {
     double target = 0;
-    //if ((value < (target + epDeadbandThreshold)) && (value > (target - epDeadbandThreshold))) { return target; } else { return value; };
     if ((value < (target + epDeadbandThreshold)) && (value > (target - epDeadbandThreshold))) { return target; } else {
         if (value > target) {
             return value - epDeadbandThreshold;
@@ -91,7 +89,6 @@ double deadbando(double value) {
 
 double deadband(double value, double threshold) {
     double target = 0;
-    //if ((value < (target + epDeadbandThreshold)) && (value > (target - epDeadbandThreshold))) { return target; } else { return value; };
     if ((value < (target + threshold)) && (value > (target - threshold))) { return target; } else {
         if (value > target) {
             return value - threshold;
@@ -235,16 +232,10 @@ void OnNoteOn(byte channel, byte note, byte velocity) {
 void OnAfterTouchPoly(byte channel, byte note, byte pressure) {
     if ((configArray[currentConfig].midiRxChannel != channel) && (configArray[currentConfig].midiRxChannel < 17) &&
         (configArray[currentConfig].midiRxChannel > 0)) { return; }
-/*
-    if (velocity == 127) {
-        stringModuleArray[0].solenoidArray[0].solenoidEngage();
-    }
-*/
     dchannel = channel; dpressure = pressure; dnote = note;
     processLocalMessage(configArray[currentConfig].polyAftertouch);
 
     debugPrintln("PolyAT on channel " + String(channel) + " note " + String(note) + " value " + String(pressure), USB);
-//  setPressure7bit(velocity);
 }
 
 /// Handle poly aftertouch message
@@ -270,28 +261,8 @@ void OnControlChange(byte channel, byte control, byte value) {
             dnote = 0; dvelocity = 0;
             dchannel = channel; dvalue = value;
             processLocalMessage(&configArray[currentConfig].controlChange[i].command);
-        //debugPrintln(configArray[currentConfig].controlChange[i].command, Debug);
         }
     }
-/*
-    if (control == 64) {  // Sustain
-        if (value == 0) {
-            sustain = false;
-        } else {
-            sustain = true;
-        }
-        debugPrintln("Setting sustain to " + String(sustain), USB);
-    } else*/
-/*    if (control == 123) {  /// All notes off
-        if (noteCount != 0) {
-            debugPrintln("All notes not removed!", Error);
-            noteCount = 0;
-
-            dchannel = notesHeld[0].channel; dnote = notesHeld[0].note; dvelocity = notesHeld[0].velocity;
-            processLocalMessage(configArray[currentConfig].noteOff);
-            notesHeld.clear();
-        }
-    }*/
 }
 
 void midiAllNotesOff() {
@@ -314,7 +285,6 @@ void OnPitchBend(byte channel, int pitch) {
     dchannel = channel;
     dpitch = pitch;
     processLocalMessage(configArray[currentConfig].pitchBend);
-    //stringModuleArray[0].bowControlArray[0].setHarmonicShift(pitch * 2);
     debugPrintln("Pitch bend on channel " + String(channel) + " value " + String(pitch), USB);
 }
 

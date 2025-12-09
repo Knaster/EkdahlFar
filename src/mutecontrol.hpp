@@ -91,7 +91,7 @@ public:
     void setStepIntervalCallback(void *stepIntervalCallback) { mute->tmc2209ServoStepper->stepServoStepper->stepIntervalCallback = stepIntervalCallback; };
 
 /***** Internal commands for debugging use, most likely to be removed *****/
-    void setStepperID(uint16_t stepperID) { mute->tmc2209ServoStepper->stepServoStepper->stepperID = stepperID; };
+//    void setStepperID(uint16_t stepperID) { mute->tmc2209ServoStepper->stepServoStepper->stepperID = stepperID; };
 };
 
 #endif

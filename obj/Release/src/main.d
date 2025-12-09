@@ -20,24 +20,24 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  lib/SafeString/src/SafeString.h lib/teensy4/Stream.h \
  lib/SafeString/src/SafeStringNameSpaceStart.h \
  lib/SafeString/src/SafeStringNameSpaceEnd.h \
- lib/SafeString/src/BufferedOutput.h lib/SafeString/src/PinFlasher.h \
- lib/teensy4/Arduino.h lib/SafeString/src/millisDelay.h \
- lib/SafeString/src/SafeString.h lib/SafeString/src/SafeStringNameSpace.h \
+ lib/SafeString/src/BufferedOutput.h lib/SafeString/src/SafeString.h \
+ lib/SafeString/src/SafeStringNameSpace.h \
  lib/SafeString/src/SafeStringNameSpaceEnd.h \
  lib/SafeString/src/SafeStringNameSpaceStart.h \
- lib/SafeString/src/SafeStringReader.h \
+ lib/SafeString/src/SafeStringReader.h lib/teensy4/Arduino.h \
  lib/SafeString/src/SafeStringStream.h lib/SafeString/src/SerialComs.h \
  lib/SafeString/src/SafeStringReader.h lib/SafeString/src/millisDelay.h \
- src/debugprint.hpp src/eepromhelpers.cpp src/configuration.cpp \
- lib/teensy4/avr_functions.h src/configuration.hpp src/commandparser.hpp \
- lib/tinyexpr/src/tinyexpr.h src/audioanalyze.h lib/Audio/Audio.h \
- lib/teensy4/DMAChannel.h lib/Audio/analyze_fft256.h \
- lib/teensy4/AudioStream.h lib/teensy4/arm_math.h \
- lib/teensy4/core_cmInstr.h lib/Audio/analyze_fft1024.h \
- lib/Audio/analyze_print.h lib/Audio/analyze_tonedetect.h \
- lib/Audio/analyze_notefreq.h lib/Audio/analyze_peak.h \
- lib/Audio/analyze_rms.h lib/Audio/async_input_spdif3.h \
- lib/Audio/Resampler.h lib/Audio/Quantizer.h lib/Audio/control_sgtl5000.h \
+ lib/SafeString/src/millisDelay.h src/debugprint.hpp \
+ src/eepromhelpers.cpp src/configuration.cpp lib/teensy4/avr_functions.h \
+ src/configuration.hpp src/commandparser.hpp lib/tinyexpr/src/tinyexpr.h \
+ src/audioanalyze.h lib/Audio/Audio.h lib/teensy4/DMAChannel.h \
+ lib/Audio/analyze_fft256.h lib/teensy4/AudioStream.h \
+ lib/teensy4/arm_math.h lib/teensy4/core_cmInstr.h \
+ lib/Audio/analyze_fft1024.h lib/Audio/analyze_print.h \
+ lib/Audio/analyze_tonedetect.h lib/Audio/analyze_notefreq.h \
+ lib/Audio/analyze_peak.h lib/Audio/analyze_rms.h \
+ lib/Audio/async_input_spdif3.h lib/Audio/Resampler.h \
+ lib/Audio/Quantizer.h lib/Audio/control_sgtl5000.h \
  lib/Audio/AudioControl.h lib/Audio/control_wm8731.h \
  lib/Audio/control_ak4558.h lib/Audio/control_cs4272.h \
  lib/Audio/control_cs42448.h lib/Audio/control_tlv320aic3206.h \

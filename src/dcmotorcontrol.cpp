@@ -32,8 +32,7 @@ DCMotorControl::DCMotorControl(char inMotorRevPin, char inMotorVoltagePin, char 
     //attachInterrupt(digitalPinToInterrupt(inTachoPin), ((void*) (&(this->tachometerISRHandler))), CHANGE);
 }
 
-eProcessResult DCMotorControl::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                           commandList *delegatedCommands = nullptr) {
+eProcessResult DCMotorControl::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
 
     processCommandItems(inCommandItem, serialCommandsDCMotor, sizeof(serialCommandsDCMotor) / sizeof(serialCommandItem));
 
@@ -106,8 +105,7 @@ eProcessResult DCMotorControl::processSerialCommand(commandItem *inCommandItem, 
     return eProcessResult::Ok;
 }
 
-eProcessResult DCMotorControl::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                                commandList *delegatedCommands = nullptr) {
+eProcessResult DCMotorControl::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
     return eProcessResult::NotFound;
 }
 

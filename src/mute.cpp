@@ -132,6 +132,11 @@ void Mute::updateMute() {
         debugPrintln("Backing off mute", debugPrintType::Debug);
         rest();
     }
+
+    if (tmc2209ServoStepper->stepServoStepper->intDrivenMsgFlag) {
+        debugRaw(tmc2209ServoStepper->stepServoStepper->intDrivenMsg);
+        tmc2209ServoStepper->stepServoStepper->intDrivenMsgFlag = false;
+    }
 }
 
 #endif

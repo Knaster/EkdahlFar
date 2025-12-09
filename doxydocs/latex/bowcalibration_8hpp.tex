@@ -1,0 +1,86 @@
+\doxysection{bowcalibration.\+hpp File Reference}
+\hypertarget{bowcalibration_8hpp}{}\label{bowcalibration_8hpp}\index{bowcalibration.hpp@{bowcalibration.hpp}}
+{\ttfamily \#include $<$sys/\+\_\+stdint.\+h$>$}\newline
+{\ttfamily \#include "{}debugprint.\+hpp"{}}\newline
+{\ttfamily \#include "{}calibrationhelpers.\+hpp"{}}\newline
+Include dependency graph for bowcalibration.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{bowcalibration_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{bowcalibration_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classCalibrateBow}{Calibrate\+Bow}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{bowcalibration_8hpp_a5edf2fe288e94bef931cd65d9d477abc}{test\+Delay}}~1
+\begin{DoxyCompactList}\small\item\em Delay used in conjunction with set\+Tilt\+PWM for various tests. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{bowcalibration_8hpp_aa8cc74500ba7d6fafdd6c1280f36a4ee}{deviation}}~2
+\begin{DoxyCompactList}\small\item\em Acceptable bow speed deviation in Hertz for various tests. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{bowcalibration_8hpp_a8c8701de81f6984d1467051303c5d5c8}{min\+Test\+Freq}}~1
+\item 
+\#define \mbox{\hyperlink{bowcalibration_8hpp_a47b98850cbd5784fa0048dc4f4285ec6}{max\+Test\+Freq}}~1000
+\item 
+\#define \mbox{\hyperlink{bowcalibration_8hpp_a207f202ec9674a99e0465a1d6cdf2081}{min\+Permissible\+Bow\+Speed\+For\+Calibration}}~20
+\item 
+\#define \mbox{\hyperlink{bowcalibration_8hpp_a947c967c63e6d866be6d4f8905de7de5}{max\+Power\+Use\+Multiplier\+During\+Calibration}}~0.\+75
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{bowcalibration_8hpp_aa8cc74500ba7d6fafdd6c1280f36a4ee}\label{bowcalibration_8hpp_aa8cc74500ba7d6fafdd6c1280f36a4ee} 
+\index{bowcalibration.hpp@{bowcalibration.hpp}!deviation@{deviation}}
+\index{deviation@{deviation}!bowcalibration.hpp@{bowcalibration.hpp}}
+\doxysubsubsection{\texorpdfstring{deviation}{deviation}}
+{\footnotesize\ttfamily \#define deviation~2}
+
+
+
+Acceptable bow speed deviation in Hertz for various tests. 
+
+\Hypertarget{bowcalibration_8hpp_a947c967c63e6d866be6d4f8905de7de5}\label{bowcalibration_8hpp_a947c967c63e6d866be6d4f8905de7de5} 
+\index{bowcalibration.hpp@{bowcalibration.hpp}!maxPowerUseMultiplierDuringCalibration@{maxPowerUseMultiplierDuringCalibration}}
+\index{maxPowerUseMultiplierDuringCalibration@{maxPowerUseMultiplierDuringCalibration}!bowcalibration.hpp@{bowcalibration.hpp}}
+\doxysubsubsection{\texorpdfstring{maxPowerUseMultiplierDuringCalibration}{maxPowerUseMultiplierDuringCalibration}}
+{\footnotesize\ttfamily \#define max\+Power\+Use\+Multiplier\+During\+Calibration~0.\+75}
+
+\Hypertarget{bowcalibration_8hpp_a47b98850cbd5784fa0048dc4f4285ec6}\label{bowcalibration_8hpp_a47b98850cbd5784fa0048dc4f4285ec6} 
+\index{bowcalibration.hpp@{bowcalibration.hpp}!maxTestFreq@{maxTestFreq}}
+\index{maxTestFreq@{maxTestFreq}!bowcalibration.hpp@{bowcalibration.hpp}}
+\doxysubsubsection{\texorpdfstring{maxTestFreq}{maxTestFreq}}
+{\footnotesize\ttfamily \#define max\+Test\+Freq~1000}
+
+\Hypertarget{bowcalibration_8hpp_a207f202ec9674a99e0465a1d6cdf2081}\label{bowcalibration_8hpp_a207f202ec9674a99e0465a1d6cdf2081} 
+\index{bowcalibration.hpp@{bowcalibration.hpp}!minPermissibleBowSpeedForCalibration@{minPermissibleBowSpeedForCalibration}}
+\index{minPermissibleBowSpeedForCalibration@{minPermissibleBowSpeedForCalibration}!bowcalibration.hpp@{bowcalibration.hpp}}
+\doxysubsubsection{\texorpdfstring{minPermissibleBowSpeedForCalibration}{minPermissibleBowSpeedForCalibration}}
+{\footnotesize\ttfamily \#define min\+Permissible\+Bow\+Speed\+For\+Calibration~20}
+
+\Hypertarget{bowcalibration_8hpp_a8c8701de81f6984d1467051303c5d5c8}\label{bowcalibration_8hpp_a8c8701de81f6984d1467051303c5d5c8} 
+\index{bowcalibration.hpp@{bowcalibration.hpp}!minTestFreq@{minTestFreq}}
+\index{minTestFreq@{minTestFreq}!bowcalibration.hpp@{bowcalibration.hpp}}
+\doxysubsubsection{\texorpdfstring{minTestFreq}{minTestFreq}}
+{\footnotesize\ttfamily \#define min\+Test\+Freq~1}
+
+\Hypertarget{bowcalibration_8hpp_a5edf2fe288e94bef931cd65d9d477abc}\label{bowcalibration_8hpp_a5edf2fe288e94bef931cd65d9d477abc} 
+\index{bowcalibration.hpp@{bowcalibration.hpp}!testDelay@{testDelay}}
+\index{testDelay@{testDelay}!bowcalibration.hpp@{bowcalibration.hpp}}
+\doxysubsubsection{\texorpdfstring{testDelay}{testDelay}}
+{\footnotesize\ttfamily \#define test\+Delay~1}
+
+
+
+Delay used in conjunction with set\+Tilt\+PWM for various tests. 
+

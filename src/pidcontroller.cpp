@@ -3,8 +3,7 @@
 
 #include "pidcontroller.hpp"
 
-eProcessResult PIDController::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                           commandList *delegatedCommands = nullptr) {
+eProcessResult PIDController::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
 
     processCommandItems(inCommandItem, serialCommandsPID, sizeof(serialCommandsPID)  / sizeof(serialCommandItem));
 
@@ -102,26 +101,37 @@ eProcessResult PIDController::processSerialCommand(commandItem *inCommandItem, s
     return eProcessResult::Ok;
 }
 
-/*
-PIDController::PIDController(CalibrationData &inCalibrationData, bowIO &inBowIO) {
-    calibrationDataConnect = &inCalibrationData;
-    bowIOConnect = &inBowIO;
+
+eProcessResult PIDController::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
+
+    processCommandItems(inCommandItem, serialCommandsPIDHidden, sizeof(serialCommandsPIDHidden)  / sizeof(serialCommandItem));
+
+    if (inCommandItem->command == "bowmeasuretimetotarget") {
+        if (!request) {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            float startSpeed = pidTargetSpeed;
+            float endSpeed = inCommandItem->argument[0].toFloat();
+            float time = measureTimeToTarget(endSpeed);
+            if (time == -1) {
+                commandResponses->push_back({"bmtt:0", InfoRequest});
+                return eProcessResult::CommandFailed;
+            } else {
+                commandResponses->push_back({"bmtt:" + String(time) + ":" + String(startSpeed) + ":" + String(endSpeed), InfoRequest});
+            }
+        }
+    } else {
+        return eProcessResult::NotFound;
+    }
+    return eProcessResult::Ok;
 }
-*/
+
 PIDController::PIDController(DCMotorControl &inDCMotorControl) {
     dcMotorControl = &inDCMotorControl;
 }
-/*
-/// Resets the PID integral
-void PIDController::pidReset() {
-    integral = 0;
-}
-*/
+
 /// Set PID target speed, check that it doesnt go above maxHz or below minHz
 bool PIDController::setPIDTarget(float inPIDTargetSpeed) {
-//    if (((_pidTargetSpeed > calibrationDataConnect->maxHz) || (_pidTargetSpeed < calibrationDataConnect->minHz)) && _pidTargetSpeed != 0) {
     if (((inPIDTargetSpeed > maxSpeedHz) || (inPIDTargetSpeed < minSpeedHz)) && inPIDTargetSpeed != 0) {
-    //if (((_pidTargetSpeed > *maxHz) || (_pidTargetSpeed < *minHz)) && _pidTargetSpeed != 0) {
         debugPrintln("PID Target out of range!", Hardware);
         return false;
     }
@@ -130,19 +140,7 @@ bool PIDController::setPIDTarget(float inPIDTargetSpeed) {
     if (inPIDTargetSpeed == 0) { pidReset(); }
     return true;
 }
-/*
-/// Set PID target speed without any safety checks, used by setPIDTarget
-void PIDController::setPIDTargetUnsafe(float inPIDTargetSpeed) {
-    pidTargetSpeed = inPIDTargetSpeed;
-}
-*/
 
-/*
-/// Returns the PID target speed
-float PIDController::getPIDTarget() {
-    return pidTargetSpeed;
-}
-*/
 /// PID calculation function to be called at pidUpdateInterval, called by pidInterruptCaller
 /// \todo add Integral injection and other pre-loading parameters to help bow start and change
 /// \todo final check so PWM is never out of range min/max
@@ -192,10 +190,10 @@ float PIDController::getPIDPeakError() {
     return a;
 }
 */
-void PIDController::measureTimeToTarget(float inPIDTargetSpeed) {
+float PIDController::measureTimeToTarget(float inPIDTargetSpeed) {
     elapsedMillis timeToTarget;
     elapsedMicros overshootTime;
-    float startSpeed = getPIDTarget();
+//    float startSpeed = getPIDTarget();
 
     timeToTarget = 0;
     float overshoot = 0;
@@ -214,14 +212,15 @@ void PIDController::measureTimeToTarget(float inPIDTargetSpeed) {
             if ((freq < undershoot) || (undershoot = -1 )) { undershoot = freq; }
         }
         if (timeToTarget > 1000) {
-            debugPrintln("Couldn't get to target speed in time (reached " + String(dcMotorControl->getAverageTachometerFreq()) + " Hertz)", Error);
-            return;
+            //debugPrintln("Couldn't get to target speed in time (reached " + String(dcMotorControl->getAverageTachometerFreq()) + " Hertz)", Error);
+            return -1;
         }
     }
 
-    debugPrint("Going from " + String(startSpeed) + " -> " + String(inPIDTargetSpeed) + " in " + String(timeToTarget) + "ms", InfoRequest);
-    if (inPIDTargetSpeed > startSpeed) { debugPrintln(", overshoot " + String(overshoot), InfoRequest); }
-    if (inPIDTargetSpeed < startSpeed) { debugPrintln(", undershoot " + String(undershoot), InfoRequest); }
+    //debugPrint("Going from " + String(startSpeed) + " -> " + String(inPIDTargetSpeed) + " in " + String(timeToTarget) + "ms", InfoRequest);
+    //if (inPIDTargetSpeed > startSpeed) { debugPrintln(", overshoot " + String(overshoot), InfoRequest); }
+    //if (inPIDTargetSpeed < startSpeed) { debugPrintln(", undershoot " + String(undershoot), InfoRequest); }
+    return timeToTarget;
 }
 
 

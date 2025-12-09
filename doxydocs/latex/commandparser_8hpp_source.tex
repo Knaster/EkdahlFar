@@ -263,7 +263,7 @@
 \DoxyCodeLine{00265\ \ \ \ \ String\ \mbox{\hyperlink{structserialCommandItem_adb3c941261b6fa076154cb515884042d}{Help}};}
 \DoxyCodeLine{00266\ \};}
 \DoxyCodeLine{00267\ }
-\DoxyCodeLine{00269\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_a411a6ce822a8546287a361612587bc36}{processCommandItems}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandParser,\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ serialCommandArray[],\ \textcolor{keywordtype}{int}\ size)\ \{}
+\DoxyCodeLine{00269\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_a2eea721b98604de46300feecf7703b60}{processCommandItems}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandParser,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ serialCommandArray[],\ \textcolor{keywordtype}{int}\ size)\ \{}
 \DoxyCodeLine{00270\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i<size;\ i++)\ \{}
 \DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\_commandParser-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_a885ce2b2f796898ce57bfa939c405c66}{shortCommand}}))\ \{}
 \DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \_commandParser-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ =\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_acfc1dd4408fcc9ebfb66f7f40fcc8efb}{longCommand}}.toLowerCase();}
@@ -286,121 +286,123 @@
 \DoxyCodeLine{00290\ \ \ \ \ \textcolor{keywordflow}{return}\ help;}
 \DoxyCodeLine{00291\ \}}
 \DoxyCodeLine{00292\ }
-\DoxyCodeLine{00294\ String\ \mbox{\hyperlink{commandparser_8hpp_a55f22cf254c21b7922ea450b24b48dd2}{addCommandHelp}}(\mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ serialCommandArray[],\ \textcolor{keywordtype}{int}\ size,\ std::vector<commandResponse>\ *commandResponses,\ String\ prefix\ =\ \textcolor{stringliteral}{"{}"{}})\ \{}
+\DoxyCodeLine{00294\ String\ \mbox{\hyperlink{commandparser_8hpp_a9584ed5f207c1c49b9a477ada94421f8}{addCommandHelp}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ serialCommandArray[],\ \textcolor{keywordtype}{int}\ size,\ std::vector<commandResponse>\ *commandResponses,\ String\ prefix\ =\ \textcolor{stringliteral}{"{}"{}})\ \{}
 \DoxyCodeLine{00295\ \ \ \ \ String\ help\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00296\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i<size;\ i++)\ \{}
-\DoxyCodeLine{00297\ \textcolor{comment}{//\ \ \ \ \ \ \ \ help\ +=\ "{}["{};}}
-\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ help\ =\ prefix;\ \textcolor{comment}{//\ +\ "{}["{};}}
+\DoxyCodeLine{00296\ \ \ \ \ \textcolor{keywordflow}{if}\ (prefix\ ==\ \textcolor{stringliteral}{"{}"{}})\ \{\ prefix\ =\ \textcolor{stringliteral}{"{}[unk]:"{}};\ \}}
+\DoxyCodeLine{00297\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i<size;\ i++)\ \{}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ help\ =\ prefix;}
 \DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].longCommand\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_acfc1dd4408fcc9ebfb66f7f40fcc8efb}{longCommand}};\ \}}
 \DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].shortCommand\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ \textcolor{stringliteral}{"{}|"{}};\ \}}
 \DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].shortCommand\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_a885ce2b2f796898ce57bfa939c405c66}{shortCommand}};\ \}}
-\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \textcolor{comment}{//help\ +=\ "{}]"{};}}
-\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].arguments\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ \textcolor{stringliteral}{"{}:"{}}\ +\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_a439b7c89ac67641d420f0b485a7ea18d}{arguments}}\ +\ \textcolor{stringliteral}{"{}:"{}};\ \}}
-\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ help\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}}\ +\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_adb3c941261b6fa076154cb515884042d}{Help}}\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};\ \textcolor{comment}{//\ +\ "{}\(\backslash\)n"{};}}
-\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{help,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a2c1b595c80ad4c1b7452f5ef8887ffba}{debugPrintType::Help}}\});}
-\DoxyCodeLine{00306\ \ \ \ \ \}}
-\DoxyCodeLine{00307\ \ \ \ \ \textcolor{keywordflow}{return}\ help;}
-\DoxyCodeLine{00308\ \}}
-\DoxyCodeLine{00309\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00310\ \textcolor{comment}{bool\ skipToCommand(commandList\ *commands,\ uint16\_t\ *index,\ String\ command)\ \{}}
-\DoxyCodeLine{00311\ \textcolor{comment}{\ \ uint16\_t\ j\ =\ *index;}}
-\DoxyCodeLine{00312\ \textcolor{comment}{\ \ debugPrintln("{}Starting\ test\ at\ "{}\ +\ String(j),\ Debug);}}
-\DoxyCodeLine{00313\ \textcolor{comment}{\ \ do\ \{}}
-\DoxyCodeLine{00314\ \textcolor{comment}{\ \ \ \ j++;}}
-\DoxyCodeLine{00315\ \textcolor{comment}{\ \ \ \ if\ (j\ >=\ commands-\/>item.size())\ \{\ break;\ \}}}
-\DoxyCodeLine{00316\ \textcolor{comment}{\ \ \}\ while\ (commands-\/>item[j].command\ !=\ command);}}
-\DoxyCodeLine{00317\ \textcolor{comment}{}}
-\DoxyCodeLine{00318\ \textcolor{comment}{\ \ debugPrintln("{}Ending\ loop\ at\ "{}\ +\ String(j)\ +\ "{},\ commands\ length\ "{}\ +\ String(commands-\/>item.size()),\ Debug);}}
-\DoxyCodeLine{00319\ \textcolor{comment}{}}
-\DoxyCodeLine{00320\ \textcolor{comment}{\ \ if\ (j\ >=\ commands-\/>item.size())\ \{}}
-\DoxyCodeLine{00321\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Termination\ not\ found,\ skipping"{},\ Error);}}
-\DoxyCodeLine{00322\ \textcolor{comment}{\ \ \ \ return\ false;}}
-\DoxyCodeLine{00323\ \textcolor{comment}{\ \ \}\ else}}
-\DoxyCodeLine{00324\ \textcolor{comment}{\ \ if\ (commands-\/>item[j].command\ ==\ command)\ \{}}
-\DoxyCodeLine{00325\ \textcolor{comment}{\ \ \ \ *index\ =\ j;}}
-\DoxyCodeLine{00326\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Skipping\ forward\ to\ command\ "{}\ +\ String(j),\ Debug);}}
-\DoxyCodeLine{00327\ \textcolor{comment}{\ \ \ \ return\ true;}}
-\DoxyCodeLine{00328\ \textcolor{comment}{\ \ \}}}
-\DoxyCodeLine{00329\ \textcolor{comment}{\ \ return\ false;}}
-\DoxyCodeLine{00330\ \textcolor{comment}{\}}}
-\DoxyCodeLine{00331\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00332\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ uint8\_t\ arguments,\ \textcolor{keywordtype}{bool}\ t\_supressError\ =\ \textcolor{keyword}{false})\ \{}
-\DoxyCodeLine{00333\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size()\ !=\ arguments)\ \{}
-\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!t\_supressError)\ \{}
-\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Wrong\ number\ of\ arguments\ "{}}\ +\ String(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
-\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00338\ \ \ \ \ \}}
-\DoxyCodeLine{00339\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00340\ \}}
-\DoxyCodeLine{00341\ }
-\DoxyCodeLine{00342\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_a0af0c008c80e8b315e813ac91855b997}{checkArgumentsMin}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ uint8\_t\ argumentsMin)\ \{}
-\DoxyCodeLine{00343\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size()\ <\ argumentsMin)\ \{}
-\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Wrong\ number\ of\ arguments"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
-\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00346\ \ \ \ \ \}}
-\DoxyCodeLine{00347\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00348\ \}}
-\DoxyCodeLine{00349\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(int16\_t\ number,\ int16\_t\ min,\ int16\_t\ max,\ \textcolor{keywordtype}{bool}\ t\_supressError\ =\ \textcolor{keyword}{false})\ \{}
-\DoxyCodeLine{00350\ \ \ \ \ \textcolor{keywordflow}{if}\ ((number\ <\ min)\ ||\ (number\ >\ max))\ \{}
-\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!t\_supressError)\ \{\mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Number\ out\ of\ bounds"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});\ \}}
-\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00353\ \ \ \ \ \}}
-\DoxyCodeLine{00354\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00355\ \}}
-\DoxyCodeLine{00356\ }
-\DoxyCodeLine{00357\ String\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}(String\ expression,\ \textcolor{keywordtype}{bool}\ force)\ \{}
-\DoxyCodeLine{00358\ \ \ \ \ String\ delimit\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00359\ }
-\DoxyCodeLine{00360\ \ \ \ \ \textcolor{keywordtype}{int}\ singleQ\ =\ expression.indexOf(\textcolor{stringliteral}{"{}'"{}});}
-\DoxyCodeLine{00361\ \ \ \ \ \textcolor{keywordtype}{int}\ doubleQ\ =\ expression.indexOf(\textcolor{stringliteral}{"{}\(\backslash\)"{}"{}});}
-\DoxyCodeLine{00362\ }
-\DoxyCodeLine{00363\ \ \ \ \ \textcolor{keywordflow}{if}\ (singleQ\ <\ doubleQ)\ \{}
-\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ delimit\ =\ \textcolor{stringliteral}{"{}'"{}};}
-\DoxyCodeLine{00365\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (singleQ\ >\ doubleQ)\ \{}
-\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ delimit\ =\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};}
-\DoxyCodeLine{00367\ \ \ \ \ \}}
-\DoxyCodeLine{00368\ }
-\DoxyCodeLine{00369\ \ \ \ \ \textcolor{comment}{//if\ ((force)\ \&\&\ (delimit\ ==\ "{}"{})\ \&\&\ ((singleQ\ >\ -\/1)\ ||\ (doubleQ\ >\ -\/1)))\ \{\ delimit\ =\ "{}'"{};\ \}}}
-\DoxyCodeLine{00370\ \ \ \ \ \textcolor{keywordflow}{if}\ (force)\ \{\ delimit\ =\ \textcolor{stringliteral}{"{}'"{}};\ \}}
-\DoxyCodeLine{00371\ \ \ \ \ \textcolor{keywordflow}{if}\ ((singleQ\ ==\ 0)\ ||\ (doubleQ\ ==\ 0))\ \{\ delimit\ =\ \textcolor{stringliteral}{"{}"{}};\ \}}
-\DoxyCodeLine{00372\ }
-\DoxyCodeLine{00373\ \ \ \ \ expression\ =\ delimit\ +\ expression\ +\ delimit;}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].arguments\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ \textcolor{stringliteral}{"{}:"{}}\ +\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_a439b7c89ac67641d420f0b485a7ea18d}{arguments}}\ +\ \textcolor{stringliteral}{"{}:"{}};\ \}}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ help\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}}\ +\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_adb3c941261b6fa076154cb515884042d}{Help}}\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};\ \textcolor{comment}{//\ +\ "{}\(\backslash\)n"{};}}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{help,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a2c1b595c80ad4c1b7452f5ef8887ffba}{debugPrintType::Help}}\});}
+\DoxyCodeLine{00305\ \ \ \ \ \}}
+\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keywordflow}{return}\ help;}
+\DoxyCodeLine{00307\ \}}
+\DoxyCodeLine{00308\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00309\ \textcolor{comment}{bool\ skipToCommand(commandList\ *commands,\ uint16\_t\ *index,\ String\ command)\ \{}}
+\DoxyCodeLine{00310\ \textcolor{comment}{\ \ uint16\_t\ j\ =\ *index;}}
+\DoxyCodeLine{00311\ \textcolor{comment}{\ \ debugPrintln("{}Starting\ test\ at\ "{}\ +\ String(j),\ Debug);}}
+\DoxyCodeLine{00312\ \textcolor{comment}{\ \ do\ \{}}
+\DoxyCodeLine{00313\ \textcolor{comment}{\ \ \ \ j++;}}
+\DoxyCodeLine{00314\ \textcolor{comment}{\ \ \ \ if\ (j\ >=\ commands-\/>item.size())\ \{\ break;\ \}}}
+\DoxyCodeLine{00315\ \textcolor{comment}{\ \ \}\ while\ (commands-\/>item[j].command\ !=\ command);}}
+\DoxyCodeLine{00316\ \textcolor{comment}{}}
+\DoxyCodeLine{00317\ \textcolor{comment}{\ \ debugPrintln("{}Ending\ loop\ at\ "{}\ +\ String(j)\ +\ "{},\ commands\ length\ "{}\ +\ String(commands-\/>item.size()),\ Debug);}}
+\DoxyCodeLine{00318\ \textcolor{comment}{}}
+\DoxyCodeLine{00319\ \textcolor{comment}{\ \ if\ (j\ >=\ commands-\/>item.size())\ \{}}
+\DoxyCodeLine{00320\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Termination\ not\ found,\ skipping"{},\ Error);}}
+\DoxyCodeLine{00321\ \textcolor{comment}{\ \ \ \ return\ false;}}
+\DoxyCodeLine{00322\ \textcolor{comment}{\ \ \}\ else}}
+\DoxyCodeLine{00323\ \textcolor{comment}{\ \ if\ (commands-\/>item[j].command\ ==\ command)\ \{}}
+\DoxyCodeLine{00324\ \textcolor{comment}{\ \ \ \ *index\ =\ j;}}
+\DoxyCodeLine{00325\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Skipping\ forward\ to\ command\ "{}\ +\ String(j),\ Debug);}}
+\DoxyCodeLine{00326\ \textcolor{comment}{\ \ \ \ return\ true;}}
+\DoxyCodeLine{00327\ \textcolor{comment}{\ \ \}}}
+\DoxyCodeLine{00328\ \textcolor{comment}{\ \ return\ false;}}
+\DoxyCodeLine{00329\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00330\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \{\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{NotFound}}\ =\ \ 0,\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{Ok}}\ =\ 1,\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20}{CommandFailed}}\ =\ 2,\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{WrongArgumentCount}}\ =\ 3,\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a6e204fafb4965a8a79b8ac29834195e2}{WrongArgumentMinimum}}\ =\ 4,\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7945af4588755e4b73b7855397babbb1}{WrongArgumentValue}}\ =\ 5,\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{PassThrough}}\ =\ 6\ \};}
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00334\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ uint8\_t\ arguments,\ \textcolor{keywordtype}{bool}\ t\_supressError\ =\ \textcolor{keyword}{false})\ \{}
+\DoxyCodeLine{00335\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size()\ !=\ arguments)\ \{}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!t\_supressError)\ \{}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Wrong\ number\ of\ arguments,\ got\ "{}}\ +\ String(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size())\ +\ \textcolor{stringliteral}{"{}\ expected\ "{}}\ +\ String(arguments),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00340\ \ \ \ \ \}}
+\DoxyCodeLine{00341\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00342\ \}}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00344\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_a0af0c008c80e8b315e813ac91855b997}{checkArgumentsMin}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ uint8\_t\ argumentsMin)\ \{}
+\DoxyCodeLine{00345\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size()\ <\ argumentsMin)\ \{}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Wrong\ number\ of\ arguments"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00348\ \ \ \ \ \}}
+\DoxyCodeLine{00349\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00350\ \}}
+\DoxyCodeLine{00351\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(int16\_t\ number,\ int16\_t\ min,\ int16\_t\ max,\ \textcolor{keywordtype}{bool}\ t\_supressError\ =\ \textcolor{keyword}{false})\ \{}
+\DoxyCodeLine{00352\ \ \ \ \ \textcolor{keywordflow}{if}\ ((number\ <\ min)\ ||\ (number\ >\ max))\ \{}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!t\_supressError)\ \{\mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Number\ out\ of\ bounds"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});\ \}}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00355\ \ \ \ \ \}}
+\DoxyCodeLine{00356\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00357\ \}}
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00359\ String\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}(String\ expression,\ \textcolor{keywordtype}{bool}\ force)\ \{}
+\DoxyCodeLine{00360\ \ \ \ \ String\ delimit\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keywordtype}{int}\ singleQ\ =\ expression.indexOf(\textcolor{stringliteral}{"{}'"{}});}
+\DoxyCodeLine{00363\ \ \ \ \ \textcolor{keywordtype}{int}\ doubleQ\ =\ expression.indexOf(\textcolor{stringliteral}{"{}\(\backslash\)"{}"{}});}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00365\ \ \ \ \ \textcolor{keywordflow}{if}\ (singleQ\ <\ doubleQ)\ \{}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ delimit\ =\ \textcolor{stringliteral}{"{}'"{}};}
+\DoxyCodeLine{00367\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (singleQ\ >\ doubleQ)\ \{}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ delimit\ =\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};}
+\DoxyCodeLine{00369\ \ \ \ \ \}}
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00371\ \ \ \ \ \textcolor{comment}{//if\ ((force)\ \&\&\ (delimit\ ==\ "{}"{})\ \&\&\ ((singleQ\ >\ -\/1)\ ||\ (doubleQ\ >\ -\/1)))\ \{\ delimit\ =\ "{}'"{};\ \}}}
+\DoxyCodeLine{00372\ \ \ \ \ \textcolor{keywordflow}{if}\ (force)\ \{\ delimit\ =\ \textcolor{stringliteral}{"{}'"{}};\ \}}
+\DoxyCodeLine{00373\ \ \ \ \ \textcolor{keywordflow}{if}\ ((singleQ\ ==\ 0)\ ||\ (doubleQ\ ==\ 0))\ \{\ delimit\ =\ \textcolor{stringliteral}{"{}"{}};\ \}}
 \DoxyCodeLine{00374\ }
-\DoxyCodeLine{00375\ \ \ \ \ \textcolor{keywordflow}{if}\ (delimit\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{}
-\DoxyCodeLine{00376\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Using\ quotestyle\ "{}\ +\ delimit\ +\ "{},\ complete\ expression\ is\ "{}\ +\ expression,\ debugPrintType::Debug);}}
-\DoxyCodeLine{00377\ \ \ \ \ \}}
-\DoxyCodeLine{00378\ }
-\DoxyCodeLine{00379\ \ \ \ \ \textcolor{keywordflow}{return}\ expression;}
-\DoxyCodeLine{00380\ \}}
-\DoxyCodeLine{00381\ }
-\DoxyCodeLine{00382\ String\ \mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(String\ expression)\ \{}
-\DoxyCodeLine{00383\ \textcolor{comment}{/*\ \ \ \ \ \ if\ ((expression.indexOf("{}\(\backslash\)"{}"{})\ !=\ -\/1)\ ||\ (expression.indexOf("{}'"{})\ !=\ -\/1))\ \{}}
-\DoxyCodeLine{00384\ \textcolor{comment}{}}
-\DoxyCodeLine{00385\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Cleaned\ expression\ "{}\ +\ item[i].argument[j],\ debugPrintType::Debug);}}
-\DoxyCodeLine{00386\ \textcolor{comment}{\ \ \ \ \}*/}}
-\DoxyCodeLine{00387\ \ \ \ \ \textcolor{comment}{//\ 1.\ strip\ starting\ and\ trailing\ white\ spaces}}
-\DoxyCodeLine{00388\ \ \ \ \ \textcolor{comment}{//\ 2.\ strip\ starting\ and\ trailing\ commas}}
-\DoxyCodeLine{00389\ \ \ \ \ \textcolor{comment}{//\ 3.\ check\ if\ beginning\ starts\ with\ a\ quote}}
-\DoxyCodeLine{00390\ \ \ \ \ \textcolor{comment}{//\ \ 3.1\ make\ sure\ that\ the\ end\ contains\ the\ same\ quote,\ if\ not,\ signal\ an\ error}}
-\DoxyCodeLine{00391\ \ \ \ \ \textcolor{comment}{//\ \ 3.2\ strip\ quotes\ from\ start\ and\ end}}
-\DoxyCodeLine{00392\ \ \ \ \ expression\ =\ expression.trim();}
-\DoxyCodeLine{00393\ }
-\DoxyCodeLine{00394\ \ \ \ \ \textcolor{keywordflow}{if}\ ((String(expression[0])\ ==\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}})\ ||\ (String(expression[0])\ ==\ \textcolor{stringliteral}{"{}'"{}}))\ \{}
-\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Stripping\ start\ \&\ end\ quotes\ from\ -\/"{}}\ +\ expression\ +\ \textcolor{stringliteral}{"{}-\/"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
-\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (expression[0]\ !=\ expression[expression.length()-\/1])\ \{}
-\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}ERROR\ Quote\ start\ and\ end\ doesn't\ match"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
-\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ expression\ =\ expression.substring(1,\ expression.length()\ -\/\ 1);}
-\DoxyCodeLine{00400\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Stripped\ expression\ is\ -\/"{}\ +\ expression\ +\ "{}-\/"{},\ debugPrintType::Debug);}}
-\DoxyCodeLine{00401\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00402\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}The\ first\ character\ is\ -\/"{}\ +\ String(expression[0])\ +\ "{}-\/"{},\ debugPrintType::Debug);}}
-\DoxyCodeLine{00403\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}No\ quotes\ found\ in\ the\ string\ -\/"{}\ +\ expression\ +\ "{}-\/"{},\ debugPrintType::Debug);}}
-\DoxyCodeLine{00404\ \ \ \ \ \}}
-\DoxyCodeLine{00405\ }
-\DoxyCodeLine{00406\ \ \ \ \ \textcolor{keywordflow}{return}\ expression;}
-\DoxyCodeLine{00407\ \}}
-\DoxyCodeLine{00408\ }
-\DoxyCodeLine{00409\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00375\ \ \ \ \ expression\ =\ delimit\ +\ expression\ +\ delimit;}
+\DoxyCodeLine{00376\ }
+\DoxyCodeLine{00377\ \ \ \ \ \textcolor{keywordflow}{if}\ (delimit\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{}
+\DoxyCodeLine{00378\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Using\ quotestyle\ "{}\ +\ delimit\ +\ "{},\ complete\ expression\ is\ "{}\ +\ expression,\ debugPrintType::Debug);}}
+\DoxyCodeLine{00379\ \ \ \ \ \}}
+\DoxyCodeLine{00380\ }
+\DoxyCodeLine{00381\ \ \ \ \ \textcolor{keywordflow}{return}\ expression;}
+\DoxyCodeLine{00382\ \}}
+\DoxyCodeLine{00383\ }
+\DoxyCodeLine{00384\ String\ \mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(String\ expression)\ \{}
+\DoxyCodeLine{00385\ \textcolor{comment}{/*\ \ \ \ \ \ if\ ((expression.indexOf("{}\(\backslash\)"{}"{})\ !=\ -\/1)\ ||\ (expression.indexOf("{}'"{})\ !=\ -\/1))\ \{}}
+\DoxyCodeLine{00386\ \textcolor{comment}{}}
+\DoxyCodeLine{00387\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Cleaned\ expression\ "{}\ +\ item[i].argument[j],\ debugPrintType::Debug);}}
+\DoxyCodeLine{00388\ \textcolor{comment}{\ \ \ \ \}*/}}
+\DoxyCodeLine{00389\ \ \ \ \ \textcolor{comment}{//\ 1.\ strip\ starting\ and\ trailing\ white\ spaces}}
+\DoxyCodeLine{00390\ \ \ \ \ \textcolor{comment}{//\ 2.\ strip\ starting\ and\ trailing\ commas}}
+\DoxyCodeLine{00391\ \ \ \ \ \textcolor{comment}{//\ 3.\ check\ if\ beginning\ starts\ with\ a\ quote}}
+\DoxyCodeLine{00392\ \ \ \ \ \textcolor{comment}{//\ \ 3.1\ make\ sure\ that\ the\ end\ contains\ the\ same\ quote,\ if\ not,\ signal\ an\ error}}
+\DoxyCodeLine{00393\ \ \ \ \ \textcolor{comment}{//\ \ 3.2\ strip\ quotes\ from\ start\ and\ end}}
+\DoxyCodeLine{00394\ \ \ \ \ expression\ =\ expression.trim();}
+\DoxyCodeLine{00395\ }
+\DoxyCodeLine{00396\ \ \ \ \ \textcolor{keywordflow}{if}\ ((String(expression[0])\ ==\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}})\ ||\ (String(expression[0])\ ==\ \textcolor{stringliteral}{"{}'"{}}))\ \{}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Stripping\ start\ \&\ end\ quotes\ from\ -\/"{}}\ +\ expression\ +\ \textcolor{stringliteral}{"{}-\/"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (expression[0]\ !=\ expression[expression.length()-\/1])\ \{}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}ERROR\ Quote\ start\ and\ end\ doesn't\ match"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ expression\ =\ expression.substring(1,\ expression.length()\ -\/\ 1);}
+\DoxyCodeLine{00402\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Stripped\ expression\ is\ -\/"{}\ +\ expression\ +\ "{}-\/"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00403\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00404\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}The\ first\ character\ is\ -\/"{}\ +\ String(expression[0])\ +\ "{}-\/"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00405\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}No\ quotes\ found\ in\ the\ string\ -\/"{}\ +\ expression\ +\ "{}-\/"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00406\ \ \ \ \ \}}
+\DoxyCodeLine{00407\ }
+\DoxyCodeLine{00408\ \ \ \ \ \textcolor{keywordflow}{return}\ expression;}
+\DoxyCodeLine{00409\ \}}
+\DoxyCodeLine{00410\ }
+\DoxyCodeLine{00411\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

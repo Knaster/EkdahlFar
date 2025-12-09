@@ -37,6 +37,8 @@ bool exitWithError(eCalibrationResult error) {
     case CR_Err_MotorNotCalibrated:
         debugPrintln("Error; motor hasn't been calibrated yet", debugPrintType::Error);
         break;
+    case CR_Ok:
+        break;
     }
     return false;
 }

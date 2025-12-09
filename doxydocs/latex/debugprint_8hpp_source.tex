@@ -20,46 +20,54 @@
 \DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
 \DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
 \DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
-\DoxyCodeLine{00019\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debugPrintType}}\ \{\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a65f6b55fdc64778bf10632a795b97761}{USB}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4aa1e0ed72a417f9c6ec63b58d565357f3}{Hardware}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a18f893264a00711081b62de694f99db4}{Undefined}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a8d73849a4fff2c301f96a1748b8b9865}{Priority}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{EParser}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{TextInfo}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a2c1b595c80ad4c1b7452f5ef8887ffba}{Help}}\};}
-\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ debugPrintTypes\ 11}}
-\DoxyCodeLine{00021\ String\ \mbox{\hyperlink{debugprint_8hpp_acbab4b58032141437b697b6071034ed6}{debugPrintTypeName}}[\mbox{\hyperlink{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}{debugPrintTypes}}]\ =\ \{\ \textcolor{stringliteral}{"{}command"{}},\ \textcolor{stringliteral}{"{}usb"{}},\ \textcolor{stringliteral}{"{}hardware"{}}\ ,\ \textcolor{stringliteral}{"{}undefined"{}},\ \textcolor{stringliteral}{"{}priority"{}},\ \textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}inforequest"{}},\ \textcolor{stringliteral}{"{}expressionparser"{}},\ \textcolor{stringliteral}{"{}debug"{}},\ \textcolor{stringliteral}{"{}textinfo"{}},\ \textcolor{stringliteral}{"{}help"{}}\ \};}
-\DoxyCodeLine{00022\ String\ \mbox{\hyperlink{debugprint_8hpp_a325006d92e4f547b1b983336d5be8b08}{debugPrintTypeNameShort}}[\mbox{\hyperlink{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}{debugPrintTypes}}]\ =\ \{\ \textcolor{stringliteral}{"{}cmd"{}},\ \textcolor{stringliteral}{"{}usb"{}},\ \textcolor{stringliteral}{"{}hw"{}},\ \textcolor{stringliteral}{"{}un"{}},\ \textcolor{stringliteral}{"{}pri"{}},\ \textcolor{stringliteral}{"{}err"{}},\ \textcolor{stringliteral}{"{}irq"{}},\ \textcolor{stringliteral}{"{}ep"{}},\ \textcolor{stringliteral}{"{}dbg"{}},\ \textcolor{stringliteral}{"{}txi"{}},\ \textcolor{stringliteral}{"{}hlp"{}}\};}
-\DoxyCodeLine{00023\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[\mbox{\hyperlink{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}{debugPrintTypes}}]\ =\ \{\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true}\ \};}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{debugprint_8hpp_a02212746d4c3138ec12bc5d582e5dc8f}{debugPrintCheckType}}(\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debugPrintType}}\ printType)\ \{}
-\DoxyCodeLine{00026\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[printType]\ ==\ \textcolor{keyword}{true})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
-\DoxyCodeLine{00027\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00028\ \}}
-\DoxyCodeLine{00029\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{debugprint_8hpp_a12ba011dd5b1adf8f77184369290a419}{debugPrint}}(String\ text,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debugPrintType}}\ printType)\ \{}
-\DoxyCodeLine{00030\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8hpp_a02212746d4c3138ec12bc5d582e5dc8f}{debugPrintCheckType}}(printType))\ \{\ ssOutput.print(\textcolor{stringliteral}{"{}["{}}\ +\ \mbox{\hyperlink{debugprint_8hpp_a325006d92e4f547b1b983336d5be8b08}{debugPrintTypeNameShort}}[printType]\ +\ \textcolor{stringliteral}{"{}]"{}}\ +\ text);\ \}}
-\DoxyCodeLine{00031\ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00032\ \}}
-\DoxyCodeLine{00033\ }
-\DoxyCodeLine{00034\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(String\ text,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debugPrintType}}\ printType)\ \{}
-\DoxyCodeLine{00035\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8hpp_a02212746d4c3138ec12bc5d582e5dc8f}{debugPrintCheckType}}(printType))\ \{\ ssOutput.println(\textcolor{stringliteral}{"{}["{}}\ +\ \mbox{\hyperlink{debugprint_8hpp_a325006d92e4f547b1b983336d5be8b08}{debugPrintTypeNameShort}}[printType]\ +\ \textcolor{stringliteral}{"{}]"{}}\ +\ text);\ \}\ \textcolor{comment}{//\ +\ "{}\ ["{}\ +\ debugPrintTypeName[printType]\ +\ "{}]"{}}}
-\DoxyCodeLine{00036\ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00037\ \}}
-\DoxyCodeLine{00038\ }
-\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{debugprint_8hpp_a01bdc1ea330372bc3011577c0eb53ce9}{debugRaw}}(String\ text)\ \{}
-\DoxyCodeLine{00040\ \ \ \ \ ssOutput.println(text);}
-\DoxyCodeLine{00041\ \}}
-\DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{debugprint_8hpp_ae6b44982470212efaf4da1bc81b5820e}{setDebugReporting}}(String\ debugName,\ \textcolor{keywordtype}{bool}\ setting)\ \{}
-\DoxyCodeLine{00044\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<\mbox{\hyperlink{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}{debugPrintTypes}};\ i++)\ \{}
-\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8hpp_acbab4b58032141437b697b6071034ed6}{debugPrintTypeName}}[i]\ ==\ debugName)\ \{}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[i]\ =\ setting;}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Setting\ reporting\ of\ name\ "{}}\ +\ debugName\ +\ \textcolor{stringliteral}{"{}\ to\ "{}}\ +\ setting,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}});}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00049\ \ \ \ \ \}}
-\DoxyCodeLine{00050\ \ \ \}}
-\DoxyCodeLine{00051\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00052\ \}}
-\DoxyCodeLine{00053\ }
-\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ commandResponseType\ debugPrintType}}
-\DoxyCodeLine{00055\ }
-\DoxyCodeLine{00056\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcommandResponse}{commandResponse}}\ \{}
-\DoxyCodeLine{00057\ \ \ \ \ String\ \mbox{\hyperlink{structcommandResponse_a15fbee9577b960681f4d8205ce8afc65}{response}};}
-\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a64739a0f4e627e77b702cb4d964bcdb5}{commandResponseType}}\ \mbox{\hyperlink{structcommandResponse_adbc467c2f02ce2bef481f8ee0d4ae7d8}{responseType}};}
-\DoxyCodeLine{00059\ \};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\ \#ifndef\ DEBUGPRINT\_H}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\ \#define\ DEBUGPRINT\_H}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\ \#include\ <WProgram.h>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\ \#include\ "{}string.h"{}}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debugPrintType}}\ \{\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a65f6b55fdc64778bf10632a795b97761}{USB}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4aa1e0ed72a417f9c6ec63b58d565357f3}{Hardware}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a18f893264a00711081b62de694f99db4}{Undefined}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a8d73849a4fff2c301f96a1748b8b9865}{Priority}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{EParser}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{TextInfo}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a2c1b595c80ad4c1b7452f5ef8887ffba}{Help}}\};}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ debugPrintTypes\ 11}}
+\DoxyCodeLine{00028\ String\ \mbox{\hyperlink{debugprint_8hpp_acbab4b58032141437b697b6071034ed6}{debugPrintTypeName}}[\mbox{\hyperlink{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}{debugPrintTypes}}]\ =\ \{\ \textcolor{stringliteral}{"{}command"{}},\ \textcolor{stringliteral}{"{}usb"{}},\ \textcolor{stringliteral}{"{}hardware"{}}\ ,\ \textcolor{stringliteral}{"{}undefined"{}},\ \textcolor{stringliteral}{"{}priority"{}},\ \textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}inforequest"{}},\ \textcolor{stringliteral}{"{}expressionparser"{}},\ \textcolor{stringliteral}{"{}debug"{}},\ \textcolor{stringliteral}{"{}textinfo"{}},\ \textcolor{stringliteral}{"{}help"{}}\ \};}
+\DoxyCodeLine{00029\ String\ \mbox{\hyperlink{debugprint_8hpp_a325006d92e4f547b1b983336d5be8b08}{debugPrintTypeNameShort}}[\mbox{\hyperlink{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}{debugPrintTypes}}]\ =\ \{\ \textcolor{stringliteral}{"{}cmd"{}},\ \textcolor{stringliteral}{"{}usb"{}},\ \textcolor{stringliteral}{"{}hw"{}},\ \textcolor{stringliteral}{"{}un"{}},\ \textcolor{stringliteral}{"{}pri"{}},\ \textcolor{stringliteral}{"{}err"{}},\ \textcolor{stringliteral}{"{}irq"{}},\ \textcolor{stringliteral}{"{}ep"{}},\ \textcolor{stringliteral}{"{}dbg"{}},\ \textcolor{stringliteral}{"{}txi"{}},\ \textcolor{stringliteral}{"{}hlp"{}}\};}
+\DoxyCodeLine{00030\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[\mbox{\hyperlink{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}{debugPrintTypes}}]\ =\ \{\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true}\ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{debugprint_8hpp_a02212746d4c3138ec12bc5d582e5dc8f}{debugPrintCheckType}}(\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debugPrintType}}\ printType)\ \{}
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[printType]\ ==\ \textcolor{keyword}{true})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00035\ \}}
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{debugprint_8hpp_a12ba011dd5b1adf8f77184369290a419}{debugPrint}}(String\ text,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debugPrintType}}\ printType)\ \{}
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8hpp_a02212746d4c3138ec12bc5d582e5dc8f}{debugPrintCheckType}}(printType))\ \{\ ssOutput.print(\textcolor{stringliteral}{"{}["{}}\ +\ \mbox{\hyperlink{debugprint_8hpp_a325006d92e4f547b1b983336d5be8b08}{debugPrintTypeNameShort}}[printType]\ +\ \textcolor{stringliteral}{"{}]"{}}\ +\ text);\ \}}
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00039\ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(String\ text,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debugPrintType}}\ printType)\ \{}
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8hpp_a02212746d4c3138ec12bc5d582e5dc8f}{debugPrintCheckType}}(printType))\ \{\ ssOutput.println(\textcolor{stringliteral}{"{}["{}}\ +\ \mbox{\hyperlink{debugprint_8hpp_a325006d92e4f547b1b983336d5be8b08}{debugPrintTypeNameShort}}[printType]\ +\ \textcolor{stringliteral}{"{}]"{}}\ +\ text);\ \}\ \textcolor{comment}{//\ +\ "{}\ ["{}\ +\ debugPrintTypeName[printType]\ +\ "{}]"{}}}
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00044\ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{debugprint_8hpp_a01bdc1ea330372bc3011577c0eb53ce9}{debugRaw}}(String\ text)\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ ssOutput.println(text);}
+\DoxyCodeLine{00048\ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{debugprint_8hpp_ae6b44982470212efaf4da1bc81b5820e}{setDebugReporting}}(String\ debugName,\ \textcolor{keywordtype}{bool}\ setting)\ \{}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<\mbox{\hyperlink{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}{debugPrintTypes}};\ i++)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8hpp_acbab4b58032141437b697b6071034ed6}{debugPrintTypeName}}[i]\ ==\ debugName)\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[i]\ =\ setting;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Setting\ reporting\ of\ name\ "{}}\ +\ debugName\ +\ \textcolor{stringliteral}{"{}\ to\ "{}}\ +\ setting,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}});}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00056\ \ \ \ \ \}}
+\DoxyCodeLine{00057\ \ \ \}}
+\DoxyCodeLine{00058\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00059\ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ commandResponseType\ debugPrintType}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcommandResponse}{commandResponse}}\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ String\ \mbox{\hyperlink{structcommandResponse_a15fbee9577b960681f4d8205ce8afc65}{response}};}
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a64739a0f4e627e77b702cb4d964bcdb5}{commandResponseType}}\ \mbox{\hyperlink{structcommandResponse_adbc467c2f02ce2bef481f8ee0d4ae7d8}{responseType}};}
+\DoxyCodeLine{00066\ \};}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DEBUGPRINT\_H}}
 
 \end{DoxyCode}

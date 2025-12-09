@@ -247,7 +247,7 @@ eCalibrationResult CalibrateBow::findMinMaxPressure() {
     bowControl->setPressureAutocorrect(autoCorrectPositionSave);
     bowControl->setPressureMotorSpeed(speed);
 
-    return safeExitWithResult(result);
+    return safeExitWithResult(result, PIDOn);
 }
 
 eCalibrationResult CalibrateBow::safeExitWithResult(eCalibrationResult result, bool pidState) {

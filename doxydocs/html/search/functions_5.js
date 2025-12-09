@@ -1,17 +1,17 @@
 var searchData=
 [
-  ['findlevel_0',['findLevel',['../classcalibrateMute.html#a593fd649dc0ca4e299ffe413e66712ca',1,'calibrateMute']]],
-  ['findlevelsilence_1',['findLevelSilence',['../classcalibrateMute.html#af16fcc7c096ea2f830319fced315428a',1,'calibrateMute']]],
-  ['findmaxpressure_2',['findMaxPressure',['../classcalibrate.html#ac7f4beb3939af5f301ee39f3b59bc74c',1,'calibrate']]],
-  ['findminmaxpressure_3',['findMinMaxPressure',['../classcalibrate.html#a8901c66131f46a26940c4ccd5d410996',1,'calibrate']]],
-  ['findminmaxspeedpid_4',['findMinMaxSpeedPID',['../classcalibrate.html#ab7f48f8f5de0d0e6ae30c0be6ca4843d',1,'calibrate']]],
-  ['findminmaxspeedpwm_5',['findMinMaxSpeedPWM',['../classcalibrate.html#a6654b82c8a1dbb55502cdfb4ef6a7b1f',1,'calibrate']]],
-  ['findminpressure_6',['findMinPressure',['../classcalibrate.html#a157d35f3855c4707cfe0d697bd557a8b',1,'calibrate']]],
-  ['findmutefirstcontact_7',['findMuteFirstContact',['../classcalibrateMute.html#a98cd0f2fdf0b1801b2ea943874072f53',1,'calibrateMute']]],
-  ['findmutelevels_8',['findMuteLevels',['../classcalibrateMute.html#a7519919b67f300e574d3ad7badcf7f57',1,'calibrateMute']]],
-  ['findmutesilence_9',['findMuteSilence',['../classcalibrateMute.html#a07470f67c1708ab459ef3d490123ba42',1,'calibrateMute']]],
-  ['findmutestall_10',['findMuteStall',['../classcalibrateMute.html#a4e6ae0e164043685de04408911947106',1,'calibrateMute']]],
+  ['farsingle_0',['FARSingle',['../classFARSingle.html#a8867fca68311c8c3c68478251009a26b',1,'FARSingle']]],
+  ['findlevel_1',['findLevel',['../classCalibrateMute.html#aeb87473967dfddc3686680c04153c72c',1,'CalibrateMute']]],
+  ['findlevelsilence_2',['findLevelSilence',['../classCalibrateMute.html#a058ae917ef92a3ec68b131d5a28091ae',1,'CalibrateMute']]],
+  ['findmaxpressure_3',['findMaxPressure',['../classCalibrateBow.html#a11577abd16b8d42f15592f2073e56157',1,'CalibrateBow']]],
+  ['findminmaxpressure_4',['findMinMaxPressure',['../classCalibrateBow.html#a4420111fa3dd5f773d96b16aafc8972b',1,'CalibrateBow']]],
+  ['findminmaxspeedpwm_5',['findMinMaxSpeedPWM',['../classCalibrateBow.html#a9e92861c49ee1f093bec2d24ea3e35c2',1,'CalibrateBow']]],
+  ['findminpressure_6',['findMinPressure',['../classCalibrateBow.html#a12009972a45e41c9d62d78a6220a99bd',1,'CalibrateBow']]],
+  ['findmutefirstcontact_7',['findMuteFirstContact',['../classCalibrateMute.html#ac795de2050af4c47513d6bc8f591e688',1,'CalibrateMute']]],
+  ['findmutelevels_8',['findMuteLevels',['../classCalibrateMute.html#a68a1737ec836189ee2495c4891d63f0b',1,'CalibrateMute']]],
+  ['findmutesilence_9',['findMuteSilence',['../classCalibrateMute.html#a9b9a4f0e0d85af62a814072239208e72',1,'CalibrateMute']]],
+  ['findmutestall_10',['findMuteStall',['../classCalibrateMute.html#aa27905148f2712814c5bd07caa33726c',1,'CalibrateMute']]],
   ['findnote_11',['findNote',['../midi_8cpp.html#a4989ed85e805ad55b1a49073de2380f9',1,'midi.cpp']]],
   ['freeram_12',['freeram',['../main_8cpp.html#afc3e7d08d802f694ab6a85e9908048f4',1,'main.cpp']]],
-  ['fullmute_13',['fullMute',['../classmute.html#ad50232c8241dcca30c410e900827369a',1,'mute']]]
+  ['fullmute_13',['fullMute',['../classMute.html#af168afb5de3626559c0124c0088565b8',1,'Mute']]]
 ];

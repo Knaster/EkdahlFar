@@ -50,7 +50,7 @@ eProcessResult Solenoid::processSerialCommand(commandItem *inCommandItem, std::v
             commandResponses->push_back({ "sed:" + String(solenoidEngageDuration), InfoRequest });
         } else {
             if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            solenoidEngageDuration = inCommandItem->argument[0].toInt();
+            setSolenoidDuration(inCommandItem->argument[0].toInt());
             commandResponses->push_back({"sed:" + String(solenoidEngageDuration), InfoRequest});
         }
     } else
@@ -86,7 +86,7 @@ eProcessResult Solenoid::processSerialCommand(commandItem *inCommandItem, std::v
     return eProcessResult::Ok;
 }
 
-eProcessResult Solenoid::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false, commandList *delegatedCommands = nullptr) {
+eProcessResult Solenoid::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
     return eProcessResult::NotFound;
 }
 
@@ -126,15 +126,11 @@ bool Solenoid::setSolenoidMax(uint16_t inMax) {
     return true;
 }
 
-uint16_t Solenoid::getSolenoidMax() { return forceMax; }
-
 bool Solenoid::setSolenoidMin(uint16_t inMin)  {
     if ((inMin <0) || (inMin > 65535)) { return false; }
     forceMin = inMin;
     return true;
 }
-
-uint16_t Solenoid::getSolenoidMin() { return forceMin; }
 
 bool Solenoid::setSolenoidMultiplier(float inMultiplier) {
  {
@@ -143,15 +139,11 @@ bool Solenoid::setSolenoidMultiplier(float inMultiplier) {
     return true;
 }}
 
-float Solenoid::getSolenoidMultiplier() { return forceMultiplier; }
-
 bool Solenoid::setSolenoidDuration(unsigned long inDuration)  {
     if ((inDuration < 0) || (inDuration > 250000)) { return false; }
     solenoidEngageDuration = inDuration;
     return false;
 }
-
-unsigned long Solenoid::getSolenoidDuration() { return solenoidEngageDuration; }
 
 bool Solenoid::update() {
     unsigned long currentTime = micros();

@@ -1,0 +1,97 @@
+\doxysection{pidcontroller.\+hpp}
+\hypertarget{pidcontroller_8hpp_source}{}\label{pidcontroller_8hpp_source}\index{pidcontroller.hpp@{pidcontroller.hpp}}
+\mbox{\hyperlink{pidcontroller_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PIDCONTROLLER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PIDCONTROLLER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{dcmotorcontrol_8cpp}{dcmotorcontrol.cpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ \mbox{\hyperlink{pidcontroller_8hpp_af4f8e8a4b715d2e5ca6c9927ce80ad93}{serialCommandsPID}}[]\ =\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidtargetfreq"{}},\ \textcolor{stringliteral}{"{}bptf"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ PID\ target\ frequency"{}}\ \},}
+\DoxyCodeLine{00008\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidki"{}},\ \textcolor{stringliteral}{"{}bpki"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ Ki\ parameter\ of\ the\ PID\ of\ the\ selected\ bow"{}}\ \},}
+\DoxyCodeLine{00009\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidkp"{}},\ \textcolor{stringliteral}{"{}bpkp"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ Kp\ parameter\ of\ the\ PID\ of\ the\ selected\ bow"{}}\ \},}
+\DoxyCodeLine{00010\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidkd"{}},\ \textcolor{stringliteral}{"{}bpkd"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ Kd\ parameter\ of\ the\ PID\ of\ the\ selected\ bow"{}}\ \},}
+\DoxyCodeLine{00011\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidintegratorerror"{}},\ \textcolor{stringliteral}{"{}bpie"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ lower\ threshold\ of\ error\ values\ for\ the\ PID\ integrator\ to\ ignore\ of\ the\ selected\ bow"{}}\ \},}
+\DoxyCodeLine{00012\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidr"{}},\ \textcolor{stringliteral}{"{}bpir"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Resets\ the\ PID\ of\ the\ selected\ bow"{}}\ \},}
+\DoxyCodeLine{00013\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidmaxerror"{}},\ \textcolor{stringliteral}{"{}bpme"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Maximum\ error\ to\ correct\ in\ each\ PID\ loop,\ essentially\ sets\ acceleration"{}}\ \},}
+\DoxyCodeLine{00014\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidpeakerror"{}},\ \textcolor{stringliteral}{"{}bpperr"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Get\ latest\ PID\ peak\ error"{}}\},}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorspeedmax"{}},\ \textcolor{stringliteral}{"{}bmsx"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ maximum\ speed\ limit"{}}\ \},}
+\DoxyCodeLine{00017\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorspeedmin"{}},\ \textcolor{stringliteral}{"{}bmsi"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ minimum\ speed\ limit"{}}\},}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidtargetfreq"{}},\ \textcolor{stringliteral}{"{}bcf"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Legacy\ command\ conversion"{}}\ \},}
+\DoxyCodeLine{00020\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidtargetfreq"{}},\ \textcolor{stringliteral}{"{}bowcontrolfrequency"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Legacy\ command\ conversion"{}}\ \}}
+\DoxyCodeLine{00021\ \};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ \mbox{\hyperlink{pidcontroller_8hpp_a01a6b43331b7609ce240ff556bb93d31}{serialCommandsPIDHidden}}[]\ =\ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmeasuretimetotarget"{}},\ \textcolor{stringliteral}{"{}bmtt"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Measure\ the\ time\ it\ takes\ to\ change\ from\ the\ current\ frequency\ to\ the\ target\ frequency"{}}\ \}}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPIDController}{PIDController}}\ \{}
+\DoxyCodeLine{00028\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{classPIDController}{PIDController}}(\mbox{\hyperlink{classDCMotorControl}{DCMotorControl}}\ \&\mbox{\hyperlink{classDCMotorControl}{DCMotorControl}});}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classPIDController_a698b5049315451aa42344da9c3a0c738}{processSerialCommand}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegate\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classPIDController_ae1776f861448d87c44395830ab659c4d}{processSerialCommandHidden}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegate\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00036\ \ \ \ \ String\ \mbox{\hyperlink{classPIDController_a1eb89031fc53df1e1e43e4f0440fb5e2}{dumpData}}();}
+\DoxyCodeLine{00037\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ \ \ \ bowIO\ *bowIOConnect;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ///<\ Pointer\ to\ associated\ bowIO\ object}}
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ \ \ \ CalibrationData\ *calibrationDataConnect;\ ///<\ Pointer\ to\ associated\ \_calibrationData\ object}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_a5c3eb07a0c4a00b86e1433b84e458a56}{Kp}}\ =\ 500;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_a8acd1f19045a89a9dbd1848e56ae6ae0}{Ki}}\ =\ 7;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_a22ef7c93498970edb0b04bef3ae3d2f9}{Kd}}\ =\ 200;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_a455a09fad7c3f0eb99d29505cc02f4c5}{previousError}}\ =\ 0.0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_a90107c556130bfbd7d3ab44cb2d1a936}{integratorIgnoreBelow}}\ =\ 0.1;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_ae3d460dc7aab69b2bbf9e4d2f7986525}{pidMaxError}}\ =\ 50;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_acdeca85f1c17132fca3eba126241c41e}{KpTerm}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_a20c6f80edcd517952c6766e38d36363e}{KiTerm}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_aa69bc8cde7aff590dd1517bec1df4448}{KdTerm}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_a9f1834a4933702b2de5076effea32f1f}{integral}}\ =\ 0.0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{classDCMotorControl}{DCMotorControl}}\ *\mbox{\hyperlink{classPIDController_af97ae23b468bb776bd33f3791e44f041}{dcMotorControl}};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_a365ba07a50e70055f61ab02a783996e0}{pidTargetSpeed}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_a80763665862ee12834aa7647090af340}{pidPeakError}}\ =\ 0;}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_a69f60934cd79167f898e5d121952eefe}{minSpeedHz}}\ =\ 20;}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_a02862e6a77b8c8503962e0547e5dfbd0}{maxSpeedHz}}\ =\ 550;}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{comment}{//PIDController(CalibrationData\ \&inCalibrationData,\ bowIO\ \&inBowIO);}}
+\DoxyCodeLine{00064\ \textcolor{comment}{\ /*****\ Module\ specific\ commands\ mirroring\ serially\ attainable\ commands\ *****/}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPIDController_ae0bbbe3b4f6578d6475307f83d3ca673}{pidReset}}()\ \{\ \mbox{\hyperlink{classPIDController_a9f1834a4933702b2de5076effea32f1f}{integral}}\ =\ 0;\ \};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPIDController_a3b463eb00aac83a6a4bba64686c9a524}{setPIDTarget}}(\textcolor{keywordtype}{float}\ inPIDTargetSpeed);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_a375a129b71794ea6d39ccc808447c448}{getPIDTarget}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classPIDController_a365ba07a50e70055f61ab02a783996e0}{pidTargetSpeed}};\ \};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_af164464e844f27bac30d7b9b99aef62b}{getPIDPeakError}}();}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_accf28de4b7e26653f461c9466521d3c3}{measureTimeToTarget}}(\textcolor{keywordtype}{float}\ \_pidTargetSpeed);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPIDController_a1915877c95834154fe7d038d42d70d26}{setMinSpeedHz}}(\textcolor{keywordtype}{float}\ inSpeed)\ \{\ \mbox{\hyperlink{classPIDController_a69f60934cd79167f898e5d121952eefe}{minSpeedHz}}\ =\ inSpeed;\ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_a06dcbfeaa89966438f3545216a4f7448}{getMinSpeedHz}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classPIDController_a69f60934cd79167f898e5d121952eefe}{minSpeedHz}};\ \};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPIDController_ac1bbccb833ee15c1cd135c5c64a23ed1}{setMaxSpeedHz}}(\textcolor{keywordtype}{float}\ inSpeed)\ \{\ \mbox{\hyperlink{classPIDController_a02862e6a77b8c8503962e0547e5dfbd0}{maxSpeedHz}}\ =\ inSpeed;\ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPIDController_a577132f4990b94d9fbb09d9ef267965e}{getMaxSpeedHz}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classPIDController_a02862e6a77b8c8503962e0547e5dfbd0}{maxSpeedHz}};\ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{comment}{/*****\ Hidden\ serial\ commands\ *****/}}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPIDController_a6bc8058b8cb2247d4c06e392c84545af}{setPIDTargetUnsafe}}(\textcolor{keywordtype}{float}\ inPIDTargetSpeed)\ \{\ \mbox{\hyperlink{classPIDController_a365ba07a50e70055f61ab02a783996e0}{pidTargetSpeed}}\ =\ inPIDTargetSpeed;\ \};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{comment}{/*****\ Internal\ commands\ for\ stand-\/alone\ and\ semi-\/modular\ use\ *****/}}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPIDController_a04e654ba7d6720fa68bb74946c0b138d}{pidControl}}();}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PIDCONTROLLER\_H}}
+
+\end{DoxyCode}

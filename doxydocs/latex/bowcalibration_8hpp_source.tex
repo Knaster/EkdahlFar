@@ -1,0 +1,65 @@
+\doxysection{bowcalibration.\+hpp}
+\hypertarget{bowcalibration_8hpp_source}{}\label{bowcalibration_8hpp_source}\index{bowcalibration.hpp@{bowcalibration.hpp}}
+\mbox{\hyperlink{bowcalibration_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <sys/\_stdint.h>}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ CALIBRATE\_H}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ CALIBRATE\_H}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{debugprint_8hpp}{debugprint.hpp}}"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{calibrationhelpers_8hpp}{calibrationhelpers.hpp}}"{}}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classCalibrateBow}{CalibrateBow}}\ \{}
+\DoxyCodeLine{00037\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{classBowControl}{BowControl}}\ *\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\ \ \ \ \#define\ testDelay\ 1\ }}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\ \ \ \ \#define\ deviation\ 2\ }}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\ \ \ \ \#define\ minTestFreq\ 1}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\ \ \ \ \#define\ maxTestFreq\ 1000}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\ \ \ \ \#define\ minPermissibleBowSpeedForCalibration\ 20}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\ \ \ \ \#define\ maxPowerUseMultiplierDuringCalibration\ 0.75}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow}{CalibrateBow}}(\mbox{\hyperlink{classBowControl}{BowControl}}\ *inBowControl);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCalibrateBow_a3da4a85fccb27f50fffb50edf205bd74}{waitForBowToStabilize}}(uint16\_t\ maxIterations);}
+\DoxyCodeLine{00052\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateBow_a12009972a45e41c9d62d78a6220a99bd}{findMinPressure}}();}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateBow_a11577abd16b8d42f15592f2073e56157}{findMaxPressure}}();}
+\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateBow_ac7276bb0954119025f6fc8746002789c}{safeExitWithResult}}(\mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ result,\ \textcolor{keywordtype}{bool}\ pidState\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00056\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classCalibrateBow_a07219a59c834914eb60c9f132beae507}{maxTestPressure}}\ =\ 60000;}
+\DoxyCodeLine{00059\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classCalibrateBow_a1c2a7dc5bc68301cbd3ac596431da525}{pressureTestRetract}}\ =\ 7500;}
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateBow_a4420111fa3dd5f773d96b16aafc8972b}{findMinMaxPressure}}();}
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateBow_a9e92861c49ee1f093bec2d24ea3e35c2}{findMinMaxSpeedPWM}}();}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{//eCalibrationResult\ findMinMaxSpeedPID();}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCalibrateBow_ac30fefcd9f184fa2f7258c6c2e354f57}{calibrateAll}}();}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ String\ \mbox{\hyperlink{classCalibrateBow_abb616193d4f13d78b94d37517ed964c2}{dumpData}}();}
+\DoxyCodeLine{00067\ \};}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

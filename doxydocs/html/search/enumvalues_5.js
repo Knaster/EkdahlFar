@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gotooffset_0',['GOTOOFFSET',['../classservoStepper.html#a3b3c9d6b2584f11fae8c214da48eab42a0af78a28f0bed73e3e49e45b30000511',1,'servoStepper']]]
+  ['gotooffset_0',['GOTOOFFSET',['../servostepper_8hpp.html#a142f56ac82b59271977a5351ea4e36f9a179e9d17bef72774376beb2d30082115',1,'servostepper.hpp']]]
 ];

@@ -1,18 +1,17 @@
 \doxysection{servostepper.\+hpp File Reference}
 \hypertarget{servostepper_8hpp}{}\label{servostepper_8hpp}\index{servostepper.hpp@{servostepper.hpp}}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{servostepper_8hpp__dep__incl}
+\includegraphics[height=550pt]{servostepper_8hpp__dep__incl}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classservoStepper}{servo\+Stepper}}
-\begin{DoxyCompactList}\small\item\em The purpose of this class is to control stepper motors in terms of positional indexing much like RC servos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -29,6 +28,31 @@ class \mbox{\hyperlink{classservoStepper}{servo\+Stepper}}
 \#define \mbox{\hyperlink{servostepper_8hpp_a3b55e293db0958e31aea2403eb0a8036}{home\+Sense\+Inactive}}~1
 \item 
 \#define \mbox{\hyperlink{servostepper_8hpp_af01638a8ef574abe19fcc5bfab1b3a28}{second\+Home\+Over\+Step}}~20\texorpdfstring{$\ast$}{*}32
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} \{ \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9}{REVERSE}} = 1
+, \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8aa26736999186daf8146f809e863712a1}{FORWARD}} = 0
+ \}
+\begin{DoxyCompactList}\small\item\em The purpose of this class is to control stepper motors in terms of positional indexing much like RC servos. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9}{e\+Homing\+Stage}} \{ \newline
+\mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a380c2e3ab567f5c3c5029541f2344d95}{UNHOMED}}
+, \mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a59dd6db7f5ad9ea58ce040c024ed7d53}{HOMED}}
+, \mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a2fd36a3a7f493497efb05fa8c48056cf}{FIRSTHOMINGRISING}}
+, \mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a5fd892078c6323b72bdb4ed2aa2093ae}{SECONDHOMINGFALLING}}
+, \newline
+\mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a61afdcd47391761dc1694c1821d182da}{SECONDHOMINGRISING}}
+, \mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9ad367a2acb72365efa8cb03d4c084a710}{FIRSTHOMINGFALLING}}
+, \mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a8679fee600df539d6eb94d910b257215}{MOVEPASTHOMESWITCH}}
+, \mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a27b4cfd42d8be775ee2c228a855cfa11}{MOVETOHOMESWITCH}}
+, \newline
+\mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a179e9d17bef72774376beb2d30082115}{GOTOOFFSET}}
+ \}
+\item 
+enum \mbox{\hyperlink{servostepper_8hpp_ac70df2e803fd66e0d043165d9d29e672}{e\+Edge\+Type}} \{ \mbox{\hyperlink{servostepper_8hpp_ac70df2e803fd66e0d043165d9d29e672afb746b6368a4aa524b3ffbc5a11ba865}{EDGERISING}} = 1
+, \mbox{\hyperlink{servostepper_8hpp_ac70df2e803fd66e0d043165d9d29e672a9777c3eb8ebbe70742e9794344597269}{EDGEFALLING}} = 0
+ \}
 \end{DoxyCompactItemize}
 
 
@@ -75,3 +99,90 @@ class \mbox{\hyperlink{classservoStepper}{servo\+Stepper}}
 \doxysubsubsection{\texorpdfstring{valuePerRotation}{valuePerRotation}}
 {\footnotesize\ttfamily \#define value\+Per\+Rotation~(\mbox{\hyperlink{servostepper_8hpp_a3f6ba33716d8ab9664efd36f48fc0663}{steps\+Per\+Revolution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{servostepper_8hpp_a6fe78f5adf18de498acaac123384db1a}{micro\+Steps}}) / 65535}
 
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{servostepper_8hpp_ac70df2e803fd66e0d043165d9d29e672}\label{servostepper_8hpp_ac70df2e803fd66e0d043165d9d29e672} 
+\index{servostepper.hpp@{servostepper.hpp}!eEdgeType@{eEdgeType}}
+\index{eEdgeType@{eEdgeType}!servostepper.hpp@{servostepper.hpp}}
+\doxysubsubsection{\texorpdfstring{eEdgeType}{eEdgeType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{servostepper_8hpp_ac70df2e803fd66e0d043165d9d29e672}{e\+Edge\+Type}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EDGERISING@{EDGERISING}!servostepper.hpp@{servostepper.hpp}}\index{servostepper.hpp@{servostepper.hpp}!EDGERISING@{EDGERISING}}}\Hypertarget{servostepper_8hpp_ac70df2e803fd66e0d043165d9d29e672afb746b6368a4aa524b3ffbc5a11ba865}\label{servostepper_8hpp_ac70df2e803fd66e0d043165d9d29e672afb746b6368a4aa524b3ffbc5a11ba865} 
+EDGERISING&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EDGEFALLING@{EDGEFALLING}!servostepper.hpp@{servostepper.hpp}}\index{servostepper.hpp@{servostepper.hpp}!EDGEFALLING@{EDGEFALLING}}}\Hypertarget{servostepper_8hpp_ac70df2e803fd66e0d043165d9d29e672a9777c3eb8ebbe70742e9794344597269}\label{servostepper_8hpp_ac70df2e803fd66e0d043165d9d29e672a9777c3eb8ebbe70742e9794344597269} 
+EDGEFALLING&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9}\label{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9} 
+\index{servostepper.hpp@{servostepper.hpp}!eHomingStage@{eHomingStage}}
+\index{eHomingStage@{eHomingStage}!servostepper.hpp@{servostepper.hpp}}
+\doxysubsubsection{\texorpdfstring{eHomingStage}{eHomingStage}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9}{e\+Homing\+Stage}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UNHOMED@{UNHOMED}!servostepper.hpp@{servostepper.hpp}}\index{servostepper.hpp@{servostepper.hpp}!UNHOMED@{UNHOMED}}}\Hypertarget{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a380c2e3ab567f5c3c5029541f2344d95}\label{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a380c2e3ab567f5c3c5029541f2344d95} 
+UNHOMED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HOMED@{HOMED}!servostepper.hpp@{servostepper.hpp}}\index{servostepper.hpp@{servostepper.hpp}!HOMED@{HOMED}}}\Hypertarget{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a59dd6db7f5ad9ea58ce040c024ed7d53}\label{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a59dd6db7f5ad9ea58ce040c024ed7d53} 
+HOMED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FIRSTHOMINGRISING@{FIRSTHOMINGRISING}!servostepper.hpp@{servostepper.hpp}}\index{servostepper.hpp@{servostepper.hpp}!FIRSTHOMINGRISING@{FIRSTHOMINGRISING}}}\Hypertarget{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a2fd36a3a7f493497efb05fa8c48056cf}\label{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a2fd36a3a7f493497efb05fa8c48056cf} 
+FIRSTHOMINGRISING&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SECONDHOMINGFALLING@{SECONDHOMINGFALLING}!servostepper.hpp@{servostepper.hpp}}\index{servostepper.hpp@{servostepper.hpp}!SECONDHOMINGFALLING@{SECONDHOMINGFALLING}}}\Hypertarget{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a5fd892078c6323b72bdb4ed2aa2093ae}\label{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a5fd892078c6323b72bdb4ed2aa2093ae} 
+SECONDHOMINGFALLING&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SECONDHOMINGRISING@{SECONDHOMINGRISING}!servostepper.hpp@{servostepper.hpp}}\index{servostepper.hpp@{servostepper.hpp}!SECONDHOMINGRISING@{SECONDHOMINGRISING}}}\Hypertarget{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a61afdcd47391761dc1694c1821d182da}\label{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a61afdcd47391761dc1694c1821d182da} 
+SECONDHOMINGRISING&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FIRSTHOMINGFALLING@{FIRSTHOMINGFALLING}!servostepper.hpp@{servostepper.hpp}}\index{servostepper.hpp@{servostepper.hpp}!FIRSTHOMINGFALLING@{FIRSTHOMINGFALLING}}}\Hypertarget{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9ad367a2acb72365efa8cb03d4c084a710}\label{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9ad367a2acb72365efa8cb03d4c084a710} 
+FIRSTHOMINGFALLING&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MOVEPASTHOMESWITCH@{MOVEPASTHOMESWITCH}!servostepper.hpp@{servostepper.hpp}}\index{servostepper.hpp@{servostepper.hpp}!MOVEPASTHOMESWITCH@{MOVEPASTHOMESWITCH}}}\Hypertarget{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a8679fee600df539d6eb94d910b257215}\label{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a8679fee600df539d6eb94d910b257215} 
+MOVEPASTHOMESWITCH&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MOVETOHOMESWITCH@{MOVETOHOMESWITCH}!servostepper.hpp@{servostepper.hpp}}\index{servostepper.hpp@{servostepper.hpp}!MOVETOHOMESWITCH@{MOVETOHOMESWITCH}}}\Hypertarget{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a27b4cfd42d8be775ee2c228a855cfa11}\label{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a27b4cfd42d8be775ee2c228a855cfa11} 
+MOVETOHOMESWITCH&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GOTOOFFSET@{GOTOOFFSET}!servostepper.hpp@{servostepper.hpp}}\index{servostepper.hpp@{servostepper.hpp}!GOTOOFFSET@{GOTOOFFSET}}}\Hypertarget{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a179e9d17bef72774376beb2d30082115}\label{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a179e9d17bef72774376beb2d30082115} 
+GOTOOFFSET&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}\label{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8} 
+\index{servostepper.hpp@{servostepper.hpp}!eStepDirection@{eStepDirection}}
+\index{eStepDirection@{eStepDirection}!servostepper.hpp@{servostepper.hpp}}
+\doxysubsubsection{\texorpdfstring{eStepDirection}{eStepDirection}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}}}
+
+
+
+The purpose of this class is to control stepper motors in terms of positional indexing much like RC servos. 
+
+All functions are non-\/blocking and update\+Position() has to be called continously in order for software and hardware to be updated.
+
+The function complete\+Task() can be called in order to block execution until the last command has completed or timed out
+
+The whole basis of indexing is in reference to a starting point; the home position. Therefore the first thing to do is to call the home() function \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{REVERSE@{REVERSE}!servostepper.hpp@{servostepper.hpp}}\index{servostepper.hpp@{servostepper.hpp}!REVERSE@{REVERSE}}}\Hypertarget{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9}\label{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9} 
+REVERSE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FORWARD@{FORWARD}!servostepper.hpp@{servostepper.hpp}}\index{servostepper.hpp@{servostepper.hpp}!FORWARD@{FORWARD}}}\Hypertarget{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8aa26736999186daf8146f809e863712a1}\label{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8aa26736999186daf8146f809e863712a1} 
+FORWARD&\\
+\hline
+
+\end{DoxyEnumFields}

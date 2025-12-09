@@ -36,12 +36,11 @@ FARSingle::FARSingle(void *muteStepperCallback, void *pressureStepperCallback, v
     pidInterrupt0.begin(pidCallback, bowControl->getPIDUpdateInterval());
 }
 
-eProcessResult FARSingle::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                           commandList *delegatedCommands = nullptr) {
+eProcessResult FARSingle::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
 
     processCommandItems(inCommandItem, serialCommandsFarSingle, sizeof(serialCommandsFarSingle)  / sizeof(serialCommandItem));
 
-    eProcessResult processResult;
+    eProcessResult processResult = eProcessResult::Ok;
     eCalibrationResult calibrationResult;
 
     if (inCommandItem->command == "help") {
@@ -112,10 +111,12 @@ eProcessResult FARSingle::processSerialCommand(commandItem *inCommandItem, std::
     return processResult;
 }
 
-eProcessResult FARSingle::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                                commandList *delegatedCommands = nullptr) {
+eProcessResult FARSingle::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
 
     eProcessResult processResult;
+
+    processResult = bowControl->processSerialCommandHidden(inCommandItem, commandResponses, request, delegate, delegatedCommands);
+    if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
 
     processResult = muteControl->processSerialCommandHidden(inCommandItem, commandResponses, request, delegate, delegatedCommands);
     if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }

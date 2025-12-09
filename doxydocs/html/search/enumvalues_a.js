@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['rest_0',['Rest',['../bowcontrol_8hpp.html#a48bbfa20eaad6b3ba296a4fcb2857e0ca661e967c4cfe56fd40a290550b64d8dc',1,'bowcontrol.hpp']]],
-  ['reverse_1',['REVERSE',['../classservoStepper.html#a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9',1,'servoStepper']]]
+  ['ok_0',['Ok',['../commandparser_8hpp.html#a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e',1,'commandparser.hpp']]]
 ];

@@ -138,11 +138,11 @@ uint8_t BowActuators::setBowActuator(uint8_t t_actuator) {
     }
     return m_currentBowActuator;
 };
-
+/*
 uint8_t BowActuators::getBowActuator() {
     return m_currentBowActuator;
 }
-
+*/
 uint8_t BowActuators::getBowActuatorCount() {
     return m_bowActuator.size();
 }
@@ -180,7 +180,7 @@ bool BowActuators::saveBowActuator(uint16_t actuator, String name) {
     m_bowActuator[actuator].id = name;
     return true;
 };
-
+/*
 bool BowActuators::setBowActuatorFirstTouchPressure(uint16_t t_firstTouchPressure)  {
     m_bowActuator[m_currentBowActuator].firstTouchPressure = t_firstTouchPressure;
     return true;
@@ -200,7 +200,7 @@ bool BowActuators::setBowActuatorID(String t_id) {
     m_bowActuator[m_currentBowActuator].id = t_id;
     return true;
 }
-
+*/
 uint16_t BowActuators::getBowActuatorFirstTouchPressure(int8_t t_bowActuatorIndex) {
     if ((t_bowActuatorIndex < 0) || (t_bowActuatorIndex > (m_bowActuator.size() -1))) { t_bowActuatorIndex = m_currentBowActuator; }
     return m_bowActuator[t_bowActuatorIndex].firstTouchPressure;

@@ -1,0 +1,52 @@
+\doxysection{calibrationhelpers.\+hpp}
+\hypertarget{calibrationhelpers_8hpp_source}{}\label{calibrationhelpers_8hpp_source}\index{calibrationhelpers.hpp@{calibrationhelpers.hpp}}
+\mbox{\hyperlink{calibrationhelpers_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CALIBRATIONHELPERS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CALIBRATIONHELPERS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \{\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfae78a5d056f0bc3105780ab48f9480077}{CR\_Err\_Undefined}}\ =\ 0,\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa4441e965ce8b9b547cb19f8eadb1593e}{CR\_Ok}}\ =\ 1,\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa1e8892ea4577a02a745e84d5b16e2dba}{CR\_Err\_BowPressure}}\ =\ 2,\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfae1105887db078d9647cebabfe0beceef}{CR\_Err\_BowStabilize}}\ =\ 3,\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa464a8ff2a661c3ca03329f879b0a1ce7}{CR\_Err\_Timeout}}\ =\ 4,\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa68b8b1be146a8a3cce1d12899e4c9e74}{CR\_Err\_MotorFault}}\ =\ 5,\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa5eecc4349c31075872fa0fab6d90ea32}{CR\_Err\_MotorFrequencyReading}}\ =\ 6,}
+\DoxyCodeLine{00005\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa9c856d1904adb1cd8b2b13322ac184ac}{CR\_Err\_AudioTooHigh}}\ =\ 7,\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa40479c0e495cb89f91de8861fbc7b6ac}{CR\_Err\_AudioTooLow}}\ =\ 8,\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa0eebcc73d85cacfbcd3b90b050154561}{CR\_Err\_MutePressure}}\ =\ 9,\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa7a472a9031142cbebed64dc6327c9351}{CR\_Err\_MotorNotCalibrated}}\ =\ 10\ \};}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a9734ed9af0ab3c50186b7f5c779c0b7a}{exitWithError}}(\mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ error)\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordflow}{switch}(error)\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa1e8892ea4577a02a745e84d5b16e2dba}{CR\_Err\_BowPressure}}:}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Error\ setting\ bow\ pressure"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfae1105887db078d9647cebabfe0beceef}{CR\_Err\_BowStabilize}}:}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Error\ getting\ bowing\ wheel\ speed\ to\ stabilize"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa68b8b1be146a8a3cce1d12899e4c9e74}{CR\_Err\_MotorFault}}:}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Error;\ motor\ fault"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa5eecc4349c31075872fa0fab6d90ea32}{CR\_Err\_MotorFrequencyReading}}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Error\ reading\ bowing\ wheel\ frequency"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa464a8ff2a661c3ca03329f879b0a1ce7}{CR\_Err\_Timeout}}:}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Error;\ timeout"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfae78a5d056f0bc3105780ab48f9480077}{CR\_Err\_Undefined}}:}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Error;\ undefined\ problem"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa9c856d1904adb1cd8b2b13322ac184ac}{CR\_Err\_AudioTooHigh}}:}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Error;\ audio\ too\ loud"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa40479c0e495cb89f91de8861fbc7b6ac}{CR\_Err\_AudioTooLow}}:}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Error;\ audio\ too\ low"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa0eebcc73d85cacfbcd3b90b050154561}{CR\_Err\_MutePressure}}:}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Error\ setting\ mute\ pressure"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa7a472a9031142cbebed64dc6327c9351}{CR\_Err\_MotorNotCalibrated}}:}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Error;\ motor\ hasn't\ been\ calibrated\ yet"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa4441e965ce8b9b547cb19f8eadb1593e}{CR\_Ok}}:}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00044\ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ CALIBRATIONHELPERS\_H}}
+
+\end{DoxyCode}

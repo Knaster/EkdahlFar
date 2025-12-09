@@ -3,16 +3,14 @@
 {\ttfamily \#include $<$WProgram.\+h$>$}\newline
 {\ttfamily \#include $<$vector$>$}\newline
 {\ttfamily \#include "{}tinyexpr.\+h"{}}\newline
-Include dependency graph for commandparser.\+hpp\+:
-\nopagebreak
+Include dependency graph for commandparser.\+hpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=305pt]{commandparser_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -28,16 +26,30 @@ class \mbox{\hyperlink{classcommandList}{command\+List}}
 \begin{DoxyCompactList}\small\item\em Class containing an array of \doxylink{classcommandItem}{command\+Item} objects and ways of processing them. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}}
 \begin{DoxyCompactList}\small\item\em Structure for containing help information as long as short-\/to-\/long name command name parsing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \{ \newline
+\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{Not\+Found}} = 0
+, \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{Ok}} = 1
+, \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20}{Command\+Failed}} = 2
+, \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{Wrong\+Argument\+Count}} = 3
+, \newline
+\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a6e204fafb4965a8a79b8ac29834195e2}{Wrong\+Argument\+Minimum}} = 4
+, \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7945af4588755e4b73b7855397babbb1}{Wrong\+Argument\+Value}} = 5
+, \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{Pass\+Through}} = 6
+ \}
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 String \mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{strip\+Quotes}} (String expression)
 \item 
-bool \mbox{\hyperlink{commandparser_8hpp_a411a6ce822a8546287a361612587bc36}{process\+Command\+Items}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}\+\_\+command\+Parser, \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Command\+Array\mbox{[}$\,$\mbox{]}, int size)
+bool \mbox{\hyperlink{commandparser_8hpp_a2eea721b98604de46300feecf7703b60}{process\+Command\+Items}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}\+\_\+command\+Parser, const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Command\+Array\mbox{[}$\,$\mbox{]}, int size)
 \begin{DoxyCompactList}\small\item\em Preprocesses a \doxylink{classcommandItem}{command\+Item}, replacing any short command names with long ones and turns them all into lowercase. \end{DoxyCompactList}\item 
 String \mbox{\hyperlink{commandparser_8hpp_a4a189b33229a0bbe691a7f3921eebb7b}{print\+Command\+Help}} (\mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Command\+Array\mbox{[}$\,$\mbox{]}, int size)
 \begin{DoxyCompactList}\small\item\em Prints all help data for commands given in the serial\+Command\+Array. \end{DoxyCompactList}\item 
-String \mbox{\hyperlink{commandparser_8hpp_a55f22cf254c21b7922ea450b24b48dd2}{add\+Command\+Help}} (\mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Command\+Array\mbox{[}$\,$\mbox{]}, int size, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, String prefix="{}"{})
+String \mbox{\hyperlink{commandparser_8hpp_a9584ed5f207c1c49b9a477ada94421f8}{add\+Command\+Help}} (const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Command\+Array\mbox{[}$\,$\mbox{]}, int size, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, String prefix="{}"{})
 \begin{DoxyCompactList}\small\item\em Prints all help data for commands given in the serial\+Command\+Array. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{check\+Arguments}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}\+\_\+command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, uint8\+\_\+t arguments, bool t\+\_\+supress\+Error=false)
 \item 
@@ -49,23 +61,61 @@ String \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{de
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}\label{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937} 
+\index{commandparser.hpp@{commandparser.hpp}!eProcessResult@{eProcessResult}}
+\index{eProcessResult@{eProcessResult}!commandparser.hpp@{commandparser.hpp}}
+\doxysubsubsection{\texorpdfstring{eProcessResult}{eProcessResult}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NotFound@{NotFound}!commandparser.hpp@{commandparser.hpp}}\index{commandparser.hpp@{commandparser.hpp}!NotFound@{NotFound}}}\Hypertarget{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}\label{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f} 
+Not\+Found&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Ok@{Ok}!commandparser.hpp@{commandparser.hpp}}\index{commandparser.hpp@{commandparser.hpp}!Ok@{Ok}}}\Hypertarget{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}\label{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e} 
+Ok&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CommandFailed@{CommandFailed}!commandparser.hpp@{commandparser.hpp}}\index{commandparser.hpp@{commandparser.hpp}!CommandFailed@{CommandFailed}}}\Hypertarget{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20}\label{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20} 
+Command\+Failed&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WrongArgumentCount@{WrongArgumentCount}!commandparser.hpp@{commandparser.hpp}}\index{commandparser.hpp@{commandparser.hpp}!WrongArgumentCount@{WrongArgumentCount}}}\Hypertarget{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}\label{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3} 
+Wrong\+Argument\+Count&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WrongArgumentMinimum@{WrongArgumentMinimum}!commandparser.hpp@{commandparser.hpp}}\index{commandparser.hpp@{commandparser.hpp}!WrongArgumentMinimum@{WrongArgumentMinimum}}}\Hypertarget{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a6e204fafb4965a8a79b8ac29834195e2}\label{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a6e204fafb4965a8a79b8ac29834195e2} 
+Wrong\+Argument\+Minimum&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WrongArgumentValue@{WrongArgumentValue}!commandparser.hpp@{commandparser.hpp}}\index{commandparser.hpp@{commandparser.hpp}!WrongArgumentValue@{WrongArgumentValue}}}\Hypertarget{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7945af4588755e4b73b7855397babbb1}\label{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7945af4588755e4b73b7855397babbb1} 
+Wrong\+Argument\+Value&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PassThrough@{PassThrough}!commandparser.hpp@{commandparser.hpp}}\index{commandparser.hpp@{commandparser.hpp}!PassThrough@{PassThrough}}}\Hypertarget{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}\label{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9} 
+Pass\+Through&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
 \doxysubsection{Function Documentation}
-\Hypertarget{commandparser_8hpp_a55f22cf254c21b7922ea450b24b48dd2}\label{commandparser_8hpp_a55f22cf254c21b7922ea450b24b48dd2} 
+\Hypertarget{commandparser_8hpp_a9584ed5f207c1c49b9a477ada94421f8}\label{commandparser_8hpp_a9584ed5f207c1c49b9a477ada94421f8} 
 \index{commandparser.hpp@{commandparser.hpp}!addCommandHelp@{addCommandHelp}}
 \index{addCommandHelp@{addCommandHelp}!commandparser.hpp@{commandparser.hpp}}
 \doxysubsubsection{\texorpdfstring{addCommandHelp()}{addCommandHelp()}}
-{\footnotesize\ttfamily String add\+Command\+Help (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}}}]{serial\+Command\+Array\mbox{[}$\,$\mbox{]},  }\item[{int}]{size,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{String}]{prefix = {\ttfamily "{}"{}} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily String add\+Command\+Help (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}}}]{serial\+Command\+Array\mbox{[}$\,$\mbox{]},  }\item[{int}]{size,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{String}]{prefix = {\ttfamily "{}"{}} }\end{DoxyParamCaption})}
 
 
 
 Prints all help data for commands given in the serial\+Command\+Array. 
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{commandparser_8hpp_a55f22cf254c21b7922ea450b24b48dd2_icgraph}
+\includegraphics[width=350pt]{commandparser_8hpp_a9584ed5f207c1c49b9a477ada94421f8_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}\label{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e} 
@@ -88,8 +138,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{checkArgumentsMin()}{checkArgumentsMin()}}
 {\footnotesize\ttfamily bool check\+Arguments\+Min (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{uint8\+\_\+t}]{arguments\+Min }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -120,11 +169,11 @@ Here is the caller graph for this function\+:
 
 Prints all help data for commands given in the serial\+Command\+Array. 
 
-\Hypertarget{commandparser_8hpp_a411a6ce822a8546287a361612587bc36}\label{commandparser_8hpp_a411a6ce822a8546287a361612587bc36} 
+\Hypertarget{commandparser_8hpp_a2eea721b98604de46300feecf7703b60}\label{commandparser_8hpp_a2eea721b98604de46300feecf7703b60} 
 \index{commandparser.hpp@{commandparser.hpp}!processCommandItems@{processCommandItems}}
 \index{processCommandItems@{processCommandItems}!commandparser.hpp@{commandparser.hpp}}
 \doxysubsubsection{\texorpdfstring{processCommandItems()}{processCommandItems()}}
-{\footnotesize\ttfamily bool process\+Command\+Items (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{\+\_\+command\+Parser,  }\item[{\mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}}}]{serial\+Command\+Array\mbox{[}$\,$\mbox{]},  }\item[{int}]{size }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool process\+Command\+Items (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{\+\_\+command\+Parser,  }\item[{const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}}}]{serial\+Command\+Array\mbox{[}$\,$\mbox{]},  }\item[{int}]{size }\end{DoxyParamCaption})}
 
 
 
@@ -135,7 +184,7 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{commandparser_8hpp_a411a6ce822a8546287a361612587bc36_icgraph}
+\includegraphics[width=350pt]{commandparser_8hpp_a2eea721b98604de46300feecf7703b60_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}\label{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6} 
@@ -144,16 +193,14 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{stripQuotes()}{stripQuotes()}}
 {\footnotesize\ttfamily String strip\+Quotes (\begin{DoxyParamCaption}\item[{String}]{expression }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -166,16 +213,14 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{validateNumber()}{validateNumber()}}
 {\footnotesize\ttfamily bool validate\+Number (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{number,  }\item[{int16\+\_\+t}]{min,  }\item[{int16\+\_\+t}]{max,  }\item[{bool}]{t\+\_\+supress\+Error = {\ttfamily false} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

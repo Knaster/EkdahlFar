@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['bitdepth_0',['bitdepth',['../dcmotorcontrol_8hpp.html#aabc9a481c4343f3d15542d6d7b46e2cf',1,'BITDEPTH:&#160;dcmotorcontrol.hpp'],['../bowio_8cpp.html#aabc9a481c4343f3d15542d6d7b46e2cf',1,'BITDEPTH:&#160;bowio.cpp']]],
-  ['bitdiv_1',['bitdiv',['../bowio_8cpp.html#ae9e5cef2db1cfd3d4fcc86f4ec73458b',1,'BITDIV:&#160;bowio.cpp'],['../dcmotorcontrol_8hpp.html#ae9e5cef2db1cfd3d4fcc86f4ec73458b',1,'BITDIV:&#160;dcmotorcontrol.hpp']]],
+  ['bitdepth_0',['BITDEPTH',['../dcmotorcontrol_8hpp.html#aabc9a481c4343f3d15542d6d7b46e2cf',1,'dcmotorcontrol.hpp']]],
+  ['bitdiv_1',['BITDIV',['../dcmotorcontrol_8hpp.html#ae9e5cef2db1cfd3d4fcc86f4ec73458b',1,'dcmotorcontrol.hpp']]],
   ['bowactuators_5fc_2',['BOWACTUATORS_C',['../bowActuators_8cpp.html#a8ae255ec726b9f70353a3e5a4ea38f39',1,'bowActuators.cpp']]],
   ['bowcontrol_5fc_3',['BOWCONTROL_C',['../bowcontrol_8cpp.html#aacf38327be7078e8bf4e1c68d92e0fcb',1,'bowcontrol.cpp']]],
-  ['bowio_5fc_4',['BOWIO_C',['../bowio_8cpp.html#a99af21f6642f569a026f4bb36ec9bfd5',1,'bowio.cpp']]],
+  ['bowpressure_5fc_4',['BOWPRESSURE_C',['../bowpressure_8cpp.html#a6040434436586a079de4df53bc8d0568',1,'bowpressure.cpp']]],
   ['build_5fday_5fch0_5',['BUILD_DAY_CH0',['../automaticversion_8hpp.html#a66944c1a3d399cabfc5217eba6ce7632',1,'automaticversion.hpp']]],
   ['build_5fday_5fch1_6',['BUILD_DAY_CH1',['../automaticversion_8hpp.html#aa6022cf79a6ae91691c1568b2a224b7f',1,'automaticversion.hpp']]],
   ['build_5fdefs_5fh_7',['BUILD_DEFS_H',['../automaticversion_8hpp.html#ad5ebad5cc2ba94cacd9d6d27f0a6555a',1,'automaticversion.hpp']]],

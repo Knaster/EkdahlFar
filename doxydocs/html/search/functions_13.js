@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['waitforbowtostabilize_0',['waitForBowToStabilize',['../classcalibrate.html#a6e708417f14acd978c8d2a38f5849074',1,'calibrate']]],
-  ['waitfortilttocomplete_1',['waitForTiltToComplete',['../classbowIO.html#a8d4057a6d30a1394038afbe2e2752286',1,'bowIO']]],
-  ['waitifprocessing_2',['waitIfProcessing',['../classcommandList.html#a0a2aa6dcae713788e3217d85d4facfd7',1,'commandList']]],
-  ['writetoslave_3',['writeToSlave',['../classstringModule.html#ab627523a631c2d63089092e18f430e63',1,'stringModule']]]
+  ['waitforbowtostabilize_0',['waitForBowToStabilize',['../classCalibrateBow.html#a3da4a85fccb27f50fffb50edf205bd74',1,'CalibrateBow']]],
+  ['waitforpressuretosettle_1',['waitForPressureToSettle',['../classBowControl.html#ae3e25debfb3d98b39c85b4e67dfc3183',1,'BowControl']]],
+  ['waitifprocessing_2',['waitIfProcessing',['../classcommandList.html#a0a2aa6dcae713788e3217d85d4facfd7',1,'commandList']]]
 ];

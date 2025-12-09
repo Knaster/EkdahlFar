@@ -3,7 +3,7 @@
 
 #include "tmc2209_servostepper.cpp"
 
-serialCommandItem serialCommandsBowPressure[] = {
+const serialCommandItem serialCommandsBowPressure[] = {
     { "bowpressurebaseline", "bpb", "0-65535", "Bow pressure baseline, modulation is added to this point upward" },
     { "bowpressuremodifier", "bpm", "0-65535", "Bow pressure modulation, added to the baseline" },
     { "bowpressurerest", "bpr", "0|1", "Puts the bow pressure in the resting position (conditional)" },
@@ -13,9 +13,13 @@ serialCommandItem serialCommandsBowPressure[] = {
     { "bowpressurepositionrest", "bppr", "0-65535", "Bow pressure rest position"},
     { "bowpressureengagespeed", "bpes", "1 - 100?", "Bow pressure movement speed when engaging or disengaging"},
     { "bowpressuremodulationspeed", "bpms", "0.1 - 10", "Bow pressure movement speed while engaged"},
-    { "bowpressurehold", "bph", "0|1", "Sets bow hold on/off" }
+    { "bowpressurehold", "bph", "0|1", "Sets bow hold on/off" },
+    { "bowhome", "bh", "-", "Homing bow, used at startup and in case of the bow loosing position" },
 };
-
+/*
+const serialCommandItem serialCommandsBowPressureHidden[] = {
+}
+*/
 enum ePressureMode { Rest, Engage };
 
 class BowPressure {
@@ -81,16 +85,6 @@ public:
 /***** Hidden serial commands *****/
     void setHardwarePressure(uint16_t pressure);
 
-    bool getHomingSensed();
-
-    eStepDirection getMoveDirection();
-
-    uint16_t getCurrentStep();
-
-    uint16_t getHomingPoint(uint8_t x, uint8_t y);
-
-    eHomingStage getHomingStage();
-
     void getTMC2209Info();
 
     bool completeTask(uint16_t timeout = 3000) { return tmc2209ServoStepper->stepServoStepper->completeTask(timeout); }
@@ -104,14 +98,16 @@ public:
     float getSpeed() { return tmc2209ServoStepper->stepServoStepper->getSpeed();}
 
 /***** Internal commands for stand-alone and semi-modular use *****/
-    void update() {};          // Update function to be periodically called in order for backoff and other things to work
+    void update();
 
-    void updateServo() { tmc2209ServoStepper->stepServoStepper->updatePosition(); };     // Handles time-critical timing of stepper motor update - automatically called through stepInervalCallback - DO NOT MANUALLY CALL THIS
+    // Handles time-critical timing of stepper motor update - automatically called through stepInervalCallback - DO NOT MANUALLY CALL THIS
+    void updateServo() { tmc2209ServoStepper->stepServoStepper->updatePosition(); };
 
-    void setStepIntervalCallback(void *stepIntervalCallback) { tmc2209ServoStepper->stepServoStepper->stepIntervalCallback = stepIntervalCallback; };   // This is to be set to a static function that in turn will call the class instance of updateMuteServo
+    // This is to be set to a static function that in turn will call the class instance of updateMuteServo
+    void setStepIntervalCallback(void *stepIntervalCallback) { tmc2209ServoStepper->stepServoStepper->stepIntervalCallback = stepIntervalCallback; };
 
 /***** Internal commands for debugging use, most likely to be removed *****/
-    void setStepperID(uint16_t stepperID);
+//    void setStepperID(uint16_t stepperID);
 
 /***** Private commands *****/
 private:

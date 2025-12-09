@@ -1,0 +1,58 @@
+\doxysection{harmonicserieshandler.\+hpp File Reference}
+\hypertarget{harmonicserieshandler_8hpp}{}\label{harmonicserieshandler_8hpp}\index{harmonicserieshandler.hpp@{harmonicserieshandler.hpp}}
+{\ttfamily \#include "{}harmonic\+Series.\+cpp"{}}\newline
+Include dependency graph for harmonicserieshandler.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{harmonicserieshandler_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{harmonicserieshandler_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classHarmonicSeriesHandler}{Harmonic\+Series\+Handler}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} \mbox{\hyperlink{harmonicserieshandler_8hpp_ab6bc5ba84521f09dd15c66cd5ce7c961}{serial\+Commands\+Harmonic\+Series\+Handler}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{harmonicserieshandler_8hpp_ab6bc5ba84521f09dd15c66cd5ce7c961}\label{harmonicserieshandler_8hpp_ab6bc5ba84521f09dd15c66cd5ce7c961} 
+\index{harmonicserieshandler.hpp@{harmonicserieshandler.hpp}!serialCommandsHarmonicSeriesHandler@{serialCommandsHarmonicSeriesHandler}}
+\index{serialCommandsHarmonicSeriesHandler@{serialCommandsHarmonicSeriesHandler}!harmonicserieshandler.hpp@{harmonicserieshandler.hpp}}
+\doxysubsubsection{\texorpdfstring{serialCommandsHarmonicSeriesHandler}{serialCommandsHarmonicSeriesHandler}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Commands\+Harmonic\+Series\+Handler\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolfundamental"{}},\ \textcolor{stringliteral}{"{}bcu"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Bow\ fundamental\ frequency,\ all\ harmonics\ are\ calculated\ from\ this\ number"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolharmonic"{}},\ \textcolor{stringliteral}{"{}bch"{}},\ \textcolor{stringliteral}{"{}int"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ speed\ in\ terms\ of\ a\ harmonic\ number.\ A\ ratio\ is\ taken\ from\ the\ given\ harmonic\ in\ the\ current\ harmonic\ list,\ the\ ratio\ is\ then\ multiplied\ by\ the\ bow\ fundamental\ frequency"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolharmonicadd"{}},\ \textcolor{stringliteral}{"{}bcha"{}},\ \textcolor{stringliteral}{"{}int"{}},\ \textcolor{stringliteral}{"{}Additative\ version\ of\ bowcontrolharmonic,\ the\ number\ is\ given\ is\ added\ to\ the\ harmonic\ given"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolharmonicbase"{}},\ \textcolor{stringliteral}{"{}bchb"{}},\ \textcolor{stringliteral}{"{}int"{}},\ \textcolor{stringliteral}{"{}Same\ as\ bowcontrolharmonic\ but\ where\ the\ harmonic\ number\ is\ based\ on\ a\ MIDI\ note\ given\ by\ bowcontrolbasenote"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolharmonicbasenote"{}},\ \textcolor{stringliteral}{"{}bchbn"{}},\ \textcolor{stringliteral}{"{}0-\/127"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ MIDI\ base\ note\ of\ the\ string,\ used\ in\ conjunction\ with\ bowcontrolharmonicbase"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolharmonicshift"{}},\ \textcolor{stringliteral}{"{}bchsh"{}},\ \textcolor{stringliteral}{"{}-\/32767-\/32767"{}},\ \textcolor{stringliteral}{"{}Setting\ shift\ from\ the\ currently\ playing\ harmonic\ where\ 32767\ equals\ the\ entire\ harmonic\ shift\ range\ shifted\ up"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolharmonicshiftrange"{}},\ \textcolor{stringliteral}{"{}bchsr"{}},\ \textcolor{stringliteral}{"{}0-\/36"{}},\ \textcolor{stringliteral}{"{}Set\ the\ number\ of\ harmonic\ numbers\ that\ constitutes\ the\ entire\ harmonic\ shift"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolharmonicshift5"{}},\ \textcolor{stringliteral}{"{}bchs5"{}},\ \textcolor{stringliteral}{"{}-\/32767-\/32767"{}},\ \textcolor{stringliteral}{"{}Setting\ shift\ from\ the\ currently\ playing\ harmonic\ over\ 5\ octaves\ where\ 32767\ equals\ 5\ octaves\ shift\ up\ from\ the\ fundamental"{}}\ \},}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowharmonicseries"{}},\ \textcolor{stringliteral}{"{}bhs"{}},\ \textcolor{stringliteral}{"{}int"{}},\ \textcolor{stringliteral}{"{}Get/set\ the\ current\ harmonic\ series"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowharmonicseriesdata"{}},\ \textcolor{stringliteral}{"{}bhsd"{}},\ \textcolor{stringliteral}{"{}slot:name:ratios"{}},\ \textcolor{stringliteral}{"{}Sets\ all\ data\ for\ the\ harmonic\ series\ in\ the\ given\ slot"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowharmonicseriesratio"{}},\ \textcolor{stringliteral}{"{}bhsr"{}},\ \textcolor{stringliteral}{"{}harmonic:ratio"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ ratio\ of\ the\ given\ harmonic\ in\ current\ harmonic\ series,\ will\ increase\ the\ list\ size\ if\ needed\ to\ adress\ the\ harmonic"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowharmonicseriesratioremove"{}},\ \textcolor{stringliteral}{"{}bhsrr"{}},\ \textcolor{stringliteral}{"{}ratio"{}},\ \textcolor{stringliteral}{"{}Remove\ the\ harmmonic\ ratio\ given\ in\ the\ current\ series\ and\ shift\ any\ ratios\ accordingly.\ Cannot\ remove\ all\ ratios"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowharmonicseriescount"{}},\ \textcolor{stringliteral}{"{}bhsc"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Returns\ the\ number\ of\ harmonic\ series\ in\ the\ list\ and\ their\ IDs"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowharmonicseriessave"{}},\ \textcolor{stringliteral}{"{}bhss"{}},\ \textcolor{stringliteral}{"{}series:name"{}},\ \textcolor{stringliteral}{"{}Saves\ the\ current\ harmonic\ series\ in\ the\ slot\ given,\ or\ if\ the\ slot\ is\ out\ of\ range,\ creates\ a\ new\ one\ at\ the\ end\ of\ the\ list"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowharmonicseriesremove"{}},\ \textcolor{stringliteral}{"{}bhsrm"{}},\ \textcolor{stringliteral}{"{}series"{}},\ \textcolor{stringliteral}{"{}Remove\ the\ series\ given\ and\ shift\ any\ series\ accordingly.\ Cannot\ remove\ all\ series"{}}\}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

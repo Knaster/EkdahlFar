@@ -92,43 +92,53 @@
 \DoxyCodeLine{00088\ \textcolor{comment}{\}}}
 \DoxyCodeLine{00089\ \textcolor{comment}{*/}}
 \DoxyCodeLine{00090\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{audioanalyze_8h_aa486c0bb291c2cef78ca63c3169f303b}{audioFrequencyAvaliable}}()\ \{}
-\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{audioanalyze_8h_a7abd8636218afea3505d9c1ca9aa9458}{audioAnalyzeStarted}})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
-\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}}-\/>available();}
-\DoxyCodeLine{00093\ \}}
-\DoxyCodeLine{00094\ }
-\DoxyCodeLine{00095\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{audioanalyze_8h_a8ecd861231dbd0db5f6e4771b3422137}{audioFrequency}}()\ \{}
-\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{audioanalyze_8h_a7abd8636218afea3505d9c1ca9aa9458}{audioAnalyzeStarted}}\ ||\ (\mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}}-\/>probability()\ <\ 0.9))\ \{\ \textcolor{keywordflow}{return}\ -\/1;\ \}}
-\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}}-\/>read();}
-\DoxyCodeLine{00098\ \}}
-\DoxyCodeLine{00099\ }
-\DoxyCodeLine{00100\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{audioanalyze_8h_a46623e59a36a0f978fef31fb33f2efd1}{audioPeakAmplitude}}()\ \{}
-\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b}{audioPeak}}-\/>available())\ \{}
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b}{audioPeak}}-\/>read();}
-\DoxyCodeLine{00103\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
-\DoxyCodeLine{00105\ \ \ \ \ \}}
-\DoxyCodeLine{00106\ \}}
-\DoxyCodeLine{00107\ }
-\DoxyCodeLine{00108\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{audioanalyze_8h_ae3b3ce9622c1f8f5f25f46ebe4bc8ced}{audioRMSAmplitude}}()\ \{}
-\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{audioanalyze_8h_a083d67b82f9d6d474d2567370515fcdb}{audioRMS}}-\/>available())\ \{}
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{audioanalyze_8h_a083d67b82f9d6d474d2567370515fcdb}{audioRMS}}-\/>read();}
-\DoxyCodeLine{00111\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
-\DoxyCodeLine{00113\ \ \ \ \ \}}
-\DoxyCodeLine{00114\ \}}
-\DoxyCodeLine{00115\ }
-\DoxyCodeLine{00116\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00117\ \textcolor{comment}{float\ audioProbability()\ \{}}
-\DoxyCodeLine{00118\ \textcolor{comment}{\ \ \ \ if\ (!audioAnalyzeStarted)\ \{\ return\ -\/1;\ \}}}
-\DoxyCodeLine{00119\ \textcolor{comment}{\ \ \ \ //\ \ if\ (!audioNoteFreq-\/>available())\ \{\ return\ -\/1;\ \}}}
-\DoxyCodeLine{00120\ \textcolor{comment}{\ \ \ \ return\ audioNoteFreq-\/>probability();}}
-\DoxyCodeLine{00121\ \textcolor{comment}{\}}}
-\DoxyCodeLine{00122\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00123\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{audioanalyze_8h_a1119501c55b77d995f19fb79432bfe53}{audioProcessorUsage}}()\ \{}
-\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{audioanalyze_8h_a7abd8636218afea3505d9c1ca9aa9458}{audioAnalyzeStarted}})\ \{\ \textcolor{keywordflow}{return}\ -\/1;\ \}}
-\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}}-\/>processorUsage();}
-\DoxyCodeLine{00126\ \}}
-\DoxyCodeLine{00127\ }
-\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{audioanalyze_8h_a7abd8636218afea3505d9c1ca9aa9458}{audioAnalyzeStarted}})\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Audio\ analyzation\ not\ started!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00094\ \ \ \ \ \}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}}-\/>available();}
+\DoxyCodeLine{00096\ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{audioanalyze_8h_a8ecd861231dbd0db5f6e4771b3422137}{audioFrequency}}()\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{audioanalyze_8h_a7abd8636218afea3505d9c1ca9aa9458}{audioAnalyzeStarted}})\ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Audio\ analyzation\ not\ started!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00102\ \ \ \ \ \}}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}}-\/>probability()\ <\ 0.9))\ \{\ \textcolor{keywordflow}{return}\ -\/1;\ \}}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}}-\/>read();}
+\DoxyCodeLine{00105\ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{audioanalyze_8h_a46623e59a36a0f978fef31fb33f2efd1}{audioPeakAmplitude}}()\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b}{audioPeak}}-\/>available())\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b}{audioPeak}}-\/>read();}
+\DoxyCodeLine{00110\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00112\ \ \ \ \ \}}
+\DoxyCodeLine{00113\ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{audioanalyze_8h_ae3b3ce9622c1f8f5f25f46ebe4bc8ced}{audioRMSAmplitude}}()\ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{audioanalyze_8h_a083d67b82f9d6d474d2567370515fcdb}{audioRMS}}-\/>available())\ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{audioanalyze_8h_a083d67b82f9d6d474d2567370515fcdb}{audioRMS}}-\/>read();}
+\DoxyCodeLine{00118\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00120\ \ \ \ \ \}}
+\DoxyCodeLine{00121\ \}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00124\ \textcolor{comment}{float\ audioProbability()\ \{}}
+\DoxyCodeLine{00125\ \textcolor{comment}{\ \ \ \ if\ (!audioAnalyzeStarted)\ \{\ return\ -\/1;\ \}}}
+\DoxyCodeLine{00126\ \textcolor{comment}{\ \ \ \ //\ \ if\ (!audioNoteFreq-\/>available())\ \{\ return\ -\/1;\ \}}}
+\DoxyCodeLine{00127\ \textcolor{comment}{\ \ \ \ return\ audioNoteFreq-\/>probability();}}
+\DoxyCodeLine{00128\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00129\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00130\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{audioanalyze_8h_a1119501c55b77d995f19fb79432bfe53}{audioProcessorUsage}}()\ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{audioanalyze_8h_a7abd8636218afea3505d9c1ca9aa9458}{audioAnalyzeStarted}})\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Audio\ analyzation\ not\ started!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00134\ \ \ \ \ \}}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}}-\/>processorUsage();}
+\DoxyCodeLine{00136\ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

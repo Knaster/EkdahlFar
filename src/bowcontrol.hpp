@@ -25,12 +25,14 @@
 
 /***** NEW CLASS *****/
 
-serialCommandItem serialCommandsBowControl[] = {
+const serialCommandItem serialCommandsBowControl[] = {
     { "bowcontrolspeedmode", "bcsm", "0|1", "Bow motor speed mode, 0 = Automatic and 1 = Manual" },
     { "bowmotortimeout", "bmt", "ms(0-65535)", "Bow motor shutdown timeout after bow having been put into the rest position" },
     { "bowmotordirectpwm", "bmdp", "0-65535", "Bow motor direct power in 16-bit PWM values, requires that the PID is turned off" },
     { "bowpid", "bpid", "1|0", "Sets the bow PID on/off" },
     { "bowmotorrun", "bmr", "1|0", "Set bow motor run on/off" },
+    { "bowmotorfaultcommands", "bmfc", "command list", "Commands to execute when a motor fault is tripped - !WARNING! Can ruin your instrument if changed" },
+    { "bowmotoroverpowercommands", "bmopc", "command list", "Commands to execute when motor is over the power limit - !WARNING! Can ruin your instrument if changed" },
 };
 
 enum eSpeedMode { Automatic, Manual };
@@ -98,11 +100,7 @@ public:
     bool disableBowMotorPower() { return dcMotorControl->disableMotorPower(); }
 
 /***** Hidden commands for modular use *****/
-    void setCommandsOverPowerCurrent(String inCommands) { commandsOverPowerCurrent = inCommands; }
-
     String getCommandsOverPowerCurrent() { return commandsOverPowerCurrent; }
-
-    void setCommandsMotorFault(String inCommands) { commandsMotorFault = inCommands; }
 
     String getCommandsMotorFault() { return commandsMotorFault; }
 
@@ -193,7 +191,7 @@ public:
 
     uint16_t getPIDUpdateInterval() { return pidUpdateInterval; }
 
-    void* getBowPressureReference() { return bowPressure; }
+    BowPressure* getBowPressureReference() { return bowPressure; }
 
 #ifndef EXTERNAL_PRESSURE_CONTROLLER
     // Handles time-critical timing of stepper motor update - automatically called through stepInervalCallback - DO NOT MANUALLY CALL THIS
@@ -203,7 +201,7 @@ public:
 #endif // EXTERNAL_PRESSURE_CONTROLLER
 /***** Internal commands for debugging use, most likely to be removed *****/
 #ifndef EXTERNAL_PRESSURE_CONTROLLER
-    void setStepperID(uint16_t stepperID);
+//    void setStepperID(uint16_t stepperID);
 #endif // EXTERNAL_PRESSURE_CONTROLLER
 private:
     void updateMotorAutoShutdown();

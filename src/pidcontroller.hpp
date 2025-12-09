@@ -19,11 +19,11 @@ const serialCommandItem serialCommandsPID[] = {
     { "bowpidtargetfreq", "bcf", "float", "Legacy command conversion" },
     { "bowpidtargetfreq", "bowcontrolfrequency", "float", "Legacy command conversion" }
 };
-/*
+
 const serialCommandItem serialCommandsPIDHidden[] =  {
-    { "mutesethardwareposition", "mshwp", "0-65535", "Sets the mute position without min/max scaling" },
+    { "bowmeasuretimetotarget", "bmtt", "float", "Measure the time it takes to change from the current frequency to the target frequency" }
 };
-*/
+
 class PIDController {
 public:
     PIDController(DCMotorControl &DCMotorControl);
@@ -70,7 +70,7 @@ public:
 
     float getPIDPeakError();
 
-    void measureTimeToTarget(float _pidTargetSpeed);
+    float measureTimeToTarget(float _pidTargetSpeed);
 
     void setMinSpeedHz(float inSpeed) { minSpeedHz = inSpeed; }
 

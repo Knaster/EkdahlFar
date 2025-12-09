@@ -25,225 +25,178 @@
 \DoxyCodeLine{00021\ }
 \DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{mutecalibration_8hpp}{mutecalibration.hpp}}"{}}}
 \DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \mbox{\hyperlink{classcalibrateMute_a00dbcdbf1e64608092742896bfeacb99}{calibrateMute::calibrateMute}}(\mbox{\hyperlink{classmute}{mute}}\ \&t\_Mute,\ \mbox{\hyperlink{classbowIO}{bowIO}}\ \&t\_bowIO,\ \mbox{\hyperlink{classbowControl}{bowControl}}\ \&t\_bowControl)\ \{}
-\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a835009d19f40da94cda14ea3764562ee}{m\_muteConnect}}\ =\ \&t\_Mute;}
-\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a86ecd5a8202a01bc74c0d94c75471fa3}{m\_bowIOConnect}}\ =\ \&t\_bowIO;}
-\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_abd6d3a8ed866d1855c8384a7415a4b4f}{m\_bowControlConnect}}\ =\ \&t\_bowControl;}
-\DoxyCodeLine{00028\ \textcolor{comment}{//\ \ \ \ m\_audioAnalyze\ =\ audioRMS;}}
-\DoxyCodeLine{00029\ \}}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00031\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classcalibrateMute_a593fd649dc0ca4e299ffe413e66712ca}{calibrateMute::findLevel}}()\ \{}
-\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{float}\ j\ =\ 0;}
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<10;\ i++)\ \{}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!\mbox{\hyperlink{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b}{audioPeak}}-\/>available())\ \{\};}
-\DoxyCodeLine{00035\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Audio\ peak\ not\ avaliable!"{},\ debugPrintType::TextInfo);}}
-\DoxyCodeLine{00036\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{*/}}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ j\ +=\ \mbox{\hyperlink{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b}{audioPeak}}-\/>read();}
-\DoxyCodeLine{00038\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ delay(1);}
-\DoxyCodeLine{00041\ \ \ \ \ \}}
-\DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ \ \ \ \ j\ =\ (j\ /\ 10);}
-\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{return}\ j;}
-\DoxyCodeLine{00045\ \}}
-\DoxyCodeLine{00046\ }
-\DoxyCodeLine{00047\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrateMute_af16fcc7c096ea2f830319fced315428a}{calibrateMute::findLevelSilence}}()\ \{}
-\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a835009d19f40da94cda14ea3764562ee}{m\_muteConnect}}-\/>\mbox{\hyperlink{classmute_a8205ea9cb3da2cfb5152bcba2a33aa02}{homeMute}}();}
-\DoxyCodeLine{00049\ }
-\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00051\ \}}
-\DoxyCodeLine{00052\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00053\ \textcolor{comment}{bool\ calibrateMute::findlevelFundamentalPeak()\ \{}}
-\DoxyCodeLine{00054\ \textcolor{comment}{\ \ \ \ return\ true;}}
-\DoxyCodeLine{00055\ \textcolor{comment}{\}}}
-\DoxyCodeLine{00056\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00057\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrateMute_a7519919b67f300e574d3ad7badcf7f57}{calibrateMute::findMuteLevels}}()\ \{}
-\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{bool}\ debugReport\ =\ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}}];}
-\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}}]\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00060\ }
-\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Starting\ the\ mute\ level\ calibration"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
+\DoxyCodeLine{00024\ \mbox{\hyperlink{classCalibrateMute_ac8c5461e47cb5c5cd86768fb4ebfa146}{CalibrateMute::CalibrateMute}}(\mbox{\hyperlink{classMuteControl}{MuteControl}}\ \&inMuteControl,\ \mbox{\hyperlink{classBowControl}{BowControl}}\ \&inBowControl,\ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}}\ \&inHarmonicSeriesHandler)\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}\ =\ \&inMuteControl;}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}\ =\ \&inBowControl;}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_ae22fc38c5a96cb38c927eef7b4307279}{harmonicSeriesHandler}}\ =\ \&inHarmonicSeriesHandler;}
+\DoxyCodeLine{00028\ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classCalibrateMute_aeb87473967dfddc3686680c04153c72c}{CalibrateMute::findLevel}}()\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{float}\ j\ =\ 0;}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<10;\ i++)\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!\mbox{\hyperlink{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b}{audioPeak}}-\/>available())\ \{\};}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ j\ +=\ \mbox{\hyperlink{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b}{audioPeak}}-\/>read();}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ delay(1);}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ j\ =\ (j\ /\ 10);}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{return}\ j;}
+\DoxyCodeLine{00040\ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCalibrateMute_a058ae917ef92a3ec68b131d5a28091ae}{CalibrateMute::findLevelSilence}}()\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a8d5b7702ac593f801e3ca282c262ce07}{home}}();}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00046\ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateMute_a68a1737ec836189ee2495c4891d63f0b}{CalibrateMute::findMuteLevels}}()\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ debugReport\ =\ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}}];}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}}]\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Starting\ the\ mute\ level\ calibration"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//\ Home\ mute\ and\ set\ mute\ and\ bow\ position\ at\ zero\ and\ turn\ off\ bow}}
+\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a8d5b7702ac593f801e3ca282c262ce07}{home}}();}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{comment}{//\ \ \ \ audioFilterBiquad-\/>setLowpass(0,\ bowControl-\/>calibrationDataConnect-\/>fundamentalFrequency,\ 0.707);}}
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a9497cf120ffd96fe6a75637c56c65c84}{disableBowMotorPower}}();}
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ac41b6162fb1ea57619fdac9b6ddce8e0}{setRun}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a9bc480001268aeac1add700870ce18ad}{setBowRest}}();}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ae3e25debfb3d98b39c85b4e67dfc3183}{waitForPressureToSettle}}())\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa1e8892ea4577a02a745e84d5b16e2dba}{CR\_Err\_BowPressure}};\ \}}
 \DoxyCodeLine{00062\ }
-\DoxyCodeLine{00063\ \ \ \ \ \textcolor{comment}{//\ Home\ mute\ and\ set\ mute\ and\ bow\ position\ at\ zero\ and\ turn\ off\ bow}}
-\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a835009d19f40da94cda14ea3764562ee}{m\_muteConnect}}-\/>\mbox{\hyperlink{classmute_a8205ea9cb3da2cfb5152bcba2a33aa02}{homeMute}}();}
-\DoxyCodeLine{00065\ \textcolor{comment}{//\ \ \ \ servoStepper\ *ss\ =\ m\_muteConnect-\/>stepServoStepper;}}
-\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{classservoStepper}{servoStepper}}\ *ss\ =\ \mbox{\hyperlink{classcalibrateMute_a835009d19f40da94cda14ea3764562ee}{m\_muteConnect}}-\/>\mbox{\hyperlink{classmute_ac01f700b833dea7842385a17c6580ff4}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}};}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{comment}{//\ Find\ the\ pickup\ output\ level\ that\ is\ considered\ silence}}
+\DoxyCodeLine{00064\ \ \ \ \ delay(3000);}
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_adcd25eb94a2964e74b408e791af2d21c}{levelSilence}}\ =\ \mbox{\hyperlink{classCalibrateMute_aeb87473967dfddc3686680c04153c72c}{findLevel}}();}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classCalibrateMute_adcd25eb94a2964e74b408e791af2d21c}{levelSilence}}\ ==\ 0)\ \{\ \mbox{\hyperlink{classCalibrateMute_adcd25eb94a2964e74b408e791af2d21c}{levelSilence}}\ =\ 0.01;\ \}}
 \DoxyCodeLine{00067\ }
-\DoxyCodeLine{00068\ \textcolor{comment}{//\ \ \ \ audioFilterBiquad-\/>setLowpass(0,\ m\_bowControlConnect-\/>calibrationDataConnect-\/>fundamentalFrequency,\ 0.707);}}
-\DoxyCodeLine{00069\ }
-\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a86ecd5a8202a01bc74c0d94c75471fa3}{m\_bowIOConnect}}-\/>\mbox{\hyperlink{classbowIO_af543966b009896f0e529909262be4c87}{disableBowPower}}();}
-\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_abd6d3a8ed866d1855c8384a7415a4b4f}{m\_bowControlConnect}}-\/>\mbox{\hyperlink{classbowControl_a00fa8313da3753909d1186b540b8a536}{run}}\ =\ 0;}
-\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_abd6d3a8ed866d1855c8384a7415a4b4f}{m\_bowControlConnect}}-\/>\mbox{\hyperlink{classbowControl_a4975e60429561b3c949047bda5178e0e}{bowRest}}(1);}
-\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a86ecd5a8202a01bc74c0d94c75471fa3}{m\_bowIOConnect}}-\/>\mbox{\hyperlink{classbowIO_a802c5cbbe1a33a6a2e75b977993ddcee}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{completeTask}}();}
-\DoxyCodeLine{00074\ }
-\DoxyCodeLine{00075\ \ \ \ \ \textcolor{comment}{//\ Find\ the\ pickup\ output\ level\ that\ is\ considered\ silence}}
-\DoxyCodeLine{00076\ }
-\DoxyCodeLine{00077\ \ \ \ \ delay(3000);}
-\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a4f1cda25c16da959cbcd3671f06561b9}{levelSilence}}\ =\ \mbox{\hyperlink{classcalibrateMute_a593fd649dc0ca4e299ffe413e66712ca}{findLevel}}();}
-\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcalibrateMute_a4f1cda25c16da959cbcd3671f06561b9}{levelSilence}}\ ==\ 0)\ \{\ \mbox{\hyperlink{classcalibrateMute_a4f1cda25c16da959cbcd3671f06561b9}{levelSilence}}\ =\ 0.01;\ \}}
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Silence\ level\ is\ set\ to\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateMute_adcd25eb94a2964e74b408e791af2d21c}{levelSilence}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classCalibrateMute_adcd25eb94a2964e74b408e791af2d21c}{levelSilence}}\ >=\ (\mbox{\hyperlink{mutecalibration_8hpp_ac3913bbe93fa10806a5cbba372a9e25a}{minFundamentalAmplitude}}\ /\ 2))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa9c856d1904adb1cd8b2b13322ac184ac}{CR\_Err\_AudioTooHigh}};\ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{comment}{//\ Enable\ bow\ and\ play\ the\ fundamental,\ set\ the\ test\ pressure\ to\ in\ between\ max\ \&\ min\ pressure}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a69c751fb80e75b6c359cf7082756e20f}{setPIDOn}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ac41b6162fb1ea57619fdac9b6ddce8e0}{setRun}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_abba2ffc34c55b9c4210e5b6d54014446}{enableBowMotorPower}}();}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_ae22fc38c5a96cb38c927eef7b4307279}{harmonicSeriesHandler}}-\/>\mbox{\hyperlink{classHarmonicSeriesHandler_ab775bc9141cb72e66073da77f5be9817}{setHarmonic}}(0);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ uint16\_t\ testPressure\ =\ \mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ac906729ef9bae05e39a92951588404d6}{getEngagePressure}}()\ +}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ ((\mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a3aff0283cf061ff1b108af53c757e17a}{getMaxPressure}}()\ -\/\ \mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ac906729ef9bae05e39a92951588404d6}{getEngagePressure}}())\ /\ 4);}
 \DoxyCodeLine{00080\ }
-\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Silence\ level\ is\ set\ to\ "{}}\ +\ String(\mbox{\hyperlink{classcalibrateMute_a4f1cda25c16da959cbcd3671f06561b9}{levelSilence}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
-\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcalibrateMute_a4f1cda25c16da959cbcd3671f06561b9}{levelSilence}}\ >=\ (\mbox{\hyperlink{mutecalibration_8hpp_ac3913bbe93fa10806a5cbba372a9e25a}{minFundamentalAmplitude}}\ /\ 2))\ \{}
-\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Silence\ level\ is\ too\ high!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00085\ \ \ \ \ \}}
-\DoxyCodeLine{00086\ }
-\DoxyCodeLine{00087\ \ \ \ \ \textcolor{comment}{//\ Enable\ bow\ and\ play\ the\ fundamental,\ set\ the\ test\ pressure\ to\ in\ between\ max\ \&\ min\ pressure}}
-\DoxyCodeLine{00088\ }
-\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_abd6d3a8ed866d1855c8384a7415a4b4f}{m\_bowControlConnect}}-\/>\mbox{\hyperlink{classbowControl_a1384f16c70c89e454ec88e5af1852a91}{PIDon}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00090\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_abd6d3a8ed866d1855c8384a7415a4b4f}{m\_bowControlConnect}}-\/>\mbox{\hyperlink{classbowControl_a00fa8313da3753909d1186b540b8a536}{run}}\ =\ 1;}
-\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a86ecd5a8202a01bc74c0d94c75471fa3}{m\_bowIOConnect}}-\/>\mbox{\hyperlink{classbowIO_a93f89060d1b63b5433dda54836075efa}{enableBowPower}}();}
-\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_abd6d3a8ed866d1855c8384a7415a4b4f}{m\_bowControlConnect}}-\/>\mbox{\hyperlink{classbowControl_af3c67773447df63befb6af1bfc978e03}{setHarmonic}}(0);}
-\DoxyCodeLine{00093\ }
-\DoxyCodeLine{00094\ \ \ \ \ uint16\_t\ testPressure\ =\ \mbox{\hyperlink{classcalibrateMute_abd6d3a8ed866d1855c8384a7415a4b4f}{m\_bowControlConnect}}-\/>\mbox{\hyperlink{classbowControl_a1ca492c797dc01e00ab2f80a88fc367c}{calibrationDataConnect}}-\/>\mbox{\hyperlink{structCalibrationData_acd0de95cff2c97a3334474622271df67}{firstTouchPressure}}\ +}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ ((\mbox{\hyperlink{classcalibrateMute_abd6d3a8ed866d1855c8384a7415a4b4f}{m\_bowControlConnect}}-\/>\mbox{\hyperlink{classbowControl_a1ca492c797dc01e00ab2f80a88fc367c}{calibrationDataConnect}}-\/>\mbox{\hyperlink{structCalibrationData_aac59ac28009041fe044ebdb8e58e73dc}{stallPressure}}\ -\/\ \mbox{\hyperlink{classcalibrateMute_abd6d3a8ed866d1855c8384a7415a4b4f}{m\_bowControlConnect}}-\/>\mbox{\hyperlink{classbowControl_a1ca492c797dc01e00ab2f80a88fc367c}{calibrationDataConnect}}-\/>\mbox{\hyperlink{structCalibrationData_acd0de95cff2c97a3334474622271df67}{firstTouchPressure}})\ /\ 4);}
-\DoxyCodeLine{00096\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Setting\ tilt\ to\ "{}}\ +\ String(testPressure),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
-\DoxyCodeLine{00097\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a86ecd5a8202a01bc74c0d94c75471fa3}{m\_bowIOConnect}}-\/>\mbox{\hyperlink{classbowIO_a105d8980fb4e0596755e8d337144aae6}{setTiltPWM}}(testPressure);}
-\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Waiting\ for\ Pressure\ setting\ to\ finish."{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
-\DoxyCodeLine{00099\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a86ecd5a8202a01bc74c0d94c75471fa3}{m\_bowIOConnect}}-\/>\mbox{\hyperlink{classbowIO_a8d4057a6d30a1394038afbe2e2752286}{waitForTiltToComplete}}();}
-\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Pause\ for\ a\ little.."{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
-\DoxyCodeLine{00101\ \ \ \ \ delay(2500);}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Setting\ tilt\ to\ "{}}\ +\ String(testPressure),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
+\DoxyCodeLine{00082\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a62ff33edc2ddef1fe4d2df379bc9d4b7}{setHardwarePressure}}(testPressure);}
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Waiting\ for\ Pressure\ setting\ to\ finish."{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ae3e25debfb3d98b39c85b4e67dfc3183}{waitForPressureToSettle}}())\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa1e8892ea4577a02a745e84d5b16e2dba}{CR\_Err\_BowPressure}};\ \}}
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Pause\ for\ a\ little.."{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
+\DoxyCodeLine{00086\ \ \ \ \ delay(2500);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Starting\ fundamental\ level\ test,\ need\ to\ reach\ "{}}\ +\ String(\mbox{\hyperlink{mutecalibration_8hpp_ac3913bbe93fa10806a5cbba372a9e25a}{minFundamentalAmplitude}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{//\ Wait\ for\ the\ bow\ to\ settle\ and\ then\ reord\ the\ fundamental\ level}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ testPressure\ +=\ 100;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a62ff33edc2ddef1fe4d2df379bc9d4b7}{setHardwarePressure}}(testPressure);}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_a14c9dea06cb113aec92a6db028411be2}{levelFundamental}}\ =\ \mbox{\hyperlink{classCalibrateMute_aeb87473967dfddc3686680c04153c72c}{findLevel}}();}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Fundamental\ level\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateMute_a14c9dea06cb113aec92a6db028411be2}{levelFundamental}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
+\DoxyCodeLine{00095\ \ \ \ \ \}\ \textcolor{keywordflow}{while}((\mbox{\hyperlink{classCalibrateMute_a14c9dea06cb113aec92a6db028411be2}{levelFundamental}}\ <\ \mbox{\hyperlink{mutecalibration_8hpp_ac3913bbe93fa10806a5cbba372a9e25a}{minFundamentalAmplitude}})\ \&\&\ (testPressure\ <\ bowControl-\/>getMaxPressure()));}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classCalibrateMute_a14c9dea06cb113aec92a6db028411be2}{levelFundamental}}\ <\ \mbox{\hyperlink{mutecalibration_8hpp_ac3913bbe93fa10806a5cbba372a9e25a}{minFundamentalAmplitude}})\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa40479c0e495cb89f91de8861fbc7b6ac}{CR\_Err\_AudioTooLow}};\ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Pickup\ fundamental\ ampltiude\ is\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateMute_a14c9dea06cb113aec92a6db028411be2}{levelFundamental}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\ \ \ \ \#define\ levelStepSize\ 100}}
 \DoxyCodeLine{00102\ }
-\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Starting\ fundamental\ level\ test,\ need\ to\ reach\ "{}}\ +\ String(\mbox{\hyperlink{mutecalibration_8hpp_ac3913bbe93fa10806a5cbba372a9e25a}{minFundamentalAmplitude}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
-\DoxyCodeLine{00104\ \ \ \ \ \textcolor{comment}{//\ Wait\ for\ the\ bow\ to\ settle\ and\ then\ reord\ the\ fundamental\ level}}
-\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ testPressure\ +=\ 100;}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a86ecd5a8202a01bc74c0d94c75471fa3}{m\_bowIOConnect}}-\/>\mbox{\hyperlink{classbowIO_a105d8980fb4e0596755e8d337144aae6}{setTiltPWM}}(testPressure);}
-\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a9401e20a3fe3fb0d8440755320251358}{levelFundamental}}\ =\ \mbox{\hyperlink{classcalibrateMute_a593fd649dc0ca4e299ffe413e66712ca}{findLevel}}();}
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Fundamental\ level\ "{}}\ +\ String(\mbox{\hyperlink{classcalibrateMute_a9401e20a3fe3fb0d8440755320251358}{levelFundamental}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
-\DoxyCodeLine{00110\ \ \ \ \ \}\ \textcolor{keywordflow}{while}((\mbox{\hyperlink{classcalibrateMute_a9401e20a3fe3fb0d8440755320251358}{levelFundamental}}\ <\ \mbox{\hyperlink{mutecalibration_8hpp_ac3913bbe93fa10806a5cbba372a9e25a}{minFundamentalAmplitude}})\ \&\&\ (testPressure\ <\ m\_bowControlConnect-\/>calibrationDataConnect-\/>stallPressure));}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{float}\ level\ =\ 0;}
+\DoxyCodeLine{00104\ \ \ \ \ uint16\_t\ mutePos\ =\ 0;}
+\DoxyCodeLine{00105\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a4c84f98f20a559d85079051752f35c87}{setHardwarePosition}}(mutePos);}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a85b73f1ef9113226956a8711eafb5dd9}{completeTask}}(5000))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa0eebcc73d85cacfbcd3b90b050154561}{CR\_Err\_MutePressure}};\ \}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a4c84f98f20a559d85079051752f35c87}{setHardwarePosition}}(mutePos);}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a85b73f1ef9113226956a8711eafb5dd9}{completeTask}}(100))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa0eebcc73d85cacfbcd3b90b050154561}{CR\_Err\_MutePressure}};\ \}}
 \DoxyCodeLine{00111\ }
-\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcalibrateMute_a9401e20a3fe3fb0d8440755320251358}{levelFundamental}}\ <\ \mbox{\hyperlink{mutecalibration_8hpp_ac3913bbe93fa10806a5cbba372a9e25a}{minFundamentalAmplitude}})\ \{}
-\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Pickup\ volume\ too\ low!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
-\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00115\ \ \ \ \ \}}
-\DoxyCodeLine{00116\ }
-\DoxyCodeLine{00117\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Pickup\ fundamental\ ampltiude\ is\ "{}}\ +\ String(\mbox{\hyperlink{classcalibrateMute_a9401e20a3fe3fb0d8440755320251358}{levelFundamental}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
-\DoxyCodeLine{00118\ }
-\DoxyCodeLine{00119\ \textcolor{preprocessor}{\ \ \ \ \#define\ levelStepSize\ 100}}
-\DoxyCodeLine{00120\ }
-\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{float}\ level\ =\ 0;}
-\DoxyCodeLine{00122\ \ \ \ \ uint16\_t\ mutePos\ =\ 0;}
-\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ ss-\/>\mbox{\hyperlink{classservoStepper_a65a7de2492de7c71e3b2bf9cc5b1f9fd}{setPosition}}(mutePos);}
-\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ ss-\/>\mbox{\hyperlink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{completeTask}}();}
-\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ mutePos\ +=\ \mbox{\hyperlink{mutecalibration_8cpp_aa7fa6b42bd7d60dfa9cfccc67c34570a}{levelStepSize}};}
-\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ level\ =\ \mbox{\hyperlink{classcalibrateMute_a593fd649dc0ca4e299ffe413e66712ca}{findLevel}}();}
-\DoxyCodeLine{00128\ }
-\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Level\ "{}}\ +\ String(level)\ +\ \textcolor{stringliteral}{"{}\ at\ position\ "{}}\ +\ String(mutePos),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
-\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (level\ <\ \mbox{\hyperlink{mutecalibration_8hpp_aa1f92eccb1ad4f6e21e7a95dff6dec93}{minAmplitude}})\ \{\ \textcolor{keywordflow}{break};\ \}}
-\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (level\ <\ \mbox{\hyperlink{classcalibrateMute_a4f1cda25c16da959cbcd3671f06561b9}{levelSilence}})\ \{\ \textcolor{keywordflow}{break};\ \}}
-\DoxyCodeLine{00132\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ ((mutePos\ <\ \mbox{\hyperlink{classcalibrateMute_a74d8e374d97cc1a77d5e7a2e77260e68}{stallPosition}})\ \&\&\ ((level\ >=\ \mbox{\hyperlink{mutecalibration_8hpp_aa1f92eccb1ad4f6e21e7a95dff6dec93}{minAmplitude}})\ ||\ (level\ >=\ \mbox{\hyperlink{classcalibrateMute_a4f1cda25c16da959cbcd3671f06561b9}{levelSilence}})));}
-\DoxyCodeLine{00133\ }
-\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordflow}{if}\ (mutePos\ ==\ \mbox{\hyperlink{mutecalibration_8cpp_aa7fa6b42bd7d60dfa9cfccc67c34570a}{levelStepSize}})\ \{}
-\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Error\ finding\ mute\ level"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
-\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00137\ \ \ \ \ \}}
-\DoxyCodeLine{00138\ }
-\DoxyCodeLine{00139\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a835009d19f40da94cda14ea3764562ee}{m\_muteConnect}}-\/>\mbox{\hyperlink{classmute_a889fe5684e410c8dd398ed59233cf047}{setFullMutePosition}}(mutePos);}
-\DoxyCodeLine{00140\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a835009d19f40da94cda14ea3764562ee}{m\_muteConnect}}-\/>\mbox{\hyperlink{classmute_a66681a7501fae2e3cdeaed42080cf353}{setHalfMutePosition}}(mutePos\ /\ 2);}
-\DoxyCodeLine{00141\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Full\ mute\ set\ at\ "{}}\ +\ String(\mbox{\hyperlink{classcalibrateMute_a835009d19f40da94cda14ea3764562ee}{m\_muteConnect}}-\/>\mbox{\hyperlink{classmute_a95be06612690ef583ba2b5ccd80a8741}{getFullMutePosition}}()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
-\DoxyCodeLine{00142\ }
-\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Finished\ level\ set"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
-\DoxyCodeLine{00144\ }
-\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_abd6d3a8ed866d1855c8384a7415a4b4f}{m\_bowControlConnect}}-\/>\mbox{\hyperlink{classbowControl_a00fa8313da3753909d1186b540b8a536}{run}}\ =\ 0;}
-\DoxyCodeLine{00146\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_abd6d3a8ed866d1855c8384a7415a4b4f}{m\_bowControlConnect}}-\/>\mbox{\hyperlink{classbowControl_a4975e60429561b3c949047bda5178e0e}{bowRest}}(1);}
-\DoxyCodeLine{00147\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a86ecd5a8202a01bc74c0d94c75471fa3}{m\_bowIOConnect}}-\/>\mbox{\hyperlink{classbowIO_af543966b009896f0e529909262be4c87}{disableBowPower}}();}
-\DoxyCodeLine{00148\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a86ecd5a8202a01bc74c0d94c75471fa3}{m\_bowIOConnect}}-\/>\mbox{\hyperlink{classbowIO_a802c5cbbe1a33a6a2e75b977993ddcee}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{completeTask}}();}
-\DoxyCodeLine{00149\ }
-\DoxyCodeLine{00150\ \textcolor{comment}{//\ \ \ \ audioFilterBiquad-\/>setLowpass(0,\ noteFreqCutoff,\ 0.707);}}
-\DoxyCodeLine{00151\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}}]\ =\ debugReport;}
-\DoxyCodeLine{00152\ }
-\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00154\ \}}
-\DoxyCodeLine{00155\ }
-\DoxyCodeLine{00156\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrateMute_a4e6ae0e164043685de04408911947106}{calibrateMute::findMuteStall}}()\ \{}
-\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{bool}\ debugReport\ =\ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}}];}
-\DoxyCodeLine{00158\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}}]\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00159\ }
-\DoxyCodeLine{00160\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Starting\ mute\ stall\ calibration"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
-\DoxyCodeLine{00161\ }
-\DoxyCodeLine{00162\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a835009d19f40da94cda14ea3764562ee}{m\_muteConnect}}-\/>\mbox{\hyperlink{classmute_a8205ea9cb3da2cfb5152bcba2a33aa02}{homeMute}}();}
-\DoxyCodeLine{00163\ \textcolor{comment}{//\ \ \ \ servoStepper\ *ss\ =\ m\_muteConnect-\/>stepServoStepper;}}
-\DoxyCodeLine{00164\ \ \ \ \ \mbox{\hyperlink{classservoStepper}{servoStepper}}\ *ss\ =\ \mbox{\hyperlink{classcalibrateMute_a835009d19f40da94cda14ea3764562ee}{m\_muteConnect}}-\/>\mbox{\hyperlink{classmute_ac01f700b833dea7842385a17c6580ff4}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}};}
-\DoxyCodeLine{00165\ }
-\DoxyCodeLine{00166\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00167\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Mute\ home\ positions:\ rising,\ forward\ "{}\ +}}
-\DoxyCodeLine{00168\ \textcolor{comment}{\ \ \ \ \ \ \ \ String(ss-\/>homingPoint[ss-\/>eEdgeType::EDGERISING][ss-\/>eStepDirection::FORWARD])\ +}}
-\DoxyCodeLine{00169\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{},\ falling\ forward\ "{}\ +\ String(ss-\/>homingPoint[ss-\/>eEdgeType::EDGEFALLING][ss-\/>eStepDirection::FORWARD])\ +}}
-\DoxyCodeLine{00170\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{},\ rising\ reverse\ "{}\ +\ String(ss-\/>homingPoint[ss-\/>eEdgeType::EDGERISING][ss-\/>eStepDirection::REVERSE])\ +}}
-\DoxyCodeLine{00171\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{},\ falling\ reverse\ "{}\ +\ String(ss-\/>homingPoint[ss-\/>eEdgeType::EDGEFALLING][ss-\/>eStepDirection::REVERSE]),}}
-\DoxyCodeLine{00172\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintType::TextInfo);}}
-\DoxyCodeLine{00173\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordtype}{bool}\ autoCorrect\ =\ ss-\/>\mbox{\hyperlink{classservoStepper_afad39eb0e3b738035e7a81cfdc87a26d}{autoCorrectPosition}};}
-\DoxyCodeLine{00175\ \ \ \ \ ss-\/>\mbox{\hyperlink{classservoStepper_afad39eb0e3b738035e7a81cfdc87a26d}{autoCorrectPosition}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00176\ }
-\DoxyCodeLine{00177\ \ \ \ \ ss-\/>\mbox{\hyperlink{classservoStepper_a65a7de2492de7c71e3b2bf9cc5b1f9fd}{setPosition}}(\mbox{\hyperlink{classcalibrateMute_afe47cc4d6497d0344998b53fa1f83d47}{maxTestStep}});}
-\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keywordflow}{if}\ (!ss-\/>\mbox{\hyperlink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{completeTask}}())\ \{}
-\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Failed\ at\ going\ to\ max\ pressure"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
-\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00181\ \ \ \ \ \}}
-\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordtype}{bool}\ initialHomingSensed\ =\ ss-\/>\mbox{\hyperlink{classservoStepper_ad79f81cac6e020bde6984fd441371605}{getHomingSensed}}();}
-\DoxyCodeLine{00183\ }
-\DoxyCodeLine{00184\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Starting\ at\ max\ with\ homing\ sense\ "{}}\ +\ String(initialHomingSensed),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
-\DoxyCodeLine{00185\ }
-\DoxyCodeLine{00186\ \ \ \ \ uint16\_t\ i\ =\ \mbox{\hyperlink{classcalibrateMute_afe47cc4d6497d0344998b53fa1f83d47}{maxTestStep}};}
-\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
-\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ i-\/-\/;}
-\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ ss-\/>\mbox{\hyperlink{classservoStepper_a65a7de2492de7c71e3b2bf9cc5b1f9fd}{setPosition}}(i);}
-\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ ss-\/>\mbox{\hyperlink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{completeTask}}();}
-\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 0)\ \{}
-\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Edge\ detection\ failed\ with\ edge\ "{}}\ +\ String(ss-\/>\mbox{\hyperlink{classservoStepper_ad79f81cac6e020bde6984fd441371605}{getHomingSensed}}()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
-\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00195\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (ss-\/>\mbox{\hyperlink{classservoStepper_ad79f81cac6e020bde6984fd441371605}{getHomingSensed}}()\ ==\ initialHomingSensed);}
-\DoxyCodeLine{00196\ }
-\DoxyCodeLine{00197\ }
-\DoxyCodeLine{00198\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Homing\ sense\ changed\ to\ "{}}\ +\ String(ss-\/>\mbox{\hyperlink{classservoStepper_ad79f81cac6e020bde6984fd441371605}{getHomingSensed}}())\ +\ \textcolor{stringliteral}{"{}\ direction\ "{}}\ +\ String(ss-\/>\mbox{\hyperlink{classservoStepper_aee3bf6486d198d08cc378102cb017572}{getMoveDirection}}())\ +\ \textcolor{stringliteral}{"{}\ step\ no\ "{}}\ +\ String(ss-\/>\mbox{\hyperlink{classservoStepper_a5ede814e327f2803b816f898bb669cce}{getCurrentStep}}()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
-\DoxyCodeLine{00199\ }
-\DoxyCodeLine{00200\ \ \ \ \ \mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057da}{servoStepper::eEdgeType}}\ edge;}
-\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordflow}{if}\ (initialHomingSensed\ ==\ \mbox{\hyperlink{servostepper_8hpp_a3b55e293db0958e31aea2403eb0a8036}{homeSenseInactive}})\ \{\ edge\ =\ ss-\/>eEdgeType::EDGERISING;\ \}\ \textcolor{keywordflow}{else}\ \{\ edge\ =\ ss-\/>eEdgeType::EDGEFALLING;\ \};}
-\DoxyCodeLine{00202\ \ \ \ \ uint16\_t\ homingPoint\ =\ ss-\/>\mbox{\hyperlink{classservoStepper_aa37a01a450f75e97f0948dbc7c22ce31}{getHomingPoint}}(edge,\ ss-\/>eStepDirection::REVERSE);}
-\DoxyCodeLine{00203\ \ \ \ \ int32\_t\ homingDifference\ =\ ss-\/>\mbox{\hyperlink{classservoStepper_a5ede814e327f2803b816f898bb669cce}{getCurrentStep}}()\ -\/\ homingPoint;}
-\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordtype}{float}\ mult\ =\ 65535\ /\ (\mbox{\hyperlink{servostepper_8hpp_a3f6ba33716d8ab9664efd36f48fc0663}{stepsPerRevolution}}\ *\ \mbox{\hyperlink{servostepper_8hpp_a6fe78f5adf18de498acaac123384db1a}{microSteps}});}
-\DoxyCodeLine{00205\ \ \ \ \ int32\_t\ maxPosition\ =\ \mbox{\hyperlink{classcalibrateMute_afe47cc4d6497d0344998b53fa1f83d47}{maxTestStep}}\ -\/\ (homingDifference\ *\ mult)\ -\/\ \mbox{\hyperlink{mutecalibration_8hpp_a2dcced8846e12aa1985258bed43d006b}{maxStepRetract}};}
-\DoxyCodeLine{00206\ }
-\DoxyCodeLine{00207\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a74d8e374d97cc1a77d5e7a2e77260e68}{stallPosition}}\ =\ maxPosition;}
-\DoxyCodeLine{00208\ }
-\DoxyCodeLine{00209\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Homing\ point\ is\ at\ "{}}\ +\ String(homingPoint)\ +\ \textcolor{stringliteral}{"{}\ difference\ is\ "{}}\ +\ String(homingDifference)\ +\ \textcolor{stringliteral}{"{}\ making\ the\ max\ position\ "{}}\ +\ String(maxPosition),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
-\DoxyCodeLine{00210\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00211\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Setting\ max\ position\ for\ test"{},\ debugPrintType::TextInfo);}}
-\DoxyCodeLine{00212\ \textcolor{comment}{\ \ \ \ ss-\/>setPosition(maxPosition);}}
-\DoxyCodeLine{00213\ \textcolor{comment}{\ \ \ \ ss-\/>completeTask();}}
-\DoxyCodeLine{00214\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00215\ \ \ \ \ ss-\/>\mbox{\hyperlink{classservoStepper_afad39eb0e3b738035e7a81cfdc87a26d}{autoCorrectPosition}}\ =\ autoCorrect;}
-\DoxyCodeLine{00216\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}}]\ =\ debugReport;}
-\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00218\ \}}
-\DoxyCodeLine{00219\ }
-\DoxyCodeLine{00220\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrateMute_a98cd0f2fdf0b1801b2ea943874072f53}{calibrateMute::findMuteFirstContact}}()\{}
-\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00222\ \}}
-\DoxyCodeLine{00223\ }
-\DoxyCodeLine{00224\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrateMute_a07470f67c1708ab459ef3d490123ba42}{calibrateMute::findMuteSilence}}()\{}
-\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00226\ \}}
-\DoxyCodeLine{00227\ }
-\DoxyCodeLine{00228\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcalibrateMute_a002008084f55858802be9827063d0e9f}{calibrateMute::calibrateAll}}()\{}
-\DoxyCodeLine{00229\ \ \ \ \ \textcolor{comment}{//if\ (stallPosition\ ==\ 0)\ \{}}
-\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classcalibrateMute_a4e6ae0e164043685de04408911947106}{findMuteStall}}())\ \{}
-\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00232\ \ \ \ \ \}}
-\DoxyCodeLine{00233\ \ \ \ \ \textcolor{comment}{//\}}}
-\DoxyCodeLine{00234\ }
-\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classcalibrateMute_a7519919b67f300e574d3ad7badcf7f57}{findMuteLevels}}())\ \{}
-\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00237\ \ \ \ \ \}}
-\DoxyCodeLine{00238\ }
-\DoxyCodeLine{00239\ \ \ \ \ \mbox{\hyperlink{classcalibrateMute_a835009d19f40da94cda14ea3764562ee}{m\_muteConnect}}-\/>\mbox{\hyperlink{classmute_a8205ea9cb3da2cfb5152bcba2a33aa02}{homeMute}}();}
-\DoxyCodeLine{00240\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00241\ \}}
-\DoxyCodeLine{00242\ }
-\DoxyCodeLine{00243\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ mutePos\ +=\ \mbox{\hyperlink{mutecalibration_8cpp_aa7fa6b42bd7d60dfa9cfccc67c34570a}{levelStepSize}};}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ level\ =\ \mbox{\hyperlink{classCalibrateMute_aeb87473967dfddc3686680c04153c72c}{findLevel}}();}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Level\ "{}}\ +\ String(level)\ +\ \textcolor{stringliteral}{"{}\ at\ position\ "{}}\ +\ String(mutePos),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (level\ <\ \mbox{\hyperlink{mutecalibration_8hpp_aa1f92eccb1ad4f6e21e7a95dff6dec93}{minAmplitude}})\ \{\ \textcolor{keywordflow}{break};\ \}}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (level\ <\ \mbox{\hyperlink{classCalibrateMute_adcd25eb94a2964e74b408e791af2d21c}{levelSilence}})\ \{\ \textcolor{keywordflow}{break};\ \}}
+\DoxyCodeLine{00118\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ ((mutePos\ <\ \mbox{\hyperlink{classCalibrateMute_ac32f851a48115a9623250048f8aaf7c6}{stallPosition}})\ \&\&\ ((level\ >=\ \mbox{\hyperlink{mutecalibration_8hpp_aa1f92eccb1ad4f6e21e7a95dff6dec93}{minAmplitude}})\ ||\ (level\ >=\ \mbox{\hyperlink{classCalibrateMute_adcd25eb94a2964e74b408e791af2d21c}{levelSilence}})));}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordflow}{if}\ (mutePos\ ==\ \mbox{\hyperlink{mutecalibration_8cpp_aa7fa6b42bd7d60dfa9cfccc67c34570a}{levelStepSize}})\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfae78a5d056f0bc3105780ab48f9480077}{CR\_Err\_Undefined}};\ \}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a439e835853b14c5b978ef168b4d2fa79}{setFullMutePosition}}(mutePos);}
+\DoxyCodeLine{00123\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_af159acc59612045904351189d523a32e}{setHalfMutePosition}}(mutePos\ /\ 2);}
+\DoxyCodeLine{00124\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Full\ mute\ set\ at\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_adc61005c2105ef2e5e4526b6652fab41}{getFullMutePosition}}()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Finished\ level\ set"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ac41b6162fb1ea57619fdac9b6ddce8e0}{setRun}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{00129\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a9bc480001268aeac1add700870ce18ad}{setBowRest}}();}
+\DoxyCodeLine{00130\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a9497cf120ffd96fe6a75637c56c65c84}{disableBowMotorPower}}();}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ae3e25debfb3d98b39c85b4e67dfc3183}{waitForPressureToSettle}}())\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa1e8892ea4577a02a745e84d5b16e2dba}{CR\_Err\_BowPressure}};\ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}}]\ =\ debugReport;}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa4441e965ce8b9b547cb19f8eadb1593e}{CR\_Ok}};}
+\DoxyCodeLine{00136\ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateMute_aa27905148f2712814c5bd07caa33726c}{CalibrateMute::findMuteStall}}()\ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{bool}\ debugReport\ =\ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}}];}
+\DoxyCodeLine{00140\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}}]\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Starting\ mute\ stall\ calibration"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a8d5b7702ac593f801e3ca282c262ce07}{home}}();}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{bool}\ autoCorrect\ =\ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a6938317be28cb82699e9889b1557e79f}{getAutoCorrect}}();}
+\DoxyCodeLine{00146\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a1222f353ba1bf240b6d8e014a1c5e6a5}{setAutoCorrect}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a4c84f98f20a559d85079051752f35c87}{setHardwarePosition}}(\mbox{\hyperlink{classCalibrateMute_a637d9617a31d116f2a82a3366ed71256}{maxTestStep}});}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a85b73f1ef9113226956a8711eafb5dd9}{completeTask}}())\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa0eebcc73d85cacfbcd3b90b050154561}{CR\_Err\_MutePressure}};\ \}}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{bool}\ initialHomingSensed\ =\ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a0975366e57663c3cb2fb2bf9f3c26395}{getHomingSensed}}();}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Starting\ at\ max\ with\ homing\ sense\ "{}}\ +\ String(initialHomingSensed),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ uint16\_t\ i\ =\ \mbox{\hyperlink{classCalibrateMute_a637d9617a31d116f2a82a3366ed71256}{maxTestStep}};}
+\DoxyCodeLine{00155\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a4c84f98f20a559d85079051752f35c87}{setHardwarePosition}}(i);}
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a85b73f1ef9113226956a8711eafb5dd9}{completeTask}}())\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa0eebcc73d85cacfbcd3b90b050154561}{CR\_Err\_MutePressure}};\ \}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ i-\/-\/;}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a4c84f98f20a559d85079051752f35c87}{setHardwarePosition}}(i);}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a85b73f1ef9113226956a8711eafb5dd9}{completeTask}}())\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa0eebcc73d85cacfbcd3b90b050154561}{CR\_Err\_MutePressure}};\ \}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 0)\ \{}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Edge\ detection\ failed\ with\ edge\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a0975366e57663c3cb2fb2bf9f3c26395}{getHomingSensed}}()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfae78a5d056f0bc3105780ab48f9480077}{CR\_Err\_Undefined}};}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00167\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a0975366e57663c3cb2fb2bf9f3c26395}{getHomingSensed}}()\ ==\ initialHomingSensed);}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Homing\ sense\ changed\ to\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a0975366e57663c3cb2fb2bf9f3c26395}{getHomingSensed}}())\ +\ \textcolor{stringliteral}{"{}\ direction\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_afc92dc3cde659a50420dd16efd248d81}{getMoveDirection}}())\ +\ \textcolor{stringliteral}{"{}\ step\ no\ "{}}\ +}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String(\mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_abdf488dd94cfb9213d0c786cfdc45603}{getCurrentStep}}()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \ \mbox{\hyperlink{servostepper_8hpp_ac70df2e803fd66e0d043165d9d29e672}{eEdgeType}}\ edge;}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordflow}{if}\ (initialHomingSensed\ ==\ \mbox{\hyperlink{servostepper_8hpp_a3b55e293db0958e31aea2403eb0a8036}{homeSenseInactive}})\ \{\ edge\ =\ \mbox{\hyperlink{servostepper_8hpp_ac70df2e803fd66e0d043165d9d29e672afb746b6368a4aa524b3ffbc5a11ba865}{eEdgeType::EDGERISING}};\ \}\ \textcolor{keywordflow}{else}\ \{\ edge\ =\mbox{\hyperlink{servostepper_8hpp_ac70df2e803fd66e0d043165d9d29e672a9777c3eb8ebbe70742e9794344597269}{eEdgeType::EDGEFALLING}};\ \};}
+\DoxyCodeLine{00174\ \ \ \ \ uint16\_t\ homingPoint\ =\ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a46a0cb72ae1ab4b6fd9b9485ff6e4dd7}{getHomingPoint}}(edge,\ \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9}{eStepDirection::REVERSE}});}
+\DoxyCodeLine{00175\ \ \ \ \ int32\_t\ homingDifference\ =\ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_abdf488dd94cfb9213d0c786cfdc45603}{getCurrentStep}}()\ -\/\ homingPoint;}
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordtype}{float}\ mult\ =\ 65535\ /\ (\mbox{\hyperlink{servostepper_8hpp_a3f6ba33716d8ab9664efd36f48fc0663}{stepsPerRevolution}}\ *\ \mbox{\hyperlink{servostepper_8hpp_a6fe78f5adf18de498acaac123384db1a}{microSteps}});}
+\DoxyCodeLine{00177\ \ \ \ \ int32\_t\ maxPosition\ =\ \mbox{\hyperlink{classCalibrateMute_a637d9617a31d116f2a82a3366ed71256}{maxTestStep}}\ -\/\ (homingDifference\ *\ mult)\ -\/\ \mbox{\hyperlink{mutecalibration_8hpp_a2dcced8846e12aa1985258bed43d006b}{maxStepRetract}};}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_ac32f851a48115a9623250048f8aaf7c6}{stallPosition}}\ =\ maxPosition;}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Homing\ point\ is\ at\ "{}}\ +\ String(homingPoint)\ +\ \textcolor{stringliteral}{"{}\ difference\ is\ "{}}\ +\ String(homingDifference)\ +\ \textcolor{stringliteral}{"{}\ making\ the\ max\ position\ "{}}\ +\ String(maxPosition),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{debugPrintType::TextInfo}});}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a1222f353ba1bf240b6d8e014a1c5e6a5}{setAutoCorrect}}(autoCorrect);}
+\DoxyCodeLine{00184\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}}]\ =\ debugReport;}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa4441e965ce8b9b547cb19f8eadb1593e}{CR\_Ok}};}
+\DoxyCodeLine{00186\ \}}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateMute_ae594e44bb589d71df3ea674151500335}{CalibrateMute::calibrateAll}}()\{}
+\DoxyCodeLine{00189\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ result\ =\ \mbox{\hyperlink{classCalibrateMute_aa27905148f2712814c5bd07caa33726c}{findMuteStall}}();}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordflow}{if}\ (result\ ==\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa4441e965ce8b9b547cb19f8eadb1593e}{CR\_Ok}})\ \{\ result\ =\ \mbox{\hyperlink{classCalibrateMute_a68a1737ec836189ee2495c4891d63f0b}{findMuteLevels}}();\ \}}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a8d5b7702ac593f801e3ca282c262ce07}{home}}();}
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00194\ \}}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

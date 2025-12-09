@@ -36,11 +36,8 @@ class averager
         elapsedMillis tempEM;
 
     public:
-//        uint16_t errorTimeThreshold = 10;  //20, 10, 50     // Amount of time that has elapsed since last time the dataChanged flag has been signaled
         uint16_t continuousTimeout = 10;
-        //uint8_t errorThreshold = 2;         //2, 0
         uint16_t continuousErrorThreshold = 2;  //PCB5 test - 5
-//        uint8_t delayErrorThreshold = 5;   //10, 5, 20          // Amount of data change required to signal dataChanged after errorTimeThreshold has elapsed
         uint16_t interruptedErrorThreshold = 40; //PCB5 test - 20
 
         bool trigger = false;                   // Set to true to enable a pDataChanged whenever the data goes above or below the value given by triggerThreshold
@@ -78,8 +75,6 @@ class averager
                 dataIndex++;
                 if (dataIndex >= dataAverageLength) { dataIndex = 0; }
             } else {
-//                int16_t prevData = dataIndex - 1;
-//                if (prevData < 0) { prevData = dataAverageLength - 1; }
 
                 dataArray[dataIndex] = data;
                 dataIndex++;
@@ -141,25 +136,7 @@ class averager
             return true;
         }
 };
-/*
-class physicalADC {
-public:
-    Adafruit_ADS1X15 *ADS;
-    uint16_t currentChannel;
-    long adsTimeOut = 10;
-    long adsConversionStart;
-    bool adsErrorReported = false;
 
-    init(uint16_t adcType) {
-        switch (adcType) {
-            case 0:
-                ADS = new  Adafruit_ADS1015();
-            case 1:
-                ADS = new Adafruit_ADS1115();
-        }
-    }
-};
-*/
 class ControlReader
 {
     public:
@@ -207,12 +184,12 @@ class ControlReader
         long ads2ConversionStart;
         bool ads2ErrorReported = false;
 
-//        physicalADC ADC[2];
-
         long adsReinitializeTimeout = 1000;
         long adsReinitCountStart;
 
-//        long findAndSetNull(uint16_t ch);
+//        bool readSingleADS(Adafruit_ADS1115 *adsx, bool *newData, uint16_t channel, uint8_t channelOffset, long *conversionStart, bool *errorReported, uint16_t timeout);
+//        bool readSingleADS(Adafruit_ADS1015 *adsx, bool *newData, uint16_t channel, uint8_t channelOffset, long *conversionStart, bool *errorReported, uint16_t timeout);
+        bool readSingleADS(Adafruit_ADS1X15 &adsx, volatile bool &newData, uint16_t &channel, uint8_t channelOffset, long &conversionStart, bool &errorReported, uint16_t timeout, uint16_t resolution);
 };
 
 #endif // CONTROLREADER_H

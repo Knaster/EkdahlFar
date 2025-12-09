@@ -1,0 +1,79 @@
+\doxysection{bowpressure.\+hpp File Reference}
+\hypertarget{bowpressure_8hpp}{}\label{bowpressure_8hpp}\index{bowpressure.hpp@{bowpressure.hpp}}
+{\ttfamily \#include "{}tmc2209\+\_\+servostepper.\+cpp"{}}\newline
+Include dependency graph for bowpressure.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=282pt]{bowpressure_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{bowpressure_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classBowPressure}{Bow\+Pressure}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0c}{e\+Pressure\+Mode}} \{ \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0ca661e967c4cfe56fd40a290550b64d8dc}{Rest}}
+, \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0caffb89f6a29dafbca91038396476c4324}{Engage}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} \mbox{\hyperlink{bowpressure_8hpp_af91bfbc052e23727d844d402fafc10bb}{serial\+Commands\+Bow\+Pressure}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0c}\label{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0c} 
+\index{bowpressure.hpp@{bowpressure.hpp}!ePressureMode@{ePressureMode}}
+\index{ePressureMode@{ePressureMode}!bowpressure.hpp@{bowpressure.hpp}}
+\doxysubsubsection{\texorpdfstring{ePressureMode}{ePressureMode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0c}{e\+Pressure\+Mode}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Rest@{Rest}!bowpressure.hpp@{bowpressure.hpp}}\index{bowpressure.hpp@{bowpressure.hpp}!Rest@{Rest}}}\Hypertarget{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0ca661e967c4cfe56fd40a290550b64d8dc}\label{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0ca661e967c4cfe56fd40a290550b64d8dc} 
+Rest&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Engage@{Engage}!bowpressure.hpp@{bowpressure.hpp}}\index{bowpressure.hpp@{bowpressure.hpp}!Engage@{Engage}}}\Hypertarget{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0caffb89f6a29dafbca91038396476c4324}\label{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0caffb89f6a29dafbca91038396476c4324} 
+Engage&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{bowpressure_8hpp_af91bfbc052e23727d844d402fafc10bb}\label{bowpressure_8hpp_af91bfbc052e23727d844d402fafc10bb} 
+\index{bowpressure.hpp@{bowpressure.hpp}!serialCommandsBowPressure@{serialCommandsBowPressure}}
+\index{serialCommandsBowPressure@{serialCommandsBowPressure}!bowpressure.hpp@{bowpressure.hpp}}
+\doxysubsubsection{\texorpdfstring{serialCommandsBowPressure}{serialCommandsBowPressure}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Commands\+Bow\+Pressure\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurebaseline"{}},\ \textcolor{stringliteral}{"{}bpb"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ baseline,\ modulation\ is\ added\ to\ this\ point\ upward"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressuremodifier"{}},\ \textcolor{stringliteral}{"{}bpm"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ modulation,\ added\ to\ the\ baseline"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurerest"{}},\ \textcolor{stringliteral}{"{}bpr"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Puts\ the\ bow\ pressure\ in\ the\ resting\ position\ (conditional)"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressureengage"{}},\ \textcolor{stringliteral}{"{}bpe"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Puts\ the\ bow\ pressure\ in\ the\ engage\ position\ (conditional)"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurepositionmax"{}},\ \textcolor{stringliteral}{"{}bppx"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ stall/maximum\ position"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurepositionengage"{}},\ \textcolor{stringliteral}{"{}bppe"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ touch/minimum\ position"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurepositionrest"{}},\ \textcolor{stringliteral}{"{}bppr"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ rest\ position"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressureengagespeed"{}},\ \textcolor{stringliteral}{"{}bpes"{}},\ \textcolor{stringliteral}{"{}1\ -\/\ 100?"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ movement\ speed\ when\ engaging\ or\ disengaging"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressuremodulationspeed"{}},\ \textcolor{stringliteral}{"{}bpms"{}},\ \textcolor{stringliteral}{"{}0.1\ -\/\ 10"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ movement\ speed\ while\ engaged"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurehold"{}},\ \textcolor{stringliteral}{"{}bph"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Sets\ bow\ hold\ on/off"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowhome"{}},\ \textcolor{stringliteral}{"{}bh"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Homing\ bow,\ used\ at\ startup\ and\ in\ case\ of\ the\ bow\ loosing\ position"{}}\ \},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

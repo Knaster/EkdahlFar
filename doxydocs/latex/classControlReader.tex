@@ -1,0 +1,392 @@
+\doxysection{Control\+Reader Class Reference}
+\hypertarget{classControlReader}{}\label{classControlReader}\index{ControlReader@{ControlReader}}
+
+
+{\ttfamily \#include $<$control\+Reader.\+hpp$>$}
+
+
+
+Collaboration diagram for Control\+Reader\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{classControlReader__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classControlReader_a92ec387a20d951b16d73d4e9c4d26bb5}{Control\+Reader}} (uint8\+\_\+t in\+Data\+Ready\+Pin, uint8\+\_\+t in\+Gate\+Pin)
+\item 
+virtual \mbox{\hyperlink{classControlReader_af538c65e5f0f45d6306b1558fcd9b957}{\texorpdfstring{$\sim$}{\string~}\+Control\+Reader}} ()
+\item 
+void \mbox{\hyperlink{classControlReader_a8998d3ffc4f19f45f2a7bc4061cc8e5a}{read\+Data}} ()
+\item 
+bool \mbox{\hyperlink{classControlReader_a102e5eeca42e074f56a5aa234badad30}{set\+ADCCommands}} (uint8\+\_\+t channel, String \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}})
+\item 
+bool \mbox{\hyperlink{classControlReader_a4dffd5e19b19104e0ec1d762072fb29a}{set\+ADCAverager\+Settings}} (uint8\+\_\+t t\+\_\+channel, uint8\+\_\+t t\+\_\+averages, uint16\+\_\+t t\+\_\+interrupt\+Error\+Threshold, uint16\+\_\+t t\+\_\+continuous\+Error\+Threshold, uint16\+\_\+t t\+\_\+continuous\+Timeout)
+\item 
+String \mbox{\hyperlink{classControlReader_a012829af77cdd47a80785360158eee22}{get\+ADCAverager\+Settings}} (uint8\+\_\+t channel)
+\item 
+void \mbox{\hyperlink{classControlReader_a9701e3779aa63088d8bc8aa560059191}{set\+Defaults}} ()
+\item 
+String \mbox{\hyperlink{classControlReader_ab45ab596486631cd4eceb137804d6c13}{dump\+Data}} ()
+\item 
+void \mbox{\hyperlink{classControlReader_a8b3c5cddf3ef9bf3cb9a56108c394f5b}{set\+ADCMin\+Max\+Test\+Channel}} (uint8\+\_\+t t\+\_\+channel)
+\item 
+void \mbox{\hyperlink{classControlReader_ac3e9b70b0918c03a8450391b614c9e22}{reset\+Ads}} ()
+\begin{DoxyCompactList}\small\item\em Tries to reconnect to the ADC converters. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classControlReader_a23c21dc8219fde243f98acbad95cc942}{get\+Data}} (int16\+\_\+t channel)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ String $>$ \mbox{\hyperlink{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}{cv\+Input\+Commands}}
+\item 
+bool \mbox{\hyperlink{classControlReader_a2b1c46952e1145ab13700e08f472a03e}{output\+Debug\+Data}} = true
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classControlReader_ab9a22bf0de979dac0f952c632841ed39}{test\+Min}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classControlReader_a67ffe474cfe49c340b66a0e609aeddf3}{test\+Max}}
+\item 
+bool \mbox{\hyperlink{classControlReader_aac84137ad7f490b34025edfadb513de4}{test\+Begin}} = true
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classControlReader_a12391f415e829660fb9a45820985577a}{test\+Channel}} = 0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classControlReader_a7ace2aea9f957123e9374a70edb427b1}{gate\+State}} = 0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classControlReader_a1fd8c0c72138326f209dcb9bd3c2126a}{add\+Test\+Data}} (uint16\+\_\+t value)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classControlReader_a76f9dba3f0d96b176548a3267f8a71d4}{ads\+Init}} = false
+\item 
+Adafruit\+\_\+\+ADS1115 \mbox{\hyperlink{classControlReader_a8f935acf0a7f67cde21e3a8775ad5235}{ads}}
+\item 
+Adafruit\+\_\+\+ADS1015 \mbox{\hyperlink{classControlReader_afa635a97f3a20a56c096fa0681865361}{ads2}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classControlReader_a91391c3cb4579812e669e6e0bb3b3e0b}{pin\+Data\+Ready}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classControlReader_a9fd26d764b116b6137f0262818598563}{pin\+Gate}}
+\item 
+\mbox{\hyperlink{classaverager}{averager}} \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}} \mbox{[}8\mbox{]}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classControlReader_ab89416e32e6258f80bc3ac09c01b7c63}{current\+Channel}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classControlReader_a59d7603d61090d3c568edb9378555c14}{current\+Channel2}}
+\item 
+long \mbox{\hyperlink{classControlReader_a4f28fa689514b369418e9b0c304606f6}{ads\+Time\+Out}} = 10
+\item 
+long \mbox{\hyperlink{classControlReader_a860817552a742e63bc71b35fd41038c0}{ads\+Conversion\+Start}}
+\item 
+bool \mbox{\hyperlink{classControlReader_ae285caee6f66937efeef81145cfb178e}{ads\+Error\+Reported}} = false
+\item 
+long \mbox{\hyperlink{classControlReader_ac3df7999dd53c06e235b753faf34873f}{ads2\+Time\+Out}} = 10
+\item 
+long \mbox{\hyperlink{classControlReader_aeb9d7bc35cdd2b016f7c73d452fee076}{ads2\+Conversion\+Start}}
+\item 
+bool \mbox{\hyperlink{classControlReader_a6213d99cea0c505d893514fb40bdd0f2}{ads2\+Error\+Reported}} = false
+\item 
+long \mbox{\hyperlink{classControlReader_ac56bbf8b2ab06aa53b4eda0aa45010ff}{ads\+Reinitialize\+Timeout}} = 1000
+\item 
+long \mbox{\hyperlink{classControlReader_a8018e2761d0b19e3bcf40bd13a714157}{ads\+Reinit\+Count\+Start}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classControlReader_a92ec387a20d951b16d73d4e9c4d26bb5}\label{classControlReader_a92ec387a20d951b16d73d4e9c4d26bb5} 
+\index{ControlReader@{ControlReader}!ControlReader@{ControlReader}}
+\index{ControlReader@{ControlReader}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{ControlReader()}{ControlReader()}}
+{\footnotesize\ttfamily Control\+Reader\+::\+Control\+Reader (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{in\+Data\+Ready\+Pin,  }\item[{uint8\+\_\+t}]{in\+Gate\+Pin }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_a92ec387a20d951b16d73d4e9c4d26bb5_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classControlReader_af538c65e5f0f45d6306b1558fcd9b957}\label{classControlReader_af538c65e5f0f45d6306b1558fcd9b957} 
+\index{ControlReader@{ControlReader}!````~ControlReader@{\texorpdfstring{$\sim$}{\string~}ControlReader}}
+\index{````~ControlReader@{\texorpdfstring{$\sim$}{\string~}ControlReader}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ControlReader()}{\string~ControlReader()}}
+{\footnotesize\ttfamily Control\+Reader\+::\texorpdfstring{$\sim$}{\string~}\+Control\+Reader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classControlReader_a1fd8c0c72138326f209dcb9bd3c2126a}\label{classControlReader_a1fd8c0c72138326f209dcb9bd3c2126a} 
+\index{ControlReader@{ControlReader}!addTestData@{addTestData}}
+\index{addTestData@{addTestData}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{addTestData()}{addTestData()}}
+{\footnotesize\ttfamily void Control\+Reader\+::add\+Test\+Data (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_a1fd8c0c72138326f209dcb9bd3c2126a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classControlReader_ab45ab596486631cd4eceb137804d6c13}\label{classControlReader_ab45ab596486631cd4eceb137804d6c13} 
+\index{ControlReader@{ControlReader}!dumpData@{dumpData}}
+\index{dumpData@{dumpData}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
+{\footnotesize\ttfamily String Control\+Reader\+::dump\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_ab45ab596486631cd4eceb137804d6c13_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classControlReader_a012829af77cdd47a80785360158eee22}\label{classControlReader_a012829af77cdd47a80785360158eee22} 
+\index{ControlReader@{ControlReader}!getADCAveragerSettings@{getADCAveragerSettings}}
+\index{getADCAveragerSettings@{getADCAveragerSettings}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{getADCAveragerSettings()}{getADCAveragerSettings()}}
+{\footnotesize\ttfamily String Control\+Reader\+::get\+ADCAverager\+Settings (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{channel }\end{DoxyParamCaption})}
+
+\Hypertarget{classControlReader_a23c21dc8219fde243f98acbad95cc942}\label{classControlReader_a23c21dc8219fde243f98acbad95cc942} 
+\index{ControlReader@{ControlReader}!getData@{getData}}
+\index{getData@{getData}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{getData()}{getData()}}
+{\footnotesize\ttfamily int32\+\_\+t Control\+Reader\+::get\+Data (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{channel }\end{DoxyParamCaption})}
+
+\Hypertarget{classControlReader_a8998d3ffc4f19f45f2a7bc4061cc8e5a}\label{classControlReader_a8998d3ffc4f19f45f2a7bc4061cc8e5a} 
+\index{ControlReader@{ControlReader}!readData@{readData}}
+\index{readData@{readData}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{readData()}{readData()}}
+{\footnotesize\ttfamily void Control\+Reader\+::read\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_a8998d3ffc4f19f45f2a7bc4061cc8e5a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_a8998d3ffc4f19f45f2a7bc4061cc8e5a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classControlReader_ac3e9b70b0918c03a8450391b614c9e22}\label{classControlReader_ac3e9b70b0918c03a8450391b614c9e22} 
+\index{ControlReader@{ControlReader}!resetAds@{resetAds}}
+\index{resetAds@{resetAds}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{resetAds()}{resetAds()}}
+{\footnotesize\ttfamily void Control\+Reader\+::reset\+Ads (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tries to reconnect to the ADC converters. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_ac3e9b70b0918c03a8450391b614c9e22_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_ac3e9b70b0918c03a8450391b614c9e22_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classControlReader_a4dffd5e19b19104e0ec1d762072fb29a}\label{classControlReader_a4dffd5e19b19104e0ec1d762072fb29a} 
+\index{ControlReader@{ControlReader}!setADCAveragerSettings@{setADCAveragerSettings}}
+\index{setADCAveragerSettings@{setADCAveragerSettings}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{setADCAveragerSettings()}{setADCAveragerSettings()}}
+{\footnotesize\ttfamily bool Control\+Reader\+::set\+ADCAverager\+Settings (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{t\+\_\+channel,  }\item[{uint8\+\_\+t}]{t\+\_\+averages,  }\item[{uint16\+\_\+t}]{t\+\_\+interrupt\+Error\+Threshold,  }\item[{uint16\+\_\+t}]{t\+\_\+continuous\+Error\+Threshold,  }\item[{uint16\+\_\+t}]{t\+\_\+continuous\+Timeout }\end{DoxyParamCaption})}
+
+\Hypertarget{classControlReader_a102e5eeca42e074f56a5aa234badad30}\label{classControlReader_a102e5eeca42e074f56a5aa234badad30} 
+\index{ControlReader@{ControlReader}!setADCCommands@{setADCCommands}}
+\index{setADCCommands@{setADCCommands}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{setADCCommands()}{setADCCommands()}}
+{\footnotesize\ttfamily bool Control\+Reader\+::set\+ADCCommands (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{channel,  }\item[{String}]{commands }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_a102e5eeca42e074f56a5aa234badad30_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classControlReader_a8b3c5cddf3ef9bf3cb9a56108c394f5b}\label{classControlReader_a8b3c5cddf3ef9bf3cb9a56108c394f5b} 
+\index{ControlReader@{ControlReader}!setADCMinMaxTestChannel@{setADCMinMaxTestChannel}}
+\index{setADCMinMaxTestChannel@{setADCMinMaxTestChannel}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{setADCMinMaxTestChannel()}{setADCMinMaxTestChannel()}}
+{\footnotesize\ttfamily void Control\+Reader\+::set\+ADCMin\+Max\+Test\+Channel (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{t\+\_\+channel }\end{DoxyParamCaption})}
+
+\Hypertarget{classControlReader_a9701e3779aa63088d8bc8aa560059191}\label{classControlReader_a9701e3779aa63088d8bc8aa560059191} 
+\index{ControlReader@{ControlReader}!setDefaults@{setDefaults}}
+\index{setDefaults@{setDefaults}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{setDefaults()}{setDefaults()}}
+{\footnotesize\ttfamily void Control\+Reader\+::set\+Defaults (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_a9701e3779aa63088d8bc8aa560059191_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classControlReader_a8f935acf0a7f67cde21e3a8775ad5235}\label{classControlReader_a8f935acf0a7f67cde21e3a8775ad5235} 
+\index{ControlReader@{ControlReader}!ads@{ads}}
+\index{ads@{ads}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{ads}{ads}}
+{\footnotesize\ttfamily Adafruit\+\_\+\+ADS1115 Control\+Reader\+::ads\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classControlReader_afa635a97f3a20a56c096fa0681865361}\label{classControlReader_afa635a97f3a20a56c096fa0681865361} 
+\index{ControlReader@{ControlReader}!ads2@{ads2}}
+\index{ads2@{ads2}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{ads2}{ads2}}
+{\footnotesize\ttfamily Adafruit\+\_\+\+ADS1015 Control\+Reader\+::ads2\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classControlReader_aeb9d7bc35cdd2b016f7c73d452fee076}\label{classControlReader_aeb9d7bc35cdd2b016f7c73d452fee076} 
+\index{ControlReader@{ControlReader}!ads2ConversionStart@{ads2ConversionStart}}
+\index{ads2ConversionStart@{ads2ConversionStart}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{ads2ConversionStart}{ads2ConversionStart}}
+{\footnotesize\ttfamily long Control\+Reader\+::ads2\+Conversion\+Start\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classControlReader_a6213d99cea0c505d893514fb40bdd0f2}\label{classControlReader_a6213d99cea0c505d893514fb40bdd0f2} 
+\index{ControlReader@{ControlReader}!ads2ErrorReported@{ads2ErrorReported}}
+\index{ads2ErrorReported@{ads2ErrorReported}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{ads2ErrorReported}{ads2ErrorReported}}
+{\footnotesize\ttfamily bool Control\+Reader\+::ads2\+Error\+Reported = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classControlReader_ac3df7999dd53c06e235b753faf34873f}\label{classControlReader_ac3df7999dd53c06e235b753faf34873f} 
+\index{ControlReader@{ControlReader}!ads2TimeOut@{ads2TimeOut}}
+\index{ads2TimeOut@{ads2TimeOut}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{ads2TimeOut}{ads2TimeOut}}
+{\footnotesize\ttfamily long Control\+Reader\+::ads2\+Time\+Out = 10\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classControlReader_a860817552a742e63bc71b35fd41038c0}\label{classControlReader_a860817552a742e63bc71b35fd41038c0} 
+\index{ControlReader@{ControlReader}!adsConversionStart@{adsConversionStart}}
+\index{adsConversionStart@{adsConversionStart}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{adsConversionStart}{adsConversionStart}}
+{\footnotesize\ttfamily long Control\+Reader\+::ads\+Conversion\+Start\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classControlReader_ae285caee6f66937efeef81145cfb178e}\label{classControlReader_ae285caee6f66937efeef81145cfb178e} 
+\index{ControlReader@{ControlReader}!adsErrorReported@{adsErrorReported}}
+\index{adsErrorReported@{adsErrorReported}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{adsErrorReported}{adsErrorReported}}
+{\footnotesize\ttfamily bool Control\+Reader\+::ads\+Error\+Reported = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classControlReader_a76f9dba3f0d96b176548a3267f8a71d4}\label{classControlReader_a76f9dba3f0d96b176548a3267f8a71d4} 
+\index{ControlReader@{ControlReader}!adsInit@{adsInit}}
+\index{adsInit@{adsInit}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{adsInit}{adsInit}}
+{\footnotesize\ttfamily bool Control\+Reader\+::ads\+Init = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classControlReader_a8018e2761d0b19e3bcf40bd13a714157}\label{classControlReader_a8018e2761d0b19e3bcf40bd13a714157} 
+\index{ControlReader@{ControlReader}!adsReinitCountStart@{adsReinitCountStart}}
+\index{adsReinitCountStart@{adsReinitCountStart}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{adsReinitCountStart}{adsReinitCountStart}}
+{\footnotesize\ttfamily long Control\+Reader\+::ads\+Reinit\+Count\+Start\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classControlReader_ac56bbf8b2ab06aa53b4eda0aa45010ff}\label{classControlReader_ac56bbf8b2ab06aa53b4eda0aa45010ff} 
+\index{ControlReader@{ControlReader}!adsReinitializeTimeout@{adsReinitializeTimeout}}
+\index{adsReinitializeTimeout@{adsReinitializeTimeout}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{adsReinitializeTimeout}{adsReinitializeTimeout}}
+{\footnotesize\ttfamily long Control\+Reader\+::ads\+Reinitialize\+Timeout = 1000\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classControlReader_a4f28fa689514b369418e9b0c304606f6}\label{classControlReader_a4f28fa689514b369418e9b0c304606f6} 
+\index{ControlReader@{ControlReader}!adsTimeOut@{adsTimeOut}}
+\index{adsTimeOut@{adsTimeOut}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{adsTimeOut}{adsTimeOut}}
+{\footnotesize\ttfamily long Control\+Reader\+::ads\+Time\+Out = 10\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}\label{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3} 
+\index{ControlReader@{ControlReader}!averages@{averages}}
+\index{averages@{averages}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{averages}{averages}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classaverager}{averager}} Control\+Reader\+::averages\mbox{[}8\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classControlReader_ab89416e32e6258f80bc3ac09c01b7c63}\label{classControlReader_ab89416e32e6258f80bc3ac09c01b7c63} 
+\index{ControlReader@{ControlReader}!currentChannel@{currentChannel}}
+\index{currentChannel@{currentChannel}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{currentChannel}{currentChannel}}
+{\footnotesize\ttfamily uint16\+\_\+t Control\+Reader\+::current\+Channel\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classControlReader_a59d7603d61090d3c568edb9378555c14}\label{classControlReader_a59d7603d61090d3c568edb9378555c14} 
+\index{ControlReader@{ControlReader}!currentChannel2@{currentChannel2}}
+\index{currentChannel2@{currentChannel2}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{currentChannel2}{currentChannel2}}
+{\footnotesize\ttfamily uint16\+\_\+t Control\+Reader\+::current\+Channel2\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}\label{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41} 
+\index{ControlReader@{ControlReader}!cvInputCommands@{cvInputCommands}}
+\index{cvInputCommands@{cvInputCommands}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{cvInputCommands}{cvInputCommands}}
+{\footnotesize\ttfamily std\+::vector$<$String$>$ Control\+Reader\+::cv\+Input\+Commands}
+
+\Hypertarget{classControlReader_a7ace2aea9f957123e9374a70edb427b1}\label{classControlReader_a7ace2aea9f957123e9374a70edb427b1} 
+\index{ControlReader@{ControlReader}!gateState@{gateState}}
+\index{gateState@{gateState}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{gateState}{gateState}}
+{\footnotesize\ttfamily uint16\+\_\+t Control\+Reader\+::gate\+State = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classControlReader_a2b1c46952e1145ab13700e08f472a03e}\label{classControlReader_a2b1c46952e1145ab13700e08f472a03e} 
+\index{ControlReader@{ControlReader}!outputDebugData@{outputDebugData}}
+\index{outputDebugData@{outputDebugData}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{outputDebugData}{outputDebugData}}
+{\footnotesize\ttfamily bool Control\+Reader\+::output\+Debug\+Data = true}
+
+\Hypertarget{classControlReader_a91391c3cb4579812e669e6e0bb3b3e0b}\label{classControlReader_a91391c3cb4579812e669e6e0bb3b3e0b} 
+\index{ControlReader@{ControlReader}!pinDataReady@{pinDataReady}}
+\index{pinDataReady@{pinDataReady}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{pinDataReady}{pinDataReady}}
+{\footnotesize\ttfamily uint8\+\_\+t Control\+Reader\+::pin\+Data\+Ready\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classControlReader_a9fd26d764b116b6137f0262818598563}\label{classControlReader_a9fd26d764b116b6137f0262818598563} 
+\index{ControlReader@{ControlReader}!pinGate@{pinGate}}
+\index{pinGate@{pinGate}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{pinGate}{pinGate}}
+{\footnotesize\ttfamily uint8\+\_\+t Control\+Reader\+::pin\+Gate\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classControlReader_aac84137ad7f490b34025edfadb513de4}\label{classControlReader_aac84137ad7f490b34025edfadb513de4} 
+\index{ControlReader@{ControlReader}!testBegin@{testBegin}}
+\index{testBegin@{testBegin}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{testBegin}{testBegin}}
+{\footnotesize\ttfamily bool Control\+Reader\+::test\+Begin = true}
+
+\Hypertarget{classControlReader_a12391f415e829660fb9a45820985577a}\label{classControlReader_a12391f415e829660fb9a45820985577a} 
+\index{ControlReader@{ControlReader}!testChannel@{testChannel}}
+\index{testChannel@{testChannel}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{testChannel}{testChannel}}
+{\footnotesize\ttfamily uint8\+\_\+t Control\+Reader\+::test\+Channel = 0}
+
+\Hypertarget{classControlReader_a67ffe474cfe49c340b66a0e609aeddf3}\label{classControlReader_a67ffe474cfe49c340b66a0e609aeddf3} 
+\index{ControlReader@{ControlReader}!testMax@{testMax}}
+\index{testMax@{testMax}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{testMax}{testMax}}
+{\footnotesize\ttfamily uint16\+\_\+t Control\+Reader\+::test\+Max}
+
+\Hypertarget{classControlReader_ab9a22bf0de979dac0f952c632841ed39}\label{classControlReader_ab9a22bf0de979dac0f952c632841ed39} 
+\index{ControlReader@{ControlReader}!testMin@{testMin}}
+\index{testMin@{testMin}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{testMin}{testMin}}
+{\footnotesize\ttfamily uint16\+\_\+t Control\+Reader\+::test\+Min}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{controlReader_8hpp}{control\+Reader.\+hpp}}\item 
+\mbox{\hyperlink{controlReader_8cpp}{control\+Reader.\+cpp}}\end{DoxyCompactItemize}

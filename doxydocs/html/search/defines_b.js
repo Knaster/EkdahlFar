@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['tachofreqlength_0',['tachofreqlength',['../bowio_8hpp.html#a24d78bb2c53ff0ee3960b1424380af6d',1,'tachoFreqLength:&#160;bowio.hpp'],['../dcmotorcontrol_8hpp.html#a24d78bb2c53ff0ee3960b1424380af6d',1,'tachoFreqLength:&#160;dcmotorcontrol.hpp']]],
-  ['tachofreqperimssiblemax_1',['tachofreqperimssiblemax',['../bowio_8hpp.html#a917bdbed5a360e07cbaf3b5566c683ce',1,'tachoFreqPerimssibleMAX:&#160;bowio.hpp'],['../dcmotorcontrol_8hpp.html#a917bdbed5a360e07cbaf3b5566c683ce',1,'tachoFreqPerimssibleMAX:&#160;dcmotorcontrol.hpp']]],
-  ['tachofreqperimssiblemin_2',['tachofreqperimssiblemin',['../bowio_8hpp.html#a4fe38822f8268415b5178beda7fe09ea',1,'tachoFreqPerimssibleMIN:&#160;bowio.hpp'],['../dcmotorcontrol_8hpp.html#a4fe38822f8268415b5178beda7fe09ea',1,'tachoFreqPerimssibleMIN:&#160;dcmotorcontrol.hpp']]],
-  ['tachoisr_5fbowcontrolarraymax_3',['tachoISR_bowControlArrayMax',['../isrclasswrapper_8cpp.html#a09ddef76f38af822146ca94d8b1bf211',1,'isrclasswrapper.cpp']]],
-  ['testdelay_4',['testDelay',['../calibrate_8hpp.html#a5edf2fe288e94bef931cd65d9d477abc',1,'calibrate.hpp']]],
-  ['tmc2209_5fservostepper_5fc_5',['TMC2209_SERVOSTEPPER_C',['../tmc2209__servostepper_8cpp.html#a0bd690832afbcfd6df17fb9a955360d5',1,'tmc2209_servostepper.cpp']]]
+  ['secondhomeoverstep_0',['secondHomeOverStep',['../servostepper_8hpp.html#af01638a8ef574abe19fcc5bfab1b3a28',1,'servostepper.hpp']]],
+  ['serial_5fnumber_1',['SERIAL_NUMBER',['../name_8c.html#ad8a20d143f6a7579ed227578aeddec21',1,'name.c']]],
+  ['serial_5fnumber_5flen_2',['SERIAL_NUMBER_LEN',['../name_8c.html#a43aec024a153fcce66ca6d700b350731',1,'name.c']]],
+  ['solenoid_5fc_3',['SOLENOID_C',['../solenoid_8cpp.html#a69b039706ce13a79215a510a96720586',1,'solenoid.cpp']]],
+  ['stepsperrevolution_4',['stepsPerRevolution',['../servostepper_8hpp.html#a3f6ba33716d8ab9664efd36f48fc0663',1,'servostepper.hpp']]]
 ];

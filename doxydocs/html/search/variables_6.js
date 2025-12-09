@@ -1,11 +1,13 @@
 var searchData=
 [
-  ['firmwarechanged_0',['firmwareChanged',['../automaticversion_8hpp.html#a26d0bc41e0e78388f09961d7491fb38f',1,'automaticversion.hpp']]],
-  ['firsttouchpressure_1',['firsttouchpressure',['../structBowActuators_1_1BowActuator.html#a3c1b1d894336ca2c4ad9268e88dda3cd',1,'BowActuators::BowActuator::firstTouchPressure'],['../structCalibrationData.html#acd0de95cff2c97a3334474622271df67',1,'CalibrationData::firstTouchPressure']]],
-  ['forcemax_2',['forceMax',['../classsolenoid.html#ae035d0d4b493dbdff67f1bd34455bf81',1,'solenoid']]],
-  ['forcemin_3',['forceMin',['../classsolenoid.html#a4af25a31cc8a8ab5406ba5ff07babe47',1,'solenoid']]],
-  ['forcemultiplier_4',['forceMultiplier',['../classsolenoid.html#a6e52fb5a39303f154645fc8d6acd58a0',1,'solenoid']]],
-  ['foundsecondhomefalling_5',['foundSecondHomeFalling',['../classservoStepper.html#aeb2ec33ba06c84ab9a4ae24927389150',1,'servoStepper']]],
-  ['fullmuteposition_6',['fullMutePosition',['../classmute.html#abdb72fbf056ae9547d43e808b34af23d',1,'mute']]],
-  ['fundamentalfrequency_7',['fundamentalFrequency',['../structCalibrationData.html#a8e1ad5a082bec8c00b3187bb877f3283',1,'CalibrationData']]]
+  ['farsingle_0',['farSingle',['../main_8cpp.html#a0300de59c914b127d83bfd99227907cc',1,'main.cpp']]],
+  ['firmwarechanged_1',['firmwareChanged',['../automaticversion_8hpp.html#a26d0bc41e0e78388f09961d7491fb38f',1,'automaticversion.hpp']]],
+  ['firsttouchpressure_2',['firstTouchPressure',['../structBowActuator.html#a9df0b12b86f0c19db8cf605e24ed5586',1,'BowActuator']]],
+  ['forcemax_3',['forceMax',['../classSolenoid.html#add93b1973b29bfce089f9a166ff74560',1,'Solenoid']]],
+  ['forcemin_4',['forceMin',['../classSolenoid.html#a66c6d3f68f11c1bad2518f302ef42e19',1,'Solenoid']]],
+  ['forcemultiplier_5',['forceMultiplier',['../classSolenoid.html#a6be3226d9b5f3e4f83583c0227331b71',1,'Solenoid']]],
+  ['foundsecondhomefalling_6',['foundSecondHomeFalling',['../classservoStepper.html#aeb2ec33ba06c84ab9a4ae24927389150',1,'servoStepper']]],
+  ['frequencychanged_7',['frequencyChanged',['../classHarmonicSeriesHandler.html#a6c0ea250eca8743be2bc1031e4ce5af3',1,'HarmonicSeriesHandler']]],
+  ['fullmuteposition_8',['fullMutePosition',['../classMute.html#ae540aa1e4c5daab17098373b3f4de47d',1,'Mute']]],
+  ['fundamentalfrequency_9',['fundamentalFrequency',['../classHarmonicSeriesHandler.html#ab7e94991bfffdabd0d9049f658a16f4d',1,'HarmonicSeriesHandler']]]
 ];

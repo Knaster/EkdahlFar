@@ -124,7 +124,7 @@ eProcessResult MuteControl::processSerialCommand(commandItem *inCommandItem, std
     return eProcessResult::Ok;
 }
 
-eProcessResult MuteControl::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false, commandList *delegatedCommands = nullptr) {
+eProcessResult MuteControl::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
     processCommandItems(inCommandItem, serialCommandsMuteHidden, sizeof(serialCommandsMuteHidden)  / sizeof(serialCommandItem));
 
     if (inCommandItem->command == "helphidden") {

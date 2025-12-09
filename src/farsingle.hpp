@@ -15,7 +15,7 @@
 #include "bowcalibration.cpp"
 #include "mutecalibration.cpp"
 
-serialCommandItem serialCommandsFarSingle[] = {
+const serialCommandItem serialCommandsFarSingle[] = {
     { "bowcalibrateall", "bca", "-", "Performs all calibration routines on the selected bow, see below for routines performed" },
     { "bowcalibratespeed", "bcs", "-", "Finds the minimum and maximum bow speed of the selected bow" },
     { "bowcalibratepressure", "bcp", "-", "Finds the minimum and maximum bow pressure of the selected bow" },

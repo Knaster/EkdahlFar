@@ -1,6 +1,20 @@
 var searchData=
 [
-  ['notefreqcutoff_0',['noteFreqCutoff',['../audioanalyze_8h.html#a9c900f998f12cff863e4fe03daf78994',1,'audioanalyze.h']]],
-  ['noteoffsingle_1',['noteOffSingle',['../configuration_8cpp.html#ace094a5a481a9002559586aef645e904',1,'configuration.cpp']]],
-  ['noteonsingle_2',['noteOnSingle',['../configuration_8cpp.html#a38c83139c1b05e16c729112eacd38624',1,'configuration.cpp']]]
+  ['manufacturer_5fname_0',['MANUFACTURER_NAME',['../name_8c.html#aaa2b8f5b105c3019df0cb346f472e803',1,'name.c']]],
+  ['manufacturer_5fname_5flen_1',['MANUFACTURER_NAME_LEN',['../name_8c.html#a7ec873977ee9666aa7646bd4c6654df9',1,'name.c']]],
+  ['mapsize_2',['mapSize',['../midi_8cpp.html#af5f9f8958f0af48944f91c92f074fbc8',1,'midi.cpp']]],
+  ['maxpowerusemultiplierduringcalibration_3',['maxPowerUseMultiplierDuringCalibration',['../bowcalibration_8hpp.html#a947c967c63e6d866be6d4f8905de7de5',1,'bowcalibration.hpp']]],
+  ['maxstepretract_4',['maxStepRetract',['../mutecalibration_8hpp.html#a2dcced8846e12aa1985258bed43d006b',1,'mutecalibration.hpp']]],
+  ['maxtestfreq_5',['maxTestFreq',['../bowcalibration_8hpp.html#a47b98850cbd5784fa0048dc4f4285ec6',1,'bowcalibration.hpp']]],
+  ['microsteps_6',['microSteps',['../servostepper_8hpp.html#a6fe78f5adf18de498acaac123384db1a',1,'servostepper.hpp']]],
+  ['midi_5fh_7',['MIDI_H',['../midi_8cpp.html#a167c786385a6cfac01f53560f43b7f9b',1,'midi.cpp']]],
+  ['midi_5fname_8',['MIDI_NAME',['../name_8c.html#acfb86508806c2d3aabbe8f8c2ef9f401',1,'name.c']]],
+  ['midi_5fname_5flen_9',['MIDI_NAME_LEN',['../name_8c.html#a7b129d726ca2eff9f6b5fd035af68834',1,'name.c']]],
+  ['minamplitude_10',['minAmplitude',['../mutecalibration_8hpp.html#aa1f92eccb1ad4f6e21e7a95dff6dec93',1,'mutecalibration.hpp']]],
+  ['minfundamentalamplitude_11',['minFundamentalAmplitude',['../mutecalibration_8hpp.html#ac3913bbe93fa10806a5cbba372a9e25a',1,'mutecalibration.hpp']]],
+  ['minpermissiblebowspeedforcalibration_12',['minPermissibleBowSpeedForCalibration',['../bowcalibration_8hpp.html#a207f202ec9674a99e0465a1d6cdf2081',1,'bowcalibration.hpp']]],
+  ['mintestfreq_13',['minTestFreq',['../bowcalibration_8hpp.html#a8c8701de81f6984d1467051303c5d5c8',1,'bowcalibration.hpp']]],
+  ['mute_5fc_14',['MUTE_C',['../mute_8cpp.html#af472a2398d3de72d6ed2271c9c09e0dc',1,'mute.cpp']]],
+  ['mutecalibration_5fcpp_15',['MUTECALIBRATION_CPP',['../mutecalibration_8cpp.html#a7050195731e27b577ef16d01e86c7a52',1,'mutecalibration.cpp']]],
+  ['mutecontrol_5fc_16',['MUTECONTROL_C',['../mutecontrol_8cpp.html#ab5e56745694fd3d14b2989ffc7c9d74e',1,'mutecontrol.cpp']]]
 ];

@@ -42,57 +42,57 @@
 \DoxyCodeLine{00038\ \textcolor{comment}{\ \ \ \ gateChanged\ =\ true;}}
 \DoxyCodeLine{00039\ \textcolor{comment}{\}}}
 \DoxyCodeLine{00040\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00041\ \mbox{\hyperlink{classcontrolReader_a87503796c1a256c06b197c398640dee1}{controlReader::controlReader}}(uint8\_t\ inDataReadyPin,\ uint8\_t\ inGatePin)}
+\DoxyCodeLine{00041\ \mbox{\hyperlink{classControlReader_a92ec387a20d951b16d73d4e9c4d26bb5}{ControlReader::ControlReader}}(uint8\_t\ inDataReadyPin,\ uint8\_t\ inGatePin)}
 \DoxyCodeLine{00042\ \{}
 \DoxyCodeLine{00043\ \textcolor{comment}{//\ \ \ \ ADC[0].init(1);\ //\ =\ new\ ADC(1);}}
 \DoxyCodeLine{00044\ \textcolor{comment}{//\ \ \ \ ADC[1].init(0);\ //\ =\ new\ ADC(0);}}
 \DoxyCodeLine{00045\ }
-\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a1aa43685a096d06ba563877a8dc41d6b}{setDefaults}}();}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classControlReader_a9701e3779aa63088d8bc8aa560059191}{setDefaults}}();}
 \DoxyCodeLine{00047\ }
-\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a675268bbd9fe4f6435569352b30242f4}{pinDataReady}}\ =\ inDataReadyPin;}
-\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_aaf068b8234bef248daa827f86236f66f}{pinGate}}\ =\ inGatePin;}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classControlReader_a91391c3cb4579812e669e6e0bb3b3e0b}{pinDataReady}}\ =\ inDataReadyPin;}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{classControlReader_a9fd26d764b116b6137f0262818598563}{pinGate}}\ =\ inGatePin;}
 \DoxyCodeLine{00050\ }
-\DoxyCodeLine{00051\ \ \ \ \ pinMode(\mbox{\hyperlink{classcontrolReader_a675268bbd9fe4f6435569352b30242f4}{pinDataReady}},\ INPUT);}
-\DoxyCodeLine{00052\ \ \ \ \ pinMode(\mbox{\hyperlink{classcontrolReader_aaf068b8234bef248daa827f86236f66f}{pinGate}},\ INPUT);}
+\DoxyCodeLine{00051\ \ \ \ \ pinMode(\mbox{\hyperlink{classControlReader_a91391c3cb4579812e669e6e0bb3b3e0b}{pinDataReady}},\ INPUT);}
+\DoxyCodeLine{00052\ \ \ \ \ pinMode(\mbox{\hyperlink{classControlReader_a9fd26d764b116b6137f0262818598563}{pinGate}},\ INPUT);}
 \DoxyCodeLine{00053\ }
-\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[4].\mbox{\hyperlink{classaverager_a911b8cf08ca00c9c0a8040f5627809ae}{trigger}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[4].\mbox{\hyperlink{classaverager_adde2499165f7e8076a054d49ba747cca}{dataAverageLength}}\ =\ 1;}
-\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[5].\mbox{\hyperlink{classaverager_a911b8cf08ca00c9c0a8040f5627809ae}{trigger}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[4].\mbox{\hyperlink{classaverager_a911b8cf08ca00c9c0a8040f5627809ae}{trigger}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[4].\mbox{\hyperlink{classaverager_adde2499165f7e8076a054d49ba747cca}{dataAverageLength}}\ =\ 1;}
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[5].\mbox{\hyperlink{classaverager_a911b8cf08ca00c9c0a8040f5627809ae}{trigger}}\ =\ \textcolor{keyword}{true};}
 \DoxyCodeLine{00057\ }
-\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a2aa12ec40d87a1e0126e6573e3a975cf}{resetAds}}();}
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{classControlReader_ac3e9b70b0918c03a8450391b614c9e22}{resetAds}}();}
 \DoxyCodeLine{00059\ }
-\DoxyCodeLine{00060\ \ \ \ \ attachInterrupt(digitalPinToInterrupt(\mbox{\hyperlink{classcontrolReader_a675268bbd9fe4f6435569352b30242f4}{pinDataReady}}),\ \mbox{\hyperlink{controlReader_8cpp_aa13e49732053a6529b8638ba1b461eba}{IRS\_AdsDataReady}},\ FALLING);}
-\DoxyCodeLine{00061\ \ \ \ \ attachInterrupt(digitalPinToInterrupt(\mbox{\hyperlink{classcontrolReader_aaf068b8234bef248daa827f86236f66f}{pinGate}}),\ \mbox{\hyperlink{controlReader_8cpp_a9b679f29f2e9a7e2eb771e8ecb37e8ce}{IRS\_AdsDataReady2}},\ FALLING);}
+\DoxyCodeLine{00060\ \ \ \ \ attachInterrupt(digitalPinToInterrupt(\mbox{\hyperlink{classControlReader_a91391c3cb4579812e669e6e0bb3b3e0b}{pinDataReady}}),\ \mbox{\hyperlink{controlReader_8cpp_aa13e49732053a6529b8638ba1b461eba}{IRS\_AdsDataReady}},\ FALLING);}
+\DoxyCodeLine{00061\ \ \ \ \ attachInterrupt(digitalPinToInterrupt(\mbox{\hyperlink{classControlReader_a9fd26d764b116b6137f0262818598563}{pinGate}}),\ \mbox{\hyperlink{controlReader_8cpp_a9b679f29f2e9a7e2eb771e8ecb37e8ce}{IRS\_AdsDataReady2}},\ FALLING);}
 \DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{return};}
 \DoxyCodeLine{00063\ \}}
 \DoxyCodeLine{00064\ }
-\DoxyCodeLine{00068\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcontrolReader_a2aa12ec40d87a1e0126e6573e3a975cf}{controlReader::resetAds}}()\ \{}
-\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a23bcf8d7a4ae68844d15d4950b7a48fc}{adsInit}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00068\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classControlReader_ac3e9b70b0918c03a8450391b614c9e22}{ControlReader::resetAds}}()\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{classControlReader_a76f9dba3f0d96b176548a3267f8a71d4}{adsInit}}\ =\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00070\ }
-\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classcontrolReader_a034a8f5368bf7be7308ca6598fc8a681}{ads}}.begin(0x48,\ \&Wire))\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classControlReader_a8f935acf0a7f67cde21e3a8775ad5235}{ads}}.begin(0x48,\ \&Wire))\ \{}
 \DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Failed\ to\ initialize\ ADS."{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
 \DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
 \DoxyCodeLine{00074\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a034a8f5368bf7be7308ca6598fc8a681}{ads}}.setGain(GAIN\_ONE);\ \ \ \ \textcolor{comment}{//GAIN\_TWOTHIRDS}}
-\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a034a8f5368bf7be7308ca6598fc8a681}{ads}}.startADCReading(ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_0,\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a034a8f5368bf7be7308ca6598fc8a681}{ads}}.setDataRate(RATE\_ADS1115\_860SPS);}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a8f935acf0a7f67cde21e3a8775ad5235}{ads}}.setGain(GAIN\_ONE);\ \ \ \ \textcolor{comment}{//GAIN\_TWOTHIRDS}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a8f935acf0a7f67cde21e3a8775ad5235}{ads}}.startADCReading(ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_0,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a8f935acf0a7f67cde21e3a8775ad5235}{ads}}.setDataRate(RATE\_ADS1115\_860SPS);}
 \DoxyCodeLine{00078\ \ \ \ \ \}}
 \DoxyCodeLine{00079\ }
-\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classcontrolReader_a74fb34f83d58e7bfc31895f5f32519ab}{ads2}}.begin(0x49,\ \&Wire))\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classControlReader_afa635a97f3a20a56c096fa0681865361}{ads2}}.begin(0x49,\ \&Wire))\ \{}
 \DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Failed\ to\ initialize\ ADS2"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
 \DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
 \DoxyCodeLine{00083\ \ \ \ \ \}}
 \DoxyCodeLine{00084\ }
-\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a23bcf8d7a4ae68844d15d4950b7a48fc}{adsInit}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a74fb34f83d58e7bfc31895f5f32519ab}{ads2}}.setGain(GAIN\_ONE);}
-\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a74fb34f83d58e7bfc31895f5f32519ab}{ads2}}.setDataRate(RATE\_ADS1015\_3300SPS);}
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{classControlReader_a76f9dba3f0d96b176548a3267f8a71d4}{adsInit}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{classControlReader_afa635a97f3a20a56c096fa0681865361}{ads2}}.setGain(GAIN\_ONE);}
+\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{classControlReader_afa635a97f3a20a56c096fa0681865361}{ads2}}.setDataRate(RATE\_ADS1015\_3300SPS);}
 \DoxyCodeLine{00088\ }
 \DoxyCodeLine{00089\ \ \ \ \ Wire.setClock(400000);}
 \DoxyCodeLine{00090\ }
-\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a74fb34f83d58e7bfc31895f5f32519ab}{ads2}}.startADCReading(ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_0,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{classControlReader_afa635a97f3a20a56c096fa0681865361}{ads2}}.startADCReading(ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_0,\ \textcolor{keyword}{false});}
 \DoxyCodeLine{00092\ }
-\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_abdb58cc1bcb3d795df920c7d417070ba}{currentChannel}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_0;}
-\DoxyCodeLine{00094\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_aa143fcfbe08f7681d518cbe667897372}{currentChannel2}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_0;}
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{classControlReader_ab89416e32e6258f80bc3ac09c01b7c63}{currentChannel}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_0;}
+\DoxyCodeLine{00094\ \ \ \ \ \mbox{\hyperlink{classControlReader_a59d7603d61090d3c568edb9378555c14}{currentChannel2}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_0;}
 \DoxyCodeLine{00095\ }
 \DoxyCodeLine{00096\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}ADS\ Initialized"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
 \DoxyCodeLine{00097\ \}}
@@ -112,39 +112,39 @@
 \DoxyCodeLine{00111\ \textcolor{comment}{Adafruit\_ADS1X15}}
 \DoxyCodeLine{00112\ \textcolor{comment}{\}}}
 \DoxyCodeLine{00113\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00114\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcontrolReader_a9d830f90d3165103c4c1b6ebc124da33}{controlReader::readData}}()\ \{}
+\DoxyCodeLine{00114\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classControlReader_a8998d3ffc4f19f45f2a7bc4061cc8e5a}{ControlReader::readData}}()\ \{}
 \DoxyCodeLine{00115\ \ \ \ \ int16\_t\ a;}
 \DoxyCodeLine{00116\ }
-\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classcontrolReader_aa973db756a5bfde60b126b7e5c0b5de2}{adsErrorReported}}\ ||\ \mbox{\hyperlink{classcontrolReader_a37e4cab67e32dd834f0e72985144b33e}{ads2ErrorReported}})\ \&\&\ ((millis()\ >\ (\mbox{\hyperlink{classcontrolReader_adc6d3356d520f7588a04d57ea6767954}{adsReinitCountStart}}\ +\ \mbox{\hyperlink{classcontrolReader_aeb9a4cd7468318b20f074a71fa616491}{adsReinitializeTimeout}}))))\ \{}
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_adc6d3356d520f7588a04d57ea6767954}{adsReinitCountStart}}\ =\ millis();}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classControlReader_ae285caee6f66937efeef81145cfb178e}{adsErrorReported}}\ ||\ \mbox{\hyperlink{classControlReader_a6213d99cea0c505d893514fb40bdd0f2}{ads2ErrorReported}})\ \&\&\ ((millis()\ >\ (\mbox{\hyperlink{classControlReader_a8018e2761d0b19e3bcf40bd13a714157}{adsReinitCountStart}}\ +\ \mbox{\hyperlink{classControlReader_ac56bbf8b2ab06aa53b4eda0aa45010ff}{adsReinitializeTimeout}}))))\ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a8018e2761d0b19e3bcf40bd13a714157}{adsReinitCountStart}}\ =\ millis();}
 \DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Trying\ to\ reinitialize\ control\ box"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a2aa12ec40d87a1e0126e6573e3a975cf}{resetAds}}();}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_ac3e9b70b0918c03a8450391b614c9e22}{resetAds}}();}
 \DoxyCodeLine{00121\ \ \ \ \ \}}
 \DoxyCodeLine{00122\ }
-\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classcontrolReader_a23bcf8d7a4ae68844d15d4950b7a48fc}{adsInit}})\ \{\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classControlReader_a76f9dba3f0d96b176548a3267f8a71d4}{adsInit}})\ \{\ \textcolor{keywordflow}{return};\ \}}
 \DoxyCodeLine{00124\ }
 \DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{controlReader_8cpp_ada3480409a90f33e3e5c47c64a5f9457}{adsNewData2}})\ \{}
-\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcontrolReader_a74fb34f83d58e7bfc31895f5f32519ab}{ads2}}.conversionComplete())\ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classControlReader_afa635a97f3a20a56c096fa0681865361}{ads2}}.conversionComplete())\ \{}
 \DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{controlReader_8cpp_ada3480409a90f33e3e5c47c64a5f9457}{adsNewData2}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ a\ =\ \mbox{\hyperlink{classcontrolReader_a74fb34f83d58e7bfc31895f5f32519ab}{ads2}}.getLastConversionResults();}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ a\ =\ \mbox{\hyperlink{classControlReader_afa635a97f3a20a56c096fa0681865361}{ads2}}.getLastConversionResults();}
 \DoxyCodeLine{00129\ }
 \DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ ch\ =\ 0;}
-\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(\mbox{\hyperlink{classcontrolReader_aa143fcfbe08f7681d518cbe667897372}{currentChannel2}})\ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(\mbox{\hyperlink{classControlReader_a59d7603d61090d3c568edb9378555c14}{currentChannel2}})\ \{}
 \DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_0:}
 \DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ch\ =\ 0;}
-\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_aa143fcfbe08f7681d518cbe667897372}{currentChannel2}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_1;}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a59d7603d61090d3c568edb9378555c14}{currentChannel2}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_1;}
 \DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_1:}
 \DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ch\ =\ 1;}
-\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_aa143fcfbe08f7681d518cbe667897372}{currentChannel2}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_2;\ \ \textcolor{comment}{//\ Stop\ here}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a59d7603d61090d3c568edb9378555c14}{currentChannel2}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_2;\ \ \textcolor{comment}{//\ Stop\ here}}
 \DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_2:}
 \DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ch\ =\ 2;}
-\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_aa143fcfbe08f7681d518cbe667897372}{currentChannel2}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_3;}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a59d7603d61090d3c568edb9378555c14}{currentChannel2}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_3;}
 \DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_3:}
 \DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ch\ =\ 3;}
-\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_aa143fcfbe08f7681d518cbe667897372}{currentChannel2}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_0;}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a59d7603d61090d3c568edb9378555c14}{currentChannel2}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_0;}
 \DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00149\ }
@@ -157,26 +157,26 @@
 \DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{main_8cpp_a651d0075db9c3f29b556e9dd764b41c2}{testMeasurementOngoing}})\ \{}
 \DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}New\ data\ ("{}}\ +\ String(a)\ +\ \textcolor{stringliteral}{"{})\ on\ ADC\ channel\ "{}}\ +\ String(ch\ +\ 4)\ +\ \textcolor{stringliteral}{"{}\ at\ "{}}\ +\ String(\mbox{\hyperlink{main_8cpp_a74a971e8a878363938ad6d1426e8255c}{testMeasurement}})\ +\ \textcolor{stringliteral}{"{}uS"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
 \DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcontrolReader_a13e402f8e77682ebcac691e3bdd3f974}{testChannel}}\ ==\ (ch\ +\ 4))\ \{}
-\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a82cd99250ee474229be705d1c48b277f}{addTestData}}(a);}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classControlReader_a12391f415e829660fb9a45820985577a}{testChannel}}\ ==\ (ch\ +\ 4))\ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a1fd8c0c72138326f209dcb9bd3c2126a}{addTestData}}(a);}
 \DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00162\ }
-\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[4\ +\ ch].\mbox{\hyperlink{classaverager_aaa54da4b2f567beab8279a63a683a4bb}{addData}}(a);}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[4\ +\ ch].\mbox{\hyperlink{classaverager_aaa54da4b2f567beab8279a63a683a4bb}{addData}}(a);}
 \DoxyCodeLine{00164\ }
-\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[4\ +\ ch].dataChanged())\ \{}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[4\ +\ ch].dataChanged())\ \{}
 \DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convert\ value\ to\ 0-\/65535\ range}}
-\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int32\_t\ convertedValue\ =\ (int32\_t)\ ((\textcolor{keywordtype}{float})\ \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[4\ +\ ch].\mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}}\ *\ ((float)\ 65536\ /\ 2048));}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int32\_t\ convertedValue\ =\ (int32\_t)\ ((\textcolor{keywordtype}{float})\ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[4\ +\ ch].\mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}}\ *\ ((float)\ 65536\ /\ 2048));}
 \DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (convertedValue\ >\ 65535)\ \{\ convertedValue\ =\ 65535;\ \}}
 \DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_ab88920172b5a32b077bd95bb1f3d6f8e}{dvalue}}\ =\ (double)\ convertedValue;}
 \DoxyCodeLine{00170\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (ch\ ==\ 1)\ \{}}
 \DoxyCodeLine{00171\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Data\ changed\ on\ ADS2,\ channel\ "{}\ +\ String(ch)\ +\ "{}\ to\ "{}\ +\ String(convertedValue)\ +\ "{}\ ("{}\ +\ String(averages[4\ +\ ch].value)\ +\ "{})"{},\ debugPrintType::Debug);}}
-\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcontrolReader_a26507a1b3f4d869e591fcfddadb69f15}{outputDebugData}})\ \{}
-\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}adcr:"{}}\ +\ String(ch\ +\ 4)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(convertedValue)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[4\ +\ ch].value),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}});}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classControlReader_a2b1c46952e1145ab13700e08f472a03e}{outputDebugData}})\ \{}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}adcr:"{}}\ +\ String(ch\ +\ 4)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(convertedValue)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[4\ +\ ch].value),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}});}
 \DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00175\ }
 \DoxyCodeLine{00176\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
 \DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{main_8cpp_a651d0075db9c3f29b556e9dd764b41c2}{testMeasurementOngoing}})\ \{}
-\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{processLocalMessage}}(\&\mbox{\hyperlink{classcontrolReader_a6bd8645dec8967566cd2239a03c1084f}{cvInputCommands}}[4\ +\ ch]);}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{processLocalMessage}}(\&\mbox{\hyperlink{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}{cvInputCommands}}[4\ +\ ch]);}
 \DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
 \DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ tempMessages\ =\ \textcolor{stringliteral}{"{}talr"{}};}
 \DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{processLocalMessage}}(\&tempMessages);}
@@ -185,40 +185,40 @@
 \DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ process\ adds\ roughly\ 5mS\ of\ latency,\ add\ to\ queue\ as\ priority\ aka\ first\ in\ line?}}
 \DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00186\ }
-\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a74fb34f83d58e7bfc31895f5f32519ab}{ads2}}.startADCReading(\mbox{\hyperlink{classcontrolReader_aa143fcfbe08f7681d518cbe667897372}{currentChannel2}},\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a3c8714ebda3f993a5f60523cfa886904}{ads2ConversionStart}}\ =\ millis();}
-\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a37e4cab67e32dd834f0e72985144b33e}{ads2ErrorReported}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_afa635a97f3a20a56c096fa0681865361}{ads2}}.startADCReading(\mbox{\hyperlink{classControlReader_a59d7603d61090d3c568edb9378555c14}{currentChannel2}},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_aeb9d7bc35cdd2b016f7c73d452fee076}{ads2ConversionStart}}\ =\ millis();}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a6213d99cea0c505d893514fb40bdd0f2}{ads2ErrorReported}}\ =\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((millis()\ >\ (\mbox{\hyperlink{classcontrolReader_a3c8714ebda3f993a5f60523cfa886904}{ads2ConversionStart}}\ +\ \mbox{\hyperlink{classcontrolReader_a709dbaa8bffc22be1b85a930b6f81601}{ads2TimeOut}}))\ \&\&\ (!\mbox{\hyperlink{classcontrolReader_a37e4cab67e32dd834f0e72985144b33e}{ads2ErrorReported}}))\ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((millis()\ >\ (\mbox{\hyperlink{classControlReader_aeb9d7bc35cdd2b016f7c73d452fee076}{ads2ConversionStart}}\ +\ \mbox{\hyperlink{classControlReader_ac3df7999dd53c06e235b753faf34873f}{ads2TimeOut}}))\ \&\&\ (!\mbox{\hyperlink{classControlReader_a6213d99cea0c505d893514fb40bdd0f2}{ads2ErrorReported}}))\ \{}
 \DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}No\ data\ on\ ADS2!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});}
-\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a37e4cab67e32dd834f0e72985144b33e}{ads2ErrorReported}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_adc6d3356d520f7588a04d57ea6767954}{adsReinitCountStart}}\ =\ millis();}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a6213d99cea0c505d893514fb40bdd0f2}{ads2ErrorReported}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a8018e2761d0b19e3bcf40bd13a714157}{adsReinitCountStart}}\ =\ millis();}
 \DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00197\ \ \ \ \ \}}
 \DoxyCodeLine{00198\ }
 \DoxyCodeLine{00199\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{controlReader_8cpp_a4df05033528c0f01925e3401245f62f3}{adsNewData}})\ \{}
-\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcontrolReader_a034a8f5368bf7be7308ca6598fc8a681}{ads}}.conversionComplete())\ \{}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classControlReader_a8f935acf0a7f67cde21e3a8775ad5235}{ads}}.conversionComplete())\ \{}
 \DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{controlReader_8cpp_a4df05033528c0f01925e3401245f62f3}{adsNewData}}\ =\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00202\ }
-\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ a\ =\ \mbox{\hyperlink{classcontrolReader_a034a8f5368bf7be7308ca6598fc8a681}{ads}}.getLastConversionResults();}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ a\ =\ \mbox{\hyperlink{classControlReader_a8f935acf0a7f67cde21e3a8775ad5235}{ads}}.getLastConversionResults();}
 \DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ ch\ =\ 0;}
-\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(\mbox{\hyperlink{classcontrolReader_abdb58cc1bcb3d795df920c7d417070ba}{currentChannel}})\ \{}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(\mbox{\hyperlink{classControlReader_ab89416e32e6258f80bc3ac09c01b7c63}{currentChannel}})\ \{}
 \DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_0:}
 \DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ch\ =\ 0;}
-\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_abdb58cc1bcb3d795df920c7d417070ba}{currentChannel}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_1;}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_ab89416e32e6258f80bc3ac09c01b7c63}{currentChannel}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_1;}
 \DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_1:}
 \DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ch\ =\ 1;}
-\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_abdb58cc1bcb3d795df920c7d417070ba}{currentChannel}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_2;}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_ab89416e32e6258f80bc3ac09c01b7c63}{currentChannel}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_2;}
 \DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_2:}
 \DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ch\ =\ 2;}
-\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_abdb58cc1bcb3d795df920c7d417070ba}{currentChannel}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_3;}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_ab89416e32e6258f80bc3ac09c01b7c63}{currentChannel}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_3;}
 \DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_3:}
 \DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ch\ =\ 3;}
-\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_abdb58cc1bcb3d795df920c7d417070ba}{currentChannel}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_0;}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_ab89416e32e6258f80bc3ac09c01b7c63}{currentChannel}}\ =\ ADS1X15\_REG\_CONFIG\_MUX\_SINGLE\_0;}
 \DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00223\ }
@@ -227,33 +227,33 @@
 \DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{main_8cpp_a651d0075db9c3f29b556e9dd764b41c2}{testMeasurementOngoing}})\ \{}
 \DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}New\ data\ ("{}}\ +\ String(a)\ +\ \textcolor{stringliteral}{"{})\ on\ ADC\ channel\ "{}}\ +\ String(ch)\ +\ \textcolor{stringliteral}{"{}\ at\ "{}}\ +\ String(\mbox{\hyperlink{main_8cpp_a74a971e8a878363938ad6d1426e8255c}{testMeasurement}})\ +\ \textcolor{stringliteral}{"{}uS"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
 \DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcontrolReader_a13e402f8e77682ebcac691e3bdd3f974}{testChannel}}\ ==\ (ch))\ \{}
-\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a82cd99250ee474229be705d1c48b277f}{addTestData}}(a);}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classControlReader_a12391f415e829660fb9a45820985577a}{testChannel}}\ ==\ (ch))\ \{}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a1fd8c0c72138326f209dcb9bd3c2126a}{addTestData}}(a);}
 \DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00232\ }
-\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[ch].\mbox{\hyperlink{classaverager_aaa54da4b2f567beab8279a63a683a4bb}{addData}}(a);}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[ch].\mbox{\hyperlink{classaverager_aaa54da4b2f567beab8279a63a683a4bb}{addData}}(a);}
 \DoxyCodeLine{00234\ \textcolor{comment}{/*}}
 \DoxyCodeLine{00235\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (ch\ ==\ 1)\ \{}}
 \DoxyCodeLine{00236\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Data\ on\ ADS1,\ channel\ "{}\ +\ String(ch)\ +\ "{}\ is\ "{}\ +\ String(a),\ debugPrintType::Debug);}}
 \DoxyCodeLine{00237\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
 \DoxyCodeLine{00238\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[ch].dataChanged())\ \{}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[ch].dataChanged())\ \{}
 \DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convert\ value\ to\ 0-\/65535\ range}}
-\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int32\_t\ convertedValue\ =\ (int32\_t)\ ((\textcolor{keywordtype}{float})\ \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[ch].\mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}}\ *\ ((float)\ 65536\ /\ 32767));}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int32\_t\ convertedValue\ =\ (int32\_t)\ ((\textcolor{keywordtype}{float})\ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[ch].\mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}}\ *\ ((float)\ 65536\ /\ 32767));}
 \DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (convertedValue\ >\ 65535)\ \{\ convertedValue\ =\ 65535;\ \}}
 \DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ch\ ==\ 0)\ \{}
-\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcontrolReader_a26507a1b3f4d869e591fcfddadb69f15}{outputDebugData}})\ \{}
-\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Data\ changed\ on\ ADS1,\ channel\ "{}}\ +\ String(ch)\ +\ \textcolor{stringliteral}{"{}\ to\ "{}}\ +\ String(convertedValue)\ +\ \textcolor{stringliteral}{"{}\ ("{}}\ +\ String(\mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[ch].value)\ +\ \textcolor{stringliteral}{"{})"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classControlReader_a2b1c46952e1145ab13700e08f472a03e}{outputDebugData}})\ \{}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Data\ changed\ on\ ADS1,\ channel\ "{}}\ +\ String(ch)\ +\ \textcolor{stringliteral}{"{}\ to\ "{}}\ +\ String(convertedValue)\ +\ \textcolor{stringliteral}{"{}\ ("{}}\ +\ String(\mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[ch].value)\ +\ \textcolor{stringliteral}{"{})"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
 \DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcontrolReader_a26507a1b3f4d869e591fcfddadb69f15}{outputDebugData}})\ \{}
-\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}adcr:"{}}\ +\ String(ch)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(convertedValue)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[ch].value),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}});}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classControlReader_a2b1c46952e1145ab13700e08f472a03e}{outputDebugData}})\ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}adcr:"{}}\ +\ String(ch)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(convertedValue)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[ch].value),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}});}
 \DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00251\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
 \DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_ab88920172b5a32b077bd95bb1f3d6f8e}{dvalue}}\ =\ (double)\ convertedValue;}
 \DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ process\ adds\ roughly\ 5mS\ of\ latency,\ add\ to\ queue\ as\ priority\ aka\ first\ in\ line?}}
 \DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{main_8cpp_a651d0075db9c3f29b556e9dd764b41c2}{testMeasurementOngoing}})\ \{}
-\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{processLocalMessage}}(\&\mbox{\hyperlink{classcontrolReader_a6bd8645dec8967566cd2239a03c1084f}{cvInputCommands}}[ch]);}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{processLocalMessage}}(\&\mbox{\hyperlink{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}{cvInputCommands}}[ch]);}
 \DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
 \DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ tempMessages\ =\ \textcolor{stringliteral}{"{}talr"{}};}
 \DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{midi_8cpp_a9c89c13da1a12e219901ae9165382a3f}{processLocalMessage}}(\&tempMessages);}
@@ -261,21 +261,21 @@
 \DoxyCodeLine{00260\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ processLocalMessage(\&cvInputCommands[ch]);}}
 \DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00262\ }
-\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a034a8f5368bf7be7308ca6598fc8a681}{ads}}.startADCReading(\mbox{\hyperlink{classcontrolReader_abdb58cc1bcb3d795df920c7d417070ba}{currentChannel}},\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_aa20060d42c799b4b45991b4c924dccdd}{adsConversionStart}}\ =\ millis();}
-\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_aa973db756a5bfde60b126b7e5c0b5de2}{adsErrorReported}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a8f935acf0a7f67cde21e3a8775ad5235}{ads}}.startADCReading(\mbox{\hyperlink{classControlReader_ab89416e32e6258f80bc3ac09c01b7c63}{currentChannel}},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a860817552a742e63bc71b35fd41038c0}{adsConversionStart}}\ =\ millis();}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_ae285caee6f66937efeef81145cfb178e}{adsErrorReported}}\ =\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((millis()\ >\ (\mbox{\hyperlink{classcontrolReader_aa20060d42c799b4b45991b4c924dccdd}{adsConversionStart}}\ +\ \mbox{\hyperlink{classcontrolReader_af4e1b9d309de073eb8a24d713581a79b}{adsTimeOut}}))\ \&\&\ (!\mbox{\hyperlink{classcontrolReader_aa973db756a5bfde60b126b7e5c0b5de2}{adsErrorReported}}))\ \{}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((millis()\ >\ (\mbox{\hyperlink{classControlReader_a860817552a742e63bc71b35fd41038c0}{adsConversionStart}}\ +\ \mbox{\hyperlink{classControlReader_a4f28fa689514b369418e9b0c304606f6}{adsTimeOut}}))\ \&\&\ (!\mbox{\hyperlink{classControlReader_ae285caee6f66937efeef81145cfb178e}{adsErrorReported}}))\ \{}
 \DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}No\ data\ on\ ADS!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});}
-\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_aa973db756a5bfde60b126b7e5c0b5de2}{adsErrorReported}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_adc6d3356d520f7588a04d57ea6767954}{adsReinitCountStart}}\ =\ millis();}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_ae285caee6f66937efeef81145cfb178e}{adsErrorReported}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a8018e2761d0b19e3bcf40bd13a714157}{adsReinitCountStart}}\ =\ millis();}
 \DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00273\ \ \ \ \ \}}
 \DoxyCodeLine{00274\ \}}
 \DoxyCodeLine{00275\ }
 \DoxyCodeLine{00276\ }
-\DoxyCodeLine{00277\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcontrolReader_a9e35f60815712a522c5fcdff86d65731}{controlReader::setADCCommands}}(uint8\_t\ channel,\ String\ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}})\ \{}
+\DoxyCodeLine{00277\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_a102e5eeca42e074f56a5aa234badad30}{ControlReader::setADCCommands}}(uint8\_t\ channel,\ String\ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}})\ \{}
 \DoxyCodeLine{00278\ \ \ \ \ \textcolor{keywordflow}{if}\ ((channel\ >\ 7))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
 \DoxyCodeLine{00279\ }
 \DoxyCodeLine{00280\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}}\ =\ \mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(\mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}});}
@@ -283,71 +283,71 @@
 \DoxyCodeLine{00282\ \textcolor{comment}{\ \ \ \ \ \ \ \ commands\ =\ commands.substring(1,\ commands.length()\ -\/\ 1);}}
 \DoxyCodeLine{00283\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Found\ initial\ quote,\ stripping\ and\ getting\ "{}\ +\ commands,\ debugPrintType::Debug);}}
 \DoxyCodeLine{00284\ \textcolor{comment}{\ \ \ \ \}*/}}
-\DoxyCodeLine{00285\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a6bd8645dec8967566cd2239a03c1084f}{cvInputCommands}}[channel]\ =\ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}};}
+\DoxyCodeLine{00285\ \ \ \ \ \mbox{\hyperlink{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}{cvInputCommands}}[channel]\ =\ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}};}
 \DoxyCodeLine{00286\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
 \DoxyCodeLine{00287\ \}}
 \DoxyCodeLine{00288\ }
-\DoxyCodeLine{00289\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcontrolReader_aef9ed809dd3aa9a2b176bda6e4849f0c}{controlReader::setADCAveragerSettings}}(uint8\_t\ t\_channel,\ uint8\_t\ t\_averages,\ uint16\_t\ t\_interruptErrorThreshold,\ uint16\_t\ t\_continuousErrorThreshold,\ uint16\_t\ t\_continuousTimeout)\ \{}
+\DoxyCodeLine{00289\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_a4dffd5e19b19104e0ec1d762072fb29a}{ControlReader::setADCAveragerSettings}}(uint8\_t\ t\_channel,\ uint8\_t\ t\_averages,\ uint16\_t\ t\_interruptErrorThreshold,\ uint16\_t\ t\_continuousErrorThreshold,\ uint16\_t\ t\_continuousTimeout)\ \{}
 \DoxyCodeLine{00290\ \ \ \ \ \textcolor{keywordflow}{if}\ ((t\_channel\ >\ 7))\ \{}
 \DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00292\ \ \ \ \ \}}
-\DoxyCodeLine{00293\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[t\_channel].\mbox{\hyperlink{classaverager_adde2499165f7e8076a054d49ba747cca}{dataAverageLength}}\ =\ t\_averages;}
-\DoxyCodeLine{00294\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[t\_channel].\mbox{\hyperlink{classaverager_ae65171959ff0da0adeed67a844e0e3d9}{interruptedErrorThreshold}}\ =\ t\_interruptErrorThreshold;}
-\DoxyCodeLine{00295\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[t\_channel].\mbox{\hyperlink{classaverager_a19eff7c8e3e37b7f08e2ac120ddcc0e3}{continuousErrorThreshold}}\ =\ t\_continuousErrorThreshold;}
-\DoxyCodeLine{00296\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[t\_channel].\mbox{\hyperlink{classaverager_a4af58bd77d322d550fe5d13bc4c6c0fb}{continuousTimeout}}\ =\ t\_continuousTimeout;}
+\DoxyCodeLine{00293\ \ \ \ \ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[t\_channel].\mbox{\hyperlink{classaverager_adde2499165f7e8076a054d49ba747cca}{dataAverageLength}}\ =\ t\_averages;}
+\DoxyCodeLine{00294\ \ \ \ \ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[t\_channel].\mbox{\hyperlink{classaverager_ae65171959ff0da0adeed67a844e0e3d9}{interruptedErrorThreshold}}\ =\ t\_interruptErrorThreshold;}
+\DoxyCodeLine{00295\ \ \ \ \ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[t\_channel].\mbox{\hyperlink{classaverager_a19eff7c8e3e37b7f08e2ac120ddcc0e3}{continuousErrorThreshold}}\ =\ t\_continuousErrorThreshold;}
+\DoxyCodeLine{00296\ \ \ \ \ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[t\_channel].\mbox{\hyperlink{classaverager_a4af58bd77d322d550fe5d13bc4c6c0fb}{continuousTimeout}}\ =\ t\_continuousTimeout;}
 \DoxyCodeLine{00297\ }
 \DoxyCodeLine{00298\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
 \DoxyCodeLine{00299\ \}}
 \DoxyCodeLine{00300\ }
-\DoxyCodeLine{00301\ String\ \mbox{\hyperlink{classcontrolReader_abf91e7188551dc76f5d803d1af07ab25}{controlReader::getADCAveragerSettings}}(uint8\_t\ t\_channel)\ \{}
+\DoxyCodeLine{00301\ String\ \mbox{\hyperlink{classControlReader_a012829af77cdd47a80785360158eee22}{ControlReader::getADCAveragerSettings}}(uint8\_t\ t\_channel)\ \{}
 \DoxyCodeLine{00302\ \ \ \ \ \textcolor{keywordflow}{if}\ (t\_channel\ >\ 7)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};\ \}}
-\DoxyCodeLine{00303\ \ \ \ \ \textcolor{keywordflow}{return}\ String(\mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[t\_channel].dataAverageLength)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[t\_channel].interruptedErrorThreshold)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[t\_channel].continuousErrorThreshold)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +}
-\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ String(\mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[t\_channel].continuousTimeout);}
+\DoxyCodeLine{00303\ \ \ \ \ \textcolor{keywordflow}{return}\ String(\mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[t\_channel].dataAverageLength)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[t\_channel].interruptedErrorThreshold)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[t\_channel].continuousErrorThreshold)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ String(\mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[t\_channel].continuousTimeout);}
 \DoxyCodeLine{00305\ \}}
 \DoxyCodeLine{00306\ }
-\DoxyCodeLine{00307\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcontrolReader_a82cd99250ee474229be705d1c48b277f}{controlReader::addTestData}}(uint16\_t\ value)\ \{}
-\DoxyCodeLine{00308\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcontrolReader_a2703143a61027a4837c931cfb504aabb}{testBegin}})\ \{}
-\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a89c7532c825bce8a0a0d788106554671}{testMin}}\ =\ value;}
-\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_aee456916defbbaffc8aad1210b7d4256}{testMax}}\ =\ value;}
-\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a2703143a61027a4837c931cfb504aabb}{testBegin}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00307\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classControlReader_a1fd8c0c72138326f209dcb9bd3c2126a}{ControlReader::addTestData}}(uint16\_t\ value)\ \{}
+\DoxyCodeLine{00308\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classControlReader_aac84137ad7f490b34025edfadb513de4}{testBegin}})\ \{}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_ab9a22bf0de979dac0f952c632841ed39}{testMin}}\ =\ value;}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_a67ffe474cfe49c340b66a0e609aeddf3}{testMax}}\ =\ value;}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader_aac84137ad7f490b34025edfadb513de4}{testBegin}}\ =\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00312\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ <\ \mbox{\hyperlink{classcontrolReader_a89c7532c825bce8a0a0d788106554671}{testMin}})\ \{\ \mbox{\hyperlink{classcontrolReader_a89c7532c825bce8a0a0d788106554671}{testMin}}\ =\ value;\ \}}
-\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ >\ \mbox{\hyperlink{classcontrolReader_aee456916defbbaffc8aad1210b7d4256}{testMax}})\ \{\ \mbox{\hyperlink{classcontrolReader_aee456916defbbaffc8aad1210b7d4256}{testMax}}\ =\ value;\ \}}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ <\ \mbox{\hyperlink{classControlReader_ab9a22bf0de979dac0f952c632841ed39}{testMin}})\ \{\ \mbox{\hyperlink{classControlReader_ab9a22bf0de979dac0f952c632841ed39}{testMin}}\ =\ value;\ \}}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ >\ \mbox{\hyperlink{classControlReader_a67ffe474cfe49c340b66a0e609aeddf3}{testMax}})\ \{\ \mbox{\hyperlink{classControlReader_a67ffe474cfe49c340b66a0e609aeddf3}{testMax}}\ =\ value;\ \}}
 \DoxyCodeLine{00315\ \ \ \ \ \}}
 \DoxyCodeLine{00316\ \}}
 \DoxyCodeLine{00317\ }
-\DoxyCodeLine{00318\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcontrolReader_a6ee96b5723f96f2cfbbd5d84698e8ae9}{controlReader::setADCMinMaxTestChannel}}(uint8\_t\ t\_channel)\ \{}
-\DoxyCodeLine{00319\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a13e402f8e77682ebcac691e3bdd3f974}{testChannel}}\ =\ t\_channel;}
-\DoxyCodeLine{00320\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a2703143a61027a4837c931cfb504aabb}{testBegin}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00318\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classControlReader_a8b3c5cddf3ef9bf3cb9a56108c394f5b}{ControlReader::setADCMinMaxTestChannel}}(uint8\_t\ t\_channel)\ \{}
+\DoxyCodeLine{00319\ \ \ \ \ \mbox{\hyperlink{classControlReader_a12391f415e829660fb9a45820985577a}{testChannel}}\ =\ t\_channel;}
+\DoxyCodeLine{00320\ \ \ \ \ \mbox{\hyperlink{classControlReader_aac84137ad7f490b34025edfadb513de4}{testBegin}}\ =\ \textcolor{keyword}{true};}
 \DoxyCodeLine{00321\ \}}
 \DoxyCodeLine{00322\ }
-\DoxyCodeLine{00323\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcontrolReader_a1aa43685a096d06ba563877a8dc41d6b}{controlReader::setDefaults}}()\ \{}
-\DoxyCodeLine{00324\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a6bd8645dec8967566cd2239a03c1084f}{cvInputCommands}}.clear();}
-\DoxyCodeLine{00325\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a6bd8645dec8967566cd2239a03c1084f}{cvInputCommands}}.push\_back(\textcolor{stringliteral}{"{}bcha:value/1327.716667-\/20"{}});}
-\DoxyCodeLine{00326\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a6bd8645dec8967566cd2239a03c1084f}{cvInputCommands}}.push\_back(\textcolor{stringliteral}{"{}bchs5:\(\backslash\)"{}deadband(value-\/32236,\ 20)/2.425\(\backslash\)"{}"{}});}
-\DoxyCodeLine{00327\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a6bd8645dec8967566cd2239a03c1084f}{cvInputCommands}}.push\_back(\textcolor{stringliteral}{"{}bchsh:\(\backslash\)"{}deadband((value-\/32600)*0.49064,\ 250)\(\backslash\)"{}"{}});\textcolor{comment}{//\ \ \ \ cvInputCommands.push\_back("{}msp:value"{});}}
-\DoxyCodeLine{00328\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a6bd8645dec8967566cd2239a03c1084f}{cvInputCommands}}.push\_back(\textcolor{stringliteral}{"{}bpb:value"{}});}
-\DoxyCodeLine{00329\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a6bd8645dec8967566cd2239a03c1084f}{cvInputCommands}}.push\_back(\textcolor{stringliteral}{"{}se:value"{}});}
-\DoxyCodeLine{00330\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a6bd8645dec8967566cd2239a03c1084f}{cvInputCommands}}.push\_back(\textcolor{stringliteral}{"{}bmr:bool(value-\/10000),bpid:1,bcsm:0,bpe:bool(value-\/10000),bpr:ibool(value-\/10000),bph:ibool(value-\/10000)"{}});}
-\DoxyCodeLine{00331\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a6bd8645dec8967566cd2239a03c1084f}{cvInputCommands}}.push\_back(\textcolor{stringliteral}{"{}sfm:\(\backslash\)"{}deadband(1/65535*value,0.002)\(\backslash\)"{}"{}});}
-\DoxyCodeLine{00332\ \ \ \ \ \mbox{\hyperlink{classcontrolReader_a6bd8645dec8967566cd2239a03c1084f}{cvInputCommands}}.push\_back(\textcolor{stringliteral}{"{}msp:value"{}});\textcolor{comment}{//\ \ \ \ cvInputCommands.push\_back("{}"{});}}
+\DoxyCodeLine{00323\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classControlReader_a9701e3779aa63088d8bc8aa560059191}{ControlReader::setDefaults}}()\ \{}
+\DoxyCodeLine{00324\ \ \ \ \ \mbox{\hyperlink{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}{cvInputCommands}}.clear();}
+\DoxyCodeLine{00325\ \ \ \ \ \mbox{\hyperlink{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}{cvInputCommands}}.push\_back(\textcolor{stringliteral}{"{}bcha:value/1327.716667-\/20"{}});}
+\DoxyCodeLine{00326\ \ \ \ \ \mbox{\hyperlink{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}{cvInputCommands}}.push\_back(\textcolor{stringliteral}{"{}bchs5:\(\backslash\)"{}deadband(value-\/32236,\ 20)/2.425\(\backslash\)"{}"{}});}
+\DoxyCodeLine{00327\ \ \ \ \ \mbox{\hyperlink{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}{cvInputCommands}}.push\_back(\textcolor{stringliteral}{"{}bchsh:\(\backslash\)"{}deadband((value-\/32600)*0.49064,\ 250)\(\backslash\)"{}"{}});\textcolor{comment}{//\ \ \ \ cvInputCommands.push\_back("{}msp:value"{});}}
+\DoxyCodeLine{00328\ \ \ \ \ \mbox{\hyperlink{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}{cvInputCommands}}.push\_back(\textcolor{stringliteral}{"{}bpb:value"{}});}
+\DoxyCodeLine{00329\ \ \ \ \ \mbox{\hyperlink{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}{cvInputCommands}}.push\_back(\textcolor{stringliteral}{"{}se:value"{}});}
+\DoxyCodeLine{00330\ \ \ \ \ \mbox{\hyperlink{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}{cvInputCommands}}.push\_back(\textcolor{stringliteral}{"{}bmr:bool(value-\/10000),bpid:1,bcsm:0,bpe:bool(value-\/10000),bpr:ibool(value-\/10000),bph:ibool(value-\/10000)"{}});}
+\DoxyCodeLine{00331\ \ \ \ \ \mbox{\hyperlink{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}{cvInputCommands}}.push\_back(\textcolor{stringliteral}{"{}sfm:\(\backslash\)"{}deadband(1/65535*value,0.002)\(\backslash\)"{}"{}});}
+\DoxyCodeLine{00332\ \ \ \ \ \mbox{\hyperlink{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}{cvInputCommands}}.push\_back(\textcolor{stringliteral}{"{}msp:value"{}});\textcolor{comment}{//\ \ \ \ cvInputCommands.push\_back("{}"{});}}
 \DoxyCodeLine{00333\ \}}
 \DoxyCodeLine{00334\ }
-\DoxyCodeLine{00335\ String\ \mbox{\hyperlink{classcontrolReader_ac3f4730b8d6f98b0e66c546e5ce1192e}{controlReader::dumpData}}()\ \{}
+\DoxyCodeLine{00335\ String\ \mbox{\hyperlink{classControlReader_ab45ab596486631cd4eceb137804d6c13}{ControlReader::dumpData}}()\ \{}
 \DoxyCodeLine{00336\ \textcolor{comment}{//\ \ \ \ if\ (!adsInit)\ \{\ return\ "{}"{};\ \}}}
 \DoxyCodeLine{00337\ \ \ \ \ String\ saveData\ =\ \textcolor{stringliteral}{"{}"{}};\ \textcolor{comment}{//\ "{}epdbt:"{}\ +\ String(epDeadbandThreshold)\ +\ "{},"{};}}
 \DoxyCodeLine{00338\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ i\ =\ 0;\ i\ <\ 8;\ i++)\ \{}
-\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ saveData\ +=\ \textcolor{stringliteral}{"{}acm:"{}}\ +\ String(i)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}(\mbox{\hyperlink{classcontrolReader_a6bd8645dec8967566cd2239a03c1084f}{cvInputCommands}}[i],\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};}
-\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ saveData\ +=\ \textcolor{stringliteral}{"{}adcs:"{}}\ +\ String(i)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[i].\mbox{\hyperlink{classaverager_adde2499165f7e8076a054d49ba747cca}{dataAverageLength}}\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[i].\mbox{\hyperlink{classaverager_ae65171959ff0da0adeed67a844e0e3d9}{interruptedErrorThreshold}}\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[i].\mbox{\hyperlink{classaverager_a19eff7c8e3e37b7f08e2ac120ddcc0e3}{continuousErrorThreshold}}\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[i].\mbox{\hyperlink{classaverager_a4af58bd77d322d550fe5d13bc4c6c0fb}{continuousTimeout}}\ +\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ saveData\ +=\ \textcolor{stringliteral}{"{}acm:"{}}\ +\ String(i)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}(\mbox{\hyperlink{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}{cvInputCommands}}[i],\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ saveData\ +=\ \textcolor{stringliteral}{"{}adcs:"{}}\ +\ String(i)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[i].\mbox{\hyperlink{classaverager_adde2499165f7e8076a054d49ba747cca}{dataAverageLength}}\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[i].\mbox{\hyperlink{classaverager_ae65171959ff0da0adeed67a844e0e3d9}{interruptedErrorThreshold}}\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[i].\mbox{\hyperlink{classaverager_a19eff7c8e3e37b7f08e2ac120ddcc0e3}{continuousErrorThreshold}}\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[i].\mbox{\hyperlink{classaverager_a4af58bd77d322d550fe5d13bc4c6c0fb}{continuousTimeout}}\ +\ \textcolor{stringliteral}{"{},"{}};}
 \DoxyCodeLine{00341\ \ \ \ \ \}}
 \DoxyCodeLine{00342\ \ \ \ \ \textcolor{keywordflow}{return}\ saveData;}
 \DoxyCodeLine{00343\ \}}
 \DoxyCodeLine{00344\ }
-\DoxyCodeLine{00345\ int32\_t\ \mbox{\hyperlink{classcontrolReader_a5d8f4d63ea42b5416b5c23e8511da343}{controlReader::getData}}(int16\_t\ channel)\ \{}
+\DoxyCodeLine{00345\ int32\_t\ \mbox{\hyperlink{classControlReader_a23c21dc8219fde243f98acbad95cc942}{ControlReader::getData}}(int16\_t\ channel)\ \{}
 \DoxyCodeLine{00346\ \ \ \ \ \textcolor{keywordflow}{if}\ ((channel\ <\ 0)\ ||\ (channel\ >\ 7))\ \{}
 \DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
 \DoxyCodeLine{00348\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classcontrolReader_a891bcb175dc04b745648c88dccb4393e}{averages}}[channel].\mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}};}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[channel].\mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}};}
 \DoxyCodeLine{00350\ \ \ \ \ \}}
 \DoxyCodeLine{00351\ \}}
 \DoxyCodeLine{00352\ \textcolor{comment}{/*}}
@@ -367,7 +367,7 @@
 \DoxyCodeLine{00366\ \textcolor{comment}{\ \ \ \ \};}}
 \DoxyCodeLine{00367\ \textcolor{comment}{\}}}
 \DoxyCodeLine{00368\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00369\ \mbox{\hyperlink{classcontrolReader_af11b0fcb9e6bf635484623d7ab215417}{controlReader::\string~controlReader}}()}
+\DoxyCodeLine{00369\ \mbox{\hyperlink{classControlReader_af538c65e5f0f45d6306b1558fcd9b957}{ControlReader::\string~ControlReader}}()}
 \DoxyCodeLine{00370\ \{}
 \DoxyCodeLine{00371\ \}}
 

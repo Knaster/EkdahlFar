@@ -1,0 +1,69 @@
+\doxysection{farsingle.\+hpp}
+\hypertarget{farsingle_8hpp_source}{}\label{farsingle_8hpp_source}\index{farsingle.hpp@{farsingle.hpp}}
+\mbox{\hyperlink{farsingle_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ FARSINGLE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ FARSINGLE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{debugprint_8hpp}{debugprint.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{mutecontrol_8cpp}{mutecontrol.cpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{solenoid_8cpp}{solenoid.cpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bowcontrol_8cpp}{bowcontrol.cpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bowActuators_8cpp}{bowActuators.cpp}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{harmonicserieshandler_8cpp}{harmonicserieshandler.cpp}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{controlReader_8cpp}{controlReader.cpp}}"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{calibrationhelpers_8hpp}{calibrationhelpers.hpp}}"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bowcalibration_8cpp}{bowcalibration.cpp}}"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{mutecalibration_8cpp}{mutecalibration.cpp}}"{}}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ \mbox{\hyperlink{farsingle_8hpp_a04b385c579c76fd09655085a4cebbe64}{serialCommandsFarSingle}}[]\ =\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcalibrateall"{}},\ \textcolor{stringliteral}{"{}bca"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Performs\ all\ calibration\ routines\ on\ the\ selected\ bow,\ see\ below\ for\ routines\ performed"{}}\ \},}
+\DoxyCodeLine{00020\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcalibratespeed"{}},\ \textcolor{stringliteral}{"{}bcs"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Finds\ the\ minimum\ and\ maximum\ bow\ speed\ of\ the\ selected\ bow"{}}\ \},}
+\DoxyCodeLine{00021\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcalibratepressure"{}},\ \textcolor{stringliteral}{"{}bcp"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Finds\ the\ minimum\ and\ maximum\ bow\ pressure\ of\ the\ selected\ bow"{}}\ \},}
+\DoxyCodeLine{00022\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}pickupstringfrequency"{}},\ \textcolor{stringliteral}{"{}psf"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Returns\ the\ fundamental\ tone\ calculated\ from\ the\ current\ audio\ signal\ if\ appliccable"{}}\},}
+\DoxyCodeLine{00023\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}pickupaudiopeak"{}},\ \textcolor{stringliteral}{"{}pap"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Returns\ the\ peak\ amplitude\ of\ the\ current\ audio\ signal"{}}\},}
+\DoxyCodeLine{00024\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}pickupaudiorms"{}},\ \textcolor{stringliteral}{"{}par"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Returns\ the\ RMS\ amplitude\ of\ the\ current\ audio\ signal"{}}\},}
+\DoxyCodeLine{00025\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}mutecalibrate"{}},\ \textcolor{stringliteral}{"{}mca"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Calibrate\ mute\ settings"{}}\}}
+\DoxyCodeLine{00026\ \};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classFARSingle}{FARSingle}}\ \{}
+\DoxyCodeLine{00029\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classFARSingle}{FARSingle}}(\textcolor{keywordtype}{void}\ *muteStepperCallback,\ \textcolor{keywordtype}{void}\ *pressureStepperCallback,\ \textcolor{keywordtype}{void}\ *tachometerCallback,\ \textcolor{keywordtype}{void}\ *pidCallback);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classFARSingle_a6b41b240f8b7ff3b3fcda42dab37e8de}{processSerialCommand}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegate\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classFARSingle_ac520d53f1804ea44028892be951aa7c7}{processSerialCommandHidden}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegate\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00037\ \ \ \ \ String\ \mbox{\hyperlink{classFARSingle_ae5957205745a7026266deed9e7a3bc96}{dumpData}}();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{classMuteControl}{MuteControl}}\ *\mbox{\hyperlink{classFARSingle_a68a03592fb8cc597309f1409bed459e7}{muteControl}};}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classSolenoid}{Solenoid}}\ *\mbox{\hyperlink{classFARSingle_a31056bbccc0d2235e1dfb2996615f2a9}{hammerControl}};}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classBowControl}{BowControl}}\ *\mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow}{CalibrateBow}}\ *\mbox{\hyperlink{classFARSingle_ad2d29c0778cac9e2bc2d4067e0a2aca5}{calibrateBow}};}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute}{CalibrateMute}}\ *\mbox{\hyperlink{classFARSingle_a2e451e94db555be3d3b17d04fa49f89b}{calibrateMute}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classBowActuators}{BowActuators}}\ *\mbox{\hyperlink{classFARSingle_a63878675dd491b77b675363ef9de1012}{bowActuators}};}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}}\ *\mbox{\hyperlink{classFARSingle_afe32373244a4094dd125895bfb845be2}{harmonicSeriesHandler}};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ IntervalTimer\ \mbox{\hyperlink{classFARSingle_a285df2d7ee4cb1fb05aef87789a71d4b}{pidInterrupt0}};}
+\DoxyCodeLine{00051\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classControlReader}{ControlReader}}\ *\mbox{\hyperlink{classFARSingle_a1aaa3b28349ab94a4ca07f93fffc8689}{controlReader}};}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFARSingle_a5ff8d0c173cd6127a732f4c0dc51eb28}{updateControlReader}}();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFARSingle_a3a9e394d329c21b7b0acf5ff419004bc}{update}}();}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFARSingle_a10de1c088c48f695e026a9c9a711a831}{updatePressureServo}}()\ \{\ \mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a4d7960dead828ad7034c5c106637d3fd}{updateServo}}();\ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFARSingle_ac107bf78c2d579aa3e97e9ba22c537a1}{updateMuteServo}}()\ \{\ \mbox{\hyperlink{classFARSingle_a68a03592fb8cc597309f1409bed459e7}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a2957241645c550ee27a2feb8eb66ee66}{updateServo}}();\ \}}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFARSingle_af2cb18627f94b6c801521ddd9b632b5d}{updateTachometer}}()\ \{\ \mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a71bbd615a798d1e7294a79ad16f0555a}{updateTachometer}}();\ \}}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFARSingle_a8d4f9a830c86ddb17c6fb441b07f5ea5}{updatePID}}()\ \{\ \mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a49f7fa12c0ca3a731d042b4a4adc6324}{updatePID}}();\ \}}
+\DoxyCodeLine{00061\ \};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ FARSINGLE\_C}}
+
+\end{DoxyCode}

@@ -55,8 +55,6 @@ private:
     uint8_t pinStep;
     uint8_t pinDir;
     uint8_t pinHomeSense;
-//    uint8_t pinVref = -1;
-//    uint8_t pinEn = -1;
 
     eHomingStage homing = UNHOMED;
 
@@ -94,8 +92,6 @@ private:
 
     bool isMoving = false;
     uint16_t movingTo = 0;      // Current target position
-
-//    int16_t homingSteps = 0;    // Debug variable for measuring accuracy of position
 
     // params for serial control DRV8825: speed 25, multiplier 0.2, steps 30
     // noiseless params for TMC2209 30 / 0.1
@@ -317,7 +313,6 @@ private:
                     turnAround = false;
                 } else {
                     reachedTarget = true;
-//                    debugPrintln("Setting reached target to true", debugPrintType::Debug);
                     isMoving = false;
                 }
             } else {
@@ -336,17 +331,13 @@ private:
 
     void correctPosition() {
         if (homingSensedChanged) {
-            //eStepDirection homePointDirection;
             eEdgeType edgeDirection;
             if (homingSensed) {
-                //homePointDirection = notDirection(moveDirection);
                 edgeDirection = eEdgeType::EDGEFALLING;
             } else {
-                //homePointDirection = moveDirection;
                 edgeDirection = eEdgeType::EDGERISING;
             }
 
-//            if (currentStep != homingPoint[homePointDirection]) {
             if (currentStep != homingPoint[edgeDirection][moveDirection]) {
                 debugPrintln("Got position " + String(currentStep) + " should have position " + String(homingPoint[edgeDirection][moveDirection]) +
                     " edge " + String(edgeDirection) + " direction " + String(moveDirection) + " movingTo " + String(movingTo) + " - Correcting : stepID " + String(stepperID),
@@ -381,21 +372,18 @@ public:
 
         if (isMoving) {
             if (moveDirection == getDirectionTo(wantToMoveTo)) {
-//                if (outputDebugData) { debugPrintln("setPosition: moving the same direction", debugPrintType::Debug); }
                 if (turnAround) {
-//                    if (outputDebugData) { debugPrintln("setPosition: Is in turn around, you have to do something here!!", debugPrintType::Debug); }
+                    debugPrintln("setPosition: Is in turn around, you have to do something here!!", debugPrintType::Debug);
                 }
                 turnAround = false;
             } else {
-//                if (outputDebugData) { debugPrintln("setPosition: moving the opposite direction", debugPrintType::Debug); }
                 if (turnAround) {
-//                    if (outputDebugData) { debugPrintln("setPosition: Is in turn around, you have to do something here!!", debugPrintType::Debug); }
+                    debugPrintln("setPosition: Is in turn around, you have to do something here!!", debugPrintType::Debug);
                 }
                 turnAroundPosition = wantToMoveTo;
                 turnAroundDirection = getDirectionTo(wantToMoveTo);
 
                 if ((!turnAround) && ((currentStep + accelerationSteps) > movingTo)) {
-//                    if (outputDebugData) { debugPrintln("setPosition: Odd thing here, maybe at fault?", debugPrintType::Debug); }
 
                     if (moveDirection == eStepDirection::FORWARD) {
                         movingTo = currentStep + accelerationSteps;
@@ -414,7 +402,6 @@ public:
 
         setDirection(getDirectionTo(movingTo));
         isMoving = true;
-//        debugPrintln("Setting reached target to false", debugPrintType::Debug);
         reachedTarget = false;
         updatePosition(false);
         inhibitInterrupt = false;
@@ -533,7 +520,6 @@ private:
 
             homing = eHomingStage::GOTOOFFSET;
             movingTo = 0;
-            //debugPrintln("Moving to offset " + String(movingTo), debugPrintType::Debug);
         } else {
             stepNext();
             if (hasStepped) {

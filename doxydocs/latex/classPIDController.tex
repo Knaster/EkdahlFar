@@ -1,0 +1,464 @@
+\doxysection{PIDController Class Reference}
+\hypertarget{classPIDController}{}\label{classPIDController}\index{PIDController@{PIDController}}
+
+
+{\ttfamily \#include $<$pidcontroller.\+hpp$>$}
+
+
+
+Collaboration diagram for PIDController\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{classPIDController__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPIDController_adb86c4a9b80312c6a70f8dc725bd4295}{PIDController}} (\mbox{\hyperlink{classDCMotorControl}{DCMotor\+Control}} \&\mbox{\hyperlink{classDCMotorControl}{DCMotor\+Control}})
+\item 
+\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classPIDController_a698b5049315451aa42344da9c3a0c738}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\item 
+\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classPIDController_ae1776f861448d87c44395830ab659c4d}{process\+Serial\+Command\+Hidden}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\item 
+String \mbox{\hyperlink{classPIDController_a1eb89031fc53df1e1e43e4f0440fb5e2}{dump\+Data}} ()
+\item 
+void \mbox{\hyperlink{classPIDController_ae0bbbe3b4f6578d6475307f83d3ca673}{pid\+Reset}} ()
+\item 
+bool \mbox{\hyperlink{classPIDController_a3b463eb00aac83a6a4bba64686c9a524}{set\+PIDTarget}} (float in\+PIDTarget\+Speed)
+\begin{DoxyCompactList}\small\item\em Set PID target speed, check that it doesnt go above max\+Hz or below min\+Hz. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classPIDController_a375a129b71794ea6d39ccc808447c448}{get\+PIDTarget}} ()
+\item 
+float \mbox{\hyperlink{classPIDController_af164464e844f27bac30d7b9b99aef62b}{get\+PIDPeak\+Error}} ()
+\item 
+float \mbox{\hyperlink{classPIDController_accf28de4b7e26653f461c9466521d3c3}{measure\+Time\+To\+Target}} (float \+\_\+pid\+Target\+Speed)
+\item 
+void \mbox{\hyperlink{classPIDController_a1915877c95834154fe7d038d42d70d26}{set\+Min\+Speed\+Hz}} (float in\+Speed)
+\item 
+float \mbox{\hyperlink{classPIDController_a06dcbfeaa89966438f3545216a4f7448}{get\+Min\+Speed\+Hz}} ()
+\item 
+void \mbox{\hyperlink{classPIDController_ac1bbccb833ee15c1cd135c5c64a23ed1}{set\+Max\+Speed\+Hz}} (float in\+Speed)
+\item 
+float \mbox{\hyperlink{classPIDController_a577132f4990b94d9fbb09d9ef267965e}{get\+Max\+Speed\+Hz}} ()
+\item 
+void \mbox{\hyperlink{classPIDController_a6bc8058b8cb2247d4c06e392c84545af}{set\+PIDTarget\+Unsafe}} (float in\+PIDTarget\+Speed)
+\item 
+void \mbox{\hyperlink{classPIDController_a04e654ba7d6720fa68bb74946c0b138d}{pid\+Control}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{classPIDController_a5c3eb07a0c4a00b86e1433b84e458a56}{Kp}} = 500
+\begin{DoxyCompactList}\small\item\em PID P multiplier 100. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classPIDController_a8acd1f19045a89a9dbd1848e56ae6ae0}{Ki}} = 7
+\begin{DoxyCompactList}\small\item\em PID I multiplier 2. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classPIDController_a22ef7c93498970edb0b04bef3ae3d2f9}{Kd}} = 200
+\begin{DoxyCompactList}\small\item\em PID D multiplier 40. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classPIDController_a455a09fad7c3f0eb99d29505cc02f4c5}{previous\+Error}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Contains the last frequency error calculated by the PID, given in Hertz. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classPIDController_a90107c556130bfbd7d3ab44cb2d1a936}{integrator\+Ignore\+Below}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em The PID will ignore any integral errors under this threshold 0.\+4. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classPIDController_ae3d460dc7aab69b2bbf9e4d2f7986525}{pid\+Max\+Error}} = 50
+\begin{DoxyCompactList}\small\item\em Max PID error per loop, essentially sets acceleration. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classPIDController_acdeca85f1c17132fca3eba126241c41e}{Kp\+Term}} = 0
+\begin{DoxyCompactList}\small\item\em Calculated P term. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classPIDController_a20c6f80edcd517952c6766e38d36363e}{Ki\+Term}} = 0
+\begin{DoxyCompactList}\small\item\em Calculated I term. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classPIDController_aa69bc8cde7aff590dd1517bec1df4448}{Kd\+Term}} = 0
+\begin{DoxyCompactList}\small\item\em Calculated D term. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classPIDController_a9f1834a4933702b2de5076effea32f1f}{integral}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Contains the integral used by the PID. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDCMotorControl}{DCMotor\+Control}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPIDController_af97ae23b468bb776bd33f3791e44f041}{dc\+Motor\+Control}}
+\item 
+float \mbox{\hyperlink{classPIDController_a365ba07a50e70055f61ab02a783996e0}{pid\+Target\+Speed}} = 0
+\begin{DoxyCompactList}\small\item\em PID target speed. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classPIDController_a80763665862ee12834aa7647090af340}{pid\+Peak\+Error}} = 0
+\item 
+float \mbox{\hyperlink{classPIDController_a69f60934cd79167f898e5d121952eefe}{min\+Speed\+Hz}} = 20
+\item 
+float \mbox{\hyperlink{classPIDController_a02862e6a77b8c8503962e0547e5dfbd0}{max\+Speed\+Hz}} = 550
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classPIDController_adb86c4a9b80312c6a70f8dc725bd4295}\label{classPIDController_adb86c4a9b80312c6a70f8dc725bd4295} 
+\index{PIDController@{PIDController}!PIDController@{PIDController}}
+\index{PIDController@{PIDController}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{PIDController()}{PIDController()}}
+{\footnotesize\ttfamily PIDController\+::\+PIDController (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classDCMotorControl}{DCMotor\+Control}} \&}]{DCMotor\+Control }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classPIDController_a1eb89031fc53df1e1e43e4f0440fb5e2}\label{classPIDController_a1eb89031fc53df1e1e43e4f0440fb5e2} 
+\index{PIDController@{PIDController}!dumpData@{dumpData}}
+\index{dumpData@{dumpData}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
+{\footnotesize\ttfamily String PIDController\+::dump\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_a1eb89031fc53df1e1e43e4f0440fb5e2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPIDController_a577132f4990b94d9fbb09d9ef267965e}\label{classPIDController_a577132f4990b94d9fbb09d9ef267965e} 
+\index{PIDController@{PIDController}!getMaxSpeedHz@{getMaxSpeedHz}}
+\index{getMaxSpeedHz@{getMaxSpeedHz}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{getMaxSpeedHz()}{getMaxSpeedHz()}}
+{\footnotesize\ttfamily float PIDController\+::get\+Max\+Speed\+Hz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_a577132f4990b94d9fbb09d9ef267965e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPIDController_a06dcbfeaa89966438f3545216a4f7448}\label{classPIDController_a06dcbfeaa89966438f3545216a4f7448} 
+\index{PIDController@{PIDController}!getMinSpeedHz@{getMinSpeedHz}}
+\index{getMinSpeedHz@{getMinSpeedHz}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{getMinSpeedHz()}{getMinSpeedHz()}}
+{\footnotesize\ttfamily float PIDController\+::get\+Min\+Speed\+Hz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_a06dcbfeaa89966438f3545216a4f7448_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPIDController_af164464e844f27bac30d7b9b99aef62b}\label{classPIDController_af164464e844f27bac30d7b9b99aef62b} 
+\index{PIDController@{PIDController}!getPIDPeakError@{getPIDPeakError}}
+\index{getPIDPeakError@{getPIDPeakError}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{getPIDPeakError()}{getPIDPeakError()}}
+{\footnotesize\ttfamily float PIDController\+::get\+PIDPeak\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classPIDController_a375a129b71794ea6d39ccc808447c448}\label{classPIDController_a375a129b71794ea6d39ccc808447c448} 
+\index{PIDController@{PIDController}!getPIDTarget@{getPIDTarget}}
+\index{getPIDTarget@{getPIDTarget}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{getPIDTarget()}{getPIDTarget()}}
+{\footnotesize\ttfamily float PIDController\+::get\+PIDTarget (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_a375a129b71794ea6d39ccc808447c448_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPIDController_accf28de4b7e26653f461c9466521d3c3}\label{classPIDController_accf28de4b7e26653f461c9466521d3c3} 
+\index{PIDController@{PIDController}!measureTimeToTarget@{measureTimeToTarget}}
+\index{measureTimeToTarget@{measureTimeToTarget}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{measureTimeToTarget()}{measureTimeToTarget()}}
+{\footnotesize\ttfamily float PIDController\+::measure\+Time\+To\+Target (\begin{DoxyParamCaption}\item[{float}]{\+\_\+pid\+Target\+Speed }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_accf28de4b7e26653f461c9466521d3c3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_accf28de4b7e26653f461c9466521d3c3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPIDController_a04e654ba7d6720fa68bb74946c0b138d}\label{classPIDController_a04e654ba7d6720fa68bb74946c0b138d} 
+\index{PIDController@{PIDController}!pidControl@{pidControl}}
+\index{pidControl@{pidControl}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{pidControl()}{pidControl()}}
+{\footnotesize\ttfamily void PIDController\+::pid\+Control (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+PID calculation function to be called at pid\+Update\+Interval, called by pid\+Interrupt\+Caller \begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000004}{Todo}}]add Integral injection and other pre-\/loading parameters to help bow start and change 
+
+final check so PWM is never out of range min/max 
+
+startup injection of fundamental maybe? \end{DoxyRefDesc}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_a04e654ba7d6720fa68bb74946c0b138d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_a04e654ba7d6720fa68bb74946c0b138d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPIDController_ae0bbbe3b4f6578d6475307f83d3ca673}\label{classPIDController_ae0bbbe3b4f6578d6475307f83d3ca673} 
+\index{PIDController@{PIDController}!pidReset@{pidReset}}
+\index{pidReset@{pidReset}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{pidReset()}{pidReset()}}
+{\footnotesize\ttfamily void PIDController\+::pid\+Reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_ae0bbbe3b4f6578d6475307f83d3ca673_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPIDController_a698b5049315451aa42344da9c3a0c738}\label{classPIDController_a698b5049315451aa42344da9c3a0c738} 
+\index{PIDController@{PIDController}!processSerialCommand@{processSerialCommand}}
+\index{processSerialCommand@{processSerialCommand}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{processSerialCommand()}{processSerialCommand()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} PIDController\+::process\+Serial\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_a698b5049315451aa42344da9c3a0c738_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_a698b5049315451aa42344da9c3a0c738_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPIDController_ae1776f861448d87c44395830ab659c4d}\label{classPIDController_ae1776f861448d87c44395830ab659c4d} 
+\index{PIDController@{PIDController}!processSerialCommandHidden@{processSerialCommandHidden}}
+\index{processSerialCommandHidden@{processSerialCommandHidden}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{processSerialCommandHidden()}{processSerialCommandHidden()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} PIDController\+::process\+Serial\+Command\+Hidden (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_ae1776f861448d87c44395830ab659c4d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_ae1776f861448d87c44395830ab659c4d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPIDController_ac1bbccb833ee15c1cd135c5c64a23ed1}\label{classPIDController_ac1bbccb833ee15c1cd135c5c64a23ed1} 
+\index{PIDController@{PIDController}!setMaxSpeedHz@{setMaxSpeedHz}}
+\index{setMaxSpeedHz@{setMaxSpeedHz}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{setMaxSpeedHz()}{setMaxSpeedHz()}}
+{\footnotesize\ttfamily void PIDController\+::set\+Max\+Speed\+Hz (\begin{DoxyParamCaption}\item[{float}]{in\+Speed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_ac1bbccb833ee15c1cd135c5c64a23ed1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPIDController_a1915877c95834154fe7d038d42d70d26}\label{classPIDController_a1915877c95834154fe7d038d42d70d26} 
+\index{PIDController@{PIDController}!setMinSpeedHz@{setMinSpeedHz}}
+\index{setMinSpeedHz@{setMinSpeedHz}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{setMinSpeedHz()}{setMinSpeedHz()}}
+{\footnotesize\ttfamily void PIDController\+::set\+Min\+Speed\+Hz (\begin{DoxyParamCaption}\item[{float}]{in\+Speed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_a1915877c95834154fe7d038d42d70d26_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPIDController_a3b463eb00aac83a6a4bba64686c9a524}\label{classPIDController_a3b463eb00aac83a6a4bba64686c9a524} 
+\index{PIDController@{PIDController}!setPIDTarget@{setPIDTarget}}
+\index{setPIDTarget@{setPIDTarget}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{setPIDTarget()}{setPIDTarget()}}
+{\footnotesize\ttfamily bool PIDController\+::set\+PIDTarget (\begin{DoxyParamCaption}\item[{float}]{in\+PIDTarget\+Speed }\end{DoxyParamCaption})}
+
+
+
+Set PID target speed, check that it doesnt go above max\+Hz or below min\+Hz. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_a3b463eb00aac83a6a4bba64686c9a524_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_a3b463eb00aac83a6a4bba64686c9a524_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPIDController_a6bc8058b8cb2247d4c06e392c84545af}\label{classPIDController_a6bc8058b8cb2247d4c06e392c84545af} 
+\index{PIDController@{PIDController}!setPIDTargetUnsafe@{setPIDTargetUnsafe}}
+\index{setPIDTargetUnsafe@{setPIDTargetUnsafe}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{setPIDTargetUnsafe()}{setPIDTargetUnsafe()}}
+{\footnotesize\ttfamily void PIDController\+::set\+PIDTarget\+Unsafe (\begin{DoxyParamCaption}\item[{float}]{in\+PIDTarget\+Speed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPIDController_a6bc8058b8cb2247d4c06e392c84545af_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classPIDController_af97ae23b468bb776bd33f3791e44f041}\label{classPIDController_af97ae23b468bb776bd33f3791e44f041} 
+\index{PIDController@{PIDController}!dcMotorControl@{dcMotorControl}}
+\index{dcMotorControl@{dcMotorControl}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{dcMotorControl}{dcMotorControl}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDCMotorControl}{DCMotor\+Control}}\texorpdfstring{$\ast$}{*} PIDController\+::dc\+Motor\+Control\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPIDController_a9f1834a4933702b2de5076effea32f1f}\label{classPIDController_a9f1834a4933702b2de5076effea32f1f} 
+\index{PIDController@{PIDController}!integral@{integral}}
+\index{integral@{integral}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{integral}{integral}}
+{\footnotesize\ttfamily float PIDController\+::integral = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Contains the integral used by the PID. 
+
+\Hypertarget{classPIDController_a90107c556130bfbd7d3ab44cb2d1a936}\label{classPIDController_a90107c556130bfbd7d3ab44cb2d1a936} 
+\index{PIDController@{PIDController}!integratorIgnoreBelow@{integratorIgnoreBelow}}
+\index{integratorIgnoreBelow@{integratorIgnoreBelow}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{integratorIgnoreBelow}{integratorIgnoreBelow}}
+{\footnotesize\ttfamily float PIDController\+::integrator\+Ignore\+Below = 0.\+1\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The PID will ignore any integral errors under this threshold 0.\+4. 
+
+\Hypertarget{classPIDController_a22ef7c93498970edb0b04bef3ae3d2f9}\label{classPIDController_a22ef7c93498970edb0b04bef3ae3d2f9} 
+\index{PIDController@{PIDController}!Kd@{Kd}}
+\index{Kd@{Kd}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{Kd}{Kd}}
+{\footnotesize\ttfamily float PIDController\+::\+Kd = 200\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+PID D multiplier 40. 
+
+\Hypertarget{classPIDController_aa69bc8cde7aff590dd1517bec1df4448}\label{classPIDController_aa69bc8cde7aff590dd1517bec1df4448} 
+\index{PIDController@{PIDController}!KdTerm@{KdTerm}}
+\index{KdTerm@{KdTerm}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{KdTerm}{KdTerm}}
+{\footnotesize\ttfamily float PIDController\+::\+Kd\+Term = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculated D term. 
+
+\Hypertarget{classPIDController_a8acd1f19045a89a9dbd1848e56ae6ae0}\label{classPIDController_a8acd1f19045a89a9dbd1848e56ae6ae0} 
+\index{PIDController@{PIDController}!Ki@{Ki}}
+\index{Ki@{Ki}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{Ki}{Ki}}
+{\footnotesize\ttfamily float PIDController\+::\+Ki = 7\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+PID I multiplier 2. 
+
+\Hypertarget{classPIDController_a20c6f80edcd517952c6766e38d36363e}\label{classPIDController_a20c6f80edcd517952c6766e38d36363e} 
+\index{PIDController@{PIDController}!KiTerm@{KiTerm}}
+\index{KiTerm@{KiTerm}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{KiTerm}{KiTerm}}
+{\footnotesize\ttfamily float PIDController\+::\+Ki\+Term = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculated I term. 
+
+\Hypertarget{classPIDController_a5c3eb07a0c4a00b86e1433b84e458a56}\label{classPIDController_a5c3eb07a0c4a00b86e1433b84e458a56} 
+\index{PIDController@{PIDController}!Kp@{Kp}}
+\index{Kp@{Kp}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{Kp}{Kp}}
+{\footnotesize\ttfamily float PIDController\+::\+Kp = 500\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+PID P multiplier 100. 
+
+\Hypertarget{classPIDController_acdeca85f1c17132fca3eba126241c41e}\label{classPIDController_acdeca85f1c17132fca3eba126241c41e} 
+\index{PIDController@{PIDController}!KpTerm@{KpTerm}}
+\index{KpTerm@{KpTerm}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{KpTerm}{KpTerm}}
+{\footnotesize\ttfamily float PIDController\+::\+Kp\+Term = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculated P term. 
+
+\Hypertarget{classPIDController_a02862e6a77b8c8503962e0547e5dfbd0}\label{classPIDController_a02862e6a77b8c8503962e0547e5dfbd0} 
+\index{PIDController@{PIDController}!maxSpeedHz@{maxSpeedHz}}
+\index{maxSpeedHz@{maxSpeedHz}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{maxSpeedHz}{maxSpeedHz}}
+{\footnotesize\ttfamily float PIDController\+::max\+Speed\+Hz = 550\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPIDController_a69f60934cd79167f898e5d121952eefe}\label{classPIDController_a69f60934cd79167f898e5d121952eefe} 
+\index{PIDController@{PIDController}!minSpeedHz@{minSpeedHz}}
+\index{minSpeedHz@{minSpeedHz}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{minSpeedHz}{minSpeedHz}}
+{\footnotesize\ttfamily float PIDController\+::min\+Speed\+Hz = 20\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPIDController_ae3d460dc7aab69b2bbf9e4d2f7986525}\label{classPIDController_ae3d460dc7aab69b2bbf9e4d2f7986525} 
+\index{PIDController@{PIDController}!pidMaxError@{pidMaxError}}
+\index{pidMaxError@{pidMaxError}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{pidMaxError}{pidMaxError}}
+{\footnotesize\ttfamily float PIDController\+::pid\+Max\+Error = 50\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Max PID error per loop, essentially sets acceleration. 
+
+\Hypertarget{classPIDController_a80763665862ee12834aa7647090af340}\label{classPIDController_a80763665862ee12834aa7647090af340} 
+\index{PIDController@{PIDController}!pidPeakError@{pidPeakError}}
+\index{pidPeakError@{pidPeakError}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{pidPeakError}{pidPeakError}}
+{\footnotesize\ttfamily float PIDController\+::pid\+Peak\+Error = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPIDController_a365ba07a50e70055f61ab02a783996e0}\label{classPIDController_a365ba07a50e70055f61ab02a783996e0} 
+\index{PIDController@{PIDController}!pidTargetSpeed@{pidTargetSpeed}}
+\index{pidTargetSpeed@{pidTargetSpeed}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{pidTargetSpeed}{pidTargetSpeed}}
+{\footnotesize\ttfamily float PIDController\+::pid\+Target\+Speed = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+PID target speed. 
+
+\Hypertarget{classPIDController_a455a09fad7c3f0eb99d29505cc02f4c5}\label{classPIDController_a455a09fad7c3f0eb99d29505cc02f4c5} 
+\index{PIDController@{PIDController}!previousError@{previousError}}
+\index{previousError@{previousError}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{previousError}{previousError}}
+{\footnotesize\ttfamily float PIDController\+::previous\+Error = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Contains the last frequency error calculated by the PID, given in Hertz. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{pidcontroller_8hpp}{pidcontroller.\+hpp}}\item 
+\mbox{\hyperlink{pidcontroller_8cpp}{pidcontroller.\+cpp}}\end{DoxyCompactItemize}

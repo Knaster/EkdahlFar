@@ -8,8 +8,7 @@ BowPressure::BowPressure(char stepEnPin, char stepDirPin, char stepStepPin, Hard
 //    home();
 }
 
-eProcessResult BowPressure::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                           commandList *delegatedCommands = nullptr) {
+eProcessResult BowPressure::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
 
     processCommandItems(inCommandItem, serialCommandsBowPressure, sizeof(serialCommandsBowPressure) / sizeof(serialCommandItem));
 
@@ -98,6 +97,15 @@ eProcessResult BowPressure::processSerialCommand(commandItem *inCommandItem, std
         if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
         if (inCommandItem->argument[0].toInt() > 0) { setHold(true); } else { setHold(false);}
         commandResponses->push_back({"bph:" + String(inCommandItem->argument[0].toInt()), InfoRequest});
+    } else
+    if (inCommandItem->command == "bowhome") {
+        if (!request) {
+            if (home()) {
+                commandResponses->push_back({"bowhome:1", InfoRequest});
+            } else {
+                commandResponses->push_back({"bowhome:0", InfoRequest});
+            }
+        }
     } else {
         return eProcessResult::NotFound;
     }
@@ -105,8 +113,8 @@ eProcessResult BowPressure::processSerialCommand(commandItem *inCommandItem, std
     return eProcessResult::Ok;
 }
 
-eProcessResult BowPressure::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                                commandList *delegatedCommands = nullptr) {
+eProcessResult BowPressure::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
+
     return eProcessResult::NotFound;
 }
 
@@ -120,7 +128,6 @@ String BowPressure::dumpData() {
 
 void BowPressure::setHardwarePressure(uint16_t pressure) {
     if ((tmc2209ServoStepper != nullptr) && (tmc2209ServoStepper->stepServoStepper != nullptr)) {
-//        debugPrintln("Setting pressure to " + String(pressure), Hardware);
         tmc2209ServoStepper->stepServoStepper->setPosition(pressure);
         lastPressure = pressure;
     }
@@ -163,29 +170,21 @@ bool BowPressure::engage(bool enact) {
     return calculateBaselineModifierPressure();
 }
 
-/*
-bool BowPressure::getHomingSensed() { return tmc2209ServoStepper->stepServoStepper->getHomingSensed(); };
-
-eStepDirection BowPressure::getMoveDirection() { return tmc2209ServoStepper->stepServoStepper->getMoveDirection(); }
-
-uint16_t BowPressure::getCurrentStep() { return tmc2209ServoStepper->stepServoStepper->getCurrentStep(); };
-
-uint16_t BowPressure::getHomingPoint(uint8_t x, uint8_t y) { return tmc2209ServoStepper->stepServoStepper->getHomingPoint(x,y); }
-
-eHomingStage BowPressure::getHomingStage() { return tmc2209ServoStepper->stepServoStepper->getHomingStage(); };
-*/
 void BowPressure::getTMC2209Info() { return tmc2209ServoStepper->getTMC2209Info(); }
 
 /***** Hidden commands for modular use *****/
 /***** Internal commands for stand-alone and semi-modular use *****/
-/*
-void BowPressure::update();          // Update function to be periodically called in order for backoff and other things to work
-void BowPressure::updateServo();     // Handles time-critical timing of stepper motor update - automatically called through stepInervalCallback - DO NOT MANUALLY CALL THIS
-void BowPressure::setStepIntervalCallback(void *stepIntervalCallback);   // This is to be set to a static function that in turn will call the class instance of updateMuteServo
-*/
+
+void BowPressure::update() {
+    if (tmc2209ServoStepper->stepServoStepper->intDrivenMsgFlag) {
+        debugRaw(tmc2209ServoStepper->stepServoStepper->intDrivenMsg);
+        tmc2209ServoStepper->stepServoStepper->intDrivenMsgFlag = false;
+    }
+}
+
 /***** Internal commands for debugging use, most likely to be removed *****/
 
-void BowPressure::setStepperID(uint16_t stepperID) { tmc2209ServoStepper->stepServoStepper->stepperID = stepperID; }
+//void BowPressure::setStepperID(uint16_t stepperID) { tmc2209ServoStepper->stepServoStepper->stepperID = stepperID; }
 
 /***** Private commands *****/
 
@@ -194,15 +193,12 @@ void BowPressure::setPressureSafe(uint16_t pressure) {
 
     if ((pressureMode == ePressureMode::Engage) && (tmc2209ServoStepper->stepServoStepper->reachedTarget))  {
         reachedEngage = true;
-//        if (outputDebugData) { debugPrintln("Reached engage", debugPrintType::Debug); }
     }
 
     if ((pressureMode == ePressureMode::Engage) && (reachedEngage)) {
         tmc2209ServoStepper->stepServoStepper->setSpeed(speedWhileEngaged);
-        //if (outputDebugData) { debugPrintln("Setting pressure speed to slow", debugPrintType::Debug); }
     } else {
         tmc2209ServoStepper->stepServoStepper->setSpeed(speedToEngage);
-//        if (outputDebugData) { debugPrintln("Setting pressure speed to high", debugPrintType::Debug); }
     }
 
     setHardwarePressure(pressure);

@@ -54,8 +54,7 @@ BowControl::BowControl(char motorRevPin, char motorVoltagePin, char motorDCDCEnP
 //    bowActuators = new BowActuators(bowPressure);
 }
 
-eProcessResult BowControl::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                           commandList *delegatedCommands = nullptr) {
+eProcessResult BowControl::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
 
     eProcessResult processResult = eProcessResult::Ok;
 
@@ -121,6 +120,20 @@ eProcessResult BowControl::processSerialCommand(commandItem *inCommandItem, std:
             bowShutoffTimeout = inCommandItem->argument[0].toInt();
             commandResponses->push_back({"bmt:" + String(bowShutoffTimeout), InfoRequest});
         }
+    } else
+    if (inCommandItem->command == "bowmotorfaultcommands") {
+        if (!request) {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            commandsMotorFault = delimitExpression(inCommandItem->argument[0], true);
+        }
+        commandResponses->push_back({ "bmfc:" + String(commandsMotorFault), InfoRequest });
+    } else
+    if (inCommandItem->command == "bowmotoroverpowercommands") {
+        if (!request) {
+            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+            commandsOverPowerCurrent = delimitExpression(inCommandItem->argument[0], true);
+        }
+        commandResponses->push_back({ "bmopc:" + String(commandsOverPowerCurrent), InfoRequest });
     } else {
         processResult = bowPressure->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
         if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
@@ -134,8 +147,19 @@ eProcessResult BowControl::processSerialCommand(commandItem *inCommandItem, std:
     return processResult;
 }
 
-eProcessResult BowControl::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                                commandList *delegatedCommands = nullptr) {
+eProcessResult BowControl::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
+
+    eProcessResult processResult = eProcessResult::NotFound;
+
+    processResult = bowPressure->processSerialCommandHidden(inCommandItem, commandResponses, request, delegate, delegatedCommands);
+    if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
+
+    processResult = dcMotorControl->processSerialCommandHidden(inCommandItem, commandResponses, request, delegate, delegatedCommands);
+    if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
+
+    processResult = pidController->processSerialCommandHidden(inCommandItem, commandResponses, request, delegate, delegatedCommands);
+    if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
+
 
     return eProcessResult::NotFound;
 }
@@ -147,6 +171,8 @@ void BowControl::setBowSpeedPWM(uint16_t speed) {
 String BowControl::dumpData() {
     String dump = "";
     dump += "bmt:" + String(bowShutoffTimeout) + ",";
+    dump += "bmfc:" + commandsMotorFault + ",";
+    dump += "bmopc:" + commandsOverPowerCurrent + ",";
     dump += dcMotorControl->dumpData() + ",";
     dump += bowPressure->dumpData() + ",";
     dump += pidController->dumpData() + ",";
@@ -210,6 +236,7 @@ void BowControl::update() {
         updateMotorAutoShutdown();
         updateRun_PID();
         updateMotorStatus();
+        bowPressure->update();
         // Check if the bowing wheel speed is zero
         dcMotorControl->checkTachometerTimeout();
     }

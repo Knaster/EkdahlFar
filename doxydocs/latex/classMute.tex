@@ -1,0 +1,553 @@
+\doxysection{Mute Class Reference}
+\hypertarget{classMute}{}\label{classMute}\index{Mute@{Mute}}
+
+
+{\ttfamily \#include $<$mute.\+hpp$>$}
+
+
+
+Collaboration diagram for Mute\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{classMute__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0f}{emute\+Position}} \{ \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0fa931952fc3cd0bac9900108cbb684b9b2}{mp\+Undefined}}
+, \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0fa8cf0481631291e433972a7613c601273}{mp\+Rest}}
+, \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0fa0c80e11b97af0a59a3d4378a95e5ae57}{mp\+Full}}
+, \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0fab10204e03259b4592ecfb2ad54b6ed59}{mp\+Half}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMute_aa4f8d23f08df99faf9f7d4822781db8b}{Mute}} (char step\+En\+Pin, char step\+Dir\+Pin, char step\+Step\+Pin, Hardware\+Serial \texorpdfstring{$\ast$}{*}step\+Serial\+Port, char step\+Home\+Sensor\+Pin)
+\item 
+bool \mbox{\hyperlink{classMute_af328cc59f4cb0766b5929970b0434abe}{setup\+TMC2209}} ()
+\item 
+void \mbox{\hyperlink{classMute_a71ffc2932616f8ea269c5af135656986}{get\+TMC2209\+Info}} ()
+\item 
+bool \mbox{\hyperlink{classMute_acbb5b9115d7e98896126fbcbe0013962}{home\+Mute}} (bool invert=false)
+\item 
+bool \mbox{\hyperlink{classMute_a6fd93a88f9ab9970e410e33969a789ba}{set\+Position}} (uint16\+\_\+t tilt)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classMute_a804da8130220812736c139d27a718a86}{get\+Position}} ()
+\item 
+bool \mbox{\hyperlink{classMute_aa6d19b1ae21b82a18f9476e4ddce5dfc}{rest}} ()
+\item 
+bool \mbox{\hyperlink{classMute_af168afb5de3626559c0124c0088565b8}{full\+Mute}} ()
+\item 
+bool \mbox{\hyperlink{classMute_a132ffdad2b40846a39a39afd934c4f3f}{half\+Mute}} ()
+\item 
+bool \mbox{\hyperlink{classMute_aa0366a6d316fe32dcc9a1e6d82b97157}{set\+Rest\+Position}} (uint16\+\_\+t in\+Rest\+Position)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classMute_aeddb3fa4973cd96fff7bc535528e9cf0}{get\+Rest\+Position}} ()
+\item 
+bool \mbox{\hyperlink{classMute_a7fbd5df0a56c5566046b7616cc021b21}{set\+Full\+Mute\+Position}} (uint16\+\_\+t in\+Full\+Mute\+Position)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classMute_a8f47beec29eac2626a7ad4dad10fee2b}{get\+Full\+Mute\+Position}} ()
+\item 
+bool \mbox{\hyperlink{classMute_a449bebc103f6f7ee8c05a04e8c272685}{set\+Half\+Mute\+Position}} (uint16\+\_\+t in\+Half\+Mute\+Position)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classMute_aad0d0c9cf8ce9c4cc9a64d7bb9830f78}{get\+Half\+Mute\+Position}} ()
+\item 
+bool \mbox{\hyperlink{classMute_a8f85c8d25360ea66ecf7962af8aec325}{set\+Back\+Off\+Time}} (uint16\+\_\+t in\+Backoff\+Time)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classMute_adeb9d25d00e1f3e0b2dbd7392b621bfe}{get\+Back\+Off\+Time}} ()
+\item 
+bool \mbox{\hyperlink{classMute_a5e64fbc1ccd2ec8c6692fc93706eca3f}{save\+Rest}} ()
+\item 
+bool \mbox{\hyperlink{classMute_a2ca121f2e1593bf0dfe6d4ece0da5c91}{save\+Full\+Mute}} ()
+\item 
+bool \mbox{\hyperlink{classMute_a9af8fdab9ed1f318c6f1941f47c4f6d2}{save\+Half\+Mute}} ()
+\item 
+bool \mbox{\hyperlink{classMute_a6ba976f6bf155a68cfe4924d9fd26f97}{set\+Sustain}} (bool in\+Sustain)
+\item 
+bool \mbox{\hyperlink{classMute_a9e75cce1079b7755476c1375f5436ffa}{get\+Sustain}} ()
+\item 
+void \mbox{\hyperlink{classMute_a0353a23ac79cc1650d820fbfa87dfafd}{update\+Mute}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classMute_adadcb19b65b32e478e092576742ad6f6}{hw\+Mute\+Pos}} = 0
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classMute_a2c12dea31dd5003f4c4ee9e232e2e066}{hw\+Last\+Mute\+Pos}} = 0
+\item 
+\mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0f}{emute\+Position}} \mbox{\hyperlink{classMute_a911412f0166131a8c50aa25d660b8b27}{mute\+Position}} = \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0fa931952fc3cd0bac9900108cbb684b9b2}{mp\+Undefined}}
+\item 
+\mbox{\hyperlink{classTmc2209ServoStepper}{Tmc2209\+Servo\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classMute_a02d9a38e3778c71c3f39f828af2416c5}{tmc2209\+Servo\+Stepper}} = nullptr
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classMute_a41e4d4f30497a81729d45dc42429440d}{last\+Position}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classMute_ac059549f1811658c4e790e59e71fda65}{rest\+Position}} = 0
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classMute_ae540aa1e4c5daab17098373b3f4de47d}{full\+Mute\+Position}} = 65535
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classMute_a3bbda9ce5b1b063b8706d7ea9b35ef09}{half\+Mute\+Position}} = 0
+\item 
+bool \mbox{\hyperlink{classMute_a106fad11788f4d3ae632320c9f199871}{sustain}} = false
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classMute_a4fd3fd2d5ea01bf0defbe634e90170e5}{mute\+Max\+Position}} = 59000
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classMute_a7156ca63ce157d54ec1112c0334832a9}{back\+Off\+Time}} = 0
+\item 
+elapsed\+Millis \mbox{\hyperlink{classMute_acc79f09b7b07c8747726a7088bd64659}{back\+Off\+Timer}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classMute_a4cfb5126a06fd835a9f51e157176ce0f}\label{classMute_a4cfb5126a06fd835a9f51e157176ce0f} 
+\index{Mute@{Mute}!emutePosition@{emutePosition}}
+\index{emutePosition@{emutePosition}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{emutePosition}{emutePosition}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0f}{Mute\+::emute\+Position}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{mpUndefined@{mpUndefined}!Mute@{Mute}}\index{Mute@{Mute}!mpUndefined@{mpUndefined}}}\Hypertarget{classMute_a4cfb5126a06fd835a9f51e157176ce0fa931952fc3cd0bac9900108cbb684b9b2}\label{classMute_a4cfb5126a06fd835a9f51e157176ce0fa931952fc3cd0bac9900108cbb684b9b2} 
+mp\+Undefined&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{mpRest@{mpRest}!Mute@{Mute}}\index{Mute@{Mute}!mpRest@{mpRest}}}\Hypertarget{classMute_a4cfb5126a06fd835a9f51e157176ce0fa8cf0481631291e433972a7613c601273}\label{classMute_a4cfb5126a06fd835a9f51e157176ce0fa8cf0481631291e433972a7613c601273} 
+mp\+Rest&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{mpFull@{mpFull}!Mute@{Mute}}\index{Mute@{Mute}!mpFull@{mpFull}}}\Hypertarget{classMute_a4cfb5126a06fd835a9f51e157176ce0fa0c80e11b97af0a59a3d4378a95e5ae57}\label{classMute_a4cfb5126a06fd835a9f51e157176ce0fa0c80e11b97af0a59a3d4378a95e5ae57} 
+mp\+Full&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{mpHalf@{mpHalf}!Mute@{Mute}}\index{Mute@{Mute}!mpHalf@{mpHalf}}}\Hypertarget{classMute_a4cfb5126a06fd835a9f51e157176ce0fab10204e03259b4592ecfb2ad54b6ed59}\label{classMute_a4cfb5126a06fd835a9f51e157176ce0fab10204e03259b4592ecfb2ad54b6ed59} 
+mp\+Half&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classMute_aa4f8d23f08df99faf9f7d4822781db8b}\label{classMute_aa4f8d23f08df99faf9f7d4822781db8b} 
+\index{Mute@{Mute}!Mute@{Mute}}
+\index{Mute@{Mute}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{Mute()}{Mute()}}
+{\footnotesize\ttfamily Mute\+::\+Mute (\begin{DoxyParamCaption}\item[{char}]{step\+En\+Pin,  }\item[{char}]{step\+Dir\+Pin,  }\item[{char}]{step\+Step\+Pin,  }\item[{Hardware\+Serial \texorpdfstring{$\ast$}{*}}]{step\+Serial\+Port,  }\item[{char}]{step\+Home\+Sensor\+Pin }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classMute_af168afb5de3626559c0124c0088565b8}\label{classMute_af168afb5de3626559c0124c0088565b8} 
+\index{Mute@{Mute}!fullMute@{fullMute}}
+\index{fullMute@{fullMute}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{fullMute()}{fullMute()}}
+{\footnotesize\ttfamily bool Mute\+::full\+Mute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_af168afb5de3626559c0124c0088565b8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_adeb9d25d00e1f3e0b2dbd7392b621bfe}\label{classMute_adeb9d25d00e1f3e0b2dbd7392b621bfe} 
+\index{Mute@{Mute}!getBackOffTime@{getBackOffTime}}
+\index{getBackOffTime@{getBackOffTime}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{getBackOffTime()}{getBackOffTime()}}
+{\footnotesize\ttfamily uint16\+\_\+t Mute\+::get\+Back\+Off\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_adeb9d25d00e1f3e0b2dbd7392b621bfe_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_a8f47beec29eac2626a7ad4dad10fee2b}\label{classMute_a8f47beec29eac2626a7ad4dad10fee2b} 
+\index{Mute@{Mute}!getFullMutePosition@{getFullMutePosition}}
+\index{getFullMutePosition@{getFullMutePosition}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{getFullMutePosition()}{getFullMutePosition()}}
+{\footnotesize\ttfamily uint16\+\_\+t Mute\+::get\+Full\+Mute\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a8f47beec29eac2626a7ad4dad10fee2b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_aad0d0c9cf8ce9c4cc9a64d7bb9830f78}\label{classMute_aad0d0c9cf8ce9c4cc9a64d7bb9830f78} 
+\index{Mute@{Mute}!getHalfMutePosition@{getHalfMutePosition}}
+\index{getHalfMutePosition@{getHalfMutePosition}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{getHalfMutePosition()}{getHalfMutePosition()}}
+{\footnotesize\ttfamily uint16\+\_\+t Mute\+::get\+Half\+Mute\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_aad0d0c9cf8ce9c4cc9a64d7bb9830f78_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_a804da8130220812736c139d27a718a86}\label{classMute_a804da8130220812736c139d27a718a86} 
+\index{Mute@{Mute}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{getPosition()}{getPosition()}}
+{\footnotesize\ttfamily uint16\+\_\+t Mute\+::get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a804da8130220812736c139d27a718a86_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_aeddb3fa4973cd96fff7bc535528e9cf0}\label{classMute_aeddb3fa4973cd96fff7bc535528e9cf0} 
+\index{Mute@{Mute}!getRestPosition@{getRestPosition}}
+\index{getRestPosition@{getRestPosition}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{getRestPosition()}{getRestPosition()}}
+{\footnotesize\ttfamily uint16\+\_\+t Mute\+::get\+Rest\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_aeddb3fa4973cd96fff7bc535528e9cf0_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_a9e75cce1079b7755476c1375f5436ffa}\label{classMute_a9e75cce1079b7755476c1375f5436ffa} 
+\index{Mute@{Mute}!getSustain@{getSustain}}
+\index{getSustain@{getSustain}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{getSustain()}{getSustain()}}
+{\footnotesize\ttfamily bool Mute\+::get\+Sustain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a9e75cce1079b7755476c1375f5436ffa_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_a71ffc2932616f8ea269c5af135656986}\label{classMute_a71ffc2932616f8ea269c5af135656986} 
+\index{Mute@{Mute}!getTMC2209Info@{getTMC2209Info}}
+\index{getTMC2209Info@{getTMC2209Info}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{getTMC2209Info()}{getTMC2209Info()}}
+{\footnotesize\ttfamily void Mute\+::get\+TMC2209\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a71ffc2932616f8ea269c5af135656986_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_a132ffdad2b40846a39a39afd934c4f3f}\label{classMute_a132ffdad2b40846a39a39afd934c4f3f} 
+\index{Mute@{Mute}!halfMute@{halfMute}}
+\index{halfMute@{halfMute}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{halfMute()}{halfMute()}}
+{\footnotesize\ttfamily bool Mute\+::half\+Mute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a132ffdad2b40846a39a39afd934c4f3f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_acbb5b9115d7e98896126fbcbe0013962}\label{classMute_acbb5b9115d7e98896126fbcbe0013962} 
+\index{Mute@{Mute}!homeMute@{homeMute}}
+\index{homeMute@{homeMute}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{homeMute()}{homeMute()}}
+{\footnotesize\ttfamily bool Mute\+::home\+Mute (\begin{DoxyParamCaption}\item[{bool}]{invert = {\ttfamily false} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_acbb5b9115d7e98896126fbcbe0013962_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_acbb5b9115d7e98896126fbcbe0013962_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_aa6d19b1ae21b82a18f9476e4ddce5dfc}\label{classMute_aa6d19b1ae21b82a18f9476e4ddce5dfc} 
+\index{Mute@{Mute}!rest@{rest}}
+\index{rest@{rest}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{rest()}{rest()}}
+{\footnotesize\ttfamily bool Mute\+::rest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_aa6d19b1ae21b82a18f9476e4ddce5dfc_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_a2ca121f2e1593bf0dfe6d4ece0da5c91}\label{classMute_a2ca121f2e1593bf0dfe6d4ece0da5c91} 
+\index{Mute@{Mute}!saveFullMute@{saveFullMute}}
+\index{saveFullMute@{saveFullMute}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{saveFullMute()}{saveFullMute()}}
+{\footnotesize\ttfamily bool Mute\+::save\+Full\+Mute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a2ca121f2e1593bf0dfe6d4ece0da5c91_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a2ca121f2e1593bf0dfe6d4ece0da5c91_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_a9af8fdab9ed1f318c6f1941f47c4f6d2}\label{classMute_a9af8fdab9ed1f318c6f1941f47c4f6d2} 
+\index{Mute@{Mute}!saveHalfMute@{saveHalfMute}}
+\index{saveHalfMute@{saveHalfMute}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{saveHalfMute()}{saveHalfMute()}}
+{\footnotesize\ttfamily bool Mute\+::save\+Half\+Mute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a9af8fdab9ed1f318c6f1941f47c4f6d2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a9af8fdab9ed1f318c6f1941f47c4f6d2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_a5e64fbc1ccd2ec8c6692fc93706eca3f}\label{classMute_a5e64fbc1ccd2ec8c6692fc93706eca3f} 
+\index{Mute@{Mute}!saveRest@{saveRest}}
+\index{saveRest@{saveRest}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{saveRest()}{saveRest()}}
+{\footnotesize\ttfamily bool Mute\+::save\+Rest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a5e64fbc1ccd2ec8c6692fc93706eca3f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a5e64fbc1ccd2ec8c6692fc93706eca3f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_a8f85c8d25360ea66ecf7962af8aec325}\label{classMute_a8f85c8d25360ea66ecf7962af8aec325} 
+\index{Mute@{Mute}!setBackOffTime@{setBackOffTime}}
+\index{setBackOffTime@{setBackOffTime}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{setBackOffTime()}{setBackOffTime()}}
+{\footnotesize\ttfamily bool Mute\+::set\+Back\+Off\+Time (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{in\+Backoff\+Time }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a8f85c8d25360ea66ecf7962af8aec325_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_a7fbd5df0a56c5566046b7616cc021b21}\label{classMute_a7fbd5df0a56c5566046b7616cc021b21} 
+\index{Mute@{Mute}!setFullMutePosition@{setFullMutePosition}}
+\index{setFullMutePosition@{setFullMutePosition}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{setFullMutePosition()}{setFullMutePosition()}}
+{\footnotesize\ttfamily bool Mute\+::set\+Full\+Mute\+Position (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{in\+Full\+Mute\+Position }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a7fbd5df0a56c5566046b7616cc021b21_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_a449bebc103f6f7ee8c05a04e8c272685}\label{classMute_a449bebc103f6f7ee8c05a04e8c272685} 
+\index{Mute@{Mute}!setHalfMutePosition@{setHalfMutePosition}}
+\index{setHalfMutePosition@{setHalfMutePosition}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{setHalfMutePosition()}{setHalfMutePosition()}}
+{\footnotesize\ttfamily bool Mute\+::set\+Half\+Mute\+Position (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{in\+Half\+Mute\+Position }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a449bebc103f6f7ee8c05a04e8c272685_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_a6fd93a88f9ab9970e410e33969a789ba}\label{classMute_a6fd93a88f9ab9970e410e33969a789ba} 
+\index{Mute@{Mute}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}}
+{\footnotesize\ttfamily bool Mute\+::set\+Position (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{tilt }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a6fd93a88f9ab9970e410e33969a789ba_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a6fd93a88f9ab9970e410e33969a789ba_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_aa0366a6d316fe32dcc9a1e6d82b97157}\label{classMute_aa0366a6d316fe32dcc9a1e6d82b97157} 
+\index{Mute@{Mute}!setRestPosition@{setRestPosition}}
+\index{setRestPosition@{setRestPosition}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{setRestPosition()}{setRestPosition()}}
+{\footnotesize\ttfamily bool Mute\+::set\+Rest\+Position (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{in\+Rest\+Position }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_aa0366a6d316fe32dcc9a1e6d82b97157_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_a6ba976f6bf155a68cfe4924d9fd26f97}\label{classMute_a6ba976f6bf155a68cfe4924d9fd26f97} 
+\index{Mute@{Mute}!setSustain@{setSustain}}
+\index{setSustain@{setSustain}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{setSustain()}{setSustain()}}
+{\footnotesize\ttfamily bool Mute\+::set\+Sustain (\begin{DoxyParamCaption}\item[{bool}]{in\+Sustain }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a6ba976f6bf155a68cfe4924d9fd26f97_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_af328cc59f4cb0766b5929970b0434abe}\label{classMute_af328cc59f4cb0766b5929970b0434abe} 
+\index{Mute@{Mute}!setupTMC2209@{setupTMC2209}}
+\index{setupTMC2209@{setupTMC2209}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{setupTMC2209()}{setupTMC2209()}}
+{\footnotesize\ttfamily bool Mute\+::setup\+TMC2209 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_af328cc59f4cb0766b5929970b0434abe_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMute_a0353a23ac79cc1650d820fbfa87dfafd}\label{classMute_a0353a23ac79cc1650d820fbfa87dfafd} 
+\index{Mute@{Mute}!updateMute@{updateMute}}
+\index{updateMute@{updateMute}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{updateMute()}{updateMute()}}
+{\footnotesize\ttfamily void Mute\+::update\+Mute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a0353a23ac79cc1650d820fbfa87dfafd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMute_a0353a23ac79cc1650d820fbfa87dfafd_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classMute_a7156ca63ce157d54ec1112c0334832a9}\label{classMute_a7156ca63ce157d54ec1112c0334832a9} 
+\index{Mute@{Mute}!backOffTime@{backOffTime}}
+\index{backOffTime@{backOffTime}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{backOffTime}{backOffTime}}
+{\footnotesize\ttfamily uint16\+\_\+t Mute\+::back\+Off\+Time = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classMute_acc79f09b7b07c8747726a7088bd64659}\label{classMute_acc79f09b7b07c8747726a7088bd64659} 
+\index{Mute@{Mute}!backOffTimer@{backOffTimer}}
+\index{backOffTimer@{backOffTimer}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{backOffTimer}{backOffTimer}}
+{\footnotesize\ttfamily elapsed\+Millis Mute\+::back\+Off\+Timer\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classMute_ae540aa1e4c5daab17098373b3f4de47d}\label{classMute_ae540aa1e4c5daab17098373b3f4de47d} 
+\index{Mute@{Mute}!fullMutePosition@{fullMutePosition}}
+\index{fullMutePosition@{fullMutePosition}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{fullMutePosition}{fullMutePosition}}
+{\footnotesize\ttfamily uint16\+\_\+t Mute\+::full\+Mute\+Position = 65535\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classMute_a3bbda9ce5b1b063b8706d7ea9b35ef09}\label{classMute_a3bbda9ce5b1b063b8706d7ea9b35ef09} 
+\index{Mute@{Mute}!halfMutePosition@{halfMutePosition}}
+\index{halfMutePosition@{halfMutePosition}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{halfMutePosition}{halfMutePosition}}
+{\footnotesize\ttfamily uint16\+\_\+t Mute\+::half\+Mute\+Position = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classMute_a2c12dea31dd5003f4c4ee9e232e2e066}\label{classMute_a2c12dea31dd5003f4c4ee9e232e2e066} 
+\index{Mute@{Mute}!hwLastMutePos@{hwLastMutePos}}
+\index{hwLastMutePos@{hwLastMutePos}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{hwLastMutePos}{hwLastMutePos}}
+{\footnotesize\ttfamily uint16\+\_\+t Mute\+::hw\+Last\+Mute\+Pos = 0}
+
+\Hypertarget{classMute_adadcb19b65b32e478e092576742ad6f6}\label{classMute_adadcb19b65b32e478e092576742ad6f6} 
+\index{Mute@{Mute}!hwMutePos@{hwMutePos}}
+\index{hwMutePos@{hwMutePos}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{hwMutePos}{hwMutePos}}
+{\footnotesize\ttfamily uint16\+\_\+t Mute\+::hw\+Mute\+Pos = 0}
+
+\Hypertarget{classMute_a41e4d4f30497a81729d45dc42429440d}\label{classMute_a41e4d4f30497a81729d45dc42429440d} 
+\index{Mute@{Mute}!lastPosition@{lastPosition}}
+\index{lastPosition@{lastPosition}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{lastPosition}{lastPosition}}
+{\footnotesize\ttfamily uint16\+\_\+t Mute\+::last\+Position\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classMute_a4fd3fd2d5ea01bf0defbe634e90170e5}\label{classMute_a4fd3fd2d5ea01bf0defbe634e90170e5} 
+\index{Mute@{Mute}!muteMaxPosition@{muteMaxPosition}}
+\index{muteMaxPosition@{muteMaxPosition}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{muteMaxPosition}{muteMaxPosition}}
+{\footnotesize\ttfamily uint16\+\_\+t Mute\+::mute\+Max\+Position = 59000\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classMute_a911412f0166131a8c50aa25d660b8b27}\label{classMute_a911412f0166131a8c50aa25d660b8b27} 
+\index{Mute@{Mute}!mutePosition@{mutePosition}}
+\index{mutePosition@{mutePosition}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{mutePosition}{mutePosition}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0f}{emute\+Position}} Mute\+::mute\+Position = \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0fa931952fc3cd0bac9900108cbb684b9b2}{mp\+Undefined}}}
+
+\Hypertarget{classMute_ac059549f1811658c4e790e59e71fda65}\label{classMute_ac059549f1811658c4e790e59e71fda65} 
+\index{Mute@{Mute}!restPosition@{restPosition}}
+\index{restPosition@{restPosition}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{restPosition}{restPosition}}
+{\footnotesize\ttfamily uint16\+\_\+t Mute\+::rest\+Position = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classMute_a106fad11788f4d3ae632320c9f199871}\label{classMute_a106fad11788f4d3ae632320c9f199871} 
+\index{Mute@{Mute}!sustain@{sustain}}
+\index{sustain@{sustain}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{sustain}{sustain}}
+{\footnotesize\ttfamily bool Mute\+::sustain = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classMute_a02d9a38e3778c71c3f39f828af2416c5}\label{classMute_a02d9a38e3778c71c3f39f828af2416c5} 
+\index{Mute@{Mute}!tmc2209ServoStepper@{tmc2209ServoStepper}}
+\index{tmc2209ServoStepper@{tmc2209ServoStepper}!Mute@{Mute}}
+\doxysubsubsection{\texorpdfstring{tmc2209ServoStepper}{tmc2209ServoStepper}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTmc2209ServoStepper}{Tmc2209\+Servo\+Stepper}}\texorpdfstring{$\ast$}{*} Mute\+::tmc2209\+Servo\+Stepper = nullptr}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mute_8hpp}{mute.\+hpp}}\item 
+\mbox{\hyperlink{mute_8cpp}{mute.\+cpp}}\end{DoxyCompactItemize}

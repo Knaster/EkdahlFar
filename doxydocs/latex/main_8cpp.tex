@@ -6,7 +6,6 @@
 {\ttfamily \#include $<$Hardware\+Serial.\+h$>$}\newline
 {\ttfamily \#include $<$Buffered\+Input.\+h$>$}\newline
 {\ttfamily \#include $<$Buffered\+Output.\+h$>$}\newline
-{\ttfamily \#include $<$Pin\+Flasher.\+h$>$}\newline
 {\ttfamily \#include $<$Safe\+String.\+h$>$}\newline
 {\ttfamily \#include $<$Safe\+String\+Name\+Space.\+h$>$}\newline
 {\ttfamily \#include $<$Safe\+String\+Name\+Space\+End.\+h$>$}\newline
@@ -18,27 +17,15 @@
 {\ttfamily \#include $<$algorithm$>$}\newline
 {\ttfamily \#include $<$vector$>$}\newline
 {\ttfamily \#include "{}debugprint.\+hpp"{}}\newline
-{\ttfamily \#include "{}harmonic\+Series.\+cpp"{}}\newline
 {\ttfamily \#include "{}eepromhelpers.\+cpp"{}}\newline
 {\ttfamily \#include "{}configuration.\+cpp"{}}\newline
 {\ttfamily \#include "{}commandparser.\+hpp"{}}\newline
 {\ttfamily \#include "{}audioanalyze.\+h"{}}\newline
-{\ttfamily \#include "{}bowio.\+cpp"{}}\newline
-{\ttfamily \#include "{}bow\+Actuators.\+hpp"{}}\newline
-{\ttfamily \#include "{}bowcontrol.\+cpp"{}}\newline
-{\ttfamily \#include "{}calibrate.\+cpp"{}}\newline
-{\ttfamily \#include "{}bow\+Actuators.\+cpp"{}}\newline
-{\ttfamily \#include "{}solenoid.\+cpp"{}}\newline
-{\ttfamily \#include "{}mute.\+cpp"{}}\newline
-{\ttfamily \#include "{}mutecalibration.\+cpp"{}}\newline
-{\ttfamily \#include "{}stringmodule.\+cpp"{}}\newline
 {\ttfamily \#include "{}midi.\+cpp"{}}\newline
-{\ttfamily \#include "{}isrclasswrapper.\+cpp"{}}\newline
-{\ttfamily \#include "{}control\+Reader.\+cpp"{}}\newline
+{\ttfamily \#include "{}farsingle.\+cpp"{}}\newline
 {\ttfamily \#include "{}settingshandler.\+cpp"{}}\newline
 {\ttfamily \#include "{}maincommandhandler.\+cpp"{}}\newline
-Include dependency graph for main.\+cpp\+:
-\nopagebreak
+Include dependency graph for main.\+cpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -50,13 +37,9 @@ Include dependency graph for main.\+cpp\+:
 \item 
 \#define \mbox{\hyperlink{main_8cpp_a7d0b5b6bfc1bae2a135c12250762d493}{AUDIO\+\_\+\+INTERFACE}}
 \item 
-\#define \mbox{\hyperlink{main_8cpp_a7a2e501ed0e83cab3740b8934d6c42c1}{master\+Slave\+Baud\+Rate}}~2000000
-\item 
 \#define \mbox{\hyperlink{main_8cpp_ae19eb15a5c6b22f63f3819a0105339d8}{clamp}}(v,  i,  x)~min(max(v,i),x)
 \item 
-\#define \mbox{\hyperlink{main_8cpp_a2c48b7e8ad263f85342e4132637108c1}{master\+Rx}}~0
-\item 
-\#define \mbox{\hyperlink{main_8cpp_aa9f03a97087feac8e2c2928240e7c332}{master\+Tx}}~1
+\#define \mbox{\hyperlink{main_8cpp_a9233706605f2febcdaba9e51a5752a87}{control\+Read}}~\mbox{\hyperlink{main_8cpp_a0300de59c914b127d83bfd99227907cc}{far\+Single}}-\/$>$control\+Reader
 \item 
 \#define \mbox{\hyperlink{main_8cpp_ac9a12a1a36ee3528c19ef62340fe33c3}{control\+Read\+Interval\+Time}}~50
 \end{DoxyCompactItemize}
@@ -72,8 +55,12 @@ int \mbox{\hyperlink{main_8cpp_afc3e7d08d802f694ab6a85e9908048f4}{freeram}} ()
 String \mbox{\hyperlink{main_8cpp_ac7fc43fb1f213243ef62cd57653110cc}{delimit\+Expression}} (String expression, bool force=false)
 \item 
 void \mbox{\hyperlink{main_8cpp_a9757a20146502da88270d1534b09db95}{update\+Servo\+Stepper\+Pressure0}} ()
-\begin{DoxyCompactList}\small\item\em Initial setup function. \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{main_8cpp_a8b43b6373262751806f58bda13204a9c}{update\+Servo\+Stepper\+Mute0}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_a5400ff10d2eebb8da77bde10c44d538b}{update\+Tachometer0}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_ac1e9f5fcad6e7495709b3d59993d872c}{update\+PID0}} ()
 \item 
 void \mbox{\hyperlink{main_8cpp_ad20897c5c8bd47f5d4005989bead0e55}{reset}} ()
 \item 
@@ -104,10 +91,8 @@ std\+::vector$<$ \mbox{\hyperlink{classconfiguration}{configuration}} $>$ \mbox{
 \item 
 \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}}
 \item 
-std\+::vector$<$ \mbox{\hyperlink{classstringModule}{string\+Module}} $>$ \mbox{\hyperlink{main_8cpp_aacbb4662d46136722bc7069351a1a30f}{string\+Module\+Array}}
+\mbox{\hyperlink{classFARSingle}{FARSingle}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8cpp_a0300de59c914b127d83bfd99227907cc}{far\+Single}}
 \item 
-\mbox{\hyperlink{classcontrolReader}{control\+Reader}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}{control\+Read}}
-\begin{DoxyCompactList}\small\item\em Interrupt callback function for measuring bowing speed of string unit. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{main_8cpp_a0652452d3c6986b4f212f9a4cd94f213}{current\+String\+Module}} = 0
 \item 
 unsigned long \mbox{\hyperlink{main_8cpp_a844366311ce26d965b0899b9a200b26b}{previous\+Time}} = 0
@@ -135,29 +120,17 @@ elapsed\+Micros \mbox{\hyperlink{main_8cpp_a24894588b78d05d43473e8e72dc24cb2}{co
 \doxysubsubsection{\texorpdfstring{clamp}{clamp}}
 {\footnotesize\ttfamily \#define clamp(\begin{DoxyParamCaption}\item[{}]{v,  }\item[{}]{i,  }\item[{}]{x }\end{DoxyParamCaption})~min(max(v,i),x)}
 
+\Hypertarget{main_8cpp_a9233706605f2febcdaba9e51a5752a87}\label{main_8cpp_a9233706605f2febcdaba9e51a5752a87} 
+\index{main.cpp@{main.cpp}!controlRead@{controlRead}}
+\index{controlRead@{controlRead}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{controlRead}{controlRead}}
+{\footnotesize\ttfamily \#define control\+Read~\mbox{\hyperlink{main_8cpp_a0300de59c914b127d83bfd99227907cc}{far\+Single}}-\/$>$control\+Reader}
+
 \Hypertarget{main_8cpp_ac9a12a1a36ee3528c19ef62340fe33c3}\label{main_8cpp_ac9a12a1a36ee3528c19ef62340fe33c3} 
 \index{main.cpp@{main.cpp}!controlReadIntervalTime@{controlReadIntervalTime}}
 \index{controlReadIntervalTime@{controlReadIntervalTime}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{controlReadIntervalTime}{controlReadIntervalTime}}
 {\footnotesize\ttfamily \#define control\+Read\+Interval\+Time~50}
-
-\Hypertarget{main_8cpp_a2c48b7e8ad263f85342e4132637108c1}\label{main_8cpp_a2c48b7e8ad263f85342e4132637108c1} 
-\index{main.cpp@{main.cpp}!masterRx@{masterRx}}
-\index{masterRx@{masterRx}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{masterRx}{masterRx}}
-{\footnotesize\ttfamily \#define master\+Rx~0}
-
-\Hypertarget{main_8cpp_a7a2e501ed0e83cab3740b8934d6c42c1}\label{main_8cpp_a7a2e501ed0e83cab3740b8934d6c42c1} 
-\index{main.cpp@{main.cpp}!masterSlaveBaudRate@{masterSlaveBaudRate}}
-\index{masterSlaveBaudRate@{masterSlaveBaudRate}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{masterSlaveBaudRate}{masterSlaveBaudRate}}
-{\footnotesize\ttfamily \#define master\+Slave\+Baud\+Rate~2000000}
-
-\Hypertarget{main_8cpp_aa9f03a97087feac8e2c2928240e7c332}\label{main_8cpp_aa9f03a97087feac8e2c2928240e7c332} 
-\index{main.cpp@{main.cpp}!masterTx@{masterTx}}
-\index{masterTx@{masterTx}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{masterTx}{masterTx}}
-{\footnotesize\ttfamily \#define master\+Tx~1}
 
 
 
@@ -188,7 +161,8 @@ Safe\+String reader creation.
 \doxysubsubsection{\texorpdfstring{delimitExpression()}{delimitExpression()}}
 {\footnotesize\ttfamily String delimit\+Expression (\begin{DoxyParamCaption}\item[{String}]{expression,  }\item[{bool}]{force = {\ttfamily false} }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -241,12 +215,31 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}}
 {\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{main_8cpp_ac1e9f5fcad6e7495709b3d59993d872c}\label{main_8cpp_ac1e9f5fcad6e7495709b3d59993d872c} 
+\index{main.cpp@{main.cpp}!updatePID0@{updatePID0}}
+\index{updatePID0@{updatePID0}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{updatePID0()}{updatePID0()}}
+{\footnotesize\ttfamily void update\+PID0 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp_ac1e9f5fcad6e7495709b3d59993d872c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{main_8cpp_ac1e9f5fcad6e7495709b3d59993d872c_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{main_8cpp_a8b43b6373262751806f58bda13204a9c}\label{main_8cpp_a8b43b6373262751806f58bda13204a9c} 
@@ -255,6 +248,13 @@ Here is the call graph for this function\+:
 \doxysubsubsection{\texorpdfstring{updateServoStepperMute0()}{updateServoStepperMute0()}}
 {\footnotesize\ttfamily void update\+Servo\+Stepper\+Mute0 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp_a8b43b6373262751806f58bda13204a9c_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -268,12 +268,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{updateServoStepperPressure0()}{updateServoStepperPressure0()}}
 {\footnotesize\ttfamily void update\+Servo\+Stepper\+Pressure0 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-
-
-Initial setup function. 
-
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -285,6 +280,26 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=324pt]{main_8cpp_a9757a20146502da88270d1534b09db95_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{main_8cpp_a5400ff10d2eebb8da77bde10c44d538b}\label{main_8cpp_a5400ff10d2eebb8da77bde10c44d538b} 
+\index{main.cpp@{main.cpp}!updateTachometer0@{updateTachometer0}}
+\index{updateTachometer0@{updateTachometer0}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{updateTachometer0()}{updateTachometer0()}}
+{\footnotesize\ttfamily void update\+Tachometer0 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp_a5400ff10d2eebb8da77bde10c44d538b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{main_8cpp_a5400ff10d2eebb8da77bde10c44d538b_icgraph}
 \end{center}
 \end{figure}
 
@@ -326,17 +341,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{configArray}{configArray}}
 {\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classconfiguration}{configuration}}$>$ config\+Array}
 
-\Hypertarget{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0}\label{main_8cpp_a7f8108e79ddb4cb4a1727441d9cdffe0} 
-\index{main.cpp@{main.cpp}!controlRead@{controlRead}}
-\index{controlRead@{controlRead}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{controlRead}{controlRead}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classcontrolReader}{control\+Reader}}\texorpdfstring{$\ast$}{*} control\+Read}
-
-
-
-Interrupt callback function for measuring bowing speed of string unit. 
-
-fm\+Pin\+State\+Changed\+ISR will be called whenever an Interrupt event happens on the pin associated. The pin associated is in turn connected to the reflection sensor output of a string unit. The function also includes the setting up of a timeout function in case of no bow movement as the interrupt will never be triggered in that case. Interrupt call \Hypertarget{main_8cpp_a24894588b78d05d43473e8e72dc24cb2}\label{main_8cpp_a24894588b78d05d43473e8e72dc24cb2} 
+\Hypertarget{main_8cpp_a24894588b78d05d43473e8e72dc24cb2}\label{main_8cpp_a24894588b78d05d43473e8e72dc24cb2} 
 \index{main.cpp@{main.cpp}!controlReaderInterval@{controlReaderInterval}}
 \index{controlReaderInterval@{controlReaderInterval}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{controlReaderInterval}{controlReaderInterval}}
@@ -366,6 +371,12 @@ fm\+Pin\+State\+Changed\+ISR will be called whenever an Interrupt event happens 
 \doxysubsubsection{\texorpdfstring{customStartupParameters}{customStartupParameters}}
 {\footnotesize\ttfamily String custom\+Startup\+Parameters = "{}"{}}
 
+\Hypertarget{main_8cpp_a0300de59c914b127d83bfd99227907cc}\label{main_8cpp_a0300de59c914b127d83bfd99227907cc} 
+\index{main.cpp@{main.cpp}!farSingle@{farSingle}}
+\index{farSingle@{farSingle}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{farSingle}{farSingle}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classFARSingle}{FARSingle}}\texorpdfstring{$\ast$}{*} far\+Single}
+
 \Hypertarget{main_8cpp_af98373428ba06a19feb1859d77b9f9d2}\label{main_8cpp_af98373428ba06a19feb1859d77b9f9d2} 
 \index{main.cpp@{main.cpp}!nickName@{nickName}}
 \index{nickName@{nickName}!main.cpp@{main.cpp}}
@@ -391,13 +402,7 @@ Main loop function.
 \item Add any serial commands to command list and execute all commands in list
 \item Process each strings update function 
 \end{DoxyEnumerate}
-\end{DoxyItemize}\Hypertarget{main_8cpp_aacbb4662d46136722bc7069351a1a30f}\label{main_8cpp_aacbb4662d46136722bc7069351a1a30f} 
-\index{main.cpp@{main.cpp}!stringModuleArray@{stringModuleArray}}
-\index{stringModuleArray@{stringModuleArray}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{stringModuleArray}{stringModuleArray}}
-{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classstringModule}{string\+Module}}$>$ string\+Module\+Array}
-
-\Hypertarget{main_8cpp_a74a971e8a878363938ad6d1426e8255c}\label{main_8cpp_a74a971e8a878363938ad6d1426e8255c} 
+\end{DoxyItemize}\Hypertarget{main_8cpp_a74a971e8a878363938ad6d1426e8255c}\label{main_8cpp_a74a971e8a878363938ad6d1426e8255c} 
 \index{main.cpp@{main.cpp}!testMeasurement@{testMeasurement}}
 \index{testMeasurement@{testMeasurement}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{testMeasurement}{testMeasurement}}

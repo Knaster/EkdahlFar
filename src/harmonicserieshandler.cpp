@@ -5,8 +5,7 @@
 
 HarmonicSeriesHandler::HarmonicSeriesHandler() {};
 
-eProcessResult HarmonicSeriesHandler::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                           commandList *delegatedCommands = nullptr) {
+eProcessResult HarmonicSeriesHandler::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
 
     processCommandItems(inCommandItem, serialCommandsHarmonicSeriesHandler, sizeof(serialCommandsHarmonicSeriesHandler)  / sizeof(serialCommandItem));
 
@@ -27,8 +26,7 @@ eProcessResult HarmonicSeriesHandler::processSerialCommand(commandItem *inComman
     return processResult;
 }
 
-eProcessResult HarmonicSeriesHandler::processControlCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                           commandList *delegatedCommands = nullptr) {
+eProcessResult HarmonicSeriesHandler::processControlCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
 
     if (inCommandItem->command == "bowcontrolfundamental") {
         if (request) {
@@ -114,8 +112,7 @@ eProcessResult HarmonicSeriesHandler::processControlCommand(commandItem *inComma
     return eProcessResult::Ok;
 }
 
-eProcessResult HarmonicSeriesHandler::processHarmonicSeriesCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                                  commandList *delegatedCommands = nullptr) {
+eProcessResult HarmonicSeriesHandler::processHarmonicSeriesCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
 
     if (inCommandItem->command == "bowharmonicseries") {
         if (request) {

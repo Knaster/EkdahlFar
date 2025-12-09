@@ -23,7 +23,7 @@
     Conforming to STD C++ naming conventions with the exception of where external non-conforming items are referenced
 */
 
-serialCommandItem serialCommandsBowActuators[] = {
+const serialCommandItem serialCommandsBowActuators[] = {
     { "bowactuator", "ba", "actuator", "Sets and loads the actuator given"},
     { "bowactuatorremove", "bar", "actuator", "Remove bow actuator"},
     { "bowactuatorsave", "bas", "-", "Save current bow parameters into currently selected bow actuator" },
@@ -68,7 +68,7 @@ private:
 
     uint8_t setBowActuator(uint8_t t_actuator);
 
-    uint8_t getBowActuator();
+//    uint8_t getBowActuator();
 
     uint8_t getBowActuatorCount();
 
@@ -77,7 +77,7 @@ private:
     bool loadBowActuator(uint8_t t_actuator);
 
     bool saveBowActuator(uint16_t actuator, String name);
-
+/*
     bool setBowActuatorFirstTouchPressure(uint16_t t_firstTouchPressure);
 
     bool setBowActuatorStallPressure(uint16_t t_stallPressure);
@@ -85,7 +85,7 @@ private:
     bool setBowActuatorRestPosition(uint16_t t_restPosition);
 
     bool setBowActuatorID(String t_id);
-
+*/
     uint16_t getBowActuatorFirstTouchPressure(int8_t t_bowActuatorIndex = -1);
 
     uint16_t getBowActuatorStallPressure(int8_t t_bowActuatorIndex = -1);

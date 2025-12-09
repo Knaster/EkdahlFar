@@ -1,88 +1,76 @@
 \doxysection{bowcontrol.\+hpp File Reference}
 \hypertarget{bowcontrol_8hpp}{}\label{bowcontrol_8hpp}\index{bowcontrol.hpp@{bowcontrol.hpp}}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
+{\ttfamily \#include "{}bowpressure.\+cpp"{}}\newline
+{\ttfamily \#include "{}pidcontroller.\+cpp"{}}\newline
+Include dependency graph for bowcontrol.\+hpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=172pt]{bowcontrol_8hpp__dep__incl}
+\includegraphics[width=350pt]{bowcontrol_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{bowcontrol_8hpp__dep__incl}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classbowControl}{bow\+Control}}
+class \mbox{\hyperlink{classBowControl}{Bow\+Control}}
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Macros}
-\begin{DoxyCompactItemize}
-\item 
-\#define \mbox{\hyperlink{bowcontrol_8hpp_a69164445e96fd1ddd0a316d803c6745b}{string\+Update\+Interval}}~= 10000
-\begin{DoxyCompactList}\small\item\em Interval at which update\+String is being processed, given in uS (10ms) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0c}{\+\_\+tilt\+Mode}} \{ \mbox{\hyperlink{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca661e967c4cfe56fd40a290550b64d8dc}{Rest}}
-, \mbox{\hyperlink{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0caffb89f6a29dafbca91038396476c4324}{Engage}}
-, \mbox{\hyperlink{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca9637c4eff490f4d2f4efcd32e0689c46}{Mute}}
+enum \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{e\+Speed\+Mode}} \{ \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389}{Automatic}}
+, \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82acad5010fb34447633f3139d69698a0f0}{Manual}}
  \}
-\begin{DoxyCompactList}\small\item\em Sets the current bow mode. \end{DoxyCompactList}\item 
-enum \mbox{\hyperlink{bowcontrol_8hpp_a08216a942f96ea84df79ef77a0554dd8}{\+\_\+speed\+Mode}} \{ \mbox{\hyperlink{bowcontrol_8hpp_a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389}{Automatic}}
-, \mbox{\hyperlink{bowcontrol_8hpp_a08216a942f96ea84df79ef77a0554dd8acad5010fb34447633f3139d69698a0f0}{Manual}}
- \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} \mbox{\hyperlink{bowcontrol_8hpp_a7f6aed390f9ba1cf16fb5eadd20ea985}{serial\+Commands\+Bow\+Control}} \mbox{[}$\,$\mbox{]}
 \end{DoxyCompactItemize}
 
 
-\doxysubsection{Macro Definition Documentation}
-\Hypertarget{bowcontrol_8hpp_a69164445e96fd1ddd0a316d803c6745b}\label{bowcontrol_8hpp_a69164445e96fd1ddd0a316d803c6745b} 
-\index{bowcontrol.hpp@{bowcontrol.hpp}!stringUpdateInterval@{stringUpdateInterval}}
-\index{stringUpdateInterval@{stringUpdateInterval}!bowcontrol.hpp@{bowcontrol.hpp}}
-\doxysubsubsection{\texorpdfstring{stringUpdateInterval}{stringUpdateInterval}}
-{\footnotesize\ttfamily \#define string\+Update\+Interval~= 10000}
-
-
-
-Interval at which update\+String is being processed, given in uS (10ms) 
-
-
-
 \doxysubsection{Enumeration Type Documentation}
-\Hypertarget{bowcontrol_8hpp_a08216a942f96ea84df79ef77a0554dd8}\label{bowcontrol_8hpp_a08216a942f96ea84df79ef77a0554dd8} 
-\index{bowcontrol.hpp@{bowcontrol.hpp}!\_speedMode@{\_speedMode}}
-\index{\_speedMode@{\_speedMode}!bowcontrol.hpp@{bowcontrol.hpp}}
-\doxysubsubsection{\texorpdfstring{\_speedMode}{\_speedMode}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{bowcontrol_8hpp_a08216a942f96ea84df79ef77a0554dd8}{\+\_\+speed\+Mode}}}
+\Hypertarget{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}\label{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82} 
+\index{bowcontrol.hpp@{bowcontrol.hpp}!eSpeedMode@{eSpeedMode}}
+\index{eSpeedMode@{eSpeedMode}!bowcontrol.hpp@{bowcontrol.hpp}}
+\doxysubsubsection{\texorpdfstring{eSpeedMode}{eSpeedMode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{e\+Speed\+Mode}}}
 
 \begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{Automatic@{Automatic}!bowcontrol.hpp@{bowcontrol.hpp}}\index{bowcontrol.hpp@{bowcontrol.hpp}!Automatic@{Automatic}}}\Hypertarget{bowcontrol_8hpp_a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389}\label{bowcontrol_8hpp_a08216a942f96ea84df79ef77a0554dd8a9248ea5dc540b00adb523d1b86fc1389} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Automatic@{Automatic}!bowcontrol.hpp@{bowcontrol.hpp}}\index{bowcontrol.hpp@{bowcontrol.hpp}!Automatic@{Automatic}}}\Hypertarget{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389}\label{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389} 
 Automatic&\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{Manual@{Manual}!bowcontrol.hpp@{bowcontrol.hpp}}\index{bowcontrol.hpp@{bowcontrol.hpp}!Manual@{Manual}}}\Hypertarget{bowcontrol_8hpp_a08216a942f96ea84df79ef77a0554dd8acad5010fb34447633f3139d69698a0f0}\label{bowcontrol_8hpp_a08216a942f96ea84df79ef77a0554dd8acad5010fb34447633f3139d69698a0f0} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Manual@{Manual}!bowcontrol.hpp@{bowcontrol.hpp}}\index{bowcontrol.hpp@{bowcontrol.hpp}!Manual@{Manual}}}\Hypertarget{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82acad5010fb34447633f3139d69698a0f0}\label{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82acad5010fb34447633f3139d69698a0f0} 
 Manual&\\
 \hline
 
 \end{DoxyEnumFields}
-\Hypertarget{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0c}\label{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0c} 
-\index{bowcontrol.hpp@{bowcontrol.hpp}!\_tiltMode@{\_tiltMode}}
-\index{\_tiltMode@{\_tiltMode}!bowcontrol.hpp@{bowcontrol.hpp}}
-\doxysubsubsection{\texorpdfstring{\_tiltMode}{\_tiltMode}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0c}{\+\_\+tilt\+Mode}}}
 
 
+\doxysubsection{Variable Documentation}
+\Hypertarget{bowcontrol_8hpp_a7f6aed390f9ba1cf16fb5eadd20ea985}\label{bowcontrol_8hpp_a7f6aed390f9ba1cf16fb5eadd20ea985} 
+\index{bowcontrol.hpp@{bowcontrol.hpp}!serialCommandsBowControl@{serialCommandsBowControl}}
+\index{serialCommandsBowControl@{serialCommandsBowControl}!bowcontrol.hpp@{bowcontrol.hpp}}
+\doxysubsubsection{\texorpdfstring{serialCommandsBowControl}{serialCommandsBowControl}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Commands\+Bow\+Control\mbox{[}$\,$\mbox{]}}
 
-Sets the current bow mode. 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolspeedmode"{}},\ \textcolor{stringliteral}{"{}bcsm"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ speed\ mode,\ 0\ =\ Automatic\ and\ 1\ =\ Manual"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotortimeout"{}},\ \textcolor{stringliteral}{"{}bmt"{}},\ \textcolor{stringliteral}{"{}ms(0-\/65535)"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ shutdown\ timeout\ after\ bow\ having\ been\ put\ into\ the\ rest\ position"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotordirectpwm"{}},\ \textcolor{stringliteral}{"{}bmdp"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ direct\ power\ in\ 16-\/bit\ PWM\ values,\ requires\ that\ the\ PID\ is\ turned\ off"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpid"{}},\ \textcolor{stringliteral}{"{}bpid"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ bow\ PID\ on/off"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorrun"{}},\ \textcolor{stringliteral}{"{}bmr"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Set\ bow\ motor\ run\ on/off"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorfaultcommands"{}},\ \textcolor{stringliteral}{"{}bmfc"{}},\ \textcolor{stringliteral}{"{}command\ list"{}},\ \textcolor{stringliteral}{"{}Commands\ to\ execute\ when\ a\ motor\ fault\ is\ tripped\ -\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}}\ \},}
+\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotoroverpowercommands"{}},\ \textcolor{stringliteral}{"{}bmopc"{}},\ \textcolor{stringliteral}{"{}command\ list"{}},\ \textcolor{stringliteral}{"{}Commands\ to\ execute\ when\ motor\ is\ over\ the\ power\ limit\ -\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}}\ \},}
+\DoxyCodeLine{\}}
 
-\begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{Rest@{Rest}!bowcontrol.hpp@{bowcontrol.hpp}}\index{bowcontrol.hpp@{bowcontrol.hpp}!Rest@{Rest}}}\Hypertarget{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca661e967c4cfe56fd40a290550b64d8dc}\label{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca661e967c4cfe56fd40a290550b64d8dc} 
-Rest&\\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{Engage@{Engage}!bowcontrol.hpp@{bowcontrol.hpp}}\index{bowcontrol.hpp@{bowcontrol.hpp}!Engage@{Engage}}}\Hypertarget{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0caffb89f6a29dafbca91038396476c4324}\label{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0caffb89f6a29dafbca91038396476c4324} 
-Engage&\\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{Mute@{Mute}!bowcontrol.hpp@{bowcontrol.hpp}}\index{bowcontrol.hpp@{bowcontrol.hpp}!Mute@{Mute}}}\Hypertarget{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca9637c4eff490f4d2f4efcd32e0689c46}\label{bowcontrol_8hpp_a48bbfa20eaad6b3ba296a4fcb2857e0ca9637c4eff490f4d2f4efcd32e0689c46} 
-Mute&\\
-\hline
-
-\end{DoxyEnumFields}
+\end{DoxyCode}

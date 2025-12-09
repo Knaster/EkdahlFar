@@ -5,29 +5,32 @@
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TMC2209\_SERVOSTEPPER\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TMC2209\_SERVOSTEPPER\_H}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00004\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classTmc2209ServoStepper}{Tmc2209ServoStepper}}\ \{}
-\DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00007\ \ \ \ \ HardwareSerial\ *\mbox{\hyperlink{classTmc2209ServoStepper_a4c2eff62dac49abb51f38d52da9de57c}{stepSerialStream}};\ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classTmc2209ServoStepper_a7fc5d37b552bb8e7994c49e8293026c2}{stepBaudRate}}\ =\ 115200;\ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classTmc2209ServoStepper_ae8acd38ce5711b82b86c07cbe7f4e208}{stepConnectDelay}}\ =\ 200;\ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00010\ \ \ \ \ TMC2209\ *\mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{stepTMC2209Driver}}\ =\ \textcolor{keyword}{nullptr};\ \ \ \ \ \ \ }
-\DoxyCodeLine{00011\ }
-\DoxyCodeLine{00012\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{classservoStepper}{servoStepper}}\ *\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}TMC2209.cpp"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{servostepper_8hpp}{servostepper.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classTmc2209ServoStepper}{Tmc2209ServoStepper}}\ \{}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00010\ \ \ \ \ HardwareSerial\ *\mbox{\hyperlink{classTmc2209ServoStepper_a4c2eff62dac49abb51f38d52da9de57c}{stepSerialStream}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classTmc2209ServoStepper_a7fc5d37b552bb8e7994c49e8293026c2}{stepBaudRate}}\ =\ 115200;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classTmc2209ServoStepper_ae8acd38ce5711b82b86c07cbe7f4e208}{stepConnectDelay}}\ =\ 200;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00013\ \ \ \ \ TMC2209\ *\mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{stepTMC2209Driver}}\ =\ \textcolor{keyword}{nullptr};\ \ \ \ \ \ \ }
 \DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ \mbox{\hyperlink{classTmc2209ServoStepper_aebef7880b107a993d5d135a0a090ed77}{stepRunCurrentPercent}}\ =\ 40;\ \ \ }
-\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ \mbox{\hyperlink{classTmc2209ServoStepper_a16e2994ba591b2b7f4611f5e598af58c}{stepHomeCurrentPercent}}\ =\ 20;}
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ \mbox{\hyperlink{classTmc2209ServoStepper_a09fa8a6e9805a52fbc01cc03e641a6e1}{stepHoldCurrentPercent}}\ =\ 10;}
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classTmc2209ServoStepper_aa55e6b34de6dbbe81494e0ad3ce780d6}{stepMicrostepping}}\ =\ 32;\ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00019\ }
-\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper}{Tmc2209ServoStepper}}(\textcolor{keywordtype}{char}\ inStepDirPin,\ \textcolor{keywordtype}{char}\ inStepStepPin,\ HardwareSerial\ *inStepSerialPort,\ \textcolor{keywordtype}{char}\ inStepHomeSensorPin);}
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classTmc2209ServoStepper_a8b80efbb0d386c6100a3a74a0c80d513}{setupTMC2209}}();}
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTmc2209ServoStepper_a4ef70b1a8a5fb8166d225b3e4f6ba63d}{getTMC2209Info}}();}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classTmc2209ServoStepper_acd55654b623910f5ed3af081148372b6}{home}}(\textcolor{keywordtype}{bool}\ invert);}
-\DoxyCodeLine{00024\ \};}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{classservoStepper}{servoStepper}}\ *\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ \mbox{\hyperlink{classTmc2209ServoStepper_aebef7880b107a993d5d135a0a090ed77}{stepRunCurrentPercent}}\ =\ 40;\ \ \ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ \mbox{\hyperlink{classTmc2209ServoStepper_a16e2994ba591b2b7f4611f5e598af58c}{stepHomeCurrentPercent}}\ =\ 20;}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ \mbox{\hyperlink{classTmc2209ServoStepper_a09fa8a6e9805a52fbc01cc03e641a6e1}{stepHoldCurrentPercent}}\ =\ 10;}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classTmc2209ServoStepper_aa55e6b34de6dbbe81494e0ad3ce780d6}{stepMicrostepping}}\ =\ 32;\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper}{Tmc2209ServoStepper}}(\textcolor{keywordtype}{char}\ inStepDirPin,\ \textcolor{keywordtype}{char}\ inStepStepPin,\ HardwareSerial\ *inStepSerialPort,\ \textcolor{keywordtype}{char}\ inStepHomeSensorPin);}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classTmc2209ServoStepper_a8b80efbb0d386c6100a3a74a0c80d513}{setupTMC2209}}();}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTmc2209ServoStepper_a4ef70b1a8a5fb8166d225b3e4f6ba63d}{getTMC2209Info}}();}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classTmc2209ServoStepper_acd55654b623910f5ed3af081148372b6}{home}}(\textcolor{keywordtype}{bool}\ invert);}
+\DoxyCodeLine{00027\ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00030\ }
 
 \end{DoxyCode}

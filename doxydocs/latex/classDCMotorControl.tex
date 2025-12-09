@@ -7,21 +7,17 @@
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{classDCMotorControl_a7d139fb42beeeece687be6968ab7ebc9}{set\+Motor\+Voltage}} (float voltage)
+\mbox{\hyperlink{classDCMotorControl_ac8f3276558d6ebc86f3a77716774258c}{DCMotor\+Control}} (char in\+Motor\+Rev\+Pin, char in\+Motor\+Voltage\+Pin, char in\+Motor\+DCDCEn\+Pin, char in\+Tacho\+Pin, char in\+Current\+Sense\+Pin, char in\+Motor\+Fault\+Pin)
 \item 
-float \mbox{\hyperlink{classDCMotorControl_a4fa179f0bdf8fa5a4ad7568832e07589}{get\+Motor\+Voltage}} ()
+\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classDCMotorControl_a325129fe30f71a28ef89ea346bc43252}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\item 
+\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classDCMotorControl_a5e28fcc8d7953071b2668ada7672af9e}{process\+Serial\+Command\+Hidden}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\item 
+String \mbox{\hyperlink{classDCMotorControl_a9bbce6a36186a7a470990ce73a09e230}{dump\+Data}} ()
 \item 
 bool \mbox{\hyperlink{classDCMotorControl_ad45596053d5c1d91e50f574a2373479a}{disable\+Motor\+Power}} ()
 \item 
 bool \mbox{\hyperlink{classDCMotorControl_ad85e1b63df6744986e6f9a2cec9c0ce2}{enable\+Motor\+Power}} ()
-\item 
-\mbox{\hyperlink{classDCMotorControl_ac8f3276558d6ebc86f3a77716774258c}{DCMotor\+Control}} (char in\+Motor\+Rev\+Pin, char in\+Motor\+Voltage\+Pin, char in\+Motor\+DCDCEn\+Pin, char in\+Tacho\+Pin, char in\+Current\+Sense\+Pin, char in\+Motor\+Fault\+Pin)
-\item 
-float \mbox{\hyperlink{classDCMotorControl_af997b8b142cfd4dab61675f685b11e32}{get\+Last\+Tacho\+Freq}} ()
-\begin{DoxyCompactList}\small\item\em Returns the last added tachometer value. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classDCMotorControl_af4d01d28e70b5fbebb838b086316785c}{clear\+Tacho\+Data}} ()
-\item 
-float \mbox{\hyperlink{classDCMotorControl_a9afd73bea4533db183caba84babc2ae8}{average\+Freq}} ()
 \item 
 void \mbox{\hyperlink{classDCMotorControl_a2a888a8e82115d709ca2b8204a9d480d}{set\+Speed\+PWMSafe}} (uint16\+\_\+t speed)
 \begin{DoxyCompactList}\small\item\em Ramps the bow speed PWM from the last PWM value given to the value given in speed, blocking, only use for testing purposes. \end{DoxyCompactList}\item 
@@ -29,51 +25,51 @@ void \mbox{\hyperlink{classDCMotorControl_a097df1a3dae34be3cc5f79e4f9661396}{set
 \begin{DoxyCompactList}\small\item\em Sets the bow speed PWM using a unsigned 16-\/bit int (RAW) \end{DoxyCompactList}\item 
 uint16\+\_\+t \mbox{\hyperlink{classDCMotorControl_aed8ce9c5b23c8b1acbbcaeeebdaf4eed}{get\+Speed\+PWM}} ()
 \item 
-void \mbox{\hyperlink{classDCMotorControl_ab7fdf0c3a47c2171a604464ebc785700}{tacho\+ISRHandler}} ()
+uint16\+\_\+t \mbox{\hyperlink{classDCMotorControl_a163a2bcbc16ea576af02651ba02cfc05}{get\+Min\+Speed\+PWM}} ()
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classDCMotorControl_a5b5c98ff5c859a44e758fe6bde79e997}{get\+Max\+Speed\+PWM}} ()
+\item 
+float \mbox{\hyperlink{classDCMotorControl_aa9a6efafb91ce461cf9a6c5694243653}{get\+Last\+Tachometer\+Freq}} ()
+\begin{DoxyCompactList}\small\item\em Returns the last added tachometer value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDCMotorControl_ae7850fe3ff070b91383767b9066c0dcc}{clear\+Tachometer\+Data}} ()
+\item 
+float \mbox{\hyperlink{classDCMotorControl_a77964b1c2ef9755ef26d638b71668dd4}{get\+Average\+Tachometer\+Freq}} ()
+\begin{DoxyCompactList}\small\item\em Returns the average bow speed frequency. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDCMotorControl_a10210522bd309e53b0eb98d41ec57823}{tachometer\+ISRHandler}} ()
 \begin{DoxyCompactList}\small\item\em Secondary callback handler for tachometer events. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classDCMotorControl_adee23e43e4e2f868d5bbc5333b86180b}{check\+Timeout}} ()
-\begin{DoxyCompactList}\small\item\em Check whether bow has timed out and add a value of 0 Hertz if so. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classDCMotorControl_ab4d2a22b4212766ed9420dc129e9b484}{update\+Bow}} ()
+float \mbox{\hyperlink{classDCMotorControl_ad79d9f9b5815dccfe7df8b76d551af35}{get\+Motor\+Max\+Power}} ()
 \item 
-float \mbox{\hyperlink{classDCMotorControl_add0ae1d944d666b3e04cdaa4a8b3ed74}{get\+Current}} ()
+float \mbox{\hyperlink{classDCMotorControl_a4fa179f0bdf8fa5a4ad7568832e07589}{get\+Motor\+Voltage}} ()
 \item 
-bool \mbox{\hyperlink{classDCMotorControl_a7f5a03032533430c3901fb4fb2b9fc76}{over\+Current}} ()
+float \mbox{\hyperlink{classDCMotorControl_add8a06829d0e8fe4aa2415f83355d27b}{get\+Motor\+Current}} ()
 \item 
-bool \mbox{\hyperlink{classDCMotorControl_af66db2bb0b636642383ff883aa3d803e}{over\+Power}} ()
+bool \mbox{\hyperlink{classDCMotorControl_a7d139fb42beeeece687be6968ab7ebc9}{set\+Motor\+Voltage}} (float voltage)
+\item 
+void \mbox{\hyperlink{classDCMotorControl_ad76b3296d1225a5eb3c5545e74f8e6c7}{set\+Motor\+Max\+Power}} (float watts)
+\item 
+void \mbox{\hyperlink{classDCMotorControl_ad63199db5848cae4dd7382628ee3bac1}{set\+Motor\+Max\+Current}} (float amps)
+\item 
+float \mbox{\hyperlink{classDCMotorControl_a8f8ae8872e959dec8ca1f52c5f86db3b}{get\+Motor\+Max\+Current}} ()
+\item 
+bool \mbox{\hyperlink{classDCMotorControl_a14bb4c5d36ab23e70508627ed87643c0}{is\+Over\+Current}} ()
+\item 
+bool \mbox{\hyperlink{classDCMotorControl_a005cc5e24ccd310852e74bc36c94b851}{is\+Over\+Power}} ()
+\item 
+bool \mbox{\hyperlink{classDCMotorControl_ab8b71fef2e8899370e4d0d249edc2576}{get\+Motor\+Fault}} ()
 \item 
 bool \mbox{\hyperlink{classDCMotorControl_af86d6d3df47fefe86b36d0ab7c2f9cd2}{emergency\+Disable}} (uint16\+\_\+t cool\+Down)
 \item 
-bool \mbox{\hyperlink{classDCMotorControl_ab8b71fef2e8899370e4d0d249edc2576}{get\+Motor\+Fault}} ()
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classDCMotorControl_ab44cebb7a1d6272d41cd01b235d33eb8}{set\+Min\+Speed\+PWM}} (uint16\+\_\+t in\+Speed)
+\item 
+void \mbox{\hyperlink{classDCMotorControl_aee8602be7711a46e46b06e0f456db5ea}{set\+Max\+Speed\+PWM}} (uint16\+\_\+t in\+Speed)
+\item 
+bool \mbox{\hyperlink{classDCMotorControl_a4e0c7f4157b7a8302a84e0d58e2c769b}{check\+Tachometer\+Timeout}} ()
+\begin{DoxyCompactList}\small\item\em Check whether bow has timed out and add a value of 0 Hertz if so. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-char \mbox{\hyperlink{classDCMotorControl_aa734fcd2acbf7aea0b73d4a884ad7c12}{motor\+Rev\+Pin}}
-\begin{DoxyCompactList}\small\item\em Pin for motor driver reverse PWM. \end{DoxyCompactList}\item 
 char \mbox{\hyperlink{classDCMotorControl_a021b48c5d7ff1309f43d70efcddba029}{reflector\+Interrupt\+Pin}}
-\begin{DoxyCompactList}\small\item\em Pin for reflection sensor output. \end{DoxyCompactList}\item 
-char \mbox{\hyperlink{classDCMotorControl_abb92cb437f75e53b5274607155e83311}{motor\+Fault\+Pin}}
-\begin{DoxyCompactList}\small\item\em Pin for motor driver \texorpdfstring{$\sim$}{\string~}\+FAULT signal. \end{DoxyCompactList}\item 
-uint8\+\_\+t \mbox{\hyperlink{classDCMotorControl_a554d2c46d2849ad58a40b2c986c724d3}{current\+Sense\+Pin}}
-\begin{DoxyCompactList}\small\item\em Pin for motor current sense. \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{classDCMotorControl_af73acb17c640c01cfe420d6acb43b37d}{motor\+Current\+Limit}} = 1.\+75
-\begin{DoxyCompactList}\small\item\em Limit for tripping bow current draw error. \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{classDCMotorControl_ab320a5746069e3bda638451c4617394a}{motor\+Wattage}} = 12.\+84
-\item 
-bool \mbox{\hyperlink{classDCMotorControl_a9b349799230e293a1b3e7c6c6ed132d0}{over\+Power\+Flag}} = false
-\item 
-bool \mbox{\hyperlink{classDCMotorControl_a3962e1db6f238d51dbde731cc4191f56}{transient\+Over\+Power}} = false
-\item 
-elapsed\+Millis \mbox{\hyperlink{classDCMotorControl_a038a4764bed09abe3910af18a0412b02}{last\+Over\+Power\+Event}}
-\item 
-uint32\+\_\+t \mbox{\hyperlink{classDCMotorControl_a3b2b8a9cbdf7f5fff47d90e2ef2db815}{over\+Power\+Duration}} = 100
-\item 
-uint32\+\_\+t \mbox{\hyperlink{classDCMotorControl_a3166cdcc795f8076911257f08d284dbe}{emergency\+Cool\+Down\+Event}}
-\item 
-uint16\+\_\+t \mbox{\hyperlink{classDCMotorControl_a4661d598ac4fd485a7f66a1340fda51d}{emergency\+Cool\+Down\+Period}} = 1000
-\item 
-bool \mbox{\hyperlink{classDCMotorControl_aa6e5ee45b4d58d734178ebaa5af817c4}{emergency\+Cool\+Down}} = false
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Pin for reflection sensor output. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -83,6 +79,8 @@ void \mbox{\hyperlink{classDCMotorControl_a6f6d1f21ab4ae77b6883762702d0a2d6}{add
 \begin{DoxyCompactItemize}
 \item 
 Teensy\+\_\+\+PWM \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDCMotorControl_a4dade4206b26b273383cd1e721a057d0}{motor\+PWM}}
+\item 
+Teensy\+\_\+\+PWM \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDCMotorControl_a48757acd7b46d7826fd6e6befb09d137}{motor\+Voltage\+PWM}}
 \item 
 double \mbox{\hyperlink{classDCMotorControl_a0faa4d2cb8bd582a4db8e79e6e9da849}{tacho\+Freq}} \mbox{[}10\mbox{]}
 \begin{DoxyCompactList}\small\item\em Tachometer buffer, used as a circular storage point of tachometer values for averaging. \end{DoxyCompactList}\item 
@@ -100,15 +98,41 @@ elapsed\+Micros \mbox{\hyperlink{classDCMotorControl_ad94e00bad987cbab3183c4a6db
 \begin{DoxyCompactList}\small\item\em Local counter for the bow speed tachometer. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classDCMotorControl_aab57b71648471c0269f805db52874c60}{reflector\+Zero\+Timeout\+Value}} = 50000
 \begin{DoxyCompactList}\small\item\em Threshold at which the bow movement is considered zero, given in uS (was 500,000 for 0.\+5\+Hz, now 50,000 for 20Hz) \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classDCMotorControl_a40d71d442ca13aaf59730e245bd06b37}{last\+Motor\+PWM}} = 0
+uint16\+\_\+t \mbox{\hyperlink{classDCMotorControl_a71d700ae7a8cdcffc2d221345ac5ea90}{last\+Motor\+PWM}} = 0
 \begin{DoxyCompactList}\small\item\em Holds the last PWM speed value sent to the bowing wheel. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classDCMotorControl_afcdb684f5590ce39b07786724ef8c4a9}{min\+Speed\+PWM}} = 0
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classDCMotorControl_a875888a7c907bd1670d8074a137a9541}{max\+Speed\+PWM}} = 65535
+\item 
+float \mbox{\hyperlink{classDCMotorControl_af73acb17c640c01cfe420d6acb43b37d}{motor\+Current\+Limit}} = 1.\+75
+\begin{DoxyCompactList}\small\item\em Limit for tripping bow current draw error. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classDCMotorControl_a45113f5486d0be1e11fc71c01fcd28f4}{motor\+Power\+Limit}} = 12.\+84
+\item 
+char \mbox{\hyperlink{classDCMotorControl_aa734fcd2acbf7aea0b73d4a884ad7c12}{motor\+Rev\+Pin}}
+\begin{DoxyCompactList}\small\item\em Pin for motor driver reverse PWM. \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{classDCMotorControl_abb92cb437f75e53b5274607155e83311}{motor\+Fault\+Pin}}
+\begin{DoxyCompactList}\small\item\em Pin for motor driver \texorpdfstring{$\sim$}{\string~}\+FAULT signal. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classDCMotorControl_a554d2c46d2849ad58a40b2c986c724d3}{current\+Sense\+Pin}}
+\begin{DoxyCompactList}\small\item\em Pin for motor current sense. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDCMotorControl_a9b349799230e293a1b3e7c6c6ed132d0}{over\+Power\+Flag}} = false
+\item 
+bool \mbox{\hyperlink{classDCMotorControl_a3962e1db6f238d51dbde731cc4191f56}{transient\+Over\+Power}} = false
+\item 
+elapsed\+Millis \mbox{\hyperlink{classDCMotorControl_a038a4764bed09abe3910af18a0412b02}{last\+Over\+Power\+Event}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classDCMotorControl_a3b2b8a9cbdf7f5fff47d90e2ef2db815}{over\+Power\+Duration}} = 100
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classDCMotorControl_a3166cdcc795f8076911257f08d284dbe}{emergency\+Cool\+Down\+Event}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classDCMotorControl_a4661d598ac4fd485a7f66a1340fda51d}{emergency\+Cool\+Down\+Period}} = 1000
+\item 
+bool \mbox{\hyperlink{classDCMotorControl_aa6e5ee45b4d58d734178ebaa5af817c4}{emergency\+Cool\+Down}} = false
+\item 
 uint8\+\_\+t \mbox{\hyperlink{classDCMotorControl_a161349a65dc4f5fdde1d363281af2d89}{motor\+DCDCEn\+Pin}}
 \item 
 bool \mbox{\hyperlink{classDCMotorControl_a2ece60b85ef38aa589d91450fa47808c}{motor\+DCDCEn}} = false
 \item 
 uint8\+\_\+t \mbox{\hyperlink{classDCMotorControl_a73aa2a0d88d92fbab1a8f1a784d978fa}{motor\+Voltage\+Pin}}
-\item 
-Teensy\+\_\+\+PWM \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDCMotorControl_a48757acd7b46d7826fd6e6befb09d137}{motor\+Voltage\+PWM}}
 \item 
 float \mbox{\hyperlink{classDCMotorControl_ac92f52c033822093766931e5fd4e4659}{motor\+Voltage}} = 6.\+6
 \end{DoxyCompactItemize}
@@ -121,8 +145,7 @@ float \mbox{\hyperlink{classDCMotorControl_ac92f52c033822093766931e5fd4e4659}{mo
 \doxysubsubsection{\texorpdfstring{DCMotorControl()}{DCMotorControl()}}
 {\footnotesize\ttfamily DCMotor\+Control\+::\+DCMotor\+Control (\begin{DoxyParamCaption}\item[{char}]{in\+Motor\+Rev\+Pin,  }\item[{char}]{in\+Motor\+Voltage\+Pin,  }\item[{char}]{in\+Motor\+DCDCEn\+Pin,  }\item[{char}]{in\+Tacho\+Pin,  }\item[{char}]{in\+Current\+Sense\+Pin,  }\item[{char}]{in\+Motor\+Fault\+Pin }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -142,53 +165,42 @@ Here is the call graph for this function\+:
 
 Adds a tachometer value to the tachometer buffer, given in Hertz. 
 
-Advances the tacho\+Freq index counter tacho\+Freq\+Index and increases tach\+Freq\+Count if it has not yet reached tacho\+Freq\+Length. Values outside of the range defined by tacho\+Freq\+Permissible\+MAX and tacho\+Freq\+Permissible\+MIN are set to 0 Here is the caller graph for this function\+:
-\nopagebreak
+Advances the tacho\+Freq index counter tacho\+Freq\+Index and increases tach\+Freq\+Count if it has not yet reached tacho\+Freq\+Length. Values outside of the range defined by tacho\+Freq\+Permissible\+MAX and tacho\+Freq\+Permissible\+MIN are set to 0 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classDCMotorControl_a6f6d1f21ab4ae77b6883762702d0a2d6_icgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classDCMotorControl_a9afd73bea4533db183caba84babc2ae8}\label{classDCMotorControl_a9afd73bea4533db183caba84babc2ae8} 
-\index{DCMotorControl@{DCMotorControl}!averageFreq@{averageFreq}}
-\index{averageFreq@{averageFreq}!DCMotorControl@{DCMotorControl}}
-\doxysubsubsection{\texorpdfstring{averageFreq()}{averageFreq()}}
-{\footnotesize\ttfamily float DCMotor\+Control\+::average\+Freq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-\begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{todo__todo000007}{Todo}}]What the fuck this wont work, move old\+Average = average to after this if statement and try again \end{DoxyRefDesc}
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classDCMotorControl_a9afd73bea4533db183caba84babc2ae8_cgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classDCMotorControl_adee23e43e4e2f868d5bbc5333b86180b}\label{classDCMotorControl_adee23e43e4e2f868d5bbc5333b86180b} 
-\index{DCMotorControl@{DCMotorControl}!checkTimeout@{checkTimeout}}
-\index{checkTimeout@{checkTimeout}!DCMotorControl@{DCMotorControl}}
-\doxysubsubsection{\texorpdfstring{checkTimeout()}{checkTimeout()}}
-{\footnotesize\ttfamily bool DCMotor\+Control\+::check\+Timeout (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\Hypertarget{classDCMotorControl_a4e0c7f4157b7a8302a84e0d58e2c769b}\label{classDCMotorControl_a4e0c7f4157b7a8302a84e0d58e2c769b} 
+\index{DCMotorControl@{DCMotorControl}!checkTachometerTimeout@{checkTachometerTimeout}}
+\index{checkTachometerTimeout@{checkTachometerTimeout}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{checkTachometerTimeout()}{checkTachometerTimeout()}}
+{\footnotesize\ttfamily bool DCMotor\+Control\+::check\+Tachometer\+Timeout (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 Check whether bow has timed out and add a value of 0 Hertz if so. 
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classDCMotorControl_adee23e43e4e2f868d5bbc5333b86180b_cgraph}
+\includegraphics[width=350pt]{classDCMotorControl_a4e0c7f4157b7a8302a84e0d58e2c769b_cgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classDCMotorControl_af4d01d28e70b5fbebb838b086316785c}\label{classDCMotorControl_af4d01d28e70b5fbebb838b086316785c} 
-\index{DCMotorControl@{DCMotorControl}!clearTachoData@{clearTachoData}}
-\index{clearTachoData@{clearTachoData}!DCMotorControl@{DCMotorControl}}
-\doxysubsubsection{\texorpdfstring{clearTachoData()}{clearTachoData()}}
-{\footnotesize\ttfamily void DCMotor\+Control\+::clear\+Tacho\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_a4e0c7f4157b7a8302a84e0d58e2c769b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classDCMotorControl_ae7850fe3ff070b91383767b9066c0dcc}\label{classDCMotorControl_ae7850fe3ff070b91383767b9066c0dcc} 
+\index{DCMotorControl@{DCMotorControl}!clearTachometerData@{clearTachometerData}}
+\index{clearTachometerData@{clearTachometerData}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{clearTachometerData()}{clearTachometerData()}}
+{\footnotesize\ttfamily void DCMotor\+Control\+::clear\+Tachometer\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \Hypertarget{classDCMotorControl_ad45596053d5c1d91e50f574a2373479a}\label{classDCMotorControl_ad45596053d5c1d91e50f574a2373479a} 
 \index{DCMotorControl@{DCMotorControl}!disableMotorPower@{disableMotorPower}}
@@ -196,12 +208,24 @@ Here is the call graph for this function\+:
 \doxysubsubsection{\texorpdfstring{disableMotorPower()}{disableMotorPower()}}
 {\footnotesize\ttfamily bool DCMotor\+Control\+::disable\+Motor\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classDCMotorControl_ad45596053d5c1d91e50f574a2373479a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classDCMotorControl_a9bbce6a36186a7a470990ce73a09e230}\label{classDCMotorControl_a9bbce6a36186a7a470990ce73a09e230} 
+\index{DCMotorControl@{DCMotorControl}!dumpData@{dumpData}}
+\index{dumpData@{dumpData}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
+{\footnotesize\ttfamily String DCMotor\+Control\+::dump\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_a9bbce6a36186a7a470990ce73a09e230_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classDCMotorControl_af86d6d3df47fefe86b36d0ab7c2f9cd2}\label{classDCMotorControl_af86d6d3df47fefe86b36d0ab7c2f9cd2} 
@@ -210,12 +234,18 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{emergencyDisable()}{emergencyDisable()}}
 {\footnotesize\ttfamily bool DCMotor\+Control\+::emergency\+Disable (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{cool\+Down }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classDCMotorControl_af86d6d3df47fefe86b36d0ab7c2f9cd2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_af86d6d3df47fefe86b36d0ab7c2f9cd2_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classDCMotorControl_ad85e1b63df6744986e6f9a2cec9c0ce2}\label{classDCMotorControl_ad85e1b63df6744986e6f9a2cec9c0ce2} 
@@ -224,90 +254,293 @@ Here is the call graph for this function\+:
 \doxysubsubsection{\texorpdfstring{enableMotorPower()}{enableMotorPower()}}
 {\footnotesize\ttfamily bool DCMotor\+Control\+::enable\+Motor\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classDCMotorControl_ad85e1b63df6744986e6f9a2cec9c0ce2_cgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classDCMotorControl_add0ae1d944d666b3e04cdaa4a8b3ed74}\label{classDCMotorControl_add0ae1d944d666b3e04cdaa4a8b3ed74} 
-\index{DCMotorControl@{DCMotorControl}!getCurrent@{getCurrent}}
-\index{getCurrent@{getCurrent}!DCMotorControl@{DCMotorControl}}
-\doxysubsubsection{\texorpdfstring{getCurrent()}{getCurrent()}}
-{\footnotesize\ttfamily float DCMotor\+Control\+::get\+Current (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_ad85e1b63df6744986e6f9a2cec9c0ce2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classDCMotorControl_a77964b1c2ef9755ef26d638b71668dd4}\label{classDCMotorControl_a77964b1c2ef9755ef26d638b71668dd4} 
+\index{DCMotorControl@{DCMotorControl}!getAverageTachometerFreq@{getAverageTachometerFreq}}
+\index{getAverageTachometerFreq@{getAverageTachometerFreq}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{getAverageTachometerFreq()}{getAverageTachometerFreq()}}
+{\footnotesize\ttfamily float DCMotor\+Control\+::get\+Average\+Tachometer\+Freq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the average bow speed frequency. 
+
+
+\begin{DoxyItemize}
+\item Calculates the average bow speed frequency using the values stored in the tachometer buffer by
+\begin{DoxyEnumerate}
+\item finding the median of the buffer
+\item recalculating the average skipping values straying from the median by a frequency given by permissible\+Freq\+Deviation 
+\end{DoxyEnumerate}
+\end{DoxyItemize}\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000002}{Todo}}]What the fuck this wont work, move old\+Average = average to after this if statement and try again \end{DoxyRefDesc}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_a77964b1c2ef9755ef26d638b71668dd4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_a77964b1c2ef9755ef26d638b71668dd4_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classDCMotorControl_aa9a6efafb91ce461cf9a6c5694243653}\label{classDCMotorControl_aa9a6efafb91ce461cf9a6c5694243653} 
+\index{DCMotorControl@{DCMotorControl}!getLastTachometerFreq@{getLastTachometerFreq}}
+\index{getLastTachometerFreq@{getLastTachometerFreq}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{getLastTachometerFreq()}{getLastTachometerFreq()}}
+{\footnotesize\ttfamily float DCMotor\+Control\+::get\+Last\+Tachometer\+Freq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the last added tachometer value. 
 
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classDCMotorControl_add0ae1d944d666b3e04cdaa4a8b3ed74_icgraph}
+\includegraphics[width=350pt]{classDCMotorControl_aa9a6efafb91ce461cf9a6c5694243653_icgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classDCMotorControl_af997b8b142cfd4dab61675f685b11e32}\label{classDCMotorControl_af997b8b142cfd4dab61675f685b11e32} 
-\index{DCMotorControl@{DCMotorControl}!getLastTachoFreq@{getLastTachoFreq}}
-\index{getLastTachoFreq@{getLastTachoFreq}!DCMotorControl@{DCMotorControl}}
-\doxysubsubsection{\texorpdfstring{getLastTachoFreq()}{getLastTachoFreq()}}
-{\footnotesize\ttfamily float DCMotor\+Control\+::get\+Last\+Tacho\+Freq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\Hypertarget{classDCMotorControl_a5b5c98ff5c859a44e758fe6bde79e997}\label{classDCMotorControl_a5b5c98ff5c859a44e758fe6bde79e997} 
+\index{DCMotorControl@{DCMotorControl}!getMaxSpeedPWM@{getMaxSpeedPWM}}
+\index{getMaxSpeedPWM@{getMaxSpeedPWM}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{getMaxSpeedPWM()}{getMaxSpeedPWM()}}
+{\footnotesize\ttfamily uint16\+\_\+t DCMotor\+Control\+::get\+Max\+Speed\+PWM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_a5b5c98ff5c859a44e758fe6bde79e997_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classDCMotorControl_a163a2bcbc16ea576af02651ba02cfc05}\label{classDCMotorControl_a163a2bcbc16ea576af02651ba02cfc05} 
+\index{DCMotorControl@{DCMotorControl}!getMinSpeedPWM@{getMinSpeedPWM}}
+\index{getMinSpeedPWM@{getMinSpeedPWM}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{getMinSpeedPWM()}{getMinSpeedPWM()}}
+{\footnotesize\ttfamily uint16\+\_\+t DCMotor\+Control\+::get\+Min\+Speed\+PWM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_a163a2bcbc16ea576af02651ba02cfc05_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classDCMotorControl_add8a06829d0e8fe4aa2415f83355d27b}\label{classDCMotorControl_add8a06829d0e8fe4aa2415f83355d27b} 
+\index{DCMotorControl@{DCMotorControl}!getMotorCurrent@{getMotorCurrent}}
+\index{getMotorCurrent@{getMotorCurrent}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{getMotorCurrent()}{getMotorCurrent()}}
+{\footnotesize\ttfamily float DCMotor\+Control\+::get\+Motor\+Current (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Returns the last added tachometer value. 
-
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_add8a06829d0e8fe4aa2415f83355d27b_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{classDCMotorControl_ab8b71fef2e8899370e4d0d249edc2576}\label{classDCMotorControl_ab8b71fef2e8899370e4d0d249edc2576} 
 \index{DCMotorControl@{DCMotorControl}!getMotorFault@{getMotorFault}}
 \index{getMotorFault@{getMotorFault}!DCMotorControl@{DCMotorControl}}
 \doxysubsubsection{\texorpdfstring{getMotorFault()}{getMotorFault()}}
 {\footnotesize\ttfamily bool DCMotor\+Control\+::get\+Motor\+Fault (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_ab8b71fef2e8899370e4d0d249edc2576_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classDCMotorControl_a8f8ae8872e959dec8ca1f52c5f86db3b}\label{classDCMotorControl_a8f8ae8872e959dec8ca1f52c5f86db3b} 
+\index{DCMotorControl@{DCMotorControl}!getMotorMaxCurrent@{getMotorMaxCurrent}}
+\index{getMotorMaxCurrent@{getMotorMaxCurrent}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{getMotorMaxCurrent()}{getMotorMaxCurrent()}}
+{\footnotesize\ttfamily float DCMotor\+Control\+::get\+Motor\+Max\+Current (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classDCMotorControl_ad79d9f9b5815dccfe7df8b76d551af35}\label{classDCMotorControl_ad79d9f9b5815dccfe7df8b76d551af35} 
+\index{DCMotorControl@{DCMotorControl}!getMotorMaxPower@{getMotorMaxPower}}
+\index{getMotorMaxPower@{getMotorMaxPower}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{getMotorMaxPower()}{getMotorMaxPower()}}
+{\footnotesize\ttfamily float DCMotor\+Control\+::get\+Motor\+Max\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_ad79d9f9b5815dccfe7df8b76d551af35_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{classDCMotorControl_a4fa179f0bdf8fa5a4ad7568832e07589}\label{classDCMotorControl_a4fa179f0bdf8fa5a4ad7568832e07589} 
 \index{DCMotorControl@{DCMotorControl}!getMotorVoltage@{getMotorVoltage}}
 \index{getMotorVoltage@{getMotorVoltage}!DCMotorControl@{DCMotorControl}}
 \doxysubsubsection{\texorpdfstring{getMotorVoltage()}{getMotorVoltage()}}
 {\footnotesize\ttfamily float DCMotor\+Control\+::get\+Motor\+Voltage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_a4fa179f0bdf8fa5a4ad7568832e07589_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{classDCMotorControl_aed8ce9c5b23c8b1acbbcaeeebdaf4eed}\label{classDCMotorControl_aed8ce9c5b23c8b1acbbcaeeebdaf4eed} 
 \index{DCMotorControl@{DCMotorControl}!getSpeedPWM@{getSpeedPWM}}
 \index{getSpeedPWM@{getSpeedPWM}!DCMotorControl@{DCMotorControl}}
 \doxysubsubsection{\texorpdfstring{getSpeedPWM()}{getSpeedPWM()}}
 {\footnotesize\ttfamily uint16\+\_\+t DCMotor\+Control\+::get\+Speed\+PWM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\Hypertarget{classDCMotorControl_a7f5a03032533430c3901fb4fb2b9fc76}\label{classDCMotorControl_a7f5a03032533430c3901fb4fb2b9fc76} 
-\index{DCMotorControl@{DCMotorControl}!overCurrent@{overCurrent}}
-\index{overCurrent@{overCurrent}!DCMotorControl@{DCMotorControl}}
-\doxysubsubsection{\texorpdfstring{overCurrent()}{overCurrent()}}
-{\footnotesize\ttfamily bool DCMotor\+Control\+::over\+Current (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classDCMotorControl_a7f5a03032533430c3901fb4fb2b9fc76_cgraph}
+\includegraphics[width=350pt]{classDCMotorControl_aed8ce9c5b23c8b1acbbcaeeebdaf4eed_icgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classDCMotorControl_af66db2bb0b636642383ff883aa3d803e}\label{classDCMotorControl_af66db2bb0b636642383ff883aa3d803e} 
-\index{DCMotorControl@{DCMotorControl}!overPower@{overPower}}
-\index{overPower@{overPower}!DCMotorControl@{DCMotorControl}}
-\doxysubsubsection{\texorpdfstring{overPower()}{overPower()}}
-{\footnotesize\ttfamily bool DCMotor\+Control\+::over\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\Hypertarget{classDCMotorControl_a14bb4c5d36ab23e70508627ed87643c0}\label{classDCMotorControl_a14bb4c5d36ab23e70508627ed87643c0} 
+\index{DCMotorControl@{DCMotorControl}!isOverCurrent@{isOverCurrent}}
+\index{isOverCurrent@{isOverCurrent}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{isOverCurrent()}{isOverCurrent()}}
+{\footnotesize\ttfamily bool DCMotor\+Control\+::is\+Over\+Current (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classDCMotorControl_af66db2bb0b636642383ff883aa3d803e_cgraph}
+\includegraphics[width=350pt]{classDCMotorControl_a14bb4c5d36ab23e70508627ed87643c0_cgraph}
 \end{center}
 \end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_a14bb4c5d36ab23e70508627ed87643c0_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classDCMotorControl_a005cc5e24ccd310852e74bc36c94b851}\label{classDCMotorControl_a005cc5e24ccd310852e74bc36c94b851} 
+\index{DCMotorControl@{DCMotorControl}!isOverPower@{isOverPower}}
+\index{isOverPower@{isOverPower}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{isOverPower()}{isOverPower()}}
+{\footnotesize\ttfamily bool DCMotor\+Control\+::is\+Over\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_a005cc5e24ccd310852e74bc36c94b851_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_a005cc5e24ccd310852e74bc36c94b851_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classDCMotorControl_a325129fe30f71a28ef89ea346bc43252}\label{classDCMotorControl_a325129fe30f71a28ef89ea346bc43252} 
+\index{DCMotorControl@{DCMotorControl}!processSerialCommand@{processSerialCommand}}
+\index{processSerialCommand@{processSerialCommand}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{processSerialCommand()}{processSerialCommand()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} DCMotor\+Control\+::process\+Serial\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_a325129fe30f71a28ef89ea346bc43252_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_a325129fe30f71a28ef89ea346bc43252_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classDCMotorControl_a5e28fcc8d7953071b2668ada7672af9e}\label{classDCMotorControl_a5e28fcc8d7953071b2668ada7672af9e} 
+\index{DCMotorControl@{DCMotorControl}!processSerialCommandHidden@{processSerialCommandHidden}}
+\index{processSerialCommandHidden@{processSerialCommandHidden}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{processSerialCommandHidden()}{processSerialCommandHidden()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} DCMotor\+Control\+::process\+Serial\+Command\+Hidden (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classDCMotorControl_af66db2bb0b636642383ff883aa3d803e_icgraph}
+\includegraphics[width=350pt]{classDCMotorControl_a5e28fcc8d7953071b2668ada7672af9e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classDCMotorControl_aee8602be7711a46e46b06e0f456db5ea}\label{classDCMotorControl_aee8602be7711a46e46b06e0f456db5ea} 
+\index{DCMotorControl@{DCMotorControl}!setMaxSpeedPWM@{setMaxSpeedPWM}}
+\index{setMaxSpeedPWM@{setMaxSpeedPWM}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{setMaxSpeedPWM()}{setMaxSpeedPWM()}}
+{\footnotesize\ttfamily void DCMotor\+Control\+::set\+Max\+Speed\+PWM (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{in\+Speed }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_aee8602be7711a46e46b06e0f456db5ea_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classDCMotorControl_ab44cebb7a1d6272d41cd01b235d33eb8}\label{classDCMotorControl_ab44cebb7a1d6272d41cd01b235d33eb8} 
+\index{DCMotorControl@{DCMotorControl}!setMinSpeedPWM@{setMinSpeedPWM}}
+\index{setMinSpeedPWM@{setMinSpeedPWM}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{setMinSpeedPWM()}{setMinSpeedPWM()}}
+{\footnotesize\ttfamily void DCMotor\+Control\+::set\+Min\+Speed\+PWM (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{in\+Speed }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_ab44cebb7a1d6272d41cd01b235d33eb8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classDCMotorControl_ad63199db5848cae4dd7382628ee3bac1}\label{classDCMotorControl_ad63199db5848cae4dd7382628ee3bac1} 
+\index{DCMotorControl@{DCMotorControl}!setMotorMaxCurrent@{setMotorMaxCurrent}}
+\index{setMotorMaxCurrent@{setMotorMaxCurrent}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{setMotorMaxCurrent()}{setMotorMaxCurrent()}}
+{\footnotesize\ttfamily void DCMotor\+Control\+::set\+Motor\+Max\+Current (\begin{DoxyParamCaption}\item[{float}]{amps }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_ad63199db5848cae4dd7382628ee3bac1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classDCMotorControl_ad76b3296d1225a5eb3c5545e74f8e6c7}\label{classDCMotorControl_ad76b3296d1225a5eb3c5545e74f8e6c7} 
+\index{DCMotorControl@{DCMotorControl}!setMotorMaxPower@{setMotorMaxPower}}
+\index{setMotorMaxPower@{setMotorMaxPower}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{setMotorMaxPower()}{setMotorMaxPower()}}
+{\footnotesize\ttfamily void DCMotor\+Control\+::set\+Motor\+Max\+Power (\begin{DoxyParamCaption}\item[{float}]{watts }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_ad76b3296d1225a5eb3c5545e74f8e6c7_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classDCMotorControl_a7d139fb42beeeece687be6968ab7ebc9}\label{classDCMotorControl_a7d139fb42beeeece687be6968ab7ebc9} 
@@ -316,8 +549,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{setMotorVoltage()}{setMotorVoltage()}}
 {\footnotesize\ttfamily bool DCMotor\+Control\+::set\+Motor\+Voltage (\begin{DoxyParamCaption}\item[{float}]{voltage }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -334,8 +566,7 @@ Here is the caller graph for this function\+:
 
 Sets the bow speed PWM using a unsigned 16-\/bit int (RAW) 
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -352,36 +583,35 @@ Here is the caller graph for this function\+:
 
 Ramps the bow speed PWM from the last PWM value given to the value given in speed, blocking, only use for testing purposes. 
 
-\Hypertarget{classDCMotorControl_ab7fdf0c3a47c2171a604464ebc785700}\label{classDCMotorControl_ab7fdf0c3a47c2171a604464ebc785700} 
-\index{DCMotorControl@{DCMotorControl}!tachoISRHandler@{tachoISRHandler}}
-\index{tachoISRHandler@{tachoISRHandler}!DCMotorControl@{DCMotorControl}}
-\doxysubsubsection{\texorpdfstring{tachoISRHandler()}{tachoISRHandler()}}
-{\footnotesize\ttfamily void DCMotor\+Control\+::tacho\+ISRHandler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDCMotorControl_a2a888a8e82115d709ca2b8204a9d480d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classDCMotorControl_a10210522bd309e53b0eb98d41ec57823}\label{classDCMotorControl_a10210522bd309e53b0eb98d41ec57823} 
+\index{DCMotorControl@{DCMotorControl}!tachometerISRHandler@{tachometerISRHandler}}
+\index{tachometerISRHandler@{tachometerISRHandler}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{tachometerISRHandler()}{tachometerISRHandler()}}
+{\footnotesize\ttfamily void DCMotor\+Control\+::tachometer\+ISRHandler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 Secondary callback handler for tachometer events. 
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classDCMotorControl_ab7fdf0c3a47c2171a604464ebc785700_cgraph}
+\includegraphics[width=350pt]{classDCMotorControl_a10210522bd309e53b0eb98d41ec57823_cgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classDCMotorControl_ab4d2a22b4212766ed9420dc129e9b484}\label{classDCMotorControl_ab4d2a22b4212766ed9420dc129e9b484} 
-\index{DCMotorControl@{DCMotorControl}!updateBow@{updateBow}}
-\index{updateBow@{updateBow}!DCMotorControl@{DCMotorControl}}
-\doxysubsubsection{\texorpdfstring{updateBow()}{updateBow()}}
-{\footnotesize\ttfamily void DCMotor\+Control\+::update\+Bow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classDCMotorControl_ab4d2a22b4212766ed9420dc129e9b484_cgraph}
+\includegraphics[width=350pt]{classDCMotorControl_a10210522bd309e53b0eb98d41ec57823_icgraph}
 \end{center}
 \end{figure}
 
@@ -391,7 +621,7 @@ Here is the call graph for this function\+:
 \index{DCMotorControl@{DCMotorControl}!currentSensePin@{currentSensePin}}
 \index{currentSensePin@{currentSensePin}!DCMotorControl@{DCMotorControl}}
 \doxysubsubsection{\texorpdfstring{currentSensePin}{currentSensePin}}
-{\footnotesize\ttfamily uint8\+\_\+t DCMotor\+Control\+::current\+Sense\+Pin}
+{\footnotesize\ttfamily uint8\+\_\+t DCMotor\+Control\+::current\+Sense\+Pin\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -401,25 +631,25 @@ Pin for motor current sense.
 \index{DCMotorControl@{DCMotorControl}!emergencyCoolDown@{emergencyCoolDown}}
 \index{emergencyCoolDown@{emergencyCoolDown}!DCMotorControl@{DCMotorControl}}
 \doxysubsubsection{\texorpdfstring{emergencyCoolDown}{emergencyCoolDown}}
-{\footnotesize\ttfamily bool DCMotor\+Control\+::emergency\+Cool\+Down = false}
+{\footnotesize\ttfamily bool DCMotor\+Control\+::emergency\+Cool\+Down = false\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classDCMotorControl_a3166cdcc795f8076911257f08d284dbe}\label{classDCMotorControl_a3166cdcc795f8076911257f08d284dbe} 
 \index{DCMotorControl@{DCMotorControl}!emergencyCoolDownEvent@{emergencyCoolDownEvent}}
 \index{emergencyCoolDownEvent@{emergencyCoolDownEvent}!DCMotorControl@{DCMotorControl}}
 \doxysubsubsection{\texorpdfstring{emergencyCoolDownEvent}{emergencyCoolDownEvent}}
-{\footnotesize\ttfamily uint32\+\_\+t DCMotor\+Control\+::emergency\+Cool\+Down\+Event}
+{\footnotesize\ttfamily uint32\+\_\+t DCMotor\+Control\+::emergency\+Cool\+Down\+Event\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classDCMotorControl_a4661d598ac4fd485a7f66a1340fda51d}\label{classDCMotorControl_a4661d598ac4fd485a7f66a1340fda51d} 
 \index{DCMotorControl@{DCMotorControl}!emergencyCoolDownPeriod@{emergencyCoolDownPeriod}}
 \index{emergencyCoolDownPeriod@{emergencyCoolDownPeriod}!DCMotorControl@{DCMotorControl}}
 \doxysubsubsection{\texorpdfstring{emergencyCoolDownPeriod}{emergencyCoolDownPeriod}}
-{\footnotesize\ttfamily uint16\+\_\+t DCMotor\+Control\+::emergency\+Cool\+Down\+Period = 1000}
+{\footnotesize\ttfamily uint16\+\_\+t DCMotor\+Control\+::emergency\+Cool\+Down\+Period = 1000\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{classDCMotorControl_a40d71d442ca13aaf59730e245bd06b37}\label{classDCMotorControl_a40d71d442ca13aaf59730e245bd06b37} 
+\Hypertarget{classDCMotorControl_a71d700ae7a8cdcffc2d221345ac5ea90}\label{classDCMotorControl_a71d700ae7a8cdcffc2d221345ac5ea90} 
 \index{DCMotorControl@{DCMotorControl}!lastMotorPWM@{lastMotorPWM}}
 \index{lastMotorPWM@{lastMotorPWM}!DCMotorControl@{DCMotorControl}}
 \doxysubsubsection{\texorpdfstring{lastMotorPWM}{lastMotorPWM}}
-{\footnotesize\ttfamily int DCMotor\+Control\+::last\+Motor\+PWM = 0\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily uint16\+\_\+t DCMotor\+Control\+::last\+Motor\+PWM = 0\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -429,7 +659,7 @@ Holds the last PWM speed value sent to the bowing wheel.
 \index{DCMotorControl@{DCMotorControl}!lastOverPowerEvent@{lastOverPowerEvent}}
 \index{lastOverPowerEvent@{lastOverPowerEvent}!DCMotorControl@{DCMotorControl}}
 \doxysubsubsection{\texorpdfstring{lastOverPowerEvent}{lastOverPowerEvent}}
-{\footnotesize\ttfamily elapsed\+Millis DCMotor\+Control\+::last\+Over\+Power\+Event}
+{\footnotesize\ttfamily elapsed\+Millis DCMotor\+Control\+::last\+Over\+Power\+Event\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classDCMotorControl_af4ef0ddb65548e4d8f539af48d1ac1b6}\label{classDCMotorControl_af4ef0ddb65548e4d8f539af48d1ac1b6} 
 \index{DCMotorControl@{DCMotorControl}!lastReflectorISRState@{lastReflectorISRState}}
@@ -441,11 +671,23 @@ Holds the last PWM speed value sent to the bowing wheel.
 
 Hold the last reflector output state. 
 
+\Hypertarget{classDCMotorControl_a875888a7c907bd1670d8074a137a9541}\label{classDCMotorControl_a875888a7c907bd1670d8074a137a9541} 
+\index{DCMotorControl@{DCMotorControl}!maxSpeedPWM@{maxSpeedPWM}}
+\index{maxSpeedPWM@{maxSpeedPWM}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{maxSpeedPWM}{maxSpeedPWM}}
+{\footnotesize\ttfamily uint16\+\_\+t DCMotor\+Control\+::max\+Speed\+PWM = 65535\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classDCMotorControl_afcdb684f5590ce39b07786724ef8c4a9}\label{classDCMotorControl_afcdb684f5590ce39b07786724ef8c4a9} 
+\index{DCMotorControl@{DCMotorControl}!minSpeedPWM@{minSpeedPWM}}
+\index{minSpeedPWM@{minSpeedPWM}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{minSpeedPWM}{minSpeedPWM}}
+{\footnotesize\ttfamily uint16\+\_\+t DCMotor\+Control\+::min\+Speed\+PWM = 0\hspace{0.3cm}{\ttfamily [private]}}
+
 \Hypertarget{classDCMotorControl_af73acb17c640c01cfe420d6acb43b37d}\label{classDCMotorControl_af73acb17c640c01cfe420d6acb43b37d} 
 \index{DCMotorControl@{DCMotorControl}!motorCurrentLimit@{motorCurrentLimit}}
 \index{motorCurrentLimit@{motorCurrentLimit}!DCMotorControl@{DCMotorControl}}
 \doxysubsubsection{\texorpdfstring{motorCurrentLimit}{motorCurrentLimit}}
-{\footnotesize\ttfamily float DCMotor\+Control\+::motor\+Current\+Limit = 1.\+75}
+{\footnotesize\ttfamily float DCMotor\+Control\+::motor\+Current\+Limit = 1.\+75\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -467,11 +709,17 @@ Limit for tripping bow current draw error.
 \index{DCMotorControl@{DCMotorControl}!motorFaultPin@{motorFaultPin}}
 \index{motorFaultPin@{motorFaultPin}!DCMotorControl@{DCMotorControl}}
 \doxysubsubsection{\texorpdfstring{motorFaultPin}{motorFaultPin}}
-{\footnotesize\ttfamily char DCMotor\+Control\+::motor\+Fault\+Pin}
+{\footnotesize\ttfamily char DCMotor\+Control\+::motor\+Fault\+Pin\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 Pin for motor driver \texorpdfstring{$\sim$}{\string~}\+FAULT signal. 
+
+\Hypertarget{classDCMotorControl_a45113f5486d0be1e11fc71c01fcd28f4}\label{classDCMotorControl_a45113f5486d0be1e11fc71c01fcd28f4} 
+\index{DCMotorControl@{DCMotorControl}!motorPowerLimit@{motorPowerLimit}}
+\index{motorPowerLimit@{motorPowerLimit}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{motorPowerLimit}{motorPowerLimit}}
+{\footnotesize\ttfamily float DCMotor\+Control\+::motor\+Power\+Limit = 12.\+84\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classDCMotorControl_a4dade4206b26b273383cd1e721a057d0}\label{classDCMotorControl_a4dade4206b26b273383cd1e721a057d0} 
 \index{DCMotorControl@{DCMotorControl}!motorPWM@{motorPWM}}
@@ -483,7 +731,7 @@ Pin for motor driver \texorpdfstring{$\sim$}{\string~}\+FAULT signal.
 \index{DCMotorControl@{DCMotorControl}!motorRevPin@{motorRevPin}}
 \index{motorRevPin@{motorRevPin}!DCMotorControl@{DCMotorControl}}
 \doxysubsubsection{\texorpdfstring{motorRevPin}{motorRevPin}}
-{\footnotesize\ttfamily char DCMotor\+Control\+::motor\+Rev\+Pin}
+{\footnotesize\ttfamily char DCMotor\+Control\+::motor\+Rev\+Pin\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -507,23 +755,17 @@ Pin for motor driver reverse PWM.
 \doxysubsubsection{\texorpdfstring{motorVoltagePWM}{motorVoltagePWM}}
 {\footnotesize\ttfamily Teensy\+\_\+\+PWM\texorpdfstring{$\ast$}{*} DCMotor\+Control\+::motor\+Voltage\+PWM\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{classDCMotorControl_ab320a5746069e3bda638451c4617394a}\label{classDCMotorControl_ab320a5746069e3bda638451c4617394a} 
-\index{DCMotorControl@{DCMotorControl}!motorWattage@{motorWattage}}
-\index{motorWattage@{motorWattage}!DCMotorControl@{DCMotorControl}}
-\doxysubsubsection{\texorpdfstring{motorWattage}{motorWattage}}
-{\footnotesize\ttfamily float DCMotor\+Control\+::motor\+Wattage = 12.\+84}
-
 \Hypertarget{classDCMotorControl_a3b2b8a9cbdf7f5fff47d90e2ef2db815}\label{classDCMotorControl_a3b2b8a9cbdf7f5fff47d90e2ef2db815} 
 \index{DCMotorControl@{DCMotorControl}!overPowerDuration@{overPowerDuration}}
 \index{overPowerDuration@{overPowerDuration}!DCMotorControl@{DCMotorControl}}
 \doxysubsubsection{\texorpdfstring{overPowerDuration}{overPowerDuration}}
-{\footnotesize\ttfamily uint32\+\_\+t DCMotor\+Control\+::over\+Power\+Duration = 100}
+{\footnotesize\ttfamily uint32\+\_\+t DCMotor\+Control\+::over\+Power\+Duration = 100\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classDCMotorControl_a9b349799230e293a1b3e7c6c6ed132d0}\label{classDCMotorControl_a9b349799230e293a1b3e7c6c6ed132d0} 
 \index{DCMotorControl@{DCMotorControl}!overPowerFlag@{overPowerFlag}}
 \index{overPowerFlag@{overPowerFlag}!DCMotorControl@{DCMotorControl}}
 \doxysubsubsection{\texorpdfstring{overPowerFlag}{overPowerFlag}}
-{\footnotesize\ttfamily bool DCMotor\+Control\+::over\+Power\+Flag = false}
+{\footnotesize\ttfamily bool DCMotor\+Control\+::over\+Power\+Flag = false\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classDCMotorControl_ad94e00bad987cbab3183c4a6db0280ee}\label{classDCMotorControl_ad94e00bad987cbab3183c4a6db0280ee} 
 \index{DCMotorControl@{DCMotorControl}!reflectorCounter@{reflectorCounter}}
@@ -609,7 +851,7 @@ Holds the last calculate tachometer average, given in Hertz.
 \index{DCMotorControl@{DCMotorControl}!transientOverPower@{transientOverPower}}
 \index{transientOverPower@{transientOverPower}!DCMotorControl@{DCMotorControl}}
 \doxysubsubsection{\texorpdfstring{transientOverPower}{transientOverPower}}
-{\footnotesize\ttfamily bool DCMotor\+Control\+::transient\+Over\+Power = false}
+{\footnotesize\ttfamily bool DCMotor\+Control\+::transient\+Over\+Power = false\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

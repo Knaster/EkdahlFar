@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['textinfo_0',['TextInfo',['../debugprint_8hpp.html#a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c',1,'debugprint.hpp']]]
+  ['rest_0',['Rest',['../bowpressure_8hpp.html#ac57b46921d2e047b3305cfb0c7733b0ca661e967c4cfe56fd40a290550b64d8dc',1,'bowpressure.hpp']]],
+  ['reverse_1',['REVERSE',['../servostepper_8hpp.html#a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9',1,'servostepper.hpp']]]
 ];

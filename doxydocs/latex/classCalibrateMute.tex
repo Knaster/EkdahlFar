@@ -1,0 +1,222 @@
+\doxysection{Calibrate\+Mute Class Reference}
+\hypertarget{classCalibrateMute}{}\label{classCalibrateMute}\index{CalibrateMute@{CalibrateMute}}
+
+
+{\ttfamily \#include $<$mutecalibration.\+hpp$>$}
+
+
+
+Collaboration diagram for Calibrate\+Mute\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCalibrateMute__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCalibrateMute_ac8c5461e47cb5c5cd86768fb4ebfa146}{Calibrate\+Mute}} (\mbox{\hyperlink{classMuteControl}{Mute\+Control}} \&in\+Mute\+Control, \mbox{\hyperlink{classBowControl}{Bow\+Control}} \&in\+Bow\+Control, \mbox{\hyperlink{classHarmonicSeriesHandler}{Harmonic\+Series\+Handler}} \&in\+Harmonic\+Series\+Handler)
+\item 
+\mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{e\+Calibration\+Result}} \mbox{\hyperlink{classCalibrateMute_ae594e44bb589d71df3ea674151500335}{calibrate\+All}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMuteControl}{Mute\+Control}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{mute\+Control}}
+\item 
+\mbox{\hyperlink{classBowControl}{Bow\+Control}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bow\+Control}}
+\item 
+\mbox{\hyperlink{classHarmonicSeriesHandler}{Harmonic\+Series\+Handler}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCalibrateMute_ae22fc38c5a96cb38c927eef7b4307279}{harmonic\+Series\+Handler}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classCalibrateMute_a637d9617a31d116f2a82a3366ed71256}{max\+Test\+Step}} = 60000
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{classCalibrateMute_aeb87473967dfddc3686680c04153c72c}{find\+Level}} ()
+\item 
+bool \mbox{\hyperlink{classCalibrateMute_a058ae917ef92a3ec68b131d5a28091ae}{find\+Level\+Silence}} ()
+\item 
+\mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{e\+Calibration\+Result}} \mbox{\hyperlink{classCalibrateMute_a68a1737ec836189ee2495c4891d63f0b}{find\+Mute\+Levels}} ()
+\item 
+\mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{e\+Calibration\+Result}} \mbox{\hyperlink{classCalibrateMute_aa27905148f2712814c5bd07caa33726c}{find\+Mute\+Stall}} ()
+\item 
+\mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{e\+Calibration\+Result}} \mbox{\hyperlink{classCalibrateMute_ac795de2050af4c47513d6bc8f591e688}{find\+Mute\+First\+Contact}} ()
+\item 
+bool \mbox{\hyperlink{classCalibrateMute_a9b9a4f0e0d85af62a814072239208e72}{find\+Mute\+Silence}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{classCalibrateMute_adcd25eb94a2964e74b408e791af2d21c}{level\+Silence}} = 0
+\item 
+float \mbox{\hyperlink{classCalibrateMute_a14c9dea06cb113aec92a6db028411be2}{level\+Fundamental}} = 0
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classCalibrateMute_ac32f851a48115a9623250048f8aaf7c6}{stall\+Position}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classCalibrateMute_ac8c5461e47cb5c5cd86768fb4ebfa146}\label{classCalibrateMute_ac8c5461e47cb5c5cd86768fb4ebfa146} 
+\index{CalibrateMute@{CalibrateMute}!CalibrateMute@{CalibrateMute}}
+\index{CalibrateMute@{CalibrateMute}!CalibrateMute@{CalibrateMute}}
+\doxysubsubsection{\texorpdfstring{CalibrateMute()}{CalibrateMute()}}
+{\footnotesize\ttfamily Calibrate\+Mute\+::\+Calibrate\+Mute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMuteControl}{Mute\+Control}} \&}]{in\+Mute\+Control,  }\item[{\mbox{\hyperlink{classBowControl}{Bow\+Control}} \&}]{in\+Bow\+Control,  }\item[{\mbox{\hyperlink{classHarmonicSeriesHandler}{Harmonic\+Series\+Handler}} \&}]{in\+Harmonic\+Series\+Handler }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classCalibrateMute_ae594e44bb589d71df3ea674151500335}\label{classCalibrateMute_ae594e44bb589d71df3ea674151500335} 
+\index{CalibrateMute@{CalibrateMute}!calibrateAll@{calibrateAll}}
+\index{calibrateAll@{calibrateAll}!CalibrateMute@{CalibrateMute}}
+\doxysubsubsection{\texorpdfstring{calibrateAll()}{calibrateAll()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{e\+Calibration\+Result}} Calibrate\+Mute\+::calibrate\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCalibrateMute_ae594e44bb589d71df3ea674151500335_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCalibrateMute_ae594e44bb589d71df3ea674151500335_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classCalibrateMute_aeb87473967dfddc3686680c04153c72c}\label{classCalibrateMute_aeb87473967dfddc3686680c04153c72c} 
+\index{CalibrateMute@{CalibrateMute}!findLevel@{findLevel}}
+\index{findLevel@{findLevel}!CalibrateMute@{CalibrateMute}}
+\doxysubsubsection{\texorpdfstring{findLevel()}{findLevel()}}
+{\footnotesize\ttfamily float Calibrate\+Mute\+::find\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCalibrateMute_aeb87473967dfddc3686680c04153c72c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classCalibrateMute_a058ae917ef92a3ec68b131d5a28091ae}\label{classCalibrateMute_a058ae917ef92a3ec68b131d5a28091ae} 
+\index{CalibrateMute@{CalibrateMute}!findLevelSilence@{findLevelSilence}}
+\index{findLevelSilence@{findLevelSilence}!CalibrateMute@{CalibrateMute}}
+\doxysubsubsection{\texorpdfstring{findLevelSilence()}{findLevelSilence()}}
+{\footnotesize\ttfamily bool Calibrate\+Mute\+::find\+Level\+Silence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCalibrateMute_a058ae917ef92a3ec68b131d5a28091ae_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classCalibrateMute_ac795de2050af4c47513d6bc8f591e688}\label{classCalibrateMute_ac795de2050af4c47513d6bc8f591e688} 
+\index{CalibrateMute@{CalibrateMute}!findMuteFirstContact@{findMuteFirstContact}}
+\index{findMuteFirstContact@{findMuteFirstContact}!CalibrateMute@{CalibrateMute}}
+\doxysubsubsection{\texorpdfstring{findMuteFirstContact()}{findMuteFirstContact()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{e\+Calibration\+Result}} Calibrate\+Mute\+::find\+Mute\+First\+Contact (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classCalibrateMute_a68a1737ec836189ee2495c4891d63f0b}\label{classCalibrateMute_a68a1737ec836189ee2495c4891d63f0b} 
+\index{CalibrateMute@{CalibrateMute}!findMuteLevels@{findMuteLevels}}
+\index{findMuteLevels@{findMuteLevels}!CalibrateMute@{CalibrateMute}}
+\doxysubsubsection{\texorpdfstring{findMuteLevels()}{findMuteLevels()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{e\+Calibration\+Result}} Calibrate\+Mute\+::find\+Mute\+Levels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCalibrateMute_a68a1737ec836189ee2495c4891d63f0b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCalibrateMute_a68a1737ec836189ee2495c4891d63f0b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classCalibrateMute_a9b9a4f0e0d85af62a814072239208e72}\label{classCalibrateMute_a9b9a4f0e0d85af62a814072239208e72} 
+\index{CalibrateMute@{CalibrateMute}!findMuteSilence@{findMuteSilence}}
+\index{findMuteSilence@{findMuteSilence}!CalibrateMute@{CalibrateMute}}
+\doxysubsubsection{\texorpdfstring{findMuteSilence()}{findMuteSilence()}}
+{\footnotesize\ttfamily bool Calibrate\+Mute\+::find\+Mute\+Silence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classCalibrateMute_aa27905148f2712814c5bd07caa33726c}\label{classCalibrateMute_aa27905148f2712814c5bd07caa33726c} 
+\index{CalibrateMute@{CalibrateMute}!findMuteStall@{findMuteStall}}
+\index{findMuteStall@{findMuteStall}!CalibrateMute@{CalibrateMute}}
+\doxysubsubsection{\texorpdfstring{findMuteStall()}{findMuteStall()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{e\+Calibration\+Result}} Calibrate\+Mute\+::find\+Mute\+Stall (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCalibrateMute_aa27905148f2712814c5bd07caa33726c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCalibrateMute_aa27905148f2712814c5bd07caa33726c_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}\label{classCalibrateMute_a159849db30f15b909c02f44510e5aaea} 
+\index{CalibrateMute@{CalibrateMute}!bowControl@{bowControl}}
+\index{bowControl@{bowControl}!CalibrateMute@{CalibrateMute}}
+\doxysubsubsection{\texorpdfstring{bowControl}{bowControl}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classBowControl}{Bow\+Control}}\texorpdfstring{$\ast$}{*} Calibrate\+Mute\+::bow\+Control}
+
+\Hypertarget{classCalibrateMute_ae22fc38c5a96cb38c927eef7b4307279}\label{classCalibrateMute_ae22fc38c5a96cb38c927eef7b4307279} 
+\index{CalibrateMute@{CalibrateMute}!harmonicSeriesHandler@{harmonicSeriesHandler}}
+\index{harmonicSeriesHandler@{harmonicSeriesHandler}!CalibrateMute@{CalibrateMute}}
+\doxysubsubsection{\texorpdfstring{harmonicSeriesHandler}{harmonicSeriesHandler}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHarmonicSeriesHandler}{Harmonic\+Series\+Handler}}\texorpdfstring{$\ast$}{*} Calibrate\+Mute\+::harmonic\+Series\+Handler}
+
+\Hypertarget{classCalibrateMute_a14c9dea06cb113aec92a6db028411be2}\label{classCalibrateMute_a14c9dea06cb113aec92a6db028411be2} 
+\index{CalibrateMute@{CalibrateMute}!levelFundamental@{levelFundamental}}
+\index{levelFundamental@{levelFundamental}!CalibrateMute@{CalibrateMute}}
+\doxysubsubsection{\texorpdfstring{levelFundamental}{levelFundamental}}
+{\footnotesize\ttfamily float Calibrate\+Mute\+::level\+Fundamental = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classCalibrateMute_adcd25eb94a2964e74b408e791af2d21c}\label{classCalibrateMute_adcd25eb94a2964e74b408e791af2d21c} 
+\index{CalibrateMute@{CalibrateMute}!levelSilence@{levelSilence}}
+\index{levelSilence@{levelSilence}!CalibrateMute@{CalibrateMute}}
+\doxysubsubsection{\texorpdfstring{levelSilence}{levelSilence}}
+{\footnotesize\ttfamily float Calibrate\+Mute\+::level\+Silence = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classCalibrateMute_a637d9617a31d116f2a82a3366ed71256}\label{classCalibrateMute_a637d9617a31d116f2a82a3366ed71256} 
+\index{CalibrateMute@{CalibrateMute}!maxTestStep@{maxTestStep}}
+\index{maxTestStep@{maxTestStep}!CalibrateMute@{CalibrateMute}}
+\doxysubsubsection{\texorpdfstring{maxTestStep}{maxTestStep}}
+{\footnotesize\ttfamily uint16\+\_\+t Calibrate\+Mute\+::max\+Test\+Step = 60000}
+
+\Hypertarget{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}\label{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc} 
+\index{CalibrateMute@{CalibrateMute}!muteControl@{muteControl}}
+\index{muteControl@{muteControl}!CalibrateMute@{CalibrateMute}}
+\doxysubsubsection{\texorpdfstring{muteControl}{muteControl}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMuteControl}{Mute\+Control}}\texorpdfstring{$\ast$}{*} Calibrate\+Mute\+::mute\+Control}
+
+\Hypertarget{classCalibrateMute_ac32f851a48115a9623250048f8aaf7c6}\label{classCalibrateMute_ac32f851a48115a9623250048f8aaf7c6} 
+\index{CalibrateMute@{CalibrateMute}!stallPosition@{stallPosition}}
+\index{stallPosition@{stallPosition}!CalibrateMute@{CalibrateMute}}
+\doxysubsubsection{\texorpdfstring{stallPosition}{stallPosition}}
+{\footnotesize\ttfamily uint16\+\_\+t Calibrate\+Mute\+::stall\+Position = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mutecalibration_8hpp}{mutecalibration.\+hpp}}\item 
+\mbox{\hyperlink{mutecalibration_8cpp}{mutecalibration.\+cpp}}\end{DoxyCompactItemize}

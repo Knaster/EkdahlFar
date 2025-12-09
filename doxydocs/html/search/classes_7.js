@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['notemsg_0',['noteMsg',['../structnoteMsg.html',1,'']]]
+  ['mute_0',['Mute',['../classMute.html',1,'']]],
+  ['mutecontrol_1',['MuteControl',['../classMuteControl.html',1,'']]]
 ];

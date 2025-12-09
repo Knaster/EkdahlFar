@@ -249,12 +249,6 @@ public:
     commandList() {
 
     }
-
-    ~commandList() {
-    //debugPrintln("List destroyed");
-    }
-
-//  commandList() {}
 };
 
 /// Structure for containing help information as long as short-to-long name command name parsing
@@ -266,7 +260,7 @@ struct serialCommandItem {
 };
 
 /// Preprocesses a commandItem, replacing any short command names with long ones and turns them all into lowercase
-bool processCommandItems(commandItem *_commandParser, serialCommandItem serialCommandArray[], int size) {
+bool processCommandItems(commandItem *_commandParser, const serialCommandItem serialCommandArray[], int size) {
     for (int i = 0; i<size; i++) {
         if ((_commandParser->command == serialCommandArray[i].shortCommand)) {
             _commandParser->command = serialCommandArray[i].longCommand.toLowerCase();
@@ -291,16 +285,14 @@ String printCommandHelp(serialCommandItem serialCommandArray[], int size) {
 }
 
 /// Prints all help data for commands given in the serialCommandArray
-String addCommandHelp(serialCommandItem serialCommandArray[], int size, std::vector<commandResponse> *commandResponses, String prefix = "") {
+String addCommandHelp(const serialCommandItem serialCommandArray[], int size, std::vector<commandResponse> *commandResponses, String prefix = "") {
     String help = "";
     if (prefix == "") { prefix = "[unk]:"; }
     for (int i = 0; i<size; i++) {
-//        help += "[";
-        help = prefix; // + "[";
+        help = prefix;
         if (serialCommandArray[i].longCommand != "") { help += serialCommandArray[i].longCommand; }
         if (serialCommandArray[i].shortCommand != "") { help += "|"; }
         if (serialCommandArray[i].shortCommand != "") { help += serialCommandArray[i].shortCommand; }
-        //help += "]";
         if (serialCommandArray[i].arguments != "") { help += ":" + serialCommandArray[i].arguments + ":"; }
         help += "\"" + serialCommandArray[i].Help + "\""; // + "\n";
         commandResponses->push_back({help, debugPrintType::Help});

@@ -1,0 +1,1347 @@
+\doxysection{Bow\+Control Class Reference}
+\hypertarget{classBowControl}{}\label{classBowControl}\index{BowControl@{BowControl}}
+
+
+{\ttfamily \#include $<$bowcontrol.\+hpp$>$}
+
+
+
+Collaboration diagram for Bow\+Control\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBowControl_acdd87742f360329eb78886432eb1536f}{Bow\+Control}} (char motor\+Rev\+Pin, char motor\+Voltage\+Pin, char motor\+DCDCEn\+Pin, char tacho\+Pin, char current\+Sense\+Pin, char motor\+Fault\+Pin, char step\+En\+Pin, char step\+Dir\+Pin, char step\+Step\+Pin, Hardware\+Serial \texorpdfstring{$\ast$}{*}step\+Serial\+Port, char step\+Home\+Sensor\+Pin)
+\item 
+\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classBowControl_af6e98ea3176a266902b7f95b409553b9}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\item 
+\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classBowControl_acb0918bfce04f9b93899133f4f73db9a}{process\+Serial\+Command\+Hidden}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\item 
+String \mbox{\hyperlink{classBowControl_aa280a126dd30e3510c9dcb722d126b3e}{dump\+Data}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_a17a1fc8cdd5f5f0c9b68b3d9ea162280}{set\+Bow\+Motor\+Direct\+PWM}} (uint16\+\_\+t speed)
+\item 
+void \mbox{\hyperlink{classBowControl_a0e73b848916039905df02ec2d243afdb}{set\+Bow\+Speed\+HZ}} (float speed)
+\item 
+bool \mbox{\hyperlink{classBowControl_a521548efe320100aa2c4aa81280e52f2}{home}} ()
+\item 
+bool \mbox{\hyperlink{classBowControl_abba2ffc34c55b9c4210e5b6d54014446}{enable\+Bow\+Motor\+Power}} ()
+\item 
+bool \mbox{\hyperlink{classBowControl_a9497cf120ffd96fe6a75637c56c65c84}{disable\+Bow\+Motor\+Power}} ()
+\item 
+String \mbox{\hyperlink{classBowControl_a3ee10be60e4c4afd5bc8cbdbac849362}{get\+Commands\+Over\+Power\+Current}} ()
+\item 
+String \mbox{\hyperlink{classBowControl_a30691a6cecdba635207456fb4ee1e6bd}{get\+Commands\+Motor\+Fault}} ()
+\item 
+bool \mbox{\hyperlink{classBowControl_a7446cb7cb5b09b88f062bc7122618755}{get\+Bow\+Over\+Power\+Flag}} ()
+\item 
+bool \mbox{\hyperlink{classBowControl_a5c9494f5321bc4ce2884ba9ac61c2bc6}{get\+Bow\+Motor\+Fault\+Flag}} ()
+\item 
+float \mbox{\hyperlink{classBowControl_aabbf480af8262531cf398c57e209d63a}{get\+Average\+Tachometer\+Freq}} ()
+\item 
+bool \mbox{\hyperlink{classBowControl_ae7c0854042b57d023047e27240eb97ab}{check\+Tachometer\+Timeout}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_a62ff33edc2ddef1fe4d2df379bc9d4b7}{set\+Hardware\+Pressure}} (uint16\+\_\+t speed)
+\item 
+bool \mbox{\hyperlink{classBowControl_ae3e25debfb3d98b39c85b4e67dfc3183}{wait\+For\+Pressure\+To\+Settle}} (uint16\+\_\+t timeout=3000)
+\item 
+void \mbox{\hyperlink{classBowControl_a6777ca35b8a0188378935056969c8ffb}{set\+Engage\+Pressure}} (uint16\+\_\+t pressure)
+\item 
+void \mbox{\hyperlink{classBowControl_a4022ef94a8122c6c24987ba4d12a7d11}{set\+Rest\+Pressure}} (uint16\+\_\+t pressure)
+\item 
+void \mbox{\hyperlink{classBowControl_ac593f79c91ca60bbb8e03ad494bf84cb}{set\+Max\+Pressure}} (uint16\+\_\+t pressure)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classBowControl_ac906729ef9bae05e39a92951588404d6}{get\+Engage\+Pressure}} ()
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classBowControl_ab66ab43cecb8da0f2ac7d74a87676203}{get\+Rest\+Pressure}} ()
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classBowControl_a3aff0283cf061ff1b108af53c757e17a}{get\+Max\+Pressure}} ()
+\item 
+bool \mbox{\hyperlink{classBowControl_a7911c03cbe760de408545e8e7bf766c4}{bow\+Motor\+Is\+Over\+Current}} ()
+\item 
+bool \mbox{\hyperlink{classBowControl_aebd3c78b81bf427ea9ef23dba8e98c57}{bow\+Motor\+Is\+Over\+Power}} ()
+\item 
+bool \mbox{\hyperlink{classBowControl_a5cf3086a9dded16bac99f981ad1661e6}{get\+Pressure\+Autocorrect}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_ac526c5f748f9d6e74931f572cd5215e1}{set\+Pressure\+Autocorrect}} (bool correct)
+\item 
+bool \mbox{\hyperlink{classBowControl_ad2211241c65c1f0070d469ec7d32b5e9}{get\+PIDOn}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_a69c751fb80e75b6c359cf7082756e20f}{set\+PIDOn}} (bool in\+PIDon)
+\item 
+void \mbox{\hyperlink{classBowControl_a6ff7bb9d5693b2486d08c529ec6688f6}{set\+Pressure\+Motor\+Speed}} (float speed)
+\item 
+float \mbox{\hyperlink{classBowControl_aec59a7cc531968449bac853ce54ef558}{get\+Pressure\+Motor\+Speed}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_ac41b6162fb1ea57619fdac9b6ddce8e0}{set\+Run}} (bool in\+Run)
+\item 
+bool \mbox{\hyperlink{classBowControl_aa18cf83495867e37168a3a5604c56783}{get\+Run}} ()
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classBowControl_ab5327c0914d0c04e254098b3b44c7a4a}{get\+Bow\+Motor\+Max\+Power}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_a5bbf25b87603181f1e5c8a944f3ad093}{set\+Bow\+Motor\+Max\+Power}} (uint16\+\_\+t power)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classBowControl_aea720b1ce0c112eb608ee64e9ad9f7b4}{get\+Bow\+Motor\+Min\+PWM}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_afba655e39997dded04b350ca680d5dd0}{set\+Bow\+Motor\+Min\+PWM}} (uint16\+\_\+t pwm)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classBowControl_a55222e4f99b462e262d7e5911489c185}{get\+Bow\+Motor\+Max\+PWM}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_add2df6c7b2cbc33b245d47e44ed58eec}{set\+Bow\+Motor\+Max\+PWM}} (uint16\+\_\+t pwm)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classBowControl_a7831cdc8fadd2206c78850543ccade9e}{get\+Bow\+Motor\+Max\+Hz}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_a73cacf4394bec865d93534d343a38715}{set\+Bow\+Motor\+Max\+Hz}} (uint16\+\_\+t frequency)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classBowControl_a82227fa717585e6c1d2a24a62f5e317e}{get\+Bow\+Motor\+Min\+Hz}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_a5ffb34b9e147eaf1d07c15b7f2accd4c}{set\+Bow\+Motor\+Min\+Hz}} (uint16\+\_\+t frequency)
+\item 
+float \mbox{\hyperlink{classBowControl_af1a5bde99050f6474e6d270607fa9394}{get\+Bow\+Motor\+Power}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_a9bc480001268aeac1add700870ce18ad}{set\+Bow\+Rest}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_a97242e515da1d76fd3faecb1c50d0fe2}{set\+Bow\+Engage}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_a185042d6311ba53b33f6b8ccc1788467}{set\+Speed\+Mode}} (\mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{e\+Speed\+Mode}} in\+Speed\+Mode)
+\item 
+void \mbox{\hyperlink{classBowControl_a94d596c5aaa12f95f8e4fbeb2cae34b9}{rest}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_a170f00fa76b4cd121942106a07e3e68d}{get\+TMC2209\+Info}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_a1e738a6854d44a43b309f1ad9a29a559}{update}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_a49f7fa12c0ca3a731d042b4a4adc6324}{update\+PID}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_a71bbd615a798d1e7294a79ad16f0555a}{update\+Tachometer}} ()
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classBowControl_ae534079033431afa0cb94651b3f70b5d}{get\+PIDUpdate\+Interval}} ()
+\item 
+\mbox{\hyperlink{classBowPressure}{Bow\+Pressure}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classBowControl_a137b369227f3987d523e0ace27f4f43a}{get\+Bow\+Pressure\+Reference}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_a4d7960dead828ad7034c5c106637d3fd}{update\+Servo}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_ab2eb10f1ad7f96658220148ef6f8da9e}{set\+Step\+Interval\+Callback}} (void \texorpdfstring{$\ast$}{*}step\+Interval\+Callback)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classBowControl_adc093196abff58a20a09a47a34dc8962}{update\+Motor\+Auto\+Shutdown}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_a6591f25b0e546db27e70518e9586f2c7}{update\+Run\+\_\+\+PID}} ()
+\item 
+void \mbox{\hyperlink{classBowControl_a3a87552e91d321d9bcaf6d81b2723798}{update\+Motor\+Status}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDCMotorControl}{DCMotor\+Control}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dc\+Motor\+Control}} = nullptr
+\item 
+\mbox{\hyperlink{classPIDController}{PIDController}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pid\+Controller}} = nullptr
+\item 
+\mbox{\hyperlink{classBowPressure}{Bow\+Pressure}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bow\+Pressure}} = nullptr
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classBowControl_a6ef6cfda459694dca3afa9d9ad049ced}{pid\+Update\+Interval}} = 1000
+\begin{DoxyCompactList}\small\item\em The interval at which the PID is being called, given in uS. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classBowControl_ac8743e51d6e90939a32feed0f820d5f8}{last\+Update}} = 0
+\begin{DoxyCompactList}\small\item\em Time of last \doxylink{classBowControl_a1e738a6854d44a43b309f1ad9a29a559}{update()} call. \end{DoxyCompactList}\item 
+elapsed\+Millis \mbox{\hyperlink{classBowControl_a9661a56ba31c3ac180cca845462e126e}{bow\+Shutoff\+Timer}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classBowControl_a1436681ee5d3b07547d8a18791f6d9a9}{bow\+Shutoff\+Timeout}} = 1000
+\item 
+bool \mbox{\hyperlink{classBowControl_a660628c5489ef9ac1bc4160cab81a8a0}{bow\+Shutoff\+Timedout}} = false
+\item 
+bool \mbox{\hyperlink{classBowControl_add46f10b20a135292c0650d1453b6f38}{bow\+Shutoff\+Motor\+Disabled}} = false
+\item 
+\mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{e\+Speed\+Mode}} \mbox{\hyperlink{classBowControl_af4e1e48fb1eca92f085369c3f5ef2dd7}{speed\+Mode}} = \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389}{e\+Speed\+Mode\+::\+Automatic}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classBowControl_a02921994677bd6d96ea0840ef325eb78}{manual\+Motor\+PWM}} = 0
+\item 
+bool \mbox{\hyperlink{classBowControl_a6f8c5fa626567fb11951672b76008574}{run}} = false
+\begin{DoxyCompactList}\small\item\em Set to true if the bowing wheel is running. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classBowControl_a42be04959663fd67a1d054d33c8bea36}{PIDon}} = true
+\begin{DoxyCompactList}\small\item\em Set to true if the PID is turned on. \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{classBowControl_a758d29eb32ccdf7d69e8e5026e34a043}{commands\+Over\+Power\+Current}} = "{}"{}
+\item 
+String \mbox{\hyperlink{classBowControl_a74f0eb026fb337a254953127b09d9de9}{commands\+Motor\+Fault}} = "{}"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classBowControl_acdd87742f360329eb78886432eb1536f}\label{classBowControl_acdd87742f360329eb78886432eb1536f} 
+\index{BowControl@{BowControl}!BowControl@{BowControl}}
+\index{BowControl@{BowControl}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{BowControl()}{BowControl()}}
+{\footnotesize\ttfamily Bow\+Control\+::\+Bow\+Control (\begin{DoxyParamCaption}\item[{char}]{motor\+Rev\+Pin,  }\item[{char}]{motor\+Voltage\+Pin,  }\item[{char}]{motor\+DCDCEn\+Pin,  }\item[{char}]{tacho\+Pin,  }\item[{char}]{current\+Sense\+Pin,  }\item[{char}]{motor\+Fault\+Pin,  }\item[{char}]{step\+En\+Pin,  }\item[{char}]{step\+Dir\+Pin,  }\item[{char}]{step\+Step\+Pin,  }\item[{Hardware\+Serial \texorpdfstring{$\ast$}{*}}]{step\+Serial\+Port,  }\item[{char}]{step\+Home\+Sensor\+Pin }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classBowControl_a7911c03cbe760de408545e8e7bf766c4}\label{classBowControl_a7911c03cbe760de408545e8e7bf766c4} 
+\index{BowControl@{BowControl}!bowMotorIsOverCurrent@{bowMotorIsOverCurrent}}
+\index{bowMotorIsOverCurrent@{bowMotorIsOverCurrent}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{bowMotorIsOverCurrent()}{bowMotorIsOverCurrent()}}
+{\footnotesize\ttfamily bool Bow\+Control\+::bow\+Motor\+Is\+Over\+Current (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a7911c03cbe760de408545e8e7bf766c4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a7911c03cbe760de408545e8e7bf766c4_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_aebd3c78b81bf427ea9ef23dba8e98c57}\label{classBowControl_aebd3c78b81bf427ea9ef23dba8e98c57} 
+\index{BowControl@{BowControl}!bowMotorIsOverPower@{bowMotorIsOverPower}}
+\index{bowMotorIsOverPower@{bowMotorIsOverPower}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{bowMotorIsOverPower()}{bowMotorIsOverPower()}}
+{\footnotesize\ttfamily bool Bow\+Control\+::bow\+Motor\+Is\+Over\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_aebd3c78b81bf427ea9ef23dba8e98c57_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_aebd3c78b81bf427ea9ef23dba8e98c57_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_ae7c0854042b57d023047e27240eb97ab}\label{classBowControl_ae7c0854042b57d023047e27240eb97ab} 
+\index{BowControl@{BowControl}!checkTachometerTimeout@{checkTachometerTimeout}}
+\index{checkTachometerTimeout@{checkTachometerTimeout}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{checkTachometerTimeout()}{checkTachometerTimeout()}}
+{\footnotesize\ttfamily bool Bow\+Control\+::check\+Tachometer\+Timeout (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ae7c0854042b57d023047e27240eb97ab_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ae7c0854042b57d023047e27240eb97ab_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a9497cf120ffd96fe6a75637c56c65c84}\label{classBowControl_a9497cf120ffd96fe6a75637c56c65c84} 
+\index{BowControl@{BowControl}!disableBowMotorPower@{disableBowMotorPower}}
+\index{disableBowMotorPower@{disableBowMotorPower}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{disableBowMotorPower()}{disableBowMotorPower()}}
+{\footnotesize\ttfamily bool Bow\+Control\+::disable\+Bow\+Motor\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a9497cf120ffd96fe6a75637c56c65c84_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a9497cf120ffd96fe6a75637c56c65c84_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_aa280a126dd30e3510c9dcb722d126b3e}\label{classBowControl_aa280a126dd30e3510c9dcb722d126b3e} 
+\index{BowControl@{BowControl}!dumpData@{dumpData}}
+\index{dumpData@{dumpData}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
+{\footnotesize\ttfamily String Bow\+Control\+::dump\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_aa280a126dd30e3510c9dcb722d126b3e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_aa280a126dd30e3510c9dcb722d126b3e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_abba2ffc34c55b9c4210e5b6d54014446}\label{classBowControl_abba2ffc34c55b9c4210e5b6d54014446} 
+\index{BowControl@{BowControl}!enableBowMotorPower@{enableBowMotorPower}}
+\index{enableBowMotorPower@{enableBowMotorPower}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{enableBowMotorPower()}{enableBowMotorPower()}}
+{\footnotesize\ttfamily bool Bow\+Control\+::enable\+Bow\+Motor\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_abba2ffc34c55b9c4210e5b6d54014446_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_abba2ffc34c55b9c4210e5b6d54014446_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_aabbf480af8262531cf398c57e209d63a}\label{classBowControl_aabbf480af8262531cf398c57e209d63a} 
+\index{BowControl@{BowControl}!getAverageTachometerFreq@{getAverageTachometerFreq}}
+\index{getAverageTachometerFreq@{getAverageTachometerFreq}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getAverageTachometerFreq()}{getAverageTachometerFreq()}}
+{\footnotesize\ttfamily float Bow\+Control\+::get\+Average\+Tachometer\+Freq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_aabbf480af8262531cf398c57e209d63a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_aabbf480af8262531cf398c57e209d63a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a5c9494f5321bc4ce2884ba9ac61c2bc6}\label{classBowControl_a5c9494f5321bc4ce2884ba9ac61c2bc6} 
+\index{BowControl@{BowControl}!getBowMotorFaultFlag@{getBowMotorFaultFlag}}
+\index{getBowMotorFaultFlag@{getBowMotorFaultFlag}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getBowMotorFaultFlag()}{getBowMotorFaultFlag()}}
+{\footnotesize\ttfamily bool Bow\+Control\+::get\+Bow\+Motor\+Fault\+Flag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a5c9494f5321bc4ce2884ba9ac61c2bc6_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a7831cdc8fadd2206c78850543ccade9e}\label{classBowControl_a7831cdc8fadd2206c78850543ccade9e} 
+\index{BowControl@{BowControl}!getBowMotorMaxHz@{getBowMotorMaxHz}}
+\index{getBowMotorMaxHz@{getBowMotorMaxHz}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getBowMotorMaxHz()}{getBowMotorMaxHz()}}
+{\footnotesize\ttfamily uint16\+\_\+t Bow\+Control\+::get\+Bow\+Motor\+Max\+Hz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a7831cdc8fadd2206c78850543ccade9e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a7831cdc8fadd2206c78850543ccade9e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_ab5327c0914d0c04e254098b3b44c7a4a}\label{classBowControl_ab5327c0914d0c04e254098b3b44c7a4a} 
+\index{BowControl@{BowControl}!getBowMotorMaxPower@{getBowMotorMaxPower}}
+\index{getBowMotorMaxPower@{getBowMotorMaxPower}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getBowMotorMaxPower()}{getBowMotorMaxPower()}}
+{\footnotesize\ttfamily uint16\+\_\+t Bow\+Control\+::get\+Bow\+Motor\+Max\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ab5327c0914d0c04e254098b3b44c7a4a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ab5327c0914d0c04e254098b3b44c7a4a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a55222e4f99b462e262d7e5911489c185}\label{classBowControl_a55222e4f99b462e262d7e5911489c185} 
+\index{BowControl@{BowControl}!getBowMotorMaxPWM@{getBowMotorMaxPWM}}
+\index{getBowMotorMaxPWM@{getBowMotorMaxPWM}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getBowMotorMaxPWM()}{getBowMotorMaxPWM()}}
+{\footnotesize\ttfamily uint16\+\_\+t Bow\+Control\+::get\+Bow\+Motor\+Max\+PWM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a55222e4f99b462e262d7e5911489c185_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a55222e4f99b462e262d7e5911489c185_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a82227fa717585e6c1d2a24a62f5e317e}\label{classBowControl_a82227fa717585e6c1d2a24a62f5e317e} 
+\index{BowControl@{BowControl}!getBowMotorMinHz@{getBowMotorMinHz}}
+\index{getBowMotorMinHz@{getBowMotorMinHz}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getBowMotorMinHz()}{getBowMotorMinHz()}}
+{\footnotesize\ttfamily uint16\+\_\+t Bow\+Control\+::get\+Bow\+Motor\+Min\+Hz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a82227fa717585e6c1d2a24a62f5e317e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a82227fa717585e6c1d2a24a62f5e317e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_aea720b1ce0c112eb608ee64e9ad9f7b4}\label{classBowControl_aea720b1ce0c112eb608ee64e9ad9f7b4} 
+\index{BowControl@{BowControl}!getBowMotorMinPWM@{getBowMotorMinPWM}}
+\index{getBowMotorMinPWM@{getBowMotorMinPWM}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getBowMotorMinPWM()}{getBowMotorMinPWM()}}
+{\footnotesize\ttfamily uint16\+\_\+t Bow\+Control\+::get\+Bow\+Motor\+Min\+PWM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_aea720b1ce0c112eb608ee64e9ad9f7b4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_aea720b1ce0c112eb608ee64e9ad9f7b4_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_af1a5bde99050f6474e6d270607fa9394}\label{classBowControl_af1a5bde99050f6474e6d270607fa9394} 
+\index{BowControl@{BowControl}!getBowMotorPower@{getBowMotorPower}}
+\index{getBowMotorPower@{getBowMotorPower}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getBowMotorPower()}{getBowMotorPower()}}
+{\footnotesize\ttfamily float Bow\+Control\+::get\+Bow\+Motor\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_af1a5bde99050f6474e6d270607fa9394_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a7446cb7cb5b09b88f062bc7122618755}\label{classBowControl_a7446cb7cb5b09b88f062bc7122618755} 
+\index{BowControl@{BowControl}!getBowOverPowerFlag@{getBowOverPowerFlag}}
+\index{getBowOverPowerFlag@{getBowOverPowerFlag}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getBowOverPowerFlag()}{getBowOverPowerFlag()}}
+{\footnotesize\ttfamily bool Bow\+Control\+::get\+Bow\+Over\+Power\+Flag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a7446cb7cb5b09b88f062bc7122618755_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a137b369227f3987d523e0ace27f4f43a}\label{classBowControl_a137b369227f3987d523e0ace27f4f43a} 
+\index{BowControl@{BowControl}!getBowPressureReference@{getBowPressureReference}}
+\index{getBowPressureReference@{getBowPressureReference}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getBowPressureReference()}{getBowPressureReference()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classBowPressure}{Bow\+Pressure}} \texorpdfstring{$\ast$}{*} Bow\+Control\+::get\+Bow\+Pressure\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a137b369227f3987d523e0ace27f4f43a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a30691a6cecdba635207456fb4ee1e6bd}\label{classBowControl_a30691a6cecdba635207456fb4ee1e6bd} 
+\index{BowControl@{BowControl}!getCommandsMotorFault@{getCommandsMotorFault}}
+\index{getCommandsMotorFault@{getCommandsMotorFault}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getCommandsMotorFault()}{getCommandsMotorFault()}}
+{\footnotesize\ttfamily String Bow\+Control\+::get\+Commands\+Motor\+Fault (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classBowControl_a3ee10be60e4c4afd5bc8cbdbac849362}\label{classBowControl_a3ee10be60e4c4afd5bc8cbdbac849362} 
+\index{BowControl@{BowControl}!getCommandsOverPowerCurrent@{getCommandsOverPowerCurrent}}
+\index{getCommandsOverPowerCurrent@{getCommandsOverPowerCurrent}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getCommandsOverPowerCurrent()}{getCommandsOverPowerCurrent()}}
+{\footnotesize\ttfamily String Bow\+Control\+::get\+Commands\+Over\+Power\+Current (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classBowControl_ac906729ef9bae05e39a92951588404d6}\label{classBowControl_ac906729ef9bae05e39a92951588404d6} 
+\index{BowControl@{BowControl}!getEngagePressure@{getEngagePressure}}
+\index{getEngagePressure@{getEngagePressure}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getEngagePressure()}{getEngagePressure()}}
+{\footnotesize\ttfamily uint16\+\_\+t Bow\+Control\+::get\+Engage\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ac906729ef9bae05e39a92951588404d6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ac906729ef9bae05e39a92951588404d6_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a3aff0283cf061ff1b108af53c757e17a}\label{classBowControl_a3aff0283cf061ff1b108af53c757e17a} 
+\index{BowControl@{BowControl}!getMaxPressure@{getMaxPressure}}
+\index{getMaxPressure@{getMaxPressure}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getMaxPressure()}{getMaxPressure()}}
+{\footnotesize\ttfamily uint16\+\_\+t Bow\+Control\+::get\+Max\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a3aff0283cf061ff1b108af53c757e17a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a3aff0283cf061ff1b108af53c757e17a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_ad2211241c65c1f0070d469ec7d32b5e9}\label{classBowControl_ad2211241c65c1f0070d469ec7d32b5e9} 
+\index{BowControl@{BowControl}!getPIDOn@{getPIDOn}}
+\index{getPIDOn@{getPIDOn}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getPIDOn()}{getPIDOn()}}
+{\footnotesize\ttfamily bool Bow\+Control\+::get\+PIDOn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ad2211241c65c1f0070d469ec7d32b5e9_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_ae534079033431afa0cb94651b3f70b5d}\label{classBowControl_ae534079033431afa0cb94651b3f70b5d} 
+\index{BowControl@{BowControl}!getPIDUpdateInterval@{getPIDUpdateInterval}}
+\index{getPIDUpdateInterval@{getPIDUpdateInterval}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getPIDUpdateInterval()}{getPIDUpdateInterval()}}
+{\footnotesize\ttfamily uint16\+\_\+t Bow\+Control\+::get\+PIDUpdate\+Interval (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ae534079033431afa0cb94651b3f70b5d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a5cf3086a9dded16bac99f981ad1661e6}\label{classBowControl_a5cf3086a9dded16bac99f981ad1661e6} 
+\index{BowControl@{BowControl}!getPressureAutocorrect@{getPressureAutocorrect}}
+\index{getPressureAutocorrect@{getPressureAutocorrect}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getPressureAutocorrect()}{getPressureAutocorrect()}}
+{\footnotesize\ttfamily bool Bow\+Control\+::get\+Pressure\+Autocorrect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a5cf3086a9dded16bac99f981ad1661e6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a5cf3086a9dded16bac99f981ad1661e6_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_aec59a7cc531968449bac853ce54ef558}\label{classBowControl_aec59a7cc531968449bac853ce54ef558} 
+\index{BowControl@{BowControl}!getPressureMotorSpeed@{getPressureMotorSpeed}}
+\index{getPressureMotorSpeed@{getPressureMotorSpeed}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getPressureMotorSpeed()}{getPressureMotorSpeed()}}
+{\footnotesize\ttfamily float Bow\+Control\+::get\+Pressure\+Motor\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_aec59a7cc531968449bac853ce54ef558_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_aec59a7cc531968449bac853ce54ef558_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_ab66ab43cecb8da0f2ac7d74a87676203}\label{classBowControl_ab66ab43cecb8da0f2ac7d74a87676203} 
+\index{BowControl@{BowControl}!getRestPressure@{getRestPressure}}
+\index{getRestPressure@{getRestPressure}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getRestPressure()}{getRestPressure()}}
+{\footnotesize\ttfamily uint16\+\_\+t Bow\+Control\+::get\+Rest\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ab66ab43cecb8da0f2ac7d74a87676203_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ab66ab43cecb8da0f2ac7d74a87676203_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_aa18cf83495867e37168a3a5604c56783}\label{classBowControl_aa18cf83495867e37168a3a5604c56783} 
+\index{BowControl@{BowControl}!getRun@{getRun}}
+\index{getRun@{getRun}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getRun()}{getRun()}}
+{\footnotesize\ttfamily bool Bow\+Control\+::get\+Run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classBowControl_a170f00fa76b4cd121942106a07e3e68d}\label{classBowControl_a170f00fa76b4cd121942106a07e3e68d} 
+\index{BowControl@{BowControl}!getTMC2209Info@{getTMC2209Info}}
+\index{getTMC2209Info@{getTMC2209Info}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getTMC2209Info()}{getTMC2209Info()}}
+{\footnotesize\ttfamily void Bow\+Control\+::get\+TMC2209\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a170f00fa76b4cd121942106a07e3e68d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a170f00fa76b4cd121942106a07e3e68d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a521548efe320100aa2c4aa81280e52f2}\label{classBowControl_a521548efe320100aa2c4aa81280e52f2} 
+\index{BowControl@{BowControl}!home@{home}}
+\index{home@{home}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{home()}{home()}}
+{\footnotesize\ttfamily bool Bow\+Control\+::home (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a521548efe320100aa2c4aa81280e52f2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a521548efe320100aa2c4aa81280e52f2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_af6e98ea3176a266902b7f95b409553b9}\label{classBowControl_af6e98ea3176a266902b7f95b409553b9} 
+\index{BowControl@{BowControl}!processSerialCommand@{processSerialCommand}}
+\index{processSerialCommand@{processSerialCommand}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{processSerialCommand()}{processSerialCommand()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Bow\+Control\+::process\+Serial\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_af6e98ea3176a266902b7f95b409553b9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_af6e98ea3176a266902b7f95b409553b9_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_acb0918bfce04f9b93899133f4f73db9a}\label{classBowControl_acb0918bfce04f9b93899133f4f73db9a} 
+\index{BowControl@{BowControl}!processSerialCommandHidden@{processSerialCommandHidden}}
+\index{processSerialCommandHidden@{processSerialCommandHidden}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{processSerialCommandHidden()}{processSerialCommandHidden()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Bow\+Control\+::process\+Serial\+Command\+Hidden (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_acb0918bfce04f9b93899133f4f73db9a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_acb0918bfce04f9b93899133f4f73db9a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a94d596c5aaa12f95f8e4fbeb2cae34b9}\label{classBowControl_a94d596c5aaa12f95f8e4fbeb2cae34b9} 
+\index{BowControl@{BowControl}!rest@{rest}}
+\index{rest@{rest}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{rest()}{rest()}}
+{\footnotesize\ttfamily void Bow\+Control\+::rest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a94d596c5aaa12f95f8e4fbeb2cae34b9_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a97242e515da1d76fd3faecb1c50d0fe2}\label{classBowControl_a97242e515da1d76fd3faecb1c50d0fe2} 
+\index{BowControl@{BowControl}!setBowEngage@{setBowEngage}}
+\index{setBowEngage@{setBowEngage}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setBowEngage()}{setBowEngage()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Bow\+Engage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a97242e515da1d76fd3faecb1c50d0fe2_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a17a1fc8cdd5f5f0c9b68b3d9ea162280}\label{classBowControl_a17a1fc8cdd5f5f0c9b68b3d9ea162280} 
+\index{BowControl@{BowControl}!setBowMotorDirectPWM@{setBowMotorDirectPWM}}
+\index{setBowMotorDirectPWM@{setBowMotorDirectPWM}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setBowMotorDirectPWM()}{setBowMotorDirectPWM()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Bow\+Motor\+Direct\+PWM (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{speed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a17a1fc8cdd5f5f0c9b68b3d9ea162280_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a17a1fc8cdd5f5f0c9b68b3d9ea162280_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a73cacf4394bec865d93534d343a38715}\label{classBowControl_a73cacf4394bec865d93534d343a38715} 
+\index{BowControl@{BowControl}!setBowMotorMaxHz@{setBowMotorMaxHz}}
+\index{setBowMotorMaxHz@{setBowMotorMaxHz}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setBowMotorMaxHz()}{setBowMotorMaxHz()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Bow\+Motor\+Max\+Hz (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{frequency }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a73cacf4394bec865d93534d343a38715_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a73cacf4394bec865d93534d343a38715_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a5bbf25b87603181f1e5c8a944f3ad093}\label{classBowControl_a5bbf25b87603181f1e5c8a944f3ad093} 
+\index{BowControl@{BowControl}!setBowMotorMaxPower@{setBowMotorMaxPower}}
+\index{setBowMotorMaxPower@{setBowMotorMaxPower}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setBowMotorMaxPower()}{setBowMotorMaxPower()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Bow\+Motor\+Max\+Power (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{power }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a5bbf25b87603181f1e5c8a944f3ad093_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a5bbf25b87603181f1e5c8a944f3ad093_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_add2df6c7b2cbc33b245d47e44ed58eec}\label{classBowControl_add2df6c7b2cbc33b245d47e44ed58eec} 
+\index{BowControl@{BowControl}!setBowMotorMaxPWM@{setBowMotorMaxPWM}}
+\index{setBowMotorMaxPWM@{setBowMotorMaxPWM}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setBowMotorMaxPWM()}{setBowMotorMaxPWM()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Bow\+Motor\+Max\+PWM (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{pwm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_add2df6c7b2cbc33b245d47e44ed58eec_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_add2df6c7b2cbc33b245d47e44ed58eec_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a5ffb34b9e147eaf1d07c15b7f2accd4c}\label{classBowControl_a5ffb34b9e147eaf1d07c15b7f2accd4c} 
+\index{BowControl@{BowControl}!setBowMotorMinHz@{setBowMotorMinHz}}
+\index{setBowMotorMinHz@{setBowMotorMinHz}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setBowMotorMinHz()}{setBowMotorMinHz()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Bow\+Motor\+Min\+Hz (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{frequency }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a5ffb34b9e147eaf1d07c15b7f2accd4c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a5ffb34b9e147eaf1d07c15b7f2accd4c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_afba655e39997dded04b350ca680d5dd0}\label{classBowControl_afba655e39997dded04b350ca680d5dd0} 
+\index{BowControl@{BowControl}!setBowMotorMinPWM@{setBowMotorMinPWM}}
+\index{setBowMotorMinPWM@{setBowMotorMinPWM}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setBowMotorMinPWM()}{setBowMotorMinPWM()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Bow\+Motor\+Min\+PWM (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{pwm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_afba655e39997dded04b350ca680d5dd0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_afba655e39997dded04b350ca680d5dd0_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a9bc480001268aeac1add700870ce18ad}\label{classBowControl_a9bc480001268aeac1add700870ce18ad} 
+\index{BowControl@{BowControl}!setBowRest@{setBowRest}}
+\index{setBowRest@{setBowRest}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setBowRest()}{setBowRest()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Bow\+Rest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a9bc480001268aeac1add700870ce18ad_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a9bc480001268aeac1add700870ce18ad_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a0e73b848916039905df02ec2d243afdb}\label{classBowControl_a0e73b848916039905df02ec2d243afdb} 
+\index{BowControl@{BowControl}!setBowSpeedHZ@{setBowSpeedHZ}}
+\index{setBowSpeedHZ@{setBowSpeedHZ}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setBowSpeedHZ()}{setBowSpeedHZ()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Bow\+Speed\+HZ (\begin{DoxyParamCaption}\item[{float}]{speed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a0e73b848916039905df02ec2d243afdb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a0e73b848916039905df02ec2d243afdb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a6777ca35b8a0188378935056969c8ffb}\label{classBowControl_a6777ca35b8a0188378935056969c8ffb} 
+\index{BowControl@{BowControl}!setEngagePressure@{setEngagePressure}}
+\index{setEngagePressure@{setEngagePressure}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setEngagePressure()}{setEngagePressure()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Engage\+Pressure (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{pressure }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a6777ca35b8a0188378935056969c8ffb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a6777ca35b8a0188378935056969c8ffb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a62ff33edc2ddef1fe4d2df379bc9d4b7}\label{classBowControl_a62ff33edc2ddef1fe4d2df379bc9d4b7} 
+\index{BowControl@{BowControl}!setHardwarePressure@{setHardwarePressure}}
+\index{setHardwarePressure@{setHardwarePressure}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setHardwarePressure()}{setHardwarePressure()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Hardware\+Pressure (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{speed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a62ff33edc2ddef1fe4d2df379bc9d4b7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a62ff33edc2ddef1fe4d2df379bc9d4b7_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_ac593f79c91ca60bbb8e03ad494bf84cb}\label{classBowControl_ac593f79c91ca60bbb8e03ad494bf84cb} 
+\index{BowControl@{BowControl}!setMaxPressure@{setMaxPressure}}
+\index{setMaxPressure@{setMaxPressure}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setMaxPressure()}{setMaxPressure()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Max\+Pressure (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{pressure }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ac593f79c91ca60bbb8e03ad494bf84cb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ac593f79c91ca60bbb8e03ad494bf84cb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a69c751fb80e75b6c359cf7082756e20f}\label{classBowControl_a69c751fb80e75b6c359cf7082756e20f} 
+\index{BowControl@{BowControl}!setPIDOn@{setPIDOn}}
+\index{setPIDOn@{setPIDOn}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setPIDOn()}{setPIDOn()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+PIDOn (\begin{DoxyParamCaption}\item[{bool}]{in\+PIDon }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a69c751fb80e75b6c359cf7082756e20f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_ac526c5f748f9d6e74931f572cd5215e1}\label{classBowControl_ac526c5f748f9d6e74931f572cd5215e1} 
+\index{BowControl@{BowControl}!setPressureAutocorrect@{setPressureAutocorrect}}
+\index{setPressureAutocorrect@{setPressureAutocorrect}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setPressureAutocorrect()}{setPressureAutocorrect()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Pressure\+Autocorrect (\begin{DoxyParamCaption}\item[{bool}]{correct }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ac526c5f748f9d6e74931f572cd5215e1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ac526c5f748f9d6e74931f572cd5215e1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a6ff7bb9d5693b2486d08c529ec6688f6}\label{classBowControl_a6ff7bb9d5693b2486d08c529ec6688f6} 
+\index{BowControl@{BowControl}!setPressureMotorSpeed@{setPressureMotorSpeed}}
+\index{setPressureMotorSpeed@{setPressureMotorSpeed}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setPressureMotorSpeed()}{setPressureMotorSpeed()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Pressure\+Motor\+Speed (\begin{DoxyParamCaption}\item[{float}]{speed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a6ff7bb9d5693b2486d08c529ec6688f6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a6ff7bb9d5693b2486d08c529ec6688f6_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a4022ef94a8122c6c24987ba4d12a7d11}\label{classBowControl_a4022ef94a8122c6c24987ba4d12a7d11} 
+\index{BowControl@{BowControl}!setRestPressure@{setRestPressure}}
+\index{setRestPressure@{setRestPressure}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setRestPressure()}{setRestPressure()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Rest\+Pressure (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{pressure }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a4022ef94a8122c6c24987ba4d12a7d11_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a4022ef94a8122c6c24987ba4d12a7d11_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_ac41b6162fb1ea57619fdac9b6ddce8e0}\label{classBowControl_ac41b6162fb1ea57619fdac9b6ddce8e0} 
+\index{BowControl@{BowControl}!setRun@{setRun}}
+\index{setRun@{setRun}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setRun()}{setRun()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Run (\begin{DoxyParamCaption}\item[{bool}]{in\+Run }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ac41b6162fb1ea57619fdac9b6ddce8e0_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a185042d6311ba53b33f6b8ccc1788467}\label{classBowControl_a185042d6311ba53b33f6b8ccc1788467} 
+\index{BowControl@{BowControl}!setSpeedMode@{setSpeedMode}}
+\index{setSpeedMode@{setSpeedMode}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setSpeedMode()}{setSpeedMode()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Speed\+Mode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{e\+Speed\+Mode}}}]{in\+Speed\+Mode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a185042d6311ba53b33f6b8ccc1788467_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_ab2eb10f1ad7f96658220148ef6f8da9e}\label{classBowControl_ab2eb10f1ad7f96658220148ef6f8da9e} 
+\index{BowControl@{BowControl}!setStepIntervalCallback@{setStepIntervalCallback}}
+\index{setStepIntervalCallback@{setStepIntervalCallback}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setStepIntervalCallback()}{setStepIntervalCallback()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Step\+Interval\+Callback (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{step\+Interval\+Callback }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ab2eb10f1ad7f96658220148ef6f8da9e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ab2eb10f1ad7f96658220148ef6f8da9e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a1e738a6854d44a43b309f1ad9a29a559}\label{classBowControl_a1e738a6854d44a43b309f1ad9a29a559} 
+\index{BowControl@{BowControl}!update@{update}}
+\index{update@{update}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Bow\+Control\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a1e738a6854d44a43b309f1ad9a29a559_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a1e738a6854d44a43b309f1ad9a29a559_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_adc093196abff58a20a09a47a34dc8962}\label{classBowControl_adc093196abff58a20a09a47a34dc8962} 
+\index{BowControl@{BowControl}!updateMotorAutoShutdown@{updateMotorAutoShutdown}}
+\index{updateMotorAutoShutdown@{updateMotorAutoShutdown}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{updateMotorAutoShutdown()}{updateMotorAutoShutdown()}}
+{\footnotesize\ttfamily void Bow\+Control\+::update\+Motor\+Auto\+Shutdown (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_adc093196abff58a20a09a47a34dc8962_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_adc093196abff58a20a09a47a34dc8962_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a3a87552e91d321d9bcaf6d81b2723798}\label{classBowControl_a3a87552e91d321d9bcaf6d81b2723798} 
+\index{BowControl@{BowControl}!updateMotorStatus@{updateMotorStatus}}
+\index{updateMotorStatus@{updateMotorStatus}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{updateMotorStatus()}{updateMotorStatus()}}
+{\footnotesize\ttfamily void Bow\+Control\+::update\+Motor\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a3a87552e91d321d9bcaf6d81b2723798_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a3a87552e91d321d9bcaf6d81b2723798_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a49f7fa12c0ca3a731d042b4a4adc6324}\label{classBowControl_a49f7fa12c0ca3a731d042b4a4adc6324} 
+\index{BowControl@{BowControl}!updatePID@{updatePID}}
+\index{updatePID@{updatePID}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{updatePID()}{updatePID()}}
+{\footnotesize\ttfamily void Bow\+Control\+::update\+PID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a49f7fa12c0ca3a731d042b4a4adc6324_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a49f7fa12c0ca3a731d042b4a4adc6324_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a6591f25b0e546db27e70518e9586f2c7}\label{classBowControl_a6591f25b0e546db27e70518e9586f2c7} 
+\index{BowControl@{BowControl}!updateRun\_PID@{updateRun\_PID}}
+\index{updateRun\_PID@{updateRun\_PID}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{updateRun\_PID()}{updateRun\_PID()}}
+{\footnotesize\ttfamily void Bow\+Control\+::update\+Run\+\_\+\+PID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a6591f25b0e546db27e70518e9586f2c7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a6591f25b0e546db27e70518e9586f2c7_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a4d7960dead828ad7034c5c106637d3fd}\label{classBowControl_a4d7960dead828ad7034c5c106637d3fd} 
+\index{BowControl@{BowControl}!updateServo@{updateServo}}
+\index{updateServo@{updateServo}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{updateServo()}{updateServo()}}
+{\footnotesize\ttfamily void Bow\+Control\+::update\+Servo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a4d7960dead828ad7034c5c106637d3fd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a4d7960dead828ad7034c5c106637d3fd_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a71bbd615a798d1e7294a79ad16f0555a}\label{classBowControl_a71bbd615a798d1e7294a79ad16f0555a} 
+\index{BowControl@{BowControl}!updateTachometer@{updateTachometer}}
+\index{updateTachometer@{updateTachometer}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{updateTachometer()}{updateTachometer()}}
+{\footnotesize\ttfamily void Bow\+Control\+::update\+Tachometer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a71bbd615a798d1e7294a79ad16f0555a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a71bbd615a798d1e7294a79ad16f0555a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_ae3e25debfb3d98b39c85b4e67dfc3183}\label{classBowControl_ae3e25debfb3d98b39c85b4e67dfc3183} 
+\index{BowControl@{BowControl}!waitForPressureToSettle@{waitForPressureToSettle}}
+\index{waitForPressureToSettle@{waitForPressureToSettle}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{waitForPressureToSettle()}{waitForPressureToSettle()}}
+{\footnotesize\ttfamily bool Bow\+Control\+::wait\+For\+Pressure\+To\+Settle (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{timeout = {\ttfamily 3000} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ae3e25debfb3d98b39c85b4e67dfc3183_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ae3e25debfb3d98b39c85b4e67dfc3183_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}\label{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58} 
+\index{BowControl@{BowControl}!bowPressure@{bowPressure}}
+\index{bowPressure@{bowPressure}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{bowPressure}{bowPressure}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classBowPressure}{Bow\+Pressure}}\texorpdfstring{$\ast$}{*} Bow\+Control\+::bow\+Pressure = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classBowControl_add46f10b20a135292c0650d1453b6f38}\label{classBowControl_add46f10b20a135292c0650d1453b6f38} 
+\index{BowControl@{BowControl}!bowShutoffMotorDisabled@{bowShutoffMotorDisabled}}
+\index{bowShutoffMotorDisabled@{bowShutoffMotorDisabled}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{bowShutoffMotorDisabled}{bowShutoffMotorDisabled}}
+{\footnotesize\ttfamily bool Bow\+Control\+::bow\+Shutoff\+Motor\+Disabled = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classBowControl_a660628c5489ef9ac1bc4160cab81a8a0}\label{classBowControl_a660628c5489ef9ac1bc4160cab81a8a0} 
+\index{BowControl@{BowControl}!bowShutoffTimedout@{bowShutoffTimedout}}
+\index{bowShutoffTimedout@{bowShutoffTimedout}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{bowShutoffTimedout}{bowShutoffTimedout}}
+{\footnotesize\ttfamily bool Bow\+Control\+::bow\+Shutoff\+Timedout = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classBowControl_a1436681ee5d3b07547d8a18791f6d9a9}\label{classBowControl_a1436681ee5d3b07547d8a18791f6d9a9} 
+\index{BowControl@{BowControl}!bowShutoffTimeout@{bowShutoffTimeout}}
+\index{bowShutoffTimeout@{bowShutoffTimeout}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{bowShutoffTimeout}{bowShutoffTimeout}}
+{\footnotesize\ttfamily uint16\+\_\+t Bow\+Control\+::bow\+Shutoff\+Timeout = 1000\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classBowControl_a9661a56ba31c3ac180cca845462e126e}\label{classBowControl_a9661a56ba31c3ac180cca845462e126e} 
+\index{BowControl@{BowControl}!bowShutoffTimer@{bowShutoffTimer}}
+\index{bowShutoffTimer@{bowShutoffTimer}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{bowShutoffTimer}{bowShutoffTimer}}
+{\footnotesize\ttfamily elapsed\+Millis Bow\+Control\+::bow\+Shutoff\+Timer\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classBowControl_a74f0eb026fb337a254953127b09d9de9}\label{classBowControl_a74f0eb026fb337a254953127b09d9de9} 
+\index{BowControl@{BowControl}!commandsMotorFault@{commandsMotorFault}}
+\index{commandsMotorFault@{commandsMotorFault}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{commandsMotorFault}{commandsMotorFault}}
+{\footnotesize\ttfamily String Bow\+Control\+::commands\+Motor\+Fault = "{}"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classBowControl_a758d29eb32ccdf7d69e8e5026e34a043}\label{classBowControl_a758d29eb32ccdf7d69e8e5026e34a043} 
+\index{BowControl@{BowControl}!commandsOverPowerCurrent@{commandsOverPowerCurrent}}
+\index{commandsOverPowerCurrent@{commandsOverPowerCurrent}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{commandsOverPowerCurrent}{commandsOverPowerCurrent}}
+{\footnotesize\ttfamily String Bow\+Control\+::commands\+Over\+Power\+Current = "{}"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classBowControl_a38164fbaeced2317f73f5febac582323}\label{classBowControl_a38164fbaeced2317f73f5febac582323} 
+\index{BowControl@{BowControl}!dcMotorControl@{dcMotorControl}}
+\index{dcMotorControl@{dcMotorControl}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{dcMotorControl}{dcMotorControl}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDCMotorControl}{DCMotor\+Control}}\texorpdfstring{$\ast$}{*} Bow\+Control\+::dc\+Motor\+Control = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classBowControl_ac8743e51d6e90939a32feed0f820d5f8}\label{classBowControl_ac8743e51d6e90939a32feed0f820d5f8} 
+\index{BowControl@{BowControl}!lastUpdate@{lastUpdate}}
+\index{lastUpdate@{lastUpdate}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{lastUpdate}{lastUpdate}}
+{\footnotesize\ttfamily uint32\+\_\+t Bow\+Control\+::last\+Update = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Time of last \doxylink{classBowControl_a1e738a6854d44a43b309f1ad9a29a559}{update()} call. 
+
+\Hypertarget{classBowControl_a02921994677bd6d96ea0840ef325eb78}\label{classBowControl_a02921994677bd6d96ea0840ef325eb78} 
+\index{BowControl@{BowControl}!manualMotorPWM@{manualMotorPWM}}
+\index{manualMotorPWM@{manualMotorPWM}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{manualMotorPWM}{manualMotorPWM}}
+{\footnotesize\ttfamily uint16\+\_\+t Bow\+Control\+::manual\+Motor\+PWM = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classBowControl_a4c7c25f21250755ca0b012088ac7c006}\label{classBowControl_a4c7c25f21250755ca0b012088ac7c006} 
+\index{BowControl@{BowControl}!pidController@{pidController}}
+\index{pidController@{pidController}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{pidController}{pidController}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classPIDController}{PIDController}}\texorpdfstring{$\ast$}{*} Bow\+Control\+::pid\+Controller = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classBowControl_a42be04959663fd67a1d054d33c8bea36}\label{classBowControl_a42be04959663fd67a1d054d33c8bea36} 
+\index{BowControl@{BowControl}!PIDon@{PIDon}}
+\index{PIDon@{PIDon}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{PIDon}{PIDon}}
+{\footnotesize\ttfamily bool Bow\+Control\+::\+PIDon = true\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Set to true if the PID is turned on. 
+
+\Hypertarget{classBowControl_a6ef6cfda459694dca3afa9d9ad049ced}\label{classBowControl_a6ef6cfda459694dca3afa9d9ad049ced} 
+\index{BowControl@{BowControl}!pidUpdateInterval@{pidUpdateInterval}}
+\index{pidUpdateInterval@{pidUpdateInterval}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{pidUpdateInterval}{pidUpdateInterval}}
+{\footnotesize\ttfamily uint16\+\_\+t Bow\+Control\+::pid\+Update\+Interval = 1000\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The interval at which the PID is being called, given in uS. 
+
+\Hypertarget{classBowControl_a6f8c5fa626567fb11951672b76008574}\label{classBowControl_a6f8c5fa626567fb11951672b76008574} 
+\index{BowControl@{BowControl}!run@{run}}
+\index{run@{run}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{run}{run}}
+{\footnotesize\ttfamily bool Bow\+Control\+::run = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Set to true if the bowing wheel is running. 
+
+\Hypertarget{classBowControl_af4e1e48fb1eca92f085369c3f5ef2dd7}\label{classBowControl_af4e1e48fb1eca92f085369c3f5ef2dd7} 
+\index{BowControl@{BowControl}!speedMode@{speedMode}}
+\index{speedMode@{speedMode}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{speedMode}{speedMode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{e\+Speed\+Mode}} Bow\+Control\+::speed\+Mode = \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389}{e\+Speed\+Mode\+::\+Automatic}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{bowcontrol_8hpp}{bowcontrol.\+hpp}}\item 
+\mbox{\hyperlink{bowcontrol_8cpp}{bowcontrol.\+cpp}}\end{DoxyCompactItemize}

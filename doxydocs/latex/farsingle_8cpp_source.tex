@@ -1,0 +1,156 @@
+\doxysection{farsingle.\+cpp}
+\hypertarget{farsingle_8cpp_source}{}\label{farsingle_8cpp_source}\index{farsingle.cpp@{farsingle.cpp}}
+\mbox{\hyperlink{farsingle_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ FARSINGLE\_C}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ FARSINGLE\_C}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{farsingle_8hpp}{farsingle.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \mbox{\hyperlink{classFARSingle_a8867fca68311c8c3c68478251009a26b}{FARSingle::FARSingle}}(\textcolor{keywordtype}{void}\ *muteStepperCallback,\ \textcolor{keywordtype}{void}\ *pressureStepperCallback,\ \textcolor{keywordtype}{void}\ *tachometerCallback,\ \textcolor{keywordtype}{void}\ *pidCallback)\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \mbox{\hyperlink{classFARSingle_a68a03592fb8cc597309f1409bed459e7}{muteControl}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classMuteControl}{MuteControl}}(-\/1,\ 5,\ 4,\ \&Serial5,\ 13);}
+\DoxyCodeLine{00008\ \ \ \ \ \mbox{\hyperlink{classFARSingle_a31056bbccc0d2235e1dfb2996615f2a9}{hammerControl}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classSolenoid}{Solenoid}}(3);}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classBowControl}{BowControl}}(2,\ 14,\ 15,12,\ 23,\ 11,\ -\/1,\ 10,\ 9,\ \&Serial2,6);}
+\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{classFARSingle_afe32373244a4094dd125895bfb845be2}{harmonicSeriesHandler}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}}();}
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{classFARSingle_a63878675dd491b77b675363ef9de1012}{bowActuators}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classBowActuators}{BowActuators}}(\mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a137b369227f3987d523e0ace27f4f43a}{getBowPressureReference}}());}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{classFARSingle_ad2d29c0778cac9e2bc2d4067e0a2aca5}{calibrateBow}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classCalibrateBow}{CalibrateBow}}(\mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}});}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{classFARSingle_a2e451e94db555be3d3b17d04fa49f89b}{calibrateMute}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classCalibrateMute}{CalibrateMute}}(*\mbox{\hyperlink{classFARSingle_a68a03592fb8cc597309f1409bed459e7}{muteControl}},\ *\mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}},\ *\mbox{\hyperlink{classFARSingle_afe32373244a4094dd125895bfb845be2}{harmonicSeriesHandler}});}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_abba2ffc34c55b9c4210e5b6d54014446}{enableBowMotorPower}}();}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a170f00fa76b4cd121942106a07e3e68d}{getTMC2209Info}}();}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{classFARSingle_a68a03592fb8cc597309f1409bed459e7}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a0b8c5390fa49a071ded9f8e8e1ca32c7}{getTMC2209Info}}();}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a521548efe320100aa2c4aa81280e52f2}{home}}();}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{classFARSingle_a68a03592fb8cc597309f1409bed459e7}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a8d5b7702ac593f801e3ca282c262ce07}{home}}();}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{float}\ equalSeries[12]\ =\ \{\ 1,\ 1.059463094,\ 1.122462048,\ 1.189207115,\ 1.25992105,\ 1.334839854,\ 1.414213562,\ 1.498307077,\ 1.587401052,\ 1.681792831,\ 1.781797436,\ 1.887748625\ \};}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{float}\ justSeries[12]\ =\ \{1,\ 1.06667,\ 1.125,\ 1.2,\ 1.25,\ 1.3333,\ 1.40625,\ 1.5,\ 1.6,\ 1.66667,\ 1.8,\ 1.875\ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classFARSingle_afe32373244a4094dd125895bfb845be2}{harmonicSeriesHandler}}-\/>\mbox{\hyperlink{classHarmonicSeriesHandler_a506b6abb6c7e48645e6b3ad662c469ec}{addHarmonicSeries}}(\textcolor{stringliteral}{"{}\(\backslash\)"{}Just\ intonation\(\backslash\)"{}"{}},\ justSeries);}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classFARSingle_afe32373244a4094dd125895bfb845be2}{harmonicSeriesHandler}}-\/>\mbox{\hyperlink{classHarmonicSeriesHandler_a506b6abb6c7e48645e6b3ad662c469ec}{addHarmonicSeries}}(\textcolor{stringliteral}{"{}\(\backslash\)"{}Equal\ temperament\(\backslash\)"{}"{}},\ equalSeries);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}}-\/>\mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{addCommands}}(\textcolor{stringliteral}{"{}bhs:0"{}});}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classFARSingle_a1aaa3b28349ab94a4ca07f93fffc8689}{controlReader}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classControlReader}{ControlReader}}(17,\ 16);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{classFARSingle_a68a03592fb8cc597309f1409bed459e7}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_ad03b7fd3c3f10ffad2ec544c45aab2c9}{setStepIntervalCallback}}(muteStepperCallback);}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ab2eb10f1ad7f96658220148ef6f8da9e}{setStepIntervalCallback}}(pressureStepperCallback);}
+\DoxyCodeLine{00035\ \ \ \ \ attachInterrupt(digitalPinToInterrupt(12),\ tachometerCallback,\ CHANGE);}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classFARSingle_a285df2d7ee4cb1fb05aef87789a71d4b}{pidInterrupt0}}.begin(pidCallback,\ \mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ae534079033431afa0cb94651b3f70b5d}{getPIDUpdateInterval}}());}
+\DoxyCodeLine{00037\ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classFARSingle_a6b41b240f8b7ff3b3fcda42dab37e8de}{FARSingle::processSerialCommand}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request,\ \textcolor{keywordtype}{bool}\ delegate,\ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands)\ \{}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a2eea721b98604de46300feecf7703b60}{processCommandItems}}(inCommandItem,\ \mbox{\hyperlink{farsingle_8hpp_a04b385c579c76fd09655085a4cebbe64}{serialCommandsFarSingle}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{farsingle_8hpp_a04b385c579c76fd09655085a4cebbe64}{serialCommandsFarSingle}})\ \ /\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}));}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ processResult\ =\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ calibrationResult;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}help"{}})\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a9584ed5f207c1c49b9a477ada94421f8}{addCommandHelp}}(\mbox{\hyperlink{farsingle_8hpp_a04b385c579c76fd09655085a4cebbe64}{serialCommandsFarSingle}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{farsingle_8hpp_a04b385c579c76fd09655085a4cebbe64}{serialCommandsFarSingle}})\ /\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}),\ commandResponses,\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowcalibratespeed"{}})\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ calibrationResult\ =\ \mbox{\hyperlink{classFARSingle_ad2d29c0778cac9e2bc2d4067e0a2aca5}{calibrateBow}}-\/>\mbox{\hyperlink{classCalibrateBow_a9e92861c49ee1f093bec2d24ea3e35c2}{findMinMaxSpeedPWM}}();}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (calibrationResult\ ==\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa4441e965ce8b9b547cb19f8eadb1593e}{CR\_Ok}})\ \{\ processResult\ =\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};\ \}\ \textcolor{keywordflow}{else}\ \{\ \mbox{\hyperlink{calibrationhelpers_8hpp_a9734ed9af0ab3c50186b7f5c779c0b7a}{exitWithError}}(calibrationResult);\ processResult\ =\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20}{eProcessResult::CommandFailed}};\ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bcs"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowcalibratepressure"{}})\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ calibrationResult\ =\ \mbox{\hyperlink{classFARSingle_ad2d29c0778cac9e2bc2d4067e0a2aca5}{calibrateBow}}-\/>\mbox{\hyperlink{classCalibrateBow_a4420111fa3dd5f773d96b16aafc8972b}{findMinMaxPressure}}();}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (calibrationResult\ ==\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa4441e965ce8b9b547cb19f8eadb1593e}{CR\_Ok}})\ \{\ processResult\ =\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};\ \}\ \textcolor{keywordflow}{else}\ \{\ \mbox{\hyperlink{calibrationhelpers_8hpp_a9734ed9af0ab3c50186b7f5c779c0b7a}{exitWithError}}(calibrationResult);\ processResult\ =\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20}{eProcessResult::CommandFailed}};\ \}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bcp"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}mutecalibrate"{}})\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ calibrationResult\ =\ \mbox{\hyperlink{classFARSingle_a2e451e94db555be3d3b17d04fa49f89b}{calibrateMute}}-\/>\mbox{\hyperlink{classCalibrateMute_ae594e44bb589d71df3ea674151500335}{calibrateAll}}();}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (calibrationResult\ ==\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa4441e965ce8b9b547cb19f8eadb1593e}{CR\_Ok}})\ \{\ processResult\ =\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};\ \}\ \textcolor{keywordflow}{else}\ \{\ \mbox{\hyperlink{calibrationhelpers_8hpp_a9734ed9af0ab3c50186b7f5c779c0b7a}{exitWithError}}(calibrationResult);\ processResult\ =\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20}{eProcessResult::CommandFailed}};\ \}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}mca"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowcalibrateall"{}})\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classFARSingle_ad2d29c0778cac9e2bc2d4067e0a2aca5}{calibrateBow}}-\/>\mbox{\hyperlink{classCalibrateBow_ac30fefcd9f184fa2f7258c6c2e354f57}{calibrateAll}}())\ \{\ processResult\ =\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};\ \}\ \textcolor{keywordflow}{else}\ \{\ processResult\ =\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20}{eProcessResult::CommandFailed}};\ \}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bca"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}mutecalibrate"{}})\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classFARSingle_a2e451e94db555be3d3b17d04fa49f89b}{calibrateMute}}-\/>\mbox{\hyperlink{classCalibrateMute_ae594e44bb589d71df3ea674151500335}{calibrateAll}}())\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}mca:1"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}mca:0"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00083\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}pickupstringfrequency"{}})\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{audioanalyze_8h_aa486c0bb291c2cef78ca63c3169f303b}{audioFrequencyAvaliable}}())\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}psf:"{}}\ +\ String(\mbox{\hyperlink{audioanalyze_8h_a8ecd861231dbd0db5f6e4771b3422137}{audioFrequency}}(),1),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}psf:\ 0"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00090\ \ \ \ \ \}\ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}pickupaudiopeak"{}})\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}pap:"{}}\ +\ String(\mbox{\hyperlink{audioanalyze_8h_a46623e59a36a0f978fef31fb33f2efd1}{audioPeakAmplitude}}()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00093\ \ \ \ \ \}\ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}pickupaudiorms"{}})\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}par:"{}}\ +\ String(\mbox{\hyperlink{audioanalyze_8h_ae3b3ce9622c1f8f5f25f46ebe4bc8ced}{audioRMSAmplitude}}()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00096\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ processResult\ =\ \mbox{\hyperlink{classFARSingle_a68a03592fb8cc597309f1409bed459e7}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a34845eb34893ebd4c145a3421059c05f}{processSerialCommand}}(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}})\ \&\&\ (processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{eProcessResult::PassThrough}}))\ \{\ \textcolor{keywordflow}{return}\ processResult;\ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ processResult\ =\ \mbox{\hyperlink{classFARSingle_a31056bbccc0d2235e1dfb2996615f2a9}{hammerControl}}-\/>\mbox{\hyperlink{classSolenoid_af91c71ce2ab45bc89bd8c2db248a6b4a}{processSerialCommand}}(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}})\ \&\&\ (processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{eProcessResult::PassThrough}}))\ \{\ \textcolor{keywordflow}{return}\ processResult;\ \}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ processResult\ =\ \mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_af6e98ea3176a266902b7f95b409553b9}{processSerialCommand}}(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}})\ \&\&\ (processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{eProcessResult::PassThrough}}))\ \{\ \textcolor{keywordflow}{return}\ processResult;\ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ processResult\ =\ \mbox{\hyperlink{classFARSingle_a63878675dd491b77b675363ef9de1012}{bowActuators}}-\/>\mbox{\hyperlink{classBowActuators_af9cd94a6d5c7e12d8871774bd84ffd0d}{processSerialCommand}}(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}})\ \{\ \textcolor{keywordflow}{return}\ processResult;\ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ processResult\ =\ \mbox{\hyperlink{classFARSingle_afe32373244a4094dd125895bfb845be2}{harmonicSeriesHandler}}-\/>\mbox{\hyperlink{classHarmonicSeriesHandler_a06220884c93228a86ea1f524aae21843}{processSerialCommand}}(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}
+\DoxyCodeLine{00110\ \ \ \ \ \}}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{return}\ processResult;}
+\DoxyCodeLine{00112\ \}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classFARSingle_ac520d53f1804ea44028892be951aa7c7}{FARSingle::processSerialCommandHidden}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request,\ \textcolor{keywordtype}{bool}\ delegate,\ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands)\ \{}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ processResult;}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ processResult\ =\ \mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_acb0918bfce04f9b93899133f4f73db9a}{processSerialCommandHidden}}(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordflow}{if}\ ((processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}})\ \&\&\ (processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{eProcessResult::PassThrough}}))\ \{\ \textcolor{keywordflow}{return}\ processResult;\ \}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ processResult\ =\ \mbox{\hyperlink{classFARSingle_a68a03592fb8cc597309f1409bed459e7}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_ab23faefce75e7dc308e857f56114221c}{processSerialCommandHidden}}(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordflow}{if}\ ((processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}})\ \&\&\ (processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{eProcessResult::PassThrough}}))\ \{\ \textcolor{keywordflow}{return}\ processResult;\ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}};}
+\DoxyCodeLine{00125\ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ String\ \mbox{\hyperlink{classFARSingle_ae5957205745a7026266deed9e7a3bc96}{FARSingle::dumpData}}()\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ String\ dump\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00129\ \ \ \ \ dump\ +=\ \mbox{\hyperlink{classFARSingle_a68a03592fb8cc597309f1409bed459e7}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a957f11cc6ff4ff5013d23c4475e0297e}{dumpData}}();}
+\DoxyCodeLine{00130\ \ \ \ \ dump\ +=\ \mbox{\hyperlink{classFARSingle_a31056bbccc0d2235e1dfb2996615f2a9}{hammerControl}}-\/>\mbox{\hyperlink{classSolenoid_a5d744ed87a648522a3f4669bc907b68b}{dumpData}}();}
+\DoxyCodeLine{00131\ \ \ \ \ dump\ +=\ \mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_aa280a126dd30e3510c9dcb722d126b3e}{dumpData}}();}
+\DoxyCodeLine{00132\ \ \ \ \ dump\ +=\ \mbox{\hyperlink{classFARSingle_a63878675dd491b77b675363ef9de1012}{bowActuators}}-\/>\mbox{\hyperlink{classBowActuators_a0f7998db6eb3b67544ac8ed6be44a43d}{dumpData}}();}
+\DoxyCodeLine{00133\ \ \ \ \ dump\ +=\ \mbox{\hyperlink{classFARSingle_afe32373244a4094dd125895bfb845be2}{harmonicSeriesHandler}}-\/>\mbox{\hyperlink{classHarmonicSeriesHandler_a6fc4b36d42469f130de9e1e7be7f19c8}{dumpData}}();}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordflow}{return}\ dump;}
+\DoxyCodeLine{00135\ \}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFARSingle_a5ff8d0c173cd6127a732f4c0dc51eb28}{FARSingle::updateControlReader}}()\ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \mbox{\hyperlink{classFARSingle_a1aaa3b28349ab94a4ca07f93fffc8689}{controlReader}}-\/>\mbox{\hyperlink{classControlReader_a8998d3ffc4f19f45f2a7bc4061cc8e5a}{readData}}();}
+\DoxyCodeLine{00139\ \}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFARSingle_a3a9e394d329c21b7b0acf5ff419004bc}{FARSingle::update}}()\ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classFARSingle_afe32373244a4094dd125895bfb845be2}{harmonicSeriesHandler}}-\/>\mbox{\hyperlink{classHarmonicSeriesHandler_a69ca24dc5cdbe6467027bf1b48275e11}{checkFrequencyChanged}}())\ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a0e73b848916039905df02ec2d243afdb}{setBowSpeedHZ}}(\mbox{\hyperlink{classFARSingle_afe32373244a4094dd125895bfb845be2}{harmonicSeriesHandler}}-\/>\mbox{\hyperlink{classHarmonicSeriesHandler_aefbeacf5b5058bcc3ff0fed6486b4edb}{getCalculatedFrequency}}());}
+\DoxyCodeLine{00144\ \ \ \ \ \}}
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{classFARSingle_a31056bbccc0d2235e1dfb2996615f2a9}{hammerControl}}-\/>\mbox{\hyperlink{classSolenoid_ab6a5e1734209835072e6f106aa2d5bb2}{update}}();}
+\DoxyCodeLine{00146\ \ \ \ \ \mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a1e738a6854d44a43b309f1ad9a29a559}{update}}();}
+\DoxyCodeLine{00147\ \ \ \ \ \mbox{\hyperlink{classFARSingle_a68a03592fb8cc597309f1409bed459e7}{muteControl}}-\/>\mbox{\hyperlink{classMuteControl_a372e65c7dbf40cf10718dc56a431e307}{update}}();}
+\DoxyCodeLine{00148\ \}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ FARSINGLE\_C}}
+
+\end{DoxyCode}

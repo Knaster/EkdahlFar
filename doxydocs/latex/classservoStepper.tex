@@ -2,38 +2,8 @@
 \hypertarget{classservoStepper}{}\label{classservoStepper}\index{servoStepper@{servoStepper}}
 
 
-The purpose of this class is to control stepper motors in terms of positional indexing much like RC servos.  
-
-
-
-
 {\ttfamily \#include $<$servostepper.\+hpp$>$}
 
-\doxysubsubsection*{Public Types}
-\begin{DoxyCompactItemize}
-\item 
-enum \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} \{ \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{REVERSE}} = 1
-, \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{FORWARD}} = 0
- \}
-\item 
-enum \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42}{e\+Homing\+Stage}} \{ \newline
-\mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42ad7b55eed63ef10b2add929ccc94eaaa9}{UNHOMED}}
-, \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a9406b576f5985eb0bc2f49da6a4ad336}{HOMED}}
-, \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a505fadaa06649853019b1b4dc6cc2eb5}{FIRSTHOMINGRISING}}
-, \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42ae40250a983d27f9d38adf9d10beab90b}{SECONDHOMINGFALLING}}
-, \newline
-\mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42af6d30c9ff1f19b7bec2557deeebaf9bf}{SECONDHOMINGRISING}}
-, \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a4c287b2fc3feb84f7148d099d52b7e3e}{FIRSTHOMINGFALLING}}
-, \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42acbed0dc60a71217c92d5af06a2a5c80f}{MOVEPASTHOMESWITCH}}
-, \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a8cf3a73bb6d3c91bf1d4dd9e47264a10}{MOVETOHOMESWITCH}}
-, \newline
-\mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a0af78a28f0bed73e3e49e45b30000511}{GOTOOFFSET}}
- \}
-\item 
-enum \mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057da}{e\+Edge\+Type}} \{ \mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057daa936595004e6457bd5213f923f0234e2a}{EDGERISING}} = 1
-, \mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057daaddee3394b72af39e200858af955489a8}{EDGEFALLING}} = 0
- \}
-\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -49,13 +19,13 @@ bool \mbox{\hyperlink{classservoStepper_a956548f11365d2125448516fc53203fd}{get\+
 \item 
 bool \mbox{\hyperlink{classservoStepper_ad79f81cac6e020bde6984fd441371605}{get\+Homing\+Sensed}} ()
 \item 
-\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} \mbox{\hyperlink{classservoStepper_aee3bf6486d198d08cc378102cb017572}{get\+Move\+Direction}} ()
+\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} \mbox{\hyperlink{classservoStepper_aee3bf6486d198d08cc378102cb017572}{get\+Move\+Direction}} ()
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classservoStepper_a5ede814e327f2803b816f898bb669cce}{get\+Current\+Step}} ()
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classservoStepper_aa37a01a450f75e97f0948dbc7c22ce31}{get\+Homing\+Point}} (uint8\+\_\+t x, uint8\+\_\+t y)
 \item 
-\mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42}{e\+Homing\+Stage}} \mbox{\hyperlink{classservoStepper_a704d1249aa4b752da990c7d62d612b18}{get\+Homing\+Stage}} ()
+\mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9}{e\+Homing\+Stage}} \mbox{\hyperlink{classservoStepper_a704d1249aa4b752da990c7d62d612b18}{get\+Homing\+Stage}} ()
 \item 
 void \mbox{\hyperlink{classservoStepper_a981bafbfa5bf82c13a4e620aab894dc2}{update\+Position}} (bool interrupt\+Driven=true)
 \item 
@@ -65,7 +35,7 @@ void \mbox{\hyperlink{classservoStepper_a5de698c0807fbb76b5139ee8d9d27449}{set\+
 \item 
 void \mbox{\hyperlink{classservoStepper_a5b83203a3efaeceaaa8bdbaab37624a6}{e\+Stop}} ()
 \item 
-bool \mbox{\hyperlink{classservoStepper_a30df0093cfd5951322cb0bdf857e4209}{home}} (\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} in\+Homing\+Direction=\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{e\+Step\+Direction\+::\+REVERSE}}, uint8\+\_\+t in\+Homing\+Speed\+Rough=10, uint8\+\_\+t in\+Homing\+Speed\+Fine=5, \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} in\+Offset\+Direction=\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{e\+Step\+Direction\+::\+FORWARD}})
+bool \mbox{\hyperlink{classservoStepper_a30df0093cfd5951322cb0bdf857e4209}{home}} (\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} in\+Homing\+Direction=\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9}{e\+Step\+Direction\+::\+REVERSE}}, uint8\+\_\+t in\+Homing\+Speed\+Rough=10, uint8\+\_\+t in\+Homing\+Speed\+Fine=5, \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} in\+Offset\+Direction=\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8aa26736999186daf8146f809e863712a1}{e\+Step\+Direction\+::\+FORWARD}})
 \item 
 bool \mbox{\hyperlink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{complete\+Task}} (uint16\+\_\+t timeout=3000)
 \end{DoxyCompactItemize}
@@ -97,9 +67,9 @@ String \mbox{\hyperlink{classservoStepper_a1ce32e635777e6e5ce904dfc3a935e8a}{int
 \doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classservoStepper_a2bf706707316fe6953dd80b462329264}{set\+Direction}} (\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} in\+Direction)
+void \mbox{\hyperlink{classservoStepper_a2bf706707316fe6953dd80b462329264}{set\+Direction}} (\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} in\+Direction)
 \item 
-\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} \mbox{\hyperlink{classservoStepper_a8f11cc27e61d5cf2a8bbe79843f6198c}{not\+Direction}} (\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} in\+Direction)
+\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} \mbox{\hyperlink{classservoStepper_a8f11cc27e61d5cf2a8bbe79843f6198c}{not\+Direction}} (\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} in\+Direction)
 \item 
 void \mbox{\hyperlink{classservoStepper_aa2ba385db7d51af709ada204f4513e3e}{calculate\+Acceleration}} ()
 \item 
@@ -109,7 +79,7 @@ void \mbox{\hyperlink{classservoStepper_aeecabbc0f2f57edd9bb49740b1b9a1bc}{step\
 \item 
 void \mbox{\hyperlink{classservoStepper_a6ac51a96a27dfaccd4b88da6bc4021b7}{step\+Next}} ()
 \item 
-\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} \mbox{\hyperlink{classservoStepper_a6e907b5b11ec3a35b96e98c3f0c88e0f}{get\+Direction\+To}} (uint16\+\_\+t position)
+\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} \mbox{\hyperlink{classservoStepper_a6e907b5b11ec3a35b96e98c3f0c88e0f}{get\+Direction\+To}} (uint16\+\_\+t position)
 \item 
 void \mbox{\hyperlink{classservoStepper_af927425c748666b146956f455effbcad}{update\+Position\+Move}} ()
 \item 
@@ -138,9 +108,9 @@ uint8\+\_\+t \mbox{\hyperlink{classservoStepper_a03ab7d33858f698587e4a9704cb321b
 \item 
 uint8\+\_\+t \mbox{\hyperlink{classservoStepper_a0753a0f4c51819d1160649f2049dd4bf}{pin\+Home\+Sense}}
 \item 
-\mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42}{e\+Homing\+Stage}} \mbox{\hyperlink{classservoStepper_aaeec33f9238f23b40f43b8c89cc84d0c}{homing}} = \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42ad7b55eed63ef10b2add929ccc94eaaa9}{UNHOMED}}
+\mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9}{e\+Homing\+Stage}} \mbox{\hyperlink{classservoStepper_aaeec33f9238f23b40f43b8c89cc84d0c}{homing}} = \mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a380c2e3ab567f5c3c5029541f2344d95}{UNHOMED}}
 \item 
-\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} \mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{move\+Direction}} = \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{e\+Step\+Direction\+::\+REVERSE}}
+\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} \mbox{\hyperlink{classservoStepper_a7c94ef2adcc44ed88259ac8fa975a838}{move\+Direction}} = \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9}{e\+Step\+Direction\+::\+REVERSE}}
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}{homing\+Point}} \mbox{[}2\mbox{]}\mbox{[}2\mbox{]}
 \item 
@@ -148,9 +118,9 @@ uint8\+\_\+t \mbox{\hyperlink{classservoStepper_aed902bec2725fcf75e3f82d19315dfd
 \item 
 uint8\+\_\+t \mbox{\hyperlink{classservoStepper_af156c423af8217472fb988b128029827}{homing\+Speed\+Fine}} = 5
 \item 
-\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} \mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homing\+Direction}} = \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{e\+Step\+Direction\+::\+REVERSE}}
+\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} \mbox{\hyperlink{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}{homing\+Direction}} = \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9}{e\+Step\+Direction\+::\+REVERSE}}
 \item 
-\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} \mbox{\hyperlink{classservoStepper_a9c8a82d5e9c78f0afa91ceb73cda10e1}{homing\+Offset\+Direction}} = \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{e\+Step\+Direction\+::\+FORWARD}}
+\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} \mbox{\hyperlink{classservoStepper_a9c8a82d5e9c78f0afa91ceb73cda10e1}{homing\+Offset\+Direction}} = \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8aa26736999186daf8146f809e863712a1}{e\+Step\+Direction\+::\+FORWARD}}
 \item 
 int16\+\_\+t \mbox{\hyperlink{classservoStepper_a9299674dd6d8b2ee02a3591792597f7a}{homing\+Offset}} = 0
 \item 
@@ -184,7 +154,7 @@ bool \mbox{\hyperlink{classservoStepper_a73dc65d535b94ea9429756164cc0f745}{turn\
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classservoStepper_ac05330644fb45e70fb5e33ffc96c0081}{turn\+Around\+Position}} = 0
 \item 
-\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} \mbox{\hyperlink{classservoStepper_ab04d4e3c9ed825d5d00ab325ef528e07}{turn\+Around\+Direction}} = \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{e\+Step\+Direction\+::\+REVERSE}}
+\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} \mbox{\hyperlink{classservoStepper_ab04d4e3c9ed825d5d00ab325ef528e07}{turn\+Around\+Direction}} = \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9}{e\+Step\+Direction\+::\+REVERSE}}
 \item 
 bool \mbox{\hyperlink{classservoStepper_a64601bfc98656bc629953d6ca7a249b0}{invert\+Direction}} = true
 \item 
@@ -196,94 +166,6 @@ uint16\+\_\+t \mbox{\hyperlink{classservoStepper_ad981181ba349dab9d8ff9cc1b0464b
 \end{DoxyCompactItemize}
 
 
-\doxysubsection{Detailed Description}
-The purpose of this class is to control stepper motors in terms of positional indexing much like RC servos. 
-
-All functions are non-\/blocking and \doxylink{classservoStepper_a981bafbfa5bf82c13a4e620aab894dc2}{update\+Position()} has to be called continously in order for software and hardware to be updated.
-
-The function \doxylink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{complete\+Task()} can be called in order to block execution until the last command has completed or timed out
-
-The whole basis of indexing is in reference to a starting point; the home position. Therefore the first thing to do is to call the \doxylink{classservoStepper_a30df0093cfd5951322cb0bdf857e4209}{home()} function 
-
-\doxysubsection{Member Enumeration Documentation}
-\Hypertarget{classservoStepper_a3c86c3a849089ddd13a05cccc31057da}\label{classservoStepper_a3c86c3a849089ddd13a05cccc31057da} 
-\index{servoStepper@{servoStepper}!eEdgeType@{eEdgeType}}
-\index{eEdgeType@{eEdgeType}!servoStepper@{servoStepper}}
-\doxysubsubsection{\texorpdfstring{eEdgeType}{eEdgeType}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{classservoStepper_a3c86c3a849089ddd13a05cccc31057da}{servo\+Stepper\+::e\+Edge\+Type}}}
-
-\begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{EDGERISING@{EDGERISING}!servoStepper@{servoStepper}}\index{servoStepper@{servoStepper}!EDGERISING@{EDGERISING}}}\Hypertarget{classservoStepper_a3c86c3a849089ddd13a05cccc31057daa936595004e6457bd5213f923f0234e2a}\label{classservoStepper_a3c86c3a849089ddd13a05cccc31057daa936595004e6457bd5213f923f0234e2a} 
-EDGERISING&\\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{EDGEFALLING@{EDGEFALLING}!servoStepper@{servoStepper}}\index{servoStepper@{servoStepper}!EDGEFALLING@{EDGEFALLING}}}\Hypertarget{classservoStepper_a3c86c3a849089ddd13a05cccc31057daaddee3394b72af39e200858af955489a8}\label{classservoStepper_a3c86c3a849089ddd13a05cccc31057daaddee3394b72af39e200858af955489a8} 
-EDGEFALLING&\\
-\hline
-
-\end{DoxyEnumFields}
-\Hypertarget{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42}\label{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42} 
-\index{servoStepper@{servoStepper}!eHomingStage@{eHomingStage}}
-\index{eHomingStage@{eHomingStage}!servoStepper@{servoStepper}}
-\doxysubsubsection{\texorpdfstring{eHomingStage}{eHomingStage}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42}{servo\+Stepper\+::e\+Homing\+Stage}}}
-
-\begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{UNHOMED@{UNHOMED}!servoStepper@{servoStepper}}\index{servoStepper@{servoStepper}!UNHOMED@{UNHOMED}}}\Hypertarget{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42ad7b55eed63ef10b2add929ccc94eaaa9}\label{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42ad7b55eed63ef10b2add929ccc94eaaa9} 
-UNHOMED&\\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{HOMED@{HOMED}!servoStepper@{servoStepper}}\index{servoStepper@{servoStepper}!HOMED@{HOMED}}}\Hypertarget{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a9406b576f5985eb0bc2f49da6a4ad336}\label{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a9406b576f5985eb0bc2f49da6a4ad336} 
-HOMED&\\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{FIRSTHOMINGRISING@{FIRSTHOMINGRISING}!servoStepper@{servoStepper}}\index{servoStepper@{servoStepper}!FIRSTHOMINGRISING@{FIRSTHOMINGRISING}}}\Hypertarget{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a505fadaa06649853019b1b4dc6cc2eb5}\label{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a505fadaa06649853019b1b4dc6cc2eb5} 
-FIRSTHOMINGRISING&\\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{SECONDHOMINGFALLING@{SECONDHOMINGFALLING}!servoStepper@{servoStepper}}\index{servoStepper@{servoStepper}!SECONDHOMINGFALLING@{SECONDHOMINGFALLING}}}\Hypertarget{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42ae40250a983d27f9d38adf9d10beab90b}\label{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42ae40250a983d27f9d38adf9d10beab90b} 
-SECONDHOMINGFALLING&\\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{SECONDHOMINGRISING@{SECONDHOMINGRISING}!servoStepper@{servoStepper}}\index{servoStepper@{servoStepper}!SECONDHOMINGRISING@{SECONDHOMINGRISING}}}\Hypertarget{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42af6d30c9ff1f19b7bec2557deeebaf9bf}\label{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42af6d30c9ff1f19b7bec2557deeebaf9bf} 
-SECONDHOMINGRISING&\\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{FIRSTHOMINGFALLING@{FIRSTHOMINGFALLING}!servoStepper@{servoStepper}}\index{servoStepper@{servoStepper}!FIRSTHOMINGFALLING@{FIRSTHOMINGFALLING}}}\Hypertarget{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a4c287b2fc3feb84f7148d099d52b7e3e}\label{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a4c287b2fc3feb84f7148d099d52b7e3e} 
-FIRSTHOMINGFALLING&\\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{MOVEPASTHOMESWITCH@{MOVEPASTHOMESWITCH}!servoStepper@{servoStepper}}\index{servoStepper@{servoStepper}!MOVEPASTHOMESWITCH@{MOVEPASTHOMESWITCH}}}\Hypertarget{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42acbed0dc60a71217c92d5af06a2a5c80f}\label{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42acbed0dc60a71217c92d5af06a2a5c80f} 
-MOVEPASTHOMESWITCH&\\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{MOVETOHOMESWITCH@{MOVETOHOMESWITCH}!servoStepper@{servoStepper}}\index{servoStepper@{servoStepper}!MOVETOHOMESWITCH@{MOVETOHOMESWITCH}}}\Hypertarget{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a8cf3a73bb6d3c91bf1d4dd9e47264a10}\label{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a8cf3a73bb6d3c91bf1d4dd9e47264a10} 
-MOVETOHOMESWITCH&\\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{GOTOOFFSET@{GOTOOFFSET}!servoStepper@{servoStepper}}\index{servoStepper@{servoStepper}!GOTOOFFSET@{GOTOOFFSET}}}\Hypertarget{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a0af78a28f0bed73e3e49e45b30000511}\label{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42a0af78a28f0bed73e3e49e45b30000511} 
-GOTOOFFSET&\\
-\hline
-
-\end{DoxyEnumFields}
-\Hypertarget{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}\label{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae} 
-\index{servoStepper@{servoStepper}!eStepDirection@{eStepDirection}}
-\index{eStepDirection@{eStepDirection}!servoStepper@{servoStepper}}
-\doxysubsubsection{\texorpdfstring{eStepDirection}{eStepDirection}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{servo\+Stepper\+::e\+Step\+Direction}}}
-
-\begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{REVERSE@{REVERSE}!servoStepper@{servoStepper}}\index{servoStepper@{servoStepper}!REVERSE@{REVERSE}}}\Hypertarget{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}\label{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9} 
-REVERSE&\\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{FORWARD@{FORWARD}!servoStepper@{servoStepper}}\index{servoStepper@{servoStepper}!FORWARD@{FORWARD}}}\Hypertarget{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}\label{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641} 
-FORWARD&\\
-\hline
-
-\end{DoxyEnumFields}
-
-
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{classservoStepper_ab771a779ed197be6908dda161172bbc2}\label{classservoStepper_ab771a779ed197be6908dda161172bbc2} 
 \index{servoStepper@{servoStepper}!servoStepper@{servoStepper}}
@@ -291,8 +173,7 @@ FORWARD&\\
 \doxysubsubsection{\texorpdfstring{servoStepper()}{servoStepper()}}
 {\footnotesize\ttfamily servo\+Stepper\+::servo\+Stepper (\begin{DoxyParamCaption}\item[{byte}]{in\+Pin\+Step,  }\item[{byte}]{in\+Pin\+Dir,  }\item[{byte}]{in\+Pin\+Home\+Sense }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -322,8 +203,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{completeTask()}{completeTask()}}
 {\footnotesize\ttfamily bool servo\+Stepper\+::complete\+Task (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{timeout = {\ttfamily 3000} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -344,8 +224,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{correctPosition()}{correctPosition()}}
 {\footnotesize\ttfamily void servo\+Stepper\+::correct\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -391,7 +270,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{servoStepper@{servoStepper}!getDirectionTo@{getDirectionTo}}
 \index{getDirectionTo@{getDirectionTo}!servoStepper@{servoStepper}}
 \doxysubsubsection{\texorpdfstring{getDirectionTo()}{getDirectionTo()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} servo\+Stepper\+::get\+Direction\+To (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} servo\+Stepper\+::get\+Direction\+To (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -445,8 +324,15 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{servoStepper@{servoStepper}!getHomingStage@{getHomingStage}}
 \index{getHomingStage@{getHomingStage}!servoStepper@{servoStepper}}
 \doxysubsubsection{\texorpdfstring{getHomingStage()}{getHomingStage()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42}{e\+Homing\+Stage}} servo\+Stepper\+::get\+Homing\+Stage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9}{e\+Homing\+Stage}} servo\+Stepper\+::get\+Homing\+Stage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classservoStepper_a704d1249aa4b752da990c7d62d612b18_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{classservoStepper_a956548f11365d2125448516fc53203fd}\label{classservoStepper_a956548f11365d2125448516fc53203fd} 
 \index{servoStepper@{servoStepper}!getIsMoving@{getIsMoving}}
 \index{getIsMoving@{getIsMoving}!servoStepper@{servoStepper}}
@@ -464,7 +350,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{servoStepper@{servoStepper}!getMoveDirection@{getMoveDirection}}
 \index{getMoveDirection@{getMoveDirection}!servoStepper@{servoStepper}}
 \doxysubsubsection{\texorpdfstring{getMoveDirection()}{getMoveDirection()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} servo\+Stepper\+::get\+Move\+Direction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} servo\+Stepper\+::get\+Move\+Direction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -490,10 +376,9 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{servoStepper@{servoStepper}!home@{home}}
 \index{home@{home}!servoStepper@{servoStepper}}
 \doxysubsubsection{\texorpdfstring{home()}{home()}}
-{\footnotesize\ttfamily bool servo\+Stepper\+::home (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}}}]{in\+Homing\+Direction = {\ttfamily \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{e\+Step\+Direction\+::\+REVERSE}}},  }\item[{uint8\+\_\+t}]{in\+Homing\+Speed\+Rough = {\ttfamily 10},  }\item[{uint8\+\_\+t}]{in\+Homing\+Speed\+Fine = {\ttfamily 5},  }\item[{\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}}}]{in\+Offset\+Direction = {\ttfamily \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{e\+Step\+Direction\+::\+FORWARD}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool servo\+Stepper\+::home (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}}}]{in\+Homing\+Direction = {\ttfamily \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9}{e\+Step\+Direction\+::\+REVERSE}}},  }\item[{uint8\+\_\+t}]{in\+Homing\+Speed\+Rough = {\ttfamily 10},  }\item[{uint8\+\_\+t}]{in\+Homing\+Speed\+Fine = {\ttfamily 5},  }\item[{\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}}}]{in\+Offset\+Direction = {\ttfamily \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8aa26736999186daf8146f809e863712a1}{e\+Step\+Direction\+::\+FORWARD}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -512,7 +397,7 @@ Here is the caller graph for this function\+:
 \index{servoStepper@{servoStepper}!notDirection@{notDirection}}
 \index{notDirection@{notDirection}!servoStepper@{servoStepper}}
 \doxysubsubsection{\texorpdfstring{notDirection()}{notDirection()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} servo\+Stepper\+::not\+Direction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}}}]{in\+Direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} servo\+Stepper\+::not\+Direction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}}}]{in\+Direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -526,7 +411,7 @@ Here is the caller graph for this function\+:
 \index{servoStepper@{servoStepper}!setDirection@{setDirection}}
 \index{setDirection@{setDirection}!servoStepper@{servoStepper}}
 \doxysubsubsection{\texorpdfstring{setDirection()}{setDirection()}}
-{\footnotesize\ttfamily void servo\+Stepper\+::set\+Direction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}}}]{in\+Direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily void servo\+Stepper\+::set\+Direction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}}}]{in\+Direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -619,8 +504,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{tsDebugPrintln()}{tsDebugPrintln()}}
 {\footnotesize\ttfamily void servo\+Stepper\+::ts\+Debug\+Println (\begin{DoxyParamCaption}\item[{String}]{m\+\_\+msg,  }\item[{\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}}}]{m\+\_\+dp\+Type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -641,8 +525,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{updatePosition()}{updatePosition()}}
 {\footnotesize\ttfamily void servo\+Stepper\+::update\+Position (\begin{DoxyParamCaption}\item[{bool}]{interrupt\+Driven = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -663,8 +546,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{updatePositionFirstHomingFalling()}{updatePositionFirstHomingFalling()}}
 {\footnotesize\ttfamily void servo\+Stepper\+::update\+Position\+First\+Homing\+Falling (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -685,8 +567,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{updatePositionFirstHomingRising()}{updatePositionFirstHomingRising()}}
 {\footnotesize\ttfamily void servo\+Stepper\+::update\+Position\+First\+Homing\+Rising (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -728,8 +609,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{updatePositionMove()}{updatePositionMove()}}
 {\footnotesize\ttfamily void servo\+Stepper\+::update\+Position\+Move (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -750,8 +630,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{updatePositionMovePastHomeSwitch()}{updatePositionMovePastHomeSwitch()}}
 {\footnotesize\ttfamily void servo\+Stepper\+::update\+Position\+Move\+Past\+Home\+Switch (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -772,8 +651,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{updatePositionMoveToHomeSwitch()}{updatePositionMoveToHomeSwitch()}}
 {\footnotesize\ttfamily void servo\+Stepper\+::update\+Position\+Move\+To\+Home\+Switch (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -794,8 +672,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{updatePositionSecondHomingFalling()}{updatePositionSecondHomingFalling()}}
 {\footnotesize\ttfamily void servo\+Stepper\+::update\+Position\+Second\+Homing\+Falling (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -816,8 +693,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{updatePositionSecondHomingRising()}{updatePositionSecondHomingRising()}}
 {\footnotesize\ttfamily void servo\+Stepper\+::update\+Position\+Second\+Homing\+Rising (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -887,13 +763,13 @@ Here is the caller graph for this function\+:
 \index{servoStepper@{servoStepper}!homing@{homing}}
 \index{homing@{homing}!servoStepper@{servoStepper}}
 \doxysubsubsection{\texorpdfstring{homing}{homing}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42}{e\+Homing\+Stage}} servo\+Stepper\+::homing = \mbox{\hyperlink{classservoStepper_a3b3c9d6b2584f11fae8c214da48eab42ad7b55eed63ef10b2add929ccc94eaaa9}{UNHOMED}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9}{e\+Homing\+Stage}} servo\+Stepper\+::homing = \mbox{\hyperlink{servostepper_8hpp_a142f56ac82b59271977a5351ea4e36f9a380c2e3ab567f5c3c5029541f2344d95}{UNHOMED}}\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classservoStepper_a4d93033d09e41e6b7630aa60240077d5}\label{classservoStepper_a4d93033d09e41e6b7630aa60240077d5} 
 \index{servoStepper@{servoStepper}!homingDirection@{homingDirection}}
 \index{homingDirection@{homingDirection}!servoStepper@{servoStepper}}
 \doxysubsubsection{\texorpdfstring{homingDirection}{homingDirection}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} servo\+Stepper\+::homing\+Direction = \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{e\+Step\+Direction\+::\+REVERSE}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} servo\+Stepper\+::homing\+Direction = \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9}{e\+Step\+Direction\+::\+REVERSE}}\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classservoStepper_a9299674dd6d8b2ee02a3591792597f7a}\label{classservoStepper_a9299674dd6d8b2ee02a3591792597f7a} 
 \index{servoStepper@{servoStepper}!homingOffset@{homingOffset}}
@@ -905,7 +781,7 @@ Here is the caller graph for this function\+:
 \index{servoStepper@{servoStepper}!homingOffsetDirection@{homingOffsetDirection}}
 \index{homingOffsetDirection@{homingOffsetDirection}!servoStepper@{servoStepper}}
 \doxysubsubsection{\texorpdfstring{homingOffsetDirection}{homingOffsetDirection}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} servo\+Stepper\+::homing\+Offset\+Direction = \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea26006a1317e0b28f34e152eaa89b8641}{e\+Step\+Direction\+::\+FORWARD}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} servo\+Stepper\+::homing\+Offset\+Direction = \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8aa26736999186daf8146f809e863712a1}{e\+Step\+Direction\+::\+FORWARD}}\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0}\label{classservoStepper_a2482c10d6825c3b02c6559d0485ba9d0} 
 \index{servoStepper@{servoStepper}!homingPoint@{homingPoint}}
@@ -983,7 +859,7 @@ Here is the caller graph for this function\+:
 \index{servoStepper@{servoStepper}!moveDirection@{moveDirection}}
 \index{moveDirection@{moveDirection}!servoStepper@{servoStepper}}
 \doxysubsubsection{\texorpdfstring{moveDirection}{moveDirection}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} servo\+Stepper\+::move\+Direction = \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{e\+Step\+Direction\+::\+REVERSE}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} servo\+Stepper\+::move\+Direction = \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9}{e\+Step\+Direction\+::\+REVERSE}}\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classservoStepper_acadd836f8be53ca1366cbf5768fbd231}\label{classservoStepper_acadd836f8be53ca1366cbf5768fbd231} 
 \index{servoStepper@{servoStepper}!movingTo@{movingTo}}
@@ -1067,7 +943,7 @@ Here is the caller graph for this function\+:
 \index{servoStepper@{servoStepper}!turnAroundDirection@{turnAroundDirection}}
 \index{turnAroundDirection@{turnAroundDirection}!servoStepper@{servoStepper}}
 \doxysubsubsection{\texorpdfstring{turnAroundDirection}{turnAroundDirection}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aae}{e\+Step\+Direction}} servo\+Stepper\+::turn\+Around\+Direction = \mbox{\hyperlink{classservoStepper_a9f9aa3d1d44b4040d36d1fe07bc78aaea712911ade939f73780da0f037fbc17d9}{e\+Step\+Direction\+::\+REVERSE}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8}{e\+Step\+Direction}} servo\+Stepper\+::turn\+Around\+Direction = \mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9}{e\+Step\+Direction\+::\+REVERSE}}\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classservoStepper_ac05330644fb45e70fb5e33ffc96c0081}\label{classservoStepper_ac05330644fb45e70fb5e33ffc96c0081} 
 \index{servoStepper@{servoStepper}!turnAroundPosition@{turnAroundPosition}}

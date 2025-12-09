@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gatestate_0',['gateState',['../classcontrolReader.html#a60201e996420e7b6c89c634e5bd7616a',1,'controlReader']]]
+  ['gatestate_0',['gateState',['../classControlReader.html#a7ace2aea9f957123e9374a70edb427b1',1,'ControlReader']]]
 ];
