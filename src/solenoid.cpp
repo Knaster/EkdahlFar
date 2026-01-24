@@ -22,81 +22,89 @@
 #include "Teensy_PWM.h"
 #include "solenoid.hpp"
 
+const ModuleCommandDeclaration Solenoid::moduleCommands[] = {
+    { "engage", "en", "0-65535", "Engages the solenoid using the 1st argument as hardness", false, false, &s_engage },
+    { "rest", "rs", "0-1", "Forces the solenoid to its rest position, an argument of '0' will leave the solenoid at its current state while any other value will disengage the solenoid", false, false, &s_disengage },
+    { "maxforce", "xf", "0 - 65535", "Set solenoid maximum usable force", false, true, &s_maxForce },
+    { "minforce", "if", "0 - 65535", "Set solenoid minimum usable force", false, true, &s_minForce },
+    { "forcemultiplier", "fm", "0 - 1", "Set solenoid force multiplier", false, false, &s_forceMultiplier },
+    { "engageduration", "ed", "uS", "Sets the duration of the solenoid hit in uS, if a value of 0 is set the solenoid will not disengage until a solenoiddisengage command has been given. WARNING!!\
+        HAVING THE SOLENOID ON FOR A SPAN OF SECONDS COULD DESTROY THE CIRCUITRY!!", false, true, &s_engageDuration }
+};
+
+getModuleCount(Solenoid)
+
 Solenoid::Solenoid(char _solenoidPin) {
+    moduleID = new ModuleID("solenoid", "so", "Solenoid controller v1.0", ModuleID::hardware);
+
     solenoidPin = _solenoidPin;
     pinMode(solenoidPin, OUTPUT);
     solenoidPWM = new Teensy_PWM(solenoidPin, 20000, 0);
 }
 
-eProcessResult Solenoid::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
+CREATE_MODULE_COMMAND_FUNCTION(engage, Solenoid) {
+    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+    solenoidEngage(inCommandItem->argument[0].toInt());
+    inCommandResponses->push_back({thisItem.shortCommand + ":" + String(inCommandItem->argument[0].toInt()), InfoRequest});
+    return eProcessResult::Ok;
+}
 
-    processCommandItems(inCommandItem, serialCommandsSolenoid, sizeof(serialCommandsSolenoid) / sizeof(serialCommandItem));
+CREATE_MODULE_COMMAND_FUNCTION(disengage, Solenoid) {
+    solenoidDisengage();
+    inCommandResponses->push_back({thisItem.shortCommand + ":" + String(inCommandItem->argument[0].toInt()), InfoRequest});
+    return eProcessResult::Ok;
+}
 
-    if (inCommandItem->command == "help") {
-        addCommandHelp(serialCommandsSolenoid, sizeof(serialCommandsSolenoid) / sizeof(serialCommandItem), commandResponses,"");
-        return eProcessResult::PassThrough;
-    } else
-    if (inCommandItem->command == "solenoidengage") {
-        if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        solenoidEngage(inCommandItem->argument[0].toInt());
-        commandResponses->push_back({"se:" + String(inCommandItem->argument[0].toInt()), InfoRequest});
-    } else
-    if (inCommandItem->command == "solenoiddisengage") {
-        solenoidDisengage();
-        commandResponses->push_back({"sd:" + String(inCommandItem->argument[0].toInt()), InfoRequest});
-    } else
-    if (inCommandItem->command == "solenoidengageduration") {
-        if (request) {
-            commandResponses->push_back({ "sed:" + String(solenoidEngageDuration), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setSolenoidDuration(inCommandItem->argument[0].toInt());
-            commandResponses->push_back({"sed:" + String(solenoidEngageDuration), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "solenoidmaxforce") {
-        if (request) {
-            commandResponses->push_back({ "sxf:" + String(forceMax), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setSolenoidMax(inCommandItem->argument[0].toInt());
-            commandResponses->push_back({"sfx:" + String(forceMax), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "solenoidminforce") {
-        if (request) {
-            commandResponses->push_back({ "sif:" + String(forceMin), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setSolenoidMin(inCommandItem->argument[0].toInt());
-            commandResponses->push_back({"sif:" + String(forceMin), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "solenoidforcemultiplier") {
-        if (request) {
-            commandResponses->push_back({ "sfm:" + String(forceMultiplier), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setSolenoidMultiplier(inCommandItem->argument[0].toFloat());
-            commandResponses->push_back({"sfm:" + String(forceMultiplier), InfoRequest});
-        }
+CREATE_MODULE_COMMAND_FUNCTION(maxForce, Solenoid) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(forceMax), InfoRequest });
     } else {
-        return eProcessResult::NotFound;
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setSolenoidMax(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(forceMax), InfoRequest});
     }
     return eProcessResult::Ok;
 }
 
-eProcessResult Solenoid::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
-    return eProcessResult::NotFound;
+CREATE_MODULE_COMMAND_FUNCTION(minForce, Solenoid) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(forceMin), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setSolenoidMin(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(forceMin), InfoRequest});
+    }
+    return eProcessResult::Ok;
 }
 
+CREATE_MODULE_COMMAND_FUNCTION(forceMultiplier, Solenoid) {
+    if (request) {
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(fForceMultiplier), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setSolenoidMultiplier(inCommandItem->argument[0].toFloat());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(fForceMultiplier), InfoRequest});
+    }
+    return eProcessResult::Ok;
+}
+
+CREATE_MODULE_COMMAND_FUNCTION(engageDuration, Solenoid) {
+    if (request) {
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(solenoidEngageDuration), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setSolenoidDuration(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(solenoidEngageDuration), InfoRequest});
+    }
+    return eProcessResult::Ok;
+}
 
 /// Engage solenoid with the given force
 void Solenoid::solenoidEngage(int force) {
     if (force <= 0) { return; }
     if (force > 65535) { force = 65535; }
 
-    float forceMultiplied = ((float) force) * forceMultiplier;
+    float forceMultiplied = ((float) force) * fForceMultiplier;
     if (forceMultiplied == 0) { return; }
 
     float actualForce = forceMin + ((float) (forceMax - forceMin)) / 65535 * forceMultiplied;
@@ -135,7 +143,7 @@ bool Solenoid::setSolenoidMin(uint16_t inMin)  {
 bool Solenoid::setSolenoidMultiplier(float inMultiplier) {
  {
     if ((inMultiplier < 0) || (inMultiplier > 1)) { return false; }
-    forceMultiplier = inMultiplier;
+    fForceMultiplier = inMultiplier;
     return true;
 }}
 
@@ -145,21 +153,11 @@ bool Solenoid::setSolenoidDuration(unsigned long inDuration)  {
     return false;
 }
 
-bool Solenoid::update() {
+void Solenoid::update() {
     unsigned long currentTime = micros();
     if ((solenoidEngaged) && (currentTime - solenoidEngageTime > solenoidEngageDuration) && (solenoidEngageDuration != 0)) {
         solenoidDisengage();
-        return true;
       }
-      return false;
 }
-
-String Solenoid::dumpData() {
-    String dump = "";
-    dump += "sxf:" + String(forceMax) + ",";
-    dump += "sif:" + String(forceMin) + ",";
-    return dump;
-}
-
 
 #endif

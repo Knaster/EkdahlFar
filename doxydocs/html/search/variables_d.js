@@ -1,10 +1,5 @@
 var searchData=
 [
-  ['name_0',['name',['../classconfiguration.html#a752b266ab819b05402a010b74d6961b3',1,'configuration']]],
-  ['nickname_1',['nickName',['../main_8cpp.html#af98373428ba06a19feb1859d77b9f9d2',1,'main.cpp']]],
-  ['note_2',['note',['../structnoteMsg.html#a0e74b207ccf427dc34a04df2686fa501',1,'noteMsg']]],
-  ['notecount_3',['noteCount',['../midi_8cpp.html#a86e27933d2680a2f0fe44c77716b48b9',1,'midi.cpp']]],
-  ['noteoff_4',['noteOff',['../classconfiguration.html#af44d3f003c6bba79474aab5d38bf0637',1,'configuration']]],
-  ['noteon_5',['noteOn',['../classconfiguration.html#a36a671b6f1e684b991f3cdb5fed48a75',1,'configuration']]],
-  ['notesheld_6',['notesHeld',['../midi_8cpp.html#a1554d7cca07515767222c66e2dbb4eca',1,'midi.cpp']]]
+  ['name_0',['name',['../structcommandItemPart.html#ae3236c5eeac38b19bff56fc7108fa4d9',1,'commandItemPart']]],
+  ['nickname_1',['nickName',['../main_8cpp.html#af98373428ba06a19feb1859d77b9f9d2',1,'main.cpp']]]
 ];

@@ -45,139 +45,83 @@
 
 /***** NEW CLASS *****/
 
+const ModuleCommandDeclaration BowControl::moduleCommands[] = {
+    { "speedmode", "sm", "0|1", "Bow motor speed mode, 0 = Automatic and 1 = Manual", false, false, &s_speedMode },
+    { "motortimeout", "mt", "ms(0-65535)", "Bow motor shutdown timeout after bow having been put into the rest position", false, true, &s_motorTimeout },
+    { "pidenable", "pe", "1|0", "Sets the bow PID on/off", false, false, &s_pidEnable },
+    { "motorfaultcommands", "mfc", "command list", "Commands to execute when a motor fault is tripped - !WARNING! Can ruin your instrument if changed", false, true, &s_motorFaultCommands },
+    { "motoroverpowercommands", "moc", "command list", "Commands to execute when motor is over the power limit - !WARNING! Can ruin your instrument if changed", false, true, &s_motorOverPowerCommands },
+};
+
+getModuleCount(BowControl)
+
 BowControl::BowControl(char motorRevPin, char motorVoltagePin, char motorDCDCEnPin, char tachoPin, char currentSensePin, char motorFaultPin,
                        char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin) {
+
+    moduleID = new ModuleID("bowingwheel", "bw", "Bowing wheel controller v1.0", ModuleID::hardware);
 
     dcMotorControl = new DCMotorControl(motorRevPin, motorVoltagePin, motorDCDCEnPin, tachoPin, currentSensePin, motorFaultPin);
     pidController = new PIDController(*dcMotorControl);
     bowPressure = new BowPressure(stepEnPin, stepDirPin, stepStepPin, stepSerialPort, stepHomeSensorPin);
-//    bowActuators = new BowActuators(bowPressure);
+
+    commandsMotorFault = "bw.dcm.ru:0,bw.bp.rs:1";
+    commandsOverPowerCurrent = "bw.dcm.ru:0,bw.bp.rs:1,bw.dcm.es:1000";
+
+    harmonicSeriesHandler = new HarmonicSeriesHandler();
+    bowActuators = new BowActuators(bowPressure);
+
+    addModule(dcMotorControl);
+    addModule(pidController);
+    addModule(bowPressure);
+
+    addModule(bowActuators);
+    addModule(harmonicSeriesHandler);
 }
 
-eProcessResult BowControl::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
-
-    eProcessResult processResult = eProcessResult::Ok;
-
-    processCommandItems(inCommandItem, serialCommandsBowControl, sizeof(serialCommandsBowControl)  / sizeof(serialCommandItem));
-
-    if (inCommandItem->command == "help") {
-        addCommandHelp(serialCommandsBowControl, sizeof(serialCommandsBowControl) / sizeof(serialCommandItem), commandResponses,"");
+CREATE_MODULE_COMMAND_FUNCTION(speedMode, BowControl) {
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        if (!validateNumber(inCommandItem->argument[0].toInt(), 0, 1)) { return eProcessResult::WrongArgumentValue; }
+        pSpeedMode = (eSpeedMode) (inCommandItem->argument[0].toInt());
     }
+    inCommandResponses->push_back({thisItem.shortCommand + ":" + String(int(pSpeedMode)), InfoRequest});
+    return eProcessResult::Ok;
+};
 
-    if (((inCommandItem->command == "bowpressurerest") || (inCommandItem->command == "bpr")) && !request) {
-        debugPrintln("Second rest", debugPrintType::Debug);
-        if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        if (inCommandItem->argument[0].toInt() == 1) { rest(); }
+CREATE_MODULE_COMMAND_FUNCTION(motorTimeout, BowControl) {
+    if (!request) {
+        bowShutoffTimeout = inCommandItem->argument[0].toInt();
     }
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(bowShutoffTimeout), InfoRequest });
+    return eProcessResult::Ok;
+};
 
-    if (inCommandItem->command == "bowmotorrun") {
-        if (request) {
-            commandResponses->push_back({ "bmr:" + String(run), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            if (inCommandItem->argument[0].toInt() > 0) {
-                run = 1;
-                dcMotorControl->enableMotorPower();
-            } else {
-                run = 0;
-                dcMotorControl->disableMotorPower();
-            }
-            commandResponses->push_back({"bmr:" + String(run), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowpid") {
-        if (request) {
-            commandResponses->push_back({ "bpid:" + String(PIDon), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            if (inCommandItem->argument[0].toInt() > 0) { PIDon = true; } else { PIDon = false;}
-            commandResponses->push_back({"bpid:" + String(PIDon), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowcontrolspeedmode") {
-        if (request) {
-            commandResponses->push_back({"bcsm:" + String(int(speedMode)), InfoRequest});
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            if (!validateNumber(inCommandItem->argument[0].toInt(), 0, 1)) { return eProcessResult::WrongArgumentValue; }
-            speedMode = (eSpeedMode) (inCommandItem->argument[0].toInt());
-            commandResponses->push_back({"bcsm:" + String(int(speedMode)), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowmotordirectpwm") {
-        if (request) {
-            commandResponses->push_back({ "bmdp:" + String(manualMotorPWM), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            manualMotorPWM = inCommandItem->argument[0].toInt();
-            commandResponses->push_back({"bmdp:" + String(manualMotorPWM), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowmotortimeout") {
-        if (request) {
-            commandResponses->push_back({ "bmt:" + String(bowShutoffTimeout), InfoRequest });
-        } else {
-            bowShutoffTimeout = inCommandItem->argument[0].toInt();
-            commandResponses->push_back({"bmt:" + String(bowShutoffTimeout), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowmotorfaultcommands") {
-        if (!request) {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            commandsMotorFault = delimitExpression(inCommandItem->argument[0], true);
-        }
-        commandResponses->push_back({ "bmfc:" + String(commandsMotorFault), InfoRequest });
-    } else
-    if (inCommandItem->command == "bowmotoroverpowercommands") {
-        if (!request) {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            commandsOverPowerCurrent = delimitExpression(inCommandItem->argument[0], true);
-        }
-        commandResponses->push_back({ "bmopc:" + String(commandsOverPowerCurrent), InfoRequest });
-    } else {
-        processResult = bowPressure->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-        if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
-
-        processResult = dcMotorControl->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-        if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
-
-        processResult = pidController->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
+CREATE_MODULE_COMMAND_FUNCTION(pidEnable, BowControl) {
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        if (inCommandItem->argument[0].toInt() > 0) { PIDon = true; } else { PIDon = false;}
     }
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(PIDon), InfoRequest });
+    return eProcessResult::Ok;
+};
 
-    return processResult;
-}
+CREATE_MODULE_COMMAND_FUNCTION(motorFaultCommands, BowControl) {
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        commandsMotorFault = stripQuotes(inCommandItem->argument[0]);
+    }
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + delimitExpression(commandsMotorFault, true), InfoRequest });
+    return eProcessResult::Ok;
+};
 
-eProcessResult BowControl::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
-
-    eProcessResult processResult = eProcessResult::NotFound;
-
-    processResult = bowPressure->processSerialCommandHidden(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-    if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
-
-    processResult = dcMotorControl->processSerialCommandHidden(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-    if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
-
-    processResult = pidController->processSerialCommandHidden(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-    if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
-
-
-    return eProcessResult::NotFound;
-}
-/*
-void BowControl::setBowSpeedPWM(uint16_t speed) {
-    pidController->setPIDTarget(speed);
-}
-*/
-String BowControl::dumpData() {
-    String dump = "";
-    dump += "bmt:" + String(bowShutoffTimeout) + ",";
-    dump += "bmfc:" + commandsMotorFault + ",";
-    dump += "bmopc:" + commandsOverPowerCurrent + ",";
-    dump += dcMotorControl->dumpData() + ",";
-    dump += bowPressure->dumpData() + ",";
-    dump += pidController->dumpData() + ",";
-    return dump;
-}
+CREATE_MODULE_COMMAND_FUNCTION(motorOverPowerCommands, BowControl) {
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        commandsOverPowerCurrent = stripQuotes(inCommandItem->argument[0]);
+    }
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + delimitExpression(commandsOverPowerCurrent, true), InfoRequest });
+    return eProcessResult::Ok;
+};
 
 void BowControl::rest() {
     bowShutoffTimer = 0;
@@ -186,9 +130,10 @@ void BowControl::rest() {
 }
 
 void BowControl::updateMotorAutoShutdown() {
-    if ((speedMode == eSpeedMode::Automatic) && (bowPressure->getHold() == false)  && (bowShutoffTimer >= bowShutoffTimeout)) {
+    if ((pSpeedMode == eSpeedMode::Automatic) && (bowPressure->getHold() == false)  && (bowShutoffTimer >= bowShutoffTimeout)) {
         if ((bowPressure->getPressureMode() == ePressureMode::Rest) && (bowShutoffTimedout == false)) {
-            run = false;
+            dcMotorControl->setBowMotorRun(false);
+            //run = false;
             bowShutoffTimedout = true;
             debugPrintln("Auto shutdown of motor", debugPrintType::Debug);
         } else
@@ -201,12 +146,13 @@ void BowControl::updateMotorAutoShutdown() {
 }
 
 void BowControl::updateRun_PID() {
-    if (run) {
+    //if (run) {
+    if (dcMotorControl->getBowMotorRun()) {
         if (PIDon) {
             if (pidController->getPIDTarget() == 0) { dcMotorControl->setSpeedPWM(0); }
         } else {
             pidController->pidReset();
-            dcMotorControl->setSpeedPWM(manualMotorPWM);
+            //dcMotorControl->setSpeedPWM(manualMotorPWM);
         }
     }  else {
         pidController->pidReset();
@@ -218,11 +164,11 @@ void BowControl::updateMotorStatus() {
     if (dcMotorControl->getSpeedPWM() != 0) {
         if (dcMotorControl->isOverPower() || dcMotorControl->isOverCurrent()) {
             debugPrintln("Bow over power!", debugPrintType::Error);
-            commands->addCommands(commandsOverPowerCurrent);
+            globalResponseCommands.addCommands(commandsOverPowerCurrent);
         }
         if (dcMotorControl->getMotorFault()) {
             debugPrintln("Bow motor fault!", debugPrintType::Error);
-            commands->addCommands(commandsMotorFault);
+            globalResponseCommands.addCommands(commandsMotorFault);
         }
     }
 }
@@ -245,7 +191,8 @@ void BowControl::update() {
 }
 
 void BowControl::updatePID() {
-    if (PIDon && (run == 1) && (pidController->getPIDTarget() > 0)) {
+    if (PIDon && (dcMotorControl->getBowMotorRun() == 1) && (pidController->getPIDTarget() > 0)) {
+//    if (PIDon && (run == 1) && (pidController->getPIDTarget() > 0)) {
         pidController->pidControl();
     }
 }

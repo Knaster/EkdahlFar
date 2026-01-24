@@ -15,6 +15,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add directory="./" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -28,6 +29,7 @@
 					<Add option="-DEFARSLAVE" />
 					<Add option="-DUSB_MIDI_SERIAL" />
 					<Add directory="./" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -44,6 +46,7 @@
 					<Add option="-DEFARMASTER" />
 					<Add option="-DUSB_MIDI_SERIAL" />
 					<Add directory="./" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -61,6 +64,7 @@
 					<Add option="-DUSB_MIDI_AUDIO_SERIAL" />
 					<Add option="-DAUDIO_INTERFACE" />
 					<Add directory="./" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -133,6 +137,33 @@
 			<Add after="arm-none-eabi-objcopy -O ihex -R .eeprom ${TARGET_OUTPUT_FILE} ${TARGET_OUTPUT_DIR}${TARGET_OUTPUT_BASENAME}.hex" />
 			<Add after="arm-none-eabi-objdump -d ${TARGET_OUTPUT_FILE} &gt; ${TARGET_OUTPUT_DIR}${TARGET_OUTPUT_BASENAME}.lst" />
 		</ExtraCommands>
+		<Unit filename="include/automaticversion.hpp" />
+		<Unit filename="include/averager.h" />
+		<Unit filename="include/basemodule.hpp" />
+		<Unit filename="include/bowActuators.hpp" />
+		<Unit filename="include/bowcalibration.hpp" />
+		<Unit filename="include/bowcontrol.hpp" />
+		<Unit filename="include/bowpressure.hpp" />
+		<Unit filename="include/controlReader.hpp" />
+		<Unit filename="include/dcmotorcontrol.hpp" />
+		<Unit filename="include/expressionparser.h" />
+		<Unit filename="include/farsingle.hpp" />
+		<Unit filename="include/harmonicSeries.hpp" />
+		<Unit filename="include/harmonicserieshandler.hpp" />
+		<Unit filename="include/midi.h" />
+		<Unit filename="include/midiconfigurationhandler.hpp" />
+		<Unit filename="include/midimessageconfiguration.hpp" />
+		<Unit filename="include/module.hpp" />
+		<Unit filename="include/modulegroup.hpp" />
+		<Unit filename="include/modulehandler.hpp" />
+		<Unit filename="include/modulesystembasics.hpp" />
+		<Unit filename="include/modulesystemglobalfunctions.hpp" />
+		<Unit filename="include/mute.hpp" />
+		<Unit filename="include/mutecalibration.hpp" />
+		<Unit filename="include/mutecontrol.hpp" />
+		<Unit filename="include/pidcontroller.hpp" />
+		<Unit filename="include/solenoid.hpp" />
+		<Unit filename="include/tmc2209_servostepper.hpp" />
 		<Unit filename="lib/Adafruit_ADS1X15/Adafruit_ADS1X15.cpp" />
 		<Unit filename="lib/Adafruit_ADS1X15/Adafruit_ADS1X15.h" />
 		<Unit filename="lib/Adafruit_BusIO/Adafruit_BusIO_Register.cpp" />
@@ -1028,46 +1059,42 @@
 		</Unit>
 		<Unit filename="lib/tinyexpr/src/tinyexpr.h" />
 		<Unit filename="src/audioanalyze.h" />
-		<Unit filename="src/automaticversion.hpp" />
+		<Unit filename="src/basemodule.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
 		<Unit filename="src/bowActuators.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/bowActuators.hpp" />
 		<Unit filename="src/bowcalibration.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/bowcalibration.hpp" />
 		<Unit filename="src/bowcontrol.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/bowcontrol.hpp" />
 		<Unit filename="src/bowpressure.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/bowpressure.hpp" />
 		<Unit filename="src/calibrationhelpers.hpp" />
 		<Unit filename="src/commandparser.hpp" />
-		<Unit filename="src/configuration.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/configuration.hpp" />
 		<Unit filename="src/controlReader.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/controlReader.hpp" />
 		<Unit filename="src/dcmotorcontrol.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/dcmotorcontrol.hpp" />
 		<Unit filename="src/debugprint.hpp" />
 		<Unit filename="src/eepromhelpers.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src/expressionparser.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
@@ -1075,27 +1102,40 @@
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/farsingle.hpp" />
 		<Unit filename="src/harmonicSeries.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/harmonicSeries.hpp" />
 		<Unit filename="src/harmonicserieshandler.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/harmonicserieshandler.hpp" />
 		<Unit filename="src/isrclasswrapper.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
 		<Unit filename="src/main.cpp" />
-		<Unit filename="src/maincommandhandler.cpp">
+		<Unit filename="src/midi.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/midi.cpp">
+		<Unit filename="src/midiconfigurationhandler.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src/midimessageconfiguration.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src/module.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src/modulegroup.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src/modulehandler.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
@@ -1103,17 +1143,14 @@
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/mute.hpp" />
 		<Unit filename="src/mutecalibration.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/mutecalibration.hpp" />
 		<Unit filename="src/mutecontrol.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/mutecontrol.hpp" />
 		<Unit filename="src/name.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -1121,22 +1158,15 @@
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/pidcontroller.hpp" />
 		<Unit filename="src/servostepper.hpp" />
-		<Unit filename="src/settingshandler.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
 		<Unit filename="src/solenoid.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/solenoid.hpp" />
 		<Unit filename="src/tmc2209_servostepper.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/tmc2209_servostepper.hpp" />
 		<Unit filename="trashcollection.txt" />
 		<Extensions />
 	</Project>

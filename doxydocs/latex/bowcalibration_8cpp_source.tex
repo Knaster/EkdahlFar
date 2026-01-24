@@ -228,224 +228,222 @@
 \DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a6777ca35b8a0188378935056969c8ffb}{setEngagePressure}}(0);}
 \DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00235\ }
-\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ac906729ef9bae05e39a92951588404d6}{getEngagePressure}}()\ >\ 3000)\ \{}
-\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a4022ef94a8122c6c24987ba4d12a7d11}{setRestPressure}}(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ac906729ef9bae05e39a92951588404d6}{getEngagePressure}}()\ -\/\ 3000);}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ab66ab43cecb8da0f2ac7d74a87676203}{getRestPressure}}()\ >\ 3000)\ \{}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a4022ef94a8122c6c24987ba4d12a7d11}{setRestPressure}}(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ab66ab43cecb8da0f2ac7d74a87676203}{getRestPressure}}()\ -\/\ 3000);}
 \DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
 \DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a4022ef94a8122c6c24987ba4d12a7d11}{setRestPressure}}(0);}
 \DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Good\ results\ acquired,\ setting\ firstTouchPressure\ to\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ac906729ef9bae05e39a92951588404d6}{getEngagePressure}}())\ +\ \textcolor{stringliteral}{"{}\ and\ restPosition\ to\ "{}}\ +}
 \DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ab66ab43cecb8da0f2ac7d74a87676203}{getRestPressure}}()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
-\DoxyCodeLine{00243\ \ \ \ \ \}\textcolor{comment}{/*\ else\ \{}}
-\DoxyCodeLine{00244\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Results\ invalid,\ not\ modifying\ data"{}\ ,\ debugPrintType::Error);}}
-\DoxyCodeLine{00245\ \textcolor{comment}{\ \ \ \ \}*/}}
-\DoxyCodeLine{00246\ }
-\DoxyCodeLine{00247\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ac526c5f748f9d6e74931f572cd5215e1}{setPressureAutocorrect}}(autoCorrectPositionSave);}
-\DoxyCodeLine{00248\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a6ff7bb9d5693b2486d08c529ec6688f6}{setPressureMotorSpeed}}(speed);}
-\DoxyCodeLine{00249\ }
-\DoxyCodeLine{00250\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classCalibrateBow_ac7276bb0954119025f6fc8746002789c}{safeExitWithResult}}(result,\ PIDOn);}
-\DoxyCodeLine{00251\ \}}
-\DoxyCodeLine{00252\ }
-\DoxyCodeLine{00253\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateBow_ac7276bb0954119025f6fc8746002789c}{CalibrateBow::safeExitWithResult}}(\mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ result,\ \textcolor{keywordtype}{bool}\ pidState)\ \{}
-\DoxyCodeLine{00254\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a17a1fc8cdd5f5f0c9b68b3d9ea162280}{setBowMotorDirectPWM}}(0);}
-\DoxyCodeLine{00255\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a62ff33edc2ddef1fe4d2df379bc9d4b7}{setHardwarePressure}}(0);}
-\DoxyCodeLine{00256\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ac41b6162fb1ea57619fdac9b6ddce8e0}{setRun}}(\textcolor{keyword}{false});}
-\DoxyCodeLine{00257\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a69c751fb80e75b6c359cf7082756e20f}{setPIDOn}}(pidState);}
-\DoxyCodeLine{00258\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a185042d6311ba53b33f6b8ccc1788467}{setSpeedMode}}(\mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389}{eSpeedMode::Automatic}});}
-\DoxyCodeLine{00259\ }
-\DoxyCodeLine{00260\ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{00261\ \}}
-\DoxyCodeLine{00262\ }
-\DoxyCodeLine{00273\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateBow_a9e92861c49ee1f093bec2d24ea3e35c2}{CalibrateBow::findMinMaxSpeedPWM}}()\ \{}
-\DoxyCodeLine{00274\ \ \ \ \ \textcolor{keywordtype}{int}\ speed\ =\ 0;}
-\DoxyCodeLine{00275\ \ \ \ \ uint32\_t\ i\ =0;}
-\DoxyCodeLine{00276\ \ \ \ \ \textcolor{keywordtype}{float}\ avgFreq\ =\ 0;}
-\DoxyCodeLine{00277\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ result\ =\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa4441e965ce8b9b547cb19f8eadb1593e}{CR\_Ok}};}
+\DoxyCodeLine{00243\ \ \ \ \ \}}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ac526c5f748f9d6e74931f572cd5215e1}{setPressureAutocorrect}}(autoCorrectPositionSave);}
+\DoxyCodeLine{00246\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a6ff7bb9d5693b2486d08c529ec6688f6}{setPressureMotorSpeed}}(speed);}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classCalibrateBow_ac7276bb0954119025f6fc8746002789c}{safeExitWithResult}}(result,\ PIDOn);}
+\DoxyCodeLine{00249\ \}}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateBow_ac7276bb0954119025f6fc8746002789c}{CalibrateBow::safeExitWithResult}}(\mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ result,\ \textcolor{keywordtype}{bool}\ pidState)\ \{}
+\DoxyCodeLine{00252\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a17a1fc8cdd5f5f0c9b68b3d9ea162280}{setBowMotorDirectPWM}}(0);}
+\DoxyCodeLine{00253\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a62ff33edc2ddef1fe4d2df379bc9d4b7}{setHardwarePressure}}(0);}
+\DoxyCodeLine{00254\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ac41b6162fb1ea57619fdac9b6ddce8e0}{setRun}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{00255\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a69c751fb80e75b6c359cf7082756e20f}{setPIDOn}}(pidState);}
+\DoxyCodeLine{00256\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a185042d6311ba53b33f6b8ccc1788467}{setSpeedMode}}(\mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389}{eSpeedMode::Automatic}});}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00259\ \}}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00271\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateBow_a9e92861c49ee1f093bec2d24ea3e35c2}{CalibrateBow::findMinMaxSpeedPWM}}()\ \{}
+\DoxyCodeLine{00272\ \ \ \ \ \textcolor{keywordtype}{int}\ speed\ =\ 0;}
+\DoxyCodeLine{00273\ \ \ \ \ uint32\_t\ i\ =0;}
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{keywordtype}{float}\ avgFreq\ =\ 0;}
+\DoxyCodeLine{00275\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ result\ =\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa4441e965ce8b9b547cb19f8eadb1593e}{CR\_Ok}};}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{keywordtype}{float}\ bowMotorPowerLimit\ =\ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ab5327c0914d0c04e254098b3b44c7a4a}{getBowMotorMaxPower}}();}
 \DoxyCodeLine{00278\ }
-\DoxyCodeLine{00279\ \ \ \ \ \textcolor{keywordtype}{float}\ bowMotorPowerLimit\ =\ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ab5327c0914d0c04e254098b3b44c7a4a}{getBowMotorMaxPower}}();}
-\DoxyCodeLine{00280\ }
-\DoxyCodeLine{00281\ \ \ \ \ \textcolor{keywordtype}{bool}\ PIDOn\ =\ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ad2211241c65c1f0070d469ec7d32b5e9}{getPIDOn}}();}
-\DoxyCodeLine{00282\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a69c751fb80e75b6c359cf7082756e20f}{setPIDOn}}(\textcolor{keyword}{false});}
-\DoxyCodeLine{00283\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_abba2ffc34c55b9c4210e5b6d54014446}{enableBowMotorPower}}();}
-\DoxyCodeLine{00284\ }
-\DoxyCodeLine{00285\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Finding\ min\ speed"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{TextInfo}});}
-\DoxyCodeLine{00286\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a17a1fc8cdd5f5f0c9b68b3d9ea162280}{setBowMotorDirectPWM}}(0);}
-\DoxyCodeLine{00287\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a62ff33edc2ddef1fe4d2df379bc9d4b7}{setHardwarePressure}}(i);}
-\DoxyCodeLine{00288\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ae3e25debfb3d98b39c85b4e67dfc3183}{waitForPressureToSettle}}())\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classCalibrateBow_ac7276bb0954119025f6fc8746002789c}{safeExitWithResult}}(\mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa1e8892ea4577a02a745e84d5b16e2dba}{CR\_Err\_BowPressure}},\ PIDOn);\ \}}
-\DoxyCodeLine{00289\ }
-\DoxyCodeLine{00290\ \ \ \ \ \textcolor{comment}{//\ Go\ from\ 0\ PWM\ to\ 65535\ and\ break\ the\ first\ time\ that\ the\ frequency\ is\ above\ zero}}
-\DoxyCodeLine{00291\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
-\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a17a1fc8cdd5f5f0c9b68b3d9ea162280}{setBowMotorDirectPWM}}(speed);}
-\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ delayMicroseconds(1000);}
-\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ speed++;}
-\DoxyCodeLine{00295\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ ((\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_aabbf480af8262531cf398c57e209d63a}{getAverageTachometerFreq}}()\ <\ \mbox{\hyperlink{bowcalibration_8hpp_a207f202ec9674a99e0465a1d6cdf2081}{minPermissibleBowSpeedForCalibration}})\ \&\&\ (speed\ <\ 65536));}
-\DoxyCodeLine{00296\ }
-\DoxyCodeLine{00297\ }
-\DoxyCodeLine{00298\ \ \ \ \ delay(500);}
-\DoxyCodeLine{00299\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classCalibrateBow_a3da4a85fccb27f50fffb50edf205bd74}{waitForBowToStabilize}}()\ ||\ (speed\ ==\ 65536))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classCalibrateBow_ac7276bb0954119025f6fc8746002789c}{safeExitWithResult}}(\mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfae1105887db078d9647cebabfe0beceef}{CR\_Err\_BowStabilize}},\ PIDOn);\ \}}
-\DoxyCodeLine{00300\ }
-\DoxyCodeLine{00301\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_afba655e39997dded04b350ca680d5dd0}{setBowMotorMinPWM}}(speed);}
-\DoxyCodeLine{00302\ \ \ \ \ delay(1000);}
-\DoxyCodeLine{00303\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a5ffb34b9e147eaf1d07c15b7f2accd4c}{setBowMotorMinHz}}(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_aabbf480af8262531cf398c57e209d63a}{getAverageTachometerFreq}}());}
-\DoxyCodeLine{00304\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Min\ speed\ is\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a82227fa717585e6c1d2a24a62f5e317e}{getBowMotorMinHz}}())\ +\ \textcolor{stringliteral}{"{}Hz\ given\ at\ PWM\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_aea720b1ce0c112eb608ee64e9ad9f7b4}{getBowMotorMinPWM}}()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{TextInfo}});}
+\DoxyCodeLine{00279\ \ \ \ \ \textcolor{keywordtype}{bool}\ PIDOn\ =\ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ad2211241c65c1f0070d469ec7d32b5e9}{getPIDOn}}();}
+\DoxyCodeLine{00280\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a69c751fb80e75b6c359cf7082756e20f}{setPIDOn}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{00281\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_abba2ffc34c55b9c4210e5b6d54014446}{enableBowMotorPower}}();}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Finding\ min\ speed"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{TextInfo}});}
+\DoxyCodeLine{00284\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a17a1fc8cdd5f5f0c9b68b3d9ea162280}{setBowMotorDirectPWM}}(0);}
+\DoxyCodeLine{00285\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a62ff33edc2ddef1fe4d2df379bc9d4b7}{setHardwarePressure}}(i);}
+\DoxyCodeLine{00286\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ae3e25debfb3d98b39c85b4e67dfc3183}{waitForPressureToSettle}}())\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classCalibrateBow_ac7276bb0954119025f6fc8746002789c}{safeExitWithResult}}(\mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa1e8892ea4577a02a745e84d5b16e2dba}{CR\_Err\_BowPressure}},\ PIDOn);\ \}}
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ \ \ \ \ \textcolor{comment}{//\ Go\ from\ 0\ PWM\ to\ 65535\ and\ break\ the\ first\ time\ that\ the\ frequency\ is\ above\ zero}}
+\DoxyCodeLine{00289\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a17a1fc8cdd5f5f0c9b68b3d9ea162280}{setBowMotorDirectPWM}}(speed);}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ delayMicroseconds(1000);}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ speed++;}
+\DoxyCodeLine{00293\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ ((\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_aabbf480af8262531cf398c57e209d63a}{getAverageTachometerFreq}}()\ <\ \mbox{\hyperlink{bowcalibration_8hpp_a207f202ec9674a99e0465a1d6cdf2081}{minPermissibleBowSpeedForCalibration}})\ \&\&\ (speed\ <\ 65536));}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \ \ \ \ delay(500);}
+\DoxyCodeLine{00297\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classCalibrateBow_a3da4a85fccb27f50fffb50edf205bd74}{waitForBowToStabilize}}()\ ||\ (speed\ ==\ 65536))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classCalibrateBow_ac7276bb0954119025f6fc8746002789c}{safeExitWithResult}}(\mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfae1105887db078d9647cebabfe0beceef}{CR\_Err\_BowStabilize}},\ PIDOn);\ \}}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_afba655e39997dded04b350ca680d5dd0}{setBowMotorMinPWM}}(speed);}
+\DoxyCodeLine{00300\ \ \ \ \ delay(1000);}
+\DoxyCodeLine{00301\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a5ffb34b9e147eaf1d07c15b7f2accd4c}{setBowMotorMinHz}}(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_aabbf480af8262531cf398c57e209d63a}{getAverageTachometerFreq}}());}
+\DoxyCodeLine{00302\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Min\ speed\ is\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a82227fa717585e6c1d2a24a62f5e317e}{getBowMotorMinHz}}())\ +\ \textcolor{stringliteral}{"{}Hz\ given\ at\ PWM\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_aea720b1ce0c112eb608ee64e9ad9f7b4}{getBowMotorMinPWM}}()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{TextInfo}});}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Finding\ max\ speed"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{TextInfo}});}
 \DoxyCodeLine{00305\ }
-\DoxyCodeLine{00306\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Finding\ max\ speed"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{TextInfo}});}
+\DoxyCodeLine{00306\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a5bbf25b87603181f1e5c8a944f3ad093}{setBowMotorMaxPower}}(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ab5327c0914d0c04e254098b3b44c7a4a}{getBowMotorMaxPower}}()\ *\ \mbox{\hyperlink{bowcalibration_8hpp_a947c967c63e6d866be6d4f8905de7de5}{maxPowerUseMultiplierDuringCalibration}});}
 \DoxyCodeLine{00307\ }
-\DoxyCodeLine{00308\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a5bbf25b87603181f1e5c8a944f3ad093}{setBowMotorMaxPower}}(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ab5327c0914d0c04e254098b3b44c7a4a}{getBowMotorMaxPower}}()\ *\ \mbox{\hyperlink{bowcalibration_8hpp_a947c967c63e6d866be6d4f8905de7de5}{maxPowerUseMultiplierDuringCalibration}});}
-\DoxyCodeLine{00309\ }
-\DoxyCodeLine{00310\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Setting\ calibration\ max\ power\ to\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ab5327c0914d0c04e254098b3b44c7a4a}{getBowMotorMaxPower}}())\ +\ \textcolor{stringliteral}{"{}\ watts"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{TextInfo}});}
-\DoxyCodeLine{00311\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
-\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a17a1fc8cdd5f5f0c9b68b3d9ea162280}{setBowMotorDirectPWM}}(i);}
-\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ delayMicroseconds(100);}
-\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ i+=10;}
-\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Motor\ power\ use\ "{}\ +\ String(bowControl-\/>getBowMotorPower())\ +\ "{}\ watts\ at\ PWM\ "{}\ +\ String(i),\ TextInfo);}}
-\DoxyCodeLine{00316\ }
-\DoxyCodeLine{00317\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ ((i\ <\ 65535)\ \&\&\ (!\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_aebd3c78b81bf427ea9ef23dba8e98c57}{bowMotorIsOverPower}}()));}
-\DoxyCodeLine{00318\ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ >\ 65535)\ \{\ i\ =\ 65535;\ \}}
+\DoxyCodeLine{00308\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Setting\ calibration\ max\ power\ to\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ab5327c0914d0c04e254098b3b44c7a4a}{getBowMotorMaxPower}}())\ +\ \textcolor{stringliteral}{"{}\ watts"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{TextInfo}});}
+\DoxyCodeLine{00309\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a17a1fc8cdd5f5f0c9b68b3d9ea162280}{setBowMotorDirectPWM}}(i);}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ delayMicroseconds(100);}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ i+=10;}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Motor\ power\ use\ "{}\ +\ String(bowControl-\/>getBowMotorPower())\ +\ "{}\ watts\ at\ PWM\ "{}\ +\ String(i),\ TextInfo);}}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ ((i\ <\ 65535)\ \&\&\ (!\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_aebd3c78b81bf427ea9ef23dba8e98c57}{bowMotorIsOverPower}}()));}
+\DoxyCodeLine{00316\ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ >\ 65535)\ \{\ i\ =\ 65535;\ \}}
+\DoxyCodeLine{00317\ }
+\DoxyCodeLine{00318\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a5bbf25b87603181f1e5c8a944f3ad093}{setBowMotorMaxPower}}(bowMotorPowerLimit);}
 \DoxyCodeLine{00319\ }
-\DoxyCodeLine{00320\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a5bbf25b87603181f1e5c8a944f3ad093}{setBowMotorMaxPower}}(bowMotorPowerLimit);}
-\DoxyCodeLine{00321\ }
-\DoxyCodeLine{00322\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_add2df6c7b2cbc33b245d47e44ed58eec}{setBowMotorMaxPWM}}(i);}
-\DoxyCodeLine{00323\ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ <\ 65540)\ \{\ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Motor\ current\ limited\ at\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ab5327c0914d0c04e254098b3b44c7a4a}{getBowMotorMaxPower}}())\ +\ \textcolor{stringliteral}{"{}\ watts"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{TextInfo}});\ \}}
-\DoxyCodeLine{00324\ \ \ \ \ delay(500);}
-\DoxyCodeLine{00325\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classCalibrateBow_a3da4a85fccb27f50fffb50edf205bd74}{waitForBowToStabilize}}())\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classCalibrateBow_ac7276bb0954119025f6fc8746002789c}{safeExitWithResult}}(\mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfae1105887db078d9647cebabfe0beceef}{CR\_Err\_BowStabilize}},\ PIDOn);\ \}}
+\DoxyCodeLine{00320\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_add2df6c7b2cbc33b245d47e44ed58eec}{setBowMotorMaxPWM}}(i);}
+\DoxyCodeLine{00321\ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ <\ 65540)\ \{\ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Motor\ current\ limited\ at\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_ab5327c0914d0c04e254098b3b44c7a4a}{getBowMotorMaxPower}}())\ +\ \textcolor{stringliteral}{"{}\ watts"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{TextInfo}});\ \}}
+\DoxyCodeLine{00322\ \ \ \ \ delay(500);}
+\DoxyCodeLine{00323\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classCalibrateBow_a3da4a85fccb27f50fffb50edf205bd74}{waitForBowToStabilize}}())\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classCalibrateBow_ac7276bb0954119025f6fc8746002789c}{safeExitWithResult}}(\mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfae1105887db078d9647cebabfe0beceef}{CR\_Err\_BowStabilize}},\ PIDOn);\ \}}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \ \ \ \ avgFreq\ =\ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_aabbf480af8262531cf398c57e209d63a}{getAverageTachometerFreq}}();}
 \DoxyCodeLine{00326\ }
-\DoxyCodeLine{00327\ \ \ \ \ avgFreq\ =\ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_aabbf480af8262531cf398c57e209d63a}{getAverageTachometerFreq}}();}
-\DoxyCodeLine{00328\ }
-\DoxyCodeLine{00329\ \ \ \ \ \textcolor{keywordflow}{if}\ (avgFreq\ <\ \mbox{\hyperlink{bowcalibration_8hpp_a207f202ec9674a99e0465a1d6cdf2081}{minPermissibleBowSpeedForCalibration}})\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classCalibrateBow_ac7276bb0954119025f6fc8746002789c}{safeExitWithResult}}(\mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa5eecc4349c31075872fa0fab6d90ea32}{CR\_Err\_MotorFrequencyReading}},\ PIDOn);\ \}}
-\DoxyCodeLine{00330\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a73cacf4394bec865d93534d343a38715}{setBowMotorMaxHz}}(avgFreq);}
+\DoxyCodeLine{00327\ \ \ \ \ \textcolor{keywordflow}{if}\ (avgFreq\ <\ \mbox{\hyperlink{bowcalibration_8hpp_a207f202ec9674a99e0465a1d6cdf2081}{minPermissibleBowSpeedForCalibration}})\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classCalibrateBow_ac7276bb0954119025f6fc8746002789c}{safeExitWithResult}}(\mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa5eecc4349c31075872fa0fab6d90ea32}{CR\_Err\_MotorFrequencyReading}},\ PIDOn);\ \}}
+\DoxyCodeLine{00328\ \ \ \ \ \mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a73cacf4394bec865d93534d343a38715}{setBowMotorMaxHz}}(avgFreq);}
+\DoxyCodeLine{00329\ }
+\DoxyCodeLine{00330\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Max\ speed\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a7831cdc8fadd2206c78850543ccade9e}{getBowMotorMaxHz}}())\ +\ \textcolor{stringliteral}{"{}Hz\ given\ at\ PWM\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a55222e4f99b462e262d7e5911489c185}{getBowMotorMaxPWM}}()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{TextInfo}});}
 \DoxyCodeLine{00331\ }
-\DoxyCodeLine{00332\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Max\ speed\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a7831cdc8fadd2206c78850543ccade9e}{getBowMotorMaxHz}}())\ +\ \textcolor{stringliteral}{"{}Hz\ given\ at\ PWM\ "{}}\ +\ String(\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a55222e4f99b462e262d7e5911489c185}{getBowMotorMaxPWM}}()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{TextInfo}});}
-\DoxyCodeLine{00333\ }
-\DoxyCodeLine{00334\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classCalibrateBow_ac7276bb0954119025f6fc8746002789c}{safeExitWithResult}}(result);}
-\DoxyCodeLine{00335\ \}}
-\DoxyCodeLine{00336\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00337\ \textcolor{comment}{bool\ CalibrateBow::findMinMaxSpeedPID()\ \{}}
-\DoxyCodeLine{00338\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Finding\ min\ PID\ speed"{},\ TextInfo);}}
-\DoxyCodeLine{00339\ \textcolor{comment}{}}
-\DoxyCodeLine{00340\ \textcolor{comment}{\ \ \ \ bowIOConnect-\/>setSpeedPWMSafe(0);}}
-\DoxyCodeLine{00341\ \textcolor{comment}{\ \ \ \ bowIOConnect-\/>setTiltPWM(0);}}
-\DoxyCodeLine{00342\ \textcolor{comment}{\ \ \ \ bowIOConnect-\/>waitForTiltToComplete();}}
+\DoxyCodeLine{00332\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classCalibrateBow_ac7276bb0954119025f6fc8746002789c}{safeExitWithResult}}(result);}
+\DoxyCodeLine{00333\ \}}
+\DoxyCodeLine{00334\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00335\ \textcolor{comment}{bool\ CalibrateBow::findMinMaxSpeedPID()\ \{}}
+\DoxyCodeLine{00336\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Finding\ min\ PID\ speed"{},\ TextInfo);}}
+\DoxyCodeLine{00337\ \textcolor{comment}{}}
+\DoxyCodeLine{00338\ \textcolor{comment}{\ \ \ \ bowIOConnect-\/>setSpeedPWMSafe(0);}}
+\DoxyCodeLine{00339\ \textcolor{comment}{\ \ \ \ bowIOConnect-\/>setTiltPWM(0);}}
+\DoxyCodeLine{00340\ \textcolor{comment}{\ \ \ \ bowIOConnect-\/>waitForTiltToComplete();}}
+\DoxyCodeLine{00341\ \textcolor{comment}{}}
+\DoxyCodeLine{00342\ \textcolor{comment}{\ \ \ \ float\ targetFreq\ =\ calibrationData-\/>minHz\ *\ 3;}}
 \DoxyCodeLine{00343\ \textcolor{comment}{}}
-\DoxyCodeLine{00344\ \textcolor{comment}{\ \ \ \ float\ targetFreq\ =\ calibrationData-\/>minHz\ *\ 3;}}
-\DoxyCodeLine{00345\ \textcolor{comment}{}}
-\DoxyCodeLine{00346\ \textcolor{comment}{\ \ \ \ bowIOConnect-\/>enableBowPower();}}
-\DoxyCodeLine{00347\ \textcolor{comment}{\ \ \ \ bowControlConnect-\/>setPIDTarget(targetFreq);}}
-\DoxyCodeLine{00348\ \textcolor{comment}{\ \ \ \ \_speedMode\ savedSpeedMode\ =\ bowControlConnect-\/>speedMode;}}
-\DoxyCodeLine{00349\ \textcolor{comment}{\ \ \ \ bowControlConnect-\/>speedMode\ =\ \_speedMode::Manual;}}
-\DoxyCodeLine{00350\ \textcolor{comment}{\ \ \ \ bowControlConnect-\/>run\ =\ 1;}}
-\DoxyCodeLine{00351\ \textcolor{comment}{\ \ \ \ bowIOConnect-\/>clearTachoData();}}
-\DoxyCodeLine{00352\ \textcolor{comment}{\ \ \ \ delay(1500);}}
+\DoxyCodeLine{00344\ \textcolor{comment}{\ \ \ \ bowIOConnect-\/>enableBowPower();}}
+\DoxyCodeLine{00345\ \textcolor{comment}{\ \ \ \ bowControlConnect-\/>setPIDTarget(targetFreq);}}
+\DoxyCodeLine{00346\ \textcolor{comment}{\ \ \ \ \_speedMode\ savedSpeedMode\ =\ bowControlConnect-\/>speedMode;}}
+\DoxyCodeLine{00347\ \textcolor{comment}{\ \ \ \ bowControlConnect-\/>speedMode\ =\ \_speedMode::Manual;}}
+\DoxyCodeLine{00348\ \textcolor{comment}{\ \ \ \ bowControlConnect-\/>run\ =\ 1;}}
+\DoxyCodeLine{00349\ \textcolor{comment}{\ \ \ \ bowIOConnect-\/>clearTachoData();}}
+\DoxyCodeLine{00350\ \textcolor{comment}{\ \ \ \ delay(1500);}}
+\DoxyCodeLine{00351\ \textcolor{comment}{}}
+\DoxyCodeLine{00352\ \textcolor{comment}{\ \ \ \ uint16\_t\ testStepDelay\ =\ 100;}}
 \DoxyCodeLine{00353\ \textcolor{comment}{}}
-\DoxyCodeLine{00354\ \textcolor{comment}{\ \ \ \ uint16\_t\ testStepDelay\ =\ 100;}}
-\DoxyCodeLine{00355\ \textcolor{comment}{}}
-\DoxyCodeLine{00356\ \textcolor{comment}{\ \ \ \ //\ Testing\ for\ stability\ of\ initial\ PID\ stability}}
-\DoxyCodeLine{00357\ \textcolor{comment}{\ \ \ \ float\ readFreq\ =\ 0;}}
-\DoxyCodeLine{00358\ \textcolor{comment}{\ \ \ \ do\ \{}}
-\DoxyCodeLine{00359\ \textcolor{comment}{\ \ \ \ \ \ \ \ readFreq\ =\ 0;}}
-\DoxyCodeLine{00360\ \textcolor{comment}{\ \ \ \ \ \ \ \ for\ (int\ i=0;\ i<25;\ i++)\ \{}}
-\DoxyCodeLine{00361\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ delay(1);}}
-\DoxyCodeLine{00362\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ readFreq\ +=\ bowIOConnect-\/>getAverageTachometerFreq();}}
-\DoxyCodeLine{00363\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{00364\ \textcolor{comment}{\ \ \ \ \ \ \ \ readFreq\ =\ (readFreq\ /\ 25);}}
-\DoxyCodeLine{00365\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Testing\ freq\ "{}\ +\ String(targetFreq)\ +\ "{}\ read\ frequency\ "{}\ +\ String(readFreq),\ TextInfo);}}
-\DoxyCodeLine{00366\ \textcolor{comment}{}}
-\DoxyCodeLine{00367\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!((readFreq\ >=\ (targetFreq\ -\/\ 1))\ \&\&\ (readFreq\ <=\ (targetFreq\ +\ 1))))\ \{}}
-\DoxyCodeLine{00368\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ break;}}
-\DoxyCodeLine{00369\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{00370\ \textcolor{comment}{\ \ \ \ \ \ \ \ targetFreq\ -\/=\ 1;}}
-\DoxyCodeLine{00371\ \textcolor{comment}{}}
-\DoxyCodeLine{00372\ \textcolor{comment}{\ \ \ \ \ \ \ \ bowControlConnect-\/>setPIDTarget(targetFreq);}}
-\DoxyCodeLine{00373\ \textcolor{comment}{\ \ \ \ \ \ \ \ delay(testStepDelay);}}
-\DoxyCodeLine{00374\ \textcolor{comment}{\ \ \ \ \}\ while\ (targetFreq\ <\ calibrationData-\/>maxHz);}}
-\DoxyCodeLine{00375\ \textcolor{comment}{}}
-\DoxyCodeLine{00376\ \textcolor{comment}{\ \ \ \ calibrationData-\/>minHz\ =\ readFreq;}}
-\DoxyCodeLine{00377\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Minimum\ PID\ frequency\ found\ at\ "{}\ +\ String(calibrationData-\/>minHz)\ +\ "{}\ Hz"{},\ TextInfo);}}
-\DoxyCodeLine{00378\ \textcolor{comment}{\ \ \ \ delay(500);}}
-\DoxyCodeLine{00379\ \textcolor{comment}{}}
-\DoxyCodeLine{00380\ \textcolor{comment}{\ \ \ \ bowIOConnect-\/>clearTachoData();}}
-\DoxyCodeLine{00381\ \textcolor{comment}{\ \ \ \ targetFreq\ =\ calibrationData-\/>maxHz;}}
-\DoxyCodeLine{00382\ \textcolor{comment}{\ \ \ \ bowControlConnect-\/>setPIDTarget(targetFreq);}}
-\DoxyCodeLine{00383\ \textcolor{comment}{\ \ \ \ //\ Testing\ for\ stability\ of\ initial\ PID\ stability}}
-\DoxyCodeLine{00384\ \textcolor{comment}{\ \ \ \ readFreq\ =\ 0;}}
-\DoxyCodeLine{00385\ \textcolor{comment}{\ \ \ \ do\ \{}}
-\DoxyCodeLine{00386\ \textcolor{comment}{\ \ \ \ \ \ \ \ readFreq\ =\ 0;}}
-\DoxyCodeLine{00387\ \textcolor{comment}{\ \ \ \ \ \ \ \ for\ (int\ i=0;\ i<25;\ i++)\ \{}}
-\DoxyCodeLine{00388\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ delay(1);}}
-\DoxyCodeLine{00389\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ readFreq\ +=\ bowIOConnect-\/>getAverageTachometerFreq();}}
-\DoxyCodeLine{00390\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{00391\ \textcolor{comment}{\ \ \ \ \ \ \ \ readFreq\ =\ (readFreq\ /\ 25);}}
-\DoxyCodeLine{00392\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Testing\ freq\ "{}\ +\ String(targetFreq)\ +\ "{}\ read\ frequency\ "{}\ +\ String(readFreq),\ TextInfo);}}
-\DoxyCodeLine{00393\ \textcolor{comment}{}}
-\DoxyCodeLine{00394\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ ((readFreq\ >=\ (targetFreq\ -\/\ 1))\ \&\&\ (readFreq\ <=\ (targetFreq\ +\ 1)))\ \{}}
-\DoxyCodeLine{00395\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ break;}}
-\DoxyCodeLine{00396\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{00397\ \textcolor{comment}{\ \ \ \ \ \ \ \ targetFreq\ -\/=\ 1;}}
-\DoxyCodeLine{00398\ \textcolor{comment}{}}
-\DoxyCodeLine{00399\ \textcolor{comment}{\ \ \ \ \ \ \ \ bowControlConnect-\/>setPIDTarget(targetFreq);}}
-\DoxyCodeLine{00400\ \textcolor{comment}{\ \ \ \ \ \ \ \ delay(testStepDelay);}}
-\DoxyCodeLine{00401\ \textcolor{comment}{\ \ \ \ \}\ while\ (targetFreq\ >\ calibrationData-\/>minHz);}}
-\DoxyCodeLine{00402\ \textcolor{comment}{}}
-\DoxyCodeLine{00403\ \textcolor{comment}{\ \ \ \ calibrationData-\/>maxHz\ =\ readFreq;}}
-\DoxyCodeLine{00404\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Maximum\ pid\ frequency\ with\ no\ pressure\ found\ at\ "{}\ +\ String(calibrationData-\/>maxHz)\ +\ "{}\ Hz"{},\ TextInfo);}}
-\DoxyCodeLine{00405\ \textcolor{comment}{\ \ \ \ delay(500);}}
-\DoxyCodeLine{00406\ \textcolor{comment}{}}
-\DoxyCodeLine{00407\ \textcolor{comment}{\ \ \ \ bowIOConnect-\/>setTiltPWM(calibrationData-\/>stallPressure);}}
-\DoxyCodeLine{00408\ \textcolor{comment}{\ \ \ \ bowIOConnect-\/>waitForTiltToComplete();}}
-\DoxyCodeLine{00409\ \textcolor{comment}{\ \ \ \ readFreq\ =\ 0;}}
-\DoxyCodeLine{00410\ \textcolor{comment}{\ \ \ \ do\ \{}}
-\DoxyCodeLine{00411\ \textcolor{comment}{\ \ \ \ \ \ \ \ readFreq\ =\ 0;}}
-\DoxyCodeLine{00412\ \textcolor{comment}{\ \ \ \ \ \ \ \ for\ (int\ i=0;\ i<25;\ i++)\ \{}}
-\DoxyCodeLine{00413\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ delay(1);}}
-\DoxyCodeLine{00414\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ readFreq\ +=\ bowIOConnect-\/>getAverageTachometerFreq();}}
-\DoxyCodeLine{00415\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{00416\ \textcolor{comment}{\ \ \ \ \ \ \ \ readFreq\ =\ (readFreq\ /\ 25);}}
-\DoxyCodeLine{00417\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Testing\ freq\ "{}\ +\ String(targetFreq)\ +\ "{}\ read\ frequency\ "{}\ +\ String(readFreq),\ TextInfo);}}
-\DoxyCodeLine{00418\ \textcolor{comment}{}}
-\DoxyCodeLine{00419\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ ((readFreq\ >=\ (targetFreq\ -\/\ 1))\ \&\&\ (readFreq\ <=\ (targetFreq\ +\ 1)))\ \{}}
-\DoxyCodeLine{00420\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ break;}}
-\DoxyCodeLine{00421\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{00422\ \textcolor{comment}{\ \ \ \ \ \ \ \ targetFreq\ -\/=\ 1;}}
-\DoxyCodeLine{00423\ \textcolor{comment}{}}
-\DoxyCodeLine{00424\ \textcolor{comment}{\ \ \ \ \ \ \ \ bowControlConnect-\/>setPIDTarget(targetFreq);}}
-\DoxyCodeLine{00425\ \textcolor{comment}{\ \ \ \ \ \ \ \ delay(testStepDelay);}}
-\DoxyCodeLine{00426\ \textcolor{comment}{\ \ \ \ \}\ while\ (targetFreq\ >\ calibrationData-\/>minHz);}}
-\DoxyCodeLine{00427\ \textcolor{comment}{}}
-\DoxyCodeLine{00428\ \textcolor{comment}{\ \ \ \ calibrationData-\/>maxHzPIDFullPressure\ =\ readFreq;}}
-\DoxyCodeLine{00429\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Maximum\ pid\ frequency\ with\ pressure\ "{}\ +\ String(calibrationData-\/>maxHzPIDFullPressure)\ +\ "{}\ Hz"{},\ TextInfo);}}
-\DoxyCodeLine{00430\ \textcolor{comment}{\ \ \ \ delay(500);}}
-\DoxyCodeLine{00431\ \textcolor{comment}{}}
-\DoxyCodeLine{00432\ \textcolor{comment}{\ \ \ \ bowControlConnect-\/>speedMode\ =\ savedSpeedMode;}}
-\DoxyCodeLine{00433\ \textcolor{comment}{\ \ \ \ bowControlConnect-\/>run\ =\ 0;}}
-\DoxyCodeLine{00434\ \textcolor{comment}{}}
-\DoxyCodeLine{00435\ \textcolor{comment}{}}
-\DoxyCodeLine{00436\ \textcolor{comment}{\ \ \ \ return\ true;}}
-\DoxyCodeLine{00437\ \textcolor{comment}{\}}}
-\DoxyCodeLine{00438\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00439\ String\ \mbox{\hyperlink{classCalibrateBow_abb616193d4f13d78b94d37517ed964c2}{CalibrateBow::dumpData}}()\ \{}
-\DoxyCodeLine{00440\ \ \ \ \ String\ dump\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00441\ \ \ \ \ \textcolor{keywordflow}{return}\ dump;}
-\DoxyCodeLine{00442\ \}}
-\DoxyCodeLine{00443\ }
-\DoxyCodeLine{00445\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCalibrateBow_ac30fefcd9f184fa2f7258c6c2e354f57}{CalibrateBow::calibrateAll}}()\ \{}
-\DoxyCodeLine{00446\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a521548efe320100aa2c4aa81280e52f2}{home}}())\ \{}
-\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Couldn't\ home\ bowing\ jack"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});}
-\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00449\ \ \ \ \ \}}
+\DoxyCodeLine{00354\ \textcolor{comment}{\ \ \ \ //\ Testing\ for\ stability\ of\ initial\ PID\ stability}}
+\DoxyCodeLine{00355\ \textcolor{comment}{\ \ \ \ float\ readFreq\ =\ 0;}}
+\DoxyCodeLine{00356\ \textcolor{comment}{\ \ \ \ do\ \{}}
+\DoxyCodeLine{00357\ \textcolor{comment}{\ \ \ \ \ \ \ \ readFreq\ =\ 0;}}
+\DoxyCodeLine{00358\ \textcolor{comment}{\ \ \ \ \ \ \ \ for\ (int\ i=0;\ i<25;\ i++)\ \{}}
+\DoxyCodeLine{00359\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ delay(1);}}
+\DoxyCodeLine{00360\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ readFreq\ +=\ bowIOConnect-\/>getAverageTachometerFreq();}}
+\DoxyCodeLine{00361\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00362\ \textcolor{comment}{\ \ \ \ \ \ \ \ readFreq\ =\ (readFreq\ /\ 25);}}
+\DoxyCodeLine{00363\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Testing\ freq\ "{}\ +\ String(targetFreq)\ +\ "{}\ read\ frequency\ "{}\ +\ String(readFreq),\ TextInfo);}}
+\DoxyCodeLine{00364\ \textcolor{comment}{}}
+\DoxyCodeLine{00365\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!((readFreq\ >=\ (targetFreq\ -\/\ 1))\ \&\&\ (readFreq\ <=\ (targetFreq\ +\ 1))))\ \{}}
+\DoxyCodeLine{00366\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ break;}}
+\DoxyCodeLine{00367\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00368\ \textcolor{comment}{\ \ \ \ \ \ \ \ targetFreq\ -\/=\ 1;}}
+\DoxyCodeLine{00369\ \textcolor{comment}{}}
+\DoxyCodeLine{00370\ \textcolor{comment}{\ \ \ \ \ \ \ \ bowControlConnect-\/>setPIDTarget(targetFreq);}}
+\DoxyCodeLine{00371\ \textcolor{comment}{\ \ \ \ \ \ \ \ delay(testStepDelay);}}
+\DoxyCodeLine{00372\ \textcolor{comment}{\ \ \ \ \}\ while\ (targetFreq\ <\ calibrationData-\/>maxHz);}}
+\DoxyCodeLine{00373\ \textcolor{comment}{}}
+\DoxyCodeLine{00374\ \textcolor{comment}{\ \ \ \ calibrationData-\/>minHz\ =\ readFreq;}}
+\DoxyCodeLine{00375\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Minimum\ PID\ frequency\ found\ at\ "{}\ +\ String(calibrationData-\/>minHz)\ +\ "{}\ Hz"{},\ TextInfo);}}
+\DoxyCodeLine{00376\ \textcolor{comment}{\ \ \ \ delay(500);}}
+\DoxyCodeLine{00377\ \textcolor{comment}{}}
+\DoxyCodeLine{00378\ \textcolor{comment}{\ \ \ \ bowIOConnect-\/>clearTachoData();}}
+\DoxyCodeLine{00379\ \textcolor{comment}{\ \ \ \ targetFreq\ =\ calibrationData-\/>maxHz;}}
+\DoxyCodeLine{00380\ \textcolor{comment}{\ \ \ \ bowControlConnect-\/>setPIDTarget(targetFreq);}}
+\DoxyCodeLine{00381\ \textcolor{comment}{\ \ \ \ //\ Testing\ for\ stability\ of\ initial\ PID\ stability}}
+\DoxyCodeLine{00382\ \textcolor{comment}{\ \ \ \ readFreq\ =\ 0;}}
+\DoxyCodeLine{00383\ \textcolor{comment}{\ \ \ \ do\ \{}}
+\DoxyCodeLine{00384\ \textcolor{comment}{\ \ \ \ \ \ \ \ readFreq\ =\ 0;}}
+\DoxyCodeLine{00385\ \textcolor{comment}{\ \ \ \ \ \ \ \ for\ (int\ i=0;\ i<25;\ i++)\ \{}}
+\DoxyCodeLine{00386\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ delay(1);}}
+\DoxyCodeLine{00387\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ readFreq\ +=\ bowIOConnect-\/>getAverageTachometerFreq();}}
+\DoxyCodeLine{00388\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00389\ \textcolor{comment}{\ \ \ \ \ \ \ \ readFreq\ =\ (readFreq\ /\ 25);}}
+\DoxyCodeLine{00390\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Testing\ freq\ "{}\ +\ String(targetFreq)\ +\ "{}\ read\ frequency\ "{}\ +\ String(readFreq),\ TextInfo);}}
+\DoxyCodeLine{00391\ \textcolor{comment}{}}
+\DoxyCodeLine{00392\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ ((readFreq\ >=\ (targetFreq\ -\/\ 1))\ \&\&\ (readFreq\ <=\ (targetFreq\ +\ 1)))\ \{}}
+\DoxyCodeLine{00393\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ break;}}
+\DoxyCodeLine{00394\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00395\ \textcolor{comment}{\ \ \ \ \ \ \ \ targetFreq\ -\/=\ 1;}}
+\DoxyCodeLine{00396\ \textcolor{comment}{}}
+\DoxyCodeLine{00397\ \textcolor{comment}{\ \ \ \ \ \ \ \ bowControlConnect-\/>setPIDTarget(targetFreq);}}
+\DoxyCodeLine{00398\ \textcolor{comment}{\ \ \ \ \ \ \ \ delay(testStepDelay);}}
+\DoxyCodeLine{00399\ \textcolor{comment}{\ \ \ \ \}\ while\ (targetFreq\ >\ calibrationData-\/>minHz);}}
+\DoxyCodeLine{00400\ \textcolor{comment}{}}
+\DoxyCodeLine{00401\ \textcolor{comment}{\ \ \ \ calibrationData-\/>maxHz\ =\ readFreq;}}
+\DoxyCodeLine{00402\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Maximum\ pid\ frequency\ with\ no\ pressure\ found\ at\ "{}\ +\ String(calibrationData-\/>maxHz)\ +\ "{}\ Hz"{},\ TextInfo);}}
+\DoxyCodeLine{00403\ \textcolor{comment}{\ \ \ \ delay(500);}}
+\DoxyCodeLine{00404\ \textcolor{comment}{}}
+\DoxyCodeLine{00405\ \textcolor{comment}{\ \ \ \ bowIOConnect-\/>setTiltPWM(calibrationData-\/>stallPressure);}}
+\DoxyCodeLine{00406\ \textcolor{comment}{\ \ \ \ bowIOConnect-\/>waitForTiltToComplete();}}
+\DoxyCodeLine{00407\ \textcolor{comment}{\ \ \ \ readFreq\ =\ 0;}}
+\DoxyCodeLine{00408\ \textcolor{comment}{\ \ \ \ do\ \{}}
+\DoxyCodeLine{00409\ \textcolor{comment}{\ \ \ \ \ \ \ \ readFreq\ =\ 0;}}
+\DoxyCodeLine{00410\ \textcolor{comment}{\ \ \ \ \ \ \ \ for\ (int\ i=0;\ i<25;\ i++)\ \{}}
+\DoxyCodeLine{00411\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ delay(1);}}
+\DoxyCodeLine{00412\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ readFreq\ +=\ bowIOConnect-\/>getAverageTachometerFreq();}}
+\DoxyCodeLine{00413\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00414\ \textcolor{comment}{\ \ \ \ \ \ \ \ readFreq\ =\ (readFreq\ /\ 25);}}
+\DoxyCodeLine{00415\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Testing\ freq\ "{}\ +\ String(targetFreq)\ +\ "{}\ read\ frequency\ "{}\ +\ String(readFreq),\ TextInfo);}}
+\DoxyCodeLine{00416\ \textcolor{comment}{}}
+\DoxyCodeLine{00417\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ ((readFreq\ >=\ (targetFreq\ -\/\ 1))\ \&\&\ (readFreq\ <=\ (targetFreq\ +\ 1)))\ \{}}
+\DoxyCodeLine{00418\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ break;}}
+\DoxyCodeLine{00419\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00420\ \textcolor{comment}{\ \ \ \ \ \ \ \ targetFreq\ -\/=\ 1;}}
+\DoxyCodeLine{00421\ \textcolor{comment}{}}
+\DoxyCodeLine{00422\ \textcolor{comment}{\ \ \ \ \ \ \ \ bowControlConnect-\/>setPIDTarget(targetFreq);}}
+\DoxyCodeLine{00423\ \textcolor{comment}{\ \ \ \ \ \ \ \ delay(testStepDelay);}}
+\DoxyCodeLine{00424\ \textcolor{comment}{\ \ \ \ \}\ while\ (targetFreq\ >\ calibrationData-\/>minHz);}}
+\DoxyCodeLine{00425\ \textcolor{comment}{}}
+\DoxyCodeLine{00426\ \textcolor{comment}{\ \ \ \ calibrationData-\/>maxHzPIDFullPressure\ =\ readFreq;}}
+\DoxyCodeLine{00427\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Maximum\ pid\ frequency\ with\ pressure\ "{}\ +\ String(calibrationData-\/>maxHzPIDFullPressure)\ +\ "{}\ Hz"{},\ TextInfo);}}
+\DoxyCodeLine{00428\ \textcolor{comment}{\ \ \ \ delay(500);}}
+\DoxyCodeLine{00429\ \textcolor{comment}{}}
+\DoxyCodeLine{00430\ \textcolor{comment}{\ \ \ \ bowControlConnect-\/>speedMode\ =\ savedSpeedMode;}}
+\DoxyCodeLine{00431\ \textcolor{comment}{\ \ \ \ bowControlConnect-\/>run\ =\ 0;}}
+\DoxyCodeLine{00432\ \textcolor{comment}{}}
+\DoxyCodeLine{00433\ \textcolor{comment}{}}
+\DoxyCodeLine{00434\ \textcolor{comment}{\ \ \ \ return\ true;}}
+\DoxyCodeLine{00435\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00436\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00437\ String\ \mbox{\hyperlink{classCalibrateBow_abb616193d4f13d78b94d37517ed964c2}{CalibrateBow::dumpData}}()\ \{}
+\DoxyCodeLine{00438\ \ \ \ \ String\ dump\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00439\ \ \ \ \ \textcolor{keywordflow}{return}\ dump;}
+\DoxyCodeLine{00440\ \}}
+\DoxyCodeLine{00441\ }
+\DoxyCodeLine{00443\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCalibrateBow_ac30fefcd9f184fa2f7258c6c2e354f57}{CalibrateBow::calibrateAll}}()\ \{}
+\DoxyCodeLine{00444\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classCalibrateBow_a089012af2313ca1a0b55613164800bf0}{bowControl}}-\/>\mbox{\hyperlink{classBowControl_a521548efe320100aa2c4aa81280e52f2}{home}}())\ \{}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Couldn't\ home\ bowing\ jack"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00447\ \ \ \ \ \}}
+\DoxyCodeLine{00448\ }
+\DoxyCodeLine{00449\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ result;}
 \DoxyCodeLine{00450\ }
-\DoxyCodeLine{00451\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ result;}
-\DoxyCodeLine{00452\ }
-\DoxyCodeLine{00453\ \ \ \ \ result\ =\ \mbox{\hyperlink{classCalibrateBow_a9e92861c49ee1f093bec2d24ea3e35c2}{findMinMaxSpeedPWM}}();}
-\DoxyCodeLine{00454\ \ \ \ \ \textcolor{keywordflow}{if}\ (result\ !=\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa4441e965ce8b9b547cb19f8eadb1593e}{CR\_Ok}})\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a9734ed9af0ab3c50186b7f5c779c0b7a}{exitWithError}}(result);\ \}}
-\DoxyCodeLine{00455\ }
-\DoxyCodeLine{00456\ \ \ \ \ result\ =\ \mbox{\hyperlink{classCalibrateBow_a4420111fa3dd5f773d96b16aafc8972b}{findMinMaxPressure}}();}
-\DoxyCodeLine{00457\ \ \ \ \ \textcolor{keywordflow}{if}\ (result\ !=\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa4441e965ce8b9b547cb19f8eadb1593e}{CR\_Ok}})\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a9734ed9af0ab3c50186b7f5c779c0b7a}{exitWithError}}(result);\ \}}
+\DoxyCodeLine{00451\ \ \ \ \ result\ =\ \mbox{\hyperlink{classCalibrateBow_a9e92861c49ee1f093bec2d24ea3e35c2}{findMinMaxSpeedPWM}}();}
+\DoxyCodeLine{00452\ \ \ \ \ \textcolor{keywordflow}{if}\ (result\ !=\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa4441e965ce8b9b547cb19f8eadb1593e}{CR\_Ok}})\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a9734ed9af0ab3c50186b7f5c779c0b7a}{exitWithError}}(result);\ \}}
+\DoxyCodeLine{00453\ }
+\DoxyCodeLine{00454\ \ \ \ \ result\ =\ \mbox{\hyperlink{classCalibrateBow_a4420111fa3dd5f773d96b16aafc8972b}{findMinMaxPressure}}();}
+\DoxyCodeLine{00455\ \ \ \ \ \textcolor{keywordflow}{if}\ (result\ !=\ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9dfa4441e965ce8b9b547cb19f8eadb1593e}{CR\_Ok}})\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{calibrationhelpers_8hpp_a9734ed9af0ab3c50186b7f5c779c0b7a}{exitWithError}}(result);\ \}}
+\DoxyCodeLine{00456\ }
+\DoxyCodeLine{00457\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Calibrations\ done"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}});}
 \DoxyCodeLine{00458\ }
-\DoxyCodeLine{00459\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Calibrations\ done"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}});}
-\DoxyCodeLine{00460\ }
-\DoxyCodeLine{00461\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00462\ \}}
-\DoxyCodeLine{00463\ }
-\DoxyCodeLine{00464\ }
-\DoxyCodeLine{00465\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00459\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00460\ \}}
+\DoxyCodeLine{00461\ }
+\DoxyCodeLine{00462\ }
+\DoxyCodeLine{00463\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

@@ -3,132 +3,147 @@
 
 #include "pidcontroller.hpp"
 
-eProcessResult PIDController::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
+const ModuleCommandDeclaration PIDController::moduleCommands[] = {
+    { "targetfrequency", "tf", "float", "Sets the PID target frequency", false, false, &s_targetFreq, },
+    { "ki", "ki", "float", "Sets the Ki parameter of the PID of the selected bow", false, true, &s_ki },
+    { "kp", "kp", "float", "Sets the Kp parameter of the PID of the selected bow", false, true, &s_kp },
+    { "kd", "kd", "float", "Sets the Kd parameter of the PID of the selected bow", false, true, &s_kd },
+    { "integratorerror", "ie", "float", "Sets the lower threshold of error values for the PID integrator to ignore of the selected bow", false, true, &s_integratorError },
+    { "reset", "re", "-", "Resets the PID of the selected bow", false, false, &s_reset },
+    { "maxerror", "xe", "float", "Maximum error to correct in each PID loop, essentially sets acceleration", false, true, &s_maxError },
+    { "peakerror", "pe", "float", "Get latest PID peak error", false, false, &s_peakError },
+    { "motorspeedmax", "msx", "float", "Bow motor maximum speed limit", false, true, &s_motorSpeedMax },
+    { "motorspeedmin", "msi", "float", "Bow motor minimum speed limit", false, true, &s_motorSpeedMin },
+    { "measuretimetotarget", "mtt", "float", "Measure the time it takes to change from the current frequency to the target frequency", false, false, &s_measureTimeToTarget }
+};
 
-    processCommandItems(inCommandItem, serialCommandsPID, sizeof(serialCommandsPID)  / sizeof(serialCommandItem));
-
-    if (inCommandItem->command == "help") {
-        addCommandHelp(serialCommandsPID, sizeof(serialCommandsPID) / sizeof(serialCommandItem), commandResponses,"");
-        return eProcessResult::PassThrough;
-    } else
-    if (inCommandItem->command == "bowpidtargetfreq") {
-        if (request) {
-            commandResponses->push_back({ "bptf:" + String(pidTargetSpeed), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setPIDTarget(inCommandItem->argument[0].toFloat());
-            commandResponses->push_back({ "bptf:" + String(pidTargetSpeed), InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "bowpidki") {
-        if (request) {
-            commandResponses->push_back({ "bpki:" + String(Ki), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            Ki = inCommandItem->argument[0].toFloat();
-            commandResponses->push_back({"bpki:" + String(Ki), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowpidkp") {
-        if (request) {
-            commandResponses->push_back({ "bpkp:" + String(Kp), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            Kp = inCommandItem->argument[0].toFloat();
-            commandResponses->push_back({"bpkp:" + String(Kp), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowpidkd") {
-        if (request) {
-            commandResponses->push_back({ "bpkd:" + String(Kd), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            Kd = inCommandItem->argument[0].toFloat();
-            commandResponses->push_back({"bpkd:" + String(Kd), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowpidr") {
-        if (!request) {
-            commandResponses->push_back({"bowpidr:1", InfoRequest});
-            previousError = 0;
-            pidReset();
-        }
-    }  else
-    if (inCommandItem->command == "bowpidintegratorerror") {
-        if (request) {
-            commandResponses->push_back({ "bpie:" + String(integratorIgnoreBelow), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            integratorIgnoreBelow = inCommandItem->argument[0].toFloat(); //String(serialCommand.substring(2,serialCommand.length())).toFloat();
-            commandResponses->push_back({"bpie:" + String(integratorIgnoreBelow), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowpidmaxerror") {
-        if (request) {
-            commandResponses->push_back({ "bpme:" + String(pidMaxError), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            pidMaxError = inCommandItem->argument[0].toInt();
-            commandResponses->push_back({"bpme:" + String(pidMaxError), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowpidpeakerror") {
-        if (request) {
-            commandResponses->push_back({ "bpperr:" + String(pidPeakError), InfoRequest });
-            pidPeakError = 0;
-        }
-    } else
-    if (inCommandItem->command == "bowmotorspeedmax") {
-        if (request) {
-            commandResponses->push_back({ "bmsx:" + String(maxSpeedHz), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setMaxSpeedHz(inCommandItem->argument[0].toFloat()); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
-            commandResponses->push_back({"bmsx:" + String(maxSpeedHz), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowmotorspeedmin") {
-        if (request) {
-            commandResponses->push_back({ "bmsi:" + String(minSpeedHz), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setMinSpeedHz(inCommandItem->argument[0].toFloat());
-            commandResponses->push_back({"bmsi:" + String(minSpeedHz), InfoRequest});
-        }
-    } else {
-        return eProcessResult::NotFound;
-    }
-    return eProcessResult::Ok;
-}
-
-
-eProcessResult PIDController::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
-
-    processCommandItems(inCommandItem, serialCommandsPIDHidden, sizeof(serialCommandsPIDHidden)  / sizeof(serialCommandItem));
-
-    if (inCommandItem->command == "bowmeasuretimetotarget") {
-        if (!request) {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            float startSpeed = pidTargetSpeed;
-            float endSpeed = inCommandItem->argument[0].toFloat();
-            float time = measureTimeToTarget(endSpeed);
-            if (time == -1) {
-                commandResponses->push_back({"bmtt:0", InfoRequest});
-                return eProcessResult::CommandFailed;
-            } else {
-                commandResponses->push_back({"bmtt:" + String(time) + ":" + String(startSpeed) + ":" + String(endSpeed), InfoRequest});
-            }
-        }
-    } else {
-        return eProcessResult::NotFound;
-    }
-    return eProcessResult::Ok;
-}
+getModuleCount(PIDController)
 
 PIDController::PIDController(DCMotorControl &inDCMotorControl) {
+    moduleID = new ModuleID("pid", "pid", "PID controller v1.0", ModuleID::software);
     dcMotorControl = &inDCMotorControl;
 }
 
+CREATE_MODULE_COMMAND_FUNCTION(targetFreq, PIDController) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pidTargetSpeed), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setPIDTarget(inCommandItem->argument[0].toFloat());
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pidTargetSpeed), InfoRequest });
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(ki, PIDController) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pKi), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        pKi = inCommandItem->argument[0].toFloat();
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(pKi), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(kp, PIDController) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pKp), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        pKp = inCommandItem->argument[0].toFloat();
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(pKp), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(kd, PIDController) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pKd), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        pKd = inCommandItem->argument[0].toFloat();
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(pKd), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(integratorError, PIDController) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(integratorIgnoreBelow), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        integratorIgnoreBelow = inCommandItem->argument[0].toFloat(); //String(serialCommand.substring(2,serialCommand.length())).toFloat();
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(integratorIgnoreBelow), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(reset, PIDController) {
+    if (!request) {
+        inCommandResponses->push_back({thisItem.shortCommand + ":1", InfoRequest});
+        previousError = 0;
+        pidReset();
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(maxError, PIDController) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pidMaxError), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        pidMaxError = inCommandItem->argument[0].toInt();
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(pidMaxError), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(peakError, PIDController) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pidPeakError), InfoRequest });
+        pidPeakError = 0;
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(motorSpeedMax, PIDController) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(maxSpeedHz), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setMaxSpeedHz(inCommandItem->argument[0].toFloat()); //String(serialCommand.substring(1,serialCommand.length())).toFloat();
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(maxSpeedHz), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(motorSpeedMin, PIDController) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(minSpeedHz), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setMinSpeedHz(inCommandItem->argument[0].toFloat());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(minSpeedHz), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(measureTimeToTarget, PIDController) {
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        float startSpeed = pidTargetSpeed;
+        float endSpeed = inCommandItem->argument[0].toFloat();
+        float time = measureTimeToTarget(endSpeed);
+        if (time == -1) {
+            inCommandResponses->push_back({thisItem.shortCommand + ":0", InfoRequest});
+            return eProcessResult::CommandFailed;
+        } else {
+            inCommandResponses->push_back({thisItem.shortCommand + ":" + String(time) + ":" + String(startSpeed) + ":" + String(endSpeed), InfoRequest});
+        }
+    }
+    return eProcessResult::Ok;
+};
 /// Set PID target speed, check that it doesnt go above maxHz or below minHz
 bool PIDController::setPIDTarget(float inPIDTargetSpeed) {
     if (((inPIDTargetSpeed > maxSpeedHz) || (inPIDTargetSpeed < minSpeedHz)) && inPIDTargetSpeed != 0) {
@@ -161,9 +176,9 @@ void PIDController::pidControl() {
     if ((error >= integratorIgnoreBelow) || (error <= -integratorIgnoreBelow)) { integral += error; }
 
     // Calculate the PID control output
-    KpTerm = Kp * error;
-    KiTerm = Ki * integral;
-    KdTerm = Kd * (error - previousError);
+    KpTerm = pKp * error;
+    KiTerm = pKi * integral;
+    KdTerm = pKd * (error - previousError);
 
     // At incorrect Ki values the integral starts building,this doesn't really matter since
     // the type cast makes the output wrap but it might cause trouble in the future so added this
@@ -221,20 +236,6 @@ float PIDController::measureTimeToTarget(float inPIDTargetSpeed) {
     //if (inPIDTargetSpeed > startSpeed) { debugPrintln(", overshoot " + String(overshoot), InfoRequest); }
     //if (inPIDTargetSpeed < startSpeed) { debugPrintln(", undershoot " + String(undershoot), InfoRequest); }
     return timeToTarget;
-}
-
-
-String PIDController::dumpData() {
-    String dump = "";
-    dump += "bpki:" + String(Ki) + ",";
-    dump += "bpkp:" + String(Kp) + ",";
-    dump += "bpkd:" + String(Kd) + ",";
-    dump += "bpie:" + String(integratorIgnoreBelow) + ",";
-    dump += "bpme:" + String(pidMaxError) + ",";
-    dump += "bmsx:" + String(maxSpeedHz) + ",";
-    dump += "bmsi:" + String(minSpeedHz);
-
-    return dump;
 }
 
 #endif // PIDCONTROLLER_C

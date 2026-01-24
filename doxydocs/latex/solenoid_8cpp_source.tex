@@ -54,7 +54,7 @@
 \DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}sed:"{}}\ +\ String(\mbox{\hyperlink{classSolenoid_a57338a84f1eab97588531d68d04bcc08}{solenoidEngageDuration}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
 \DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
 \DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSolenoid_a57338a84f1eab97588531d68d04bcc08}{solenoidEngageDuration}}\ =\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSolenoid_a068fb895637fe34b1406fcf2b0a802ff}{setSolenoidDuration}}(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt());}
 \DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}sed:"{}}\ +\ String(\mbox{\hyperlink{classSolenoid_a57338a84f1eab97588531d68d04bcc08}{solenoidEngageDuration}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
 \DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00056\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
@@ -127,50 +127,42 @@
 \DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
 \DoxyCodeLine{00127\ \}}
 \DoxyCodeLine{00128\ }
-\DoxyCodeLine{00129\ uint16\_t\ \mbox{\hyperlink{classSolenoid_a6a91ec2f986f7eed0edcc7ea9d75c898}{Solenoid::getSolenoidMax}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classSolenoid_add93b1973b29bfce089f9a166ff74560}{forceMax}};\ \}}
-\DoxyCodeLine{00130\ }
-\DoxyCodeLine{00131\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_a1085333a5d375c2aec9a5ab3ddb54567}{Solenoid::setSolenoidMin}}(uint16\_t\ inMin)\ \ \{}
-\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordflow}{if}\ ((inMin\ <0)\ ||\ (inMin\ >\ 65535))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
-\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{classSolenoid_a66c6d3f68f11c1bad2518f302ef42e19}{forceMin}}\ =\ inMin;}
-\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00135\ \}}
-\DoxyCodeLine{00136\ }
-\DoxyCodeLine{00137\ uint16\_t\ \mbox{\hyperlink{classSolenoid_a8406e83e66a2fbe703eec3859ab0b812}{Solenoid::getSolenoidMin}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classSolenoid_a66c6d3f68f11c1bad2518f302ef42e19}{forceMin}};\ \}}
-\DoxyCodeLine{00138\ }
-\DoxyCodeLine{00139\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_a3ff145c3e8dee4c19b679adfdeeeed33}{Solenoid::setSolenoidMultiplier}}(\textcolor{keywordtype}{float}\ inMultiplier)\ \{}
-\DoxyCodeLine{00140\ \ \{}
-\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordflow}{if}\ ((inMultiplier\ <\ 0)\ ||\ (inMultiplier\ >\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
-\DoxyCodeLine{00142\ \ \ \ \ \mbox{\hyperlink{classSolenoid_a6be3226d9b5f3e4f83583c0227331b71}{forceMultiplier}}\ =\ inMultiplier;}
-\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00144\ \}\}}
-\DoxyCodeLine{00145\ }
-\DoxyCodeLine{00146\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classSolenoid_a2ef7b60464ab44f533662904a24b054c}{Solenoid::getSolenoidMultiplier}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classSolenoid_a6be3226d9b5f3e4f83583c0227331b71}{forceMultiplier}};\ \}}
+\DoxyCodeLine{00129\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_a1085333a5d375c2aec9a5ab3ddb54567}{Solenoid::setSolenoidMin}}(uint16\_t\ inMin)\ \ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordflow}{if}\ ((inMin\ <0)\ ||\ (inMin\ >\ 65535))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00131\ \ \ \ \ \mbox{\hyperlink{classSolenoid_a66c6d3f68f11c1bad2518f302ef42e19}{forceMin}}\ =\ inMin;}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00133\ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_a3ff145c3e8dee4c19b679adfdeeeed33}{Solenoid::setSolenoidMultiplier}}(\textcolor{keywordtype}{float}\ inMultiplier)\ \{}
+\DoxyCodeLine{00136\ \ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordflow}{if}\ ((inMultiplier\ <\ 0)\ ||\ (inMultiplier\ >\ 1))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00138\ \ \ \ \ \mbox{\hyperlink{classSolenoid_a6be3226d9b5f3e4f83583c0227331b71}{forceMultiplier}}\ =\ inMultiplier;}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00140\ \}\}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_a068fb895637fe34b1406fcf2b0a802ff}{Solenoid::setSolenoidDuration}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ inDuration)\ \ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{if}\ ((inDuration\ <\ 0)\ ||\ (inDuration\ >\ 250000))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00144\ \ \ \ \ \mbox{\hyperlink{classSolenoid_a57338a84f1eab97588531d68d04bcc08}{solenoidEngageDuration}}\ =\ inDuration;}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00146\ \}}
 \DoxyCodeLine{00147\ }
-\DoxyCodeLine{00148\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_a068fb895637fe34b1406fcf2b0a802ff}{Solenoid::setSolenoidDuration}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ inDuration)\ \ \{}
-\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordflow}{if}\ ((inDuration\ <\ 0)\ ||\ (inDuration\ >\ 250000))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
-\DoxyCodeLine{00150\ \ \ \ \ \mbox{\hyperlink{classSolenoid_a57338a84f1eab97588531d68d04bcc08}{solenoidEngageDuration}}\ =\ inDuration;}
-\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00152\ \}}
-\DoxyCodeLine{00153\ }
-\DoxyCodeLine{00154\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classSolenoid_a93e732c090ff17cb07fe88082a096554}{Solenoid::getSolenoidDuration}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classSolenoid_a57338a84f1eab97588531d68d04bcc08}{solenoidEngageDuration}};\ \}}
-\DoxyCodeLine{00155\ }
-\DoxyCodeLine{00156\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_ab6a5e1734209835072e6f106aa2d5bb2}{Solenoid::update}}()\ \{}
-\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{main_8cpp_af205655c0c86fc6aaf4c8450d8243938}{currentTime}}\ =\ micros();}
-\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classSolenoid_afc07cd3e237f4d30e653b7e6a5d3d2d4}{solenoidEngaged}})\ \&\&\ (\mbox{\hyperlink{main_8cpp_af205655c0c86fc6aaf4c8450d8243938}{currentTime}}\ -\/\ \mbox{\hyperlink{classSolenoid_a97789c71533ac969ac20c4a8ca08650e}{solenoidEngageTime}}\ >\ \mbox{\hyperlink{classSolenoid_a57338a84f1eab97588531d68d04bcc08}{solenoidEngageDuration}})\ \&\&\ (\mbox{\hyperlink{classSolenoid_a57338a84f1eab97588531d68d04bcc08}{solenoidEngageDuration}}\ !=\ 0))\ \{}
-\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSolenoid_ad883846bc1ecb3f9c03f4b3f2cc11d84}{solenoidDisengage}}();}
-\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00161\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00162\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00163\ \}}
+\DoxyCodeLine{00148\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_ab6a5e1734209835072e6f106aa2d5bb2}{Solenoid::update}}()\ \{}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{main_8cpp_af205655c0c86fc6aaf4c8450d8243938}{currentTime}}\ =\ micros();}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classSolenoid_afc07cd3e237f4d30e653b7e6a5d3d2d4}{solenoidEngaged}})\ \&\&\ (\mbox{\hyperlink{main_8cpp_af205655c0c86fc6aaf4c8450d8243938}{currentTime}}\ -\/\ \mbox{\hyperlink{classSolenoid_a97789c71533ac969ac20c4a8ca08650e}{solenoidEngageTime}}\ >\ \mbox{\hyperlink{classSolenoid_a57338a84f1eab97588531d68d04bcc08}{solenoidEngageDuration}})\ \&\&\ (\mbox{\hyperlink{classSolenoid_a57338a84f1eab97588531d68d04bcc08}{solenoidEngageDuration}}\ !=\ 0))\ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSolenoid_ad883846bc1ecb3f9c03f4b3f2cc11d84}{solenoidDisengage}}();}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00155\ \}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ String\ \mbox{\hyperlink{classSolenoid_a5d744ed87a648522a3f4669bc907b68b}{Solenoid::dumpData}}()\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ String\ dump\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00159\ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}sxf:"{}}\ +\ String(\mbox{\hyperlink{classSolenoid_add93b1973b29bfce089f9a166ff74560}{forceMax}})\ +\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00160\ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}sif:"{}}\ +\ String(\mbox{\hyperlink{classSolenoid_a66c6d3f68f11c1bad2518f302ef42e19}{forceMin}})\ +\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordflow}{return}\ dump;}
+\DoxyCodeLine{00162\ \}}
+\DoxyCodeLine{00163\ }
 \DoxyCodeLine{00164\ }
-\DoxyCodeLine{00165\ String\ \mbox{\hyperlink{classSolenoid_a5d744ed87a648522a3f4669bc907b68b}{Solenoid::dumpData}}()\ \{}
-\DoxyCodeLine{00166\ \ \ \ \ String\ dump\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00167\ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}sxf:"{}}\ +\ String(\mbox{\hyperlink{classSolenoid_add93b1973b29bfce089f9a166ff74560}{forceMax}})\ +\ \textcolor{stringliteral}{"{},"{}};}
-\DoxyCodeLine{00168\ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}sif:"{}}\ +\ String(\mbox{\hyperlink{classSolenoid_a66c6d3f68f11c1bad2518f302ef42e19}{forceMin}})\ +\ \textcolor{stringliteral}{"{},"{}};}
-\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordflow}{return}\ dump;}
-\DoxyCodeLine{00170\ \}}
-\DoxyCodeLine{00171\ }
-\DoxyCodeLine{00172\ }
-\DoxyCodeLine{00173\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00165\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

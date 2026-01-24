@@ -3,30 +3,40 @@
 
 #include "farsingle.hpp"
 
+MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI);
+
+CREATE_MIDI_SOURCE_CALLBACKS(MIDI)
+CREATE_MIDI_SOURCE_CALLBACKS(usbMIDI)
+
+const ModuleCommandDeclaration FARSingle::moduleCommands[] = {
+    { "calibrateall", "ca", "-", "Performs all calibration routines on the selected bow, see below for routines performed", false, false, &s_calibrateAll },
+    { "calibratebowspeed", "cbs", "-", "Finds the minimum and maximum bow speed of the selected bow", false, false, &s_calibrateBowSpeed },
+    { "calibratebowpressure", "cbp", "-", "Finds the minimum and maximum bow pressure of the selected bow", false, false, &s_calibrateBowPressure },
+    { "calibratemute", "cmu", "-", "Calibrate mute settings", false, false, &s_calibrateMute },
+    { "pickupstringfrequency", "psf", "-", "Returns the fundamental tone calculated from the current audio signal if appliccable", false, false, &s_pickupStringFrequency },
+    { "pickupaudiopeak", "pap", "-", "Returns the peak amplitude of the current audio signal", false, false, &s_pickupAudioPeak },
+    { "pickupaudiorms", "par", "-", "Returns the RMS amplitude of the current audio signal", false, false, &s_pickupAudioRMS }
+};
+
 FARSingle::FARSingle(void *muteStepperCallback, void *pressureStepperCallback, void *tachometerCallback, void *pidCallback) {
+    moduleID = new ModuleID("", "", "FAR 1.1", ModuleID::hardware, true);
+
     muteControl = new MuteControl(-1, 5, 4, &Serial5, 13);
     hammerControl = new Solenoid(3);
     bowControl = new BowControl(2, 14, 15,12, 23, 11, -1, 10, 9, &Serial2,6);
-    harmonicSeriesHandler = new HarmonicSeriesHandler();
-    bowActuators = new BowActuators(bowControl->getBowPressureReference());
 
     calibrateBow = new CalibrateBow(bowControl);
-    calibrateMute = new CalibrateMute(*muteControl, *bowControl, *harmonicSeriesHandler);
+    pCalibrateMute = new CalibrateMute(*muteControl, *bowControl, *(bowControl->harmonicSeriesHandler));
+
+    midiConfigurationHandler = new MIDIConfigurationHandler();
+    MIDIsource = midiConfigurationHandler->addMIDISource(&MIDI);
+    CONNECT_MIDI_CALLBACKS(MIDIsource, MIDI)
+    usbMIDIsource = midiConfigurationHandler->addMIDISource(&usbMIDI);
+    CONNECT_USBMIDI_CALLBACKS(usbMIDIsource, usbMIDI)
 
     bowControl->enableBowMotorPower();
     bowControl->getTMC2209Info();
     muteControl->getTMC2209Info();
-    bowControl->home();
-    muteControl->home();
-
-    float equalSeries[12] = { 1, 1.059463094, 1.122462048, 1.189207115, 1.25992105, 1.334839854, 1.414213562, 1.498307077, 1.587401052, 1.681792831, 1.781797436, 1.887748625 };
-    float justSeries[12] = {1, 1.06667, 1.125, 1.2, 1.25, 1.3333, 1.40625, 1.5, 1.6, 1.66667, 1.8, 1.875 };
-
-
-    harmonicSeriesHandler->addHarmonicSeries("\"Just intonation\"", justSeries);
-    harmonicSeriesHandler->addHarmonicSeries("\"Equal temperament\"", equalSeries);
-
-    commands->addCommands("bhs:0");
 
     controlReader = new ControlReader(17, 16);
 
@@ -34,117 +44,123 @@ FARSingle::FARSingle(void *muteStepperCallback, void *pressureStepperCallback, v
     bowControl->setStepIntervalCallback(pressureStepperCallback);
     attachInterrupt(digitalPinToInterrupt(12), tachometerCallback, CHANGE);
     pidInterrupt0.begin(pidCallback, bowControl->getPIDUpdateInterval());
+
+    startAudioAnalyze();
+
+    addModule(muteControl);
+    addModule(hammerControl);
+    addModule(bowControl);
+    addModule(midiConfigurationHandler);
+    addModule(controlReader);
 }
 
-eProcessResult FARSingle::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
+getModuleCount(FARSingle)
 
-    processCommandItems(inCommandItem, serialCommandsFarSingle, sizeof(serialCommandsFarSingle)  / sizeof(serialCommandItem));
+CREATE_MODULE_COMMAND_FUNCTION(calibrateAll, FARSingle) {
+    if (calibrateBow == nullptr) { return eProcessResult::CommandFailed; }
+    if (!request) {
+        if (calibrateBow->calibrateAll()) {
+            inCommandResponses->push_back({ thisItem.shortCommand + ":1", InfoRequest });
+            return eProcessResult::Ok;
+        } else {
+            inCommandResponses->push_back({ thisItem.shortCommand + ":0", InfoRequest });
+            return eProcessResult::CommandFailed;
+        }
+    }
+    return eProcessResult::Ok;
+};
 
-    eProcessResult processResult = eProcessResult::Ok;
+CREATE_MODULE_COMMAND_FUNCTION(calibrateBowSpeed, FARSingle) {
     eCalibrationResult calibrationResult;
-
-    if (inCommandItem->command == "help") {
-        addCommandHelp(serialCommandsFarSingle, sizeof(serialCommandsFarSingle) / sizeof(serialCommandItem), commandResponses,"");
+    if (calibrateBow == nullptr) { return eProcessResult::CommandFailed; }
+    if (!request) {
+        calibrationResult = calibrateBow->findMinMaxSpeedPWM();
+        if (calibrationResult == CR_Ok) {
+            inCommandResponses->push_back({ thisItem.shortCommand + ":1", InfoRequest });
+            return eProcessResult::Ok;
+        } else {
+            exitWithError(calibrationResult);
+            inCommandResponses->push_back({ thisItem.shortCommand + ":0", InfoRequest });
+            return eProcessResult::CommandFailed;
+        }
     }
+    return eProcessResult::Ok;
+};
 
-    if (inCommandItem->command == "bowcalibratespeed") {
-        if (!request) {
-            calibrationResult = calibrateBow->findMinMaxSpeedPWM();
-            if (calibrationResult == CR_Ok) { processResult = eProcessResult::Ok; } else { exitWithError(calibrationResult); processResult = eProcessResult::CommandFailed; }
-            commandResponses->push_back({ "bcs", InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "bowcalibratepressure") {
-        if (!request) {
-            calibrationResult = calibrateBow->findMinMaxPressure();
-            if (calibrationResult == CR_Ok) { processResult = eProcessResult::Ok; } else { exitWithError(calibrationResult); processResult = eProcessResult::CommandFailed; }
-            commandResponses->push_back({ "bcp", InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "mutecalibrate") {
-        if (!request) {
-            calibrationResult = calibrateMute->calibrateAll();
-            if (calibrationResult == CR_Ok) { processResult = eProcessResult::Ok; } else { exitWithError(calibrationResult); processResult = eProcessResult::CommandFailed; }
-            commandResponses->push_back({ "mca", InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "bowcalibrateall") {
-        if (!request) {
-            if (calibrateBow->calibrateAll()) { processResult = eProcessResult::Ok; } else { processResult = eProcessResult::CommandFailed; }
-            commandResponses->push_back({ "bca", InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "mutecalibrate") {
-        if (!calibrateMute->calibrateAll()) {
-            commandResponses->push_back({"mca:1", InfoRequest});
+CREATE_MODULE_COMMAND_FUNCTION(calibrateBowPressure, FARSingle) {
+    eCalibrationResult calibrationResult;
+    if (calibrateBow == nullptr) { return eProcessResult::CommandFailed; }
+    if (!request) {
+        calibrationResult = calibrateBow->findMinMaxPressure();
+        if (calibrationResult == CR_Ok) {
+            inCommandResponses->push_back({ thisItem.shortCommand + ":1", InfoRequest });
+            return eProcessResult::Ok;
         } else {
-            commandResponses->push_back({"mca:0", InfoRequest});
+            exitWithError(calibrationResult);
+            inCommandResponses->push_back({ thisItem.shortCommand + ":0", InfoRequest });
+            return eProcessResult::CommandFailed;
         }
-    } else
-    if (inCommandItem->command == "pickupstringfrequency") {
-        if (audioFrequencyAvaliable()) {
-            commandResponses->push_back({ "psf:" + String(audioFrequency(),1), InfoRequest });
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(calibrateMute, FARSingle) {
+    eCalibrationResult calibrationResult;
+    if (pCalibrateMute == nullptr) { return eProcessResult::CommandFailed; }
+    if (!request) {
+        calibrationResult = pCalibrateMute->calibrateAll();
+        if (calibrationResult == CR_Ok) {
+            inCommandResponses->push_back({ thisItem.shortCommand + ":1", InfoRequest });
+            return eProcessResult::Ok;
         } else {
-            commandResponses->push_back({ "psf: 0", InfoRequest });
+            exitWithError(calibrationResult);
+            inCommandResponses->push_back({ thisItem.shortCommand + ":0", InfoRequest });
+            return eProcessResult::CommandFailed;
         }
-    }  else
-    if (inCommandItem->command == "pickupaudiopeak") {
-        commandResponses->push_back({ "pap:" + String(audioPeakAmplitude()), InfoRequest });
-    }  else
-    if (inCommandItem->command == "pickupaudiorms") {
-        commandResponses->push_back({ "par:" + String(audioRMSAmplitude()), InfoRequest });
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(pickupStringFrequency, FARSingle) {
+    if (audioFrequencyAvaliable()) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(audioFrequency()), InfoRequest });
     } else {
-        processResult = muteControl->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-        if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
-
-        processResult = hammerControl->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-        if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
-
-        processResult = bowControl->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-        if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
-
-        processResult = bowActuators->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-        if (processResult != eProcessResult::NotFound) { return processResult; }
-
-        processResult = harmonicSeriesHandler->processSerialCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
+        inCommandResponses->push_back({ thisItem.shortCommand + ":0", InfoRequest });
     }
-    return processResult;
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(pickupAudioPeak, FARSingle) {
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(audioPeakAmplitude()), InfoRequest });
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(pickupAudioRMS, FARSingle) {
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(audioRMSAmplitude()), InfoRequest });
+    return eProcessResult::Ok;
+};
+
+void FARSingle::initFAR() {
+    bowControl->home();
+    muteControl->home();
 }
 
-eProcessResult FARSingle::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
-
-    eProcessResult processResult;
-
-    processResult = bowControl->processSerialCommandHidden(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-    if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
-
-    processResult = muteControl->processSerialCommandHidden(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-    if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
-
-    return eProcessResult::NotFound;
-}
-
-String FARSingle::dumpData() {
-    String dump = "";
-    dump += muteControl->dumpData();
-    dump += hammerControl->dumpData();
-    dump += bowControl->dumpData();
-    dump += bowActuators->dumpData();
-    dump += harmonicSeriesHandler->dumpData();
-    return dump;
-}
-
-void FARSingle::updateControlReader() {
-    controlReader->readData();
+void FARSingle::updateControlReader(std::vector<commandResponse> *inCommandResponses) {
+    controlReader->readData(inCommandResponses);
 }
 
 void FARSingle::update() {
-    if (harmonicSeriesHandler->checkFrequencyChanged()) {
-        bowControl->setBowSpeedHZ(harmonicSeriesHandler->getCalculatedFrequency());
+    if (midiConfigurationHandler != nullptr) { midiConfigurationHandler->update(); }
+    if (bowControl != nullptr) {
+        if (bowControl->harmonicSeriesHandler != nullptr) {
+            if (bowControl->harmonicSeriesHandler->checkFrequencyChanged()) {
+                bowControl->setBowSpeedHZ(bowControl->harmonicSeriesHandler->getCalculatedFrequency());
+            }
+        }
+        bowControl->update();
     }
-    hammerControl->update();
-    bowControl->update();
-    muteControl->update();
+    if (hammerControl != nullptr) { hammerControl->update(); }
+    if (muteControl != nullptr) { muteControl->update(); }
 }
 
 #endif // FARSINGLE_C

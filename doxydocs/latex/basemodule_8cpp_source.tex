@@ -1,0 +1,319 @@
+\doxysection{basemodule.\+cpp}
+\hypertarget{basemodule_8cpp_source}{}\label{basemodule_8cpp_source}\index{basemodule.cpp@{basemodule.cpp}}
+\mbox{\hyperlink{basemodule_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BASEMODULE\_CPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BASEMODULE\_CPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}basemodule.hpp"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{const}\ ModuleCommandDeclaration\ BaseModule::moduleCommands[]\ =\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}requestinfo"{}},\ \textcolor{stringliteral}{"{}rqi"{}},\ \textcolor{stringliteral}{"{}command"{}},\ \textcolor{stringliteral}{"{}Retrives\ rather\ than\ sets\ data\ associated\ with\ a\ command,\ if\ applicable"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_requestInfo\ \ \},}
+\DoxyCodeLine{00008\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}debugprint"{}},\ \textcolor{stringliteral}{"{}dp"{}},\ \textcolor{stringliteral}{"{}command|usb|hardware|undefined|priority|error|inforequest|expressionparser|debug:1|0"{}},\ \textcolor{stringliteral}{"{}Turns\ on\ or\ off\ serial\ feedback\ for\ the\ given\ item"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \&s\_debugPrint\},}
+\DoxyCodeLine{00009\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}version"{}},\ \textcolor{stringliteral}{"{}ver"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Gets\ the\ current\ firmware\ version"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \&s\_version\},}
+\DoxyCodeLine{00010\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}saveallparameters"{}},\ \textcolor{stringliteral}{"{}sap"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Saves\ all\ avaliable\ parameters"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_saveAllParameters\},}
+\DoxyCodeLine{00011\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}loadallparameters"{}},\ \textcolor{stringliteral}{"{}lap"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Loads\ all\ avaliable\ parameters"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_loadAllParameters\},}
+\DoxyCodeLine{00012\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}resetallparameters"{}},\ \textcolor{stringliteral}{"{}rap"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Resets\ all\ saved\ parameters"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_resetAllParameters\},}
+\DoxyCodeLine{00013\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}uservariable"{}},\ \textcolor{stringliteral}{"{}uv"{}},\ \textcolor{stringliteral}{"{}variable(0-\/9):value"{}},\ \textcolor{stringliteral}{"{}Set\ user\ variable\ 0-\/9\ to\ value"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_userVariables\},}
+\DoxyCodeLine{00014\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}expressionparserevaluate"{}},\ \textcolor{stringliteral}{"{}epev"{}},\ \textcolor{stringliteral}{"{}expression"{}},\ \textcolor{stringliteral}{"{}Evaluates\ an\ arithmetric\ expression\ and\ sends\ back\ the\ output"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_expressionParserEvaluate\},}
+\DoxyCodeLine{00015\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}ifequal"{}},\ \textcolor{stringliteral}{"{}ife"{}},\ \textcolor{stringliteral}{"{}variable:comparator:truecommandstring:elsecommandstring"{}},\ \textcolor{stringliteral}{"{}Performs\ 'IF\ [variable]\ EQUALS\ [comparator]'\ and\ adds\ [truecommandstring]\ to\ the\ \(\backslash\)}}
+\DoxyCodeLine{00016\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ que\ if\ TRUE,\ otherwise\ adds\ [elsecommandstring]"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_ifEqual\},}
+\DoxyCodeLine{00017\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}ifgreater"{}},\ \textcolor{stringliteral}{"{}ifg"{}},\ \textcolor{stringliteral}{"{}variable:comparator:truecommandstring:elsecommandstring"{}},\ \textcolor{stringliteral}{"{}Performs\ 'IF\ [variable]\ >\ [comparator]'\ and\ adds\ [truecommandstring]\ to\ the\ \(\backslash\)}}
+\DoxyCodeLine{00018\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ que\ if\ TRUE,\ otherwise\ adds\ [elsecommandstring]"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_ifGreater\},}
+\DoxyCodeLine{00019\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}ifless"{}},\ \textcolor{stringliteral}{"{}ifl"{}},\ \textcolor{stringliteral}{"{}variable:comparator:truecommandstring:elsecommandstring"{}},\ \textcolor{stringliteral}{"{}Performs\ 'IF\ [variable]\ <\ [comparator]'\ and\ adds\ [truecommandstring]\ to\ the\ \(\backslash\)}}
+\DoxyCodeLine{00020\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ que\ if\ TRUE,\ otherwise\ adds\ [elsecommandstring]"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_ifLess\},}
+\DoxyCodeLine{00021\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}reset"{}},\ \textcolor{stringliteral}{"{}rst"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Resets\ the\ Ekdahl\ FAR,\ conditional"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_reset\},}
+\DoxyCodeLine{00022\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}nick"{}},\ \textcolor{stringliteral}{"{}nick"{}},\ \textcolor{stringliteral}{"{}string"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ nickname\ of\ this\ unit"{}}\ ,\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \&s\_nick\},}
+\DoxyCodeLine{00023\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}nooperation"{}},\ \textcolor{stringliteral}{"{}nop"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Do\ absolutely,\ positively,\ nothing"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_noOperation\ \},}
+\DoxyCodeLine{00024\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}freeram"{}},\ \textcolor{stringliteral}{"{}free"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Shows\ free\ RAM\ memory"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_freeRAM\ \}}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \mbox{\hyperlink{basemodule_8cpp_aa47671a2a2669c2c4a4c5f78c6f75e7a}{getModuleCount}}(BaseModule)}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ BaseModule::BaseModule(Module\ *inModule)}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordflow}{if}\ (inModule\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ mainModule\ =\ inModule;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ moduleID\ =\ inModule-\/>moduleID;}
+\DoxyCodeLine{00034\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ moduleID\ =\ \textcolor{keyword}{new}\ ModuleID(\textcolor{stringliteral}{"{}unknown"{}},\ \textcolor{stringliteral}{"{}unknown"{}},\ \textcolor{stringliteral}{"{}unknown"{}},\ 0);}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(\mbox{\hyperlink{debugprint_8hpp_a12ba011dd5b1adf8f77184369290a419}{debugPrint}},\ BaseModule)\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 2))\ \{\ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentCount;\ \}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ found\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<\mbox{\hyperlink{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}{debugPrintTypes}};\ i++\ )\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8hpp_acbab4b58032141437b697b6071034ed6}{debugPrintTypeName}}[i]\ ==\ inCommandItem-\/>argument[0])\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[i]\ =\ inCommandItem-\/>argument[1].toInt();}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ found\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!found)\ \{\ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentValue;\ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<\mbox{\hyperlink{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}{debugPrintTypes}};\ i++\ )\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{debugprint_8hpp_acbab4b58032141437b697b6071034ed6}{debugPrintTypeName}}[i]\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{debugprint_8hpp_a9c71895d3563902fd61dbfe70213f577}{debugPrintEnabled}}[i],\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\ \});}
+\DoxyCodeLine{00055\ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00057\ \};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(version,\ BaseModule)\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ currentFirmwareVersion,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00062\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentCount;\ \}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((currentFirmwareVersion\ !=\ inCommandItem-\/>argument[0]))\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ firmwareChanged\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Firmware\ version\ changed!\ Previous\ version:\ "{}}\ +\ inCommandItem-\/>argument[0],\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ currentFirmwareVersion,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00069\ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00071\ \};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(saveAllParameters,\ BaseModule)\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ std::vector<commandResponse>\ inCommandResponse;}
+\DoxyCodeLine{00075\ \ \ \ \ dumpData(\&inCommandResponse);}
+\DoxyCodeLine{00076\ \ \ \ \ String\ saveData\ =\ \textcolor{stringliteral}{"{}"{}};\ \textcolor{comment}{//dumpData();}}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ inCommandResponse.size();\ i++)\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (saveData\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ saveData\ +=\ \textcolor{stringliteral}{"{},"{}};\ \}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ saveData\ +=\ inCommandResponse[i].response;}
+\DoxyCodeLine{00080\ \ \ \ \ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\(\backslash\)n"{}}\ +\ saveData\ +\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}\ +\ \textcolor{stringliteral}{"{}Total:\ "{}}\ +\ String(\mbox{\hyperlink{eepromhelpers_8cpp_aa24ecf0d4c0610d752b0e8e5aa887486}{EEPROMSaveString}}(\&saveData,\ 0))\ +\ \textcolor{stringliteral}{"{}\ bytes"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}});}
+\DoxyCodeLine{00082\ \ \ \ \ inCommandResponses-\/>push\_back(\{thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:1"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00084\ \};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(loadAllParameters,\ BaseModule)\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ loadAllParameters();}
+\DoxyCodeLine{00088\ \ \ \ \ inCommandResponses-\/>push\_back(\{thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:1"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Returning\ to\ command\ handler"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00091\ \};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{keywordtype}{void}\ BaseModule::loadAllParameters()\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ String\ loadData;\ \textcolor{comment}{//\ \ =\ new\ String();}}
+\DoxyCodeLine{00095\ \ \ \ \ uint32\_t\ datal\ =\ \mbox{\hyperlink{eepromhelpers_8cpp_a030652f23e30526a2b56af8de9d3e4dc}{EEPROMLoadString}}(\&loadData,\ 0);}
+\DoxyCodeLine{00096\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(loadData\ +\ \textcolor{stringliteral}{"{}\(\backslash\)nLoaded\ "{}}\ +\ String(datal)\ +\ \textcolor{stringliteral}{"{}\ bytes\ of\ data"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}});}
+\DoxyCodeLine{00097\ \ \ \ \ \mbox{\hyperlink{main_8cpp_ae7826d05ec6eb6efce350270ead447c8}{globalResponseCommands}}.\mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{addCommands}}(loadData);}
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Commands\ added"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00099\ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(resetAllParameters,\ BaseModule)\ \{}
+\DoxyCodeLine{00102\ \ \ \ \ String\ saveData\ =\ \textcolor{stringliteral}{"{}ver:"{}}\ +\ currentFirmwareVersion\ +\ \textcolor{stringliteral}{"{},"{}};\ \textcolor{comment}{//\ "{}ver:1,"{};}}
+\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\(\backslash\)n"{}}\ +\ saveData\ +\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}\ +\ \textcolor{stringliteral}{"{}Total:\ "{}}\ +\ String(\mbox{\hyperlink{eepromhelpers_8cpp_aa24ecf0d4c0610d752b0e8e5aa887486}{EEPROMSaveString}}(\&saveData,\ 0))\ +\ \textcolor{stringliteral}{"{}\ bytes"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}});}
+\DoxyCodeLine{00104\ \ \ \ \ inCommandResponses-\/>push\_back(\{thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:1"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00106\ \};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(userVariables,\ BaseModule)\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 2))\ \{\ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentCount;\ \}}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(inCommandItem-\/>argument[0].toInt(),\ 0,\ userVariableMax))\ \{\ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentValue;\ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{int}\ userVariable\ =\ inCommandItem-\/>argument[0].toInt();}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00114\ \textcolor{comment}{//\ \ \ \ \ \ \ \ expressionParser.duv[userVariable]\ =\ inCommandItem-\/>argument[1].toFloat();}}
+\DoxyCodeLine{00115\ \ \ \ \ \}}
+\DoxyCodeLine{00116\ \textcolor{comment}{//\ \ \ \ inCommandResponses-\/>push\_back(\{thisItem.shortCommand\ +\ "{}:"{}\ +\ String(userVariable)\ +\ "{}:"{}\ +\ String(expressionParser.duv[userVariable]),\ InfoRequest\});}}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00118\ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(expressionParserEvaluate,\ BaseModule)\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentCount;\ \}}
+\DoxyCodeLine{00122\ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ testCommands(thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ inCommandItem-\/>argument[0]);}
+\DoxyCodeLine{00123\ \textcolor{comment}{//\ \ \ \ testCommands.parseCommandExpressions(expressionParser);}}
+\DoxyCodeLine{00124\ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(testCommands.\mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[0].argument[0]),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\});}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00126\ \};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(ifEqual,\ BaseModule)\ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 4))\ \{\ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentCount;\ \}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *executeNow;}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>argument[0].toInt()\ ==\ inCommandItem-\/>argument[1].toInt())\ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ executeNow\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcommandList}{commandList}}(inCommandItem-\/>argument[2]);}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ executeNow\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcommandList}{commandList}}(inCommandItem-\/>argument[3]);}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a33042e12a9e7c685f982a942d092f7f0}{processCommandList}}(\textcolor{keyword}{this},\ executeNow,\ inCommandResponses);}
+\DoxyCodeLine{00138\ \ \ \ \ \}}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00140\ \};}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(ifGreater,\ BaseModule)\ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 4))\ \{\ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentCount;\ \}}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *executeNow;}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>argument[0].toInt()\ >\ inCommandItem-\/>argument[1].toInt())\ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ executeNow\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcommandList}{commandList}}(inCommandItem-\/>argument[2]);}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ executeNow\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcommandList}{commandList}}(inCommandItem-\/>argument[3]);}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a33042e12a9e7c685f982a942d092f7f0}{processCommandList}}(\textcolor{keyword}{this},\ executeNow,\ inCommandResponses);}
+\DoxyCodeLine{00152\ \ \ \ \ \}}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00154\ \};}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(ifLess,\ BaseModule)\ \{}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 4))\ \{\ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentCount;\ \}}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *executeNow;}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>argument[0].toInt()\ <\ inCommandItem-\/>argument[1].toInt())\ \{}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ executeNow\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcommandList}{commandList}}(inCommandItem-\/>argument[2]);}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ executeNow\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcommandList}{commandList}}(inCommandItem-\/>argument[3]);}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a33042e12a9e7c685f982a942d092f7f0}{processCommandList}}(\textcolor{keyword}{this},\ executeNow,\ inCommandResponses);}
+\DoxyCodeLine{00166\ \ \ \ \ \}}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00168\ \};}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(reset,\ BaseModule)\ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentCount;\ \}}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>argument[0].toInt()\ ==\ 1)\ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ reset();}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00176\ \ \ \ \ \}}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00178\ \};}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(nick,\ BaseModule)\ \{}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{main_8cpp_af98373428ba06a19feb1859d77b9f9d2}{nickName}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\});}
+\DoxyCodeLine{00183\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentCount;\ \}}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_af98373428ba06a19feb1859d77b9f9d2}{nickName}}\ =\ String(inCommandItem-\/>argument[0]).trim();}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{main_8cpp_af98373428ba06a19feb1859d77b9f9d2}{nickName}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\});}
+\DoxyCodeLine{00187\ \ \ \ \ \}}
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00189\ \};}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(noOperation,\ BaseModule)\ \{}
+\DoxyCodeLine{00192\ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00194\ \};}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(dump,\ BaseModule)\ \{}
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{comment}{/*std::vector<commandResponse>\ returnResponses\ =\ Module::dumpData();}}
+\DoxyCodeLine{00198\ \textcolor{comment}{\ \ \ \ for\ (int\ i\ =\ 0;\ i\ <\ returnResponses.size();\ i++)\ \{}}
+\DoxyCodeLine{00199\ \textcolor{comment}{\ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(returnResponses[i]);}}
+\DoxyCodeLine{00200\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00201\ \textcolor{comment}{}}
+\DoxyCodeLine{00202\ \textcolor{comment}{\ \ \ \ returnResponses\ =\ mainModule-\/>dumpData();}}
+\DoxyCodeLine{00203\ \textcolor{comment}{\ \ \ \ for\ (int\ i\ =\ 0;\ i\ <\ returnResponses.size();\ i++)\ \{}}
+\DoxyCodeLine{00204\ \textcolor{comment}{\ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(returnResponses[i]);}}
+\DoxyCodeLine{00205\ \textcolor{comment}{\ \ \ \ \}*/}}
+\DoxyCodeLine{00206\ \ \ \ \ Module::dumpData(inCommandResponses);}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordflow}{if}\ (mainModule\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ mainModule-\/>dumpData(inCommandResponses);}
+\DoxyCodeLine{00209\ \ \ \ \ \}}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00212\ \}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(requestInfo,\ BaseModule)\ \{}
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{commandparser_8hpp_a47b5a74095fe6948dc38caf72ddfbff0}{checkArgumentsMin}}(inCommandItem,\ inCommandResponses,\ 1))\ \{}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ String\ commandString\ =\ inCommandItem-\/>argument[0].trim();}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ inCommandItem-\/>argument.size()\ -\/\ 1;\ i++)\ \{}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ commandString\ +=\ \textcolor{stringliteral}{"{}:"{}}\ +\ inCommandItem-\/>argument[i\ +\ 1];}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00220\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}New\ command\ string\ is\ "{}\ +\ commandString,\ debugPrintType::Debug);}}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \textcolor{comment}{//commandItem\ *tCommandItem\ =\ new\ commandItem(commandString);}}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem}{commandItem}}\ tCommandItem(commandString);}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ processCommands(\&tCommandItem,\ inCommandResponses,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00224\ \ \ \ \ \}}
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentCount;}
+\DoxyCodeLine{00226\ \}}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ \mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(freeRAM,\ BaseModule)\ \{}
+\DoxyCodeLine{00229\ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{main_8cpp_afc3e7d08d802f694ab6a85e9908048f4}{freeram}}()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00231\ \}}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ eProcessResult\ BaseModule::processCommands(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request)\ \{}
+\DoxyCodeLine{00234\ \ \ \ \ eProcessResult\ processResult;}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Before\ processing\ we\ have\ "{}\ +\ String(inCommandItem-\/>argument.size())\ +\ "{}\ arguments"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \ \ \ \ processResult\ =\ Module::processCommands(inCommandItem,\ commandResponses,\ request);}
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{comment}{//debugPrintln("{}After\ module\ processing\ we\ have\ "{}\ +\ String(inCommandItem-\/>argument.size())\ +\ "{}\ arguments"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{keywordflow}{if}\ (processResult\ ==\ eProcessResult::NotFound)\ \{}
+\DoxyCodeLine{00241\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Main?"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mainModule\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00243\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Main."{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ processResult\ =\ mainModule-\/>processCommands(inCommandItem,\ commandResponses,\ request);}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00246\ \ \ \ \ \}}
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{comment}{//debugPrintln("{}All\ commands\ processed,\ adding\ "{}\ +\ String(inCommandItem-\/>argument.size())\ +\ "{}\ response\ arguments"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00248\ \ \ \ \ String\ response\ =\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}};}
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size();\ i++)\ \{}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}:"{}}\ +\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[i];}
+\DoxyCodeLine{00251\ \ \ \ \ \}}
+\DoxyCodeLine{00252\ \ \ \ \ \textcolor{comment}{//debugPrintln("{}All\ response\ arguments\ added"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ \ \ \ \ \textcolor{keywordflow}{switch}\ (processResult)\ \{}
+\DoxyCodeLine{00255\ \ \ \ \ \textcolor{keywordflow}{case}\ eProcessResult::NotFound:}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Command\ not\ found:\ "{}}\ +\ response,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}}\});}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordflow}{case}\ eProcessResult::CommandFailed:}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Command\ failed:\ "{}}\ +\ response,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}}\});}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{keywordflow}{case}\ eProcessResult::WrongArgumentCount:}
+\DoxyCodeLine{00262\ \ \ \ \ \textcolor{keywordflow}{case}\ eProcessResult::WrongArgumentMinimum:}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Wrong\ command\ arguments:\ "{}}\ +\ response,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}}\});}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00265\ \ \ \ \ \textcolor{keywordflow}{case}\ eProcessResult::WrongArgumentValue:}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Wrong\ command\ argument\ values:\ "{}}\ +\ response,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}}\});}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{keywordflow}{case}\ eProcessResult::Ok:}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Ok"{},\ debugPrintType::TextInfo);}}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{keywordflow}{case}\ eProcessResult::PassThrough:}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Ok,\ pass-\/through"{},\ debugPrintType::TextInfo);}}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Unknown\ response\ "{}}\ +\ String(processResult),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00276\ \ \ \ \ \};}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Returning\ result"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ \ \ \ \ \textcolor{keywordflow}{return}\ processResult;}
+\DoxyCodeLine{00281\ \}}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \textcolor{keywordtype}{void}\ BaseModule::dir(std::vector<commandResponse>\ *inCommandResponses,\ String\ longPrefix,\ String\ shortPrefix,\ \textcolor{keywordtype}{bool}\ hidden,\ \textcolor{keywordtype}{bool}\ inModules,\ \textcolor{keywordtype}{bool}\ commands,\ \textcolor{keywordtype}{bool}\ instances,\ \textcolor{keywordtype}{bool}\ instanceCount,\ \textcolor{keywordtype}{bool}\ recursive)\ \{}
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Base\ dir"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00285\ \ \ \ \ Module::dir(inCommandResponses,\ longPrefix,\ shortPrefix,\ hidden,\ inModules,\ commands,\ instances,\ instanceCount,\ recursive);}
+\DoxyCodeLine{00286\ \ \ \ \ mainModule-\/>dir(inCommandResponses,\ longPrefix,\ shortPrefix,\ hidden,\ inModules,\ commands,\ instances,\ instanceCount,\ recursive);}
+\DoxyCodeLine{00287\ \}}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ \textcolor{keywordtype}{void}\ BaseModule::dumpData(std::vector<commandResponse>\ *dataDump)\ \{}
+\DoxyCodeLine{00290\ \textcolor{comment}{/*\ \ \ \ std::vector<commandResponse>\ inCommandResponse;}}
+\DoxyCodeLine{00291\ \textcolor{comment}{\ \ \ \ inCommandResponse\ =\ Module::dumpData();}}
+\DoxyCodeLine{00292\ \textcolor{comment}{\ \ \ \ std::vector<commandResponse>\ inCommandResponse2;}}
+\DoxyCodeLine{00293\ \textcolor{comment}{\ \ \ \ inCommandResponse2\ =\ mainModule-\/>dumpData();}}
+\DoxyCodeLine{00294\ \textcolor{comment}{\ \ \ \ inCommandResponse.insert(inCommandResponse.end(),\ inCommandResponse2.begin(),\ inCommandResponse2.end());*/}}
+\DoxyCodeLine{00295\ \ \ \ \ Module::dumpData(dataDump);}
+\DoxyCodeLine{00296\ \ \ \ \ \textcolor{keywordflow}{if}\ (mainModule\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ mainModule-\/>dumpData(dataDump);}
+\DoxyCodeLine{00298\ \ \ \ \ \}}
+\DoxyCodeLine{00299\ \textcolor{comment}{//\ \ \ \ return\ inCommandResponse;}}
+\DoxyCodeLine{00300\ \}}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00302\ \textcolor{keywordtype}{void}\ BaseModule::reset()\ \{}
+\DoxyCodeLine{00303\ \ \ \ \ SCB\_AIRCR\ =\ 0x05FA0004;}
+\DoxyCodeLine{00304\ \ \ \ \ \textcolor{keyword}{asm}\ \textcolor{keyword}{volatile}\ (\textcolor{stringliteral}{"{}dsb"{}});}
+\DoxyCodeLine{00305\ \}}
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00307\ \textcolor{keywordtype}{void}\ BaseModule::update()\ \{}
+\DoxyCodeLine{00308\ \ \ \ \ \textcolor{keywordflow}{if}\ (mainModule\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ mainModule-\/>update();}
+\DoxyCodeLine{00310\ \ \ \ \ \}}
+\DoxyCodeLine{00311\ \}}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00313\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BASEMODULE\_CPP}}
+
+\end{DoxyCode}

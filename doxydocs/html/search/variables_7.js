@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['gatestate_0',['gateState',['../classControlReader.html#a7ace2aea9f957123e9374a70edb427b1',1,'ControlReader']]]
+  ['globalcommands_0',['globalCommands',['../main_8cpp.html#a895567420077455478bd74c7bdbedbb2',1,'main.cpp']]],
+  ['globalresponsecommands_1',['globalResponseCommands',['../main_8cpp.html#ae7826d05ec6eb6efce350270ead447c8',1,'main.cpp']]]
 ];

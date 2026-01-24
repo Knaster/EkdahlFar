@@ -25,384 +25,443 @@
 \DoxyCodeLine{00021\ }
 \DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <WProgram.h>}}
 \DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}tinyexpr.h"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{expressionparser_8cpp}{expressionparser.cpp}}"{}}}
 \DoxyCodeLine{00025\ }
-\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcommandItem}{commandItem}}\ \{}
-\DoxyCodeLine{00028\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00029\ \ \ std::vector<String>\ \mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}};}
-\DoxyCodeLine{00030\ \ \ String\ \mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00031\ }
-\DoxyCodeLine{00032\ \textcolor{comment}{//\ \ commandItem()\ \{\}}}
-\DoxyCodeLine{00033\ }
-\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{classcommandItem_aed853bc05734a9bc9581412a064a92ce}{commandItem}}\ (String\ commandString)\ \{}
-\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ commandString.indexOf(\textcolor{stringliteral}{"{}:"{}});}
-\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ -\/1)\ \{}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ =\ commandString;}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00040\ \ \ \ \ \}}
-\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ =\ commandString.substring(0,\ i).toLowerCase();}
-\DoxyCodeLine{00042\ \textcolor{comment}{//\ \ \ \ debugPrintln("{}Adding\ command\ "{}\ +\ command,\ Debug);}}
-\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{while}\ (i\ <\ (\textcolor{keywordtype}{int}(commandString.length())\ -\/\ 1))\ \{}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ i++;}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ e\ =\ commandString.indexOf(\textcolor{stringliteral}{"{}:"{}},\ i);}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \textcolor{comment}{//\ If\ we\ find\ quotes,\ and\ they\ come\ before\ the\ next\ command\ separator,\ process\ the\ quotes}}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ f\ =\ commandString.indexOf(\textcolor{stringliteral}{"{}'"{}},\ i);}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ h\ =\ commandString.indexOf(\textcolor{stringliteral}{"{}\(\backslash\)"{}"{}},\ i);\ \textcolor{comment}{//\ Added\ 2023-\/10-\/25}}
-\DoxyCodeLine{00049\ \textcolor{comment}{//\ \ \ \ \ \ if\ ((f\ !=\ -\/1)\ \&\&\ (f\ <\ e))\ \{\ //\ Commented\ out\ 2023-\/10-\/25}}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((f\ !=\ -\/1)\ \&\&\ (f\ <\ e))\ ||\ ((h\ !=\ -\/1)\ \&\&\ (h\ <\ e)))\ \{\ \textcolor{comment}{//\ Added\ 2023-\/10-\/25}}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ String\ searchFor\ =\ \textcolor{stringliteral}{"{}'"{}};\ \textcolor{comment}{//\ Added\ 2023-\/10-\/25}}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((h\ <\ f)\ \&\&\ (h\ !=\ -\/1))\ ||\ (f\ ==\ -\/1))\ \{\ searchFor\ =\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};\ f\ =\ h;\ \}\ \textcolor{keywordflow}{else}\ \{\ searchFor\ =\ \textcolor{stringliteral}{"{}'"{}};\ \}\ \textcolor{comment}{//\ Added\ 2023-\/10-\/25}}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ g\ =\ commandString.indexOf(searchFor,f\ +\ 1);\ \ \textcolor{comment}{//\ Added\ 2023-\/10-\/25}}
-\DoxyCodeLine{00054\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Found\ other\ \ "{}\ +\ searchFor\ +\ "{}\ at\ "{}\ +\ String(g),\ Debug);\ \ //\ Added\ 2023-\/10-\/25}}
-\DoxyCodeLine{00055\ \textcolor{comment}{//\ \ \ \ \ \ \ \ int\ g\ =\ commandString.indexOf("{}'"{},f\ +\ 1);\ //\ Commented\ out\ 2023-\/10-\/25}}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (g\ !=\ -\/1)\ \{}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ e\ =\ g\ +\ 1;}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \};}
-\DoxyCodeLine{00060\ }
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (e\ ==\ -\/1)\ \{}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ e\ =\ commandString.length();}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ String*\ \_argument\ =\ \textcolor{keyword}{new}\ String(commandString.substring(i,\ e).toLowerCase());}
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.push\_back(*\_argument);}
-\DoxyCodeLine{00066\ \textcolor{comment}{//\ \ \ \ \ \ debugPrintln("{}Adding\ argument\ "{}\ +\ *\_argument,\ Debug);}}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \_argument;}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ i\ =\ e;}
-\DoxyCodeLine{00069\ \ \ \ \ \}}
-\DoxyCodeLine{00070\ \ \ \}}
-\DoxyCodeLine{00071\ }
-\DoxyCodeLine{00072\ \ \ \mbox{\hyperlink{classcommandItem_a5d1b12010d80cb6da5e468ff091579c7}{\string~commandItem}}()\ \{}
-\DoxyCodeLine{00073\ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Item\ destroyed"{});}}
-\DoxyCodeLine{00074\ \ \ \}}
-\DoxyCodeLine{00075\ \};}
-\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{const}\ uint8\_t\ \mbox{\hyperlink{commandparser_8hpp_aa230916c95623a7e6e5b94cae91a4a08}{quoteStyle}}[]\ =\ \{\ \textcolor{charliteral}{'\(\backslash\)''},\ \textcolor{charliteral}{'\(\backslash\)"{}'}\ \};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ SELECTION\ std::vector<uint8\_t>}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcommandItemPart}{commandItemPart}}\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ String\ \mbox{\hyperlink{structcommandItemPart_ae3236c5eeac38b19bff56fc7108fa4d9}{name}};}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_aef2174e268da3b99985a2d6018a32409}{SELECTION}}\ \mbox{\hyperlink{structcommandItemPart_aba0800f90fe68eed75771aedd71c5cad}{selection}};}
+\DoxyCodeLine{00033\ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcommandItem}{commandItem}}\ \{}
+\DoxyCodeLine{00037\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00038\ \ \ \ \ std::vector<String>\ \mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}};}
+\DoxyCodeLine{00039\ \ \ \ \ String\ \mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00040\ \ \ \ \ std::vector<commandItemPart>\ \mbox{\hyperlink{classcommandItem_a28a5a435734fef37683ee69d92a42854}{hierarchy}};}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcommandItem_af827425df75c26c320c43581963faba1}{hierarchyIndex}}\ =\ 0;}
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ \ \ \ String\ prefix\ =\ "{}"{};}}
+\DoxyCodeLine{00043\ \ \ \ \ String\ \mbox{\hyperlink{classcommandItem_a5a2c3d3e2fc28bd141919d2388936be1}{originalCommand}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_aef2174e268da3b99985a2d6018a32409}{SELECTION}}\ \mbox{\hyperlink{classcommandItem_abcf23aaba67fdd691e6b5ff34b7fec25}{selection}};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classcommandItem_a6c459427959a43fe80d8f1a72012dc6a}{commandItem}}()\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.clear();}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem_a28a5a435734fef37683ee69d92a42854}{hierarchy}}.clear();}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem_af827425df75c26c320c43581963faba1}{hierarchyIndex}}\ =\ 0;}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem_a5a2c3d3e2fc28bd141919d2388936be1}{originalCommand}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem_abcf23aaba67fdd691e6b5ff34b7fec25}{selection}}.clear();}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{classcommandItem_aed853bc05734a9bc9581412a064a92ce}{commandItem}}\ (String\ commandString)\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ commandString.indexOf(\textcolor{stringliteral}{"{}:"{}});}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ =\ commandString;}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Command\ is\ "{}}\ +\ \mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{debugPrintType::EParser}});}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ =\ commandString.substring(0,\ i).toLowerCase();}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Command\ is\ "{}}\ +\ \mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{debugPrintType::EParser}});}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (i\ <\ (\textcolor{keywordtype}{int}(commandString.length())\ -\/\ 1))\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i++;}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ e\ =\ commandString.indexOf(\textcolor{stringliteral}{"{}:"{}},\ i);}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ f\ =\ commandString.indexOf(\textcolor{stringliteral}{"{}'"{}},\ i);}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ h\ =\ commandString.indexOf(\textcolor{stringliteral}{"{}\(\backslash\)"{}"{}},\ i);\ \textcolor{comment}{//\ Added\ 2023-\/10-\/25}}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((f\ !=\ -\/1)\ \&\&\ (f\ <\ e))\ ||\ ((h\ !=\ -\/1)\ \&\&\ (h\ <\ e)))\ \{\ \textcolor{comment}{//\ Added\ 2023-\/10-\/25}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ searchFor\ =\ \textcolor{stringliteral}{"{}'"{}};\ \textcolor{comment}{//\ Added\ 2023-\/10-\/25}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((h\ <\ f)\ \&\&\ (h\ !=\ -\/1))\ ||\ (f\ ==\ -\/1))\ \{\ searchFor\ =\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};\ f\ =\ h;\ \}\ \textcolor{keywordflow}{else}\ \{\ searchFor\ =\ \textcolor{stringliteral}{"{}'"{}};\ \}\ \textcolor{comment}{//\ Added\ 2023-\/10-\/25}}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ g\ =\ commandString.indexOf(searchFor,f\ +\ 1);\ \ \textcolor{comment}{//\ Added\ 2023-\/10-\/25}}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (g\ !=\ -\/1)\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e\ =\ g\ +\ 1;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
 \DoxyCodeLine{00077\ }
-\DoxyCodeLine{00078\ \ \ \textcolor{comment}{//TODO\ remove\ this\ forwards\ declaration\ once\ headers\ have\ been\ made}}
-\DoxyCodeLine{00079\ \ \ String\ \mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(String\ expression);}
-\DoxyCodeLine{00080\ }
-\DoxyCodeLine{00082\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcommandList}{commandList}}\ \{}
-\DoxyCodeLine{00083\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00084\ \ \ \ \ std::vector<commandItem>\ \mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}};}
-\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcommandList_ab023b253b73ce66e0f3442686cc5eb1a}{processingCommands}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00086\ }
-\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcommandList_a0a2aa6dcae713788e3217d85d4facfd7}{waitIfProcessing}}()\ \{}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classcommandList_ab023b253b73ce66e0f3442686cc5eb1a}{processingCommands}});}
-\DoxyCodeLine{00089\ \ \ \ \ \}}
-\DoxyCodeLine{00090\ }
-\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcommandList_a049b9bf7e110abb4d44d1760af0c93c4}{parseQuoteSingle}}(String\ commandItems,\ \textcolor{keywordtype}{int}\ i)\ \{}
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Found\ single\ quote\ start\ @\ "{}}\ +\ String(i),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{debugPrintType::EParser}});}
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ i++;}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (String(commandItems[i])\ ==\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}})\ \{}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ \mbox{\hyperlink{classcommandList_a049b9bf7e110abb4d44d1760af0c93c4}{parseQuoteSingle}}(commandItems,\ i);}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ ((String(commandItems[i])\ !=\ \textcolor{stringliteral}{"{}'"{}})\ \&\&\ (i\ <\ (\textcolor{keywordtype}{int}(commandItems.length())\ -\/\ 1)));}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Found\ single\ quote\ end\ @\ "{}}\ +\ String(i),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{debugPrintType::EParser}});}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ i;}
-\DoxyCodeLine{00101\ \ \ \ \ \}}
-\DoxyCodeLine{00102\ }
-\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcommandList_a82021fbc22036799183f9777a79f10c1}{parseQuoteDouble}}(String\ commandItems,\ \textcolor{keywordtype}{int}\ i)\ \{}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Found\ double\ quote\ start\ @\ "{}}\ +\ String(i),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{debugPrintType::EParser}});}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ i++;}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (String(commandItems[i])\ ==\ \textcolor{stringliteral}{"{}'"{}})\ \{}
-\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ \mbox{\hyperlink{classcommandList_a049b9bf7e110abb4d44d1760af0c93c4}{parseQuoteSingle}}(commandItems,\ i);}
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ ((String(commandItems[i])\ !=\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}})\ \&\&\ (i\ <\ (\textcolor{keywordtype}{int}(commandItems.length())\ -\/\ 1)));}
-\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Found\ double\ quote\ end\ @\ "{}}\ +\ String(i),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{debugPrintType::EParser}});}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ i;}
-\DoxyCodeLine{00113\ \ \ \ \ \}}
-\DoxyCodeLine{00114\ }
-\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{addCommands}}(String\ commandItems)\ \{}
-\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList_a0a2aa6dcae713788e3217d85d4facfd7}{waitIfProcessing}}();}
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ commandItems\ =\ commandItems.toLowerCase();}
-\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ e\ =\ 0;}
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ f\ =\ 0;}
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ stripEnd\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (i\ <\ (\textcolor{keywordtype}{int}(commandItems.length())\ -\/\ 1))\ \{}
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Looking\ for\ ','\ @\ "{}}\ +\ String(i),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{debugPrintType::EParser}});}
-\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ e\ =\ i;}
-\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ ((e\ <\ (\textcolor{keywordtype}{int}(commandItems.length())\ -\/\ 1))\ \&\&\ (String(commandItems[e])\ !=\ \textcolor{stringliteral}{"{},"{}}))\ \{}
-\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Checking\ "{}\ +\ String(commandItems[e]),\ debugPrintType::EParser);}}
-\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (String(commandItems[e])\ ==\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}})\ \{}
-\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e\ =\ \mbox{\hyperlink{classcommandList_a82021fbc22036799183f9777a79f10c1}{parseQuoteDouble}}(commandItems,\ e);}
-\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ e)\ \{}
-\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Double\ quote\ found\ at\ beginning\ of\ command,\ advancing\ command\ start\ and\ setting\ flag"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
-\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i++;}
-\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stripEnd\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (String(commandItems[e])\ ==\ \textcolor{stringliteral}{"{}'"{}})\ \{}
-\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e\ =\ \mbox{\hyperlink{classcommandList_a049b9bf7e110abb4d44d1760af0c93c4}{parseQuoteSingle}}(commandItems,\ e);}
-\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ e)\ \{}
-\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Single\ quote\ found\ at\ beginning\ of\ command,\ advancing\ command\ start\ and\ setting\ flag"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
-\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i++;}
-\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stripEnd\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00145\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ else\ \{}}
-\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e++;}
-\DoxyCodeLine{00147\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Found\ ','\ @\ "{}}\ +\ String(e),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{debugPrintType::EParser}});}
-\DoxyCodeLine{00150\ }
-\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (String(commandItems[e])\ !=\ \textcolor{stringliteral}{"{},"{}})\ \{}
-\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e\ =\ commandItems.length();}
-\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ f\ =\ e;}
-\DoxyCodeLine{00155\ }
-\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((String(commandItems[f\ -\/\ 1])\ ==\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}})\ ||\ (String(commandItems[f\ -\/\ 1])\ ==\ \textcolor{stringliteral}{"{}'"{}}))\ \&\&\ (stripEnd))\ \{}
-\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Quote\ found\ at\ end\ of\ command,\ reverting\ command\ end"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
-\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ f-\/-\/;}
-\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stripEnd\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (e\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e\ =\ commandString.length();}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//String*\ \_argument\ =\ new\ String(commandString.substring(i,\ e).toLowerCase());}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Argument\ "{}\ +\ *\_argument,\ debugPrintType::EParser);}}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//argument.push\_back(*\_argument);}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//delete\ \_argument;}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ arg\ =\ commandString.substring(i,\ e).toLowerCase();}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.push\_back(arg);}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ e;}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem_a5244bdaca36d379542c1a390b952eec7}{buildHierarchy}}();}
+\DoxyCodeLine{00092\ \ \ \ \ \}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \mbox{\hyperlink{classcommandItem}{commandItem}}\&\ \mbox{\hyperlink{classcommandItem_a7a92b9044b3420619d12b51b3b92541a}{operator\ =\ }}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classcommandItem}{commandItem}}\&\ other)\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Guard\ self\ assignment}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ ==\ \&other)}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ this-\/>command\ =\ other.\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}};}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ this-\/>hierarchyIndex\ =\ other.\mbox{\hyperlink{classcommandItem_af827425df75c26c320c43581963faba1}{hierarchyIndex}};}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ this-\/>argument\ =\ other.\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}};}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ this-\/>hierarchy\ =\ other.\mbox{\hyperlink{classcommandItem_a28a5a435734fef37683ee69d92a42854}{hierarchy}};}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ this-\/>originalCommand\ =\ other.\mbox{\hyperlink{classcommandItem_a5a2c3d3e2fc28bd141919d2388936be1}{originalCommand}};}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ this-\/>selection\ =\ other.\mbox{\hyperlink{classcommandItem_abcf23aaba67fdd691e6b5ff34b7fec25}{selection}};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00107\ \ \ \ \ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{classcommandItem_a5d1b12010d80cb6da5e468ff091579c7}{\string~commandItem}}()\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcommandItem_a5244bdaca36d379542c1a390b952eec7}{buildHierarchy}}()\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem_af827425df75c26c320c43581963faba1}{hierarchyIndex}}\ =\ 0;}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem_a28a5a435734fef37683ee69d92a42854}{hierarchy}}.clear();}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ start\ =\ 0,\ end\ =\ 0;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ String\ portion;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ end\ =\ \mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}.indexOf(\textcolor{charliteral}{'.'},\ start);}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (end\ ==\ -\/1)\ \{\ end\ =\ \mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}.length();\ \}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ portion\ =\ \mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}.substring(start,\ end);}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_aef2174e268da3b99985a2d6018a32409}{SELECTION}}\ thisSel;}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ thisSel.clear();}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Portion\ "{}\ +\ portion,\ debugPrintType::Debug);}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ portion.indexOf(\textcolor{charliteral}{'['});}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ j\ =\ portion.lastIndexOf(\textcolor{charliteral}{']'});}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((i\ !=\ -\/1)\ \&\&\ (j\ !=\ -\/1\ ))\ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ +=\ 1;}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ sel\ =\ portion.substring(i,\ j);}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Adding\ selection:\ "{}\ +\ sel,\ debugPrintType::Debug);}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ l\ =\ 0,\ m,\ n,\ k\ =\ 0;}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ ((k\ <\ j))\ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ k\ =\ portion.indexOf(\textcolor{charliteral}{','},\ i\ +\ 1);}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (k\ ==\ -\/1)\ \{\ k\ =\ j;\ \};}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sel\ =\ portion.substring(i,\ k);}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ l\ =\ sel.indexOf(\textcolor{charliteral}{'-\/'});}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (l\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Adding\ "{}\ +\ sel,\ debugPrintType::Debug);}}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ thisSel.push\_back(sel.toInt());}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\ =\ sel.substring(0,\ l).toInt();}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n\ =\ sel.substring(l\ +\ 1,\ sel.length()).toInt();}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((n\ <\ m)\ ||\ (m\ <\ 0)\ ||\ (n\ <\ 0)\ ||\ (m\ >\ 255)\ ||\ (n\ >\ 255))\ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Invalid\ selection\ range"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (m=m;\ m<=n;\ m++)\ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ thisSel.push\_back(m);}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Adding\ "{}\ +\ String(m),\ debugPrintType::Debug);}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ k\ +\ 1;}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00161\ }
-\DoxyCodeLine{00162\ \ \ \ \ \textcolor{comment}{/*\ \ \ \ \ \ int\ e\ =\ commandItems.indexOf("{},"{},\ i);}}
-\DoxyCodeLine{00163\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ int\ f\ =\ commandItems.indexOf("{}'"{},\ i);}}
-\DoxyCodeLine{00164\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ int\ h\ =\ commandItems.indexOf("{}\(\backslash\)"{}"{},i);\ \ \ //\ Added\ 2023-\/10-\/25}}
-\DoxyCodeLine{00165\ \textcolor{comment}{}}
-\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ debugPrintln("{}Found\ ,\ @\ "{}\ +\ String(e)\ +\ "{}\ '\ @\ "{}\ +\ String(f)\ +\ "{}\ \(\backslash\)"{}\ @\ "{}\ +\ String(h),\ EParser);\ //\ Added\ 2023-\/10-\/25}}
-\DoxyCodeLine{00167\ \textcolor{comment}{}}
-\DoxyCodeLine{00168\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //\ If\ we\ find\ quotes,\ and\ they\ come\ before\ the\ next\ command\ separator,\ process\ the\ quotes}}
-\DoxyCodeLine{00169\ \textcolor{comment}{\ \ \ \ //\ \ \ \ \ \ if\ ((f\ !=\ -\/1)\ \&\&\ (f\ <\ e))\ \{\ \ \ //\ commented\ out\ 2023-\/10-\/25}}
-\DoxyCodeLine{00170\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ if\ (((f\ !=\ -\/1)\ \&\&\ (f\ <\ e))\ ||\ ((h\ !=\ -\/1)\ \&\&\ (h\ <\ e)))\ \{\ //\ Added\ 2023-\/10-\/25}}
-\DoxyCodeLine{00171\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Found\ delimiter"{},\ EParser);}}
-\DoxyCodeLine{00172\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ String\ searchFor\ =\ "{}'"{};\ //\ Added\ 2023-\/10-\/25}}
-\DoxyCodeLine{00173\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (((h\ <\ f)\ \&\&\ (h\ !=\ -\/1))\ ||\ (f\ ==\ -\/1))\ \{\ searchFor\ =\ "{}\(\backslash\)"{}"{};\ f\ =\ h;\ \}\ else\ \{\ searchFor\ =\ "{}'"{};\ \}\ //\ Added\ 2023-\/10-\/25}}
-\DoxyCodeLine{00174\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ int\ g\ =\ commandItems.indexOf(searchFor,f\ +\ 1);\ \ //\ Added\ 2023-\/10-\/25}}
-\DoxyCodeLine{00175\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Found\ other\ \ "{}\ +\ searchFor\ +\ "{}\ at\ "{}\ +\ String(g),\ EParser);\ \ //\ Added\ 2023-\/10-\/25}}
-\DoxyCodeLine{00176\ \textcolor{comment}{\ \ \ \ //\ \ \ \ \ \ \ \ int\ g\ =\ commandItems.indexOf("{}'"{},f\ +\ 1);\ //\ commented\ out\ 2023-\/10-\/25}}
-\DoxyCodeLine{00177\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (g\ !=\ -\/1)\ \{}}
-\DoxyCodeLine{00178\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ e\ =\ g\ +\ 1;}}
-\DoxyCodeLine{00179\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{00180\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \};}}
-\DoxyCodeLine{00181\ \textcolor{comment}{}}
-\DoxyCodeLine{00182\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ if\ (e\ ==\ -\/1)\ \{}}
-\DoxyCodeLine{00183\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ e\ =\ commandItems.length();}}
-\DoxyCodeLine{00184\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{00185\ \textcolor{comment}{\ \ \ \ */}}
-\DoxyCodeLine{00186\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ String*\ \_item\ =\ new\ String(commandItems.substring(i,\ e).toLowerCase());}}
-\DoxyCodeLine{00187\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ debugPrintln("{}New\ string\ from\ "{}\ +\ String(i)\ +\ "{}\ to\ "{}\ +\ String(e)\ +\ "{}\ is\ "{}\ +\ commandItems.substring(i,\ e).toLowerCase(),\ EParser);}}
-\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ String*\ \_item\ =\ \textcolor{keyword}{new}\ String(commandItems.substring(i,\ f).toLowerCase());}
-\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}New\ string\ from\ "{}}\ +\ String(i)\ +\ \textcolor{stringliteral}{"{}\ to\ "{}}\ +\ String(f)\ +\ \textcolor{stringliteral}{"{}\ is\ "{}}\ +\ commandItems.substring(i,\ f).toLowerCase(),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{EParser}});}
-\DoxyCodeLine{00190\ }
-\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Creating\ command\ string\ "{}}\ +\ *\_item,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{EParser}});}
-\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcommandItem}{commandItem}}(*\_item);}
-\DoxyCodeLine{00193\ }
-\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}.push\_back(*\_item);}
-\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \_item;}
-\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \_commandItem;}
-\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ e;}
-\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ i++;}
-\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00201\ \ \ \ \ \}}
-\DoxyCodeLine{00202\ }
-\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcommandList_af42de049662f915fd12f8ed92477c03f}{parseCommandExpressions}}(te\_variable\ vars[],\ \textcolor{keywordtype}{int}\ varCount)\ \{}
-\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList_a0a2aa6dcae713788e3217d85d4facfd7}{waitIfProcessing}}();}
-\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ String\ debugOut;}
-\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrint("{}Command\ sequence\ "{},\ EParser);}}
-\DoxyCodeLine{00208\ }
-\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ debugOut\ =\ \textcolor{stringliteral}{"{}Command\ sequence\ "{}};}
-\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ int(\mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}.size());\ i++)\ \{}
-\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrint(item[i].command,\ EParser);}}
-\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ debugOut\ +=\ \mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[i].command;}
-\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ int(\mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[i].argument.size());\ j++)\ \{}
-\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrint("{}:"{},\ EParser);}}
-\DoxyCodeLine{00215\ }
-\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}index\ of\ \(\backslash\)"{}\ "{}\ +\ String(item[i].argument[j].indexOf("{}\(\backslash\)"{}"{}))\ +\ "{},\ '\ "{}\ +\ String(item[i].argument[j].indexOf("{}'"{})),\ debugPrintType::Debug);}}
-\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ if\ ((item[i].argument[j].indexOf("{}\(\backslash\)"{}"{})\ !=\ -\/1)\ ||\ (item[i].argument[j].indexOf("{}'"{})\ !=\ -\/1))\ \{}}
-\DoxyCodeLine{00218\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ item[i].argument[j]\ =\ item[i].argument[j].substring(1,\ item[i].argument[j].length()\ -\/\ 1);}}
-\DoxyCodeLine{00219\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Cleaned\ expression\ "{}\ +\ item[i].argument[j],\ debugPrintType::Debug);}}
-\DoxyCodeLine{00220\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}*/}}
-\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[i].argument[j]\ =\ \mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(\mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[i].argument[j]);}
-\DoxyCodeLine{00222\ }
-\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debugOut\ +=\ \ \textcolor{stringliteral}{"{}:"{}};}
-\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ err;}
-\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ te\_expr\ *n\ =\ te\_compile(\mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[i].argument[j].c\_str(),\ vars,\ varCount,\ \&err);}
-\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ -\/1;}
-\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n)\ \{}
-\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\ =\ te\_eval(n);}
-\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[i].argument[j]\ =\ String(r,\ 5);}
-\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Error\ in\ expression\ at\ "{}\ +\ item[i].argument[j].substring(err,\ item[i].argument[j].length()\ -\/\ 1));}}
-\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrint(item[i].argument[j],\ EParser);}}
-\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debugOut\ +=\ \mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[i].argument[j];}
-\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ te\_free(n);}
-\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrint("{}\ "{},\ EParser);}}
-\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ debugOut\ +=\ \textcolor{stringliteral}{"{}\ "{}};}
-\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ debugPrintln("{}"{},\ EParser);}}
-\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(debugOut,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{EParser}});}
-\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00243\ \ \ \ \ \}}
-\DoxyCodeLine{00244\ }
-\DoxyCodeLine{00245\ \ \ \ \ \mbox{\hyperlink{classcommandList_a649398fbbbd83f3ccf3403419b465a2d}{commandList}}(String\ commandItems)\ \{}
-\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{addCommands}}(commandItems);}
-\DoxyCodeLine{00247\ \ \ \ \ \}}
-\DoxyCodeLine{00248\ }
-\DoxyCodeLine{00249\ \ \ \ \ \mbox{\hyperlink{classcommandList_aecba7f7d49008de18d24c19fbd6b3dca}{commandList}}()\ \{}
-\DoxyCodeLine{00250\ }
-\DoxyCodeLine{00251\ \ \ \ \ \}}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ portion\ =\ portion.substring(0,\ portion.indexOf(\textcolor{charliteral}{'['}));}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}New\ portion\ is\ "{}\ +\ portion,\ debugPrintType::Debug);}}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandItem_a28a5a435734fef37683ee69d92a42854}{hierarchy}}.push\_back(\{\ portion,\ thisSel\ \});}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ start\ =\ end\ +\ 1;}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (end\ <\ \mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}.length());}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ \}}
+\DoxyCodeLine{00171\ \};}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \textcolor{comment}{//TODO\ remove\ this\ forwards\ declaration\ once\ headers\ have\ been\ made}}
+\DoxyCodeLine{00175\ String\ \mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(String\ expression);}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00178\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcommandList}{commandList}}\ \{}
+\DoxyCodeLine{00179\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00180\ \ \ \ \ std::vector<commandItem>\ \mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}};}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcommandList_ab023b253b73ce66e0f3442686cc5eb1a}{processingCommands}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcommandList_a0a2aa6dcae713788e3217d85d4facfd7}{waitIfProcessing}}()\ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classcommandList_ab023b253b73ce66e0f3442686cc5eb1a}{processingCommands}})\ \{}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Waited\ for\ processing"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classcommandList_ab023b253b73ce66e0f3442686cc5eb1a}{processingCommands}});}
+\DoxyCodeLine{00188\ \ \ \ \ \}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcommandList_a060e73762f17623fa0fe2079e7d08431}{parseQuote}}(String\ commandString,\ \textcolor{keywordtype}{char}\ quote,\ \textcolor{keywordtype}{int}\ start)\ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ otherQuote\ =\ 0;}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (quote\ ==\ 0)\ \{\ otherQuote\ =\ 1;\ \}}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (quote\ ==\ 1)\ \{\ otherQuote\ =\ 0;\ \}}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{\ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}MAJOR\ ERROR\ IN\ QUOTE\ PARSER"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{debugPrintType::EParser}});\ \}}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Found\ quote\ start\ @\ "{}}\ +\ String(start),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{debugPrintType::EParser}});}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ start++;}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (String(commandString[start])\ ==\ \mbox{\hyperlink{commandparser_8hpp_aa230916c95623a7e6e5b94cae91a4a08}{quoteStyle}}[otherQuote])\ \{}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ start\ =\ \mbox{\hyperlink{classcommandList_a060e73762f17623fa0fe2079e7d08431}{parseQuote}}(commandString,\ otherQuote,\ start);}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}start:\ "{}\ +\ String(start)\ +\ "{}\ length:\ "{}\ +\ String(commandString.length())\ +\ "{}\ is\ quote\ style:"{}\ +\ String(String(commandString[start])\ ==\ quoteStyle[quote])\ +\ "{}\ aka\ char\ -\/"{}\ +\ commandString[start]\ +\ "{}-\/"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}\ while\ ((String(commandString[start])\ !=\ quoteStyle[quote])\ \&\&\ (start\ <\ (int(commandString.length())\ -\/\ 1)));}}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ ((commandString[start]\ !=\ \mbox{\hyperlink{commandparser_8hpp_aa230916c95623a7e6e5b94cae91a4a08}{quoteStyle}}[quote])\ \&\&\ (start\ <\ (\textcolor{keywordtype}{int}(commandString.length())\ -\/\ 1)));}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Found\ quote\ end\ @\ "{}}\ +\ String(start),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{debugPrintType::EParser}});}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ start;}
+\DoxyCodeLine{00208\ \ \ \ \ \}}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcommandList_a12ff03e9259042daa07f184d66b387e2}{parseBracket}}(String\ commandString,\ \textcolor{keywordtype}{int}\ start)\ \{}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Found\ bracket\ start\ @\ "{}}\ +\ String(start),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{debugPrintType::EParser}});}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ start++;}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (String(commandString[start])\ ==\ \textcolor{charliteral}{'['})\ \{}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ start\ =\ \mbox{\hyperlink{classcommandList_a12ff03e9259042daa07f184d66b387e2}{parseBracket}}(commandString,\ start);}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ ((String(commandString[start])\ !=\ \textcolor{charliteral}{']'})\ \&\&\ (start\ <\ (\textcolor{keywordtype}{int}(commandString.length())\ -\/\ 1)));}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Found\ bracket\ end\ @\ "{}}\ +\ String(start),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{debugPrintType::EParser}});}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ start;}
+\DoxyCodeLine{00220\ \ \ \ \ \}}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{addCommands}}(String\ commandItems)\ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Building\ command\ list"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{debugPrintType::EParser}});}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList_a0a2aa6dcae713788e3217d85d4facfd7}{waitIfProcessing}}();}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ commandItems\ =\ \mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(commandItems.toLowerCase());}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ e\ =\ 0;}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ f\ =\ 0;}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (i\ <\ (\textcolor{keywordtype}{int}(commandItems.length())\ -\/\ 1))\ \{}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Looking\ for\ ','\ @\ "{}}\ +\ String(i),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{debugPrintType::EParser}});}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ e\ =\ i;}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ ((e\ <\ (\textcolor{keywordtype}{int}(commandItems.length())\ -\/\ 1))\ \&\&\ (String(commandItems[e])\ !=\ \textcolor{stringliteral}{"{},"{}}))\ \{}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{char}(commandItems[e])\ ==\ \mbox{\hyperlink{commandparser_8hpp_aa230916c95623a7e6e5b94cae91a4a08}{quoteStyle}}[0])\ \{}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e\ =\ \mbox{\hyperlink{classcommandList_a060e73762f17623fa0fe2079e7d08431}{parseQuote}}(commandItems,\ 0,\ e);}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{char}(commandItems[e])\ ==\ \mbox{\hyperlink{commandparser_8hpp_aa230916c95623a7e6e5b94cae91a4a08}{quoteStyle}}[1])\ \{}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e\ =\ \mbox{\hyperlink{classcommandList_a060e73762f17623fa0fe2079e7d08431}{parseQuote}}(commandItems,\ 1,\ e);}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{char}(commandItems[e])\ ==\ \textcolor{charliteral}{'['})\ \{}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e\ =\ \mbox{\hyperlink{classcommandList_a12ff03e9259042daa07f184d66b387e2}{parseBracket}}(commandItems,\ e);}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e++;}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Found\ ','\ @\ "{}}\ +\ String(e),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{debugPrintType::EParser}});}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (String(commandItems[e])\ !=\ \textcolor{stringliteral}{"{},"{}})\ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e\ =\ commandItems.length();}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ f\ =\ e;}
 \DoxyCodeLine{00252\ }
-\DoxyCodeLine{00253\ \ \ \ \ \mbox{\hyperlink{classcommandList_aa436fe7b5f53d07f16f9ace9cb82106f}{\string~commandList}}()\ \{}
-\DoxyCodeLine{00254\ \ \ \ \ \textcolor{comment}{//debugPrintln("{}List\ destroyed"{});}}
-\DoxyCodeLine{00255\ \ \ \ \ \}}
-\DoxyCodeLine{00256\ }
-\DoxyCodeLine{00257\ \textcolor{comment}{//\ \ commandList()\ \{\}}}
-\DoxyCodeLine{00258\ \};}
-\DoxyCodeLine{00259\ }
-\DoxyCodeLine{00261\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ \{}
-\DoxyCodeLine{00262\ \ \ \ \ String\ \mbox{\hyperlink{structserialCommandItem_acfc1dd4408fcc9ebfb66f7f40fcc8efb}{longCommand}};}
-\DoxyCodeLine{00263\ \ \ \ \ String\ \mbox{\hyperlink{structserialCommandItem_a885ce2b2f796898ce57bfa939c405c66}{shortCommand}};}
-\DoxyCodeLine{00264\ \ \ \ \ String\ \mbox{\hyperlink{structserialCommandItem_a439b7c89ac67641d420f0b485a7ea18d}{arguments}};}
-\DoxyCodeLine{00265\ \ \ \ \ String\ \mbox{\hyperlink{structserialCommandItem_adb3c941261b6fa076154cb515884042d}{Help}};}
-\DoxyCodeLine{00266\ \};}
-\DoxyCodeLine{00267\ }
-\DoxyCodeLine{00269\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_a2eea721b98604de46300feecf7703b60}{processCommandItems}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandParser,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ serialCommandArray[],\ \textcolor{keywordtype}{int}\ size)\ \{}
-\DoxyCodeLine{00270\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i<size;\ i++)\ \{}
-\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\_commandParser-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_a885ce2b2f796898ce57bfa939c405c66}{shortCommand}}))\ \{}
-\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \_commandParser-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ =\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_acfc1dd4408fcc9ebfb66f7f40fcc8efb}{longCommand}}.toLowerCase();}
-\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00274\ \ \ \ \ \}}
-\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00276\ \}}
-\DoxyCodeLine{00277\ }
-\DoxyCodeLine{00279\ String\ \mbox{\hyperlink{commandparser_8hpp_a4a189b33229a0bbe691a7f3921eebb7b}{printCommandHelp}}(\mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ serialCommandArray[],\ \textcolor{keywordtype}{int}\ size)\ \{}
-\DoxyCodeLine{00280\ \ \ \ \ String\ help\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00281\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i<size;\ i++)\ \{}
-\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ help\ +=\ \textcolor{stringliteral}{"{}["{}};}
-\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].longCommand\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_acfc1dd4408fcc9ebfb66f7f40fcc8efb}{longCommand}};\ \}}
-\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].shortCommand\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ \textcolor{stringliteral}{"{}|"{}};\ \}}
-\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].shortCommand\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_a885ce2b2f796898ce57bfa939c405c66}{shortCommand}};\ \}}
-\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ help\ +=\ \textcolor{stringliteral}{"{}]"{}};}
-\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].arguments\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ \textcolor{stringliteral}{"{}:["{}}\ +\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_a439b7c89ac67641d420f0b485a7ea18d}{arguments}}\ +\ \textcolor{stringliteral}{"{}]"{}};\ \}}
-\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ help\ +=\ \textcolor{stringliteral}{"{}\ "{}}\ +\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_adb3c941261b6fa076154cb515884042d}{Help}}\ +\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00289\ \ \ \ \ \}}
-\DoxyCodeLine{00290\ \ \ \ \ \textcolor{keywordflow}{return}\ help;}
-\DoxyCodeLine{00291\ \}}
-\DoxyCodeLine{00292\ }
-\DoxyCodeLine{00294\ String\ \mbox{\hyperlink{commandparser_8hpp_a9584ed5f207c1c49b9a477ada94421f8}{addCommandHelp}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ serialCommandArray[],\ \textcolor{keywordtype}{int}\ size,\ std::vector<commandResponse>\ *commandResponses,\ String\ prefix\ =\ \textcolor{stringliteral}{"{}"{}})\ \{}
-\DoxyCodeLine{00295\ \ \ \ \ String\ help\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00296\ \ \ \ \ \textcolor{keywordflow}{if}\ (prefix\ ==\ \textcolor{stringliteral}{"{}"{}})\ \{\ prefix\ =\ \textcolor{stringliteral}{"{}[unk]:"{}};\ \}}
-\DoxyCodeLine{00297\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i<size;\ i++)\ \{}
-\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ help\ =\ prefix;}
-\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].longCommand\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_acfc1dd4408fcc9ebfb66f7f40fcc8efb}{longCommand}};\ \}}
-\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].shortCommand\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ \textcolor{stringliteral}{"{}|"{}};\ \}}
-\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].shortCommand\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_a885ce2b2f796898ce57bfa939c405c66}{shortCommand}};\ \}}
-\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].arguments\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ \textcolor{stringliteral}{"{}:"{}}\ +\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_a439b7c89ac67641d420f0b485a7ea18d}{arguments}}\ +\ \textcolor{stringliteral}{"{}:"{}};\ \}}
-\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ help\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}}\ +\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_adb3c941261b6fa076154cb515884042d}{Help}}\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};\ \textcolor{comment}{//\ +\ "{}\(\backslash\)n"{};}}
-\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{help,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a2c1b595c80ad4c1b7452f5ef8887ffba}{debugPrintType::Help}}\});}
-\DoxyCodeLine{00305\ \ \ \ \ \}}
-\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keywordflow}{return}\ help;}
-\DoxyCodeLine{00307\ \}}
-\DoxyCodeLine{00308\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00309\ \textcolor{comment}{bool\ skipToCommand(commandList\ *commands,\ uint16\_t\ *index,\ String\ command)\ \{}}
-\DoxyCodeLine{00310\ \textcolor{comment}{\ \ uint16\_t\ j\ =\ *index;}}
-\DoxyCodeLine{00311\ \textcolor{comment}{\ \ debugPrintln("{}Starting\ test\ at\ "{}\ +\ String(j),\ Debug);}}
-\DoxyCodeLine{00312\ \textcolor{comment}{\ \ do\ \{}}
-\DoxyCodeLine{00313\ \textcolor{comment}{\ \ \ \ j++;}}
-\DoxyCodeLine{00314\ \textcolor{comment}{\ \ \ \ if\ (j\ >=\ commands-\/>item.size())\ \{\ break;\ \}}}
-\DoxyCodeLine{00315\ \textcolor{comment}{\ \ \}\ while\ (commands-\/>item[j].command\ !=\ command);}}
-\DoxyCodeLine{00316\ \textcolor{comment}{}}
-\DoxyCodeLine{00317\ \textcolor{comment}{\ \ debugPrintln("{}Ending\ loop\ at\ "{}\ +\ String(j)\ +\ "{},\ commands\ length\ "{}\ +\ String(commands-\/>item.size()),\ Debug);}}
-\DoxyCodeLine{00318\ \textcolor{comment}{}}
-\DoxyCodeLine{00319\ \textcolor{comment}{\ \ if\ (j\ >=\ commands-\/>item.size())\ \{}}
-\DoxyCodeLine{00320\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Termination\ not\ found,\ skipping"{},\ Error);}}
-\DoxyCodeLine{00321\ \textcolor{comment}{\ \ \ \ return\ false;}}
-\DoxyCodeLine{00322\ \textcolor{comment}{\ \ \}\ else}}
-\DoxyCodeLine{00323\ \textcolor{comment}{\ \ if\ (commands-\/>item[j].command\ ==\ command)\ \{}}
-\DoxyCodeLine{00324\ \textcolor{comment}{\ \ \ \ *index\ =\ j;}}
-\DoxyCodeLine{00325\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Skipping\ forward\ to\ command\ "{}\ +\ String(j),\ Debug);}}
-\DoxyCodeLine{00326\ \textcolor{comment}{\ \ \ \ return\ true;}}
-\DoxyCodeLine{00327\ \textcolor{comment}{\ \ \}}}
-\DoxyCodeLine{00328\ \textcolor{comment}{\ \ return\ false;}}
-\DoxyCodeLine{00329\ \textcolor{comment}{\}}}
-\DoxyCodeLine{00330\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00331\ }
-\DoxyCodeLine{00332\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \{\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{NotFound}}\ =\ \ 0,\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{Ok}}\ =\ 1,\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20}{CommandFailed}}\ =\ 2,\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{WrongArgumentCount}}\ =\ 3,\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a6e204fafb4965a8a79b8ac29834195e2}{WrongArgumentMinimum}}\ =\ 4,\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7945af4588755e4b73b7855397babbb1}{WrongArgumentValue}}\ =\ 5,\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{PassThrough}}\ =\ 6\ \};}
-\DoxyCodeLine{00333\ }
-\DoxyCodeLine{00334\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ uint8\_t\ arguments,\ \textcolor{keywordtype}{bool}\ t\_supressError\ =\ \textcolor{keyword}{false})\ \{}
-\DoxyCodeLine{00335\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size()\ !=\ arguments)\ \{}
-\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!t\_supressError)\ \{}
-\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Wrong\ number\ of\ arguments,\ got\ "{}}\ +\ String(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size())\ +\ \textcolor{stringliteral}{"{}\ expected\ "{}}\ +\ String(arguments),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
-\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00340\ \ \ \ \ \}}
-\DoxyCodeLine{00341\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00342\ \}}
-\DoxyCodeLine{00343\ }
-\DoxyCodeLine{00344\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_a0af0c008c80e8b315e813ac91855b997}{checkArgumentsMin}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ uint8\_t\ argumentsMin)\ \{}
-\DoxyCodeLine{00345\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size()\ <\ argumentsMin)\ \{}
-\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Wrong\ number\ of\ arguments"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
-\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//String*\ \_item\ =\ new\ String(stripQuotes(commandItems.substring(i,\ f).toLowerCase()));}}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}New\ string\ from\ "{}\ +\ String(i)\ +\ "{}\ to\ "{}\ +\ String(f)\ +\ "{}\ is\ "{}\ +\ commandItems.substring(i,\ f).toLowerCase(),\ EParser);}}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Creating\ command\ string\ "{}\ +\ *\_item,\ EParser);}}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//commandItem\ *\_commandItem\ =\ new\ commandItem(*\_item);}}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//item.push\_back(*\_item);}}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//delete\ \_item;}}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//delete\ \_commandItem;}}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}New\ string\ from\ "{}}\ +\ String(i)\ +\ \textcolor{stringliteral}{"{}\ to\ "{}}\ +\ String(f)\ +\ \textcolor{stringliteral}{"{}\ is\ "{}}\ +\ commandItems.substring(i,\ f).toLowerCase(),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{EParser}});}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Creating\ command\ string\ "{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(commandItems.substring(i,\ f).toLowerCase()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{EParser}});}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}.push\_back(\mbox{\hyperlink{classcommandItem}{commandItem}}(\mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(commandItems.substring(i,\ f).toLowerCase())));}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ e;}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ i++;}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Command\ created"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{EParser}});}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}List\ created"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{EParser}});}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00273\ \ \ \ \ \}}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcommandList_a642e2aff6de5eb65835d24dbceefd8a8}{parseCommandExpressions}}(ExpressionParser\ \mbox{\hyperlink{midi_8cpp_a6520e87f3b58b3b5ceff30a1e2353a1c}{expressionParser}})\ \{\ \textcolor{comment}{//(te\_variable\ vars[],\ int\ varCount)\ \{}}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList_a0a2aa6dcae713788e3217d85d4facfd7}{waitIfProcessing}}();}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ String\ debugOut;}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ debugOut\ =\ \textcolor{stringliteral}{"{}Command\ sequence\ "{}};}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ int(\mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}.size());\ i++)\ \{}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \ \ debugOut\ +=\ \mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[i].command;}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ int(\mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[i].argument.size());\ j++)\ \{}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[i].argument[j]\ =\ \mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(\mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[i].argument[j]);}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debugOut\ +=\ \ \textcolor{stringliteral}{"{}:"{}};}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[i].argument[j]\ =\ \mbox{\hyperlink{midi_8cpp_a6520e87f3b58b3b5ceff30a1e2353a1c}{expressionParser}}.parseCommandExpressions(\mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[i].argument[j]);}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debugOut\ +=\ \mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[i].argument[j];}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ debugOut\ +=\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(debugOut,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a29daf9f50600089ffb148a3b45de3409}{EParser}});}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00293\ \ \ \ \ \}}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ \ \ \ \ \mbox{\hyperlink{classcommandList_a649398fbbbd83f3ccf3403419b465a2d}{commandList}}(String\ commandItems)\ \{}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{addCommands}}(commandItems);}
+\DoxyCodeLine{00297\ \ \ \ \ \}}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\&\ \mbox{\hyperlink{classcommandList_a17c67d5921695b3a111c2d6f0764889f}{operator\ =\ }}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classcommandList}{commandList}}\&\ other)\ \{}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}in\ the\ operator"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Guard\ self\ assignment}}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ ==\ \&other)}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}passed\ self\ assignment"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i<other.\mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}.size();\ i++)\ \{}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Adding\ item\ "{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}.push\_back(other.\mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}}[i]);}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00312\ \ \ \ \ \}}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00314\ \ \ \ \ \mbox{\hyperlink{classcommandList_aecba7f7d49008de18d24c19fbd6b3dca}{commandList}}()\ \{}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00316\ \ \ \ \ \}}
+\DoxyCodeLine{00317\ \};}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00320\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ \{}
+\DoxyCodeLine{00321\ \ \ \ \ String\ \mbox{\hyperlink{structserialCommandItem_acfc1dd4408fcc9ebfb66f7f40fcc8efb}{longCommand}};}
+\DoxyCodeLine{00322\ \ \ \ \ String\ \mbox{\hyperlink{structserialCommandItem_a885ce2b2f796898ce57bfa939c405c66}{shortCommand}};}
+\DoxyCodeLine{00323\ \ \ \ \ String\ \mbox{\hyperlink{structserialCommandItem_a439b7c89ac67641d420f0b485a7ea18d}{arguments}};}
+\DoxyCodeLine{00324\ \ \ \ \ String\ \mbox{\hyperlink{structserialCommandItem_adb3c941261b6fa076154cb515884042d}{Help}};}
+\DoxyCodeLine{00325\ \};}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00328\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_a2eea721b98604de46300feecf7703b60}{processCommandItems}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandParser,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ serialCommandArray[],\ \textcolor{keywordtype}{int}\ size)\ \{}
+\DoxyCodeLine{00329\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i<size;\ i++)\ \{}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\_commandParser-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_a885ce2b2f796898ce57bfa939c405c66}{shortCommand}}))\ \{}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ \_commandParser-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ =\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_acfc1dd4408fcc9ebfb66f7f40fcc8efb}{longCommand}}.toLowerCase();}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00333\ \ \ \ \ \}}
+\DoxyCodeLine{00334\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00335\ \}}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00338\ String\ \mbox{\hyperlink{commandparser_8hpp_a4a189b33229a0bbe691a7f3921eebb7b}{printCommandHelp}}(\mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ serialCommandArray[],\ \textcolor{keywordtype}{int}\ size)\ \{}
+\DoxyCodeLine{00339\ \ \ \ \ String\ help\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00340\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i<size;\ i++)\ \{}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ help\ +=\ \textcolor{stringliteral}{"{}["{}};}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].longCommand\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_acfc1dd4408fcc9ebfb66f7f40fcc8efb}{longCommand}};\ \}}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].shortCommand\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ \textcolor{stringliteral}{"{}|"{}};\ \}}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].shortCommand\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_a885ce2b2f796898ce57bfa939c405c66}{shortCommand}};\ \}}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ help\ +=\ \textcolor{stringliteral}{"{}]"{}};}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].arguments\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ \textcolor{stringliteral}{"{}:["{}}\ +\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_a439b7c89ac67641d420f0b485a7ea18d}{arguments}}\ +\ \textcolor{stringliteral}{"{}]"{}};\ \}}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ help\ +=\ \textcolor{stringliteral}{"{}\ "{}}\ +\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_adb3c941261b6fa076154cb515884042d}{Help}}\ +\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
 \DoxyCodeLine{00348\ \ \ \ \ \}}
-\DoxyCodeLine{00349\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00349\ \ \ \ \ \textcolor{keywordflow}{return}\ help;}
 \DoxyCodeLine{00350\ \}}
-\DoxyCodeLine{00351\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(int16\_t\ number,\ int16\_t\ min,\ int16\_t\ max,\ \textcolor{keywordtype}{bool}\ t\_supressError\ =\ \textcolor{keyword}{false})\ \{}
-\DoxyCodeLine{00352\ \ \ \ \ \textcolor{keywordflow}{if}\ ((number\ <\ min)\ ||\ (number\ >\ max))\ \{}
-\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!t\_supressError)\ \{\mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Number\ out\ of\ bounds"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});\ \}}
-\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00355\ \ \ \ \ \}}
-\DoxyCodeLine{00356\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00357\ \}}
-\DoxyCodeLine{00358\ }
-\DoxyCodeLine{00359\ String\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}(String\ expression,\ \textcolor{keywordtype}{bool}\ force)\ \{}
-\DoxyCodeLine{00360\ \ \ \ \ String\ delimit\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00361\ }
-\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keywordtype}{int}\ singleQ\ =\ expression.indexOf(\textcolor{stringliteral}{"{}'"{}});}
-\DoxyCodeLine{00363\ \ \ \ \ \textcolor{keywordtype}{int}\ doubleQ\ =\ expression.indexOf(\textcolor{stringliteral}{"{}\(\backslash\)"{}"{}});}
-\DoxyCodeLine{00364\ }
-\DoxyCodeLine{00365\ \ \ \ \ \textcolor{keywordflow}{if}\ (singleQ\ <\ doubleQ)\ \{}
-\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ delimit\ =\ \textcolor{stringliteral}{"{}'"{}};}
-\DoxyCodeLine{00367\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (singleQ\ >\ doubleQ)\ \{}
-\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ delimit\ =\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};}
-\DoxyCodeLine{00369\ \ \ \ \ \}}
-\DoxyCodeLine{00370\ }
-\DoxyCodeLine{00371\ \ \ \ \ \textcolor{comment}{//if\ ((force)\ \&\&\ (delimit\ ==\ "{}"{})\ \&\&\ ((singleQ\ >\ -\/1)\ ||\ (doubleQ\ >\ -\/1)))\ \{\ delimit\ =\ "{}'"{};\ \}}}
-\DoxyCodeLine{00372\ \ \ \ \ \textcolor{keywordflow}{if}\ (force)\ \{\ delimit\ =\ \textcolor{stringliteral}{"{}'"{}};\ \}}
-\DoxyCodeLine{00373\ \ \ \ \ \textcolor{keywordflow}{if}\ ((singleQ\ ==\ 0)\ ||\ (doubleQ\ ==\ 0))\ \{\ delimit\ =\ \textcolor{stringliteral}{"{}"{}};\ \}}
-\DoxyCodeLine{00374\ }
-\DoxyCodeLine{00375\ \ \ \ \ expression\ =\ delimit\ +\ expression\ +\ delimit;}
-\DoxyCodeLine{00376\ }
-\DoxyCodeLine{00377\ \ \ \ \ \textcolor{keywordflow}{if}\ (delimit\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{}
-\DoxyCodeLine{00378\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Using\ quotestyle\ "{}\ +\ delimit\ +\ "{},\ complete\ expression\ is\ "{}\ +\ expression,\ debugPrintType::Debug);}}
-\DoxyCodeLine{00379\ \ \ \ \ \}}
-\DoxyCodeLine{00380\ }
-\DoxyCodeLine{00381\ \ \ \ \ \textcolor{keywordflow}{return}\ expression;}
-\DoxyCodeLine{00382\ \}}
-\DoxyCodeLine{00383\ }
-\DoxyCodeLine{00384\ String\ \mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(String\ expression)\ \{}
-\DoxyCodeLine{00385\ \textcolor{comment}{/*\ \ \ \ \ \ if\ ((expression.indexOf("{}\(\backslash\)"{}"{})\ !=\ -\/1)\ ||\ (expression.indexOf("{}'"{})\ !=\ -\/1))\ \{}}
-\DoxyCodeLine{00386\ \textcolor{comment}{}}
-\DoxyCodeLine{00387\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Cleaned\ expression\ "{}\ +\ item[i].argument[j],\ debugPrintType::Debug);}}
-\DoxyCodeLine{00388\ \textcolor{comment}{\ \ \ \ \}*/}}
-\DoxyCodeLine{00389\ \ \ \ \ \textcolor{comment}{//\ 1.\ strip\ starting\ and\ trailing\ white\ spaces}}
-\DoxyCodeLine{00390\ \ \ \ \ \textcolor{comment}{//\ 2.\ strip\ starting\ and\ trailing\ commas}}
-\DoxyCodeLine{00391\ \ \ \ \ \textcolor{comment}{//\ 3.\ check\ if\ beginning\ starts\ with\ a\ quote}}
-\DoxyCodeLine{00392\ \ \ \ \ \textcolor{comment}{//\ \ 3.1\ make\ sure\ that\ the\ end\ contains\ the\ same\ quote,\ if\ not,\ signal\ an\ error}}
-\DoxyCodeLine{00393\ \ \ \ \ \textcolor{comment}{//\ \ 3.2\ strip\ quotes\ from\ start\ and\ end}}
-\DoxyCodeLine{00394\ \ \ \ \ expression\ =\ expression.trim();}
-\DoxyCodeLine{00395\ }
-\DoxyCodeLine{00396\ \ \ \ \ \textcolor{keywordflow}{if}\ ((String(expression[0])\ ==\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}})\ ||\ (String(expression[0])\ ==\ \textcolor{stringliteral}{"{}'"{}}))\ \{}
-\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Stripping\ start\ \&\ end\ quotes\ from\ -\/"{}}\ +\ expression\ +\ \textcolor{stringliteral}{"{}-\/"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
-\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (expression[0]\ !=\ expression[expression.length()-\/1])\ \{}
-\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}ERROR\ Quote\ start\ and\ end\ doesn't\ match"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
-\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ expression\ =\ expression.substring(1,\ expression.length()\ -\/\ 1);}
-\DoxyCodeLine{00402\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Stripped\ expression\ is\ -\/"{}\ +\ expression\ +\ "{}-\/"{},\ debugPrintType::Debug);}}
-\DoxyCodeLine{00403\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00404\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}The\ first\ character\ is\ -\/"{}\ +\ String(expression[0])\ +\ "{}-\/"{},\ debugPrintType::Debug);}}
-\DoxyCodeLine{00405\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}No\ quotes\ found\ in\ the\ string\ -\/"{}\ +\ expression\ +\ "{}-\/"{},\ debugPrintType::Debug);}}
-\DoxyCodeLine{00406\ \ \ \ \ \}}
-\DoxyCodeLine{00407\ }
-\DoxyCodeLine{00408\ \ \ \ \ \textcolor{keywordflow}{return}\ expression;}
-\DoxyCodeLine{00409\ \}}
-\DoxyCodeLine{00410\ }
-\DoxyCodeLine{00411\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00351\ }
+\DoxyCodeLine{00353\ String\ \mbox{\hyperlink{commandparser_8hpp_a9584ed5f207c1c49b9a477ada94421f8}{addCommandHelp}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ serialCommandArray[],\ \textcolor{keywordtype}{int}\ size,\ std::vector<commandResponse>\ *commandResponses,\ String\ prefix\ =\ \textcolor{stringliteral}{"{}"{}})\ \{}
+\DoxyCodeLine{00354\ \ \ \ \ String\ help\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00355\ \ \ \ \ \textcolor{keywordflow}{if}\ (prefix\ ==\ \textcolor{stringliteral}{"{}"{}})\ \{\ prefix\ =\ \textcolor{stringliteral}{"{}[unk]:"{}};\ \}}
+\DoxyCodeLine{00356\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i<size;\ i++)\ \{}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ help\ =\ prefix;}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].longCommand\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_acfc1dd4408fcc9ebfb66f7f40fcc8efb}{longCommand}};\ \}}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].shortCommand\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ \textcolor{stringliteral}{"{}|"{}};\ \}}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].shortCommand\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_a885ce2b2f796898ce57bfa939c405c66}{shortCommand}};\ \}}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serialCommandArray[i].arguments\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ help\ +=\ \textcolor{stringliteral}{"{}:"{}}\ +\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_a439b7c89ac67641d420f0b485a7ea18d}{arguments}}\ +\ \textcolor{stringliteral}{"{}:"{}};\ \}}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ help\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}}\ +\ serialCommandArray[i].\mbox{\hyperlink{structserialCommandItem_adb3c941261b6fa076154cb515884042d}{Help}}\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};\ \textcolor{comment}{//\ +\ "{}\(\backslash\)n"{};}}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{help,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a2c1b595c80ad4c1b7452f5ef8887ffba}{debugPrintType::Help}}\});}
+\DoxyCodeLine{00364\ \ \ \ \ \}}
+\DoxyCodeLine{00365\ \ \ \ \ \textcolor{keywordflow}{return}\ help;}
+\DoxyCodeLine{00366\ \}}
+\DoxyCodeLine{00367\ }
+\DoxyCodeLine{00368\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ uint8\_t\ arguments,\ \textcolor{keywordtype}{bool}\ t\_supressError\ =\ \textcolor{keyword}{false})\ \{}
+\DoxyCodeLine{00369\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size()\ !=\ arguments)\ \{}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!t\_supressError)\ \{}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Wrong\ number\ of\ arguments,\ got\ "{}}\ +\ String(\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size())\ +\ \textcolor{stringliteral}{"{}\ expected\ "{}}\ +\ String(arguments),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00374\ \ \ \ \ \}}
+\DoxyCodeLine{00375\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00376\ \}}
+\DoxyCodeLine{00377\ }
+\DoxyCodeLine{00378\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_a47b5a74095fe6948dc38caf72ddfbff0}{checkArgumentsMin}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ uint8\_t\ argumentsMin,\ \textcolor{keywordtype}{bool}\ t\_supressError\ =\ \textcolor{keyword}{false})\ \{}
+\DoxyCodeLine{00379\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_commandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size()\ <\ argumentsMin)\ \{}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!t\_supressError)\ \{\ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Wrong\ number\ of\ arguments"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});\ \};}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00382\ \ \ \ \ \}}
+\DoxyCodeLine{00383\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00384\ \}}
+\DoxyCodeLine{00385\ }
+\DoxyCodeLine{00386\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(int16\_t\ number,\ int16\_t\ min,\ int16\_t\ max,\ \textcolor{keywordtype}{bool}\ t\_supressError\ =\ \textcolor{keyword}{false})\ \{}
+\DoxyCodeLine{00387\ \ \ \ \ \textcolor{keywordflow}{if}\ ((number\ <\ min)\ ||\ (number\ >\ max))\ \{}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!t\_supressError)\ \{\mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Number\ out\ of\ bounds"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});\ \}}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00390\ \ \ \ \ \}}
+\DoxyCodeLine{00391\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00392\ \}}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ String\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}(String\ expression,\ \textcolor{keywordtype}{bool}\ force)\ \{}
+\DoxyCodeLine{00395\ \ \ \ \ String\ delimit\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ \ \ \ \ \textcolor{keywordflow}{if}\ (expression\ ==\ \textcolor{stringliteral}{"{}"{}})\ \{\ \textcolor{keywordflow}{return}\ expression;\ \}}
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00399\ \ \ \ \ \textcolor{keywordflow}{if}\ (((expression[0]\ ==\ \textcolor{stringliteral}{"{}'"{}})\ or\ (expression[0]\ ==\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}}))\ and\ (expression[0]\ ==\ expression[expression.length()\ -\/\ 1]))\ \{}
+\DoxyCodeLine{00400\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}-\/"{}\ +\ expression\ +\ "{}-\/\ is\ already\ delimited!"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ expression;}
+\DoxyCodeLine{00402\ \ \ \ \ \}}
+\DoxyCodeLine{00403\ }
+\DoxyCodeLine{00404\ \ \ \ \ \textcolor{keywordtype}{int}\ singleQ\ =\ expression.indexOf(\textcolor{stringliteral}{"{}'"{}});}
+\DoxyCodeLine{00405\ \ \ \ \ \textcolor{keywordtype}{int}\ doubleQ\ =\ expression.indexOf(\textcolor{stringliteral}{"{}\(\backslash\)"{}"{}});}
+\DoxyCodeLine{00406\ }
+\DoxyCodeLine{00407\ \ \ \ \ \textcolor{keywordflow}{if}\ (singleQ\ <\ doubleQ)\ \{}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ delimit\ =\ \textcolor{stringliteral}{"{}'"{}};}
+\DoxyCodeLine{00409\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (singleQ\ >\ doubleQ)\ \{}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ delimit\ =\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};}
+\DoxyCodeLine{00411\ \ \ \ \ \}}
+\DoxyCodeLine{00412\ }
+\DoxyCodeLine{00413\ \textcolor{comment}{//\ \ \ \ debugPrintln("{}exp\ -\/"{}\ +\ expression\ +\ "{}-\/"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00414\ \ \ \ \ \textcolor{keywordflow}{if}\ (!((singleQ\ ==\ 0)\ ||\ (doubleQ\ ==\ 0)))\ \{}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (force)\ \{}
+\DoxyCodeLine{00416\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}force"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \ \ \ \ delimit\ =\ \textcolor{stringliteral}{"{}'"{}};}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \ \ \ \ delimit\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00421\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00422\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}has\ quote;\ singleQ:\ "{}\ +\ String(singleQ)\ +\ "{},\ doubleQ:\ "{}\ +\ String(doubleQ),\ debugPrintType::Debug);}}
+\DoxyCodeLine{00423\ \ \ \ \ \}}
+\DoxyCodeLine{00424\ }
+\DoxyCodeLine{00425\ \ \ \ \ expression\ =\ delimit\ +\ expression\ +\ delimit;}
+\DoxyCodeLine{00426\ \textcolor{comment}{//\ \ \ \ debugPrintln("{}new\ exp\ -\/"{}\ +\ expression\ +\ "{}-\/"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00427\ }
+\DoxyCodeLine{00428\ \ \ \ \ \textcolor{keywordflow}{if}\ (delimit\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{}
+\DoxyCodeLine{00429\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Using\ quotestyle\ "{}\ +\ delimit\ +\ "{},\ complete\ expression\ is\ "{}\ +\ expression,\ debugPrintType::Debug);}}
+\DoxyCodeLine{00430\ \ \ \ \ \}}
+\DoxyCodeLine{00431\ }
+\DoxyCodeLine{00432\ \ \ \ \ \textcolor{keywordflow}{return}\ expression;}
+\DoxyCodeLine{00433\ \}}
+\DoxyCodeLine{00434\ }
+\DoxyCodeLine{00435\ String\ \mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(String\ expression)\ \{}
+\DoxyCodeLine{00436\ \ \ \ \ \textcolor{comment}{//\ 1.\ strip\ starting\ and\ trailing\ white\ spaces}}
+\DoxyCodeLine{00437\ \ \ \ \ \textcolor{comment}{//\ 2.\ strip\ starting\ and\ trailing\ commas}}
+\DoxyCodeLine{00438\ \ \ \ \ \textcolor{comment}{//\ 3.\ check\ if\ beginning\ starts\ with\ a\ quote}}
+\DoxyCodeLine{00439\ \ \ \ \ \textcolor{comment}{//\ \ 3.1\ make\ sure\ that\ the\ end\ contains\ the\ same\ quote,\ if\ not,\ signal\ an\ error}}
+\DoxyCodeLine{00440\ \ \ \ \ \textcolor{comment}{//\ \ 3.2\ strip\ quotes\ from\ start\ and\ end}}
+\DoxyCodeLine{00441\ \ \ \ \ expression\ =\ expression.trim();}
+\DoxyCodeLine{00442\ }
+\DoxyCodeLine{00443\ \ \ \ \ \textcolor{keywordflow}{if}\ ((String(expression[0])\ ==\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}})\ ||\ (String(expression[0])\ ==\ \textcolor{stringliteral}{"{}'"{}}))\ \{}
+\DoxyCodeLine{00444\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Stripping\ start\ \&\ end\ quotes\ from\ -\/"{}\ +\ expression\ +\ "{}-\/"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (expression[0]\ !=\ expression[expression.length()-\/1])\ \{}
+\DoxyCodeLine{00446\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}ERROR\ Quote\ start\ and\ end\ doesn't\ match"{},\ debugPrintType::Error);}}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ expression\ =\ expression.substring(1,\ expression.length()\ -\/\ 1);}
+\DoxyCodeLine{00449\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Stripped\ expression\ is\ -\/"{}\ +\ expression\ +\ "{}-\/"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00450\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00451\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}The\ first\ character\ is\ -\/"{}\ +\ String(expression[0])\ +\ "{}-\/"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00452\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}No\ quotes\ found\ in\ the\ string\ -\/"{}\ +\ expression\ +\ "{}-\/"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00453\ \ \ \ \ \}}
+\DoxyCodeLine{00454\ }
+\DoxyCodeLine{00455\ \ \ \ \ \textcolor{keywordflow}{return}\ expression;}
+\DoxyCodeLine{00456\ \}}
+\DoxyCodeLine{00457\ }
+\DoxyCodeLine{00458\ String\ \mbox{\hyperlink{commandparser_8hpp_aa2920a70f474546b537b11768a46d011}{removePrefix}}(String\ input,\ String\ prefix)\ \{}
+\DoxyCodeLine{00459\ \ \ \ \ prefix\ =\ prefix.replace(\textcolor{stringliteral}{"{}."{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00460\ }
+\DoxyCodeLine{00461\ \ \ \ \ \textcolor{keywordflow}{if}\ (input.substring(0,\ prefix.length())\ ==\ prefix)\ \{}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ input\ =\ input.substring(prefix.length());}
+\DoxyCodeLine{00463\ \ \ \ \ \}}
+\DoxyCodeLine{00464\ }
+\DoxyCodeLine{00465\ \ \ \ \ \textcolor{keywordflow}{return}\ input;}
+\DoxyCodeLine{00466\ \}}
+\DoxyCodeLine{00467\ }
+\DoxyCodeLine{00468\ }
+\DoxyCodeLine{00469\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

@@ -28,89 +28,78 @@
 \DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{configuration_8hpp}{configuration.hpp}}"{}}}
 \DoxyCodeLine{00025\ }
 \DoxyCodeLine{00026\ \mbox{\hyperlink{classconfiguration_ad4446282343ce7dd8a67ffbc15f1d575}{configuration::configuration}}()\ \{}
-\DoxyCodeLine{00027\ \textcolor{preprocessor}{\ \ \ \ \#define\ noteOnSingle\ "{}m:uv0,b:0,bchb:note,bmr:1,bpid:1,bpe:1,se:(velocity*512)*(1-\/notecount),bcsm:0"{}\ }\textcolor{comment}{//"{}m:uv0,b:0,hb:note,run:1,pid:1,engage:1,muterest,ssm:0"{}}}
-\DoxyCodeLine{00028\ \textcolor{preprocessor}{\ \ \ \ \#define\ noteOffSingle\ "{}m:uv0,b:0,bpr:ibool(notecount),bcsm:0"{}\ }\textcolor{comment}{//\ "{}m:uv0,b:0,rest:ibool(notecount),mutefullmute,ssm:0"{}}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\ \ \ \ \#define\ noteOnSingle\ "{}m:uv0,b:0,bchb:note,bmr:1,bpid:1,bpe:1,se:(velocity*512)*(1-\/notecount),bcsm:0"{}}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\ \ \ \ \#define\ noteOffSingle\ "{}m:uv0,b:0,bpr:ibool(notecount),bcsm:0"{}}}
 \DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a752b266ab819b05402a010b74d6961b3}{name}}\ =\ \textcolor{keyword}{new}\ String();\ \textcolor{comment}{//String("{}default"{});}}
-\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classconfiguration_af44d3f003c6bba79474aab5d38bf0637}{noteOff}}\ =\ \textcolor{keyword}{new}\ String();\ \textcolor{comment}{//String(noteOffSingle);}}
-\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a36a671b6f1e684b991f3cdb5fed48a75}{noteOn}}\ =\ \textcolor{keyword}{new}\ String();\ \textcolor{comment}{//String(noteOnSingle);}}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a752b266ab819b05402a010b74d6961b3}{name}}\ =\ \textcolor{keyword}{new}\ String();}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classconfiguration_af44d3f003c6bba79474aab5d38bf0637}{noteOff}}\ =\ \textcolor{keyword}{new}\ String();}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a36a671b6f1e684b991f3cdb5fed48a75}{noteOn}}\ =\ \textcolor{keyword}{new}\ String();}
 \DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a93310aedd288a327b3574078875ad019}{polyAftertouch}}\ =\ \textcolor{keyword}{new}\ String();}
 \DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classconfiguration_aa4348734e37e66795f4e06d27c2955fc}{programChange}}\ =\ \textcolor{keyword}{new}\ String();}
-\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a81bb79062036d8ef1219f893e5edd46e}{channelAftertouch}}\ =\ \textcolor{keyword}{new}\ String();\ \textcolor{comment}{//String("{}m:uv0,b:0,bpm:(pressure*512)"{});}}
-\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classconfiguration_acdd444bd1c83d1ec202fe38cfd52bbc6}{pitchBend}}\ =\ \textcolor{keyword}{new}\ String();\ \textcolor{comment}{//String("{}m:0,b:0,bchsh:pitch/2"{});}}
-\DoxyCodeLine{00037\ \textcolor{comment}{//\ \ \ \ midiRxChannel\ =\ 0x7F;}}
-\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a148b31746119e5bcf0c7ddcf4f3ffcd9}{setDefaultBaseParameters}}();}
-\DoxyCodeLine{00039\ \}}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ uint8\_t\ \mbox{\hyperlink{classconfiguration_a2ad0e61c381ac3f835ef503e0ef235ab}{configuration::setCC}}(uint8\_t\ controller,\ String\ *command)\ \{}
-\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint16\_t\ i=0;\ i<\mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.size();\ i++)\ \{}
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}[i].control\ ==\ controller)\ \{}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}[i].command\ =\ *command;}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ i;}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00047\ \ \ \ \ \}}
-\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.push\_back(\{controller,\ *command\ \});}
-\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.size()\ -\/\ 1;}
-\DoxyCodeLine{00050\ \}}
-\DoxyCodeLine{00051\ }
-\DoxyCodeLine{00052\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classconfiguration_a323c0abd33143110539eba665c276b2d}{configuration::removeCC}}(uint8\_t\ controller)\ \{}
-\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint16\_t\ i=0;\ i<\mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.size();\ i++)\ \{}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}[i].control\ ==\ controller)\ \{}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.erase(\mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.begin()\ +\ i);}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00058\ \ \ \ \ \}}
-\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00060\ \}}
-\DoxyCodeLine{00061\ }
-\DoxyCodeLine{00062\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classconfiguration_a148b31746119e5bcf0c7ddcf4f3ffcd9}{configuration::setDefaultBaseParameters}}()\ \{}
-\DoxyCodeLine{00063\ \ \ \ \ *\mbox{\hyperlink{classconfiguration_a752b266ab819b05402a010b74d6961b3}{name}}\ =\ \textcolor{stringliteral}{"{}default"{}};}
-\DoxyCodeLine{00064\ \ \ \ \ *\mbox{\hyperlink{classconfiguration_af44d3f003c6bba79474aab5d38bf0637}{noteOff}}\ =\ \textcolor{stringliteral}{"{}m:0,b:0,bpr:ibool(notecount),bcsm:0"{}};}
-\DoxyCodeLine{00065\ \ \ \ \ *\mbox{\hyperlink{classconfiguration_a36a671b6f1e684b991f3cdb5fed48a75}{noteOn}}\ =\ \textcolor{stringliteral}{"{}m:0,b:0,bchb:note,bmr:1,bpid:1,bpe:1,se:(velocity*512)*(1-\/notecount),bcsm:0"{}};}
-\DoxyCodeLine{00066\ \ \ \ \ *\mbox{\hyperlink{classconfiguration_a93310aedd288a327b3574078875ad019}{polyAftertouch}}\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00067\ \ \ \ \ *\mbox{\hyperlink{classconfiguration_aa4348734e37e66795f4e06d27c2955fc}{programChange}}\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00068\ \ \ \ \ *\mbox{\hyperlink{classconfiguration_a81bb79062036d8ef1219f893e5edd46e}{channelAftertouch}}\ =\ \textcolor{stringliteral}{"{}m:0,b:0,bpm:(pressure*512)"{}};}
-\DoxyCodeLine{00069\ \ \ \ \ *\mbox{\hyperlink{classconfiguration_acdd444bd1c83d1ec202fe38cfd52bbc6}{pitchBend}}\ =\ \textcolor{stringliteral}{"{}m:0,b:0,bchsh:pitch*4"{}};}
-\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a1e915fd6a01b6df31be57ed60bec4374}{midiRxChannel}}\ =\ 0x7F;}
-\DoxyCodeLine{00071\ \}}
-\DoxyCodeLine{00072\ }
-\DoxyCodeLine{00073\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classconfiguration_ae0927e2179097259e7fd3bf61bea1b11}{configuration::setDefaultCCs}}()\ \{}
-\DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.clear();}
-\DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.push\_back(\{64,\ \textcolor{stringliteral}{"{}bowpressurehold:bool(value)"{}}\});}
-\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.push\_back(\{123,\ \textcolor{stringliteral}{"{}midiallnotesoff:1"{}}\});}
-\DoxyCodeLine{00077\ \}}
-\DoxyCodeLine{00078\ }
-\DoxyCodeLine{00079\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classconfiguration_acd5b3b9293e0277d8ddaaad5b666c1d9}{configuration::setDefaults}}()\ \{}
-\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a148b31746119e5bcf0c7ddcf4f3ffcd9}{setDefaultBaseParameters}}();}
-\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{classconfiguration_ae0927e2179097259e7fd3bf61bea1b11}{setDefaultCCs}}();}
-\DoxyCodeLine{00082\ \}}
-\DoxyCodeLine{00083\ }
-\DoxyCodeLine{00084\ String\ \mbox{\hyperlink{classconfiguration_a5d444f0c115c9e5c8e4149408c75a0ca}{configuration::dumpData}}()\ \{}
-\DoxyCodeLine{00085\ \ \ \ \ String\ dump\ =\ \textcolor{stringliteral}{"{}mrc:"{}}\ +\ String(\mbox{\hyperlink{classconfiguration_a1e915fd6a01b6df31be57ed60bec4374}{midiRxChannel}})+\ \textcolor{stringliteral}{"{},"{}};}
-\DoxyCodeLine{00086\ \textcolor{comment}{/*\ \ \ \ if\ (*name\ !=\ "{}default"{})\ \{\ dump\ +=\ "{}mcfn:\(\backslash\)"{}"{}\ +\ \ (*name)\ +\ "{}\(\backslash\)"{},"{};\ \}}}
-\DoxyCodeLine{00087\ \textcolor{comment}{\ \ \ \ if\ (*noteOff\ !=\ "{}"{})\ \{\ dump\ +=\ "{}mev:noteoff:\(\backslash\)"{}"{}\ +\ (*noteOff)\ +\ "{}\(\backslash\)"{},"{};\ \}}}
-\DoxyCodeLine{00088\ \textcolor{comment}{\ \ \ \ if\ (*noteOn\ !=\ "{}"{})\ \{\ dump\ +=\ "{}mev:noteon:\(\backslash\)"{}"{}\ +\ (*noteOn)\ +\ "{}\(\backslash\)"{},"{};\ \}}}
-\DoxyCodeLine{00089\ \textcolor{comment}{\ \ \ \ if\ (*polyAftertouch\ !=\ "{}"{})\ \{\ dump\ +=\ "{}mev:pat:\(\backslash\)"{}"{}\ +\ (*polyAftertouch)\ +\ "{}\(\backslash\)"{},"{};\ \}}}
-\DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ \ if\ (*programChange\ !=\ "{}"{})\ \{\ dump\ +=\ "{}mev:pc:\(\backslash\)"{}"{}\ +\ (*programChange)\ +\ "{}\(\backslash\)"{},"{};\ \}}}
-\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ \ if\ (*channelAftertouch\ !=\ "{}"{})\ \{\ dump\ +=\ "{}mev:cat:\(\backslash\)"{}"{}\ +\ (*channelAftertouch)\ +\ "{}\(\backslash\)"{},"{};\ \}}}
-\DoxyCodeLine{00092\ \textcolor{comment}{\ \ \ \ if\ (*pitchBend\ !=\ "{}"{})\ \{\ dump\ +=\ "{}mev:pb:\(\backslash\)"{}"{}\ +\ (*pitchBend)\ +\ "{}\(\backslash\)"{},"{};\ \}}}
-\DoxyCodeLine{00093\ \textcolor{comment}{\ \ \ \ for\ (int\ i\ =\ 0;\ i\ <\ int(controlChange.size());\ i++)\ \{}}
-\DoxyCodeLine{00094\ \textcolor{comment}{\ \ \ \ \ \ \ \ dump\ +=\ "{}mev:cc:"{}\ +\ String(controlChange[i].control)\ +\ "{}:\(\backslash\)"{}"{}\ +\ controlChange[i].command\ +\ "{}\(\backslash\)"{},"{};}}
-\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ \ \}*/}}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a81bb79062036d8ef1219f893e5edd46e}{channelAftertouch}}\ =\ \textcolor{keyword}{new}\ String();}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classconfiguration_acdd444bd1c83d1ec202fe38cfd52bbc6}{pitchBend}}\ =\ \textcolor{keyword}{new}\ String();}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a148b31746119e5bcf0c7ddcf4f3ffcd9}{setDefaultBaseParameters}}();}
+\DoxyCodeLine{00038\ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ uint8\_t\ \mbox{\hyperlink{classconfiguration_a2ad0e61c381ac3f835ef503e0ef235ab}{configuration::setCC}}(uint8\_t\ controller,\ String\ *command)\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint16\_t\ i=0;\ i<\mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.size();\ i++)\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}[i].control\ ==\ controller)\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}[i].command\ =\ *command;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ i;}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.push\_back(\{controller,\ *command\ \});}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.size()\ -\/\ 1;}
+\DoxyCodeLine{00049\ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classconfiguration_a323c0abd33143110539eba665c276b2d}{configuration::removeCC}}(uint8\_t\ controller)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint16\_t\ i=0;\ i<\mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.size();\ i++)\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}[i].control\ ==\ controller)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.erase(\mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.begin()\ +\ i);}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00057\ \ \ \ \ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00059\ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classconfiguration_a148b31746119e5bcf0c7ddcf4f3ffcd9}{configuration::setDefaultBaseParameters}}()\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ *\mbox{\hyperlink{classconfiguration_a752b266ab819b05402a010b74d6961b3}{name}}\ =\ \textcolor{stringliteral}{"{}default"{}};}
+\DoxyCodeLine{00063\ \ \ \ \ *\mbox{\hyperlink{classconfiguration_af44d3f003c6bba79474aab5d38bf0637}{noteOff}}\ =\ \textcolor{stringliteral}{"{}m:0,b:0,bpr:ibool(notecount),bcsm:0"{}};}
+\DoxyCodeLine{00064\ \ \ \ \ *\mbox{\hyperlink{classconfiguration_a36a671b6f1e684b991f3cdb5fed48a75}{noteOn}}\ =\ \textcolor{stringliteral}{"{}m:0,b:0,bchb:note,bmr:1,bpid:1,bpe:1,se:(velocity*512)*(1-\/notecount),bcsm:0"{}};}
+\DoxyCodeLine{00065\ \ \ \ \ *\mbox{\hyperlink{classconfiguration_a93310aedd288a327b3574078875ad019}{polyAftertouch}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00066\ \ \ \ \ *\mbox{\hyperlink{classconfiguration_aa4348734e37e66795f4e06d27c2955fc}{programChange}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00067\ \ \ \ \ *\mbox{\hyperlink{classconfiguration_a81bb79062036d8ef1219f893e5edd46e}{channelAftertouch}}\ =\ \textcolor{stringliteral}{"{}m:0,b:0,bpm:(pressure*512)"{}};}
+\DoxyCodeLine{00068\ \ \ \ \ *\mbox{\hyperlink{classconfiguration_acdd444bd1c83d1ec202fe38cfd52bbc6}{pitchBend}}\ =\ \textcolor{stringliteral}{"{}m:0,b:0,bchsh:pitch*4"{}};}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a1e915fd6a01b6df31be57ed60bec4374}{midiRxChannel}}\ =\ 0x7F;}
+\DoxyCodeLine{00070\ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classconfiguration_ae0927e2179097259e7fd3bf61bea1b11}{configuration::setDefaultCCs}}()\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.clear();}
+\DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.push\_back(\{64,\ \textcolor{stringliteral}{"{}bowpressurehold:bool(value)"{}}\});}
+\DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.push\_back(\{123,\ \textcolor{stringliteral}{"{}midiallnotesoff:1"{}}\});}
+\DoxyCodeLine{00076\ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classconfiguration_acd5b3b9293e0277d8ddaaad5b666c1d9}{configuration::setDefaults}}()\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{classconfiguration_a148b31746119e5bcf0c7ddcf4f3ffcd9}{setDefaultBaseParameters}}();}
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{classconfiguration_ae0927e2179097259e7fd3bf61bea1b11}{setDefaultCCs}}();}
+\DoxyCodeLine{00081\ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ String\ \mbox{\hyperlink{classconfiguration_a5d444f0c115c9e5c8e4149408c75a0ca}{configuration::dumpData}}()\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ String\ dump\ =\ \textcolor{stringliteral}{"{}mrc:"{}}\ +\ String(\mbox{\hyperlink{classconfiguration_a1e915fd6a01b6df31be57ed60bec4374}{midiRxChannel}})+\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordflow}{if}\ (*\mbox{\hyperlink{classconfiguration_a752b266ab819b05402a010b74d6961b3}{name}}\ !=\ \textcolor{stringliteral}{"{}default"{}})\ \{\ dump\ +=\ \textcolor{stringliteral}{"{}mcfn:"{}}\ +\ \ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}((*\mbox{\hyperlink{classconfiguration_a752b266ab819b05402a010b74d6961b3}{name}}),\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};\ \}}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordflow}{if}\ (*\mbox{\hyperlink{classconfiguration_af44d3f003c6bba79474aab5d38bf0637}{noteOff}}\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ dump\ +=\ \textcolor{stringliteral}{"{}mev:noteoff:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}((*\mbox{\hyperlink{classconfiguration_af44d3f003c6bba79474aab5d38bf0637}{noteOff}}),\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};\ \}}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{if}\ (*\mbox{\hyperlink{classconfiguration_a36a671b6f1e684b991f3cdb5fed48a75}{noteOn}}\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ dump\ +=\ \textcolor{stringliteral}{"{}mev:noteon:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}((*\mbox{\hyperlink{classconfiguration_a36a671b6f1e684b991f3cdb5fed48a75}{noteOn}}),\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};\ \}}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordflow}{if}\ (*\mbox{\hyperlink{classconfiguration_a93310aedd288a327b3574078875ad019}{polyAftertouch}}\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ dump\ +=\ \textcolor{stringliteral}{"{}mev:pat:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}((*\mbox{\hyperlink{classconfiguration_a93310aedd288a327b3574078875ad019}{polyAftertouch}}),\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};\ \}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{if}\ (*\mbox{\hyperlink{classconfiguration_aa4348734e37e66795f4e06d27c2955fc}{programChange}}\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ dump\ +=\ \textcolor{stringliteral}{"{}mev:pc:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}((*\mbox{\hyperlink{classconfiguration_aa4348734e37e66795f4e06d27c2955fc}{programChange}}),\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};\ \}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{if}\ (*\mbox{\hyperlink{classconfiguration_a81bb79062036d8ef1219f893e5edd46e}{channelAftertouch}}\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ dump\ +=\ \textcolor{stringliteral}{"{}mev:cat:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}((*\mbox{\hyperlink{classconfiguration_a81bb79062036d8ef1219f893e5edd46e}{channelAftertouch}}),\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};\ \}}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordflow}{if}\ (*\mbox{\hyperlink{classconfiguration_acdd444bd1c83d1ec202fe38cfd52bbc6}{pitchBend}}\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ dump\ +=\ \textcolor{stringliteral}{"{}mev:pb:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}((*\mbox{\hyperlink{classconfiguration_acdd444bd1c83d1ec202fe38cfd52bbc6}{pitchBend}}),\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};\ \}}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ int(\mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.size());\ i++)\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}mev:cc:"{}}\ +\ String(\mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}[i].control)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}(\mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}[i].command,\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00095\ \ \ \ \ \}}
 \DoxyCodeLine{00096\ }
-\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordflow}{if}\ (*\mbox{\hyperlink{classconfiguration_a752b266ab819b05402a010b74d6961b3}{name}}\ !=\ \textcolor{stringliteral}{"{}default"{}})\ \{\ dump\ +=\ \textcolor{stringliteral}{"{}mcfn:"{}}\ +\ \ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}((*\mbox{\hyperlink{classconfiguration_a752b266ab819b05402a010b74d6961b3}{name}}),\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};\ \}}
-\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordflow}{if}\ (*\mbox{\hyperlink{classconfiguration_af44d3f003c6bba79474aab5d38bf0637}{noteOff}}\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ dump\ +=\ \textcolor{stringliteral}{"{}mev:noteoff:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}((*\mbox{\hyperlink{classconfiguration_af44d3f003c6bba79474aab5d38bf0637}{noteOff}}),\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};\ \}}
-\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordflow}{if}\ (*\mbox{\hyperlink{classconfiguration_a36a671b6f1e684b991f3cdb5fed48a75}{noteOn}}\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ dump\ +=\ \textcolor{stringliteral}{"{}mev:noteon:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}((*\mbox{\hyperlink{classconfiguration_a36a671b6f1e684b991f3cdb5fed48a75}{noteOn}}),\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};\ \}}
-\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordflow}{if}\ (*\mbox{\hyperlink{classconfiguration_a93310aedd288a327b3574078875ad019}{polyAftertouch}}\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ dump\ +=\ \textcolor{stringliteral}{"{}mev:pat:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}((*\mbox{\hyperlink{classconfiguration_a93310aedd288a327b3574078875ad019}{polyAftertouch}}),\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};\ \}}
-\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordflow}{if}\ (*\mbox{\hyperlink{classconfiguration_aa4348734e37e66795f4e06d27c2955fc}{programChange}}\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ dump\ +=\ \textcolor{stringliteral}{"{}mev:pc:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}((*\mbox{\hyperlink{classconfiguration_aa4348734e37e66795f4e06d27c2955fc}{programChange}}),\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};\ \}}
-\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordflow}{if}\ (*\mbox{\hyperlink{classconfiguration_a81bb79062036d8ef1219f893e5edd46e}{channelAftertouch}}\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ dump\ +=\ \textcolor{stringliteral}{"{}mev:cat:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}((*\mbox{\hyperlink{classconfiguration_a81bb79062036d8ef1219f893e5edd46e}{channelAftertouch}}),\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};\ \}}
-\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordflow}{if}\ (*\mbox{\hyperlink{classconfiguration_acdd444bd1c83d1ec202fe38cfd52bbc6}{pitchBend}}\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ dump\ +=\ \textcolor{stringliteral}{"{}mev:pb:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}((*\mbox{\hyperlink{classconfiguration_acdd444bd1c83d1ec202fe38cfd52bbc6}{pitchBend}}),\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};\ \}}
-\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ int(\mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}.size());\ i++)\ \{}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}mev:cc:"{}}\ +\ String(\mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}[i].control)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}(\mbox{\hyperlink{classconfiguration_a4ff6ca10a90f0e06e8d9c20d3949d0f8}{controlChange}}[i].command,\ \textcolor{keyword}{true})\ +\ \textcolor{stringliteral}{"{},"{}};}
-\DoxyCodeLine{00106\ \ \ \ \ \}}
-\DoxyCodeLine{00107\ }
-\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordflow}{return}\ dump;}
-\DoxyCodeLine{00109\ \}}
-\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordflow}{return}\ dump;}
+\DoxyCodeLine{00098\ \}}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

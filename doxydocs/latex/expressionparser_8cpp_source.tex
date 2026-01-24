@@ -1,0 +1,92 @@
+\doxysection{expressionparser.\+cpp}
+\hypertarget{expressionparser_8cpp_source}{}\label{expressionparser_8cpp_source}\index{expressionparser.cpp@{expressionparser.cpp}}
+\mbox{\hyperlink{expressionparser_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ EXPRESSIONPARSER\_C}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ EXPRESSIONPARSER\_C}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}expressionparser.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ ExpressionParser::ExpressionParser()\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ setFunctionPointer(\textcolor{stringliteral}{"{}bool"{}},\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*)\ \&expBool,\ TE\_FUNCTION1);}
+\DoxyCodeLine{00008\ \ \ \ \ setFunctionPointer(\textcolor{stringliteral}{"{}ibool"{}},\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*)\ \&expIBool,\ TE\_FUNCTION1);}
+\DoxyCodeLine{00009\ \ \ \ \ setFunctionPointer(\textcolor{stringliteral}{"{}mapkeys"{}},\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*)\ \&mapKeys,\ TE\_FUNCTION1);}
+\DoxyCodeLine{00010\ \ \ \ \ setFunctionPointer(\textcolor{stringliteral}{"{}deadband"{}},\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*)\ \&deadband,\ TE\_FUNCTION2);}
+\DoxyCodeLine{00011\ \ \ \ \ setFunctionPointer(\textcolor{stringliteral}{"{}zerothreshold"{}},\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*)\ \&zeroThreshold,\ TE\_FUNCTION1);}
+\DoxyCodeLine{00012\ \}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keywordtype}{void}\ ExpressionParser::setFunctionPointer(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ address,\ \textcolor{keywordtype}{int}\ type)\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<expFunctionCount;\ i++)\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (expFunctions[i].name\ ==\ name)\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ expFunctions[i].address\ =\ address;}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ expFunctions[i].type\ =\ type;}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00021\ \ \ \ \ \}}
+\DoxyCodeLine{00022\ \}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keywordtype}{bool}\ ExpressionParser::setVariable(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name,\ \textcolor{keywordtype}{double}\ value)\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<expFunctionCount;\ i++)\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (expFunctions[i].name\ ==\ name)\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ *ptr\ =\ \textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{double}*\textcolor{keyword}{>}(\textcolor{keyword}{static\_cast<}\textcolor{keyword}{const\ }\textcolor{keywordtype}{double}*\textcolor{keyword}{>}(expFunctions[i].address));}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ *ptr\ =\ value;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00033\ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keywordtype}{double}\ ExpressionParser::mapKeys(\textcolor{keywordtype}{double}\ key)\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{int}\ mapIndex\ =\ (((int)\ key)\ \%\ 12);}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{if}\ ((mapIndex\ <\ 0)\ ||\ (mapIndex\ >=\ mapSize))\ \{\ \textcolor{keywordflow}{return}\ 0;\ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{return}\ dMap[mapIndex];}
+\DoxyCodeLine{00039\ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{double}\ ExpressionParser::expBool(\textcolor{keywordtype}{double}\ input)\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{if}\ (input\ <=\ 0)\ \{\ \textcolor{keywordflow}{return}\ 0;\ \}\ \textcolor{keywordflow}{else}\ \{\ \textcolor{keywordflow}{return}\ 1;\ \};}
+\DoxyCodeLine{00043\ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{double}\ ExpressionParser::expIBool(\textcolor{keywordtype}{double}\ input)\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{if}\ (input\ <=\ 0)\ \{\ \textcolor{keywordflow}{return}\ 1;\ \}\ \textcolor{keywordflow}{else}\ \{\ \textcolor{keywordflow}{return}\ 0;\ \};}
+\DoxyCodeLine{00047\ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{double}\ ExpressionParser::deadband(\textcolor{keywordtype}{double}\ value,\ \textcolor{keywordtype}{double}\ threshold)\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{double}\ target\ =\ 0;}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{if}\ ((value\ <\ (target\ +\ threshold))\ \&\&\ (value\ >\ (target\ -\/\ threshold)))\ \{\ \textcolor{keywordflow}{return}\ target;\ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ >\ target)\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value\ -\/\ threshold;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value\ +\ threshold;}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \};}
+\DoxyCodeLine{00059\ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{keywordtype}{double}\ ExpressionParser::zeroThreshold(\textcolor{keywordtype}{double}\ value)\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ <\ epZeroThreshold)\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00064\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ String\ ExpressionParser::parseCommandExpressions(String\ inExpression)\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ expression\ =\ inExpression.c\_str();}
+\DoxyCodeLine{00071\ \ \ \ \ String\ outExpression;}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{int}\ err;}
+\DoxyCodeLine{00073\ \ \ \ \ te\_expr\ *n\ =\ te\_compile(expression,\ expFunctions,\ expFunctionCount,\ \&err);}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ -\/1;}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordflow}{if}\ (n)\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ r\ =\ te\_eval(n);}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ outExpression\ =\ String(r,\ 5);}
+\DoxyCodeLine{00078\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Error\ in\ expression\ '"{}}\ +\ inExpression\ +\ \textcolor{stringliteral}{"{}'"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00080\ \ \ \ \ \}}
+\DoxyCodeLine{00081\ \ \ \ \ te\_free(n);}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{return}\ outExpression;}
+\DoxyCodeLine{00083\ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EXPRESSIONPARSER\_C}}
+
+\end{DoxyCode}

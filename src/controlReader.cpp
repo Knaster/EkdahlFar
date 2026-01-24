@@ -21,16 +21,32 @@
 volatile bool adsNewData = false;
 volatile bool adsNewData2 = false;
 
-void IRS_AdsDataReady() {
+void ISR_AdsDataReady() {
     adsNewData = true;
 }
 
-void IRS_AdsDataReady2() {
+void ISR_AdsDataReady2() {
     adsNewData2 = true;
 }
 
+const ModuleCommandDeclaration ControlReader::moduleCommands[] = {
+  { "controldata", "cda", "channel:command string", "Sets the command string invoked when the value on ADC channel [channel] changes", false, true, &s_controlData},
+  { "controldefaults", "cde", "-" "Reverts all ADC command strings to default values", false, false, &s_controlDefaults },
+  { "datareturn", "dr", "channel:value", "Sent when a new value is presented on one of the ADC channels, cannot be invoked", false, false, &s_dataReturn },
+  { "adcsettings", "ads", "channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout", "Explain ADC settings here", false, true, &s_adcSettings },
+  { "testadclatency", "tal", "0-65535", "Test ADC Latency", true, false, &s_testADCLatency },
+  { "testadclatencyreturn", "talr", "-", "Return from test", true, false, &s_testADCLatencyReturn },
+  { "testadcminmax", "tix", "channel", "Measure min/max value for a given channel and resets the counter", true, false, &s_testADCMinMax }
+};
+
+#define DATARETURN_CMD 2
+
+getModuleCount(ControlReader)
+
 ControlReader::ControlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
 {
+    moduleID = new ModuleID("controlbox", "cb", "Control Box 1.0", ModuleID::hardware);
+
     setDefaults();
 
     pinDataReady = inDataReadyPin;
@@ -45,10 +61,110 @@ ControlReader::ControlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
 
     resetAds();
 
-    attachInterrupt(digitalPinToInterrupt(pinDataReady), IRS_AdsDataReady, FALLING);
-    attachInterrupt(digitalPinToInterrupt(pinGate), IRS_AdsDataReady2, FALLING);
+    attachInterrupt(digitalPinToInterrupt(pinDataReady), ISR_AdsDataReady, FALLING);
+    attachInterrupt(digitalPinToInterrupt(pinGate), ISR_AdsDataReady2, FALLING);
+
+    midiHandler = new MIDIHandler();
     return;
 }
+
+CREATE_MODULE_COMMAND_FUNCTION(controlData, ControlReader) {
+    int8_t channel = -1;
+    if (checkArgumentsMin(inCommandItem, inCommandResponses, 1, true)) {
+        channel = inCommandItem->argument[0].toInt();
+    }
+
+    if (request) {
+        if (channel != -1) {
+            inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(channel) + ":" + delimitExpression(cvInputCommands[channel], true), InfoRequest});
+        } else {
+            for (int channel = 0; channel < 8; channel++) {
+                inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(channel) + ":" + delimitExpression(cvInputCommands[channel], true), InfoRequest});
+            }
+        }
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 2)) { return eProcessResult::WrongArgumentCount; }
+        setADCCommands(channel, stripQuotes(inCommandItem->argument[1]));
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(channel) + ":" + delimitExpression(cvInputCommands[channel], true), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(controlDefaults, ControlReader) {
+    setDefaults();
+    inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::InfoRequest});
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(dataReturn, ControlReader) {
+    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+    int i = inCommandItem->argument[0].toInt();
+    if ((i < 0) || (i > 7)) { return eProcessResult::WrongArgumentValue; }
+
+    int32_t convertedValue;
+    if (i < 5) {
+        convertedValue = (int32_t) ((float) getData(i) * ((float) 65536 / 32767));
+    } else {
+        convertedValue = (int32_t) ((float) getData(i) * ((float) 65536 / 2048));
+    }
+    if (convertedValue > 65535) { convertedValue = 65535; }
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(i) + ":" + String(convertedValue) + ":" + String(getData(i)), debugPrintType::InfoRequest});
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(adcSettings, ControlReader) {
+    int8_t channel = -1;
+    if (checkArgumentsMin(inCommandItem, inCommandResponses, 1, true)) {
+        channel = inCommandItem->argument[0].toInt();
+    }
+    if (channel > 7) { return eProcessResult::WrongArgumentValue; }
+
+    if (request) {
+        if (channel != -1) {
+            inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(channel) + ":" + getADCAveragerSettings(channel), InfoRequest});
+        } else {
+            for (int channel = 0; channel < 8; channel++) {
+                inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(channel) + ":" + getADCAveragerSettings(channel), InfoRequest});
+            }
+        }
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 5)) { return eProcessResult::WrongArgumentCount; }
+        if (!setADCAveragerSettings(inCommandItem->argument[0].toInt(), inCommandItem->argument[1].toInt(), inCommandItem->argument[2].toInt(), inCommandItem->argument[3].toInt(),
+            inCommandItem->argument[4].toInt())) { return eProcessResult::CommandFailed; }
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(channel) + ":" + getADCAveragerSettings(channel), debugPrintType::InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(testADCLatency, ControlReader) {
+    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+    testMeasurement = 0;
+    testMeasurementOngoing = true;
+    analogWrite(3, int(inCommandItem->argument[0].toInt()));
+    inCommandResponses->push_back({"Starting ADC latency test", debugPrintType::TextInfo});
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(testADCLatencyReturn, ControlReader) {
+    testMeasurementOngoing = false;
+    inCommandResponses->push_back({"Returned from ADC latency test in " + String(testMeasurement) + " uS", debugPrintType::TextInfo});
+    inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::InfoRequest });
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(testADCMinMax, ControlReader) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(testChannel) + ":" + String(testMin) + ":" + String(testMax), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        int testChannel = inCommandItem->argument[0].toInt();
+        if ((testChannel < 0) || (testChannel > 7)) { return eProcessResult::WrongArgumentValue; }
+        setADCMinMaxTestChannel(testChannel);
+        inCommandResponses->push_back({ "Starting ADC min/max test on channel " + String(testChannel), debugPrintType::TextInfo });
+        inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::Debug });
+    }
+    return eProcessResult::Ok;
+};
 
 /*! \brief Tries to reconnect to the ADC converters
  */
@@ -84,9 +200,10 @@ void ControlReader::resetAds() {
     debugPrintln("ADS Initialized", debugPrintType::Debug);
 }
 
-bool ControlReader::readSingleADS(Adafruit_ADS1X15 &adsx, volatile bool &newData, uint16_t &channel, uint8_t channelOffset, long &conversionStart, bool &errorReported, uint16_t timeout, uint16_t resolution) {
-   int16_t a;
+bool ControlReader::readSingleADS(Adafruit_ADS1X15 &adsx, volatile bool &newData, uint16_t &channel, uint8_t channelOffset, long &conversionStart, bool &errorReported, uint16_t timeout,
+                                  uint16_t resolution, std::vector<commandResponse> *inCommandResponses) {
 
+   int16_t a;
    if (newData) {
         if (adsx.conversionComplete()) {
             newData = false;
@@ -113,7 +230,6 @@ bool ControlReader::readSingleADS(Adafruit_ADS1X15 &adsx, volatile bool &newData
 
             if (a < 0) { a = 0; }
 
-
             if (testMeasurementOngoing) {
                 debugPrintln("New data (" + String(a) + ") on ADC channel " + String(ch + channelOffset) + " at " + String(testMeasurement) + "uS", Debug);
             }
@@ -126,16 +242,20 @@ bool ControlReader::readSingleADS(Adafruit_ADS1X15 &adsx, volatile bool &newData
                 // Convert value to 0-65535 range
                 int32_t convertedValue = (int32_t) ((float) averages[channelOffset + ch].value * ((float) 65536 / resolution));
                 if (convertedValue > 65535) { convertedValue = 65535; }
-                dvalue = (double) convertedValue;
+                expressionParser.dvalue = (double) convertedValue;
+
+                inCommandResponses->push_back({ moduleCommands[DATARETURN_CMD].shortCommand + ":" + String(ch + channelOffset) + ":" + String(convertedValue) + ":" +
+                                              String(averages[channelOffset + ch].value), debugPrintType::InfoRequest });
+/*
                 if (outputDebugData) {
                     debugPrintln("adcr:" + String(ch + channelOffset) + ":" + String(convertedValue) + ":" + String(averages[channelOffset + ch].value), debugPrintType::InfoRequest);
                 }
-
+*/
                 if (!testMeasurementOngoing) {
-                    processLocalMessage(&cvInputCommands[channelOffset + ch]);
+                    midiHandler->processLocalMessage(&cvInputCommands[channelOffset + ch]);
                 } else {
                     String tempMessages = "talr";
-                    processLocalMessage(&tempMessages);
+                    midiHandler->processLocalMessage(&tempMessages);
                 }
 
                 // The process adds roughly 5mS of latency, add to queue as priority aka first in line?
@@ -157,9 +277,7 @@ bool ControlReader::readSingleADS(Adafruit_ADS1X15 &adsx, volatile bool &newData
     return true;
 }
 
-void ControlReader::readData() {
-    int16_t a;
-
+void ControlReader::readData(std::vector<commandResponse> *inCommandResponses) {
     if ((adsErrorReported || ads2ErrorReported) && ((millis() > (adsReinitCountStart + adsReinitializeTimeout)))) {
         adsReinitCountStart = millis();
         debugPrintln("Trying to reinitialize control box", debugPrintType::Debug);
@@ -168,146 +286,8 @@ void ControlReader::readData() {
 
     if (!adsInit) { return; }
 
-    readSingleADS(ads2, adsNewData2, currentChannel2, 4, ads2ConversionStart, ads2ErrorReported, ads2TimeOut, 2048);
-    readSingleADS(ads, adsNewData, currentChannel, 0, adsConversionStart, adsErrorReported, adsTimeOut, 32767);
-/*
-    if (adsNewData2) {
-        if (ads2.conversionComplete()) {
-            adsNewData2 = false;
-            a = ads2.getLastConversionResults();
-
-            uint8_t ch = 0;
-            switch(currentChannel2) {
-                case ADS1X15_REG_CONFIG_MUX_SINGLE_0:
-                    ch = 0;
-                    currentChannel2 = ADS1X15_REG_CONFIG_MUX_SINGLE_1;
-                    break;
-                case ADS1X15_REG_CONFIG_MUX_SINGLE_1:
-                    ch = 1;
-                    currentChannel2 = ADS1X15_REG_CONFIG_MUX_SINGLE_2;  // Stop here
-                    break;
-                case ADS1X15_REG_CONFIG_MUX_SINGLE_2:
-                    ch = 2;
-                    currentChannel2 = ADS1X15_REG_CONFIG_MUX_SINGLE_3;
-                    break;
-                case ADS1X15_REG_CONFIG_MUX_SINGLE_3:
-                    ch = 3;
-                    currentChannel2 = ADS1X15_REG_CONFIG_MUX_SINGLE_0;
-                    break;
-            }
-
-            if (a < 0) { a = 0; }
-
-
-            if (testMeasurementOngoing) {
-                debugPrintln("New data (" + String(a) + ") on ADC channel " + String(ch + 4) + " at " + String(testMeasurement) + "uS", Debug);
-            }
-            if (testChannel == (ch + 4)) {
-                addTestData(a);
-            }
-
-            averages[4 + ch].addData(a);
-
-            if (averages[4 + ch].dataChanged()) {
-                // Convert value to 0-65535 range
-                int32_t convertedValue = (int32_t) ((float) averages[4 + ch].value * ((float) 65536 / 2048));
-                if (convertedValue > 65535) { convertedValue = 65535; }
-                dvalue = (double) convertedValue;
-                if (outputDebugData) {
-                    debugPrintln("adcr:" + String(ch + 4) + ":" + String(convertedValue) + ":" + String(averages[4 + ch].value), debugPrintType::InfoRequest);
-                }
-
-                if (!testMeasurementOngoing) {
-                    processLocalMessage(&cvInputCommands[4 + ch]);
-                } else {
-                    String tempMessages = "talr";
-                    processLocalMessage(&tempMessages);
-                }
-
-                // The process adds roughly 5mS of latency, add to queue as priority aka first in line?
-            }
-
-            ads2.startADCReading(currentChannel2, false);
-            ads2ConversionStart = millis();
-            ads2ErrorReported = false;
-        } else {
-            if ((millis() > (ads2ConversionStart + ads2TimeOut)) && (!ads2ErrorReported)) {
-                debugPrintln("No data on ADS2!", Error);
-                ads2ErrorReported = true;
-                adsReinitCountStart = millis();
-            }
-        }
-    }
-
-    if (adsNewData) {
-        if (ads.conversionComplete()) {
-            adsNewData = false;
-
-            a = ads.getLastConversionResults();
-            uint8_t ch = 0;
-            switch(currentChannel) {
-                case ADS1X15_REG_CONFIG_MUX_SINGLE_0:
-                    ch = 0;
-                    currentChannel = ADS1X15_REG_CONFIG_MUX_SINGLE_1;
-                    break;
-                case ADS1X15_REG_CONFIG_MUX_SINGLE_1:
-                    ch = 1;
-                    currentChannel = ADS1X15_REG_CONFIG_MUX_SINGLE_2;
-                    break;
-                case ADS1X15_REG_CONFIG_MUX_SINGLE_2:
-                    ch = 2;
-                    currentChannel = ADS1X15_REG_CONFIG_MUX_SINGLE_3;
-                    break;
-                case ADS1X15_REG_CONFIG_MUX_SINGLE_3:
-                    ch = 3;
-                    currentChannel = ADS1X15_REG_CONFIG_MUX_SINGLE_0;
-                    break;
-            }
-
-            if (a < 0) { a = 0; }
-
-            if (testMeasurementOngoing) {
-                debugPrintln("New data (" + String(a) + ") on ADC channel " + String(ch) + " at " + String(testMeasurement) + "uS", Debug);
-            }
-            if (testChannel == (ch)) {
-                addTestData(a);
-            }
-
-            averages[ch].addData(a);
-            if (averages[ch].dataChanged()) {
-                // Convert value to 0-65535 range
-                int32_t convertedValue = (int32_t) ((float) averages[ch].value * ((float) 65536 / 32767));
-                if (convertedValue > 65535) { convertedValue = 65535; }
-                if (ch == 0) {
-                    if (outputDebugData) {
-                        debugPrintln("Data changed on ADS1, channel " + String(ch) + " to " + String(convertedValue) + " (" + String(averages[ch].value) + ")", debugPrintType::Debug);
-                    }
-                }
-                if (outputDebugData) {
-                    debugPrintln("adcr:" + String(ch) + ":" + String(convertedValue) + ":" + String(averages[ch].value), debugPrintType::InfoRequest);
-                }
-                dvalue = (double) convertedValue;
-                // The process adds roughly 5mS of latency, add to queue as priority aka first in line?
-                if (!testMeasurementOngoing) {
-                    processLocalMessage(&cvInputCommands[ch]);
-                } else {
-                    String tempMessages = "talr";
-                    processLocalMessage(&tempMessages);
-                }
-            }
-
-            ads.startADCReading(currentChannel, false);
-            adsConversionStart = millis();
-            adsErrorReported = false;
-        } else {
-            if ((millis() > (adsConversionStart + adsTimeOut)) && (!adsErrorReported)) {
-                debugPrintln("No data on ADS!", Error);
-                adsErrorReported = true;
-                adsReinitCountStart = millis();
-            }
-        }
-    }
-    */
+    readSingleADS(ads2, adsNewData2, currentChannel2, 4, ads2ConversionStart, ads2ErrorReported, ads2TimeOut, 2048, inCommandResponses);
+    readSingleADS(ads, adsNewData, currentChannel, 0, adsConversionStart, adsErrorReported, adsTimeOut, 32767, inCommandResponses);
 }
 
 
@@ -327,7 +307,6 @@ bool ControlReader::setADCAveragerSettings(uint8_t t_channel, uint8_t t_averages
     averages[t_channel].interruptedErrorThreshold = t_interruptErrorThreshold;
     averages[t_channel].continuousErrorThreshold = t_continuousErrorThreshold;
     averages[t_channel].continuousTimeout = t_continuousTimeout;
-
     return true;
 }
 
@@ -355,23 +334,14 @@ void ControlReader::setADCMinMaxTestChannel(uint8_t t_channel) {
 
 void ControlReader::setDefaults() {
     cvInputCommands.clear();
-    cvInputCommands.push_back("bcha:value/1327.716667-20");
-    cvInputCommands.push_back("bchs5:\"deadband(value-32236, 20)/2.425\"");
-    cvInputCommands.push_back("bchsh:\"deadband((value-32600)*0.49064, 250)\"");//    cvInputCommands.push_back("msp:value");
-    cvInputCommands.push_back("bpb:value");
-    cvInputCommands.push_back("se:value");
-    cvInputCommands.push_back("bmr:bool(value-10000),bpid:1,bcsm:0,bpe:bool(value-10000),bpr:ibool(value-10000),bph:ibool(value-10000)");
-    cvInputCommands.push_back("sfm:\"deadband(1/65535*value,0.002)\"");
-    cvInputCommands.push_back("msp:value");//    cvInputCommands.push_back("");
-}
-
-String ControlReader::dumpData() {
-    String saveData = ""; // "epdbt:" + String(epDeadbandThreshold) + ",";
-    for (uint8_t i = 0; i < 8; i++) {
-        saveData += "acm:" + String(i) + ":" + delimitExpression(cvInputCommands[i], true) + ",";
-        saveData += "adcs:" + String(i) + ":" + averages[i].dataAverageLength + ":" + averages[i].interruptedErrorThreshold + ":" + averages[i].continuousErrorThreshold + ":" + averages[i].continuousTimeout + ",";
-    }
-    return saveData;
+    cvInputCommands.push_back("bw.hsh.ha:\"value/1327.716667-20\"");
+    cvInputCommands.push_back("bw.hsh.sh5:\"deadband(value-32236, 20)/2.425\"");
+    cvInputCommands.push_back("bw.hsh.sh:\"deadband((value-32600)*0.49064, 250)\"");//    cvInputCommands.push_back("msp:value");
+    cvInputCommands.push_back("bw.bp.ba:value");
+    cvInputCommands.push_back("so.en:value");
+    cvInputCommands.push_back("bw.dcm.ru:bool(value-10000),bw.pe:1,bw.sm:0,bw.bp.en:bool(value-10000),bw.bp.rs:ibool(value-10000),bw.bp.hd:ibool(value-10000)");
+    cvInputCommands.push_back("so.fm:\"deadband(1/65535*value,0.002)\"");
+    cvInputCommands.push_back("mu.sp:value");//    cvInputCommands.push_back("");
 }
 
 int32_t ControlReader::getData(int16_t channel) {
@@ -380,8 +350,4 @@ int32_t ControlReader::getData(int16_t channel) {
     } else {
         return averages[channel].value;
     }
-}
-
-ControlReader::~ControlReader()
-{
 }

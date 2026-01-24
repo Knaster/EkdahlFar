@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['parsecommandexpressions_0',['parseCommandExpressions',['../classcommandList.html#af42de049662f915fd12f8ed92477c03f',1,'commandList']]],
-  ['parsequotedouble_1',['parseQuoteDouble',['../classcommandList.html#a82021fbc22036799183f9777a79f10c1',1,'commandList']]],
-  ['parsequotesingle_2',['parseQuoteSingle',['../classcommandList.html#a049b9bf7e110abb4d44d1760af0c93c4',1,'commandList']]],
+  ['parsebracket_0',['parseBracket',['../classcommandList.html#a12ff03e9259042daa07f184d66b387e2',1,'commandList']]],
+  ['parsecommandexpressions_1',['parseCommandExpressions',['../classcommandList.html#a642e2aff6de5eb65835d24dbceefd8a8',1,'commandList']]],
+  ['parsequote_2',['parseQuote',['../classcommandList.html#a060e73762f17623fa0fe2079e7d08431',1,'commandList']]],
   ['pid_5fisr0_3',['pid_ISR0',['../isrclasswrapper_8cpp.html#acd59c11b9dd282bb04376f7db98dfa9a',1,'isrclasswrapper.cpp']]],
   ['pid_5fisr1_4',['pid_ISR1',['../isrclasswrapper_8cpp.html#a2da6c389452f1f2c21186cb66410fca6',1,'isrclasswrapper.cpp']]],
   ['pid_5fisr2_5',['pid_ISR2',['../isrclasswrapper_8cpp.html#af2adef4a623f706a77dc916b1283ae86',1,'isrclasswrapper.cpp']]],
@@ -11,17 +11,9 @@ var searchData=
   ['pid_5fisr5_8',['pid_ISR5',['../isrclasswrapper_8cpp.html#ac030305cd86b2989beb6f1b4236d67b5',1,'isrclasswrapper.cpp']]],
   ['pid_5fisr6_9',['pid_ISR6',['../isrclasswrapper_8cpp.html#aa4a1d0f8fb49fcda81d16b01442aeead',1,'isrclasswrapper.cpp']]],
   ['pid_5fisr7_10',['pid_ISR7',['../isrclasswrapper_8cpp.html#a08c04a512994787a5bd86d62d351817b',1,'isrclasswrapper.cpp']]],
-  ['pidcontrol_11',['pidControl',['../classPIDController.html#a04e654ba7d6720fa68bb74946c0b138d',1,'PIDController']]],
-  ['pidcontroller_12',['PIDController',['../classPIDController.html#adb86c4a9b80312c6a70f8dc725bd4295',1,'PIDController']]],
-  ['pidisr_5fassigninterrupt_13',['pidISR_assignInterrupt',['../isrclasswrapper_8cpp.html#a83fb51cb17c291e7eca40fdd288c0695',1,'isrclasswrapper.cpp']]],
-  ['pidreset_14',['pidReset',['../classPIDController.html#ae0bbbe3b4f6578d6475307f83d3ca673',1,'PIDController']]],
-  ['printcommandhelp_15',['printCommandHelp',['../commandparser_8hpp.html#a4a189b33229a0bbe691a7f3921eebb7b',1,'commandparser.hpp']]],
-  ['processcommanditems_16',['processCommandItems',['../commandparser_8hpp.html#a2eea721b98604de46300feecf7703b60',1,'commandparser.hpp']]],
-  ['processcontrolcommand_17',['processControlCommand',['../classHarmonicSeriesHandler.html#a70a57b37e472961067fd594491f5658d',1,'HarmonicSeriesHandler']]],
-  ['processharmonicseriescommand_18',['processHarmonicSeriesCommand',['../classHarmonicSeriesHandler.html#abf4dc24c627892cc6acb7f4d64c3b978',1,'HarmonicSeriesHandler']]],
-  ['processlocalmessage_19',['processLocalMessage',['../midi_8cpp.html#a9c89c13da1a12e219901ae9165382a3f',1,'midi.cpp']]],
-  ['processmaincommands_20',['processMainCommands',['../maincommandhandler_8cpp.html#a2c60c46c0df6601dd7a54cc4af11227d',1,'maincommandhandler.cpp']]],
-  ['processserialcommand_21',['processserialcommand',['../classBowControl.html#af6e98ea3176a266902b7f95b409553b9',1,'BowControl::processSerialCommand()'],['../classSolenoid.html#af91c71ce2ab45bc89bd8c2db248a6b4a',1,'Solenoid::processSerialCommand()'],['../classPIDController.html#a698b5049315451aa42344da9c3a0c738',1,'PIDController::processSerialCommand()'],['../classMuteControl.html#a34845eb34893ebd4c145a3421059c05f',1,'MuteControl::processSerialCommand()'],['../classHarmonicSeriesHandler.html#a06220884c93228a86ea1f524aae21843',1,'HarmonicSeriesHandler::processSerialCommand()'],['../classFARSingle.html#a6b41b240f8b7ff3b3fcda42dab37e8de',1,'FARSingle::processSerialCommand()'],['../classDCMotorControl.html#a325129fe30f71a28ef89ea346bc43252',1,'DCMotorControl::processSerialCommand()'],['../classBowPressure.html#aa8bdebfaa32dc5d991a77270d0d37f06',1,'BowPressure::processSerialCommand()'],['../classBowActuators.html#af9cd94a6d5c7e12d8871774bd84ffd0d',1,'BowActuators::processSerialCommand()']]],
-  ['processserialcommandhidden_22',['processserialcommandhidden',['../classDCMotorControl.html#a5e28fcc8d7953071b2668ada7672af9e',1,'DCMotorControl::processSerialCommandHidden()'],['../classSolenoid.html#ad885d148f5a65547491069f843ca5893',1,'Solenoid::processSerialCommandHidden()'],['../classPIDController.html#ae1776f861448d87c44395830ab659c4d',1,'PIDController::processSerialCommandHidden()'],['../classMuteControl.html#ab23faefce75e7dc308e857f56114221c',1,'MuteControl::processSerialCommandHidden()'],['../classHarmonicSeriesHandler.html#a2bdc7b8878c93bc883d462e339dd7743',1,'HarmonicSeriesHandler::processSerialCommandHidden()'],['../classFARSingle.html#ac520d53f1804ea44028892be951aa7c7',1,'FARSingle::processSerialCommandHidden()'],['../classBowPressure.html#aca49dc9352f13a5d6099d0025f597f25',1,'BowPressure::processSerialCommandHidden()'],['../classBowControl.html#acb0918bfce04f9b93899133f4f73db9a',1,'BowControl::processSerialCommandHidden()'],['../classBowActuators.html#af79decee30c6e16aeec1d803f95cd6d5',1,'BowActuators::processSerialCommandHidden()']]],
-  ['processserialcommands_23',['processSerialCommands',['../maincommandhandler_8cpp.html#aa8ffdf555ac7c84e88dd4ad41098e41a',1,'maincommandhandler.cpp']]]
+  ['pidisr_5fassigninterrupt_11',['pidISR_assignInterrupt',['../isrclasswrapper_8cpp.html#a83fb51cb17c291e7eca40fdd288c0695',1,'isrclasswrapper.cpp']]],
+  ['printcommandhelp_12',['printCommandHelp',['../commandparser_8hpp.html#a4a189b33229a0bbe691a7f3921eebb7b',1,'commandparser.hpp']]],
+  ['processcommanditems_13',['processCommandItems',['../commandparser_8hpp.html#a2eea721b98604de46300feecf7703b60',1,'commandparser.hpp']]],
+  ['processcommandlist_14',['processCommandList',['../main_8cpp.html#a33042e12a9e7c685f982a942d092f7f0',1,'main.cpp']]],
+  ['processserialcommands_15',['processSerialCommands',['../main_8cpp.html#aa8ffdf555ac7c84e88dd4ad41098e41a',1,'main.cpp']]]
 ];

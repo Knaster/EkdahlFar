@@ -25,200 +25,81 @@
 \DoxyCodeLine{00021\ }
 \DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <Wire.h>}}
 \DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <Adafruit\_ADS1X15.h>}}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classaverager}{averager}}}
-\DoxyCodeLine{00026\ \{}
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ int32\_t\ \mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Final\ value\ after\ averaging}}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classaverager_adde2499165f7e8076a054d49ba747cca}{dataAverageLength}}\ =\ 1;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Amount\ of\ data\ points\ to\ store\ and\ average}}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classaverager_a05e9e18dcdfe19bb3df1202202524eee}{dataIndex}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Current\ pointer\ in\ data\ array}}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classaverager_a655a24b1204e470116902f8ed8ddcfc3}{dataArray}}[10];\ \ \textcolor{comment}{//\ Data\ array}}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classaverager_a82f127ce49291496bdf93d634855ef62}{dataCount}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Amount\ of\ data\ stored,\ will\ be\ the\ same\ as\ dataAverageLength\ at\ all\ times\ except\ startup}}
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classaverager_aaf07cf2bb27948fc13dbef3b54e28f9a}{pDataChanged}}\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Flag\ to\ signal\ that\ the\ data\ has\ changed\ in\ accordance\ to\ the\ error\ parameters}}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ elapsedMillis\ \mbox{\hyperlink{classaverager_a3861c71547ed8423c54e1082768620e9}{timeSinceChange}}\ =\ 0;\ \ \ \ \ \ \textcolor{comment}{//\ Time\ measuring\ class\ for\ error\ calculation}}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ elapsedMillis\ \mbox{\hyperlink{classaverager_ac44fcaf126fc2e739d07307ebe55556e}{tempEM}};}
-\DoxyCodeLine{00037\ }
-\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00039\ \textcolor{comment}{//\ \ \ \ \ \ \ \ uint16\_t\ errorTimeThreshold\ =\ 10;\ \ //20,\ 10,\ 50\ \ \ \ \ //\ Amount\ of\ time\ that\ has\ elapsed\ since\ last\ time\ the\ dataChanged\ flag\ has\ been\ signaled}}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classaverager_a4af58bd77d322d550fe5d13bc4c6c0fb}{continuousTimeout}}\ =\ 10;}
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{comment}{//uint8\_t\ errorThreshold\ =\ 2;\ \ \ \ \ \ \ \ \ //2,\ 0}}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classaverager_a19eff7c8e3e37b7f08e2ac120ddcc0e3}{continuousErrorThreshold}}\ =\ 2;\ \ \textcolor{comment}{//PCB5\ test\ -\/\ 5}}
-\DoxyCodeLine{00043\ \textcolor{comment}{//\ \ \ \ \ \ \ \ uint8\_t\ delayErrorThreshold\ =\ 5;\ \ \ //10,\ 5,\ 20\ \ \ \ \ \ \ \ \ \ //\ Amount\ of\ data\ change\ required\ to\ signal\ dataChanged\ after\ errorTimeThreshold\ has\ elapsed}}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classaverager_ae65171959ff0da0adeed67a844e0e3d9}{interruptedErrorThreshold}}\ =\ 40;\ \textcolor{comment}{//PCB5\ test\ -\/\ 20}}
-\DoxyCodeLine{00045\ }
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classaverager_a911b8cf08ca00c9c0a8040f5627809ae}{trigger}}\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ to\ true\ to\ enable\ a\ pDataChanged\ whenever\ the\ data\ goes\ above\ or\ below\ the\ value\ given\ by\ triggerThreshold}}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classaverager_a5f9bdead7dc4af8e6e437eeaee72c875}{triggerThreshold}}\ =\ 250;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Threshold\ which\ at\ to\ trigger\ a\ data\ change}}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ int16\_t\ \mbox{\hyperlink{classaverager_a1571abcefec5ad9f189bd5123f5a9a60}{triggerDelay}}\ =\ 3000;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Delay\ from\ trigger\ to\ sampling,\ given\ in\ uS}}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ elapsedMicros\ \mbox{\hyperlink{classaverager_acb664b8a0229f27d9347850ccb583c63}{triggerDelayEM}};}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classaverager_a31644ac67d506815a40b141221f8ade5}{triggerDelayEngage}}\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Flag\ to\ indicate\ trigger\ has\ been\ received\ and\ sampling\ delay\ engaged}}
-\DoxyCodeLine{00051\ }
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classaverager_ab3a154fc369eb7de55c5acf2f5d2162b}{singleShot}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{averager_8h}{averager.h}}"{}}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ \mbox{\hyperlink{controlReader_8hpp_af010ef87d79c7b30a812a509c1c17da0}{serialCommandsControlReader}}[]\ =\ \{}
+\DoxyCodeLine{00027\ \ \ \{\ \textcolor{stringliteral}{"{}adccommandmap"{}},\ \textcolor{stringliteral}{"{}acm"{}},\ \textcolor{stringliteral}{"{}channel:command\ string"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ command\ string\ invoked\ when\ the\ value\ on\ ADC\ channel\ [channel]\ changes"{}}\},}
+\DoxyCodeLine{00028\ \ \ \{\ \textcolor{stringliteral}{"{}adcdefaults"{}},\ \textcolor{stringliteral}{"{}acd"{}},\ \textcolor{stringliteral}{"{}-\/"{}}\ \textcolor{stringliteral}{"{}Reverts\ all\ ADC\ command\ strings\ to\ default\ values"{}}\ \},}
+\DoxyCodeLine{00029\ \ \ \{\ \textcolor{stringliteral}{"{}adcread"{}},\ \textcolor{stringliteral}{"{}adcr"{}},\ \textcolor{stringliteral}{"{}channel:value"{}},\ \textcolor{stringliteral}{"{}Sent\ when\ a\ new\ value\ is\ presented\ on\ one\ of\ the\ ADC\ channels,\ cannot\ be\ invoked"{}}\ \},}
+\DoxyCodeLine{00030\ \ \ \{\ \textcolor{stringliteral}{"{}adcsettings"{}},\ \textcolor{stringliteral}{"{}adcs"{}},\ \textcolor{stringliteral}{"{}channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout"{}},\ \textcolor{stringliteral}{"{}Explain\ ADC\ settings\ here"{}}\}}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ \mbox{\hyperlink{controlReader_8hpp_a3c55c0cd1b85967ea65b6b0d9a16b92d}{serialCommandsControlReaderHidden}}[]\ =\ \{}
+\DoxyCodeLine{00034\ \ \ \{\ \textcolor{stringliteral}{"{}testadclatency"{}},\ \textcolor{stringliteral}{"{}tal"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Test\ ADC\ Latency"{}}\ \},}
+\DoxyCodeLine{00035\ \ \ \{\ \textcolor{stringliteral}{"{}testadclatencyreturn"{}},\ \textcolor{stringliteral}{"{}talr"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Return\ from\ test"{}}\ \},}
+\DoxyCodeLine{00036\ \ \ \{\ \textcolor{stringliteral}{"{}testadcminmax"{}},\ \textcolor{stringliteral}{"{}tamm"{}},\ \textcolor{stringliteral}{"{}channel"{}},\ \textcolor{stringliteral}{"{}Measure\ min/max\ value\ for\ a\ given\ channel\ and\ resets\ the\ counter"{}}\ \}}
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classControlReader}{ControlReader}}}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00041\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classControlReader}{ControlReader}}(uint8\_t\ inDataReadyPin,\ uint8\_t\ inGatePin);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classControlReader_a846296d3aa4c74e6fdf101c8e5e77c5e}{processSerialCommand}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegate\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classControlReader_ab834d896f4beed29dfd9571265993214}{processSerialCommandHidden}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegate\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00049\ \ \ \ \ String\ \mbox{\hyperlink{classControlReader_ab45ab596486631cd4eceb137804d6c13}{dumpData}}();}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classControlReader_a8998d3ffc4f19f45f2a7bc4061cc8e5a}{readData}}();}
 \DoxyCodeLine{00053\ }
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classaverager_ae3238eab894d996fcc88e6bad1a6e4c4}{outputDebugData}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00054\ \ \ \ \ std::vector<String>\ \mbox{\hyperlink{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}{cvInputCommands}};}
 \DoxyCodeLine{00055\ }
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_a984c8c03a83d4d02ed1cfeb1f5f320ae}{averager}}()\ \{}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_a05e9e18dcdfe19bb3df1202202524eee}{dataIndex}}\ =\ 0;}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_a82f127ce49291496bdf93d634855ef62}{dataCount}}\ =\ 0;}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{classaverager_adde2499165f7e8076a054d49ba747cca}{dataAverageLength}};\ i++)\ \{}
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_a655a24b1204e470116902f8ed8ddcfc3}{dataArray}}[i]\ =\ 0;}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00064\ }
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classaverager_aec65e58ed67a35cbc04936f407d9b69f}{dataChanged}}()\ \{}
-\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ temp\ =\ \mbox{\hyperlink{classaverager_aaf07cf2bb27948fc13dbef3b54e28f9a}{pDataChanged}};}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_aaf07cf2bb27948fc13dbef3b54e28f9a}{pDataChanged}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ temp;}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_a2b1c46952e1145ab13700e08f472a03e}{outputDebugData}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_a102e5eeca42e074f56a5aa234badad30}{setADCCommands}}(uint8\_t\ channel,\ String\ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}});}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_a4dffd5e19b19104e0ec1d762072fb29a}{setADCAveragerSettings}}(uint8\_t\ t\_channel,\ uint8\_t\ t\_averages,\ uint16\_t\ t\_interruptErrorThreshold,\ uint16\_t\ t\_continuousErrorThreshold,\ uint16\_t\ t\_continuousTimeout);}
+\DoxyCodeLine{00060\ \ \ \ \ String\ \mbox{\hyperlink{classControlReader_a012829af77cdd47a80785360158eee22}{getADCAveragerSettings}}(uint8\_t\ channel);}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classControlReader_a9701e3779aa63088d8bc8aa560059191}{setDefaults}}();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classControlReader_ab9a22bf0de979dac0f952c632841ed39}{testMin}},\ \mbox{\hyperlink{classControlReader_a67ffe474cfe49c340b66a0e609aeddf3}{testMax}};}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_aac84137ad7f490b34025edfadb513de4}{testBegin}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00065\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classControlReader_a12391f415e829660fb9a45820985577a}{testChannel}}\ =\ 0;}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classControlReader_a8b3c5cddf3ef9bf3cb9a56108c394f5b}{setADCMinMaxTestChannel}}(uint8\_t\ t\_channel);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classControlReader_ac3e9b70b0918c03a8450391b614c9e22}{resetAds}}();}
+\DoxyCodeLine{00069\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classControlReader_a23c21dc8219fde243f98acbad95cc942}{getData}}(int16\_t\ channel);}
 \DoxyCodeLine{00070\ }
-\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classaverager_aaa54da4b2f567beab8279a63a683a4bb}{addData}}(int16\_t\ data)\ \{}
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ we\ are\ still\ just\ filling\ up\ the\ buffer\ then\ just\ add\ the\ data}}
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classaverager_a82f127ce49291496bdf93d634855ef62}{dataCount}}\ +\ 1)\ <\ \mbox{\hyperlink{classaverager_adde2499165f7e8076a054d49ba747cca}{dataAverageLength}})\ \{}
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_a82f127ce49291496bdf93d634855ef62}{dataCount}}++;}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}}\ =\ -\/1;}
-\DoxyCodeLine{00076\ }
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_a655a24b1204e470116902f8ed8ddcfc3}{dataArray}}[\mbox{\hyperlink{classaverager_a05e9e18dcdfe19bb3df1202202524eee}{dataIndex}}]\ =\ data;}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_a05e9e18dcdfe19bb3df1202202524eee}{dataIndex}}++;}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classaverager_a05e9e18dcdfe19bb3df1202202524eee}{dataIndex}}\ >=\ \mbox{\hyperlink{classaverager_adde2499165f7e8076a054d49ba747cca}{dataAverageLength}})\ \{\ \mbox{\hyperlink{classaverager_a05e9e18dcdfe19bb3df1202202524eee}{dataIndex}}\ =\ 0;\ \}}
-\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00081\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int16\_t\ prevData\ =\ dataIndex\ -\/\ 1;}}
-\DoxyCodeLine{00082\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (prevData\ <\ 0)\ \{\ prevData\ =\ dataAverageLength\ -\/\ 1;\ \}}}
+\DoxyCodeLine{00071\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00072\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classControlReader_a7ace2aea9f957123e9374a70edb427b1}{gateState}}\ =\ 0;}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_a76f9dba3f0d96b176548a3267f8a71d4}{adsInit}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00076\ \ \ \ \ Adafruit\_ADS1115\ \mbox{\hyperlink{classControlReader_a8f935acf0a7f67cde21e3a8775ad5235}{ads}};}
+\DoxyCodeLine{00077\ \ \ \ \ Adafruit\_ADS1015\ \mbox{\hyperlink{classControlReader_afa635a97f3a20a56c096fa0681865361}{ads2}};}
+\DoxyCodeLine{00078\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classControlReader_a91391c3cb4579812e669e6e0bb3b3e0b}{pinDataReady}},\ \mbox{\hyperlink{classControlReader_a9fd26d764b116b6137f0262818598563}{pinGate}};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{classaverager}{averager}}\ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[8];}
+\DoxyCodeLine{00081\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classControlReader_ab89416e32e6258f80bc3ac09c01b7c63}{currentChannel}};}
+\DoxyCodeLine{00082\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classControlReader_a59d7603d61090d3c568edb9378555c14}{currentChannel2}};}
 \DoxyCodeLine{00083\ }
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_a655a24b1204e470116902f8ed8ddcfc3}{dataArray}}[\mbox{\hyperlink{classaverager_a05e9e18dcdfe19bb3df1202202524eee}{dataIndex}}]\ =\ data;}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_a05e9e18dcdfe19bb3df1202202524eee}{dataIndex}}++;}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classaverager_a05e9e18dcdfe19bb3df1202202524eee}{dataIndex}}\ >=\ \mbox{\hyperlink{classaverager_adde2499165f7e8076a054d49ba747cca}{dataAverageLength}})\ \{\ \mbox{\hyperlink{classaverager_a05e9e18dcdfe19bb3df1202202524eee}{dataIndex}}\ =\ 0;\ \}}
-\DoxyCodeLine{00087\ }
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int32\_t\ temp\ =\ 0;}
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{classaverager_adde2499165f7e8076a054d49ba747cca}{dataAverageLength}};\ i++)\ \{}
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ temp\ +=\ \mbox{\hyperlink{classaverager_a655a24b1204e470116902f8ed8ddcfc3}{dataArray}}[i];}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ temp\ =\ temp\ /\ \mbox{\hyperlink{classaverager_adde2499165f7e8076a054d49ba747cca}{dataAverageLength}};}
-\DoxyCodeLine{00093\ }
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classaverager_a911b8cf08ca00c9c0a8040f5627809ae}{trigger}})\ \{}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classaverager_a31644ac67d506815a40b141221f8ade5}{triggerDelayEngage}})\ \{}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classaverager_acb664b8a0229f27d9347850ccb583c63}{triggerDelayEM}}\ >=\ \mbox{\hyperlink{classaverager_a1571abcefec5ad9f189bd5123f5a9a60}{triggerDelay}})\ \{}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_aaf07cf2bb27948fc13dbef3b54e28f9a}{pDataChanged}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_a3861c71547ed8423c54e1082768620e9}{timeSinceChange}}\ =\ 0;}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_a31644ac67d506815a40b141221f8ade5}{triggerDelayEngage}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classaverager_ab3a154fc369eb7de55c5acf2f5d2162b}{singleShot}})\ \{}
-\DoxyCodeLine{00103\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (((value\ <=\ triggerThreshold)\ \&\&\ (temp\ >\ triggerThreshold)\ \ ))}}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((\mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}}\ <=\ \mbox{\hyperlink{classaverager_a5f9bdead7dc4af8e6e437eeaee72c875}{triggerThreshold}})\ \&\&\ (temp\ >\ \mbox{\hyperlink{classaverager_a5f9bdead7dc4af8e6e437eeaee72c875}{triggerThreshold}}))\ ||\ ((\mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}}\ >=\ \mbox{\hyperlink{classaverager_a5f9bdead7dc4af8e6e437eeaee72c875}{triggerThreshold}})\ \&\&\ (temp\ <\ \mbox{\hyperlink{classaverager_a5f9bdead7dc4af8e6e437eeaee72c875}{triggerThreshold}})))\ \{}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Value\ "{}}\ +\ String(\mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}})\ +\ \textcolor{stringliteral}{"{}\ and\ average\ "{}}\ +\ String(temp)\ +\ \textcolor{stringliteral}{"{}\ over\ threshold\ "{}}\ +\ String(\mbox{\hyperlink{classaverager_a5f9bdead7dc4af8e6e437eeaee72c875}{triggerThreshold}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classaverager_a1571abcefec5ad9f189bd5123f5a9a60}{triggerDelay}}\ ==\ 0)\ \{}
-\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_aaf07cf2bb27948fc13dbef3b54e28f9a}{pDataChanged}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_a3861c71547ed8423c54e1082768620e9}{timeSinceChange}}\ =\ 0;}
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_a31644ac67d506815a40b141221f8ade5}{triggerDelayEngage}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_acb664b8a0229f27d9347850ccb583c63}{triggerDelayEM}}\ =\ 0;}
-\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ a\ quick\ change\ has\ happened,\ aka\ a\ new\ value\ has\ been\ received\ before\ the\ continuousTimeout\ has\ been\ passed}}
-\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ then\ we\ are\ being\ lenient\ and\ passing\ any\ value\ change\ greater\ than\ continuousErrorThreshold.\ This\ is\ to\ allow\ continuous\ sweeps}}
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classaverager_a3861c71547ed8423c54e1082768620e9}{timeSinceChange}}\ <\ \mbox{\hyperlink{classaverager_a4af58bd77d322d550fe5d13bc4c6c0fb}{continuousTimeout}})\ \{}
-\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((temp\ <\ (\mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}}\ -\/\ \mbox{\hyperlink{classaverager_a19eff7c8e3e37b7f08e2ac120ddcc0e3}{continuousErrorThreshold}}))\ ||\ (temp\ >\ (\mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}}\ +\ \mbox{\hyperlink{classaverager_a19eff7c8e3e37b7f08e2ac120ddcc0e3}{continuousErrorThreshold}})))\ \{}
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classaverager_ae3238eab894d996fcc88e6bad1a6e4c4}{outputDebugData}})\ \{}
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Continuous\ data\ change\ occured\ at\ "{}}\ +\ String(\mbox{\hyperlink{classaverager_a3861c71547ed8423c54e1082768620e9}{timeSinceChange}})\ +\ \textcolor{stringliteral}{"{}\ ms\ which\ is\ below\ the\ continuousTimeout\ of\ "{}}\ +\ String(\mbox{\hyperlink{classaverager_a4af58bd77d322d550fe5d13bc4c6c0fb}{continuousTimeout}})\ +\ \textcolor{stringliteral}{"{}\ ms."{}}}
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}The\ data\ is\ above\ the\ continuousErrorThreshold\ of\ "{}}\ +\ String(\mbox{\hyperlink{classaverager_a19eff7c8e3e37b7f08e2ac120ddcc0e3}{continuousErrorThreshold}})\ +\ \textcolor{stringliteral}{"{}.\ The\ new\ data\ is\ "{}}\ +\ String(temp)\ +\ \textcolor{stringliteral}{"{}\ while\ the\ old\ data\ was\ "{}}\ +\ String(\mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
-\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_aaf07cf2bb27948fc13dbef3b54e28f9a}{pDataChanged}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_a3861c71547ed8423c54e1082768620e9}{timeSinceChange}}\ =\ 0;}
-\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((temp\ <\ (\mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}}\ -\/\ \mbox{\hyperlink{classaverager_ae65171959ff0da0adeed67a844e0e3d9}{interruptedErrorThreshold}}))\ ||\ (temp\ >\ (\mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}}\ +\ \mbox{\hyperlink{classaverager_ae65171959ff0da0adeed67a844e0e3d9}{interruptedErrorThreshold}})))\ \{}
-\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classaverager_ae3238eab894d996fcc88e6bad1a6e4c4}{outputDebugData}})\ \{}
-\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}A\ data\ change\ occured\ after\ the\ errorThreshold\ time,\ the\ data\ did\ surpass\ the\ interruptedErrorThreshold\ of\ "{}}\ +\ String(\mbox{\hyperlink{classaverager_ae65171959ff0da0adeed67a844e0e3d9}{interruptedErrorThreshold}})\ +}
-\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}.\ The\ new\ data\ is\ "{}}\ +\ String(temp)\ +\ \textcolor{stringliteral}{"{}\ while\ the\ old\ data\ was\ "{}}\ +\ String(\mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
-\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_aaf07cf2bb27948fc13dbef3b54e28f9a}{pDataChanged}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager_a3861c71547ed8423c54e1082768620e9}{timeSinceChange}}\ =\ 0;}
-\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00138\ }
-\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classaverager_aaf07cf2bb27948fc13dbef3b54e28f9a}{pDataChanged}})\ \{\ \mbox{\hyperlink{classaverager_ade0cac017e395f4b8a524d44b0d831ec}{value}}\ =\ temp;\ \}}
-\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00143\ \};}
-\DoxyCodeLine{00144\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00145\ \textcolor{comment}{class\ physicalADC\ \{}}
-\DoxyCodeLine{00146\ \textcolor{comment}{public:}}
-\DoxyCodeLine{00147\ \textcolor{comment}{\ \ \ \ Adafruit\_ADS1X15\ *ADS;}}
-\DoxyCodeLine{00148\ \textcolor{comment}{\ \ \ \ uint16\_t\ currentChannel;}}
-\DoxyCodeLine{00149\ \textcolor{comment}{\ \ \ \ long\ adsTimeOut\ =\ 10;}}
-\DoxyCodeLine{00150\ \textcolor{comment}{\ \ \ \ long\ adsConversionStart;}}
-\DoxyCodeLine{00151\ \textcolor{comment}{\ \ \ \ bool\ adsErrorReported\ =\ false;}}
-\DoxyCodeLine{00152\ \textcolor{comment}{}}
-\DoxyCodeLine{00153\ \textcolor{comment}{\ \ \ \ init(uint16\_t\ adcType)\ \{}}
-\DoxyCodeLine{00154\ \textcolor{comment}{\ \ \ \ \ \ \ \ switch\ (adcType)\ \{}}
-\DoxyCodeLine{00155\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ case\ 0:}}
-\DoxyCodeLine{00156\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ADS\ =\ new\ \ Adafruit\_ADS1015();}}
-\DoxyCodeLine{00157\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ case\ 1:}}
-\DoxyCodeLine{00158\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ADS\ =\ new\ Adafruit\_ADS1115();}}
-\DoxyCodeLine{00159\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{00160\ \textcolor{comment}{\ \ \ \ \}}}
-\DoxyCodeLine{00161\ \textcolor{comment}{\};}}
-\DoxyCodeLine{00162\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00163\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classControlReader}{ControlReader}}}
-\DoxyCodeLine{00164\ \{}
-\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classControlReader}{ControlReader}}(uint8\_t\ inDataReadyPin,\ uint8\_t\ inGatePin);}
-\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classControlReader_af538c65e5f0f45d6306b1558fcd9b957}{\string~ControlReader}}();}
-\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classControlReader_a8998d3ffc4f19f45f2a7bc4061cc8e5a}{readData}}();}
-\DoxyCodeLine{00169\ }
-\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ std::vector<String>\ \mbox{\hyperlink{classControlReader_a4f79f274aa131d9e6a0b5ebeed864d41}{cvInputCommands}};}
-\DoxyCodeLine{00171\ }
-\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_a2b1c46952e1145ab13700e08f472a03e}{outputDebugData}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_a102e5eeca42e074f56a5aa234badad30}{setADCCommands}}(uint8\_t\ channel,\ String\ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}});}
-\DoxyCodeLine{00174\ }
-\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_a4dffd5e19b19104e0ec1d762072fb29a}{setADCAveragerSettings}}(uint8\_t\ t\_channel,\ uint8\_t\ t\_averages,\ uint16\_t\ t\_interruptErrorThreshold,\ uint16\_t\ t\_continuousErrorThreshold,\ uint16\_t\ t\_continuousTimeout);}
-\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ String\ \mbox{\hyperlink{classControlReader_a012829af77cdd47a80785360158eee22}{getADCAveragerSettings}}(uint8\_t\ channel);}
-\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classControlReader_a9701e3779aa63088d8bc8aa560059191}{setDefaults}}();}
-\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ String\ \mbox{\hyperlink{classControlReader_ab45ab596486631cd4eceb137804d6c13}{dumpData}}();}
-\DoxyCodeLine{00179\ }
-\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classControlReader_ab9a22bf0de979dac0f952c632841ed39}{testMin}},\ \mbox{\hyperlink{classControlReader_a67ffe474cfe49c340b66a0e609aeddf3}{testMax}};}
-\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_aac84137ad7f490b34025edfadb513de4}{testBegin}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classControlReader_a12391f415e829660fb9a45820985577a}{testChannel}}\ =\ 0;}
-\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classControlReader_a8b3c5cddf3ef9bf3cb9a56108c394f5b}{setADCMinMaxTestChannel}}(uint8\_t\ t\_channel);}
-\DoxyCodeLine{00184\ }
-\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classControlReader_ac3e9b70b0918c03a8450391b614c9e22}{resetAds}}();}
-\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ int32\_t\ \mbox{\hyperlink{classControlReader_a23c21dc8219fde243f98acbad95cc942}{getData}}(int16\_t\ channel);}
-\DoxyCodeLine{00187\ }
-\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classControlReader_a7ace2aea9f957123e9374a70edb427b1}{gateState}}\ =\ 0;}
-\DoxyCodeLine{00190\ }
-\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_a76f9dba3f0d96b176548a3267f8a71d4}{adsInit}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ Adafruit\_ADS1115\ \mbox{\hyperlink{classControlReader_a8f935acf0a7f67cde21e3a8775ad5235}{ads}};}
-\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ Adafruit\_ADS1015\ \mbox{\hyperlink{classControlReader_afa635a97f3a20a56c096fa0681865361}{ads2}};}
-\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classControlReader_a91391c3cb4579812e669e6e0bb3b3e0b}{pinDataReady}},\ \mbox{\hyperlink{classControlReader_a9fd26d764b116b6137f0262818598563}{pinGate}};}
-\DoxyCodeLine{00196\ }
-\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classaverager}{averager}}\ \mbox{\hyperlink{classControlReader_a3a31ef1b2f4860a5116bfeaedbf758d3}{averages}}[8];}
-\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classControlReader_ab89416e32e6258f80bc3ac09c01b7c63}{currentChannel}};}
-\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classControlReader_a59d7603d61090d3c568edb9378555c14}{currentChannel2}};}
-\DoxyCodeLine{00200\ }
-\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classControlReader_a1fd8c0c72138326f209dcb9bd3c2126a}{addTestData}}(uint16\_t\ value);}
-\DoxyCodeLine{00202\ }
-\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classControlReader_a4f28fa689514b369418e9b0c304606f6}{adsTimeOut}}\ =\ 10;}
-\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classControlReader_a860817552a742e63bc71b35fd41038c0}{adsConversionStart}};}
-\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_ae285caee6f66937efeef81145cfb178e}{adsErrorReported}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classControlReader_ac3df7999dd53c06e235b753faf34873f}{ads2TimeOut}}\ =\ 10;}
-\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classControlReader_aeb9d7bc35cdd2b016f7c73d452fee076}{ads2ConversionStart}};}
-\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_a6213d99cea0c505d893514fb40bdd0f2}{ads2ErrorReported}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00209\ }
-\DoxyCodeLine{00210\ \textcolor{comment}{//\ \ \ \ \ \ \ \ physicalADC\ ADC[2];}}
-\DoxyCodeLine{00211\ }
-\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classControlReader_ac56bbf8b2ab06aa53b4eda0aa45010ff}{adsReinitializeTimeout}}\ =\ 1000;}
-\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classControlReader_a8018e2761d0b19e3bcf40bd13a714157}{adsReinitCountStart}};}
-\DoxyCodeLine{00214\ }
-\DoxyCodeLine{00215\ \textcolor{comment}{//\ \ \ \ \ \ \ \ long\ findAndSetNull(uint16\_t\ ch);}}
-\DoxyCodeLine{00216\ \};}
-\DoxyCodeLine{00217\ }
-\DoxyCodeLine{00218\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ CONTROLREADER\_H}}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classControlReader_a1fd8c0c72138326f209dcb9bd3c2126a}{addTestData}}(uint16\_t\ value);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classControlReader_a4f28fa689514b369418e9b0c304606f6}{adsTimeOut}}\ =\ 10;}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classControlReader_a860817552a742e63bc71b35fd41038c0}{adsConversionStart}};}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_ae285caee6f66937efeef81145cfb178e}{adsErrorReported}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classControlReader_ac3df7999dd53c06e235b753faf34873f}{ads2TimeOut}}\ =\ 10;}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classControlReader_aeb9d7bc35cdd2b016f7c73d452fee076}{ads2ConversionStart}};}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_a6213d99cea0c505d893514fb40bdd0f2}{ads2ErrorReported}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classControlReader_ac56bbf8b2ab06aa53b4eda0aa45010ff}{adsReinitializeTimeout}}\ =\ 1000;}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classControlReader_a8018e2761d0b19e3bcf40bd13a714157}{adsReinitCountStart}};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classControlReader_a30d5c5915d4f615582348f82742513db}{readSingleADS}}(Adafruit\_ADS1X15\ \&adsx,\ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{bool}\ \&newData,\ uint16\_t\ \&channel,\ uint8\_t\ channelOffset,\ \textcolor{keywordtype}{long}\ \&conversionStart,\ \textcolor{keywordtype}{bool}\ \&errorReported,\ uint16\_t\ timeout,\ uint16\_t\ resolution);}
+\DoxyCodeLine{00097\ \};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ CONTROLREADER\_H}}
 
 \end{DoxyCode}

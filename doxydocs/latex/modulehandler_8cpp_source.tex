@@ -1,0 +1,141 @@
+\doxysection{modulehandler.\+cpp}
+\hypertarget{modulehandler_8cpp_source}{}\label{modulehandler_8cpp_source}\index{modulehandler.cpp@{modulehandler.cpp}}
+\mbox{\hyperlink{modulehandler_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MODULEHANDLER\_CPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MODULEHANDLER\_CPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}modulehandler.hpp"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../src/module.cpp"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../src/modulegroup.cpp"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ ModuleHandler::ModuleHandler()\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ isGroupHandler\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00010\ \}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keywordtype}{void}\ ModuleHandler::dir(std::vector<commandResponse>\ *inCommandResponses,\ String\ longPrefix,\ String\ shortPrefix,\ \textcolor{keywordtype}{bool}\ hidden,\ \textcolor{keywordtype}{bool}\ modules,\ \textcolor{keywordtype}{bool}\ commands,\ \textcolor{keywordtype}{bool}\ instances,\ \textcolor{keywordtype}{bool}\ instanceCount,\ \textcolor{keywordtype}{bool}\ recursive)\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ String\ lp\ =\ longPrefix,\ sp\ =\ shortPrefix;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordflow}{if}\ (lp\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ \textcolor{keywordflow}{if}\ (lp[lp.length()\ -\/\ 1]\ !=\ \textcolor{charliteral}{'.'})\ \{\ lp\ +=\ \ \textcolor{stringliteral}{"{}."{}};\ \}\ \}}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordflow}{if}\ (sp\ !=\ \textcolor{stringliteral}{"{}"{}})\ \{\ \textcolor{keywordflow}{if}\ (sp[sp.length()\ -\/\ 1]\ !=\ \textcolor{charliteral}{'.'})\ \{\ sp\ +=\ \ \textcolor{stringliteral}{"{}."{}};\ \}\ \}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{if}\ (commands)\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ Module::dir(inCommandResponses,\ lp,\ sp,\ hidden,\ modules,\ commands,\ instances,\ instanceCount,\ recursive);}
+\DoxyCodeLine{00020\ \ \ \ \ \}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ moduleGroups.size();\ i++)\ \{}
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Dir\ Groups:\ "{}\ +\ String(moduleGroups[i].moduleID-\/>getLongName()),\ debugPrintType::Debug);}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ moduleGroups[i].dir(inCommandResponses,lp\ +\ moduleGroups[i].moduleID-\/>getLongName(),\ sp\ +\ moduleGroups[i].moduleID-\/>getShortName(),\ hidden,\ modules,\ commands,\ instances,\ instanceCount,\ recursive);}
+\DoxyCodeLine{00025\ \ \ \ \ \}}
+\DoxyCodeLine{00026\ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//std::vector<commandResponse>\ ModuleHandler::dumpData()\ \{}}
+\DoxyCodeLine{00029\ \textcolor{keywordtype}{void}\ ModuleHandler::dumpData(std::vector<commandResponse>\ *inCommandResponses)\ \{}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ \ \ \ std::vector<commandResponse>\ dataDump;}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ \ \ \ std::vector<commandResponse>\ outDataDump;}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ moduleGroups.size()\ +\ 1;\ i++)\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 0)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//outDataDump\ =\ Module::dumpData();}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ Module::dumpData(inCommandResponses);}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//outDataDump\ =\ moduleGroups[i\ -\/\ 1].dumpData();}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ moduleGroups[i\ -\/\ 1].dumpData(inCommandResponses);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ for\ (int\ j\ =\ 0;\ j\ <\ outDataDump.size();\ j++)\ \{}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ dataDump.push\_back(outDataDump[j]);}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}*/}}
+\DoxyCodeLine{00044\ \ \ \ \ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{comment}{//return\ dataDump;}}
+\DoxyCodeLine{00046\ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ ModuleGroup*\ ModuleHandler::getGroup(String\ longName)\ \{}
+\DoxyCodeLine{00049\ \textcolor{comment}{//\ \ \ \ debugPrintln("{}We\ have\ "{}\ +\ String(moduleGroups.size())\ +\ "{}\ groups"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ moduleGroups.size();\ i++)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (moduleGroups[i].moduleID-\/>getLongName()\ ==\ longName)\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \&moduleGroups[i];}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00055\ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00057\ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ ModuleGroup*\ ModuleHandler::addGroup(ModuleID\ inModuleID)\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ ModuleGroup\ *group\ =\ getGroup(inModuleID.getLongName());}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{if}\ (group\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Group\ already\ exists!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ group;}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{//group\ =\ new\ ;}}
+\DoxyCodeLine{00066\ \ \ \ \ moduleGroups.push\_back(ModuleGroup(inModuleID));}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Added\ a\ group,\ for\ a\ total\ of\ "{}\ +\ String(moduleGroups.size())\ +\ "{}\ groups"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordflow}{return}\ \&moduleGroups.back();}
+\DoxyCodeLine{00071\ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ ModuleGroup*\ ModuleHandler::addModule(Module\ *module)\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ ModuleGroup\ *group\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ group\ =\ getGroup(module-\/>moduleID-\/>getLongName());}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordflow}{if}\ (group\ ==\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln("{}Adding\ group\ "{}\ +\ module-\/>moduleID-\/>getLongName(),\ debugPrintType::Debug);}}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ group\ =\ addGroup(module-\/>moduleID);}
+\DoxyCodeLine{00081\ \ \ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ group-\/>addModule(module);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordflow}{return}\ \&moduleGroups.back();}
+\DoxyCodeLine{00086\ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ eProcessResult\ ModuleHandler::processCommands(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request)\ \{}
+\DoxyCodeLine{00089\ \ \ \ \ eProcessResult\ result\ =\ processBuiltInCommands(inCommandItem,\ commandResponses,\ request);}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{if}\ (result\ !=\ eProcessResult::NotFound)\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00092\ \ \ \ \ \}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{comment}{//\ if\ this\ is\ not\ the\ last\ item\ in\ the\ hierarchy,\ check\ groups.\ If\ this\ is\ the\ last\ but\ it\ has\ a\ selection\ it\ is\ an\ indexing\ command\ in\ which\ case\ we\ will\ call\ command\ "{}"{}\ on\ the\ group}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{if}\ ((inCommandItem-\/>\mbox{\hyperlink{classcommandItem_af827425df75c26c320c43581963faba1}{hierarchyIndex}}\ <\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a28a5a435734fef37683ee69d92a42854}{hierarchy}}.size()\ -\/\ 1))\ ||\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a28a5a435734fef37683ee69d92a42854}{hierarchy}}[inCommandItem-\/>\mbox{\hyperlink{classcommandItem_af827425df75c26c320c43581963faba1}{hierarchyIndex}}].selection.size()\ >\ 0))\ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ moduleGroups.size();\ i++)\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ this\ group\ has\ the\ same\ name\ as\ the\ current\ hierarchy,\ enter}}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a28a5a435734fef37683ee69d92a42854}{hierarchy}}[inCommandItem-\/>\mbox{\hyperlink{classcommandItem_af827425df75c26c320c43581963faba1}{hierarchyIndex}}].name\ ==\ moduleGroups[i].moduleID-\/>getLongName())\ ||}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a28a5a435734fef37683ee69d92a42854}{hierarchy}}[inCommandItem-\/>\mbox{\hyperlink{classcommandItem_af827425df75c26c320c43581963faba1}{hierarchyIndex}}].name\ ==\ moduleGroups[i].moduleID-\/>getShortAlias()))\ \{}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Module\ group\ for\ "{}\ +\ moduleGroups[i].moduleID-\/>getDescriptor()\ +\ "{}\ has\ prefix\ "{}\ +\ moduleGroups[i].moduleID-\/>getLongName(),\ debugPrintType::Debug);}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ this\ is\ an\ indexing\ command}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_af827425df75c26c320c43581963faba1}{hierarchyIndex}}\ ==\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a28a5a435734fef37683ee69d92a42854}{hierarchy}}.size()\ -\/\ 1))\ \{}
+\DoxyCodeLine{00105\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Indexing\ command\ in\ module\ handler,\ selection\ is\ "{}\ +\ String(inCommandItem-\/>selection.size())\ ,\ debugPrintType::Debug);}}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!moduleGroups[i].indexing(inCommandItem))\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::CommandFailed;}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ returnString\ =\ moduleGroups[i].moduleID-\/>getShortAlias();}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (moduleGroups[i].selection.size()\ >\ 0)\ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a28a5a435734fef37683ee69d92a42854}{hierarchy}}[inCommandItem-\/>\mbox{\hyperlink{classcommandItem_af827425df75c26c320c43581963faba1}{hierarchyIndex}}].selection.size();\ j++)\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ returnString\ +\ \textcolor{stringliteral}{"{}["{}}\ +\ String(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a28a5a435734fef37683ee69d92a42854}{hierarchy}}[inCommandItem-\/>\mbox{\hyperlink{classcommandItem_af827425df75c26c320c43581963faba1}{hierarchyIndex}}].selection[j])\ +\ \textcolor{stringliteral}{"{}]"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\ \});}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ returnString\ +\ \textcolor{stringliteral}{"{}:none"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\ \});}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ moduleGroups[i].processCommands(inCommandItem,\ commandResponses,\ request);}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//debugPrintln(inCommandItem-\/>prefix\ +\ "{}\ is\ not\ found\ for\ "{}\ +\ moduleGroups[i].moduleID-\/>getLongName(),\ debugPrintType::Debug);}}
+\DoxyCodeLine{00125\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debugPrintln(inCommandItem-\/>hierarchy[inCommandItem-\/>hierarchyIndex].name\ +\ "{}\ is\ not\ found\ for\ "{}\ +\ moduleGroups[i].moduleID-\/>getLongName(),\ debugPrintType::Debug);}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Module\ "{}}\ +\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a28a5a435734fef37683ee69d92a42854}{hierarchy}}[inCommandItem-\/>\mbox{\hyperlink{classcommandItem_af827425df75c26c320c43581963faba1}{hierarchyIndex}}].name\ +\ \textcolor{stringliteral}{"{}\ not\ found\ in\ "{}}\ +\ moduleID-\/>getLongName()\ ,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00129\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00130\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Last\ entry,\ checking\ commands"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Module::processCommands(inCommandItem,\ commandResponses,\ request);}
+\DoxyCodeLine{00132\ \ \ \ \ \}}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::NotFound;}
+\DoxyCodeLine{00134\ \}}
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

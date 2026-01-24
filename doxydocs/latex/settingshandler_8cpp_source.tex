@@ -33,46 +33,29 @@
 \DoxyCodeLine{00029\ \ \ \ \ saveData\ +=\ \textcolor{stringliteral}{"{}mcf:"{}}\ +\ String(saveCurrentConfig)\ +\ \textcolor{stringliteral}{"{},"{}};}
 \DoxyCodeLine{00030\ }
 \DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\ cv\ mapping"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
-\DoxyCodeLine{00032\ \ \ \ \ saveData\ +=\ \mbox{\hyperlink{main_8cpp_a9233706605f2febcdaba9e51a5752a87}{controlRead}}-\/>dumpData();}
-\DoxyCodeLine{00033\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00034\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Saving\ calibration\ data"{},\ debugPrintType::Debug);}}
-\DoxyCodeLine{00035\ \textcolor{comment}{\ \ \ \ saveData\ +=\ "{}m:0,"{}\ +\ stringModuleArray[0].calibrateArray[0].dumpData();}}
-\DoxyCodeLine{00036\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Saving\ harmonic\ series"{},\ debugPrintType::Debug);}}
-\DoxyCodeLine{00037\ \textcolor{comment}{\ \ \ \ saveData\ +=\ stringModuleArray[0].bowControlArray[0].harmonicSeriesList.dumpData();}}
-\DoxyCodeLine{00038\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Saving\ mute\ data"{},\ debugPrintType::Debug);}}
-\DoxyCodeLine{00039\ \textcolor{comment}{\ \ \ \ saveData\ +=\ stringModuleArray[0].muteArray[0].dumpData();}}
-\DoxyCodeLine{00040\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Saving\ bow\ control\ data"{},\ debugPrintType::Debug);}}
-\DoxyCodeLine{00041\ \textcolor{comment}{\ \ \ \ saveData\ +=\ stringModuleArray[0].bowControlArray[0].dumpData();}}
-\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Saving\ bow\ IO\ data"{},\ debugPrintType::Debug);}}
-\DoxyCodeLine{00043\ \textcolor{comment}{\ \ \ \ saveData\ +=\ stringModuleArray[0].bowIOArray[0].dumpData();}}
-\DoxyCodeLine{00044\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Saving\ solenoid\ data"{},\ debugPrintType::Debug);}}
-\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ \ saveData\ +=\ stringModuleArray[0].solenoidArray[0].dumpData();}}
-\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Saving\ actuator\ data"{},\ debugPrintType::Debug);}}
-\DoxyCodeLine{00047\ \textcolor{comment}{\ \ \ \ saveData\ +=\ stringModuleArray[0].bowControlArray[0].bowActuators-\/>dumpData();*/}}
-\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}REPLACE\ ALL\ THE\ DUMPDATA\ SAVES"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
-\DoxyCodeLine{00049\ \ \ \ \ saveData\ +=\ \mbox{\hyperlink{main_8cpp_a0300de59c914b127d83bfd99227907cc}{farSingle}}-\/>\mbox{\hyperlink{classFARSingle_ae5957205745a7026266deed9e7a3bc96}{dumpData}}();}
-\DoxyCodeLine{00050\ \ \ \ \ saveData\ +=\ \textcolor{stringliteral}{"{}nop"{}};}
-\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{return}\ saveData;}
-\DoxyCodeLine{00052\ \}}
-\DoxyCodeLine{00053\ }
-\DoxyCodeLine{00054\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{settingshandler_8cpp_ae0121269d2cc5beaea756f4a70fa416d}{resetAllParams}}()\ \{}
-\DoxyCodeLine{00055\ \ \ \ \ String\ saveData\ =\ \textcolor{stringliteral}{"{}ver:"{}}\ +\ \mbox{\hyperlink{automaticversion_8hpp_a7580b394441d49b9d0d1e40d57449d5d}{currentFirmwareVersion}}\ +\ \textcolor{stringliteral}{"{},"{}};\ \textcolor{comment}{//\ "{}ver:1,"{};}}
-\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\(\backslash\)n"{}}\ +\ saveData\ +\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}\ +\ \textcolor{stringliteral}{"{}Total:\ "{}}\ +\ String(\mbox{\hyperlink{eepromhelpers_8cpp_aa24ecf0d4c0610d752b0e8e5aa887486}{EEPROMSaveString}}(\&saveData,\ 0))\ +\ \textcolor{stringliteral}{"{}\ bytes"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}});}
-\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00058\ \}}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00060\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{settingshandler_8cpp_ace3c5429a7600071f43b7c8c4462a23d}{saveAllParams}}()\ \{}
-\DoxyCodeLine{00061\ \ \ \ \ String\ saveData\ =\ \mbox{\hyperlink{settingshandler_8cpp_a046d4c46537d3b0f2aab95d06f33174d}{dumpData}}();}
-\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\(\backslash\)n"{}}\ +\ saveData\ +\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}\ +\ \textcolor{stringliteral}{"{}Total:\ "{}}\ +\ String(\mbox{\hyperlink{eepromhelpers_8cpp_aa24ecf0d4c0610d752b0e8e5aa887486}{EEPROMSaveString}}(\&saveData,\ 0))\ +\ \textcolor{stringliteral}{"{}\ bytes"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}});}
-\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00064\ \}}
-\DoxyCodeLine{00065\ }
-\DoxyCodeLine{00066\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{settingshandler_8cpp_a4c39676e517471f401dcca5aff39686c}{loadAllParams}}()\ \{}
-\DoxyCodeLine{00067\ \ \ \ \ String\ loadData;\ \textcolor{comment}{//\ \ =\ new\ String();}}
-\DoxyCodeLine{00068\ \ \ \ \ uint32\_t\ datal\ =\ \mbox{\hyperlink{eepromhelpers_8cpp_a030652f23e30526a2b56af8de9d3e4dc}{EEPROMLoadString}}(\&loadData,\ 0);}
-\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(loadData\ +\ \textcolor{stringliteral}{"{}\(\backslash\)nLoaded\ "{}}\ +\ String(datal)\ +\ \textcolor{stringliteral}{"{}\ bytes\ of\ data"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}});}
-\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}}-\/>\mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{addCommands}}(loadData);}
-\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00072\ \}}
+\DoxyCodeLine{00032\ \ \ \ \ saveData\ +=\ \mbox{\hyperlink{main_8cpp_a0300de59c914b127d83bfd99227907cc}{farSingle}}-\/>\mbox{\hyperlink{classFARSingle_ae5957205745a7026266deed9e7a3bc96}{dumpData}}();}
+\DoxyCodeLine{00033\ \ \ \ \ saveData\ +=\ \textcolor{stringliteral}{"{}nop"{}};}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{return}\ saveData;}
+\DoxyCodeLine{00035\ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{settingshandler_8cpp_ae0121269d2cc5beaea756f4a70fa416d}{resetAllParams}}()\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ String\ saveData\ =\ \textcolor{stringliteral}{"{}ver:"{}}\ +\ \mbox{\hyperlink{automaticversion_8hpp_a7580b394441d49b9d0d1e40d57449d5d}{currentFirmwareVersion}}\ +\ \textcolor{stringliteral}{"{},"{}};\ \textcolor{comment}{//\ "{}ver:1,"{};}}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\(\backslash\)n"{}}\ +\ saveData\ +\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}\ +\ \textcolor{stringliteral}{"{}Total:\ "{}}\ +\ String(\mbox{\hyperlink{eepromhelpers_8cpp_aa24ecf0d4c0610d752b0e8e5aa887486}{EEPROMSaveString}}(\&saveData,\ 0))\ +\ \textcolor{stringliteral}{"{}\ bytes"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}});}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00041\ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{settingshandler_8cpp_ace3c5429a7600071f43b7c8c4462a23d}{saveAllParams}}()\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ String\ saveData\ =\ \mbox{\hyperlink{settingshandler_8cpp_a046d4c46537d3b0f2aab95d06f33174d}{dumpData}}();}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Saving\(\backslash\)n"{}}\ +\ saveData\ +\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}\ +\ \textcolor{stringliteral}{"{}Total:\ "{}}\ +\ String(\mbox{\hyperlink{eepromhelpers_8cpp_aa24ecf0d4c0610d752b0e8e5aa887486}{EEPROMSaveString}}(\&saveData,\ 0))\ +\ \textcolor{stringliteral}{"{}\ bytes"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}});}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00047\ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{settingshandler_8cpp_a4c39676e517471f401dcca5aff39686c}{loadAllParams}}()\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ String\ loadData;\ \textcolor{comment}{//\ \ =\ new\ String();}}
+\DoxyCodeLine{00051\ \ \ \ \ uint32\_t\ datal\ =\ \mbox{\hyperlink{eepromhelpers_8cpp_a030652f23e30526a2b56af8de9d3e4dc}{EEPROMLoadString}}(\&loadData,\ 0);}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(loadData\ +\ \textcolor{stringliteral}{"{}\(\backslash\)nLoaded\ "{}}\ +\ String(datal)\ +\ \textcolor{stringliteral}{"{}\ bytes\ of\ data"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}});}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}}-\/>\mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{addCommands}}(loadData);}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00055\ \}}
 
 \end{DoxyCode}

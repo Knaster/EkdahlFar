@@ -74,22 +74,26 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">controlReader.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;Wire.h&gt;</code><br />
 <code>#include &lt;Adafruit_ADS1X15.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="averager_8h_source.html">averager.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for controlReader.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="controlReader_8hpp__incl.png" border="0" usemap="#acontrolReader_8hpp" alt=""/></div>
 <map name="acontrolReader_8hpp" id="acontrolReader_8hpp">
-<area shape="rect" title=" " alt="" coords="34,5,174,31"/>
+<area shape="rect" title=" " alt="" coords="101,5,241,31"/>
 <area shape="rect" title=" " alt="" coords="5,79,69,104"/>
-<area shape="poly" title=" " alt="" coords="95,33,59,70,56,67,91,29"/>
+<area shape="poly" title=" " alt="" coords="150,33,72,74,70,70,148,28"/>
 <area shape="rect" title=" " alt="" coords="94,79,247,104"/>
-<area shape="poly" title=" " alt="" coords="117,29,152,67,149,70,113,33"/>
+<area shape="poly" title=" " alt="" coords="173,31,173,65,168,65,168,31"/>
+<area shape="rect" href="averager_8h.html" title=" " alt="" coords="272,79,363,104"/>
+<area shape="poly" title=" " alt="" coords="195,28,282,70,280,75,193,33"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -113,11 +117,56 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaverager.html">averager</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classControlReader.html">ControlReader</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:af010ef87d79c7b30a812a509c1c17da0" id="r_af010ef87d79c7b30a812a509c1c17da0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structserialCommandItem.html">serialCommandItem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controlReader_8hpp.html#af010ef87d79c7b30a812a509c1c17da0">serialCommandsControlReader</a> []</td></tr>
+<tr class="separator:af010ef87d79c7b30a812a509c1c17da0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c55c0cd1b85967ea65b6b0d9a16b92d" id="r_a3c55c0cd1b85967ea65b6b0d9a16b92d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structserialCommandItem.html">serialCommandItem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controlReader_8hpp.html#a3c55c0cd1b85967ea65b6b0d9a16b92d">serialCommandsControlReaderHidden</a> []</td></tr>
+<tr class="separator:a3c55c0cd1b85967ea65b6b0d9a16b92d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="af010ef87d79c7b30a812a509c1c17da0" name="af010ef87d79c7b30a812a509c1c17da0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af010ef87d79c7b30a812a509c1c17da0">&#9670;&#160;</a></span>serialCommandsControlReader</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structserialCommandItem.html">serialCommandItem</a> serialCommandsControlReader[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">  { <span class="stringliteral">&quot;adccommandmap&quot;</span>, <span class="stringliteral">&quot;acm&quot;</span>, <span class="stringliteral">&quot;channel:command string&quot;</span>, <span class="stringliteral">&quot;Sets the command string invoked when the value on ADC channel [channel] changes&quot;</span>},</div>
+<div class="line">  { <span class="stringliteral">&quot;adcdefaults&quot;</span>, <span class="stringliteral">&quot;acd&quot;</span>, <span class="stringliteral">&quot;-&quot;</span> <span class="stringliteral">&quot;Reverts all ADC command strings to default values&quot;</span> },</div>
+<div class="line">  { <span class="stringliteral">&quot;adcread&quot;</span>, <span class="stringliteral">&quot;adcr&quot;</span>, <span class="stringliteral">&quot;channel:value&quot;</span>, <span class="stringliteral">&quot;Sent when a new value is presented on one of the ADC channels, cannot be invoked&quot;</span> },</div>
+<div class="line">  { <span class="stringliteral">&quot;adcsettings&quot;</span>, <span class="stringliteral">&quot;adcs&quot;</span>, <span class="stringliteral">&quot;channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout&quot;</span>, <span class="stringliteral">&quot;Explain ADC settings here&quot;</span>}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3c55c0cd1b85967ea65b6b0d9a16b92d" name="a3c55c0cd1b85967ea65b6b0d9a16b92d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c55c0cd1b85967ea65b6b0d9a16b92d">&#9670;&#160;</a></span>serialCommandsControlReaderHidden</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structserialCommandItem.html">serialCommandItem</a> serialCommandsControlReaderHidden[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">  { <span class="stringliteral">&quot;testadclatency&quot;</span>, <span class="stringliteral">&quot;tal&quot;</span>, <span class="stringliteral">&quot;0-65535&quot;</span>, <span class="stringliteral">&quot;Test ADC Latency&quot;</span> },</div>
+<div class="line">  { <span class="stringliteral">&quot;testadclatencyreturn&quot;</span>, <span class="stringliteral">&quot;talr&quot;</span>, <span class="stringliteral">&quot;-&quot;</span>, <span class="stringliteral">&quot;Return from test&quot;</span> },</div>
+<div class="line">  { <span class="stringliteral">&quot;testadcminmax&quot;</span>, <span class="stringliteral">&quot;tamm&quot;</span>, <span class="stringliteral">&quot;channel&quot;</span>, <span class="stringliteral">&quot;Measure min/max value for a given channel and resets the counter&quot;</span> }</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

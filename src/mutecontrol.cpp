@@ -3,199 +3,239 @@
 
 #include "mutecontrol.hpp"
 
+const ModuleCommandDeclaration MuteControl::moduleCommands[] = {
+    { "setposition", "sp", "0-65535", "Set mute position", false, false, &s_setPosition },
+    { "fullmute", "fm", "1|0", "Put mute in full mute position (conditional)", false, false, &s_fullMute  },
+    { "halfmute", "hfm", "1|0", "Put mute in half mute position (conditional)", false, false, &s_halfMute  },
+    { "rest", "rs", "1|0", "Put mute in rest position (conditional)", false, false, &s_rest  },
+    { "savefull", "sf", "1|0", "Save current mute position as full mute position (conditional)", false, false, &s_saveFull  },
+    { "savehalf", "sh", "1|0", "Save current mute position as half mute position (conditional)", false, false, &s_saveHalf  },
+    { "saverest", "sr", "1|0", "Save current mute position as mute rest position (conditional)", false, false, &s_saveRest  },
+    { "fullmuteposition", "fmp", "0-65535", "Mute full mute position", false, true, s_fullMutePosition },
+    { "halfmuteposition", "hmp", "0-65535", "Mute half mute position", false, true, s_halfMutePosition },
+    { "restposition", "rp", "0-65535", "Mute rest position", false, true, s_restPosition },
+    { "sustain", "su", "0|1", "Setting sustain on (1) or off (0)", false, false, s_sustain  },
+    { "backoff", "bo", "0-65535", "Setting the time that the mute stays in the mutefullmute position before automatically going into rest, set in mS", false, true, &s_backoff },
+    { "home", "hm", "-", "Home mute", false, false, &s_home  },
+    { "hardwareposition", "hwp", "0-65535", "Sets the mute position without min/max scaling", true, false, &s_setHardwarePosition },
+    { "completetask", "cpt", "-", "Requests a callback when the current operation is finished", true, false, &s_completeTask },
+    { "autocorrect", "ac", "1|0", "Enables auto correct positioning that uses the homing sensor to correct positioning on the fly", true, false, &s_autoCorrect },
+    { "homingsensed", "hms", "-", "Requests whether the homing sensor is currently active or not", true, false, &s_homingSensed },
+    { "movedirection", "md", "-", "Requests the current direction of movement (0 Forward, 1 Reverse)", true, false, &s_moveDirection },
+    { "currentstep", "cs", "-", "Requests the current step", true, false, &s_currentStep },
+    { "homingpoint", "hmp", "edge,direction", "Requests the given homing point", true, false, &s_homingPoint },
+    { "homingstage", "hms", "-", "Requests the current homing stage (UNHOMED, HOMED, FIRSTHOMINGRISING, SECONDHOMINGFALLING, SECONDHOMINGRISING, FIRSTHOMINGFALLING, MOVEPASTHOMESWITCH, \
+        MOVETOHOMESWITCH, GOTOOFFSET)", true, false, &s_homingStage },
+    { "tmcinfo", "tmi", "-", "Request statistical information from the TMC2209", true, false, &s_tmcInfo }
+};
+
+getModuleCount(MuteControl)
+
 MuteControl::MuteControl(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensor) {
     mute = new Mute(stepEnPin, stepDirPin, stepStepPin, stepSerialPort, stepHomeSensor);
+
+    moduleID = new ModuleID("mute", "mu", "Mute controller v1.0", ModuleID::hardware);
 }
 
-eProcessResult MuteControl::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
-
-    processCommandItems(inCommandItem, serialCommandsMute, sizeof(serialCommandsMute)  / sizeof(serialCommandItem));
-
-    if (inCommandItem->command == "help") {
-        addCommandHelp(serialCommandsMute, sizeof(serialCommandsMute) / sizeof(serialCommandItem), commandResponses,"");
-        return eProcessResult::PassThrough;
-    } else
-    if (inCommandItem->command == "mutesetposition") {
-        if (request) {
-            commandResponses->push_back({ "msp:" + String(mute->getPosition()), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            mute->setPosition(inCommandItem->argument[0].toInt());
-            commandResponses->push_back({"msp:" + String(mute->getPosition()), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "mutefullmute") {
-        if (request) {
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            if (inCommandItem->argument[0].toInt() == 1) {
-                mute->fullMute();
-                commandResponses->push_back({"mfm:1", InfoRequest});
-            }
-        }
-    } else
-    if (inCommandItem->command == "mutehalfmute") {
-        if (request) {
-        } else {
-            mute->halfMute();
-            commandResponses->push_back({"mhm:1", InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "muterest") {
-        if (request) {
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            if (inCommandItem->argument[0].toInt() == 1) {
-                mute->rest();
-                commandResponses->push_back({"mr:1", InfoRequest});
-            }
-        }
-    } else
-    if (inCommandItem->command == "mutesavefull") {
-        mute->saveFullMute();
-        commandResponses->push_back({"msf:1", InfoRequest});
-    } else
-    if (inCommandItem->command == "mutesavehalf") {
-        mute->saveHalfMute();
-        commandResponses->push_back({"msh:1", InfoRequest});
-    } else
-    if (inCommandItem->command == "mutesaverest") {
-        mute->saveRest();
-        commandResponses->push_back({"msr:1", InfoRequest});
-    } else
-    if (inCommandItem->command == "mutefullmuteposition") {
-        if (request) {
-            commandResponses->push_back({ "mfmp:" + String(mute->getFullMutePosition()), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            mute->setFullMutePosition(inCommandItem->argument[0].toInt());
-            commandResponses->push_back({"mfmp:" + String(mute->getFullMutePosition()), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "mutehalfmuteposition") {
-        if (request) {
-            commandResponses->push_back({ "mhmp:" + String(mute->getHalfMutePosition()), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            mute->setHalfMutePosition(inCommandItem->argument[0].toInt());
-            commandResponses->push_back({"mhmp:" + String(mute->getHalfMutePosition()), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "muterestposition") {
-        if (request) {
-            commandResponses->push_back({ "mrp:" + String(mute->getRestPosition()), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            mute->setRestPosition(inCommandItem->argument[0].toInt());
-            commandResponses->push_back({ "mrp:" + String(mute->getRestPosition()), InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "mutesustain") {
-        if (request) {
-            commandResponses->push_back({ "ms:" + String(mute->getSustain()), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            if (inCommandItem->argument[0].toInt() == 1) {
-                mute->setSustain(true);
-            } else {
-                mute->setSustain(false);
-            }
-            commandResponses->push_back({"ms:" + String(mute->getSustain()), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "mutebackoff") {
-        if (request) {
-            commandResponses->push_back({ "mbo:" + String(mute->getBackOffTime()), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            mute->setBackOffTime(inCommandItem->argument[0].toInt());
-            commandResponses->push_back({"mbo:" + String(mute->getBackOffTime()), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "mutehome") {
-        if (!mute->homeMute()) {
-            commandResponses->push_back({"mutehome:0", Error});
-        } else {
-            commandResponses->push_back({"mutehome:1", InfoRequest});
-        }
+CREATE_MODULE_COMMAND_FUNCTION(setPosition, MuteControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(mute->getPosition()), InfoRequest });
     } else {
-        return eProcessResult::NotFound;
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        mute->setPosition(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(mute->getPosition()), InfoRequest});
     }
     return eProcessResult::Ok;
-}
+};
 
-eProcessResult MuteControl::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
-    processCommandItems(inCommandItem, serialCommandsMuteHidden, sizeof(serialCommandsMuteHidden)  / sizeof(serialCommandItem));
-
-    if (inCommandItem->command == "helphidden") {
-        addCommandHelp(serialCommandsMuteHidden, sizeof(serialCommandsMuteHidden) / sizeof(serialCommandItem), commandResponses,"");
-        return eProcessResult::PassThrough;
-    } else
-    if (inCommandItem->command == "mutesethardwareposition") {
-        if (request) {
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setHardwarePosition(inCommandItem->argument[0].toInt());
-            commandResponses->push_back({"msp:" + inCommandItem->argument[0], InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "mutecompletetask") {
-        if (completeTask()) {
-            commandResponses->push_back({"mcpt:1", InfoRequest});
-        } else {
-            commandResponses->push_back({"mcpt:0", InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "muteautocorrect") {
-        if (request) {
-            commandResponses->push_back({ "mac:" + String(getAutoCorrect()), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setAutoCorrect(inCommandItem->argument[0].toInt());
-            commandResponses->push_back({"mac:" + String(getAutoCorrect()), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "mutehomingsensed") {
-        if (request) {
-            commandResponses->push_back({ "mhmse:" + String(getHomingSensed()), InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "mutemovedirection") {
-        if (request) {
-            commandResponses->push_back({ "mmd:" + String(getMoveDirection()), InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "mutecurrentstep") {
-        if (request) {
-            commandResponses->push_back({ "mcs:" + String(getCurrentStep()), InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "mutehomingpoint") {
-        if (request) {
-            if (!checkArguments(inCommandItem, commandResponses, 2)) { return eProcessResult::WrongArgumentCount; }
-            commandResponses->push_back({ "mhmp:" + String(getHomingPoint(inCommandItem->argument[0].toInt(), inCommandItem->argument[1].toInt())), InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "mutehomingstage") {
-        if (request) {
-            commandResponses->push_back({ "mhms:" + String(getHomingStage()), InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "mutetmcinfo") {
-        if (request) { getTMC2209Info(); }
+CREATE_MODULE_COMMAND_FUNCTION(fullMute, MuteControl) {
+    if (request) {
     } else {
-        return eProcessResult::NotFound;
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        if (inCommandItem->argument[0].toInt() == 1) {
+            mute->fullMute();
+            inCommandResponses->push_back({thisItem.shortCommand + ":1", InfoRequest});
+        }
     }
     return eProcessResult::Ok;
-}
+};
 
-String MuteControl::dumpData() {
-    String dump = "";
-    dump += "mfmp:" + String(mute->getFullMutePosition()) + ",";
-    dump += "mhmp:" + String(mute->getHalfMutePosition()) + ",";
-    dump += "mrp:" + String(mute->getRestPosition()) + ",";
-    dump += "mbo:" + String(mute->getBackOffTime()) + ",";
-    return dump;
-}
+CREATE_MODULE_COMMAND_FUNCTION(halfMute, MuteControl) {
+    if (request) {
+    } else {
+        mute->halfMute();
+        inCommandResponses->push_back({thisItem.shortCommand + ":1", InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
 
+CREATE_MODULE_COMMAND_FUNCTION(rest, MuteControl) {
+    if (request) {
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        if (inCommandItem->argument[0].toInt() == 1) {
+            mute->rest();
+            inCommandResponses->push_back({thisItem.shortCommand + ":1", InfoRequest});
+        }
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(saveFull, MuteControl) {
+    mute->saveFullMute();
+    inCommandResponses->push_back({thisItem.shortCommand + ":1", InfoRequest});
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(saveHalf, MuteControl) {
+    mute->saveHalfMute();
+    inCommandResponses->push_back({thisItem.shortCommand + ":1", InfoRequest});
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(saveRest, MuteControl) {
+    mute->saveRest();
+    inCommandResponses->push_back({thisItem.shortCommand + ":1", InfoRequest});
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(fullMutePosition, MuteControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(mute->getFullMutePosition()), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        mute->setFullMutePosition(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(mute->getFullMutePosition()), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(halfMutePosition, MuteControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(mute->getHalfMutePosition()), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        mute->setHalfMutePosition(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(mute->getHalfMutePosition()), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(restPosition, MuteControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(mute->getRestPosition()), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        mute->setRestPosition(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(mute->getRestPosition()), InfoRequest });
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(sustain, MuteControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(mute->getSustain()), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        if (inCommandItem->argument[0].toInt() == 1) {
+            mute->setSustain(true);
+        } else {
+            mute->setSustain(false);
+        }
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(mute->getSustain()), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(backoff, MuteControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(mute->getBackOffTime()), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        mute->setBackOffTime(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(mute->getBackOffTime()), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(home, MuteControl) {
+    debugPrintln("asjdhkasjd", debugPrintType::Debug);
+    if (!mute->homeMute()) {
+        inCommandResponses->push_back({thisItem.shortCommand + ":0", Error});
+    } else {
+        inCommandResponses->push_back({thisItem.shortCommand + ":1", InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(setHardwarePosition, MuteControl) {
+    if (request) {
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setHardwarePosition(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + inCommandItem->argument[0], InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(completeTask, MuteControl) {
+    if (completeTask()) {
+        inCommandResponses->push_back({thisItem.shortCommand + ":1", InfoRequest});
+    } else {
+        inCommandResponses->push_back({thisItem.shortCommand + ":0", InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(autoCorrect, MuteControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(getAutoCorrect()), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setAutoCorrect(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(getAutoCorrect()), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(homingSensed, MuteControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(getHomingSensed()), InfoRequest });
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(moveDirection, MuteControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(getMoveDirection()), InfoRequest });
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(currentStep, MuteControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(getCurrentStep()), InfoRequest });
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(homingPoint, MuteControl) {
+    if (request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 2)) { return eProcessResult::WrongArgumentCount; }
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(getHomingPoint(inCommandItem->argument[0].toInt(), inCommandItem->argument[1].toInt())), InfoRequest });
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(homingStage, MuteControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(getHomingStage()), InfoRequest });
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(tmcInfo, MuteControl) {
+    if (request) { getTMC2209Info(); }
+    return eProcessResult::Ok;
+};
 #endif

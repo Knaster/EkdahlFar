@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['averager_0',['averager',['../classaverager.html',1,'']]]
+  ['serialcommanditem_0',['serialCommandItem',['../structserialCommandItem.html',1,'']]],
+  ['servostepper_1',['servoStepper',['../classservoStepper.html',1,'']]]
 ];

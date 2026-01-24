@@ -183,48 +183,64 @@ int freeram() {
 }
 
 String customStartupParameters = "";
-String nickName = "";
+String nickName = "default";
 
 #include "eepromhelpers.cpp"
 
 String delimitExpression(String expression, bool force = false);
-#include "configuration.cpp"
-int currentConfig = 0;
-std::vector<configuration> configArray;
 
 #include "commandparser.hpp"
-commandList *commands;
+//commandList *commands;
+commandList globalCommands;
+commandList globalResponseCommands;
 
-#include "audioanalyze.h"
-#include "midi.cpp"
+#include "modulesystembasics.hpp"
+#include "../src/module.cpp"
+#include "../src/modulehandler.cpp"
+#include "modulesystemglobalfunctions.hpp"
 
+#include "farsingle.hpp"
+FAR_SINGLE_CREATE_INSTANCE(farSingle)
 #include "farsingle.cpp"
-FARSingle *farSingle;
-#define controlRead farSingle->controlReader
 
-#include "settingshandler.cpp"
+void processCommandList(Module *inModule, commandList *inCommands, std::vector<commandResponse> *commandResponses) {
+    uint16_t i = 0;
+    while (i < inCommands->item.size()) {
+        inModule->processCommands(&(inCommands->item[i]), commandResponses);
+        i++;
+    }
 
-void updateServoStepperPressure0() {
-    farSingle->updatePressureServo();
 }
 
+#include "basemodule.cpp"
+BaseModule *baseModule;
 
-void updateServoStepperMute0() {
-    farSingle->updateMuteServo();
+void processSerialCommands() {
+    globalCommands = globalResponseCommands;
+    if (ssReader.read()) { globalCommands.addCommands(ssReader.c_str()); }
+
+    if (globalCommands.item.size() == 0) { return; }
+
+    std::vector <commandResponse> commandResponses;
+
+    uint16_t i = 0;
+
+    while(globalCommands.item.size() > 0) {
+        processCommandList(baseModule, &globalCommands, &commandResponses);
+        globalCommands.item.clear();
+        globalCommands = globalResponseCommands;
+        globalResponseCommands.item.clear();
+        debugPrintln("New response commands: " + String(globalCommands.item.size()), debugPrintType::Debug);
+    }
+
+    for (i=0; i<commandResponses.size(); i++) {
+        debugPrintln(commandResponses[i].response, commandResponses[i].responseType);
+    }
 }
 
-void updateTachometer0() {
-    farSingle->updateTachometer();
-}
-
-void updatePID0() {
-    farSingle->updatePID();
-}
-
-void reset() {
-    SCB_AIRCR = 0x05FA0004;
-    asm volatile ("dsb");
-}
+uint32_t startupTime;
+bool startupReached = false;
+#define startupTimeout 250
 
 void setup() {
     Serial.begin(115200);
@@ -235,31 +251,28 @@ void setup() {
 
     debugPrintln("RAM free " + String(freeram()), Command);
 
-    configuration defaultConfig;
-    configArray.push_back(defaultConfig);
-    currentConfig = 0;
+    //commands = new commandList();
 
-    commands = new commandList();
+    farSingle = new FARSingle(&farSingleUpdateServoStepperMute0, &farSingleUpdateServoStepperPressure0, &farSingleUpdateTachometer0, &farSingleUpdatePID0);
 
-    farSingle = new FARSingle(&updateServoStepperMute0, &updateServoStepperPressure0, &updateTachometer0, &updatePID0);
-
-    loadAllParams();
-
-    initMidi();
-
-    startAudioAnalyze();
+    baseModule = new BaseModule(farSingle);
+//    baseModule = new BaseModule(nullptr);
+    baseModule->loadAllParameters();
+    farSingle->initFAR();
 
     debugPrintln("Initialized", InfoRequest);
 
     currentFirmwareVersion = String(reinterpret_cast< char const* >(&completeVersion));
     debugPrintln("Current version is " + currentFirmwareVersion, debugPrintType::Debug);
     delay(100);
-    commands->addCommands("bpr:1");
+
+    startupTime = millis();
+//    debugPrintEnabled[EParser] = true;
 }
 
 int currentStringModule = 0;
 
-#include "maincommandhandler.cpp"
+//#include "maincommandhandler.cpp"
 /*! \brief Main loop function
  *
  *  - The flow of the main loop is as follows:
@@ -277,21 +290,42 @@ elapsedMillis updateRollingStatus;
 elapsedMicros controlReaderInterval;
 #define controlReadIntervalTime 50
 
+unsigned long previousAlive = 0;
+unsigned long currentAlive = 0;
+unsigned long aliveUpdateInterval = 500;
+
 void loop() {
-    ssOutput.nextByteOut();
+    if (!startupReached) {
+        if (millis() > (startupTime + startupTimeout) && (!startupReached)) {
+            startupReached = true;
+        }
+    } else {
+        ssOutput.nextByteOut();
 
-    usbMIDI.read();
-    if (controlReaderInterval >= controlReadIntervalTime) {
-        farSingle->updateControlReader();
-        controlReaderInterval = 0;
+        usbMIDI.read();
+        if (controlReaderInterval >= controlReadIntervalTime) {
+            std::vector<commandResponse> inCommandResponse;
+            farSingle->updateControlReader(&inCommandResponse);
+
+            for (int i=0; i<inCommandResponse.size(); i++) {
+                debugPrintln("cb." + inCommandResponse[i].response, inCommandResponse[i].responseType);
+            }
+            controlReaderInterval = 0;
+        }
+        MIDI.read();
     }
-    MIDI.read();
 
-    farSingle->update();
+    baseModule->update();
 
     unsigned long currentTime = micros();
     if (currentTime - previousTime >= commandUpadateInterval) {
         previousTime = currentTime;
         processSerialCommands();
     }
+/*
+    currentAlive = millis();
+    if (currentAlive - previousAlive >= aliveUpdateInterval) {
+        previousAlive = currentAlive;
+        debugPrintln("Alive", debugPrintType::TextInfo);
+    }*/
 }

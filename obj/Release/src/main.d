@@ -15,7 +15,7 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  lib/teensy4/WCharacter.h lib/teensy4/elapsedMillis.h \
  lib/teensy4/WProgram.h lib/teensy4/IntervalTimer.h \
  lib/teensy4/CrashReport.h lib/teensy4/Printable.h lib/teensy4/WString.h \
- src/automaticversion.hpp lib/teensy4/HardwareSerial.h \
+ include/automaticversion.hpp lib/teensy4/HardwareSerial.h \
  lib/SafeString/src/BufferedInput.h lib/teensy4/Print.h \
  lib/SafeString/src/SafeString.h lib/teensy4/Stream.h \
  lib/SafeString/src/SafeStringNameSpaceStart.h \
@@ -28,9 +28,24 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  lib/SafeString/src/SafeStringStream.h lib/SafeString/src/SerialComs.h \
  lib/SafeString/src/SafeStringReader.h lib/SafeString/src/millisDelay.h \
  lib/SafeString/src/millisDelay.h src/debugprint.hpp \
- src/eepromhelpers.cpp src/configuration.cpp lib/teensy4/avr_functions.h \
- src/configuration.hpp src/commandparser.hpp lib/tinyexpr/src/tinyexpr.h \
- src/audioanalyze.h lib/Audio/Audio.h lib/teensy4/DMAChannel.h \
+ src/eepromhelpers.cpp src/commandparser.hpp src/expressionparser.cpp \
+ include/expressionparser.h lib/tinyexpr/src/tinyexpr.h \
+ include/modulesystembasics.hpp include/module.hpp src/../src/module.cpp \
+ include/module.hpp src/../src/modulehandler.cpp \
+ include/modulehandler.hpp include/modulegroup.hpp \
+ src/../src/../src/module.cpp src/../src/../src/modulegroup.cpp \
+ src/../src/../src/../src/modulegroup.cpp \
+ src/../src/../src/../src/module.cpp \
+ include/modulesystemglobalfunctions.hpp include/farsingle.hpp \
+ include/../src/midimessageconfiguration.cpp lib/teensy4/avr_functions.h \
+ include/midimessageconfiguration.hpp \
+ include/../src/midiconfigurationhandler.cpp \
+ include/midiconfigurationhandler.hpp include/../src/midi.cpp \
+ lib/MIDI/MIDI.h lib/MIDI/midi_Defs.h lib/MIDI/midi_Namespace.h \
+ lib/MIDI/midi_Platform.h lib/MIDI/midi_Settings.h \
+ lib/MIDI/midi_Message.h lib/MIDI/serialMIDI.h lib/MIDI/MIDI.hpp \
+ include/../src/expressionparser.cpp include/midi.h \
+ include/../src/audioanalyze.h lib/Audio/Audio.h lib/teensy4/DMAChannel.h \
  lib/Audio/analyze_fft256.h lib/teensy4/AudioStream.h \
  lib/teensy4/arm_math.h lib/teensy4/core_cmInstr.h \
  lib/Audio/analyze_fft1024.h lib/Audio/analyze_print.h \
@@ -113,26 +128,27 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  lib/Audio/synth_waveform.h lib/Audio/synth_dc.h \
  lib/Audio/synth_whitenoise.h lib/Audio/synth_pinknoise.h \
  lib/Audio/synth_karplusstrong.h lib/Audio/synth_simple_drum.h \
- lib/Audio/synth_pwm.h lib/Audio/synth_wavetable.h src/midi.cpp \
- lib/MIDI/MIDI.h lib/MIDI/midi_Defs.h lib/MIDI/midi_Namespace.h \
- lib/MIDI/midi_Platform.h lib/MIDI/midi_Settings.h \
- lib/MIDI/midi_Message.h lib/MIDI/serialMIDI.h lib/MIDI/MIDI.hpp \
- src/farsingle.cpp src/farsingle.hpp src/mutecontrol.cpp \
- src/mutecontrol.hpp src/mute.cpp src/tmc2209_servostepper.cpp \
- src/tmc2209_servostepper.hpp lib/TMC2209/src/TMC2209.cpp \
- lib/TMC2209/src/TMC2209.h src/servostepper.hpp src/mute.hpp \
- src/solenoid.cpp lib/Teensy_PWM/src/Teensy_PWM.h \
- lib/Teensy_PWM/src/PWM_Generic_Debug.h src/solenoid.hpp \
- src/bowcontrol.cpp src/bowcontrol.hpp src/bowpressure.cpp \
- src/bowpressure.hpp src/pidcontroller.cpp src/pidcontroller.hpp \
- src/dcmotorcontrol.cpp src/dcmotorcontrol.hpp src/bowActuators.cpp \
- src/bowActuators.hpp src/harmonicserieshandler.cpp \
- src/harmonicserieshandler.hpp src/harmonicSeries.cpp \
- src/harmonicSeries.hpp src/controlReader.cpp src/controlReader.hpp \
- lib/Wire/Wire.h lib/Wire/WireIMXRT.h \
+ lib/Audio/synth_pwm.h lib/Audio/synth_wavetable.h \
+ include/../src/debugprint.hpp include/../src/mutecontrol.cpp \
+ include/mutecontrol.hpp include/../src/mute.cpp \
+ include/../src/tmc2209_servostepper.cpp include/tmc2209_servostepper.hpp \
+ lib/TMC2209/src/TMC2209.cpp lib/TMC2209/src/TMC2209.h \
+ include/../src/servostepper.hpp include/mute.hpp \
+ include/tmc2209_servostepper.hpp include/../src/solenoid.cpp \
+ lib/Teensy_PWM/src/Teensy_PWM.h lib/Teensy_PWM/src/PWM_Generic_Debug.h \
+ include/solenoid.hpp include/../src/bowcontrol.cpp \
+ include/bowcontrol.hpp include/../src/bowpressure.cpp \
+ include/bowpressure.hpp include/../src/tmc2209_servostepper.cpp \
+ include/../src/pidcontroller.cpp include/pidcontroller.hpp \
+ include/../src/dcmotorcontrol.cpp include/dcmotorcontrol.hpp \
+ include/../src/bowActuators.cpp include/bowActuators.hpp \
+ include/../src/harmonicserieshandler.cpp \
+ include/harmonicserieshandler.hpp include/../src/harmonicSeries.cpp \
+ include/harmonicSeries.hpp include/../src/controlReader.cpp \
+ include/controlReader.hpp lib/Wire/Wire.h lib/Wire/WireIMXRT.h \
  lib/Adafruit_ADS1X15/Adafruit_ADS1X15.h \
- lib/Adafruit_BusIO/Adafruit_I2CDevice.h src/calibrationhelpers.hpp \
- src/bowcalibration.cpp src/bowcalibration.hpp src/mutecalibration.cpp \
- src/mutecalibration.hpp src/settingshandler.cpp lib/EEPROM/EEPROM.h \
- lib/teensy4/avr/eeprom.h lib/teensy4/avr/io.h \
- lib/teensy4/avr/../avr_emulation.h src/maincommandhandler.cpp
+ lib/Adafruit_BusIO/Adafruit_I2CDevice.h include/averager.h \
+ include/../src/calibrationhelpers.hpp include/../src/bowcalibration.cpp \
+ include/../src/bowcontrol.cpp include/bowcalibration.hpp \
+ include/../src/mutecalibration.cpp include/mutecalibration.hpp \
+ src/farsingle.cpp src/basemodule.cpp include/basemodule.hpp

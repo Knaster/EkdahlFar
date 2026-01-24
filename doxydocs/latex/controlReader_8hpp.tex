@@ -2,11 +2,13 @@
 \hypertarget{controlReader_8hpp}{}\label{controlReader_8hpp}\index{controlReader.hpp@{controlReader.hpp}}
 {\ttfamily \#include $<$Wire.\+h$>$}\newline
 {\ttfamily \#include $<$Adafruit\+\_\+\+ADS1\+X15.\+h$>$}\newline
-Include dependency graph for control\+Reader.\+hpp\+:\nopagebreak
+{\ttfamily \#include "{}averager.\+h"{}}\newline
+Include dependency graph for control\+Reader.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=262pt]{controlReader_8hpp__incl}
+\includegraphics[width=348pt]{controlReader_8hpp__incl}
 \end{center}
 \end{figure}
 This graph shows which files directly or indirectly include this file\+:\nopagebreak
@@ -19,7 +21,46 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classaverager}{averager}}
-\item 
 class \mbox{\hyperlink{classControlReader}{Control\+Reader}}
 \end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} \mbox{\hyperlink{controlReader_8hpp_af010ef87d79c7b30a812a509c1c17da0}{serial\+Commands\+Control\+Reader}} \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} \mbox{\hyperlink{controlReader_8hpp_a3c55c0cd1b85967ea65b6b0d9a16b92d}{serial\+Commands\+Control\+Reader\+Hidden}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{controlReader_8hpp_af010ef87d79c7b30a812a509c1c17da0}\label{controlReader_8hpp_af010ef87d79c7b30a812a509c1c17da0} 
+\index{controlReader.hpp@{controlReader.hpp}!serialCommandsControlReader@{serialCommandsControlReader}}
+\index{serialCommandsControlReader@{serialCommandsControlReader}!controlReader.hpp@{controlReader.hpp}}
+\doxysubsubsection{\texorpdfstring{serialCommandsControlReader}{serialCommandsControlReader}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Commands\+Control\+Reader\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \{\ \textcolor{stringliteral}{"{}adccommandmap"{}},\ \textcolor{stringliteral}{"{}acm"{}},\ \textcolor{stringliteral}{"{}channel:command\ string"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ command\ string\ invoked\ when\ the\ value\ on\ ADC\ channel\ [channel]\ changes"{}}\},}
+\DoxyCodeLine{\ \ \{\ \textcolor{stringliteral}{"{}adcdefaults"{}},\ \textcolor{stringliteral}{"{}acd"{}},\ \textcolor{stringliteral}{"{}-\/"{}}\ \textcolor{stringliteral}{"{}Reverts\ all\ ADC\ command\ strings\ to\ default\ values"{}}\ \},}
+\DoxyCodeLine{\ \ \{\ \textcolor{stringliteral}{"{}adcread"{}},\ \textcolor{stringliteral}{"{}adcr"{}},\ \textcolor{stringliteral}{"{}channel:value"{}},\ \textcolor{stringliteral}{"{}Sent\ when\ a\ new\ value\ is\ presented\ on\ one\ of\ the\ ADC\ channels,\ cannot\ be\ invoked"{}}\ \},}
+\DoxyCodeLine{\ \ \{\ \textcolor{stringliteral}{"{}adcsettings"{}},\ \textcolor{stringliteral}{"{}adcs"{}},\ \textcolor{stringliteral}{"{}channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout"{}},\ \textcolor{stringliteral}{"{}Explain\ ADC\ settings\ here"{}}\}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{controlReader_8hpp_a3c55c0cd1b85967ea65b6b0d9a16b92d}\label{controlReader_8hpp_a3c55c0cd1b85967ea65b6b0d9a16b92d} 
+\index{controlReader.hpp@{controlReader.hpp}!serialCommandsControlReaderHidden@{serialCommandsControlReaderHidden}}
+\index{serialCommandsControlReaderHidden@{serialCommandsControlReaderHidden}!controlReader.hpp@{controlReader.hpp}}
+\doxysubsubsection{\texorpdfstring{serialCommandsControlReaderHidden}{serialCommandsControlReaderHidden}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Commands\+Control\+Reader\+Hidden\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \{\ \textcolor{stringliteral}{"{}testadclatency"{}},\ \textcolor{stringliteral}{"{}tal"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Test\ ADC\ Latency"{}}\ \},}
+\DoxyCodeLine{\ \ \{\ \textcolor{stringliteral}{"{}testadclatencyreturn"{}},\ \textcolor{stringliteral}{"{}talr"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Return\ from\ test"{}}\ \},}
+\DoxyCodeLine{\ \ \{\ \textcolor{stringliteral}{"{}testadcminmax"{}},\ \textcolor{stringliteral}{"{}tamm"{}},\ \textcolor{stringliteral}{"{}channel"{}},\ \textcolor{stringliteral}{"{}Measure\ min/max\ value\ for\ a\ given\ channel\ and\ resets\ the\ counter"{}}\ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

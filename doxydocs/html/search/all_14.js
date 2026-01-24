@@ -1,11 +1,21 @@
 var searchData=
 [
-  ['validatenumber_0',['validateNumber',['../commandparser_8hpp.html#a91c0b52dff43b3f28af4dcd90938c4ea',1,'commandparser.hpp']]],
-  ['value_1',['value',['../classaverager.html#ade0cac017e395f4b8a524d44b0d831ec',1,'averager']]],
-  ['valueperrotation_2',['valuePerRotation',['../servostepper_8hpp.html#afede2097a25e7d6451771f11e431a6e1',1,'servostepper.hpp']]],
-  ['velocity_3',['velocity',['../structnoteMsg.html#ab465b72dedecef1146ca0c584ef5c48f',1,'noteMsg']]],
-  ['version_5fmajor_4',['VERSION_MAJOR',['../automaticversion_8hpp.html#a1a53b724b6de666faa8a9e0d06d1055f',1,'automaticversion.hpp']]],
-  ['version_5fmajor_5finit_5',['VERSION_MAJOR_INIT',['../automaticversion_8hpp.html#a9a6e4b16934b64a76320ab8311ee89e5',1,'automaticversion.hpp']]],
-  ['version_5fminor_6',['VERSION_MINOR',['../automaticversion_8hpp.html#ae0cb52afb79b185b1bf82c7e235f682b',1,'automaticversion.hpp']]],
-  ['version_5fminor_5finit_7',['VERSION_MINOR_INIT',['../automaticversion_8hpp.html#ae7b1bf4e4cd95c0bcf4eec71a7ed1f0d',1,'automaticversion.hpp']]]
+  ['uaccelperiod_0',['uAccelPeriod',['../classservoStepper.html#a1883b61564ace7a8797983f7965592e6',1,'servoStepper']]],
+  ['undefined_1',['Undefined',['../debugprint_8hpp.html#a7f327d12d94173c3c786ded0b10d2be4a18f893264a00711081b62de694f99db4',1,'debugprint.hpp']]],
+  ['unhomed_2',['UNHOMED',['../servostepper_8hpp.html#a142f56ac82b59271977a5351ea4e36f9a380c2e3ab567f5c3c5029541f2344d95',1,'servostepper.hpp']]],
+  ['updateperiod_3',['updatePeriod',['../classservoStepper.html#aaa70849e320f845a283e3ae01f084d3e',1,'servoStepper']]],
+  ['updateposition_4',['updatePosition',['../classservoStepper.html#a981bafbfa5bf82c13a4e620aab894dc2',1,'servoStepper']]],
+  ['updatepositionfirsthomingfalling_5',['updatePositionFirstHomingFalling',['../classservoStepper.html#ad2792b0bdfa52d1caf01fddabdb88b4c',1,'servoStepper']]],
+  ['updatepositionfirsthomingrising_6',['updatePositionFirstHomingRising',['../classservoStepper.html#a5d38d0a8e3d48c6f94736515247d0c32',1,'servoStepper']]],
+  ['updatepositiongotooffset_7',['updatePositionGotoOffset',['../classservoStepper.html#a461c43ca0fd0232c93fc18a7bd493d9f',1,'servoStepper']]],
+  ['updatepositionmove_8',['updatePositionMove',['../classservoStepper.html#af927425c748666b146956f455effbcad',1,'servoStepper']]],
+  ['updatepositionmovepasthomeswitch_9',['updatePositionMovePastHomeSwitch',['../classservoStepper.html#a131155bf76281c013cb17abaea38d0c9',1,'servoStepper']]],
+  ['updatepositionmovetohomeswitch_10',['updatePositionMoveToHomeSwitch',['../classservoStepper.html#a6d11d8308b5d1ffad77f5df3331d99a6',1,'servoStepper']]],
+  ['updatepositionsecondhomingfalling_11',['updatePositionSecondHomingFalling',['../classservoStepper.html#aba059b166e86d21121671db3530db43a',1,'servoStepper']]],
+  ['updatepositionsecondhomingrising_12',['updatePositionSecondHomingRising',['../classservoStepper.html#a1a7fb59f63dd2f6cf7f513ceb11a293e',1,'servoStepper']]],
+  ['updaterollingstatus_13',['updateRollingStatus',['../main_8cpp.html#ab04d737a375f71bd322407e877bcfa68',1,'main.cpp']]],
+  ['usb_14',['USB',['../debugprint_8hpp.html#a7f327d12d94173c3c786ded0b10d2be4a65f6b55fdc64778bf10632a795b97761',1,'debugprint.hpp']]],
+  ['usb_5fstring_5fmanufacturer_5fname_15',['usb_string_manufacturer_name',['../name_8c.html#aa8457ef11f394fd7531cb8fdee9c81c8',1,'name.c']]],
+  ['usb_5fstring_5fproduct_5fname_16',['usb_string_product_name',['../name_8c.html#ac306526ea4c665592e1c51d6253cbad7',1,'name.c']]],
+  ['usb_5fstring_5fserial_5fnumber_17',['usb_string_serial_number',['../name_8c.html#ad12fc4a657b6d8e7c5f04c8e2f1026ed',1,'name.c']]]
 ];

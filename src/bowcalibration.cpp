@@ -233,16 +233,14 @@ eCalibrationResult CalibrateBow::findMinMaxPressure() {
             bowControl->setEngagePressure(0);
         }
 
-        if (bowControl->getEngagePressure() > 3000) {
-            bowControl->setRestPressure(bowControl->getEngagePressure() - 3000);
+        if (bowControl->getRestPressure() > 3000) {
+            bowControl->setRestPressure(bowControl->getRestPressure() - 3000);
         } else {
             bowControl->setRestPressure(0);
         }
         debugPrintln("Good results acquired, setting firstTouchPressure to " + String(bowControl->getEngagePressure()) + " and restPosition to " +
                      String(bowControl->getRestPressure()), debugPrintType::Debug);
-    }/* else {
-        debugPrintln("Results invalid, not modifying data" , debugPrintType::Error);
-    }*/
+    }
 
     bowControl->setPressureAutocorrect(autoCorrectPositionSave);
     bowControl->setPressureMotorSpeed(speed);
@@ -436,10 +434,10 @@ bool CalibrateBow::findMinMaxSpeedPID() {
     return true;
 }
 */
-String CalibrateBow::dumpData() {
+/*String CalibrateBow::dumpData() {
     String dump = "";
     return dump;
-}
+}*/
 
 /// Perform all calibration tests
 bool CalibrateBow::calibrateAll() {

@@ -5,14 +5,14 @@
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TMC2209\_SERVOSTEPPER\_C}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TMC2209\_SERVOSTEPPER\_C}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tmc2209__servostepper_8hpp}{tmc2209\_servostepper.hpp}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}tmc2209\_servostepper.hpp"{}}}
 \DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ \mbox{\hyperlink{classTmc2209ServoStepper_af2f0449ed69854f4c22be9631bfe2877}{Tmc2209ServoStepper::Tmc2209ServoStepper}}(\textcolor{keywordtype}{char}\ inStepDirPin,\ \textcolor{keywordtype}{char}\ inStepStepPin,\ HardwareSerial\ *inStepSerialPort,\ \textcolor{keywordtype}{char}\ inStepHomeSensorPin)\ \{}
-\DoxyCodeLine{00007\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_a4c2eff62dac49abb51f38d52da9de57c}{stepSerialStream}}\ =\ inStepSerialPort;}
-\DoxyCodeLine{00008\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classservoStepper}{servoStepper}}(inStepStepPin,\ inStepDirPin,\ inStepHomeSensorPin);\ \textcolor{comment}{//,\ stepEnPin);}}
-\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{stepTMC2209Driver}}\ =\ \textcolor{keyword}{new}\ TMC2209();}
-\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_a8b80efbb0d386c6100a3a74a0c80d513}{setupTMC2209}}();}
-\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a5de698c0807fbb76b5139ee8d9d27449}{setHomingOffset}}(6000);}
+\DoxyCodeLine{00006\ Tmc2209ServoStepper::Tmc2209ServoStepper(\textcolor{keywordtype}{char}\ inStepDirPin,\ \textcolor{keywordtype}{char}\ inStepStepPin,\ HardwareSerial\ *inStepSerialPort,\ \textcolor{keywordtype}{char}\ inStepHomeSensorPin)\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ stepSerialStream\ =\ inStepSerialPort;}
+\DoxyCodeLine{00008\ \ \ \ \ stepServoStepper\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classservoStepper}{servoStepper}}(inStepStepPin,\ inStepDirPin,\ inStepHomeSensorPin);\ \textcolor{comment}{//,\ stepEnPin);}}
+\DoxyCodeLine{00009\ \ \ \ \ stepTMC2209Driver\ =\ \textcolor{keyword}{new}\ TMC2209();}
+\DoxyCodeLine{00010\ \ \ \ \ setupTMC2209();}
+\DoxyCodeLine{00011\ \ \ \ \ stepServoStepper-\/>setHomingOffset(6000);}
 \DoxyCodeLine{00012\ \textcolor{comment}{/*}}
 \DoxyCodeLine{00013\ \textcolor{comment}{\ \ \ \ debugPrintln("{}Starting\ home"{},\ Debug);}}
 \DoxyCodeLine{00014\ \textcolor{comment}{\ \ \ \ stepTMC2209Driver-\/>setRunCurrent(stepHomeCurrentPercent);}}
@@ -23,31 +23,31 @@
 \DoxyCodeLine{00019\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Homing\ FAILED!"{},\ Error);}}
 \DoxyCodeLine{00020\ \textcolor{comment}{\ \ \ \ \}}}
 \DoxyCodeLine{00021\ \textcolor{comment}{\ \ \ \ */}}
-\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{stepTMC2209Driver}}-\/>setRunCurrent(\mbox{\hyperlink{classTmc2209ServoStepper_aebef7880b107a993d5d135a0a090ed77}{stepRunCurrentPercent}});}
+\DoxyCodeLine{00022\ \ \ \ \ stepTMC2209Driver-\/>setRunCurrent(stepRunCurrentPercent);}
 \DoxyCodeLine{00023\ \textcolor{comment}{//\ \ \ \ stepServoStepper-\/>setPosition(0);}}
-\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{completeTask}}();}
-\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a756180269e0983c5a5f30c0dbc0539e3}{setSpeed}}(15);}
+\DoxyCodeLine{00024\ \ \ \ \ stepServoStepper-\/>completeTask();}
+\DoxyCodeLine{00025\ \ \ \ \ stepServoStepper-\/>setSpeed(15);}
 \DoxyCodeLine{00026\ \}}
 \DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classTmc2209ServoStepper_a8b80efbb0d386c6100a3a74a0c80d513}{Tmc2209ServoStepper::setupTMC2209}}()\ \{}
-\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{stepTMC2209Driver}}\ ==\ \textcolor{keyword}{nullptr})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00028\ \textcolor{keywordtype}{bool}\ Tmc2209ServoStepper::setupTMC2209()\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{if}\ (stepTMC2209Driver\ ==\ \textcolor{keyword}{nullptr})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
 \DoxyCodeLine{00030\ }
-\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{stepTMC2209Driver}}-\/>setup(*\mbox{\hyperlink{classTmc2209ServoStepper_a4c2eff62dac49abb51f38d52da9de57c}{stepSerialStream}});}
-\DoxyCodeLine{00032\ \ \ \ \ delay(\mbox{\hyperlink{classTmc2209ServoStepper_ae8acd38ce5711b82b86c07cbe7f4e208}{stepConnectDelay}});}
+\DoxyCodeLine{00031\ \ \ \ \ stepTMC2209Driver-\/>setup(*stepSerialStream);}
+\DoxyCodeLine{00032\ \ \ \ \ delay(stepConnectDelay);}
 \DoxyCodeLine{00033\ }
-\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{stepTMC2209Driver}}-\/>setRunCurrent(\mbox{\hyperlink{classTmc2209ServoStepper_aebef7880b107a993d5d135a0a090ed77}{stepRunCurrentPercent}});}
-\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{stepTMC2209Driver}}-\/>setMicrostepsPerStep(\mbox{\hyperlink{classTmc2209ServoStepper_aa55e6b34de6dbbe81494e0ad3ce780d6}{stepMicrostepping}});}
-\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{stepTMC2209Driver}}-\/>disableStealthChop();}
-\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{stepTMC2209Driver}}-\/>setHoldCurrent(10);}
-\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{stepTMC2209Driver}}-\/>enable();}
+\DoxyCodeLine{00034\ \ \ \ \ stepTMC2209Driver-\/>setRunCurrent(stepRunCurrentPercent);}
+\DoxyCodeLine{00035\ \ \ \ \ stepTMC2209Driver-\/>setMicrostepsPerStep(stepMicrostepping);}
+\DoxyCodeLine{00036\ \ \ \ \ stepTMC2209Driver-\/>disableStealthChop();}
+\DoxyCodeLine{00037\ \ \ \ \ stepTMC2209Driver-\/>setHoldCurrent(10);}
+\DoxyCodeLine{00038\ \ \ \ \ stepTMC2209Driver-\/>enable();}
 \DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
 \DoxyCodeLine{00040\ \}}
 \DoxyCodeLine{00041\ }
 \DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTmc2209ServoStepper_a4ef70b1a8a5fb8166d225b3e4f6ba63d}{Tmc2209ServoStepper::getTMC2209Info}}()\ \{}
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ Tmc2209ServoStepper::getTMC2209Info()\ \{}
 \DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}*************************"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
 \DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}getSettings()"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
-\DoxyCodeLine{00046\ \ \ \ \ TMC2209::Settings\ settings\ =\ \mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{stepTMC2209Driver}}-\/>getSettings();}
+\DoxyCodeLine{00046\ \ \ \ \ TMC2209::Settings\ settings\ =\ stepTMC2209Driver-\/>getSettings();}
 \DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.is\_communicating\ =\ "{}}\ +\ String(settings.is\_communicating),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
 \DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.is\_setup\ =\ "{}}\ +\ String(settings.is\_setup),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
 \DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}settings.software\_enabled\ =\ "{}}\ +\ String(settings.software\_enabled),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
@@ -88,14 +88,14 @@
 \DoxyCodeLine{00084\ }
 \DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}*************************"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
 \DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}hardwareDisabled()"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
-\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{bool}\ hardware\_disabled\ =\ \mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{stepTMC2209Driver}}-\/>hardwareDisabled();}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{bool}\ hardware\_disabled\ =\ stepTMC2209Driver-\/>hardwareDisabled();}
 \DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a12ba011dd5b1adf8f77184369290a419}{debugPrint}}(\textcolor{stringliteral}{"{}hardware\_disabled\ =\ "{}}\ +\ String(hardware\_disabled),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
 \DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}*************************"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
 \DoxyCodeLine{00090\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
 \DoxyCodeLine{00091\ }
 \DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}*************************"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
 \DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}getStatus()"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
-\DoxyCodeLine{00094\ \ \ \ \ TMC2209::Status\ status\ =\ \mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{stepTMC2209Driver}}-\/>getStatus();}
+\DoxyCodeLine{00094\ \ \ \ \ TMC2209::Status\ status\ =\ stepTMC2209Driver-\/>getStatus();}
 \DoxyCodeLine{00095\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.over\_temperature\_warning\ =\ "{}}\ +\ String(status.over\_temperature\_warning),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
 \DoxyCodeLine{00096\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.over\_temperature\_shutdown\ =\ "{}}\ +\ String(status.over\_temperature\_shutdown),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
 \DoxyCodeLine{00097\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}status.short\_to\_ground\_a\ =\ "{}}\ +\ String(status.short\_to\_ground\_a),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
@@ -116,27 +116,27 @@
 \DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordflow}{return};}
 \DoxyCodeLine{00113\ \}}
 \DoxyCodeLine{00114\ }
-\DoxyCodeLine{00115\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classTmc2209ServoStepper_acd55654b623910f5ed3af081148372b6}{Tmc2209ServoStepper::home}}(\textcolor{keywordtype}{bool}\ invert)\ \{}
+\DoxyCodeLine{00115\ \textcolor{keywordtype}{bool}\ Tmc2209ServoStepper::home(\textcolor{keywordtype}{bool}\ invert)\ \{}
 \DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Starting\ home"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
 \DoxyCodeLine{00117\ }
-\DoxyCodeLine{00118\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a5de698c0807fbb76b5139ee8d9d27449}{setHomingOffset}}(6000);}
-\DoxyCodeLine{00119\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{stepTMC2209Driver}}-\/>setRunCurrent(\mbox{\hyperlink{classTmc2209ServoStepper_a16e2994ba591b2b7f4611f5e598af58c}{stepHomeCurrentPercent}});}
-\DoxyCodeLine{00120\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a5b83203a3efaeceaaa8bdbaab37624a6}{eStop}}();}
+\DoxyCodeLine{00118\ \ \ \ \ stepServoStepper-\/>setHomingOffset(6000);}
+\DoxyCodeLine{00119\ \ \ \ \ stepTMC2209Driver-\/>setRunCurrent(stepHomeCurrentPercent);}
+\DoxyCodeLine{00120\ \ \ \ \ stepServoStepper-\/>eStop();}
 \DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{if}\ (!invert)\ \{}
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a30df0093cfd5951322cb0bdf857e4209}{home}}(\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8aa26736999186daf8146f809e863712a1}{eStepDirection::FORWARD}},5,5,\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9}{eStepDirection::REVERSE}});\ \textcolor{comment}{//\ ,5,5}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ stepServoStepper-\/>home(\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8aa26736999186daf8146f809e863712a1}{eStepDirection::FORWARD}},5,5,\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9}{eStepDirection::REVERSE}});\ \textcolor{comment}{//\ ,5,5}}
 \DoxyCodeLine{00123\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a30df0093cfd5951322cb0bdf857e4209}{home}}(\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9}{eStepDirection::REVERSE}},5,5,\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8aa26736999186daf8146f809e863712a1}{eStepDirection::FORWARD}});\ \textcolor{comment}{//\ ,5,5}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ stepServoStepper-\/>home(\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8a906b7cc20b42994dda4da492767c1de9}{eStepDirection::REVERSE}},5,5,\mbox{\hyperlink{servostepper_8hpp_a2c05167dbd23f46366705808fb2354e8aa26736999186daf8146f809e863712a1}{eStepDirection::FORWARD}});\ \textcolor{comment}{//\ ,5,5}}
 \DoxyCodeLine{00125\ \ \ \ \ \}}
 \DoxyCodeLine{00126\ }
-\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{completeTask}}(5000))\ \{\ \ \ \ \textcolor{comment}{//2000}}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordflow}{if}\ (stepServoStepper-\/>completeTask(5000))\ \{\ \ \ \ \textcolor{comment}{//2000}}
 \DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Homed"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{Debug}});}
 \DoxyCodeLine{00129\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
 \DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Homing\ FAILED!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}});}
 \DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00132\ \ \ \ \ \}}
-\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_a8c335f5e906c76909f33e430b7309ec3}{stepTMC2209Driver}}-\/>setRunCurrent(\mbox{\hyperlink{classTmc2209ServoStepper_aebef7880b107a993d5d135a0a090ed77}{stepRunCurrentPercent}});}
-\DoxyCodeLine{00134\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a65a7de2492de7c71e3b2bf9cc5b1f9fd}{setPosition}}(0);}
-\DoxyCodeLine{00135\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{completeTask}}();}
+\DoxyCodeLine{00133\ \ \ \ \ stepTMC2209Driver-\/>setRunCurrent(stepRunCurrentPercent);}
+\DoxyCodeLine{00134\ \ \ \ \ stepServoStepper-\/>setPosition(0);}
+\DoxyCodeLine{00135\ \ \ \ \ stepServoStepper-\/>completeTask();}
 \DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
 \DoxyCodeLine{00137\ \}}
 \DoxyCodeLine{00138\ }

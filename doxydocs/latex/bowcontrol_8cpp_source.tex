@@ -23,215 +23,162 @@
 \DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ BOWCONTROL\_C}}
 \DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ BOWCONTROL\_C}}
 \DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bowcontrol_8hpp}{bowcontrol.hpp}}"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}bowcontrol.hpp"{}}}
 \DoxyCodeLine{00023\ }
 \DoxyCodeLine{00046\ \textcolor{comment}{/*****\ NEW\ CLASS\ *****/}}
 \DoxyCodeLine{00047\ }
-\DoxyCodeLine{00048\ \mbox{\hyperlink{classBowControl_acdd87742f360329eb78886432eb1536f}{BowControl::BowControl}}(\textcolor{keywordtype}{char}\ motorRevPin,\ \textcolor{keywordtype}{char}\ motorVoltagePin,\ \textcolor{keywordtype}{char}\ motorDCDCEnPin,\ \textcolor{keywordtype}{char}\ tachoPin,\ \textcolor{keywordtype}{char}\ currentSensePin,\ \textcolor{keywordtype}{char}\ motorFaultPin,}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ stepEnPin,\ \textcolor{keywordtype}{char}\ stepDirPin,\ \textcolor{keywordtype}{char}\ stepStepPin,\ HardwareSerial\ *stepSerialPort,\ \textcolor{keywordtype}{char}\ stepHomeSensorPin)\ \{}
-\DoxyCodeLine{00050\ }
-\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classDCMotorControl}{DCMotorControl}}(motorRevPin,\ motorVoltagePin,\ motorDCDCEnPin,\ tachoPin,\ currentSensePin,\ motorFaultPin);}
-\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classPIDController}{PIDController}}(*\mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}});}
-\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classBowPressure}{BowPressure}}(stepEnPin,\ stepDirPin,\ stepStepPin,\ stepSerialPort,\ stepHomeSensorPin);}
-\DoxyCodeLine{00054\ \textcolor{comment}{//\ \ \ \ bowActuators\ =\ new\ BowActuators(bowPressure);}}
-\DoxyCodeLine{00055\ \}}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00057\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classBowControl_af6e98ea3176a266902b7f95b409553b9}{BowControl::processSerialCommand}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request,\ \textcolor{keywordtype}{bool}\ delegate,\ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands)\ \{}
-\DoxyCodeLine{00058\ }
-\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ processResult\ =\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
+\DoxyCodeLine{00048\ \textcolor{keyword}{const}\ ModuleCommandDeclaration\ BowControl::moduleCommands[]\ =\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}speedmode"{}},\ \textcolor{stringliteral}{"{}sm"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ speed\ mode,\ 0\ =\ Automatic\ and\ 1\ =\ Manual"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_speedMode\ \},}
+\DoxyCodeLine{00050\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}motortimeout"{}},\ \textcolor{stringliteral}{"{}mt"{}},\ \textcolor{stringliteral}{"{}ms(0-\/65535)"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ shutdown\ timeout\ after\ bow\ having\ been\ put\ into\ the\ rest\ position"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \&s\_motorTimeout\ \},}
+\DoxyCodeLine{00051\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}pidenable"{}},\ \textcolor{stringliteral}{"{}pe"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ bow\ PID\ on/off"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_pidEnable\ \},}
+\DoxyCodeLine{00052\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}motorfaultcommands"{}},\ \textcolor{stringliteral}{"{}mfc"{}},\ \textcolor{stringliteral}{"{}command\ list"{}},\ \textcolor{stringliteral}{"{}Commands\ to\ execute\ when\ a\ motor\ fault\ is\ tripped\ -\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \&s\_motorFaultCommands\ \},}
+\DoxyCodeLine{00053\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}motoroverpowercommands"{}},\ \textcolor{stringliteral}{"{}moc"{}},\ \textcolor{stringliteral}{"{}command\ list"{}},\ \textcolor{stringliteral}{"{}Commands\ to\ execute\ when\ motor\ is\ over\ the\ power\ limit\ -\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \&s\_motorOverPowerCommands\ \},}
+\DoxyCodeLine{00054\ \};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \mbox{\hyperlink{bowcontrol_8cpp_a223c592eb8c4bc584a3ca8db7bf97fc7}{getModuleCount}}(BowControl)}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ BowControl::BowControl(\textcolor{keywordtype}{char}\ motorRevPin,\ \textcolor{keywordtype}{char}\ motorVoltagePin,\ \textcolor{keywordtype}{char}\ motorDCDCEnPin,\ \textcolor{keywordtype}{char}\ tachoPin,\ \textcolor{keywordtype}{char}\ currentSensePin,\ \textcolor{keywordtype}{char}\ motorFaultPin,}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ stepEnPin,\ \textcolor{keywordtype}{char}\ stepDirPin,\ \textcolor{keywordtype}{char}\ stepStepPin,\ HardwareSerial\ *stepSerialPort,\ \textcolor{keywordtype}{char}\ stepHomeSensorPin)\ \{}
 \DoxyCodeLine{00060\ }
-\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a2eea721b98604de46300feecf7703b60}{processCommandItems}}(inCommandItem,\ \mbox{\hyperlink{bowcontrol_8hpp_a7f6aed390f9ba1cf16fb5eadd20ea985}{serialCommandsBowControl}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{bowcontrol_8hpp_a7f6aed390f9ba1cf16fb5eadd20ea985}{serialCommandsBowControl}})\ \ /\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}));}
+\DoxyCodeLine{00061\ \ \ \ \ moduleID\ =\ \textcolor{keyword}{new}\ ModuleID(\textcolor{stringliteral}{"{}bowingwheel"{}},\ \textcolor{stringliteral}{"{}bw"{}},\ \textcolor{stringliteral}{"{}Bowing\ wheel\ controller\ v1.0"{}},\ ModuleID::hardware);}
 \DoxyCodeLine{00062\ }
-\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}help"{}})\ \{}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a9584ed5f207c1c49b9a477ada94421f8}{addCommandHelp}}(\mbox{\hyperlink{bowcontrol_8hpp_a7f6aed390f9ba1cf16fb5eadd20ea985}{serialCommandsBowControl}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{bowcontrol_8hpp_a7f6aed390f9ba1cf16fb5eadd20ea985}{serialCommandsBowControl}})\ /\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}),\ commandResponses,\textcolor{stringliteral}{"{}"{}});}
-\DoxyCodeLine{00065\ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \ \ \ \ dcMotorControl\ =\ \textcolor{keyword}{new}\ DCMotorControl(motorRevPin,\ motorVoltagePin,\ motorDCDCEnPin,\ tachoPin,\ currentSensePin,\ motorFaultPin);}
+\DoxyCodeLine{00064\ \ \ \ \ pidController\ =\ \textcolor{keyword}{new}\ PIDController(*dcMotorControl);}
+\DoxyCodeLine{00065\ \ \ \ \ bowPressure\ =\ \textcolor{keyword}{new}\ BowPressure(stepEnPin,\ stepDirPin,\ stepStepPin,\ stepSerialPort,\ stepHomeSensorPin);}
 \DoxyCodeLine{00066\ }
-\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordflow}{if}\ (((inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowpressurerest"{}})\ ||\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bpr"{}}))\ \&\&\ !request)\ \{}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Second\ rest"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()\ ==\ 1)\ \{\ \mbox{\hyperlink{classBowControl_a94d596c5aaa12f95f8e4fbeb2cae34b9}{rest}}();\ \}}
-\DoxyCodeLine{00071\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ commandsMotorFault\ =\ \textcolor{stringliteral}{"{}bw.dcm.ru:0,bw.bp.rs:1"{}};}
+\DoxyCodeLine{00068\ \ \ \ \ commandsOverPowerCurrent\ =\ \textcolor{stringliteral}{"{}bw.dcm.ru:0,bw.bp.rs:1,bw.dcm.es:1000"{}};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ harmonicSeriesHandler\ =\ \textcolor{keyword}{new}\ HarmonicSeriesHandler();}
+\DoxyCodeLine{00071\ \ \ \ \ bowActuators\ =\ \textcolor{keyword}{new}\ BowActuators(bowPressure);}
 \DoxyCodeLine{00072\ }
-\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowmotorrun"{}})\ \{}
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bmr:"{}}\ +\ String(\mbox{\hyperlink{classBowControl_a6f8c5fa626567fb11951672b76008574}{run}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()\ >\ 0)\ \{}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a6f8c5fa626567fb11951672b76008574}{run}}\ =\ 1;}
-\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_ad85e1b63df6744986e6f9a2cec9c0ce2}{enableMotorPower}}();}
-\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a6f8c5fa626567fb11951672b76008574}{run}}\ =\ 0;}
-\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_ad45596053d5c1d91e50f574a2373479a}{disableMotorPower}}();}
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}bmr:"{}}\ +\ String(\mbox{\hyperlink{classBowControl_a6f8c5fa626567fb11951672b76008574}{run}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00087\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowpid"{}})\ \{}
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bpid:"{}}\ +\ String(\mbox{\hyperlink{classBowControl_a42be04959663fd67a1d054d33c8bea36}{PIDon}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()\ >\ 0)\ \{\ \mbox{\hyperlink{classBowControl_a42be04959663fd67a1d054d33c8bea36}{PIDon}}\ =\ \textcolor{keyword}{true};\ \}\ \textcolor{keywordflow}{else}\ \{\ \mbox{\hyperlink{classBowControl_a42be04959663fd67a1d054d33c8bea36}{PIDon}}\ =\ \textcolor{keyword}{false};\}}
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}bpid:"{}}\ +\ String(\mbox{\hyperlink{classBowControl_a42be04959663fd67a1d054d33c8bea36}{PIDon}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00096\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowcontrolspeedmode"{}})\ \{}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}bcsm:"{}}\ +\ String(\textcolor{keywordtype}{int}(\mbox{\hyperlink{classBowControl_af4e1e48fb1eca92f085369c3f5ef2dd7}{speedMode}})),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt(),\ 0,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7945af4588755e4b73b7855397babbb1}{eProcessResult::WrongArgumentValue}};\ \}}
-\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_af4e1e48fb1eca92f085369c3f5ef2dd7}{speedMode}}\ =\ (\mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{eSpeedMode}})\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt());}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}bcsm:"{}}\ +\ String(\textcolor{keywordtype}{int}(\mbox{\hyperlink{classBowControl_af4e1e48fb1eca92f085369c3f5ef2dd7}{speedMode}})),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00106\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowmotordirectpwm"{}})\ \{}
-\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bmdp:"{}}\ +\ String(\mbox{\hyperlink{classBowControl_a02921994677bd6d96ea0840ef325eb78}{manualMotorPWM}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a02921994677bd6d96ea0840ef325eb78}{manualMotorPWM}}\ =\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
-\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}bmdp:"{}}\ +\ String(\mbox{\hyperlink{classBowControl_a02921994677bd6d96ea0840ef325eb78}{manualMotorPWM}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
-\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00115\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowmotortimeout"{}})\ \{}
-\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bmt:"{}}\ +\ String(\mbox{\hyperlink{classBowControl_a1436681ee5d3b07547d8a18791f6d9a9}{bowShutoffTimeout}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a1436681ee5d3b07547d8a18791f6d9a9}{bowShutoffTimeout}}\ =\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}bmt:"{}}\ +\ String(\mbox{\hyperlink{classBowControl_a1436681ee5d3b07547d8a18791f6d9a9}{bowShutoffTimeout}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00123\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowmotorfaultcommands"{}})\ \{}
-\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
-\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a74f0eb026fb337a254953127b09d9de9}{commandsMotorFault}}\ =\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0],\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bmfc:"{}}\ +\ String(\mbox{\hyperlink{classBowControl_a74f0eb026fb337a254953127b09d9de9}{commandsMotorFault}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00130\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowmotoroverpowercommands"{}})\ \{}
-\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
-\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a758d29eb32ccdf7d69e8e5026e34a043}{commandsOverPowerCurrent}}\ =\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0],\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bmopc:"{}}\ +\ String(\mbox{\hyperlink{classBowControl_a758d29eb32ccdf7d69e8e5026e34a043}{commandsOverPowerCurrent}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00137\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ processResult\ =\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_aa8bdebfaa32dc5d991a77270d0d37f06}{processSerialCommand}}(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}
-\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}})\ \&\&\ (processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{eProcessResult::PassThrough}}))\ \{\ \textcolor{keywordflow}{return}\ processResult;\ \}}
-\DoxyCodeLine{00140\ }
-\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ processResult\ =\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a325129fe30f71a28ef89ea346bc43252}{processSerialCommand}}(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}
-\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}})\ \&\&\ (processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{eProcessResult::PassThrough}}))\ \{\ \textcolor{keywordflow}{return}\ processResult;\ \}}
-\DoxyCodeLine{00143\ }
-\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ processResult\ =\ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_a698b5049315451aa42344da9c3a0c738}{processSerialCommand}}(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}
+\DoxyCodeLine{00073\ \ \ \ \ addModule(dcMotorControl);}
+\DoxyCodeLine{00074\ \ \ \ \ addModule(pidController);}
+\DoxyCodeLine{00075\ \ \ \ \ addModule(bowPressure);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ addModule(bowActuators);}
+\DoxyCodeLine{00078\ \ \ \ \ addModule(harmonicSeriesHandler);}
+\DoxyCodeLine{00079\ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \mbox{\hyperlink{bowcontrol_8cpp_a63e6ab50d790f7fb869b37086922f522}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(speedMode,\ BowControl)\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentCount;\ \}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(inCommandItem-\/>argument[0].toInt(),\ 0,\ 1))\ \{\ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentValue;\ \}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ pSpeedMode\ =\ (eSpeedMode)\ (inCommandItem-\/>argument[0].toInt());}
+\DoxyCodeLine{00086\ \ \ \ \ \}}
+\DoxyCodeLine{00087\ \ \ \ \ inCommandResponses-\/>push\_back(\{thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\textcolor{keywordtype}{int}(pSpeedMode)),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00089\ \};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \mbox{\hyperlink{bowcontrol_8cpp_a63e6ab50d790f7fb869b37086922f522}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(motorTimeout,\ BowControl)\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ bowShutoffTimeout\ =\ inCommandItem-\/>argument[0].toInt();}
+\DoxyCodeLine{00094\ \ \ \ \ \}}
+\DoxyCodeLine{00095\ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(bowShutoffTimeout),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00097\ \};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \mbox{\hyperlink{bowcontrol_8cpp_a63e6ab50d790f7fb869b37086922f522}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(pidEnable,\ BowControl)\ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentCount;\ \}}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>argument[0].toInt()\ >\ 0)\ \{\ PIDon\ =\ \textcolor{keyword}{true};\ \}\ \textcolor{keywordflow}{else}\ \{\ PIDon\ =\ \textcolor{keyword}{false};\}}
+\DoxyCodeLine{00103\ \ \ \ \ \}}
+\DoxyCodeLine{00104\ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(PIDon),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00106\ \};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \mbox{\hyperlink{bowcontrol_8cpp_a63e6ab50d790f7fb869b37086922f522}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(motorFaultCommands,\ BowControl)\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentCount;\ \}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ commandsMotorFault\ =\ \mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(inCommandItem-\/>argument[0]);}
+\DoxyCodeLine{00112\ \ \ \ \ \}}
+\DoxyCodeLine{00113\ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}(commandsMotorFault,\ \textcolor{keyword}{true}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00115\ \};}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \mbox{\hyperlink{bowcontrol_8cpp_a63e6ab50d790f7fb869b37086922f522}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(motorOverPowerCommands,\ BowControl)\ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ eProcessResult::WrongArgumentCount;\ \}}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ commandsOverPowerCurrent\ =\ \mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(inCommandItem-\/>argument[0]);}
+\DoxyCodeLine{00121\ \ \ \ \ \}}
+\DoxyCodeLine{00122\ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{commandparser_8hpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}(commandsOverPowerCurrent,\ \textcolor{keyword}{true}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{return}\ eProcessResult::Ok;}
+\DoxyCodeLine{00124\ \};}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \textcolor{keywordtype}{void}\ BowControl::rest()\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ bowShutoffTimer\ =\ 0;}
+\DoxyCodeLine{00128\ \ \ \ \ bowShutoffTimedout\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ added\ 2024-\/06-\/27}}
+\DoxyCodeLine{00129\ \ \ \ \ bowShutoffMotorDisabled\ =\ \textcolor{keyword}{false};\ \ \ \ \textcolor{comment}{//\ added\ 2024-\/06-\/27}}
+\DoxyCodeLine{00130\ \}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \textcolor{keywordtype}{void}\ BowControl::updateMotorAutoShutdown()\ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordflow}{if}\ ((pSpeedMode\ ==\ eSpeedMode::Automatic)\ \&\&\ (bowPressure-\/>getHold()\ ==\ \textcolor{keyword}{false})\ \ \&\&\ (bowShutoffTimer\ >=\ bowShutoffTimeout))\ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((bowPressure-\/>getPressureMode()\ ==\ ePressureMode::Rest)\ \&\&\ (bowShutoffTimedout\ ==\ \textcolor{keyword}{false}))\ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ dcMotorControl-\/>setBowMotorRun(\textcolor{keyword}{false});}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//run\ =\ false;}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ bowShutoffTimedout\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Auto\ shutdown\ of\ motor"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((bowShutoffTimedout\ ==\ \textcolor{keyword}{true})\ \&\&\ (bowShutoffMotorDisabled\ ==\ \textcolor{keyword}{false})\ \&\&\ (dcMotorControl-\/>getAverageTachometerFreq()\ ==\ 0))\ \{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ dcMotorControl-\/>disableMotorPower();}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ bowShutoffMotorDisabled\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Auto\ shutdown\ of\ motor\ dc/dc\ converter"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00145\ \ \ \ \ \}}
-\DoxyCodeLine{00146\ }
-\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordflow}{return}\ processResult;}
-\DoxyCodeLine{00148\ \}}
-\DoxyCodeLine{00149\ }
-\DoxyCodeLine{00150\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classBowControl_acb0918bfce04f9b93899133f4f73db9a}{BowControl::processSerialCommandHidden}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request,\ \textcolor{keywordtype}{bool}\ delegate,\ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands)\ \{}
-\DoxyCodeLine{00151\ }
-\DoxyCodeLine{00152\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ processResult\ =\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}};}
-\DoxyCodeLine{00153\ }
-\DoxyCodeLine{00154\ \ \ \ \ processResult\ =\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_aca49dc9352f13a5d6099d0025f597f25}{processSerialCommandHidden}}(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}
-\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordflow}{if}\ ((processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}})\ \&\&\ (processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{eProcessResult::PassThrough}}))\ \{\ \textcolor{keywordflow}{return}\ processResult;\ \}}
-\DoxyCodeLine{00156\ }
-\DoxyCodeLine{00157\ \ \ \ \ processResult\ =\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a5e28fcc8d7953071b2668ada7672af9e}{processSerialCommandHidden}}(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}
-\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordflow}{if}\ ((processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}})\ \&\&\ (processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{eProcessResult::PassThrough}}))\ \{\ \textcolor{keywordflow}{return}\ processResult;\ \}}
-\DoxyCodeLine{00159\ }
-\DoxyCodeLine{00160\ \ \ \ \ processResult\ =\ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_ae1776f861448d87c44395830ab659c4d}{processSerialCommandHidden}}(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}
-\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordflow}{if}\ ((processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}})\ \&\&\ (processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{eProcessResult::PassThrough}}))\ \{\ \textcolor{keywordflow}{return}\ processResult;\ \}}
+\DoxyCodeLine{00146\ \}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \textcolor{keywordtype}{void}\ BowControl::updateRun\_PID()\ \{}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{comment}{//if\ (run)\ \{}}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordflow}{if}\ (dcMotorControl-\/>getBowMotorRun())\ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (PIDon)\ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pidController-\/>getPIDTarget()\ ==\ 0)\ \{\ dcMotorControl-\/>setSpeedPWM(0);\ \}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ pidController-\/>pidReset();}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//dcMotorControl-\/>setSpeedPWM(manualMotorPWM);}}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00157\ \ \ \ \ \}\ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ pidController-\/>pidReset();}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ dcMotorControl-\/>setSpeedPWM(0);}
+\DoxyCodeLine{00160\ \ \ \ \ \}}
+\DoxyCodeLine{00161\ \}}
 \DoxyCodeLine{00162\ }
-\DoxyCodeLine{00163\ }
-\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}};}
-\DoxyCodeLine{00165\ \}}
-\DoxyCodeLine{00166\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00167\ \textcolor{comment}{void\ BowControl::setBowSpeedPWM(uint16\_t\ speed)\ \{}}
-\DoxyCodeLine{00168\ \textcolor{comment}{\ \ \ \ pidController-\/>setPIDTarget(speed);}}
-\DoxyCodeLine{00169\ \textcolor{comment}{\}}}
-\DoxyCodeLine{00170\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00171\ String\ \mbox{\hyperlink{classBowControl_aa280a126dd30e3510c9dcb722d126b3e}{BowControl::dumpData}}()\ \{}
-\DoxyCodeLine{00172\ \ \ \ \ String\ dump\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00173\ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}bmt:"{}}\ +\ String(\mbox{\hyperlink{classBowControl_a1436681ee5d3b07547d8a18791f6d9a9}{bowShutoffTimeout}})\ +\ \textcolor{stringliteral}{"{},"{}};}
-\DoxyCodeLine{00174\ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}bmfc:"{}}\ +\ \mbox{\hyperlink{classBowControl_a74f0eb026fb337a254953127b09d9de9}{commandsMotorFault}}\ +\ \textcolor{stringliteral}{"{},"{}};}
-\DoxyCodeLine{00175\ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}bmopc:"{}}\ +\ \mbox{\hyperlink{classBowControl_a758d29eb32ccdf7d69e8e5026e34a043}{commandsOverPowerCurrent}}\ +\ \textcolor{stringliteral}{"{},"{}};}
-\DoxyCodeLine{00176\ \ \ \ \ dump\ +=\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a9bbce6a36186a7a470990ce73a09e230}{dumpData}}()\ +\ \textcolor{stringliteral}{"{},"{}};}
-\DoxyCodeLine{00177\ \ \ \ \ dump\ +=\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a4a8fb49c23e85135bdbb93ce6e038aab}{dumpData}}()\ +\ \textcolor{stringliteral}{"{},"{}};}
-\DoxyCodeLine{00178\ \ \ \ \ dump\ +=\ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_a1eb89031fc53df1e1e43e4f0440fb5e2}{dumpData}}()\ +\ \textcolor{stringliteral}{"{},"{}};}
-\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordflow}{return}\ dump;}
-\DoxyCodeLine{00180\ \}}
+\DoxyCodeLine{00163\ \textcolor{keywordtype}{void}\ BowControl::updateMotorStatus()\ \{}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordflow}{if}\ (dcMotorControl-\/>getSpeedPWM()\ !=\ 0)\ \{}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dcMotorControl-\/>isOverPower()\ ||\ dcMotorControl-\/>isOverCurrent())\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Bow\ over\ power!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_ae7826d05ec6eb6efce350270ead447c8}{globalResponseCommands}}.\mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{addCommands}}(commandsOverPowerCurrent);}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dcMotorControl-\/>getMotorFault())\ \{}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Bow\ motor\ fault!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_ae7826d05ec6eb6efce350270ead447c8}{globalResponseCommands}}.\mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{addCommands}}(commandsMotorFault);}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00173\ \ \ \ \ \}}
+\DoxyCodeLine{00174\ \}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \textcolor{keywordtype}{void}\ BowControl::update()\ \{}
+\DoxyCodeLine{00177\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{main_8cpp_af205655c0c86fc6aaf4c8450d8243938}{currentTime}}\ =\ micros();}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{main_8cpp_af205655c0c86fc6aaf4c8450d8243938}{currentTime}}\ -\/\ lastUpdate\ >=\ pidUpdateInterval)\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ lastUpdate\ =\ \mbox{\hyperlink{main_8cpp_af205655c0c86fc6aaf4c8450d8243938}{currentTime}};}
 \DoxyCodeLine{00181\ }
-\DoxyCodeLine{00182\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a94d596c5aaa12f95f8e4fbeb2cae34b9}{BowControl::rest}}()\ \{}
-\DoxyCodeLine{00183\ \ \ \ \ \mbox{\hyperlink{classBowControl_a9661a56ba31c3ac180cca845462e126e}{bowShutoffTimer}}\ =\ 0;}
-\DoxyCodeLine{00184\ \ \ \ \ \mbox{\hyperlink{classBowControl_a660628c5489ef9ac1bc4160cab81a8a0}{bowShutoffTimedout}}\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ added\ 2024-\/06-\/27}}
-\DoxyCodeLine{00185\ \ \ \ \ \mbox{\hyperlink{classBowControl_add46f10b20a135292c0650d1453b6f38}{bowShutoffMotorDisabled}}\ =\ \textcolor{keyword}{false};\ \ \ \ \textcolor{comment}{//\ added\ 2024-\/06-\/27}}
-\DoxyCodeLine{00186\ \}}
-\DoxyCodeLine{00187\ }
-\DoxyCodeLine{00188\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_adc093196abff58a20a09a47a34dc8962}{BowControl::updateMotorAutoShutdown}}()\ \{}
-\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classBowControl_af4e1e48fb1eca92f085369c3f5ef2dd7}{speedMode}}\ ==\ \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389}{eSpeedMode::Automatic}})\ \&\&\ (\mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a4c398fe321290b51a3c7af223e450dcc}{getHold}}()\ ==\ \textcolor{keyword}{false})\ \ \&\&\ (\mbox{\hyperlink{classBowControl_a9661a56ba31c3ac180cca845462e126e}{bowShutoffTimer}}\ >=\ \mbox{\hyperlink{classBowControl_a1436681ee5d3b07547d8a18791f6d9a9}{bowShutoffTimeout}}))\ \{}
-\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_adc8babd4d6e1c175a19e4a3f7f268fc0}{getPressureMode}}()\ ==\ \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0ca661e967c4cfe56fd40a290550b64d8dc}{ePressureMode::Rest}})\ \&\&\ (\mbox{\hyperlink{classBowControl_a660628c5489ef9ac1bc4160cab81a8a0}{bowShutoffTimedout}}\ ==\ \textcolor{keyword}{false}))\ \{}
-\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a6f8c5fa626567fb11951672b76008574}{run}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a660628c5489ef9ac1bc4160cab81a8a0}{bowShutoffTimedout}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Auto\ shutdown\ of\ motor"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
-\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classBowControl_a660628c5489ef9ac1bc4160cab81a8a0}{bowShutoffTimedout}}\ ==\ \textcolor{keyword}{true})\ \&\&\ (\mbox{\hyperlink{classBowControl_add46f10b20a135292c0650d1453b6f38}{bowShutoffMotorDisabled}}\ ==\ \textcolor{keyword}{false})\ \&\&\ (\mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a77964b1c2ef9755ef26d638b71668dd4}{getAverageTachometerFreq}}()\ ==\ 0))\ \{}
-\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_ad45596053d5c1d91e50f574a2373479a}{disableMotorPower}}();}
-\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_add46f10b20a135292c0650d1453b6f38}{bowShutoffMotorDisabled}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Auto\ shutdown\ of\ motor\ dc/dc\ converter"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
-\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00200\ \ \ \ \ \}}
-\DoxyCodeLine{00201\ \}}
-\DoxyCodeLine{00202\ }
-\DoxyCodeLine{00203\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a6591f25b0e546db27e70518e9586f2c7}{BowControl::updateRun\_PID}}()\ \{}
-\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classBowControl_a6f8c5fa626567fb11951672b76008574}{run}})\ \{}
-\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classBowControl_a42be04959663fd67a1d054d33c8bea36}{PIDon}})\ \{}
-\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_a375a129b71794ea6d39ccc808447c448}{getPIDTarget}}()\ ==\ 0)\ \{\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a097df1a3dae34be3cc5f79e4f9661396}{setSpeedPWM}}(0);\ \}}
-\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_ae0bbbe3b4f6578d6475307f83d3ca673}{pidReset}}();}
-\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a097df1a3dae34be3cc5f79e4f9661396}{setSpeedPWM}}(\mbox{\hyperlink{classBowControl_a02921994677bd6d96ea0840ef325eb78}{manualMotorPWM}});}
-\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00211\ \ \ \ \ \}\ \ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_ae0bbbe3b4f6578d6475307f83d3ca673}{pidReset}}();}
-\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a097df1a3dae34be3cc5f79e4f9661396}{setSpeedPWM}}(0);}
-\DoxyCodeLine{00214\ \ \ \ \ \}}
-\DoxyCodeLine{00215\ \}}
-\DoxyCodeLine{00216\ }
-\DoxyCodeLine{00217\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a3a87552e91d321d9bcaf6d81b2723798}{BowControl::updateMotorStatus}}()\ \{}
-\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_aed8ce9c5b23c8b1acbbcaeeebdaf4eed}{getSpeedPWM}}()\ !=\ 0)\ \{}
-\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a005cc5e24ccd310852e74bc36c94b851}{isOverPower}}()\ ||\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a14bb4c5d36ab23e70508627ed87643c0}{isOverCurrent}}())\ \{}
-\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Bow\ over\ power!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
-\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}}-\/>\mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{addCommands}}(\mbox{\hyperlink{classBowControl_a758d29eb32ccdf7d69e8e5026e34a043}{commandsOverPowerCurrent}});}
-\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_ab8b71fef2e8899370e4d0d249edc2576}{getMotorFault}}())\ \{}
-\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Bow\ motor\ fault!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
-\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}}-\/>\mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{addCommands}}(\mbox{\hyperlink{classBowControl_a74f0eb026fb337a254953127b09d9de9}{commandsMotorFault}});}
-\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00227\ \ \ \ \ \}}
-\DoxyCodeLine{00228\ \}}
-\DoxyCodeLine{00229\ }
-\DoxyCodeLine{00230\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a1e738a6854d44a43b309f1ad9a29a559}{BowControl::update}}()\ \{}
-\DoxyCodeLine{00231\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{main_8cpp_af205655c0c86fc6aaf4c8450d8243938}{currentTime}}\ =\ micros();}
-\DoxyCodeLine{00232\ }
-\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{main_8cpp_af205655c0c86fc6aaf4c8450d8243938}{currentTime}}\ -\/\ \mbox{\hyperlink{classBowControl_ac8743e51d6e90939a32feed0f820d5f8}{lastUpdate}}\ >=\ \mbox{\hyperlink{classBowControl_a6ef6cfda459694dca3afa9d9ad049ced}{pidUpdateInterval}})\ \{}
-\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_ac8743e51d6e90939a32feed0f820d5f8}{lastUpdate}}\ =\ \mbox{\hyperlink{main_8cpp_af205655c0c86fc6aaf4c8450d8243938}{currentTime}};}
-\DoxyCodeLine{00235\ }
-\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_adc093196abff58a20a09a47a34dc8962}{updateMotorAutoShutdown}}();}
-\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a6591f25b0e546db27e70518e9586f2c7}{updateRun\_PID}}();}
-\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a3a87552e91d321d9bcaf6d81b2723798}{updateMotorStatus}}();}
-\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_af381de6731a25b1ee801cf4c6766a213}{update}}();}
-\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ bowing\ wheel\ speed\ is\ zero}}
-\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a4e0c7f4157b7a8302a84e0d58e2c769b}{checkTachometerTimeout}}();}
-\DoxyCodeLine{00242\ \ \ \ \ \}}
-\DoxyCodeLine{00243\ }
-\DoxyCodeLine{00244\ \ \ \ \ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_af381de6731a25b1ee801cf4c6766a213}{update}}();}
-\DoxyCodeLine{00245\ \}}
-\DoxyCodeLine{00246\ }
-\DoxyCodeLine{00247\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a49f7fa12c0ca3a731d042b4a4adc6324}{BowControl::updatePID}}()\ \{}
-\DoxyCodeLine{00248\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classBowControl_a42be04959663fd67a1d054d33c8bea36}{PIDon}}\ \&\&\ (\mbox{\hyperlink{classBowControl_a6f8c5fa626567fb11951672b76008574}{run}}\ ==\ 1)\ \&\&\ (\mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_a375a129b71794ea6d39ccc808447c448}{getPIDTarget}}()\ >\ 0))\ \{}
-\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_a04e654ba7d6720fa68bb74946c0b138d}{pidControl}}();}
-\DoxyCodeLine{00250\ \ \ \ \ \}}
-\DoxyCodeLine{00251\ \}}
-\DoxyCodeLine{00252\ }
-\DoxyCodeLine{00253\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ updateMotorAutoShutdown();}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ updateRun\_PID();}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ updateMotorStatus();}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ bowPressure-\/>update();}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ bowing\ wheel\ speed\ is\ zero}}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ dcMotorControl-\/>checkTachometerTimeout();}
+\DoxyCodeLine{00188\ \ \ \ \ \}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \ \ bowPressure-\/>update();}
+\DoxyCodeLine{00191\ \}}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \textcolor{keywordtype}{void}\ BowControl::updatePID()\ \{}
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keywordflow}{if}\ (PIDon\ \&\&\ (dcMotorControl-\/>getBowMotorRun()\ ==\ 1)\ \&\&\ (pidController-\/>getPIDTarget()\ >\ 0))\ \{}
+\DoxyCodeLine{00195\ \textcolor{comment}{//\ \ \ \ if\ (PIDon\ \&\&\ (run\ ==\ 1)\ \&\&\ (pidController-\/>getPIDTarget()\ >\ 0))\ \{}}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ pidController-\/>pidControl();}
+\DoxyCodeLine{00197\ \ \ \ \ \}}
+\DoxyCodeLine{00198\ \}}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

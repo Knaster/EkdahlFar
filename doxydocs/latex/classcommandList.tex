@@ -14,19 +14,19 @@ Class containing an array of \doxylink{classcommandItem}{command\+Item} objects 
 \item 
 void \mbox{\hyperlink{classcommandList_a0a2aa6dcae713788e3217d85d4facfd7}{wait\+If\+Processing}} ()
 \item 
-int \mbox{\hyperlink{classcommandList_a049b9bf7e110abb4d44d1760af0c93c4}{parse\+Quote\+Single}} (String command\+Items, int i)
+int \mbox{\hyperlink{classcommandList_a060e73762f17623fa0fe2079e7d08431}{parse\+Quote}} (String command\+String, char quote, int start)
 \item 
-int \mbox{\hyperlink{classcommandList_a82021fbc22036799183f9777a79f10c1}{parse\+Quote\+Double}} (String command\+Items, int i)
+int \mbox{\hyperlink{classcommandList_a12ff03e9259042daa07f184d66b387e2}{parse\+Bracket}} (String command\+String, int start)
 \item 
 void \mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{add\+Commands}} (String command\+Items)
 \begin{DoxyCompactList}\small\item\em Parses a string of commands into several \doxylink{classcommandItem}{command\+Item} objects. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classcommandList_af42de049662f915fd12f8ed92477c03f}{parse\+Command\+Expressions}} (te\+\_\+variable vars\mbox{[}$\,$\mbox{]}, int var\+Count)
-\begin{DoxyCompactList}\small\item\em Parses out a \doxylink{classcommandItem}{command\+Item} objects arguments with a expression parser using a list of variables. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcommandList_a642e2aff6de5eb65835d24dbceefd8a8}{parse\+Command\+Expressions}} (Expression\+Parser \mbox{\hyperlink{midi_8cpp_a6520e87f3b58b3b5ceff30a1e2353a1c}{expression\+Parser}})
+\item 
 \mbox{\hyperlink{classcommandList_a649398fbbbd83f3ccf3403419b465a2d}{command\+List}} (String command\+Items)
 \item 
-\mbox{\hyperlink{classcommandList_aecba7f7d49008de18d24c19fbd6b3dca}{command\+List}} ()
+\mbox{\hyperlink{classcommandList}{command\+List}} \& \mbox{\hyperlink{classcommandList_a17c67d5921695b3a111c2d6f0764889f}{operator=}} (const \mbox{\hyperlink{classcommandList}{command\+List}} \&other)
 \item 
-\mbox{\hyperlink{classcommandList_aa436fe7b5f53d07f16f9ace9cb82106f}{\texorpdfstring{$\sim$}{\string~}command\+List}} ()
+\mbox{\hyperlink{classcommandList_aecba7f7d49008de18d24c19fbd6b3dca}{command\+List}} ()
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -47,7 +47,8 @@ Class containing an array of \doxylink{classcommandItem}{command\+Item} objects 
 \doxysubsubsection{\texorpdfstring{commandList()}{commandList()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily command\+List\+::command\+List (\begin{DoxyParamCaption}\item[{String}]{command\+Items }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -59,12 +60,6 @@ Here is the call graph for this function\+:\nopagebreak
 \index{commandList@{commandList}!commandList@{commandList}}
 \doxysubsubsection{\texorpdfstring{commandList()}{commandList()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily command\+List\+::command\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-\Hypertarget{classcommandList_aa436fe7b5f53d07f16f9ace9cb82106f}\label{classcommandList_aa436fe7b5f53d07f16f9ace9cb82106f} 
-\index{commandList@{commandList}!````~commandList@{\texorpdfstring{$\sim$}{\string~}commandList}}
-\index{````~commandList@{\texorpdfstring{$\sim$}{\string~}commandList}!commandList@{commandList}}
-\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}commandList()}{\string~commandList()}}
-{\footnotesize\ttfamily command\+List\+::\texorpdfstring{$\sim$}{\string~}command\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -79,82 +74,84 @@ Here is the call graph for this function\+:\nopagebreak
 
 Parses a string of commands into several \doxylink{classcommandItem}{command\+Item} objects. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classcommandList_a904e6e8220f9141ed807005326dd96f6_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classcommandList_a904e6e8220f9141ed807005326dd96f6_icgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classcommandList_af42de049662f915fd12f8ed92477c03f}\label{classcommandList_af42de049662f915fd12f8ed92477c03f} 
+\Hypertarget{classcommandList_a17c67d5921695b3a111c2d6f0764889f}\label{classcommandList_a17c67d5921695b3a111c2d6f0764889f} 
+\index{commandList@{commandList}!operator=@{operator=}}
+\index{operator=@{operator=}!commandList@{commandList}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcommandList}{command\+List}} \& command\+List\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcommandList}{command\+List}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcommandList_a12ff03e9259042daa07f184d66b387e2}\label{classcommandList_a12ff03e9259042daa07f184d66b387e2} 
+\index{commandList@{commandList}!parseBracket@{parseBracket}}
+\index{parseBracket@{parseBracket}!commandList@{commandList}}
+\doxysubsubsection{\texorpdfstring{parseBracket()}{parseBracket()}}
+{\footnotesize\ttfamily int command\+List\+::parse\+Bracket (\begin{DoxyParamCaption}\item[{String}]{command\+String,  }\item[{int}]{start }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcommandList_a12ff03e9259042daa07f184d66b387e2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcommandList_a12ff03e9259042daa07f184d66b387e2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcommandList_a642e2aff6de5eb65835d24dbceefd8a8}\label{classcommandList_a642e2aff6de5eb65835d24dbceefd8a8} 
 \index{commandList@{commandList}!parseCommandExpressions@{parseCommandExpressions}}
 \index{parseCommandExpressions@{parseCommandExpressions}!commandList@{commandList}}
 \doxysubsubsection{\texorpdfstring{parseCommandExpressions()}{parseCommandExpressions()}}
-{\footnotesize\ttfamily void command\+List\+::parse\+Command\+Expressions (\begin{DoxyParamCaption}\item[{te\+\_\+variable}]{vars\mbox{[}$\,$\mbox{]},  }\item[{int}]{var\+Count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void command\+List\+::parse\+Command\+Expressions (\begin{DoxyParamCaption}\item[{Expression\+Parser}]{expression\+Parser }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-
-
-Parses out a \doxylink{classcommandItem}{command\+Item} objects arguments with a expression parser using a list of variables. 
-
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classcommandList_af42de049662f915fd12f8ed92477c03f_cgraph}
+\includegraphics[width=350pt]{classcommandList_a642e2aff6de5eb65835d24dbceefd8a8_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classcommandList_af42de049662f915fd12f8ed92477c03f_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classcommandList_a82021fbc22036799183f9777a79f10c1}\label{classcommandList_a82021fbc22036799183f9777a79f10c1} 
-\index{commandList@{commandList}!parseQuoteDouble@{parseQuoteDouble}}
-\index{parseQuoteDouble@{parseQuoteDouble}!commandList@{commandList}}
-\doxysubsubsection{\texorpdfstring{parseQuoteDouble()}{parseQuoteDouble()}}
-{\footnotesize\ttfamily int command\+List\+::parse\+Quote\+Double (\begin{DoxyParamCaption}\item[{String}]{command\+Items,  }\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\Hypertarget{classcommandList_a060e73762f17623fa0fe2079e7d08431}\label{classcommandList_a060e73762f17623fa0fe2079e7d08431} 
+\index{commandList@{commandList}!parseQuote@{parseQuote}}
+\index{parseQuote@{parseQuote}!commandList@{commandList}}
+\doxysubsubsection{\texorpdfstring{parseQuote()}{parseQuote()}}
+{\footnotesize\ttfamily int command\+List\+::parse\+Quote (\begin{DoxyParamCaption}\item[{String}]{command\+String,  }\item[{char}]{quote,  }\item[{int}]{start }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classcommandList_a82021fbc22036799183f9777a79f10c1_cgraph}
+\includegraphics[width=350pt]{classcommandList_a060e73762f17623fa0fe2079e7d08431_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classcommandList_a82021fbc22036799183f9777a79f10c1_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classcommandList_a049b9bf7e110abb4d44d1760af0c93c4}\label{classcommandList_a049b9bf7e110abb4d44d1760af0c93c4} 
-\index{commandList@{commandList}!parseQuoteSingle@{parseQuoteSingle}}
-\index{parseQuoteSingle@{parseQuoteSingle}!commandList@{commandList}}
-\doxysubsubsection{\texorpdfstring{parseQuoteSingle()}{parseQuoteSingle()}}
-{\footnotesize\ttfamily int command\+List\+::parse\+Quote\+Single (\begin{DoxyParamCaption}\item[{String}]{command\+Items,  }\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classcommandList_a049b9bf7e110abb4d44d1760af0c93c4_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classcommandList_a049b9bf7e110abb4d44d1760af0c93c4_icgraph}
+\includegraphics[width=350pt]{classcommandList_a060e73762f17623fa0fe2079e7d08431_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classcommandList_a0a2aa6dcae713788e3217d85d4facfd7}\label{classcommandList_a0a2aa6dcae713788e3217d85d4facfd7} 
@@ -163,7 +160,16 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{waitIfProcessing()}{waitIfProcessing()}}
 {\footnotesize\ttfamily void command\+List\+::wait\+If\+Processing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcommandList_a0a2aa6dcae713788e3217d85d4facfd7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

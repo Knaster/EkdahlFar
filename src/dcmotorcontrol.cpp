@@ -3,7 +3,25 @@
 
 #include "dcmotorcontrol.hpp"
 
+const ModuleCommandDeclaration DCMotorControl::moduleCommands[] = {
+    { "run", "ru", "1|0", "Set bow motor run on/off", false, false, &s_run },
+    { "pwm", "pw", "0-65535", "Bow motor direct power in 16-bit PWM values, requires that the PID is turned off", false, false, &s_pwm },
+    { "voltage", "vo", "float", "Bow motor voltage", false, true, &s_voltage },
+    { "current", "cu", "float", "Bow motor reported current use", false, false, &s_current },
+    { "currentlimit", "cl", "float", "Bow motor current limit (A)- !WARNING! Can ruin your instrument if changed", false, true, &s_currentLimit },
+    { "powerlimit", "pl", "float", "Bow motor power limit (W) - !WARNING! Can ruin your instrument if changed", false, true, &s_powerLimit },
+    { "frequency", "fq", "-", "Bow motor reported frequency", false, false, &s_frequency },
+    { "emergencystop", "es", "ms (0-65535)", "Immediately stops the bowing motor and doesn't allow it to start again until the cool down period given in \
+        the first argument has lapsed (milliseconds)", false, false, &s_emergencyStop },
+    { "minpwm", "ip", "-", "Bow motor minimum PWM (for calibration)", false, true, &s_minPWM },
+    { "maxpwm", "xp", "-", "Bow motor maximum PWM (for calibration)", false, true, &s_maxPWM }
+};
+
+getModuleCount(DCMotorControl)
+
 DCMotorControl::DCMotorControl(char inMotorRevPin, char inMotorVoltagePin, char inMotorDCDCEnPin, char inTachoPin, char inCurrentSensePin, char inMotorFaultPin) {
+    moduleID = new ModuleID("dcmotor", "dcm", "DC Motor controller v1.0", ModuleID::hardware);
+
     motorRevPin = inMotorRevPin;
     reflectorInterruptPin = inTachoPin;
     currentSensePin = inCurrentSensePin;
@@ -32,94 +50,100 @@ DCMotorControl::DCMotorControl(char inMotorRevPin, char inMotorVoltagePin, char 
     //attachInterrupt(digitalPinToInterrupt(inTachoPin), ((void*) (&(this->tachometerISRHandler))), CHANGE);
 }
 
-eProcessResult DCMotorControl::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
-
-    processCommandItems(inCommandItem, serialCommandsDCMotor, sizeof(serialCommandsDCMotor) / sizeof(serialCommandItem));
-
-    if (inCommandItem->command == "help") {
-        addCommandHelp(serialCommandsDCMotor, sizeof(serialCommandsDCMotor) / sizeof(serialCommandItem), commandResponses,"");
-        return eProcessResult::PassThrough;
-    } else
-    if (inCommandItem->command == "bowmotorvoltage") {
-        if (request) {
-            commandResponses->push_back({ "bmv:" + String(motorVoltage), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setMotorVoltage(inCommandItem->argument[0].toFloat());
-            commandResponses->push_back({"bmv:" + String(motorVoltage), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowmotorcurrent") {
-        if (request) {
-            commandResponses->push_back({ "bmc:" + String(getMotorCurrent()), InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "bowmotorcurrentlimit") {
-        if (request) {
-            commandResponses->push_back({ "bmcl:" + String(motorCurrentLimit), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setMotorMaxCurrent(inCommandItem->argument[0].toFloat());
-            commandResponses->push_back({"bmcl" + String(motorCurrentLimit), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowmotorpowerlimit") {
-        if (request) {
-            commandResponses->push_back({ "bmpl:" + String(motorPowerLimit), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setMotorMaxPower(inCommandItem->argument[0].toFloat());
-            commandResponses->push_back({"bmpl:" + String(motorPowerLimit), InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowmotorfrequency") {
-        if (request) {
-            commandResponses->push_back({ "bmf:" + String(getAverageTachometerFreq()), InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "bowmotoremergencystop") {
-        if (request) {
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            emergencyDisable(inCommandItem->argument[0].toInt());
-            commandResponses->push_back({"bmes:" + inCommandItem->argument[0], InfoRequest});
-            commandResponses->push_back({"EMERGENCY STOP! Cooling down for " + inCommandItem->argument[0] + " ms", Command});
-        }
-    } else
-    if (inCommandItem->command == "bowmotorpwmmin") {
-        if (!request) {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setMinSpeedPWM(inCommandItem->argument[0].toInt());
-        }
-        commandResponses->push_back({ "bmpi:" + String(minSpeedPWM), InfoRequest });
-    } else
-    if (inCommandItem->command == "bowmotorpwmmax") {
-        if (!request) {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setMaxSpeedPWM(inCommandItem->argument[0].toInt());
-        }
-        commandResponses->push_back({ "bmpx:" + String(maxSpeedPWM), InfoRequest });
+CREATE_MODULE_COMMAND_FUNCTION(run, DCMotorControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pRun), InfoRequest });
     } else {
-        return eProcessResult::NotFound;
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setBowMotorRun(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(pRun), InfoRequest});
     }
     return eProcessResult::Ok;
-}
+};
 
-eProcessResult DCMotorControl::processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
-    return eProcessResult::NotFound;
-}
+CREATE_MODULE_COMMAND_FUNCTION(pwm, DCMotorControl) {
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setSpeedPWM(inCommandItem->argument[0].toInt());
+    }
+    inCommandResponses->push_back({thisItem.shortCommand + ":" + String(getSpeedPWM()), debugPrintType::InfoRequest});
+    return eProcessResult::Ok;
+};
 
-String DCMotorControl::dumpData() {
-    String dump = "";
-    dump += "bmv:" + String(motorVoltage) + ",";
-    dump += "bmcl:" + String(motorCurrentLimit) + ",";
-    dump += "bmpl:" + String(motorPowerLimit) + ",";
-    dump += "bmpi:" + String(minSpeedPWM) + ",";
-    dump += "bmpx:" + String(maxSpeedPWM);
-    return dump;
-}
+CREATE_MODULE_COMMAND_FUNCTION(voltage, DCMotorControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(motorVoltage), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setMotorVoltage(inCommandItem->argument[0].toFloat());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(motorVoltage), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
 
-// *** POWER SUPPLY FUNCTIONS
+CREATE_MODULE_COMMAND_FUNCTION(current, DCMotorControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(getMotorCurrent()), InfoRequest });
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(currentLimit, DCMotorControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(motorCurrentLimit), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setMotorMaxCurrent(inCommandItem->argument[0].toFloat());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(motorCurrentLimit), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(powerLimit, DCMotorControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(motorPowerLimit), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setMotorMaxPower(inCommandItem->argument[0].toFloat());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(motorPowerLimit), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(frequency, DCMotorControl) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(getAverageTachometerFreq()), InfoRequest });
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(emergencyStop, DCMotorControl) {
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        emergencyDisable(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + inCommandItem->argument[0], InfoRequest});
+        inCommandResponses->push_back({"EMERGENCY STOP! Cooling down for " + inCommandItem->argument[0] + " ms", debugPrintType::Error});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(minPWM, DCMotorControl) {
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setMinSpeedPWM(inCommandItem->argument[0].toInt());
+    }
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(minSpeedPWM), InfoRequest });
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(maxPWM, DCMotorControl) {
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setMaxSpeedPWM(inCommandItem->argument[0].toInt());
+    }
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(maxSpeedPWM), InfoRequest });
+    return eProcessResult::Ok;
+};
 
 bool DCMotorControl::setMotorVoltage(float voltage) {
     motorVoltage = voltage;
@@ -152,6 +176,15 @@ bool DCMotorControl::enableMotorPower() {
 bool DCMotorControl::disableMotorPower() {
     digitalWrite(motorDCDCEnPin, 0);
     return true;
+}
+
+void DCMotorControl::setBowMotorRun(bool inRun) {
+    pRun = inRun;
+    if (pRun) {
+        enableMotorPower();
+    } else {
+        disableMotorPower();
+    }
 }
 
 /** \brief Adds a tachometer value to the tachometer buffer, given in Hertz

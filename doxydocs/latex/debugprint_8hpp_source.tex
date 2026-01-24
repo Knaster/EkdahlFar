@@ -62,12 +62,45 @@
 \DoxyCodeLine{00058\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00059\ \}}
 \DoxyCodeLine{00060\ }
-\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ commandResponseType\ debugPrintType}}
-\DoxyCodeLine{00062\ }
-\DoxyCodeLine{00063\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcommandResponse}{commandResponse}}\ \{}
-\DoxyCodeLine{00064\ \ \ \ \ String\ \mbox{\hyperlink{structcommandResponse_a15fbee9577b960681f4d8205ce8afc65}{response}};}
-\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a64739a0f4e627e77b702cb4d964bcdb5}{commandResponseType}}\ \mbox{\hyperlink{structcommandResponse_adbc467c2f02ce2bef481f8ee0d4ae7d8}{responseType}};}
-\DoxyCodeLine{00066\ \};}
-\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DEBUGPRINT\_H}}
+\DoxyCodeLine{00061\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classthreadSafeDebugPrint}{threadSafeDebugPrint}}\ \{}
+\DoxyCodeLine{00062\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00063\ \ \ \ \ String\ \mbox{\hyperlink{classthreadSafeDebugPrint_a515dd850edffe90a290563f01f85a8c6}{intDrivenMsgP}};}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classthreadSafeDebugPrint_a8088716b72d16d531c37635ff3eff7f6}{locked}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classthreadSafeDebugPrint_a289a79848af877ee5ac8aa7889b9999d}{i}};}
+\DoxyCodeLine{00066\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classthreadSafeDebugPrint_a5d91ba64ca66858eb81f0a4ec43dbc36}{tsMsgFlag}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_aab7e35736e50f2f6ceb614a9f28c9bbc}{threadSafeDebugPrint}}()\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_a515dd850edffe90a290563f01f85a8c6}{intDrivenMsgP}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00071\ \ \ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classthreadSafeDebugPrint_aad7caa93fbf3b20ab427fbab28a19722}{tsDebugPrintln}}(String\ m\_msg,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debugPrintType}}\ m\_dpType)\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}(\mbox{\hyperlink{classthreadSafeDebugPrint_a8088716b72d16d531c37635ff3eff7f6}{locked}});}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_a8088716b72d16d531c37635ff3eff7f6}{locked}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8hpp_a02212746d4c3138ec12bc5d582e5dc8f}{debugPrintCheckType}}(m\_dpType))\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_a5d91ba64ca66858eb81f0a4ec43dbc36}{tsMsgFlag}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_a515dd850edffe90a290563f01f85a8c6}{intDrivenMsgP}}\ +=\ \textcolor{stringliteral}{"{}["{}}\ +\ \mbox{\hyperlink{debugprint_8hpp_a325006d92e4f547b1b983336d5be8b08}{debugPrintTypeNameShort}}[m\_dpType]\ +\ \textcolor{stringliteral}{"{}]"{}}\ +\ m\_msg;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_a8088716b72d16d531c37635ff3eff7f6}{locked}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00081\ \ \ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ String\ \mbox{\hyperlink{classthreadSafeDebugPrint_af7c3dd7bbde7dd7d06c01a6290fa104c}{tsRetrieveMessages}}()\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classthreadSafeDebugPrint_a5d91ba64ca66858eb81f0a4ec43dbc36}{tsMsgFlag}})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};\ \}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}(\mbox{\hyperlink{classthreadSafeDebugPrint_a8088716b72d16d531c37635ff3eff7f6}{locked}});}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_a8088716b72d16d531c37635ff3eff7f6}{locked}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ String\ intDrivenMsg\ =\ \mbox{\hyperlink{classthreadSafeDebugPrint_a515dd850edffe90a290563f01f85a8c6}{intDrivenMsgP}};}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_a8088716b72d16d531c37635ff3eff7f6}{locked}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_a5d91ba64ca66858eb81f0a4ec43dbc36}{tsMsgFlag}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ intDrivenMsg;}
+\DoxyCodeLine{00091\ \ \ \ \ \}}
+\DoxyCodeLine{00092\ \};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#define\ commandResponseType\ debugPrintType}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcommandResponse}{commandResponse}}\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ String\ \mbox{\hyperlink{structcommandResponse_a15fbee9577b960681f4d8205ce8afc65}{response}};}
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a64739a0f4e627e77b702cb4d964bcdb5}{commandResponseType}}\ \mbox{\hyperlink{structcommandResponse_adbc467c2f02ce2bef481f8ee0d4ae7d8}{responseType}};}
+\DoxyCodeLine{00099\ \};}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DEBUGPRINT\_H}}
 
 \end{DoxyCode}

@@ -3,242 +3,209 @@
 
 #include "harmonicserieshandler.hpp"
 
-HarmonicSeriesHandler::HarmonicSeriesHandler() {};
+const ModuleCommandDeclaration HarmonicSeriesHandler::moduleCommands[] = {
+    { "fundamental", "fu", "float", "Bow fundamental frequency, all harmonics are calculated from this number", false, true, &s_fundamental },
+    { "harmonic", "h", "int", "Bow motor speed in terms of a harmonic number. A ratio is taken from the given harmonic in the current harmonic list, the ratio is \
+        then multiplied by the bow fundamental frequency", false, false, &s_harmonic },
+    { "harmonicadd", "ha", "int", "Additative version of bowcontrolharmonic, the number is given is added to the harmonic given", false, false, &s_harmonicAdd },
+    { "harmonicbase", "hb", "int", "Same as bowcontrolharmonic but where the harmonic number is based on a MIDI note given by bowcontrolbasenote", false, false, &s_harmonicBase },
+    { "basenote", "bn", "0-127", "Sets the MIDI base note of the string, used in conjunction with bowcontrolharmonicbase", false, true, &s_baseNote },
+    { "shift", "sh", "-32767-32767", "Setting shift from the currently playing harmonic where 32767 equals the entire harmonic shift range shifted up", false, false, &s_shift },
+    { "shiftrange", "sr", "0-36", "Set the number of harmonic numbers that constitutes the entire harmonic shift", false, true, &s_shiftRange },
+    { "shift5", "sh5", "-32767-32767", "Setting shift from the currently playing harmonic over 5 octaves where 32767 equals 5 octaves shift up from the fundamental", false, false, &s_shift5 },
 
-eProcessResult HarmonicSeriesHandler::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
+//    { "harmonicseries", "hs", "int", "Get/set the current harmonic series", false, true, nullptr },
+//    { "bowharmonicseriessave", "bhss", "series:name", "Saves the current harmonic series in the slot given, or if the slot is out of range, creates a new one at the end of the list", false, false, nullptr },
+    { "add", "a", "(name):(ratios)", "Add a new series with the given name and parameters", false, false, &s_add },
+    { "remove", "rm", "series", "Remove the series given and shift any series accordingly. Cannot remove all series", false, false, &s_remove },
+    { "count", "c", "-", "Returns the number of harmonic series in the list and their IDs", false, false, &s_count },
+};
 
-    processCommandItems(inCommandItem, serialCommandsHarmonicSeriesHandler, sizeof(serialCommandsHarmonicSeriesHandler)  / sizeof(serialCommandItem));
+getModuleCount(HarmonicSeriesHandler)
 
-    eProcessResult processResult;
+float equalSeries[12] = { 1, 1.059463094, 1.122462048, 1.189207115, 1.25992105, 1.334839854, 1.414213562, 1.498307077, 1.587401052, 1.681792831, 1.781797436, 1.887748625 };
+float justSeries[12] = {1, 1.06667, 1.125, 1.2, 1.25, 1.3333, 1.40625, 1.5, 1.6, 1.66667, 1.8, 1.875 };
 
-    if (inCommandItem->command == "help") {
-        addCommandHelp(serialCommandsHarmonicSeriesHandler, sizeof(serialCommandsHarmonicSeriesHandler) / sizeof(serialCommandItem), commandResponses,"");
-        processResult = eProcessResult::PassThrough;
-    } else {
+HarmonicSeriesHandler::HarmonicSeriesHandler() {
+    moduleID = new ModuleID("harmonicserieshandler", "hsh", "Harmonic series handler", ModuleID::software);
+    HarmonicSeries tempSeries;
+    ModuleGroup *group = addGroup(tempSeries.moduleID);
+    group->mustHaveSelection = true;
+    group->singleSelection = true;
+    group->setIndexCallback(this, &s_harmonicSeriesIndexChanged);
+    addHarmonicSeries("Just intonation", justSeries, 12);
+    addHarmonicSeries("Equal temperament", equalSeries, 12);
+    group->setSelection(0);
+};
 
-        processResult = processControlCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-
-        if ((processResult != eProcessResult::NotFound) && (processResult != eProcessResult::PassThrough)) { return processResult; }
-
-        processResult = processHarmonicSeriesCommand(inCommandItem, commandResponses, request, delegate, delegatedCommands);
-    }
-
-    return processResult;
+CREATE_INDEX_CALLBACK(harmonicSeriesIndexChanged, HarmonicSeriesHandler) {
+    updateHarmonicData();
+    return true;
 }
 
-eProcessResult HarmonicSeriesHandler::processControlCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
+CREATE_DATACHANGED_CALLBACK(dataChanged, HarmonicSeriesHandler) {
+    debugPrintln("Data changed!", debugPrintType::Debug);
+    return true;
+}
 
-    if (inCommandItem->command == "bowcontrolfundamental") {
-        if (request) {
-            commandResponses->push_back({ "bcu:" + String(fundamentalFrequency), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            fundamentalFrequency = inCommandItem->argument[0].toFloat();
-            commandResponses->push_back({"bcu:" + String(fundamentalFrequency), InfoRequest});
+CREATE_MODULE_COMMAND_FUNCTION(add, HarmonicSeriesHandler) {
+    HarmonicSeries *lHarmonicSeries;
+
+    switch(inCommandItem->argument.size()) {
+    case 0:
+        lHarmonicSeries = addHarmonicSeries("default just", justSeries, 12);
+        break;
+    case 1:
+        lHarmonicSeries = addHarmonicSeries(delimitExpression(inCommandItem->argument[0], true), justSeries, 12);
+        break;
+    default:
+        float newSeries[inCommandItem->argument.size() - 1];
+        for (int i = 0; i < inCommandItem->argument.size() - 1; i++) {
+            newSeries[i] = inCommandItem->argument[i + 1].toFloat();
         }
-    } else
-    if (inCommandItem->command == "bowcontrolharmonic") {
-        if (request) {
-            commandResponses->push_back({ "bch:" + String(harmonic), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            if (!setHarmonic(inCommandItem->argument[0].toInt())) {
-                commandResponses->push_back({"ERROR setting harmonic to " + String(inCommandItem->argument[0].toInt()), Error});
-            } else {
-                commandResponses->push_back({ "bch:" + String(harmonic), InfoRequest });
-            }
-        }
-    } else
-    if (inCommandItem->command == "bowcontrolharmonicadd") {
-        if (request) {
-            commandResponses->push_back({ "bcha:" + String(harmonicAdd), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            if (!setHarmonicAdd(inCommandItem->argument[0].toInt())) {
-                commandResponses->push_back({"ERROR setting harmonic add to " + String(inCommandItem->argument[0].toInt()), Error});
-            } else {
-                commandResponses->push_back({ "bcha:" + String(harmonicAdd), InfoRequest });
-            }
-        }
-    } else
-    if (inCommandItem->command == "bowcontrolharmonicbase") {
-        if (request) {
-            commandResponses->push_back({ "bchb:" + String(harmonic + baseNote), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setHarmonic(inCommandItem->argument[0].toInt() - baseNote);
-            commandResponses->push_back({ "bchb:" + String(harmonic + baseNote), InfoRequest });
-            commandResponses->push_back({ "bch:" + String(harmonic), InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "bowcontrolharmonicbasenote") {
-        if (request) {
-            commandResponses->push_back({ "bchbn:" + String(baseNote), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setBaseNote(inCommandItem->argument[0].toInt());
-            commandResponses->push_back({ "bchbn:" + String(baseNote), InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "bowcontrolharmonicshift") {
-        if (request) {
-            commandResponses->push_back({ "bchsh:" + String(harmonicShift), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setHarmonicShift(inCommandItem->argument[0].toInt());
-            commandResponses->push_back({ "bchsh:" + String(harmonicShift), InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "bowcontrolharmonicshiftrange") {
-        if (request) {
-            commandResponses->push_back({ "bchsr:" + String(harmonicShiftRange), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setHarmonicShiftRange(inCommandItem->argument[0].toFloat());
-            commandResponses->push_back({ "bchsr:" + String(harmonicShiftRange), InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "bowcontrolharmonicshift5") {
-        if (request) {
-            commandResponses->push_back({ "bchs5:" + String(harmonicShift5), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            setHarmonicShift5(inCommandItem->argument[0].toInt());
-            commandResponses->push_back({ "bchs5:" + String(harmonicShift5), InfoRequest });
-        }
-    } else {
-        return eProcessResult::NotFound;
+        lHarmonicSeries = addHarmonicSeries(delimitExpression(inCommandItem->argument[0], true), newSeries, (inCommandItem->argument.size() - 1));
     }
+
+    String response = thisItem.shortCommand + ":" + delimitExpression(lHarmonicSeries->Id, true);
+    for (int i = 0; i < lHarmonicSeries->ratios.size(); i++) {
+        response += ":" + String(lHarmonicSeries->ratios[i]);
+    }
+
+    inCommandResponses->push_back({ response, InfoRequest });
     return eProcessResult::Ok;
-}
+};
 
-eProcessResult HarmonicSeriesHandler::processHarmonicSeriesCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
+CREATE_MODULE_COMMAND_FUNCTION(remove, HarmonicSeriesHandler) {
+    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
 
-    if (inCommandItem->command == "bowharmonicseries") {
-        if (request) {
-            commandResponses->push_back({ "bhs:" + String(currentHarmonicSeries), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            if (!validateNumber(inCommandItem->argument[0].toInt(), 0, harmonicSeriesList.series.size())) { return eProcessResult::WrongArgumentValue; }
-            uint8_t hs = inCommandItem->argument[0].toInt();
-            if (hs > (harmonicSeriesList.series.size() - 1)) {
-                commandResponses->push_back({"Harmonic list doesn't exist " + String(hs), Error});
-                return eProcessResult::CommandFailed;
-            }
-            loadHarmonicSeries(hs);
-            commandResponses->push_back({ "bhs:" + String(currentHarmonicSeries), InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "bowharmonicseriesdata") {
-        if (request) {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            int ser = inCommandItem->argument[0].toInt();
-            if (!validateNumber(ser, 0, harmonicSeriesList.series.size() - 1)) {
-                commandResponses->push_back({"Harmonic series out of range", Error});
-                return eProcessResult::CommandFailed;
-            }
-            int j=0;
-            String response = "bhsd";
-            response += ":" + String(ser) + ":" + harmonicSeriesList.series[ser].Id;
-            while (j < int(harmonicSeriesList.series[ser].ratio.size())) {
-                response += ":" + String(harmonicSeriesList.series[ser].ratio[j], 4);
-                j++;
-            }
-            commandResponses->push_back({response, InfoRequest});
-        } else {
-            if (!checkArgumentsMin(inCommandItem, commandResponses, 2)) { return eProcessResult::WrongArgumentCount; }
-            String response = "Setting harmonic series data:" + String(inCommandItem->argument[0].toInt());
+    ModuleGroup *group = getGroup("harmonicseries");
+    if (group == nullptr) { return eProcessResult::CommandFailed; }
 
-            while (inCommandItem->argument[0].toInt() > harmonicSeriesList.series.size() - 1) {
-                harmonicSeriesList.addHarmonicSeries();
-            }
-
-            harmonicSeriesList.series[inCommandItem->argument[0].toInt()].ratio.clear();
-            harmonicSeriesList.series[inCommandItem->argument[0].toInt()].Id = String(inCommandItem->argument[1]);
-
-            for (int i = 1; i < (int(inCommandItem->argument.size()) - 1); i++) {
-                response += ":" + inCommandItem->argument[i + 1];
-                harmonicSeriesList.series[inCommandItem->argument[0].toInt()].setHarmonic(i - 1, inCommandItem->argument[i + 1].toFloat());
-            }
-
-            if (harmonicSeriesList.series[currentHarmonicSeries].ratio.size() == 0) {
-                debugPrintln("Current harmonic series is zero, reloading", debugPrintType::Debug);
-                loadHarmonicSeries(currentHarmonicSeries);
-            }
-
-            updateHarmonicData();
-            commandResponses->push_back({response, InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowharmonicseriesratio") {
-        if (!checkArguments(inCommandItem, commandResponses, 2)) { return eProcessResult::WrongArgumentCount; }
-        harmonicSeriesList.series[currentHarmonicSeries].setHarmonic(inCommandItem->argument[0].toInt(), inCommandItem->argument[1].toFloat());
-
-        updateHarmonicData();
-
-        commandResponses->push_back({"bhsr:" + String(inCommandItem->argument[0].toInt()) + ":" + String(inCommandItem->argument[1].toFloat()), InfoRequest});
-    } else
-    if (inCommandItem->command == "bowharmonicseriesratioremove") {
-        if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        if (harmonicSeriesList.series[currentHarmonicSeries].ratio.size() < 2) {
-            commandResponses->push_back({"Cannot remove all harmonics", Error});
+    if (!request) {
+//        harmonicSeries.erase(harmonicSeries.begin() + listNo);
+        int listNo = inCommandItem->argument[0].toInt();
+        if (!group->removeModule(listNo)) {
             return eProcessResult::CommandFailed;
         }
+    }
+    inCommandResponses->push_back({ thisItem.shortCommand, debugPrintType::InfoRequest });
+    return eProcessResult::Ok;
+};
 
-        int i = inCommandItem->argument[0].toInt();
-        harmonicSeriesList.series[currentHarmonicSeries].ratio.erase(harmonicSeriesList.series[currentHarmonicSeries].ratio.begin() + i);
-        updateHarmonicData();
+CREATE_MODULE_COMMAND_FUNCTION(count, HarmonicSeriesHandler) {
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + getGroup("harmonicseries")->modules.size(), debugPrintType::InfoRequest });
 
-        commandResponses->push_back({"bhsrr:" + String(i), InfoRequest});
-    } else
-    if (inCommandItem->command == "bowharmonicseriescount") {
-        String response = "bhsc:" + String(harmonicSeriesList.series.size());
-        for (int i=0; i<harmonicSeriesList.series.size(); i++) {
-            response += ":" + harmonicSeriesList.series[i].Id;
-        }
-        commandResponses->push_back({ response, InfoRequest });
-    } else
-    if (inCommandItem->command == "bowharmonicseriessave") {
-        if (request) {
-            commandResponses->push_back({ "bhss:" + String(harmonicSeriesList.series.size()), InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 2)) { return eProcessResult::WrongArgumentCount; }
-            if (!validateNumber(inCommandItem->argument[0].toInt(), 0, harmonicSeriesList.series.size() - 1, true)) {
-                harmonicSeriesList.addHarmonicSeries(inCommandItem->argument[1], harmonicSeriesList.series[currentHarmonicSeries].ratio);
-                currentHarmonicSeries = harmonicSeriesList.series.size() - 1;
-            } else {
-                harmonicSeriesList.series[inCommandItem->argument[0].toInt()] = harmonicSeriesList.series[currentHarmonicSeries];
-                harmonicSeriesList.series[inCommandItem->argument[0].toInt()].Id = inCommandItem->argument[1];
-                currentHarmonicSeries = inCommandItem->argument[0].toInt();
-            }
-            commandResponses->push_back({ "bhss:" + String(currentHarmonicSeries), InfoRequest });
-        }
-    } else
-    if (inCommandItem->command == "bowharmonicseriesremove") {
-        if (request) {
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            int listNo = inCommandItem->argument[0].toInt();
-            debugPrintln("Attempting to remove list " + String(listNo), debugPrintType::Debug);
-            if (!validateNumber(listNo, 0, harmonicSeriesList.series.size() - 1, true)) { return eProcessResult::WrongArgumentValue; }
+    return eProcessResult::Ok;
+};
 
-            harmonicSeriesList.series.erase(
-                harmonicSeriesList.series.begin() + listNo);
-
-            if ((currentHarmonicSeries >= listNo) && (currentHarmonicSeries > 0)) {
-                currentHarmonicSeries--;
-            }
-
-            commandResponses->push_back({ "bhsrm:" + String(currentHarmonicSeries), InfoRequest });
-        }
+CREATE_MODULE_COMMAND_FUNCTION(fundamental, HarmonicSeriesHandler) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(fundamentalFrequency), InfoRequest });
     } else {
-        return eProcessResult::NotFound;
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        fundamentalFrequency = inCommandItem->argument[0].toFloat();
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(fundamentalFrequency), InfoRequest});
     }
     return eProcessResult::Ok;
-}
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(harmonic, HarmonicSeriesHandler) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pHarmonic), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        if (!setHarmonic(inCommandItem->argument[0].toInt())) {
+            inCommandResponses->push_back({"ERROR setting harmonic to " + String(inCommandItem->argument[0].toInt()), Error});
+        } else {
+            inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pHarmonic), InfoRequest });
+        }
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(harmonicAdd, HarmonicSeriesHandler) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pHarmonicAdd), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        if (!setHarmonicAdd(inCommandItem->argument[0].toInt())) {
+            inCommandResponses->push_back({"ERROR setting harmonic add to " + String(inCommandItem->argument[0].toInt()), Error});
+        } else {
+            inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pHarmonicAdd), InfoRequest });
+        }
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(harmonicBase, HarmonicSeriesHandler) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pHarmonic + pBaseNote), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setHarmonic(inCommandItem->argument[0].toInt() - pBaseNote);
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pHarmonic + pBaseNote), InfoRequest });
+        //inCommandResponses->push_back({ "bch:" + String(harmonic), InfoRequest });
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(baseNote, HarmonicSeriesHandler) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pBaseNote), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setBaseNote(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pBaseNote), InfoRequest });
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(shift, HarmonicSeriesHandler) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(harmonicShift), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setHarmonicShift(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(harmonicShift), InfoRequest });
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(shiftRange, HarmonicSeriesHandler) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(harmonicShiftRange), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setHarmonicShiftRange(inCommandItem->argument[0].toFloat());
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(harmonicShiftRange), InfoRequest });
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(shift5, HarmonicSeriesHandler) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(harmonicShift5), InfoRequest });
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setHarmonicShift5(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(harmonicShift5), InfoRequest });
+    }
+    return eProcessResult::Ok;
+};
 
 bool HarmonicSeriesHandler::calculateHarmonicShift() {
-    int octave = harmonicSeriesList.series[currentHarmonicSeries].ratio.size();
+    //int octave = harmonicSeriesList.series[currentHarmonicSeries].ratio.size();
+    ModuleGroup *group = getGroup("harmonicseries");
+    if (group == nullptr) {
+        return false;
+    }
+
+    HarmonicSeries *module = group->getSingleSelection();
+    if (module == nullptr) {
+        return false;
+    }
+
+    int octave = module->ratios.size();
 
     float freq = currentHarmonicFreq * pow(2, ((float) (((float) harmonicShiftRange) / octave) * harmonicShift / 32768 ));
     float freq5 = freq * pow(2, ((float) (((float) (5 * octave)) / octave) * harmonicShift5 / 32768 ));
@@ -278,23 +245,33 @@ int HarmonicSeriesHandler::getHarmonicShiftRange() { return harmonicShiftRange; 
 bool HarmonicSeriesHandler::setHarmonic(int _harmonic) {
     int __harmonic = clamp(_harmonic, lowerHarmonic, upperHarmonic);
     if (__harmonic != _harmonic) { return false; }
-    harmonic = __harmonic;
+    pHarmonic = __harmonic;
     return updateHarmonicData();
 }
 
-int HarmonicSeriesHandler::getHarmonic() { return harmonic; }
+int HarmonicSeriesHandler::getHarmonic() { return pHarmonic; }
 
 bool HarmonicSeriesHandler::setHarmonicAdd(int _harmonic) {
-    harmonicAdd = _harmonic;
+    pHarmonicAdd = _harmonic;
     return updateHarmonicData();
 }
 
-int HarmonicSeriesHandler::getHarmonicAdd() { return harmonicAdd; }
+int HarmonicSeriesHandler::getHarmonicAdd() { return pHarmonicAdd; }
 
 bool HarmonicSeriesHandler::updateHarmonicData() {
-    int targetHarmonic = harmonic + harmonicAdd;
+    ModuleGroup *group = getGroup("harmonicseries");
+    if (group == nullptr) {
+        return false;
+    }
 
-    int harmonicCount = harmonicSeriesList.series[currentHarmonicSeries].ratio.size();
+    HarmonicSeries *module = group->getSingleSelection();
+    if (module == nullptr) {
+        return false;
+    }
+
+    int targetHarmonic = pHarmonic + pHarmonicAdd;
+
+    int harmonicCount = module->ratios.size();
     if (harmonicCount == 0) {
         debugPrintln("Harmonic list empty!", debugPrintType::Error);
         return false;
@@ -306,7 +283,7 @@ bool HarmonicSeriesHandler::updateHarmonicData() {
     if (targetHarmonic < 0) { targetHarmonic -= (harmonicCount - 1); }
     int octave = trunc(targetHarmonic / harmonicCount);
 
-    float freq = fundamentalFrequency * pow(2, octave) * harmonicSeriesList.series[currentHarmonicSeries].ratio[series]; // - 0.4;
+    float freq = fundamentalFrequency * pow(2, octave) * module->getHarmonic(series); // - 0.4;
 
     currentHarmonicFreq = freq;
     calculateHarmonicShift();
@@ -316,18 +293,9 @@ bool HarmonicSeriesHandler::updateHarmonicData() {
 
 bool HarmonicSeriesHandler::setBaseNote(int inBaseNote) {
     if ((inBaseNote < 0) || (inBaseNote > 127)) { return false; }
-    baseNote = uint8_t (inBaseNote);
+    pBaseNote = uint8_t (inBaseNote);
     return true;
 }
-
-bool HarmonicSeriesHandler::loadHarmonicSeries(int i) {
-    if ((i > (harmonicSeriesList.series.size() - 1)) || (i < 0)) {
-        return false;
-    }
-    currentHarmonicSeries = i;
-    harmonicSeriesList.series[currentHarmonicSeries] = harmonicSeriesList.series[i];
-    return true;
-};
 
 bool HarmonicSeriesHandler::raiseFrequencyChanged() {
     frequencyChanged = true;
@@ -342,14 +310,30 @@ bool HarmonicSeriesHandler::checkFrequencyChanged() {
     return false;
 }
 
-String HarmonicSeriesHandler::dumpData() {
-    String dump = "";
-    dump += "bcu:" + String(fundamentalFrequency) + ",";
-    dump += "bchbn:" + String(baseNote) + ",";
-    dump += "bchsr:" + String(harmonicShiftRange) + ",";
-    dump += "bhs:" + String(currentHarmonicSeries) + ",";
-    dump += harmonicSeriesList.dumpData();
-    return dump;
+HarmonicSeries* HarmonicSeriesHandler::addHarmonicSeries() {
+    HarmonicSeries *lHarmonicSeries = new HarmonicSeries();
+    ModuleGroup *group = addModule(lHarmonicSeries);
+    Module *module = group->modules.back();
+    module->setDataChangedCallback(this, &s_dataChanged);
+    return module;
+}
+
+HarmonicSeries* HarmonicSeriesHandler::addHarmonicSeries(String id, float frequencies[], int size) {
+    HarmonicSeries *hs = addHarmonicSeries(); //new HarmonicSeries();
+    hs->Id = id;
+    for (int i = 0; i < size; i++) {
+        hs->setHarmonic(i, frequencies[i]);
+    }
+    return hs;
+}
+
+void HarmonicSeriesHandler::dumpData(std::vector<commandResponse> *inCommandResponses) {
+//    std::vector<commandResponse> commandResponses;
+//    commandResponses = ModuleHandler::dumpData();
+//    commandResponses.push_back({ "hs[" + String(moduleGroups[0].selection[0]) + "]", debugPrintType::InfoRequest });
+//    return commandResponses;
+    ModuleHandler::dumpData(inCommandResponses);
+    inCommandResponses->push_back({ "hs[" + String(moduleGroups[0].selection[0]) + "]", debugPrintType::InfoRequest });
 }
 
 #endif // HARMONICSERIESHANDLER_H

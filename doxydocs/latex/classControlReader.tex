@@ -18,7 +18,11 @@ Collaboration diagram for Control\+Reader\+:\nopagebreak
 \item 
 \mbox{\hyperlink{classControlReader_a92ec387a20d951b16d73d4e9c4d26bb5}{Control\+Reader}} (uint8\+\_\+t in\+Data\+Ready\+Pin, uint8\+\_\+t in\+Gate\+Pin)
 \item 
-virtual \mbox{\hyperlink{classControlReader_af538c65e5f0f45d6306b1558fcd9b957}{\texorpdfstring{$\sim$}{\string~}\+Control\+Reader}} ()
+\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classControlReader_a846296d3aa4c74e6fdf101c8e5e77c5e}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\item 
+\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classControlReader_ab834d896f4beed29dfd9571265993214}{process\+Serial\+Command\+Hidden}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\item 
+String \mbox{\hyperlink{classControlReader_ab45ab596486631cd4eceb137804d6c13}{dump\+Data}} ()
 \item 
 void \mbox{\hyperlink{classControlReader_a8998d3ffc4f19f45f2a7bc4061cc8e5a}{read\+Data}} ()
 \item 
@@ -29,8 +33,6 @@ bool \mbox{\hyperlink{classControlReader_a4dffd5e19b19104e0ec1d762072fb29a}{set\
 String \mbox{\hyperlink{classControlReader_a012829af77cdd47a80785360158eee22}{get\+ADCAverager\+Settings}} (uint8\+\_\+t channel)
 \item 
 void \mbox{\hyperlink{classControlReader_a9701e3779aa63088d8bc8aa560059191}{set\+Defaults}} ()
-\item 
-String \mbox{\hyperlink{classControlReader_ab45ab596486631cd4eceb137804d6c13}{dump\+Data}} ()
 \item 
 void \mbox{\hyperlink{classControlReader_a8b3c5cddf3ef9bf3cb9a56108c394f5b}{set\+ADCMin\+Max\+Test\+Channel}} (uint8\+\_\+t t\+\_\+channel)
 \item 
@@ -62,6 +64,8 @@ uint16\+\_\+t \mbox{\hyperlink{classControlReader_a7ace2aea9f957123e9374a70edb42
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classControlReader_a1fd8c0c72138326f209dcb9bd3c2126a}{add\+Test\+Data}} (uint16\+\_\+t value)
+\item 
+bool \mbox{\hyperlink{classControlReader_a30d5c5915d4f615582348f82742513db}{read\+Single\+ADS}} (Adafruit\+\_\+\+ADS1\+X15 \&adsx, volatile bool \&new\+Data, uint16\+\_\+t \&channel, uint8\+\_\+t channel\+Offset, long \&conversion\+Start, bool \&error\+Reported, uint16\+\_\+t timeout, uint16\+\_\+t resolution)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -114,12 +118,6 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classControlReader_a92ec387a20d951b16d73d4e9c4d26bb5_cgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classControlReader_af538c65e5f0f45d6306b1558fcd9b957}\label{classControlReader_af538c65e5f0f45d6306b1558fcd9b957} 
-\index{ControlReader@{ControlReader}!````~ControlReader@{\texorpdfstring{$\sim$}{\string~}ControlReader}}
-\index{````~ControlReader@{\texorpdfstring{$\sim$}{\string~}ControlReader}!ControlReader@{ControlReader}}
-\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ControlReader()}{\string~ControlReader()}}
-{\footnotesize\ttfamily Control\+Reader\+::\texorpdfstring{$\sim$}{\string~}\+Control\+Reader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
-
 
 
 \doxysubsection{Member Function Documentation}
@@ -129,7 +127,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{addTestData()}{addTestData()}}
 {\footnotesize\ttfamily void Control\+Reader\+::add\+Test\+Data (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -149,25 +148,94 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classControlReader_ab45ab596486631cd4eceb137804d6c13_cgraph}
 \end{center}
 \end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_ab45ab596486631cd4eceb137804d6c13_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{classControlReader_a012829af77cdd47a80785360158eee22}\label{classControlReader_a012829af77cdd47a80785360158eee22} 
 \index{ControlReader@{ControlReader}!getADCAveragerSettings@{getADCAveragerSettings}}
 \index{getADCAveragerSettings@{getADCAveragerSettings}!ControlReader@{ControlReader}}
 \doxysubsubsection{\texorpdfstring{getADCAveragerSettings()}{getADCAveragerSettings()}}
 {\footnotesize\ttfamily String Control\+Reader\+::get\+ADCAverager\+Settings (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{channel }\end{DoxyParamCaption})}
 
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_a012829af77cdd47a80785360158eee22_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{classControlReader_a23c21dc8219fde243f98acbad95cc942}\label{classControlReader_a23c21dc8219fde243f98acbad95cc942} 
 \index{ControlReader@{ControlReader}!getData@{getData}}
 \index{getData@{getData}!ControlReader@{ControlReader}}
 \doxysubsubsection{\texorpdfstring{getData()}{getData()}}
 {\footnotesize\ttfamily int32\+\_\+t Control\+Reader\+::get\+Data (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{channel }\end{DoxyParamCaption})}
 
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_a23c21dc8219fde243f98acbad95cc942_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classControlReader_a846296d3aa4c74e6fdf101c8e5e77c5e}\label{classControlReader_a846296d3aa4c74e6fdf101c8e5e77c5e} 
+\index{ControlReader@{ControlReader}!processSerialCommand@{processSerialCommand}}
+\index{processSerialCommand@{processSerialCommand}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{processSerialCommand()}{processSerialCommand()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Control\+Reader\+::process\+Serial\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_a846296d3aa4c74e6fdf101c8e5e77c5e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_a846296d3aa4c74e6fdf101c8e5e77c5e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classControlReader_ab834d896f4beed29dfd9571265993214}\label{classControlReader_ab834d896f4beed29dfd9571265993214} 
+\index{ControlReader@{ControlReader}!processSerialCommandHidden@{processSerialCommandHidden}}
+\index{processSerialCommandHidden@{processSerialCommandHidden}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{processSerialCommandHidden()}{processSerialCommandHidden()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Control\+Reader\+::process\+Serial\+Command\+Hidden (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_ab834d896f4beed29dfd9571265993214_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_ab834d896f4beed29dfd9571265993214_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{classControlReader_a8998d3ffc4f19f45f2a7bc4061cc8e5a}\label{classControlReader_a8998d3ffc4f19f45f2a7bc4061cc8e5a} 
 \index{ControlReader@{ControlReader}!readData@{readData}}
 \index{readData@{readData}!ControlReader@{ControlReader}}
 \doxysubsubsection{\texorpdfstring{readData()}{readData()}}
 {\footnotesize\ttfamily void Control\+Reader\+::read\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -179,6 +247,28 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classControlReader_a8998d3ffc4f19f45f2a7bc4061cc8e5a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classControlReader_a30d5c5915d4f615582348f82742513db}\label{classControlReader_a30d5c5915d4f615582348f82742513db} 
+\index{ControlReader@{ControlReader}!readSingleADS@{readSingleADS}}
+\index{readSingleADS@{readSingleADS}!ControlReader@{ControlReader}}
+\doxysubsubsection{\texorpdfstring{readSingleADS()}{readSingleADS()}}
+{\footnotesize\ttfamily bool Control\+Reader\+::read\+Single\+ADS (\begin{DoxyParamCaption}\item[{Adafruit\+\_\+\+ADS1\+X15 \&}]{adsx,  }\item[{volatile bool \&}]{new\+Data,  }\item[{uint16\+\_\+t \&}]{channel,  }\item[{uint8\+\_\+t}]{channel\+Offset,  }\item[{long \&}]{conversion\+Start,  }\item[{bool \&}]{error\+Reported,  }\item[{uint16\+\_\+t}]{timeout,  }\item[{uint16\+\_\+t}]{resolution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_a30d5c5915d4f615582348f82742513db_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_a30d5c5915d4f615582348f82742513db_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classControlReader_ac3e9b70b0918c03a8450391b614c9e22}\label{classControlReader_ac3e9b70b0918c03a8450391b614c9e22} 
@@ -211,6 +301,14 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{setADCAveragerSettings()}{setADCAveragerSettings()}}
 {\footnotesize\ttfamily bool Control\+Reader\+::set\+ADCAverager\+Settings (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{t\+\_\+channel,  }\item[{uint8\+\_\+t}]{t\+\_\+averages,  }\item[{uint16\+\_\+t}]{t\+\_\+interrupt\+Error\+Threshold,  }\item[{uint16\+\_\+t}]{t\+\_\+continuous\+Error\+Threshold,  }\item[{uint16\+\_\+t}]{t\+\_\+continuous\+Timeout }\end{DoxyParamCaption})}
 
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_a4dffd5e19b19104e0ec1d762072fb29a_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{classControlReader_a102e5eeca42e074f56a5aa234badad30}\label{classControlReader_a102e5eeca42e074f56a5aa234badad30} 
 \index{ControlReader@{ControlReader}!setADCCommands@{setADCCommands}}
 \index{setADCCommands@{setADCCommands}!ControlReader@{ControlReader}}
@@ -224,19 +322,36 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classControlReader_a102e5eeca42e074f56a5aa234badad30_cgraph}
 \end{center}
 \end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_a102e5eeca42e074f56a5aa234badad30_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{classControlReader_a8b3c5cddf3ef9bf3cb9a56108c394f5b}\label{classControlReader_a8b3c5cddf3ef9bf3cb9a56108c394f5b} 
 \index{ControlReader@{ControlReader}!setADCMinMaxTestChannel@{setADCMinMaxTestChannel}}
 \index{setADCMinMaxTestChannel@{setADCMinMaxTestChannel}!ControlReader@{ControlReader}}
 \doxysubsubsection{\texorpdfstring{setADCMinMaxTestChannel()}{setADCMinMaxTestChannel()}}
 {\footnotesize\ttfamily void Control\+Reader\+::set\+ADCMin\+Max\+Test\+Channel (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{t\+\_\+channel }\end{DoxyParamCaption})}
 
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classControlReader_a8b3c5cddf3ef9bf3cb9a56108c394f5b_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{classControlReader_a9701e3779aa63088d8bc8aa560059191}\label{classControlReader_a9701e3779aa63088d8bc8aa560059191} 
 \index{ControlReader@{ControlReader}!setDefaults@{setDefaults}}
 \index{setDefaults@{setDefaults}!ControlReader@{ControlReader}}
 \doxysubsubsection{\texorpdfstring{setDefaults()}{setDefaults()}}
 {\footnotesize\ttfamily void Control\+Reader\+::set\+Defaults (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

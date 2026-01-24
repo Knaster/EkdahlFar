@@ -1766,13 +1766,13 @@ typedef struct
 #define SCB_BASE            (SCS_BASE +  0x0D00UL)                    /*!< System Control Block Base Address */
 
 #define SCnSCB              ((SCnSCB_Type    *)     SCS_BASE      )   /*!< System control Register not in SCB */
-#define SCB                 ((SCB_Type       *)     SCB_BASE      )   /*!< SCB configuration struct */
-#define SysTick             ((SysTick_Type   *)     SysTick_BASE  )   /*!< SysTick configuration struct */
-#define NVIC                ((NVIC_Type      *)     NVIC_BASE     )   /*!< NVIC configuration struct */
-#define ITM                 ((ITM_Type       *)     ITM_BASE      )   /*!< ITM configuration struct */
-#define DWT                 ((DWT_Type       *)     DWT_BASE      )   /*!< DWT configuration struct */
-#define TPI                 ((TPI_Type       *)     TPI_BASE      )   /*!< TPI configuration struct */
-#define CoreDebug           ((CoreDebug_Type *)     CoreDebug_BASE)   /*!< Core Debug configuration struct */
+#define SCB                 ((SCB_Type       *)     SCB_BASE      )   /*!< SCB MIDIMessageConfiguration struct */
+#define SysTick             ((SysTick_Type   *)     SysTick_BASE  )   /*!< SysTick MIDIMessageConfiguration struct */
+#define NVIC                ((NVIC_Type      *)     NVIC_BASE     )   /*!< NVIC MIDIMessageConfiguration struct */
+#define ITM                 ((ITM_Type       *)     ITM_BASE      )   /*!< ITM MIDIMessageConfiguration struct */
+#define DWT                 ((DWT_Type       *)     DWT_BASE      )   /*!< DWT MIDIMessageConfiguration struct */
+#define TPI                 ((TPI_Type       *)     TPI_BASE      )   /*!< TPI MIDIMessageConfiguration struct */
+#define CoreDebug           ((CoreDebug_Type *)     CoreDebug_BASE)   /*!< Core Debug MIDIMessageConfiguration struct */
 
 #if defined (__MPU_PRESENT) && (__MPU_PRESENT == 1U)
   #define MPU_BASE          (SCS_BASE +  0x0D90UL)                    /*!< Memory Protection Unit */

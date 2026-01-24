@@ -27,7 +27,7 @@ uint32_t EEPROMSaveString(String *data, uint32_t EEPROM_offset) {
 
 uint32_t EEPROMLoadString(String *data, uint32_t EEPROM_offset) {
     uint32_t datal = 0;
-    eeprom_read_block(&datal, (void*) (EEPROM_offset) , 1);
+    eeprom_read_block(&datal, (void*) (EEPROM_offset), 1);
     datal = eeprom_read_dword(0);
     if (datal != 0) {
         char text[datal + 1];  // Make enough room for the Text + NULL

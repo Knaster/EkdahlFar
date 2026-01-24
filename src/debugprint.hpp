@@ -58,6 +58,39 @@ bool setDebugReporting(String debugName, bool setting) {
   return false;
 }
 
+class threadSafeDebugPrint {
+private:
+    String intDrivenMsgP;
+    bool locked = false;
+    int i;
+public:
+    bool tsMsgFlag = false;
+
+    threadSafeDebugPrint() {
+        intDrivenMsgP = "";
+    }
+
+    void tsDebugPrintln(String m_msg, debugPrintType m_dpType) {
+        while(locked);
+        locked = true;
+        if (debugPrintCheckType(m_dpType)) {
+            tsMsgFlag = true;
+            intDrivenMsgP += "[" + debugPrintTypeNameShort[m_dpType] + "]" + m_msg;
+        }
+        locked = false;
+    }
+
+    String tsRetrieveMessages() {
+        if (!tsMsgFlag) { return ""; }
+        while(locked);
+        locked = true;
+        String intDrivenMsg = intDrivenMsgP;
+        locked = false;
+        tsMsgFlag = false;
+        return intDrivenMsg;
+    }
+};
+
 #define commandResponseType debugPrintType
 
 struct commandResponse {

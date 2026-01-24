@@ -26,226 +26,105 @@
 #include <vector>
 #include "bowActuators.hpp"
 
+
+const ModuleCommandDeclaration BowActuators::moduleCommands[] = {
+    { "add", "a", "(name):(rest:engage:stall)", "Add new actuator with the given name and parameters", false, false, &s_add},
+    { "remove", "rm", "actuator", "Remove bow actuator", false, false, &s_remove},
+    { "count", "c", "-", "Returns the amount of saved bow actuators", false, false, &s_count},
+};
+
+getModuleCount(BowActuators)
+
 BowActuators::BowActuators(BowPressure *inBowPressure)
 {
+    moduleID = new ModuleID("actuatorhandler", "ah", "Bow actuator handler", ModuleID::software);
+
     bowPressure = inBowPressure;
-    m_currentBowActuator = 0;
-    //m_bowActuator.push_back({0, 65535, 0, "default"});
-    setBowActuatorData(0, 2000, 50000, 0, "default");
-    loadBowActuator();
+
+    BowActuator ba;
+    ModuleGroup *group = addGroup(ba.moduleID);
+    addBowActuator();
+    group->mustHaveSelection = true;
+    group->singleSelection = true;
+    group->setIndexCallback(this, &s_actuatorIndexChanged);
+    group->setSelection(0);
 }
 
-eProcessResult BowActuators::processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request, bool delegate, commandList *delegatedCommands) {
+CREATE_INDEX_CALLBACK(actuatorIndexChanged, BowActuators) {
+//    debugPrintln("Actuator index changed", debugPrintType::Debug);
+    return true;
+}
 
-    processCommandItems(inCommandItem, serialCommandsBowActuators, sizeof(serialCommandsBowActuators)  / sizeof(serialCommandItem));
+CREATE_MODULE_COMMAND_FUNCTION(add, BowActuators) {
+    BowActuator *actuator;
 
-    if (inCommandItem->command == "help") {
-        addCommandHelp(serialCommandsBowActuators, sizeof(serialCommandsBowActuators) / sizeof(serialCommandItem), commandResponses,"");
-        return eProcessResult::PassThrough;
-    } else
-    if (inCommandItem->command == "bowactuator") {
-        if (request) {
-            commandResponses->push_back({ "ba:" + String(m_currentBowActuator), debugPrintType::InfoRequest });
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            if (!loadBowActuator(inCommandItem->argument[0].toInt())) {
-                return eProcessResult::CommandFailed;
-            }
-            commandResponses->push_back({"ba:" + String(m_currentBowActuator), debugPrintType::InfoRequest});
-        }
-    } else
-    if (inCommandItem->command == "bowactuatorsave") {
-        if (!checkArguments(inCommandItem, commandResponses, 2)) { return eProcessResult::WrongArgumentCount; }
-        if (!saveBowActuator(inCommandItem->argument[0].toInt(), inCommandItem->argument[1])) {
-            return eProcessResult::CommandFailed;
-        }
-        //uint8_t actuator = getBowActuator();
-        commandResponses->push_back({"bas:" + String(m_currentBowActuator) + ":" + getBowActuatorID(m_currentBowActuator), InfoRequest});
-    }  else
-    if (inCommandItem->command == "bowactuatordata") {
-        int8_t bowIndex;
-        if (request) {
-            bowIndex = m_currentBowActuator;
-            if (checkArguments(inCommandItem, commandResponses, 1, true)) {
-                bowIndex = inCommandItem->argument[0].toInt();
-                if (bowIndex > (getBowActuatorCount() - 1)) {
-                    return eProcessResult::WrongArgumentValue;
-                }
-            } else {
-                return eProcessResult::WrongArgumentCount;
-            }
-        } else {
-            if (!checkArguments(inCommandItem, commandResponses, 5)) { return eProcessResult::WrongArgumentCount; }
-            setBowActuatorData(inCommandItem->argument[0].toInt(), inCommandItem->argument[1].toInt(), inCommandItem->argument[2].toInt(), inCommandItem->argument[3].toInt(), inCommandItem->argument[4]);
-            bowIndex = inCommandItem->argument[0].toInt();
-        }
-        commandResponses->push_back({ "bad:" + String(bowIndex) + ":" + getBowActuatorFirstTouchPressure(bowIndex) + ":"  + getBowActuatorStallPressure(bowIndex) + ":" +
-            getBowActuatorRestPosition(bowIndex) + ":" + getBowActuatorID(bowIndex), InfoRequest });
-    }  else
-    if (inCommandItem->command == "bowactuatorcount") {
-        commandResponses->push_back({ "bac:" + String(getBowActuatorCount()), InfoRequest });
-    } else
-    if (inCommandItem->command == "bowactuatorremove") {
-        if (!request) {
-            if (!checkArguments(inCommandItem, commandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-            if (!removeBowActuator(inCommandItem->argument[0].toInt())) { return eProcessResult::CommandFailed; }
-            commandResponses->push_back({"bar:" + String(inCommandItem->argument[0].toInt()), InfoRequest});
-        }
-    } else {
-        return eProcessResult::NotFound;
+    switch(inCommandItem->argument.size()) {
+    case 0:
+        actuator = addBowActuator();
+        break;
+    case 1:
+        actuator = addBowActuator(inCommandItem->argument[0]);
+        break;
+    case 4:
+        actuator = addBowActuator(inCommandItem->argument[0], inCommandItem->argument[1].toInt(), inCommandItem->argument[2].toInt(), inCommandItem->argument[3].toInt());
+        break;
+    default:
+        return eProcessResult::WrongArgumentCount;
     }
+
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + actuator->id + ":" + actuator->restPosition+ ":" + actuator->firstTouchPressure  + ":" + actuator->stallPressure,
+                                  debugPrintType::InfoRequest });
+
     return eProcessResult::Ok;
 }
 
-/*
-BowActuators::BowActuators(CalibrationData *t_calibrationDataConnect)
-{
-    m_calibrationDataConnect = t_calibrationDataConnect;
-    m_currentBowActuator = 0;
-    //m_bowActuator.push_back({0, 65535, 0, "default"});
-    setBowActuatorData(0, 2000, 50000, 0, "default");
-    loadBowActuator();
+CREATE_MODULE_COMMAND_FUNCTION(remove, BowActuators) {
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+
+        ModuleGroup *group = getGroup("actuator");
+        if (group == nullptr) { return eProcessResult::CommandFailed; }
+
+        if (!request) {
+            if (!group->removeModule(inCommandItem->argument[0].toInt())) {
+                return eProcessResult::CommandFailed;
+            }
+        }
+    }
+    inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::InfoRequest });
+    return eProcessResult::Ok;
 }
 
-BowActuators::~BowActuators()
-{
-    //dtor
+CREATE_MODULE_COMMAND_FUNCTION(count, BowActuators) {
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + getGroup("actuator")->modules.size(), debugPrintType::InfoRequest });
+    return eProcessResult::Ok;
 }
-*/
 
-uint8_t BowActuators::addBowActuator() {
-    m_bowActuator.push_back({0, 65535, 0, "new"});
-    return m_bowActuator.size() - 1;
+BowActuator* BowActuators::addBowActuator(String name, uint16_t rest, uint16_t engage, uint16_t stall) {
+    BowActuator *lBowActuator = new BowActuator();
+    ModuleGroup *group = addModule(lBowActuator);
+    BowActuator *actuator = group->modules.back();
+    actuator->id = name;
+    actuator->firstTouchPressure = engage;
+    actuator->restPosition = rest;
+    actuator->stallPressure = stall;
+
+    debugPrint("adding actuator with values " + actuator->id + "," + String(actuator->restPosition) + ":" + String(actuator->firstTouchPressure) + ":" + String(actuator->stallPressure), debugPrintType::Debug);
+    return actuator;
 }
 
 bool BowActuators::removeBowActuator(uint8_t t_actuator) {
-    if (t_actuator >= m_bowActuator.size()) {
-        return false;
-    }
-    m_bowActuator.erase(m_bowActuator.begin() + t_actuator);
-    if (m_currentBowActuator >= t_actuator) {
-        m_currentBowActuator = 0;
-        debugPrintln("Removed active bow actuator, resetting to actuator 0", debugPrintType::Debug);
-    }
-    return true;
+    ModuleGroup *group = getGroup("bowactuators");
+    if (group == nullptr) { return eProcessResult::CommandFailed; }
+    return group->removeModule(t_actuator);
 }
 
-uint8_t BowActuators::setBowActuator(uint8_t t_actuator) {
-    if (t_actuator >= m_bowActuator.size()) {
-        debugPrintln("Actuator over current size!", debugPrintType::Error);
-    } else {
-        m_currentBowActuator = t_actuator;
-    }
-    return m_currentBowActuator;
-};
-/*
-uint8_t BowActuators::getBowActuator() {
-    return m_currentBowActuator;
-}
-*/
-uint8_t BowActuators::getBowActuatorCount() {
-    return m_bowActuator.size();
+void BowActuators::dumpData(std::vector<commandResponse> *dataDump) {
+/*    std::vector<commandResponse> commandResponses;
+    commandResponses = ModuleHandler::dumpData();
+    commandResponses.push_back({ "ac[" + String(moduleGroups[0].selection[0]) + "]", debugPrintType::InfoRequest });
+    return commandResponses;*/
+    ModuleHandler::dumpData(dataDump);
 }
 
-bool BowActuators::loadBowActuator() {
-    bowPressure->setEngagePressure(m_bowActuator[m_currentBowActuator].firstTouchPressure);
-    bowPressure->setMaxPressure(m_bowActuator[m_currentBowActuator].stallPressure);
-    bowPressure->setRestPressure(m_bowActuator[m_currentBowActuator].restPosition);
-    return true;
-}
-
-bool BowActuators::loadBowActuator(uint8_t t_actuator) {
-    if (t_actuator >= m_bowActuator.size()) { return false; }
-    m_currentBowActuator = t_actuator;
-    loadBowActuator();
-    return true;
-}
-/*
-bool BowActuators::saveBowActuator() {
-    m_bowActuator[m_currentBowActuator].firstTouchPressure = m_calibrationDataConnect->firstTouchPressure;
-    m_bowActuator[m_currentBowActuator].stallPressure = m_calibrationDataConnect->stallPressure;
-    m_bowActuator[m_currentBowActuator].restPosition = m_calibrationDataConnect->restPosition;
-    return true;
-};
-*/
-bool BowActuators::saveBowActuator(uint16_t actuator, String name) {
-    if (actuator > m_bowActuator.size() - 1) {
-        debugPrintln("Inserting new actuator", Debug);
-        m_bowActuator.push_back({0, 65535, 0, "new"});
-        actuator = m_bowActuator.size() - 1;
-    }
-    m_bowActuator[actuator].firstTouchPressure = bowPressure->getEngagePressure();
-    m_bowActuator[actuator].stallPressure = bowPressure->getMaxPressure();
-    m_bowActuator[actuator].restPosition = bowPressure->getRestPressure();
-    m_bowActuator[actuator].id = name;
-    return true;
-};
-/*
-bool BowActuators::setBowActuatorFirstTouchPressure(uint16_t t_firstTouchPressure)  {
-    m_bowActuator[m_currentBowActuator].firstTouchPressure = t_firstTouchPressure;
-    return true;
-};
-
-bool BowActuators::setBowActuatorStallPressure(uint16_t t_stallPressure)  {
-    m_bowActuator[m_currentBowActuator].stallPressure = t_stallPressure;
-    return true;
-};
-
-bool BowActuators::setBowActuatorRestPosition(uint16_t t_restPosition) {
-    m_bowActuator[m_currentBowActuator].restPosition = t_restPosition;
-    return true;
-};
-
-bool BowActuators::setBowActuatorID(String t_id) {
-    m_bowActuator[m_currentBowActuator].id = t_id;
-    return true;
-}
-*/
-uint16_t BowActuators::getBowActuatorFirstTouchPressure(int8_t t_bowActuatorIndex) {
-    if ((t_bowActuatorIndex < 0) || (t_bowActuatorIndex > (m_bowActuator.size() -1))) { t_bowActuatorIndex = m_currentBowActuator; }
-    return m_bowActuator[t_bowActuatorIndex].firstTouchPressure;
-}
-
-uint16_t BowActuators::getBowActuatorStallPressure(int8_t t_bowActuatorIndex) {
-    if ((t_bowActuatorIndex < 0) || (t_bowActuatorIndex > (m_bowActuator.size() -1))) { t_bowActuatorIndex = m_currentBowActuator; }
-    return m_bowActuator[t_bowActuatorIndex].stallPressure;
-}
-
-uint16_t BowActuators::getBowActuatorRestPosition(int8_t t_bowActuatorIndex) {
-    if ((t_bowActuatorIndex < 0) || (t_bowActuatorIndex > (m_bowActuator.size() -1))) { t_bowActuatorIndex = m_currentBowActuator; }
-    return m_bowActuator[t_bowActuatorIndex].restPosition;
-}
-
-String BowActuators::getBowActuatorID(int8_t t_bowActuatorIndex) {
-    if ((t_bowActuatorIndex < 0) || (t_bowActuatorIndex > (m_bowActuator.size() -1))) { t_bowActuatorIndex = m_currentBowActuator; }
-    return m_bowActuator[t_bowActuatorIndex].id;
-}
-
-bool BowActuators::setBowActuatorData(int8_t t_bowActuatorIndex, uint16_t t_firstTouchPressure, uint16_t t_stallPressure, uint16_t t_restPosition, String t_id) {
-    if (t_bowActuatorIndex >= m_bowActuator.size()) {
-        if (t_bowActuatorIndex == m_bowActuator.size()) {
-            debugPrintln("Bow actuator index out of range by one, adding bow index", debugPrintType::Debug);
-            t_bowActuatorIndex = addBowActuator();
-        } else {
-            debugPrintln("Bow actuator index out of range by more than one", debugPrintType::Error);
-            return false;
-        }
-    }
-    m_bowActuator[t_bowActuatorIndex].stallPressure = t_stallPressure;
-    m_bowActuator[t_bowActuatorIndex].firstTouchPressure = t_firstTouchPressure;
-    m_bowActuator[t_bowActuatorIndex].restPosition = t_restPosition;
-    m_bowActuator[t_bowActuatorIndex].id = t_id;
-    return true;
-};
-
-String BowActuators::dumpData() {
-    String dump = "";
-    for (uint8_t i = 0; i < (m_bowActuator.size()); i++) {
-        dump += "bad:" + String(i) + ":" + String(m_bowActuator[i].firstTouchPressure) + ":" + String(m_bowActuator[i].stallPressure) + ":" +
-            String(m_bowActuator[i].restPosition) + ":" + delimitExpression(m_bowActuator[i].id, true) + ",";
-    }
-    //dump += "bas:" + String(m_currentBowActuator) + ",bal,";
-    dump += "ba:" + String(m_currentBowActuator) + ",";
-    return dump;
-}
 #endif

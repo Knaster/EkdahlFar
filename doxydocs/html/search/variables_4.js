@@ -1,22 +1,7 @@
 var searchData=
 [
-  ['dataarray_0',['dataArray',['../classaverager.html#a655a24b1204e470116902f8ed8ddcfc3',1,'averager']]],
-  ['dataaveragelength_1',['dataAverageLength',['../classaverager.html#adde2499165f7e8076a054d49ba747cca',1,'averager']]],
-  ['datacount_2',['dataCount',['../classaverager.html#a82f127ce49291496bdf93d634855ef62',1,'averager']]],
-  ['dataindex_3',['dataIndex',['../classaverager.html#a05e9e18dcdfe19bb3df1202202524eee',1,'averager']]],
-  ['dchannel_4',['dchannel',['../midi_8cpp.html#aa2816efa610ba96e26646ca2d25f0cba',1,'midi.cpp']]],
-  ['dcmotorcontrol_5',['dcmotorcontrol',['../classBowControl.html#a38164fbaeced2317f73f5febac582323',1,'BowControl::dcMotorControl'],['../classPIDController.html#af97ae23b468bb776bd33f3791e44f041',1,'PIDController::dcMotorControl']]],
-  ['debugprintenabled_6',['debugPrintEnabled',['../debugprint_8hpp.html#a9c71895d3563902fd61dbfe70213f577',1,'debugprint.hpp']]],
-  ['debugprinttypename_7',['debugPrintTypeName',['../debugprint_8hpp.html#acbab4b58032141437b697b6071034ed6',1,'debugprint.hpp']]],
-  ['debugprinttypenameshort_8',['debugPrintTypeNameShort',['../debugprint_8hpp.html#a325006d92e4f547b1b983336d5be8b08',1,'debugprint.hpp']]],
-  ['dirchange_9',['dirChange',['../classservoStepper.html#a3e1e00e108bec142df788d2dbb8188ba',1,'servoStepper']]],
-  ['dmap_10',['dMap',['../midi_8cpp.html#a4e0fa8899ed6b9f1bde2bc03de889626',1,'midi.cpp']]],
-  ['dnote_11',['dnote',['../midi_8cpp.html#afe77cbca418de1f23989ea0572954c2f',1,'midi.cpp']]],
-  ['dnotecount_12',['dnotecount',['../midi_8cpp.html#a43fd958e8f9b57cb0a7710fd2fc7a62a',1,'midi.cpp']]],
-  ['dpitch_13',['dpitch',['../midi_8cpp.html#a2230b468d53b40b5e940c8dc818345c6',1,'midi.cpp']]],
-  ['dpressure_14',['dpressure',['../midi_8cpp.html#aa57ea4be85a9ab70734ba96f316234b3',1,'midi.cpp']]],
-  ['dprogram_15',['dprogram',['../midi_8cpp.html#a298e941b7f939b9387cfe86b767f401c',1,'midi.cpp']]],
-  ['duv_16',['duv',['../midi_8cpp.html#ad31c4c0ab2326a2058452d0a2ee7626b',1,'midi.cpp']]],
-  ['dvalue_17',['dvalue',['../midi_8cpp.html#ab88920172b5a32b077bd95bb1f3d6f8e',1,'midi.cpp']]],
-  ['dvelocity_18',['dvelocity',['../midi_8cpp.html#a363d3e781f267bacd53748c7f8752a4a',1,'midi.cpp']]]
+  ['debugprintenabled_0',['debugPrintEnabled',['../debugprint_8hpp.html#a9c71895d3563902fd61dbfe70213f577',1,'debugprint.hpp']]],
+  ['debugprinttypename_1',['debugPrintTypeName',['../debugprint_8hpp.html#acbab4b58032141437b697b6071034ed6',1,'debugprint.hpp']]],
+  ['debugprinttypenameshort_2',['debugPrintTypeNameShort',['../debugprint_8hpp.html#a325006d92e4f547b1b983336d5be8b08',1,'debugprint.hpp']]],
+  ['dirchange_3',['dirChange',['../classservoStepper.html#a3e1e00e108bec142df788d2dbb8188ba',1,'servoStepper']]]
 ];

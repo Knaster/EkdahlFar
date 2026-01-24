@@ -24,65 +24,107 @@
 
 #include "harmonicSeries.hpp"
 
-class HarmonicSeries {
-public:
-    std::vector<float> ratio;
-    String Id;
-
-    void setHarmonic(uint16_t harmonic, float _ratio) {
-        while (harmonic >= ratio.size()) {
-            ratio.push_back({float(0)});
-        }
-        ratio[harmonic] = _ratio;
-    }
-
-    HarmonicSeries() {
-
-    }
+const ModuleCommandDeclaration HarmonicSeries::moduleCommands[] = {
+    { "", "", "int", "Sets the current Harmonic Series", false, false, nullptr },
+    { "name", "na", "name", "Sets the name of the harmonic series", false, false, &s_name },
+    { "data", "da", "name:ratios", "Gets / sets all data for the harmonic series in the given slot", false, true, &s_data },
+    { "ratio", "r", "harmonic:ratio", "Sets the ratio of the given harmonic in current harmonic series, will increase the list size if needed to adress the harmonic", false, false, &s_ratio },
+    { "remove", "rm", "harmonic", "Remove the harmonic ratio given in the current series and shift any ratios accordingly. Cannot remove all ratios", false, false, &s_remove }
 };
 
-class HarmonicSeriesList {
-public:
-    std::vector<HarmonicSeries> series;
+getModuleCount(HarmonicSeries)
 
-    void addHarmonicSeries() {
-        HarmonicSeries hs;
-        series.push_back(hs);
+HarmonicSeries::HarmonicSeries() {
+    moduleID = new ModuleID("harmonicseries", "hs", "The list of ratios used in the current harmonic series", ModuleID::software);
+}
+
+CREATE_MODULE_COMMAND_FUNCTION(name, HarmonicSeries) {
+    if (request) {
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + Id, InfoRequest});
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        Id = delimitExpression(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + Id, InfoRequest});
     }
+    return eProcessResult::Ok;
+}
 
-    void addHarmonicSeries(String Id, float frequency[]) {
-        HarmonicSeries hs;
-
-        hs.Id = Id;
-        for (int i=0; i<12; i++) {
-            hs.setHarmonic(i, frequency[i]);
+CREATE_MODULE_COMMAND_FUNCTION(data, HarmonicSeries) {
+    if (!request) {
+        if (!checkArgumentsMin(inCommandItem, inCommandResponses, 1, false)) { return eProcessResult::WrongArgumentCount; }
+        ratios.clear();
+        for (int i = 0; i < inCommandItem->argument.size() - 1; i++) {
+            setHarmonic(i, inCommandItem->argument[i + 1].toFloat());
         }
-
-        series.push_back(hs);
     }
 
-    void addHarmonicSeries(String Id, std::vector<float> ratio) {
-        HarmonicSeries hs;
-
-        hs.Id = Id;
-        for (int i=0; i<12; i++) {
-            hs.setHarmonic(i, ratio[i]);
-        }
-
-        series.push_back(hs);
+    String response = thisItem.shortCommand + ":" + delimitExpression(Id, true);
+    for (int i = 0; i < ratios.size(); i++) {
+        response += ":" + String(ratios[i], 3);
     }
 
-    String dumpData() {
-        String dump = "";
-        for (int i = 0; i < int(series.size()); i++) {
-            dump += "bhsd:" + String(i) + ":" + String(series[i].Id);
-            for (int j = 0; j < int(series[i].ratio.size()); j++) {
-                dump += ":" + String(series[i].ratio[j], 5);
+    inCommandResponses->push_back({ response, InfoRequest });
+    return eProcessResult::Ok;
+}
+
+CREATE_MODULE_COMMAND_FUNCTION(ratio, HarmonicSeries) {
+    if (request) {
+        String returnString = thisItem.shortCommand + ":";
+        int r = 0;
+        if (inCommandItem->argument.size() > 0) {
+            r = inCommandItem->argument[0].toInt();
+            if (!validateNumber(r, 0, ratios.size() - 1)) { return eProcessResult::WrongArgumentValue; }
+            returnString += String(ratios[r]);
+        } else {
+            for (int i = 0; i < ratios.size(); i++) {
+                if (i > 0) { returnString += ":"; }
+                returnString += String(ratios[r]);
             }
-            dump += ",";
         }
-        return dump;
+        inCommandResponses->push_back({returnString, InfoRequest});
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 2)) { return eProcessResult::WrongArgumentCount; }
+        setHarmonic(inCommandItem->argument[0].toInt(), inCommandItem->argument[1].toFloat());
+        callDataChanged();
+
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(inCommandItem->argument[0].toInt()) + ":" + String(inCommandItem->argument[1].toFloat(), 3), InfoRequest});
     }
+    return eProcessResult::Ok;
 };
+
+CREATE_MODULE_COMMAND_FUNCTION(remove, HarmonicSeries) {
+    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+    if (ratios.size() < 2) {
+        inCommandResponses->push_back({"Cannot remove all harmonics", Error});
+        return eProcessResult::CommandFailed;
+    }
+
+    int i = inCommandItem->argument[0].toInt();
+    ratios.erase(ratios.begin() + i);
+    callDataChanged();
+
+    inCommandResponses->push_back({thisItem.shortCommand + ":" + String(i), InfoRequest});
+    return eProcessResult::Ok;
+};
+
+void HarmonicSeries::callDataChanged() {
+    if (dataChanged != nullptr) {
+        dataChanged(owner, this);
+    }
+}
+
+void HarmonicSeries::setHarmonic(uint16_t harmonic, float inRatio) {
+    while (harmonic >= ratios.size()) {
+        ratios.push_back({float(0)});
+    }
+    ratios[harmonic] = inRatio;
+}
+
+float HarmonicSeries::getHarmonic(uint16_t harmonic) {
+    if ((harmonic < 0) || (harmonic >= ratios.size())) {
+        return -1;
+    }
+    return ratios[harmonic];
+}
 
 #endif
