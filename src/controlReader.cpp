@@ -45,7 +45,7 @@ getModuleCount(ControlReader)
 
 ControlReader::ControlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
 {
-    moduleID = new ModuleID("controlbox", "cb", "Control Box 1.0", ModuleID::hardware);
+    moduleID = new ModuleID("controlbox", "cb", "Control Box 1.0", eModuleType::hardware);
 
     setDefaults();
 

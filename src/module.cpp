@@ -98,7 +98,7 @@ void Module::dir(std::vector<commandResponse> *inCommandResponses, String longPr
         }
     }
 }
-
+/*
 void Module::setDataChangedCallback(Module *inOwner, void (*inCallback)(Module *owner, Module *module)) {
     if ((owner != nullptr) && (owner != inOwner)) {
         debugPrintln("Object can only have on owner!", debugPrintType::Error);
@@ -106,9 +106,9 @@ void Module::setDataChangedCallback(Module *inOwner, void (*inCallback)(Module *
     }
     debugPrintln("Callback set", debugPrintType::Debug);
     owner = inOwner;
-    dataChanged = inCallback;
+    dataChangedCallback = inCallback;
 }
-
+*/
 void Module::update() {
     debugPrintln("Do not use me either.", debugPrintType::Debug);
 }
@@ -117,6 +117,15 @@ int Module::getModuleCommandCount() {
     debugPrintln("Do not use me.", debugPrintType::Debug);
     return -1;
 }
+
+bool Module::hasDataChange() {
+    if (pDataChange) {
+        pDataChange = false;
+        return true;
+    }
+    return false;
+}
+
 
 void Module::dumpData(std::vector<commandResponse> *dataDump) {
     for (int i = 0; i < getModuleCommandCount(); i++) {

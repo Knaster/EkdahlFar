@@ -21,8 +21,11 @@ const ModuleCommandDeclaration BowPressure::moduleCommands[] = {
 getModuleCount(BowPressure)
 
 BowPressure::BowPressure(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin) {
-    moduleID = new ModuleID("bowpressure", "bp", "Bowing pressure controller v1.0", ModuleID::hardware);
+    moduleID = new ModuleID("bowpressure", "bp", "Bowing pressure controller v1.0", eModuleType::hardware);
     tmc2209ServoStepper = new Tmc2209ServoStepper(stepDirPin, stepStepPin, stepSerialPort, stepHomeSensorPin);
+
+    bowActuators = new BowActuators();
+    addModule(bowActuators);
 }
 
 CREATE_MODULE_COMMAND_FUNCTION(baseline, BowPressure) {
@@ -63,33 +66,33 @@ CREATE_MODULE_COMMAND_FUNCTION(engage, BowPressure) {
 
 CREATE_MODULE_COMMAND_FUNCTION(stallPressure, BowPressure) {
     if (request) {
-        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(maxPressure), InfoRequest });
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(getStallPressure()), InfoRequest });
     } else {
         if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        maxPressure = inCommandItem->argument[0].toInt();
-        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(maxPressure), InfoRequest});
+        setStallPressure(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(getStallPressure()), InfoRequest});
     }
     return eProcessResult::Ok;
 };
 
 CREATE_MODULE_COMMAND_FUNCTION(engagePressure, BowPressure) {
     if (request) {
-        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pEngagePressure), InfoRequest });
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(getEngagePressure()), InfoRequest });
     } else {
         if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        pEngagePressure = inCommandItem->argument[0].toInt();
-        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(pEngagePressure), InfoRequest});
+        setEngagePressure(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(getEngagePressure()), InfoRequest});
     }
     return eProcessResult::Ok;
 };
 
 CREATE_MODULE_COMMAND_FUNCTION(restPressure, BowPressure) {
     if (request) {
-        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pRestPressure), InfoRequest });
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(getRestPressure()), InfoRequest });
     } else {
         if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        pRestPressure = inCommandItem->argument[0].toInt();
-        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pRestPressure), InfoRequest });
+        setRestPressure(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(getRestPressure()), InfoRequest });
     }
     return eProcessResult::Ok;
 };
@@ -121,9 +124,11 @@ CREATE_MODULE_COMMAND_FUNCTION(modulationSpeed, BowPressure) {
 };
 
 CREATE_MODULE_COMMAND_FUNCTION(hold, BowPressure) {
-    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-    if (inCommandItem->argument[0].toInt() > 0) { setHold(true); } else { setHold(false);}
-    inCommandResponses->push_back({thisItem.shortCommand + ":" + String(inCommandItem->argument[0].toInt()), InfoRequest});
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        if (inCommandItem->argument[0].toInt() > 0) { setHold(true); } else { setHold(false);}
+    }
+    inCommandResponses->push_back({thisItem.shortCommand + ":" + String(getHold()), InfoRequest});
     return eProcessResult::Ok;
 };
 
@@ -143,7 +148,64 @@ CREATE_MODULE_COMMAND_FUNCTION(tmcinfo, BowPressure) {
     return eProcessResult::Ok;
 }
 
+BowActuator* BowPressure::currentActuator() {
+    ModuleGroup *ahGroup = getGroup("actuatorhandler");
+    if (ahGroup == nullptr) {
+        debugPrintln("Actuator handler group not found", debugPrintType::Error);
+        return nullptr;
+    }
+    ModuleGroup *acGroup = ((ModuleHandler*) (ahGroup->modules[0]))->getGroup("actuator");
+    if (acGroup == nullptr) {
+        debugPrintln("Actuator group not found", debugPrintType::Error);
+        return nullptr;
+    }
+    BowActuator *actuator = acGroup->getSingleSelection();
+    if (actuator == nullptr) {
+        debugPrintln("Actuator not found", debugPrintType::Error);
+        return nullptr;
+    }
+    return actuator;
+}
+
 /***** Module specific commands mirroring serially attainable commands *****/
+bool BowPressure::setRestPressure(uint16_t inRestPressure) {
+    BowActuator *cAC = currentActuator();
+    if (cAC == nullptr) { return false; }
+    cAC->restPosition = inRestPressure;
+    return true;
+}
+
+uint16_t BowPressure::getRestPressure() {
+    BowActuator *cAC = currentActuator();
+    if (cAC == nullptr) { return false; }
+    return cAC->restPosition;
+}
+
+bool BowPressure::setEngagePressure(uint16_t inEngagePressure) {
+    BowActuator *cAC = currentActuator();
+    if (cAC == nullptr) { return false; }
+    cAC->firstTouchPressure = inEngagePressure;
+    return true;
+}
+
+uint16_t BowPressure::getEngagePressure() {
+    BowActuator *cAC = currentActuator();
+    if (cAC == nullptr) { return false; }
+    return cAC->firstTouchPressure;
+}
+
+bool BowPressure::setStallPressure(uint16_t inStallPressure) {
+    BowActuator *cAC = currentActuator();
+    if (cAC == nullptr) { return false; }
+    cAC->stallPressure = inStallPressure;
+    return true;
+}
+
+uint16_t BowPressure::getStallPressure() {
+    BowActuator *cAC = currentActuator();
+    if (cAC == nullptr) { return false; }
+    return cAC->stallPressure;
+}
 
 void BowPressure::setHardwarePressure(uint16_t pressure) {
     if ((tmc2209ServoStepper != nullptr) && (tmc2209ServoStepper->stepServoStepper != nullptr)) {
@@ -169,10 +231,11 @@ void BowPressure::setPressureModifier(uint16_t modifier) {
 bool BowPressure::rest(bool enact) {
     if (enact == 0) { return false; }
     pressureMode = ePressureMode::Rest;
+    setRestSignal();
     if (pHold) { return true; }
 
     reachedEngage = false;
-    setPressureSafe(pRestPressure);
+    setPressureSafe(getRestPressure());
     return true;
 }
 
@@ -191,6 +254,14 @@ bool BowPressure::engage(bool enact) {
 
 void BowPressure::getTMC2209Info() { return tmc2209ServoStepper->getTMC2209Info(); }
 
+bool BowPressure::getRestSignal() {
+    if (restSignal) {
+        restSignal = false;
+        return true;
+    }
+    return false;
+}
+
 /***** Hidden commands for modular use *****/
 /***** Internal commands for stand-alone and semi-modular use *****/
 
@@ -208,7 +279,7 @@ void BowPressure::update() {
 /***** Private commands *****/
 
 void BowPressure::setPressureSafe(uint16_t pressure) {
-    if (pressure > maxPressure) { pressure = maxPressure; }
+    if (pressure > getStallPressure()) { pressure = getStallPressure(); }
 
     if ((pressureMode == ePressureMode::Engage) && (tmc2209ServoStepper->stepServoStepper->reachedTarget))  {
         reachedEngage = true;
@@ -226,7 +297,8 @@ void BowPressure::setPressureSafe(uint16_t pressure) {
 
 /// Calculate the tilt PWM value using baselineTiltPWM and modfierTiltPWM and send it to BowIO
 bool BowPressure::calculateBaselineModifierPressure() {
-    unsigned int pressure = pEngagePressure + ((double)(maxPressure - pEngagePressure) / 65535 * ((double)(baselinePressure + modifierPressure)));
+    uint16_t pEngagePressure = getEngagePressure();
+    unsigned int pressure = pEngagePressure + ((double)(getStallPressure() - pEngagePressure) / 65535 * ((double)(baselinePressure + modifierPressure)));
     setPressureSafe(pressure);
     return true;
 }

@@ -24,14 +24,25 @@ struct ModuleCommandDeclaration {
 //    eProcessResult (*commandFunction) (Module*, ModuleCommandDeclarationArguments);
 };
 
+enum eModuleType {
+    software = 0,
+    hardware = 1,
+    remote = 2
+};
+
+#include <string>
+
+struct tModuleID {
+    const char* longName;
+    const char* shortName;
+    const char* description;
+    eModuleType moduleType = 0;
+    bool isGroupHandler = false;
+    std::string shortAlias;
+};
+
 class ModuleID {
 public:
-    enum eModuleType {
-        software = 0,
-        hardware = 1,
-        remote = 2
-    };
-
     bool isGroupHandler = false;
 
     const String moduleTypeDescription[3] = { "Software", "Hardware", "Remote" };
@@ -103,3 +114,13 @@ static eProcessResult s_dump(ModuleCommand* self, ModuleCommandDeclarationArgume
     bool className::name(Module *module)
 
 #endif
+
+#define SETMODULEID(longName, shortName, description, moduleType, groupHandler) \
+    static constexpr const char* kLongName = longName; \
+    static constexpr const char* kShortName = shortName; \
+    static constexpr const char* kDescription = description; \
+    static constexpr eModuleType kModuleType = moduleType; \
+    tModuleID tmoduleID = { kLongName, kShortName, kDescription, kModuleType, groupHandler, kShortName }; \
+    const tModuleID& getModuleID() const override { return tmoduleID; } \
+    tModuleID& getModuleID() override { return tmoduleID; } \
+    static tModuleID getModuleIDStatic() { return { kLongName, kShortName, kDescription, kModuleType, groupHandler, kShortName }; }

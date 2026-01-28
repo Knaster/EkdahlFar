@@ -13,12 +13,12 @@ public:
     CREATE_MODULE_COMMAND_FUNCTION_FWD(engageDuration, Solenoid)
 
     Solenoid(char _solenoidPin);
-
+/*
     eProcessResult processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
                                commandList *delegatedCommands = nullptr);
     eProcessResult processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
                                     commandList *delegatedCommands = nullptr);
-
+*/
     void update();
 
 private:

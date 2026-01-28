@@ -35,16 +35,21 @@ const ModuleCommandDeclaration HarmonicSeries::moduleCommands[] = {
 getModuleCount(HarmonicSeries)
 
 HarmonicSeries::HarmonicSeries() {
-    moduleID = new ModuleID("harmonicseries", "hs", "The list of ratios used in the current harmonic series", ModuleID::software);
+    moduleID = new ModuleID("harmonicseries", "hs", "The list of ratios used in the current harmonic series", eModuleType::software);
 }
-
+/*
+CREATE_DATACHANGED_CALLBACK(fDataChanged, HarmonicSeries) {
+    debugPrintln("Data changed hs!", debugPrintType::Debug);
+    return true;
+}
+*/
 CREATE_MODULE_COMMAND_FUNCTION(name, HarmonicSeries) {
     if (request) {
         inCommandResponses->push_back({thisItem.shortCommand + ":" + Id, InfoRequest});
     } else {
         if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        Id = delimitExpression(inCommandItem->argument[0].toInt());
-        inCommandResponses->push_back({thisItem.shortCommand + ":" + Id, InfoRequest});
+        Id = stripQuotes(inCommandItem->argument[0]);
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + delimitExpression(Id, true), InfoRequest});
     }
     return eProcessResult::Ok;
 }
@@ -56,6 +61,7 @@ CREATE_MODULE_COMMAND_FUNCTION(data, HarmonicSeries) {
         for (int i = 0; i < inCommandItem->argument.size() - 1; i++) {
             setHarmonic(i, inCommandItem->argument[i + 1].toFloat());
         }
+        callDataChanged();
     }
 
     String response = thisItem.shortCommand + ":" + delimitExpression(Id, true);
@@ -108,9 +114,10 @@ CREATE_MODULE_COMMAND_FUNCTION(remove, HarmonicSeries) {
 };
 
 void HarmonicSeries::callDataChanged() {
-    if (dataChanged != nullptr) {
-        dataChanged(owner, this);
-    }
+/*    if (dataChangedCallback != nullptr) {
+        dataChangedCallback(owner, this);
+    }*/
+    setDataChanged();
 }
 
 void HarmonicSeries::setHarmonic(uint16_t harmonic, float inRatio) {

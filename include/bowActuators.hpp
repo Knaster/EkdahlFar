@@ -31,7 +31,7 @@ public:
     CREATE_MODULE_COMMAND_FUNCTION_FWD(data, BowActuator)
 
     BowActuator() {
-        moduleID = new ModuleID("actuator", "ac", "actuator data", ModuleID::software);
+        moduleID = new ModuleID("actuator", "ac", "actuator data", eModuleType::software);
     }
 
     uint16_t firstTouchPressure = 2000;
@@ -83,10 +83,7 @@ public:
 
     void dumpData(std::vector<commandResponse> *dataDump) override;
 
-    BowActuators(BowPressure *inBowPressure);
-
-private:
-    BowPressure *bowPressure;
+    BowActuators();
 
 private:
 /***** Module specific commands mirroring serially attainable commands *****/

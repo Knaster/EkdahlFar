@@ -19,9 +19,9 @@
 #ifndef BOWCONTROL_H
 #define BOWCONTROL_H
 
+#include "../src/bowActuators.cpp"
 #include "../src/bowpressure.cpp"
 #include "../src/pidcontroller.cpp"
-#include "../src/bowActuators.cpp"
 #include "../src/harmonicserieshandler.cpp"
 
 
@@ -43,8 +43,6 @@ private:
     DCMotorControl *dcMotorControl = nullptr;
     PIDController *pidController = nullptr;
     BowPressure *bowPressure = nullptr;
-
-    BowActuators *bowActuators = nullptr;
 
 public:
     HarmonicSeriesHandler *harmonicSeriesHandler = nullptr;
@@ -125,13 +123,13 @@ public:
 
     void setRestPressure(uint16_t pressure) { bowPressure->setRestPressure(pressure); }
 
-    void setMaxPressure(uint16_t pressure) { bowPressure->setMaxPressure(pressure); }
+    void setStallPressure(uint16_t pressure) { bowPressure->setStallPressure(pressure); }
 
     uint16_t getEngagePressure() { return bowPressure->getEngagePressure(); }
 
     uint16_t getRestPressure() { return bowPressure->getRestPressure(); }
 
-    uint16_t getMaxPressure() { return bowPressure->getMaxPressure(); }
+    uint16_t getStallPressure() { return bowPressure->getStallPressure(); }
 
     bool bowMotorIsOverCurrent() { return dcMotorControl->isOverCurrent(); }
 

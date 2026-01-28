@@ -76,7 +76,7 @@ eCalibrationResult CalibrateMute::findMuteLevels() {
     harmonicSeriesHandler->setHarmonic(0);
 
     uint16_t testPressure = bowControl->getEngagePressure() +
-        ((bowControl->getMaxPressure() - bowControl->getEngagePressure()) / 4);
+        ((bowControl->getStallPressure() - bowControl->getEngagePressure()) / 4);
 
     debugPrintln("Setting tilt to " + String(testPressure), debugPrintType::TextInfo);
     bowControl->setHardwarePressure(testPressure);
@@ -92,7 +92,7 @@ eCalibrationResult CalibrateMute::findMuteLevels() {
         bowControl->setHardwarePressure(testPressure);
         levelFundamental = findLevel();
         debugPrintln("Fundamental level " + String(levelFundamental), debugPrintType::TextInfo);
-    } while((levelFundamental < minFundamentalAmplitude) && (testPressure < bowControl->getMaxPressure()));
+    } while((levelFundamental < minFundamentalAmplitude) && (testPressure < bowControl->getStallPressure()));
 
     if (levelFundamental < minFundamentalAmplitude) { return CR_Err_AudioTooLow; }
 
@@ -121,6 +121,9 @@ eCalibrationResult CalibrateMute::findMuteLevels() {
 
     muteControl->setFullMutePosition(mutePos);
     muteControl->setHalfMutePosition(mutePos / 2);
+    int32_t rest = mutePos - 30000;
+    if (rest < 0) { rest = 0; }
+    muteControl->setRestPosition(rest);
     debugPrintln("Full mute set at " + String(muteControl->getFullMutePosition()), debugPrintType::TextInfo);
 
     debugPrintln("Finished level set", debugPrintType::TextInfo);

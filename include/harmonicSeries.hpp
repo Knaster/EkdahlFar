@@ -27,6 +27,8 @@ class HarmonicSeries : public Module {
 public:
     MODULECOMMANDHANDLER
 
+//    CREATE_DATACHANGED_CALLBACK_FWD(fDataChanged, HarmonicSeries)
+
     CREATE_MODULE_COMMAND_FUNCTION_FWD(data, HarmonicSeries)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(name, HarmonicSeries)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(ratio, HarmonicSeries)

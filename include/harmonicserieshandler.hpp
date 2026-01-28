@@ -8,7 +8,7 @@ public:
     MODULECOMMANDHANDLER
 
     CREATE_INDEX_CALLBACK_FWD(harmonicSeriesIndexChanged, HarmonicSeriesHandler);
-    CREATE_DATACHANGED_CALLBACK_FWD(dataChanged, HarmonicSeriesHandler)
+//    CREATE_DATACHANGED_CALLBACK_FWD(harmonicSeriesDataChanged, HarmonicSeriesHandler)
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(fundamental, HarmonicSeriesHandler)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(harmonic, HarmonicSeriesHandler)
@@ -25,18 +25,7 @@ public:
 
     HarmonicSeriesHandler();
 
-//    std::vector<commandResponse> dumpData() override;
     void dumpData(std::vector<commandResponse> *dataDump) override;
-
-/*
-    eProcessResult processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                               commandList *delegatedCommands = nullptr);
-
-    eProcessResult processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                                    commandList *delegatedCommands = nullptr);
-*/
-
-
 
 private:
     float fundamentalFrequency = 66;
@@ -55,17 +44,18 @@ private:
     int16_t upperHarmonic = 49;
 
     bool frequencyChanged = false;
+    bool harmonicSeriesChangeReported = false;
 private:
     bool calculateHarmonicShift();
 
     bool raiseFrequencyChanged();
-
+/*
     eProcessResult processControlCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
                                commandList *delegatedCommands = nullptr);
 
     eProcessResult processHarmonicSeriesCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
                                       commandList *delegatedCommands = nullptr);
-
+*/
     //std::vector<HarmonicSeries> harmonicSeries;
 public:
     bool setHarmonicShift(int inHarmonicShift);

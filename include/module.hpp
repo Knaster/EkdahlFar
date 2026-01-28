@@ -31,18 +31,23 @@ public:
 
     virtual void update();
 
+    // MUST be implemented
     virtual int getModuleCommandCount();
 
     virtual void dumpData(std::vector<commandResponse> *dataDump);  // Returns dump data directly as string
 
-    void setDataChangedCallback(Module *inOwner, void (*inCallback)(Module *owner, Module *module));
+//    void setDataChangedCallback(Module *inOwner, void (*inCallback)(Module *owner, Module *module));
 
     bool isGroupHandler = false;
+private:
+    bool pDataChange = false;
+public:
+    bool hasDataChange();
 protected:
     Module *owner = nullptr;
-    void (*dataChanged)(Module *owner, Module *module) = nullptr;
+//    bool (*dataChangedCallback)(Module *owner, Module *module) = nullptr;
 
-private:
+    void setDataChanged() { pDataChange = true; }
 };
 
 #endif // MODULE_H

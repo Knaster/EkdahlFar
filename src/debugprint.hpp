@@ -23,11 +23,11 @@
  #include <WProgram.h>
  #include "string.h"
 
-enum debugPrintType { Command, USB, Hardware, Undefined, Priority, Error, InfoRequest, EParser, Debug, TextInfo, Help};
-#define debugPrintTypes 11
-String debugPrintTypeName[debugPrintTypes] = { "command", "usb", "hardware" , "undefined", "priority", "error", "inforequest", "expressionparser", "debug", "textinfo", "help" };
-String debugPrintTypeNameShort[debugPrintTypes] = { "cmd", "usb", "hw", "un", "pri", "err", "irq", "ep", "dbg", "txi", "hlp"};
-bool debugPrintEnabled[debugPrintTypes] = { true, true, true, true, true, true, true, false, true, true, true };
+enum debugPrintType { Command, USB, Hardware, Undefined, Priority, Error, InfoRequest, EParser, Debug, TextInfo, Help, Internal};
+#define debugPrintTypes 12
+String debugPrintTypeName[debugPrintTypes] = { "command", "usb", "hardware" , "undefined", "priority", "error", "inforequest", "expressionparser", "debug", "textinfo", "help", "internal" };
+String debugPrintTypeNameShort[debugPrintTypes] = { "cmd", "usb", "hw", "un", "pri", "err", "irq", "ep", "dbg", "txi", "hlp", "int"};
+bool debugPrintEnabled[debugPrintTypes] = { true, true, true, true, true, true, true, false, true, true, true, false };
 
 bool debugPrintCheckType(debugPrintType printType) {
   if (debugPrintEnabled[printType] == true) { return true; }

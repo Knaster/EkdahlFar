@@ -14,13 +14,15 @@ ModuleGroup::ModuleGroup(ModuleID inModuleID) {
     moduleID = new ModuleID(inModuleID);
 }
 
-ModuleGroup::~ModuleGroup()
-{
-    //dtor
-}
+ModuleGroup::~ModuleGroup() { }
 
 void ModuleGroup::dir(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix, bool hidden, bool inModules, bool commands, bool instances, bool instanceCount, bool recursive) {
-    if (modules.size() == 0) { return; }
+    if (modules.size() == 0) {
+        if (inModules) {
+            inCommandResponses->push_back({ "dir: " + longPrefix + "[0] : " + shortPrefix + "[0] : " + String(modules.size()) + " : " + moduleID->getModuleTypeS(), debugPrintType::InfoRequest });
+        }
+        return;
+    }
 
     if (recursive) {
         if (!instances) {
@@ -43,24 +45,19 @@ void ModuleGroup::dir(std::vector<commandResponse> *inCommandResponses, String l
 }
 
 void ModuleGroup::dumpData(std::vector<commandResponse> *inCommandResponses) {
-//std::vector<commandResponse> ModuleGroup::dumpData() {
-    //std::vector<commandResponse> dataDump;
     std::vector<commandResponse> outDataDump;
-
     String out;
 
     for (int i = 0; i < modules.size(); i++) {
-        //outDataDump = modules[i]->dumpData();
         modules[i]->dumpData(&outDataDump);
         for (int j = 0; j < outDataDump.size(); j++) {
             out = modules[i]->moduleID->getShortAlias();
             if (modules.size() > 1) { out += "[" + String(i) + "]"; }
             out += "." + outDataDump[j].response;
-            //dataDump.push_back({out, outDataDump[j].responseType });
             inCommandResponses->push_back({ out, outDataDump[j].responseType });
         }
+        outDataDump.clear();
     }
-    //return dataDump;
 }
 
 eProcessResult ModuleGroup::processCommands(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request) {
@@ -87,12 +84,10 @@ eProcessResult ModuleGroup::processCommands(commandItem *inCommandItem, std::vec
 //    debugPrintln("Group has " + String(modules.size()) + " children and we have " + String(localSel.size()) + " selections", debugPrintType::Debug);
     for (int i = 0; i < localSel.size(); i++) {
 //        debugPrintln("Checking selection " + String(i), debugPrintType::Debug);
-
         childReturn.clear();
         item = localSel[i];
         if (item < modules.size()) {
 //            debugPrintln("In module " + String(item), debugPrintType::Debug);
-
             eProcessResult result = modules[item]->processCommands(inCommandItem, &childReturn, request);
 
             returnString = moduleID->getShortAlias();
@@ -128,10 +123,8 @@ bool ModuleGroup::indexing(commandItem *inCommandItem) {
             }
             return false;
         }
-//        debugPrintln("Copying item " + String(i), debugPrintType::Debug);
         selection.push_back(j);
     }
-//    debugPrintln("All copied", debugPrintType::Debug);
     if (indexCallback != nullptr) {
         return indexCallback(owner, this);
     }
@@ -147,10 +140,11 @@ std::vector<Module*> ModuleGroup::getSelection() {
 }
 
 Module* ModuleGroup::getSingleSelection() {
-    if (selection.size() != 1) {
+    if (selection.size() < 1) {
+        debugPrintln("No selection avaliable", debugPrintType::Error);
         return nullptr;
     } else {
-        return modules[0];
+        return modules[selection[0]];
     }
 }
 

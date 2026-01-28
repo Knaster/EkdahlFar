@@ -152,7 +152,7 @@
 
 #include <BufferedInput.h>
 #include <BufferedOutput.h>
-//#include <PinFlasher.h>
+
 #include <SafeString.h>
 #include <SafeStringNameSpace.h>
 #include <SafeStringNameSpaceEnd.h>
@@ -174,6 +174,9 @@ bool testMeasurementOngoing = false;
 
 #include "debugprint.hpp"
 
+#include "expressionparser.cpp"
+ExpressionParser expressionParser;
+
 extern unsigned long _heap_start;
 extern unsigned long _heap_end;
 extern char *__brkval;
@@ -190,7 +193,6 @@ String nickName = "default";
 String delimitExpression(String expression, bool force = false);
 
 #include "commandparser.hpp"
-//commandList *commands;
 commandList globalCommands;
 commandList globalResponseCommands;
 
@@ -215,6 +217,23 @@ void processCommandList(Module *inModule, commandList *inCommands, std::vector<c
 #include "basemodule.cpp"
 BaseModule *baseModule;
 
+void processSerialCommands(commandList inCommandList, bool isInternal = false) {
+    if (inCommandList.item.size() == 0) { return; }
+    std::vector <commandResponse> commandResponses;
+    while (inCommandList.item.size() > 0) {
+        processCommandList(baseModule, &inCommandList, &commandResponses);
+        inCommandList.item.clear();
+        inCommandList = globalResponseCommands;
+        globalResponseCommands.item.clear();
+    }
+
+    if ((!isInternal) || debugPrintEnabled[debugPrintType::Internal]) {
+        for (int i=0; i<commandResponses.size(); i++) {
+            debugPrintln(commandResponses[i].response, commandResponses[i].responseType);
+        }
+    }
+}
+
 void processSerialCommands() {
     globalCommands = globalResponseCommands;
     if (ssReader.read()) { globalCommands.addCommands(ssReader.c_str()); }
@@ -224,13 +243,12 @@ void processSerialCommands() {
     std::vector <commandResponse> commandResponses;
 
     uint16_t i = 0;
-
     while(globalCommands.item.size() > 0) {
         processCommandList(baseModule, &globalCommands, &commandResponses);
+
         globalCommands.item.clear();
         globalCommands = globalResponseCommands;
         globalResponseCommands.item.clear();
-        debugPrintln("New response commands: " + String(globalCommands.item.size()), debugPrintType::Debug);
     }
 
     for (i=0; i<commandResponses.size(); i++) {
@@ -250,8 +268,6 @@ void setup() {
     analogReadResolution(12);
 
     debugPrintln("RAM free " + String(freeram()), Command);
-
-    //commands = new commandList();
 
     farSingle = new FARSingle(&farSingleUpdateServoStepperMute0, &farSingleUpdateServoStepperPressure0, &farSingleUpdateTachometer0, &farSingleUpdatePID0);
 
@@ -316,6 +332,7 @@ void loop() {
     }
 
     baseModule->update();
+    processSerialCommands(globalResponseCommands, true);
 
     unsigned long currentTime = micros();
     if (currentTime - previousTime >= commandUpadateInterval) {

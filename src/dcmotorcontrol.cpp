@@ -20,7 +20,7 @@ const ModuleCommandDeclaration DCMotorControl::moduleCommands[] = {
 getModuleCount(DCMotorControl)
 
 DCMotorControl::DCMotorControl(char inMotorRevPin, char inMotorVoltagePin, char inMotorDCDCEnPin, char inTachoPin, char inCurrentSensePin, char inMotorFaultPin) {
-    moduleID = new ModuleID("dcmotor", "dcm", "DC Motor controller v1.0", ModuleID::hardware);
+    moduleID = new ModuleID("dcmotor", "dcm", "DC Motor controller v1.0", eModuleType::hardware);
 
     motorRevPin = inMotorRevPin;
     reflectorInterruptPin = inTachoPin;

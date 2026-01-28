@@ -37,7 +37,6 @@
 #define MIDI_CPP
 
 #include <MIDI.h>
-#include "expressionparser.cpp"
 #include "midi.h"
 
 #define MIDI_CONFIG_CHECK \
@@ -45,8 +44,6 @@
         debugPrintln("No configuration selected", debugPrintType::Error); \
         return; \
     }
-
-ExpressionParser expressionParser;
 
 MIDIHandler::MIDIHandler() {
 }

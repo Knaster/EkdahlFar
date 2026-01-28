@@ -34,7 +34,7 @@ getModuleCount(MuteControl)
 MuteControl::MuteControl(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensor) {
     mute = new Mute(stepEnPin, stepDirPin, stepStepPin, stepSerialPort, stepHomeSensor);
 
-    moduleID = new ModuleID("mute", "mu", "Mute controller v1.0", ModuleID::hardware);
+    moduleID = new ModuleID("mute", "mu", "Mute controller v1.0", eModuleType::hardware);
 }
 
 CREATE_MODULE_COMMAND_FUNCTION(setPosition, MuteControl) {
@@ -104,7 +104,8 @@ CREATE_MODULE_COMMAND_FUNCTION(fullMutePosition, MuteControl) {
         inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(mute->getFullMutePosition()), InfoRequest });
     } else {
         if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        mute->setFullMutePosition(inCommandItem->argument[0].toInt());
+        //mute->setFullMutePosition(inCommandItem->argument[0].toInt());
+        setFullMutePosition(inCommandItem->argument[0].toInt());
         inCommandResponses->push_back({thisItem.shortCommand + ":" + String(mute->getFullMutePosition()), InfoRequest});
     }
     return eProcessResult::Ok;
@@ -115,7 +116,8 @@ CREATE_MODULE_COMMAND_FUNCTION(halfMutePosition, MuteControl) {
         inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(mute->getHalfMutePosition()), InfoRequest });
     } else {
         if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        mute->setHalfMutePosition(inCommandItem->argument[0].toInt());
+        //mute->setHalfMutePosition(inCommandItem->argument[0].toInt());
+        setHalfMutePosition(inCommandItem->argument[0].toInt());
         inCommandResponses->push_back({thisItem.shortCommand + ":" + String(mute->getHalfMutePosition()), InfoRequest});
     }
     return eProcessResult::Ok;
@@ -126,7 +128,8 @@ CREATE_MODULE_COMMAND_FUNCTION(restPosition, MuteControl) {
         inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(mute->getRestPosition()), InfoRequest });
     } else {
         if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        mute->setRestPosition(inCommandItem->argument[0].toInt());
+        //mute->setRestPosition(inCommandItem->argument[0].toInt());
+        setRestPosition(inCommandItem->argument[0].toInt());
         inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(mute->getRestPosition()), InfoRequest });
     }
     return eProcessResult::Ok;

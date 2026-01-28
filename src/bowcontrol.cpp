@@ -58,7 +58,7 @@ getModuleCount(BowControl)
 BowControl::BowControl(char motorRevPin, char motorVoltagePin, char motorDCDCEnPin, char tachoPin, char currentSensePin, char motorFaultPin,
                        char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin) {
 
-    moduleID = new ModuleID("bowingwheel", "bw", "Bowing wheel controller v1.0", ModuleID::hardware);
+    moduleID = new ModuleID("bowingwheel", "bw", "Bowing wheel controller v1.0", eModuleType::hardware);
 
     dcMotorControl = new DCMotorControl(motorRevPin, motorVoltagePin, motorDCDCEnPin, tachoPin, currentSensePin, motorFaultPin);
     pidController = new PIDController(*dcMotorControl);
@@ -68,13 +68,11 @@ BowControl::BowControl(char motorRevPin, char motorVoltagePin, char motorDCDCEnP
     commandsOverPowerCurrent = "bw.dcm.ru:0,bw.bp.rs:1,bw.dcm.es:1000";
 
     harmonicSeriesHandler = new HarmonicSeriesHandler();
-    bowActuators = new BowActuators(bowPressure);
 
     addModule(dcMotorControl);
     addModule(pidController);
     addModule(bowPressure);
 
-    addModule(bowActuators);
     addModule(harmonicSeriesHandler);
 }
 
@@ -127,13 +125,15 @@ void BowControl::rest() {
     bowShutoffTimer = 0;
     bowShutoffTimedout = false;         // added 2024-06-27
     bowShutoffMotorDisabled = false;    // added 2024-06-27
+    debugPrintln("rest signal ", debugPrintType::Debug);
 }
 
 void BowControl::updateMotorAutoShutdown() {
+    if (((BowPressure*) getGroup("bowpressure")->modules[0])->getRestSignal()) { rest(); }
+
     if ((pSpeedMode == eSpeedMode::Automatic) && (bowPressure->getHold() == false)  && (bowShutoffTimer >= bowShutoffTimeout)) {
         if ((bowPressure->getPressureMode() == ePressureMode::Rest) && (bowShutoffTimedout == false)) {
             dcMotorControl->setBowMotorRun(false);
-            //run = false;
             bowShutoffTimedout = true;
             debugPrintln("Auto shutdown of motor", debugPrintType::Debug);
         } else

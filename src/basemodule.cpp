@@ -3,6 +3,8 @@
 
 #include "basemodule.hpp"
 
+#include "pluginhandler.cpp"
+
 const ModuleCommandDeclaration BaseModule::moduleCommands[] = {
     { "requestinfo", "rqi", "command", "Retrives rather than sets data associated with a command, if applicable", false, false, &s_requestInfo  },
     { "debugprint", "dp", "command|usb|hardware|undefined|priority|error|inforequest|expressionparser|debug:1|0", "Turns on or off serial feedback for the given item", false, true, &s_debugPrint},
@@ -21,7 +23,8 @@ const ModuleCommandDeclaration BaseModule::moduleCommands[] = {
     { "reset", "rst", "0|1", "Resets the Ekdahl FAR, conditional", false, false, &s_reset},
     { "nick", "nick", "string", "Sets the nickname of this unit" , false, true, &s_nick},
     { "nooperation", "nop", "-", "Do absolutely, positively, nothing", false, false, &s_noOperation },
-    { "freeram", "free", "-", "Shows free RAM memory", false, false, &s_freeRAM }
+    { "freeram", "free", "-", "Shows free RAM memory", false, false, &s_freeRAM },
+    { "test", "test", "-", "-", false, false, &s_test}
 };
 
 getModuleCount(BaseModule)
@@ -31,6 +34,9 @@ BaseModule::BaseModule(Module *inModule)
     if (inModule != nullptr) {
         mainModule = inModule;
         moduleID = inModule->moduleID;
+
+        pluginHandler = new PluginHandler();
+        mainModule->addModule(pluginHandler);
     } else {
         moduleID = new ModuleID("unknown", "unknown", "unknown", 0);
     }
@@ -111,17 +117,27 @@ CREATE_MODULE_COMMAND_FUNCTION(userVariables, BaseModule) {
 
     int userVariable = inCommandItem->argument[0].toInt();
     if (!request) {
-//        expressionParser.duv[userVariable] = inCommandItem->argument[1].toFloat();
+        expressionParser.duv[userVariable] = inCommandItem->argument[1].toFloat();
     }
-//    inCommandResponses->push_back({thisItem.shortCommand + ":" + String(userVariable) + ":" + String(expressionParser.duv[userVariable]), InfoRequest});
+    inCommandResponses->push_back({thisItem.shortCommand + ":" + String(userVariable) + ":" + String(expressionParser.duv[userVariable]), InfoRequest});
     return eProcessResult::Ok;
 }
 
 CREATE_MODULE_COMMAND_FUNCTION(expressionParserEvaluate, BaseModule) {
-    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-    commandList testCommands(thisItem.shortCommand + ":" + inCommandItem->argument[0]);
-//    testCommands.parseCommandExpressions(expressionParser);
-    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(testCommands.item[0].argument[0]), debugPrintType::InfoRequest});
+    //if (!checkArgumentsMin(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+    if (inCommandItem->argument.size() == 1) {
+        String result = expressionParser.parseCommandExpressions(stripQuotes(inCommandItem->argument[0]));
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + result, debugPrintType::InfoRequest});
+    } else
+    if (inCommandItem->argument.size() == 2) {
+        String result = expressionParser.parseCommandExpressions(stripQuotes(inCommandItem->argument[0]));
+        result = inCommandItem->argument[1] + ":" + delimitExpression(result);
+        globalResponseCommands.addCommands(result);
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + delimitExpression(result), debugPrintType::InfoRequest});
+    } else {
+        return eProcessResult::WrongArgumentCount;
+    }
+
     return eProcessResult::Ok;
 };
 
@@ -135,6 +151,7 @@ CREATE_MODULE_COMMAND_FUNCTION(ifEqual, BaseModule) {
             executeNow = new commandList(inCommandItem->argument[3]);
         }
         processCommandList(this, executeNow, inCommandResponses);
+        delete executeNow;
     }
     return eProcessResult::Ok;
 };
@@ -149,6 +166,7 @@ CREATE_MODULE_COMMAND_FUNCTION(ifGreater, BaseModule) {
             executeNow = new commandList(inCommandItem->argument[3]);
         }
         processCommandList(this, executeNow, inCommandResponses);
+        delete executeNow;
     }
     return eProcessResult::Ok;
 };
@@ -163,6 +181,7 @@ CREATE_MODULE_COMMAND_FUNCTION(ifLess, BaseModule) {
             executeNow = new commandList(inCommandItem->argument[3]);
         }
         processCommandList(this, executeNow, inCommandResponses);
+        delete executeNow;
     }
     return eProcessResult::Ok;
 };
@@ -194,15 +213,7 @@ CREATE_MODULE_COMMAND_FUNCTION(noOperation, BaseModule) {
 };
 
 CREATE_MODULE_COMMAND_FUNCTION(dump, BaseModule) {
-    /*std::vector<commandResponse> returnResponses = Module::dumpData();
-    for (int i = 0; i < returnResponses.size(); i++) {
-        inCommandResponses->push_back(returnResponses[i]);
-    }
 
-    returnResponses = mainModule->dumpData();
-    for (int i = 0; i < returnResponses.size(); i++) {
-        inCommandResponses->push_back(returnResponses[i]);
-    }*/
     Module::dumpData(inCommandResponses);
     if (mainModule != nullptr) {
         mainModule->dumpData(inCommandResponses);
@@ -217,8 +228,6 @@ CREATE_MODULE_COMMAND_FUNCTION(requestInfo, BaseModule) {
         for (int i = 0; i < inCommandItem->argument.size() - 1; i++) {
             commandString += ":" + inCommandItem->argument[i + 1];
         }
-//        debugPrintln("New command string is " + commandString, debugPrintType::Debug);
-        //commandItem *tCommandItem = new commandItem(commandString);
         commandItem tCommandItem(commandString);
         return processCommands(&tCommandItem, inCommandResponses, true);
     }
@@ -230,26 +239,29 @@ CREATE_MODULE_COMMAND_FUNCTION(freeRAM, BaseModule) {
     return eProcessResult::Ok;
 }
 
+CREATE_MODULE_COMMAND_FUNCTION(test, BaseModule) {
+    String out = "";
+    for (int i = 0; i < inCommandItem->argument.size(); i++) {
+        out += ", " + String(inCommandItem->argument[i]);
+    }
+    debugRaw(out);
+    return eProcessResult::Ok;
+}
+
 eProcessResult BaseModule::processCommands(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request) {
     eProcessResult processResult;
 
-    //debugPrintln("Before processing we have " + String(inCommandItem->argument.size()) + " arguments", debugPrintType::Debug);
-
     processResult = Module::processCommands(inCommandItem, commandResponses, request);
-    //debugPrintln("After module processing we have " + String(inCommandItem->argument.size()) + " arguments", debugPrintType::Debug);
     if (processResult == eProcessResult::NotFound) {
-//        debugPrintln("Main?", debugPrintType::Debug);
         if (mainModule != nullptr) {
-//            debugPrintln("Main.", debugPrintType::Debug);
             processResult = mainModule->processCommands(inCommandItem, commandResponses, request);
         }
     }
-    //debugPrintln("All commands processed, adding " + String(inCommandItem->argument.size()) + " response arguments", debugPrintType::Debug);
+
     String response = inCommandItem->command;
     for (int i = 0; i < inCommandItem->argument.size(); i++) {
         response += ":" + inCommandItem->argument[i];
     }
-    //debugPrintln("All response arguments added", debugPrintType::Debug);
 
     switch (processResult) {
     case eProcessResult::NotFound:
@@ -287,16 +299,10 @@ void BaseModule::dir(std::vector<commandResponse> *inCommandResponses, String lo
 }
 
 void BaseModule::dumpData(std::vector<commandResponse> *dataDump) {
-/*    std::vector<commandResponse> inCommandResponse;
-    inCommandResponse = Module::dumpData();
-    std::vector<commandResponse> inCommandResponse2;
-    inCommandResponse2 = mainModule->dumpData();
-    inCommandResponse.insert(inCommandResponse.end(), inCommandResponse2.begin(), inCommandResponse2.end());*/
     Module::dumpData(dataDump);
     if (mainModule != nullptr) {
         mainModule->dumpData(dataDump);
     }
-//    return inCommandResponse;
 }
 
 void BaseModule::reset() {
@@ -307,6 +313,7 @@ void BaseModule::reset() {
 void BaseModule::update() {
     if (mainModule != nullptr) {
         mainModule->update();
+        pluginHandler->update();
     }
 }
 

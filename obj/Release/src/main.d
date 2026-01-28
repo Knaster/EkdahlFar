@@ -28,8 +28,8 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  lib/SafeString/src/SafeStringStream.h lib/SafeString/src/SerialComs.h \
  lib/SafeString/src/SafeStringReader.h lib/SafeString/src/millisDelay.h \
  lib/SafeString/src/millisDelay.h src/debugprint.hpp \
- src/eepromhelpers.cpp src/commandparser.hpp src/expressionparser.cpp \
- include/expressionparser.h lib/tinyexpr/src/tinyexpr.h \
+ src/expressionparser.cpp include/expressionparser.h \
+ lib/tinyexpr/src/tinyexpr.h src/eepromhelpers.cpp src/commandparser.hpp \
  include/modulesystembasics.hpp include/module.hpp src/../src/module.cpp \
  include/module.hpp src/../src/modulehandler.cpp \
  include/modulehandler.hpp include/modulegroup.hpp \
@@ -44,15 +44,14 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  lib/MIDI/MIDI.h lib/MIDI/midi_Defs.h lib/MIDI/midi_Namespace.h \
  lib/MIDI/midi_Platform.h lib/MIDI/midi_Settings.h \
  lib/MIDI/midi_Message.h lib/MIDI/serialMIDI.h lib/MIDI/MIDI.hpp \
- include/../src/expressionparser.cpp include/midi.h \
- include/../src/audioanalyze.h lib/Audio/Audio.h lib/teensy4/DMAChannel.h \
- lib/Audio/analyze_fft256.h lib/teensy4/AudioStream.h \
- lib/teensy4/arm_math.h lib/teensy4/core_cmInstr.h \
- lib/Audio/analyze_fft1024.h lib/Audio/analyze_print.h \
- lib/Audio/analyze_tonedetect.h lib/Audio/analyze_notefreq.h \
- lib/Audio/analyze_peak.h lib/Audio/analyze_rms.h \
- lib/Audio/async_input_spdif3.h lib/Audio/Resampler.h \
- lib/Audio/Quantizer.h lib/Audio/control_sgtl5000.h \
+ include/midi.h include/../src/audioanalyze.h lib/Audio/Audio.h \
+ lib/teensy4/DMAChannel.h lib/Audio/analyze_fft256.h \
+ lib/teensy4/AudioStream.h lib/teensy4/arm_math.h \
+ lib/teensy4/core_cmInstr.h lib/Audio/analyze_fft1024.h \
+ lib/Audio/analyze_print.h lib/Audio/analyze_tonedetect.h \
+ lib/Audio/analyze_notefreq.h lib/Audio/analyze_peak.h \
+ lib/Audio/analyze_rms.h lib/Audio/async_input_spdif3.h \
+ lib/Audio/Resampler.h lib/Audio/Quantizer.h lib/Audio/control_sgtl5000.h \
  lib/Audio/AudioControl.h lib/Audio/control_wm8731.h \
  lib/Audio/control_ak4558.h lib/Audio/control_cs4272.h \
  lib/Audio/control_cs42448.h lib/Audio/control_tlv320aic3206.h \
@@ -137,11 +136,11 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  include/tmc2209_servostepper.hpp include/../src/solenoid.cpp \
  lib/Teensy_PWM/src/Teensy_PWM.h lib/Teensy_PWM/src/PWM_Generic_Debug.h \
  include/solenoid.hpp include/../src/bowcontrol.cpp \
- include/bowcontrol.hpp include/../src/bowpressure.cpp \
+ include/bowcontrol.hpp include/../src/bowActuators.cpp \
+ include/bowActuators.hpp include/../src/bowpressure.cpp \
  include/bowpressure.hpp include/../src/tmc2209_servostepper.cpp \
  include/../src/pidcontroller.cpp include/pidcontroller.hpp \
  include/../src/dcmotorcontrol.cpp include/dcmotorcontrol.hpp \
- include/../src/bowActuators.cpp include/bowActuators.hpp \
  include/../src/harmonicserieshandler.cpp \
  include/harmonicserieshandler.hpp include/../src/harmonicSeries.cpp \
  include/harmonicSeries.hpp include/../src/controlReader.cpp \
@@ -151,4 +150,9 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  include/../src/calibrationhelpers.hpp include/../src/bowcalibration.cpp \
  include/../src/bowcontrol.cpp include/bowcalibration.hpp \
  include/../src/mutecalibration.cpp include/mutecalibration.hpp \
- src/farsingle.cpp src/basemodule.cpp include/basemodule.hpp
+ src/farsingle.cpp src/basemodule.cpp include/basemodule.hpp \
+ src/pluginhandler.cpp include/pluginhandler.hpp \
+ include/modulehandler.hpp include/../src/plugin_lfo.cpp \
+ include/plugin_lfo.hpp include/../src/plugin_map.cpp \
+ include/plugin_map.hpp include/../src/plugin_adsr.cpp \
+ include/plugin_adsr.hpp

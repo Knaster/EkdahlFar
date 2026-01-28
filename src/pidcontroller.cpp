@@ -20,7 +20,7 @@ const ModuleCommandDeclaration PIDController::moduleCommands[] = {
 getModuleCount(PIDController)
 
 PIDController::PIDController(DCMotorControl &inDCMotorControl) {
-    moduleID = new ModuleID("pid", "pid", "PID controller v1.0", ModuleID::software);
+    moduleID = new ModuleID("pid", "pid", "PID controller v1.0", eModuleType::software);
     dcMotorControl = &inDCMotorControl;
 }
 
@@ -150,7 +150,7 @@ bool PIDController::setPIDTarget(float inPIDTargetSpeed) {
         debugPrintln("PID Target out of range!", Hardware);
         return false;
     }
-    debugPrintln("Setting PID target to " + String(inPIDTargetSpeed), Hardware);
+//    debugPrintln("Setting PID target to " + String(inPIDTargetSpeed), Hardware);
     setPIDTargetUnsafe(inPIDTargetSpeed);
     if (inPIDTargetSpeed == 0) { pidReset(); }
     return true;

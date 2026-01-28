@@ -35,11 +35,9 @@ const ModuleCommandDeclaration BowActuators::moduleCommands[] = {
 
 getModuleCount(BowActuators)
 
-BowActuators::BowActuators(BowPressure *inBowPressure)
+BowActuators::BowActuators()
 {
-    moduleID = new ModuleID("actuatorhandler", "ah", "Bow actuator handler", ModuleID::software);
-
-    bowPressure = inBowPressure;
+    moduleID = new ModuleID("actuatorhandler", "ah", "Bow actuator handler", eModuleType::software);
 
     BowActuator ba;
     ModuleGroup *group = addGroup(ba.moduleID);
@@ -51,7 +49,7 @@ BowActuators::BowActuators(BowPressure *inBowPressure)
 }
 
 CREATE_INDEX_CALLBACK(actuatorIndexChanged, BowActuators) {
-//    debugPrintln("Actuator index changed", debugPrintType::Debug);
+    debugPrintln("Actuator index changed", debugPrintType::Debug);
     return true;
 }
 

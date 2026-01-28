@@ -26,6 +26,8 @@ public:
 //    CREATE_MODULE_COMMAND_FUNCTION_FWD(dir, BaseModule)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(dump, BaseModule)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(freeRAM, BaseModule)
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(test, BaseModule)
+
     eProcessResult processCommands(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false) override;
 
     void dir(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix, bool hidden, bool inModules, bool commands, bool instances, bool instanceCount, bool recursive) override;
@@ -37,7 +39,8 @@ public:
 
     void loadAllParameters();
 protected:
-    Module *mainModule = nullptr;
+    ModuleHandler *mainModule = nullptr;
+    ModuleHandler *pluginHandler = nullptr;
 private:
 };
 

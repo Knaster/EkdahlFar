@@ -54,6 +54,10 @@ public:
 
     uint16_t getHalfMutePosition() { return mute->getHalfMutePosition(); };
 
+    bool setRestPosition(uint16_t inRestPosition) { return mute->setRestPosition(inRestPosition); }
+
+    uint16_t getRestPosition() { return mute->getRestPosition(); }
+
     bool home(bool invert = false) { return mute->tmc2209ServoStepper->home(invert); };
 
 /***** Hidden commands for modular use *****/

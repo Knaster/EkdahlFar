@@ -19,7 +19,7 @@ const ModuleCommandDeclaration FARSingle::moduleCommands[] = {
 };
 
 FARSingle::FARSingle(void *muteStepperCallback, void *pressureStepperCallback, void *tachometerCallback, void *pidCallback) {
-    moduleID = new ModuleID("", "", "FAR 1.1", ModuleID::hardware, true);
+    moduleID = new ModuleID("", "", "FAR 1.1", eModuleType::hardware, true);
 
     muteControl = new MuteControl(-1, 5, 4, &Serial5, 13);
     hammerControl = new Solenoid(3);

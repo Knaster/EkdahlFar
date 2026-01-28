@@ -5,7 +5,7 @@
 
 enum ePressureMode { Rest, Engage };
 
-class BowPressure : public Module {
+class BowPressure : public ModuleHandler {
 public:
     MODULECOMMANDHANDLER
 
@@ -23,6 +23,8 @@ public:
     CREATE_MODULE_COMMAND_FUNCTION_FWD(tmcinfo, BowPressure)
 
 private:
+    BowActuators *bowActuators = nullptr;
+
     uint16_t lastPressure = 0;
     Tmc2209ServoStepper *tmc2209ServoStepper = nullptr;
 
@@ -30,23 +32,24 @@ private:
     uint16_t modifierPressure = 0;             ///< The modifier pressure value used in conjunction with the baselinePressure when engaing the bow with the string
     ePressureMode pressureMode = ePressureMode::Rest;
 
-    uint16_t maxPressure = 65535;
-    uint16_t pEngagePressure = 0;
-    uint16_t pRestPressure = 0;
-
     float speedToEngage = 10;
     float speedWhileEngaged = 10;
     bool reachedEngage = false;
 
     bool pHold = false;
+
+    bool restSignal = false;
 public:
 
     BowPressure(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin);
-
+/*
     eProcessResult processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
                                commandList *delegatedCommands = nullptr);
     eProcessResult processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
                                     commandList *delegatedCommands = nullptr);
+*/
+    void setRestSignal() { restSignal = true; }
+    bool getRestSignal();
 
 /***** Module specific commands mirroring serially attainable commands *****/
     void setPressureSafe(uint16_t pressure);
@@ -63,17 +66,17 @@ public:
 
     bool engage(bool enact);
 
-    void setMaxPressure(uint16_t inMaxPressure) { maxPressure = inMaxPressure; }
+    bool setStallPressure(uint16_t inStallPressure);
 
-    uint16_t getMaxPressure() { return maxPressure; }
+    uint16_t getStallPressure();
 
-    void setEngagePressure(uint16_t inEngagePressure) { pEngagePressure = inEngagePressure; }
+    bool setEngagePressure(uint16_t inEngagePressure);
 
-    uint16_t getEngagePressure() { return pEngagePressure; }
+    uint16_t getEngagePressure();
 
-    void setRestPressure(uint16_t inRestPressure) { pRestPressure = inRestPressure; }
+    bool setRestPressure(uint16_t inRestPressure);
 
-    uint16_t getRestPressure() { return pRestPressure; }
+    uint16_t getRestPressure();
 
     bool getHold() { return pHold; }
 
@@ -111,6 +114,7 @@ public:
 /***** Private commands *****/
 private:
     bool calculateBaselineModifierPressure();
+    BowActuator* currentActuator();
 };
 #endif // BOWPRESSURE_H
 

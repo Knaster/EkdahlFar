@@ -36,7 +36,7 @@ const ModuleCommandDeclaration MIDIMessageConfiguration::moduleCommands[] = {
 getModuleCount(MIDIMessageConfiguration)
 
 MIDIMessageConfiguration::MIDIMessageConfiguration() {
-    moduleID = new ModuleID("midiconfiguration", "mc", "MIDI message configuration 1.0", ModuleID::software);
+    moduleID = new ModuleID("midiconfiguration", "mc", "MIDI message configuration 1.0", eModuleType::software);
     name = new String();
     setDefaultBaseParameters();
     setDefaultCCs();

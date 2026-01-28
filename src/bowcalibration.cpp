@@ -151,8 +151,15 @@ eCalibrationResult CalibrateBow::findMinPressure() {
 eCalibrationResult CalibrateBow::findMaxPressure() {
     debugPrintln("Finding max contact", TextInfo);
 
-    bowControl->setBowMotorDirectPWM(bowControl->getBowMotorMinPWM() + (bowControl->getBowMotorMaxPWM() - bowControl->getBowMotorMinPWM()) / 2);
+    bowControl->setSpeedMode(1);
+    bowControl->setPIDOn(false);
+    bowControl->setRun(true);
+
+    uint16_t maxPwm = bowControl->getBowMotorMinPWM() + (bowControl->getBowMotorMaxPWM() - bowControl->getBowMotorMinPWM()) / 2;
+    debugPrintln("Setting bow to PWM " + String(maxPwm), debugPrintType::TextInfo);
+    bowControl->setBowMotorDirectPWM(maxPwm);
     bowControl->setHardwarePressure(0);
+    delay(2000);
     if (!bowControl->waitForPressureToSettle()) { return CR_Err_BowPressure; }
 
     delay(500);
@@ -193,7 +200,7 @@ eCalibrationResult CalibrateBow::findMaxPressure() {
             }
         }
 
-        bowControl->setMaxPressure(i);
+        bowControl->setStallPressure(i);
         if (!fault) {
             debugPrintln("Final contact PWM " + String(i) + " at frequency " + String(bowControl->getAverageTachometerFreq()) + "Hz", TextInfo);
         } else {

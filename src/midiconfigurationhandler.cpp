@@ -14,7 +14,7 @@ getModuleCount(MIDIConfigurationHandler)
 
 MIDIConfigurationHandler::MIDIConfigurationHandler()
 {
-    moduleID = new ModuleID("midiconfigurationhandler", "mcf", "MIDI message configuration handler 1.0", ModuleID::software);
+    moduleID = new ModuleID("midiconfigurationhandler", "mcf", "MIDI message configuration handler 1.0", eModuleType::software);
 
     MIDIMessageConfiguration tempSeries;
     ModuleGroup *group = addGroup(tempSeries.moduleID);
@@ -90,11 +90,6 @@ bool MIDIConfigurationHandler::addDefaultConfiguration() {
 }
 
 void MIDIConfigurationHandler::dumpData(std::vector<commandResponse> *inCommandResponses) {
-/*std::vector<commandResponse> MIDIConfigurationHandler::dumpData() {
-    std::vector<commandResponse> commandResponses;
-    commandResponses = ModuleHandler::dumpData();
-    commandResponses.push_back({ "mc[" + String(moduleGroups[0].selection[0]) + "]", debugPrintType::InfoRequest });
-    return commandResponses;*/
     ModuleHandler::dumpData(inCommandResponses);
     inCommandResponses->push_back({ "mc[" + String(moduleGroups[0].selection[0]) + "]", debugPrintType::InfoRequest });
 }

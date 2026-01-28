@@ -27,7 +27,7 @@ const ModuleCommandDeclaration Solenoid::moduleCommands[] = {
     { "rest", "rs", "0-1", "Forces the solenoid to its rest position, an argument of '0' will leave the solenoid at its current state while any other value will disengage the solenoid", false, false, &s_disengage },
     { "maxforce", "xf", "0 - 65535", "Set solenoid maximum usable force", false, true, &s_maxForce },
     { "minforce", "if", "0 - 65535", "Set solenoid minimum usable force", false, true, &s_minForce },
-    { "forcemultiplier", "fm", "0 - 1", "Set solenoid force multiplier", false, false, &s_forceMultiplier },
+    { "forcemultiplier", "fm", "0 - 1", "Set solenoid force multiplier", false, true, &s_forceMultiplier },
     { "engageduration", "ed", "uS", "Sets the duration of the solenoid hit in uS, if a value of 0 is set the solenoid will not disengage until a solenoiddisengage command has been given. WARNING!!\
         HAVING THE SOLENOID ON FOR A SPAN OF SECONDS COULD DESTROY THE CIRCUITRY!!", false, true, &s_engageDuration }
 };
@@ -35,7 +35,7 @@ const ModuleCommandDeclaration Solenoid::moduleCommands[] = {
 getModuleCount(Solenoid)
 
 Solenoid::Solenoid(char _solenoidPin) {
-    moduleID = new ModuleID("solenoid", "so", "Solenoid controller v1.0", ModuleID::hardware);
+    moduleID = new ModuleID("solenoid", "so", "Solenoid controller v1.0", eModuleType::hardware);
 
     solenoidPin = _solenoidPin;
     pinMode(solenoidPin, OUTPUT);

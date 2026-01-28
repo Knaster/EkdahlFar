@@ -27,7 +27,7 @@ float equalSeries[12] = { 1, 1.059463094, 1.122462048, 1.189207115, 1.25992105, 
 float justSeries[12] = {1, 1.06667, 1.125, 1.2, 1.25, 1.3333, 1.40625, 1.5, 1.6, 1.66667, 1.8, 1.875 };
 
 HarmonicSeriesHandler::HarmonicSeriesHandler() {
-    moduleID = new ModuleID("harmonicserieshandler", "hsh", "Harmonic series handler", ModuleID::software);
+    moduleID = new ModuleID("harmonicserieshandler", "hsh", "Harmonic series handler", eModuleType::software);
     HarmonicSeries tempSeries;
     ModuleGroup *group = addGroup(tempSeries.moduleID);
     group->mustHaveSelection = true;
@@ -39,15 +39,18 @@ HarmonicSeriesHandler::HarmonicSeriesHandler() {
 };
 
 CREATE_INDEX_CALLBACK(harmonicSeriesIndexChanged, HarmonicSeriesHandler) {
+    debugPrintln("Index changed hsh!", debugPrintType::Debug);
     updateHarmonicData();
     return true;
 }
-
-CREATE_DATACHANGED_CALLBACK(dataChanged, HarmonicSeriesHandler) {
-    debugPrintln("Data changed!", debugPrintType::Debug);
+/*
+CREATE_DATACHANGED_CALLBACK(harmonicSeriesDataChanged, HarmonicSeriesHandler) {
+    //debugPrintln("Data changed hsh!", debugPrintType::Debug);
+    harmonicSeriesChangeReported = true;
+    //updateHarmonicData();
     return true;
 }
-
+*/
 CREATE_MODULE_COMMAND_FUNCTION(add, HarmonicSeriesHandler) {
     HarmonicSeries *lHarmonicSeries;
 
@@ -55,15 +58,17 @@ CREATE_MODULE_COMMAND_FUNCTION(add, HarmonicSeriesHandler) {
     case 0:
         lHarmonicSeries = addHarmonicSeries("default just", justSeries, 12);
         break;
-    case 1:
-        lHarmonicSeries = addHarmonicSeries(delimitExpression(inCommandItem->argument[0], true), justSeries, 12);
-        break;
     default:
-        float newSeries[inCommandItem->argument.size() - 1];
-        for (int i = 0; i < inCommandItem->argument.size() - 1; i++) {
-            newSeries[i] = inCommandItem->argument[i + 1].toFloat();
+        String name = stripQuotes(inCommandItem->argument[0]);
+        if (inCommandItem->argument.size() > 1) {
+            float newSeries[inCommandItem->argument.size() - 1];
+            for (int i = 0; i < inCommandItem->argument.size() - 1; i++) {
+                newSeries[i] = inCommandItem->argument[i + 1].toFloat();
+            }
+            lHarmonicSeries = addHarmonicSeries(name, newSeries, (inCommandItem->argument.size() - 1));
+        } else {
+            lHarmonicSeries = addHarmonicSeries(name, justSeries, 12);
         }
-        lHarmonicSeries = addHarmonicSeries(delimitExpression(inCommandItem->argument[0], true), newSeries, (inCommandItem->argument.size() - 1));
     }
 
     String response = thisItem.shortCommand + ":" + delimitExpression(lHarmonicSeries->Id, true);
@@ -88,12 +93,12 @@ CREATE_MODULE_COMMAND_FUNCTION(remove, HarmonicSeriesHandler) {
             return eProcessResult::CommandFailed;
         }
     }
-    inCommandResponses->push_back({ thisItem.shortCommand, debugPrintType::InfoRequest });
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(getGroup("harmonicseries")->modules.size()), debugPrintType::InfoRequest });
     return eProcessResult::Ok;
 };
 
 CREATE_MODULE_COMMAND_FUNCTION(count, HarmonicSeriesHandler) {
-    inCommandResponses->push_back({ thisItem.shortCommand + ":" + getGroup("harmonicseries")->modules.size(), debugPrintType::InfoRequest });
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(getGroup("harmonicseries")->modules.size()), debugPrintType::InfoRequest });
 
     return eProcessResult::Ok;
 };
@@ -196,24 +201,17 @@ CREATE_MODULE_COMMAND_FUNCTION(shift5, HarmonicSeriesHandler) {
 bool HarmonicSeriesHandler::calculateHarmonicShift() {
     //int octave = harmonicSeriesList.series[currentHarmonicSeries].ratio.size();
     ModuleGroup *group = getGroup("harmonicseries");
-    if (group == nullptr) {
-        return false;
-    }
+    if (group == nullptr) { return false; }
 
     HarmonicSeries *module = group->getSingleSelection();
-    if (module == nullptr) {
-        return false;
-    }
+    if (module == nullptr) { return false; }
 
     int octave = module->ratios.size();
 
     float freq = currentHarmonicFreq * pow(2, ((float) (((float) harmonicShiftRange) / octave) * harmonicShift / 32768 ));
     float freq5 = freq * pow(2, ((float) (((float) (5 * octave)) / octave) * harmonicShift5 / 32768 ));
-//    if (outputDebugData) { debugPrintln("Current freq " + String(currentHarmonicFreq) + " shifted freq " + String(freq) + " shifted freq 5 octaves " + String(freq5), Debug); }
-//    currentHarmonicShiftFreq = clamp(freq5, calibrationDataConnect->minHz, calibrationDataConnect->maxHz);
+
     currentHarmonicShiftFreq = freq5;
-//    debugPrintln("Move the frequency min/max check to the receiving end", debugPrintType::Error);
-//    if (currentHarmonicShiftFreq != freq5) { return false; }
     return true;
 }
 
@@ -260,14 +258,10 @@ int HarmonicSeriesHandler::getHarmonicAdd() { return pHarmonicAdd; }
 
 bool HarmonicSeriesHandler::updateHarmonicData() {
     ModuleGroup *group = getGroup("harmonicseries");
-    if (group == nullptr) {
-        return false;
-    }
+    if (group == nullptr) { return false; }
 
     HarmonicSeries *module = group->getSingleSelection();
-    if (module == nullptr) {
-        return false;
-    }
+    if (module == nullptr) { return false; }
 
     int targetHarmonic = pHarmonic + pHarmonicAdd;
 
@@ -303,6 +297,15 @@ bool HarmonicSeriesHandler::raiseFrequencyChanged() {
 }
 
 bool HarmonicSeriesHandler::checkFrequencyChanged() {
+    ModuleGroup *group = getGroup("harmonicseries");
+    if (group == nullptr) { return false; }
+
+    HarmonicSeries *module = group->getSingleSelection();
+    if (module == nullptr) { return false; }
+    if (module->hasDataChange()) {
+        updateHarmonicData();
+    }
+
     if (frequencyChanged) {
         frequencyChanged = false;
         return true;
@@ -314,7 +317,6 @@ HarmonicSeries* HarmonicSeriesHandler::addHarmonicSeries() {
     HarmonicSeries *lHarmonicSeries = new HarmonicSeries();
     ModuleGroup *group = addModule(lHarmonicSeries);
     Module *module = group->modules.back();
-    module->setDataChangedCallback(this, &s_dataChanged);
     return module;
 }
 
@@ -328,10 +330,6 @@ HarmonicSeries* HarmonicSeriesHandler::addHarmonicSeries(String id, float freque
 }
 
 void HarmonicSeriesHandler::dumpData(std::vector<commandResponse> *inCommandResponses) {
-//    std::vector<commandResponse> commandResponses;
-//    commandResponses = ModuleHandler::dumpData();
-//    commandResponses.push_back({ "hs[" + String(moduleGroups[0].selection[0]) + "]", debugPrintType::InfoRequest });
-//    return commandResponses;
     ModuleHandler::dumpData(inCommandResponses);
     inCommandResponses->push_back({ "hs[" + String(moduleGroups[0].selection[0]) + "]", debugPrintType::InfoRequest });
 }

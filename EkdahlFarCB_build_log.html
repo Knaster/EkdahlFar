@@ -4,11 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 <tt>
-Build started on: <u>24-01-2026 at 11:31.08</u><br />
-Build ended on: <u>24-01-2026 at 11:31.14</u><p />
+Build started on: <u>27-01-2026 at 22:28.32</u><br />
+Build ended on: <u>27-01-2026 at 22:28.38</u><p />
 <b>-------------- Build: Release in EkdahlFarCB (compiler: Teensyduino 1.58.1)---------------</b><br />
 arm-none-eabi-g++ -mthumb -Os -Wunreachable-code -Wall -std=gnu++14 -g -ffunction-sections -fdata-sections -nostdlib -MMD -mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -fno-exceptions -fpermissive -fno-rtti -fno-threadsafe-statics -felide-constructors -Wno-error=narrowing -Wunused -Wunused-function -Wunused-variable -Wno-sign-compare -D__IMXRT1062__ -DTEENSYDUINO=158 -DARDUINO_TEENSY40 -DLAYOUT_US_ENGLISH -DF_CPU=600000000 -DARDUINO -O2 -DEFARSLAVE -DUSB_MIDI_SERIAL -ffunction-sections -fdata-sections -nostdlib -MMD -mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -fno-exceptions -fpermissive -fno-rtti -fno-threadsafe-statics -felide-constructors -Wno-error=narrowing -D__IMXRT1062__ -DTEENSYDUINO=158 -DARDUINO_TEENSY40 -DLAYOUT_US_ENGLISH -DF_CPU=600000000 -Ilib/teensy4 -Ilib/SafeString/src -Ilib/EEPROM -Ilib/Adafruit_BusIO -Ilib/SPI -Ilib/Wire -Ilib/Audio -Ilib/Audio/utility -Ilib/SD/src -Ilib/SdFat/src -Ilib/SerialFlash -Ilib/TMC2209/src -Ilib/tinyexpr/src -Ilib/Teensy_PWM/src -Ilib/Adafruit_ADS1X15 -Ilib/MIDI -I./ -Iinclude -c src/main.cpp -o obj/Release/src/main.o<br />
-In file included from src/main.cpp:192:<br />
+In file included from src/main.cpp:195:<br />
 src/commandparser.hpp: In member function 'int commandList::parseQuote(String, char, int)':<br />
 <font color="#0000ff">src/commandparser.hpp:205:54: warning: array subscript has type 'char' [-Wchar-subscripts]</font><br />
   205 |         } while ((commandString[start] != quoteStyle[quote]) &amp;&amp; (start &lt; (int(commandString.length()) - 1)));<br />
@@ -25,7 +25,7 @@ In file included from lib/teensy4/Print.h:38,<br />
 lib/teensy4/WString.h:204:18: note:   in call to 'String&amp; String::toLowerCase()'<br />
   204 |         String &amp; toLowerCase(void);<br />
       |                  ^~~~~~~~~~~<br />
-In file included from src/main.cpp:192:<br />
+In file included from src/main.cpp:195:<br />
 src/commandparser.hpp: In function 'String delimitExpression(String, bool)':<br />
 <font color="#0000ff">src/commandparser.hpp:399:25: warning: comparison with string literal results in unspecified behavior [-Waddress]</font><br />
   399 |     if (((expression[0] == "'") or (expression[0] == "\"")) and (expression[0] == expression[expression.length() - 1])) {<br />
@@ -33,145 +33,151 @@ src/commandparser.hpp: In function 'String delimitExpression(String, bool)':<br 
 <font color="#0000ff">src/commandparser.hpp:399:51: warning: comparison with string literal results in unspecified behavior [-Waddress]</font><br />
   399 |     if (((expression[0] == "'") or (expression[0] == "\"")) and (expression[0] == expression[expression.length() - 1])) {<br />
 <font color="#0000ff">src/commandparser.hpp:399:51: warning: ISO C++ forbids comparison between pointer and integer [-fpermissive]</font><br />
-In file included from src/main.cpp:197:<br />
+In file included from src/main.cpp:199:<br />
 include/modulesystembasics.hpp: At global scope:<br />
-<font color="#0000ff">include/modulesystembasics.hpp:71:30: warning: invalid conversion from 'int' to 'ModuleID::eModuleType' [-fpermissive]</font><br />
-   71 |     eModuleType moduleType = 0;<br />
+<font color="#0000ff">include/modulesystembasics.hpp:39:30: warning: invalid conversion from 'int' to 'eModuleType' [-fpermissive]</font><br />
+   39 |     eModuleType moduleType = 0;<br />
+      |                              ^<br />
+      |                              |<br />
+      |                              int<br />
+In file included from src/main.cpp:199:<br />
+<font color="#0000ff">include/modulesystembasics.hpp:82:30: warning: invalid conversion from 'int' to 'eModuleType' [-fpermissive]</font><br />
+   82 |     eModuleType moduleType = 0;<br />
       |                              ^<br />
       |                              |<br />
       |                              int<br />
 In file included from src/../src/modulehandler.cpp:6,<br />
-                 from src/main.cpp:199:<br />
+                 from src/main.cpp:201:<br />
 src/../src/../src/modulegroup.cpp: In member function 'void ModuleGroup::dumpData(std::vector&lt;commandResponse&gt;*)':<br />
-<font color="#0000ff">src/../src/../src/modulegroup.cpp:56:54: warning: passing 'const ModuleID' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   56 |             out = modules[i]-&gt;moduleID-&gt;getShortAlias();<br />
+<font color="#0000ff">src/../src/../src/modulegroup.cpp:54:54: warning: passing 'const ModuleID' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+   54 |             out = modules[i]-&gt;moduleID-&gt;getShortAlias();<br />
       |                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~<br />
-In file included from src/main.cpp:197:<br />
-include/modulesystembasics.hpp:58:12: note:   in call to 'String ModuleID::getShortAlias()'<br />
-   58 |     String getShortAlias() { return shortAlias; }<br />
+In file included from src/main.cpp:199:<br />
+include/modulesystembasics.hpp:69:12: note:   in call to 'String ModuleID::getShortAlias()'<br />
+   69 |     String getShortAlias() { return shortAlias; }<br />
       |            ^~~~~~~~~~~~~<br />
 In file included from src/../src/modulehandler.cpp:6,<br />
-                 from src/main.cpp:199:<br />
+                 from src/main.cpp:201:<br />
 src/../src/../src/modulegroup.cpp: In member function 'void ModuleGroup::setIndexCallback(Module*, void (*)(Module*, ModuleGroup*))':<br />
-<font color="#0000ff">src/../src/../src/modulegroup.cpp:261:21: warning: invalid conversion from 'void (*)(Module*, ModuleGroup*)' to 'bool (*)(Module*, ModuleGroup*)' [-fpermissive]</font><br />
-  261 |     indexCallback = inCallback;<br />
+<font color="#0000ff">src/../src/../src/modulegroup.cpp:255:21: warning: invalid conversion from 'void (*)(Module*, ModuleGroup*)' to 'bool (*)(Module*, ModuleGroup*)' [-fpermissive]</font><br />
+  255 |     indexCallback = inCallback;<br />
       |                     ^~~~~~~~~~<br />
       |                     |<br />
       |                     void (*)(Module*, ModuleGroup*)<br />
-In file included from src/main.cpp:199:<br />
+In file included from src/main.cpp:201:<br />
 src/../src/modulehandler.cpp: In member function 'ModuleGroup* ModuleHandler::addModule(Module*)':<br />
-<font color="#0000ff">src/../src/modulehandler.cpp:76:51: warning: passing 'const ModuleID' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   76 |     group = getGroup(module-&gt;moduleID-&gt;getLongName());<br />
+<font color="#0000ff">src/../src/modulehandler.cpp:64:51: warning: passing 'const ModuleID' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+   64 |     group = getGroup(module-&gt;moduleID-&gt;getLongName());<br />
       |                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~<br />
-In file included from src/main.cpp:197:<br />
-include/modulesystembasics.hpp:56:12: note:   in call to 'String ModuleID::getLongName()'<br />
-   56 |     String getLongName() { return longName; }<br />
-      |            ^~~~~~~~~~~<br />
 In file included from src/main.cpp:199:<br />
-<font color="#0000ff">src/../src/modulehandler.cpp:80:34: warning: invalid conversion from 'const ModuleID*' to 'ModuleID*' [-fpermissive]</font><br />
-   80 |         group = addGroup(module-&gt;moduleID);<br />
+include/modulesystembasics.hpp:67:12: note:   in call to 'String ModuleID::getLongName()'<br />
+   67 |     String getLongName() { return longName; }<br />
+      |            ^~~~~~~~~~~<br />
+In file included from src/main.cpp:201:<br />
+<font color="#0000ff">src/../src/modulehandler.cpp:67:34: warning: invalid conversion from 'const ModuleID*' to 'ModuleID*' [-fpermissive]</font><br />
+   67 |         group = addGroup(module-&gt;moduleID);<br />
       |                          ~~~~~~~~^~~~~~~~<br />
       |                                  |<br />
       |                                  const ModuleID*<br />
-In file included from src/main.cpp:197:<br />
-include/modulesystembasics.hpp:48:24: note:   initializing argument 1 of 'ModuleID::ModuleID(ModuleID*)'<br />
-   48 |     ModuleID(ModuleID *inModuleID) {<br />
-      |              ~~~~~~~~~~^~~~~~~~~~<br />
 In file included from src/main.cpp:199:<br />
+include/modulesystembasics.hpp:59:24: note:   initializing argument 1 of 'ModuleID::ModuleID(ModuleID*)'<br />
+   59 |     ModuleID(ModuleID *inModuleID) {<br />
+      |              ~~~~~~~~~~^~~~~~~~~~<br />
+In file included from src/main.cpp:201:<br />
 src/../src/modulehandler.cpp: In member function 'virtual eProcessResult ModuleHandler::processCommands(commandItem*, std::vector&lt;commandResponse&gt;*, bool)':<br />
-<font color="#0000ff">src/../src/modulehandler.cpp:128:137: warning: passing 'const ModuleID' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-  128 |         debugPrintln("Module " + inCommandItem-&gt;hierarchy[inCommandItem-&gt;hierarchyIndex].name + " not found in " + moduleID-&gt;getLongName() , debugPrintType::Error);<br />
+<font color="#0000ff">src/../src/modulehandler.cpp:126:137: warning: passing 'const ModuleID' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  126 |         debugPrintln("Module " + inCommandItem-&gt;hierarchy[inCommandItem-&gt;hierarchyIndex].name + " not found in " + moduleID-&gt;getLongName() , debugPrintType::Error);<br />
       |                                                                                                                    ~~~~~~~~~~~~~~~~~~~~~^~<br />
-In file included from src/main.cpp:197:<br />
-include/modulesystembasics.hpp:56:12: note:   in call to 'String ModuleID::getLongName()'<br />
-   56 |     String getLongName() { return longName; }<br />
+In file included from src/main.cpp:199:<br />
+include/modulesystembasics.hpp:67:12: note:   in call to 'String ModuleID::getLongName()'<br />
+   67 |     String getLongName() { return longName; }<br />
       |            ^~~~~~~~~~~<br />
-In file included from src/main.cpp:200:<br />
+In file included from src/main.cpp:202:<br />
 include/modulesystemglobalfunctions.hpp: In function 'eProcessResult s_dir(ModuleCommand*, commandItem*, std::vector&lt;commandResponse&gt;*, bool, ModuleCommandDeclaration)':<br />
 <font color="#0000ff">include/modulesystemglobalfunctions.hpp:37:97: warning: passing 'const ModuleID' as 'this' argument discards qualifiers [-fpermissive]</font><br />
    37 |         ((ModuleHandler*)self)-&gt;dir(inCommandResponses, ((Module*)(self))-&gt;moduleID-&gt;getLongName(), ((Module*)(self))-&gt;moduleID-&gt;getShortAlias(), hidden, modules, commands, instances, instanceCount, recursive);<br />
       |                                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~<br />
-In file included from src/main.cpp:197:<br />
-include/modulesystembasics.hpp:56:12: note:   in call to 'String ModuleID::getLongName()'<br />
-   56 |     String getLongName() { return longName; }<br />
+In file included from src/main.cpp:199:<br />
+include/modulesystembasics.hpp:67:12: note:   in call to 'String ModuleID::getLongName()'<br />
+   67 |     String getLongName() { return longName; }<br />
       |            ^~~~~~~~~~~<br />
-In file included from src/main.cpp:200:<br />
+In file included from src/main.cpp:202:<br />
 <font color="#0000ff">include/modulesystemglobalfunctions.hpp:37:143: warning: passing 'const ModuleID' as 'this' argument discards qualifiers [-fpermissive]</font><br />
    37 |         ((ModuleHandler*)self)-&gt;dir(inCommandResponses, ((Module*)(self))-&gt;moduleID-&gt;getLongName(), ((Module*)(self))-&gt;moduleID-&gt;getShortAlias(), hidden, modules, commands, instances, instanceCount, recursive);<br />
       |                                                                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~<br />
-In file included from src/main.cpp:197:<br />
-include/modulesystembasics.hpp:58:12: note:   in call to 'String ModuleID::getShortAlias()'<br />
-   58 |     String getShortAlias() { return shortAlias; }<br />
+In file included from src/main.cpp:199:<br />
+include/modulesystembasics.hpp:69:12: note:   in call to 'String ModuleID::getShortAlias()'<br />
+   69 |     String getShortAlias() { return shortAlias; }<br />
       |            ^~~~~~~~~~~~~<br />
-In file included from src/main.cpp:200:<br />
+In file included from src/main.cpp:202:<br />
 <font color="#0000ff">include/modulesystemglobalfunctions.hpp:39:90: warning: passing 'const ModuleID' as 'this' argument discards qualifiers [-fpermissive]</font><br />
    39 |         ((Module*)self)-&gt;dir(inCommandResponses, ((Module*)(self))-&gt;moduleID-&gt;getLongName(), ((Module*)(self))-&gt;moduleID-&gt;getShortAlias(), hidden, modules, commands, instances, instanceCount, recursive);<br />
       |                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~<br />
-In file included from src/main.cpp:197:<br />
-include/modulesystembasics.hpp:56:12: note:   in call to 'String ModuleID::getLongName()'<br />
-   56 |     String getLongName() { return longName; }<br />
+In file included from src/main.cpp:199:<br />
+include/modulesystembasics.hpp:67:12: note:   in call to 'String ModuleID::getLongName()'<br />
+   67 |     String getLongName() { return longName; }<br />
       |            ^~~~~~~~~~~<br />
-In file included from src/main.cpp:200:<br />
+In file included from src/main.cpp:202:<br />
 <font color="#0000ff">include/modulesystemglobalfunctions.hpp:39:136: warning: passing 'const ModuleID' as 'this' argument discards qualifiers [-fpermissive]</font><br />
    39 |         ((Module*)self)-&gt;dir(inCommandResponses, ((Module*)(self))-&gt;moduleID-&gt;getLongName(), ((Module*)(self))-&gt;moduleID-&gt;getShortAlias(), hidden, modules, commands, instances, instanceCount, recursive);<br />
       |                                                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~<br />
-In file included from src/main.cpp:197:<br />
-include/modulesystembasics.hpp:58:12: note:   in call to 'String ModuleID::getShortAlias()'<br />
-   58 |     String getShortAlias() { return shortAlias; }<br />
+In file included from src/main.cpp:199:<br />
+include/modulesystembasics.hpp:69:12: note:   in call to 'String ModuleID::getShortAlias()'<br />
+   69 |     String getShortAlias() { return shortAlias; }<br />
       |            ^~~~~~~~~~~~~<br />
-In file included from src/main.cpp:197:<br />
+In file included from src/main.cpp:199:<br />
 include/midimessageconfiguration.hpp: In member function 'virtual const ModuleCommandDeclaration MIDIMessageConfiguration::getModuleCommand(uint8_t) const':<br />
-<font color="#0000ff">include/modulesystembasics.hpp:92:50: warning: passing 'const MIDIMessageConfiguration' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   92 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const MIDIMessageConfiguration' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
       |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
 include/midimessageconfiguration.hpp:26:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
    26 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/modulesystembasics.hpp:90:9: note:   in call to 'virtual int MIDIMessageConfiguration::getModuleCommandCount()'<br />
-   90 |     int getModuleCommandCount(); \<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int MIDIMessageConfiguration::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
       |         ^~~~~~~~~~~~~~~~~~~~~<br />
 include/midimessageconfiguration.hpp:26:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
    26 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
 include/midiconfigurationhandler.hpp: In member function 'virtual const ModuleCommandDeclaration MIDIConfigurationHandler::getModuleCommand(uint8_t) const':<br />
-<font color="#0000ff">include/modulesystembasics.hpp:92:50: warning: passing 'const MIDIConfigurationHandler' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   92 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const MIDIConfigurationHandler' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
       |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
 include/midiconfigurationhandler.hpp:64:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
    64 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/modulesystembasics.hpp:90:9: note:   in call to 'virtual int MIDIConfigurationHandler::getModuleCommandCount()'<br />
-   90 |     int getModuleCommandCount(); \<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int MIDIConfigurationHandler::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
       |         ^~~~~~~~~~~~~~~~~~~~~<br />
 include/midiconfigurationhandler.hpp:64:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
    64 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
 In file included from include/farsingle.hpp:5,<br />
-                 from src/main.cpp:202:<br />
+                 from src/main.cpp:204:<br />
 include/../src/midiconfigurationhandler.cpp: In constructor 'MIDIConfigurationHandler::MIDIConfigurationHandler()':<br />
 <font color="#0000ff">include/../src/midiconfigurationhandler.cpp:20:46: warning: invalid conversion from 'const ModuleID*' to 'ModuleID*' [-fpermissive]</font><br />
    20 |     ModuleGroup *group = addGroup(tempSeries.moduleID);<br />
       |                                   ~~~~~~~~~~~^~~~~~~~<br />
       |                                              |<br />
       |                                              const ModuleID*<br />
-In file included from src/main.cpp:197:<br />
-include/modulesystembasics.hpp:48:24: note:   initializing argument 1 of 'ModuleID::ModuleID(ModuleID*)'<br />
-   48 |     ModuleID(ModuleID *inModuleID) {<br />
+In file included from src/main.cpp:199:<br />
+include/modulesystembasics.hpp:59:24: note:   initializing argument 1 of 'ModuleID::ModuleID(ModuleID*)'<br />
+   59 |     ModuleID(ModuleID *inModuleID) {<br />
       |              ~~~~~~~~~~^~~~~~~~~~<br />
 In file included from include/farsingle.hpp:5,<br />
-                 from src/main.cpp:202:<br />
+                 from src/main.cpp:204:<br />
 <font color="#0000ff">include/../src/midiconfigurationhandler.cpp:23:35: warning: invalid conversion from 'bool (*)(Module*, ModuleGroup*)' to 'void (*)(Module*, ModuleGroup*)' [-fpermissive]</font><br />
    23 |     group-&gt;setIndexCallback(this, &amp;s_configurationIndexChanged);<br />
       |                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
       |                                   |<br />
       |                                   bool (*)(Module*, ModuleGroup*)<br />
 In file included from src/../src/modulehandler.cpp:6,<br />
-                 from src/main.cpp:199:<br />
-src/../src/../src/modulegroup.cpp:254:60: note:   initializing argument 2 of 'void ModuleGroup::setIndexCallback(Module*, void (*)(Module*, ModuleGroup*))'<br />
-  254 | void ModuleGroup::setIndexCallback(Module *inOwner, void (*inCallback)(Module *owner, ModuleGroup *moduleGroup)) {<br />
+                 from src/main.cpp:201:<br />
+src/../src/../src/modulegroup.cpp:248:60: note:   initializing argument 2 of 'void ModuleGroup::setIndexCallback(Module*, void (*)(Module*, ModuleGroup*))'<br />
+  248 | void ModuleGroup::setIndexCallback(Module *inOwner, void (*inCallback)(Module *owner, ModuleGroup *moduleGroup)) {<br />
       |                                                     ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
 In file included from include/farsingle.hpp:5,<br />
-                 from src/main.cpp:202:<br />
+                 from src/main.cpp:204:<br />
 include/../src/midiconfigurationhandler.cpp: In member function 'bool MIDIConfigurationHandler::configurationIndexChanged(ModuleGroup*)':<br />
 <font color="#0000ff">include/../src/midiconfigurationhandler.cpp:30:109: warning: invalid conversion from '__gnu_cxx::__alloc_traits&lt;std::allocator&lt;Module*&gt;, Module*&gt;::value_type' {aka 'Module*'} to 'MIDIMessageConfiguration*' [-fpermissive]</font><br />
    30 |         midiSources[i].midiHandler.midiMessageConfiguration = moduleGroup-&gt;modules[moduleGroup-&gt;selection[0]];<br />
@@ -184,7 +190,7 @@ In file included from include/tmc2209_servostepper.hpp:5,<br />
                  from include/mutecontrol.hpp:4,<br />
                  from include/../src/mutecontrol.cpp:4,<br />
                  from include/farsingle.hpp:14,<br />
-                 from src/main.cpp:202:<br />
+                 from src/main.cpp:204:<br />
 include/../src/servostepper.hpp: In member function 'void servoStepper::updatePositionMove()':<br />
 <font color="#0000ff">include/../src/servostepper.hpp:326:40: warning: invalid conversion from 'void*' to 'void (*)()' [-fpermissive]</font><br />
   326 |                     stepInterval.begin(stepIntervalCallback, ((double) uAccelPeriod));<br />
@@ -196,163 +202,174 @@ In file included from lib/teensy4/WProgram.h:68,<br />
 lib/teensy4/IntervalTimer.h:94:27: note:   initializing argument 1 of 'bool IntervalTimer::begin(void (*)(), double)'<br />
    94 |         bool begin(void (*funct)(), double microseconds) {<br />
       |                    ~~~~~~~^~~~~~~~<br />
-In file included from src/main.cpp:197:<br />
+In file included from src/main.cpp:199:<br />
 include/mutecontrol.hpp: In member function 'virtual const ModuleCommandDeclaration MuteControl::getModuleCommand(uint8_t) const':<br />
-<font color="#0000ff">include/modulesystembasics.hpp:92:50: warning: passing 'const MuteControl' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   92 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const MuteControl' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
       |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
 include/mutecontrol.hpp:9:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
     9 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/modulesystembasics.hpp:90:9: note:   in call to 'virtual int MuteControl::getModuleCommandCount()'<br />
-   90 |     int getModuleCommandCount(); \<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int MuteControl::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
       |         ^~~~~~~~~~~~~~~~~~~~~<br />
 include/mutecontrol.hpp:9:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
     9 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
 include/solenoid.hpp: In member function 'virtual const ModuleCommandDeclaration Solenoid::getModuleCommand(uint8_t) const':<br />
-<font color="#0000ff">include/modulesystembasics.hpp:92:50: warning: passing 'const Solenoid' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   92 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const Solenoid' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
       |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
 include/solenoid.hpp:6:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
     6 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/modulesystembasics.hpp:90:9: note:   in call to 'virtual int Solenoid::getModuleCommandCount()'<br />
-   90 |     int getModuleCommandCount(); \<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int Solenoid::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
       |         ^~~~~~~~~~~~~~~~~~~~~<br />
 include/solenoid.hpp:6:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
     6 |     MODULECOMMANDHANDLER<br />
-      |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/bowpressure.hpp: In member function 'virtual const ModuleCommandDeclaration BowPressure::getModuleCommand(uint8_t) const':<br />
-<font color="#0000ff">include/modulesystembasics.hpp:92:50: warning: passing 'const BowPressure' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   92 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
-      |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
-include/bowpressure.hpp:10:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
-   10 |     MODULECOMMANDHANDLER<br />
-      |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/modulesystembasics.hpp:90:9: note:   in call to 'virtual int BowPressure::getModuleCommandCount()'<br />
-   90 |     int getModuleCommandCount(); \<br />
-      |         ^~~~~~~~~~~~~~~~~~~~~<br />
-include/bowpressure.hpp:10:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
-   10 |     MODULECOMMANDHANDLER<br />
-      |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/dcmotorcontrol.hpp: In member function 'virtual const ModuleCommandDeclaration DCMotorControl::getModuleCommand(uint8_t) const':<br />
-<font color="#0000ff">include/modulesystembasics.hpp:92:50: warning: passing 'const DCMotorControl' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   92 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
-      |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
-include/dcmotorcontrol.hpp:11:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
-   11 |     MODULECOMMANDHANDLER<br />
-      |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/modulesystembasics.hpp:90:9: note:   in call to 'virtual int DCMotorControl::getModuleCommandCount()'<br />
-   90 |     int getModuleCommandCount(); \<br />
-      |         ^~~~~~~~~~~~~~~~~~~~~<br />
-include/dcmotorcontrol.hpp:11:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
-   11 |     MODULECOMMANDHANDLER<br />
-      |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/pidcontroller.hpp: In member function 'virtual const ModuleCommandDeclaration PIDController::getModuleCommand(uint8_t) const':<br />
-<font color="#0000ff">include/modulesystembasics.hpp:92:50: warning: passing 'const PIDController' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   92 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
-      |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
-include/pidcontroller.hpp:8:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
-    8 |     MODULECOMMANDHANDLER<br />
-      |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/modulesystembasics.hpp:90:9: note:   in call to 'virtual int PIDController::getModuleCommandCount()'<br />
-   90 |     int getModuleCommandCount(); \<br />
-      |         ^~~~~~~~~~~~~~~~~~~~~<br />
-include/pidcontroller.hpp:8:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
-    8 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
 include/bowActuators.hpp: In member function 'virtual const ModuleCommandDeclaration BowActuator::getModuleCommand(uint8_t) const':<br />
-<font color="#0000ff">include/modulesystembasics.hpp:92:50: warning: passing 'const BowActuator' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   92 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const BowActuator' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
       |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
 include/bowActuators.hpp:28:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
    28 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/modulesystembasics.hpp:90:9: note:   in call to 'virtual int BowActuator::getModuleCommandCount()'<br />
-   90 |     int getModuleCommandCount(); \<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int BowActuator::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
       |         ^~~~~~~~~~~~~~~~~~~~~<br />
 include/bowActuators.hpp:28:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
    28 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
 include/bowActuators.hpp: In member function 'virtual const ModuleCommandDeclaration BowActuators::getModuleCommand(uint8_t) const':<br />
-<font color="#0000ff">include/modulesystembasics.hpp:92:50: warning: passing 'const BowActuators' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   92 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const BowActuators' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
       |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
 include/bowActuators.hpp:75:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
    75 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/modulesystembasics.hpp:90:9: note:   in call to 'virtual int BowActuators::getModuleCommandCount()'<br />
-   90 |     int getModuleCommandCount(); \<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int BowActuators::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
       |         ^~~~~~~~~~~~~~~~~~~~~<br />
 include/bowActuators.hpp:75:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
    75 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
-In file included from include/bowcontrol.hpp:24,<br />
+In file included from include/bowcontrol.hpp:22,<br />
                  from include/../src/bowcontrol.cpp:22,<br />
                  from include/farsingle.hpp:16,<br />
-                 from src/main.cpp:202:<br />
-include/../src/bowActuators.cpp: In constructor 'BowActuators::BowActuators(BowPressure*)':<br />
-<font color="#0000ff">include/../src/bowActuators.cpp:45:38: warning: invalid conversion from 'const ModuleID*' to 'ModuleID*' [-fpermissive]</font><br />
-   45 |     ModuleGroup *group = addGroup(ba.moduleID);<br />
+                 from src/main.cpp:204:<br />
+include/../src/bowActuators.cpp: In constructor 'BowActuators::BowActuators()':<br />
+<font color="#0000ff">include/../src/bowActuators.cpp:43:38: warning: invalid conversion from 'const ModuleID*' to 'ModuleID*' [-fpermissive]</font><br />
+   43 |     ModuleGroup *group = addGroup(ba.moduleID);<br />
       |                                   ~~~^~~~~~~~<br />
       |                                      |<br />
       |                                      const ModuleID*<br />
-In file included from src/main.cpp:197:<br />
-include/modulesystembasics.hpp:48:24: note:   initializing argument 1 of 'ModuleID::ModuleID(ModuleID*)'<br />
-   48 |     ModuleID(ModuleID *inModuleID) {<br />
+In file included from src/main.cpp:199:<br />
+include/modulesystembasics.hpp:59:24: note:   initializing argument 1 of 'ModuleID::ModuleID(ModuleID*)'<br />
+   59 |     ModuleID(ModuleID *inModuleID) {<br />
       |              ~~~~~~~~~~^~~~~~~~~~<br />
-In file included from include/bowcontrol.hpp:24,<br />
+In file included from include/bowcontrol.hpp:22,<br />
                  from include/../src/bowcontrol.cpp:22,<br />
                  from include/farsingle.hpp:16,<br />
-                 from src/main.cpp:202:<br />
-<font color="#0000ff">include/../src/bowActuators.cpp:49:35: warning: invalid conversion from 'bool (*)(Module*, ModuleGroup*)' to 'void (*)(Module*, ModuleGroup*)' [-fpermissive]</font><br />
-   49 |     group-&gt;setIndexCallback(this, &amp;s_actuatorIndexChanged);<br />
+                 from src/main.cpp:204:<br />
+<font color="#0000ff">include/../src/bowActuators.cpp:47:35: warning: invalid conversion from 'bool (*)(Module*, ModuleGroup*)' to 'void (*)(Module*, ModuleGroup*)' [-fpermissive]</font><br />
+   47 |     group-&gt;setIndexCallback(this, &amp;s_actuatorIndexChanged);<br />
       |                                   ^~~~~~~~~~~~~~~~~~~~~~~<br />
       |                                   |<br />
       |                                   bool (*)(Module*, ModuleGroup*)<br />
 In file included from src/../src/modulehandler.cpp:6,<br />
-                 from src/main.cpp:199:<br />
-src/../src/../src/modulegroup.cpp:254:60: note:   initializing argument 2 of 'void ModuleGroup::setIndexCallback(Module*, void (*)(Module*, ModuleGroup*))'<br />
-  254 | void ModuleGroup::setIndexCallback(Module *inOwner, void (*inCallback)(Module *owner, ModuleGroup *moduleGroup)) {<br />
+                 from src/main.cpp:201:<br />
+src/../src/../src/modulegroup.cpp:248:60: note:   initializing argument 2 of 'void ModuleGroup::setIndexCallback(Module*, void (*)(Module*, ModuleGroup*))'<br />
+  248 | void ModuleGroup::setIndexCallback(Module *inOwner, void (*inCallback)(Module *owner, ModuleGroup *moduleGroup)) {<br />
       |                                                     ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
-In file included from include/bowcontrol.hpp:24,<br />
+In file included from include/bowcontrol.hpp:22,<br />
                  from include/../src/bowcontrol.cpp:22,<br />
                  from include/farsingle.hpp:16,<br />
-                 from src/main.cpp:202:<br />
+                 from src/main.cpp:204:<br />
 include/../src/bowActuators.cpp: In member function 'BowActuator* BowActuators::addBowActuator(String, uint16_t, uint16_t, uint16_t)':<br />
-<font color="#0000ff">include/../src/bowActuators.cpp:106:48: warning: invalid conversion from '__gnu_cxx::__alloc_traits&lt;std::allocator&lt;Module*&gt;, Module*&gt;::value_type' {aka 'Module*'} to 'BowActuator*' [-fpermissive]</font><br />
-  106 |     BowActuator *actuator = group-&gt;modules.back();<br />
+<font color="#0000ff">include/../src/bowActuators.cpp:104:48: warning: invalid conversion from '__gnu_cxx::__alloc_traits&lt;std::allocator&lt;Module*&gt;, Module*&gt;::value_type' {aka 'Module*'} to 'BowActuator*' [-fpermissive]</font><br />
+  104 |     BowActuator *actuator = group-&gt;modules.back();<br />
       |                             ~~~~~~~~~~~~~~~~~~~^~<br />
       |                                                |<br />
       |                                                __gnu_cxx::__alloc_traits&lt;std::allocator&lt;Module*&gt;, Module*&gt;::value_type {aka Module*}<br />
 include/../src/bowActuators.cpp: In member function 'bool BowActuators::removeBowActuator(uint8_t)':<br />
-<font color="#0000ff">include/../src/bowActuators.cpp:118:52: warning: enum constant in boolean context [-Wint-in-bool-context]</font><br />
-  118 |     if (group == nullptr) { return eProcessResult::CommandFailed; }<br />
+<font color="#0000ff">include/../src/bowActuators.cpp:116:52: warning: enum constant in boolean context [-Wint-in-bool-context]</font><br />
+  116 |     if (group == nullptr) { return eProcessResult::CommandFailed; }<br />
       |                                                    ^~~~~~~~~~~~~<br />
-In file included from src/main.cpp:197:<br />
+In file included from src/main.cpp:199:<br />
+include/bowpressure.hpp: In member function 'virtual const ModuleCommandDeclaration BowPressure::getModuleCommand(uint8_t) const':<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const BowPressure' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+      |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
+include/bowpressure.hpp:10:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+   10 |     MODULECOMMANDHANDLER<br />
+      |     ^~~~~~~~~~~~~~~~~~~~<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int BowPressure::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
+      |         ^~~~~~~~~~~~~~~~~~~~~<br />
+include/bowpressure.hpp:10:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+   10 |     MODULECOMMANDHANDLER<br />
+      |     ^~~~~~~~~~~~~~~~~~~~<br />
+In file included from include/bowcontrol.hpp:23,<br />
+                 from include/../src/bowcontrol.cpp:22,<br />
+                 from include/farsingle.hpp:16,<br />
+                 from src/main.cpp:204:<br />
+include/../src/bowpressure.cpp: In member function 'BowActuator* BowPressure::currentActuator()':<br />
+<font color="#0000ff">include/../src/bowpressure.cpp:162:56: warning: invalid conversion from 'Module*' to 'BowActuator*' [-fpermissive]</font><br />
+  162 |     BowActuator *actuator = acGroup-&gt;getSingleSelection();<br />
+      |                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~<br />
+      |                                                        |<br />
+      |                                                        Module*<br />
+In file included from src/main.cpp:199:<br />
+include/dcmotorcontrol.hpp: In member function 'virtual const ModuleCommandDeclaration DCMotorControl::getModuleCommand(uint8_t) const':<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const DCMotorControl' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+      |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
+include/dcmotorcontrol.hpp:11:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+   11 |     MODULECOMMANDHANDLER<br />
+      |     ^~~~~~~~~~~~~~~~~~~~<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int DCMotorControl::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
+      |         ^~~~~~~~~~~~~~~~~~~~~<br />
+include/dcmotorcontrol.hpp:11:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+   11 |     MODULECOMMANDHANDLER<br />
+      |     ^~~~~~~~~~~~~~~~~~~~<br />
+include/pidcontroller.hpp: In member function 'virtual const ModuleCommandDeclaration PIDController::getModuleCommand(uint8_t) const':<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const PIDController' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+      |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
+include/pidcontroller.hpp:8:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+    8 |     MODULECOMMANDHANDLER<br />
+      |     ^~~~~~~~~~~~~~~~~~~~<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int PIDController::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
+      |         ^~~~~~~~~~~~~~~~~~~~~<br />
+include/pidcontroller.hpp:8:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+    8 |     MODULECOMMANDHANDLER<br />
+      |     ^~~~~~~~~~~~~~~~~~~~<br />
 include/harmonicSeries.hpp: In member function 'virtual const ModuleCommandDeclaration HarmonicSeries::getModuleCommand(uint8_t) const':<br />
-<font color="#0000ff">include/modulesystembasics.hpp:92:50: warning: passing 'const HarmonicSeries' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   92 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const HarmonicSeries' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
       |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
 include/harmonicSeries.hpp:28:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
    28 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/modulesystembasics.hpp:90:9: note:   in call to 'virtual int HarmonicSeries::getModuleCommandCount()'<br />
-   90 |     int getModuleCommandCount(); \<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int HarmonicSeries::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
       |         ^~~~~~~~~~~~~~~~~~~~~<br />
 include/harmonicSeries.hpp:28:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
    28 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
 include/harmonicserieshandler.hpp: In member function 'virtual const ModuleCommandDeclaration HarmonicSeriesHandler::getModuleCommand(uint8_t) const':<br />
-<font color="#0000ff">include/modulesystembasics.hpp:92:50: warning: passing 'const HarmonicSeriesHandler' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   92 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const HarmonicSeriesHandler' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
       |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
 include/harmonicserieshandler.hpp:8:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
     8 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/modulesystembasics.hpp:90:9: note:   in call to 'virtual int HarmonicSeriesHandler::getModuleCommandCount()'<br />
-   90 |     int getModuleCommandCount(); \<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int HarmonicSeriesHandler::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
       |         ^~~~~~~~~~~~~~~~~~~~~<br />
 include/harmonicserieshandler.hpp:8:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
     8 |     MODULECOMMANDHANDLER<br />
@@ -360,114 +377,121 @@ include/harmonicserieshandler.hpp:8:5: note: in expansion of macro 'MODULECOMMAN
 In file included from include/bowcontrol.hpp:25,<br />
                  from include/../src/bowcontrol.cpp:22,<br />
                  from include/farsingle.hpp:16,<br />
-                 from src/main.cpp:202:<br />
+                 from src/main.cpp:204:<br />
 include/../src/harmonicserieshandler.cpp: In constructor 'HarmonicSeriesHandler::HarmonicSeriesHandler()':<br />
 <font color="#0000ff">include/../src/harmonicserieshandler.cpp:32:46: warning: invalid conversion from 'const ModuleID*' to 'ModuleID*' [-fpermissive]</font><br />
    32 |     ModuleGroup *group = addGroup(tempSeries.moduleID);<br />
       |                                   ~~~~~~~~~~~^~~~~~~~<br />
       |                                              |<br />
       |                                              const ModuleID*<br />
-In file included from src/main.cpp:197:<br />
-include/modulesystembasics.hpp:48:24: note:   initializing argument 1 of 'ModuleID::ModuleID(ModuleID*)'<br />
-   48 |     ModuleID(ModuleID *inModuleID) {<br />
+In file included from src/main.cpp:199:<br />
+include/modulesystembasics.hpp:59:24: note:   initializing argument 1 of 'ModuleID::ModuleID(ModuleID*)'<br />
+   59 |     ModuleID(ModuleID *inModuleID) {<br />
       |              ~~~~~~~~~~^~~~~~~~~~<br />
 In file included from include/bowcontrol.hpp:25,<br />
                  from include/../src/bowcontrol.cpp:22,<br />
                  from include/farsingle.hpp:16,<br />
-                 from src/main.cpp:202:<br />
+                 from src/main.cpp:204:<br />
 <font color="#0000ff">include/../src/harmonicserieshandler.cpp:35:35: warning: invalid conversion from 'bool (*)(Module*, ModuleGroup*)' to 'void (*)(Module*, ModuleGroup*)' [-fpermissive]</font><br />
    35 |     group-&gt;setIndexCallback(this, &amp;s_harmonicSeriesIndexChanged);<br />
       |                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
       |                                   |<br />
       |                                   bool (*)(Module*, ModuleGroup*)<br />
 In file included from src/../src/modulehandler.cpp:6,<br />
-                 from src/main.cpp:199:<br />
-src/../src/../src/modulegroup.cpp:254:60: note:   initializing argument 2 of 'void ModuleGroup::setIndexCallback(Module*, void (*)(Module*, ModuleGroup*))'<br />
-  254 | void ModuleGroup::setIndexCallback(Module *inOwner, void (*inCallback)(Module *owner, ModuleGroup *moduleGroup)) {<br />
+                 from src/main.cpp:201:<br />
+src/../src/../src/modulegroup.cpp:248:60: note:   initializing argument 2 of 'void ModuleGroup::setIndexCallback(Module*, void (*)(Module*, ModuleGroup*))'<br />
+  248 | void ModuleGroup::setIndexCallback(Module *inOwner, void (*inCallback)(Module *owner, ModuleGroup *moduleGroup)) {<br />
       |                                                     ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
 In file included from include/bowcontrol.hpp:25,<br />
                  from include/../src/bowcontrol.cpp:22,<br />
                  from include/farsingle.hpp:16,<br />
-                 from src/main.cpp:202:<br />
+                 from src/main.cpp:204:<br />
 include/../src/harmonicserieshandler.cpp: In member function 'bool HarmonicSeriesHandler::calculateHarmonicShift()':<br />
-<font color="#0000ff">include/../src/harmonicserieshandler.cpp:203:55: warning: invalid conversion from 'Module*' to 'HarmonicSeries*' [-fpermissive]</font><br />
-  203 |     HarmonicSeries *module = group-&gt;getSingleSelection();<br />
+<font color="#0000ff">include/../src/harmonicserieshandler.cpp:206:55: warning: invalid conversion from 'Module*' to 'HarmonicSeries*' [-fpermissive]</font><br />
+  206 |     HarmonicSeries *module = group-&gt;getSingleSelection();<br />
       |                              ~~~~~~~~~~~~~~~~~~~~~~~~~^~<br />
       |                                                       |<br />
       |                                                       Module*<br />
 include/../src/harmonicserieshandler.cpp: In member function 'bool HarmonicSeriesHandler::updateHarmonicData()':<br />
-<font color="#0000ff">include/../src/harmonicserieshandler.cpp:267:55: warning: invalid conversion from 'Module*' to 'HarmonicSeries*' [-fpermissive]</font><br />
-  267 |     HarmonicSeries *module = group-&gt;getSingleSelection();<br />
+<font color="#0000ff">include/../src/harmonicserieshandler.cpp:263:55: warning: invalid conversion from 'Module*' to 'HarmonicSeries*' [-fpermissive]</font><br />
+  263 |     HarmonicSeries *module = group-&gt;getSingleSelection();<br />
+      |                              ~~~~~~~~~~~~~~~~~~~~~~~~~^~<br />
+      |                                                       |<br />
+      |                                                       Module*<br />
+include/../src/harmonicserieshandler.cpp: In member function 'bool HarmonicSeriesHandler::checkFrequencyChanged()':<br />
+<font color="#0000ff">include/../src/harmonicserieshandler.cpp:303:55: warning: invalid conversion from 'Module*' to 'HarmonicSeries*' [-fpermissive]</font><br />
+  303 |     HarmonicSeries *module = group-&gt;getSingleSelection();<br />
       |                              ~~~~~~~~~~~~~~~~~~~~~~~~~^~<br />
       |                                                       |<br />
       |                                                       Module*<br />
 include/../src/harmonicserieshandler.cpp: In member function 'HarmonicSeries* HarmonicSeriesHandler::addHarmonicSeries()':<br />
-<font color="#0000ff">include/../src/harmonicserieshandler.cpp:317:42: warning: invalid conversion from 'bool (*)(Module*, Module*)' to 'void (*)(Module*, Module*)' [-fpermissive]</font><br />
-  317 |     module-&gt;setDataChangedCallback(this, &amp;s_dataChanged);<br />
-      |                                          ^~~~~~~~~~~~~~<br />
-      |                                          |<br />
-      |                                          bool (*)(Module*, Module*)<br />
-In file included from src/main.cpp:198:<br />
-src/../src/module.cpp:102:61: note:   initializing argument 2 of 'void Module::setDataChangedCallback(Module*, void (*)(Module*, Module*))'<br />
-  102 | void Module::setDataChangedCallback(Module *inOwner, void (*inCallback)(Module *owner, Module *module)) {<br />
-      |                                                      ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
-In file included from include/bowcontrol.hpp:25,<br />
-                 from include/../src/bowcontrol.cpp:22,<br />
-                 from include/farsingle.hpp:16,<br />
-                 from src/main.cpp:202:<br />
-<font color="#0000ff">include/../src/harmonicserieshandler.cpp:318:12: warning: invalid conversion from 'Module*' to 'HarmonicSeries*' [-fpermissive]</font><br />
-  318 |     return module;<br />
+<font color="#0000ff">include/../src/harmonicserieshandler.cpp:321:12: warning: invalid conversion from 'Module*' to 'HarmonicSeries*' [-fpermissive]</font><br />
+  321 |     return module;<br />
       |            ^~~~~~<br />
       |            |<br />
       |            Module*<br />
-In file included from src/main.cpp:197:<br />
+In file included from src/main.cpp:199:<br />
 include/bowcontrol.hpp: In member function 'virtual const ModuleCommandDeclaration BowControl::getModuleCommand(uint8_t) const':<br />
-<font color="#0000ff">include/modulesystembasics.hpp:92:50: warning: passing 'const BowControl' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   92 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const BowControl' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
       |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
 include/bowcontrol.hpp:34:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
    34 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/modulesystembasics.hpp:90:9: note:   in call to 'virtual int BowControl::getModuleCommandCount()'<br />
-   90 |     int getModuleCommandCount(); \<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int BowControl::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
       |         ^~~~~~~~~~~~~~~~~~~~~<br />
 include/bowcontrol.hpp:34:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
    34 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
 include/controlReader.hpp: In member function 'virtual const ModuleCommandDeclaration ControlReader::getModuleCommand(uint8_t) const':<br />
-<font color="#0000ff">include/modulesystembasics.hpp:92:50: warning: passing 'const ControlReader' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   92 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const ControlReader' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
       |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
 include/controlReader.hpp:29:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
    29 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/modulesystembasics.hpp:90:9: note:   in call to 'virtual int ControlReader::getModuleCommandCount()'<br />
-   90 |     int getModuleCommandCount(); \<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int ControlReader::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
       |         ^~~~~~~~~~~~~~~~~~~~~<br />
 include/controlReader.hpp:29:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
    29 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
 In file included from include/farsingle.hpp:19,<br />
-                 from src/main.cpp:202:<br />
+                 from src/main.cpp:204:<br />
 include/../src/controlReader.cpp: At global scope:<br />
 <font color="#0000ff">include/../src/controlReader.cpp:34:102: warning: narrowing conversion of 'ControlReader::s_controlDefaults' from 'eProcessResult (*)(ModuleCommand*, commandItem*, std::vector&lt;commandResponse&gt;*, bool, ModuleCommandDeclaration)' to 'bool' [-Wnarrowing]</font><br />
    34 |   { "controldefaults", "cde", "-" "Reverts all ADC command strings to default values", false, false, &amp;s_controlDefaults },<br />
       |                                                                                                      ^~~~~~~~~~~~~~~~~~<br />
-In file included from src/main.cpp:197:<br />
+In file included from include/farsingle.hpp:23,<br />
+                 from src/main.cpp:204:<br />
+include/../src/bowcalibration.cpp: In member function 'eCalibrationResult CalibrateBow::findMaxPressure()':<br />
+<font color="#0000ff">include/../src/bowcalibration.cpp:154:30: warning: invalid conversion from 'int' to 'eSpeedMode' [-fpermissive]</font><br />
+  154 |     bowControl-&gt;setSpeedMode(1);<br />
+      |                              ^<br />
+      |                              |<br />
+      |                              int<br />
+In file included from include/../src/bowcontrol.cpp:22,<br />
+                 from include/farsingle.hpp:16,<br />
+                 from src/main.cpp:204:<br />
+include/bowcontrol.hpp:180:34: note:   initializing argument 1 of 'void BowControl::setSpeedMode(eSpeedMode)'<br />
+  180 |     void setSpeedMode(eSpeedMode inSpeedMode) { pSpeedMode = inSpeedMode; }<br />
+      |                       ~~~~~~~~~~~^~~~~~~~~~~<br />
+In file included from src/main.cpp:199:<br />
 include/farsingle.hpp: In member function 'virtual const ModuleCommandDeclaration FARSingle::getModuleCommand(uint8_t) const':<br />
-<font color="#0000ff">include/modulesystembasics.hpp:92:50: warning: passing 'const FARSingle' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   92 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const FARSingle' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
       |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
 include/farsingle.hpp:35:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
    35 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/modulesystembasics.hpp:90:9: note:   in call to 'virtual int FARSingle::getModuleCommandCount()'<br />
-   90 |     int getModuleCommandCount(); \<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int FARSingle::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
       |         ^~~~~~~~~~~~~~~~~~~~~<br />
 include/farsingle.hpp:35:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
    35 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
-In file included from src/main.cpp:204:<br />
+In file included from src/main.cpp:206:<br />
 src/farsingle.cpp: In constructor 'FARSingle::FARSingle(void*, void*, void*, void*)':<br />
 <font color="#0000ff">src/farsingle.cpp:45:48: warning: invalid conversion from 'void*' to 'void (*)()' [-fpermissive]</font><br />
    45 |     attachInterrupt(digitalPinToInterrupt(12), tachometerCallback, CHANGE);<br />
@@ -480,7 +504,7 @@ In file included from lib/teensy4/wiring.h:39,<br />
 lib/teensy4/core_pins.h:2336:42: note:   initializing argument 2 of 'void attachInterrupt(uint8_t, void (*)(), int)'<br />
  2336 | void attachInterrupt(uint8_t pin, void (*function)(void), int mode);<br />
       |                                   ~~~~~~~^~~~~~~~~~~~~~~<br />
-In file included from src/main.cpp:204:<br />
+In file included from src/main.cpp:206:<br />
 <font color="#0000ff">src/farsingle.cpp:46:25: warning: invalid conversion from 'void*' to 'void (*)()' [-fpermissive]</font><br />
    46 |     pidInterrupt0.begin(pidCallback, bowControl-&gt;getPIDUpdateInterval());<br />
       |                         ^~~~~~~~~~~<br />
@@ -491,83 +515,163 @@ In file included from lib/teensy4/WProgram.h:68,<br />
 lib/teensy4/IntervalTimer.h:66:27: note:   initializing argument 1 of 'bool IntervalTimer::begin(void (*)(), int)'<br />
    66 |         bool begin(void (*funct)(), int microseconds) {<br />
       |                    ~~~~~~~^~~~~~~~<br />
-In file included from src/main.cpp:197:<br />
+In file included from src/main.cpp:199:<br />
 include/basemodule.hpp: In member function 'virtual const ModuleCommandDeclaration BaseModule::getModuleCommand(uint8_t) const':<br />
-<font color="#0000ff">include/modulesystembasics.hpp:92:50: warning: passing 'const BaseModule' as 'this' argument discards qualifiers [-fpermissive]</font><br />
-   92 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const BaseModule' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
       |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
 include/basemodule.hpp:8:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
     8 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
-include/modulesystembasics.hpp:90:9: note:   in call to 'virtual int BaseModule::getModuleCommandCount()'<br />
-   90 |     int getModuleCommandCount(); \<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int BaseModule::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
       |         ^~~~~~~~~~~~~~~~~~~~~<br />
 include/basemodule.hpp:8:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
     8 |     MODULECOMMANDHANDLER<br />
       |     ^~~~~~~~~~~~~~~~~~~~<br />
-In file included from src/main.cpp:215:<br />
+In file included from src/pluginhandler.cpp:4,<br />
+                 from src/basemodule.cpp:6,<br />
+                 from src/main.cpp:217:<br />
+include/pluginhandler.hpp: At global scope:<br />
+<font color="#0000ff">include/pluginhandler.hpp:31:5: warning: 'typedef' was ignored in this declaration</font><br />
+   31 |     typedef struct PluginRegistry {<br />
+      |     ^~~~~~~<br />
+In file included from src/main.cpp:199:<br />
+include/pluginhandler.hpp: In member function 'virtual const ModuleCommandDeclaration PluginHandler::getModuleCommand(uint8_t) const':<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const PluginHandler' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+      |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
+include/pluginhandler.hpp:101:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+  101 |     MODULECOMMANDHANDLER<br />
+      |     ^~~~~~~~~~~~~~~~~~~~<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int PluginHandler::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
+      |         ^~~~~~~~~~~~~~~~~~~~~<br />
+include/pluginhandler.hpp:101:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+  101 |     MODULECOMMANDHANDLER<br />
+      |     ^~~~~~~~~~~~~~~~~~~~<br />
+include/plugin_lfo.hpp: In member function 'virtual const ModuleCommandDeclaration Plugin_LFO::getModuleCommand(uint8_t) const':<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const Plugin_LFO' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+      |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
+include/plugin_lfo.hpp:11:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+   11 |     MODULECOMMANDHANDLER<br />
+      |     ^~~~~~~~~~~~~~~~~~~~<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int Plugin_LFO::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
+      |         ^~~~~~~~~~~~~~~~~~~~~<br />
+include/plugin_lfo.hpp:11:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+   11 |     MODULECOMMANDHANDLER<br />
+      |     ^~~~~~~~~~~~~~~~~~~~<br />
+include/plugin_map.hpp: In member function 'virtual const ModuleCommandDeclaration Plugin_Map::getModuleCommand(uint8_t) const':<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const Plugin_Map' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+      |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
+include/plugin_map.hpp:15:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+   15 |     MODULECOMMANDHANDLER<br />
+      |     ^~~~~~~~~~~~~~~~~~~~<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int Plugin_Map::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
+      |         ^~~~~~~~~~~~~~~~~~~~~<br />
+include/plugin_map.hpp:15:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+   15 |     MODULECOMMANDHANDLER<br />
+      |     ^~~~~~~~~~~~~~~~~~~~<br />
+In file included from include/pluginhandler.hpp:142,<br />
+                 from src/pluginhandler.cpp:4,<br />
+                 from src/basemodule.cpp:6,<br />
+                 from src/main.cpp:217:<br />
+include/../src/plugin_map.cpp: In member function 'eProcessResult Plugin_Map::data(commandItem*, std::vector&lt;commandResponse&gt;*, bool, ModuleCommandDeclaration)':<br />
+<font color="#0000ff">include/../src/plugin_map.cpp:38:22: warning: structured bindings only available with '-std=c++17' or '-std=gnu++17'</font><br />
+   38 |     for (const auto&amp; [key, value] : mapData) {<br />
+      |                      ^<br />
+In file included from include/../src/plugin_adsr.cpp:4,<br />
+                 from include/pluginhandler.hpp:143,<br />
+                 from src/pluginhandler.cpp:4,<br />
+                 from src/basemodule.cpp:6,<br />
+                 from src/main.cpp:217:<br />
+include/plugin_adsr.hpp: At global scope:<br />
+<font color="#0000ff">include/plugin_adsr.hpp:67:21: warning: invalid conversion from 'int' to 'Plugin_AHDSR::eStage' [-fpermissive]</font><br />
+   67 |     eStage pStage = 4;<br />
+      |                     ^<br />
+      |                     |<br />
+      |                     int<br />
+In file included from src/main.cpp:199:<br />
+include/plugin_adsr.hpp: In member function 'virtual const ModuleCommandDeclaration Plugin_AHDSR::getModuleCommand(uint8_t) const':<br />
+<font color="#0000ff">include/modulesystembasics.hpp:103:50: warning: passing 'const Plugin_AHDSR' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+  103 |         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+      |                             ~~~~~~~~~~~~~~~~~~~~~^~<br />
+include/plugin_adsr.hpp:12:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+   12 |     MODULECOMMANDHANDLER<br />
+      |     ^~~~~~~~~~~~~~~~~~~~<br />
+include/modulesystembasics.hpp:101:9: note:   in call to 'virtual int Plugin_AHDSR::getModuleCommandCount()'<br />
+  101 |     int getModuleCommandCount(); \<br />
+      |         ^~~~~~~~~~~~~~~~~~~~~<br />
+include/plugin_adsr.hpp:12:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+   12 |     MODULECOMMANDHANDLER<br />
+      |     ^~~~~~~~~~~~~~~~~~~~<br />
+In file included from src/main.cpp:217:<br />
 src/basemodule.cpp: In constructor 'BaseModule::BaseModule(Module*)':<br />
-<font color="#0000ff">src/basemodule.cpp:35:66: warning: invalid conversion from 'int' to 'ModuleID::eModuleType' [-fpermissive]</font><br />
-   35 |         moduleID = new ModuleID("unknown", "unknown", "unknown", 0);<br />
+<font color="#0000ff">src/basemodule.cpp:35:22: warning: invalid conversion from 'Module*' to 'ModuleHandler*' [-fpermissive]</font><br />
+   35 |         mainModule = inModule;<br />
+      |                      ^~~~~~~~<br />
+      |                      |<br />
+      |                      Module*<br />
+<font color="#0000ff">src/basemodule.cpp:41:66: warning: invalid conversion from 'int' to 'eModuleType' [-fpermissive]</font><br />
+   41 |         moduleID = new ModuleID("unknown", "unknown", "unknown", 0);<br />
       |                                                                  ^<br />
       |                                                                  |<br />
       |                                                                  int<br />
-In file included from src/main.cpp:197:<br />
-include/modulesystembasics.hpp:39:86: note:   initializing argument 4 of 'ModuleID::ModuleID(String, String, String, ModuleID::eModuleType, bool)'<br />
-   39 |     ModuleID(String inLongName, String inShortName, String inDescriptor, eModuleType inModuleType, bool inGroupHandler = false) {<br />
+In file included from src/main.cpp:199:<br />
+include/modulesystembasics.hpp:50:86: note:   initializing argument 4 of 'ModuleID::ModuleID(String, String, String, eModuleType, bool)'<br />
+   50 |     ModuleID(String inLongName, String inShortName, String inDescriptor, eModuleType inModuleType, bool inGroupHandler = false) {<br />
       |                                                                          ~~~~~~~~~~~~^~~~~~~~~~~~<br />
-In file included from src/main.cpp:215:<br />
-src/basemodule.cpp: In member function 'eProcessResult BaseModule::userVariables(commandItem*, std::vector&lt;commandResponse&gt;*, bool, ModuleCommandDeclaration)':<br />
-<font color="#0000ff">src/basemodule.cpp:112:9: warning: unused variable 'userVariable' [-Wunused-variable]</font><br />
-  112 |     int userVariable = inCommandItem-&gt;argument[0].toInt();<br />
-      |         ^~~~~~~~~~~~<br />
 src/main.cpp: In function 'void setup()':<br />
-<font color="#0000ff">src/main.cpp:256:31: warning: invalid conversion from 'void (*)()' to 'void*' [-fpermissive]</font><br />
-  256 |     farSingle = new FARSingle(&amp;farSingleUpdateServoStepperMute0, &amp;farSingleUpdateServoStepperPressure0, &amp;farSingleUpdateTachometer0, &amp;farSingleUpdatePID0);<br />
+<font color="#0000ff">src/main.cpp:272:31: warning: invalid conversion from 'void (*)()' to 'void*' [-fpermissive]</font><br />
+  272 |     farSingle = new FARSingle(&amp;farSingleUpdateServoStepperMute0, &amp;farSingleUpdateServoStepperPressure0, &amp;farSingleUpdateTachometer0, &amp;farSingleUpdatePID0);<br />
       |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
       |                               |<br />
       |                               void (*)()<br />
-In file included from src/main.cpp:204:<br />
+In file included from src/main.cpp:206:<br />
 src/farsingle.cpp:21:28: note:   initializing argument 1 of 'FARSingle::FARSingle(void*, void*, void*, void*)'<br />
    21 | FARSingle::FARSingle(void *muteStepperCallback, void *pressureStepperCallback, void *tachometerCallback, void *pidCallback) {<br />
       |                      ~~~~~~^~~~~~~~~~~~~~~~~~~<br />
-<font color="#0000ff">src/main.cpp:256:66: warning: invalid conversion from 'void (*)()' to 'void*' [-fpermissive]</font><br />
-  256 |     farSingle = new FARSingle(&amp;farSingleUpdateServoStepperMute0, &amp;farSingleUpdateServoStepperPressure0, &amp;farSingleUpdateTachometer0, &amp;farSingleUpdatePID0);<br />
+<font color="#0000ff">src/main.cpp:272:66: warning: invalid conversion from 'void (*)()' to 'void*' [-fpermissive]</font><br />
+  272 |     farSingle = new FARSingle(&amp;farSingleUpdateServoStepperMute0, &amp;farSingleUpdateServoStepperPressure0, &amp;farSingleUpdateTachometer0, &amp;farSingleUpdatePID0);<br />
       |                                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
       |                                                                  |<br />
       |                                                                  void (*)()<br />
-In file included from src/main.cpp:204:<br />
+In file included from src/main.cpp:206:<br />
 src/farsingle.cpp:21:55: note:   initializing argument 2 of 'FARSingle::FARSingle(void*, void*, void*, void*)'<br />
    21 | FARSingle::FARSingle(void *muteStepperCallback, void *pressureStepperCallback, void *tachometerCallback, void *pidCallback) {<br />
       |                                                 ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~<br />
-<font color="#0000ff">src/main.cpp:256:105: warning: invalid conversion from 'void (*)()' to 'void*' [-fpermissive]</font><br />
-  256 |     farSingle = new FARSingle(&amp;farSingleUpdateServoStepperMute0, &amp;farSingleUpdateServoStepperPressure0, &amp;farSingleUpdateTachometer0, &amp;farSingleUpdatePID0);<br />
+<font color="#0000ff">src/main.cpp:272:105: warning: invalid conversion from 'void (*)()' to 'void*' [-fpermissive]</font><br />
+  272 |     farSingle = new FARSingle(&amp;farSingleUpdateServoStepperMute0, &amp;farSingleUpdateServoStepperPressure0, &amp;farSingleUpdateTachometer0, &amp;farSingleUpdatePID0);<br />
       |                                                                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
       |                                                                                                         |<br />
       |                                                                                                         void (*)()<br />
-In file included from src/main.cpp:204:<br />
+In file included from src/main.cpp:206:<br />
 src/farsingle.cpp:21:86: note:   initializing argument 3 of 'FARSingle::FARSingle(void*, void*, void*, void*)'<br />
    21 | FARSingle::FARSingle(void *muteStepperCallback, void *pressureStepperCallback, void *tachometerCallback, void *pidCallback) {<br />
       |                                                                                ~~~~~~^~~~~~~~~~~~~~~~~~<br />
-<font color="#0000ff">src/main.cpp:256:134: warning: invalid conversion from 'void (*)()' to 'void*' [-fpermissive]</font><br />
-  256 |     farSingle = new FARSingle(&amp;farSingleUpdateServoStepperMute0, &amp;farSingleUpdateServoStepperPressure0, &amp;farSingleUpdateTachometer0, &amp;farSingleUpdatePID0);<br />
+<font color="#0000ff">src/main.cpp:272:134: warning: invalid conversion from 'void (*)()' to 'void*' [-fpermissive]</font><br />
+  272 |     farSingle = new FARSingle(&amp;farSingleUpdateServoStepperMute0, &amp;farSingleUpdateServoStepperPressure0, &amp;farSingleUpdateTachometer0, &amp;farSingleUpdatePID0);<br />
       |                                                                                                                                      ^~~~~~~~~~~~~~~~~~~~<br />
       |                                                                                                                                      |<br />
       |                                                                                                                                      void (*)()<br />
-In file included from src/main.cpp:204:<br />
+In file included from src/main.cpp:206:<br />
 src/farsingle.cpp:21:112: note:   initializing argument 4 of 'FARSingle::FARSingle(void*, void*, void*, void*)'<br />
    21 | FARSingle::FARSingle(void *muteStepperCallback, void *pressureStepperCallback, void *tachometerCallback, void *pidCallback) {<br />
       |                                                                                                          ~~~~~~^~~~~~~~~~~<br />
 arm-none-eabi-g++ -Lteensy4 -o bin/Release/EkdahlFarCB.elf obj/Release/lib/Adafruit_ADS1X15/Adafruit_ADS1X15.o obj/Release/lib/Adafruit_BusIO/Adafruit_BusIO_Register.o obj/Release/lib/Adafruit_BusIO/Adafruit_I2CDevice.o obj/Release/lib/Adafruit_BusIO/Adafruit_SPIDevice.o obj/Release/lib/Audio/analyze_notefreq.o obj/Release/lib/Audio/analyze_peak.o obj/Release/lib/Audio/analyze_rms.o obj/Release/lib/Audio/filter_biquad.o obj/Release/lib/Audio/input_adc.o obj/Release/lib/Audio/utility/imxrt_hw.o obj/Release/lib/Audio/utility/sqrt_integer.o obj/Release/lib/EEPROM/EEPROM.o obj/Release/lib/MIDI/MIDI.o obj/Release/lib/SafeString/src/BufferedInput.o obj/Release/lib/SafeString/src/BufferedOutput.o obj/Release/lib/SafeString/src/loopTimer.o obj/Release/lib/SafeString/src/millisDelay.o obj/Release/lib/SafeString/src/PinFlasher.o obj/Release/lib/SafeString/src/SafeString.o obj/Release/lib/SafeString/src/SafeStringReader.o obj/Release/lib/SafeString/src/SafeStringStream.o obj/Release/lib/SafeString/src/SerialComs.o obj/Release/lib/SD/src/SD.o obj/Release/lib/SdFat/src/common/FmtNumber.o obj/Release/lib/SdFat/src/common/FsCache.o obj/Release/lib/SdFat/src/common/FsDateTime.o obj/Release/lib/SdFat/src/common/FsName.o obj/Release/lib/SdFat/src/common/FsStructs.o obj/Release/lib/SdFat/src/common/FsUtf.o obj/Release/lib/SdFat/src/common/PrintBasic.o obj/Release/lib/SdFat/src/common/upcase.o obj/Release/lib/SdFat/src/ExFatLib/ExFatDbg.o obj/Release/lib/SdFat/src/ExFatLib/ExFatFile.o obj/Release/lib/SdFat/src/ExFatLib/ExFatFilePrint.o obj/Release/lib/SdFat/src/ExFatLib/ExFatFileWrite.o obj/Release/lib/SdFat/src/ExFatLib/ExFatFormatter.o obj/Release/lib/SdFat/src/ExFatLib/ExFatName.o obj/Release/lib/SdFat/src/ExFatLib/ExFatPartition.o obj/Release/lib/SdFat/src/ExFatLib/ExFatVolume.o obj/Release/lib/SdFat/src/ExFatLib/upcase.o obj/Release/lib/SdFat/src/FatLib/FatDbg.o obj/Release/lib/SdFat/src/FatLib/FatFile.o obj/Release/lib/SdFat/src/FatLib/FatFileLFN.o obj/Release/lib/SdFat/src/FatLib/FatFilePrint.o obj/Release/lib/SdFat/src/FatLib/FatFileSFN.o obj/Release/lib/SdFat/src/FatLib/FatFormatter.o obj/Release/lib/SdFat/src/FatLib/FatName.o obj/Release/lib/SdFat/src/FatLib/FatPartition.o obj/Release/lib/SdFat/src/FatLib/FatVolume.o obj/Release/lib/SdFat/src/FreeStack.o obj/Release/lib/SdFat/src/FsLib/FsFile.o obj/Release/lib/SdFat/src/FsLib/FsNew.o obj/Release/lib/SdFat/src/FsLib/FsVolume.o obj/Release/lib/SdFat/src/iostream/istream.o obj/Release/lib/SdFat/src/iostream/ostream.o obj/Release/lib/SdFat/src/iostream/StdioStream.o obj/Release/lib/SdFat/src/iostream/StreamBaseClass.o obj/Release/lib/SdFat/src/MinimumSerial.o obj/Release/lib/SdFat/src/SdCard/SdCardInfo.o obj/Release/lib/SdFat/src/SdCard/SdioTeensy.o obj/Release/lib/SdFat/src/SdCard/SdSpiCard.o obj/Release/lib/SdFat/src/SpiDriver/SdSpiArtemis.o obj/Release/lib/SdFat/src/SpiDriver/SdSpiChipSelect.o obj/Release/lib/SdFat/src/SpiDriver/SdSpiDue.o obj/Release/lib/SdFat/src/SpiDriver/SdSpiESP.o obj/Release/lib/SdFat/src/SpiDriver/SdSpiParticle.o obj/Release/lib/SdFat/src/SpiDriver/SdSpiSTM32.o obj/Release/lib/SdFat/src/SpiDriver/SdSpiSTM32Core.o obj/Release/lib/SdFat/src/SpiDriver/SdSpiTeensy3.o obj/Release/lib/SerialFlash/SerialFlashChip.o obj/Release/lib/SerialFlash/SerialFlashDirectory.o obj/Release/lib/SPI/SPI.o obj/Release/lib/teensy4/analog.o obj/Release/lib/teensy4/AudioStream.o obj/Release/lib/teensy4/bootdata.o obj/Release/lib/teensy4/clockspeed.o obj/Release/lib/teensy4/CrashReport.o obj/Release/lib/teensy4/debugprintf.o obj/Release/lib/teensy4/delay.o obj/Release/lib/teensy4/digital.o obj/Release/lib/teensy4/DMAChannel.o obj/Release/lib/teensy4/eeprom.o obj/Release/lib/teensy4/EventResponder.o obj/Release/lib/teensy4/extmem.o obj/Release/lib/teensy4/fuse.o obj/Release/lib/teensy4/HardwareSerial.o obj/Release/lib/teensy4/HardwareSerial1.o obj/Release/lib/teensy4/HardwareSerial2.o obj/Release/lib/teensy4/HardwareSerial3.o obj/Release/lib/teensy4/HardwareSerial4.o obj/Release/lib/teensy4/HardwareSerial5.o obj/Release/lib/teensy4/HardwareSerial6.o obj/Release/lib/teensy4/HardwareSerial7.o obj/Release/lib/teensy4/HardwareSerial8.o obj/Release/lib/teensy4/interrupt.o obj/Release/lib/teensy4/IntervalTimer.o obj/Release/lib/teensy4/IPAddress.o obj/Release/lib/teensy4/keylayouts.o obj/Release/lib/teensy4/libc.o obj/Release/lib/teensy4/main.o obj/Release/lib/teensy4/memcpy-armv7m.o obj/Release/lib/teensy4/memset.o obj/Release/lib/teensy4/new.o obj/Release/lib/teensy4/nonstd.o obj/Release/lib/teensy4/Print.o obj/Release/lib/teensy4/pwm.o obj/Release/lib/teensy4/rtc.o obj/Release/lib/teensy4/serialEvent.o obj/Release/lib/teensy4/serialEvent1.o obj/Release/lib/teensy4/serialEvent2.o obj/Release/lib/teensy4/serialEvent3.o obj/Release/lib/teensy4/serialEvent4.o obj/Release/lib/teensy4/serialEvent5.o obj/Release/lib/teensy4/serialEvent6.o obj/Release/lib/teensy4/serialEvent7.o obj/Release/lib/teensy4/serialEvent8.o obj/Release/lib/teensy4/serialEventUSB1.o obj/Release/lib/teensy4/serialEventUSB2.o obj/Release/lib/teensy4/sm_alloc_valid.o obj/Release/lib/teensy4/sm_calloc.o obj/Release/lib/teensy4/sm_free.o obj/Release/lib/teensy4/sm_hash.o obj/Release/lib/teensy4/sm_malloc.o obj/Release/lib/teensy4/sm_malloc_stats.o obj/Release/lib/teensy4/sm_pool.o obj/Release/lib/teensy4/sm_realloc.o obj/Release/lib/teensy4/sm_realloc_i.o obj/Release/lib/teensy4/sm_realloc_move.o obj/Release/lib/teensy4/sm_szalloc.o obj/Release/lib/teensy4/sm_util.o obj/Release/lib/teensy4/sm_zalloc.o obj/Release/lib/teensy4/startup.o obj/Release/lib/teensy4/Stream.o obj/Release/lib/teensy4/tempmon.o obj/Release/lib/teensy4/Time.o obj/Release/lib/teensy4/Tone.o obj/Release/lib/teensy4/usb.o obj/Release/lib/teensy4/usb_audio.o obj/Release/lib/teensy4/usb_desc.o obj/Release/lib/teensy4/usb_flightsim.o obj/Release/lib/teensy4/usb_inst.o obj/Release/lib/teensy4/usb_joystick.o obj/Release/lib/teensy4/usb_keyboard.o obj/Release/lib/teensy4/usb_midi.o obj/Release/lib/teensy4/usb_mouse.o obj/Release/lib/teensy4/usb_mtp.o obj/Release/lib/teensy4/usb_rawhid.o obj/Release/lib/teensy4/usb_seremu.o obj/Release/lib/teensy4/usb_serial.o obj/Release/lib/teensy4/usb_serial2.o obj/Release/lib/teensy4/usb_serial3.o obj/Release/lib/teensy4/usb_touch.o obj/Release/lib/teensy4/WMath.o obj/Release/lib/teensy4/WString.o obj/Release/lib/teensy4/yield.o obj/Release/lib/tinyexpr/src/tinyexpr.o obj/Release/lib/Wire/utility/twi.o obj/Release/lib/Wire/Wire.o obj/Release/lib/Wire/WireIMXRT.o obj/Release/lib/Wire/WireKinetis.o obj/Release/src/main.o obj/Release/src/name.o  -mthumb -mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -Os -Wl,--gc-sections -Tlib/teensy4/imxrt1062.ld -s -mthumb -mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -Os -Wl,--gc-sections  -larm_cortexM7lfsp_math -lm -lstdc++<br />
-Output file is bin/Release/EkdahlFarCB.elf with size 517.77 KB<br />
+Output file is bin/Release/EkdahlFarCB.elf with size 543.77 KB<br />
 arm-none-eabi-size bin/Release/EkdahlFarCB.elf<br />
    text	   data	    bss	    dec	    hex	filename<br />
- 279224	  53576	  70016	 402816	  62580	bin/Release/EkdahlFarCB.elf<br />
+ 302776	  56648	  71904	 431328	  694e0	bin/Release/EkdahlFarCB.elf<br />
 arm-none-eabi-objcopy -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0 bin/Release/EkdahlFarCB.elf bin/Release/EkdahlFarCB.eep<br />
 arm-none-eabi-objcopy -O ihex -R .eeprom bin/Release/EkdahlFarCB.elf bin/Release/EkdahlFarCB.hex<br />
 arm-none-eabi-objdump -d bin/Release/EkdahlFarCB.elf &gt; bin/Release/EkdahlFarCB.lst<br />
-<font color="#0000ff">Process terminated with status 0 (0 minute(s), 5 second(s))</font><br />
-<font color="#0000ff">0 error(s), 54 warning(s) (0 minute(s), 5 second(s))</font><br />
+<font color="#0000ff">Process terminated with status 0 (0 minute(s), 6 second(s))</font><br />
+<font color="#0000ff">0 error(s), 64 warning(s) (0 minute(s), 6 second(s))</font><br />
 </tt>
 </body>
 </html>
