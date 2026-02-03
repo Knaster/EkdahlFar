@@ -25,17 +25,17 @@
 #include "harmonicSeries.hpp"
 
 const ModuleCommandDeclaration HarmonicSeries::moduleCommands[] = {
-    { "", "", "int", "Sets the current Harmonic Series", false, false, nullptr },
-    { "name", "na", "name", "Sets the name of the harmonic series", false, false, &s_name },
-    { "data", "da", "name:ratios", "Gets / sets all data for the harmonic series in the given slot", false, true, &s_data },
-    { "ratio", "r", "harmonic:ratio", "Sets the ratio of the given harmonic in current harmonic series, will increase the list size if needed to adress the harmonic", false, false, &s_ratio },
-    { "remove", "rm", "harmonic", "Remove the harmonic ratio given in the current series and shift any ratios accordingly. Cannot remove all ratios", false, false, &s_remove }
+    { "", "", "int", "Sets the current Harmonic Series", false, false, nullptr, eCommandType::Index },
+    { "name", "na", "name", "Sets the name of the harmonic series", false, false, &s_name, eCommandType::Name },
+    { "data", "da", "name:ratios", "Gets / sets all data for the harmonic series in the given slot", false, true, &s_data, eCommandType::Data },
+    { "ratio", "r", "harmonic:ratio", "Sets the ratio of the given harmonic in current harmonic series, will increase the list size if needed to adress the harmonic", false, false, &s_ratio, eCommandType::SimpleFloat },
+    { "remove", "rm", "harmonic", "Remove the harmonic ratio given in the current series and shift any ratios accordingly. Cannot remove all ratios", false, false, &s_remove, eCommandType::Remove }
 };
 
 getModuleCount(HarmonicSeries)
 
 HarmonicSeries::HarmonicSeries() {
-    moduleID = new ModuleID("harmonicseries", "hs", "The list of ratios used in the current harmonic series", eModuleType::software);
+//    moduleID = new ModuleID("harmonicseries", "hs", "The list of ratios used in the current harmonic series", eModuleType::software);
 }
 /*
 CREATE_DATACHANGED_CALLBACK(fDataChanged, HarmonicSeries) {

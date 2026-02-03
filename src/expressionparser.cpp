@@ -72,13 +72,7 @@ bool ExpressionParser::setVariable(const char* name, double value) {
     }
     return false;
 }
-/*
-double ExpressionParser::mapKeys(double key) {
-    int mapIndex = (((int) key) % 12);
-    if ((mapIndex < 0) || (mapIndex >= mapSize)) { return 0; }
-    return dMap[mapIndex];
-}
-*/
+
 double ExpressionParser::expBool(double input) {
     if (input <= 0) { return 0; } else { return 1; };
 }
@@ -111,14 +105,14 @@ String ExpressionParser::parseCommandExpressions(String inExpression) {
     const char* expression = inExpression.c_str();
     String outExpression;
     int err;
-    //te_expr *n = te_compile(expression, expFunctions, expFunctionCount, &err);
     te_expr *n = te_compile(expression, expFunctions.data(), expFunctions.size(), &err);
     double r = -1;
     if (n) {
       r = te_eval(n);
       outExpression = String(r, 5);
     } else {
-      debugPrintln("Error in expression '" + inExpression + "'", debugPrintType::Error);
+      debugPrintln("Not an expression '" + inExpression + "'", debugPrintType::Debug);
+      return inExpression;
     }
     te_free(n);
     return outExpression;

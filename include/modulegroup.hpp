@@ -15,8 +15,8 @@ class ModuleGroup
     public:
         Module *owner = nullptr;
 
-        ModuleGroup(ModuleID inModuleID);
-//        ModuleGroup(Module *inModule);
+//        ModuleGroup(ModuleID inModuleID);
+        ModuleGroup(tModuleID inModuleID);
         virtual ~ModuleGroup();
 
         Module* addModule(Module *inModule);
@@ -29,9 +29,12 @@ class ModuleGroup
         bool setSelection(std::vector<int> inSelection);
         bool setSelection(int inSelection);
 
-        ModuleID *moduleID;
+        tModuleID tmoduleID;
+//        ModuleID *moduleID;
 
         void dir(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix, bool hidden, bool modules, bool commands, bool instances, bool instanceCount, bool recursive);
+
+        void help(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix);
 
         eProcessResult processCommands(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false);
 

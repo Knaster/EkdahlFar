@@ -5,6 +5,8 @@
 
 class PIDController : public Module {
 public:
+    SETMODULEID("pid", "pid", "PID controller v1.0", eModuleType::software, false)
+
     MODULECOMMANDHANDLER
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(targetFreq, PIDController)

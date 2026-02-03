@@ -8,8 +8,6 @@
 
 class Plugin : public Module {
 public:
-    virtual const tModuleID& getModuleID() const = 0;
-    virtual tModuleID& getModuleID() = 0;
     virtual void registerExpression() {};
     uint8_t index = 0;
     virtual ModuleGroup* getGroup() const = 0;
@@ -17,8 +15,6 @@ public:
     ModuleHandler *parent = nullptr;
 
     virtual ~Plugin() = default;
-//    virtual eProcessResult setData(commandItem inCommandItem);
-//    virtual eProcessResult getData();
     virtual void update() {
         debugPrintln("Standard plugin response", debugPrintType::Debug);
     };
@@ -95,9 +91,50 @@ private:
     \
     ModuleGroup* class::group = nullptr;
 
+#define CREATEGETSET_HEADER(name, class) \
+    CREATE_MODULE_COMMAND_FUNCTION(name, class) { \
+        if (!request) { \
+            if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; } \
+
+#define CREATEGETSET_FOOTER(variable) \
+        } \
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(variable), debugPrintType::InfoRequest }); \
+        return eProcessResult::Ok; \
+    }
+
+#define CREATEGETSET_FOOTERQ(variable) \
+        } \
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + delimitExpression(String(variable), true), debugPrintType::InfoRequest }); \
+        return eProcessResult::Ok; \
+    }
+
+#define CREATE_GETSET_FUNCTION_CONVERT(name, class, variable, conversion) \
+    CREATEGETSET_HEADER(name, class) \
+    variable = inCommandItem->argument[0].conversion(); \
+    CREATEGETSET_FOOTER(variable)
+
+#define CREATE_GETSET_FUNCTION(name, class, variable) \
+    CREATEGETSET_HEADER(name, class) \
+    variable = stripQuotes(inCommandItem->argument[0]); \
+    CREATEGETSET_FOOTERQ(variable)
+
+#define CREATE_GETSET_FUNCTION_F_CONVERT(name, class, variable, conversion, function) \
+    CREATEGETSET_HEADER(name, class) \
+    variable = inCommandItem->argument[0].conversion(); \
+    function(); \
+    CREATEGETSET_FOOTER(variable)
+
+#define CREATE_GETSET_FUNCTION_F(name, class, variable, function) \
+    CREATEGETSET_HEADER(name, class) \
+    variable = stripQuotes(inCommandItem->argument[0]); \
+    function(); \
+    CREATEGETSET_FOOTERQ(variable)
+
 class PluginHandler : public ModuleHandler
 {
 public:
+    SETMODULEID("pluginhandler", "ph", "Plugin handler v1.0", eModuleType::software, false)
+
     MODULECOMMANDHANDLER
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(add, PluginHandler)
@@ -141,5 +178,6 @@ float convertMsToRate(float parentRate, float inRate) {
 #include "../src/plugin_lfo.cpp"
 #include "../src/plugin_map.cpp"
 #include "../src/plugin_adsr.cpp"
+#include "../src/plugin_mult.cpp"
 
 #endif // PLUGINS_HPP

@@ -46,11 +46,11 @@
 /***** NEW CLASS *****/
 
 const ModuleCommandDeclaration BowControl::moduleCommands[] = {
-    { "speedmode", "sm", "0|1", "Bow motor speed mode, 0 = Automatic and 1 = Manual", false, false, &s_speedMode },
-    { "motortimeout", "mt", "ms(0-65535)", "Bow motor shutdown timeout after bow having been put into the rest position", false, true, &s_motorTimeout },
-    { "pidenable", "pe", "1|0", "Sets the bow PID on/off", false, false, &s_pidEnable },
-    { "motorfaultcommands", "mfc", "command list", "Commands to execute when a motor fault is tripped - !WARNING! Can ruin your instrument if changed", false, true, &s_motorFaultCommands },
-    { "motoroverpowercommands", "moc", "command list", "Commands to execute when motor is over the power limit - !WARNING! Can ruin your instrument if changed", false, true, &s_motorOverPowerCommands },
+    { "speedmode", "sm", "0|1", "Bow motor speed mode, 0 = Automatic and 1 = Manual", false, false, &s_speedMode, eCommandType::SimpleBool },
+    { "motortimeout", "mt", "ms(0-65535)", "Bow motor shutdown timeout after bow having been put into the rest position", false, true, &s_motorTimeout, eCommandType::Milliseconds },
+    { "pidenable", "pe", "1|0", "Sets the bow PID on/off", false, false, &s_pidEnable, eCommandType::SimpleBool },
+    { "motorfaultcommands", "mfc", "commands", "Commands to execute when a motor fault is tripped - !WARNING! Can ruin your instrument if changed", false, true, &s_motorFaultCommands, eCommandType::OutputAssignment },
+    { "motoroverpowercommands", "moc", "commands", "Commands to execute when motor is over the power limit - !WARNING! Can ruin your instrument if changed", false, true, &s_motorOverPowerCommands, eCommandType::OutputAssignment },
 };
 
 getModuleCount(BowControl)
@@ -58,7 +58,7 @@ getModuleCount(BowControl)
 BowControl::BowControl(char motorRevPin, char motorVoltagePin, char motorDCDCEnPin, char tachoPin, char currentSensePin, char motorFaultPin,
                        char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin) {
 
-    moduleID = new ModuleID("bowingwheel", "bw", "Bowing wheel controller v1.0", eModuleType::hardware);
+//    moduleID = new ModuleID("bowingwheel", "bw", "Bowing wheel controller v1.0", eModuleType::hardware);
 
     dcMotorControl = new DCMotorControl(motorRevPin, motorVoltagePin, motorDCDCEnPin, tachoPin, currentSensePin, motorFaultPin);
     pidController = new PIDController(*dcMotorControl);

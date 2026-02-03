@@ -5,10 +5,11 @@
 
 class HarmonicSeriesHandler : public ModuleHandler {
 public:
+    SETMODULEID("harmonicserieshandler", "hsh", "Harmonic series handler", eModuleType::software, false)
+
     MODULECOMMANDHANDLER
 
     CREATE_INDEX_CALLBACK_FWD(harmonicSeriesIndexChanged, HarmonicSeriesHandler);
-//    CREATE_DATACHANGED_CALLBACK_FWD(harmonicSeriesDataChanged, HarmonicSeriesHandler)
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(fundamental, HarmonicSeriesHandler)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(harmonic, HarmonicSeriesHandler)

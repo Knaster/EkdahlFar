@@ -24,19 +24,19 @@
 #include "midimessageconfiguration.hpp"
 
 const ModuleCommandDeclaration MIDIMessageConfiguration::moduleCommands[] = {
-    { "", "", "int", "Sets the current MIDI configuration", false, false, nullptr },
-    { "name", "na", "string", "Set the name of the MIDI configuration (for request, argument is index of configuration to return name for (optional))", false, true, &s_namef },
-    { "data", "da", "noteon|noteoff|pat|cc:(0-127)|cat|pb|pc", "Set the MIDI event handling data, the event given will execute the given command string", false, true, &s_eventHandler },
-    { "addcc", "ac", "cc(0-127):command string", "Add continuous controller and the command string to execute", false, false, &s_addcc },
-    { "removecc", "rmc", "cc(0-127)", "remove continuous controller from list", false, false, &s_ccRemove },
-    { "defaults", "d", "-", "Reverts the current configuration to default values and CCs", false, false, &s_defaults },
-    { "receivechannel", "rc", "-", "Sets the MIDI receive channel of the current configuration. 1-16 sets specific channel, any other value for OMNI", false, false, &s_receiveChannel}
+    { "", "", "int", "Sets the current MIDI configuration", false, false, nullptr, eCommandType::Index },
+    { "name", "na", "string", "Set the name of the MIDI configuration (for request, argument is index of configuration to return name for (optional))", false, true, &s_namef, eCommandType::Name },
+    { "data", "da", "noteon|noteoff|pat|cc:(0-127)|cat|pb|pc", "Set the MIDI event handling data, the event given will execute the given command string", false, true, &s_eventHandler, eCommandType::OutputAssignment },
+    { "addcc", "ac", "cc(0-127):command string", "Add continuous controller and the command string to execute", false, false, &s_addcc, eCommandType::Data },
+    { "removecc", "rmc", "cc(0-127)", "remove continuous controller from list", false, false, &s_ccRemove, eCommandType::Remove },
+    { "defaults", "d", "-", "Reverts the current configuration to default values and CCs", false, false, &s_defaults, eCommandType::Immediate },
+    { "receivechannel", "rc", "-", "Sets the MIDI receive channel of the current configuration. 1-16 sets specific channel, any other value for OMNI", false, false, &s_receiveChannel, eCommandType::SimpleUInt8}
 };
 
 getModuleCount(MIDIMessageConfiguration)
 
 MIDIMessageConfiguration::MIDIMessageConfiguration() {
-    moduleID = new ModuleID("midiconfiguration", "mc", "MIDI message configuration 1.0", eModuleType::software);
+//    moduleID = new ModuleID("midiconfiguration", "mc", "MIDI message configuration 1.0", eModuleType::software);
     name = new String();
     setDefaultBaseParameters();
     setDefaultCCs();

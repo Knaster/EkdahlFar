@@ -4,21 +4,17 @@
 #include "harmonicserieshandler.hpp"
 
 const ModuleCommandDeclaration HarmonicSeriesHandler::moduleCommands[] = {
-    { "fundamental", "fu", "float", "Bow fundamental frequency, all harmonics are calculated from this number", false, true, &s_fundamental },
-    { "harmonic", "h", "int", "Bow motor speed in terms of a harmonic number. A ratio is taken from the given harmonic in the current harmonic list, the ratio is \
-        then multiplied by the bow fundamental frequency", false, false, &s_harmonic },
-    { "harmonicadd", "ha", "int", "Additative version of bowcontrolharmonic, the number is given is added to the harmonic given", false, false, &s_harmonicAdd },
-    { "harmonicbase", "hb", "int", "Same as bowcontrolharmonic but where the harmonic number is based on a MIDI note given by bowcontrolbasenote", false, false, &s_harmonicBase },
-    { "basenote", "bn", "0-127", "Sets the MIDI base note of the string, used in conjunction with bowcontrolharmonicbase", false, true, &s_baseNote },
-    { "shift", "sh", "-32767-32767", "Setting shift from the currently playing harmonic where 32767 equals the entire harmonic shift range shifted up", false, false, &s_shift },
-    { "shiftrange", "sr", "0-36", "Set the number of harmonic numbers that constitutes the entire harmonic shift", false, true, &s_shiftRange },
-    { "shift5", "sh5", "-32767-32767", "Setting shift from the currently playing harmonic over 5 octaves where 32767 equals 5 octaves shift up from the fundamental", false, false, &s_shift5 },
-
-//    { "harmonicseries", "hs", "int", "Get/set the current harmonic series", false, true, nullptr },
-//    { "bowharmonicseriessave", "bhss", "series:name", "Saves the current harmonic series in the slot given, or if the slot is out of range, creates a new one at the end of the list", false, false, nullptr },
-    { "add", "a", "(name):(ratios)", "Add a new series with the given name and parameters", false, false, &s_add },
-    { "remove", "rm", "series", "Remove the series given and shift any series accordingly. Cannot remove all series", false, false, &s_remove },
-    { "count", "c", "-", "Returns the number of harmonic series in the list and their IDs", false, false, &s_count },
+    { "fundamental", "fu", "float", "Bow fundamental frequency, all harmonics are calculated from this number", false, true, &s_fundamental, eCommandType::Hertz },
+    { "harmonic", "h", "int", "Bow motor speed in terms of a harmonic number. A ratio is taken from the given harmonic in the current harmonic list, the ratio is then multiplied by the bow fundamental frequency", false, false, &s_harmonic, eCommandType::SimpleUInt8 },
+    { "harmonicadd", "ha", "int", "Additative version of bowcontrolharmonic, the number is given is added to the harmonic given", false, false, &s_harmonicAdd, eCommandType::SimpleUInt8 },
+    { "harmonicbase", "hb", "int", "Same as bowcontrolharmonic but where the harmonic number is based on a MIDI note given by bowcontrolbasenote", false, false, &s_harmonicBase, eCommandType::SimpleUInt8 },
+    { "basenote", "bn", "0-127", "Sets the MIDI base note of the string, used in conjunction with bowcontrolharmonicbase", false, true, &s_baseNote, eCommandType::SimpleUInt8 },
+    { "shift", "sh", "-32767-32767", "Setting shift from the currently playing harmonic where 32767 equals the entire harmonic shift range shifted up", false, false, &s_shift, eCommandType::SimpleUInt16 },
+    { "shiftrange", "sr", "0-36", "Set the number of harmonic numbers that constitutes the entire harmonic shift", false, true, &s_shiftRange, eCommandType::SimpleUInt8 },
+    { "shift5", "sh5", "-32767-32767", "Setting shift from the currently playing harmonic over 5 octaves where 32767 equals 5 octaves shift up from the fundamental", false, false, &s_shift5, eCommandType::SimpleUInt16 },
+    { "add", "a", "(name):(ratios)", "Add a new series with the given name and parameters", false, false, &s_add, eCommandType::Data },
+    { "remove", "rm", "series", "Remove the series given and shift any series accordingly. Cannot remove all series", false, false, &s_remove, eCommandType::Remove },
+    { "count", "c", "-", "Returns the number of harmonic series in the list and their IDs", false, false, &s_count, eCommandType::Count },
 };
 
 getModuleCount(HarmonicSeriesHandler)
@@ -27,9 +23,10 @@ float equalSeries[12] = { 1, 1.059463094, 1.122462048, 1.189207115, 1.25992105, 
 float justSeries[12] = {1, 1.06667, 1.125, 1.2, 1.25, 1.3333, 1.40625, 1.5, 1.6, 1.66667, 1.8, 1.875 };
 
 HarmonicSeriesHandler::HarmonicSeriesHandler() {
-    moduleID = new ModuleID("harmonicserieshandler", "hsh", "Harmonic series handler", eModuleType::software);
+//    moduleID = new ModuleID("harmonicserieshandler", "hsh", "Harmonic series handler", eModuleType::software);
     HarmonicSeries tempSeries;
-    ModuleGroup *group = addGroup(tempSeries.moduleID);
+//    ModuleGroup *group = addGroup(tempSeries.moduleID);
+    ModuleGroup *group = addGroup(tempSeries.tmoduleID);
     group->mustHaveSelection = true;
     group->singleSelection = true;
     group->setIndexCallback(this, &s_harmonicSeriesIndexChanged);

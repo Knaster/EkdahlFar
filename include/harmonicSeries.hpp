@@ -25,9 +25,9 @@
 
 class HarmonicSeries : public Module {
 public:
-    MODULECOMMANDHANDLER
+    SETMODULEID("harmonicseries", "hs", "The list of ratios used in the current harmonic series", eModuleType::software, false)
 
-//    CREATE_DATACHANGED_CALLBACK_FWD(fDataChanged, HarmonicSeries)
+    MODULECOMMANDHANDLER
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(data, HarmonicSeries)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(name, HarmonicSeries)

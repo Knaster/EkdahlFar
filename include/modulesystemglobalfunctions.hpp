@@ -2,8 +2,6 @@
 #define MODULESYSTEMGLOBALFUNCTIONS_HPP
 
 static eProcessResult s_dir(ModuleCommand *self, ModuleCommandDeclarationArguments) {
-    //hidden/h:modules/m:commands/c:instances/i:instancecounts/ic:recursive/r
-
 //    debugPrintln("Called from " + ((Module*)(self))->moduleID->getLongName(), debugPrintType::Debug);
 
     bool hidden = false;
@@ -20,7 +18,7 @@ static eProcessResult s_dir(ModuleCommand *self, ModuleCommandDeclarationArgumen
         instances = false;
         instanceCount = true;
         recursive = true;
-        debugPrintln("Using default parameters", debugPrintType::Debug);
+//        debugPrintln("Using default parameters", debugPrintType::Debug);
     } else {
         for (int i = 0; i < inCommandItem->argument.size(); i++) {
             String arg = inCommandItem->argument[i];
@@ -34,9 +32,13 @@ static eProcessResult s_dir(ModuleCommand *self, ModuleCommandDeclarationArgumen
     }
 
     if (((Module*) self)->isGroupHandler) {
-        ((ModuleHandler*)self)->dir(inCommandResponses, ((Module*)(self))->moduleID->getLongName(), ((Module*)(self))->moduleID->getShortAlias(), hidden, modules, commands, instances, instanceCount, recursive);
+//        ((ModuleHandler*)self)->dir(inCommandResponses, ((Module*)(self))->moduleID->getLongName(), ((Module*)(self))->moduleID->getShortAlias(), hidden, modules, commands, instances, instanceCount, recursive);
+        ModuleHandler *mod = (Module*)(self);
+        ((ModuleHandler*)self)->dir(inCommandResponses, String(mod->getModuleID().longName), String(mod->getModuleID().shortAlias.c_str()), hidden, modules, commands, instances, instanceCount, recursive);
     } else {
-        ((Module*)self)->dir(inCommandResponses, ((Module*)(self))->moduleID->getLongName(), ((Module*)(self))->moduleID->getShortAlias(), hidden, modules, commands, instances, instanceCount, recursive);
+//        ((Module*)self)->dir(inCommandResponses, ((Module*)(self))->moduleID->getLongName(), ((Module*)(self))->moduleID->getShortAlias(), hidden, modules, commands, instances, instanceCount, recursive);
+        Module *mod = (Module*)(self);
+        ((Module*)self)->dir(inCommandResponses, String(mod->getModuleID().longName), String(mod->getModuleID().shortAlias.c_str()), hidden, modules, commands, instances, instanceCount, recursive);
     }
 
     return eProcessResult::Ok;
@@ -49,6 +51,18 @@ static eProcessResult s_dump(ModuleCommand *self, ModuleCommandDeclarationArgume
     } else {
         //*inCommandResponses = ((Module*)self)->dumpData();
         ((Module*)self)->dumpData(inCommandResponses);
+    }
+
+    return eProcessResult::Ok;
+}
+
+static eProcessResult s_help(ModuleCommand *self, ModuleCommandDeclarationArguments) {
+    if (((Module*) self)->isGroupHandler) {
+        ModuleHandler *mod = (Module*)(self);
+        ((ModuleHandler*)self)->help(inCommandResponses, String(mod->getModuleID().longName), String(mod->getModuleID().shortAlias.c_str()));
+    } else {
+        Module *mod = (Module*)(self);
+        ((Module*)self)->help(inCommandResponses, String(mod->getModuleID().longName), String(mod->getModuleID().shortAlias.c_str()));
     }
 
     return eProcessResult::Ok;

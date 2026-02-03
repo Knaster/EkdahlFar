@@ -26,6 +26,8 @@
 class ControlReader : public Module
 {
 public:
+    SETMODULEID("controlbox", "cb", "Control Box 1.0", eModuleType::hardware, false)
+
     MODULECOMMANDHANDLER
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(controlData, ControlReader)

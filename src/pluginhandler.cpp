@@ -4,20 +4,21 @@
 #include "pluginhandler.hpp"
 
 const ModuleCommandDeclaration PluginHandler::moduleCommands[] = {
-    { "add", "a", "plugin", "Add plugin with the given name", false, false, &s_add },
-    { "remove", "rm", "plugin:index", "Remove plugin with the given name and index", false, false, nullptr },
-    { "count", "c", "(plugin)", "Return the number of plugins of the given type, if none given returns all", false, false, nullptr },
+    { "add", "a", "plugin", "Add plugin with the given name", false, false, &s_add, eCommandType::Add },
+    { "remove", "rm", "plugin:index", "Remove plugin with the given name and index", false, false, &s_remove, eCommandType::Remove },
+    { "count", "c", "(plugin)", "Return the number of plugins of the given type, if none given returns all", false, false, nullptr, eCommandType::Count },
 };
 
 getModuleCount(PluginHandler)
 
 PluginHandler::PluginHandler()
 {
-    moduleID = new ModuleID("pluginhandler", "ph", "Plugin handler v1.0", eModuleType::software);
+//    moduleID = new ModuleID("pluginhandler", "ph", "Plugin handler v1.0", eModuleType::software);
     //addGroup(ModuleID("numbermap", "nm", "Number mapper v1.0", eModuleType::software, false));
     #define plugs PluginFactory::instance().plugins[i].tmoduleID
     for (int i = 0; i < PluginFactory::instance().plugins.size(); i++) {
-        addGroup(ModuleID(plugs.longName, plugs.shortName, plugs.description, plugs.moduleType, plugs.isGroupHandler));
+//        addGroup(ModuleID(plugs.longName, plugs.shortName, plugs.description, plugs.moduleType, plugs.isGroupHandler));
+        addGroup(plugs);
     }
 }
 
@@ -31,6 +32,20 @@ CREATE_MODULE_COMMAND_FUNCTION(add, PluginHandler) {
 }
 
 CREATE_MODULE_COMMAND_FUNCTION(remove, PluginHandler) {
+    if (request) {
+        return eProcessResult::Ok;
+    }
+    if (!checkArguments(inCommandItem, inCommandResponses, 2)) { return eProcessResult::WrongArgumentCount; }
+    ModuleGroup *group = getGroup(inCommandItem->argument[0]);
+    if (group == nullptr) {
+        debugPrintln("Group not found: " + inCommandItem->argument[0], debugPrintType::Error);
+        return eProcessResult::WrongArgumentValue;
+    }
+    if (!group->removeModule(inCommandItem->argument[1].toInt())) {
+        debugPrintln("Module not found: "  + inCommandItem->argument[1], debugPrintType::Error);
+        return eProcessResult::WrongArgumentValue;
+    }
+    inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::Debug });
     return eProcessResult::Ok;
 }
 
@@ -49,9 +64,10 @@ void PluginHandler::update() {
 
 bool PluginHandler::addPlugin(String name) {
     for (int i = 0; i< moduleGroups.size(); i++) {
-        if ((moduleGroups[i].moduleID->getLongName() == name) || (moduleGroups[i].moduleID->getShortName() == name)) {
+//        if ((moduleGroups[i].moduleID->getLongName() == name) || (moduleGroups[i].moduleID->getShortName() == name)) {
+        if ((String(moduleGroups[i].tmoduleID.longName) == name) || (String(moduleGroups[i].tmoduleID.shortName) == name)) {
             int index = moduleGroups[i].modules.size();
-            std::unique_ptr<Plugin> plugin = PluginFactory::instance().create(name);
+            std::unique_ptr<Plugin> plugin = PluginFactory::instance().create(moduleGroups[i].tmoduleID.longName);
 
             if (!plugin) {
                 debugPrintln("Failed at creating plugin", debugPrintType::Error);
@@ -87,16 +103,5 @@ void PluginHandler::addInstances(String name, uint8_t count) {
         addPlugin(name);
     }
 };
-
-/*
-void dumpData(std::vector inCommandResponse) {
-    for (int i = 0; i < moduleGroups.size(); i++) {
-        for (int j = 0; j < moduleGroups[i].modules.size; j++) {
-            debugPrintln()
-        }
-    }
-    ModuleHandler::dumpData(inCommandResponse);
-}
-*/
 
 #endif

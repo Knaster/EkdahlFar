@@ -6,28 +6,29 @@
 #include <cmath>
 
 const ModuleCommandDeclaration Plugin_AHDSR::moduleCommands[] = {
-    { "enable", "en", "1|0", "Will enable or disable the output of the target commands", false, true, &s_enable },
-    { "target", "tg", "commandlist*", "Sets the command string to execute each iteration, the string 'lfoout' will be replaced with the current value", false, true, &s_target },
-    { "updaterate", "ur", "mS", "Sets the frequency with which the target commands are executed. Limited by the global maximum as set in the plugin handler", false, true, &s_updaterate },
-
-    { "gate", "gt", "0|1", "Gate signal, '1' initiates the attack phase and if it reaches its maximum value, continues through the decay down to the sustain point. \
-        A '0' initiates the release from whatever point the ADSR is at.", false, true, &s_gate },
-    { "attack", "at", "mS", "Attack time in mS", false, true, &s_attack },
-    { "hold", "hd", "mS", "Hold time in mS", false, true, &s_hold },
-    { "decay", "dc", "mS", "Delay time in mS", false, true, &s_decay },
-    { "sustain", "su", "mS", "Sustain point", false, true, &s_sustain },
-    { "release", "re", "mS", "Release time in mS", false, true, &s_release },
-    { "releasetarget", "rr", "commands", "Commands to execute once the release has hit zero", false, true, &s_releasetarget },
-    { "amplitude", "amp", "0-65535", "Output amplitude", false, true, &s_amplitude },
-    { "invert", "inv", "1|0", "Inverts the results and gives negative values", false, true, nullptr }
+    { "name", "na", "name", "Sets the LFO name", false, true, &s_name, eCommandType::Name },
+    { "enable", "en", "1|0", "Will enable or disable the output of the target commands", false, true, &s_enable, eCommandType::SimpleBool },
+    { "target", "tg", "commandlist*", "Sets the command string to execute each iteration, the string [ahdsrout] will be replaced with the current value", false, true, &s_target, eCommandType::OutputAssignment },
+    { "updaterate", "ur", "mS", "Sets the frequency with which the target commands are executed. Limited by the global maximum as set in the plugin handler", false, true, &s_updaterate, eCommandType::Milliseconds },
+    { "gate", "gt", "0|1", "Gate signal, [1] initiates the attack phase and if it reaches its maximum value, continues through the decay down to the sustain point. A [0] initiates the release from whatever point the ADSR is at.", false, true, &s_gate, eCommandType::SimpleBool },
+    { "attack", "at", "mS", "Attack time in mS", false, true, &s_attack, eCommandType::Milliseconds },
+    { "hold", "hd", "mS", "Hold time in mS", false, true, &s_hold, eCommandType::Milliseconds },
+    { "decay", "dc", "mS", "Delay time in mS", false, true, &s_decay, eCommandType::Milliseconds },
+    { "sustain", "su", "mS", "Sustain point", false, true, &s_sustain, eCommandType::SimpleUInt16 },
+    { "release", "re", "mS", "Release time in mS", false, true, &s_release, eCommandType::Milliseconds },
+    { "releasetarget", "rt", "commands", "Commands to execute once the release has hit zero", false, true, &s_releasetarget, eCommandType::OutputAssignment },
+    { "amplitude", "amp", "0-65535", "Output amplitude", false, true, &s_amplitude, eCommandType::SimpleUInt16 },
+    { "invert", "inv", "1|0", "Inverts the results and gives negative values", false, true, nullptr, eCommandType::SimpleBool }
 };
 
 getModuleCount(Plugin_AHDSR)
 
 Plugin_AHDSR::Plugin_AHDSR() {
-    moduleID = new ModuleID("ahdsr", "ahdsr", "Basic software AHDSR v1.0", eModuleType::software, false);
+//    moduleID = new ModuleID("ahdsr", "ahdsr", "Basic software AHDSR v1.0", eModuleType::software, false);
     recalculateRates();
 }
+
+CREATE_GETSET_FUNCTION(name, Plugin_AHDSR, pName)
 
 CREATE_MODULE_COMMAND_FUNCTION(enable, Plugin_AHDSR) {
     if (!request) {

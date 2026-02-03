@@ -5,6 +5,10 @@ class Module : public ModuleCommand
 {
 public:
     Module();
+
+    virtual const tModuleID& getModuleID() const = 0;
+    virtual tModuleID& getModuleID() = 0;
+
 private:
     static ModuleCommandDeclaration builtinCommands[];
 
@@ -17,9 +21,7 @@ private:
         return builtinCommands[i];
     }
 public:
-//    virtual CREATE_MODULE_COMMAND_FUNCTION_FWD(dir, Module)
-
-    const ModuleID *moduleID;
+//    const ModuleID *moduleID;
 
     virtual eProcessResult processBuiltInCommands(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false);
 
@@ -35,9 +37,7 @@ public:
     virtual int getModuleCommandCount();
 
     virtual void dumpData(std::vector<commandResponse> *dataDump);  // Returns dump data directly as string
-
-//    void setDataChangedCallback(Module *inOwner, void (*inCallback)(Module *owner, Module *module));
-
+    virtual void help(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix);
     bool isGroupHandler = false;
 private:
     bool pDataChange = false;
@@ -45,7 +45,6 @@ public:
     bool hasDataChange();
 protected:
     Module *owner = nullptr;
-//    bool (*dataChangedCallback)(Module *owner, Module *module) = nullptr;
 
     void setDataChanged() { pDataChange = true; }
 };

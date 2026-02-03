@@ -13,6 +13,58 @@ public:
     virtual const ModuleCommandDeclaration getModuleCommand(uint8_t i) const = 0;
 };
 
+enum eCommandType {
+    SimpleString = 0,
+    SimpleBool = 1,
+    SimpleFloat = 2,
+    SimpleUInt8 = 3,
+    SimpleInt16 = 4,
+    SimpleUInt16 = 5,
+    Commands = 6,
+    Data = 7,
+    Conditional = 8,
+    ReturnOnly = 9,
+    Immediate = 10,
+    Expression = 11,
+    Add = 12,
+    Remove = 13,
+    Count = 14,
+    Name = 15,
+    Index = 16,
+    Milliseconds = 17,
+    Microseconds = 18,
+    Hertz = 19,
+    RequestOnly = 20,
+    ReturnRequest = 21,
+    OutputAssignment = 22
+};
+
+String commandTypeDescription[23] = {
+    "string",
+    "bool",
+    "float",
+    "uint8",
+    "int16",
+    "uint16",
+    "commands",
+    "data",
+    "conditional",
+    "returnonly",
+    "immediate",
+    "expression",
+    "add",
+    "remove",
+    "count",
+    "name",
+    "index",
+    "milliseconds",
+    "microseconds",
+    "hertz",
+    "requestonly",
+    "returnrequest",
+    "outputassignment"
+};
+
 struct ModuleCommandDeclaration {
     const String longCommand;
     const String shortCommand;
@@ -21,7 +73,7 @@ struct ModuleCommandDeclaration {
     const bool hidden;
     const bool save;
     eProcessResult (*commandFunction) (ModuleCommand*, ModuleCommandDeclarationArguments);
-//    eProcessResult (*commandFunction) (Module*, ModuleCommandDeclarationArguments);
+    const eCommandType cType;
 };
 
 enum eModuleType {
@@ -36,56 +88,23 @@ struct tModuleID {
     const char* longName;
     const char* shortName;
     const char* description;
-    eModuleType moduleType = 0;
+    const eModuleType moduleType = 0;
     bool isGroupHandler = false;
     std::string shortAlias;
 };
 
-class ModuleID {
-public:
-    bool isGroupHandler = false;
+const String moduleTypeDescription[3] = { "Software", "Hardware", "Remote" };
 
-    const String moduleTypeDescription[3] = { "Software", "Hardware", "Remote" };
-
-    ModuleID(String inLongName, String inShortName, String inDescriptor, eModuleType inModuleType, bool inGroupHandler = false) {
-        longName = inLongName;
-        shortName = inShortName;
-        shortAlias = inShortName;
-        descriptor = inDescriptor;
-        moduleType = inModuleType;
-        isGroupHandler = inGroupHandler;
-    }
-
-    ModuleID(ModuleID *inModuleID) {
-        longName = inModuleID->longName;
-        shortName = inModuleID->shortName;
-        shortAlias = inModuleID->shortAlias;
-        descriptor = inModuleID->descriptor;
-        moduleType = inModuleID->moduleType;
-    }
-
-    String getLongName() { return longName; }
-    String getShortName() { return shortName; }
-    String getShortAlias() { return shortAlias; }
-    String getDescriptor() { return descriptor; }
-    String getModuleType() { return moduleType; }
-    String getModuleTypeS() { return moduleTypeDescription[moduleType]; }
-
-
-protected:
-    void setAlias(String inAlias) {
-        shortAlias = inAlias;
-    }
-
-private:
-    String longName, shortName, shortAlias, descriptor;
-    eModuleType moduleType = 0;
-};
+String getModuleType(uint8_t mType) {
+    if ((mType > sizeof(moduleTypeDescription)) || (mType < 0)) { return ""; }
+    return moduleTypeDescription[mType];
+}
 
 #include "module.hpp"
 
 static eProcessResult s_dir(ModuleCommand* self, ModuleCommandDeclarationArguments);
 static eProcessResult s_dump(ModuleCommand* self, ModuleCommandDeclarationArguments);
+static eProcessResult s_help(ModuleCommand* self, ModuleCommandDeclarationArguments);
 
 #define staticCopy(name, className) \
     static eProcessResult s_##name(ModuleCommand* self, ModuleCommandDeclarationArguments) { return static_cast<className*>(self)->name(inCommandItem, inCommandResponses, request, thisItem); }

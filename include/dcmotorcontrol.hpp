@@ -8,6 +8,8 @@
 #define DCDCUPPERBOUND 9
 class DCMotorControl : public Module {
 public:
+    SETMODULEID("dcmotor", "dcm", "DC Motor controller v1.0", eModuleType::hardware, false)
+
     MODULECOMMANDHANDLER
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(run, DCMotorControl)

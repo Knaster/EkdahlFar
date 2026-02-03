@@ -25,13 +25,15 @@
 
 class BowActuator : public Module {
 public:
+    SETMODULEID("actuator", "ac", "Actuator data handler", eModuleType::software, false)
+
     MODULECOMMANDHANDLER
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(name, BowActuator)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(data, BowActuator)
 
     BowActuator() {
-        moduleID = new ModuleID("actuator", "ac", "actuator data", eModuleType::software);
+//        moduleID = new ModuleID("actuator", "ac", "actuator data", eModuleType::software);
     }
 
     uint16_t firstTouchPressure = 2000;
@@ -41,9 +43,9 @@ public:
 };
 
 const ModuleCommandDeclaration BowActuator::moduleCommands[] = {
-    { "", "", "int", "Sets the current actuator", false, false, nullptr },
-    { "name", "na", "string", "Get / set the name of the current actuator", false, false, &s_name  },
-    { "data", "da", "name:rest:engage:stall", "Set actuator data", false, true, &s_data }
+    { "", "", "int", "Sets the current actuator", false, false, nullptr, eCommandType::Index },
+    { "name", "na", "string", "Get / set the name of the current actuator", false, false, &s_name, eCommandType::Name  },
+    { "data", "da", "name:rest:engage:stall", "Set actuator data", false, true, &s_data, eCommandType::Data }
 };
 
 CREATE_MODULE_COMMAND_FUNCTION(name, BowActuator) {
@@ -72,6 +74,8 @@ getModuleCount(BowActuator)
 class BowActuators : public ModuleHandler
 {
 public:
+    SETMODULEID("actuatorhandler", "ah", "Bow actuator handler", eModuleType::software, false)
+
     MODULECOMMANDHANDLER
 
     CREATE_INDEX_CALLBACK_FWD(actuatorIndexChanged, BowActuators);

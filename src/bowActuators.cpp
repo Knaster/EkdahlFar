@@ -28,19 +28,20 @@
 
 
 const ModuleCommandDeclaration BowActuators::moduleCommands[] = {
-    { "add", "a", "(name):(rest:engage:stall)", "Add new actuator with the given name and parameters", false, false, &s_add},
-    { "remove", "rm", "actuator", "Remove bow actuator", false, false, &s_remove},
-    { "count", "c", "-", "Returns the amount of saved bow actuators", false, false, &s_count},
+    { "add", "a", "(name):(rest:engage:stall)", "Add new actuator with the given name and parameters", false, false, &s_add, eCommandType::Add},
+    { "remove", "rm", "actuator", "Remove bow actuator", false, false, &s_remove, eCommandType::Remove},
+    { "count", "c", "-", "Returns the amount of saved bow actuators", false, false, &s_count, eCommandType::Count},
 };
 
 getModuleCount(BowActuators)
 
 BowActuators::BowActuators()
 {
-    moduleID = new ModuleID("actuatorhandler", "ah", "Bow actuator handler", eModuleType::software);
+//    moduleID = new ModuleID("actuatorhandler", "ah", "Bow actuator handler", eModuleType::software);
 
     BowActuator ba;
-    ModuleGroup *group = addGroup(ba.moduleID);
+//    ModuleGroup *group = addGroup(ba.moduleID);
+    ModuleGroup *group = addGroup(ba.tmoduleID);
     addBowActuator();
     group->mustHaveSelection = true;
     group->singleSelection = true;

@@ -6,25 +6,22 @@
 #include "pluginhandler.cpp"
 
 const ModuleCommandDeclaration BaseModule::moduleCommands[] = {
-    { "requestinfo", "rqi", "command", "Retrives rather than sets data associated with a command, if applicable", false, false, &s_requestInfo  },
-    { "debugprint", "dp", "command|usb|hardware|undefined|priority|error|inforequest|expressionparser|debug:1|0", "Turns on or off serial feedback for the given item", false, true, &s_debugPrint},
-    { "version", "ver", "-", "Gets the current firmware version", false, true, &s_version},
-    { "saveallparameters", "sap", "-", "Saves all avaliable parameters", false, false, &s_saveAllParameters},
-    { "loadallparameters", "lap", "-", "Loads all avaliable parameters", false, false, &s_loadAllParameters},
-    { "resetallparameters", "rap", "-", "Resets all saved parameters", false, false, &s_resetAllParameters},
-    { "uservariable", "uv", "variable(0-9):value", "Set user variable 0-9 to value", false, false, &s_userVariables},
-    { "expressionparserevaluate", "epev", "expression", "Evaluates an arithmetric expression and sends back the output", false, false, &s_expressionParserEvaluate},
-    { "ifequal", "ife", "variable:comparator:truecommandstring:elsecommandstring", "Performs 'IF [variable] EQUALS [comparator]' and adds [truecommandstring] to the \
-        que if TRUE, otherwise adds [elsecommandstring]", false, false, &s_ifEqual},
-    { "ifgreater", "ifg", "variable:comparator:truecommandstring:elsecommandstring", "Performs 'IF [variable] > [comparator]' and adds [truecommandstring] to the \
-        que if TRUE, otherwise adds [elsecommandstring]", false, false, &s_ifGreater},
-    { "ifless", "ifl", "variable:comparator:truecommandstring:elsecommandstring", "Performs 'IF [variable] < [comparator]' and adds [truecommandstring] to the \
-        que if TRUE, otherwise adds [elsecommandstring]", false, false, &s_ifLess},
-    { "reset", "rst", "0|1", "Resets the Ekdahl FAR, conditional", false, false, &s_reset},
-    { "nick", "nick", "string", "Sets the nickname of this unit" , false, true, &s_nick},
-    { "nooperation", "nop", "-", "Do absolutely, positively, nothing", false, false, &s_noOperation },
-    { "freeram", "free", "-", "Shows free RAM memory", false, false, &s_freeRAM },
-    { "test", "test", "-", "-", false, false, &s_test}
+    { "requestinfo", "rqi", "command", "Retrives rather than sets data associated with a command, if applicable", false, false, &s_requestInfo, eCommandType::Commands  },
+    { "debugprint", "dp", "command|usb|hardware|undefined|priority|error|inforequest|expressionparser|debug:1|0", "Turns on or off serial feedback for the given item", false, true, &s_debugPrint, eCommandType::Data},
+    { "version", "ver", "-", "Gets the current firmware version", false, true, &s_version, eCommandType::Data},
+    { "saveallparameters", "sap", "-", "Saves all avaliable parameters", false, false, &s_saveAllParameters, eCommandType::Immediate},
+    { "loadallparameters", "lap", "-", "Loads all avaliable parameters", false, false, &s_loadAllParameters, eCommandType::Immediate},
+    { "resetallparameters", "rap", "-", "Resets all saved parameters", false, false, &s_resetAllParameters, eCommandType::Immediate},
+    { "uservariable", "uv", "variable(0-9):value", "Set user variable 0-9 to value", false, false, &s_userVariables, eCommandType::Data},
+    { "expressionparserevaluate", "epev", "expression", "Evaluates an arithmetric expression and sends back the output", false, false, &s_expressionParserEvaluate, eCommandType::Expression},
+    { "ifequal", "ife", "variable:comparator:truecommandstring:elsecommandstring", "Performs [IF [variable] EQUALS [comparator]] and adds [truecommandstring] to the que if TRUE, otherwise adds [elsecommandstring]", false, false, &s_ifEqual, eCommandType::Data},
+    { "ifgreater", "ifg", "variable:comparator:truecommandstring:elsecommandstring", "Performs [IF [variable] > [comparator]] and adds [truecommandstring] to the que if TRUE, otherwise adds [elsecommandstring]", false, false, &s_ifGreater, eCommandType::Data},
+    { "ifless", "ifl", "variable:comparator:truecommandstring:elsecommandstring", "Performs [IF [variable] < [comparator]] and adds [truecommandstring] to the que if TRUE, otherwise adds [elsecommandstring]", false, false, &s_ifLess, eCommandType::Data},
+    { "reset", "rst", "0|1", "Resets the Ekdahl FAR, conditional", false, false, &s_reset, eCommandType::Conditional},
+    { "nick", "nick", "string", "Sets the nickname of this unit" , false, true, &s_nick, eCommandType::SimpleString},
+    { "nooperation", "nop", "-", "Do absolutely, positively, nothing", false, false, &s_noOperation, eCommandType::Immediate },
+    { "freeram", "free", "-", "Shows free RAM memory", false, false, &s_freeRAM, eCommandType::Immediate },
+    { "test", "test", "-", "-", false, false, &s_test, eCommandType::Data}
 };
 
 getModuleCount(BaseModule)
@@ -33,12 +30,15 @@ BaseModule::BaseModule(Module *inModule)
 {
     if (inModule != nullptr) {
         mainModule = inModule;
-        moduleID = inModule->moduleID;
+//        moduleID = inModule->moduleID;
+        tmoduleID = &(inModule->getModuleID());
 
         pluginHandler = new PluginHandler();
         mainModule->addModule(pluginHandler);
     } else {
-        moduleID = new ModuleID("unknown", "unknown", "unknown", 0);
+        //moduleID = new ModuleID("unknown", "unknown", "unknown", 0);
+        tmoduleID = &defaultModuleID;
+        debugPrintln("Base tModuleID is NULL, errors are going to ensue", debugPrintType::Error);
     }
 }
 
@@ -295,13 +295,23 @@ eProcessResult BaseModule::processCommands(commandItem *inCommandItem, std::vect
 void BaseModule::dir(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix, bool hidden, bool inModules, bool commands, bool instances, bool instanceCount, bool recursive) {
     //debugPrintln("Base dir", debugPrintType::Debug);
     Module::dir(inCommandResponses, longPrefix, shortPrefix, hidden, inModules, commands, instances, instanceCount, recursive);
-    mainModule->dir(inCommandResponses, longPrefix, shortPrefix, hidden, inModules, commands, instances, instanceCount, recursive);
+    if (mainModule != nullptr) {
+        mainModule->dir(inCommandResponses, longPrefix, shortPrefix, hidden, inModules, commands, instances, instanceCount, recursive);
+    }
 }
 
 void BaseModule::dumpData(std::vector<commandResponse> *dataDump) {
     Module::dumpData(dataDump);
     if (mainModule != nullptr) {
         mainModule->dumpData(dataDump);
+    }
+}
+
+void BaseModule::help(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix) {
+//    debugPrintln("hlepp", debugPrintType::Debug);
+    Module::help(inCommandResponses, longPrefix, shortPrefix);
+    if (mainModule != nullptr) {
+        mainModule->help(inCommandResponses, longPrefix, shortPrefix);
     }
 }
 

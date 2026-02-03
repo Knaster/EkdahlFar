@@ -9,17 +9,28 @@ ModuleGroup::ModuleGroup(Module *inModule)
     moduleID = new ModuleID(inModule->moduleID);
     addModule(inModule);
 }*/
-
+/*
 ModuleGroup::ModuleGroup(ModuleID inModuleID) {
-    moduleID = new ModuleID(inModuleID);
+//    moduleID = new ModuleID(inModuleID);
+}
+*/
+ModuleGroup::ModuleGroup(tModuleID inModuleID) {
+    //tmoduleID = &inModuleID;
+    tmoduleID.description = inModuleID.description;
+    tmoduleID.longName = inModuleID.longName;
+    tmoduleID.shortName = inModuleID.shortName;
+    tmoduleID.isGroupHandler = inModuleID.isGroupHandler;
+    tmoduleID.shortAlias = inModuleID.shortAlias;
 }
 
 ModuleGroup::~ModuleGroup() { }
 
 void ModuleGroup::dir(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix, bool hidden, bool inModules, bool commands, bool instances, bool instanceCount, bool recursive) {
     if (modules.size() == 0) {
+//        debugPrintln("Dir empty module group", debugPrintType::Debug);
         if (inModules) {
-            inCommandResponses->push_back({ "dir: " + longPrefix + "[0] : " + shortPrefix + "[0] : " + String(modules.size()) + " : " + moduleID->getModuleTypeS(), debugPrintType::InfoRequest });
+//            inCommandResponses->push_back({ "dir: " + longPrefix + "[0] : " + shortPrefix + "[0] : " + String(modules.size()) + " : " + moduleID->getModuleTypeS(), debugPrintType::InfoRequest });
+            inCommandResponses->push_back({ "ls: " + longPrefix + "[0] : " + shortPrefix + "[0] : " + String(modules.size()) + " : " + getModuleType(tmoduleID.moduleType), debugPrintType::InfoRequest });
         }
         return;
     }
@@ -27,21 +38,38 @@ void ModuleGroup::dir(std::vector<commandResponse> *inCommandResponses, String l
     if (recursive) {
         if (!instances) {
             if (inModules) {
-                inCommandResponses->push_back({ "dir: " + longPrefix + "[0] : " + shortPrefix + "[0] : " + String(modules.size()) + " : " + moduleID->getModuleTypeS(), debugPrintType::InfoRequest });
+//                debugPrintln("Dir module group " + String(tmoduleID.longName) + " commands", debugPrintType::Debug);
+//                inCommandResponses->push_back({ "dir: " + longPrefix + "[0] : " + shortPrefix + "[0] : " + String(modules.size()) + " : " + moduleID->getModuleTypeS(), debugPrintType::InfoRequest });
+                inCommandResponses->push_back({ "ls: " + longPrefix + "[0] : " + shortPrefix + "[0] : " + String(modules.size()) + " : " + getModuleType(tmoduleID.moduleType), debugPrintType::InfoRequest });
             }
             modules[0]->dir(inCommandResponses, longPrefix, shortPrefix, hidden, inModules, commands, instances, instanceCount, recursive);
         } else {
-//            debugPrintln("instances", debugPrintType::Debug);
+//            debugPrintln("Dir module group instances", debugPrintType::Debug);
             for (int i = 0; i < modules.size(); i++) {
                 String index = "[" + String (i) + "]";
                 if (inModules) {
-                    inCommandResponses->push_back({ "dir: " + longPrefix + index + " : " + shortPrefix + index + " : " + String(modules.size()) + " : " + moduleID->getModuleTypeS(), debugPrintType::InfoRequest });
+//                    inCommandResponses->push_back({ "dir: " + longPrefix + index + " : " + shortPrefix + index + " : " + String(modules.size()) + " : " + moduleID->getModuleTypeS(), debugPrintType::InfoRequest });
+                    inCommandResponses->push_back({ "ls: " + longPrefix + index + " : " + shortPrefix + index + " : " + String(modules.size()) + " : " + getModuleType(tmoduleID.moduleType), debugPrintType::InfoRequest });
                 }
                 modules[i]->dir(inCommandResponses, longPrefix + index, shortPrefix + index, hidden, inModules, commands, instances, instanceCount, recursive);
             }
         }
 
     }
+}
+
+void ModuleGroup::help(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix) {
+    if (modules.size() == 0) {
+        debugPrintln("Help: empty module group", debugPrintType::Debug);
+//        inCommandResponses->push_back({ "ls: " + longPrefix + "[0] : " + shortPrefix + "[0] : " + String(modules.size()) + " : " + getModuleType(tmoduleID.moduleType), debugPrintType::InfoRequest });
+        return;
+    }
+
+//            debugPrintln("Dir module group instances", debugPrintType::Debug);
+//        if (inModules) {
+//            inCommandResponses->push_back({ "ls: " + longPrefix + index + " : " + shortPrefix + index + " : " + String(modules.size()) + " : " + getModuleType(tmoduleID.moduleType), debugPrintType::InfoRequest });
+//        }
+     modules[0]->help(inCommandResponses, longPrefix, shortPrefix);
 }
 
 void ModuleGroup::dumpData(std::vector<commandResponse> *inCommandResponses) {
@@ -51,7 +79,8 @@ void ModuleGroup::dumpData(std::vector<commandResponse> *inCommandResponses) {
     for (int i = 0; i < modules.size(); i++) {
         modules[i]->dumpData(&outDataDump);
         for (int j = 0; j < outDataDump.size(); j++) {
-            out = modules[i]->moduleID->getShortAlias();
+//            out = modules[i]->moduleID->getShortAlias();
+            out = String(modules[i]->getModuleID().shortAlias.c_str());
             if (modules.size() > 1) { out += "[" + String(i) + "]"; }
             out += "." + outDataDump[j].response;
             inCommandResponses->push_back({ out, outDataDump[j].responseType });
@@ -90,10 +119,11 @@ eProcessResult ModuleGroup::processCommands(commandItem *inCommandItem, std::vec
 //            debugPrintln("In module " + String(item), debugPrintType::Debug);
             eProcessResult result = modules[item]->processCommands(inCommandItem, &childReturn, request);
 
-            returnString = moduleID->getShortAlias();
-            if (modules.size() > 1) {
+            //returnString = moduleID->getShortAlias();
+            returnString = tmoduleID.shortAlias.c_str();
+            //if (modules.size() > 1) {
                     returnString += "[" + String(localSel[i]) + "]";
-            }
+            //}
             returnString += ".";
             for (int j = 0; j < childReturn.size(); j++) {
                 commandResponses->push_back({ returnString + childReturn[j].response, childReturn[j].responseType });
@@ -102,7 +132,8 @@ eProcessResult ModuleGroup::processCommands(commandItem *inCommandItem, std::vec
                 return result;
             }
         } else {
-            debugPrintln("Index " + String(item) + " out of bounds for module group " + moduleID->getLongName() + " (size is " + String(modules.size()) + ")", debugPrintType::Error);
+//            debugPrintln("Index " + String(item) + " out of bounds for module group " + moduleID->getLongName() + " (size is " + String(modules.size()) + ")", debugPrintType::Error);
+            debugPrintln("Index " + String(item) + " out of bounds for module group " + tmoduleID.longName + " (size is " + String(modules.size()) + ")", debugPrintType::Error);
         }
     }
     return eProcessResult::Ok;

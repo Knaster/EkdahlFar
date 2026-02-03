@@ -15,24 +15,29 @@ public:
     MODULECOMMANDHANDLER
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(name, Plugin_Map)
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(target, Plugin_Map)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(data, Plugin_Map)
-    CREATE_MODULE_COMMAND_FUNCTION_FWD(count, Plugin_Map)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(remove, Plugin_Map)
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(scale, Plugin_Map)
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(trigger, Plugin_Map)
 
     Plugin_Map();
-/*
-    eProcessResult setData(commandItem inCommandItem) override;
-    eProcessResult getData() override;
-*/
-    double mapExpression(double index, double input);
 
+    double mapExpression(uint8_t input);
     static double s_mapExpression(double index, double input);
-    double output;
+
+    bool updateManual(int16_t index = -1);
+    void update() override {};
 protected:
 
 private:
-    std::map<float, float> mapData;
-    String pluginName;
+    String pName;
+    String pTarget;
+    String pLastOutput;
+    uint16_t pScale = 65535;
+    int16_t pLastIndex = -1;
+
+    std::map<uint8_t, float> mapData;
 };
 
 REGISTERPLUGIN(Plugin_Map)

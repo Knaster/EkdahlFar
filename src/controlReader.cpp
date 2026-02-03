@@ -30,13 +30,13 @@ void ISR_AdsDataReady2() {
 }
 
 const ModuleCommandDeclaration ControlReader::moduleCommands[] = {
-  { "controldata", "cda", "channel:command string", "Sets the command string invoked when the value on ADC channel [channel] changes", false, true, &s_controlData},
-  { "controldefaults", "cde", "-" "Reverts all ADC command strings to default values", false, false, &s_controlDefaults },
-  { "datareturn", "dr", "channel:value", "Sent when a new value is presented on one of the ADC channels, cannot be invoked", false, false, &s_dataReturn },
-  { "adcsettings", "ads", "channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout", "Explain ADC settings here", false, true, &s_adcSettings },
-  { "testadclatency", "tal", "0-65535", "Test ADC Latency", true, false, &s_testADCLatency },
-  { "testadclatencyreturn", "talr", "-", "Return from test", true, false, &s_testADCLatencyReturn },
-  { "testadcminmax", "tix", "channel", "Measure min/max value for a given channel and resets the counter", true, false, &s_testADCMinMax }
+  { "controldata", "cda", "channel:command string", "Sets the command string invoked when the value on ADC channel [channel] changes", false, true, &s_controlData, eCommandType::OutputAssignment},
+  { "controldefaults", "cde", "-", "Reverts all ADC command strings to default values", false, false, &s_controlDefaults, eCommandType::Immediate },
+  { "datareturn", "dr", "channel:value", "Sent when a new value is presented on one of the ADC channels, cannot be invoked", false, false, &s_dataReturn, eCommandType::ReturnRequest },
+  { "adcsettings", "ads", "channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout", "Explain ADC settings here", false, true, &s_adcSettings, eCommandType::Data },
+  { "testadclatency", "tal", "0-65535", "Test ADC Latency", true, false, &s_testADCLatency, eCommandType::Immediate },
+  { "testadclatencyreturn", "talr", "-", "Return from test", true, false, &s_testADCLatencyReturn, eCommandType::ReturnOnly },
+  { "testadcminmax", "tix", "channel", "Measure min/max value for a given channel and resets the counter", true, false, &s_testADCMinMax, eCommandType::Immediate }
 };
 
 #define DATARETURN_CMD 2
@@ -45,7 +45,7 @@ getModuleCount(ControlReader)
 
 ControlReader::ControlReader(uint8_t inDataReadyPin, uint8_t inGatePin)
 {
-    moduleID = new ModuleID("controlbox", "cb", "Control Box 1.0", eModuleType::hardware);
+//    moduleID = new ModuleID("controlbox", "cb", "Control Box 1.0", eModuleType::hardware);
 
     setDefaults();
 

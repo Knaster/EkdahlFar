@@ -8,12 +8,12 @@ class ModuleHandler : public Module
     public:
         ModuleHandler();
 
-//        CREATE_MODULE_COMMAND_FUNCTION_FWD(groupdir, ModuleHandler);
-
         eProcessResult processCommands(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false) override;
         eProcessResult processModuleHandlerCommands(commandItem *inCommandItem, std::vector<commandResponse> *commandResponse, bool request = false);
 
         void dir(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix, bool hidden, bool modules, bool commands, bool instances, bool instanceCount, bool recursive) override;
+
+        void help(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix);
 
         std::vector<ModuleGroup> moduleGroups;
 
@@ -22,7 +22,8 @@ class ModuleHandler : public Module
         void dumpData(std::vector<commandResponse> *dataDump);
 
         ModuleGroup* addModule(Module *module);
-        ModuleGroup* addGroup(ModuleID inModuleID);
+//        ModuleGroup* addGroup(ModuleID inModuleID);
+        ModuleGroup* addGroup(tModuleID inModuleID);
         virtual void addInstances(String name, uint8_t count) {};
     protected:
     private:

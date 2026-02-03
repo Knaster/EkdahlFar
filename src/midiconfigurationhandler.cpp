@@ -4,20 +4,20 @@
 #include "midiconfigurationhandler.hpp"
 
 const ModuleCommandDeclaration MIDIConfigurationHandler::moduleCommands[] = {
-    { "allnotesoff", "ano", "1|0", "Clear the entire buffer of MIDI notes held", false, false, nullptr },
-    { "add", "a", "(name):(event:commands)*", "Adds a new MIDI configuration with the given name, events and command strings", false, false, &s_addConfiguration },   //
-    { "remove", "rm", "int", "Remove the specified MIDI configuration", false,  false, &s_removeConfiguration },   //
-    { "count", "c", "-", "Returns the number of MIDI configurations", false, false, &s_count }
+    { "allnotesoff", "ano", "1|0", "Clear the entire buffer of MIDI notes held", false, false, nullptr, eCommandType::Conditional },
+    { "add", "a", "(name):(event:commands)*", "Adds a new MIDI configuration with the given name, events and command strings", false, false, &s_addConfiguration, eCommandType::Data },
+    { "remove", "rm", "int", "Remove the specified MIDI configuration", false,  false, &s_removeConfiguration, eCommandType::Remove },
+    { "count", "c", "-", "Returns the number of MIDI configurations", false, false, &s_count, eCommandType::Count }
 };
 
 getModuleCount(MIDIConfigurationHandler)
 
 MIDIConfigurationHandler::MIDIConfigurationHandler()
 {
-    moduleID = new ModuleID("midiconfigurationhandler", "mcf", "MIDI message configuration handler 1.0", eModuleType::software);
-
+//    moduleID = new ModuleID("midiconfigurationhandler", "mcf", "MIDI message configuration handler 1.0", eModuleType::software);
     MIDIMessageConfiguration tempSeries;
-    ModuleGroup *group = addGroup(tempSeries.moduleID);
+//    ModuleGroup *group = addGroup(tempSeries.moduleID);
+    ModuleGroup *group = addGroup(tempSeries.tmoduleID);
     group->mustHaveSelection = true;
     group->singleSelection = true;
     group->setIndexCallback(this, &s_configurationIndexChanged);

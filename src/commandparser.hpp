@@ -200,8 +200,6 @@ public:
                 start = parseQuote(commandString, otherQuote, start);
             }
             //debugPrintln("start: " + String(start) + " length: " + String(commandString.length()) + " is quote style:" + String(String(commandString[start]) == quoteStyle[quote]) + " aka char -" + commandString[start] + "-", debugPrintType::Debug);
-
-//        } while ((String(commandString[start]) != quoteStyle[quote]) && (start < (int(commandString.length()) - 1)));
         } while ((commandString[start] != quoteStyle[quote]) && (start < (int(commandString.length()) - 1)));
         debugPrintln("Found quote end @ " + String(start), debugPrintType::EParser);
         return start;
@@ -249,16 +247,6 @@ public:
                 e = commandItems.length();
             }
             f = e;
-
-            //String* _item = new String(stripQuotes(commandItems.substring(i, f).toLowerCase()));
-            //debugPrintln("New string from " + String(i) + " to " + String(f) + " is " + commandItems.substring(i, f).toLowerCase(), EParser);
-
-            //debugPrintln("Creating command string " + *_item, EParser);
-            //commandItem *_commandItem = new commandItem(*_item);
-
-            //item.push_back(*_item);
-            //delete _item;
-            //delete _commandItem;
 
             debugPrintln("New string from " + String(i) + " to " + String(f) + " is " + commandItems.substring(i, f).toLowerCase(), EParser);
             debugPrintln("Creating command string " + stripQuotes(commandItems.substring(i, f).toLowerCase()), EParser);

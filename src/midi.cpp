@@ -57,21 +57,12 @@ void MIDIHandler::updateLocalVariables() {
 void MIDIHandler::processLocalMessage(String *message) {
     updateLocalVariables();
     globalResponseCommands.addCommands(*message);
-    //commands->parseCommandExpressions(expFunctions, expFunctionCount);
     globalResponseCommands.parseCommandExpressions(expressionParser);
 }
 /** messaging system end **/
 
 /** note cue begin **/
-/*
-struct noteMsg {
-    char channel = -1;
-    char note = -1;
-    char velocity = -1;
-};
 
-std::vector<noteMsg> notesHeld;
-*/
 int8_t MIDIHandler::findNote(byte channel, byte note) {
     for (int i = 0; i < int(notesHeld.size()); i++) {
         if ((notesHeld[i].note == note) && (notesHeld[i].channel == channel)) {
@@ -112,8 +103,6 @@ void MIDIHandler::setNote() {
     expressionParser.dchannel = notesHeld[notesHeld.size() - 1].channel;
     expressionParser.dnote = notesHeld[notesHeld.size() - 1].note;
     expressionParser.dvelocity = notesHeld[notesHeld.size() - 1].velocity;
-//    processLocalMessage(configArray[currentConfig].noteOn);
-//    processLocalMessage(midiMessageConfiguration->noteOn);
     processLocalMessage(&midiMessageConfiguration->midiEventMap[midiMessageConfiguration->eMIDIEvent::ev_noteOn]);
 }
 
@@ -124,8 +113,6 @@ void MIDIHandler::setNotes() {
         expressionParser.dchannel = notesHeld[i].channel;
         expressionParser.dnote = notesHeld[i].note;
         expressionParser.dvelocity = notesHeld[i].velocity;
-        //processLocalMessage(configArray[currentConfig].noteOn);
-//        processLocalMessage(midiMessageConfiguration->noteOn);
         processLocalMessage(&midiMessageConfiguration->midiEventMap[midiMessageConfiguration->eMIDIEvent::ev_noteOn]);
     }
 }
@@ -133,10 +120,6 @@ void MIDIHandler::setNotes() {
 /// Handle note off message
 void MIDIHandler::OnNoteOff(byte channel, byte note, byte velocity) {
     MIDI_CONFIG_CHECK
-/*
-    if ((configArray[currentConfig].midiRxChannel != channel) && (configArray[currentConfig].midiRxChannel < 17) &&
-        (configArray[currentConfig].midiRxChannel > 0)) { return; }
-*/
     if ((midiMessageConfiguration->midiRxChannel != channel) && (midiMessageConfiguration->midiRxChannel < 17) &&
         (midiMessageConfiguration->midiRxChannel > 0)) { return; }
 
@@ -147,8 +130,6 @@ void MIDIHandler::OnNoteOff(byte channel, byte note, byte velocity) {
     expressionParser.dchannel = channel;
     expressionParser.dnote = note;
     expressionParser.dvelocity = velocity;
-//    processLocalMessage(configArray[currentConfig].noteOff);
-//    processLocalMessage(midiMessageConfiguration->noteOff);
     processLocalMessage(&midiMessageConfiguration->midiEventMap[midiMessageConfiguration->eMIDIEvent::ev_noteOff]);
 
     if ((notesHeld.size() > 0) && (monoMode)) {
@@ -161,9 +142,6 @@ void MIDIHandler::OnNoteOff(byte channel, byte note, byte velocity) {
 /// Handles note on messages
 void MIDIHandler::OnNoteOn(byte channel, byte note, byte velocity) {
     MIDI_CONFIG_CHECK
-/*    if ((configArray[currentConfig].midiRxChannel != channel) && (configArray[currentConfig].midiRxChannel < 17) &&
-        (configArray[currentConfig].midiRxChannel > 0)) { return; }
-*/
 
     if ((midiMessageConfiguration->midiRxChannel != channel) && (midiMessageConfiguration->midiRxChannel < 17) &&
         (midiMessageConfiguration->midiRxChannel > 0)) { return; }
@@ -183,10 +161,7 @@ void MIDIHandler::OnNoteOn(byte channel, byte note, byte velocity) {
 /// Handle poly aftertouch message
 void MIDIHandler::OnAfterTouchPoly(byte channel, byte note, byte pressure) {
     MIDI_CONFIG_CHECK
-/*
-    if ((configArray[currentConfig].midiRxChannel != channel) && (configArray[currentConfig].midiRxChannel < 17) &&
-        (configArray[currentConfig].midiRxChannel > 0)) { return; }
-*/
+
     if ((midiMessageConfiguration->midiRxChannel != channel) && (midiMessageConfiguration->midiRxChannel < 17) &&
         (midiMessageConfiguration->midiRxChannel > 0)) { return; }
 
@@ -194,8 +169,6 @@ void MIDIHandler::OnAfterTouchPoly(byte channel, byte note, byte pressure) {
     expressionParser.dpressure = pressure;
     expressionParser.dnote = note;
 
-//    processLocalMessage(configArray[currentConfig].polyAftertouch);
-//    processLocalMessage(midiMessageConfiguration->polyAftertouch);
     processLocalMessage(&midiMessageConfiguration->midiEventMap[midiMessageConfiguration->eMIDIEvent::ev_polyAfterTouch]);
 
     debugPrintln("PolyAT on channel " + String(channel) + " note " + String(note) + " value " + String(pressure), USB);
@@ -204,18 +177,13 @@ void MIDIHandler::OnAfterTouchPoly(byte channel, byte note, byte pressure) {
 /// Handle poly aftertouch message
 void MIDIHandler::OnChannelAftertouch(byte channel, byte pressure) {
     MIDI_CONFIG_CHECK
-/*
-    if ((configArray[currentConfig].midiRxChannel != channel) && (configArray[currentConfig].midiRxChannel < 17) &&
-        (configArray[currentConfig].midiRxChannel > 0)) { return; }
-*/
+
     if ((midiMessageConfiguration->midiRxChannel != channel) && (midiMessageConfiguration->midiRxChannel < 17) &&
         (midiMessageConfiguration->midiRxChannel > 0)) { return; }
 
     expressionParser.dchannel = channel;
     expressionParser.dpressure = pressure;
 
-//    processLocalMessage(configArray[currentConfig].channelAftertouch);
-//    processLocalMessage(midiMessageConfiguration->channelAftertouch);
     processLocalMessage(&midiMessageConfiguration->midiEventMap[midiMessageConfiguration->eMIDIEvent::ev_channelAftertouch]);
 
     debugPrintln("ChannelAT on channel " + String(channel) + " value " + String(pressure), USB);
@@ -224,24 +192,17 @@ void MIDIHandler::OnChannelAftertouch(byte channel, byte pressure) {
 /// handle control change message
 void MIDIHandler::OnControlChange(byte channel, byte control, byte value) {
     MIDI_CONFIG_CHECK
-/*
-    if ((configArray[currentConfig].midiRxChannel != channel) && (configArray[currentConfig].midiRxChannel < 17) &&
-        (configArray[currentConfig].midiRxChannel > 0)) { return; }
-*/
     if ((midiMessageConfiguration->midiRxChannel != channel) && (midiMessageConfiguration->midiRxChannel < 17) &&
         (midiMessageConfiguration->midiRxChannel > 0)) { return; }
 
     debugPrintln("Control change on channel " + String(channel) + " control " + String(control) + " value " + String(value), USB);
 
-//    for (int i = 0; i < int(configArray[currentConfig].controlChange.size()); i++) {
     for (int i = 0; i < int(midiMessageConfiguration->controlChange.size()); i++) {
-//        if (configArray[currentConfig].controlChange[i].control == control) {
         if (midiMessageConfiguration->controlChange[i].control == control) {
             expressionParser.dnote = 0;
             expressionParser.dvelocity = 0;
             expressionParser.dchannel = channel;
             expressionParser.dvalue = value;
-//            processLocalMessage(&configArray[currentConfig].controlChange[i].command);
             processLocalMessage(&midiMessageConfiguration->controlChange[i].command);
         }
     }
@@ -258,8 +219,6 @@ void MIDIHandler::midiAllNotesOff() {
         expressionParser.dnote = notesHeld[0].note;
         expressionParser.dvelocity = notesHeld[0].velocity;
 
-//        processLocalMessage(configArray[currentConfig].noteOff);
-//        processLocalMessage(midiMessageConfiguration->noteOff);
         processLocalMessage(&midiMessageConfiguration->midiEventMap[midiMessageConfiguration->eMIDIEvent::ev_noteOff]);
         notesHeld.clear();
     }
@@ -269,36 +228,26 @@ void MIDIHandler::midiAllNotesOff() {
 /// handle pitch bend message
 void MIDIHandler::OnPitchBend(byte channel, int pitch) {
     MIDI_CONFIG_CHECK
-/*
-    if ((configArray[currentConfig].midiRxChannel != channel) && (configArray[currentConfig].midiRxChannel < 17) &&
-        (configArray[currentConfig].midiRxChannel > 0)) { return; }
-*/
+
     if ((midiMessageConfiguration->midiRxChannel != channel) && (midiMessageConfiguration->midiRxChannel < 17) &&
         (midiMessageConfiguration->midiRxChannel > 0)) { return; }
 
     expressionParser.dchannel = channel;
     expressionParser.dpitch = pitch;
 
-//    processLocalMessage(configArray[currentConfig].pitchBend);
-//    processLocalMessage(midiMessageConfiguration->pitchBend);
     processLocalMessage(&midiMessageConfiguration->midiEventMap[midiMessageConfiguration->eMIDIEvent::ev_PitchBend]);
     debugPrintln("Pitch bend on channel " + String(channel) + " value " + String(pitch), USB);
 }
 
 void MIDIHandler::OnProgramChange(uint8_t channel, uint8_t program) {
     MIDI_CONFIG_CHECK
-/*
-    if ((configArray[currentConfig].midiRxChannel != channel) && (configArray[currentConfig].midiRxChannel < 17) &&
-        (configArray[currentConfig].midiRxChannel > 0)) { return; }
-*/
+
     if ((midiMessageConfiguration->midiRxChannel != channel) && (midiMessageConfiguration->midiRxChannel < 17) &&
         (midiMessageConfiguration->midiRxChannel > 0)) { return; }
 
     expressionParser.dchannel = channel;
     expressionParser.dprogram = program;
 
-//    processLocalMessage(configArray[currentConfig].programChange);
-//    processLocalMessage(midiMessageConfiguration->programChange);
     processLocalMessage(&midiMessageConfiguration->midiEventMap[midiMessageConfiguration->eMIDIEvent::ev_programChange]);
     debugPrintln("Program change on channel " + String(channel) + " program " + String(program), USB);
 }

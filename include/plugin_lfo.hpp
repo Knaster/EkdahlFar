@@ -10,6 +10,7 @@ public:
 
     MODULECOMMANDHANDLER
 
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(name, Plugin_LFO)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(enable, Plugin_LFO)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(target, Plugin_LFO)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(updaterate, Plugin_LFO)
@@ -27,6 +28,7 @@ public:
     void update() override;
 private:
     bool pEnable = false;
+    String pName = "";
     String pTarget = "bw.hsh.sh5:lfoout";
     uint16_t pUpdateRate = 10;
 
@@ -53,9 +55,9 @@ private:
 
 
     eWaveform pWaveform = eWaveform::sine;
-    uint16_t pAmplitude = 100;
+    uint16_t pAmplitude = 65535;
     float pFrequency = 4;
-    uint16_t pDelay = 0;
+    uint16_t pDelay = 1000;
     bool pBipolar = true;
 
     float pCount = 0;

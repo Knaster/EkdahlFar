@@ -6,6 +6,8 @@
 
 class MuteControl : public Module {
 public:
+    SETMODULEID("mute", "mu", "Mute controller v1.0", eModuleType::hardware, false)
+
     MODULECOMMANDHANDLER
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(setPosition, MuteControl)
@@ -32,12 +34,13 @@ public:
     CREATE_MODULE_COMMAND_FUNCTION_FWD(tmcInfo, MuteControl)
 
     MuteControl(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensor);
-
+/*
     eProcessResult processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
                                commandList *delegatedCommands = nullptr);
 
     eProcessResult processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
                                     commandList *delegatedCommands = nullptr);
+*/
 private:
     Mute *mute = nullptr;
 public:

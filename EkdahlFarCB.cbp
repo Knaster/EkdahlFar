@@ -136,6 +136,7 @@
 			<Add after="arm-none-eabi-objcopy -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0 ${TARGET_OUTPUT_FILE} ${TARGET_OUTPUT_DIR}${TARGET_OUTPUT_BASENAME}.eep" />
 			<Add after="arm-none-eabi-objcopy -O ihex -R .eeprom ${TARGET_OUTPUT_FILE} ${TARGET_OUTPUT_DIR}${TARGET_OUTPUT_BASENAME}.hex" />
 			<Add after="arm-none-eabi-objdump -d ${TARGET_OUTPUT_FILE} &gt; ${TARGET_OUTPUT_DIR}${TARGET_OUTPUT_BASENAME}.lst" />
+			<Add after="size ${TARGET_OUTPUT_FILE} --format=sysv" />
 		</ExtraCommands>
 		<Unit filename="include/automaticversion.hpp" />
 		<Unit filename="include/averager.h" />
@@ -165,6 +166,7 @@
 		<Unit filename="include/plugin_adsr.hpp" />
 		<Unit filename="include/plugin_lfo.hpp" />
 		<Unit filename="include/plugin_map.hpp" />
+		<Unit filename="include/plugin_mult.hpp" />
 		<Unit filename="include/pluginhandler.hpp" />
 		<Unit filename="include/solenoid.hpp" />
 		<Unit filename="include/tmc2209_servostepper.hpp" />
@@ -1171,6 +1173,10 @@
 			<Option link="0" />
 		</Unit>
 		<Unit filename="src/plugin_map.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src/plugin_mult.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>

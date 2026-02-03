@@ -4,24 +4,24 @@
 #include "bowpressure.hpp"
 
 const ModuleCommandDeclaration BowPressure::moduleCommands[] = {
-    { "baseline", "ba", "0-65535", "Bow pressure baseline, modulation is added to this point upward", false, false, &s_baseline },
-    { "modifier", "mo", "0-65535", "Bow pressure modulation, added to the baseline", false, false, &s_modifier },
-    { "rest", "rs", "0|1", "Puts the bow pressure in the resting position (conditional)", false, false, &s_rest },
-    { "engage", "en", "0|1", "Puts the bow pressure in the engage position (conditional)", false, false, &s_engage },
-    { "stallpressure", "sp", "0-65535", "Bow pressure stall/maximum position", false, false, &s_stallPressure },
-    { "engagepressure", "ep", "0-65535", "Bow pressure touch/minimum position", false, false, &s_engagePressure },
-    { "restpressure", "rp", "0-65535", "Bow pressure rest position", false, false, &s_restPressure},
-    { "engagespeed", "es", "1 - 100?", "Bow pressure movement speed when engaging or disengaging", false, false, &s_engageSpeed},
-    { "modulationspeed", "ms", "0.1 - 10", "Bow pressure movement speed while engaged", false, false, &s_modulationSpeed},
-    { "hold", "hd", "0|1", "Sets bow hold on/off", false, false, &s_hold },
-    { "home", "hm", "-", "Homing bow, used at startup and in case of the bow loosing position", false, false, &s_home },
-    { "tmcinfo", "tmi", "-", "Request statistical information from the TMC2209", true, false, &s_tmcinfo }
+    { "baseline", "ba", "0-65535", "Bow pressure baseline, modulation is added to this point upward", false, false, &s_baseline, eCommandType::SimpleUInt16 },
+    { "modifier", "mo", "0-65535", "Bow pressure modulation, added to the baseline", false, false, &s_modifier, eCommandType::SimpleUInt16 },
+    { "rest", "rs", "0|1", "Puts the bow pressure in the resting position (conditional)", false, false, &s_rest, eCommandType::Conditional },
+    { "engage", "en", "0|1", "Puts the bow pressure in the engage position (conditional)", false, false, &s_engage, eCommandType::Conditional },
+    { "stallpressure", "sp", "0-65535", "Bow pressure stall/maximum position", false, false, &s_stallPressure, eCommandType::SimpleUInt16 },
+    { "engagepressure", "ep", "0-65535", "Bow pressure touch/minimum position", false, false, &s_engagePressure, eCommandType::SimpleUInt16 },
+    { "restpressure", "rp", "0-65535", "Bow pressure rest position", false, false, &s_restPressure, eCommandType::SimpleUInt16},
+    { "engagespeed", "es", "1 - 100?", "Bow pressure movement speed when engaging or disengaging", false, false, &s_engageSpeed, eCommandType::SimpleUInt8 },
+    { "modulationspeed", "ms", "0.1 - 10", "Bow pressure movement speed while engaged", false, false, &s_modulationSpeed, eCommandType::SimpleUInt8 },
+    { "hold", "hd", "0|1", "Sets bow hold on/off", false, false, &s_hold, eCommandType::SimpleBool },
+    { "home", "hm", "-", "Homing bow, used at startup and in case of the bow loosing position", false, false, &s_home, eCommandType::Immediate },
+    { "tmcinfo", "tmi", "-", "Request statistical information from the TMC2209", true, false, &s_tmcinfo, eCommandType::RequestOnly }
 };
 
 getModuleCount(BowPressure)
 
 BowPressure::BowPressure(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin) {
-    moduleID = new ModuleID("bowpressure", "bp", "Bowing pressure controller v1.0", eModuleType::hardware);
+//    moduleID = new ModuleID("bowpressure", "bp", "Bowing pressure controller v1.0", eModuleType::hardware);
     tmc2209ServoStepper = new Tmc2209ServoStepper(stepDirPin, stepStepPin, stepSerialPort, stepHomeSensorPin);
 
     bowActuators = new BowActuators();

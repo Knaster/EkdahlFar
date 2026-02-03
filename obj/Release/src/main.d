@@ -155,4 +155,5 @@ obj/Release/src/main.o: src/main.cpp lib/teensy4/WProgram.h \
  include/modulehandler.hpp include/../src/plugin_lfo.cpp \
  include/plugin_lfo.hpp include/../src/plugin_map.cpp \
  include/plugin_map.hpp include/../src/plugin_adsr.cpp \
- include/plugin_adsr.hpp
+ include/plugin_adsr.hpp include/../src/plugin_mult.cpp \
+ include/plugin_mult.hpp

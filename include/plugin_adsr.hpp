@@ -11,6 +11,7 @@ public:
 
     MODULECOMMANDHANDLER
 
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(name, Plugin_AHDSR)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(enable, Plugin_AHDSR)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(target, Plugin_AHDSR)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(updaterate, Plugin_AHDSR)
@@ -30,6 +31,7 @@ public:
     void update() override;
 
 private:
+    String pName = "";
     bool pEnable = false;
     String pTarget = "bw.bp.mo:ahdsrout";
     String pReleaseTarget = "bw.bp.rs:1";

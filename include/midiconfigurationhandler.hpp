@@ -61,6 +61,8 @@ public:
 class MIDIConfigurationHandler : public ModuleHandler
 {
 public:
+    SETMODULEID("midiconfigurationhandler", "mcf", "MIDI message configuration handler 1.0", eModuleType::software, false)
+
     MODULECOMMANDHANDLER
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(addConfiguration, MIDIConfigurationHandler)

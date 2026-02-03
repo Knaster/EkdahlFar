@@ -6,26 +6,28 @@
 #include <cmath>
 
 const ModuleCommandDeclaration Plugin_LFO::moduleCommands[] = {
-    { "enable", "en", "1|0", "Will enable or disable the output of the target commands", false, true, &s_enable },
-    { "target", "tg", "commandlist*", "Sets the command string to execute each iteration, the string 'lfoout' will be replaced with the current value", false, true, &s_target },
-    { "updaterate", "ur", "mS", "Sets the frequency with which the target commands are executed. Limited by the global maximum as set in the plugin handler", false, true, &s_updaterate },
-
-    { "waveform", "wf", "sine|triangle|square|saw", "Sets the waveform", false, true, &s_waveform },
-    { "frequency", "fq", "Hz", "Sets the frequency of the LFO", false, true, &s_frequency },
-    { "amplitude", "amp", "0-65535", "Sets the output amplitude of the LFO", false, true, &s_amplitude },
-    { "delay", "dl", "ms", "Sets the amplitude ramp up delay, from 1ms to 65s", false, true, &s_delay },
-    { "resetdelay", "rd", "-", "Resets the delay count to zero and reset the waveform", false, false, &s_resetdelay },
-    { "resetwave", "rw", "-", "Resets the waveform so it starts over", false, false, &s_resetwave },
-    { "bipolar", "bp", "1|0", "Sets whether the waveform is bipolar (default) or positive only", false, true, &s_bipolar }
+    { "name", "na", "name", "Sets the LFO name", false, true, &s_name, eCommandType::Name },
+    { "enable", "en", "1|0", "Will enable or disable the output of the target commands", false, true, &s_enable, eCommandType::SimpleBool },
+    { "target", "tg", "commandlist*", "Sets the command string to execute each iteration, the string [lfoout] will be replaced with the current value", false, true, &s_target, eCommandType::OutputAssignment },
+    { "updaterate", "ur", "mS", "Sets the frequency with which the target commands are executed. Limited by the global maximum as set in the plugin handler", false, true, &s_updaterate, eCommandType::Milliseconds },
+    { "waveform", "wf", "sine|triangle|square|saw", "Sets the waveform", false, true, &s_waveform, eCommandType::Data },
+    { "frequency", "fq", "Hz", "Sets the frequency of the LFO", false, true, &s_frequency, eCommandType::Hertz },
+    { "amplitude", "amp", "0-65535", "Sets the output amplitude of the LFO", false, true, &s_amplitude, eCommandType::SimpleUInt16 },
+    { "delay", "dl", "ms", "Sets the amplitude ramp up delay, from 1ms to 65s", false, true, &s_delay, eCommandType::Milliseconds },
+    { "resetdelay", "rd", "-", "Resets the delay count to zero and reset the waveform", false, false, &s_resetdelay, eCommandType::SimpleBool },
+    { "resetwave", "rw", "-", "Resets the waveform so it starts over", false, false, &s_resetwave, eCommandType::SimpleBool },
+    { "bipolar", "bp", "1|0", "Sets whether the waveform is bipolar (default) or positive only", false, true, &s_bipolar, eCommandType::SimpleBool }
 };
 
 getModuleCount(Plugin_LFO)
 
 Plugin_LFO::Plugin_LFO()
 {
-    moduleID = new ModuleID("lfo", "lfo", "Basic software LFO v1.0", eModuleType::software, false);
+//    moduleID = new ModuleID("lfo", "lfo", "Basic software LFO v1.0", eModuleType::software, false);
     recalculateIncrease();
 }
+
+CREATE_GETSET_FUNCTION(name, Plugin_LFO, pName)
 
 CREATE_MODULE_COMMAND_FUNCTION(enable, Plugin_LFO) {
     if (!request) {
@@ -42,23 +44,8 @@ CREATE_MODULE_COMMAND_FUNCTION(enable, Plugin_LFO) {
     return eProcessResult::Ok;
 }
 
-CREATE_MODULE_COMMAND_FUNCTION(target, Plugin_LFO) {
-    if (!request) {
-        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        pTarget = stripQuotes(inCommandItem->argument[0]);
-    }
-    inCommandResponses->push_back({ thisItem.shortCommand + ":" + delimitExpression(pTarget, true), debugPrintType::InfoRequest });
-    return eProcessResult::Ok;
-}
-
-CREATE_MODULE_COMMAND_FUNCTION(updaterate, Plugin_LFO) {
-    if (!request) {
-        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        pUpdateRate = inCommandItem->argument[0].toInt();
-    }
-    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pUpdateRate), debugPrintType::InfoRequest });
-    return eProcessResult::Ok;
-}
+CREATE_GETSET_FUNCTION(target, Plugin_LFO, pTarget)
+CREATE_GETSET_FUNCTION_CONVERT(updaterate, Plugin_LFO, pUpdateRate, toInt)
 
 CREATE_MODULE_COMMAND_FUNCTION(waveform, Plugin_LFO) {
     if (!request) {
@@ -76,53 +63,24 @@ CREATE_MODULE_COMMAND_FUNCTION(waveform, Plugin_LFO) {
     return eProcessResult::Ok;
 }
 
-CREATE_MODULE_COMMAND_FUNCTION(frequency, Plugin_LFO) {
-    if (!request) {
-        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        pFrequency = inCommandItem->argument[0].toFloat();
-        recalculateIncrease();
-    }
-    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pFrequency), debugPrintType::InfoRequest });
-    return eProcessResult::Ok;
-}
-
-CREATE_MODULE_COMMAND_FUNCTION(amplitude, Plugin_LFO) {
-    if (!request) {
-        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        pAmplitude = inCommandItem->argument[0].toInt();
-    }
-    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pAmplitude), debugPrintType::InfoRequest });
-    return eProcessResult::Ok;
-}
-
-CREATE_MODULE_COMMAND_FUNCTION(delay, Plugin_LFO) {
-    if (!request) {
-        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        pDelay = inCommandItem->argument[0].toInt();
-        recalculateIncrease();
-    }
-    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pDelay), debugPrintType::InfoRequest });
-    return eProcessResult::Ok;
-}
+CREATE_GETSET_FUNCTION_F_CONVERT(frequency, Plugin_LFO, pFrequency, toFloat, recalculateIncrease)
+CREATE_GETSET_FUNCTION_CONVERT(amplitude, Plugin_LFO, pAmplitude, toInt)
+CREATE_GETSET_FUNCTION_F_CONVERT(delay, Plugin_LFO, pDelay, toInt, recalculateIncrease)
+CREATE_GETSET_FUNCTION_CONVERT(bipolar, Plugin_LFO, pBipolar, toInt)
 
 CREATE_MODULE_COMMAND_FUNCTION(resetdelay, Plugin_LFO) {
+    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+    if (inCommandItem->argument[0].toInt() == 0) { return eProcessResult::Ok; }
     pDelayCount = 0;
     inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::InfoRequest });
     return eProcessResult::Ok;
 }
 
 CREATE_MODULE_COMMAND_FUNCTION(resetwave, Plugin_LFO) {
+    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+    if (inCommandItem->argument[0].toInt() == 0) { return eProcessResult::Ok; }
     pCount = 0;
     inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::InfoRequest });
-    return eProcessResult::Ok;
-}
-
-CREATE_MODULE_COMMAND_FUNCTION(bipolar, Plugin_LFO) {
-    if (!request) {
-        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        pBipolar = inCommandItem->argument[0].toInt();
-    }
-    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pBipolar), debugPrintType::InfoRequest });
     return eProcessResult::Ok;
 }
 
@@ -221,7 +179,6 @@ void Plugin_LFO::recalculateIncrease() {
     } else {
         delayIncrease = 65535;
     }
-
     //debugPrintln("increase " + String(calculatedIncrease) + " delay increase " + String(delayIncrease), debugPrintType::Debug);
 }
 

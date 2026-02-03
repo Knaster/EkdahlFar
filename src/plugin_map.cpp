@@ -4,73 +4,97 @@
 #include "plugin_map.hpp"
 
 const ModuleCommandDeclaration Plugin_Map::moduleCommands[] = {
-    { "name", "na", "name", "Sets the map name", false, true, &s_name },
-    { "data", "da", "(in:out)*", "Set the map data in any number of pairs of [in] returns [out]", false, true, &s_data },
-    { "count", "c", "count*", "Returns the amount of items in the map", false, false, &s_count },
-    { "remove", "da", "in", "Removes the map with [in] if it exists", false, false, &s_remove }
+    { "name", "na", "name", "Sets the map name", false, true, &s_name, eCommandType::Name },
+    { "target", "tg", "commandlist*", "Sets the command string to execute whenever a connection value changes", false, true, &s_target, eCommandType::OutputAssignment },
+    { "data", "da", "(in:out)*", "Set the map data in any number of pairs of [in] returns [out]", false, true, &s_data, eCommandType::Data },
+    { "remove", "rm", "in", "Removes the map with [in] if it exists", false, false, &s_remove, eCommandType::Data },
+    { "scale", "sc", "in", "Sets the overall scale of the number map", false, true, &s_scale, eCommandType::SimpleUInt16 },
+    { "trigger", "tr", "number", "Triggers the commands set in the target with the given outpu", false, false, &s_trigger, eCommandType::SimpleUInt8 }
 };
 
 getModuleCount(Plugin_Map)
 
-Plugin_Map::Plugin_Map() {
-    moduleID = new ModuleID("numbermap", "nm", "Number mapper v1.0", eModuleType::software, false);
-}
+Plugin_Map::Plugin_Map() { }
 
-CREATE_MODULE_COMMAND_FUNCTION(name, Plugin_Map) {
-    if (!request) {
-        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        pluginName = inCommandItem->argument[0];
-    }
-    debugPrintln(thisItem.shortCommand + ":" + pluginName, debugPrintType::Debug);
-    return eProcessResult::Ok;
-}
+CREATE_GETSET_FUNCTION(name, Plugin_Map, pName)
+
+CREATE_GETSET_FUNCTION_F(target, Plugin_Map, pTarget, updateManual)
 
 CREATE_MODULE_COMMAND_FUNCTION(data, Plugin_Map) {
     if (!request) {
         if (!checkArgumentsMin(inCommandItem, inCommandResponses, 2) || (inCommandItem->argument.size() % 2 != 0)) { return eProcessResult::WrongArgumentCount; }
         int i = 0;
+        bool update = false;
         while ((i + 1) < inCommandItem->argument.size()) {
-            mapData[inCommandItem->argument[i].toFloat()] = inCommandItem->argument[i + 1].toFloat();
+            mapData[inCommandItem->argument[i].toInt()] = inCommandItem->argument[i + 1].toFloat();
+
+            if ((inCommandItem->argument[i].toInt() == pLastIndex)) { update = true; }
+
             i += 2;
         }
+        if (update) {
+            debugPrintln("same value, updating", debugPrintType::Debug);
+            updateManual();
+        }
     }
-    String out = thisItem.shortCommand + ":" + String(index);
+    String out = thisItem.shortCommand;
     for (const auto& [key, value] : mapData) {
         out += ":" + String(key) + ":" + String(value);
     }
-    debugPrintln(out, debugPrintType::InfoRequest);
+    inCommandResponses->push_back({ out, debugPrintType::InfoRequest });
+    return eProcessResult::Ok;
+}
+
+CREATE_MODULE_COMMAND_FUNCTION(scale, Plugin_Map) {
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        pScale = inCommandItem->argument[0].toInt();
+        updateManual();
+    }
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(pScale), debugPrintType::InfoRequest });
     return eProcessResult::Ok;
 }
 
 CREATE_MODULE_COMMAND_FUNCTION(remove, Plugin_Map) {
     if (!request) {
         if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        if (index >= group->modules.size()) {
-            debugPrintln("Map not found", debugPrintType::Error);
-            return eProcessResult::CommandFailed;
-        }
-        group->modules.erase(group->modules.begin() + index);
+        uint8_t number = inCommandItem->argument[0].toInt();
+        if (mapData.find(number) == mapData.end()) { return eProcessResult::WrongArgumentValue; }
+        mapData.erase(number);
     }
-    debugPrintln(thisItem.shortCommand + ":" + String(mapData.size()), debugPrintType::InfoRequest);
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(mapData.size()), debugPrintType::InfoRequest });
     return eProcessResult::Ok;
 }
 
-CREATE_MODULE_COMMAND_FUNCTION(count, Plugin_Map) {
-    debugPrintln(thisItem.shortCommand + ":" + String(mapData.size()), debugPrintType::InfoRequest);
-    return eProcessResult::Ok;
-}
-/*
-eProcessResult Plugin_Map::setData(commandItem inCommandItem) {
+CREATE_MODULE_COMMAND_FUNCTION(trigger, Plugin_Map) {
+    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+    if (!updateManual(inCommandItem->argument[0].toInt())) { return eProcessResult::WrongArgumentValue; }
     return eProcessResult::Ok;
 }
 
-eProcessResult Plugin_Map::getData() {
-    return eProcessResult::Ok;
+bool Plugin_Map::updateManual(int16_t index) {
+    if (index == -1) {
+        if (pLastIndex == -1) { return false; }
+        index = pLastIndex;
+    }
+    pLastIndex = index;
+    if (mapData.find(index) == mapData.end()) { return false; }
+
+    String newTarget = pTarget;
+    newTarget = newTarget.replace("nmout", String(mapData[index]  / ((double) 65535 / ((double) pScale))));
+    if ((newTarget != pLastOutput)) {
+        debugPrintln(newTarget, debugPrintType::Debug);
+        globalResponseCommands.addCommands(newTarget);
+        pLastOutput = newTarget;
+    }
+    return true;
 }
-*/
-double Plugin_Map::mapExpression(double index, double input) {
+
+double Plugin_Map::mapExpression(uint8_t input) {
+    double output;
     if (mapData.find(input) != mapData.end()) {
-        output = mapData[input];
+        output = mapData[input] / ((double) 65535 / ((double) pScale));
+        pLastIndex = input;
     } else {
         output = 0;
     }
@@ -78,9 +102,9 @@ double Plugin_Map::mapExpression(double index, double input) {
 }
 
 double Plugin_Map::s_mapExpression(double index, double input) {
-    Plugin_Map *plugin = getIndex(int(index));
+    Plugin_Map *plugin = getIndex(index);
     if (plugin == nullptr) { return 0; }
-    return plugin->mapExpression(index, input);
+    return plugin->mapExpression(input);
 }
 
 #endif

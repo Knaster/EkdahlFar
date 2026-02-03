@@ -31,6 +31,8 @@ enum eSpeedMode { Automatic, Manual };
 
 class BowControl : public ModuleHandler {
 public:
+    SETMODULEID("bowingwheel", "bw", "Bowing wheel controller v1.0", eModuleType::hardware, false)
+
     MODULECOMMANDHANDLER
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(speedMode, BowControl)

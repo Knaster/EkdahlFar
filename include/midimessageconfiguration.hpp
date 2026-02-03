@@ -23,6 +23,8 @@
 
 class MIDIMessageConfiguration : public Module {
 public:
+    SETMODULEID("midiconfiguration", "mc", "MIDI message configuration 1.0", eModuleType::software, false)
+
     MODULECOMMANDHANDLER
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(eventHandler, MIDIMessageConfiguration)

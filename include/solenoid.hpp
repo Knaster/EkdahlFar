@@ -3,6 +3,8 @@
 
 class Solenoid : public Module {
 public:
+    SETMODULEID("solenoid", "so", "Solenoid controller v1.0", eModuleType::hardware, false)
+
     MODULECOMMANDHANDLER
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(engage, Solenoid)

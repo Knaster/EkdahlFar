@@ -9,19 +9,19 @@ CREATE_MIDI_SOURCE_CALLBACKS(MIDI)
 CREATE_MIDI_SOURCE_CALLBACKS(usbMIDI)
 
 const ModuleCommandDeclaration FARSingle::moduleCommands[] = {
-    { "calibrateall", "ca", "-", "Performs all calibration routines on the selected bow, see below for routines performed", false, false, &s_calibrateAll },
-    { "calibratebowspeed", "cbs", "-", "Finds the minimum and maximum bow speed of the selected bow", false, false, &s_calibrateBowSpeed },
-    { "calibratebowpressure", "cbp", "-", "Finds the minimum and maximum bow pressure of the selected bow", false, false, &s_calibrateBowPressure },
-    { "calibratemute", "cmu", "-", "Calibrate mute settings", false, false, &s_calibrateMute },
-    { "pickupstringfrequency", "psf", "-", "Returns the fundamental tone calculated from the current audio signal if appliccable", false, false, &s_pickupStringFrequency },
-    { "pickupaudiopeak", "pap", "-", "Returns the peak amplitude of the current audio signal", false, false, &s_pickupAudioPeak },
-    { "pickupaudiorms", "par", "-", "Returns the RMS amplitude of the current audio signal", false, false, &s_pickupAudioRMS }
+    { "calibrateall", "ca", "-", "Performs all calibration routines on the selected bow, see below for routines performed", false, false, &s_calibrateAll, eCommandType::Immediate },
+    { "calibratebowspeed", "cbs", "-", "Finds the minimum and maximum bow speed of the selected bow", false, false, &s_calibrateBowSpeed, eCommandType::Immediate },
+    { "calibratebowpressure", "cbp", "-", "Finds the minimum and maximum bow pressure of the selected bow", false, false, &s_calibrateBowPressure, eCommandType::Immediate },
+    { "calibratemute", "cmu", "-", "Calibrate mute settings", false, false, &s_calibrateMute, eCommandType::Immediate },
+    { "pickupstringfrequency", "psf", "-", "Returns the fundamental tone calculated from the current audio signal if appliccable", false, false, &s_pickupStringFrequency, eCommandType::Hertz },
+    { "pickupaudiopeak", "pap", "-", "Returns the peak amplitude of the current audio signal", false, false, &s_pickupAudioPeak, eCommandType::SimpleInt16 },
+    { "pickupaudiorms", "par", "-", "Returns the RMS amplitude of the current audio signal", false, false, &s_pickupAudioRMS, eCommandType::SimpleInt16 }
 };
 
 FARSingle::FARSingle(void *muteStepperCallback, void *pressureStepperCallback, void *tachometerCallback, void *pidCallback) {
-    moduleID = new ModuleID("", "", "FAR 1.1", eModuleType::hardware, true);
-
+//    moduleID = new ModuleID("", "", "FAR 1.1", eModuleType::hardware, true);
     muteControl = new MuteControl(-1, 5, 4, &Serial5, 13);
+
     hammerControl = new Solenoid(3);
     bowControl = new BowControl(2, 14, 15,12, 23, 11, -1, 10, 9, &Serial2,6);
 
@@ -47,10 +47,10 @@ FARSingle::FARSingle(void *muteStepperCallback, void *pressureStepperCallback, v
 
     startAudioAnalyze();
 
-    addModule(muteControl);
     addModule(hammerControl);
     addModule(bowControl);
     addModule(midiConfigurationHandler);
+    addModule(muteControl);
     addModule(controlReader);
 }
 

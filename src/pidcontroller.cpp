@@ -4,23 +4,23 @@
 #include "pidcontroller.hpp"
 
 const ModuleCommandDeclaration PIDController::moduleCommands[] = {
-    { "targetfrequency", "tf", "float", "Sets the PID target frequency", false, false, &s_targetFreq, },
-    { "ki", "ki", "float", "Sets the Ki parameter of the PID of the selected bow", false, true, &s_ki },
-    { "kp", "kp", "float", "Sets the Kp parameter of the PID of the selected bow", false, true, &s_kp },
-    { "kd", "kd", "float", "Sets the Kd parameter of the PID of the selected bow", false, true, &s_kd },
-    { "integratorerror", "ie", "float", "Sets the lower threshold of error values for the PID integrator to ignore of the selected bow", false, true, &s_integratorError },
-    { "reset", "re", "-", "Resets the PID of the selected bow", false, false, &s_reset },
-    { "maxerror", "xe", "float", "Maximum error to correct in each PID loop, essentially sets acceleration", false, true, &s_maxError },
-    { "peakerror", "pe", "float", "Get latest PID peak error", false, false, &s_peakError },
-    { "motorspeedmax", "msx", "float", "Bow motor maximum speed limit", false, true, &s_motorSpeedMax },
-    { "motorspeedmin", "msi", "float", "Bow motor minimum speed limit", false, true, &s_motorSpeedMin },
-    { "measuretimetotarget", "mtt", "float", "Measure the time it takes to change from the current frequency to the target frequency", false, false, &s_measureTimeToTarget }
+    { "targetfrequency", "tf", "float", "Sets the PID target frequency", false, false, &s_targetFreq, eCommandType::Hertz },
+    { "ki", "ki", "float", "Sets the Ki parameter of the PID of the selected bow", false, true, &s_ki, eCommandType::SimpleFloat },
+    { "kp", "kp", "float", "Sets the Kp parameter of the PID of the selected bow", false, true, &s_kp, eCommandType::SimpleFloat },
+    { "kd", "kd", "float", "Sets the Kd parameter of the PID of the selected bow", false, true, &s_kd, eCommandType::SimpleFloat },
+    { "integratorerror", "ie", "float", "Sets the lower threshold of error values for the PID integrator to ignore of the selected bow", false, true, &s_integratorError, eCommandType::SimpleFloat },
+    { "reset", "re", "-", "Resets the PID of the selected bow", false, false, &s_reset, eCommandType::Immediate },
+    { "maxerror", "xe", "float", "Maximum error to correct in each PID loop, essentially sets acceleration", false, true, &s_maxError, eCommandType::SimpleFloat },
+    { "peakerror", "pe", "float", "Get latest PID peak error", false, false, &s_peakError, eCommandType::RequestOnly },
+    { "motorspeedmax", "msx", "float", "Bow motor maximum speed limit", false, true, &s_motorSpeedMax, eCommandType::Hertz },
+    { "motorspeedmin", "msi", "float", "Bow motor minimum speed limit", false, true, &s_motorSpeedMin, eCommandType::Hertz },
+    { "measuretimetotarget", "mtt", "float", "Measure the time it takes to change from the current frequency to the target frequency", false, false, &s_measureTimeToTarget, eCommandType::Milliseconds }
 };
 
 getModuleCount(PIDController)
 
 PIDController::PIDController(DCMotorControl &inDCMotorControl) {
-    moduleID = new ModuleID("pid", "pid", "PID controller v1.0", eModuleType::software);
+//    moduleID = new ModuleID("pid", "pid", "PID controller v1.0", eModuleType::software);
     dcMotorControl = &inDCMotorControl;
 }
 

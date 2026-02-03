@@ -32,6 +32,8 @@
 
 class FARSingle : public ModuleHandler {
 public:
+    SETMODULEID("", "", "FAR 1.1", eModuleType::hardware, true)
+
     MODULECOMMANDHANDLER
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(calibrateAll, FARSingle)

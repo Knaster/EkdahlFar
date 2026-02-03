@@ -229,7 +229,11 @@ void processSerialCommands(commandList inCommandList, bool isInternal = false) {
 
     if ((!isInternal) || debugPrintEnabled[debugPrintType::Internal]) {
         for (int i=0; i<commandResponses.size(); i++) {
-            debugPrintln(commandResponses[i].response, commandResponses[i].responseType);
+            if (!isInternal) {
+                debugPrintln(commandResponses[i].response, commandResponses[i].responseType);
+            } else {
+                debugPrintln(commandResponses[i].response, debugPrintType::Internal);
+            }
         }
     }
 }
@@ -237,7 +241,9 @@ void processSerialCommands(commandList inCommandList, bool isInternal = false) {
 void processSerialCommands() {
     globalCommands = globalResponseCommands;
     if (ssReader.read()) { globalCommands.addCommands(ssReader.c_str()); }
-
+    processSerialCommands(globalCommands, false);
+    globalCommands.item.clear();
+/*
     if (globalCommands.item.size() == 0) { return; }
 
     std::vector <commandResponse> commandResponses;
@@ -253,7 +259,7 @@ void processSerialCommands() {
 
     for (i=0; i<commandResponses.size(); i++) {
         debugPrintln(commandResponses[i].response, commandResponses[i].responseType);
-    }
+    }*/
 }
 
 uint32_t startupTime;
@@ -274,7 +280,7 @@ void setup() {
     baseModule = new BaseModule(farSingle);
 //    baseModule = new BaseModule(nullptr);
     baseModule->loadAllParameters();
-    farSingle->initFAR();
+//    farSingle->initFAR();
 
     debugPrintln("Initialized", InfoRequest);
 

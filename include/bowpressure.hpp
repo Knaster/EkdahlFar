@@ -7,6 +7,8 @@ enum ePressureMode { Rest, Engage };
 
 class BowPressure : public ModuleHandler {
 public:
+    SETMODULEID("bowpressure", "bp", "Bow pressure controller v1.0", eModuleType::hardware, false)
+
     MODULECOMMANDHANDLER
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(baseline, BowPressure)

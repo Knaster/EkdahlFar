@@ -4,23 +4,22 @@
 #include "dcmotorcontrol.hpp"
 
 const ModuleCommandDeclaration DCMotorControl::moduleCommands[] = {
-    { "run", "ru", "1|0", "Set bow motor run on/off", false, false, &s_run },
-    { "pwm", "pw", "0-65535", "Bow motor direct power in 16-bit PWM values, requires that the PID is turned off", false, false, &s_pwm },
-    { "voltage", "vo", "float", "Bow motor voltage", false, true, &s_voltage },
-    { "current", "cu", "float", "Bow motor reported current use", false, false, &s_current },
-    { "currentlimit", "cl", "float", "Bow motor current limit (A)- !WARNING! Can ruin your instrument if changed", false, true, &s_currentLimit },
-    { "powerlimit", "pl", "float", "Bow motor power limit (W) - !WARNING! Can ruin your instrument if changed", false, true, &s_powerLimit },
-    { "frequency", "fq", "-", "Bow motor reported frequency", false, false, &s_frequency },
-    { "emergencystop", "es", "ms (0-65535)", "Immediately stops the bowing motor and doesn't allow it to start again until the cool down period given in \
-        the first argument has lapsed (milliseconds)", false, false, &s_emergencyStop },
-    { "minpwm", "ip", "-", "Bow motor minimum PWM (for calibration)", false, true, &s_minPWM },
-    { "maxpwm", "xp", "-", "Bow motor maximum PWM (for calibration)", false, true, &s_maxPWM }
+    { "run", "ru", "1|0", "Set bow motor run on/off", false, false, &s_run, eCommandType::SimpleBool },
+    { "pwm", "pw", "0-65535", "Bow motor direct power in 16-bit PWM values, requires that the PID is turned off", false, false, &s_pwm, eCommandType::SimpleUInt16 },
+    { "voltage", "vo", "float", "Bow motor voltage", false, true, &s_voltage, eCommandType::SimpleFloat },
+    { "current", "cu", "float", "Bow motor reported current use", false, false, &s_current, eCommandType::ReturnOnly },
+    { "currentlimit", "cl", "float", "Bow motor current limit (A)- !WARNING! Can ruin your instrument if changed", false, true, &s_currentLimit, eCommandType::SimpleFloat },
+    { "powerlimit", "pl", "float", "Bow motor power limit (W) - !WARNING! Can ruin your instrument if changed", false, true, &s_powerLimit, eCommandType::SimpleFloat },
+    { "frequency", "fq", "-", "Bow motor reported frequency", false, false, &s_frequency, eCommandType::Hertz },
+    { "emergencystop", "es", "ms (0-65535)", "Immediately stops the bowing motor and doesn't allow it to start again until the cool down period given in the first argument has lapsed (milliseconds)", false, false, &s_emergencyStop, eCommandType::Immediate },
+    { "minpwm", "ip", "-", "Bow motor minimum PWM (for calibration)", false, true, &s_minPWM, eCommandType::SimpleUInt16 },
+    { "maxpwm", "xp", "-", "Bow motor maximum PWM (for calibration)", false, true, &s_maxPWM, eCommandType::SimpleUInt16 }
 };
 
 getModuleCount(DCMotorControl)
 
 DCMotorControl::DCMotorControl(char inMotorRevPin, char inMotorVoltagePin, char inMotorDCDCEnPin, char inTachoPin, char inCurrentSensePin, char inMotorFaultPin) {
-    moduleID = new ModuleID("dcmotor", "dcm", "DC Motor controller v1.0", eModuleType::hardware);
+//    moduleID = new ModuleID("dcmotor", "dcm", "DC Motor controller v1.0", eModuleType::hardware);
 
     motorRevPin = inMotorRevPin;
     reflectorInterruptPin = inTachoPin;

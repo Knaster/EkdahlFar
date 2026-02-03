@@ -4,29 +4,28 @@
 #include "mutecontrol.hpp"
 
 const ModuleCommandDeclaration MuteControl::moduleCommands[] = {
-    { "setposition", "sp", "0-65535", "Set mute position", false, false, &s_setPosition },
-    { "fullmute", "fm", "1|0", "Put mute in full mute position (conditional)", false, false, &s_fullMute  },
-    { "halfmute", "hfm", "1|0", "Put mute in half mute position (conditional)", false, false, &s_halfMute  },
-    { "rest", "rs", "1|0", "Put mute in rest position (conditional)", false, false, &s_rest  },
-    { "savefull", "sf", "1|0", "Save current mute position as full mute position (conditional)", false, false, &s_saveFull  },
-    { "savehalf", "sh", "1|0", "Save current mute position as half mute position (conditional)", false, false, &s_saveHalf  },
-    { "saverest", "sr", "1|0", "Save current mute position as mute rest position (conditional)", false, false, &s_saveRest  },
-    { "fullmuteposition", "fmp", "0-65535", "Mute full mute position", false, true, s_fullMutePosition },
-    { "halfmuteposition", "hmp", "0-65535", "Mute half mute position", false, true, s_halfMutePosition },
-    { "restposition", "rp", "0-65535", "Mute rest position", false, true, s_restPosition },
-    { "sustain", "su", "0|1", "Setting sustain on (1) or off (0)", false, false, s_sustain  },
-    { "backoff", "bo", "0-65535", "Setting the time that the mute stays in the mutefullmute position before automatically going into rest, set in mS", false, true, &s_backoff },
-    { "home", "hm", "-", "Home mute", false, false, &s_home  },
-    { "hardwareposition", "hwp", "0-65535", "Sets the mute position without min/max scaling", true, false, &s_setHardwarePosition },
-    { "completetask", "cpt", "-", "Requests a callback when the current operation is finished", true, false, &s_completeTask },
-    { "autocorrect", "ac", "1|0", "Enables auto correct positioning that uses the homing sensor to correct positioning on the fly", true, false, &s_autoCorrect },
-    { "homingsensed", "hms", "-", "Requests whether the homing sensor is currently active or not", true, false, &s_homingSensed },
-    { "movedirection", "md", "-", "Requests the current direction of movement (0 Forward, 1 Reverse)", true, false, &s_moveDirection },
-    { "currentstep", "cs", "-", "Requests the current step", true, false, &s_currentStep },
-    { "homingpoint", "hmp", "edge,direction", "Requests the given homing point", true, false, &s_homingPoint },
-    { "homingstage", "hms", "-", "Requests the current homing stage (UNHOMED, HOMED, FIRSTHOMINGRISING, SECONDHOMINGFALLING, SECONDHOMINGRISING, FIRSTHOMINGFALLING, MOVEPASTHOMESWITCH, \
-        MOVETOHOMESWITCH, GOTOOFFSET)", true, false, &s_homingStage },
-    { "tmcinfo", "tmi", "-", "Request statistical information from the TMC2209", true, false, &s_tmcInfo }
+    { "setposition", "sp", "0-65535", "Set mute position", false, false, &s_setPosition, eCommandType::SimpleUInt16 },
+    { "fullmute", "fm", "1|0", "Put mute in full mute position (conditional)", false, false, &s_fullMute, eCommandType::Conditional  },
+    { "halfmute", "hfm", "1|0", "Put mute in half mute position (conditional)", false, false, &s_halfMute, eCommandType::Conditional  },
+    { "rest", "rs", "1|0", "Put mute in rest position (conditional)", false, false, &s_rest, eCommandType::Conditional  },
+    { "savefull", "sf", "1|0", "Save current mute position as full mute position (conditional)", false, false, &s_saveFull, eCommandType::Conditional  },
+    { "savehalf", "sh", "1|0", "Save current mute position as half mute position (conditional)", false, false, &s_saveHalf, eCommandType::Conditional  },
+    { "saverest", "sr", "1|0", "Save current mute position as mute rest position (conditional)", false, false, &s_saveRest, eCommandType::Conditional  },
+    { "fullmuteposition", "fmp", "0-65535", "Mute full mute position", false, true, s_fullMutePosition, eCommandType::SimpleUInt16 },
+    { "halfmuteposition", "hmp", "0-65535", "Mute half mute position", false, true, s_halfMutePosition, eCommandType::SimpleUInt16 },
+    { "restposition", "rp", "0-65535", "Mute rest position", false, true, s_restPosition, eCommandType::SimpleUInt16 },
+    { "sustain", "su", "0|1", "Setting sustain on (1) or off (0)", false, false, s_sustain, eCommandType::SimpleBool  },
+    { "backoff", "bo", "0-65535", "Setting the time that the mute stays in the mutefullmute position before automatically going into rest, set in mS", false, true, &s_backoff, eCommandType::Milliseconds },
+    { "home", "hm", "-", "Home mute", false, false, &s_home, eCommandType::Immediate  },
+    { "hardwareposition", "hwp", "0-65535", "Sets the mute position without min/max scaling", true, false, &s_setHardwarePosition, eCommandType::SimpleUInt16 },
+    { "completetask", "cpt", "-", "Requests a callback when the current operation is finished", true, false, &s_completeTask, eCommandType::Immediate },
+    { "autocorrect", "ac", "1|0", "Enables auto correct positioning that uses the homing sensor to correct positioning on the fly", true, false, &s_autoCorrect, eCommandType::SimpleBool },
+    { "homingsensed", "hms", "-", "Requests whether the homing sensor is currently active or not", true, false, &s_homingSensed, eCommandType::RequestOnly },
+    { "movedirection", "md", "-", "Requests the current direction of movement (0 Forward, 1 Reverse)", true, false, &s_moveDirection, eCommandType::RequestOnly },
+    { "currentstep", "cs", "-", "Requests the current step", true, false, &s_currentStep, eCommandType::RequestOnly },
+    { "homingpoint", "hmp", "edge,direction", "Requests the given homing point", true, false, &s_homingPoint, eCommandType::Data },
+    { "homingstage", "hms", "-", "Requests the current homing stage (UNHOMED, HOMED, FIRSTHOMINGRISING, SECONDHOMINGFALLING, SECONDHOMINGRISING, FIRSTHOMINGFALLING, MOVEPASTHOMESWITCH, MOVETOHOMESWITCH, GOTOOFFSET)", true, false, &s_homingStage, eCommandType::RequestOnly },
+    { "tmcinfo", "tmi", "-", "Request statistical information from the TMC2209", true, false, &s_tmcInfo, eCommandType::RequestOnly }
 };
 
 getModuleCount(MuteControl)
@@ -34,7 +33,7 @@ getModuleCount(MuteControl)
 MuteControl::MuteControl(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensor) {
     mute = new Mute(stepEnPin, stepDirPin, stepStepPin, stepSerialPort, stepHomeSensor);
 
-    moduleID = new ModuleID("mute", "mu", "Mute controller v1.0", eModuleType::hardware);
+//    moduleID = new ModuleID("mute", "mu", "Mute controller v1.0", eModuleType::hardware);
 }
 
 CREATE_MODULE_COMMAND_FUNCTION(setPosition, MuteControl) {
