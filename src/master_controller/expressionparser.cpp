@@ -1,0 +1,106 @@
+#ifndef EXPRESSIONPARSER_C
+#define EXPRESSIONPARSER_C
+
+#include "master_controller/expressionparser.h"
+
+#define mapSize 12    // C  C# D  D# E  F  F# G  G# A  A# B
+double dMap[mapSize] = { 1, 1, 0, 1, 2, 1, 0, 0, 1, 0, 1, 2 };
+double epZeroThreshold = 200;
+
+ExpressionParser::ExpressionParser() {
+    registerFunction("note", &dnote, TE_VARIABLE);
+    registerFunction("velocity", &dvelocity, TE_VARIABLE);
+    registerFunction("notecount", &dnotecount, TE_VARIABLE);
+    registerFunction("pressure", &dpressure, TE_VARIABLE);
+    registerFunction("value", &dvalue, TE_VARIABLE);
+    registerFunction("pitch", &dpitch, TE_VARIABLE);
+    registerFunction("program", &dprogram, TE_VARIABLE);
+    registerFunction("uv0", &duv[0], TE_VARIABLE);
+    registerFunction("uv1", &duv[1], TE_VARIABLE);
+    registerFunction("uv2", &duv[2], TE_VARIABLE);
+    registerFunction("uv3", &duv[3], TE_VARIABLE);
+    registerFunction("uv4", &duv[4], TE_VARIABLE);
+    registerFunction("uv5", &duv[5], TE_VARIABLE);
+    registerFunction("uv6", &duv[6], TE_VARIABLE);
+    registerFunction("uv7", &duv[7], TE_VARIABLE);
+    registerFunction("uv8", &duv[8], TE_VARIABLE);
+    registerFunction("uv9", &duv[9], TE_VARIABLE);
+    registerFunction("bool", (const void*) &expBool, TE_FUNCTION1);
+    registerFunction("ibool", (const void*) &expIBool, TE_FUNCTION1);
+    registerFunction("deadband", (const void*) &deadband, TE_FUNCTION2);
+    registerFunction("zerothreshold", (const void*) &zeroThreshold, TE_FUNCTION1);
+}
+
+void ExpressionParser::registerFunction(const char *name, const void *address, int type) {
+    expFunctions.push_back({ name, address, type });
+}
+/*
+void ExpressionParser::setFunctionPointer(const char* name, const void* address, int type) {
+    for (int i=0; i<expFunctionCount; i++) {
+        if (expFunctions[i].name == name) {
+            expFunctions[i].address = address;
+            expFunctions[i].type = type;
+            return;
+        }
+    }
+}
+*/
+bool ExpressionParser::setVariable(const char* name, double value) {
+    for (int i=0; i<expFunctionCount; i++) {
+        if (expFunctions[i].name == name) {
+            double *ptr = const_cast<double*>(static_cast<const double*>(expFunctions[i].address));
+            *ptr = value;
+            return true;
+        }
+    }
+    return false;
+}
+
+double ExpressionParser::expBool(double input) {
+    if (input <= 0) { return 0; } else { return 1; };
+}
+
+double ExpressionParser::expIBool(double input) {
+    if (input <= 0) { return 1; } else { return 0; };
+}
+
+double ExpressionParser::deadband(double value, double threshold) {
+    double target = 0;
+    if ((value < (target + threshold)) && (value > (target - threshold))) { return target; } else {
+        if (value > target) {
+            return value - threshold;
+        } else {
+            return value + threshold;
+        }
+
+    };
+}
+
+double ExpressionParser::zeroThreshold(double value) {
+    if (value < epZeroThreshold) {
+        return 0;
+    } else {
+        return value;
+    }
+}
+
+String ExpressionParser::parseCommandExpressions(String inExpression) {
+    const char* expression = inExpression.c_str();
+    String outExpression;
+    int err;
+    te_expr *n = te_compile(expression, expFunctions.data(), expFunctions.size(), &err);
+    double r = -1;
+    if (n) {
+      r = te_eval(n);
+      outExpression = String(r, 5);
+    } else {
+      debugPrintln("Not an expression '" + inExpression + "'", debugPrintType::Debug);
+      return inExpression;
+    }
+    te_free(n);
+    return outExpression;
+}
+
+/// Parses out a commandItem objects arguments with a expression parser using a list of variables
+
+#endif // EXPRESSIONPARSER_C

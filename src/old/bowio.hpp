@@ -19,12 +19,12 @@
 #ifndef BOWIO_H
 #define BOWIO_H
 
-#include "WProgram.h"
+#include "base/arduinorequired.hpp"
 #include "Teensy_PWM.h"
 
-#include "tmc2209_servostepper.cpp"
-#include "dcmotorcontrol.cpp"
-#include "bowpressure.cpp"
+#include "generic_functions/tmc2209_servostepper.hpp"
+#include "generic_functions/dcmotorcontrol.hpp"
+#include "bow/bowpressure.hpp"
 
 /**
  * @file bowio.hpp

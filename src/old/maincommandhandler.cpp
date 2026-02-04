@@ -17,6 +17,8 @@
  * Copyright (C) 2024 Karl Ekdahl
  */
 
+ #include "base/module.hpp"
+
 serialCommandItem serialCommandsMain[] = {
   { "requestinfo", "rqi", "command", "Retrives rather than sets data associated with a command, if appliccable"},
   { "module", "m", "0-15", "Sets the currently active string module"},

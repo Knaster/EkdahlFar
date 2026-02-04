@@ -138,38 +138,48 @@
 			<Add after="arm-none-eabi-objdump -d ${TARGET_OUTPUT_FILE} &gt; ${TARGET_OUTPUT_DIR}${TARGET_OUTPUT_BASENAME}.lst" />
 			<Add after="size ${TARGET_OUTPUT_FILE} --format=sysv" />
 		</ExtraCommands>
-		<Unit filename="include/automaticversion.hpp" />
-		<Unit filename="include/averager.h" />
-		<Unit filename="include/basemodule.hpp" />
-		<Unit filename="include/bowActuators.hpp" />
-		<Unit filename="include/bowcalibration.hpp" />
-		<Unit filename="include/bowcontrol.hpp" />
-		<Unit filename="include/bowpressure.hpp" />
-		<Unit filename="include/controlReader.hpp" />
-		<Unit filename="include/dcmotorcontrol.hpp" />
-		<Unit filename="include/expressionparser.h" />
-		<Unit filename="include/farsingle.hpp" />
-		<Unit filename="include/harmonicSeries.hpp" />
-		<Unit filename="include/harmonicserieshandler.hpp" />
-		<Unit filename="include/midi.h" />
-		<Unit filename="include/midiconfigurationhandler.hpp" />
-		<Unit filename="include/midimessageconfiguration.hpp" />
-		<Unit filename="include/module.hpp" />
-		<Unit filename="include/modulegroup.hpp" />
-		<Unit filename="include/modulehandler.hpp" />
-		<Unit filename="include/modulesystembasics.hpp" />
-		<Unit filename="include/modulesystemglobalfunctions.hpp" />
-		<Unit filename="include/mute.hpp" />
-		<Unit filename="include/mutecalibration.hpp" />
-		<Unit filename="include/mutecontrol.hpp" />
-		<Unit filename="include/pidcontroller.hpp" />
-		<Unit filename="include/plugin_adsr.hpp" />
-		<Unit filename="include/plugin_lfo.hpp" />
-		<Unit filename="include/plugin_map.hpp" />
-		<Unit filename="include/plugin_mult.hpp" />
-		<Unit filename="include/pluginhandler.hpp" />
-		<Unit filename="include/solenoid.hpp" />
-		<Unit filename="include/tmc2209_servostepper.hpp" />
+		<Unit filename="include/base/arduinorequired.hpp" />
+		<Unit filename="include/base/commandparser.hpp" />
+		<Unit filename="include/base/debugprint.hpp" />
+		<Unit filename="include/base/module.hpp" />
+		<Unit filename="include/base/modulegroup.hpp" />
+		<Unit filename="include/base/modulehandler.hpp" />
+		<Unit filename="include/base/modulesystembasics.hpp" />
+		<Unit filename="include/base/modulesystemglobalfunctions.hpp" />
+		<Unit filename="include/bow/bowcalibration.hpp" />
+		<Unit filename="include/bow/bowcontrol.hpp" />
+		<Unit filename="include/bow/bowpressure.hpp" />
+		<Unit filename="include/controlbox/averager.h" />
+		<Unit filename="include/controlbox/controlReader.hpp" />
+		<Unit filename="include/generic_functions/bowActuators.hpp" />
+		<Unit filename="include/generic_functions/bowactuator.hpp" />
+		<Unit filename="include/generic_functions/calibrationhelpers.hpp" />
+		<Unit filename="include/generic_functions/dcmotorcontrol.hpp" />
+		<Unit filename="include/generic_functions/harmonicSeries.hpp" />
+		<Unit filename="include/generic_functions/harmonicserieshandler.hpp" />
+		<Unit filename="include/generic_functions/pidcontroller.hpp" />
+		<Unit filename="include/generic_functions/servostepper.hpp" />
+		<Unit filename="include/generic_functions/tmc2209_servostepper.hpp" />
+		<Unit filename="include/master_controller/automaticversion.hpp" />
+		<Unit filename="include/master_controller/expressionparser.h" />
+		<Unit filename="include/master_controller/global_generics.hpp" />
+		<Unit filename="include/master_controller/midi.h" />
+		<Unit filename="include/master_controller/midiconfigurationhandler.hpp" />
+		<Unit filename="include/master_controller/midimessageconfiguration.hpp" />
+		<Unit filename="include/mute/mute.hpp" />
+		<Unit filename="include/mute/mutecalibration.hpp" />
+		<Unit filename="include/mute/mutecontrol.hpp" />
+		<Unit filename="include/pickup/audioanalyze.h" />
+		<Unit filename="include/plugins/plugin_adsr.hpp" />
+		<Unit filename="include/plugins/plugin_lfo.hpp" />
+		<Unit filename="include/plugins/plugin_map.hpp" />
+		<Unit filename="include/plugins/plugin_mult.hpp" />
+		<Unit filename="include/plugins/pluginhandler.hpp" />
+		<Unit filename="include/single_far/basemodule.hpp" />
+		<Unit filename="include/single_far/farsingle.hpp" />
+		<Unit filename="include/single_far/farsinglemodulehandler.hpp" />
+		<Unit filename="include/solenoid/solenoid.hpp" />
+		<Unit filename="include/teensy_specific/eepromhelpers.hpp" />
 		<Unit filename="lib/Adafruit_ADS1X15/Adafruit_ADS1X15.cpp" />
 		<Unit filename="lib/Adafruit_ADS1X15/Adafruit_ADS1X15.h" />
 		<Unit filename="lib/Adafruit_BusIO/Adafruit_BusIO_Register.cpp" />
@@ -1064,135 +1074,53 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="lib/tinyexpr/src/tinyexpr.h" />
-		<Unit filename="src/audioanalyze.h" />
-		<Unit filename="src/basemodule.cpp">
+		<Unit filename="src/base/arduinorequired.cpp" />
+		<Unit filename="src/base/commandparser.cpp" />
+		<Unit filename="src/base/debugprint.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/bowActuators.cpp">
+		<Unit filename="src/base/module.cpp" />
+		<Unit filename="src/base/modulegroup.cpp" />
+		<Unit filename="src/base/modulehandler.cpp" />
+		<Unit filename="src/base/modulesystembasics.cpp" />
+		<Unit filename="src/base/modulesystemglobalfunctions.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/bowcalibration.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/bowcontrol.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/bowpressure.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/calibrationhelpers.hpp" />
-		<Unit filename="src/commandparser.hpp" />
-		<Unit filename="src/controlReader.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/dcmotorcontrol.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/debugprint.hpp" />
-		<Unit filename="src/eepromhelpers.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/expressionparser.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/farsingle.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/harmonicSeries.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/harmonicserieshandler.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/isrclasswrapper.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/main.cpp" />
-		<Unit filename="src/midi.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/midiconfigurationhandler.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/midimessageconfiguration.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/module.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/modulegroup.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/modulehandler.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/mute.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/mutecalibration.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/mutecontrol.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/name.c">
+		<Unit filename="src/bow/bowcalibration.cpp" />
+		<Unit filename="src/bow/bowcontrol.cpp" />
+		<Unit filename="src/bow/bowpressure.cpp" />
+		<Unit filename="src/controlbox/controlReader.cpp" />
+		<Unit filename="src/generic_functions/bowActuators.cpp" />
+		<Unit filename="src/generic_functions/bowactuator.cpp" />
+		<Unit filename="src/generic_functions/calibrationhelpers.cpp" />
+		<Unit filename="src/generic_functions/dcmotorcontrol.cpp" />
+		<Unit filename="src/generic_functions/harmonicSeries.cpp" />
+		<Unit filename="src/generic_functions/harmonicserieshandler.cpp" />
+		<Unit filename="src/generic_functions/pidcontroller.cpp" />
+		<Unit filename="src/generic_functions/tmc2209_servostepper.cpp" />
+		<Unit filename="src/master_controller/expressionparser.cpp" />
+		<Unit filename="src/master_controller/globalgenerics.cpp" />
+		<Unit filename="src/master_controller/midi.cpp" />
+		<Unit filename="src/master_controller/midiconfigurationhandler.cpp" />
+		<Unit filename="src/master_controller/midimessageconfiguration.cpp" />
+		<Unit filename="src/mute/mute.cpp" />
+		<Unit filename="src/mute/mutecalibration.cpp" />
+		<Unit filename="src/mute/mutecontrol.cpp" />
+		<Unit filename="src/pickup/audioanalyze.cpp" />
+		<Unit filename="src/pluginhandler/plugin_adsr.cpp" />
+		<Unit filename="src/pluginhandler/plugin_lfo.cpp" />
+		<Unit filename="src/pluginhandler/plugin_map.cpp" />
+		<Unit filename="src/pluginhandler/plugin_mult.cpp" />
+		<Unit filename="src/pluginhandler/pluginhandler.cpp" />
+		<Unit filename="src/single_far/basemodule.cpp" />
+		<Unit filename="src/single_far/farsingle.cpp" />
+		<Unit filename="src/single_far/main.cpp" />
+		<Unit filename="src/single_far/name.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="src/pidcontroller.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/plugin_adsr.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/plugin_lfo.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/plugin_map.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/plugin_mult.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/pluginhandler.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/servostepper.hpp" />
-		<Unit filename="src/solenoid.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/tmc2209_servostepper.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
+		<Unit filename="src/solenoid/solenoid.cpp" />
 		<Unit filename="trashcollection.txt" />
 		<Extensions />
 	</Project>
