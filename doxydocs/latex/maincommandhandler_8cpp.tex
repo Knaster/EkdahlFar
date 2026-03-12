@@ -1,16 +1,24 @@
 \doxysection{maincommandhandler.\+cpp File Reference}
 \hypertarget{maincommandhandler_8cpp}{}\label{maincommandhandler_8cpp}\index{maincommandhandler.cpp@{maincommandhandler.cpp}}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+{\ttfamily \#include "{}base/module.\+hpp"{}}\newline
+Include dependency graph for maincommandhandler.\+cpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=226pt]{maincommandhandler_8cpp__dep__incl}
+\includegraphics[width=350pt]{maincommandhandler_8cpp__incl}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{maincommandhandler_8cpp_a2c60c46c0df6601dd7a54cc4af11227d}{process\+Main\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegated=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+void \mbox{\hyperlink{maincommandhandler_8cpp_acfe68e77f9493dfcc4ccb14e94cef125}{process\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool delegated=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\item 
+void \mbox{\hyperlink{maincommandhandler_8cpp_aeed07bbc6fc2f7cd110ac014c4d661bf}{process\+Command\+List}} (\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}in\+Commands, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses)
+\item 
+void \mbox{\hyperlink{maincommandhandler_8cpp_ade3cae98a475d7013e06b1b18ff8bb6c}{dir}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, String long\+Prefix, String short\+Prefix)
+\item 
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{maincommandhandler_8cpp_a2c60c46c0df6601dd7a54cc4af11227d}{process\+Main\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegated=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
 \item 
 void \mbox{\hyperlink{maincommandhandler_8cpp_aa8ffdf555ac7c84e88dd4ad41098e41a}{process\+Serial\+Commands}} ()
 \end{DoxyCompactItemize}
@@ -22,11 +30,69 @@ void \mbox{\hyperlink{maincommandhandler_8cpp_aa8ffdf555ac7c84e88dd4ad41098e41a}
 
 
 \doxysubsection{Function Documentation}
+\Hypertarget{maincommandhandler_8cpp_ade3cae98a475d7013e06b1b18ff8bb6c}\label{maincommandhandler_8cpp_ade3cae98a475d7013e06b1b18ff8bb6c} 
+\index{maincommandhandler.cpp@{maincommandhandler.cpp}!dir@{dir}}
+\index{dir@{dir}!maincommandhandler.cpp@{maincommandhandler.cpp}}
+\doxysubsubsection{\texorpdfstring{dir()}{dir()}}
+{\footnotesize\ttfamily void dir (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{String}]{long\+Prefix,  }\item[{String}]{short\+Prefix }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{maincommandhandler_8cpp_ade3cae98a475d7013e06b1b18ff8bb6c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{maincommandhandler_8cpp_acfe68e77f9493dfcc4ccb14e94cef125}\label{maincommandhandler_8cpp_acfe68e77f9493dfcc4ccb14e94cef125} 
+\index{maincommandhandler.cpp@{maincommandhandler.cpp}!processCommand@{processCommand}}
+\index{processCommand@{processCommand}!maincommandhandler.cpp@{maincommandhandler.cpp}}
+\doxysubsubsection{\texorpdfstring{processCommand()}{processCommand()}}
+{\footnotesize\ttfamily void process\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{maincommandhandler_8cpp_acfe68e77f9493dfcc4ccb14e94cef125_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{maincommandhandler_8cpp_acfe68e77f9493dfcc4ccb14e94cef125_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{maincommandhandler_8cpp_aeed07bbc6fc2f7cd110ac014c4d661bf}\label{maincommandhandler_8cpp_aeed07bbc6fc2f7cd110ac014c4d661bf} 
+\index{maincommandhandler.cpp@{maincommandhandler.cpp}!processCommandList@{processCommandList}}
+\index{processCommandList@{processCommandList}!maincommandhandler.cpp@{maincommandhandler.cpp}}
+\doxysubsubsection{\texorpdfstring{processCommandList()}{processCommandList()}}
+{\footnotesize\ttfamily void process\+Command\+List (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{in\+Commands,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{maincommandhandler_8cpp_aeed07bbc6fc2f7cd110ac014c4d661bf_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{maincommandhandler_8cpp_aeed07bbc6fc2f7cd110ac014c4d661bf_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{maincommandhandler_8cpp_a2c60c46c0df6601dd7a54cc4af11227d}\label{maincommandhandler_8cpp_a2c60c46c0df6601dd7a54cc4af11227d} 
 \index{maincommandhandler.cpp@{maincommandhandler.cpp}!processMainCommands@{processMainCommands}}
 \index{processMainCommands@{processMainCommands}!maincommandhandler.cpp@{maincommandhandler.cpp}}
 \doxysubsubsection{\texorpdfstring{processMainCommands()}{processMainCommands()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} process\+Main\+Commands (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} process\+Main\+Commands (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -36,7 +102,8 @@ Here is the call graph for this function\+:
 \includegraphics[width=350pt]{maincommandhandler_8cpp_a2c60c46c0df6601dd7a54cc4af11227d_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -55,13 +122,6 @@ Here is the call graph for this function\+:
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{maincommandhandler_8cpp_aa8ffdf555ac7c84e88dd4ad41098e41a_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=291pt]{maincommandhandler_8cpp_aa8ffdf555ac7c84e88dd4ad41098e41a_icgraph}
 \end{center}
 \end{figure}
 

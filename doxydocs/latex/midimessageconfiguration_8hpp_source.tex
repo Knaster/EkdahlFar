@@ -1,0 +1,86 @@
+\doxysection{midimessageconfiguration.\+hpp}
+\hypertarget{midimessageconfiguration_8hpp_source}{}\label{midimessageconfiguration_8hpp_source}\index{midimessageconfiguration.hpp@{midimessageconfiguration.hpp}}
+\mbox{\hyperlink{midimessageconfiguration_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ MIDIMESSAGECONFIGURATION\_H}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ MIDIMESSAGECONFIGURATION\_H}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{arduinorequired_8hpp}{base/arduinorequired.hpp}}"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{module_8hpp}{base/module.hpp}}"{}}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessageConfiguration}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classModule}{Module}}\ \{}
+\DoxyCodeLine{00027\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a726e985c9256abcd3e04b255b31cba09}{SETMODULEID}}(\textcolor{stringliteral}{"{}midiconfiguration"{}},\ \textcolor{stringliteral}{"{}mc"{}},\ \textcolor{stringliteral}{"{}MIDI\ message\ configuration\ 1.0"{}},\ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8}{eModuleType::software}},\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(eventHandler,\ \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessageConfiguration}})}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(addcc,\ \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessageConfiguration}})}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(ccRemove,\ \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessageConfiguration}})}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(defaults,\ \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessageConfiguration}})}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(receiveChannel,\ \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessageConfiguration}})}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(allNotesOff,\ \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessageConfiguration}})}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(namef,\ \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessageConfiguration}})}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ String\ *\mbox{\hyperlink{classMIDIMessageConfiguration_ae2069cf2e9bc95d044e15545183ad509}{name}};}
+\DoxyCodeLine{00041\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ \ String\ *noteOn;}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ \ \ \ String\ *noteOff;}}
+\DoxyCodeLine{00044\ \textcolor{comment}{\ \ \ \ String\ *polyAftertouch;}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ \ String\ *programChange;}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ \ String\ *channelAftertouch;}}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ \ \ String\ *pitchBend;}}
+\DoxyCodeLine{00048\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00049\ \ \ \ \ enum\ \mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96}{eMIDIEvent}}\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96ae82b2f2dbb53953f9f7ed60987dc7b45}{ev\_noteOn}}\ =\ 0,}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96af6379cac6b7547ac447bd93e2f5f0f37}{ev\_noteOff}}\ =\ 1,}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96a45aa3dd284ec0ca600be61b4ec7dc5ad}{ev\_polyAfterTouch}}\ =\ 2,}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96a9f3f462099844302c31319bdd2298bb5}{ev\_programChange}}\ =\ 3,}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96a66def36698da5fd3656f4ea2f4ea42de}{ev\_channelAftertouch}}\ =\ 4,}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96a0e16015a9296fedf512d2409bf14ff5d}{ev\_PitchBend}}\ =\ 5,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96ab2e58207991f612d9708d410fc275ed2}{ev\_cc}}\ =\ 6}
+\DoxyCodeLine{00057\ \ \ \ \ \};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{const}\ String\ \mbox{\hyperlink{classMIDIMessageConfiguration_a5de3cb86fd8cbeafd58f3fb4c907e8cf}{eventID}}[7]\ =\ \{\ \textcolor{stringliteral}{"{}noteon"{}},\ \textcolor{stringliteral}{"{}noteoff"{}},\ \textcolor{stringliteral}{"{}pat"{}},\ \textcolor{stringliteral}{"{}pc"{}},\ \textcolor{stringliteral}{"{}cat"{}},\ \textcolor{stringliteral}{"{}pb"{}},\ \textcolor{stringliteral}{"{}cc"{}}\ \};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ String\ \mbox{\hyperlink{classMIDIMessageConfiguration_aa71e31509c7f8f753923cf1d3fe2a4e4}{midiEventMap}}[7];}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classMIDIMessageConfiguration_a2cc74ca1efd089ed74ccab27c56877d5}{midiRxChannel}};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structMIDIMessageConfiguration_1_1__controlChange}{\_controlChange}}\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ \mbox{\hyperlink{structMIDIMessageConfiguration_1_1__controlChange_ad9be849b7b691f0a87bb37e831a88589}{control}};}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ String\ \mbox{\hyperlink{structMIDIMessageConfiguration_1_1__controlChange_a42f7874fbecfce9e2ee05d2853525aa1}{command}};}
+\DoxyCodeLine{00068\ \ \ \ \ \};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ std::vector<\_controlChange>\ \mbox{\hyperlink{classMIDIMessageConfiguration_a8ed406457dbd4ec70290172f64d68b3d}{controlChange}};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{classMIDIMessageConfiguration_a1399579c19f749da2de33d36892352ec}{MIDIMessageConfiguration}}();}
+\DoxyCodeLine{00073\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classMIDIMessageConfiguration_a4dc791504754091b8e32ac443549d92a}{setCC}}(uint8\_t\ controller,\ String\ *command);}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMIDIMessageConfiguration_a13912e21c9c6468a7e6f3fde6580ac11}{removeCC}}(uint8\_t\ controller);}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIMessageConfiguration_a107f06d383998a78587da419daf0081d}{setDefaultBaseParameters}}();}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIMessageConfiguration_adb2fbb2629cedd665881cc1eb031ab06}{setDefaultCCs}}();}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIMessageConfiguration_a130a3aa44264f76a9ebbcd469de3a826}{setDefaults}}();}
+\DoxyCodeLine{00078\ \textcolor{comment}{//\ \ \ \ String\ dumpData();}}
+\DoxyCodeLine{00079\ \};}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

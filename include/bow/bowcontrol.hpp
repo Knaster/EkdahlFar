@@ -24,6 +24,9 @@
 #include "generic_functions/pidcontroller.hpp"
 #include "generic_functions/harmonicserieshandler.hpp"
 
+#include <commandlist.hpp>
+extern CommandList globalCommands;
+extern CommandList globalResponseCommands;
 
 /***** NEW CLASS *****/
 
@@ -57,10 +60,6 @@ public:
                        char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin);
 #endif // EXTERNAL_PRESSURE_CONTROLLER
 
-    eProcessResult processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                               commandList *delegatedCommands = nullptr);
-    eProcessResult processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                                    commandList *delegatedCommands = nullptr);
 private:
     uint16_t pidUpdateInterval = 1000;          ///< The interval at which the PID is being called, given in uS
 
@@ -202,7 +201,7 @@ public:
     // Handles time-critical timing of stepper motor update - automatically called through stepInervalCallback - DO NOT MANUALLY CALL THIS
     void updateServo() { bowPressure->updateServo(); }
 
-    void setStepIntervalCallback(void *stepIntervalCallback) { bowPressure->setStepIntervalCallback(stepIntervalCallback); }
+    void setStepIntervalCallback(void (*stepIntervalCallback)()) { bowPressure->setStepIntervalCallback(stepIntervalCallback); }
 #endif // EXTERNAL_PRESSURE_CONTROLLER
 /***** Internal commands for debugging use, most likely to be removed *****/
 #ifndef EXTERNAL_PRESSURE_CONTROLLER

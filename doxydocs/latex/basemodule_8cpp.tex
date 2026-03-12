@@ -1,20 +1,16 @@
 \doxysection{basemodule.\+cpp File Reference}
 \hypertarget{basemodule_8cpp}{}\label{basemodule_8cpp}\index{basemodule.cpp@{basemodule.cpp}}
-{\ttfamily \#include "{}basemodule.\+hpp"{}}\newline
+{\ttfamily \#include "{}single\+\_\+far/basemodule.\+hpp"{}}\newline
+{\ttfamily \#include "{}plugins/pluginhandler.\+hpp"{}}\newline
+{\ttfamily \#include "{}master\+\_\+controller/automaticversion.\+hpp"{}}\newline
+{\ttfamily \#include "{}teensy\+\_\+specific/eepromhelpers.\+hpp"{}}\newline
+{\ttfamily \#include "{}master\+\_\+controller/global\+\_\+generics.\+hpp"{}}\newline
 Include dependency graph for basemodule.\+cpp\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=178pt]{basemodule_8cpp__incl}
-\end{center}
-\end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=177pt]{basemodule_8cpp__dep__incl}
+\includegraphics[width=350pt]{basemodule_8cpp__incl}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Macros}
@@ -25,39 +21,41 @@ This graph shows which files directly or indirectly include this file\+:
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{basemodule_8cpp_aa47671a2a2669c2c4a4c5f78c6f75e7a}{get\+Module\+Count}} (Base\+Module) Base\+Module
+\mbox{\hyperlink{basemodule_8cpp_aa47671a2a2669c2c4a4c5f78c6f75e7a}{get\+Module\+Count}} (\mbox{\hyperlink{classBaseModule}{Base\+Module}}) \mbox{\hyperlink{classBaseModule}{Base\+Module}}
 \item 
-\mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (\mbox{\hyperlink{debugprint_8hpp_a12ba011dd5b1adf8f77184369290a419}{debug\+Print}}, Base\+Module)
+\mbox{\hyperlink{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (\mbox{\hyperlink{debugprint_8cpp_a12ba011dd5b1adf8f77184369290a419}{debug\+Print}}, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
 \item 
-\mbox{\hyperlink{basemodule_8cpp_a4510980a05f207365b95a48c18b363f2}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (version, Base\+Module)
+\mbox{\hyperlink{basemodule_8cpp_a4510980a05f207365b95a48c18b363f2}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (version, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
 \item 
-\mbox{\hyperlink{basemodule_8cpp_ac317bc05a1b96b0f4c3d4ce5f142e1da}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (save\+All\+Parameters, Base\+Module)
+\mbox{\hyperlink{basemodule_8cpp_ac317bc05a1b96b0f4c3d4ce5f142e1da}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (save\+All\+Parameters, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
 \item 
-\mbox{\hyperlink{basemodule_8cpp_a58ed360cab349494780c5759b7e89351}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (load\+All\+Parameters, Base\+Module)
+\mbox{\hyperlink{basemodule_8cpp_a58ed360cab349494780c5759b7e89351}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (load\+All\+Parameters, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
 \item 
-\mbox{\hyperlink{basemodule_8cpp_a44aae970f001950f604333fe09455f3b}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (reset\+All\+Parameters, Base\+Module)
+\mbox{\hyperlink{basemodule_8cpp_a44aae970f001950f604333fe09455f3b}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (reset\+All\+Parameters, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
 \item 
-\mbox{\hyperlink{basemodule_8cpp_ac2973054fec62f324bb1973b73bc05f6}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (user\+Variables, Base\+Module)
+\mbox{\hyperlink{basemodule_8cpp_ac2973054fec62f324bb1973b73bc05f6}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (user\+Variables, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
 \item 
-\mbox{\hyperlink{basemodule_8cpp_a462d883cc77d48f600d9b70c7b25c2c3}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (expression\+Parser\+Evaluate, Base\+Module)
+\mbox{\hyperlink{basemodule_8cpp_a462d883cc77d48f600d9b70c7b25c2c3}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (expression\+Parser\+Evaluate, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
 \item 
-\mbox{\hyperlink{basemodule_8cpp_a5089e57621093cff8363689451456785}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (if\+Equal, Base\+Module)
+\mbox{\hyperlink{basemodule_8cpp_a5089e57621093cff8363689451456785}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (if\+Equal, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
 \item 
-\mbox{\hyperlink{basemodule_8cpp_a9b27d7f80d54f745405d11e49b23020f}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (if\+Greater, Base\+Module)
+\mbox{\hyperlink{basemodule_8cpp_a9b27d7f80d54f745405d11e49b23020f}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (if\+Greater, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
 \item 
-\mbox{\hyperlink{basemodule_8cpp_adf91635bccfefb372de2367784afbef1}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (if\+Less, Base\+Module)
+\mbox{\hyperlink{basemodule_8cpp_adf91635bccfefb372de2367784afbef1}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (if\+Less, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
 \item 
-\mbox{\hyperlink{basemodule_8cpp_a79f6d98af3f844c17490306059c3d432}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (reset, Base\+Module)
+\mbox{\hyperlink{basemodule_8cpp_a79f6d98af3f844c17490306059c3d432}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (reset, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
 \item 
-\mbox{\hyperlink{basemodule_8cpp_ac8f0ce3d3c2c3f48ccac3e7a484cf65c}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (nick, Base\+Module)
+\mbox{\hyperlink{basemodule_8cpp_ac8f0ce3d3c2c3f48ccac3e7a484cf65c}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (nick, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
 \item 
-\mbox{\hyperlink{basemodule_8cpp_aa3f2a8322e4d07ae0f114fc7258f1cf3}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (no\+Operation, Base\+Module)
+\mbox{\hyperlink{basemodule_8cpp_aa3f2a8322e4d07ae0f114fc7258f1cf3}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (no\+Operation, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
 \item 
-\mbox{\hyperlink{basemodule_8cpp_ab2d4c919c340d9ee2b77c23e7cf7a0b8}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (dump, Base\+Module)
+\mbox{\hyperlink{basemodule_8cpp_ab2d4c919c340d9ee2b77c23e7cf7a0b8}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (dump, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
 \item 
-\mbox{\hyperlink{basemodule_8cpp_ae5c45d96aa6b1e0cc80d6afe6097354e}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (request\+Info, Base\+Module)
+\mbox{\hyperlink{basemodule_8cpp_ae5c45d96aa6b1e0cc80d6afe6097354e}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (request\+Info, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
 \item 
-\mbox{\hyperlink{basemodule_8cpp_a695f5c5044dc9e9cfb9d4517a5edd174}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (free\+RAM, Base\+Module)
+\mbox{\hyperlink{basemodule_8cpp_a695f5c5044dc9e9cfb9d4517a5edd174}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (free\+RAM, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
+\item 
+\mbox{\hyperlink{basemodule_8cpp_a939964db1f1f19c3f68f492c6261abdd}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (test, \mbox{\hyperlink{classBaseModule}{Base\+Module}})
 \end{DoxyCompactItemize}
 
 
@@ -74,11 +72,10 @@ This graph shows which files directly or indirectly include this file\+:
 \Hypertarget{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940}\label{basemodule_8cpp_a41ff7f1395f8f2970c453265c88a7940} 
 \index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [1/16]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{debugprint_8hpp_a12ba011dd5b1adf8f77184369290a419}{debug\+Print}}}]{,  }\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [1/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{debugprint_8cpp_a12ba011dd5b1adf8f77184369290a419}{debug\+Print}}}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -88,17 +85,23 @@ Here is the call graph for this function\+:
 \Hypertarget{basemodule_8cpp_ab2d4c919c340d9ee2b77c23e7cf7a0b8}\label{basemodule_8cpp_ab2d4c919c340d9ee2b77c23e7cf7a0b8} 
 \index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [2/16]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{dump}]{,  }\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [2/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{dump}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{basemodule_8cpp_ab2d4c919c340d9ee2b77c23e7cf7a0b8_cgraph}
+\end{center}
+\end{figure}
 \Hypertarget{basemodule_8cpp_a462d883cc77d48f600d9b70c7b25c2c3}\label{basemodule_8cpp_a462d883cc77d48f600d9b70c7b25c2c3} 
 \index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [3/16]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{expression\+Parser\+Evaluate}]{,  }\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [3/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{expression\+Parser\+Evaluate}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -108,11 +111,10 @@ Here is the call graph for this function\+:
 \Hypertarget{basemodule_8cpp_a695f5c5044dc9e9cfb9d4517a5edd174}\label{basemodule_8cpp_a695f5c5044dc9e9cfb9d4517a5edd174} 
 \index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [4/16]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{free\+RAM}]{,  }\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [4/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{free\+RAM}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -122,11 +124,10 @@ Here is the call graph for this function\+:
 \Hypertarget{basemodule_8cpp_a5089e57621093cff8363689451456785}\label{basemodule_8cpp_a5089e57621093cff8363689451456785} 
 \index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [5/16]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{if\+Equal}]{,  }\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [5/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{if\+Equal}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -136,11 +137,10 @@ Here is the call graph for this function\+:
 \Hypertarget{basemodule_8cpp_a9b27d7f80d54f745405d11e49b23020f}\label{basemodule_8cpp_a9b27d7f80d54f745405d11e49b23020f} 
 \index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [6/16]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{if\+Greater}]{,  }\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [6/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{if\+Greater}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -150,11 +150,10 @@ Here is the call graph for this function\+:
 \Hypertarget{basemodule_8cpp_adf91635bccfefb372de2367784afbef1}\label{basemodule_8cpp_adf91635bccfefb372de2367784afbef1} 
 \index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [7/16]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{if\+Less}]{,  }\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [7/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{if\+Less}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -164,11 +163,10 @@ Here is the call graph for this function\+:
 \Hypertarget{basemodule_8cpp_a58ed360cab349494780c5759b7e89351}\label{basemodule_8cpp_a58ed360cab349494780c5759b7e89351} 
 \index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [8/16]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{load\+All\+Parameters}]{,  }\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [8/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{load\+All\+Parameters}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -178,11 +176,10 @@ Here is the call graph for this function\+:
 \Hypertarget{basemodule_8cpp_ac8f0ce3d3c2c3f48ccac3e7a484cf65c}\label{basemodule_8cpp_ac8f0ce3d3c2c3f48ccac3e7a484cf65c} 
 \index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [9/16]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{nick}]{,  }\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [9/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{nick}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -192,17 +189,16 @@ Here is the call graph for this function\+:
 \Hypertarget{basemodule_8cpp_aa3f2a8322e4d07ae0f114fc7258f1cf3}\label{basemodule_8cpp_aa3f2a8322e4d07ae0f114fc7258f1cf3} 
 \index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [10/16]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{no\+Operation}]{,  }\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [10/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{no\+Operation}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
 \Hypertarget{basemodule_8cpp_ae5c45d96aa6b1e0cc80d6afe6097354e}\label{basemodule_8cpp_ae5c45d96aa6b1e0cc80d6afe6097354e} 
 \index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [11/16]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{request\+Info}]{,  }\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [11/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{request\+Info}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -212,11 +208,10 @@ Here is the call graph for this function\+:
 \Hypertarget{basemodule_8cpp_a79f6d98af3f844c17490306059c3d432}\label{basemodule_8cpp_a79f6d98af3f844c17490306059c3d432} 
 \index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [12/16]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{reset}]{,  }\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [12/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{reset}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -226,11 +221,10 @@ Here is the call graph for this function\+:
 \Hypertarget{basemodule_8cpp_a44aae970f001950f604333fe09455f3b}\label{basemodule_8cpp_a44aae970f001950f604333fe09455f3b} 
 \index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [13/16]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{reset\+All\+Parameters}]{,  }\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [13/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{reset\+All\+Parameters}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -240,25 +234,36 @@ Here is the call graph for this function\+:
 \Hypertarget{basemodule_8cpp_ac317bc05a1b96b0f4c3d4ce5f142e1da}\label{basemodule_8cpp_ac317bc05a1b96b0f4c3d4ce5f142e1da} 
 \index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [14/16]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{save\+All\+Parameters}]{,  }\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [14/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{save\+All\+Parameters}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{basemodule_8cpp_ac317bc05a1b96b0f4c3d4ce5f142e1da_cgraph}
 \end{center}
 \end{figure}
+\Hypertarget{basemodule_8cpp_a939964db1f1f19c3f68f492c6261abdd}\label{basemodule_8cpp_a939964db1f1f19c3f68f492c6261abdd} 
+\index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
+\index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [15/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{test}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=345pt]{basemodule_8cpp_a939964db1f1f19c3f68f492c6261abdd_cgraph}
+\end{center}
+\end{figure}
 \Hypertarget{basemodule_8cpp_ac2973054fec62f324bb1973b73bc05f6}\label{basemodule_8cpp_ac2973054fec62f324bb1973b73bc05f6} 
 \index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [15/16]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{user\+Variables}]{,  }\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [16/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{user\+Variables}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -268,11 +273,10 @@ Here is the call graph for this function\+:
 \Hypertarget{basemodule_8cpp_a4510980a05f207365b95a48c18b363f2}\label{basemodule_8cpp_a4510980a05f207365b95a48c18b363f2} 
 \index{basemodule.cpp@{basemodule.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!basemodule.cpp@{basemodule.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [16/16]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{version}]{,  }\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [17/17]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{version}]{,  }\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -283,5 +287,12 @@ Here is the call graph for this function\+:
 \index{basemodule.cpp@{basemodule.cpp}!getModuleCount@{getModuleCount}}
 \index{getModuleCount@{getModuleCount}!basemodule.cpp@{basemodule.cpp}}
 \doxysubsubsection{\texorpdfstring{getModuleCount()}{getModuleCount()}}
-{\footnotesize\ttfamily get\+Module\+Count (\begin{DoxyParamCaption}\item[{Base\+Module}]{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily get\+Module\+Count (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classBaseModule}{Base\+Module}}}]{ }\end{DoxyParamCaption})}
 
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{basemodule_8cpp_aa47671a2a2669c2c4a4c5f78c6f75e7a_cgraph}
+\end{center}
+\end{figure}

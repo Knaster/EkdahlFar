@@ -30,13 +30,35 @@ void ISR_AdsDataReady2() {
 }
 
 const ModuleCommandDeclaration ControlReader::moduleCommands[] = {
-  { "controldata", "cda", "channel:command string", "Sets the command string invoked when the value on ADC channel [channel] changes", false, true, &s_controlData, eCommandType::OutputAssignment},
-  { "controldefaults", "cde", "-", "Reverts all ADC command strings to default values", false, false, &s_controlDefaults, eCommandType::Immediate },
-  { "datareturn", "dr", "channel:value", "Sent when a new value is presented on one of the ADC channels, cannot be invoked", false, false, &s_dataReturn, eCommandType::ReturnRequest },
-  { "adcsettings", "ads", "channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout", "Explain ADC settings here", false, true, &s_adcSettings, eCommandType::Data },
-  { "testadclatency", "tal", "0-65535", "Test ADC Latency", true, false, &s_testADCLatency, eCommandType::Immediate },
-  { "testadclatencyreturn", "talr", "-", "Return from test", true, false, &s_testADCLatencyReturn, eCommandType::ReturnOnly },
-  { "testadcminmax", "tix", "channel", "Measure min/max value for a given channel and resets the counter", true, false, &s_testADCMinMax, eCommandType::Immediate }
+  { "controldata", "cda", "0-7:outputassignment", "Sets the command string invoked when the value on ADC channel [channel] changes", false, false, &s_controlData,
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
+
+  { "harmonic", "har", "outputassignment", "Sets the command string invoked when the harmonic knob or modulation changes", false, true, &s_controlDataNew,
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
+  { "harmonicshift", "has", "outputassignment", "Sets the command string invoked when the harmonic shift modulation changes", false, true, &s_controlDataNew,
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
+  { "finetune", "fin", "outputassignment", "Sets the command string invoked when the fine tune knob changes", false, true, &s_controlDataNew,
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
+  { "pressure", "pre", "outputassignment", "Sets the command string invoked when the pressure knob or modulation changes", false, true, &s_controlDataNew,
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
+  { "mute", "mut", "outputassignment", "Sets the command string invoked when the mute knob or modulation changes", false, true, &s_controlDataNew,
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
+  { "hammerscale", "hms", "outputassignment", "Sets the command string invoked when the hammer scale knob changes", false, true, &s_controlDataNew,
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
+  { "gate", "gt", "outputassignment", "Sets the command string invoked when the gate switch or modulation changes", false, true, &s_controlDataNew,
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
+  { "hammertrig", "hmt", "outputassignment", "Sets the command string invoked when the hammer trigger modulation changes", false, true, &s_controlDataNew,
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
+
+  { "controldefaults", "cde", "-", "Reverts all ADC command strings to default values", false, false, &s_controlDefaults, eCommandType_data::ectImmediate | eCommandType_function::ectSystem },
+  { "datareturn", "dr", "channel:value", "Sent when a new value is presented on one of the ADC channels, cannot be invoked. Triggers the commands associated with the channel", false, false, &s_dataReturn,
+    eCommandType_data::ectSimpleUInt16 | eCommandType_access::ectSelfInvoked },
+  { "adcsettings", "ads", "channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout", "Explain ADC settings here", false, true, &s_adcSettings,
+    eCommandType_data::ectData | eCommandType_function::ectSystem },
+  { "testadclatency", "tal", "0-65535", "Test ADC Latency", true, false, &s_testADCLatency, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectSystem },
+  { "testadclatencyreturn", "talr", "-", "Return from test", true, false, &s_testADCLatencyReturn, eCommandType_data::ectImmediate | eCommandType_access::ectSelfInvoked },
+  { "testadcminmax", "tix", "channel", "Measure min/max value for a given channel and resets the counter", true, false, &s_testADCMinMax,
+    eCommandType_data::ectData | eCommandType_function::ectSystem }
 };
 
 #define DATARETURN_CMD 2
@@ -88,6 +110,29 @@ CREATE_MODULE_COMMAND_FUNCTION(controlData, ControlReader) {
         if (!checkArguments(inCommandItem, inCommandResponses, 2)) { return eProcessResult::WrongArgumentCount; }
         setADCCommands(channel, stripQuotes(inCommandItem->argument[1]));
         inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(channel) + ":" + delimitExpression(cvInputCommands[channel], true), InfoRequest});
+    }
+    return eProcessResult::Ok;
+};
+
+CREATE_MODULE_COMMAND_FUNCTION(controlDataNew, ControlReader) {
+    if ((!request) and (!checkArguments(inCommandItem, inCommandResponses, 1, true))) { return eProcessResult::WrongArgumentCount; };
+    int8_t channel = -1;
+    for (int i = 0; i < 8; i ++) {
+        if (controlAssignment[i] == thisItem.longCommand) { channel = i; break; }
+    }
+    if (channel == -1) {
+        debugPrintln("Internal error; " + thisItem.longCommand + " doesn't exist in controlbox data", debugPrintType::Debug);
+        return eProcessResult::CommandFailed;
+    }
+
+    if (request) {
+        if (channel != -1) {
+            inCommandResponses->push_back({ thisItem.shortCommand + ":" + delimitExpression(cvInputCommands[channel], true), InfoRequest});
+        }
+    } else {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        setADCCommands(channel, stripQuotes(inCommandItem->argument[0]));
+        inCommandResponses->push_back({ thisItem.shortCommand + ":"  + delimitExpression(cvInputCommands[channel], true), InfoRequest});
     }
     return eProcessResult::Ok;
 };
@@ -174,18 +219,23 @@ CREATE_MODULE_COMMAND_FUNCTION(testADCMinMax, ControlReader) {
 void ControlReader::resetAds() {
     adsInit = false;
 
+    debugPrintln("ads2: " + String(uint32_t (&ads2)) + " wire: " + String((uint32_t (&Wire))), debugPrintType::Debug);
     if (!ads.begin(0x48, &Wire)) {
         debugPrintln("Failed to initialize ADS.", debugPrintType::Error);
         return;
     } else {
+        debugPrintln("ADS initialized", debugPrintType::TextInfo);
         ads.setGain(GAIN_ONE);    //GAIN_TWOTHIRDS
         ads.startADCReading(ADS1X15_REG_CONFIG_MUX_SINGLE_0, false);
         ads.setDataRate(RATE_ADS1115_860SPS);
     }
 
     if (!ads2.begin(0x49, &Wire)) {
-        debugPrintln("Failed to initialize ADS2", debugPrintType::Error);
+//    if (ads2.begin(0x49)) {
+        debugPrintln("Failed to initialize ADS 2", debugPrintType::Error);
         return;
+    } else {
+        debugPrintln("ADS 2 initialized", debugPrintType::TextInfo);
     }
 
     adsInit = true;
@@ -199,7 +249,7 @@ void ControlReader::resetAds() {
     currentChannel = ADS1X15_REG_CONFIG_MUX_SINGLE_0;
     currentChannel2 = ADS1X15_REG_CONFIG_MUX_SINGLE_0;
 
-    debugPrintln("ADS Initialized", debugPrintType::Debug);
+    debugPrintln("Control box Initialized", debugPrintType::Debug);
 }
 
 bool ControlReader::readSingleADS(Adafruit_ADS1X15 &adsx, volatile bool &newData, uint16_t &channel, uint8_t channelOffset, long &conversionStart, bool &errorReported, uint16_t timeout,

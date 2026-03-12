@@ -1,13 +1,15 @@
 var searchData=
 [
-  ['secondhomefallingsteps_0',['secondHomeFallingSteps',['../classservoStepper.html#ad981181ba349dab9d8ff9cc1b0464b2b',1,'servoStepper']]],
-  ['selection_1',['selection',['../structcommandItemPart.html#aba0800f90fe68eed75771aedd71c5cad',1,'commandItemPart::selection'],['../classcommandItem.html#abcf23aaba67fdd691e6b5ff34b7fec25',1,'commandItem::selection']]],
-  ['shortcommand_2',['shortCommand',['../structserialCommandItem.html#a885ce2b2f796898ce57bfa939c405c66',1,'serialCommandItem']]],
-  ['speedrpm_3',['speedRPM',['../classservoStepper.html#a2b0f23cba5196c099bf80f41a24f7ae4',1,'servoStepper']]],
-  ['speeduperiod_4',['speedUPeriod',['../classservoStepper.html#abed34731aa570aa563564d8bc27bbce7',1,'servoStepper']]],
-  ['startupreached_5',['startupReached',['../main_8cpp.html#ab702dfdb086d159fc9c9e26436520fe7',1,'main.cpp']]],
-  ['startuptime_6',['startupTime',['../main_8cpp.html#ab2f6b8b6b2615dbd77d4253210e4133d',1,'main.cpp']]],
-  ['stepinterval_7',['stepInterval',['../classservoStepper.html#a7e22e14773073f92d8670fd66762853d',1,'servoStepper']]],
-  ['stepintervalcallback_8',['stepIntervalCallback',['../classservoStepper.html#a9354943971fa185957e25c1b2106b3ac',1,'servoStepper']]],
-  ['stepperid_9',['stepperID',['../classservoStepper.html#a2479d6b10fc0be2b9e830c545994409b',1,'servoStepper']]]
+  ['ratioconnectors_0',['ratioConnectors',['../classPlugin__Mult.html#a82760e99abf9a395222c44944fa9a0c3',1,'Plugin_Mult']]],
+  ['ratios_1',['ratios',['../classHarmonicSeries.html#a166ca581a6531e846d42c4f2754c12f2',1,'HarmonicSeries']]],
+  ['reachedengage_2',['reachedEngage',['../classBowPressure.html#aed90e56b13c8a931c438b3bdcc33fb1d',1,'BowPressure']]],
+  ['reachedtarget_3',['reachedTarget',['../classservoStepper.html#a6ce149fe254e8fa5c1b93d73d16b11e5',1,'servoStepper']]],
+  ['reflectorcounter_4',['reflectorCounter',['../classDCMotorControl.html#ad94e00bad987cbab3183c4a6db0280ee',1,'DCMotorControl']]],
+  ['reflectorcycleperiod_5',['reflectorCyclePeriod',['../classDCMotorControl.html#afedf6dddebcdfac19ee8c7d8ffd4b413',1,'DCMotorControl']]],
+  ['reflectorinterruptpin_6',['reflectorInterruptPin',['../classDCMotorControl.html#a021b48c5d7ff1309f43d70efcddba029',1,'DCMotorControl']]],
+  ['reflectorzerotimeoutvalue_7',['reflectorZeroTimeoutValue',['../classDCMotorControl.html#aab57b71648471c0269f805db52874c60',1,'DCMotorControl']]],
+  ['response_8',['response',['../structcommandResponse.html#a15fbee9577b960681f4d8205ce8afc65',1,'commandResponse']]],
+  ['responsetype_9',['responseType',['../structcommandResponse.html#adbc467c2f02ce2bef481f8ee0d4ae7d8',1,'commandResponse']]],
+  ['restposition_10',['restposition',['../classBowActuator.html#acc4233c63346078418d68de125494138',1,'BowActuator::restPosition'],['../classMute.html#ac059549f1811658c4e790e59e71fda65',1,'Mute::restPosition']]],
+  ['restsignal_11',['restSignal',['../classBowPressure.html#acaaf417aaefc9cad4e6260e6476c2cb1',1,'BowPressure']]]
 ];

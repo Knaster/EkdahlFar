@@ -16,11 +16,12 @@
  *
  * Copyright (C) 2024 Karl Ekdahl
  */
+#ifndef EEPROM_HELPERS_HPP
+#define EEPROM_HELPERS_HPP
+
 uint32_t EEPROMSaveString(String *data, uint32_t EEPROM_offset) {
-    //eeprom_write_byte(EEPROM_offset, data->length());
     uint32_t datal = data->length();
     eeprom_write_dword(0, datal);
-//    eeprom_read_block(const void *addr)
     eeprom_write_block(data->c_str(), (void*) (EEPROM_offset + 4), data->length() + 1); // Save one above length so the trailing NULL is included
     return 2 + data->length();
 }
@@ -39,14 +40,5 @@ uint32_t EEPROMLoadString(String *data, uint32_t EEPROM_offset) {
 
     return datal + 2;  // +1 for intial length byte, +1 for trailing NULL
 }
-/*
-void debugPrintEEPROM(uint16_t offset, uint16_t count) {
-  uint8_t b1;
-  for (int i=offset; i<(offset+count); i++) {
-      b1 = eeprom_read_byte(i);
-      debugPrint(String(b1) + " ", Debug);
-  }
-  debugPrintln(String(b1) + " ", Debug);
-}
 
-*/
+#endif

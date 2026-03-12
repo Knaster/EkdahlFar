@@ -24,13 +24,31 @@
 #include "master_controller/midimessageconfiguration.hpp"
 
 const ModuleCommandDeclaration MIDIMessageConfiguration::moduleCommands[] = {
-    { "", "", "int", "Sets the current MIDI configuration", false, false, nullptr, eCommandType::Index },
-    { "name", "na", "string", "Set the name of the MIDI configuration (for request, argument is index of configuration to return name for (optional))", false, true, &s_namef, eCommandType::Name },
-    { "data", "da", "noteon|noteoff|pat|cc:(0-127)|cat|pb|pc", "Set the MIDI event handling data, the event given will execute the given command string", false, true, &s_eventHandler, eCommandType::OutputAssignment },
-    { "addcc", "ac", "cc(0-127):command string", "Add continuous controller and the command string to execute", false, false, &s_addcc, eCommandType::Data },
-    { "removecc", "rmc", "cc(0-127)", "remove continuous controller from list", false, false, &s_ccRemove, eCommandType::Remove },
-    { "defaults", "d", "-", "Reverts the current configuration to default values and CCs", false, false, &s_defaults, eCommandType::Immediate },
-    { "receivechannel", "rc", "-", "Sets the MIDI receive channel of the current configuration. 1-16 sets specific channel, any other value for OMNI", false, false, &s_receiveChannel, eCommandType::SimpleUInt8}
+    { "", "", "int", "Sets the current MIDI configuration", false, false, nullptr, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectIndex },
+    { "name", "na", "string", "Set the name of the MIDI configuration (for request, argument is index of configuration to return name for (optional))", false, true, &s_namef,
+        eCommandType_data::ectSimpleString | eCommandType_function::ectName },
+    { "data", "da", "noteon|noteoff|pat|cc:(0-127)|cat|pb|pc:outputassignment", "Set the MIDI event handling data, the event given will execute the given command string",
+        false, false, &s_eventHandler, eCommandType_data::ectOutputAssignment | eCommandType_function::ectAssignment | eCommandType_dataOptions::ectExpression },
+    { "noteon", "non", "outputassignment", "Sets the commands to execute at a MIDI Note On event", false, true, &s_eventHandlerNew,
+        eCommandType_data::ectOutputAssignment | eCommandType_function::ectAssignment | eCommandType_dataOptions::ectExpression, "channel,note,velocity" },
+    { "noteoff", "nof", "outputassignment", "Sets the commands to execute at a MIDI Note Off event", false, true, &s_eventHandlerNew,
+        eCommandType_data::ectOutputAssignment | eCommandType_function::ectAssignment | eCommandType_dataOptions::ectExpression, "channel,note,velocity" },
+    { "polyaftertouch", "pat", "outputassignment", "Sets the commands to execute at a MIDI Polyphonic after touch event", false, true, &s_eventHandlerNew,
+        eCommandType_data::ectOutputAssignment | eCommandType_function::ectAssignment | eCommandType_dataOptions::ectExpression, "channel,note,pressure" },
+    { "channelaftertouch", "cat", "outputassignment", "Sets the commands to execute at a MIDI Channel after touch event", false, true, &s_eventHandlerNew,
+        eCommandType_data::ectOutputAssignment | eCommandType_function::ectAssignment | eCommandType_dataOptions::ectExpression, "channel,velocity" },
+    { "pitchbend", "pb", "outputassignment", "Sets the commands to execute at a MIDI Pitch bend event", false, true, &s_eventHandlerNew,
+        eCommandType_data::ectOutputAssignment | eCommandType_function::ectAssignment | eCommandType_dataOptions::ectExpression, "channel,pitch" },
+    { "programchange", "pc", "outputassignment", "Sets the commands to execute at a MIDI Program change event", false, true, &s_eventHandlerNew,
+        eCommandType_data::ectOutputAssignment | eCommandType_function::ectAssignment | eCommandType_dataOptions::ectExpression, "channel,program" },
+    { "continuouscontroller", "cc", "number:outputassignment", "Sets the commands to execute at a MIDI Continuous controller event with the given [number]", false, true, &s_continuouscontroller,
+        eCommandType_data::ectOutputAssignment | eCommandType_function::ectAssignment | eCommandType_dataOptions::ectExpression, "channel,value" },
+    { "addcc", "ac", "0-127:outputassignment", "Add continuous controller and the command string to execute", false, false, &s_addcc,
+        eCommandType_data::ectData | eCommandType_function::ectAssignment },
+    { "removecc", "rmc", "cc number", "remove continuous controller from list", false, false, &s_ccRemove, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectRemove },
+    { "defaults", "d", "-", "Reverts the current configuration to default values and CCs", false, false, &s_defaults, eCommandType_data::ectImmediate | eCommandType_function::ectSystem },
+    { "receivechannel", "rc", "-", "Sets the MIDI receive channel of the current configuration. 1-16 sets specific channel, any other value for OMNI", false, false, &s_receiveChannel,
+        eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectParameter }
 };
 
 getModuleCount(MIDIMessageConfiguration)
@@ -80,7 +98,9 @@ CREATE_MODULE_COMMAND_FUNCTION(eventHandler, MIDIMessageConfiguration) {
             argument++;
         }
         if (!changedSomething) {
-            inCommandResponses->push_back({ "Error setting midi configuration data: " + inCommandItem->originalCommand, debugPrintType::Error });
+
+//            inCommandResponses->push_back({ "Error setting midi configuration data: " + inCommandItem->command, debugPrintType::Error });
+            inCommandResponses->push_back({ "Error setting midi configuration data: " + inCommandItem->hierarchy[0].name, debugPrintType::Error });
             return eProcessResult::CommandFailed;
         }
     }
@@ -97,6 +117,69 @@ CREATE_MODULE_COMMAND_FUNCTION(eventHandler, MIDIMessageConfiguration) {
                                       out, debugPrintType::InfoRequest});
     }
 
+    return eProcessResult::Ok;
+}
+
+CREATE_MODULE_COMMAND_FUNCTION(eventHandlerNew, MIDIMessageConfiguration) {
+    uint8_t evtype = -1;
+
+    for (int j = 0; j < 7; j++) {
+        if (thisItem.longCommand == eventID2[j]) {
+//            debugPrintln("Event type -" + thisItem.longCommand + "- is " + eventID[j] + "-", debugPrintType::Debug);
+            evtype = j;
+            break;
+        } else {
+//            debugPrintln("Event type -" + thisItem.longCommand + "- is not -" + eventID[j] + "-", debugPrintType::Debug);
+        }
+    }
+    if (evtype == -1) {
+        inCommandResponses->push_back({ "Event type not found: -" + thisItem.longCommand + "-", debugPrintType::Error });
+        return eProcessResult::WrongArgumentValue;
+    }
+
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+
+        midiEventMap[evtype] = stripQuotes(inCommandItem->argument[0]);
+    }
+
+//    for (int i = 0; i < 6; i++) {
+    String out = delimitExpression(midiEventMap[evtype], true);
+    if (out == "") { out = "''"; }
+    inCommandResponses->push_back({thisItem.shortCommand + ":" + out, debugPrintType::InfoRequest});
+/*
+    }
+*/
+    return eProcessResult::Ok;
+}
+
+CREATE_MODULE_COMMAND_FUNCTION(continuouscontroller, MIDIMessageConfiguration) {
+    int8_t cc = -1;
+
+    if (checkArgumentsMin(inCommandItem, inCommandResponses, 1, true)) {
+        uint8_t findcc = inCommandItem->argument[0].toInt();
+        for (int i = 0; i < controlChange.size(); i++) {
+            if (controlChange[i].control == findcc) { cc = i; break; }
+        }
+        if ((cc == -1) && (request)) { return eProcessResult::WrongArgumentValue; }
+    } else
+    if (!request) { return eProcessResult::WrongArgumentCount; }
+    else {
+        for (int i = 0; i < controlChange.size(); i++) {
+            String out = delimitExpression(controlChange[i].command, true);
+            if (out == "") { out = "''"; }
+            inCommandResponses->push_back({thisItem.shortCommand + ":" + String(controlChange[i].control) + ":" + out, debugPrintType::InfoRequest});
+        }
+        return eProcessResult::Ok;
+    }
+
+    if (!request) {
+        if (checkArguments(inCommandItem, inCommandResponses, 2)) { return eProcessResult::WrongArgumentCount; }
+        setCC(inCommandItem->argument[0].toInt(), &inCommandItem->argument[1]);
+        if (cc == -1) { cc = controlChange.size() - 1; }
+    }
+
+    inCommandResponses->push_back({thisItem.shortCommand + ":" + String(controlChange[cc].control) + ":" + controlChange[cc].command, debugPrintType::InfoRequest});
     return eProcessResult::Ok;
 }
 

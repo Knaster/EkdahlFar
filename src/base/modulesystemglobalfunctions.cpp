@@ -2,7 +2,7 @@
 #define MODULESYSTEMGLOBALFUNCTIONS_CPP
 
 #include "base/modulesystemglobalfunctions.hpp"
-#include <base/modulehandler.hpp>
+//#include <base/modulehandler.hpp>
 
 static eProcessResult s_dir(ModuleCommand *self, ModuleCommandDeclarationArguments) {
     bool hidden = false;
@@ -21,7 +21,7 @@ static eProcessResult s_dir(ModuleCommand *self, ModuleCommandDeclarationArgumen
         recursive = true;
     } else {
         for (int i = 0; i < inCommandItem->argument.size(); i++) {
-            String arg = inCommandItem->argument[i];
+            String arg = stripQuotes(inCommandItem->argument[i]);
             if ((arg == "hidden") || (arg == "h")) { hidden = true; }
             else if ((arg == "modules") || (arg == "m")) { modules = true; }
             else if ((arg == "commands") || (arg == "c")) { commands = true; }
@@ -31,38 +31,22 @@ static eProcessResult s_dir(ModuleCommand *self, ModuleCommandDeclarationArgumen
         }
     }
 
-    if (((Module*) self)->isGroupHandler) {
-        ModuleHandler *mod = (Module*)(self);
-        ((ModuleHandler*)self)->dir(inCommandResponses, String(mod->getModuleID().longName), String(mod->getModuleID().shortAlias.c_str()), hidden, modules, commands, instances, instanceCount, recursive);
-    } else {
-        Module *mod = (Module*)(self);
-        ((Module*)self)->dir(inCommandResponses, String(mod->getModuleID().longName), String(mod->getModuleID().shortAlias.c_str()), hidden, modules, commands, instances, instanceCount, recursive);
-    }
+    Module *mod = (Module*)(self);
+    ((Module*)self)->dir(inCommandResponses, String(mod->getModuleID().longName), String(mod->getModuleID().shortAlias.c_str()), hidden, modules, commands, instances, instanceCount, recursive);
 
     return eProcessResult::Ok;
 }
 
 static eProcessResult s_dump(ModuleCommand *self, ModuleCommandDeclarationArguments) {
-    if (((Module*) self)->isGroupHandler) {
-        ((ModuleHandler*)self)->dumpData(inCommandResponses);
-    } else {
-        ((Module*)self)->dumpData(inCommandResponses);
-    }
-
+    ((Module*)self)->dumpData(inCommandResponses);
     return eProcessResult::Ok;
 }
 
 static eProcessResult s_help(ModuleCommand *self, ModuleCommandDeclarationArguments) {
-    if (((Module*) self)->isGroupHandler) {
-        ModuleHandler *mod = (Module*)(self);
-        ((ModuleHandler*)self)->help(inCommandResponses, String(mod->getModuleID().longName), String(mod->getModuleID().shortAlias.c_str()));
-    } else {
-        Module *mod = (Module*)(self);
-        ((Module*)self)->help(inCommandResponses, String(mod->getModuleID().longName), String(mod->getModuleID().shortAlias.c_str()));
-    }
-
+//    ModuleHandler *mod = (Module*)(self);
+    Module *mod = (Module*)(self);
+    mod->help(inCommandResponses, String(mod->getModuleID().longName), String(mod->getModuleID().shortAlias.c_str()));
     return eProcessResult::Ok;
 }
 
 #endif
-

@@ -35,13 +35,7 @@ public:
     CREATE_MODULE_COMMAND_FUNCTION_FWD(tmcInfo, MuteControl)
 
     MuteControl(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensor);
-/*
-    eProcessResult processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                               commandList *delegatedCommands = nullptr);
 
-    eProcessResult processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                                    commandList *delegatedCommands = nullptr);
-*/
 private:
     Mute *mute = nullptr;
 public:
@@ -91,7 +85,7 @@ public:
     // Handles time-critical timing of stepper motor update - automatically called through stepInervalCallback - DO NOT MANUALLY CALL THIS
     void updateServo() { mute->tmc2209ServoStepper->stepServoStepper->updatePosition(); };
     // This is to be set to a static function that in turn will call the class instance of updateMuteServo
-    void setStepIntervalCallback(void *stepIntervalCallback) { mute->tmc2209ServoStepper->stepServoStepper->stepIntervalCallback = stepIntervalCallback; };
+    void setStepIntervalCallback(void (*stepIntervalCallback)()) { mute->tmc2209ServoStepper->stepServoStepper->stepIntervalCallback = stepIntervalCallback; };
 
 /***** Internal commands for debugging use, most likely to be removed *****/
 //    void setStepperID(uint16_t stepperID) { mute->tmc2209ServoStepper->stepServoStepper->stepperID = stepperID; };

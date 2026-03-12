@@ -23,122 +23,28 @@
 \DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ AUDIOANALYZE\_H}}
 \DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ AUDIOANALYZE\_H}}
 \DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <Audio.h>}}
-\DoxyCodeLine{00023\ \textcolor{comment}{//\#include\ <Wire.h>}}
-\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <SPI.h>}}
-\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <SerialFlash.h>}}
-\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <usb\_audio.h>}}
-\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ <AudioStream.h>}}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ AudioInputAnalog\ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{audioanalyze_8h_a813f3de3c8849a38037fbc39a6b87376}{audioADC}};\textcolor{comment}{//adc1(AMUX\_DATA);\ \ \ \ \ \ \ \ \ \ \ //xy=317,326}}
-\DoxyCodeLine{00030\ AudioAnalyzeNoteFrequency\ *\mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}};\textcolor{comment}{//notefreq2;\ \ \ \ \ \ //xy=549,350}}
-\DoxyCodeLine{00031\ AudioAnalyzePeak\ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b}{audioPeak}};}
-\DoxyCodeLine{00032\ AudioAnalyzeRMS\ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{audioanalyze_8h_a083d67b82f9d6d474d2567370515fcdb}{audioRMS}};}
-\DoxyCodeLine{00033\ }
-\DoxyCodeLine{00034\ AudioConnection\ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{audioanalyze_8h_a8e944c87273160403274a8c472005cf4}{audioPatchCord1}};\textcolor{comment}{//patchCord1(adc1,\ notefreq2);}}
-\DoxyCodeLine{00035\ AudioConnection\ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{audioanalyze_8h_a41033f672a97a3a57b2a596917d92c41}{audioPatchCord2}};}
-\DoxyCodeLine{00036\ AudioConnection\ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{audioanalyze_8h_aef0a12569b9e758304a652c5c45128df}{audioPatchCord3}};}
-\DoxyCodeLine{00037\ AudioConnection\ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{audioanalyze_8h_a14a777371d223f1e16b0df5449523fb1}{audioPatchCord4}};}
-\DoxyCodeLine{00038\ }
-\DoxyCodeLine{00039\ AudioOutputUSB\ \ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{audioanalyze_8h_a6901729182ea95bdcef9bac60b2cab97}{audioOutUSB}};}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ AudioFilterBiquad\ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{audioanalyze_8h_a434cfc088f54a8392278fe739c7230fd}{audioFilterBiquad}};}
-\DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ noteFreqCutoff\ 800}}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{audioanalyze_8h_a7abd8636218afea3505d9c1ca9aa9458}{audioAnalyzeStarted}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00046\ }
-\DoxyCodeLine{00047\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{audioanalyze_8h_afa56efd9b032b4127590c49b942706c9}{startAudioAnalyze}}()\ \{}
-\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{audioanalyze_8h_a813f3de3c8849a38037fbc39a6b87376}{audioADC}}\ =\ \textcolor{keyword}{new}\ AudioInputAnalog(22);}
-\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{audioanalyze_8h_a434cfc088f54a8392278fe739c7230fd}{audioFilterBiquad}}\ =\ \textcolor{keyword}{new}\ AudioFilterBiquad();}
-\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{audioanalyze_8h_a434cfc088f54a8392278fe739c7230fd}{audioFilterBiquad}}-\/>setLowpass(0,\ \mbox{\hyperlink{audioanalyze_8h_a9c900f998f12cff863e4fe03daf78994}{noteFreqCutoff}},\ 0.707);}
-\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#ifndef\ USB\_MIDI\_AUDIO\_SERIAL}}
-\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}}\ =\ \textcolor{keyword}{new}\ AudioAnalyzeNoteFrequency();}
-\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b}{audioPeak}}\ =\ \textcolor{keyword}{new}\ AudioAnalyzePeak();}
-\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{audioanalyze_8h_a083d67b82f9d6d474d2567370515fcdb}{audioRMS}}\ =\ \textcolor{keyword}{new}\ AudioAnalyzeRMS();}
-\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#ifdef\ USB\_MIDI\_AUDIO\_SERIAL}}
-\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{audioanalyze_8h_a6901729182ea95bdcef9bac60b2cab97}{audioOutUSB}}\ =\ \textcolor{keyword}{new}\ AudioOutputUSB();}
-\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#ifndef\ USB\_MIDI\_AUDIO\_SERIAL}}
-\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{audioanalyze_8h_aef0a12569b9e758304a652c5c45128df}{audioPatchCord3}}\ =\ \textcolor{keyword}{new}\ AudioConnection(*\mbox{\hyperlink{audioanalyze_8h_a813f3de3c8849a38037fbc39a6b87376}{audioADC}},\ *\mbox{\hyperlink{audioanalyze_8h_a434cfc088f54a8392278fe739c7230fd}{audioFilterBiquad}});}
-\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{audioanalyze_8h_a8e944c87273160403274a8c472005cf4}{audioPatchCord1}}\ =\ \textcolor{keyword}{new}\ AudioConnection(*\mbox{\hyperlink{audioanalyze_8h_a434cfc088f54a8392278fe739c7230fd}{audioFilterBiquad}},\ *\mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}});}
-\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{audioanalyze_8h_a41033f672a97a3a57b2a596917d92c41}{audioPatchCord2}}\ =\ \textcolor{keyword}{new}\ AudioConnection(*\mbox{\hyperlink{audioanalyze_8h_a434cfc088f54a8392278fe739c7230fd}{audioFilterBiquad}},\ *\mbox{\hyperlink{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b}{audioPeak}});}
-\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{audioanalyze_8h_a14a777371d223f1e16b0df5449523fb1}{audioPatchCord4}}\ =\ \textcolor{keyword}{new}\ AudioConnection(*\mbox{\hyperlink{audioanalyze_8h_a813f3de3c8849a38037fbc39a6b87376}{audioADC}},\ *\mbox{\hyperlink{audioanalyze_8h_a083d67b82f9d6d474d2567370515fcdb}{audioRMS}});}
-\DoxyCodeLine{00065\ \textcolor{comment}{//\ \ \ \ audioPatchCord1\ =\ new\ AudioConnection(*audioADC,\ *audioNoteFreq);}}
-\DoxyCodeLine{00066\ \textcolor{comment}{//\ \ \ \ audioPatchCord2\ =\ new\ AudioConnection(*audioADC,\ *audioPeak);}}
-\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#ifdef\ USB\_MIDI\_AUDIO\_SERIAL}}
-\DoxyCodeLine{00069\ \textcolor{comment}{//\ \ \ \ audioPatchCord3\ =\ new\ AudioConnection(*audioADC,\ *audioOutUSB);}}
-\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{audioanalyze_8h_aef0a12569b9e758304a652c5c45128df}{audioPatchCord3}}\ =\ \textcolor{keyword}{new}\ AudioConnection(*\mbox{\hyperlink{audioanalyze_8h_a813f3de3c8849a38037fbc39a6b87376}{audioADC}},\ *\mbox{\hyperlink{audioanalyze_8h_a434cfc088f54a8392278fe739c7230fd}{audioFilterBiquad}});}
-\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{audioanalyze_8h_a14a777371d223f1e16b0df5449523fb1}{audioPatchCord4}}\ =\ \textcolor{keyword}{new}\ AudioConnection(*\mbox{\hyperlink{audioanalyze_8h_a434cfc088f54a8392278fe739c7230fd}{audioFilterBiquad}},\ *\mbox{\hyperlink{audioanalyze_8h_a6901729182ea95bdcef9bac60b2cab97}{audioOutUSB}});}
-\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00073\ \ \ \ \ AudioMemory(30);}
-\DoxyCodeLine{00074\ }
-\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#ifndef\ USB\_MIDI\_AUDIO\_SERIAL}}
-\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{audioanalyze_8h_a7abd8636218afea3505d9c1ca9aa9458}{audioAnalyzeStarted}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}}-\/>begin(0.45);}
-\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00079\ \}}
-\DoxyCodeLine{00080\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00081\ \textcolor{comment}{void\ stopAudioAnalyze()\ \{}}
-\DoxyCodeLine{00082\ \textcolor{comment}{\ \ \ \ delete\ audioPatchCord1;}}
-\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ \ delete\ audioNoteFreq;}}
-\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ \ delete\ audioPatchCord2;}}
-\DoxyCodeLine{00085\ \textcolor{comment}{\ \ \ \ delete\ audioPeak;}}
-\DoxyCodeLine{00086\ \textcolor{comment}{\ \ \ \ delete\ audioADC;}}
-\DoxyCodeLine{00087\ \textcolor{comment}{\ \ \ \ audioAnalyzeStarted\ =\ false;}}
-\DoxyCodeLine{00088\ \textcolor{comment}{\}}}
-\DoxyCodeLine{00089\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00090\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{audioanalyze_8h_aa486c0bb291c2cef78ca63c3169f303b}{audioFrequencyAvaliable}}()\ \{}
-\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{audioanalyze_8h_a7abd8636218afea3505d9c1ca9aa9458}{audioAnalyzeStarted}})\ \{}
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Audio\ analyzation\ not\ started!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00094\ \ \ \ \ \}}
-\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}}-\/>available();}
-\DoxyCodeLine{00096\ \}}
-\DoxyCodeLine{00097\ }
-\DoxyCodeLine{00098\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{audioanalyze_8h_a8ecd861231dbd0db5f6e4771b3422137}{audioFrequency}}()\ \{}
-\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{audioanalyze_8h_a7abd8636218afea3505d9c1ca9aa9458}{audioAnalyzeStarted}})\ \{}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Audio\ analyzation\ not\ started!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00102\ \ \ \ \ \}}
-\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}}-\/>probability()\ <\ 0.9))\ \{\ \textcolor{keywordflow}{return}\ -\/1;\ \}}
-\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}}-\/>read();}
-\DoxyCodeLine{00105\ \}}
-\DoxyCodeLine{00106\ }
-\DoxyCodeLine{00107\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{audioanalyze_8h_a46623e59a36a0f978fef31fb33f2efd1}{audioPeakAmplitude}}()\ \{}
-\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b}{audioPeak}}-\/>available())\ \{}
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b}{audioPeak}}-\/>read();}
-\DoxyCodeLine{00110\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
-\DoxyCodeLine{00112\ \ \ \ \ \}}
-\DoxyCodeLine{00113\ \}}
-\DoxyCodeLine{00114\ }
-\DoxyCodeLine{00115\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{audioanalyze_8h_ae3b3ce9622c1f8f5f25f46ebe4bc8ced}{audioRMSAmplitude}}()\ \{}
-\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{audioanalyze_8h_a083d67b82f9d6d474d2567370515fcdb}{audioRMS}}-\/>available())\ \{}
-\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{audioanalyze_8h_a083d67b82f9d6d474d2567370515fcdb}{audioRMS}}-\/>read();}
-\DoxyCodeLine{00118\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
-\DoxyCodeLine{00120\ \ \ \ \ \}}
-\DoxyCodeLine{00121\ \}}
-\DoxyCodeLine{00122\ }
-\DoxyCodeLine{00123\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00124\ \textcolor{comment}{float\ audioProbability()\ \{}}
-\DoxyCodeLine{00125\ \textcolor{comment}{\ \ \ \ if\ (!audioAnalyzeStarted)\ \{\ return\ -\/1;\ \}}}
-\DoxyCodeLine{00126\ \textcolor{comment}{\ \ \ \ //\ \ if\ (!audioNoteFreq-\/>available())\ \{\ return\ -\/1;\ \}}}
-\DoxyCodeLine{00127\ \textcolor{comment}{\ \ \ \ return\ audioNoteFreq-\/>probability();}}
-\DoxyCodeLine{00128\ \textcolor{comment}{\}}}
-\DoxyCodeLine{00129\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00130\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{audioanalyze_8h_a1119501c55b77d995f19fb79432bfe53}{audioProcessorUsage}}()\ \{}
-\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{audioanalyze_8h_a7abd8636218afea3505d9c1ca9aa9458}{audioAnalyzeStarted}})\ \{}
-\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Audio\ analyzation\ not\ started!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
-\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
-\DoxyCodeLine{00134\ \ \ \ \ \}}
-\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}}-\/>processorUsage();}
-\DoxyCodeLine{00136\ \}}
-\DoxyCodeLine{00137\ }
-\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{arduinorequired_8hpp}{base/arduinorequired.hpp}}>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <Audio.h>}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//\#include\ <Wire.h>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <SPI.h>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <SerialFlash.h>}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ <usb\_audio.h>}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ <AudioStream.h>}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ AUDIO\_INTERFACE}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\#define\ AUDIO\_BLOCK\_SAMPLES\ 2048}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{extern}\ AudioAnalyzeNoteFrequency\ *\mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audioNoteFreq}};\textcolor{comment}{//notefreq2;\ \ \ \ \ \ //xy=549,350}}
+\DoxyCodeLine{00034\ \textcolor{keyword}{extern}\ AudioAnalyzePeak\ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b}{audioPeak}};}
+\DoxyCodeLine{00035\ \textcolor{keyword}{extern}\ AudioAnalyzeRMS\ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{audioanalyze_8h_a083d67b82f9d6d474d2567370515fcdb}{audioRMS}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{audioanalyze_8h_afa56efd9b032b4127590c49b942706c9}{startAudioAnalyze}}();}
+\DoxyCodeLine{00038\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{audioanalyze_8h_aa486c0bb291c2cef78ca63c3169f303b}{audioFrequencyAvaliable}}();}
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{audioanalyze_8h_a8ecd861231dbd0db5f6e4771b3422137}{audioFrequency}}();}
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{audioanalyze_8h_a46623e59a36a0f978fef31fb33f2efd1}{audioPeakAmplitude}}();}
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{audioanalyze_8h_ae3b3ce9622c1f8f5f25f46ebe4bc8ced}{audioRMSAmplitude}}();}
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{audioanalyze_8h_a1119501c55b77d995f19fb79432bfe53}{audioProcessorUsage}}();}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

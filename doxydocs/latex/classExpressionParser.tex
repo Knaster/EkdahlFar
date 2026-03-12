@@ -1,0 +1,242 @@
+\doxysection{Expression\+Parser Class Reference}
+\hypertarget{classExpressionParser}{}\label{classExpressionParser}\index{ExpressionParser@{ExpressionParser}}
+
+
+{\ttfamily \#include $<$expressionparser.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classExpressionParser_a2f33225f51f7d0e3f9e40098a6a16597}{Expression\+Parser}} ()
+\item 
+String \mbox{\hyperlink{classExpressionParser_a3993cc93af8bd57bd07f9fffe60b4639}{parse\+Command\+Expressions}} (String expression)
+\item 
+void \mbox{\hyperlink{classExpressionParser_a7f2360c7cfb2d68bff735e6611004259}{register\+Function}} (const char \texorpdfstring{$\ast$}{*}name, const void \texorpdfstring{$\ast$}{*}address, int type)
+\item 
+bool \mbox{\hyperlink{classExpressionParser_a37d64b2ffae00af45e5adc5f1c356a28}{set\+Variable}} (const char \texorpdfstring{$\ast$}{*}name, double value)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classExpressionParser_a0a4115f690bf018efe686cd2355b3aa5}{dnote}}
+\item 
+double \mbox{\hyperlink{classExpressionParser_a48ae31637269c9fb1e99c235b36dd753}{dchannel}}
+\item 
+double \mbox{\hyperlink{classExpressionParser_abfd334fe25ae573583c5d003b1450fa8}{dvelocity}}
+\item 
+double \mbox{\hyperlink{classExpressionParser_a0b8753a9f6d1cecd24f3319323b47017}{dnotecount}}
+\item 
+double \mbox{\hyperlink{classExpressionParser_a578792de49e34a10660ac02985f62eb8}{dpressure}}
+\item 
+double \mbox{\hyperlink{classExpressionParser_a6d8484e6cb52d2a255f637d591786d48}{dvalue}}
+\item 
+double \mbox{\hyperlink{classExpressionParser_ad163507b5e0cf5897c92418db23a9706}{dpitch}}
+\item 
+double \mbox{\hyperlink{classExpressionParser_a2d053002eefee94cc5b571936ebb2584}{dprogram}}
+\item 
+double \mbox{\hyperlink{classExpressionParser_a647fb9673d69abca8a207658a3581b77}{duv}} \mbox{[}10\mbox{]} = \{ 0,0,0,0,0,0,0,0,0,0 \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{classExpressionParser_a85ab06921e8e0044eb9c37f793ec7ff1}{exp\+Bool}} (double input)
+\item 
+static double \mbox{\hyperlink{classExpressionParser_ac95a8bc01bb231f9a6f5396fa45f1929}{exp\+IBool}} (double input)
+\item 
+static double \mbox{\hyperlink{classExpressionParser_a377ade2f443753aca8ea271dfa77a130}{deadband}} (double value, double threshold)
+\item 
+static double \mbox{\hyperlink{classExpressionParser_a19395c27fb150f86e109fd9c67fd1a7b}{zero\+Threshold}} (double value)
+\item 
+static double \mbox{\hyperlink{classExpressionParser_a3eb34cc9d95481c2cf0a3a94bc4d4463}{ifequal}} (double value, double comp, String \mbox{\hyperlink{classcommandList}{command\+List}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ te\+\_\+variable $>$ \mbox{\hyperlink{classExpressionParser_a0294a888221b1ce371d92e4dd4149492}{exp\+Functions}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classExpressionParser_a2f33225f51f7d0e3f9e40098a6a16597}\label{classExpressionParser_a2f33225f51f7d0e3f9e40098a6a16597} 
+\index{ExpressionParser@{ExpressionParser}!ExpressionParser@{ExpressionParser}}
+\index{ExpressionParser@{ExpressionParser}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{ExpressionParser()}{ExpressionParser()}}
+{\footnotesize\ttfamily Expression\+Parser\+::\+Expression\+Parser (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classExpressionParser_a2f33225f51f7d0e3f9e40098a6a16597_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classExpressionParser_a377ade2f443753aca8ea271dfa77a130}\label{classExpressionParser_a377ade2f443753aca8ea271dfa77a130} 
+\index{ExpressionParser@{ExpressionParser}!deadband@{deadband}}
+\index{deadband@{deadband}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{deadband()}{deadband()}}
+{\footnotesize\ttfamily double Expression\+Parser\+::deadband (\begin{DoxyParamCaption}\item[{double}]{value,  }\item[{double}]{threshold }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classExpressionParser_a377ade2f443753aca8ea271dfa77a130_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classExpressionParser_a85ab06921e8e0044eb9c37f793ec7ff1}\label{classExpressionParser_a85ab06921e8e0044eb9c37f793ec7ff1} 
+\index{ExpressionParser@{ExpressionParser}!expBool@{expBool}}
+\index{expBool@{expBool}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{expBool()}{expBool()}}
+{\footnotesize\ttfamily double Expression\+Parser\+::exp\+Bool (\begin{DoxyParamCaption}\item[{double}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classExpressionParser_a85ab06921e8e0044eb9c37f793ec7ff1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classExpressionParser_ac95a8bc01bb231f9a6f5396fa45f1929}\label{classExpressionParser_ac95a8bc01bb231f9a6f5396fa45f1929} 
+\index{ExpressionParser@{ExpressionParser}!expIBool@{expIBool}}
+\index{expIBool@{expIBool}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{expIBool()}{expIBool()}}
+{\footnotesize\ttfamily double Expression\+Parser\+::exp\+IBool (\begin{DoxyParamCaption}\item[{double}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classExpressionParser_ac95a8bc01bb231f9a6f5396fa45f1929_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classExpressionParser_a3eb34cc9d95481c2cf0a3a94bc4d4463}\label{classExpressionParser_a3eb34cc9d95481c2cf0a3a94bc4d4463} 
+\index{ExpressionParser@{ExpressionParser}!ifequal@{ifequal}}
+\index{ifequal@{ifequal}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{ifequal()}{ifequal()}}
+{\footnotesize\ttfamily static double Expression\+Parser\+::ifequal (\begin{DoxyParamCaption}\item[{double}]{value,  }\item[{double}]{comp,  }\item[{String}]{command\+List }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classExpressionParser_a3993cc93af8bd57bd07f9fffe60b4639}\label{classExpressionParser_a3993cc93af8bd57bd07f9fffe60b4639} 
+\index{ExpressionParser@{ExpressionParser}!parseCommandExpressions@{parseCommandExpressions}}
+\index{parseCommandExpressions@{parseCommandExpressions}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{parseCommandExpressions()}{parseCommandExpressions()}}
+{\footnotesize\ttfamily String Expression\+Parser\+::parse\+Command\+Expressions (\begin{DoxyParamCaption}\item[{String}]{expression }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classExpressionParser_a3993cc93af8bd57bd07f9fffe60b4639_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classExpressionParser_a3993cc93af8bd57bd07f9fffe60b4639_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classExpressionParser_a7f2360c7cfb2d68bff735e6611004259}\label{classExpressionParser_a7f2360c7cfb2d68bff735e6611004259} 
+\index{ExpressionParser@{ExpressionParser}!registerFunction@{registerFunction}}
+\index{registerFunction@{registerFunction}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{registerFunction()}{registerFunction()}}
+{\footnotesize\ttfamily void Expression\+Parser\+::register\+Function (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name,  }\item[{const void \texorpdfstring{$\ast$}{*}}]{address,  }\item[{int}]{type }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classExpressionParser_a7f2360c7cfb2d68bff735e6611004259_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classExpressionParser_a37d64b2ffae00af45e5adc5f1c356a28}\label{classExpressionParser_a37d64b2ffae00af45e5adc5f1c356a28} 
+\index{ExpressionParser@{ExpressionParser}!setVariable@{setVariable}}
+\index{setVariable@{setVariable}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{setVariable()}{setVariable()}}
+{\footnotesize\ttfamily bool Expression\+Parser\+::set\+Variable (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name,  }\item[{double}]{value }\end{DoxyParamCaption})}
+
+\Hypertarget{classExpressionParser_a19395c27fb150f86e109fd9c67fd1a7b}\label{classExpressionParser_a19395c27fb150f86e109fd9c67fd1a7b} 
+\index{ExpressionParser@{ExpressionParser}!zeroThreshold@{zeroThreshold}}
+\index{zeroThreshold@{zeroThreshold}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{zeroThreshold()}{zeroThreshold()}}
+{\footnotesize\ttfamily double Expression\+Parser\+::zero\+Threshold (\begin{DoxyParamCaption}\item[{double}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classExpressionParser_a19395c27fb150f86e109fd9c67fd1a7b_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classExpressionParser_a48ae31637269c9fb1e99c235b36dd753}\label{classExpressionParser_a48ae31637269c9fb1e99c235b36dd753} 
+\index{ExpressionParser@{ExpressionParser}!dchannel@{dchannel}}
+\index{dchannel@{dchannel}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{dchannel}{dchannel}}
+{\footnotesize\ttfamily double Expression\+Parser\+::dchannel}
+
+\Hypertarget{classExpressionParser_a0a4115f690bf018efe686cd2355b3aa5}\label{classExpressionParser_a0a4115f690bf018efe686cd2355b3aa5} 
+\index{ExpressionParser@{ExpressionParser}!dnote@{dnote}}
+\index{dnote@{dnote}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{dnote}{dnote}}
+{\footnotesize\ttfamily double Expression\+Parser\+::dnote}
+
+\Hypertarget{classExpressionParser_a0b8753a9f6d1cecd24f3319323b47017}\label{classExpressionParser_a0b8753a9f6d1cecd24f3319323b47017} 
+\index{ExpressionParser@{ExpressionParser}!dnotecount@{dnotecount}}
+\index{dnotecount@{dnotecount}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{dnotecount}{dnotecount}}
+{\footnotesize\ttfamily double Expression\+Parser\+::dnotecount}
+
+\Hypertarget{classExpressionParser_ad163507b5e0cf5897c92418db23a9706}\label{classExpressionParser_ad163507b5e0cf5897c92418db23a9706} 
+\index{ExpressionParser@{ExpressionParser}!dpitch@{dpitch}}
+\index{dpitch@{dpitch}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{dpitch}{dpitch}}
+{\footnotesize\ttfamily double Expression\+Parser\+::dpitch}
+
+\Hypertarget{classExpressionParser_a578792de49e34a10660ac02985f62eb8}\label{classExpressionParser_a578792de49e34a10660ac02985f62eb8} 
+\index{ExpressionParser@{ExpressionParser}!dpressure@{dpressure}}
+\index{dpressure@{dpressure}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{dpressure}{dpressure}}
+{\footnotesize\ttfamily double Expression\+Parser\+::dpressure}
+
+\Hypertarget{classExpressionParser_a2d053002eefee94cc5b571936ebb2584}\label{classExpressionParser_a2d053002eefee94cc5b571936ebb2584} 
+\index{ExpressionParser@{ExpressionParser}!dprogram@{dprogram}}
+\index{dprogram@{dprogram}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{dprogram}{dprogram}}
+{\footnotesize\ttfamily double Expression\+Parser\+::dprogram}
+
+\Hypertarget{classExpressionParser_a647fb9673d69abca8a207658a3581b77}\label{classExpressionParser_a647fb9673d69abca8a207658a3581b77} 
+\index{ExpressionParser@{ExpressionParser}!duv@{duv}}
+\index{duv@{duv}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{duv}{duv}}
+{\footnotesize\ttfamily double Expression\+Parser\+::duv\mbox{[}10\mbox{]} = \{ 0,0,0,0,0,0,0,0,0,0 \}}
+
+\Hypertarget{classExpressionParser_a6d8484e6cb52d2a255f637d591786d48}\label{classExpressionParser_a6d8484e6cb52d2a255f637d591786d48} 
+\index{ExpressionParser@{ExpressionParser}!dvalue@{dvalue}}
+\index{dvalue@{dvalue}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{dvalue}{dvalue}}
+{\footnotesize\ttfamily double Expression\+Parser\+::dvalue}
+
+\Hypertarget{classExpressionParser_abfd334fe25ae573583c5d003b1450fa8}\label{classExpressionParser_abfd334fe25ae573583c5d003b1450fa8} 
+\index{ExpressionParser@{ExpressionParser}!dvelocity@{dvelocity}}
+\index{dvelocity@{dvelocity}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{dvelocity}{dvelocity}}
+{\footnotesize\ttfamily double Expression\+Parser\+::dvelocity}
+
+\Hypertarget{classExpressionParser_a0294a888221b1ce371d92e4dd4149492}\label{classExpressionParser_a0294a888221b1ce371d92e4dd4149492} 
+\index{ExpressionParser@{ExpressionParser}!expFunctions@{expFunctions}}
+\index{expFunctions@{expFunctions}!ExpressionParser@{ExpressionParser}}
+\doxysubsubsection{\texorpdfstring{expFunctions}{expFunctions}}
+{\footnotesize\ttfamily std\+::vector$<$te\+\_\+variable$>$ Expression\+Parser\+::exp\+Functions\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{expressionparser_8h}{expressionparser.\+h}}\item 
+\mbox{\hyperlink{expressionparser_8cpp}{expressionparser.\+cpp}}\end{DoxyCompactItemize}

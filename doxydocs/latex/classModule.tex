@@ -1,0 +1,403 @@
+\doxysection{Module Class Reference}
+\hypertarget{classModule}{}\label{classModule}\index{Module@{Module}}
+
+
+{\ttfamily \#include $<$module.\+hpp$>$}
+
+
+
+Inheritance diagram for Module\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Module\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule_a5a240a8a9ab1813b17bcb810b24ceaea}{Module}} ()
+\item 
+virtual const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{get\+Module\+ID}} () const =0
+\item 
+virtual \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a9a13ef0a8291e562a9557c311d07b334}{get\+Module\+ID}} ()=0
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a534a35eb18ec29dbcc8bafce30c21128}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_af7fe70cf55b7c8999672c8a202cbdb71}{process\+Module\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a3896fd907affb2fb5a81df36080ef744}{process\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual void \mbox{\hyperlink{classModule_a8aa6237aabeb8c851f0e6272d6cdc28f}{dir}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix, bool hidden, bool modules, bool commands, bool instances, bool instance\+Count, bool recursive)
+\item 
+virtual void \mbox{\hyperlink{classModule_a09131761fec40345e3657b801778057f}{update}} ()
+\item 
+virtual int \mbox{\hyperlink{classModule_ae6fa72e64554ee0b09a8bb6a77a68640}{get\+Module\+Command\+Count}} ()
+\item 
+virtual void \mbox{\hyperlink{classModule_a5798bc3ad2b47f69e8915297cb33b3e3}{dump\+Data}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}data\+Dump)
+\item 
+virtual void \mbox{\hyperlink{classModule_a72b5f8a3b37fe31c9002c6d7352b2427}{help}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix)
+\item 
+bool \mbox{\hyperlink{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2}{has\+Data\+Change}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleCommand}{Module\+Command}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModuleCommand_a4ce6a1d032eaa918f21ad8121ba59094}{get\+Module\+Command}} (uint8\+\_\+t i) const =0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classModule_aa09bd171529da96438e917258ab5ab8d}{is\+Group\+Handler}} = false
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}{set\+Data\+Changed}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModule_ad85cad50c5538cc47c6d3ac76500e4cf}{owner}} = nullptr
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classModule_a4eddb3b6ba2034603c234262dccd5f4d}{get\+Builtin\+Command\+Count}} ()
+\item 
+const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModule_a2ce723cda6f7377fee2023c174b48948}{get\+Builtin\+Command}} (uint8\+\_\+t i)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classModule_a71ec64342571d0a4a3a99ede23164ed9}{p\+Data\+Change}} = false
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModule_a2b930f376b031611ccdf0070585fb805}{builtin\+Commands}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classModule_a5a240a8a9ab1813b17bcb810b24ceaea}\label{classModule_a5a240a8a9ab1813b17bcb810b24ceaea} 
+\index{Module@{Module}!Module@{Module}}
+\index{Module@{Module}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Module()}{Module()}}
+{\footnotesize\ttfamily Module\+::\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classModule_a8aa6237aabeb8c851f0e6272d6cdc28f}\label{classModule_a8aa6237aabeb8c851f0e6272d6cdc28f} 
+\index{Module@{Module}!dir@{dir}}
+\index{dir@{dir}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{dir()}{dir()}}
+{\footnotesize\ttfamily void Module\+::dir (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{in\+Command\+Responses,  }\item[{String}]{long\+Prefix,  }\item[{String}]{short\+Prefix,  }\item[{bool}]{hidden,  }\item[{bool}]{modules,  }\item[{bool}]{commands,  }\item[{bool}]{instances,  }\item[{bool}]{instance\+Count,  }\item[{bool}]{recursive }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classBaseModule_a773ba1995ef5b97d58e3be11ff80238f}{Base\+Module}}, and \mbox{\hyperlink{classModuleHandler_a8086440da55f316a89562f2a736a1ab6}{Module\+Handler}}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a8aa6237aabeb8c851f0e6272d6cdc28f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a8aa6237aabeb8c851f0e6272d6cdc28f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classModule_a5798bc3ad2b47f69e8915297cb33b3e3}\label{classModule_a5798bc3ad2b47f69e8915297cb33b3e3} 
+\index{Module@{Module}!dumpData@{dumpData}}
+\index{dumpData@{dumpData}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
+{\footnotesize\ttfamily void Module\+::dump\+Data (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{data\+Dump }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classModuleHandler_ae3fa5b4e5e4fa54687c3d26e0d937782}{Module\+Handler}}, \mbox{\hyperlink{classBowActuators_a6a7200c6d26ac713d942e4ef24d453d3}{Bow\+Actuators}}, \mbox{\hyperlink{classHarmonicSeriesHandler_ad54478d5f92f3500da931491d0a59088}{Harmonic\+Series\+Handler}}, \mbox{\hyperlink{classMIDIConfigurationHandler_ad0cd26b75ec6c680b910e73cc97c843f}{MIDIConfiguration\+Handler}}, and \mbox{\hyperlink{classBaseModule_aa8f8becf50a684de1d93472b355df105}{Base\+Module}}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a5798bc3ad2b47f69e8915297cb33b3e3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a5798bc3ad2b47f69e8915297cb33b3e3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classModule_a2ce723cda6f7377fee2023c174b48948}\label{classModule_a2ce723cda6f7377fee2023c174b48948} 
+\index{Module@{Module}!getBuiltinCommand@{getBuiltinCommand}}
+\index{getBuiltinCommand@{getBuiltinCommand}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{getBuiltinCommand()}{getBuiltinCommand()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} Module\+::get\+Builtin\+Command (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a2ce723cda6f7377fee2023c174b48948_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a2ce723cda6f7377fee2023c174b48948_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classModule_a4eddb3b6ba2034603c234262dccd5f4d}\label{classModule_a4eddb3b6ba2034603c234262dccd5f4d} 
+\index{Module@{Module}!getBuiltinCommandCount@{getBuiltinCommandCount}}
+\index{getBuiltinCommandCount@{getBuiltinCommandCount}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{getBuiltinCommandCount()}{getBuiltinCommandCount()}}
+{\footnotesize\ttfamily int Module\+::get\+Builtin\+Command\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a4eddb3b6ba2034603c234262dccd5f4d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classModule_ae6fa72e64554ee0b09a8bb6a77a68640}\label{classModule_ae6fa72e64554ee0b09a8bb6a77a68640} 
+\index{Module@{Module}!getModuleCommandCount@{getModuleCommandCount}}
+\index{getModuleCommandCount@{getModuleCommandCount}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{getModuleCommandCount()}{getModuleCommandCount()}}
+{\footnotesize\ttfamily int Module\+::get\+Module\+Command\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_ae6fa72e64554ee0b09a8bb6a77a68640_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_ae6fa72e64554ee0b09a8bb6a77a68640_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}\label{classModule_a262f18e4f440d6e82dbf7b20d42be4f8} 
+\index{Module@{Module}!getModuleID@{getModuleID}}
+\index{getModuleID@{getModuleID}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{getModuleID()}{getModuleID()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& Module\+::get\+Module\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classBaseModule_ad96f42d66eea15323c95eb466c0a5918}{Base\+Module}}.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a262f18e4f440d6e82dbf7b20d42be4f8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classModule_a9a13ef0a8291e562a9557c311d07b334}\label{classModule_a9a13ef0a8291e562a9557c311d07b334} 
+\index{Module@{Module}!getModuleID@{getModuleID}}
+\index{getModuleID@{getModuleID}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{getModuleID()}{getModuleID()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& Module\+::get\+Module\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classBaseModule_a6fc683538eb4e95582050e041218b0fc}{Base\+Module}}.
+
+\Hypertarget{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2}\label{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2} 
+\index{Module@{Module}!hasDataChange@{hasDataChange}}
+\index{hasDataChange@{hasDataChange}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{hasDataChange()}{hasDataChange()}}
+{\footnotesize\ttfamily bool Module\+::has\+Data\+Change (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classModule_a72b5f8a3b37fe31c9002c6d7352b2427}\label{classModule_a72b5f8a3b37fe31c9002c6d7352b2427} 
+\index{Module@{Module}!help@{help}}
+\index{help@{help}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{help()}{help()}}
+{\footnotesize\ttfamily void Module\+::help (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{in\+Command\+Responses,  }\item[{String}]{long\+Prefix,  }\item[{String}]{short\+Prefix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classModuleHandler_a9c235cdcf6965c856fcb2be82cc46175}{Module\+Handler}}, and \mbox{\hyperlink{classBaseModule_a195c0beae8512383e4caedb237132e30}{Base\+Module}}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a72b5f8a3b37fe31c9002c6d7352b2427_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a72b5f8a3b37fe31c9002c6d7352b2427_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classModule_a534a35eb18ec29dbcc8bafce30c21128}\label{classModule_a534a35eb18ec29dbcc8bafce30c21128} 
+\index{Module@{Module}!processBuiltInCommands@{processBuiltInCommands}}
+\index{processBuiltInCommands@{processBuiltInCommands}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{processBuiltInCommands()}{processBuiltInCommands()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Module\+::process\+Built\+In\+Commands (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a534a35eb18ec29dbcc8bafce30c21128_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a534a35eb18ec29dbcc8bafce30c21128_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classModule_a3896fd907affb2fb5a81df36080ef744}\label{classModule_a3896fd907affb2fb5a81df36080ef744} 
+\index{Module@{Module}!processCommands@{processCommands}}
+\index{processCommands@{processCommands}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{processCommands()}{processCommands()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Module\+::process\+Commands (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classModuleHandler_aba53cb524d3e200345c18bbaf96adaf2}{Module\+Handler}}, and \mbox{\hyperlink{classBaseModule_a40c15922404fbc63dbd3e5c4af25ec63}{Base\+Module}}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a3896fd907affb2fb5a81df36080ef744_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a3896fd907affb2fb5a81df36080ef744_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classModule_af7fe70cf55b7c8999672c8a202cbdb71}\label{classModule_af7fe70cf55b7c8999672c8a202cbdb71} 
+\index{Module@{Module}!processModuleCommands@{processModuleCommands}}
+\index{processModuleCommands@{processModuleCommands}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{processModuleCommands()}{processModuleCommands()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Module\+::process\+Module\+Commands (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_af7fe70cf55b7c8999672c8a202cbdb71_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_af7fe70cf55b7c8999672c8a202cbdb71_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}\label{classModule_a691b8d7f95611abf1aa51fb3f09e34cd} 
+\index{Module@{Module}!setDataChanged@{setDataChanged}}
+\index{setDataChanged@{setDataChanged}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{setDataChanged()}{setDataChanged()}}
+{\footnotesize\ttfamily void Module\+::set\+Data\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a691b8d7f95611abf1aa51fb3f09e34cd_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classModule_a09131761fec40345e3657b801778057f}\label{classModule_a09131761fec40345e3657b801778057f} 
+\index{Module@{Module}!update@{update}}
+\index{update@{update}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Module\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classBowControl_a1e738a6854d44a43b309f1ad9a29a559}{Bow\+Control}}, \mbox{\hyperlink{classBowPressure_af381de6731a25b1ee801cf4c6766a213}{Bow\+Pressure}}, \mbox{\hyperlink{classMIDIConfigurationHandler_a8f22888ac12b0cc07ae5a6471afd8c43}{MIDIConfiguration\+Handler}}, \mbox{\hyperlink{classMuteControl_a372e65c7dbf40cf10718dc56a431e307}{Mute\+Control}}, \mbox{\hyperlink{classPlugin_abb4748bbb52c63fc194fc65983674ed7}{Plugin}}, \mbox{\hyperlink{classBaseModule_ad57097a5e256c89a17d8efbd14c47b8e}{Base\+Module}}, \mbox{\hyperlink{classSolenoid_ac5436da834dec4ca7273fe223f080949}{Solenoid}}, \mbox{\hyperlink{classPlugin__AHDSR_af4098ea71399aea6b3da67eed6c21a8f}{Plugin\+\_\+\+AHDSR}}, \mbox{\hyperlink{classPlugin__LFO_aa04273ed167e5222aba0b439d2d07071}{Plugin\+\_\+\+LFO}}, \mbox{\hyperlink{classPlugin__Map_a13d757d23e7a59bd90d4ba0bb154e3bc}{Plugin\+\_\+\+Map}}, \mbox{\hyperlink{classPlugin__Mult_a907d93505da21178919afdfe6eeaef05}{Plugin\+\_\+\+Mult}}, \mbox{\hyperlink{classPluginHandler_a5e6713823544269628abc861120bc020}{Plugin\+Handler}}, and \mbox{\hyperlink{classFARSingle_a3f734631b7c6abaed45192c1e6481107}{FARSingle}}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a09131761fec40345e3657b801778057f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModule_a09131761fec40345e3657b801778057f_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classModule_a2b930f376b031611ccdf0070585fb805}\label{classModule_a2b930f376b031611ccdf0070585fb805} 
+\index{Module@{Module}!builtinCommands@{builtinCommands}}
+\index{builtinCommands@{builtinCommands}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{builtinCommands}{builtinCommands}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} Module\+::builtin\+Commands\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \{\ \textcolor{stringliteral}{"{}list"{}},\ \textcolor{stringliteral}{"{}ls"{}},\ \textcolor{stringliteral}{"{}hidden/h:modules/m:commands/c:instances/i:instancecounts/ic:recursive/r"{}},\ \textcolor{stringliteral}{"{}Lists\ all\ commands\ and\ modules\ under\ the\ current\ module\ depending\ on\ the\ parameters\ given;\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ 'hidden'\ includes\ normally\ hidden\ commands,\ 'modules'\ includes\ any\ submodules,\ 'commands'\ includes\ commands,\ 'instances'\ shows\ data\ for\ each\ individual\ instance\ of\ a\ module,\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ 'instancecounts'\ includes\ number\ of\ instances\ of\ each\ module,\ 'recursive'\ lists\ and\ child\ modules\ /\ commands\ "{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_dir\},}
+\DoxyCodeLine{\ \ \{\ \textcolor{stringliteral}{"{}help"{}},\ \textcolor{stringliteral}{"{}help"{}},\ \textcolor{stringliteral}{"{}recursive/r"{}},\ \textcolor{stringliteral}{"{}shows\ this\ brief\ explanation\ of\ all\ commands\ and\ modules,\ shows\ the\ help\ for\ all\ submodules\ as\ well\ if\ 'recursive'"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_help\ \},}
+\DoxyCodeLine{\ \ \{\ \textcolor{stringliteral}{"{}dumpdata"{}},\ \textcolor{stringliteral}{"{}dump"{}},\ \textcolor{stringliteral}{"{}recursive/r"{}},\ \textcolor{stringliteral}{"{}Dumps\ all\ data\ to\ be\ saved\ for\ the\ current\ module,\ will\ list\ the\ data\ of\ all\ submodules\ as\ well\ if\ 'recursive'"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_dump\ \},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{classModule_aa09bd171529da96438e917258ab5ab8d}\label{classModule_aa09bd171529da96438e917258ab5ab8d} 
+\index{Module@{Module}!isGroupHandler@{isGroupHandler}}
+\index{isGroupHandler@{isGroupHandler}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{isGroupHandler}{isGroupHandler}}
+{\footnotesize\ttfamily bool Module\+::is\+Group\+Handler = false}
+
+\Hypertarget{classModule_ad85cad50c5538cc47c6d3ac76500e4cf}\label{classModule_ad85cad50c5538cc47c6d3ac76500e4cf} 
+\index{Module@{Module}!owner@{owner}}
+\index{owner@{owner}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{owner}{owner}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classModule}{Module}}\texorpdfstring{$\ast$}{*} Module\+::owner = nullptr\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classModule_a71ec64342571d0a4a3a99ede23164ed9}\label{classModule_a71ec64342571d0a4a3a99ede23164ed9} 
+\index{Module@{Module}!pDataChange@{pDataChange}}
+\index{pDataChange@{pDataChange}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{pDataChange}{pDataChange}}
+{\footnotesize\ttfamily bool Module\+::p\+Data\+Change = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{module_8hpp}{module.\+hpp}}\item 
+\mbox{\hyperlink{module_8cpp}{module.\+cpp}}\end{DoxyCompactItemize}

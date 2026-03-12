@@ -1,0 +1,101 @@
+\doxysection{midiconfigurationhandler.\+hpp File Reference}
+\hypertarget{midiconfigurationhandler_8hpp}{}\label{midiconfigurationhandler_8hpp}\index{midiconfigurationhandler.hpp@{midiconfigurationhandler.hpp}}
+{\ttfamily \#include "{}master\+\_\+controller/midi.\+h"{}}\newline
+{\ttfamily \#include "{}MIDI.\+h"{}}\newline
+{\ttfamily \#include "{}base/modulehandler.\+hpp"{}}\newline
+{\ttfamily \#include "{}master\+\_\+controller/expressionparser.\+h"{}}\newline
+{\ttfamily \#include "{}master\+\_\+controller/midimessageconfiguration.\+hpp"{}}\newline
+Include dependency graph for midiconfigurationhandler.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{midiconfigurationhandler_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{midiconfigurationhandler_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classMIDIHardwareWrapper}{MIDIHardware\+Wrapper}}
+\item 
+class \mbox{\hyperlink{classMIDIConfigurationHandler}{MIDIConfiguration\+Handler}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{midiconfigurationhandler_8hpp_af1d4195550c85696093c8f91b826bec8}{CREATE\+\_\+\+MIDI\+\_\+\+SOURCE\+\_\+\+CALLBACKS\+\_\+\+FWD}}(name)~    extern \mbox{\hyperlink{classMIDIHardwareWrapper}{MIDIHardware\+Wrapper}} \texorpdfstring{$\ast$}{*}name\#\#source;
+\item 
+\#define \mbox{\hyperlink{midiconfigurationhandler_8hpp_a29beb04f4a4a2df7f4c60ccd7046bb7d}{CREATE\+\_\+\+MIDI\+\_\+\+SOURCE\+\_\+\+CALLBACKS}}(name)
+\item 
+\#define \mbox{\hyperlink{midiconfigurationhandler_8hpp_a2e175e868b161d8eefd737c00682d688}{CONNECT\+\_\+\+MIDI\+\_\+\+CALLBACKS}}(source,  name)
+\item 
+\#define \mbox{\hyperlink{midiconfigurationhandler_8hpp_a130e033600bb847a9803bd8a2395215e}{CONNECT\+\_\+\+USBMIDI\+\_\+\+CALLBACKS}}(source,  name)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{midiconfigurationhandler_8hpp_a2e175e868b161d8eefd737c00682d688}\label{midiconfigurationhandler_8hpp_a2e175e868b161d8eefd737c00682d688} 
+\index{midiconfigurationhandler.hpp@{midiconfigurationhandler.hpp}!CONNECT\_MIDI\_CALLBACKS@{CONNECT\_MIDI\_CALLBACKS}}
+\index{CONNECT\_MIDI\_CALLBACKS@{CONNECT\_MIDI\_CALLBACKS}!midiconfigurationhandler.hpp@{midiconfigurationhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{CONNECT\_MIDI\_CALLBACKS}{CONNECT\_MIDI\_CALLBACKS}}
+{\footnotesize\ttfamily \#define CONNECT\+\_\+\+MIDI\+\_\+\+CALLBACKS(\begin{DoxyParamCaption}\item[{}]{source,  }\item[{}]{name }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ source-\/>hardwareMIDI-\/>setHandleNoteOn(name\#\#OnNoteOn);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ source-\/>hardwareMIDI-\/>setHandleNoteOff(name\#\#OnNoteOff);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ source-\/>hardwareMIDI-\/>setHandleAfterTouchPoly(name\#\#OnAfterTouchPoly);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ source-\/>hardwareMIDI-\/>setHandleAfterTouchChannel(name\#\#OnChannelAftertouch);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ source-\/>hardwareMIDI-\/>setHandleControlChange(name\#\#OnControlChange);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ source-\/>hardwareMIDI-\/>setHandlePitchBend(name\#\#OnPitchBend);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ source-\/>hardwareMIDI-\/>setHandleProgramChange(name\#\#OnProgramChange);}
+
+\end{DoxyCode}
+\Hypertarget{midiconfigurationhandler_8hpp_a130e033600bb847a9803bd8a2395215e}\label{midiconfigurationhandler_8hpp_a130e033600bb847a9803bd8a2395215e} 
+\index{midiconfigurationhandler.hpp@{midiconfigurationhandler.hpp}!CONNECT\_USBMIDI\_CALLBACKS@{CONNECT\_USBMIDI\_CALLBACKS}}
+\index{CONNECT\_USBMIDI\_CALLBACKS@{CONNECT\_USBMIDI\_CALLBACKS}!midiconfigurationhandler.hpp@{midiconfigurationhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{CONNECT\_USBMIDI\_CALLBACKS}{CONNECT\_USBMIDI\_CALLBACKS}}
+{\footnotesize\ttfamily \#define CONNECT\+\_\+\+USBMIDI\+\_\+\+CALLBACKS(\begin{DoxyParamCaption}\item[{}]{source,  }\item[{}]{name }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ source-\/>usbMIDI-\/>setHandleNoteOn(name\#\#OnNoteOn);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ source-\/>usbMIDI-\/>setHandleNoteOff(name\#\#OnNoteOff);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ source-\/>usbMIDI-\/>setHandleAfterTouchPoly(name\#\#OnAfterTouchPoly);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ source-\/>usbMIDI-\/>setHandleAfterTouchChannel(name\#\#OnChannelAftertouch);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ source-\/>usbMIDI-\/>setHandleControlChange(name\#\#OnControlChange);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ source-\/>usbMIDI-\/>setHandlePitchChange(name\#\#OnPitchBend);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ source-\/>usbMIDI-\/>setHandleProgramChange(name\#\#OnProgramChange);}
+
+\end{DoxyCode}
+\Hypertarget{midiconfigurationhandler_8hpp_a29beb04f4a4a2df7f4c60ccd7046bb7d}\label{midiconfigurationhandler_8hpp_a29beb04f4a4a2df7f4c60ccd7046bb7d} 
+\index{midiconfigurationhandler.hpp@{midiconfigurationhandler.hpp}!CREATE\_MIDI\_SOURCE\_CALLBACKS@{CREATE\_MIDI\_SOURCE\_CALLBACKS}}
+\index{CREATE\_MIDI\_SOURCE\_CALLBACKS@{CREATE\_MIDI\_SOURCE\_CALLBACKS}!midiconfigurationhandler.hpp@{midiconfigurationhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{CREATE\_MIDI\_SOURCE\_CALLBACKS}{CREATE\_MIDI\_SOURCE\_CALLBACKS}}
+{\footnotesize\ttfamily \#define CREATE\+\_\+\+MIDI\+\_\+\+SOURCE\+\_\+\+CALLBACKS(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classMIDIHardwareWrapper}{MIDIHardwareWrapper}}\ *name\#\#source;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ name\#\#OnNoteOn(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ note,\ \textcolor{keywordtype}{byte}\ velocity)\ \ \{\ name\#\#source-\/>\mbox{\hyperlink{classMIDIHardwareWrapper_a79bd03c55e871a5060bfd4bdd6bf9e33}{midiHandler}}-\/>\mbox{\hyperlink{classMIDIHandler_aa934661065db5fedf3ac616cdf49ee2a}{OnNoteOn}}(channel,\ note,\ velocity);\ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ name\#\#OnNoteOff(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ note,\ \textcolor{keywordtype}{byte}\ velocity)\ \{\ name\#\#source-\/>midiHandler-\/>OnNoteOff(channel,\ note,\ velocity);\ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ name\#\#OnAfterTouchPoly(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ note,\ \textcolor{keywordtype}{byte}\ pressure)\ \{\ name\#\#source-\/>midiHandler-\/>OnAfterTouchPoly(channel,\ note,\ pressure);\ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ name\#\#OnChannelAftertouch(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ pressure)\ \ \{\ name\#\#source-\/>midiHandler-\/>OnChannelAftertouch(channel,pressure);\ \};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ name\#\#OnControlChange(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ control,\ \textcolor{keywordtype}{byte}\ value)\ \{\ name\#\#source-\/>midiHandler-\/>OnControlChange(channel,\ control,\ value);\ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ name\#\#OnPitchBend(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{int}\ pitch)\ \ \{\ name\#\#source-\/>midiHandler-\/>OnPitchBend(channel,\ pitch);\ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ name\#\#OnProgramChange(uint8\_t\ channel,\ uint8\_t\ program)\ \{\ name\#\#source-\/>midiHandler-\/>OnProgramChange(channel,\ program);\ \}\ \(\backslash\)}
+
+\end{DoxyCode}
+\Hypertarget{midiconfigurationhandler_8hpp_af1d4195550c85696093c8f91b826bec8}\label{midiconfigurationhandler_8hpp_af1d4195550c85696093c8f91b826bec8} 
+\index{midiconfigurationhandler.hpp@{midiconfigurationhandler.hpp}!CREATE\_MIDI\_SOURCE\_CALLBACKS\_FWD@{CREATE\_MIDI\_SOURCE\_CALLBACKS\_FWD}}
+\index{CREATE\_MIDI\_SOURCE\_CALLBACKS\_FWD@{CREATE\_MIDI\_SOURCE\_CALLBACKS\_FWD}!midiconfigurationhandler.hpp@{midiconfigurationhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{CREATE\_MIDI\_SOURCE\_CALLBACKS\_FWD}{CREATE\_MIDI\_SOURCE\_CALLBACKS\_FWD}}
+{\footnotesize\ttfamily \#define CREATE\+\_\+\+MIDI\+\_\+\+SOURCE\+\_\+\+CALLBACKS\+\_\+\+FWD(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~    extern \mbox{\hyperlink{classMIDIHardwareWrapper}{MIDIHardware\+Wrapper}} \texorpdfstring{$\ast$}{*}name\#\#source;}
+

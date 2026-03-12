@@ -26,11 +26,12 @@ public:
 
 private:
     char solenoidPin;     ///< Pin for solenoid activation
-    Teensy_PWM *solenoidPWM;
+    //Teensy_PWM *solenoidPWM;
 
     uint16_t forceMax = 65535;
     uint16_t forceMin = 0;
-    float fForceMultiplier = 1;
+    //float fForceMultiplier = 1;
+    uint16_t pForceMultiplier = 65535;
 
     bool solenoidEngaged = false; ///< Current state of the pick solenoid
     unsigned long solenoidEngageTime = 0; ///< Time at which the solenoid was engaged last
@@ -42,7 +43,8 @@ private:
 
     bool setSolenoidMax(uint16_t inMax);
     bool setSolenoidMin(uint16_t inMin);
-    bool setSolenoidMultiplier(float inMultiplier);
+    //bool setSolenoidMultiplier(float inMultiplier);
+    bool setSolenoidMultiplier(uint16_t inMultiplier);
     bool setSolenoidDuration(unsigned long inDuration);
 };
 

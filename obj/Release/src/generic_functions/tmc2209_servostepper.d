@@ -19,10 +19,5 @@ obj/Release/src/generic_functions/tmc2209_servostepper.o: \
  lib/teensy4/CrashReport.h lib/teensy4/Printable.h lib/teensy4/WString.h \
  include/generic_functions/servostepper.hpp \
  include/base/arduinorequired.hpp lib/teensy4/WProgram.h \
- lib/SafeString/src/SerialComs.h lib/SafeString/src/SafeStringReader.h \
- lib/SafeString/src/SafeString.h lib/teensy4/Print.h lib/teensy4/Stream.h \
- lib/SafeString/src/SafeStringNameSpaceStart.h \
- lib/SafeString/src/SafeStringNameSpaceEnd.h \
- lib/SafeString/src/millisDelay.h lib/SafeString/src/millisDelay.h \
  include/base/debugprint.hpp lib/TMC2209/src/TMC2209.cpp \
  lib/TMC2209/src/TMC2209.h

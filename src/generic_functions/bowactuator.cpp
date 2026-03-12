@@ -4,9 +4,9 @@
 #include "generic_functions/bowactuator.hpp"
 
 const ModuleCommandDeclaration BowActuator::moduleCommands[] = {
-    { "", "", "int", "Sets the current actuator", false, false, nullptr, eCommandType::Index },
-    { "name", "na", "string", "Get / set the name of the current actuator", false, false, &s_name, eCommandType::Name  },
-    { "data", "da", "name:rest:engage:stall", "Set actuator data", false, true, &s_data, eCommandType::Data }
+    { "", "", "int", "Sets the current actuator", false, false, nullptr, eCommandType_function::ectIndex },
+    { "name", "na", "string", "Get / set the name of the current actuator", false, false, &s_name, eCommandType_function::ectName  },
+    { "data", "da", "name:rest:engage:stall", "Set actuator data", false, true, &s_data, eCommandType_data::ectData }
 };
 
 getModuleCount(BowActuator)

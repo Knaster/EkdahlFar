@@ -4,5 +4,32 @@
 \begin{DoxyRefList}
 \item[File \doxylink{bowcontrol_8cpp}{bowcontrol.cpp} ]\label{todo__todo000001}%
 \Hypertarget{todo__todo000001}%
-THIS NEEDS TO CHANGE, values should be updated internally but only outputted depending on manual / automatic control 
+THIS NEEDS TO CHANGE, values should be updated internally but only outputted depending on manual / automatic control  
+\item[Member \doxylink{classDCMotorControl_a77964b1c2ef9755ef26d638b71668dd4}{DCMotor\+Control\+::get\+Average\+Tachometer\+Freq} ()]\label{todo__todo000002}%
+\Hypertarget{todo__todo000002}%
+What the fuck this wont work, move old\+Average = average to after this if statement and try again  
+\item[File \doxylink{midi_8h}{midi.h} ]\label{todo__todo000004}%
+\Hypertarget{todo__todo000004}%
+REVISE
+\begin{DoxyItemize}
+\item Note\+On with velocity 0 sets speed only
+\item Note\+On with velocity \texorpdfstring{$>$}{>}0 sets speed and pressure
+\item Note\+Off disengage string if no notes present
+\item Aftertouch \texorpdfstring{$<$}{<}127 sets pressure only
+\item Aftertouch 127 engages solenoid
+\item Pitch bend sets frequency deviation
+\item CC 64 / 0x40 sets sustain on/off
+\item CC 16 engages solenoid 
+\end{DoxyItemize}
+\item[Member \doxylink{classPIDController_a04e654ba7d6720fa68bb74946c0b138d}{PIDController\+::pid\+Control} ()]\label{todo__todo000003}%
+\Hypertarget{todo__todo000003}%
+add Integral injection and other pre-\/loading parameters to help bow start and change 
+
+
+
+final check so PWM is never out of range min/max 
+
+
+
+startup injection of fundamental maybe? 
 \end{DoxyRefList}

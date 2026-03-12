@@ -1,0 +1,98 @@
+\doxysection{Plugin\+Factory Class Reference}
+\hypertarget{classPluginFactory}{}\label{classPluginFactory}\index{PluginFactory@{PluginFactory}}
+
+
+{\ttfamily \#include $<$pluginhandler.\+hpp$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structPluginFactory_1_1PluginRegistry}{Plugin\+Registry}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classPluginFactory_a8ea4c7063d81846fea11cd909ec754cd}{creator\+\_\+t}} = std\+::function$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classPlugin}{Plugin}} $>$()$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classPluginFactory_a3e56144452e573304bfed7e08ccecacb}{register\+Plugin}} (\mbox{\hyperlink{classPluginFactory_a8ea4c7063d81846fea11cd909ec754cd}{creator\+\_\+t}} creator, \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} tmodule\+ID)
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classPlugin}{Plugin}} $>$ \mbox{\hyperlink{classPluginFactory_a9ca7f9dd94c64d23429017e1f75b9f7b}{create}} (String long\+Name) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classPluginFactory}{Plugin\+Factory}} \& \mbox{\hyperlink{classPluginFactory_a7cf119d70c104bed92be0a6d8bd6bc48}{instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structPluginFactory_1_1PluginRegistry}{Plugin\+Registry}} $>$ \mbox{\hyperlink{classPluginFactory_a5e3fb082706af187baee9510bedc3010}{plugins}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classPluginFactory_a8ea4c7063d81846fea11cd909ec754cd}\label{classPluginFactory_a8ea4c7063d81846fea11cd909ec754cd} 
+\index{PluginFactory@{PluginFactory}!creator\_t@{creator\_t}}
+\index{creator\_t@{creator\_t}!PluginFactory@{PluginFactory}}
+\doxysubsubsection{\texorpdfstring{creator\_t}{creator\_t}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classPluginFactory_a8ea4c7063d81846fea11cd909ec754cd}{Plugin\+Factory\+::creator\+\_\+t}} =  std\+::function$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classPlugin}{Plugin}}$>$()$>$}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classPluginFactory_a9ca7f9dd94c64d23429017e1f75b9f7b}\label{classPluginFactory_a9ca7f9dd94c64d23429017e1f75b9f7b} 
+\index{PluginFactory@{PluginFactory}!create@{create}}
+\index{create@{create}!PluginFactory@{PluginFactory}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classPlugin}{Plugin}} $>$ Plugin\+Factory\+::create (\begin{DoxyParamCaption}\item[{String}]{long\+Name }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPluginFactory_a9ca7f9dd94c64d23429017e1f75b9f7b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPluginFactory_a9ca7f9dd94c64d23429017e1f75b9f7b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPluginFactory_a7cf119d70c104bed92be0a6d8bd6bc48}\label{classPluginFactory_a7cf119d70c104bed92be0a6d8bd6bc48} 
+\index{PluginFactory@{PluginFactory}!instance@{instance}}
+\index{instance@{instance}!PluginFactory@{PluginFactory}}
+\doxysubsubsection{\texorpdfstring{instance()}{instance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classPluginFactory}{Plugin\+Factory}} \& Plugin\+Factory\+::instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPluginFactory_a7cf119d70c104bed92be0a6d8bd6bc48_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPluginFactory_a3e56144452e573304bfed7e08ccecacb}\label{classPluginFactory_a3e56144452e573304bfed7e08ccecacb} 
+\index{PluginFactory@{PluginFactory}!registerPlugin@{registerPlugin}}
+\index{registerPlugin@{registerPlugin}!PluginFactory@{PluginFactory}}
+\doxysubsubsection{\texorpdfstring{registerPlugin()}{registerPlugin()}}
+{\footnotesize\ttfamily void Plugin\+Factory\+::register\+Plugin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classPluginFactory_a8ea4c7063d81846fea11cd909ec754cd}{creator\+\_\+t}}}]{creator,  }\item[{\mbox{\hyperlink{structtModuleID}{t\+Module\+ID}}}]{tmodule\+ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classPluginFactory_a5e3fb082706af187baee9510bedc3010}\label{classPluginFactory_a5e3fb082706af187baee9510bedc3010} 
+\index{PluginFactory@{PluginFactory}!plugins@{plugins}}
+\index{plugins@{plugins}!PluginFactory@{PluginFactory}}
+\doxysubsubsection{\texorpdfstring{plugins}{plugins}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structPluginFactory_1_1PluginRegistry}{Plugin\+Registry}}$>$ Plugin\+Factory\+::plugins}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{pluginhandler_8hpp}{pluginhandler.\+hpp}}\end{DoxyCompactItemize}

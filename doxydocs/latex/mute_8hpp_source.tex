@@ -23,62 +23,65 @@
 \DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ MUTE\_H}}
 \DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ MUTE\_H}}
 \DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classMute}{Mute}}\ \{}
-\DoxyCodeLine{00023\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00024\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_a41e4d4f30497a81729d45dc42429440d}{lastPosition}};}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_ac059549f1811658c4e790e59e71fda65}{restPosition}}\ =\ 0;}
-\DoxyCodeLine{00027\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_ae540aa1e4c5daab17098373b3f4de47d}{fullMutePosition}}\ =\ 65535;}
-\DoxyCodeLine{00028\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_a3bbda9ce5b1b063b8706d7ea9b35ef09}{halfMutePosition}}\ =\ 0;}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a106fad11788f4d3ae632320c9f199871}{sustain}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00031\ }
-\DoxyCodeLine{00032\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_a4fd3fd2d5ea01bf0defbe634e90170e5}{muteMaxPosition}}\ =\ 59000;}
-\DoxyCodeLine{00033\ }
-\DoxyCodeLine{00034\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_a7156ca63ce157d54ec1112c0334832a9}{backOffTime}}\ =\ 0;}
-\DoxyCodeLine{00035\ \ \ \ \ elapsedMillis\ \mbox{\hyperlink{classMute_acc79f09b7b07c8747726a7088bd64659}{backOffTimer}};}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{arduinorequired_8hpp}{base/arduinorequired.hpp}}"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tmc2209__servostepper_8hpp}{generic\_functions/tmc2209\_servostepper.hpp}}"{}}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classMute}{Mute}}\ \{}
+\DoxyCodeLine{00026\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00027\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_a41e4d4f30497a81729d45dc42429440d}{lastPosition}};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_ac059549f1811658c4e790e59e71fda65}{restPosition}}\ =\ 0;}
+\DoxyCodeLine{00030\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_ae540aa1e4c5daab17098373b3f4de47d}{fullMutePosition}}\ =\ 65535;}
+\DoxyCodeLine{00031\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_a3bbda9ce5b1b063b8706d7ea9b35ef09}{halfMutePosition}}\ =\ 0;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a106fad11788f4d3ae632320c9f199871}{sustain}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_a4fd3fd2d5ea01bf0defbe634e90170e5}{muteMaxPosition}}\ =\ 59000;}
 \DoxyCodeLine{00036\ }
-\DoxyCodeLine{00037\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00038\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_adadcb19b65b32e478e092576742ad6f6}{hwMutePos}}\ =\ 0;}
-\DoxyCodeLine{00039\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_a2c12dea31dd5003f4c4ee9e232e2e066}{hwLastMutePos}}\ =\ 0;}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0f}{emutePosition}}\ \{\mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0fa931952fc3cd0bac9900108cbb684b9b2}{mpUndefined}},\ \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0fa8cf0481631291e433972a7613c601273}{mpRest}},\ \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0fa0c80e11b97af0a59a3d4378a95e5ae57}{mpFull}},\ \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0fab10204e03259b4592ecfb2ad54b6ed59}{mpHalf}}\ \};}
-\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0f}{emutePosition}}\ \mbox{\hyperlink{classMute_a911412f0166131a8c50aa25d660b8b27}{mutePosition}}\ =\ \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0fa931952fc3cd0bac9900108cbb684b9b2}{mpUndefined}};}
+\DoxyCodeLine{00037\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_a7156ca63ce157d54ec1112c0334832a9}{backOffTime}}\ =\ 0;}
+\DoxyCodeLine{00038\ \ \ \ \ elapsedMillis\ \mbox{\hyperlink{classMute_acc79f09b7b07c8747726a7088bd64659}{backOffTimer}};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_adadcb19b65b32e478e092576742ad6f6}{hwMutePos}}\ =\ 0;}
+\DoxyCodeLine{00042\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_a2c12dea31dd5003f4c4ee9e232e2e066}{hwLastMutePos}}\ =\ 0;}
 \DoxyCodeLine{00043\ }
-\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper}{Tmc2209ServoStepper}}\ *\mbox{\hyperlink{classMute_a02d9a38e3778c71c3f39f828af2416c5}{tmc2209ServoStepper}}\ =\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00045\ }
-\DoxyCodeLine{00046\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classMute}{Mute}}(\textcolor{keywordtype}{char}\ stepEnPin,\ \textcolor{keywordtype}{char}\ stepDirPin,\ \textcolor{keywordtype}{char}\ stepStepPin,\ HardwareSerial\ *stepSerialPort,\ \textcolor{keywordtype}{char}\ stepHomeSensorPin);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0f}{emutePosition}}\ \{\mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0fa931952fc3cd0bac9900108cbb684b9b2}{mpUndefined}},\ \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0fa8cf0481631291e433972a7613c601273}{mpRest}},\ \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0fa0c80e11b97af0a59a3d4378a95e5ae57}{mpFull}},\ \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0fab10204e03259b4592ecfb2ad54b6ed59}{mpHalf}}\ \};}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0f}{emutePosition}}\ \mbox{\hyperlink{classMute_a911412f0166131a8c50aa25d660b8b27}{mutePosition}}\ =\ \mbox{\hyperlink{classMute_a4cfb5126a06fd835a9f51e157176ce0fa931952fc3cd0bac9900108cbb684b9b2}{mpUndefined}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper}{Tmc2209ServoStepper}}\ *\mbox{\hyperlink{classMute_a02d9a38e3778c71c3f39f828af2416c5}{tmc2209ServoStepper}}\ =\ \textcolor{keyword}{nullptr};}
 \DoxyCodeLine{00048\ }
-\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_af328cc59f4cb0766b5929970b0434abe}{setupTMC2209}}();}
-\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMute_a71ffc2932616f8ea269c5af135656986}{getTMC2209Info}}();}
-\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_acbb5b9115d7e98896126fbcbe0013962}{homeMute}}(\textcolor{keywordtype}{bool}\ invert\ =\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00052\ }
-\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a6fd93a88f9ab9970e410e33969a789ba}{setPosition}}(uint16\_t\ tilt);}
-\DoxyCodeLine{00054\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_a804da8130220812736c139d27a718a86}{getPosition}}();}
+\DoxyCodeLine{00049\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{classMute}{Mute}}(\textcolor{keywordtype}{char}\ stepEnPin,\ \textcolor{keywordtype}{char}\ stepDirPin,\ \textcolor{keywordtype}{char}\ stepStepPin,\ HardwareSerial\ *stepSerialPort,\ \textcolor{keywordtype}{char}\ stepHomeSensorPin);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_af328cc59f4cb0766b5929970b0434abe}{setupTMC2209}}();}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMute_a71ffc2932616f8ea269c5af135656986}{getTMC2209Info}}();}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_acbb5b9115d7e98896126fbcbe0013962}{homeMute}}(\textcolor{keywordtype}{bool}\ invert\ =\ \textcolor{keyword}{false});}
 \DoxyCodeLine{00055\ }
-\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_aa6d19b1ae21b82a18f9476e4ddce5dfc}{rest}}();}
-\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_af168afb5de3626559c0124c0088565b8}{fullMute}}();}
-\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a132ffdad2b40846a39a39afd934c4f3f}{halfMute}}();}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_aa0366a6d316fe32dcc9a1e6d82b97157}{setRestPosition}}(uint16\_t\ inRestPosition);}
-\DoxyCodeLine{00061\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_aeddb3fa4973cd96fff7bc535528e9cf0}{getRestPosition}}();}
-\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a7fbd5df0a56c5566046b7616cc021b21}{setFullMutePosition}}(uint16\_t\ inFullMutePosition);}
-\DoxyCodeLine{00063\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_a8f47beec29eac2626a7ad4dad10fee2b}{getFullMutePosition}}();}
-\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a449bebc103f6f7ee8c05a04e8c272685}{setHalfMutePosition}}(uint16\_t\ inHalfMutePosition);}
-\DoxyCodeLine{00065\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_aad0d0c9cf8ce9c4cc9a64d7bb9830f78}{getHalfMutePosition}}();}
-\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a8f85c8d25360ea66ecf7962af8aec325}{setBackOffTime}}(uint16\_t\ inBackoffTime);}
-\DoxyCodeLine{00067\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_adeb9d25d00e1f3e0b2dbd7392b621bfe}{getBackOffTime}}();}
-\DoxyCodeLine{00068\ }
-\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a5e64fbc1ccd2ec8c6692fc93706eca3f}{saveRest}}();}
-\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a2ca121f2e1593bf0dfe6d4ece0da5c91}{saveFullMute}}();}
-\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a9af8fdab9ed1f318c6f1941f47c4f6d2}{saveHalfMute}}();}
-\DoxyCodeLine{00072\ }
-\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a6ba976f6bf155a68cfe4924d9fd26f97}{setSustain}}(\textcolor{keywordtype}{bool}\ inSustain);}
-\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a9e75cce1079b7755476c1375f5436ffa}{getSustain}}();}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a6fd93a88f9ab9970e410e33969a789ba}{setPosition}}(uint16\_t\ tilt);}
+\DoxyCodeLine{00057\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_a804da8130220812736c139d27a718a86}{getPosition}}();}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_aa6d19b1ae21b82a18f9476e4ddce5dfc}{rest}}();}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_af168afb5de3626559c0124c0088565b8}{fullMute}}();}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a132ffdad2b40846a39a39afd934c4f3f}{halfMute}}();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_aa0366a6d316fe32dcc9a1e6d82b97157}{setRestPosition}}(uint16\_t\ inRestPosition);}
+\DoxyCodeLine{00064\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_aeddb3fa4973cd96fff7bc535528e9cf0}{getRestPosition}}();}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a7fbd5df0a56c5566046b7616cc021b21}{setFullMutePosition}}(uint16\_t\ inFullMutePosition);}
+\DoxyCodeLine{00066\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_a8f47beec29eac2626a7ad4dad10fee2b}{getFullMutePosition}}();}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a449bebc103f6f7ee8c05a04e8c272685}{setHalfMutePosition}}(uint16\_t\ inHalfMutePosition);}
+\DoxyCodeLine{00068\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_aad0d0c9cf8ce9c4cc9a64d7bb9830f78}{getHalfMutePosition}}();}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a8f85c8d25360ea66ecf7962af8aec325}{setBackOffTime}}(uint16\_t\ inBackoffTime);}
+\DoxyCodeLine{00070\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classMute_adeb9d25d00e1f3e0b2dbd7392b621bfe}{getBackOffTime}}();}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a5e64fbc1ccd2ec8c6692fc93706eca3f}{saveRest}}();}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a2ca121f2e1593bf0dfe6d4ece0da5c91}{saveFullMute}}();}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a9af8fdab9ed1f318c6f1941f47c4f6d2}{saveHalfMute}}();}
 \DoxyCodeLine{00075\ }
-\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMute_a0353a23ac79cc1650d820fbfa87dfafd}{updateMute}}();}
-\DoxyCodeLine{00077\ \};}
-\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a6ba976f6bf155a68cfe4924d9fd26f97}{setSustain}}(\textcolor{keywordtype}{bool}\ inSustain);}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMute_a9e75cce1079b7755476c1375f5436ffa}{getSustain}}();}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMute_a0353a23ac79cc1650d820fbfa87dfafd}{updateMute}}();}
+\DoxyCodeLine{00080\ \};}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

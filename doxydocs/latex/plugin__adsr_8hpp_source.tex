@@ -1,0 +1,84 @@
+\doxysection{plugin\+\_\+adsr.\+hpp}
+\hypertarget{plugin__adsr_8hpp_source}{}\label{plugin__adsr_8hpp_source}\index{plugin\_adsr.hpp@{plugin\_adsr.hpp}}
+\mbox{\hyperlink{plugin__adsr_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLUGIN\_AHDSR\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLUGIN\_AHDSR\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{pluginhandler_8hpp}{plugins/pluginhandler.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classPlugin}{Plugin}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a726e985c9256abcd3e04b255b31cba09}{SETMODULEID}}(\textcolor{stringliteral}{"{}ahdsr"{}},\ \textcolor{stringliteral}{"{}ahdsr"{}},\ \textcolor{stringliteral}{"{}Basic\ software\ AHDSR\ v1.0"{}},\ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8}{eModuleType::software}},\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{pluginhandler_8hpp_a013343e5a8289faf7dd55823f0635aad}{CREATEPLUGINFUNCTIONS}}(\mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}})}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(name,\ \mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}})}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(enable,\ \mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}})}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(target,\ \mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}})}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(updaterate,\ \mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}})}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(gate,\ \mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}})}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(attack,\ \mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}})}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(decay,\ \mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}})}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(hold,\ \mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}})}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(sustain,\ \mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}})}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(release,\ \mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}})}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(amplitude,\ \mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}})}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(releasetarget,\ \mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}})}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(invert,\ \mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}})}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}}();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlugin__AHDSR_af4098ea71399aea6b3da67eed6c21a8f}{update}}()\ override;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ private:}
+\DoxyCodeLine{00035\ \ \ \ \ String\ \mbox{\hyperlink{classPlugin__AHDSR_a4f69f3f4441fbd0b82cae90c1c5bfe00}{pName}}\ =\ "{}"{};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPlugin__AHDSR_a4a0141b274701fca900f922ae8f05c96}{pEnable}}\ =\ false;}
+\DoxyCodeLine{00037\ \ \ \ \ String\ \mbox{\hyperlink{classPlugin__AHDSR_a6dba07bf8d0bc0e97cc26844a2429e13}{pTarget}}\ =\ "{}bw.bp.mo:ahdsrout"{};}
+\DoxyCodeLine{00038\ \ \ \ \ String\ \mbox{\hyperlink{classPlugin__AHDSR_a032abc16415a517f5e168ca79aba0ec3}{pReleaseTarget}}\ =\ "{}bw.bp.rs:1"{};}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPlugin__AHDSR_a6ed5267f6d48527b034cf9a5ddd9539e}{pReleased}}\ =\ false;}
+\DoxyCodeLine{00040\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classPlugin__AHDSR_a4bb896353a8904c21fb9049ddaff0806}{pUpdateRate}}\ =\ 10;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPlugin__AHDSR_a8264ec19eb7ac13c8a5c23d7316ac926}{pGate}}\ =\ false;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPlugin__AHDSR_a465fec0a863f048e2c8cf645f2af8b92}{pValue}}\ =\ 0;}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPlugin__AHDSR_a9689d00db5cd3c9ce55cbd143b078a83}{pHoldValue}}\ =\ 0;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPlugin__AHDSR_aa1f146f176a70129571d55bd92938ff3}{pAmplitude}}\ =\ 5000;}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classPlugin__AHDSR_a5502b8ea16f72e020e79201bff080509}{pAttack}}\ =\ 1000;}
+\DoxyCodeLine{00050\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classPlugin__AHDSR_a962ebc3ef69625de4e7d18d5290073b4}{pHold}}\ =\ 1000;}
+\DoxyCodeLine{00051\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classPlugin__AHDSR_ab043c5038594f845941530a82adabc0c}{pDecay}}\ =\ 3000;}
+\DoxyCodeLine{00052\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classPlugin__AHDSR_ae4660c25cd75cf6850e08ad06cd8ac0d}{pSustain}}\ =\ 16000;}
+\DoxyCodeLine{00053\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classPlugin__AHDSR_a1ed204873517de08ef65aba15c7aaea4}{pRelease}}\ =\ 5000;}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPlugin__AHDSR_af4828bb19bfa9276a085aa235028ec4d}{pAttackRate}}\ =\ 0;}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPlugin__AHDSR_ab3e031e9e4fcfdef4ab4b82fae2de91f}{pHoldRate}}\ =\ 0;}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPlugin__AHDSR_acd9bcf57af58ce7fc0c664e3757786a7}{pDecayRate}}\ =\ 0;}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPlugin__AHDSR_a39eb5079bb1c83a82a576e905582a2eb}{pReleaseRate}}\ =\ 0;}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPlugin__AHDSR_a2acdc8bbbdeb4c019b15fec2018f18a2}{pInvert}}\ =\ false;}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ enum\ \mbox{\hyperlink{classPlugin__AHDSR_a8272101b5b1956012422d6a623eabccf}{eStage}}\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPlugin__AHDSR_a8272101b5b1956012422d6a623eabccfa1d0527fb93d3d95848ff7d8ae9eab150}{sAttack}}\ =\ 0,}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPlugin__AHDSR_a8272101b5b1956012422d6a623eabccfa35053322079f9136bfcf97939865775c}{sHold}}\ =\ 1,}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPlugin__AHDSR_a8272101b5b1956012422d6a623eabccfabebd02651cf1f4795ca5789eb3a3a757}{sDecay}}\ =\ 2,}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPlugin__AHDSR_a8272101b5b1956012422d6a623eabccfac96212055c180edbdb08585c0e8dc35d}{sSustain}}\ =\ 3,}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPlugin__AHDSR_a8272101b5b1956012422d6a623eabccfaeb10a6ac2e2cf6c8ffe784ec5f34c2b6}{sRelease}}\ =\ 4}
+\DoxyCodeLine{00068\ \ \ \ \ \};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{classPlugin__AHDSR_a8272101b5b1956012422d6a623eabccf}{eStage}}\ \mbox{\hyperlink{classPlugin__AHDSR_a998178b452f5d2eaf998272ab9d666ca}{pStage}}\ =\ 4;}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classPlugin__AHDSR_aec8b0d115421665811c02b5585454e7b}{pLastValue}}\ =\ 0;}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlugin__AHDSR_a2d83de2ac9d2d0c091cc1ad15e36da19}{recalculateRates}}();}
+\DoxyCodeLine{00074\ \};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \mbox{\hyperlink{pluginhandler_8hpp_a23e9e92f3a30c6eff4975c9d9f988d5a}{REGISTERPLUGIN}}(\mbox{\hyperlink{classPlugin__AHDSR}{Plugin\_AHDSR}})}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PLUGIN\_ADSR\_HPP}}
+
+\end{DoxyCode}

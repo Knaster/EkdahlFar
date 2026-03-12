@@ -29,12 +29,6 @@ public:
 
     DCMotorControl(char inMotorRevPin, char inMotorVoltagePin, char inMotorDCDCEnPin, char inTachoPin, char inCurrentSensePin, char inMotorFaultPin);
 
-    eProcessResult processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                               commandList *delegatedCommands = nullptr);
-
-    eProcessResult processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                                    commandList *delegatedCommands = nullptr);
-
 private:
     Teensy_PWM* motorPWM;
 

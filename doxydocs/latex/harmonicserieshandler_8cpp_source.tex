@@ -5,357 +5,336 @@
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ HARMONICSERIESHANDLER\_C}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ HARMONICSERIESHANDLER\_C}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{harmonicserieshandler_8hpp}{harmonicserieshandler.hpp}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{harmonicserieshandler_8hpp}{generic\_functions/harmonicserieshandler.hpp}}"{}}}
 \DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ \mbox{\hyperlink{classHarmonicSeriesHandler_a71b2f84329c07f34a3d6e95e09190221}{HarmonicSeriesHandler::HarmonicSeriesHandler}}()\ \{\};}
-\DoxyCodeLine{00007\ }
-\DoxyCodeLine{00008\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a06220884c93228a86ea1f524aae21843}{HarmonicSeriesHandler::processSerialCommand}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request,\ \textcolor{keywordtype}{bool}\ delegate,\ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands)\ \{}
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a2eea721b98604de46300feecf7703b60}{processCommandItems}}(inCommandItem,\ \mbox{\hyperlink{harmonicserieshandler_8hpp_ab6bc5ba84521f09dd15c66cd5ce7c961}{serialCommandsHarmonicSeriesHandler}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{harmonicserieshandler_8hpp_ab6bc5ba84521f09dd15c66cd5ce7c961}{serialCommandsHarmonicSeriesHandler}})\ \ /\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}));}
-\DoxyCodeLine{00011\ }
-\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ processResult;}
-\DoxyCodeLine{00013\ }
-\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}help"{}})\ \{}
-\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a9584ed5f207c1c49b9a477ada94421f8}{addCommandHelp}}(\mbox{\hyperlink{harmonicserieshandler_8hpp_ab6bc5ba84521f09dd15c66cd5ce7c961}{serialCommandsHarmonicSeriesHandler}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{harmonicserieshandler_8hpp_ab6bc5ba84521f09dd15c66cd5ce7c961}{serialCommandsHarmonicSeriesHandler}})\ /\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}),\ commandResponses,\textcolor{stringliteral}{"{}"{}});}
-\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ processResult\ =\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{eProcessResult::PassThrough}};}
-\DoxyCodeLine{00017\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ processResult\ =\ \mbox{\hyperlink{classHarmonicSeriesHandler_a70a57b37e472961067fd594491f5658d}{processControlCommand}}(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}})\ \&\&\ (processResult\ !=\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{eProcessResult::PassThrough}}))\ \{\ \textcolor{keywordflow}{return}\ processResult;\ \}}
-\DoxyCodeLine{00022\ }
-\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ processResult\ =\ \mbox{\hyperlink{classHarmonicSeriesHandler_abf4dc24c627892cc6acb7f4d64c3b978}{processHarmonicSeriesCommand}}(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}
-\DoxyCodeLine{00024\ \ \ \ \ \}}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{return}\ processResult;}
-\DoxyCodeLine{00027\ \}}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a70a57b37e472961067fd594491f5658d}{HarmonicSeriesHandler::processControlCommand}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request,\ \textcolor{keywordtype}{bool}\ delegate,\ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands)\ \{}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowcontrolfundamental"{}})\ \{}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bcu:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_ab7e94991bfffdabd0d9049f658a16f4d}{fundamentalFrequency}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ab7e94991bfffdabd0d9049f658a16f4d}{fundamentalFrequency}}\ =\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toFloat();}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}bcu:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_ab7e94991bfffdabd0d9049f658a16f4d}{fundamentalFrequency}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00039\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowcontrolharmonic"{}})\ \{}
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bch:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_ac1799e16caa174b6cc9a081f33b795d4}{harmonic}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classHarmonicSeriesHandler_ab775bc9141cb72e66073da77f5be9817}{setHarmonic}}(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()))\ \{}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}ERROR\ setting\ harmonic\ to\ "{}}\ +\ String(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bch:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_ac1799e16caa174b6cc9a081f33b795d4}{harmonic}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00051\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowcontrolharmonicadd"{}})\ \{}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bcha:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_a092b27ba7e6d53298902cb953345d99b}{harmonicAdd}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classHarmonicSeriesHandler_a948584873518c7d24d9304d51fd52de2}{setHarmonicAdd}}(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()))\ \{}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}ERROR\ setting\ harmonic\ add\ to\ "{}}\ +\ String(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bcha:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_a092b27ba7e6d53298902cb953345d99b}{harmonicAdd}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00063\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowcontrolharmonicbase"{}})\ \{}
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bchb:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_ac1799e16caa174b6cc9a081f33b795d4}{harmonic}}\ +\ \mbox{\hyperlink{classHarmonicSeriesHandler_a165e439503d522582f48589facede47f}{baseNote}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ab775bc9141cb72e66073da77f5be9817}{setHarmonic}}(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()\ -\/\ \mbox{\hyperlink{classHarmonicSeriesHandler_a165e439503d522582f48589facede47f}{baseNote}});}
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bchb:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_ac1799e16caa174b6cc9a081f33b795d4}{harmonic}}\ +\ \mbox{\hyperlink{classHarmonicSeriesHandler_a165e439503d522582f48589facede47f}{baseNote}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bch:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_ac1799e16caa174b6cc9a081f33b795d4}{harmonic}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00073\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowcontrolharmonicbasenote"{}})\ \{}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bchbn:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_a165e439503d522582f48589facede47f}{baseNote}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_afcb716f608764f2fc078e857bf1df049}{setBaseNote}}(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt());}
-\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bchbn:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_a165e439503d522582f48589facede47f}{baseNote}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00082\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowcontrolharmonicshift"{}})\ \{}
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bchsh:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_a70af6f2f1eb059517339969fc3100461}{harmonicShift}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ae769737a2459f9704dd9eb1357343104}{setHarmonicShift}}(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt());}
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bchsh:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_a70af6f2f1eb059517339969fc3100461}{harmonicShift}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00091\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowcontrolharmonicshiftrange"{}})\ \{}
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bchsr:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_adcb5e5ffd6a283d124936abca437ac85}{harmonicShiftRange}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_aaaf5d361c3220a3dc3cc477df74d5100}{setHarmonicShiftRange}}(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toFloat());}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bchsr:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_adcb5e5ffd6a283d124936abca437ac85}{harmonicShiftRange}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00100\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowcontrolharmonicshift5"{}})\ \{}
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bchs5:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_a21386aa3a7245c6b7114320a5c1b5ac6}{harmonicShift5}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_abc241df1c3dd3e8f005d50b7895c4339}{setHarmonicShift5}}(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt());}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bchs5:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_a21386aa3a7245c6b7114320a5c1b5ac6}{harmonicShift5}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00109\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}};}
-\DoxyCodeLine{00111\ \ \ \ \ \}}
-\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
-\DoxyCodeLine{00113\ \}}
-\DoxyCodeLine{00114\ }
-\DoxyCodeLine{00115\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classHarmonicSeriesHandler_abf4dc24c627892cc6acb7f4d64c3b978}{HarmonicSeriesHandler::processHarmonicSeriesCommand}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request,\ \textcolor{keywordtype}{bool}\ delegate,\ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands)\ \{}
-\DoxyCodeLine{00116\ }
-\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowharmonicseries"{}})\ \{}
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bhs:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt(),\ 0,\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}.size()))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7945af4588755e4b73b7855397babbb1}{eProcessResult::WrongArgumentValue}};\ \}}
-\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ hs\ =\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hs\ >\ (\mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}.size()\ -\/\ 1))\ \{}
-\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Harmonic\ list\ doesn't\ exist\ "{}}\ +\ String(hs),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
-\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20}{eProcessResult::CommandFailed}};}
-\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a342a5e5bb9add99b597d600a6ed12188}{loadHarmonicSeries}}(hs);}
-\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bhs:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00131\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowharmonicseriesdata"{}})\ \{}
-\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ ser\ =\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
-\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(ser,\ 0,\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}.size()\ -\/\ 1))\ \{}
-\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Harmonic\ series\ out\ of\ range"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
-\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20}{eProcessResult::CommandFailed}};}
-\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ j=0;}
-\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ String\ response\ =\ \textcolor{stringliteral}{"{}bhsd"{}};}
-\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(ser)\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[ser].Id;}
-\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (j\ <\ \textcolor{keywordtype}{int}(\mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[ser].ratio.size()))\ \{}
-\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[ser].ratio[j],\ 4);}
-\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ j++;}
-\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{response,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
-\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_a0af0c008c80e8b315e813ac91855b997}{checkArgumentsMin}}(inCommandItem,\ commandResponses,\ 2))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ String\ response\ =\ \textcolor{stringliteral}{"{}Setting\ harmonic\ series\ data:"{}}\ +\ String(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt());}
-\DoxyCodeLine{00151\ }
-\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()\ >\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}.size()\ -\/\ 1)\ \{}
-\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7c71abff4db71f6d336b524770535800}{addHarmonicSeries}}();}
-\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00155\ }
-\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()].ratio.clear();}
-\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()].Id\ =\ String(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1]);}
-\DoxyCodeLine{00158\ }
-\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ (int(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}.size())\ -\/\ 1);\ i++)\ \{}
-\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}:"{}}\ +\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[i\ +\ 1];}
-\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()].setHarmonic(i\ -\/\ 1,\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[i\ +\ 1].toFloat());}
-\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00163\ }
-\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}].ratio.size()\ ==\ 0)\ \{}
-\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Current\ harmonic\ series\ is\ zero,\ reloading"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
-\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a342a5e5bb9add99b597d600a6ed12188}{loadHarmonicSeries}}(\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}});}
-\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00168\ }
-\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da}{updateHarmonicData}}();}
-\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{response,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
-\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00172\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowharmonicseriesratio"{}})\ \{}
-\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 2))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}].setHarmonic(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt(),\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1].toFloat());}
-\DoxyCodeLine{00176\ }
-\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da}{updateHarmonicData}}();}
-\DoxyCodeLine{00178\ }
-\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}bhsr:"{}}\ +\ String(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt())\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1].toFloat()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
-\DoxyCodeLine{00180\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowharmonicseriesratioremove"{}})\ \{}
-\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}].ratio.size()\ <\ 2)\ \{}
-\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}Cannot\ remove\ all\ harmonics"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
-\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20}{eProcessResult::CommandFailed}};}
-\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00187\ }
-\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
-\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}].ratio.erase(\mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}].ratio.begin()\ +\ i);}
-\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da}{updateHarmonicData}}();}
-\DoxyCodeLine{00191\ }
-\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}bhsrr:"{}}\ +\ String(i),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
-\DoxyCodeLine{00193\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowharmonicseriescount"{}})\ \{}
-\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ String\ response\ =\ \textcolor{stringliteral}{"{}bhsc:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}.size());}
-\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<\mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}.size();\ i++)\ \{}
-\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[i].Id;}
-\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ response,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00200\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowharmonicseriessave"{}})\ \{}
-\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bhss:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}.size()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 2))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt(),\ 0,\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}.size()\ -\/\ 1,\ \textcolor{keyword}{true}))\ \{}
-\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7c71abff4db71f6d336b524770535800}{addHarmonicSeries}}(inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1],\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}].ratio);}
-\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}\ =\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}.size()\ -\/\ 1;}
-\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()]\ =\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}];}
-\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt()].Id\ =\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[1];}
-\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}\ =\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
-\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bhss:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00216\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ ==\ \textcolor{stringliteral}{"{}bowharmonicseriesremove"{}})\ \{}
-\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
-\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(inCommandItem,\ commandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
-\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ listNo\ =\ inCommandItem-\/>\mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}}[0].toInt();}
-\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Attempting\ to\ remove\ list\ "{}}\ +\ String(listNo),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
-\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(listNo,\ 0,\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}.size()\ -\/\ 1,\ \textcolor{keyword}{true}))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7945af4588755e4b73b7855397babbb1}{eProcessResult::WrongArgumentValue}};\ \}}
-\DoxyCodeLine{00224\ }
-\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}.erase(}
-\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}.begin()\ +\ listNo);}
-\DoxyCodeLine{00227\ }
-\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}\ >=\ listNo)\ \&\&\ (\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}\ >\ 0))\ \{}
-\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}-\/-\/;}
-\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00231\ }
-\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}bhsrm:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
-\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00234\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{eProcessResult::NotFound}};}
-\DoxyCodeLine{00236\ \ \ \ \ \}}
-\DoxyCodeLine{00237\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
-\DoxyCodeLine{00238\ \}}
+\DoxyCodeLine{00006\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structModuleCommandDeclaration}{ModuleCommandDeclaration}}\ HarmonicSeriesHandler::moduleCommands[]\ =\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}fundamental"{}},\ \textcolor{stringliteral}{"{}fu"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Bow\ fundamental\ frequency,\ all\ harmonics\ are\ calculated\ from\ this\ number"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \&s\_fundamental,\ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a668e4e299b1dc007e1a756ba41fa88dc}{eCommandType::Hertz}}\ \},}
+\DoxyCodeLine{00008\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}harmonic"{}},\ \textcolor{stringliteral}{"{}h"{}},\ \textcolor{stringliteral}{"{}int"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ speed\ in\ terms\ of\ a\ harmonic\ number.\ A\ ratio\ is\ taken\ from\ the\ given\ harmonic\ in\ the\ current\ harmonic\ list,\ the\ ratio\ is\ then\ multiplied\ by\ the\ bow\ fundamental\ frequency"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_harmonic,\ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa1f2510a5d3c28f81f047744d50ffb8f}{eCommandType::SimpleUInt8}}\ \},}
+\DoxyCodeLine{00009\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}harmonicadd"{}},\ \textcolor{stringliteral}{"{}ha"{}},\ \textcolor{stringliteral}{"{}int"{}},\ \textcolor{stringliteral}{"{}Additative\ version\ of\ bowcontrolharmonic,\ the\ number\ is\ given\ is\ added\ to\ the\ harmonic\ given"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_harmonicAdd,\ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa1f2510a5d3c28f81f047744d50ffb8f}{eCommandType::SimpleUInt8}}\ \},}
+\DoxyCodeLine{00010\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}harmonicbase"{}},\ \textcolor{stringliteral}{"{}hb"{}},\ \textcolor{stringliteral}{"{}int"{}},\ \textcolor{stringliteral}{"{}Same\ as\ bowcontrolharmonic\ but\ where\ the\ harmonic\ number\ is\ based\ on\ a\ MIDI\ note\ given\ by\ bowcontrolbasenote"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_harmonicBase,\ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa1f2510a5d3c28f81f047744d50ffb8f}{eCommandType::SimpleUInt8}}\ \},}
+\DoxyCodeLine{00011\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}basenote"{}},\ \textcolor{stringliteral}{"{}bn"{}},\ \textcolor{stringliteral}{"{}0-\/127"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ MIDI\ base\ note\ of\ the\ string,\ used\ in\ conjunction\ with\ bowcontrolharmonicbase"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \&s\_baseNote,\ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa1f2510a5d3c28f81f047744d50ffb8f}{eCommandType::SimpleUInt8}}\ \},}
+\DoxyCodeLine{00012\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}shift"{}},\ \textcolor{stringliteral}{"{}sh"{}},\ \textcolor{stringliteral}{"{}-\/32767-\/32767"{}},\ \textcolor{stringliteral}{"{}Setting\ shift\ from\ the\ currently\ playing\ harmonic\ where\ 32767\ equals\ the\ entire\ harmonic\ shift\ range\ shifted\ up"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_shift,\ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a85a18924b17a185c4314d76e2c6737e8}{eCommandType::SimpleUInt16}}\ \},}
+\DoxyCodeLine{00013\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}shiftrange"{}},\ \textcolor{stringliteral}{"{}sr"{}},\ \textcolor{stringliteral}{"{}0-\/36"{}},\ \textcolor{stringliteral}{"{}Set\ the\ number\ of\ harmonic\ numbers\ that\ constitutes\ the\ entire\ harmonic\ shift"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \&s\_shiftRange,\ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa1f2510a5d3c28f81f047744d50ffb8f}{eCommandType::SimpleUInt8}}\ \},}
+\DoxyCodeLine{00014\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}shift5"{}},\ \textcolor{stringliteral}{"{}sh5"{}},\ \textcolor{stringliteral}{"{}-\/32767-\/32767"{}},\ \textcolor{stringliteral}{"{}Setting\ shift\ from\ the\ currently\ playing\ harmonic\ over\ 5\ octaves\ where\ 32767\ equals\ 5\ octaves\ shift\ up\ from\ the\ fundamental"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_shift5,\ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a85a18924b17a185c4314d76e2c6737e8}{eCommandType::SimpleUInt16}}\ \},}
+\DoxyCodeLine{00015\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}add"{}},\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}(name):(ratios)"{}},\ \textcolor{stringliteral}{"{}Add\ a\ new\ series\ with\ the\ given\ name\ and\ parameters"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_add,\ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa9703801ac7bd790f6f980532e4224c0}{eCommandType::Data}}\ \},}
+\DoxyCodeLine{00016\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}remove"{}},\ \textcolor{stringliteral}{"{}rm"{}},\ \textcolor{stringliteral}{"{}series"{}},\ \textcolor{stringliteral}{"{}Remove\ the\ series\ given\ and\ shift\ any\ series\ accordingly.\ Cannot\ remove\ all\ series"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_remove,\ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a00dbb5a5f8f3c267c5cb1e29fff3c3e5}{eCommandType::Remove}}\ \},}
+\DoxyCodeLine{00017\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}count"{}},\ \textcolor{stringliteral}{"{}c"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Returns\ the\ number\ of\ harmonic\ series\ in\ the\ list\ and\ their\ IDs"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false},\ \&s\_count,\ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a928f33270be19855038d0245a0fa06a1}{eCommandType::Count}}\ \},}
+\DoxyCodeLine{00018\ \};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \mbox{\hyperlink{modulesystembasics_8hpp_ad805e7e7e19b26258610463cec8d7fa8}{getModuleCount}}(\mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}})}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keywordtype}{float}\ equalSeries[12]\ =\ \{\ 1,\ 1.059463094,\ 1.122462048,\ 1.189207115,\ 1.25992105,\ 1.334839854,\ 1.414213562,\ 1.498307077,\ 1.587401052,\ 1.681792831,\ 1.781797436,\ 1.887748625\ \};}
+\DoxyCodeLine{00023\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{harmonicserieshandler_8cpp_a9309ac54d9d508e6214b6d5fffde724f}{justSeries}}[12]\ =\ \{1,\ 1.06667,\ 1.125,\ 1.2,\ 1.25,\ 1.3333,\ 1.40625,\ 1.5,\ 1.6,\ 1.66667,\ 1.8,\ 1.875\ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \mbox{\hyperlink{classHarmonicSeriesHandler_a71b2f84329c07f34a3d6e95e09190221}{HarmonicSeriesHandler::HarmonicSeriesHandler}}()\ \{}
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ \ \ \ moduleID\ =\ new\ ModuleID("{}harmonicserieshandler"{},\ "{}hsh"{},\ "{}Harmonic\ series\ handler"{},\ eModuleType::software);}}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}}\ tempSeries;}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ \ \ \ ModuleGroup\ *group\ =\ addGroup(tempSeries.moduleID);}}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{classModuleGroup}{ModuleGroup}}\ *group\ =\ \mbox{\hyperlink{classModuleHandler_a25c83b60da881f9c0dd2886e6a89e631}{addGroup}}(tempSeries.tmoduleID);}
+\DoxyCodeLine{00030\ \ \ \ \ group-\/>\mbox{\hyperlink{classModuleGroup_acbee2bc20d20e3748c602a1b389d320f}{mustHaveSelection}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00031\ \ \ \ \ group-\/>\mbox{\hyperlink{classModuleGroup_a805cd7c74ebdfdc02abb5d77b7054bd5}{singleSelection}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00032\ \ \ \ \ group-\/>\mbox{\hyperlink{classModuleGroup_a8717163c078eab3cde180864ae0b97e0}{setIndexCallback}}(\textcolor{keyword}{this},\ \&s\_harmonicSeriesIndexChanged);}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_afef415cddf83a8f05f8daa94f33ed7bb}{addHarmonicSeries}}(\textcolor{stringliteral}{"{}Just\ intonation"{}},\ \mbox{\hyperlink{harmonicserieshandler_8cpp_a9309ac54d9d508e6214b6d5fffde724f}{justSeries}},\ 12);}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_afef415cddf83a8f05f8daa94f33ed7bb}{addHarmonicSeries}}(\textcolor{stringliteral}{"{}Equal\ temperament"{}},\ equalSeries,\ 12);}
+\DoxyCodeLine{00035\ \ \ \ \ group-\/>\mbox{\hyperlink{classModuleGroup_a10869aa8219085d711316012e8b15b8e}{setSelection}}(0);}
+\DoxyCodeLine{00036\ \};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \mbox{\hyperlink{modulegroup_8hpp_a937c07ea2b2812a26c47e5677718699c}{CREATE\_INDEX\_CALLBACK}}(harmonicSeriesIndexChanged,\ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}})\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{debugprint_8cpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Index\ changed\ hsh!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00040\ \ \ \ \ updateHarmonicData();}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00042\ \}}
+\DoxyCodeLine{00043\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00044\ \textcolor{comment}{CREATE\_DATACHANGED\_CALLBACK(harmonicSeriesDataChanged,\ HarmonicSeriesHandler)\ \{}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ \ //debugPrintln("{}Data\ changed\ hsh!"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ \ harmonicSeriesChangeReported\ =\ true;}}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ \ \ //updateHarmonicData();}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \ \ \ return\ true;}}
+\DoxyCodeLine{00049\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00050\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00051\ \mbox{\hyperlink{modulesystembasics_8hpp_a33460e04d9e860676f5c8d5f5b47bf61}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(add,\ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}})\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}}\ *lHarmonicSeries;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{switch}(inCommandItem-\/>argument.size())\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordflow}{case}\ 0:}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ lHarmonicSeries\ =\ addHarmonicSeries(\textcolor{stringliteral}{"{}default\ just"{}},\ \mbox{\hyperlink{harmonicserieshandler_8cpp_a9309ac54d9d508e6214b6d5fffde724f}{justSeries}},\ 12);}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ String\ name\ =\ \mbox{\hyperlink{commandparser_8cpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(inCommandItem-\/>argument[0]);}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>argument.size()\ >\ 1)\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ newSeries[inCommandItem-\/>argument.size()\ -\/\ 1];}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ inCommandItem-\/>argument.size()\ -\/\ 1;\ i++)\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ newSeries[i]\ =\ inCommandItem-\/>argument[i\ +\ 1].toFloat();}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ lHarmonicSeries\ =\ addHarmonicSeries(name,\ newSeries,\ (inCommandItem-\/>argument.size()\ -\/\ 1));}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ lHarmonicSeries\ =\ addHarmonicSeries(name,\ \mbox{\hyperlink{harmonicserieshandler_8cpp_a9309ac54d9d508e6214b6d5fffde724f}{justSeries}},\ 12);}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00069\ \ \ \ \ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ String\ response\ =\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{commandparser_8cpp_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(lHarmonicSeries-\/>\mbox{\hyperlink{classHarmonicSeries_a864d2755443961c9cbea5d497909f6b0}{Id}},\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ lHarmonicSeries-\/>\mbox{\hyperlink{classHarmonicSeries_a166ca581a6531e846d42c4f2754c12f2}{ratios}}.size();\ i++)\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ response\ +=\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(lHarmonicSeries-\/>\mbox{\hyperlink{classHarmonicSeries_a166ca581a6531e846d42c4f2754c12f2}{ratios}}[i]);}
+\DoxyCodeLine{00074\ \ \ \ \ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ inCommandResponses-\/>push\_back(\{\ response,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
+\DoxyCodeLine{00078\ \};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \mbox{\hyperlink{modulesystembasics_8hpp_a33460e04d9e860676f5c8d5f5b47bf61}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(remove,\ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}})\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8cpp_af2583fe961d044690c62a57c7563ec9d}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{classModuleGroup}{ModuleGroup}}\ *group\ =\ getGroup(\textcolor{stringliteral}{"{}harmonicseries"{}});}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{if}\ (group\ ==\ \textcolor{keyword}{nullptr})\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20}{eProcessResult::CommandFailed}};\ \}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordflow}{if}\ (!request)\ \{}
+\DoxyCodeLine{00087\ \textcolor{comment}{//\ \ \ \ \ \ \ \ harmonicSeries.erase(harmonicSeries.begin()\ +\ listNo);}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ listNo\ =\ inCommandItem-\/>argument[0].toInt();}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!group-\/>\mbox{\hyperlink{classModuleGroup_ad25b6763d2890573872308326c8cd2a7}{removeModule}}(listNo))\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20}{eProcessResult::CommandFailed}};}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00092\ \ \ \ \ \}}
+\DoxyCodeLine{00093\ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(getGroup(\textcolor{stringliteral}{"{}harmonicseries"{}})-\/>modules.size()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\ \});}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
+\DoxyCodeLine{00095\ \};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \mbox{\hyperlink{modulesystembasics_8hpp_a33460e04d9e860676f5c8d5f5b47bf61}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(count,\ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}})\ \{}
+\DoxyCodeLine{00098\ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(getGroup(\textcolor{stringliteral}{"{}harmonicseries"{}})-\/>modules.size()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\ \});}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
+\DoxyCodeLine{00101\ \};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \mbox{\hyperlink{modulesystembasics_8hpp_a33460e04d9e860676f5c8d5f5b47bf61}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(fundamental,\ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}})\ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(fundamentalFrequency),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00106\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8cpp_af2583fe961d044690c62a57c7563ec9d}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ fundamentalFrequency\ =\ inCommandItem-\/>argument[0].toFloat();}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(fundamentalFrequency),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\});}
+\DoxyCodeLine{00110\ \ \ \ \ \}}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
+\DoxyCodeLine{00112\ \};}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \mbox{\hyperlink{modulesystembasics_8hpp_a33460e04d9e860676f5c8d5f5b47bf61}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(harmonic,\ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}})\ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(pHarmonic),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00117\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8cpp_af2583fe961d044690c62a57c7563ec9d}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!setHarmonic(inCommandItem-\/>argument[0].toInt()))\ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}ERROR\ setting\ harmonic\ to\ "{}}\ +\ String(inCommandItem-\/>argument[0].toInt()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(pHarmonic),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \}}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
+\DoxyCodeLine{00126\ \};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \mbox{\hyperlink{modulesystembasics_8hpp_a33460e04d9e860676f5c8d5f5b47bf61}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(harmonicAdd,\ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}})\ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(pHarmonicAdd),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00131\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8cpp_af2583fe961d044690c62a57c7563ec9d}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!setHarmonicAdd(inCommandItem-\/>argument[0].toInt()))\ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\textcolor{stringliteral}{"{}ERROR\ setting\ harmonic\ add\ to\ "{}}\ +\ String(inCommandItem-\/>argument[0].toInt()),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{Error}}\});}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(pHarmonicAdd),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00138\ \ \ \ \ \}}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
+\DoxyCodeLine{00140\ \};}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \mbox{\hyperlink{modulesystembasics_8hpp_a33460e04d9e860676f5c8d5f5b47bf61}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(harmonicBase,\ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}})\ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(pHarmonic\ +\ pBaseNote),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00145\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8cpp_af2583fe961d044690c62a57c7563ec9d}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ setHarmonic(inCommandItem-\/>argument[0].toInt()\ -\/\ pBaseNote);}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(pHarmonic\ +\ pBaseNote),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{comment}{//inCommandResponses-\/>push\_back(\{\ "{}bch:"{}\ +\ String(harmonic),\ InfoRequest\ \});}}
+\DoxyCodeLine{00150\ \ \ \ \ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
+\DoxyCodeLine{00152\ \};}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \mbox{\hyperlink{modulesystembasics_8hpp_a33460e04d9e860676f5c8d5f5b47bf61}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(baseNote,\ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}})\ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(pBaseNote),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00157\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8cpp_af2583fe961d044690c62a57c7563ec9d}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ setBaseNote(inCommandItem-\/>argument[0].toInt());}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(pBaseNote),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00161\ \ \ \ \ \}}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
+\DoxyCodeLine{00163\ \};}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \mbox{\hyperlink{modulesystembasics_8hpp_a33460e04d9e860676f5c8d5f5b47bf61}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(shift,\ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}})\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(harmonicShift),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00168\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8cpp_af2583fe961d044690c62a57c7563ec9d}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ setHarmonicShift(inCommandItem-\/>argument[0].toInt());}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(harmonicShift),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00172\ \ \ \ \ \}}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
+\DoxyCodeLine{00174\ \};}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \mbox{\hyperlink{modulesystembasics_8hpp_a33460e04d9e860676f5c8d5f5b47bf61}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(shiftRange,\ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}})\ \{}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(harmonicShiftRange),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00179\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8cpp_af2583fe961d044690c62a57c7563ec9d}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ setHarmonicShiftRange(inCommandItem-\/>argument[0].toFloat());}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(harmonicShiftRange),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00183\ \ \ \ \ \}}
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
+\DoxyCodeLine{00185\ \};}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \mbox{\hyperlink{modulesystembasics_8hpp_a33460e04d9e860676f5c8d5f5b47bf61}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(shift5,\ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}})\ \{}
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordflow}{if}\ (request)\ \{}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(harmonicShift5),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00190\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{commandparser_8cpp_af2583fe961d044690c62a57c7563ec9d}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ setHarmonicShift5(inCommandItem-\/>argument[0].toInt());}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(harmonicShift5),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{InfoRequest}}\ \});}
+\DoxyCodeLine{00194\ \ \ \ \ \}}
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
+\DoxyCodeLine{00196\ \};}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab3f2f36f18026e2c8880c23aacf0a25c}{HarmonicSeriesHandler::calculateHarmonicShift}}()\ \{}
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{comment}{//int\ octave\ =\ harmonicSeriesList.series[currentHarmonicSeries].ratio.size();}}
+\DoxyCodeLine{00200\ \ \ \ \ \mbox{\hyperlink{classModuleGroup}{ModuleGroup}}\ *group\ =\ \mbox{\hyperlink{classModuleHandler_ab87ee8507b0edd4888eaa422f189d716}{getGroup}}(\textcolor{stringliteral}{"{}harmonicseries"{}});}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordflow}{if}\ (group\ ==\ \textcolor{keyword}{nullptr})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}}\ *\textcolor{keyword}{module}\ =\ group-\/>getSingleSelection();}
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordflow}{if}\ (module\ ==\ \textcolor{keyword}{nullptr})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keywordtype}{int}\ octave\ =\ \textcolor{keyword}{module}-\/>ratios.size();}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keywordtype}{float}\ freq\ =\ \mbox{\hyperlink{classHarmonicSeriesHandler_afbf8da531e9d50bff3ff48088a98045d}{currentHarmonicFreq}}\ *\ pow(2,\ ((\textcolor{keywordtype}{float})\ (((\textcolor{keywordtype}{float})\ \mbox{\hyperlink{classHarmonicSeriesHandler_adcb5e5ffd6a283d124936abca437ac85}{harmonicShiftRange}})\ /\ octave)\ *\ \mbox{\hyperlink{classHarmonicSeriesHandler_a70af6f2f1eb059517339969fc3100461}{harmonicShift}}\ /\ 32768\ ));}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordtype}{float}\ freq5\ =\ freq\ *\ pow(2,\ ((\textcolor{keywordtype}{float})\ (((\textcolor{keywordtype}{float})\ (5\ *\ octave))\ /\ octave)\ *\ \mbox{\hyperlink{classHarmonicSeriesHandler_a21386aa3a7245c6b7114320a5c1b5ac6}{harmonicShift5}}\ /\ 32768\ ));}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_adf400b812ed4ee0fdbff83500f6f1669}{currentHarmonicShiftFreq}}\ =\ freq5;}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00213\ \}}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ae769737a2459f9704dd9eb1357343104}{HarmonicSeriesHandler::setHarmonicShift}}(\textcolor{keywordtype}{int}\ inHarmonicShift)\ \{}
+\DoxyCodeLine{00216\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a70af6f2f1eb059517339969fc3100461}{harmonicShift}}\ =\ inHarmonicShift;}
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classHarmonicSeriesHandler_ab3f2f36f18026e2c8880c23aacf0a25c}{calculateHarmonicShift}}())\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classHarmonicSeriesHandler_a0c5dae4f8cf80d9d4796f7304c7b8981}{raiseFrequencyChanged}}())\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \};}
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00220\ \}}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_abc241df1c3dd3e8f005d50b7895c4339}{HarmonicSeriesHandler::setHarmonicShift5}}(\textcolor{keywordtype}{int}\ inHarmonicShift5)\ \{}
+\DoxyCodeLine{00223\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a21386aa3a7245c6b7114320a5c1b5ac6}{harmonicShift5}}\ =\ inHarmonicShift5;}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classHarmonicSeriesHandler_ab3f2f36f18026e2c8880c23aacf0a25c}{calculateHarmonicShift}}())\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classHarmonicSeriesHandler_a0c5dae4f8cf80d9d4796f7304c7b8981}{raiseFrequencyChanged}}())\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \};}
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00227\ \}}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a291e7a1affee1773092526297c90a425}{HarmonicSeriesHandler::getHarmonicShift}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a70af6f2f1eb059517339969fc3100461}{harmonicShift}};\ \}}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a592cc31106a795478ff66f8eabd0a24e}{HarmonicSeriesHandler::getHarmonicShift5}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a21386aa3a7245c6b7114320a5c1b5ac6}{harmonicShift5}};\ \}}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_aaaf5d361c3220a3dc3cc477df74d5100}{HarmonicSeriesHandler::setHarmonicShiftRange}}(\textcolor{keywordtype}{int}\ inHarmonicShiftRange)\ \{}
+\DoxyCodeLine{00234\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_adcb5e5ffd6a283d124936abca437ac85}{harmonicShiftRange}}\ =\ inHarmonicShiftRange;}
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00236\ \}}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_af8b94475d0f5bca4f4b4f5d8868daf53}{HarmonicSeriesHandler::getHarmonicShiftRange}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_adcb5e5ffd6a283d124936abca437ac85}{harmonicShiftRange}};\ \}}
 \DoxyCodeLine{00239\ }
-\DoxyCodeLine{00240\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab3f2f36f18026e2c8880c23aacf0a25c}{HarmonicSeriesHandler::calculateHarmonicShift}}()\ \{}
-\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keywordtype}{int}\ octave\ =\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}].ratio.size();}
-\DoxyCodeLine{00242\ }
-\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordtype}{float}\ freq\ =\ \mbox{\hyperlink{classHarmonicSeriesHandler_afbf8da531e9d50bff3ff48088a98045d}{currentHarmonicFreq}}\ *\ pow(2,\ ((\textcolor{keywordtype}{float})\ (((\textcolor{keywordtype}{float})\ \mbox{\hyperlink{classHarmonicSeriesHandler_adcb5e5ffd6a283d124936abca437ac85}{harmonicShiftRange}})\ /\ octave)\ *\ \mbox{\hyperlink{classHarmonicSeriesHandler_a70af6f2f1eb059517339969fc3100461}{harmonicShift}}\ /\ 32768\ ));}
-\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keywordtype}{float}\ freq5\ =\ freq\ *\ pow(2,\ ((\textcolor{keywordtype}{float})\ (((\textcolor{keywordtype}{float})\ (5\ *\ octave))\ /\ octave)\ *\ \mbox{\hyperlink{classHarmonicSeriesHandler_a21386aa3a7245c6b7114320a5c1b5ac6}{harmonicShift5}}\ /\ 32768\ ));}
-\DoxyCodeLine{00245\ \textcolor{comment}{//\ \ \ \ if\ (outputDebugData)\ \{\ debugPrintln("{}Current\ freq\ "{}\ +\ String(currentHarmonicFreq)\ +\ "{}\ shifted\ freq\ "{}\ +\ String(freq)\ +\ "{}\ shifted\ freq\ 5\ octaves\ "{}\ +\ String(freq5),\ Debug);\ \}}}
-\DoxyCodeLine{00246\ \textcolor{comment}{//\ \ \ \ currentHarmonicShiftFreq\ =\ clamp(freq5,\ calibrationDataConnect-\/>minHz,\ calibrationDataConnect-\/>maxHz);}}
-\DoxyCodeLine{00247\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_adf400b812ed4ee0fdbff83500f6f1669}{currentHarmonicShiftFreq}}\ =\ freq5;}
-\DoxyCodeLine{00248\ \textcolor{comment}{//\ \ \ \ debugPrintln("{}Move\ the\ frequency\ min/max\ check\ to\ the\ receiving\ end"{},\ debugPrintType::Error);}}
-\DoxyCodeLine{00249\ \textcolor{comment}{//\ \ \ \ if\ (currentHarmonicShiftFreq\ !=\ freq5)\ \{\ return\ false;\ \}}}
-\DoxyCodeLine{00250\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00251\ \}}
-\DoxyCodeLine{00252\ }
-\DoxyCodeLine{00253\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ae769737a2459f9704dd9eb1357343104}{HarmonicSeriesHandler::setHarmonicShift}}(\textcolor{keywordtype}{int}\ inHarmonicShift)\ \{}
-\DoxyCodeLine{00254\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a70af6f2f1eb059517339969fc3100461}{harmonicShift}}\ =\ inHarmonicShift;}
-\DoxyCodeLine{00255\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classHarmonicSeriesHandler_ab3f2f36f18026e2c8880c23aacf0a25c}{calculateHarmonicShift}}())\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
-\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classHarmonicSeriesHandler_a0c5dae4f8cf80d9d4796f7304c7b8981}{raiseFrequencyChanged}}())\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \};}
-\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00258\ \}}
+\DoxyCodeLine{00240\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab775bc9141cb72e66073da77f5be9817}{HarmonicSeriesHandler::setHarmonic}}(\textcolor{keywordtype}{int}\ \_harmonic)\ \{}
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keywordtype}{int}\ \_\_harmonic\ =\ \mbox{\hyperlink{arduinorequired_8hpp_ae19eb15a5c6b22f63f3819a0105339d8}{clamp}}(\_harmonic,\ \mbox{\hyperlink{classHarmonicSeriesHandler_a802667d02b9f8ce6c2cfecbe08a24af1}{lowerHarmonic}},\ \mbox{\hyperlink{classHarmonicSeriesHandler_a9c996baab64d406af9740e914264ad7a}{upperHarmonic}});}
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_\_harmonic\ !=\ \_harmonic)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00243\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a3a754e7dd46324742f1b1bbe19104920}{pHarmonic}}\ =\ \_\_harmonic;}
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da}{updateHarmonicData}}();}
+\DoxyCodeLine{00245\ \}}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ae5595b18fc15842426d7fab38462088c}{HarmonicSeriesHandler::getHarmonic}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a3a754e7dd46324742f1b1bbe19104920}{pHarmonic}};\ \}}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a948584873518c7d24d9304d51fd52de2}{HarmonicSeriesHandler::setHarmonicAdd}}(\textcolor{keywordtype}{int}\ \_harmonic)\ \{}
+\DoxyCodeLine{00250\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a2901f7ff9f99cbc8278f5d1dbdb8375b}{pHarmonicAdd}}\ =\ \_harmonic;}
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da}{updateHarmonicData}}();}
+\DoxyCodeLine{00252\ \}}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a707614acd1d75704f57ab4875bd9862d}{HarmonicSeriesHandler::getHarmonicAdd}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a2901f7ff9f99cbc8278f5d1dbdb8375b}{pHarmonicAdd}};\ \}}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da}{HarmonicSeriesHandler::updateHarmonicData}}()\ \{}
+\DoxyCodeLine{00257\ \ \ \ \ \mbox{\hyperlink{classModuleGroup}{ModuleGroup}}\ *group\ =\ \mbox{\hyperlink{classModuleHandler_ab87ee8507b0edd4888eaa422f189d716}{getGroup}}(\textcolor{stringliteral}{"{}harmonicseries"{}});}
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordflow}{if}\ (group\ ==\ \textcolor{keyword}{nullptr})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
 \DoxyCodeLine{00259\ }
-\DoxyCodeLine{00260\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_abc241df1c3dd3e8f005d50b7895c4339}{HarmonicSeriesHandler::setHarmonicShift5}}(\textcolor{keywordtype}{int}\ inHarmonicShift5)\ \{}
-\DoxyCodeLine{00261\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a21386aa3a7245c6b7114320a5c1b5ac6}{harmonicShift5}}\ =\ inHarmonicShift5;}
-\DoxyCodeLine{00262\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classHarmonicSeriesHandler_ab3f2f36f18026e2c8880c23aacf0a25c}{calculateHarmonicShift}}())\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
-\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classHarmonicSeriesHandler_a0c5dae4f8cf80d9d4796f7304c7b8981}{raiseFrequencyChanged}}())\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \};}
-\DoxyCodeLine{00264\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00265\ \}}
-\DoxyCodeLine{00266\ }
-\DoxyCodeLine{00267\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a291e7a1affee1773092526297c90a425}{HarmonicSeriesHandler::getHarmonicShift}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a70af6f2f1eb059517339969fc3100461}{harmonicShift}};\ \}}
-\DoxyCodeLine{00268\ }
-\DoxyCodeLine{00269\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a592cc31106a795478ff66f8eabd0a24e}{HarmonicSeriesHandler::getHarmonicShift5}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a21386aa3a7245c6b7114320a5c1b5ac6}{harmonicShift5}};\ \}}
-\DoxyCodeLine{00270\ }
-\DoxyCodeLine{00271\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_aaaf5d361c3220a3dc3cc477df74d5100}{HarmonicSeriesHandler::setHarmonicShiftRange}}(\textcolor{keywordtype}{int}\ inHarmonicShiftRange)\ \{}
-\DoxyCodeLine{00272\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_adcb5e5ffd6a283d124936abca437ac85}{harmonicShiftRange}}\ =\ inHarmonicShiftRange;}
-\DoxyCodeLine{00273\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00274\ \}}
-\DoxyCodeLine{00275\ }
-\DoxyCodeLine{00276\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_af8b94475d0f5bca4f4b4f5d8868daf53}{HarmonicSeriesHandler::getHarmonicShiftRange}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_adcb5e5ffd6a283d124936abca437ac85}{harmonicShiftRange}};\ \}}
-\DoxyCodeLine{00277\ }
-\DoxyCodeLine{00278\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab775bc9141cb72e66073da77f5be9817}{HarmonicSeriesHandler::setHarmonic}}(\textcolor{keywordtype}{int}\ \_harmonic)\ \{}
-\DoxyCodeLine{00279\ \ \ \ \ \textcolor{keywordtype}{int}\ \_\_harmonic\ =\ \mbox{\hyperlink{main_8cpp_ae19eb15a5c6b22f63f3819a0105339d8}{clamp}}(\_harmonic,\ \mbox{\hyperlink{classHarmonicSeriesHandler_a802667d02b9f8ce6c2cfecbe08a24af1}{lowerHarmonic}},\ \mbox{\hyperlink{classHarmonicSeriesHandler_a9c996baab64d406af9740e914264ad7a}{upperHarmonic}});}
-\DoxyCodeLine{00280\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_\_harmonic\ !=\ \_harmonic)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
-\DoxyCodeLine{00281\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ac1799e16caa174b6cc9a081f33b795d4}{harmonic}}\ =\ \_\_harmonic;}
-\DoxyCodeLine{00282\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da}{updateHarmonicData}}();}
+\DoxyCodeLine{00260\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}}\ *\textcolor{keyword}{module}\ =\ group-\/>getSingleSelection();}
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{keywordflow}{if}\ (module\ ==\ \textcolor{keyword}{nullptr})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keywordtype}{int}\ targetHarmonic\ =\ \mbox{\hyperlink{classHarmonicSeriesHandler_a3a754e7dd46324742f1b1bbe19104920}{pHarmonic}}\ +\ \mbox{\hyperlink{classHarmonicSeriesHandler_a2901f7ff9f99cbc8278f5d1dbdb8375b}{pHarmonicAdd}};}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ \ \ \ \ \textcolor{keywordtype}{int}\ harmonicCount\ =\ \textcolor{keyword}{module}-\/>ratios.size();}
+\DoxyCodeLine{00266\ \ \ \ \ \textcolor{keywordflow}{if}\ (harmonicCount\ ==\ 0)\ \{}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8cpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Harmonic\ list\ empty!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00269\ \ \ \ \ \}}
+\DoxyCodeLine{00270\ \ \ \ \ \textcolor{comment}{//\ Calculate\ where\ in\ the\ series\ the\ current\ harmonic\ resides\ (0-\/11)}}
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{keywordtype}{int}\ series\ =\ targetHarmonic\ \%\ harmonicCount;}
+\DoxyCodeLine{00272\ \ \ \ \ \textcolor{keywordflow}{if}\ (series\ <\ 0)\ \{\ series\ =\ harmonicCount\ +\ series;\ \}}
+\DoxyCodeLine{00273\ \ \ \ \ \textcolor{comment}{//\ If\ harmonic\ is\ below\ 0\ we\ need\ to\ reduce\ for\ the\ truncation\ to\ work\ properly}}
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{keywordflow}{if}\ (targetHarmonic\ <\ 0)\ \{\ targetHarmonic\ -\/=\ (harmonicCount\ -\/\ 1);\ \}}
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keywordtype}{int}\ octave\ =\ trunc(targetHarmonic\ /\ harmonicCount);}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{keywordtype}{float}\ freq\ =\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab7e94991bfffdabd0d9049f658a16f4d}{fundamentalFrequency}}\ *\ pow(2,\ octave)\ *\ \textcolor{keyword}{module}-\/>getHarmonic(series);\ \textcolor{comment}{//\ -\/\ 0.4;}}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00279\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_afbf8da531e9d50bff3ff48088a98045d}{currentHarmonicFreq}}\ =\ freq;}
+\DoxyCodeLine{00280\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ab3f2f36f18026e2c8880c23aacf0a25c}{calculateHarmonicShift}}();}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00282\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a0c5dae4f8cf80d9d4796f7304c7b8981}{raiseFrequencyChanged}}();}
 \DoxyCodeLine{00283\ \}}
 \DoxyCodeLine{00284\ }
-\DoxyCodeLine{00285\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ae5595b18fc15842426d7fab38462088c}{HarmonicSeriesHandler::getHarmonic}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ac1799e16caa174b6cc9a081f33b795d4}{harmonic}};\ \}}
-\DoxyCodeLine{00286\ }
-\DoxyCodeLine{00287\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a948584873518c7d24d9304d51fd52de2}{HarmonicSeriesHandler::setHarmonicAdd}}(\textcolor{keywordtype}{int}\ \_harmonic)\ \{}
-\DoxyCodeLine{00288\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a092b27ba7e6d53298902cb953345d99b}{harmonicAdd}}\ =\ \_harmonic;}
-\DoxyCodeLine{00289\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da}{updateHarmonicData}}();}
-\DoxyCodeLine{00290\ \}}
-\DoxyCodeLine{00291\ }
-\DoxyCodeLine{00292\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a707614acd1d75704f57ab4875bd9862d}{HarmonicSeriesHandler::getHarmonicAdd}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a092b27ba7e6d53298902cb953345d99b}{harmonicAdd}};\ \}}
-\DoxyCodeLine{00293\ }
-\DoxyCodeLine{00294\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da}{HarmonicSeriesHandler::updateHarmonicData}}()\ \{}
-\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keywordtype}{int}\ targetHarmonic\ =\ \mbox{\hyperlink{classHarmonicSeriesHandler_ac1799e16caa174b6cc9a081f33b795d4}{harmonic}}\ +\ \mbox{\hyperlink{classHarmonicSeriesHandler_a092b27ba7e6d53298902cb953345d99b}{harmonicAdd}};}
-\DoxyCodeLine{00296\ }
-\DoxyCodeLine{00297\ \ \ \ \ \textcolor{keywordtype}{int}\ harmonicCount\ =\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}].ratio.size();}
-\DoxyCodeLine{00298\ \ \ \ \ \textcolor{keywordflow}{if}\ (harmonicCount\ ==\ 0)\ \{}
-\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Harmonic\ list\ empty!"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
-\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00301\ \ \ \ \ \}}
-\DoxyCodeLine{00302\ \ \ \ \ \textcolor{comment}{//\ Calculate\ where\ in\ the\ series\ the\ current\ harmonic\ resides\ (0-\/11)}}
-\DoxyCodeLine{00303\ \ \ \ \ \textcolor{keywordtype}{int}\ series\ =\ targetHarmonic\ \%\ harmonicCount;}
-\DoxyCodeLine{00304\ \ \ \ \ \textcolor{keywordflow}{if}\ (series\ <\ 0)\ \{\ series\ =\ harmonicCount\ +\ series;\ \}}
-\DoxyCodeLine{00305\ \ \ \ \ \textcolor{comment}{//\ If\ harmonic\ is\ below\ 0\ we\ need\ to\ reduce\ for\ the\ truncation\ to\ work\ properly}}
-\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keywordflow}{if}\ (targetHarmonic\ <\ 0)\ \{\ targetHarmonic\ -\/=\ (harmonicCount\ -\/\ 1);\ \}}
-\DoxyCodeLine{00307\ \ \ \ \ \textcolor{keywordtype}{int}\ octave\ =\ trunc(targetHarmonic\ /\ harmonicCount);}
-\DoxyCodeLine{00308\ }
-\DoxyCodeLine{00309\ \ \ \ \ \textcolor{keywordtype}{float}\ freq\ =\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab7e94991bfffdabd0d9049f658a16f4d}{fundamentalFrequency}}\ *\ pow(2,\ octave)\ *\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}].ratio[series];\ \textcolor{comment}{//\ -\/\ 0.4;}}
-\DoxyCodeLine{00310\ }
-\DoxyCodeLine{00311\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_afbf8da531e9d50bff3ff48088a98045d}{currentHarmonicFreq}}\ =\ freq;}
-\DoxyCodeLine{00312\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ab3f2f36f18026e2c8880c23aacf0a25c}{calculateHarmonicShift}}();}
-\DoxyCodeLine{00313\ }
-\DoxyCodeLine{00314\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a0c5dae4f8cf80d9d4796f7304c7b8981}{raiseFrequencyChanged}}();}
-\DoxyCodeLine{00315\ \}}
-\DoxyCodeLine{00316\ }
-\DoxyCodeLine{00317\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_afcb716f608764f2fc078e857bf1df049}{HarmonicSeriesHandler::setBaseNote}}(\textcolor{keywordtype}{int}\ inBaseNote)\ \{}
-\DoxyCodeLine{00318\ \ \ \ \ \textcolor{keywordflow}{if}\ ((inBaseNote\ <\ 0)\ ||\ (inBaseNote\ >\ 127))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
-\DoxyCodeLine{00319\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a165e439503d522582f48589facede47f}{baseNote}}\ =\ uint8\_t\ (inBaseNote);}
-\DoxyCodeLine{00320\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00321\ \}}
-\DoxyCodeLine{00322\ }
-\DoxyCodeLine{00323\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a342a5e5bb9add99b597d600a6ed12188}{HarmonicSeriesHandler::loadHarmonicSeries}}(\textcolor{keywordtype}{int}\ i)\ \{}
-\DoxyCodeLine{00324\ \ \ \ \ \textcolor{keywordflow}{if}\ ((i\ >\ (\mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}.size()\ -\/\ 1))\ ||\ (i\ <\ 0))\ \{}
-\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00326\ \ \ \ \ \}}
-\DoxyCodeLine{00327\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}\ =\ i;}
-\DoxyCodeLine{00328\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}}]\ =\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a7575de9107e57f192ecaf6dcf1d0b4b7}{series}}[i];}
-\DoxyCodeLine{00329\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00330\ \};}
-\DoxyCodeLine{00331\ }
-\DoxyCodeLine{00332\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a0c5dae4f8cf80d9d4796f7304c7b8981}{HarmonicSeriesHandler::raiseFrequencyChanged}}()\ \{}
-\DoxyCodeLine{00333\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a6c0ea250eca8743be2bc1031e4ce5af3}{frequencyChanged}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00334\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00335\ \}}
-\DoxyCodeLine{00336\ }
-\DoxyCodeLine{00337\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a69ca24dc5cdbe6467027bf1b48275e11}{HarmonicSeriesHandler::checkFrequencyChanged}}()\ \{}
-\DoxyCodeLine{00338\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classHarmonicSeriesHandler_a6c0ea250eca8743be2bc1031e4ce5af3}{frequencyChanged}})\ \{}
-\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a6c0ea250eca8743be2bc1031e4ce5af3}{frequencyChanged}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00341\ \ \ \ \ \}}
-\DoxyCodeLine{00342\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00343\ \}}
-\DoxyCodeLine{00344\ }
-\DoxyCodeLine{00345\ String\ \mbox{\hyperlink{classHarmonicSeriesHandler_a6fc4b36d42469f130de9e1e7be7f19c8}{HarmonicSeriesHandler::dumpData}}()\ \{}
-\DoxyCodeLine{00346\ \ \ \ \ String\ dump\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00347\ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}bcu:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_ab7e94991bfffdabd0d9049f658a16f4d}{fundamentalFrequency}})\ +\ \textcolor{stringliteral}{"{},"{}};}
-\DoxyCodeLine{00348\ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}bchbn:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_a165e439503d522582f48589facede47f}{baseNote}})\ +\ \textcolor{stringliteral}{"{},"{}};}
-\DoxyCodeLine{00349\ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}bchsr:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_adcb5e5ffd6a283d124936abca437ac85}{harmonicShiftRange}})\ +\ \textcolor{stringliteral}{"{},"{}};}
-\DoxyCodeLine{00350\ \ \ \ \ dump\ +=\ \textcolor{stringliteral}{"{}bhs:"{}}\ +\ String(\mbox{\hyperlink{classHarmonicSeriesHandler_a09ee12329546488c79401ed730cac4a5}{currentHarmonicSeries}})\ +\ \textcolor{stringliteral}{"{},"{}};}
-\DoxyCodeLine{00351\ \ \ \ \ dump\ +=\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab50160b9c046f4039968792660f20f2f}{harmonicSeriesList}}.\mbox{\hyperlink{classHarmonicSeriesList_a635f07883f73ef624e0548fcb58713d7}{dumpData}}();}
-\DoxyCodeLine{00352\ \ \ \ \ \textcolor{keywordflow}{return}\ dump;}
-\DoxyCodeLine{00353\ \}}
-\DoxyCodeLine{00354\ }
-\DoxyCodeLine{00355\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ HARMONICSERIESHANDLER\_H}}
+\DoxyCodeLine{00285\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_afcb716f608764f2fc078e857bf1df049}{HarmonicSeriesHandler::setBaseNote}}(\textcolor{keywordtype}{int}\ inBaseNote)\ \{}
+\DoxyCodeLine{00286\ \ \ \ \ \textcolor{keywordflow}{if}\ ((inBaseNote\ <\ 0)\ ||\ (inBaseNote\ >\ 127))\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00287\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a9376db8cd5a7be8ed59dd9319d45582c}{pBaseNote}}\ =\ uint8\_t\ (inBaseNote);}
+\DoxyCodeLine{00288\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00289\ \}}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a0c5dae4f8cf80d9d4796f7304c7b8981}{HarmonicSeriesHandler::raiseFrequencyChanged}}()\ \{}
+\DoxyCodeLine{00292\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a6c0ea250eca8743be2bc1031e4ce5af3}{frequencyChanged}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00293\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00294\ \}}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a69ca24dc5cdbe6467027bf1b48275e11}{HarmonicSeriesHandler::checkFrequencyChanged}}()\ \{}
+\DoxyCodeLine{00297\ \ \ \ \ \mbox{\hyperlink{classModuleGroup}{ModuleGroup}}\ *group\ =\ \mbox{\hyperlink{classModuleHandler_ab87ee8507b0edd4888eaa422f189d716}{getGroup}}(\textcolor{stringliteral}{"{}harmonicseries"{}});}
+\DoxyCodeLine{00298\ \ \ \ \ \textcolor{keywordflow}{if}\ (group\ ==\ \textcolor{keyword}{nullptr})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00300\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}}\ *\textcolor{keyword}{module}\ =\ group-\/>getSingleSelection();}
+\DoxyCodeLine{00301\ \ \ \ \ \textcolor{keywordflow}{if}\ (module\ ==\ \textcolor{keyword}{nullptr})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00302\ \ \ \ \ \textcolor{keywordflow}{if}\ (module-\/>hasDataChange())\ \{}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da}{updateHarmonicData}}();}
+\DoxyCodeLine{00304\ \ \ \ \ \}}
+\DoxyCodeLine{00305\ }
+\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classHarmonicSeriesHandler_a6c0ea250eca8743be2bc1031e4ce5af3}{frequencyChanged}})\ \{}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a6c0ea250eca8743be2bc1031e4ce5af3}{frequencyChanged}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00309\ \ \ \ \ \}}
+\DoxyCodeLine{00310\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00311\ \}}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00313\ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}}*\ \mbox{\hyperlink{classHarmonicSeriesHandler_afef415cddf83a8f05f8daa94f33ed7bb}{HarmonicSeriesHandler::addHarmonicSeries}}()\ \{}
+\DoxyCodeLine{00314\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}}\ *lHarmonicSeries\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}}();}
+\DoxyCodeLine{00315\ \ \ \ \ \mbox{\hyperlink{classModuleGroup}{ModuleGroup}}\ *group\ =\ \mbox{\hyperlink{classModuleHandler_aa8b0ee11f9f981d5d791e0994618377b}{addModule}}(lHarmonicSeries);}
+\DoxyCodeLine{00316\ \ \ \ \ \mbox{\hyperlink{classModule}{Module}}\ *\textcolor{keyword}{module}\ =\ group-\/>modules.back();}
+\DoxyCodeLine{00317\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{module};}
+\DoxyCodeLine{00318\ \}}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}}*\ \mbox{\hyperlink{classHarmonicSeriesHandler_afef415cddf83a8f05f8daa94f33ed7bb}{HarmonicSeriesHandler::addHarmonicSeries}}(String\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{float}\ frequencies[],\ \textcolor{keywordtype}{int}\ size)\ \{}
+\DoxyCodeLine{00321\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}}\ *hs\ =\ \mbox{\hyperlink{classHarmonicSeriesHandler_afef415cddf83a8f05f8daa94f33ed7bb}{addHarmonicSeries}}();\ \textcolor{comment}{//new\ HarmonicSeries();}}
+\DoxyCodeLine{00322\ \ \ \ \ hs-\/>\mbox{\hyperlink{classHarmonicSeries_a864d2755443961c9cbea5d497909f6b0}{Id}}\ =\ id;}
+\DoxyCodeLine{00323\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ size;\ i++)\ \{}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ hs-\/>\mbox{\hyperlink{classHarmonicSeries_afbdd70e64fbed4dc82924ed03672cd6c}{setHarmonic}}(i,\ frequencies[i]);}
+\DoxyCodeLine{00325\ \ \ \ \ \}}
+\DoxyCodeLine{00326\ \ \ \ \ \textcolor{keywordflow}{return}\ hs;}
+\DoxyCodeLine{00327\ \}}
+\DoxyCodeLine{00328\ }
+\DoxyCodeLine{00329\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ad54478d5f92f3500da931491d0a59088}{HarmonicSeriesHandler::dumpData}}(std::vector<commandResponse>\ *inCommandResponses)\ \{}
+\DoxyCodeLine{00330\ \ \ \ \ \mbox{\hyperlink{classModuleHandler_ae3fa5b4e5e4fa54687c3d26e0d937782}{ModuleHandler::dumpData}}(inCommandResponses);}
+\DoxyCodeLine{00331\ \ \ \ \ inCommandResponses-\/>push\_back(\{\ \textcolor{stringliteral}{"{}hs["{}}\ +\ String(\mbox{\hyperlink{classModuleHandler_a1913f2c62636218e752bbf72de5e45af}{moduleGroups}}[0].selection[0])\ +\ \textcolor{stringliteral}{"{}]"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\ \});}
+\DoxyCodeLine{00332\ \}}
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00334\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ HARMONICSERIESHANDLER\_H}}
 
 \end{DoxyCode}

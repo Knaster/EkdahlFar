@@ -17,15 +17,10 @@ obj/Release/src/mute/mutecontrol.o: src/mute/mutecontrol.cpp \
  lib/teensy4/elapsedMillis.h lib/teensy4/WProgram.h \
  lib/teensy4/IntervalTimer.h lib/teensy4/CrashReport.h \
  lib/teensy4/Printable.h lib/teensy4/WString.h \
- lib/SafeString/src/SerialComs.h lib/SafeString/src/SafeStringReader.h \
- lib/teensy4/Arduino.h lib/SafeString/src/SafeString.h \
- lib/teensy4/Print.h lib/teensy4/Stream.h \
- lib/SafeString/src/SafeStringNameSpaceStart.h \
- lib/SafeString/src/SafeStringNameSpaceEnd.h \
- lib/SafeString/src/millisDelay.h lib/SafeString/src/millisDelay.h \
  include/base/debugprint.hpp include/base/modulesystembasics.hpp \
- include/base/commandparser.hpp \
- include/master_controller/expressionparser.h lib/tinyexpr/src/tinyexpr.h \
+ include/base/commandparser.hpp include/base/commanditem.hpp \
+ include/base/generalhelpers.hpp include/base/arduinorequired.hpp \
  include/base/module.hpp include/mute/mute.hpp \
  include/generic_functions/tmc2209_servostepper.hpp \
- lib/TMC2209/src/TMC2209.h include/generic_functions/servostepper.hpp
+ lib/TMC2209/src/TMC2209.h lib/teensy4/Arduino.h \
+ include/generic_functions/servostepper.hpp

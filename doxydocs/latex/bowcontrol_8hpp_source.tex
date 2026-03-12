@@ -23,196 +23,201 @@
 \DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ BOWCONTROL\_H}}
 \DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ BOWCONTROL\_H}}
 \DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bowpressure_8cpp}{bowpressure.cpp}}"{}}}
-\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{pidcontroller_8cpp}{pidcontroller.cpp}}"{}}}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ \textcolor{comment}{/*****\ NEW\ CLASS\ *****/}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bowActuators_8hpp}{generic\_functions/bowActuators.hpp}}"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bowpressure_8hpp}{bow/bowpressure.hpp}}"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{pidcontroller_8hpp}{generic\_functions/pidcontroller.hpp}}"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{harmonicserieshandler_8hpp}{generic\_functions/harmonicserieshandler.hpp}}"{}}}
+\DoxyCodeLine{00026\ }
 \DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ \mbox{\hyperlink{bowcontrol_8hpp_a7f6aed390f9ba1cf16fb5eadd20ea985}{serialCommandsBowControl}}[]\ =\ \{}
-\DoxyCodeLine{00029\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolspeedmode"{}},\ \textcolor{stringliteral}{"{}bcsm"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ speed\ mode,\ 0\ =\ Automatic\ and\ 1\ =\ Manual"{}}\ \},}
-\DoxyCodeLine{00030\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotortimeout"{}},\ \textcolor{stringliteral}{"{}bmt"{}},\ \textcolor{stringliteral}{"{}ms(0-\/65535)"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ shutdown\ timeout\ after\ bow\ having\ been\ put\ into\ the\ rest\ position"{}}\ \},}
-\DoxyCodeLine{00031\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotordirectpwm"{}},\ \textcolor{stringliteral}{"{}bmdp"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ direct\ power\ in\ 16-\/bit\ PWM\ values,\ requires\ that\ the\ PID\ is\ turned\ off"{}}\ \},}
-\DoxyCodeLine{00032\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpid"{}},\ \textcolor{stringliteral}{"{}bpid"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ bow\ PID\ on/off"{}}\ \},}
-\DoxyCodeLine{00033\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorrun"{}},\ \textcolor{stringliteral}{"{}bmr"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Set\ bow\ motor\ run\ on/off"{}}\ \},}
-\DoxyCodeLine{00034\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorfaultcommands"{}},\ \textcolor{stringliteral}{"{}bmfc"{}},\ \textcolor{stringliteral}{"{}command\ list"{}},\ \textcolor{stringliteral}{"{}Commands\ to\ execute\ when\ a\ motor\ fault\ is\ tripped\ -\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}}\ \},}
-\DoxyCodeLine{00035\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotoroverpowercommands"{}},\ \textcolor{stringliteral}{"{}bmopc"{}},\ \textcolor{stringliteral}{"{}command\ list"{}},\ \textcolor{stringliteral}{"{}Commands\ to\ execute\ when\ motor\ is\ over\ the\ power\ limit\ -\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}}\ \},}
-\DoxyCodeLine{00036\ \};}
+\DoxyCodeLine{00028\ \textcolor{comment}{/*****\ NEW\ CLASS\ *****/}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{eSpeedMode}}\ \{\ \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389}{Automatic}},\ \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82acad5010fb34447633f3139d69698a0f0}{Manual}}\ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classBowControl}{BowControl}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classModuleHandler}{ModuleHandler}}\ \{}
+\DoxyCodeLine{00033\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a726e985c9256abcd3e04b255b31cba09}{SETMODULEID}}(\textcolor{stringliteral}{"{}bowingwheel"{}},\ \textcolor{stringliteral}{"{}bw"{}},\ \textcolor{stringliteral}{"{}Bowing\ wheel\ controller\ v1.0"{}},\ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabea41b91ec2ec246009a6c05166c265c06a}{eModuleType::hardware}},\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}}}
 \DoxyCodeLine{00037\ }
-\DoxyCodeLine{00038\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{eSpeedMode}}\ \{\ \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389}{Automatic}},\ \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82acad5010fb34447633f3139d69698a0f0}{Manual}}\ \};}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00040\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classBowControl}{BowControl}}\ \{}
-\DoxyCodeLine{00041\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classDCMotorControl}{DCMotorControl}}\ *\mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(speedMode,\ \mbox{\hyperlink{classBowControl}{BowControl}})}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(motorTimeout,\ \mbox{\hyperlink{classBowControl}{BowControl}})}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(pidEnable,\ \mbox{\hyperlink{classBowControl}{BowControl}})}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(motorFaultCommands,\ \mbox{\hyperlink{classBowControl}{BowControl}})}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(motorOverPowerCommands,\ \mbox{\hyperlink{classBowControl}{BowControl}})}
 \DoxyCodeLine{00043\ }
-\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classPIDController}{PIDController}}\ *\mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}\ =\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00045\ }
-\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classBowPressure}{BowPressure}}\ *\mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}\ =\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00047\ }
-\DoxyCodeLine{00048\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#ifndef\ EXTERNAL\_PRESSURE\_CONTROLLER}}
-\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{classBowControl}{BowControl}}(\textcolor{keywordtype}{char}\ motorRevPin,\ \textcolor{keywordtype}{char}\ motorVoltagePin,\ \textcolor{keywordtype}{char}\ motorDCDCEnPin,\ \textcolor{keywordtype}{char}\ tachoPin,\ \textcolor{keywordtype}{char}\ currentSensePin,\ \textcolor{keywordtype}{char}\ motorFaultPin,}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ stepEnPin,\ \textcolor{keywordtype}{char}\ stepDirPin,\ \textcolor{keywordtype}{char}\ stepStepPin,\ HardwareSerial\ *stepSerialPort,\ \textcolor{keywordtype}{char}\ stepHomeSensorPin);}
-\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EXTERNAL\_PRESSURE\_CONTROLLER}}
-\DoxyCodeLine{00053\ }
-\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classBowControl_af6e98ea3176a266902b7f95b409553b9}{processSerialCommand}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegate\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classBowControl_acb0918bfce04f9b93899133f4f73db9a}{processSerialCommandHidden}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegate\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{00058\ \ \ \ \ String\ \mbox{\hyperlink{classBowControl_aa280a126dd30e3510c9dcb722d126b3e}{dumpData}}();}
-\DoxyCodeLine{00059\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00060\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_a6ef6cfda459694dca3afa9d9ad049ced}{pidUpdateInterval}}\ =\ 1000;\ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00061\ }
-\DoxyCodeLine{00062\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classBowControl_ac8743e51d6e90939a32feed0f820d5f8}{lastUpdate}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00063\ }
-\DoxyCodeLine{00064\ \ \ \ \ elapsedMillis\ \mbox{\hyperlink{classBowControl_a9661a56ba31c3ac180cca845462e126e}{bowShutoffTimer}};}
-\DoxyCodeLine{00065\ }
-\DoxyCodeLine{00066\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_a1436681ee5d3b07547d8a18791f6d9a9}{bowShutoffTimeout}}\ =\ 1000;}
-\DoxyCodeLine{00067\ }
-\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a660628c5489ef9ac1bc4160cab81a8a0}{bowShutoffTimedout}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00069\ }
-\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_add46f10b20a135292c0650d1453b6f38}{bowShutoffMotorDisabled}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00071\ }
-\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{eSpeedMode}}\ \mbox{\hyperlink{classBowControl_af4e1e48fb1eca92f085369c3f5ef2dd7}{speedMode}}\ =\ \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389}{eSpeedMode::Automatic}};}
-\DoxyCodeLine{00073\ }
-\DoxyCodeLine{00074\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_a02921994677bd6d96ea0840ef325eb78}{manualMotorPWM}}\ =\ 0;}
-\DoxyCodeLine{00075\ }
-\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a6f8c5fa626567fb11951672b76008574}{run}}\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00077\ }
-\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a42be04959663fd67a1d054d33c8bea36}{PIDon}}\ =\ \textcolor{keyword}{true};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00079\ }
-\DoxyCodeLine{00080\ \ \ \ \ String\ \mbox{\hyperlink{classBowControl_a758d29eb32ccdf7d69e8e5026e34a043}{commandsOverPowerCurrent}}\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00081\ }
-\DoxyCodeLine{00082\ \ \ \ \ String\ \mbox{\hyperlink{classBowControl_a74f0eb026fb337a254953127b09d9de9}{commandsMotorFault}}\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00083\ }
-\DoxyCodeLine{00084\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00085\ \textcolor{comment}{/*****\ Module\ specific\ commands\ mirroring\ serially\ attainable\ commands\ *****/}}
-\DoxyCodeLine{00086\ \ \ \ \ \textcolor{comment}{//void\ setBowSpeedPWM(uint16\_t\ speed);}}
-\DoxyCodeLine{00087\ }
-\DoxyCodeLine{00088\ \ \ \ \ \textcolor{comment}{//uint16\_t\ getBowSpeedPWM()\ \{\ return\ dcMotorControl-\/>getSpeedPWM();\ \}}}
-\DoxyCodeLine{00089\ }
-\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a17a1fc8cdd5f5f0c9b68b3d9ea162280}{setBowMotorDirectPWM}}(uint16\_t\ speed)\ \{\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a2a888a8e82115d709ca2b8204a9d480d}{setSpeedPWMSafe}}(speed);\ \}}
-\DoxyCodeLine{00091\ }
-\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a0e73b848916039905df02ec2d243afdb}{setBowSpeedHZ}}(\textcolor{keywordtype}{float}\ speed)\ \{\ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_a3b463eb00aac83a6a4bba64686c9a524}{setPIDTarget}}(speed);\ \}}
-\DoxyCodeLine{00093\ }
-\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#ifndef\ EXTERNAL\_PRESSURE\_CONTROLLER}}
-\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a521548efe320100aa2c4aa81280e52f2}{home}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_ab1be80952ab6b1ec659c6aa00f5e9f52}{home}}();\ \}}
-\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00097\ }
-\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_abba2ffc34c55b9c4210e5b6d54014446}{enableBowMotorPower}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_ad85e1b63df6744986e6f9a2cec9c0ce2}{enableMotorPower}}();\ \}}
-\DoxyCodeLine{00099\ }
-\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a9497cf120ffd96fe6a75637c56c65c84}{disableBowMotorPower}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_ad45596053d5c1d91e50f574a2373479a}{disableMotorPower}}();\ \}}
-\DoxyCodeLine{00101\ }
-\DoxyCodeLine{00102\ \textcolor{comment}{/*****\ Hidden\ commands\ for\ modular\ use\ *****/}}
-\DoxyCodeLine{00103\ \ \ \ \ String\ \mbox{\hyperlink{classBowControl_a3ee10be60e4c4afd5bc8cbdbac849362}{getCommandsOverPowerCurrent}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a758d29eb32ccdf7d69e8e5026e34a043}{commandsOverPowerCurrent}};\ \}}
+\DoxyCodeLine{00044\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classDCMotorControl}{DCMotorControl}}\ *\mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classPIDController}{PIDController}}\ *\mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classBowPressure}{BowPressure}}\ *\mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}}\ *\mbox{\hyperlink{classBowControl_a58caa5e1f7e8a377f387bc093c2aeefe}{harmonicSeriesHandler}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{const}\ String\ \mbox{\hyperlink{classBowControl_af0fd8d0433370a8e73814ffce64233fb}{prefix}}[2]\ =\ \{\ \textcolor{stringliteral}{"{}bow"{}},\ \textcolor{stringliteral}{"{}b"{}}\ \};}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{const}\ String\ \mbox{\hyperlink{classBowControl_add8ee71da9ed9509ef51d89bdb3abd85}{identifier}}\ =\ \textcolor{stringliteral}{"{}Bowing\ wheel\ controller\ v1.0"{}};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#ifndef\ EXTERNAL\_PRESSURE\_CONTROLLER}}
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{classBowControl_acdd87742f360329eb78886432eb1536f}{BowControl}}(\textcolor{keywordtype}{char}\ motorRevPin,\ \textcolor{keywordtype}{char}\ motorVoltagePin,\ \textcolor{keywordtype}{char}\ motorDCDCEnPin,\ \textcolor{keywordtype}{char}\ tachoPin,\ \textcolor{keywordtype}{char}\ currentSensePin,\ \textcolor{keywordtype}{char}\ motorFaultPin,}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ stepEnPin,\ \textcolor{keywordtype}{char}\ stepDirPin,\ \textcolor{keywordtype}{char}\ stepStepPin,\ HardwareSerial\ *stepSerialPort,\ \textcolor{keywordtype}{char}\ stepHomeSensorPin);}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EXTERNAL\_PRESSURE\_CONTROLLER}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classBowControl_af6e98ea3176a266902b7f95b409553b9}{processSerialCommand}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegate\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classBowControl_acb0918bfce04f9b93899133f4f73db9a}{processSerialCommandHidden}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegate\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00064\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00065\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_a6ef6cfda459694dca3afa9d9ad049ced}{pidUpdateInterval}}\ =\ 1000;\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classBowControl_ac8743e51d6e90939a32feed0f820d5f8}{lastUpdate}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ elapsedMillis\ \mbox{\hyperlink{classBowControl_a9661a56ba31c3ac180cca845462e126e}{bowShutoffTimer}};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_a1436681ee5d3b07547d8a18791f6d9a9}{bowShutoffTimeout}}\ =\ 1000;}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a660628c5489ef9ac1bc4160cab81a8a0}{bowShutoffTimedout}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_add46f10b20a135292c0650d1453b6f38}{bowShutoffMotorDisabled}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{eSpeedMode}}\ \mbox{\hyperlink{classBowControl_a23ec6d3e2a0e2aee136fe38ffe6c9430}{pSpeedMode}}\ =\ \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389}{eSpeedMode::Automatic}};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{comment}{//\ \ \ \ uint16\_t\ manualMotorPWM\ =\ 0;}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{comment}{//bool\ run\ =\ false;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ///<\ Set\ to\ true\ if\ the\ bowing\ wheel\ is\ running}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a42be04959663fd67a1d054d33c8bea36}{PIDon}}\ =\ \textcolor{keyword}{true};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ String\ \mbox{\hyperlink{classBowControl_a758d29eb32ccdf7d69e8e5026e34a043}{commandsOverPowerCurrent}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ String\ \mbox{\hyperlink{classBowControl_a74f0eb026fb337a254953127b09d9de9}{commandsMotorFault}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00090\ \textcolor{comment}{/*****\ Module\ specific\ commands\ mirroring\ serially\ attainable\ commands\ *****/}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{//void\ setBowSpeedPWM(uint16\_t\ speed);}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{comment}{//uint16\_t\ getBowSpeedPWM()\ \{\ return\ dcMotorControl-\/>getSpeedPWM();\ \}}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a17a1fc8cdd5f5f0c9b68b3d9ea162280}{setBowMotorDirectPWM}}(uint16\_t\ speed)\ \{\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a2a888a8e82115d709ca2b8204a9d480d}{setSpeedPWMSafe}}(speed);\ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a0e73b848916039905df02ec2d243afdb}{setBowSpeedHZ}}(\textcolor{keywordtype}{float}\ speed)\ \{\ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_a3b463eb00aac83a6a4bba64686c9a524}{setPIDTarget}}(speed);\ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#ifndef\ EXTERNAL\_PRESSURE\_CONTROLLER}}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a521548efe320100aa2c4aa81280e52f2}{home}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_ab1be80952ab6b1ec659c6aa00f5e9f52}{home}}();\ \}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_abba2ffc34c55b9c4210e5b6d54014446}{enableBowMotorPower}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_ad85e1b63df6744986e6f9a2cec9c0ce2}{enableMotorPower}}();\ \}}
 \DoxyCodeLine{00104\ }
-\DoxyCodeLine{00105\ \ \ \ \ String\ \mbox{\hyperlink{classBowControl_a30691a6cecdba635207456fb4ee1e6bd}{getCommandsMotorFault}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a74f0eb026fb337a254953127b09d9de9}{commandsMotorFault}};\ \}}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a9497cf120ffd96fe6a75637c56c65c84}{disableBowMotorPower}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_ad45596053d5c1d91e50f574a2373479a}{disableMotorPower}}();\ \}}
 \DoxyCodeLine{00106\ }
-\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a7446cb7cb5b09b88f062bc7122618755}{getBowOverPowerFlag}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a005cc5e24ccd310852e74bc36c94b851}{isOverPower}}();\ \}}
-\DoxyCodeLine{00108\ }
-\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a5c9494f5321bc4ce2884ba9ac61c2bc6}{getBowMotorFaultFlag}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_ab8b71fef2e8899370e4d0d249edc2576}{getMotorFault}}();\ \}}
-\DoxyCodeLine{00110\ }
-\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classBowControl_aabbf480af8262531cf398c57e209d63a}{getAverageTachometerFreq}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a77964b1c2ef9755ef26d638b71668dd4}{getAverageTachometerFreq}}();\ \}}
-\DoxyCodeLine{00112\ }
-\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_ae7c0854042b57d023047e27240eb97ab}{checkTachometerTimeout}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a4e0c7f4157b7a8302a84e0d58e2c769b}{checkTachometerTimeout}}();\ \}}
-\DoxyCodeLine{00114\ }
-\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a62ff33edc2ddef1fe4d2df379bc9d4b7}{setHardwarePressure}}(uint16\_t\ speed)\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_abeaa578a81b74ff2cd6704751fe48cb4}{setHardwarePressure}}(speed);\}}
-\DoxyCodeLine{00116\ }
-\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_ae3e25debfb3d98b39c85b4e67dfc3183}{waitForPressureToSettle}}(uint16\_t\ timeout\ =\ 3000)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a20fcb7c6a4854837052bf696baaa7579}{completeTask}}(timeout);\ \}}
-\DoxyCodeLine{00118\ }
-\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a6777ca35b8a0188378935056969c8ffb}{setEngagePressure}}(uint16\_t\ pressure)\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a4611209843a2926626d508b3854d6e44}{setEngagePressure}}(pressure);\ \}}
-\DoxyCodeLine{00120\ }
-\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a4022ef94a8122c6c24987ba4d12a7d11}{setRestPressure}}(uint16\_t\ pressure)\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_ad95f948f469b5535e764d556305d2ce1}{setRestPressure}}(pressure);\ \}}
-\DoxyCodeLine{00122\ }
-\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_ac593f79c91ca60bbb8e03ad494bf84cb}{setMaxPressure}}(uint16\_t\ pressure)\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a416727ac846bccf9dfb717e1398da6ea}{setMaxPressure}}(pressure);\ \}}
-\DoxyCodeLine{00124\ }
-\DoxyCodeLine{00125\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_ac906729ef9bae05e39a92951588404d6}{getEngagePressure}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_aae47b143f75a91e727d6951e749ff0ee}{getEngagePressure}}();\ \}}
-\DoxyCodeLine{00126\ }
-\DoxyCodeLine{00127\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_ab66ab43cecb8da0f2ac7d74a87676203}{getRestPressure}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a157b3023b744d32eb53b838e9f49a9f3}{getRestPressure}}();\ \}}
-\DoxyCodeLine{00128\ }
-\DoxyCodeLine{00129\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_a3aff0283cf061ff1b108af53c757e17a}{getMaxPressure}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a45dfd77ba57d2da2c28dbc5a091474de}{getMaxPressure}}();\ \}}
-\DoxyCodeLine{00130\ }
-\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a7911c03cbe760de408545e8e7bf766c4}{bowMotorIsOverCurrent}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a14bb4c5d36ab23e70508627ed87643c0}{isOverCurrent}}();\ \}}
-\DoxyCodeLine{00132\ }
-\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_aebd3c78b81bf427ea9ef23dba8e98c57}{bowMotorIsOverPower}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a005cc5e24ccd310852e74bc36c94b851}{isOverPower}}();\ \}}
-\DoxyCodeLine{00134\ }
-\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a5cf3086a9dded16bac99f981ad1661e6}{getPressureAutocorrect}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_aa1aad3330d8301cd9cd70c1e12b01bfb}{getAutoCorrect}}();\ \}}
-\DoxyCodeLine{00136\ }
-\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_ac526c5f748f9d6e74931f572cd5215e1}{setPressureAutocorrect}}(\textcolor{keywordtype}{bool}\ correct)\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a9f3c33a86cd8c12cce7c6d6c5247eea0}{setAutoCorrect}}(correct);\ \}}
-\DoxyCodeLine{00138\ }
-\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_ad2211241c65c1f0070d469ec7d32b5e9}{getPIDOn}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a42be04959663fd67a1d054d33c8bea36}{PIDon}};\ \}}
-\DoxyCodeLine{00140\ }
-\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a69c751fb80e75b6c359cf7082756e20f}{setPIDOn}}(\textcolor{keywordtype}{bool}\ inPIDon)\ \{\ \mbox{\hyperlink{classBowControl_a42be04959663fd67a1d054d33c8bea36}{PIDon}}\ =\ inPIDon;\}}
-\DoxyCodeLine{00142\ }
-\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a6ff7bb9d5693b2486d08c529ec6688f6}{setPressureMotorSpeed}}(\textcolor{keywordtype}{float}\ speed)\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a055b155370efb9c29a924f8cd1849121}{setSpeed}}(speed);\ \}}
-\DoxyCodeLine{00144\ }
-\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classBowControl_aec59a7cc531968449bac853ce54ef558}{getPressureMotorSpeed}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_af8051b2f3f54475821821563507b77bd}{getSpeed}}();\ \}}
-\DoxyCodeLine{00146\ }
-\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_ac41b6162fb1ea57619fdac9b6ddce8e0}{setRun}}(\textcolor{keywordtype}{bool}\ inRun)\ \{\ \mbox{\hyperlink{classBowControl_a6f8c5fa626567fb11951672b76008574}{run}}\ =\ inRun;\ \}}
-\DoxyCodeLine{00148\ }
-\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_aa18cf83495867e37168a3a5604c56783}{getRun}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f8c5fa626567fb11951672b76008574}{run}};\ \}}
-\DoxyCodeLine{00150\ }
-\DoxyCodeLine{00151\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_ab5327c0914d0c04e254098b3b44c7a4a}{getBowMotorMaxPower}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_ad79d9f9b5815dccfe7df8b76d551af35}{getMotorMaxPower}}();\ \}}
-\DoxyCodeLine{00152\ }
-\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a5bbf25b87603181f1e5c8a944f3ad093}{setBowMotorMaxPower}}(uint16\_t\ power)\ \{\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_ad76b3296d1225a5eb3c5545e74f8e6c7}{setMotorMaxPower}}(power);\ \}}
-\DoxyCodeLine{00154\ }
-\DoxyCodeLine{00155\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_aea720b1ce0c112eb608ee64e9ad9f7b4}{getBowMotorMinPWM}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a163a2bcbc16ea576af02651ba02cfc05}{getMinSpeedPWM}}();\ \}}
-\DoxyCodeLine{00156\ }
-\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_afba655e39997dded04b350ca680d5dd0}{setBowMotorMinPWM}}(uint16\_t\ pwm)\ \{\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_ab44cebb7a1d6272d41cd01b235d33eb8}{setMinSpeedPWM}}(pwm);\ \}}
-\DoxyCodeLine{00158\ }
-\DoxyCodeLine{00159\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_a55222e4f99b462e262d7e5911489c185}{getBowMotorMaxPWM}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a5b5c98ff5c859a44e758fe6bde79e997}{getMaxSpeedPWM}}();\ \}}
-\DoxyCodeLine{00160\ }
-\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_add2df6c7b2cbc33b245d47e44ed58eec}{setBowMotorMaxPWM}}(uint16\_t\ pwm)\ \{\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_aee8602be7711a46e46b06e0f456db5ea}{setMaxSpeedPWM}}(pwm);\ \}}
-\DoxyCodeLine{00162\ }
-\DoxyCodeLine{00163\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_a7831cdc8fadd2206c78850543ccade9e}{getBowMotorMaxHz}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_a577132f4990b94d9fbb09d9ef267965e}{getMaxSpeedHz}}();\ \}}
-\DoxyCodeLine{00164\ }
-\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a73cacf4394bec865d93534d343a38715}{setBowMotorMaxHz}}(uint16\_t\ frequency)\ \{\ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_ac1bbccb833ee15c1cd135c5c64a23ed1}{setMaxSpeedHz}}(frequency);\ \}}
-\DoxyCodeLine{00166\ }
-\DoxyCodeLine{00167\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_a82227fa717585e6c1d2a24a62f5e317e}{getBowMotorMinHz}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_a06dcbfeaa89966438f3545216a4f7448}{getMinSpeedHz}}();\ \}}
-\DoxyCodeLine{00168\ }
-\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a5ffb34b9e147eaf1d07c15b7f2accd4c}{setBowMotorMinHz}}(uint16\_t\ frequency)\ \{\ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_a1915877c95834154fe7d038d42d70d26}{setMinSpeedHz}}(frequency);\ \}}
-\DoxyCodeLine{00170\ }
-\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classBowControl_af1a5bde99050f6474e6d270607fa9394}{getBowMotorPower}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_add8a06829d0e8fe4aa2415f83355d27b}{getMotorCurrent}}()\ *\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a4fa179f0bdf8fa5a4ad7568832e07589}{getMotorVoltage}}();\ \}}
-\DoxyCodeLine{00172\ }
-\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a9bc480001268aeac1add700870ce18ad}{setBowRest}}()\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_aa5dc5f078942e290f8002f3877dac307}{rest}}(\textcolor{keyword}{true});\ \}}
-\DoxyCodeLine{00174\ }
-\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a97242e515da1d76fd3faecb1c50d0fe2}{setBowEngage}}()\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_aad1b47b9e6d76276ed84faadc55d7a9d}{engage}}(\textcolor{keyword}{true});\ \}}
-\DoxyCodeLine{00176\ }
-\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a185042d6311ba53b33f6b8ccc1788467}{setSpeedMode}}(\mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{eSpeedMode}}\ inSpeedMode)\ \{\ \mbox{\hyperlink{classBowControl_af4e1e48fb1eca92f085369c3f5ef2dd7}{speedMode}}\ =\ inSpeedMode;\ \}}
-\DoxyCodeLine{00178\ }
-\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a94d596c5aaa12f95f8e4fbeb2cae34b9}{rest}}();}
-\DoxyCodeLine{00180\ \textcolor{preprocessor}{\#ifndef\ EXTERNAL\_PRESSURE\_CONTROLLER}}
-\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a170f00fa76b4cd121942106a07e3e68d}{getTMC2209Info}}()\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a353b29c45350a9ead04c999d83524b51}{getTMC2209Info}}();\ \}}
-\DoxyCodeLine{00182\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EXTERNAL\_PRESSURE\_CONTROLLER}}
+\DoxyCodeLine{00107\ \textcolor{comment}{/*****\ Hidden\ commands\ for\ modular\ use\ *****/}}
+\DoxyCodeLine{00108\ \ \ \ \ String\ \mbox{\hyperlink{classBowControl_a3ee10be60e4c4afd5bc8cbdbac849362}{getCommandsOverPowerCurrent}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a758d29eb32ccdf7d69e8e5026e34a043}{commandsOverPowerCurrent}};\ \}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ String\ \mbox{\hyperlink{classBowControl_a30691a6cecdba635207456fb4ee1e6bd}{getCommandsMotorFault}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a74f0eb026fb337a254953127b09d9de9}{commandsMotorFault}};\ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a7446cb7cb5b09b88f062bc7122618755}{getBowOverPowerFlag}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a005cc5e24ccd310852e74bc36c94b851}{isOverPower}}();\ \}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a5c9494f5321bc4ce2884ba9ac61c2bc6}{getBowMotorFaultFlag}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_ab8b71fef2e8899370e4d0d249edc2576}{getMotorFault}}();\ \}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classBowControl_aabbf480af8262531cf398c57e209d63a}{getAverageTachometerFreq}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a77964b1c2ef9755ef26d638b71668dd4}{getAverageTachometerFreq}}();\ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_ae7c0854042b57d023047e27240eb97ab}{checkTachometerTimeout}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a4e0c7f4157b7a8302a84e0d58e2c769b}{checkTachometerTimeout}}();\ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a62ff33edc2ddef1fe4d2df379bc9d4b7}{setHardwarePressure}}(uint16\_t\ speed)\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_abeaa578a81b74ff2cd6704751fe48cb4}{setHardwarePressure}}(speed);\}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_ae3e25debfb3d98b39c85b4e67dfc3183}{waitForPressureToSettle}}(uint16\_t\ timeout\ =\ 3000)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a20fcb7c6a4854837052bf696baaa7579}{completeTask}}(timeout);\ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a6777ca35b8a0188378935056969c8ffb}{setEngagePressure}}(uint16\_t\ pressure)\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a94f290e2387a4d90308cf79abc349801}{setEngagePressure}}(pressure);\ \}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a4022ef94a8122c6c24987ba4d12a7d11}{setRestPressure}}(uint16\_t\ pressure)\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_ac421b9d9ef7a02853fc22f8ac21df3bd}{setRestPressure}}(pressure);\ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a859d99fa5185cb1a16150b5b5f9977c1}{setStallPressure}}(uint16\_t\ pressure)\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_ac929f8c2e086e80da772c42be1167f5e}{setStallPressure}}(pressure);\ \}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_ac906729ef9bae05e39a92951588404d6}{getEngagePressure}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_aae47b143f75a91e727d6951e749ff0ee}{getEngagePressure}}();\ \}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_ab66ab43cecb8da0f2ac7d74a87676203}{getRestPressure}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a157b3023b744d32eb53b838e9f49a9f3}{getRestPressure}}();\ \}}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_a71b56f4be5f18696268cb1705a6a3c66}{getStallPressure}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a7ce72570971f0fcd0cc8341fa14062ec}{getStallPressure}}();\ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a7911c03cbe760de408545e8e7bf766c4}{bowMotorIsOverCurrent}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a14bb4c5d36ab23e70508627ed87643c0}{isOverCurrent}}();\ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_aebd3c78b81bf427ea9ef23dba8e98c57}{bowMotorIsOverPower}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a005cc5e24ccd310852e74bc36c94b851}{isOverPower}}();\ \}}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_a5cf3086a9dded16bac99f981ad1661e6}{getPressureAutocorrect}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_aa1aad3330d8301cd9cd70c1e12b01bfb}{getAutoCorrect}}();\ \}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_ac526c5f748f9d6e74931f572cd5215e1}{setPressureAutocorrect}}(\textcolor{keywordtype}{bool}\ correct)\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a9f3c33a86cd8c12cce7c6d6c5247eea0}{setAutoCorrect}}(correct);\ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_ad2211241c65c1f0070d469ec7d32b5e9}{getPIDOn}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a42be04959663fd67a1d054d33c8bea36}{PIDon}};\ \}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a69c751fb80e75b6c359cf7082756e20f}{setPIDOn}}(\textcolor{keywordtype}{bool}\ inPIDon)\ \{\ \mbox{\hyperlink{classBowControl_a42be04959663fd67a1d054d33c8bea36}{PIDon}}\ =\ inPIDon;\}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a6ff7bb9d5693b2486d08c529ec6688f6}{setPressureMotorSpeed}}(\textcolor{keywordtype}{float}\ speed)\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a055b155370efb9c29a924f8cd1849121}{setSpeed}}(speed);\ \}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classBowControl_aec59a7cc531968449bac853ce54ef558}{getPressureMotorSpeed}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_af8051b2f3f54475821821563507b77bd}{getSpeed}}();\ \}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_ac41b6162fb1ea57619fdac9b6ddce8e0}{setRun}}(\textcolor{keywordtype}{bool}\ inRun)\ \{\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a1a5fae8f5845422a64d6b07f6dfe3a71}{setBowMotorRun}}(inRun);\ \}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowControl_aa18cf83495867e37168a3a5604c56783}{getRun}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_aafd3b156211d186a3fe6ef5197878ab9}{getBowMotorRun}}();\ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_ab5327c0914d0c04e254098b3b44c7a4a}{getBowMotorMaxPower}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_ad79d9f9b5815dccfe7df8b76d551af35}{getMotorMaxPower}}();\ \}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a5bbf25b87603181f1e5c8a944f3ad093}{setBowMotorMaxPower}}(uint16\_t\ power)\ \{\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_ad76b3296d1225a5eb3c5545e74f8e6c7}{setMotorMaxPower}}(power);\ \}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_aea720b1ce0c112eb608ee64e9ad9f7b4}{getBowMotorMinPWM}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a163a2bcbc16ea576af02651ba02cfc05}{getMinSpeedPWM}}();\ \}}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_afba655e39997dded04b350ca680d5dd0}{setBowMotorMinPWM}}(uint16\_t\ pwm)\ \{\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_ab44cebb7a1d6272d41cd01b235d33eb8}{setMinSpeedPWM}}(pwm);\ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_a55222e4f99b462e262d7e5911489c185}{getBowMotorMaxPWM}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a5b5c98ff5c859a44e758fe6bde79e997}{getMaxSpeedPWM}}();\ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_add2df6c7b2cbc33b245d47e44ed58eec}{setBowMotorMaxPWM}}(uint16\_t\ pwm)\ \{\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_aee8602be7711a46e46b06e0f456db5ea}{setMaxSpeedPWM}}(pwm);\ \}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_a7831cdc8fadd2206c78850543ccade9e}{getBowMotorMaxHz}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_a577132f4990b94d9fbb09d9ef267965e}{getMaxSpeedHz}}();\ \}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a73cacf4394bec865d93534d343a38715}{setBowMotorMaxHz}}(uint16\_t\ frequency)\ \{\ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_ac1bbccb833ee15c1cd135c5c64a23ed1}{setMaxSpeedHz}}(frequency);\ \}}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_a82227fa717585e6c1d2a24a62f5e317e}{getBowMotorMinHz}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_a06dcbfeaa89966438f3545216a4f7448}{getMinSpeedHz}}();\ \}}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a5ffb34b9e147eaf1d07c15b7f2accd4c}{setBowMotorMinHz}}(uint16\_t\ frequency)\ \{\ \mbox{\hyperlink{classBowControl_a4c7c25f21250755ca0b012088ac7c006}{pidController}}-\/>\mbox{\hyperlink{classPIDController_a1915877c95834154fe7d038d42d70d26}{setMinSpeedHz}}(frequency);\ \}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classBowControl_af1a5bde99050f6474e6d270607fa9394}{getBowMotorPower}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_add8a06829d0e8fe4aa2415f83355d27b}{getMotorCurrent}}()\ *\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a4fa179f0bdf8fa5a4ad7568832e07589}{getMotorVoltage}}();\ \}}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a9bc480001268aeac1add700870ce18ad}{setBowRest}}()\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_aa5dc5f078942e290f8002f3877dac307}{rest}}(\textcolor{keyword}{true});\ \}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a97242e515da1d76fd3faecb1c50d0fe2}{setBowEngage}}()\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_aad1b47b9e6d76276ed84faadc55d7a9d}{engage}}(\textcolor{keyword}{true});\ \}}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a185042d6311ba53b33f6b8ccc1788467}{setSpeedMode}}(\mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{eSpeedMode}}\ inSpeedMode)\ \{\ \mbox{\hyperlink{classBowControl_a23ec6d3e2a0e2aee136fe38ffe6c9430}{pSpeedMode}}\ =\ inSpeedMode;\ \}}
 \DoxyCodeLine{00183\ }
-\DoxyCodeLine{00184\ \textcolor{comment}{/*****\ Internal\ commands\ for\ stand-\/alone\ and\ semi-\/modular\ use\ *****/}}
-\DoxyCodeLine{00185\ \ \ \ \ \textcolor{comment}{//\ Update\ function\ to\ be\ periodically\ called\ in\ order\ for\ backoff\ and\ other\ things\ to\ work}}
-\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a1e738a6854d44a43b309f1ad9a29a559}{update}}();}
-\DoxyCodeLine{00187\ }
-\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a49f7fa12c0ca3a731d042b4a4adc6324}{updatePID}}();}
-\DoxyCodeLine{00189\ }
-\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a71bbd615a798d1e7294a79ad16f0555a}{updateTachometer}}()\ \{\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a10210522bd309e53b0eb98d41ec57823}{tachometerISRHandler}}();\ \}}
-\DoxyCodeLine{00191\ }
-\DoxyCodeLine{00192\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_ae534079033431afa0cb94651b3f70b5d}{getPIDUpdateInterval}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6ef6cfda459694dca3afa9d9ad049ced}{pidUpdateInterval}};\ \}}
-\DoxyCodeLine{00193\ }
-\DoxyCodeLine{00194\ \ \ \ \ \mbox{\hyperlink{classBowPressure}{BowPressure}}*\ \mbox{\hyperlink{classBowControl_a137b369227f3987d523e0ace27f4f43a}{getBowPressureReference}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}};\ \}}
-\DoxyCodeLine{00195\ }
-\DoxyCodeLine{00196\ \textcolor{preprocessor}{\#ifndef\ EXTERNAL\_PRESSURE\_CONTROLLER}}
-\DoxyCodeLine{00197\ \ \ \ \ \textcolor{comment}{//\ Handles\ time-\/critical\ timing\ of\ stepper\ motor\ update\ -\/\ automatically\ called\ through\ stepInervalCallback\ -\/\ DO\ NOT\ MANUALLY\ CALL\ THIS}}
-\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a4d7960dead828ad7034c5c106637d3fd}{updateServo}}()\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_ad171c8f304d6cba6e524bd2f5202fa0c}{updateServo}}();\ \}}
-\DoxyCodeLine{00199\ }
-\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_ab2eb10f1ad7f96658220148ef6f8da9e}{setStepIntervalCallback}}(\textcolor{keywordtype}{void}\ *stepIntervalCallback)\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a0891ff0635cc2954afd32081144fecc5}{setStepIntervalCallback}}(stepIntervalCallback);\ \}}
-\DoxyCodeLine{00201\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EXTERNAL\_PRESSURE\_CONTROLLER}}
-\DoxyCodeLine{00202\ \textcolor{comment}{/*****\ Internal\ commands\ for\ debugging\ use,\ most\ likely\ to\ be\ removed\ *****/}}
-\DoxyCodeLine{00203\ \textcolor{preprocessor}{\#ifndef\ EXTERNAL\_PRESSURE\_CONTROLLER}}
-\DoxyCodeLine{00204\ \textcolor{comment}{//\ \ \ \ void\ setStepperID(uint16\_t\ stepperID);}}
-\DoxyCodeLine{00205\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EXTERNAL\_PRESSURE\_CONTROLLER}}
-\DoxyCodeLine{00206\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_adc093196abff58a20a09a47a34dc8962}{updateMotorAutoShutdown}}();}
-\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a6591f25b0e546db27e70518e9586f2c7}{updateRun\_PID}}();}
-\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a3a87552e91d321d9bcaf6d81b2723798}{updateMotorStatus}}();}
-\DoxyCodeLine{00210\ \};}
-\DoxyCodeLine{00211\ }
-\DoxyCodeLine{00212\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a94d596c5aaa12f95f8e4fbeb2cae34b9}{rest}}();}
+\DoxyCodeLine{00185\ \textcolor{preprocessor}{\#ifndef\ EXTERNAL\_PRESSURE\_CONTROLLER}}
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a170f00fa76b4cd121942106a07e3e68d}{getTMC2209Info}}()\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a353b29c45350a9ead04c999d83524b51}{getTMC2209Info}}();\ \}}
+\DoxyCodeLine{00187\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EXTERNAL\_PRESSURE\_CONTROLLER}}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \textcolor{comment}{/*****\ Internal\ commands\ for\ stand-\/alone\ and\ semi-\/modular\ use\ *****/}}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{comment}{//\ Update\ function\ to\ be\ periodically\ called\ in\ order\ for\ backoff\ and\ other\ things\ to\ work}}
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a1e738a6854d44a43b309f1ad9a29a559}{update}}();}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a49f7fa12c0ca3a731d042b4a4adc6324}{updatePID}}();}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a71bbd615a798d1e7294a79ad16f0555a}{updateTachometer}}()\ \{\ \mbox{\hyperlink{classBowControl_a38164fbaeced2317f73f5febac582323}{dcMotorControl}}-\/>\mbox{\hyperlink{classDCMotorControl_a10210522bd309e53b0eb98d41ec57823}{tachometerISRHandler}}();\ \}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowControl_ae534079033431afa0cb94651b3f70b5d}{getPIDUpdateInterval}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6ef6cfda459694dca3afa9d9ad049ced}{pidUpdateInterval}};\ \}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ \ \ \mbox{\hyperlink{classBowPressure}{BowPressure}}*\ \mbox{\hyperlink{classBowControl_a137b369227f3987d523e0ace27f4f43a}{getBowPressureReference}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}};\ \}}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \textcolor{preprocessor}{\#ifndef\ EXTERNAL\_PRESSURE\_CONTROLLER}}
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{comment}{//\ Handles\ time-\/critical\ timing\ of\ stepper\ motor\ update\ -\/\ automatically\ called\ through\ stepInervalCallback\ -\/\ DO\ NOT\ MANUALLY\ CALL\ THIS}}
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a4d7960dead828ad7034c5c106637d3fd}{updateServo}}()\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_ad171c8f304d6cba6e524bd2f5202fa0c}{updateServo}}();\ \}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_ab2eb10f1ad7f96658220148ef6f8da9e}{setStepIntervalCallback}}(\textcolor{keywordtype}{void}\ *stepIntervalCallback)\ \{\ \mbox{\hyperlink{classBowControl_a6f7e3d199f08f994f2119cacf4eafc58}{bowPressure}}-\/>\mbox{\hyperlink{classBowPressure_a0891ff0635cc2954afd32081144fecc5}{setStepIntervalCallback}}(stepIntervalCallback);\ \}}
+\DoxyCodeLine{00206\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EXTERNAL\_PRESSURE\_CONTROLLER}}
+\DoxyCodeLine{00207\ \textcolor{comment}{/*****\ Internal\ commands\ for\ debugging\ use,\ most\ likely\ to\ be\ removed\ *****/}}
+\DoxyCodeLine{00208\ \textcolor{preprocessor}{\#ifndef\ EXTERNAL\_PRESSURE\_CONTROLLER}}
+\DoxyCodeLine{00209\ \textcolor{comment}{//\ \ \ \ void\ setStepperID(uint16\_t\ stepperID);}}
+\DoxyCodeLine{00210\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EXTERNAL\_PRESSURE\_CONTROLLER}}
+\DoxyCodeLine{00211\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_adc093196abff58a20a09a47a34dc8962}{updateMotorAutoShutdown}}();}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a6591f25b0e546db27e70518e9586f2c7}{updateRun\_PID}}();}
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowControl_a3a87552e91d321d9bcaf6d81b2723798}{updateMotorStatus}}();}
+\DoxyCodeLine{00215\ \};}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

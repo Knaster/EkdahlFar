@@ -4,8 +4,9 @@
 #include <base/commandparser.hpp>
 #include <base/module.hpp>
 #include "master_controller/global_generics.hpp"
+#include <commandlist.hpp>
 
-void processCommandList(Module *inModule, commandList *inCommands, std::vector<commandResponse> *commandResponses) {
+void processCommandList(Module *inModule, CommandList *inCommands, std::vector<commandResponse> *commandResponses) {
     uint16_t i = 0;
     while (i < inCommands->item.size()) {
         inModule->processCommands(&(inCommands->item[i]), commandResponses);

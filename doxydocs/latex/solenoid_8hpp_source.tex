@@ -5,58 +5,51 @@
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SOLENOID\_HPP}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SOLENOID\_HPP}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00004\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ \mbox{\hyperlink{solenoid_8hpp_a0f05a9d0e6a5ad4c87fdf85ca07006b1}{serialCommandsSolenoid}}[]\ =\ \{}
-\DoxyCodeLine{00005\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}solenoidengage"{}},\ \textcolor{stringliteral}{"{}se"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ solenoid\ engagement\ of\ the\ current\ bow\ using\ the\ 1st\ argument\ as\ hardness"{}}\ \},}
-\DoxyCodeLine{00006\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}solenoiddisengage"{}},\ \textcolor{stringliteral}{"{}sd"{}},\ \textcolor{stringliteral}{"{}0-\/1"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ solenoid\ disengagement\ of\ the\ current\ bow,\ an\ argument\ of\ '0'\ will\ leave\ the\ solenoid\ at\ its\ current\ state\ while\ any\ other\ value\ will\ disengage\ the\ solenoid"{}}\ \},}
-\DoxyCodeLine{00007\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}solenoidmaxforce"{}},\ \textcolor{stringliteral}{"{}sxf"{}},\ \textcolor{stringliteral}{"{}0\ -\/\ 65535"{}},\ \textcolor{stringliteral}{"{}Set\ solenoid\ maximum\ usable\ force"{}}\ \},}
-\DoxyCodeLine{00008\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}solenoidminforce"{}},\ \textcolor{stringliteral}{"{}sif"{}},\ \textcolor{stringliteral}{"{}0\ -\/\ 65535"{}},\ \textcolor{stringliteral}{"{}Set\ solenoid\ minimum\ usable\ force"{}}\ \},}
-\DoxyCodeLine{00009\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}solenoidforcemultiplier"{}},\ \textcolor{stringliteral}{"{}sfm"{}},\ \textcolor{stringliteral}{"{}0\ -\/\ 1"{}},\ \textcolor{stringliteral}{"{}Set\ solenoid\ force\ multiplier"{}}\ \},}
-\DoxyCodeLine{00010\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}solenoidengageduration"{}},\ \textcolor{stringliteral}{"{}sed"{}},\ \textcolor{stringliteral}{"{}uS"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ duration\ of\ the\ solenoid\ hit\ in\ uS,\ if\ a\ value\ of\ 0\ is\ set\ the\ solenoid\ will\ not\ disengage\ until\ a\ solenoiddisengage\ command\ has\ been\ given"{}}\}}
-\DoxyCodeLine{00011\ \};}
-\DoxyCodeLine{00012\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00013\ \textcolor{comment}{const\ serialCommandItem\ serialCommandsSolenoidHidden[]\ =\ \{}}
-\DoxyCodeLine{00014\ \textcolor{comment}{}}
-\DoxyCodeLine{00015\ \textcolor{comment}{\}}}
-\DoxyCodeLine{00016\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classSolenoid}{Solenoid}}\ \{}
-\DoxyCodeLine{00018\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classSolenoid_a349e767b2463b66f5f8295104c41341e}{solenoidPin}};\ \ \ \ \ }
-\DoxyCodeLine{00020\ \ \ \ \ Teensy\_PWM\ *\mbox{\hyperlink{classSolenoid_a536b2cdaffe5f1e6d777275a33525d46}{solenoidPWM}};}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classSolenoid_add93b1973b29bfce089f9a166ff74560}{forceMax}}\ =\ 65535;}
-\DoxyCodeLine{00023\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classSolenoid_a66c6d3f68f11c1bad2518f302ef42e19}{forceMin}}\ =\ 0;}
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classSolenoid_a6be3226d9b5f3e4f83583c0227331b71}{forceMultiplier}}\ =\ 1;}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_afc07cd3e237f4d30e653b7e6a5d3d2d4}{solenoidEngaged}}\ =\ \textcolor{keyword}{false};\ }
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classSolenoid_a97789c71533ac969ac20c4a8ca08650e}{solenoidEngageTime}}\ =\ 0;\ }
-\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classSolenoid_a57338a84f1eab97588531d68d04bcc08}{solenoidEngageDuration}}\ =\ 15000;\ \ }
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classSolenoid}{Solenoid}}(\textcolor{keywordtype}{char}\ \_solenoidPin);}
-\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classSolenoid_af91c71ce2ab45bc89bd8c2db248a6b4a}{processSerialCommand}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegate\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classSolenoid_ad885d148f5a65547491069f843ca5893}{processSerialCommandHidden}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegate\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{00036\ \ \ \ \ String\ \mbox{\hyperlink{classSolenoid_a5d744ed87a648522a3f4669bc907b68b}{dumpData}}();}
-\DoxyCodeLine{00037\ }
-\DoxyCodeLine{00038\ \textcolor{comment}{/*****\ Module\ specific\ commands\ mirroring\ serially\ attainable\ commands\ *****/}}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00040\ \textcolor{comment}{/*****\ Hidden\ commands\ for\ modular\ use\ *****/}}
-\DoxyCodeLine{00041\ \textcolor{comment}{/*****\ Internal\ commands\ for\ stand-\/alone\ and\ semi-\/modular\ use\ *****/}}
-\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_ab6a5e1734209835072e6f106aa2d5bb2}{update}}();}
-\DoxyCodeLine{00043\ \textcolor{comment}{/*****\ Internal\ commands\ for\ debugging\ use,\ most\ likely\ to\ be\ removed\ *****/}}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSolenoid_aed17f5f69b0799f0be395b582b172616}{solenoidEngage}}(\textcolor{keywordtype}{int}\ force);}
-\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSolenoid_aed17f5f69b0799f0be395b582b172616}{solenoidEngage}}();}
-\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSolenoid_ad883846bc1ecb3f9c03f4b3f2cc11d84}{solenoidDisengage}}();}
-\DoxyCodeLine{00049\ }
-\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_a7ddc40e4cfa4d30ef42cc0d79e23664f}{setSolenoidMax}}(uint16\_t\ inMax);}
-\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_a1085333a5d375c2aec9a5ab3ddb54567}{setSolenoidMin}}(uint16\_t\ inMin);}
-\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_a3ff145c3e8dee4c19b679adfdeeeed33}{setSolenoidMultiplier}}(\textcolor{keywordtype}{float}\ inMultiplier);}
-\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_a068fb895637fe34b1406fcf2b0a802ff}{setSolenoidDuration}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ inDuration);}
-\DoxyCodeLine{00054\ \};}
-\DoxyCodeLine{00055\ }
-\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SOLENOID\_HPP}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{module_8hpp}{base/module.hpp}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifdef\ ARDUINO\_TEENSY40}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <Teensy\_PWM.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ARDUINO\_TEENSY40}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classSolenoid}{Solenoid}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classModule}{Module}}\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a726e985c9256abcd3e04b255b31cba09}{SETMODULEID}}(\textcolor{stringliteral}{"{}solenoid"{}},\ \textcolor{stringliteral}{"{}so"{}},\ \textcolor{stringliteral}{"{}Solenoid\ controller\ v1.0"{}},\ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabea41b91ec2ec246009a6c05166c265c06a}{eModuleType::hardware}},\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(engage,\ \mbox{\hyperlink{classSolenoid}{Solenoid}})}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(disengage,\ \mbox{\hyperlink{classSolenoid}{Solenoid}})}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(maxForce,\ \mbox{\hyperlink{classSolenoid}{Solenoid}})}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(minForce,\ \mbox{\hyperlink{classSolenoid}{Solenoid}})}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(forceMultiplier,\ \mbox{\hyperlink{classSolenoid}{Solenoid}})}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(engageDuration,\ \mbox{\hyperlink{classSolenoid}{Solenoid}})}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classSolenoid}{Solenoid}}(\textcolor{keywordtype}{char}\ \_solenoidPin);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSolenoid_ac5436da834dec4ca7273fe223f080949}{update}}();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ private:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classSolenoid_a349e767b2463b66f5f8295104c41341e}{solenoidPin}};\ \ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ Teensy\_PWM\ *\mbox{\hyperlink{classSolenoid_a536b2cdaffe5f1e6d777275a33525d46}{solenoidPWM}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classSolenoid_add93b1973b29bfce089f9a166ff74560}{forceMax}}\ =\ 65535;}
+\DoxyCodeLine{00032\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classSolenoid_a66c6d3f68f11c1bad2518f302ef42e19}{forceMin}}\ =\ 0;}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classSolenoid_a8e67226b6bb3da8d3856a9929acbe05a}{fForceMultiplier}}\ =\ 1;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_afc07cd3e237f4d30e653b7e6a5d3d2d4}{solenoidEngaged}}\ =\ false;\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classSolenoid_a97789c71533ac969ac20c4a8ca08650e}{solenoidEngageTime}}\ =\ 0;\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classSolenoid_a57338a84f1eab97588531d68d04bcc08}{solenoidEngageDuration}}\ =\ 15000;\ \ }
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSolenoid_aed17f5f69b0799f0be395b582b172616}{solenoidEngage}}(\textcolor{keywordtype}{int}\ force);}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSolenoid_aed17f5f69b0799f0be395b582b172616}{solenoidEngage}}();}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSolenoid_ad883846bc1ecb3f9c03f4b3f2cc11d84}{solenoidDisengage}}();}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_a7ddc40e4cfa4d30ef42cc0d79e23664f}{setSolenoidMax}}(uint16\_t\ inMax);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_a1085333a5d375c2aec9a5ab3ddb54567}{setSolenoidMin}}(uint16\_t\ inMin);}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_a3ff145c3e8dee4c19b679adfdeeeed33}{setSolenoidMultiplier}}(\textcolor{keywordtype}{float}\ inMultiplier);}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSolenoid_a068fb895637fe34b1406fcf2b0a802ff}{setSolenoidDuration}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ inDuration);}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SOLENOID\_HPP}}
 
 \end{DoxyCode}

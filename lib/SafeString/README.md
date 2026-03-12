@@ -24,6 +24,21 @@ See [Arduino Text I/O for the Real World](https://www.forward.com.au/pfod/Arduin
 See [Simple Multitasking Arduino](https://www.forward.com.au/pfod/ArduinoProgramming/RealTimeArduino/index.html)  
 See [How to code Timers and Delays in Arduino](https://www.forward.com.au/pfod/ArduinoProgramming/TimingDelaysInArduino.html)  
 
+# Sparkfun SAMD compile issue  
+See issue https://github.com/PowerBroker2/SafeString/issues/73  
+
+Sparkfun's SAMD board support does not provide a define to distinguish it from Arduino's SAMD boards.  
+This causes SafeString compile to fail with  
+    
+ **error: expected class-name before '{' token 73 | class SafeStringReader : public SafeString {**      
+
+This fix is to remove the contents of these three header files  
+SafeStringNameSpace.h  
+SafeStringNameSpaceEnd.h  
+SafeStringNameSpaceStart.h  
+
+That is just have empty files for those three headers.  
+
 # PlatformIO support
 This library is primarily an Arduino IDE library, but users have had success using it with PlatformIO.  
 See the PlatformIO subdirectory for the two PlatformIO versions.  One for boards that use the arduino namespace, e.g. Arduino Zero, and one for boards that don't, e.g. UNO.
@@ -41,6 +56,19 @@ See the top of each file for its license
 Note, this is NOT my work, I am simply hosting it for easy access. The original code belongs to [Forward Computing and Control Pty. Ltd](https://www.forward.com.au/pfod/ArduinoProgramming/SafeString/index.html).
 
 # Revisions
+V4.1.42 prevent recursive calls to nextByteOut(). Added utf8index() and utf8nextIndex()  
+V4.1.41 fixed millisDelay repeat after stop()/finish()  
+V4.1.40 add support for separate setting of on and off times for PinFlasher    
+V4.1.39 add int64_t for += and -= operators  
+V4.1.38 corrected print(int64_t)  
+V4.1.37 added print(int64_t) support and check for invalid bases.  
+V4.1.36 added toInt64_t for parsing time_t inputs.  
+V4.1.35 minor edit to BufferedOutput  
+V4.1.34 fixed SafeStringLengthTrim example (removed unsupported setLength() calls)  
+V4.1.33 fix for bool for SAM boards  
+V4.1.32 added support for Adafruit SAMD boards  
+V4.1.31 added support for other Arduino MBED boards like Opta   
+V4.1.30 added default initializations   
 V4.1.29 removed F() macro and FlashStringHelper class from SafeString.h.  SafeString now depends of the board's core to define these.   
 V4.1.28 fixes for Arduino UNO R4 and R4 WiFi   
 V4.1.27 revised defines for Arduino Zero   

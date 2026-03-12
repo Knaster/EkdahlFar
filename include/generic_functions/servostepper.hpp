@@ -44,7 +44,7 @@ public:
     uint8_t accelerationSteps = 35;            //  30 min for serial control @ speed 20
 
     IntervalTimer stepInterval;
-    void *stepIntervalCallback;
+    void (*stepIntervalCallback)();
 
     bool reachedTarget = false;
 

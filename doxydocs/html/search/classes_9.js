@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pidcontroller_0',['PIDController',['../classPIDController.html',1,'']]]
+  ['notemsg_0',['noteMsg',['../structMIDIHandler_1_1noteMsg.html',1,'MIDIHandler']]]
 ];

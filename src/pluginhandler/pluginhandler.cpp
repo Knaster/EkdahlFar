@@ -4,9 +4,10 @@
 #include "plugins/pluginhandler.hpp"
 
 const ModuleCommandDeclaration PluginHandler::moduleCommands[] = {
-    { "add", "a", "plugin", "Add plugin with the given name", false, false, &s_add, eCommandType::Add },
-    { "remove", "rm", "plugin:index", "Remove plugin with the given name and index", false, false, &s_remove, eCommandType::Remove },
-    { "count", "c", "(plugin)", "Return the number of plugins of the given type, if none given returns all", false, false, nullptr, eCommandType::Count },
+    { "add", "a", "plugin", "Add plugin with the given name", false, false, &s_add, eCommandType_data::ectSimpleString | eCommandType_function::ectAdd },
+    { "remove", "rm", "plugin:index", "Remove plugin with the given name and index", false, false, &s_remove, eCommandType_data::ectData | eCommandType_function::ectRemove },
+    { "count", "c", "(plugin)", "Return the number of plugins of the given type, if none given returns all", false, false, nullptr,
+        eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectCount | eCommandType_access::ectRequest },
 };
 
 getModuleCount(PluginHandler)
@@ -90,7 +91,7 @@ bool PluginHandler::addPlugin(String name) {
 }
 
 void PluginHandler::addInstances(String name, uint8_t count) {
-    debugPrintln("Add " + String(count) + " of " + name, debugPrintType::Debug);
+//    debugPrintln("Add " + String(count) + " of " + name, debugPrintType::Debug);
     ModuleGroup *group = getGroup(name);
     if (group == nullptr) {
         debugPrintln("Group not found", debugPrintType::Error);

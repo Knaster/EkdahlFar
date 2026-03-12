@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['farsingle_0',['FARSingle',['../classFARSingle.html',1,'']]]
+  ['expressionparser_0',['ExpressionParser',['../classExpressionParser.html',1,'']]]
 ];

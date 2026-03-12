@@ -151,7 +151,7 @@ eCalibrationResult CalibrateBow::findMinPressure() {
 eCalibrationResult CalibrateBow::findMaxPressure() {
     debugPrintln("Finding max contact", TextInfo);
 
-    bowControl->setSpeedMode(1);
+    bowControl->setSpeedMode(eSpeedMode::Manual);
     bowControl->setPIDOn(false);
     bowControl->setRun(true);
 

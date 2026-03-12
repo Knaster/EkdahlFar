@@ -4,6 +4,10 @@
 #include "base/modulehandler.hpp"
 #include "master_controller/expressionparser.h"
 
+#include <commandlist.hpp>
+extern CommandList globalCommands;
+extern CommandList globalResponseCommands;
+
 #include <functional>
 #include <string>
 
@@ -23,7 +27,8 @@ class PluginFactory {
 public:
     using creator_t = std::function<std::unique_ptr<Plugin>()>;
 
-    typedef struct PluginRegistry {
+    //typedef
+    struct PluginRegistry {
         creator_t creator;
         tModuleID tmoduleID;
     };

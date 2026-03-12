@@ -23,38 +23,43 @@
 \DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ MUTECALIBRATION\_HPP}}
 \DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ MUTECALIBRATION\_HPP}}
 \DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classCalibrateMute}{CalibrateMute}}\ \{}
-\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classMuteControl}{MuteControl}}\ *\mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}};}
-\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classBowControl}{BowControl}}\ *\mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}};}
-\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}}\ *\mbox{\hyperlink{classCalibrateMute_ae22fc38c5a96cb38c927eef7b4307279}{harmonicSeriesHandler}};}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classCalibrateMute_a637d9617a31d116f2a82a3366ed71256}{maxTestStep}}\ =\ 60000;}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \textcolor{preprocessor}{\ \ \ \ \#define\ maxStepRetract\ 2000}}
-\DoxyCodeLine{00031\ \textcolor{preprocessor}{\ \ \ \ \#define\ minAmplitude\ 0.01}}
-\DoxyCodeLine{00032\ \textcolor{preprocessor}{\ \ \ \ \#define\ minFundamentalAmplitude\ 0.3}}
-\DoxyCodeLine{00033\ }
-\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute}{CalibrateMute}}(\mbox{\hyperlink{classMuteControl}{MuteControl}}\ \&inMuteControl,\ \mbox{\hyperlink{classBowControl}{BowControl}}\ \&inBowControl,\ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}}\ \&inHarmonicSeriesHandler);}
-\DoxyCodeLine{00035\ }
-\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateMute_ae594e44bb589d71df3ea674151500335}{calibrateAll}}();}
-\DoxyCodeLine{00037\ }
-\DoxyCodeLine{00038\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classCalibrateMute_adcd25eb94a2964e74b408e791af2d21c}{levelSilence}}\ =\ 0;}
-\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classCalibrateMute_a14c9dea06cb113aec92a6db028411be2}{levelFundamental}}\ =\ 0;}
-\DoxyCodeLine{00041\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classCalibrateMute_ac32f851a48115a9623250048f8aaf7c6}{stallPosition}}\ =\ 0;}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{mutecontrol_8hpp}{mute/mutecontrol.hpp}}>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{bowcontrol_8hpp}{bow/bowcontrol.hpp}}>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{audioanalyze_8h}{pickup/audioanalyze.h}}>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{calibrationhelpers_8hpp}{generic\_functions/calibrationhelpers.hpp}}>}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classCalibrateMute}{CalibrateMute}}\ \{}
+\DoxyCodeLine{00028\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{classMuteControl}{MuteControl}}\ *\mbox{\hyperlink{classCalibrateMute_aa200bbe53da5f69946b8e48abab735bc}{muteControl}};}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classBowControl}{BowControl}}\ *\mbox{\hyperlink{classCalibrateMute_a159849db30f15b909c02f44510e5aaea}{bowControl}};}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}}\ *\mbox{\hyperlink{classCalibrateMute_ae22fc38c5a96cb38c927eef7b4307279}{harmonicSeriesHandler}};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classCalibrateMute_a637d9617a31d116f2a82a3366ed71256}{maxTestStep}}\ =\ 60000;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\ \ \ \ \#define\ maxStepRetract\ 2000}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\ \ \ \ \#define\ minAmplitude\ 0.01}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\ \ \ \ \#define\ minFundamentalAmplitude\ 0.3}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{classCalibrateMute}{CalibrateMute}}(\mbox{\hyperlink{classMuteControl}{MuteControl}}\ \&inMuteControl,\ \mbox{\hyperlink{classBowControl}{BowControl}}\ \&inBowControl,\ \mbox{\hyperlink{classHarmonicSeriesHandler}{HarmonicSeriesHandler}}\ \&inHarmonicSeriesHandler);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateMute_ae594e44bb589d71df3ea674151500335}{calibrateAll}}();}
 \DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classCalibrateMute_aeb87473967dfddc3686680c04153c72c}{findLevel}}();}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCalibrateMute_a058ae917ef92a3ec68b131d5a28091ae}{findLevelSilence}}();}
-\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateMute_a68a1737ec836189ee2495c4891d63f0b}{findMuteLevels}}();}
+\DoxyCodeLine{00043\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classCalibrateMute_adcd25eb94a2964e74b408e791af2d21c}{levelSilence}}\ =\ 0;}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classCalibrateMute_a14c9dea06cb113aec92a6db028411be2}{levelFundamental}}\ =\ 0;}
+\DoxyCodeLine{00046\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classCalibrateMute_ac32f851a48115a9623250048f8aaf7c6}{stallPosition}}\ =\ 0;}
 \DoxyCodeLine{00047\ }
-\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateMute_aa27905148f2712814c5bd07caa33726c}{findMuteStall}}();}
-\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateMute_ac795de2050af4c47513d6bc8f591e688}{findMuteFirstContact}}();}
-\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCalibrateMute_a9b9a4f0e0d85af62a814072239208e72}{findMuteSilence}}();}
-\DoxyCodeLine{00051\ }
-\DoxyCodeLine{00052\ \};}
-\DoxyCodeLine{00053\ }
-\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classCalibrateMute_aeb87473967dfddc3686680c04153c72c}{findLevel}}();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCalibrateMute_a058ae917ef92a3ec68b131d5a28091ae}{findLevelSilence}}();}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateMute_a68a1737ec836189ee2495c4891d63f0b}{findMuteLevels}}();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateMute_aa27905148f2712814c5bd07caa33726c}{findMuteStall}}();}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{calibrationhelpers_8hpp_a8cd8f7041a9ccae077fbbb821157d9df}{eCalibrationResult}}\ \mbox{\hyperlink{classCalibrateMute_ac795de2050af4c47513d6bc8f591e688}{findMuteFirstContact}}();}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCalibrateMute_a9b9a4f0e0d85af62a814072239208e72}{findMuteSilence}}();}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

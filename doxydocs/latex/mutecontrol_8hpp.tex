@@ -1,8 +1,10 @@
 \doxysection{mutecontrol.\+hpp File Reference}
 \hypertarget{mutecontrol_8hpp}{}\label{mutecontrol_8hpp}\index{mutecontrol.hpp@{mutecontrol.hpp}}
-{\ttfamily \#include "{}mute.\+cpp"{}}\newline
-{\ttfamily \#include "{}tmc2209\+\_\+servostepper.\+hpp"{}}\newline
-Include dependency graph for mutecontrol.\+hpp\+:\nopagebreak
+{\ttfamily \#include "{}base/module.\+hpp"{}}\newline
+{\ttfamily \#include "{}mute/mute.\+hpp"{}}\newline
+{\ttfamily \#include "{}generic\+\_\+functions/tmc2209\+\_\+servostepper.\+hpp"{}}\newline
+Include dependency graph for mutecontrol.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -13,7 +15,7 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=177pt]{mutecontrol_8hpp__dep__incl}
+\includegraphics[width=350pt]{mutecontrol_8hpp__dep__incl}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Classes}
@@ -21,59 +23,3 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \item 
 class \mbox{\hyperlink{classMuteControl}{Mute\+Control}}
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} \mbox{\hyperlink{mutecontrol_8hpp_aa650e3212c65fd10e136f9b789b315f9}{serial\+Commands\+Mute}} \mbox{[}$\,$\mbox{]}
-\item 
-const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} \mbox{\hyperlink{mutecontrol_8hpp_ab238160bcaa8c76305066006e41a9246}{serial\+Commands\+Mute\+Hidden}} \mbox{[}$\,$\mbox{]}
-\end{DoxyCompactItemize}
-
-
-\doxysubsection{Variable Documentation}
-\Hypertarget{mutecontrol_8hpp_aa650e3212c65fd10e136f9b789b315f9}\label{mutecontrol_8hpp_aa650e3212c65fd10e136f9b789b315f9} 
-\index{mutecontrol.hpp@{mutecontrol.hpp}!serialCommandsMute@{serialCommandsMute}}
-\index{serialCommandsMute@{serialCommandsMute}!mutecontrol.hpp@{mutecontrol.hpp}}
-\doxysubsubsection{\texorpdfstring{serialCommandsMute}{serialCommandsMute}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Commands\+Mute\mbox{[}$\,$\mbox{]}}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{=\ \{}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutesetposition"{}},\ \textcolor{stringliteral}{"{}msp"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Set\ mute\ position"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutefullmute"{}},\ \textcolor{stringliteral}{"{}mfm"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Put\ mute\ in\ full\ mute\ position\ (conditional)"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutehalfmute"{}},\ \textcolor{stringliteral}{"{}mhm"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Put\ mute\ in\ half\ mute\ position\ (conditional)"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}muterest"{}},\ \textcolor{stringliteral}{"{}mr"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Put\ mute\ in\ rest\ position\ (conditional)"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutesavefull"{}},\ \textcolor{stringliteral}{"{}msf"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Save\ current\ mute\ position\ as\ full\ mute\ position\ (conditional)"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutesavehalf"{}},\ \textcolor{stringliteral}{"{}msh"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Save\ current\ mute\ position\ as\ half\ mute\ position\ (conditional)"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutesaverest"{}},\ \textcolor{stringliteral}{"{}msr"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Save\ current\ mute\ position\ as\ mute\ rest\ position\ (conditional)"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutefullmuteposition"{}},\ \textcolor{stringliteral}{"{}mfmp"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Mute\ full\ mute\ position"{}}\},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutehalfmuteposition"{}},\ \textcolor{stringliteral}{"{}mhmp"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Mute\ half\ mute\ position"{}}\},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}muterestposition"{}},\ \textcolor{stringliteral}{"{}mrp"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Mute\ rest\ position"{}}\},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutesustain"{}},\ \textcolor{stringliteral}{"{}ms"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Setting\ sustain\ on\ (1)\ or\ off\ (0)"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutebackoff"{}},\ \textcolor{stringliteral}{"{}mbo"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Setting\ the\ time\ that\ the\ mute\ stays\ in\ the\ mutefullmute\ position\ before\ automatically\ going\ into\ rest,\ set\ in\ mS"{}}\},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutehome"{}},\ \textcolor{stringliteral}{"{}mh"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Home\ mute"{}}\ \}}
-\DoxyCodeLine{\}}
-
-\end{DoxyCode}
-\Hypertarget{mutecontrol_8hpp_ab238160bcaa8c76305066006e41a9246}\label{mutecontrol_8hpp_ab238160bcaa8c76305066006e41a9246} 
-\index{mutecontrol.hpp@{mutecontrol.hpp}!serialCommandsMuteHidden@{serialCommandsMuteHidden}}
-\index{serialCommandsMuteHidden@{serialCommandsMuteHidden}!mutecontrol.hpp@{mutecontrol.hpp}}
-\doxysubsubsection{\texorpdfstring{serialCommandsMuteHidden}{serialCommandsMuteHidden}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Commands\+Mute\+Hidden\mbox{[}$\,$\mbox{]}}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{=\ \ \{}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutesethardwareposition"{}},\ \textcolor{stringliteral}{"{}mshwp"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ mute\ position\ without\ min/max\ scaling"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutecompletetask"{}},\ \textcolor{stringliteral}{"{}mcpt"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Requests\ a\ callback\ when\ the\ current\ operation\ is\ finished"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}muteautocorrect"{}},\ \textcolor{stringliteral}{"{}mac"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Enables\ auto\ correct\ positioning\ that\ uses\ the\ homing\ sensor\ to\ correct\ positioning\ on\ the\ fly"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutehomingsensed"{}},\ \textcolor{stringliteral}{"{}mhmse"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Requests\ whether\ the\ homing\ sensor\ is\ currently\ active\ or\ not"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutemovedirection"{}},\ \textcolor{stringliteral}{"{}mmd"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Requests\ the\ current\ direction\ of\ movement\ (0\ Forward,\ 1\ Reverse)"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutecurrentstep"{}},\ \textcolor{stringliteral}{"{}mcs"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Requests\ the\ current\ step"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutehomingpoint"{}},\ \textcolor{stringliteral}{"{}mhmp"{}},\ \textcolor{stringliteral}{"{}edge,direction"{}},\ \textcolor{stringliteral}{"{}Requests\ the\ given\ homing\ point"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutehomingstage"{}},\ \textcolor{stringliteral}{"{}mhms"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Requests\ the\ current\ homing\ stage\ (UNHOMED,\ HOMED,\ FIRSTHOMINGRISING,\ SECONDHOMINGFALLING,\ SECONDHOMINGRISING,\ FIRSTHOMINGFALLING,\ MOVEPASTHOMESWITCH,\ MOVETOHOMESWITCH,\ GOTOOFFSET)"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutetmcinfo"{}},\ \textcolor{stringliteral}{"{}mtmi"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Request\ statistical\ information\ from\ the\ TMC2209"{}}\ \}}
-\DoxyCodeLine{\}}
-
-\end{DoxyCode}

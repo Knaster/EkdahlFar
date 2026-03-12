@@ -1,0 +1,127 @@
+\doxysection{modulesystembasics.\+hpp}
+\hypertarget{modulesystembasics_8hpp_source}{}\label{modulesystembasics_8hpp_source}\index{modulesystembasics.hpp@{modulesystembasics.hpp}}
+\mbox{\hyperlink{modulesystembasics_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MODULESYSTEMBASICS\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MODULESYSTEMBASICS\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{arduinorequired_8hpp}{base/arduinorequired.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{commandparser_8hpp}{base/commandparser.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \{\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{NotFound}}\ =\ \ 0,\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{Ok}}\ =\ 1,\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20}{CommandFailed}}\ =\ 2,\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{WrongArgumentCount}}\ =\ 3,\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a6e204fafb4965a8a79b8ac29834195e2}{WrongArgumentMinimum}}\ =\ 4,\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7945af4588755e4b73b7855397babbb1}{WrongArgumentValue}}\ =\ 5,\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{PassThrough}}\ =\ 6\ \};}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ ModuleCommandDeclarationArguments\ commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *inCommandResponses,\ bool\ request,\ ModuleCommandDeclaration\ thisItem}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structModuleCommandDeclaration}{ModuleCommandDeclaration}};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ This\ class\ is\ never\ used\ alone\ but\ part\ of\ the\ inheritance\ for\ Module\ and\ thus\ ModuleHandler}}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classModuleCommand}{ModuleCommand}}\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structModuleCommandDeclaration}{ModuleCommandDeclaration}}\ \mbox{\hyperlink{classModuleCommand_a4ce6a1d032eaa918f21ad8121ba59094}{getModuleCommand}}(uint8\_t\ i)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00017\ \};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3}{eCommandType}}\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3ab44f630ccd79e857b188881d7be5d554}{SimpleString}}\ =\ 0,}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a28b5bc6291c2acdc97d4f1f46f4789cb}{SimpleBool}}\ =\ 1,}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa210d75eecafc3c332388f910fb265f6}{SimpleFloat}}\ =\ 2,}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa1f2510a5d3c28f81f047744d50ffb8f}{SimpleUInt8}}\ =\ 3,}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a5a24c30a835d2fb61a48e94d0674c5b5}{SimpleInt16}}\ =\ 4,}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a85a18924b17a185c4314d76e2c6737e8}{SimpleUInt16}}\ =\ 5,}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a01d682d86657be62abb7d000317bb67e}{Commands}}\ =\ 6,}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa9703801ac7bd790f6f980532e4224c0}{Data}}\ =\ 7,}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a83e5a2cc5db1f28fe99e410d449cf895}{Conditional}}\ =\ 8,}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a0557cd28125506b469fa64c001718071}{ReturnOnly}}\ =\ 9,}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3ae940424d9ddb2b0510a1c99d4755c2b9}{Immediate}}\ =\ 10,}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3ae60cea90d3ef92a696f784d475f728e0}{Expression}}\ =\ 11,}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a0d592a4b562059bc283e00b3704865c9}{Add}}\ =\ 12,}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a00dbb5a5f8f3c267c5cb1e29fff3c3e5}{Remove}}\ =\ 13,}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a928f33270be19855038d0245a0fa06a1}{Count}}\ =\ 14,}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a923b92502c8f8beef4a620fee49b89ae}{Name}}\ =\ 15,}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a3340c8ecc8e48277387c30bd3c435799}{Index}}\ =\ 16,}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa401dab5577100adae9efd391c1300a0}{Milliseconds}}\ =\ 17,}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a155231ae9ec9185d47ef8523aafac530}{Microseconds}}\ =\ 18,}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a668e4e299b1dc007e1a756ba41fa88dc}{Hertz}}\ =\ 19,}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3ae2a3aba9326b6832f7ff513bf0138eb7}{RequestOnly}}\ =\ 20,}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a88550d193faf074a64550cd75aa8da91}{ReturnRequest}}\ =\ 21,}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a613b700c2027b68da289086569c51909}{OutputAssignment}}\ =\ 22}
+\DoxyCodeLine{00043\ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{extern}\ String\ \mbox{\hyperlink{modulesystembasics_8hpp_ab8b5d3dd764b37dbb1275217a0b41042}{commandTypeDescription}}[];}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structModuleCommandDeclaration}{ModuleCommandDeclaration}}\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{const}\ String\ \mbox{\hyperlink{structModuleCommandDeclaration_a80d1f95b2e2eaecd56547f3924a11cad}{longCommand}};}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{const}\ String\ \mbox{\hyperlink{structModuleCommandDeclaration_ae00e734f2adf202ac60b7304b9f31041}{shortCommand}};}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{const}\ String\ \mbox{\hyperlink{structModuleCommandDeclaration_a37e49ca9dc1a455c5874ee851c22b418}{arguments}};}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{const}\ String\ \mbox{\hyperlink{structModuleCommandDeclaration_a5865b2dc0c5142c9bcbfd1e3fe62f07d}{Help}};}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structModuleCommandDeclaration_ae36ce83461f35e71814eb3866555f4bd}{hidden}};}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structModuleCommandDeclaration_a4d6c97fca5272a5113f3ddb77620d7ee}{save}};}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ (*\mbox{\hyperlink{structModuleCommandDeclaration_aa7bc5a1c5690fc16767d7b5ef8ec37d6}{commandFunction}})\ (\mbox{\hyperlink{classModuleCommand}{ModuleCommand}}*,\ \mbox{\hyperlink{modulesystembasics_8hpp_af1cbff4235e0dc51c811eafe60054141}{ModuleCommandDeclarationArguments}});}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3}{eCommandType}}\ \mbox{\hyperlink{structModuleCommandDeclaration_ae6ae4bcc730167c37ac19b7bf222200c}{cType}};}
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabe}{eModuleType}}\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8}{software}}\ =\ 0,}
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabea41b91ec2ec246009a6c05166c265c06a}{hardware}}\ =\ 1,}
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeafcf00f740c40cfca071f907d32575168}{remote}}\ =\ 2}
+\DoxyCodeLine{00062\ \};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structtModuleID}{tModuleID}}\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structtModuleID_afcab52c65d05cf884acf5163513bd549}{longName}};}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structtModuleID_a7e235716c9308ab73c5ca5774361d1c5}{shortName}};}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structtModuleID_a23934bb69c84616ef2b221e614d6b651}{description}};}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabe}{eModuleType}}\ \mbox{\hyperlink{structtModuleID_a0e743e311831a9d54e14db280a5976a8}{moduleType}}\ =\ 0;}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structtModuleID_aa039dd2855b4a003ec960e591d0915de}{isGroupHandler}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00072\ \ \ \ \ std::string\ \mbox{\hyperlink{structtModuleID_a13b7d7442b2db77ec7baec392f2ab660}{shortAlias}};}
+\DoxyCodeLine{00073\ \};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ String\ \mbox{\hyperlink{modulesystembasics_8hpp_a3129efc76642849531b5941ae9606c72}{moduleTypeDescription}}[];}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ String\ \mbox{\hyperlink{modulesystembasics_8hpp_ab1d3552f0d084f9bcb06087edb6f101b}{getModuleType}}(uint8\_t\ mType);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{module_8hpp}{module.hpp}}"{}}}
+\DoxyCodeLine{00080\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00081\ \textcolor{comment}{static\ eProcessResult\ s\_dir(ModuleCommand*\ self,\ ModuleCommandDeclarationArguments);}}
+\DoxyCodeLine{00082\ \textcolor{comment}{static\ eProcessResult\ s\_dump(ModuleCommand*\ self,\ ModuleCommandDeclarationArguments);}}
+\DoxyCodeLine{00083\ \textcolor{comment}{static\ eProcessResult\ s\_help(ModuleCommand*\ self,\ ModuleCommandDeclarationArguments);}}
+\DoxyCodeLine{00084\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ staticCopy(name,\ className)\ \(\backslash\)}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\ \ \ \ static\ eProcessResult\ s\_\#\#name(ModuleCommand*\ self,\ ModuleCommandDeclarationArguments)\ \{\ return\ static\_cast<className*>(self)-\/>name(inCommandItem,\ inCommandResponses,\ request,\ thisItem);\ \}}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#define\ CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD(funcname,\ className)\ eProcessResult\ funcname(ModuleCommandDeclarationArguments);\ staticCopy(funcname,\ className)}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#define\ CREATE\_MODULE\_COMMAND\_FUNCTION(funcname,\ className)\ eProcessResult\ className::funcname(ModuleCommandDeclarationArguments)}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#define\ getModuleCount(name)\ int\ name::getModuleCommandCount()\ \{\ return\ sizeof(moduleCommands)\ /\ sizeof(moduleCommands[0]);\ \}}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#define\ MODULECOMMANDHANDLER\ \(\backslash\)}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\ \ \ \ static\ const\ ModuleCommandDeclaration\ moduleCommands[];\ \(\backslash\)}}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\ \ \ \ int\ getModuleCommandCount();\ \(\backslash\)}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\ \ \ \ const\ ModuleCommandDeclaration\ getModuleCommand(uint8\_t\ i)\ const\ override\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ ((i\ <\ 0)\ ||\ (i\ >\ getModuleCommandCount()))\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Command\ index\ out\ of\ bounds"{},\ debugPrintType::Error);\ \(\backslash\)}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ moduleCommands[i];\ \(\backslash\)}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#define\ CREATE\_DATACHANGED\_CALLBACK\_FWD(name,\ className)\ \(\backslash\)}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\ \ \ \ bool\ name(Module\ *module);\ \(\backslash\)}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\ \ \ \ static\ bool\ s\_\#\#name(Module\ *owner,\ Module\ *module)\ \{\ return\ static\_cast<className*>(owner)-\/>name(module);\ \}}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#define\ CREATE\_DATACHANGED\_CALLBACK(name,\ className)\ \(\backslash\)}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\ \ \ \ bool\ className::name(Module\ *module)}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#define\ SETMODULEID(longName,\ shortName,\ description,\ moduleType,\ groupHandler)\ \(\backslash\)}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\ \ \ \ static\ constexpr\ const\ char*\ kLongName\ =\ longName;\ \(\backslash\)}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\ \ \ \ static\ constexpr\ const\ char*\ kShortName\ =\ shortName;\ \(\backslash\)}}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\ \ \ \ static\ constexpr\ const\ char*\ kDescription\ =\ description;\ \(\backslash\)}}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\ \ \ \ static\ constexpr\ eModuleType\ kModuleType\ =\ moduleType;\ \(\backslash\)}}
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\ \ \ \ tModuleID\ tmoduleID\ =\ \{\ kLongName,\ kShortName,\ kDescription,\ kModuleType,\ groupHandler,\ kShortName\ \};\ \(\backslash\)}}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\ \ \ \ const\ tModuleID\&\ getModuleID()\ const\ override\ \{\ return\ tmoduleID;\ \}\ \(\backslash\)}}
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\ \ \ \ tModuleID\&\ getModuleID()\ override\ \{\ return\ tmoduleID;\ \}\ \(\backslash\)}}
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\ \ \ \ static\ tModuleID\ getModuleIDStatic()\ \{\ return\ \{\ kLongName,\ kShortName,\ kDescription,\ kModuleType,\ groupHandler,\ kShortName\ \};\ \}}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

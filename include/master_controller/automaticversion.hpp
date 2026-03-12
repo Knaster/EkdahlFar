@@ -3,11 +3,10 @@
 // source file version_num.h
 
 #ifndef VERSION_NUM_H
-
 #define VERSION_NUM_H
 
 
-#define VERSION_MAJOR 0
+#define VERSION_MAJOR 1
 #define VERSION_MINOR 1
 
 
@@ -16,7 +15,6 @@
 // source file build_defs.h
 
 #ifndef BUILD_DEFS_H
-
 #define BUILD_DEFS_H
 
 
@@ -125,6 +123,9 @@
 
 #endif // BUILD_DEFS_H
 
+#ifndef COMPLETE_VERSION
+#define COMPLETE_VERSION
+
 const unsigned char completeVersion[] =
 {
     VERSION_MAJOR_INIT,
@@ -139,3 +140,4 @@ const unsigned char completeVersion[] =
     BUILD_SEC_CH0, BUILD_SEC_CH1,
     '\0'
 };
+#endif // COMPLETE_VERSION

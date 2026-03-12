@@ -3,13 +3,13 @@
 
 #ifdef ARDUINO_TEENSY40
 #include <WProgram.h>
+#else
+#include "WString.h"
 #endif
-
-#include <SerialComs.h>
-#include <millisDelay.h>
 
 #include <algorithm> // for min/max
 #define clamp(v,i,x) min(max(v,i),x)
+
 #include <vector>
 
 #include <base/debugprint.hpp>

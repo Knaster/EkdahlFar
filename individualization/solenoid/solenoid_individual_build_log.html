@@ -1,0 +1,191 @@
+<html>
+<head>
+<title>solenoid_individual build log</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<body>
+<tt>
+Build started on: <u>11-02-2026 at 16:17.50</u><br />
+Build ended on: <u>11-02-2026 at 16:17.53</u><p />
+<b>-------------- Build: Samd21 in solenoid_individual (compiler: GNU GCC Compiler for AVR)---------------</b><br />
+make -f makefile Samd21<br />
+rm -r build/samd21<br />
+mkdir -p build<br />
+mkdir -p build/samd21<br />
+/home/knas/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -c -g -Os -Werror=return-type -ffunction-sections -fdata-sections -fno-threadsafe-statics -nostdlib --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -fpermissive -w -x c++ -E -CC -DF_CPU=48000000L -DARDUINO=10607 -D__SAMD21G18A__ -DUSBCON -DARDUINO_SAMD_MKRZERO -DUSE_ARDUINO_MKR_PIN_LAYOUT -DARDUINO_ARCH_SAMD -DUSB_VID=0x2341 -DUSB_PID=0x804f -DUSBCON -DUSB_MANUFACTURER="Arduino LLC" -DUSB_PRODUCT="Arduino MKRZero" -I/home/knas/.arduino15/packages/adafruit/hardware/samd/1.7.16/libraries/Adafruit_TinyUSB_Arduino/src/arduino -Os -D__SAMD21G18A__ -DARDUINO_SAMD_ZERO -DARM_MATH_CM0PLUS -I/home/knas/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Include/ -I/home/knas/.arduino15/packages/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/ -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated-avr-comp -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero -I../../include/solenoid/ -I../../include/ -I../../include/base/ -I../../src/base/ src/main.cpp -o build/samd21/sketch_merged.cpp<br />
+Sketch merged<br />
+/home/knas/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -c -g -Os -Werror=return-type -ffunction-sections -fdata-sections -fno-threadsafe-statics -nostdlib --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -fpermissive -DF_CPU=48000000L -DARDUINO=10607 -D__SAMD21G18A__ -DUSBCON -DARDUINO_SAMD_MKRZERO -DUSE_ARDUINO_MKR_PIN_LAYOUT -DARDUINO_ARCH_SAMD -DUSB_VID=0x2341 -DUSB_PID=0x804f -DUSBCON -DUSB_MANUFACTURER="Arduino LLC" -DUSB_PRODUCT="Arduino MKRZero" -I/home/knas/.arduino15/packages/adafruit/hardware/samd/1.7.16/libraries/Adafruit_TinyUSB_Arduino/src/arduino -Os -D__SAMD21G18A__ -DARDUINO_SAMD_ZERO -DARM_MATH_CM0PLUS -I/home/knas/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Include/ -I/home/knas/.arduino15/packages/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/ -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated-avr-comp -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero -I../../include/solenoid/ -I../../include/ -I../../include/base/ -I../../src/base/ src/main.cpp -o build/samd21/solenoid.o<br />
+In file included from src/main.cpp:21:0:<br />
+../../src/base/debugprint.cpp: In function 'debugPrintType debugPrintGetType(arduino::String*)':<br />
+<font color="#0000ff">../../src/base/debugprint.cpp:89:20: warning: invalid conversion from 'int' to 'debugPrintType' [-fpermissive]</font><br />
+             return i;<br />
+                    ^<br />
+<font color="#0000ff">../../src/base/debugprint.cpp:92:13: warning: invalid conversion from 'int' to 'debugPrintType' [-fpermissive]</font><br />
+     return -1;<br />
+             ^<br />
+In file included from src/main.cpp:22:0:<br />
+../../src/base/generalhelpers.cpp: In function 'arduino::String delimitExpression(arduino::String, bool)':<br />
+<font color="#0000ff">../../src/base/generalhelpers.cpp:6:63: warning: default argument given for parameter 2 of 'arduino::String delimitExpression(arduino::String, bool)' [-fpermissive]</font><br />
+ String delimitExpression(String expression, bool force = false) {<br />
+                                                               ^<br />
+In file included from ../../src/base/generalhelpers.cpp:4:0,<br />
+                 from src/main.cpp:22:<br />
+../../include/base/generalhelpers.hpp:8:8: note: previous specification in 'arduino::String delimitExpression(arduino::String, bool)' here<br />
+ String delimitExpression(String expression, bool force = false);<br />
+        ^~~~~~~~~~~~~~~~~<br />
+In file included from src/main.cpp:22:0:<br />
+../../src/base/generalhelpers.cpp: In function 'arduino::String delimitExpression(arduino::String, bool)':<br />
+<font color="#0000ff">../../src/base/generalhelpers.cpp:11:28: warning: ISO C++ forbids comparison between pointer and integer [-fpermissive]</font><br />
+     if (((expression[0] == "'") or (expression[0] == "\"")) and (expression[0] == expression[expression.length() - 1])) {<br />
+                            ^~~<br />
+<font color="#0000ff">../../src/base/generalhelpers.cpp:11:54: warning: ISO C++ forbids comparison between pointer and integer [-fpermissive]</font><br />
+     if (((expression[0] == "'") or (expression[0] == "\"")) and (expression[0] == expression[expression.length() - 1])) {<br />
+                                                      ^~~~<br />
+../../src/base/generalhelpers.cpp: In function 'bool validateNumber(int16_t, int16_t, int16_t, bool)':<br />
+<font color="#0000ff">../../src/base/generalhelpers.cpp:54:90: warning: default argument given for parameter 4 of 'bool validateNumber(int16_t, int16_t, int16_t, bool)' [-fpermissive]</font><br />
+ bool validateNumber(int16_t number, int16_t min, int16_t max, bool t_supressError = false) {<br />
+                                                                                          ^<br />
+In file included from ../../src/base/generalhelpers.cpp:4:0,<br />
+                 from src/main.cpp:22:<br />
+../../include/base/generalhelpers.hpp:6:6: note: previous specification in 'bool validateNumber(int16_t, int16_t, int16_t, bool)' here<br />
+ bool validateNumber(int16_t number, int16_t min, int16_t max, bool t_supressError = false);<br />
+      ^~~~~~~~~~~~~~<br />
+In file included from ../../include/base/module.hpp:5:0,<br />
+                 from ../../include/solenoid/solenoid.hpp:4,<br />
+                 from src/main.cpp:24:<br />
+../../include/solenoid/solenoid.hpp: In member function 'virtual const ModuleCommandDeclaration Solenoid::getModuleCommand(uint8_t) const':<br />
+<font color="#0000ff">../../include/base/modulesystembasics.hpp:94:51: warning: passing 'const Solenoid' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+                                                   ^<br />
+../../include/solenoid/solenoid.hpp:14:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+     MODULECOMMANDHANDLER<br />
+     ^~~~~~~~~~~~~~~~~~~~<br />
+../../include/base/modulesystembasics.hpp:92:9: note:   in call to 'virtual int Solenoid::getModuleCommandCount()'<br />
+     int getModuleCommandCount(); \<br />
+         ^<br />
+../../include/solenoid/solenoid.hpp:14:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+     MODULECOMMANDHANDLER<br />
+     ^~~~~~~~~~~~~~~~~~~~<br />
+../../include/base/basemodule.hpp: In member function 'virtual const ModuleCommandDeclaration BaseModule::getModuleCommand(uint8_t) const':<br />
+<font color="#0000ff">../../include/base/modulesystembasics.hpp:94:51: warning: passing 'const BaseModule' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+                                                   ^<br />
+../../include/base/basemodule.hpp:16:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+     MODULECOMMANDHANDLER<br />
+     ^~~~~~~~~~~~~~~~~~~~<br />
+../../include/base/modulesystembasics.hpp:92:9: note:   in call to 'virtual int BaseModule::getModuleCommandCount()'<br />
+     int getModuleCommandCount(); \<br />
+         ^<br />
+../../include/base/basemodule.hpp:16:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+     MODULECOMMANDHANDLER<br />
+     ^~~~~~~~~~~~~~~~~~~~<br />
+Initial main build<br />
+/home/knas/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -c -g -Os -Werror=return-type -ffunction-sections -fdata-sections -fno-threadsafe-statics -nostdlib --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -fpermissive -DF_CPU=48000000L -DARDUINO=10607 -D__SAMD21G18A__ -DUSBCON -DARDUINO_SAMD_MKRZERO -DUSE_ARDUINO_MKR_PIN_LAYOUT -DARDUINO_ARCH_SAMD -DUSB_VID=0x2341 -DUSB_PID=0x804f -DUSBCON -DUSB_MANUFACTURER="Arduino LLC" -DUSB_PRODUCT="Arduino MKRZero" -I/home/knas/.arduino15/packages/adafruit/hardware/samd/1.7.16/libraries/Adafruit_TinyUSB_Arduino/src/arduino -Os -D__SAMD21G18A__ -DARDUINO_SAMD_ZERO -DARM_MATH_CM0PLUS -I/home/knas/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Include/ -I/home/knas/.arduino15/packages/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/ -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated-avr-comp -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero \<br />
+	 /home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero/variant.cpp -o build/samd21/mkrzero.o<br />
+Variant build<br />
+mkdir -p ../farcore/build/samd21/<br />
+/home/knas/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -c -g -Os -Werror=return-type -ffunction-sections -fdata-sections -fno-threadsafe-statics -nostdlib --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -fpermissive -DF_CPU=48000000L -DARDUINO=10607 -D__SAMD21G18A__ -DUSBCON -DARDUINO_SAMD_MKRZERO -DUSE_ARDUINO_MKR_PIN_LAYOUT -DARDUINO_ARCH_SAMD -DUSB_VID=0x2341 -DUSB_PID=0x804f -DUSBCON -DUSB_MANUFACTURER="Arduino LLC" -DUSB_PRODUCT="Arduino MKRZero" -I/home/knas/.arduino15/packages/adafruit/hardware/samd/1.7.16/libraries/Adafruit_TinyUSB_Arduino/src/arduino -Os -D__SAMD21G18A__ -DARDUINO_SAMD_ZERO -DARM_MATH_CM0PLUS -I/home/knas/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Include/ -I/home/knas/.arduino15/packages/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/ -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated-avr-comp -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero -I../../include/solenoid/ -I../../include/ -I../../include/base/ -I../../src/base/ \<br />
+	../../src//base/commanditem.cpp -o ../farcore/build/samd21/commanditem.o<br />
+/home/knas/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -c -g -Os -Werror=return-type -ffunction-sections -fdata-sections -fno-threadsafe-statics -nostdlib --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -fpermissive -DF_CPU=48000000L -DARDUINO=10607 -D__SAMD21G18A__ -DUSBCON -DARDUINO_SAMD_MKRZERO -DUSE_ARDUINO_MKR_PIN_LAYOUT -DARDUINO_ARCH_SAMD -DUSB_VID=0x2341 -DUSB_PID=0x804f -DUSBCON -DUSB_MANUFACTURER="Arduino LLC" -DUSB_PRODUCT="Arduino MKRZero" -I/home/knas/.arduino15/packages/adafruit/hardware/samd/1.7.16/libraries/Adafruit_TinyUSB_Arduino/src/arduino -Os -D__SAMD21G18A__ -DARDUINO_SAMD_ZERO -DARM_MATH_CM0PLUS -I/home/knas/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Include/ -I/home/knas/.arduino15/packages/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/ -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated-avr-comp -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero -I../../include/solenoid/ -I../../include/ -I../../include/base/ -I../../src/base/ \<br />
+	../../src//base/commandparser.cpp -o ../farcore/build/samd21/commandparser.o<br />
+/home/knas/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -c -g -Os -Werror=return-type -ffunction-sections -fdata-sections -fno-threadsafe-statics -nostdlib --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -fpermissive -DF_CPU=48000000L -DARDUINO=10607 -D__SAMD21G18A__ -DUSBCON -DARDUINO_SAMD_MKRZERO -DUSE_ARDUINO_MKR_PIN_LAYOUT -DARDUINO_ARCH_SAMD -DUSB_VID=0x2341 -DUSB_PID=0x804f -DUSBCON -DUSB_MANUFACTURER="Arduino LLC" -DUSB_PRODUCT="Arduino MKRZero" -I/home/knas/.arduino15/packages/adafruit/hardware/samd/1.7.16/libraries/Adafruit_TinyUSB_Arduino/src/arduino -Os -D__SAMD21G18A__ -DARDUINO_SAMD_ZERO -DARM_MATH_CM0PLUS -I/home/knas/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Include/ -I/home/knas/.arduino15/packages/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/ -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated-avr-comp -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero -I../../include/solenoid/ -I../../include/ -I../../include/base/ -I../../src/base/ \<br />
+	../../src//base/modulesystembasics.cpp -o ../farcore/build/samd21/modulesystembasics.o<br />
+/home/knas/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -c -g -Os -Werror=return-type -ffunction-sections -fdata-sections -fno-threadsafe-statics -nostdlib --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -fpermissive -DF_CPU=48000000L -DARDUINO=10607 -D__SAMD21G18A__ -DUSBCON -DARDUINO_SAMD_MKRZERO -DUSE_ARDUINO_MKR_PIN_LAYOUT -DARDUINO_ARCH_SAMD -DUSB_VID=0x2341 -DUSB_PID=0x804f -DUSBCON -DUSB_MANUFACTURER="Arduino LLC" -DUSB_PRODUCT="Arduino MKRZero" -I/home/knas/.arduino15/packages/adafruit/hardware/samd/1.7.16/libraries/Adafruit_TinyUSB_Arduino/src/arduino -Os -D__SAMD21G18A__ -DARDUINO_SAMD_ZERO -DARM_MATH_CM0PLUS -I/home/knas/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Include/ -I/home/knas/.arduino15/packages/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/ -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated-avr-comp -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero -I../../include/solenoid/ -I../../include/ -I../../include/base/ -I../../src/base/ \<br />
+	../../src//base/module.cpp  -o ../farcore/build/samd21/module.o<br />
+../../src//base/module.cpp: In member function 'virtual void Module::dumpData(std::vector&lt;commandResponse&gt;*)':<br />
+<font color="#0000ff">../../src//base/module.cpp:149:44: warning: invalid conversion from 'const arduino::String*' to 'arduino::String*' [-fpermissive]</font><br />
+             CommandItem temp = CommandItem(&amp;mcd.shortCommand);<br />
+                                            ^~~~~~~~~~~~~~~~~<br />
+In file included from ../../include/base/commandparser.hpp:23:0,<br />
+                 from ../../include/base/modulesystembasics.hpp:5,<br />
+                 from ../../include/base/module.hpp:5,<br />
+                 from ../../src//base/module.cpp:4:<br />
+../../include/base/commanditem.hpp:26:5: note:   initializing argument 1 of 'CommandItem::CommandItem(arduino::String*)'<br />
+     CommandItem (String *commandString);<br />
+     ^~~~~~~~~~~<br />
+/home/knas/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -c -g -Os -Werror=return-type -ffunction-sections -fdata-sections -fno-threadsafe-statics -nostdlib --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -fpermissive -DF_CPU=48000000L -DARDUINO=10607 -D__SAMD21G18A__ -DUSBCON -DARDUINO_SAMD_MKRZERO -DUSE_ARDUINO_MKR_PIN_LAYOUT -DARDUINO_ARCH_SAMD -DUSB_VID=0x2341 -DUSB_PID=0x804f -DUSBCON -DUSB_MANUFACTURER="Arduino LLC" -DUSB_PRODUCT="Arduino MKRZero" -I/home/knas/.arduino15/packages/adafruit/hardware/samd/1.7.16/libraries/Adafruit_TinyUSB_Arduino/src/arduino -Os -D__SAMD21G18A__ -DARDUINO_SAMD_ZERO -DARM_MATH_CM0PLUS -I/home/knas/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Include/ -I/home/knas/.arduino15/packages/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/ -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated-avr-comp -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero -I../../include/solenoid/ -I../../include/ -I../../include/base/ -I../../src/base/ \<br />
+	../../src//base/basemodule.cpp  -o ../farcore/build/samd21/basemodule.o<br />
+In file included from ../../include/base/module.hpp:5:0,<br />
+                 from ../../include/base/basemodule.hpp:5,<br />
+                 from ../../src//base/basemodule.cpp:4:<br />
+../../include/base/basemodule.hpp: In member function 'virtual const ModuleCommandDeclaration BaseModule::getModuleCommand(uint8_t) const':<br />
+<font color="#0000ff">../../include/base/modulesystembasics.hpp:94:51: warning: passing 'const BaseModule' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+                                                   ^<br />
+../../include/base/basemodule.hpp:16:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+     MODULECOMMANDHANDLER<br />
+     ^~~~~~~~~~~~~~~~~~~~<br />
+../../include/base/modulesystembasics.hpp:92:9: note:   in call to 'virtual int BaseModule::getModuleCommandCount()'<br />
+     int getModuleCommandCount(); \<br />
+         ^<br />
+../../include/base/basemodule.hpp:16:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+     MODULECOMMANDHANDLER<br />
+     ^~~~~~~~~~~~~~~~~~~~<br />
+/home/knas/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -c -g -Os -Werror=return-type -ffunction-sections -fdata-sections -fno-threadsafe-statics -nostdlib --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -fpermissive -DF_CPU=48000000L -DARDUINO=10607 -D__SAMD21G18A__ -DUSBCON -DARDUINO_SAMD_MKRZERO -DUSE_ARDUINO_MKR_PIN_LAYOUT -DARDUINO_ARCH_SAMD -DUSB_VID=0x2341 -DUSB_PID=0x804f -DUSBCON -DUSB_MANUFACTURER="Arduino LLC" -DUSB_PRODUCT="Arduino MKRZero" -I/home/knas/.arduino15/packages/adafruit/hardware/samd/1.7.16/libraries/Adafruit_TinyUSB_Arduino/src/arduino -Os -D__SAMD21G18A__ -DARDUINO_SAMD_ZERO -DARM_MATH_CM0PLUS -I/home/knas/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Include/ -I/home/knas/.arduino15/packages/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/ -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated-avr-comp -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero -I../../include/solenoid/ -I../../include/ -I../../include/base/ -I../../src/base/ \<br />
+	../../src/solenoid/solenoid.cpp -o ../farcore/build/samd21/solenoid.o<br />
+In file included from ../../include/base/module.hpp:5:0,<br />
+                 from ../../include/solenoid/solenoid.hpp:4,<br />
+                 from ../../src/solenoid/solenoid.cpp:28:<br />
+../../include/solenoid/solenoid.hpp: In member function 'virtual const ModuleCommandDeclaration Solenoid::getModuleCommand(uint8_t) const':<br />
+<font color="#0000ff">../../include/base/modulesystembasics.hpp:94:51: warning: passing 'const Solenoid' as 'this' argument discards qualifiers [-fpermissive]</font><br />
+         if ((i &lt; 0) || (i &gt; getModuleCommandCount())) { \<br />
+                                                   ^<br />
+../../include/solenoid/solenoid.hpp:14:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+     MODULECOMMANDHANDLER<br />
+     ^~~~~~~~~~~~~~~~~~~~<br />
+../../include/base/modulesystembasics.hpp:92:9: note:   in call to 'virtual int Solenoid::getModuleCommandCount()'<br />
+     int getModuleCommandCount(); \<br />
+         ^<br />
+../../include/solenoid/solenoid.hpp:14:5: note: in expansion of macro 'MODULECOMMANDHANDLER'<br />
+     MODULECOMMANDHANDLER<br />
+     ^~~~~~~~~~~~~~~~~~~~<br />
+/home/knas/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -c -g -Os -Werror=return-type -ffunction-sections -fdata-sections -fno-threadsafe-statics -nostdlib --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -fpermissive -DF_CPU=48000000L -DARDUINO=10607 -D__SAMD21G18A__ -DUSBCON -DARDUINO_SAMD_MKRZERO -DUSE_ARDUINO_MKR_PIN_LAYOUT -DARDUINO_ARCH_SAMD -DUSB_VID=0x2341 -DUSB_PID=0x804f -DUSBCON -DUSB_MANUFACTURER="Arduino LLC" -DUSB_PRODUCT="Arduino MKRZero" -I/home/knas/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Include/ -I/home/knas/.arduino15/packages/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/ -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated-avr-comp -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero -I../../include/solenoid/ -I../../include/ -I../../include/base/ -I../../src/base/ \<br />
+	../../lib/SafeString/src/BufferedInput.cpp -o build/samd21/BufferedInput.o<br />
+/home/knas/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -c -g -Os -Werror=return-type -ffunction-sections -fdata-sections -fno-threadsafe-statics -nostdlib --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -fpermissive -DF_CPU=48000000L -DARDUINO=10607 -D__SAMD21G18A__ -DUSBCON -DARDUINO_SAMD_MKRZERO -DUSE_ARDUINO_MKR_PIN_LAYOUT -DARDUINO_ARCH_SAMD -DUSB_VID=0x2341 -DUSB_PID=0x804f -DUSBCON -DUSB_MANUFACTURER="Arduino LLC" -DUSB_PRODUCT="Arduino MKRZero" -I/home/knas/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Include/ -I/home/knas/.arduino15/packages/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/ -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated-avr-comp -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero -I../../include/solenoid/ -I../../include/ -I../../include/base/ -I../../src/base/ \<br />
+	../../lib/SafeString/src/BufferedOutput.cpp -o build/samd21/BufferedOutput.o<br />
+/home/knas/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -c -g -Os -Werror=return-type -ffunction-sections -fdata-sections -fno-threadsafe-statics -nostdlib --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -fpermissive -DF_CPU=48000000L -DARDUINO=10607 -D__SAMD21G18A__ -DUSBCON -DARDUINO_SAMD_MKRZERO -DUSE_ARDUINO_MKR_PIN_LAYOUT -DARDUINO_ARCH_SAMD -DUSB_VID=0x2341 -DUSB_PID=0x804f -DUSBCON -DUSB_MANUFACTURER="Arduino LLC" -DUSB_PRODUCT="Arduino MKRZero" -I/home/knas/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Include/ -I/home/knas/.arduino15/packages/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/ -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated-avr-comp -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero -I../../include/solenoid/ -I../../include/ -I../../include/base/ -I../../src/base/ \<br />
+	../../lib/SafeString/src/SafeString.cpp -o build/samd21/SafeString.o<br />
+/home/knas/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -c -g -Os -Werror=return-type -ffunction-sections -fdata-sections -fno-threadsafe-statics -nostdlib --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -fpermissive -DF_CPU=48000000L -DARDUINO=10607 -D__SAMD21G18A__ -DUSBCON -DARDUINO_SAMD_MKRZERO -DUSE_ARDUINO_MKR_PIN_LAYOUT -DARDUINO_ARCH_SAMD -DUSB_VID=0x2341 -DUSB_PID=0x804f -DUSBCON -DUSB_MANUFACTURER="Arduino LLC" -DUSB_PRODUCT="Arduino MKRZero" -I/home/knas/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Include/ -I/home/knas/.arduino15/packages/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/ -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated-avr-comp -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero -I../../include/solenoid/ -I../../include/ -I../../include/base/ -I../../src/base/ -I../../lib/SafeString/src/  \<br />
+	../../lib/SafeString/src/SafeStringReader.cpp -o build/samd21/SafeStringReader.o<br />
+/home/knas/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -c -g -Os -Werror=return-type -ffunction-sections -fdata-sections -fno-threadsafe-statics -nostdlib --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -fpermissive -DF_CPU=48000000L -DARDUINO=10607 -D__SAMD21G18A__ -DUSBCON -DARDUINO_SAMD_MKRZERO -DUSE_ARDUINO_MKR_PIN_LAYOUT -DARDUINO_ARCH_SAMD -DUSB_VID=0x2341 -DUSB_PID=0x804f -DUSBCON -DUSB_MANUFACTURER="Arduino LLC" -DUSB_PRODUCT="Arduino MKRZero" -I/home/knas/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Include/ -I/home/knas/.arduino15/packages/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/ -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino/api/deprecated-avr-comp -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino -I/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero -I../../include/solenoid/ -I../../include/ -I../../include/base/ -I../../src/base/ \<br />
+	../../lib/SafeString/src/SafeStringStream.cpp -o build/samd21/SafeStringStream.o<br />
+Built FAR objects<br />
+/home/knas/.arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-g++ -Os -Wl,--gc-sections -save-temps -T/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero/linker_scripts/gcc/flash_with_bootloader.ld \<br />
+-Wl,-Map,build/samd21/solenoid.map --specs=nano.specs --specs=nosys.specs -mcpu=cortex-m0plus -mthumb -Wl,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--unresolved-symbols=report-all -Wl,--warn-common -Wl,--warn-section-align -o build/samd21/solenoid.elf build/samd21/solenoid.o \<br />
+build/samd21/mkrzero.o \<br />
+build/samd21/BufferedInput.o build/samd21/BufferedOutput.o ../farcore/build/samd21//commanditem.o ../farcore/build/samd21//commandparser.o ../farcore/build/samd21//modulesystembasics.o ../farcore/build/samd21//module.o ../farcore/build/samd21//basemodule.o build/samd21/SafeString.o build/samd21/SafeStringReader.o build/samd21/SafeStringStream.o \<br />
+../farcore/build/samd21/solenoid.o \<br />
+-Wl,--start-group -L/home/knas/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Lib/GCC/ \<br />
+-larm_cortexM0l_math -L/home/knas/.arduino15/packages/arduino/hardware/samd/1.8.14/variants/mkrzero \<br />
+-lm ../processor_cores/mkrzerov2.a -Wl,--end-group<br />
+Linking<br />
+/home/knas/.arduino15/packages/adafruit/tools/arm-none-eabi-gcc/9-2019q4/bin/arm-none-eabi-objcopy -O binary build/samd21/solenoid.elf build/samd21/solenoid.bin<br />
+/home/knas/.arduino15/packages/adafruit/tools/arm-none-eabi-gcc/9-2019q4/bin/arm-none-eabi-objcopy -O ihex -R .eeprom build/samd21/solenoid.elf build/samd21/solenoid.hex<br />
+/home/knas/.arduino15/packages/adafruit/tools/arm-none-eabi-gcc/9-2019q4/bin/arm-none-eabi-size -A build/samd21/solenoid.elf<br />
+build/samd21/solenoid.elf  :<br />
+section              size        addr<br />
+.text               41872        8192<br />
+.data                 624   536870912<br />
+.bss                 7528   536871536<br />
+.ARM.attributes        40           0<br />
+.comment              126           0<br />
+.debug_info        907929           0<br />
+.debug_abbrev       53667           0<br />
+.debug_loc         130183           0<br />
+.debug_aranges       6808           0<br />
+.debug_ranges       18248           0<br />
+.debug_line         78562           0<br />
+.debug_str         176157           0<br />
+.debug_frame        27244           0<br />
+.stab                  60           0<br />
+.stabstr              118           0<br />
+Total             1449166<br />
+#stty -F /dev/ttyACM0 1200;stty -F /dev/ttyACM0 1200;"/home/knas/.arduino15/packages/arduino/tools/bossac/1.7.0-arduino3/bossac" -i -d --port=ttyACM0 -U true -i -e -w -v \<br />
+#build/samd21/solenoid.bin -R<br />
+#stty -a -F /dev/ttyACM0<br />
+#stty -a -F /dev/ttyACM0<br />
+#<br />
+<font color="#0000ff">Process terminated with status 0 (0 minute(s), 3 second(s))</font><br />
+<font color="#0000ff">0 error(s), 11 warning(s) (0 minute(s), 3 second(s))</font><br />
+</tt>
+</body>
+</html>

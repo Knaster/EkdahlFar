@@ -74,7 +74,7 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_99bb62724a7a35703cd16d4de9b43ea9.html">generic_functions</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -102,13 +102,51 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#ifndef HARMONICSERIES_H</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#define HARMONICSERIES_H</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &lt;WProgram.h&gt;</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &lt;<a class="code" href="arduinorequired_8hpp.html">base/arduinorequired.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &lt;<a class="code" href="module_8hpp.html">base/module.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classHarmonicSeries.html">   25</a></span><span class="keyword">class </span><a class="code hl_class" href="classHarmonicSeries.html">HarmonicSeries</a> : <span class="keyword">public</span> <a class="code hl_class" href="classModule.html">Module</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_define" href="modulesystembasics_8hpp.html#a726e985c9256abcd3e04b255b31cba09">SETMODULEID</a>(<span class="stringliteral">&quot;harmonicseries&quot;</span>, <span class="stringliteral">&quot;hs&quot;</span>, <span class="stringliteral">&quot;The list of ratios used in the current harmonic series&quot;</span>, <a class="code hl_enumvalue" href="modulesystembasics_8hpp.html#ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8">eModuleType::software</a>, <span class="keyword">false</span>)</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_define" href="modulesystembasics_8hpp.html#a4e880a1a5618ce289caa355084e13735">MODULECOMMANDHANDLER</a></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_define" href="modulesystembasics_8hpp.html#a45bdcd7ad6f73438698f45ce76cbccc3">CREATE_MODULE_COMMAND_FUNCTION_FWD</a>(data, <a class="code hl_class" href="classHarmonicSeries.html">HarmonicSeries</a>)</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_define" href="modulesystembasics_8hpp.html#a45bdcd7ad6f73438698f45ce76cbccc3">CREATE_MODULE_COMMAND_FUNCTION_FWD</a>(name, <a class="code hl_class" href="classHarmonicSeries.html">HarmonicSeries</a>)</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_define" href="modulesystembasics_8hpp.html#a45bdcd7ad6f73438698f45ce76cbccc3">CREATE_MODULE_COMMAND_FUNCTION_FWD</a>(ratio, <a class="code hl_class" href="classHarmonicSeries.html">HarmonicSeries</a>)</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_define" href="modulesystembasics_8hpp.html#a45bdcd7ad6f73438698f45ce76cbccc3">CREATE_MODULE_COMMAND_FUNCTION_FWD</a>(remove, <a class="code hl_class" href="classHarmonicSeries.html">HarmonicSeries</a>)</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classHarmonicSeries.html#a166ca581a6531e846d42c4f2754c12f2">   36</a></span>    std::vector&lt;<span class="keywordtype">float</span>&gt; <a class="code hl_variable" href="classHarmonicSeries.html#a166ca581a6531e846d42c4f2754c12f2">ratios</a>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classHarmonicSeries.html#a864d2755443961c9cbea5d497909f6b0">   37</a></span>    String <a class="code hl_variable" href="classHarmonicSeries.html#a864d2755443961c9cbea5d497909f6b0">Id</a>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classHarmonicSeries.html#afbdd70e64fbed4dc82924ed03672cd6c">setHarmonic</a>(uint16_t harmonic, <span class="keywordtype">float</span> inRatio);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">float</span> <a class="code hl_function" href="classHarmonicSeries.html#ad782b16a3fd50793724537728b81a954">getHarmonic</a>(uint16_t harmonic);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classHarmonicSeries.html#a474532a288397ea7eed3d2a4d32f7e70">callDataChanged</a>();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classHarmonicSeries.html#a58bf4b6e0e8ac8b70ed2ecdeba38d79b">   44</a></span>    <a class="code hl_class" href="classHarmonicSeries.html">HarmonicSeries</a>();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>private:</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classHarmonicSeries.html#a961fe997c47728db73732d4705af10e9">   46</a></span>    <a class="code hl_class" href="classModule.html">Module</a> *<a class="code hl_variable" href="classHarmonicSeries.html#a961fe997c47728db73732d4705af10e9">owner</a>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
+</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="ttc" id="aarduinorequired_8hpp_html"><div class="ttname"><a href="arduinorequired_8hpp.html">arduinorequired.hpp</a></div></div>
+<div class="ttc" id="aclassHarmonicSeries_html"><div class="ttname"><a href="classHarmonicSeries.html">HarmonicSeries</a></div><div class="ttdef"><b>Definition</b> harmonicSeries.hpp:25</div></div>
+<div class="ttc" id="aclassHarmonicSeries_html_a166ca581a6531e846d42c4f2754c12f2"><div class="ttname"><a href="classHarmonicSeries.html#a166ca581a6531e846d42c4f2754c12f2">HarmonicSeries::ratios</a></div><div class="ttdeci">MODULECOMMANDHANDLER std::vector&lt; float &gt; ratios</div><div class="ttdef"><b>Definition</b> harmonicSeries.hpp:36</div></div>
+<div class="ttc" id="aclassHarmonicSeries_html_a474532a288397ea7eed3d2a4d32f7e70"><div class="ttname"><a href="classHarmonicSeries.html#a474532a288397ea7eed3d2a4d32f7e70">HarmonicSeries::callDataChanged</a></div><div class="ttdeci">void callDataChanged()</div><div class="ttdef"><b>Definition</b> harmonicSeries.cpp:116</div></div>
+<div class="ttc" id="aclassHarmonicSeries_html_a864d2755443961c9cbea5d497909f6b0"><div class="ttname"><a href="classHarmonicSeries.html#a864d2755443961c9cbea5d497909f6b0">HarmonicSeries::Id</a></div><div class="ttdeci">String Id</div><div class="ttdef"><b>Definition</b> harmonicSeries.hpp:37</div></div>
+<div class="ttc" id="aclassHarmonicSeries_html_a961fe997c47728db73732d4705af10e9"><div class="ttname"><a href="classHarmonicSeries.html#a961fe997c47728db73732d4705af10e9">HarmonicSeries::owner</a></div><div class="ttdeci">Module * owner</div><div class="ttdef"><b>Definition</b> harmonicSeries.hpp:46</div></div>
+<div class="ttc" id="aclassHarmonicSeries_html_ad782b16a3fd50793724537728b81a954"><div class="ttname"><a href="classHarmonicSeries.html#ad782b16a3fd50793724537728b81a954">HarmonicSeries::getHarmonic</a></div><div class="ttdeci">float getHarmonic(uint16_t harmonic)</div><div class="ttdef"><b>Definition</b> harmonicSeries.cpp:130</div></div>
+<div class="ttc" id="aclassHarmonicSeries_html_afbdd70e64fbed4dc82924ed03672cd6c"><div class="ttname"><a href="classHarmonicSeries.html#afbdd70e64fbed4dc82924ed03672cd6c">HarmonicSeries::setHarmonic</a></div><div class="ttdeci">void setHarmonic(uint16_t harmonic, float inRatio)</div><div class="ttdef"><b>Definition</b> harmonicSeries.cpp:123</div></div>
+<div class="ttc" id="aclassModule_html"><div class="ttname"><a href="classModule.html">Module</a></div><div class="ttdef"><b>Definition</b> module.hpp:8</div></div>
+<div class="ttc" id="amodule_8hpp_html"><div class="ttname"><a href="module_8hpp.html">module.hpp</a></div></div>
+<div class="ttc" id="amodulesystembasics_8hpp_html_a45bdcd7ad6f73438698f45ce76cbccc3"><div class="ttname"><a href="modulesystembasics_8hpp.html#a45bdcd7ad6f73438698f45ce76cbccc3">CREATE_MODULE_COMMAND_FUNCTION_FWD</a></div><div class="ttdeci">#define CREATE_MODULE_COMMAND_FUNCTION_FWD(funcname, className)</div><div class="ttdef"><b>Definition</b> modulesystembasics.hpp:88</div></div>
+<div class="ttc" id="amodulesystembasics_8hpp_html_a4e880a1a5618ce289caa355084e13735"><div class="ttname"><a href="modulesystembasics_8hpp.html#a4e880a1a5618ce289caa355084e13735">MODULECOMMANDHANDLER</a></div><div class="ttdeci">#define MODULECOMMANDHANDLER</div><div class="ttdef"><b>Definition</b> modulesystembasics.hpp:94</div></div>
+<div class="ttc" id="amodulesystembasics_8hpp_html_a726e985c9256abcd3e04b255b31cba09"><div class="ttname"><a href="modulesystembasics_8hpp.html#a726e985c9256abcd3e04b255b31cba09">SETMODULEID</a></div><div class="ttdeci">#define SETMODULEID(longName, shortName, description, moduleType, groupHandler)</div><div class="ttdef"><b>Definition</b> modulesystembasics.hpp:111</div></div>
+<div class="ttc" id="amodulesystembasics_8hpp_html_ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8"><div class="ttname"><a href="modulesystembasics_8hpp.html#ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8">software</a></div><div class="ttdeci">@ software</div><div class="ttdef"><b>Definition</b> modulesystembasics.hpp:59</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

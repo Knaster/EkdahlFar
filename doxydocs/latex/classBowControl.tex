@@ -6,6 +6,15 @@
 
 
 
+Inheritance diagram for Bow\+Control\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{classBowControl__inherit__graph}
+\end{center}
+\end{figure}
+
+
 Collaboration diagram for Bow\+Control\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -18,11 +27,9 @@ Collaboration diagram for Bow\+Control\+:\nopagebreak
 \item 
 \mbox{\hyperlink{classBowControl_acdd87742f360329eb78886432eb1536f}{Bow\+Control}} (char motor\+Rev\+Pin, char motor\+Voltage\+Pin, char motor\+DCDCEn\+Pin, char tacho\+Pin, char current\+Sense\+Pin, char motor\+Fault\+Pin, char step\+En\+Pin, char step\+Dir\+Pin, char step\+Step\+Pin, Hardware\+Serial \texorpdfstring{$\ast$}{*}step\+Serial\+Port, char step\+Home\+Sensor\+Pin)
 \item 
-\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classBowControl_af6e98ea3176a266902b7f95b409553b9}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classBowControl_af6e98ea3176a266902b7f95b409553b9}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
 \item 
-\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classBowControl_acb0918bfce04f9b93899133f4f73db9a}{process\+Serial\+Command\+Hidden}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
-\item 
-String \mbox{\hyperlink{classBowControl_aa280a126dd30e3510c9dcb722d126b3e}{dump\+Data}} ()
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classBowControl_acb0918bfce04f9b93899133f4f73db9a}{process\+Serial\+Command\+Hidden}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
 \item 
 void \mbox{\hyperlink{classBowControl_a17a1fc8cdd5f5f0c9b68b3d9ea162280}{set\+Bow\+Motor\+Direct\+PWM}} (uint16\+\_\+t speed)
 \item 
@@ -54,13 +61,13 @@ void \mbox{\hyperlink{classBowControl_a6777ca35b8a0188378935056969c8ffb}{set\+En
 \item 
 void \mbox{\hyperlink{classBowControl_a4022ef94a8122c6c24987ba4d12a7d11}{set\+Rest\+Pressure}} (uint16\+\_\+t pressure)
 \item 
-void \mbox{\hyperlink{classBowControl_ac593f79c91ca60bbb8e03ad494bf84cb}{set\+Max\+Pressure}} (uint16\+\_\+t pressure)
+void \mbox{\hyperlink{classBowControl_a859d99fa5185cb1a16150b5b5f9977c1}{set\+Stall\+Pressure}} (uint16\+\_\+t pressure)
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classBowControl_ac906729ef9bae05e39a92951588404d6}{get\+Engage\+Pressure}} ()
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classBowControl_ab66ab43cecb8da0f2ac7d74a87676203}{get\+Rest\+Pressure}} ()
 \item 
-uint16\+\_\+t \mbox{\hyperlink{classBowControl_a3aff0283cf061ff1b108af53c757e17a}{get\+Max\+Pressure}} ()
+uint16\+\_\+t \mbox{\hyperlink{classBowControl_a71b56f4be5f18696268cb1705a6a3c66}{get\+Stall\+Pressure}} ()
 \item 
 bool \mbox{\hyperlink{classBowControl_a7911c03cbe760de408545e8e7bf766c4}{bow\+Motor\+Is\+Over\+Current}} ()
 \item 
@@ -128,6 +135,70 @@ void \mbox{\hyperlink{classBowControl_a4d7960dead828ad7034c5c106637d3fd}{update\
 \item 
 void \mbox{\hyperlink{classBowControl_ab2eb10f1ad7f96658220148ef6f8da9e}{set\+Step\+Interval\+Callback}} (void \texorpdfstring{$\ast$}{*}step\+Interval\+Callback)
 \end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleHandler}{Module\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModuleHandler_a9eb2f015987df6e507d2e2f7281cc520}{Module\+Handler}} ()
+\item 
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModuleHandler_aba53cb524d3e200345c18bbaf96adaf2}{process\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false) override
+\item 
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModuleHandler_aa8b5a72e62b7a43ac40822461f535c0c}{process\+Module\+Handler\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structcommandResponse}{command\+Response}}, bool request=false)
+\item 
+void \mbox{\hyperlink{classModuleHandler_a8086440da55f316a89562f2a736a1ab6}{dir}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix, bool hidden, bool modules, bool commands, bool instances, bool instance\+Count, bool recursive) override
+\item 
+void \mbox{\hyperlink{classModuleHandler_a9c235cdcf6965c856fcb2be82cc46175}{help}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix)
+\item 
+\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleHandler_ab87ee8507b0edd4888eaa422f189d716}{get\+Group}} (String long\+Name)
+\item 
+void \mbox{\hyperlink{classModuleHandler_ae3fa5b4e5e4fa54687c3d26e0d937782}{dump\+Data}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}data\+Dump)
+\item 
+\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleHandler_aa8b0ee11f9f981d5d791e0994618377b}{add\+Module}} (\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}module)
+\item 
+\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleHandler_a25c83b60da881f9c0dd2886e6a89e631}{add\+Group}} (\mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} in\+Module\+ID)
+\item 
+virtual void \mbox{\hyperlink{classModuleHandler_aeb0456562a8743c5f4cf5d4aa9a474eb}{add\+Instances}} (String name, uint8\+\_\+t count)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule_a5a240a8a9ab1813b17bcb810b24ceaea}{Module}} ()
+\item 
+virtual const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{get\+Module\+ID}} () const =0
+\item 
+virtual \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a9a13ef0a8291e562a9557c311d07b334}{get\+Module\+ID}} ()=0
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a534a35eb18ec29dbcc8bafce30c21128}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_af7fe70cf55b7c8999672c8a202cbdb71}{process\+Module\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual int \mbox{\hyperlink{classModule_ae6fa72e64554ee0b09a8bb6a77a68640}{get\+Module\+Command\+Count}} ()
+\item 
+bool \mbox{\hyperlink{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2}{has\+Data\+Change}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleCommand}{Module\+Command}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModuleCommand_a4ce6a1d032eaa918f21ad8121ba59094}{get\+Module\+Command}} (uint8\+\_\+t i) const =0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHarmonicSeriesHandler}{Harmonic\+Series\+Handler}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classBowControl_a58caa5e1f7e8a377f387bc093c2aeefe}{harmonic\+Series\+Handler}} = nullptr
+\item 
+const String \mbox{\hyperlink{classBowControl_af0fd8d0433370a8e73814ffce64233fb}{prefix}} \mbox{[}2\mbox{]} = \{ "{}bow"{}, "{}b"{} \}
+\item 
+const String \mbox{\hyperlink{classBowControl_add8ee71da9ed9509ef51d89bdb3abd85}{identifier}} = "{}Bowing wheel controller v1.\+0"{}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModuleHandler}{Module\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classModuleGroup}{Module\+Group}} $>$ \mbox{\hyperlink{classModuleHandler_a1913f2c62636218e752bbf72de5e45af}{module\+Groups}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classModule_aa09bd171529da96438e917258ab5ab8d}{is\+Group\+Handler}} = false
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -158,17 +229,24 @@ bool \mbox{\hyperlink{classBowControl_a660628c5489ef9ac1bc4160cab81a8a0}{bow\+Sh
 \item 
 bool \mbox{\hyperlink{classBowControl_add46f10b20a135292c0650d1453b6f38}{bow\+Shutoff\+Motor\+Disabled}} = false
 \item 
-\mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{e\+Speed\+Mode}} \mbox{\hyperlink{classBowControl_af4e1e48fb1eca92f085369c3f5ef2dd7}{speed\+Mode}} = \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389}{e\+Speed\+Mode\+::\+Automatic}}
+\mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{e\+Speed\+Mode}} \mbox{\hyperlink{classBowControl_a23ec6d3e2a0e2aee136fe38ffe6c9430}{p\+Speed\+Mode}} = \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389}{e\+Speed\+Mode\+::\+Automatic}}
 \item 
-uint16\+\_\+t \mbox{\hyperlink{classBowControl_a02921994677bd6d96ea0840ef325eb78}{manual\+Motor\+PWM}} = 0
-\item 
-bool \mbox{\hyperlink{classBowControl_a6f8c5fa626567fb11951672b76008574}{run}} = false
-\begin{DoxyCompactList}\small\item\em Set to true if the bowing wheel is running. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classBowControl_a42be04959663fd67a1d054d33c8bea36}{PIDon}} = true
 \begin{DoxyCompactList}\small\item\em Set to true if the PID is turned on. \end{DoxyCompactList}\item 
 String \mbox{\hyperlink{classBowControl_a758d29eb32ccdf7d69e8e5026e34a043}{commands\+Over\+Power\+Current}} = "{}"{}
 \item 
 String \mbox{\hyperlink{classBowControl_a74f0eb026fb337a254953127b09d9de9}{commands\+Motor\+Fault}} = "{}"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}{set\+Data\+Changed}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModule_ad85cad50c5538cc47c6d3ac76500e4cf}{owner}} = nullptr
 \end{DoxyCompactItemize}
 
 
@@ -260,26 +338,6 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classBowControl_a9497cf120ffd96fe6a75637c56c65c84_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classBowControl_aa280a126dd30e3510c9dcb722d126b3e}\label{classBowControl_aa280a126dd30e3510c9dcb722d126b3e} 
-\index{BowControl@{BowControl}!dumpData@{dumpData}}
-\index{dumpData@{dumpData}!BowControl@{BowControl}}
-\doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
-{\footnotesize\ttfamily String Bow\+Control\+::dump\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowControl_aa280a126dd30e3510c9dcb722d126b3e_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowControl_aa280a126dd30e3510c9dcb722d126b3e_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classBowControl_abba2ffc34c55b9c4210e5b6d54014446}\label{classBowControl_abba2ffc34c55b9c4210e5b6d54014446} 
@@ -467,13 +525,6 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{getBowPressureReference()}{getBowPressureReference()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classBowPressure}{Bow\+Pressure}} \texorpdfstring{$\ast$}{*} Bow\+Control\+::get\+Bow\+Pressure\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowControl_a137b369227f3987d523e0ace27f4f43a_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classBowControl_a30691a6cecdba635207456fb4ee1e6bd}\label{classBowControl_a30691a6cecdba635207456fb4ee1e6bd} 
 \index{BowControl@{BowControl}!getCommandsMotorFault@{getCommandsMotorFault}}
 \index{getCommandsMotorFault@{getCommandsMotorFault}!BowControl@{BowControl}}
@@ -504,26 +555,6 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classBowControl_ac906729ef9bae05e39a92951588404d6_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classBowControl_a3aff0283cf061ff1b108af53c757e17a}\label{classBowControl_a3aff0283cf061ff1b108af53c757e17a} 
-\index{BowControl@{BowControl}!getMaxPressure@{getMaxPressure}}
-\index{getMaxPressure@{getMaxPressure}!BowControl@{BowControl}}
-\doxysubsubsection{\texorpdfstring{getMaxPressure()}{getMaxPressure()}}
-{\footnotesize\ttfamily uint16\+\_\+t Bow\+Control\+::get\+Max\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowControl_a3aff0283cf061ff1b108af53c757e17a_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowControl_a3aff0283cf061ff1b108af53c757e17a_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classBowControl_ad2211241c65c1f0070d469ec7d32b5e9}\label{classBowControl_ad2211241c65c1f0070d469ec7d32b5e9} 
@@ -618,6 +649,33 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{getRun()}{getRun()}}
 {\footnotesize\ttfamily bool Bow\+Control\+::get\+Run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_aa18cf83495867e37168a3a5604c56783_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a71b56f4be5f18696268cb1705a6a3c66}\label{classBowControl_a71b56f4be5f18696268cb1705a6a3c66} 
+\index{BowControl@{BowControl}!getStallPressure@{getStallPressure}}
+\index{getStallPressure@{getStallPressure}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{getStallPressure()}{getStallPressure()}}
+{\footnotesize\ttfamily uint16\+\_\+t Bow\+Control\+::get\+Stall\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a71b56f4be5f18696268cb1705a6a3c66_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a71b56f4be5f18696268cb1705a6a3c66_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{classBowControl_a170f00fa76b4cd121942106a07e3e68d}\label{classBowControl_a170f00fa76b4cd121942106a07e3e68d} 
 \index{BowControl@{BowControl}!getTMC2209Info@{getTMC2209Info}}
 \index{getTMC2209Info@{getTMC2209Info}!BowControl@{BowControl}}
@@ -662,50 +720,27 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{BowControl@{BowControl}!processSerialCommand@{processSerialCommand}}
 \index{processSerialCommand@{processSerialCommand}!BowControl@{BowControl}}
 \doxysubsubsection{\texorpdfstring{processSerialCommand()}{processSerialCommand()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Bow\+Control\+::process\+Serial\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Bow\+Control\+::process\+Serial\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowControl_af6e98ea3176a266902b7f95b409553b9_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowControl_af6e98ea3176a266902b7f95b409553b9_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classBowControl_acb0918bfce04f9b93899133f4f73db9a}\label{classBowControl_acb0918bfce04f9b93899133f4f73db9a} 
 \index{BowControl@{BowControl}!processSerialCommandHidden@{processSerialCommandHidden}}
 \index{processSerialCommandHidden@{processSerialCommandHidden}!BowControl@{BowControl}}
 \doxysubsubsection{\texorpdfstring{processSerialCommandHidden()}{processSerialCommandHidden()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Bow\+Control\+::process\+Serial\+Command\+Hidden (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Bow\+Control\+::process\+Serial\+Command\+Hidden (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowControl_acb0918bfce04f9b93899133f4f73db9a_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowControl_acb0918bfce04f9b93899133f4f73db9a_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classBowControl_a94d596c5aaa12f95f8e4fbeb2cae34b9}\label{classBowControl_a94d596c5aaa12f95f8e4fbeb2cae34b9} 
 \index{BowControl@{BowControl}!rest@{rest}}
 \index{rest@{rest}!BowControl@{BowControl}}
 \doxysubsubsection{\texorpdfstring{rest()}{rest()}}
 {\footnotesize\ttfamily void Bow\+Control\+::rest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a94d596c5aaa12f95f8e4fbeb2cae34b9_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -926,26 +961,6 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classBowControl_a62ff33edc2ddef1fe4d2df379bc9d4b7_icgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classBowControl_ac593f79c91ca60bbb8e03ad494bf84cb}\label{classBowControl_ac593f79c91ca60bbb8e03ad494bf84cb} 
-\index{BowControl@{BowControl}!setMaxPressure@{setMaxPressure}}
-\index{setMaxPressure@{setMaxPressure}!BowControl@{BowControl}}
-\doxysubsubsection{\texorpdfstring{setMaxPressure()}{setMaxPressure()}}
-{\footnotesize\ttfamily void Bow\+Control\+::set\+Max\+Pressure (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{pressure }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowControl_ac593f79c91ca60bbb8e03ad494bf84cb_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowControl_ac593f79c91ca60bbb8e03ad494bf84cb_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classBowControl_a69c751fb80e75b6c359cf7082756e20f}\label{classBowControl_a69c751fb80e75b6c359cf7082756e20f} 
 \index{BowControl@{BowControl}!setPIDOn@{setPIDOn}}
 \index{setPIDOn@{setPIDOn}!BowControl@{BowControl}}
@@ -1025,6 +1040,13 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{setRun()}{setRun()}}
 {\footnotesize\ttfamily void Bow\+Control\+::set\+Run (\begin{DoxyParamCaption}\item[{bool}]{in\+Run }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_ac41b6162fb1ea57619fdac9b6ddce8e0_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -1043,6 +1065,26 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classBowControl_a185042d6311ba53b33f6b8ccc1788467_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowControl_a859d99fa5185cb1a16150b5b5f9977c1}\label{classBowControl_a859d99fa5185cb1a16150b5b5f9977c1} 
+\index{BowControl@{BowControl}!setStallPressure@{setStallPressure}}
+\index{setStallPressure@{setStallPressure}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{setStallPressure()}{setStallPressure()}}
+{\footnotesize\ttfamily void Bow\+Control\+::set\+Stall\+Pressure (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{pressure }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a859d99fa5185cb1a16150b5b5f9977c1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowControl_a859d99fa5185cb1a16150b5b5f9977c1_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classBowControl_ab2eb10f1ad7f96658220148ef6f8da9e}\label{classBowControl_ab2eb10f1ad7f96658220148ef6f8da9e} 
@@ -1069,7 +1111,11 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{BowControl@{BowControl}!update@{update}}
 \index{update@{update}!BowControl@{BowControl}}
 \doxysubsubsection{\texorpdfstring{update()}{update()}}
-{\footnotesize\ttfamily void Bow\+Control\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Bow\+Control\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classModule_a09131761fec40345e3657b801778057f}{Module}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -1082,7 +1128,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classBowControl_a1e738a6854d44a43b309f1ad9a29a559_icgraph}
+\includegraphics[width=333pt]{classBowControl_a1e738a6854d44a43b309f1ad9a29a559_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classBowControl_adc093196abff58a20a09a47a34dc8962}\label{classBowControl_adc093196abff58a20a09a47a34dc8962} 
@@ -1276,6 +1322,18 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{dcMotorControl}{dcMotorControl}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classDCMotorControl}{DCMotor\+Control}}\texorpdfstring{$\ast$}{*} Bow\+Control\+::dc\+Motor\+Control = nullptr\hspace{0.3cm}{\ttfamily [private]}}
 
+\Hypertarget{classBowControl_a58caa5e1f7e8a377f387bc093c2aeefe}\label{classBowControl_a58caa5e1f7e8a377f387bc093c2aeefe} 
+\index{BowControl@{BowControl}!harmonicSeriesHandler@{harmonicSeriesHandler}}
+\index{harmonicSeriesHandler@{harmonicSeriesHandler}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{harmonicSeriesHandler}{harmonicSeriesHandler}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHarmonicSeriesHandler}{Harmonic\+Series\+Handler}}\texorpdfstring{$\ast$}{*} Bow\+Control\+::harmonic\+Series\+Handler = nullptr}
+
+\Hypertarget{classBowControl_add8ee71da9ed9509ef51d89bdb3abd85}\label{classBowControl_add8ee71da9ed9509ef51d89bdb3abd85} 
+\index{BowControl@{BowControl}!identifier@{identifier}}
+\index{identifier@{identifier}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{identifier}{identifier}}
+{\footnotesize\ttfamily const String Bow\+Control\+::identifier = "{}Bowing wheel controller v1.\+0"{}}
+
 \Hypertarget{classBowControl_ac8743e51d6e90939a32feed0f820d5f8}\label{classBowControl_ac8743e51d6e90939a32feed0f820d5f8} 
 \index{BowControl@{BowControl}!lastUpdate@{lastUpdate}}
 \index{lastUpdate@{lastUpdate}!BowControl@{BowControl}}
@@ -1285,12 +1343,6 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 Time of last \doxylink{classBowControl_a1e738a6854d44a43b309f1ad9a29a559}{update()} call. 
-
-\Hypertarget{classBowControl_a02921994677bd6d96ea0840ef325eb78}\label{classBowControl_a02921994677bd6d96ea0840ef325eb78} 
-\index{BowControl@{BowControl}!manualMotorPWM@{manualMotorPWM}}
-\index{manualMotorPWM@{manualMotorPWM}!BowControl@{BowControl}}
-\doxysubsubsection{\texorpdfstring{manualMotorPWM}{manualMotorPWM}}
-{\footnotesize\ttfamily uint16\+\_\+t Bow\+Control\+::manual\+Motor\+PWM = 0\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classBowControl_a4c7c25f21250755ca0b012088ac7c006}\label{classBowControl_a4c7c25f21250755ca0b012088ac7c006} 
 \index{BowControl@{BowControl}!pidController@{pidController}}
@@ -1318,21 +1370,17 @@ Set to true if the PID is turned on.
 
 The interval at which the PID is being called, given in uS. 
 
-\Hypertarget{classBowControl_a6f8c5fa626567fb11951672b76008574}\label{classBowControl_a6f8c5fa626567fb11951672b76008574} 
-\index{BowControl@{BowControl}!run@{run}}
-\index{run@{run}!BowControl@{BowControl}}
-\doxysubsubsection{\texorpdfstring{run}{run}}
-{\footnotesize\ttfamily bool Bow\+Control\+::run = false\hspace{0.3cm}{\ttfamily [private]}}
+\Hypertarget{classBowControl_af0fd8d0433370a8e73814ffce64233fb}\label{classBowControl_af0fd8d0433370a8e73814ffce64233fb} 
+\index{BowControl@{BowControl}!prefix@{prefix}}
+\index{prefix@{prefix}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{prefix}{prefix}}
+{\footnotesize\ttfamily const String Bow\+Control\+::prefix\mbox{[}2\mbox{]} = \{ "{}bow"{}, "{}b"{} \}}
 
-
-
-Set to true if the bowing wheel is running. 
-
-\Hypertarget{classBowControl_af4e1e48fb1eca92f085369c3f5ef2dd7}\label{classBowControl_af4e1e48fb1eca92f085369c3f5ef2dd7} 
-\index{BowControl@{BowControl}!speedMode@{speedMode}}
-\index{speedMode@{speedMode}!BowControl@{BowControl}}
-\doxysubsubsection{\texorpdfstring{speedMode}{speedMode}}
-{\footnotesize\ttfamily \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{e\+Speed\+Mode}} Bow\+Control\+::speed\+Mode = \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389}{e\+Speed\+Mode\+::\+Automatic}}\hspace{0.3cm}{\ttfamily [private]}}
+\Hypertarget{classBowControl_a23ec6d3e2a0e2aee136fe38ffe6c9430}\label{classBowControl_a23ec6d3e2a0e2aee136fe38ffe6c9430} 
+\index{BowControl@{BowControl}!pSpeedMode@{pSpeedMode}}
+\index{pSpeedMode@{pSpeedMode}!BowControl@{BowControl}}
+\doxysubsubsection{\texorpdfstring{pSpeedMode}{pSpeedMode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{e\+Speed\+Mode}} Bow\+Control\+::p\+Speed\+Mode = \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389}{e\+Speed\+Mode\+::\+Automatic}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

@@ -1,19 +1,8 @@
 var searchData=
 [
-  ['pidinterrupt0_0',['pidInterrupt0',['../isrclasswrapper_8cpp.html#a1d7d2c77b2f43378e554b1fb506d5b1f',1,'isrclasswrapper.cpp']]],
-  ['pidinterrupt1_1',['pidInterrupt1',['../isrclasswrapper_8cpp.html#a4f5d2523f4d93b491586757744b6e157',1,'isrclasswrapper.cpp']]],
-  ['pidinterrupt2_2',['pidInterrupt2',['../isrclasswrapper_8cpp.html#a48aa4ca77f49836a47b5ce08fd1bc883',1,'isrclasswrapper.cpp']]],
-  ['pidinterrupt3_3',['pidInterrupt3',['../isrclasswrapper_8cpp.html#af5970c4e5c158d5b06c5730f8f08eaf8',1,'isrclasswrapper.cpp']]],
-  ['pidinterrupt4_4',['pidInterrupt4',['../isrclasswrapper_8cpp.html#a9efbbf3d1220c89f3963f6382dd5eb92',1,'isrclasswrapper.cpp']]],
-  ['pidinterrupt5_5',['pidInterrupt5',['../isrclasswrapper_8cpp.html#afd814dc96e3881382407e6d58561f24e',1,'isrclasswrapper.cpp']]],
-  ['pidinterrupt6_6',['pidInterrupt6',['../isrclasswrapper_8cpp.html#a95f9e3c4a97708ab82fd14211b9f1bd2',1,'isrclasswrapper.cpp']]],
-  ['pidinterrupt7_7',['pidInterrupt7',['../isrclasswrapper_8cpp.html#ad20132da763e4f145b94eb0e53fda42b',1,'isrclasswrapper.cpp']]],
-  ['pidisr_5fbowcontrolarray_8',['pidISR_bowControlArray',['../isrclasswrapper_8cpp.html#ad0a15780f0558a387ce6c360782ee59a',1,'isrclasswrapper.cpp']]],
-  ['pidisr_5fbowcontrolcounter_9',['pidISR_bowControlCounter',['../isrclasswrapper_8cpp.html#a525a8ecb41defd5194558a43dcdfce85',1,'isrclasswrapper.cpp']]],
-  ['pindir_10',['pinDir',['../classservoStepper.html#a03ab7d33858f698587e4a9704cb321bd',1,'servoStepper']]],
-  ['pinhomesense_11',['pinHomeSense',['../classservoStepper.html#a0753a0f4c51819d1160649f2049dd4bf',1,'servoStepper']]],
-  ['pinstep_12',['pinStep',['../classservoStepper.html#a17b0bdce79f91acee51fd57a71906444',1,'servoStepper']]],
-  ['previousalive_13',['previousAlive',['../main_8cpp.html#a320e70c7b238268a4ab14cc695686292',1,'main.cpp']]],
-  ['previoustime_14',['previousTime',['../main_8cpp.html#a844366311ce26d965b0899b9a200b26b',1,'main.cpp']]],
-  ['processingcommands_15',['processingCommands',['../classcommandList.html#ab023b253b73ce66e0f3442686cc5eb1a',1,'commandList']]]
+  ['originalcommand_0',['originalCommand',['../classcommandItem.html#a5a2c3d3e2fc28bd141919d2388936be1',1,'commandItem']]],
+  ['outputdebugdata_1',['outputdebugdata',['../classaverager.html#ae3238eab894d996fcc88e6bad1a6e4c4',1,'averager::outputDebugData'],['../classControlReader.html#a2b1c46952e1145ab13700e08f472a03e',1,'ControlReader::outputDebugData'],['../classservoStepper.html#a4d77b0b31e409b487aeff3dc292c615f',1,'servoStepper::outputDebugData']]],
+  ['overpowerduration_2',['overPowerDuration',['../classDCMotorControl.html#a3b2b8a9cbdf7f5fff47d90e2ef2db815',1,'DCMotorControl']]],
+  ['overpowerflag_3',['overPowerFlag',['../classDCMotorControl.html#a9b349799230e293a1b3e7c6c6ed132d0',1,'DCMotorControl']]],
+  ['owner_4',['owner',['../classModule.html#ad85cad50c5538cc47c6d3ac76500e4cf',1,'Module::owner'],['../classModuleGroup.html#ae091ad7a4842bc2ba9ce9d4f54614226',1,'ModuleGroup::owner'],['../classHarmonicSeries.html#a961fe997c47728db73732d4705af10e9',1,'HarmonicSeries::owner']]]
 ];

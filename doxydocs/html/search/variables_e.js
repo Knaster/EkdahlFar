@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['originalcommand_0',['originalCommand',['../classcommandItem.html#a5a2c3d3e2fc28bd141919d2388936be1',1,'commandItem']]],
-  ['outputdebugdata_1',['outputDebugData',['../classservoStepper.html#a4d77b0b31e409b487aeff3dc292c615f',1,'servoStepper']]]
+  ['name_0',['name',['../structcommandItemPart.html#ae3236c5eeac38b19bff56fc7108fa4d9',1,'commandItemPart::name'],['../classMIDIMessageConfiguration.html#ae2069cf2e9bc95d044e15545183ad509',1,'MIDIMessageConfiguration::name'],['../structPlugin__LFO_1_1tWaveform.html#aa6763603f57d72e50be8a0fd1c8802f3',1,'Plugin_LFO::tWaveform::name']]],
+  ['note_1',['note',['../structMIDIHandler_1_1noteMsg.html#a169cd035e27d81471bf818812345d5e2',1,'MIDIHandler::noteMsg']]],
+  ['notecount_2',['noteCount',['../classMIDIHandler.html#a3689c0c92eed6daccfa7577278e9ab80',1,'MIDIHandler']]],
+  ['notesheld_3',['notesHeld',['../classMIDIHandler.html#ad99a0de9672f7248fa9f0ace54f8bd12',1,'MIDIHandler']]]
 ];

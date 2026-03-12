@@ -45,10 +45,10 @@ private:
     Plugin_Mult_Connector* getConnector(String inId, std::vector<Plugin_Mult_Connector> *connectors);
     Plugin_Mult_Connector* connect(String id, float value, bool request, std::vector<Plugin_Mult_Connector> *connectors);
 
-    eProcessResult commandConnect(commandItem *inCommandItem, std::vector<commandResponse> *inCommandResponses, ModuleCommandDeclaration *thisItem, bool request,
+    eProcessResult commandConnect(CommandItem *inCommandItem, std::vector<commandResponse> *inCommandResponses, ModuleCommandDeclaration *thisItem, bool request,
                                   std::vector<Plugin_Mult_Connector> *connectors);
 
-    eProcessResult commandDisconnect(commandItem *inCommandItem, std::vector<commandResponse> *inCommandResponses, ModuleCommandDeclaration *thisItem, bool request,
+    eProcessResult commandDisconnect(CommandItem *inCommandItem, std::vector<commandResponse> *inCommandResponses, ModuleCommandDeclaration *thisItem, bool request,
                                            std::vector<Plugin_Mult_Connector> *connectors);
 };
 

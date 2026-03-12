@@ -143,43 +143,46 @@
 #include <base/arduinorequired.hpp>
 
 #include "master_controller/automaticversion.hpp"
+
 #include "string.h"
 #include <HardwareSerial.h>
 #include <BufferedInput.h>
 #include <BufferedOutput.h>
 #include <SafeString.h>
-#include <SafeStringNameSpace.h>
-#include <SafeStringNameSpaceEnd.h>
-#include <SafeStringNameSpaceStart.h>
 #include <SafeStringReader.h>
-#include <SafeStringStream.h>
 
 //String customStartupParameters = "";
-
+//8192
 createSafeStringReader(ssReader, 8192, "\r\n");       ///< SafeString reader creation
 createBufferedOutput(ssOutput, 8192, DROP_UNTIL_EMPTY); ///< SafeString buffer creation
+
 #include "../../src/base/debugprint.cpp"
 
 #include "base/commandparser.hpp"
 #include "base/module.hpp"
 #include "single_far/farsingle.hpp"
 FAR_SINGLE_CREATE_INSTANCE(farSingle)
-#include "single_far/basemodule.hpp"
-BaseModule *baseModule;
+#include "master_controller/mastermodule.hpp"
+MasterModule *masterModule;
 #include "master_controller/global_generics.hpp"
 
-void processSerialCommands(commandList inCommandList, bool isInternal = false) {
+//#ifdef GLOBALS
+CommandList globalCommands;
+CommandList globalResponseCommands;
+//#endif
+
+void processSerialCommands(CommandList inCommandList, bool isInternal = false) {
     if (inCommandList.item.size() == 0) { return; }
     std::vector <commandResponse> commandResponses;
     while (inCommandList.item.size() > 0) {
-        processCommandList(baseModule, &inCommandList, &commandResponses);
+        processCommandList(masterModule, &inCommandList, &commandResponses);
         inCommandList.item.clear();
         inCommandList = globalResponseCommands;
         globalResponseCommands.item.clear();
     }
-
+    //printResponses(&commandResponses, isInternal);
     if ((!isInternal) || debugPrintEnabled[debugPrintType::Internal]) {
-        for (int i=0; i<commandResponses.size(); i++) {
+        for (int i = 0; i < commandResponses.size(); i++) {
             if (!isInternal) {
                 debugPrintln(commandResponses[i].response, commandResponses[i].responseType);
             } else {
@@ -194,23 +197,6 @@ void processSerialCommands() {
     if (ssReader.read()) { globalCommands.addCommands(ssReader.c_str()); }
     processSerialCommands(globalCommands, false);
     globalCommands.item.clear();
-/*
-    if (globalCommands.item.size() == 0) { return; }
-
-    std::vector <commandResponse> commandResponses;
-
-    uint16_t i = 0;
-    while(globalCommands.item.size() > 0) {
-        processCommandList(baseModule, &globalCommands, &commandResponses);
-
-        globalCommands.item.clear();
-        globalCommands = globalResponseCommands;
-        globalResponseCommands.item.clear();
-    }
-
-    for (i=0; i<commandResponses.size(); i++) {
-        debugPrintln(commandResponses[i].response, commandResponses[i].responseType);
-    }*/
 }
 
 uint32_t startupTime;
@@ -228,16 +214,15 @@ void setup() {
 
     farSingle = new FARSingle(&farSingleUpdateServoStepperMute0, &farSingleUpdateServoStepperPressure0, &farSingleUpdateTachometer0, &farSingleUpdatePID0);
 
-    baseModule = new BaseModule(farSingle, farSingle->expressionParser);
-//    baseModule = new BaseModule(nullptr);
-    baseModule->loadAllParameters();
-//    farSingle->initFAR();
+    masterModule = new MasterModule(farSingle, farSingle->expressionParser);
+    masterModule->loadAllParameters();
+    masterModule->init();
+    farSingle->initFAR();
 
     debugPrintln("Initialized", InfoRequest);
 
-    baseModule->checkVersion();
+    masterModule->version();
     startupTime = millis();
-//    debugPrintEnabled[EParser] = true;
 }
 
 int currentStringModule = 0;
@@ -276,6 +261,7 @@ void loop() {
         outputNext();
 
         usbMIDI.read();
+
         if (controlReaderInterval >= controlReadIntervalTime) {
             std::vector<commandResponse> inCommandResponse;
             farSingle->updateControlReader(&inCommandResponse);
@@ -285,10 +271,13 @@ void loop() {
             }
             controlReaderInterval = 0;
         }
+#ifdef NO_EXTERNAL_MODULES
         MIDI.read();
+#endif
+
     }
 
-    baseModule->update();
+    masterModule->update();
     processSerialCommands(globalResponseCommands, true);
 
     unsigned long currentTime = micros();
@@ -296,6 +285,7 @@ void loop() {
         previousTime = currentTime;
         processSerialCommands();
     }
+
 /*
     currentAlive = millis();
     if (currentAlive - previousAlive >= aliveUpdateInterval) {

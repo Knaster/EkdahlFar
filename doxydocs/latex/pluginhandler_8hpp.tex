@@ -1,0 +1,237 @@
+\doxysection{pluginhandler.\+hpp File Reference}
+\hypertarget{pluginhandler_8hpp}{}\label{pluginhandler_8hpp}\index{pluginhandler.hpp@{pluginhandler.hpp}}
+{\ttfamily \#include "{}base/modulehandler.\+hpp"{}}\newline
+{\ttfamily \#include "{}master\+\_\+controller/expressionparser.\+h"{}}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+Include dependency graph for pluginhandler.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{pluginhandler_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{pluginhandler_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classPlugin}{Plugin}}
+\item 
+class \mbox{\hyperlink{classPluginFactory}{Plugin\+Factory}}
+\item 
+struct \mbox{\hyperlink{structPluginFactory_1_1PluginRegistry}{Plugin\+Factory\+::\+Plugin\+Registry}}
+\item 
+class \mbox{\hyperlink{classPluginHandler}{Plugin\+Handler}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{pluginhandler_8hpp_a013343e5a8289faf7dd55823f0635aad}{CREATEPLUGINFUNCTIONS}}(class)
+\item 
+\#define \mbox{\hyperlink{pluginhandler_8hpp_a08e4d36bf4fbf5d0f602c676445ac171}{REGISTEREXPRESSION}}(callback)
+\item 
+\#define \mbox{\hyperlink{pluginhandler_8hpp_a23e9e92f3a30c6eff4975c9d9f988d5a}{REGISTERPLUGIN}}(class)
+\item 
+\#define \mbox{\hyperlink{pluginhandler_8hpp_aa2208bddfe36aa22e41fd25450c0c518}{CREATEGETSET\+\_\+\+HEADER}}(name,  class)
+\item 
+\#define \mbox{\hyperlink{pluginhandler_8hpp_af5147d9ca751fce715cfb8c9fd46d787}{CREATEGETSET\+\_\+\+FOOTER}}(variable)
+\item 
+\#define \mbox{\hyperlink{pluginhandler_8hpp_abfa1ca60fed44b6370e712d3d46a5ed1}{CREATEGETSET\+\_\+\+FOOTERQ}}(variable)
+\item 
+\#define \mbox{\hyperlink{pluginhandler_8hpp_a718635700fbd5d2df3c85785782bf252}{CREATE\+\_\+\+GETSET\+\_\+\+FUNCTION\+\_\+\+CONVERT}}(name,  class,  variable,  conversion)
+\item 
+\#define \mbox{\hyperlink{pluginhandler_8hpp_aedecf5c5c141e62527c7f9b3139cb50c}{CREATE\+\_\+\+GETSET\+\_\+\+FUNCTION}}(name,  class,  variable)
+\item 
+\#define \mbox{\hyperlink{pluginhandler_8hpp_a0d02f065371f941263d0c42d86c4ca08}{CREATE\+\_\+\+GETSET\+\_\+\+FUNCTION\+\_\+\+F\+\_\+\+CONVERT}}(name,  class,  variable,  conversion,  function)
+\item 
+\#define \mbox{\hyperlink{pluginhandler_8hpp_adbf6cb71b0c65f252775fc220ec65302}{CREATE\+\_\+\+GETSET\+\_\+\+FUNCTION\+\_\+F}}(name,  class,  variable,  function)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{pluginhandler_8hpp_a5ff1eeee6f86bc24c60bb267464d0f87}{convert\+Ms\+To\+Rate}} (float parent\+Rate, float in\+Rate)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{pluginhandler_8hpp_aedecf5c5c141e62527c7f9b3139cb50c}\label{pluginhandler_8hpp_aedecf5c5c141e62527c7f9b3139cb50c} 
+\index{pluginhandler.hpp@{pluginhandler.hpp}!CREATE\_GETSET\_FUNCTION@{CREATE\_GETSET\_FUNCTION}}
+\index{CREATE\_GETSET\_FUNCTION@{CREATE\_GETSET\_FUNCTION}!pluginhandler.hpp@{pluginhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{CREATE\_GETSET\_FUNCTION}{CREATE\_GETSET\_FUNCTION}}
+{\footnotesize\ttfamily \#define CREATE\+\_\+\+GETSET\+\_\+\+FUNCTION(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{class,  }\item[{}]{variable }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{pluginhandler_8hpp_aa2208bddfe36aa22e41fd25450c0c518}{CREATEGETSET\_HEADER}}(name,\ \textcolor{keyword}{class})\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ variable\ =\ \mbox{\hyperlink{commandparser_8cpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(inCommandItem-\/>argument[0]);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ CREATEGETSET\_FOOTERQ(variable)}
+
+\end{DoxyCode}
+\Hypertarget{pluginhandler_8hpp_a718635700fbd5d2df3c85785782bf252}\label{pluginhandler_8hpp_a718635700fbd5d2df3c85785782bf252} 
+\index{pluginhandler.hpp@{pluginhandler.hpp}!CREATE\_GETSET\_FUNCTION\_CONVERT@{CREATE\_GETSET\_FUNCTION\_CONVERT}}
+\index{CREATE\_GETSET\_FUNCTION\_CONVERT@{CREATE\_GETSET\_FUNCTION\_CONVERT}!pluginhandler.hpp@{pluginhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{CREATE\_GETSET\_FUNCTION\_CONVERT}{CREATE\_GETSET\_FUNCTION\_CONVERT}}
+{\footnotesize\ttfamily \#define CREATE\+\_\+\+GETSET\+\_\+\+FUNCTION\+\_\+\+CONVERT(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{class,  }\item[{}]{variable,  }\item[{}]{conversion }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{pluginhandler_8hpp_aa2208bddfe36aa22e41fd25450c0c518}{CREATEGETSET\_HEADER}}(name,\ \textcolor{keyword}{class})\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ variable\ =\ inCommandItem-\/>argument[0].conversion();\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ CREATEGETSET\_FOOTER(variable)}
+
+\end{DoxyCode}
+\Hypertarget{pluginhandler_8hpp_adbf6cb71b0c65f252775fc220ec65302}\label{pluginhandler_8hpp_adbf6cb71b0c65f252775fc220ec65302} 
+\index{pluginhandler.hpp@{pluginhandler.hpp}!CREATE\_GETSET\_FUNCTION\_F@{CREATE\_GETSET\_FUNCTION\_F}}
+\index{CREATE\_GETSET\_FUNCTION\_F@{CREATE\_GETSET\_FUNCTION\_F}!pluginhandler.hpp@{pluginhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{CREATE\_GETSET\_FUNCTION\_F}{CREATE\_GETSET\_FUNCTION\_F}}
+{\footnotesize\ttfamily \#define CREATE\+\_\+\+GETSET\+\_\+\+FUNCTION\+\_\+F(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{class,  }\item[{}]{variable,  }\item[{}]{function }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{pluginhandler_8hpp_aa2208bddfe36aa22e41fd25450c0c518}{CREATEGETSET\_HEADER}}(name,\ \textcolor{keyword}{class})\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ variable\ =\ \mbox{\hyperlink{commandparser_8cpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(inCommandItem-\/>argument[0]);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ function();\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ CREATEGETSET\_FOOTERQ(variable)}
+
+\end{DoxyCode}
+\Hypertarget{pluginhandler_8hpp_a0d02f065371f941263d0c42d86c4ca08}\label{pluginhandler_8hpp_a0d02f065371f941263d0c42d86c4ca08} 
+\index{pluginhandler.hpp@{pluginhandler.hpp}!CREATE\_GETSET\_FUNCTION\_F\_CONVERT@{CREATE\_GETSET\_FUNCTION\_F\_CONVERT}}
+\index{CREATE\_GETSET\_FUNCTION\_F\_CONVERT@{CREATE\_GETSET\_FUNCTION\_F\_CONVERT}!pluginhandler.hpp@{pluginhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{CREATE\_GETSET\_FUNCTION\_F\_CONVERT}{CREATE\_GETSET\_FUNCTION\_F\_CONVERT}}
+{\footnotesize\ttfamily \#define CREATE\+\_\+\+GETSET\+\_\+\+FUNCTION\+\_\+\+F\+\_\+\+CONVERT(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{class,  }\item[{}]{variable,  }\item[{}]{conversion,  }\item[{}]{function }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{pluginhandler_8hpp_aa2208bddfe36aa22e41fd25450c0c518}{CREATEGETSET\_HEADER}}(name,\ \textcolor{keyword}{class})\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ variable\ =\ inCommandItem-\/>argument[0].conversion();\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ function();\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ CREATEGETSET\_FOOTER(variable)}
+
+\end{DoxyCode}
+\Hypertarget{pluginhandler_8hpp_af5147d9ca751fce715cfb8c9fd46d787}\label{pluginhandler_8hpp_af5147d9ca751fce715cfb8c9fd46d787} 
+\index{pluginhandler.hpp@{pluginhandler.hpp}!CREATEGETSET\_FOOTER@{CREATEGETSET\_FOOTER}}
+\index{CREATEGETSET\_FOOTER@{CREATEGETSET\_FOOTER}!pluginhandler.hpp@{pluginhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{CREATEGETSET\_FOOTER}{CREATEGETSET\_FOOTER}}
+{\footnotesize\ttfamily \#define CREATEGETSET\+\_\+\+FOOTER(\begin{DoxyParamCaption}\item[{}]{variable }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ String(variable),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\ \});\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{pluginhandler_8hpp_abfa1ca60fed44b6370e712d3d46a5ed1}\label{pluginhandler_8hpp_abfa1ca60fed44b6370e712d3d46a5ed1} 
+\index{pluginhandler.hpp@{pluginhandler.hpp}!CREATEGETSET\_FOOTERQ@{CREATEGETSET\_FOOTERQ}}
+\index{CREATEGETSET\_FOOTERQ@{CREATEGETSET\_FOOTERQ}!pluginhandler.hpp@{pluginhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{CREATEGETSET\_FOOTERQ}{CREATEGETSET\_FOOTERQ}}
+{\footnotesize\ttfamily \#define CREATEGETSET\+\_\+\+FOOTERQ(\begin{DoxyParamCaption}\item[{}]{variable }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{commandparser_8cpp_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(String(variable),\ \textcolor{keyword}{true}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\ \});\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{pluginhandler_8hpp_aa2208bddfe36aa22e41fd25450c0c518}\label{pluginhandler_8hpp_aa2208bddfe36aa22e41fd25450c0c518} 
+\index{pluginhandler.hpp@{pluginhandler.hpp}!CREATEGETSET\_HEADER@{CREATEGETSET\_HEADER}}
+\index{CREATEGETSET\_HEADER@{CREATEGETSET\_HEADER}!pluginhandler.hpp@{pluginhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{CREATEGETSET\_HEADER}{CREATEGETSET\_HEADER}}
+{\footnotesize\ttfamily \#define CREATEGETSET\+\_\+\+HEADER(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{class }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a33460e04d9e860676f5c8d5f5b47bf61}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(name,\ \textcolor{keyword}{class})\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ if\ (!request)\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!\mbox{\hyperlink{commandparser_8cpp_af2583fe961d044690c62a57c7563ec9d}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}\ \(\backslash\)}
+
+\end{DoxyCode}
+\Hypertarget{pluginhandler_8hpp_a013343e5a8289faf7dd55823f0635aad}\label{pluginhandler_8hpp_a013343e5a8289faf7dd55823f0635aad} 
+\index{pluginhandler.hpp@{pluginhandler.hpp}!CREATEPLUGINFUNCTIONS@{CREATEPLUGINFUNCTIONS}}
+\index{CREATEPLUGINFUNCTIONS@{CREATEPLUGINFUNCTIONS}!pluginhandler.hpp@{pluginhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{CREATEPLUGINFUNCTIONS}{CREATEPLUGINFUNCTIONS}}
+{\footnotesize\ttfamily \#define CREATEPLUGINFUNCTIONS(\begin{DoxyParamCaption}\item[{}]{class }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ std::unique\_ptr<Plugin>\ create()\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::make\_unique<class>();\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classModuleGroup}{ModuleGroup}}\ *group;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classModuleGroup}{ModuleGroup}}*\ getGroup()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ group;\ \};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ setGroup(\mbox{\hyperlink{classModuleGroup}{ModuleGroup}}\ *inGroup)\textcolor{keyword}{\ const\ override\ }\{\ group\ =\ inGroup;\ \};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{class}*\ getIndex(uint8\_t\ index)\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ if\ (index\ >=\ group-\/>\mbox{\hyperlink{classModuleGroup_a31669ae78598fbdb7e03c1bbbfc65219}{modules}}.size())\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ debugPrintln(\textcolor{stringliteral}{"{}Map\ not\ found"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ return\ ((\textcolor{keyword}{class}*)\ group-\/>\mbox{\hyperlink{classModuleGroup_a31669ae78598fbdb7e03c1bbbfc65219}{modules}}[index]);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{private}:\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ registered;\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}:}
+
+\end{DoxyCode}
+\Hypertarget{pluginhandler_8hpp_a08e4d36bf4fbf5d0f602c676445ac171}\label{pluginhandler_8hpp_a08e4d36bf4fbf5d0f602c676445ac171} 
+\index{pluginhandler.hpp@{pluginhandler.hpp}!REGISTEREXPRESSION@{REGISTEREXPRESSION}}
+\index{REGISTEREXPRESSION@{REGISTEREXPRESSION}!pluginhandler.hpp@{pluginhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{REGISTEREXPRESSION}{REGISTEREXPRESSION}}
+{\footnotesize\ttfamily \#define REGISTEREXPRESSION(\begin{DoxyParamCaption}\item[{}]{callback }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ registerExpression(\mbox{\hyperlink{classExpressionParser}{ExpressionParser}}\ *expressionParser)\textcolor{keyword}{\ override\ }\{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ if\ (expressionParser\ ==\ \textcolor{keyword}{nullptr})\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ debugPrintln(\textcolor{stringliteral}{"{}Expression\ Parser\ is\ NULL"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ expressionParser-\/>\mbox{\hyperlink{classExpressionParser_a7f2360c7cfb2d68bff735e6611004259}{registerFunction}}(tmoduleID.shortName,\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*)\ \&callback,\ TE\_FUNCTION2);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \(\backslash\)}
+
+\end{DoxyCode}
+\Hypertarget{pluginhandler_8hpp_a23e9e92f3a30c6eff4975c9d9f988d5a}\label{pluginhandler_8hpp_a23e9e92f3a30c6eff4975c9d9f988d5a} 
+\index{pluginhandler.hpp@{pluginhandler.hpp}!REGISTERPLUGIN@{REGISTERPLUGIN}}
+\index{REGISTERPLUGIN@{REGISTERPLUGIN}!pluginhandler.hpp@{pluginhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{REGISTERPLUGIN}{REGISTERPLUGIN}}
+{\footnotesize\ttfamily \#define REGISTERPLUGIN(\begin{DoxyParamCaption}\item[{}]{class }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{bool}\ class::registered\ =\ []\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ PluginFactory::instance().registerPlugin(\&class::create,\ class::getModuleIDStatic());\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ ();\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classModuleGroup}{ModuleGroup}}*\ class::group\ =\ \textcolor{keyword}{nullptr};}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{pluginhandler_8hpp_a5ff1eeee6f86bc24c60bb267464d0f87}\label{pluginhandler_8hpp_a5ff1eeee6f86bc24c60bb267464d0f87} 
+\index{pluginhandler.hpp@{pluginhandler.hpp}!convertMsToRate@{convertMsToRate}}
+\index{convertMsToRate@{convertMsToRate}!pluginhandler.hpp@{pluginhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{convertMsToRate()}{convertMsToRate()}}
+{\footnotesize\ttfamily float convert\+Ms\+To\+Rate (\begin{DoxyParamCaption}\item[{float}]{parent\+Rate,  }\item[{float}]{in\+Rate }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{pluginhandler_8hpp_a5ff1eeee6f86bc24c60bb267464d0f87_icgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,45 @@
+\doxysection{midi.\+h File Reference}
+\hypertarget{midi_8h}{}\label{midi_8h}\index{midi.h@{midi.h}}
+{\ttfamily \#include $<$base/arduinorequired.\+hpp$>$}\newline
+{\ttfamily \#include $<$master\+\_\+controller/midimessageconfiguration.\+hpp$>$}\newline
+{\ttfamily \#include $<$base/commandparser.\+hpp$>$}\newline
+{\ttfamily \#include "{}master\+\_\+controller/expressionparser.\+h"{}}\newline
+Include dependency graph for midi.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{midi_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{midi_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classMIDIHandler}{MIDIHandler}}
+\item 
+struct \mbox{\hyperlink{structMIDIHandler_1_1noteMsg}{MIDIHandler\+::note\+Msg}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Processing various MIDI messages
+
+Current POSSIBLE behavior of MIDI messages \begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000004}{Todo}}]REVISE
+\begin{DoxyItemize}
+\item Note\+On with velocity 0 sets speed only
+\item Note\+On with velocity \texorpdfstring{$>$}{>}0 sets speed and pressure
+\item Note\+Off disengage string if no notes present
+\item Aftertouch \texorpdfstring{$<$}{<}127 sets pressure only
+\item Aftertouch 127 engages solenoid
+\item Pitch bend sets frequency deviation
+\item CC 64 / 0x40 sets sustain on/off
+\item CC 16 engages solenoid
+\end{DoxyItemize}\end{DoxyRefDesc}

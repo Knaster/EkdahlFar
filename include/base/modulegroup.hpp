@@ -37,25 +37,22 @@ class ModuleGroup
 
         void help(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix);
 
-        eProcessResult processCommands(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false);
+        eProcessResult processCommands(CommandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false);
 
         SELECTION selection;
         bool singleSelection = false;
         bool mustHaveSelection = false;
         // In this bizarre contraption *self and *moduleGroup are both supposed to be 'this' but they are later recast as the Module and ModuleGroup portion of the object
 
-        void setIndexCallback(Module *inOwner, void (*inCallback)(Module *owner, ModuleGroup *moduleGroup));
-        //void setDataChangedCallback(Module *inOwner, void (*inCallback)(Module *owner, ModuleGroup *moduleGroup));
-        //std::vector<commandResponse> dumpData();
+        void setIndexCallback(Module *inOwner, bool (*inCallback)(Module *owner, ModuleGroup *moduleGroup));
         void dumpData(std::vector<commandResponse> *dataDump);
 
         std::vector<Module*> modules;
 
-        bool indexing(commandItem *inCommandItem);
+        bool indexing(CommandItem *inCommandItem);
     protected:
     private:
         bool (*indexCallback)(Module *owner, ModuleGroup *moduleGroup) = nullptr;
-        //void (*dataChanged)(Module *owner, Module *module) = nullptr;
 };
 
 #endif // MODULEGROUP_HPP

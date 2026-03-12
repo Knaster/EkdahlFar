@@ -4,10 +4,11 @@
 #include "plugins/plugin_mult.hpp"
 
 const ModuleCommandDeclaration Plugin_Mult::moduleCommands[] = {
-    { "name", "na", "name", "Sets the map name", false, true, &s_name, eCommandType::Name },
-    { "target", "tg", "commandlist*", "Sets the command string to execute whenever a connection value changes", false, true, &s_target, eCommandType::OutputAssignment },
-    { "data", "da", "(adder|ratio:id:value)", "Adds or requests data", false, true, &s_data, eCommandType::Data },
-    { "remove", "rm", "adder|ratio:id", "Removes the adder or ratio with the given id", false, true, &s_remove, eCommandType::Remove }
+    { "name", "na", "name", "Sets the map name", false, true, &s_name, eCommandType_data::ectSimpleString | eCommandType_function::ectName },
+    { "target", "tg", "commandlist*", "Sets the command string to execute whenever a connection value changes", false, true, &s_target,
+        eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression | eCommandType_function::ectAssignment, "mltout" },
+    { "data", "da", "(adder|ratio:id:value)", "Adds or requests data", false, true, &s_data, eCommandType_data::ectData | eCommandType_function::ectParameter },
+    { "remove", "rm", "adder|ratio:id", "Removes the adder or ratio with the given id", false, true, &s_remove, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectRemove }
 };
 
 getModuleCount(Plugin_Mult)
@@ -23,7 +24,7 @@ CREATE_MODULE_COMMAND_FUNCTION(remove, Plugin_Mult) {
     if (!request) {
         i = inCommandItem->argument.size();
         if ((i  % 2) != 0) { return eProcessResult::WrongArgumentCount; }
-        int j = 0, k = 0;
+        int j = 0; //, k = 0;
         std::vector<Plugin_Mult_Connector> *pmc;
         while ((j + 1) < i) {
             if (inCommandItem->argument[j] == "adder") {
@@ -59,7 +60,7 @@ CREATE_MODULE_COMMAND_FUNCTION(data, Plugin_Mult) {
     if (!request) {
         i = inCommandItem->argument.size();
         if ((i  % 3) != 0) { return eProcessResult::WrongArgumentCount; }
-        int j = 0, k = 0;
+        int j = 0; //, k = 0;
         std::vector<Plugin_Mult_Connector> *pmc;
         while ((j + 2) < i) {
             if (inCommandItem->argument[j] == "adder") {
@@ -67,6 +68,8 @@ CREATE_MODULE_COMMAND_FUNCTION(data, Plugin_Mult) {
             } else
             if (inCommandItem->argument[j] == "ratio") {
                 pmc = &ratioConnectors;
+            } else {
+                return eProcessResult::WrongArgumentValue;
             }
             connect(inCommandItem->argument[j + 1], inCommandItem->argument[j + 2].toFloat(), false, pmc);
             j += 3;
@@ -98,7 +101,7 @@ void Plugin_Mult::updateManual() {
     if (ratioConnectors.size() == 0) { ratio = 1; }
 //    debugPrintln(String(ratio), debugPrintType::Debug);
     out *= ratio;
-
+    if (out < 0) { out = 0; }
 //    if ((newTarget != lastOutput)) {
     if (pLastOutput != ((int32_t) out)) {
         String newTarget = pTarget;

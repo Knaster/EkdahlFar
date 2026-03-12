@@ -25,11 +25,13 @@
 #include "generic_functions/harmonicSeries.hpp"
 
 const ModuleCommandDeclaration HarmonicSeries::moduleCommands[] = {
-    { "", "", "int", "Sets the current Harmonic Series", false, false, nullptr, eCommandType::Index },
-    { "name", "na", "name", "Sets the name of the harmonic series", false, false, &s_name, eCommandType::Name },
-    { "data", "da", "name:ratios", "Gets / sets all data for the harmonic series in the given slot", false, true, &s_data, eCommandType::Data },
-    { "ratio", "r", "harmonic:ratio", "Sets the ratio of the given harmonic in current harmonic series, will increase the list size if needed to adress the harmonic", false, false, &s_ratio, eCommandType::SimpleFloat },
-    { "remove", "rm", "harmonic", "Remove the harmonic ratio given in the current series and shift any ratios accordingly. Cannot remove all ratios", false, false, &s_remove, eCommandType::Remove }
+    { "", "", "int", "Sets the current Harmonic Series", false, false, nullptr, eCommandType_function::ectIndex },
+    { "name", "na", "name", "Sets the name of the harmonic series", false, false, &s_name, eCommandType_function::ectName },
+    { "data", "da", "name:ratios", "Gets / sets all data for the harmonic series in the given slot", false, true, &s_data, eCommandType_data::ectData },
+    { "ratio", "r", "harmonic:ratio", "Sets the ratio of the given harmonic in current harmonic series, will increase the list size if needed to adress the harmonic", false, false, &s_ratio,
+        eCommandType_data::ectData },
+    { "remove", "rm", "harmonic", "Remove the harmonic ratio given in the current series and shift any ratios accordingly. Cannot remove all ratios", false, false, &s_remove,
+        eCommandType_function::ectRemove }
 };
 
 getModuleCount(HarmonicSeries)

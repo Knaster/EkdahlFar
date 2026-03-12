@@ -23,106 +23,61 @@
 \DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ BOWIO\_H}}
 \DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ BOWIO\_H}}
 \DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}WProgram.h"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{arduinorequired_8hpp}{base/arduinorequired.hpp}}"{}}}
 \DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}Teensy\_PWM.h"{}}}
 \DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <TMC2209.cpp>}}
-\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{servostepper_8hpp}{servostepper.hpp}}"{}}}
-\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tmc2209__servostepper_8cpp}{tmc2209\_servostepper.cpp}}"{}}}
-\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{dcmotorcontrol_8cpp}{dcmotorcontrol.cpp}}"{}}}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00037\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classbowIO}{bowIO}}\ \{}
-\DoxyCodeLine{00038\ \ \ \ \ Teensy\_PWM*\ \mbox{\hyperlink{classbowIO_a539fd24fe9ec97a49af254daf2624ef5}{bowMotorPWM}};}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tmc2209__servostepper_8hpp}{generic\_functions/tmc2209\_servostepper.hpp}}"{}}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{dcmotorcontrol_8hpp}{generic\_functions/dcmotorcontrol.hpp}}"{}}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bowpressure_8hpp}{bow/bowpressure.hpp}}"{}}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classbowIO}{bowIO}}\ \{}
+\DoxyCodeLine{00037\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ \ \ \ uint16\_t\ lastTilt\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ///<\ Last\ tilt\ value\ set}}
 \DoxyCodeLine{00039\ }
-\DoxyCodeLine{00040\ \textcolor{preprocessor}{\ \ \ \ \#define\ tachoFreqLength\ 10\ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classbowIO_a750ea0e143a2b1af9d516eec58471d16}{tachoFreq}}[\mbox{\hyperlink{bowio_8hpp_a24d78bb2c53ff0ee3960b1424380af6d}{tachoFreqLength}}];\ \ \ \ \ \ }
-\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowIO_acdfcfab19f374b4ef843654237d40248}{tachoFreqCount}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowIO_a5e067579c5f2e56d0d28714a0d3293ed}{tachoFreqIndex}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00044\ \textcolor{preprocessor}{\ \ \ \ \#define\ tachoFreqPerimssibleMIN\ 10\ \ \ \ \ \ }}
-\DoxyCodeLine{00045\ \textcolor{preprocessor}{\ \ \ \ \#define\ tachoFreqPerimssibleMAX\ 100000\ \ }}
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ \ \ \ float\ bowMotorCurrentLimit\ =\ 1.75;\ \ \ \ \ \ \ ///<\ Limit\ for\ tripping\ bow\ current\ draw\ error}}
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ \ \ \ float\ bowMotorWattage\ =\ 12.84;}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ \ \ \ Tmc2209ServoStepper\ *tmc2209ServoStepper\ =\ nullptr;}}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classDCMotorControl}{DCMotorControl}}\ *\mbox{\hyperlink{classbowIO_aba4fb03543de0d741f7c19f8b2499579}{dcMotorControl}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classBowPressure}{BowPressure}}\ *\mbox{\hyperlink{classbowIO_a597b66834f18ea0e1780a2943df8d00b}{bowPressure}}\ =\ \textcolor{keyword}{nullptr};}
 \DoxyCodeLine{00046\ }
-\DoxyCodeLine{00047\ \textcolor{preprocessor}{\ \ \ \ \#define\ permissibleFreqDeviation\ 10\ \ \ \ \ }}
-\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowIO_a72d569f27a8d29af7549e189d96e3159}{tachoOldAverage}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ \ \ \ bool\ setupTMC2209();}}
 \DoxyCodeLine{00049\ }
-\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classbowIO_a03334bc47218cd2bcdc1af4d3397efd7}{lastReflectorISRState}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classbowIO_a81178d84fd24fd44e0460dfcfdb16149}{reflectorCyclePeriod}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00052\ \ \ \ \ elapsedMicros\ \mbox{\hyperlink{classbowIO_a8524be5ec6375822275113db99378ed0}{reflectorCounter}};\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00053\ }
-\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classbowIO_ac44fcb0bdfac398a9ebf3a8e2c811f71}{reflectorZeroTimeoutValue}}\ =\ 50000;\ }
-\DoxyCodeLine{00055\ }
-\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classbowIO_a8f107cf299b70a0b1b15a1bc1553d94c}{lastBowMotorPWM}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00057\ }
-\DoxyCodeLine{00058\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00059\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classbowIO_acee6375445970bc0ecbf706d2c8e6e52}{lastTilt}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00050\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{classbowIO}{bowIO}}(\textcolor{keywordtype}{char}\ motorRevPin,\ \textcolor{keywordtype}{char}\ motorVoltagePin,\ \textcolor{keywordtype}{char}\ motorDCDCEnPin,\ \textcolor{keywordtype}{char}\ tachoPin,\ \textcolor{keywordtype}{char}\ currentSensePin,\ \textcolor{keywordtype}{char}\ motorFaultPin,\ \textcolor{keywordtype}{char}\ stepEnPin,\ \textcolor{keywordtype}{char}\ stepDirPin,\ \textcolor{keywordtype}{char}\ stepStepPin,\ HardwareSerial\ *stepSerialPort,\ \textcolor{keywordtype}{char}\ stepHomeSensorPin,\ \textcolor{keywordtype}{char}\ stepCorrectionSensorPin);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ \ \ \ float\ getLastTachoFreq();}}
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ \ \ \ float\ averageFreq();}}
+\DoxyCodeLine{00055\ \textcolor{comment}{//\ \ \ \ void\ clearTachoData();}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{comment}{//\ \ \ \ void\ setSpeedPWMSafe(uint16\_t\ speed);}}
+\DoxyCodeLine{00058\ \textcolor{comment}{//\ \ \ \ void\ setSpeedPWM(uint16\_t\ speed);}}
+\DoxyCodeLine{00059\ \textcolor{comment}{//\ \ \ \ uint16\_t\ getSpeedPWM();}}
 \DoxyCodeLine{00060\ }
-\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classbowIO_a23ab12e09c4622de7ecfaf40192884ca}{bowMotorRevPin}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classbowIO_abc53e811dffa77fee38c10a3c9a1fac3}{reflectorInterruptPin}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classbowIO_ac58364f8bdc54db6e57c9fccd128657d}{bowMotorFaultPin}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00064\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classbowIO_a27b8883e2e4be45be2aa3d72088526b8}{bowCurrentSensePin}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00061\ \textcolor{comment}{//\ \ \ \ void\ setTiltPWM(uint16\_t\ tilt);}}
+\DoxyCodeLine{00062\ \textcolor{comment}{//\ \ \ \ bool\ waitForTiltToComplete(uint16\_t\ timeout\ =\ 3000);}}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_ad696a1be1319731a12945db354dac833}{tachoISRHandler}}();}
+\DoxyCodeLine{00064\ \textcolor{comment}{//\ \ \ \ bool\ checkTimeout();}}
 \DoxyCodeLine{00065\ }
-\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowIO_ad5e3d0d8112aa11a71103da59c0b9f37}{bowMotorCurrentLimit}}\ =\ 1.75;\ \ \ \ \ \ \ }
-\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowIO_a3cb7ce3224903a11ad4dcb47cf1932e5}{bowMotorWattage}}\ =\ 12.84;}
-\DoxyCodeLine{00068\ }
-\DoxyCodeLine{00069\ \textcolor{comment}{//\ \ \ \ servoStepper\ *stepServoStepper\ =\ nullptr;}}
-\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper}{Tmc2209ServoStepper}}\ *\mbox{\hyperlink{classbowIO_a802c5cbbe1a33a6a2e75b977993ddcee}{tmc2209ServoStepper}}\ =\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00071\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_ab0bb402f5ebc7607c4e3f473f58e914a}{addTachoFreq}}(\textcolor{keywordtype}{float}\ freq);}
-\DoxyCodeLine{00073\ }
-\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a589985b295184b0e30ceb431cde58b3b}{setupTMC2209}}();}
-\DoxyCodeLine{00075\ }
-\DoxyCodeLine{00076\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classbowIO_a71c9fc86984dee46a8c99aa8f8400b40}{bowMotorDCDCEnPin}};}
-\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a479d2039d425958e967a4f67f224f034}{bowMotorDCDCEn}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00078\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classbowIO_a5ef03477cae4e221c63371c8596382a5}{bowMotorVoltagePin}};}
-\DoxyCodeLine{00079\ \ \ \ \ Teensy\_PWM\ *\mbox{\hyperlink{classbowIO_a6e876e9d929f90c6e064d994bdf89ea1}{bowMotorVoltagePWM}};}
+\DoxyCodeLine{00066\ \textcolor{comment}{//\ \ \ \ bool\ setBowMotorVoltage(float\ voltage);}}
+\DoxyCodeLine{00067\ \textcolor{comment}{//\ \ \ \ float\ getBowMotorVoltage();}}
+\DoxyCodeLine{00068\ \textcolor{comment}{//\ \ \ \ bool\ disableBowPower();}}
+\DoxyCodeLine{00069\ \textcolor{comment}{//\ \ \ \ bool\ enableBowPower();}}
+\DoxyCodeLine{00070\ \textcolor{comment}{//\ \ \ \ void\ getTMC2209Info();}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{comment}{//\ \ \ \ float\ getBowCurrent();}}
+\DoxyCodeLine{00073\ \textcolor{comment}{//\ \ \ \ bool\ bowOverCurrent();}}
+\DoxyCodeLine{00074\ \textcolor{comment}{//\ \ \ \ bool\ bowOverPower();}}
+\DoxyCodeLine{00075\ \textcolor{comment}{//\ \ \ \ bool\ getMotorFault();}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ String\ \mbox{\hyperlink{classbowIO_a10371f6b9c9c3f2a4690040d144c2320}{dumpData}}();}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{comment}{//\ \ \ \ bool\ emergencyBowDisable(uint16\_t\ coolDown);\ \ \ \ //\ Emergency\ disable\ of\ power\ with\ a\ required\ cooldown\ period\ before\ bow\ is\ allowed\ to\ be\ started\ again}}
 \DoxyCodeLine{00080\ }
-\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowIO_a4898e1b1bb2261a8d5a162377e8f4529}{bowMotorVoltage}}\ =\ 6.6;}
-\DoxyCodeLine{00082\ }
-\DoxyCodeLine{00083\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowIO_a3710c97bb9e51a9f0b0f3b9ad5a98625}{tiltAdjust}}\ =\ 0;\ \ \ \ \ }
-\DoxyCodeLine{00085\ }
-\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{classbowIO}{bowIO}}(\textcolor{keywordtype}{char}\ motorRevPin,\ \textcolor{keywordtype}{char}\ motorVoltagePin,\ \textcolor{keywordtype}{char}\ motorDCDCEnPin,\ \textcolor{keywordtype}{char}\ tachoPin,\ \textcolor{keywordtype}{char}\ currentSensePin,\ \textcolor{keywordtype}{char}\ motorFaultPin,\ \textcolor{keywordtype}{char}\ stepEnPin,\ \textcolor{keywordtype}{char}\ stepDirPin,\ \textcolor{keywordtype}{char}\ stepStepPin,\ HardwareSerial\ *stepSerialPort,\ \textcolor{keywordtype}{char}\ stepHomeSensorPin,\ \textcolor{keywordtype}{char}\ stepCorrectionSensorPin);}
-\DoxyCodeLine{00087\ }
-\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowIO_a685e1ba9c2a8a77ac8286a229e8a7f0c}{getLastTachoFreq}}();}
-\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowIO_a4f7ef490b19cc4d9d6e3bd2e65d77061}{averageFreq}}();}
-\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_a63fefac92798add272f8ac75b6bdd432}{clearTachoData}}();}
-\DoxyCodeLine{00091\ }
-\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_aa6270522a1d74af01e1328d6d9f25d5d}{setSpeedPWMSafe}}(uint16\_t\ speed);}
-\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_aa614cecda8ea9c77d0fd85987a8e26e8}{setSpeedPWM}}(uint16\_t\ speed);}
-\DoxyCodeLine{00094\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classbowIO_a8593c08923868a21d8bdc463ef14e0b1}{getSpeedPWM}}();}
-\DoxyCodeLine{00095\ }
-\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_a105d8980fb4e0596755e8d337144aae6}{setTiltPWM}}(uint16\_t\ tilt);}
-\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a8d4057a6d30a1394038afbe2e2752286}{waitForTiltToComplete}}(uint16\_t\ timeout\ =\ 3000);}
-\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_ad696a1be1319731a12945db354dac833}{tachoISRHandler}}();}
-\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_ab579e762084f1b384c5a6c1b968cd769}{checkTimeout}}();}
-\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_a6bb3298b28dd27eb77287589ab5b9e82}{updateBow}}();}
-\DoxyCodeLine{00101\ }
-\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a06a6d2dab473c40d8089b10114f06f83}{createStepper}}(\textcolor{keywordtype}{byte}\ \_pinStep,\ \textcolor{keywordtype}{byte}\ \_pinDir,\ \textcolor{keywordtype}{byte}\ \_pinHome);}
-\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a5862fd84eae540cec06f7cf6b01b2724}{setBowMotorVoltage}}(\textcolor{keywordtype}{float}\ voltage);}
-\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowIO_a52974e4eccc141a2971174983d50dc12}{getBowMotorVoltage}}();}
-\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_af543966b009896f0e529909262be4c87}{disableBowPower}}();}
-\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a93f89060d1b63b5433dda54836075efa}{enableBowPower}}();}
-\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbowIO_a76c490095ad46b62c107b738a423c321}{getTMC2209Info}}();}
-\DoxyCodeLine{00108\ }
-\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbowIO_a563fccfa0253235dfdb061135c9ddbd8}{getBowCurrent}}();}
-\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a25eabc5e7b0c82b2d117586d155aae66}{bowOverCurrent}}();}
-\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a147462aa41b453a7096c94f93be3d38b}{bowOverPower}}();}
-\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a951120e99c2120a3c7e07181cafc621a}{getMotorFault}}();}
-\DoxyCodeLine{00113\ }
-\DoxyCodeLine{00114\ \ \ \ \ String\ \mbox{\hyperlink{classbowIO_a10371f6b9c9c3f2a4690040d144c2320}{dumpData}}();}
-\DoxyCodeLine{00115\ }
-\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_acc60f3a0b373a28fb864a4ac352a60fa}{bowOverPowerFlag}}\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \textcolor{comment}{//\ External\ flag\ to\ show\ a\ over-\/power\ event\ has\ happend,\ taking\ into\ account\ the\ duration\ of\ the\ event\ etc.}}
-\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_ae3e77ef140722811625e332893d49cf9}{transientOverPower}}\ =\ \textcolor{keyword}{false};\ \ \textcolor{comment}{//\ Set\ to\ true\ at\ first\ over-\/power\ event,\ cleared\ if\ bow\ is\ not\ over\ power}}
-\DoxyCodeLine{00118\ \ \ \ \ elapsedMillis\ \mbox{\hyperlink{classbowIO_ab727c8be7d25fd0a28a3a8a2342942f2}{lastBowOverPowerEvent}};}
-\DoxyCodeLine{00119\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classbowIO_a2e31bad3796820041267074775c177c4}{bowOverPowerDuration}}\ =\ 100;\ \textcolor{comment}{//\ If\ bow\ over\ power\ events\ are\ going\ past\ the\ duration\ (in\ ms),\ signal\ the\ over\ power\ event}}
-\DoxyCodeLine{00120\ }
-\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a49e01939c12fc4b187a4541b79d53a1c}{emergencyBowDisable}}(uint16\_t\ coolDown);\ \ \ \ \textcolor{comment}{//\ Emergency\ disable\ of\ power\ with\ a\ required\ cooldown\ period\ before\ bow\ is\ allowed\ to\ be\ started\ again}}
-\DoxyCodeLine{00122\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classbowIO_ad74acda96a684931e59b63cb22a4610c}{emergencyCoolDownEvent}};}
-\DoxyCodeLine{00123\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classbowIO_ad85cc8a8b92f106e1def85add4121c66}{emergencyCoolDownPeriod}}\ =\ 1000;}
-\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a1445e6b0237c568d3fdf19fd710d585e}{emergencyCoolDown}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00125\ }
-\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classbowIO_a090ba4c4cb860b6aa26cd80d6bc079e1}{homeBow}}(\textcolor{keywordtype}{bool}\ invert\ =\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00127\ \};}
-\DoxyCodeLine{00128\ }
-\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00081\ \textcolor{comment}{//\ \ \ \ bool\ homeBow(bool\ invert\ =\ false);}}
+\DoxyCodeLine{00082\ \};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

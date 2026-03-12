@@ -16,20 +16,14 @@ obj/Release/src/pickup/audioanalyze.o: src/pickup/audioanalyze.cpp \
  lib/teensy4/elapsedMillis.h lib/teensy4/WProgram.h \
  lib/teensy4/IntervalTimer.h lib/teensy4/CrashReport.h \
  lib/teensy4/Printable.h lib/teensy4/WString.h \
- lib/SafeString/src/SerialComs.h lib/SafeString/src/SafeStringReader.h \
- lib/teensy4/Arduino.h lib/SafeString/src/SafeString.h \
- lib/teensy4/Print.h lib/teensy4/Stream.h \
- lib/SafeString/src/SafeStringNameSpaceStart.h \
- lib/SafeString/src/SafeStringNameSpaceEnd.h \
- lib/SafeString/src/millisDelay.h lib/SafeString/src/millisDelay.h \
  include/base/debugprint.hpp lib/Audio/Audio.h lib/teensy4/DMAChannel.h \
- lib/Audio/analyze_fft256.h lib/teensy4/AudioStream.h \
- lib/teensy4/arm_math.h lib/teensy4/core_cmInstr.h \
- lib/Audio/analyze_fft1024.h lib/Audio/analyze_print.h \
- lib/Audio/analyze_tonedetect.h lib/Audio/analyze_notefreq.h \
- lib/Audio/analyze_peak.h lib/Audio/analyze_rms.h \
- lib/Audio/async_input_spdif3.h lib/Audio/Resampler.h \
- lib/Audio/Quantizer.h lib/Audio/control_sgtl5000.h \
+ lib/Audio/analyze_fft256.h lib/teensy4/Arduino.h \
+ lib/teensy4/AudioStream.h lib/teensy4/arm_math.h \
+ lib/teensy4/core_cmInstr.h lib/Audio/analyze_fft1024.h \
+ lib/Audio/analyze_print.h lib/Audio/analyze_tonedetect.h \
+ lib/Audio/analyze_notefreq.h lib/Audio/analyze_peak.h \
+ lib/Audio/analyze_rms.h lib/Audio/async_input_spdif3.h \
+ lib/Audio/Resampler.h lib/Audio/Quantizer.h lib/Audio/control_sgtl5000.h \
  lib/Audio/AudioControl.h lib/Audio/control_wm8731.h \
  lib/Audio/control_ak4558.h lib/Audio/control_cs4272.h \
  lib/Audio/control_cs42448.h lib/Audio/control_tlv320aic3206.h \

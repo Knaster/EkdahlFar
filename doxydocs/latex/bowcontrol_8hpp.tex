@@ -1,8 +1,11 @@
 \doxysection{bowcontrol.\+hpp File Reference}
 \hypertarget{bowcontrol_8hpp}{}\label{bowcontrol_8hpp}\index{bowcontrol.hpp@{bowcontrol.hpp}}
-{\ttfamily \#include "{}bowpressure.\+cpp"{}}\newline
-{\ttfamily \#include "{}pidcontroller.\+cpp"{}}\newline
-Include dependency graph for bowcontrol.\+hpp\+:\nopagebreak
+{\ttfamily \#include "{}generic\+\_\+functions/bow\+Actuators.\+hpp"{}}\newline
+{\ttfamily \#include "{}bow/bowpressure.\+hpp"{}}\newline
+{\ttfamily \#include "{}generic\+\_\+functions/pidcontroller.\+hpp"{}}\newline
+{\ttfamily \#include "{}generic\+\_\+functions/harmonicserieshandler.\+hpp"{}}\newline
+Include dependency graph for bowcontrol.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -13,7 +16,7 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=222pt]{bowcontrol_8hpp__dep__incl}
+\includegraphics[width=350pt]{bowcontrol_8hpp__dep__incl}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Classes}
@@ -27,11 +30,6 @@ class \mbox{\hyperlink{classBowControl}{Bow\+Control}}
 enum \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82}{e\+Speed\+Mode}} \{ \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389}{Automatic}}
 , \mbox{\hyperlink{bowcontrol_8hpp_a85d7864d6d68b5370e4f7aa90eb2fb82acad5010fb34447633f3139d69698a0f0}{Manual}}
  \}
-\end{DoxyCompactItemize}
-\doxysubsubsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} \mbox{\hyperlink{bowcontrol_8hpp_a7f6aed390f9ba1cf16fb5eadd20ea985}{serial\+Commands\+Bow\+Control}} \mbox{[}$\,$\mbox{]}
 \end{DoxyCompactItemize}
 
 
@@ -52,25 +50,3 @@ Manual&\\
 \hline
 
 \end{DoxyEnumFields}
-
-
-\doxysubsection{Variable Documentation}
-\Hypertarget{bowcontrol_8hpp_a7f6aed390f9ba1cf16fb5eadd20ea985}\label{bowcontrol_8hpp_a7f6aed390f9ba1cf16fb5eadd20ea985} 
-\index{bowcontrol.hpp@{bowcontrol.hpp}!serialCommandsBowControl@{serialCommandsBowControl}}
-\index{serialCommandsBowControl@{serialCommandsBowControl}!bowcontrol.hpp@{bowcontrol.hpp}}
-\doxysubsubsection{\texorpdfstring{serialCommandsBowControl}{serialCommandsBowControl}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Commands\+Bow\+Control\mbox{[}$\,$\mbox{]}}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{=\ \{}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcontrolspeedmode"{}},\ \textcolor{stringliteral}{"{}bcsm"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ speed\ mode,\ 0\ =\ Automatic\ and\ 1\ =\ Manual"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotortimeout"{}},\ \textcolor{stringliteral}{"{}bmt"{}},\ \textcolor{stringliteral}{"{}ms(0-\/65535)"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ shutdown\ timeout\ after\ bow\ having\ been\ put\ into\ the\ rest\ position"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotordirectpwm"{}},\ \textcolor{stringliteral}{"{}bmdp"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ direct\ power\ in\ 16-\/bit\ PWM\ values,\ requires\ that\ the\ PID\ is\ turned\ off"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpid"{}},\ \textcolor{stringliteral}{"{}bpid"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ bow\ PID\ on/off"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorrun"{}},\ \textcolor{stringliteral}{"{}bmr"{}},\ \textcolor{stringliteral}{"{}1|0"{}},\ \textcolor{stringliteral}{"{}Set\ bow\ motor\ run\ on/off"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorfaultcommands"{}},\ \textcolor{stringliteral}{"{}bmfc"{}},\ \textcolor{stringliteral}{"{}command\ list"{}},\ \textcolor{stringliteral}{"{}Commands\ to\ execute\ when\ a\ motor\ fault\ is\ tripped\ -\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotoroverpowercommands"{}},\ \textcolor{stringliteral}{"{}bmopc"{}},\ \textcolor{stringliteral}{"{}command\ list"{}},\ \textcolor{stringliteral}{"{}Commands\ to\ execute\ when\ motor\ is\ over\ the\ power\ limit\ -\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}}\ \},}
-\DoxyCodeLine{\}}
-
-\end{DoxyCode}

@@ -1,0 +1,49 @@
+\doxysection{expressionparser.\+h}
+\hypertarget{expressionparser_8h_source}{}\label{expressionparser_8h_source}\index{expressionparser.h@{expressionparser.h}}
+\mbox{\hyperlink{expressionparser_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ EXPRESSIONPARSER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ EXPRESSIONPARSER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}tinyexpr.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{arduinorequired_8hpp}{base/arduinorequired.hpp}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{expressionparser_8h_a32ef6f5dfb2bf18814707509a33b56d6}{dMap}}[];}
+\DoxyCodeLine{00009\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{expressionparser_8h_add91d24a5eea2bc734c1f083b2a0870b}{epZeroThreshold}};}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classExpressionParser}{ExpressionParser}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classExpressionParser_a0a4115f690bf018efe686cd2355b3aa5}{dnote}};}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classExpressionParser_a48ae31637269c9fb1e99c235b36dd753}{dchannel}};}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classExpressionParser_abfd334fe25ae573583c5d003b1450fa8}{dvelocity}};}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classExpressionParser_a0b8753a9f6d1cecd24f3319323b47017}{dnotecount}};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classExpressionParser_a578792de49e34a10660ac02985f62eb8}{dpressure}};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classExpressionParser_a6d8484e6cb52d2a255f637d591786d48}{dvalue}};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classExpressionParser_ad163507b5e0cf5897c92418db23a9706}{dpitch}};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classExpressionParser_a2d053002eefee94cc5b571936ebb2584}{dprogram}};}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\ \ \ \ \#define\ userVariableMax\ 10}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classExpressionParser_a647fb9673d69abca8a207658a3581b77}{duv}}[\mbox{\hyperlink{expressionparser_8h_ac95cb2b2f0097507ba0b2e1666593a4a}{userVariableMax}}]\ =\ \{\ 0,0,0,0,0,0,0,0,0,0\ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00025\ \ \ \ \ std::vector<te\_variable>\ \mbox{\hyperlink{classExpressionParser_a0294a888221b1ce371d92e4dd4149492}{expFunctions}};}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ \ \ \#define\ expFunctionCount\ expFunctions.size()}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classExpressionParser_a85ab06921e8e0044eb9c37f793ec7ff1}{expBool}}(\textcolor{keywordtype}{double}\ input);}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classExpressionParser_ac95a8bc01bb231f9a6f5396fa45f1929}{expIBool}}(\textcolor{keywordtype}{double}\ input);}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classExpressionParser_a377ade2f443753aca8ea271dfa77a130}{deadband}}(\textcolor{keywordtype}{double}\ value,\ \textcolor{keywordtype}{double}\ threshold);}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classExpressionParser_a19395c27fb150f86e109fd9c67fd1a7b}{zeroThreshold}}(\textcolor{keywordtype}{double}\ value);}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classExpressionParser_a3eb34cc9d95481c2cf0a3a94bc4d4463}{ifequal}}(\textcolor{keywordtype}{double}\ value,\ \textcolor{keywordtype}{double}\ comp,\ String\ \mbox{\hyperlink{classcommandList}{commandList}});}
+\DoxyCodeLine{00033\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classExpressionParser_a2f33225f51f7d0e3f9e40098a6a16597}{ExpressionParser}}();}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ String\ \mbox{\hyperlink{classExpressionParser_a3993cc93af8bd57bd07f9fffe60b4639}{parseCommandExpressions}}(String\ expression);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classExpressionParser_a7f2360c7cfb2d68bff735e6611004259}{registerFunction}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *name,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *address,\ \textcolor{keywordtype}{int}\ type);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classExpressionParser_a37d64b2ffae00af45e5adc5f1c356a28}{setVariable}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name,\ \textcolor{keywordtype}{double}\ value);}
+\DoxyCodeLine{00041\ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EXPRESSIONPARSER\_H}}
+
+\end{DoxyCode}

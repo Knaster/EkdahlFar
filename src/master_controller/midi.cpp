@@ -59,7 +59,24 @@ void MIDIHandler::updateLocalVariables() {
 void MIDIHandler::processLocalMessage(String *message) {
     updateLocalVariables();
     globalResponseCommands.addCommands(*message);
-    globalResponseCommands.parseCommandExpressions(*expressionParser);
+//    globalResponseCommands.parseCommandExpressions(*expressionParser);
+
+    globalResponseCommands.waitIfProcessing();
+    String debugOut;
+    debugOut = "Command sequence ";
+    for (int i = 0; i < int(globalResponseCommands.item.size()); i++) {
+//        debugOut += globalResponseCommands.item[i].command;
+        debugOut += globalResponseCommands.item[i].hierarchy[0].name;
+        for (int j = 0; j < int(globalResponseCommands.item[i].argument.size()); j++) {
+            globalResponseCommands.item[i].argument[j] = stripQuotes(globalResponseCommands.item[i].argument[j]);
+
+            debugOut +=  ":";
+            globalResponseCommands.item[i].argument[j] = expressionParser->parseCommandExpressions(globalResponseCommands.item[i].argument[j]);
+            debugOut += globalResponseCommands.item[i].argument[j];
+        }
+        debugOut += " ";
+    }
+    debugPrintln(debugOut, EParser);
 }
 /** messaging system end **/
 
@@ -138,7 +155,7 @@ void MIDIHandler::OnNoteOff(byte channel, byte note, byte velocity) {
         setNotes();
     }
 
-    debugPrintln("NoteOff with note " + String(note) + " at velocity " + String(velocity), USB);
+    debugPrintln("NoteOff with note " + String(note) + " at velocity " + String(velocity), dpUSB);
 }
 
 /// Handles note on messages
@@ -148,7 +165,7 @@ void MIDIHandler::OnNoteOn(byte channel, byte note, byte velocity) {
     if ((midiMessageConfiguration->midiRxChannel != channel) && (midiMessageConfiguration->midiRxChannel < 17) &&
         (midiMessageConfiguration->midiRxChannel > 0)) { return; }
 
-    debugPrintln("NoteOn with note " + String(note) + " at velocity " + String(velocity), USB);
+    debugPrintln("NoteOn with note " + String(note) + " at velocity " + String(velocity), dpUSB);
     if (velocity == 0) {
         OnNoteOff(channel, note, velocity);
         return;
@@ -173,7 +190,7 @@ void MIDIHandler::OnAfterTouchPoly(byte channel, byte note, byte pressure) {
 
     processLocalMessage(&midiMessageConfiguration->midiEventMap[midiMessageConfiguration->eMIDIEvent::ev_polyAfterTouch]);
 
-    debugPrintln("PolyAT on channel " + String(channel) + " note " + String(note) + " value " + String(pressure), USB);
+    debugPrintln("PolyAT on channel " + String(channel) + " note " + String(note) + " value " + String(pressure), dpUSB);
 }
 
 /// Handle poly aftertouch message
@@ -188,7 +205,7 @@ void MIDIHandler::OnChannelAftertouch(byte channel, byte pressure) {
 
     processLocalMessage(&midiMessageConfiguration->midiEventMap[midiMessageConfiguration->eMIDIEvent::ev_channelAftertouch]);
 
-    debugPrintln("ChannelAT on channel " + String(channel) + " value " + String(pressure), USB);
+    debugPrintln("ChannelAT on channel " + String(channel) + " value " + String(pressure), dpUSB);
 }
 
 /// handle control change message
@@ -197,7 +214,7 @@ void MIDIHandler::OnControlChange(byte channel, byte control, byte value) {
     if ((midiMessageConfiguration->midiRxChannel != channel) && (midiMessageConfiguration->midiRxChannel < 17) &&
         (midiMessageConfiguration->midiRxChannel > 0)) { return; }
 
-    debugPrintln("Control change on channel " + String(channel) + " control " + String(control) + " value " + String(value), USB);
+    debugPrintln("Control change on channel " + String(channel) + " control " + String(control) + " value " + String(value), dpUSB);
 
     for (int i = 0; i < int(midiMessageConfiguration->controlChange.size()); i++) {
         if (midiMessageConfiguration->controlChange[i].control == control) {
@@ -224,7 +241,7 @@ void MIDIHandler::midiAllNotesOff() {
         processLocalMessage(&midiMessageConfiguration->midiEventMap[midiMessageConfiguration->eMIDIEvent::ev_noteOff]);
         notesHeld.clear();
     }
-    debugPrintln("All notes off", USB);
+    debugPrintln("All notes off", dpUSB);
 }
 
 /// handle pitch bend message
@@ -238,7 +255,7 @@ void MIDIHandler::OnPitchBend(byte channel, int pitch) {
     expressionParser->dpitch = pitch;
 
     processLocalMessage(&midiMessageConfiguration->midiEventMap[midiMessageConfiguration->eMIDIEvent::ev_PitchBend]);
-    debugPrintln("Pitch bend on channel " + String(channel) + " value " + String(pitch), USB);
+    debugPrintln("Pitch bend on channel " + String(channel) + " value " + String(pitch), dpUSB);
 }
 
 void MIDIHandler::OnProgramChange(uint8_t channel, uint8_t program) {
@@ -251,6 +268,6 @@ void MIDIHandler::OnProgramChange(uint8_t channel, uint8_t program) {
     expressionParser->dprogram = program;
 
     processLocalMessage(&midiMessageConfiguration->midiEventMap[midiMessageConfiguration->eMIDIEvent::ev_programChange]);
-    debugPrintln("Program change on channel " + String(channel) + " program " + String(program), USB);
+    debugPrintln("Program change on channel " + String(channel) + " program " + String(program), dpUSB);
 }
 #endif

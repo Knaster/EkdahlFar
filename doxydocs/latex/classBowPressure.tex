@@ -6,11 +6,20 @@
 
 
 
+Inheritance diagram for Bow\+Pressure\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{classBowPressure__inherit__graph}
+\end{center}
+\end{figure}
+
+
 Collaboration diagram for Bow\+Pressure\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=256pt]{classBowPressure__coll__graph}
+\includegraphics[width=350pt]{classBowPressure__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Public Member Functions}
@@ -18,11 +27,9 @@ Collaboration diagram for Bow\+Pressure\+:\nopagebreak
 \item 
 \mbox{\hyperlink{classBowPressure_a1b32a6eb3949b425effb931f456b7fa9}{Bow\+Pressure}} (char step\+En\+Pin, char step\+Dir\+Pin, char step\+Step\+Pin, Hardware\+Serial \texorpdfstring{$\ast$}{*}step\+Serial\+Port, char step\+Home\+Sensor\+Pin)
 \item 
-\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classBowPressure_aa8bdebfaa32dc5d991a77270d0d37f06}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+void \mbox{\hyperlink{classBowPressure_a28621198e7b76c9d94124e69a1728841}{set\+Rest\+Signal}} ()
 \item 
-\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classBowPressure_aca49dc9352f13a5d6099d0025f597f25}{process\+Serial\+Command\+Hidden}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
-\item 
-String \mbox{\hyperlink{classBowPressure_a4a8fb49c23e85135bdbb93ce6e038aab}{dump\+Data}} ()
+bool \mbox{\hyperlink{classBowPressure_aa493cbbbcd42b766a335e0573ab4dc17}{get\+Rest\+Signal}} ()
 \item 
 void \mbox{\hyperlink{classBowPressure_a2e73720f7117effca0ef47ef37324a81}{set\+Pressure\+Safe}} (uint16\+\_\+t pressure)
 \item 
@@ -38,15 +45,15 @@ bool \mbox{\hyperlink{classBowPressure_aa5dc5f078942e290f8002f3877dac307}{rest}}
 \item 
 bool \mbox{\hyperlink{classBowPressure_aad1b47b9e6d76276ed84faadc55d7a9d}{engage}} (bool enact)
 \item 
-void \mbox{\hyperlink{classBowPressure_a416727ac846bccf9dfb717e1398da6ea}{set\+Max\+Pressure}} (uint16\+\_\+t in\+Max\+Pressure)
+bool \mbox{\hyperlink{classBowPressure_ac929f8c2e086e80da772c42be1167f5e}{set\+Stall\+Pressure}} (uint16\+\_\+t in\+Stall\+Pressure)
 \item 
-uint16\+\_\+t \mbox{\hyperlink{classBowPressure_a45dfd77ba57d2da2c28dbc5a091474de}{get\+Max\+Pressure}} ()
+uint16\+\_\+t \mbox{\hyperlink{classBowPressure_a7ce72570971f0fcd0cc8341fa14062ec}{get\+Stall\+Pressure}} ()
 \item 
-void \mbox{\hyperlink{classBowPressure_a4611209843a2926626d508b3854d6e44}{set\+Engage\+Pressure}} (uint16\+\_\+t in\+Engage\+Pressure)
+bool \mbox{\hyperlink{classBowPressure_a94f290e2387a4d90308cf79abc349801}{set\+Engage\+Pressure}} (uint16\+\_\+t in\+Engage\+Pressure)
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classBowPressure_aae47b143f75a91e727d6951e749ff0ee}{get\+Engage\+Pressure}} ()
 \item 
-void \mbox{\hyperlink{classBowPressure_ad95f948f469b5535e764d556305d2ce1}{set\+Rest\+Pressure}} (uint16\+\_\+t in\+Rest\+Pressure)
+bool \mbox{\hyperlink{classBowPressure_ac421b9d9ef7a02853fc22f8ac21df3bd}{set\+Rest\+Pressure}} (uint16\+\_\+t in\+Rest\+Pressure)
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classBowPressure_a157b3023b744d32eb53b838e9f49a9f3}{get\+Rest\+Pressure}} ()
 \item 
@@ -76,13 +83,62 @@ void \mbox{\hyperlink{classBowPressure_ad171c8f304d6cba6e524bd2f5202fa0c}{update
 \item 
 void \mbox{\hyperlink{classBowPressure_a0891ff0635cc2954afd32081144fecc5}{set\+Step\+Interval\+Callback}} (void \texorpdfstring{$\ast$}{*}step\+Interval\+Callback)
 \end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleHandler}{Module\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModuleHandler_a9eb2f015987df6e507d2e2f7281cc520}{Module\+Handler}} ()
+\item 
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModuleHandler_aba53cb524d3e200345c18bbaf96adaf2}{process\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false) override
+\item 
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModuleHandler_aa8b5a72e62b7a43ac40822461f535c0c}{process\+Module\+Handler\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structcommandResponse}{command\+Response}}, bool request=false)
+\item 
+void \mbox{\hyperlink{classModuleHandler_a8086440da55f316a89562f2a736a1ab6}{dir}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix, bool hidden, bool modules, bool commands, bool instances, bool instance\+Count, bool recursive) override
+\item 
+void \mbox{\hyperlink{classModuleHandler_a9c235cdcf6965c856fcb2be82cc46175}{help}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix)
+\item 
+\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleHandler_ab87ee8507b0edd4888eaa422f189d716}{get\+Group}} (String long\+Name)
+\item 
+void \mbox{\hyperlink{classModuleHandler_ae3fa5b4e5e4fa54687c3d26e0d937782}{dump\+Data}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}data\+Dump)
+\item 
+\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleHandler_aa8b0ee11f9f981d5d791e0994618377b}{add\+Module}} (\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}module)
+\item 
+\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleHandler_a25c83b60da881f9c0dd2886e6a89e631}{add\+Group}} (\mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} in\+Module\+ID)
+\item 
+virtual void \mbox{\hyperlink{classModuleHandler_aeb0456562a8743c5f4cf5d4aa9a474eb}{add\+Instances}} (String name, uint8\+\_\+t count)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule_a5a240a8a9ab1813b17bcb810b24ceaea}{Module}} ()
+\item 
+virtual const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{get\+Module\+ID}} () const =0
+\item 
+virtual \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a9a13ef0a8291e562a9557c311d07b334}{get\+Module\+ID}} ()=0
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a534a35eb18ec29dbcc8bafce30c21128}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_af7fe70cf55b7c8999672c8a202cbdb71}{process\+Module\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual int \mbox{\hyperlink{classModule_ae6fa72e64554ee0b09a8bb6a77a68640}{get\+Module\+Command\+Count}} ()
+\item 
+bool \mbox{\hyperlink{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2}{has\+Data\+Change}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleCommand}{Module\+Command}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModuleCommand_a4ce6a1d032eaa918f21ad8121ba59094}{get\+Module\+Command}} (uint8\+\_\+t i) const =0
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 bool \mbox{\hyperlink{classBowPressure_a668f5460844d279cf7c6c953e6945846}{calculate\+Baseline\+Modifier\+Pressure}} ()
-\begin{DoxyCompactList}\small\item\em Calculate the tilt PWM value using baseline\+Tilt\+PWM and modfier\+Tilt\+PWM and send it to Bow\+IO. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Calculate the tilt PWM value using baseline\+Tilt\+PWM and modfier\+Tilt\+PWM and send it to Bow\+IO. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classBowActuator}{Bow\+Actuator}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classBowPressure_a7d6da8c4bd6a4ce287ab7871456ec850}{current\+Actuator}} ()
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBowActuators}{Bow\+Actuators}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classBowPressure_a4599e64cafd8d529c6d360db86ce95e1}{bow\+Actuators}} = nullptr
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classBowPressure_aa2552be4057976c6300d665e3754f614}{last\+Pressure}} = 0
 \item 
@@ -94,19 +150,36 @@ uint16\+\_\+t \mbox{\hyperlink{classBowPressure_a2ac10d76e0df06070fd49145f85ba7b
 \begin{DoxyCompactList}\small\item\em The modifier pressure value used in conjunction with the baseline\+Pressure when engaing the bow with the string. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0c}{e\+Pressure\+Mode}} \mbox{\hyperlink{classBowPressure_af0ef8867c993193742218555a8dbb87c}{pressure\+Mode}} = \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0ca661e967c4cfe56fd40a290550b64d8dc}{e\+Pressure\+Mode\+::\+Rest}}
 \item 
-uint16\+\_\+t \mbox{\hyperlink{classBowPressure_a15e38408cb66e1b8b39f27807432c690}{max\+Pressure}} = 65535
-\item 
-uint16\+\_\+t \mbox{\hyperlink{classBowPressure_a33bb0a93bce1acece0abcf94178247d0}{engage\+Pressure}} = 0
-\item 
-uint16\+\_\+t \mbox{\hyperlink{classBowPressure_a8ce241e7ebc5a5a529e57518522fd728}{rest\+Pressure}} = 0
-\item 
 float \mbox{\hyperlink{classBowPressure_a406b45eee9f49aef1b661179878d6bd9}{speed\+To\+Engage}} = 10
 \item 
 float \mbox{\hyperlink{classBowPressure_a4283e4fada48c2d67a8d2422de2333de}{speed\+While\+Engaged}} = 10
 \item 
 bool \mbox{\hyperlink{classBowPressure_aed90e56b13c8a931c438b3bdcc33fb1d}{reached\+Engage}} = false
 \item 
-bool \mbox{\hyperlink{classBowPressure_ab67217a30161b84c2ac438065c995e9c}{hold}} = false
+bool \mbox{\hyperlink{classBowPressure_a1b922bec4cc06db14a5c4e23781883ab}{p\+Hold}} = false
+\item 
+bool \mbox{\hyperlink{classBowPressure_acaaf417aaefc9cad4e6260e6476c2cb1}{rest\+Signal}} = false
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModuleHandler}{Module\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classModuleGroup}{Module\+Group}} $>$ \mbox{\hyperlink{classModuleHandler_a1913f2c62636218e752bbf72de5e45af}{module\+Groups}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classModule_aa09bd171529da96438e917258ab5ab8d}{is\+Group\+Handler}} = false
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}{set\+Data\+Changed}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModule_ad85cad50c5538cc47c6d3ac76500e4cf}{owner}} = nullptr
 \end{DoxyCompactItemize}
 
 
@@ -164,17 +237,24 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classBowPressure_a20fcb7c6a4854837052bf696baaa7579_icgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classBowPressure_a4a8fb49c23e85135bdbb93ce6e038aab}\label{classBowPressure_a4a8fb49c23e85135bdbb93ce6e038aab} 
-\index{BowPressure@{BowPressure}!dumpData@{dumpData}}
-\index{dumpData@{dumpData}!BowPressure@{BowPressure}}
-\doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
-{\footnotesize\ttfamily String Bow\+Pressure\+::dump\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\Hypertarget{classBowPressure_a7d6da8c4bd6a4ce287ab7871456ec850}\label{classBowPressure_a7d6da8c4bd6a4ce287ab7871456ec850} 
+\index{BowPressure@{BowPressure}!currentActuator@{currentActuator}}
+\index{currentActuator@{currentActuator}!BowPressure@{BowPressure}}
+\doxysubsubsection{\texorpdfstring{currentActuator()}{currentActuator()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classBowActuator}{Bow\+Actuator}} \texorpdfstring{$\ast$}{*} Bow\+Pressure\+::current\+Actuator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowPressure_a7d6da8c4bd6a4ce287ab7871456ec850_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classBowPressure_a4a8fb49c23e85135bdbb93ce6e038aab_icgraph}
+\includegraphics[width=350pt]{classBowPressure_a7d6da8c4bd6a4ce287ab7871456ec850_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classBowPressure_aad1b47b9e6d76276ed84faadc55d7a9d}\label{classBowPressure_aad1b47b9e6d76276ed84faadc55d7a9d} 
@@ -214,8 +294,15 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{BowPressure@{BowPressure}!getEngagePressure@{getEngagePressure}}
 \index{getEngagePressure@{getEngagePressure}!BowPressure@{BowPressure}}
 \doxysubsubsection{\texorpdfstring{getEngagePressure()}{getEngagePressure()}}
-{\footnotesize\ttfamily uint16\+\_\+t Bow\+Pressure\+::get\+Engage\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily uint16\+\_\+t Bow\+Pressure\+::get\+Engage\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowPressure_aae47b143f75a91e727d6951e749ff0ee_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -234,19 +321,6 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classBowPressure_a4c398fe321290b51a3c7af223e450dcc_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classBowPressure_a45dfd77ba57d2da2c28dbc5a091474de}\label{classBowPressure_a45dfd77ba57d2da2c28dbc5a091474de} 
-\index{BowPressure@{BowPressure}!getMaxPressure@{getMaxPressure}}
-\index{getMaxPressure@{getMaxPressure}!BowPressure@{BowPressure}}
-\doxysubsubsection{\texorpdfstring{getMaxPressure()}{getMaxPressure()}}
-{\footnotesize\ttfamily uint16\+\_\+t Bow\+Pressure\+::get\+Max\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowPressure_a45dfd77ba57d2da2c28dbc5a091474de_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classBowPressure_aa8ed0b225cb3166292fbba3042dc9b0b}\label{classBowPressure_aa8ed0b225cb3166292fbba3042dc9b0b} 
@@ -272,8 +346,15 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{BowPressure@{BowPressure}!getRestPressure@{getRestPressure}}
 \index{getRestPressure@{getRestPressure}!BowPressure@{BowPressure}}
 \doxysubsubsection{\texorpdfstring{getRestPressure()}{getRestPressure()}}
-{\footnotesize\ttfamily uint16\+\_\+t Bow\+Pressure\+::get\+Rest\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily uint16\+\_\+t Bow\+Pressure\+::get\+Rest\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowPressure_a157b3023b744d32eb53b838e9f49a9f3_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -281,6 +362,12 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classBowPressure_a157b3023b744d32eb53b838e9f49a9f3_icgraph}
 \end{center}
 \end{figure}
+\Hypertarget{classBowPressure_aa493cbbbcd42b766a335e0573ab4dc17}\label{classBowPressure_aa493cbbbcd42b766a335e0573ab4dc17} 
+\index{BowPressure@{BowPressure}!getRestSignal@{getRestSignal}}
+\index{getRestSignal@{getRestSignal}!BowPressure@{BowPressure}}
+\doxysubsubsection{\texorpdfstring{getRestSignal()}{getRestSignal()}}
+{\footnotesize\ttfamily bool Bow\+Pressure\+::get\+Rest\+Signal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 \Hypertarget{classBowPressure_af8051b2f3f54475821821563507b77bd}\label{classBowPressure_af8051b2f3f54475821821563507b77bd} 
 \index{BowPressure@{BowPressure}!getSpeed@{getSpeed}}
 \index{getSpeed@{getSpeed}!BowPressure@{BowPressure}}
@@ -299,6 +386,26 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classBowPressure_af8051b2f3f54475821821563507b77bd_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowPressure_a7ce72570971f0fcd0cc8341fa14062ec}\label{classBowPressure_a7ce72570971f0fcd0cc8341fa14062ec} 
+\index{BowPressure@{BowPressure}!getStallPressure@{getStallPressure}}
+\index{getStallPressure@{getStallPressure}!BowPressure@{BowPressure}}
+\doxysubsubsection{\texorpdfstring{getStallPressure()}{getStallPressure()}}
+{\footnotesize\ttfamily uint16\+\_\+t Bow\+Pressure\+::get\+Stall\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowPressure_a7ce72570971f0fcd0cc8341fa14062ec_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowPressure_a7ce72570971f0fcd0cc8341fa14062ec_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classBowPressure_a353b29c45350a9ead04c999d83524b51}\label{classBowPressure_a353b29c45350a9ead04c999d83524b51} 
@@ -341,40 +448,6 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classBowPressure_ab1be80952ab6b1ec659c6aa00f5e9f52_icgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classBowPressure_aa8bdebfaa32dc5d991a77270d0d37f06}\label{classBowPressure_aa8bdebfaa32dc5d991a77270d0d37f06} 
-\index{BowPressure@{BowPressure}!processSerialCommand@{processSerialCommand}}
-\index{processSerialCommand@{processSerialCommand}!BowPressure@{BowPressure}}
-\doxysubsubsection{\texorpdfstring{processSerialCommand()}{processSerialCommand()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Bow\+Pressure\+::process\+Serial\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowPressure_aa8bdebfaa32dc5d991a77270d0d37f06_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowPressure_aa8bdebfaa32dc5d991a77270d0d37f06_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classBowPressure_aca49dc9352f13a5d6099d0025f597f25}\label{classBowPressure_aca49dc9352f13a5d6099d0025f597f25} 
-\index{BowPressure@{BowPressure}!processSerialCommandHidden@{processSerialCommandHidden}}
-\index{processSerialCommandHidden@{processSerialCommandHidden}!BowPressure@{BowPressure}}
-\doxysubsubsection{\texorpdfstring{processSerialCommandHidden()}{processSerialCommandHidden()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Bow\+Pressure\+::process\+Serial\+Command\+Hidden (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
-
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowPressure_aca49dc9352f13a5d6099d0025f597f25_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classBowPressure_aa5dc5f078942e290f8002f3877dac307}\label{classBowPressure_aa5dc5f078942e290f8002f3877dac307} 
 \index{BowPressure@{BowPressure}!rest@{rest}}
 \index{rest@{rest}!BowPressure@{BowPressure}}
@@ -408,17 +481,24 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classBowPressure_a9f3c33a86cd8c12cce7c6d6c5247eea0_icgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classBowPressure_a4611209843a2926626d508b3854d6e44}\label{classBowPressure_a4611209843a2926626d508b3854d6e44} 
+\Hypertarget{classBowPressure_a94f290e2387a4d90308cf79abc349801}\label{classBowPressure_a94f290e2387a4d90308cf79abc349801} 
 \index{BowPressure@{BowPressure}!setEngagePressure@{setEngagePressure}}
 \index{setEngagePressure@{setEngagePressure}!BowPressure@{BowPressure}}
 \doxysubsubsection{\texorpdfstring{setEngagePressure()}{setEngagePressure()}}
-{\footnotesize\ttfamily void Bow\+Pressure\+::set\+Engage\+Pressure (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{in\+Engage\+Pressure }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool Bow\+Pressure\+::set\+Engage\+Pressure (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{in\+Engage\+Pressure }\end{DoxyParamCaption})}
 
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowPressure_a94f290e2387a4d90308cf79abc349801_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classBowPressure_a4611209843a2926626d508b3854d6e44_icgraph}
+\includegraphics[width=350pt]{classBowPressure_a94f290e2387a4d90308cf79abc349801_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classBowPressure_abeaa578a81b74ff2cd6704751fe48cb4}\label{classBowPressure_abeaa578a81b74ff2cd6704751fe48cb4} 
@@ -454,26 +534,6 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classBowPressure_a79e40c61a6288f269c186c67750be00e_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowPressure_a79e40c61a6288f269c186c67750be00e_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classBowPressure_a416727ac846bccf9dfb717e1398da6ea}\label{classBowPressure_a416727ac846bccf9dfb717e1398da6ea} 
-\index{BowPressure@{BowPressure}!setMaxPressure@{setMaxPressure}}
-\index{setMaxPressure@{setMaxPressure}!BowPressure@{BowPressure}}
-\doxysubsubsection{\texorpdfstring{setMaxPressure()}{setMaxPressure()}}
-{\footnotesize\ttfamily void Bow\+Pressure\+::set\+Max\+Pressure (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{in\+Max\+Pressure }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowPressure_a416727ac846bccf9dfb717e1398da6ea_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classBowPressure_a85bf7901ad1e2bc98d1d99dfb29f16de}\label{classBowPressure_a85bf7901ad1e2bc98d1d99dfb29f16de} 
 \index{BowPressure@{BowPressure}!setPressureBaseline@{setPressureBaseline}}
 \index{setPressureBaseline@{setPressureBaseline}!BowPressure@{BowPressure}}
@@ -487,13 +547,6 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classBowPressure_a85bf7901ad1e2bc98d1d99dfb29f16de_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowPressure_a85bf7901ad1e2bc98d1d99dfb29f16de_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classBowPressure_a840b39df3dae69e6e53aab5b63a8b9b7}\label{classBowPressure_a840b39df3dae69e6e53aab5b63a8b9b7} 
 \index{BowPressure@{BowPressure}!setPressureModifier@{setPressureModifier}}
 \index{setPressureModifier@{setPressureModifier}!BowPressure@{BowPressure}}
@@ -505,13 +558,6 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classBowPressure_a840b39df3dae69e6e53aab5b63a8b9b7_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classBowPressure_a840b39df3dae69e6e53aab5b63a8b9b7_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classBowPressure_a2e73720f7117effca0ef47ef37324a81}\label{classBowPressure_a2e73720f7117effca0ef47ef37324a81} 
@@ -534,17 +580,37 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classBowPressure_a2e73720f7117effca0ef47ef37324a81_icgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classBowPressure_ad95f948f469b5535e764d556305d2ce1}\label{classBowPressure_ad95f948f469b5535e764d556305d2ce1} 
+\Hypertarget{classBowPressure_ac421b9d9ef7a02853fc22f8ac21df3bd}\label{classBowPressure_ac421b9d9ef7a02853fc22f8ac21df3bd} 
 \index{BowPressure@{BowPressure}!setRestPressure@{setRestPressure}}
 \index{setRestPressure@{setRestPressure}!BowPressure@{BowPressure}}
 \doxysubsubsection{\texorpdfstring{setRestPressure()}{setRestPressure()}}
-{\footnotesize\ttfamily void Bow\+Pressure\+::set\+Rest\+Pressure (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{in\+Rest\+Pressure }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool Bow\+Pressure\+::set\+Rest\+Pressure (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{in\+Rest\+Pressure }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowPressure_ac421b9d9ef7a02853fc22f8ac21df3bd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowPressure_ac421b9d9ef7a02853fc22f8ac21df3bd_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classBowPressure_a28621198e7b76c9d94124e69a1728841}\label{classBowPressure_a28621198e7b76c9d94124e69a1728841} 
+\index{BowPressure@{BowPressure}!setRestSignal@{setRestSignal}}
+\index{setRestSignal@{setRestSignal}!BowPressure@{BowPressure}}
+\doxysubsubsection{\texorpdfstring{setRestSignal()}{setRestSignal()}}
+{\footnotesize\ttfamily void Bow\+Pressure\+::set\+Rest\+Signal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classBowPressure_ad95f948f469b5535e764d556305d2ce1_icgraph}
+\includegraphics[width=350pt]{classBowPressure_a28621198e7b76c9d94124e69a1728841_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classBowPressure_a055b155370efb9c29a924f8cd1849121}\label{classBowPressure_a055b155370efb9c29a924f8cd1849121} 
@@ -567,6 +633,26 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classBowPressure_a055b155370efb9c29a924f8cd1849121_icgraph}
 \end{center}
 \end{figure}
+\Hypertarget{classBowPressure_ac929f8c2e086e80da772c42be1167f5e}\label{classBowPressure_ac929f8c2e086e80da772c42be1167f5e} 
+\index{BowPressure@{BowPressure}!setStallPressure@{setStallPressure}}
+\index{setStallPressure@{setStallPressure}!BowPressure@{BowPressure}}
+\doxysubsubsection{\texorpdfstring{setStallPressure()}{setStallPressure()}}
+{\footnotesize\ttfamily bool Bow\+Pressure\+::set\+Stall\+Pressure (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{in\+Stall\+Pressure }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowPressure_ac929f8c2e086e80da772c42be1167f5e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBowPressure_ac929f8c2e086e80da772c42be1167f5e_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{classBowPressure_a0891ff0635cc2954afd32081144fecc5}\label{classBowPressure_a0891ff0635cc2954afd32081144fecc5} 
 \index{BowPressure@{BowPressure}!setStepIntervalCallback@{setStepIntervalCallback}}
 \index{setStepIntervalCallback@{setStepIntervalCallback}!BowPressure@{BowPressure}}
@@ -584,7 +670,11 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{BowPressure@{BowPressure}!update@{update}}
 \index{update@{update}!BowPressure@{BowPressure}}
 \doxysubsubsection{\texorpdfstring{update()}{update()}}
-{\footnotesize\ttfamily void Bow\+Pressure\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Bow\+Pressure\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classModule_a09131761fec40345e3657b801778057f}{Module}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -633,29 +723,17 @@ Here is the caller graph for this function\+:\nopagebreak
 
 The baseline pressure value used when engaging the bow with the string. 
 
-\Hypertarget{classBowPressure_a33bb0a93bce1acece0abcf94178247d0}\label{classBowPressure_a33bb0a93bce1acece0abcf94178247d0} 
-\index{BowPressure@{BowPressure}!engagePressure@{engagePressure}}
-\index{engagePressure@{engagePressure}!BowPressure@{BowPressure}}
-\doxysubsubsection{\texorpdfstring{engagePressure}{engagePressure}}
-{\footnotesize\ttfamily uint16\+\_\+t Bow\+Pressure\+::engage\+Pressure = 0\hspace{0.3cm}{\ttfamily [private]}}
-
-\Hypertarget{classBowPressure_ab67217a30161b84c2ac438065c995e9c}\label{classBowPressure_ab67217a30161b84c2ac438065c995e9c} 
-\index{BowPressure@{BowPressure}!hold@{hold}}
-\index{hold@{hold}!BowPressure@{BowPressure}}
-\doxysubsubsection{\texorpdfstring{hold}{hold}}
-{\footnotesize\ttfamily bool Bow\+Pressure\+::hold = false\hspace{0.3cm}{\ttfamily [private]}}
+\Hypertarget{classBowPressure_a4599e64cafd8d529c6d360db86ce95e1}\label{classBowPressure_a4599e64cafd8d529c6d360db86ce95e1} 
+\index{BowPressure@{BowPressure}!bowActuators@{bowActuators}}
+\index{bowActuators@{bowActuators}!BowPressure@{BowPressure}}
+\doxysubsubsection{\texorpdfstring{bowActuators}{bowActuators}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classBowActuators}{Bow\+Actuators}}\texorpdfstring{$\ast$}{*} Bow\+Pressure\+::bow\+Actuators = nullptr\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classBowPressure_aa2552be4057976c6300d665e3754f614}\label{classBowPressure_aa2552be4057976c6300d665e3754f614} 
 \index{BowPressure@{BowPressure}!lastPressure@{lastPressure}}
 \index{lastPressure@{lastPressure}!BowPressure@{BowPressure}}
 \doxysubsubsection{\texorpdfstring{lastPressure}{lastPressure}}
 {\footnotesize\ttfamily uint16\+\_\+t Bow\+Pressure\+::last\+Pressure = 0\hspace{0.3cm}{\ttfamily [private]}}
-
-\Hypertarget{classBowPressure_a15e38408cb66e1b8b39f27807432c690}\label{classBowPressure_a15e38408cb66e1b8b39f27807432c690} 
-\index{BowPressure@{BowPressure}!maxPressure@{maxPressure}}
-\index{maxPressure@{maxPressure}!BowPressure@{BowPressure}}
-\doxysubsubsection{\texorpdfstring{maxPressure}{maxPressure}}
-{\footnotesize\ttfamily uint16\+\_\+t Bow\+Pressure\+::max\+Pressure = 65535\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classBowPressure_a2ac10d76e0df06070fd49145f85ba7b4}\label{classBowPressure_a2ac10d76e0df06070fd49145f85ba7b4} 
 \index{BowPressure@{BowPressure}!modifierPressure@{modifierPressure}}
@@ -666,6 +744,12 @@ The baseline pressure value used when engaging the bow with the string.
 
 
 The modifier pressure value used in conjunction with the baseline\+Pressure when engaing the bow with the string. 
+
+\Hypertarget{classBowPressure_a1b922bec4cc06db14a5c4e23781883ab}\label{classBowPressure_a1b922bec4cc06db14a5c4e23781883ab} 
+\index{BowPressure@{BowPressure}!pHold@{pHold}}
+\index{pHold@{pHold}!BowPressure@{BowPressure}}
+\doxysubsubsection{\texorpdfstring{pHold}{pHold}}
+{\footnotesize\ttfamily bool Bow\+Pressure\+::p\+Hold = false\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classBowPressure_af0ef8867c993193742218555a8dbb87c}\label{classBowPressure_af0ef8867c993193742218555a8dbb87c} 
 \index{BowPressure@{BowPressure}!pressureMode@{pressureMode}}
@@ -679,11 +763,11 @@ The modifier pressure value used in conjunction with the baseline\+Pressure when
 \doxysubsubsection{\texorpdfstring{reachedEngage}{reachedEngage}}
 {\footnotesize\ttfamily bool Bow\+Pressure\+::reached\+Engage = false\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{classBowPressure_a8ce241e7ebc5a5a529e57518522fd728}\label{classBowPressure_a8ce241e7ebc5a5a529e57518522fd728} 
-\index{BowPressure@{BowPressure}!restPressure@{restPressure}}
-\index{restPressure@{restPressure}!BowPressure@{BowPressure}}
-\doxysubsubsection{\texorpdfstring{restPressure}{restPressure}}
-{\footnotesize\ttfamily uint16\+\_\+t Bow\+Pressure\+::rest\+Pressure = 0\hspace{0.3cm}{\ttfamily [private]}}
+\Hypertarget{classBowPressure_acaaf417aaefc9cad4e6260e6476c2cb1}\label{classBowPressure_acaaf417aaefc9cad4e6260e6476c2cb1} 
+\index{BowPressure@{BowPressure}!restSignal@{restSignal}}
+\index{restSignal@{restSignal}!BowPressure@{BowPressure}}
+\doxysubsubsection{\texorpdfstring{restSignal}{restSignal}}
+{\footnotesize\ttfamily bool Bow\+Pressure\+::rest\+Signal = false\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classBowPressure_a406b45eee9f49aef1b661179878d6bd9}\label{classBowPressure_a406b45eee9f49aef1b661179878d6bd9} 
 \index{BowPressure@{BowPressure}!speedToEngage@{speedToEngage}}

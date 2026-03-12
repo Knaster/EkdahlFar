@@ -1,18 +1,19 @@
 \doxysection{pidcontroller.\+hpp File Reference}
 \hypertarget{pidcontroller_8hpp}{}\label{pidcontroller_8hpp}\index{pidcontroller.hpp@{pidcontroller.hpp}}
-{\ttfamily \#include "{}dcmotorcontrol.\+cpp"{}}\newline
-Include dependency graph for pidcontroller.\+hpp\+:\nopagebreak
+{\ttfamily \#include "{}generic\+\_\+functions/dcmotorcontrol.\+hpp"{}}\newline
+Include dependency graph for pidcontroller.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=192pt]{pidcontroller_8hpp__incl}
+\includegraphics[width=350pt]{pidcontroller_8hpp__incl}
 \end{center}
 \end{figure}
 This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=225pt]{pidcontroller_8hpp__dep__incl}
+\includegraphics[width=350pt]{pidcontroller_8hpp__dep__incl}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Classes}
@@ -20,52 +21,3 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \item 
 class \mbox{\hyperlink{classPIDController}{PIDController}}
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} \mbox{\hyperlink{pidcontroller_8hpp_af4f8e8a4b715d2e5ca6c9927ce80ad93}{serial\+Commands\+PID}} \mbox{[}$\,$\mbox{]}
-\item 
-const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} \mbox{\hyperlink{pidcontroller_8hpp_a01a6b43331b7609ce240ff556bb93d31}{serial\+Commands\+PIDHidden}} \mbox{[}$\,$\mbox{]}
-\end{DoxyCompactItemize}
-
-
-\doxysubsection{Variable Documentation}
-\Hypertarget{pidcontroller_8hpp_af4f8e8a4b715d2e5ca6c9927ce80ad93}\label{pidcontroller_8hpp_af4f8e8a4b715d2e5ca6c9927ce80ad93} 
-\index{pidcontroller.hpp@{pidcontroller.hpp}!serialCommandsPID@{serialCommandsPID}}
-\index{serialCommandsPID@{serialCommandsPID}!pidcontroller.hpp@{pidcontroller.hpp}}
-\doxysubsubsection{\texorpdfstring{serialCommandsPID}{serialCommandsPID}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Commands\+PID\mbox{[}$\,$\mbox{]}}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{=\ \{}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidtargetfreq"{}},\ \textcolor{stringliteral}{"{}bptf"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ PID\ target\ frequency"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidki"{}},\ \textcolor{stringliteral}{"{}bpki"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ Ki\ parameter\ of\ the\ PID\ of\ the\ selected\ bow"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidkp"{}},\ \textcolor{stringliteral}{"{}bpkp"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ Kp\ parameter\ of\ the\ PID\ of\ the\ selected\ bow"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidkd"{}},\ \textcolor{stringliteral}{"{}bpkd"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ Kd\ parameter\ of\ the\ PID\ of\ the\ selected\ bow"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidintegratorerror"{}},\ \textcolor{stringliteral}{"{}bpie"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Sets\ the\ lower\ threshold\ of\ error\ values\ for\ the\ PID\ integrator\ to\ ignore\ of\ the\ selected\ bow"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidr"{}},\ \textcolor{stringliteral}{"{}bpir"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Resets\ the\ PID\ of\ the\ selected\ bow"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidmaxerror"{}},\ \textcolor{stringliteral}{"{}bpme"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Maximum\ error\ to\ correct\ in\ each\ PID\ loop,\ essentially\ sets\ acceleration"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidpeakerror"{}},\ \textcolor{stringliteral}{"{}bpperr"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Get\ latest\ PID\ peak\ error"{}}\},}
-\DoxyCodeLine{}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorspeedmax"{}},\ \textcolor{stringliteral}{"{}bmsx"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ maximum\ speed\ limit"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorspeedmin"{}},\ \textcolor{stringliteral}{"{}bmsi"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ minimum\ speed\ limit"{}}\},}
-\DoxyCodeLine{}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidtargetfreq"{}},\ \textcolor{stringliteral}{"{}bcf"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Legacy\ command\ conversion"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpidtargetfreq"{}},\ \textcolor{stringliteral}{"{}bowcontrolfrequency"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Legacy\ command\ conversion"{}}\ \}}
-\DoxyCodeLine{\}}
-
-\end{DoxyCode}
-\Hypertarget{pidcontroller_8hpp_a01a6b43331b7609ce240ff556bb93d31}\label{pidcontroller_8hpp_a01a6b43331b7609ce240ff556bb93d31} 
-\index{pidcontroller.hpp@{pidcontroller.hpp}!serialCommandsPIDHidden@{serialCommandsPIDHidden}}
-\index{serialCommandsPIDHidden@{serialCommandsPIDHidden}!pidcontroller.hpp@{pidcontroller.hpp}}
-\doxysubsubsection{\texorpdfstring{serialCommandsPIDHidden}{serialCommandsPIDHidden}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Commands\+PIDHidden\mbox{[}$\,$\mbox{]}}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{=\ \ \{}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmeasuretimetotarget"{}},\ \textcolor{stringliteral}{"{}bmtt"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Measure\ the\ time\ it\ takes\ to\ change\ from\ the\ current\ frequency\ to\ the\ target\ frequency"{}}\ \}}
-\DoxyCodeLine{\}}
-
-\end{DoxyCode}

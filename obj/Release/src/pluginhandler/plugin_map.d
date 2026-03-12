@@ -19,13 +19,9 @@ obj/Release/src/pluginhandler/plugin_map.o: \
  lib/teensy4/elapsedMillis.h lib/teensy4/WProgram.h \
  lib/teensy4/IntervalTimer.h lib/teensy4/CrashReport.h \
  lib/teensy4/Printable.h lib/teensy4/WString.h \
- lib/SafeString/src/SerialComs.h lib/SafeString/src/SafeStringReader.h \
- lib/teensy4/Arduino.h lib/SafeString/src/SafeString.h \
- lib/teensy4/Print.h lib/teensy4/Stream.h \
- lib/SafeString/src/SafeStringNameSpaceStart.h \
- lib/SafeString/src/SafeStringNameSpaceEnd.h \
- lib/SafeString/src/millisDelay.h lib/SafeString/src/millisDelay.h \
  include/base/debugprint.hpp include/base/modulesystembasics.hpp \
- include/base/commandparser.hpp \
- include/master_controller/expressionparser.h lib/tinyexpr/src/tinyexpr.h \
- include/base/module.hpp
+ include/base/commandparser.hpp include/base/commanditem.hpp \
+ include/base/generalhelpers.hpp include/base/arduinorequired.hpp \
+ include/base/module.hpp include/master_controller/expressionparser.h \
+ lib/tinyexpr/src/tinyexpr.h include/base/commandlist.hpp \
+ include/base/commanditem.hpp

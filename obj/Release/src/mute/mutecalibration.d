@@ -16,20 +16,15 @@ obj/Release/src/mute/mutecalibration.o: src/mute/mutecalibration.cpp \
  lib/teensy4/elapsedMillis.h lib/teensy4/WProgram.h \
  lib/teensy4/IntervalTimer.h lib/teensy4/CrashReport.h \
  lib/teensy4/Printable.h lib/teensy4/WString.h \
- lib/SafeString/src/SerialComs.h lib/SafeString/src/SafeStringReader.h \
- lib/teensy4/Arduino.h lib/SafeString/src/SafeString.h \
- lib/teensy4/Print.h lib/teensy4/Stream.h \
- lib/SafeString/src/SafeStringNameSpaceStart.h \
- lib/SafeString/src/SafeStringNameSpaceEnd.h \
- lib/SafeString/src/millisDelay.h lib/SafeString/src/millisDelay.h \
  include/base/debugprint.hpp include/mute/mutecalibration.hpp \
  include/mute/mutecontrol.hpp include/base/module.hpp \
  include/base/modulesystembasics.hpp include/base/commandparser.hpp \
- include/master_controller/expressionparser.h lib/tinyexpr/src/tinyexpr.h \
- include/base/module.hpp include/mute/mute.hpp \
- include/generic_functions/tmc2209_servostepper.hpp \
- lib/TMC2209/src/TMC2209.h include/generic_functions/servostepper.hpp \
- include/bow/bowcontrol.hpp include/generic_functions/bowActuators.hpp \
+ include/base/commanditem.hpp include/base/generalhelpers.hpp \
+ include/base/arduinorequired.hpp include/base/module.hpp \
+ include/mute/mute.hpp include/generic_functions/tmc2209_servostepper.hpp \
+ lib/TMC2209/src/TMC2209.h lib/teensy4/Arduino.h \
+ include/generic_functions/servostepper.hpp include/bow/bowcontrol.hpp \
+ include/generic_functions/bowActuators.hpp \
  include/base/modulehandler.hpp include/base/modulegroup.hpp \
  include/generic_functions/bowactuator.hpp include/bow/bowpressure.hpp \
  include/generic_functions/pidcontroller.hpp \
@@ -37,6 +32,7 @@ obj/Release/src/mute/mutecalibration.o: src/mute/mutecalibration.cpp \
  lib/Teensy_PWM/src/Teensy_PWM.h lib/Teensy_PWM/src/PWM_Generic_Debug.h \
  include/generic_functions/harmonicserieshandler.hpp \
  include/generic_functions/harmonicSeries.hpp \
+ include/base/commandlist.hpp include/base/commanditem.hpp \
  include/pickup/audioanalyze.h lib/Audio/Audio.h lib/teensy4/DMAChannel.h \
  lib/Audio/analyze_fft256.h lib/teensy4/AudioStream.h \
  lib/teensy4/arm_math.h lib/teensy4/core_cmInstr.h \

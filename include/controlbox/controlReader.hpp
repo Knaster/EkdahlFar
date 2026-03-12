@@ -34,6 +34,7 @@ public:
     MODULECOMMANDHANDLER
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(controlData, ControlReader)
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(controlDataNew, ControlReader)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(controlDefaults, ControlReader)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(dataReturn, ControlReader)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(adcSettings, ControlReader)
@@ -62,6 +63,8 @@ public:
 
     void resetAds();
     int32_t getData(int16_t channel);
+
+    const String controlAssignment[8] = { "harmonic", "harmonicshift", "finetune", "pressure", "hammertrig", "gate", "hammerscale", "mute" };
 
 protected:
     uint16_t gateState = 0;

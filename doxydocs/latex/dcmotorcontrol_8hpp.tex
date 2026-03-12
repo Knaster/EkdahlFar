@@ -1,10 +1,20 @@
 \doxysection{dcmotorcontrol.\+hpp File Reference}
 \hypertarget{dcmotorcontrol_8hpp}{}\label{dcmotorcontrol_8hpp}\index{dcmotorcontrol.hpp@{dcmotorcontrol.hpp}}
+{\ttfamily \#include $<$base/module.\+hpp$>$}\newline
+{\ttfamily \#include $<$Teensy\+\_\+\+PWM.\+h$>$}\newline
+Include dependency graph for dcmotorcontrol.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dcmotorcontrol_8hpp__incl}
+\end{center}
+\end{figure}
 This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=550pt]{dcmotorcontrol_8hpp__dep__incl}
+\includegraphics[width=350pt]{dcmotorcontrol_8hpp__dep__incl}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Classes}
@@ -31,11 +41,6 @@ class \mbox{\hyperlink{classDCMotorControl}{DCMotor\+Control}}
 \begin{DoxyCompactList}\small\item\em Maximum tachometer value acceptable, given in Hertz. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{dcmotorcontrol_8hpp_a07bc3185c052a70c9ae3ce08b44c0fd3}{permissible\+Freq\+Deviation}}~10
 \begin{DoxyCompactList}\small\item\em Maximum permissible deviation from median value when averaging tachometer values, given in Hertz. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsubsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} \mbox{\hyperlink{dcmotorcontrol_8hpp_ad8e979e182665985b152d09eaf31353f}{serial\+Commands\+DCMotor}} \mbox{[}$\,$\mbox{]}
-\end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
@@ -103,26 +108,3 @@ Maximum tachometer value acceptable, given in Hertz.
 
 Minimum tachometer value acceptable, given in Hertz. 
 
-
-
-\doxysubsection{Variable Documentation}
-\Hypertarget{dcmotorcontrol_8hpp_ad8e979e182665985b152d09eaf31353f}\label{dcmotorcontrol_8hpp_ad8e979e182665985b152d09eaf31353f} 
-\index{dcmotorcontrol.hpp@{dcmotorcontrol.hpp}!serialCommandsDCMotor@{serialCommandsDCMotor}}
-\index{serialCommandsDCMotor@{serialCommandsDCMotor}!dcmotorcontrol.hpp@{dcmotorcontrol.hpp}}
-\doxysubsubsection{\texorpdfstring{serialCommandsDCMotor}{serialCommandsDCMotor}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Commands\+DCMotor\mbox{[}$\,$\mbox{]}}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{=\ \{}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorvoltage"{}},\ \textcolor{stringliteral}{"{}bmv"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ voltage"{}}\},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorcurrent"{}},\ \textcolor{stringliteral}{"{}bmc"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ reported\ current\ use"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorcurrentlimit"{}},\ \textcolor{stringliteral}{"{}bmcl"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ current\ limit\ (A)-\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorpowerlimit"{}},\ \textcolor{stringliteral}{"{}bmpl"{}},\ \textcolor{stringliteral}{"{}float"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ power\ limit\ (W)\ -\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorfrequency"{}},\ \textcolor{stringliteral}{"{}bmf"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ reported\ frequency"{}}\},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotoremergencystop"{}},\ \textcolor{stringliteral}{"{}bmes"{}},\ \textcolor{stringliteral}{"{}ms\ (0-\/65535)"{}},\ \textcolor{stringliteral}{"{}Immediately\ stops\ the\ bowing\ motor\ and\ doesn't\ allow\ it\ to\ start\ again\ until\ the\ cool\ down\ period\ given\ in\ the\ first\ argument\ has\ lapsed\ (milliseconds)"{}}\},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorpwmmin"{}},\ \textcolor{stringliteral}{"{}bmpi"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ minimum\ PWM\ (for\ calibration)"{}}\},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowmotorpwmmax"{}},\ \textcolor{stringliteral}{"{}bmpx"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Bow\ motor\ maximum\ PWM\ (for\ calibration)"{}}\}}
-\DoxyCodeLine{\}}
-
-\end{DoxyCode}

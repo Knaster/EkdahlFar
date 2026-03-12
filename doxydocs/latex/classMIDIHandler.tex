@@ -1,0 +1,401 @@
+\doxysection{MIDIHandler Class Reference}
+\hypertarget{classMIDIHandler}{}\label{classMIDIHandler}\index{MIDIHandler@{MIDIHandler}}
+
+
+{\ttfamily \#include $<$midi.\+h$>$}
+
+
+
+Collaboration diagram for MIDIHandler\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structMIDIHandler_1_1noteMsg}{note\+Msg}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMIDIHandler_a8be1de1f346fdabd239864a6f4104477}{MIDIHandler}} (\mbox{\hyperlink{classExpressionParser}{Expression\+Parser}} \texorpdfstring{$\ast$}{*}in\+Expression\+Parser)
+\item 
+void \mbox{\hyperlink{classMIDIHandler_a0e3fd499dfd9be1e99c45b63ab78709f}{On\+Note\+Off}} (byte channel, byte note, byte velocity)
+\begin{DoxyCompactList}\small\item\em Handle note off message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMIDIHandler_aa934661065db5fedf3ac616cdf49ee2a}{On\+Note\+On}} (byte channel, byte note, byte velocity)
+\begin{DoxyCompactList}\small\item\em Handles note on messages. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMIDIHandler_a8b3545569490cb0a4056c0babf1db258}{On\+After\+Touch\+Poly}} (byte channel, byte note, byte pressure)
+\begin{DoxyCompactList}\small\item\em Handle poly aftertouch message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMIDIHandler_a9896c4c3b7a1776c8f58b38fd1f2610b}{On\+Channel\+Aftertouch}} (byte channel, byte pressure)
+\begin{DoxyCompactList}\small\item\em Handle poly aftertouch message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMIDIHandler_a4f644eed423c2a6117d8a4713b63283f}{On\+Control\+Change}} (byte channel, byte control, byte value)
+\begin{DoxyCompactList}\small\item\em handle control change message \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMIDIHandler_a765fe42874f2ecb4f56c7299d4e28ab0}{On\+Pitch\+Bend}} (byte channel, int pitch)
+\begin{DoxyCompactList}\small\item\em handle pitch bend message \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMIDIHandler_a64030fd2adde91877d396608554232a4}{On\+Program\+Change}} (uint8\+\_\+t channel, uint8\+\_\+t program)
+\item 
+void \mbox{\hyperlink{classMIDIHandler_a73cca14722f21160fabf08d7256eafa5}{update\+Local\+Variables}} ()
+\item 
+void \mbox{\hyperlink{classMIDIHandler_ad851aca568b97f872fa83b57b9be03e0}{process\+Local\+Message}} (String \texorpdfstring{$\ast$}{*}message)
+\item 
+void \mbox{\hyperlink{classMIDIHandler_aef33b29e1cb5e23e1fbb296bda96a002}{midi\+All\+Notes\+Off}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classMIDIHandler_a017967bf6e29f7570549305bd017b06e}{midi\+Message\+Configuration}} = nullptr
+\item 
+\mbox{\hyperlink{classExpressionParser}{Expression\+Parser}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classMIDIHandler_af9a7f76a3fb02893d94ba0693bd21c05}{expression\+Parser}} = nullptr
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int8\+\_\+t \mbox{\hyperlink{classMIDIHandler_a4631aede2de70444e470cb29b2ef51db}{find\+Note}} (byte channel, byte note)
+\item 
+bool \mbox{\hyperlink{classMIDIHandler_a714850d9efdfd7e151986bb5aaaf6c22}{remove\+Note}} (byte channel, byte note)
+\item 
+void \mbox{\hyperlink{classMIDIHandler_ae78aacf7a6adb42ec5df8eb4f50ea8a1}{add\+Note}} (byte channel, byte note, byte velocity)
+\item 
+void \mbox{\hyperlink{classMIDIHandler_aaaa90c963dc1a9ff64c5a061d8558d6f}{set\+Note}} ()
+\item 
+void \mbox{\hyperlink{classMIDIHandler_a8a396de40e136e9d985ccbd067c46b0b}{set\+Notes}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structMIDIHandler_1_1noteMsg}{note\+Msg}} $>$ \mbox{\hyperlink{classMIDIHandler_ad99a0de9672f7248fa9f0ace54f8bd12}{notes\+Held}}
+\item 
+int \mbox{\hyperlink{classMIDIHandler_a3689c0c92eed6daccfa7577278e9ab80}{note\+Count}} = 0
+\begin{DoxyCompactList}\small\item\em The current amount of keys depressed. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classMIDIHandler_a3b8e4e262f935420931738e47e4b3de9}{mono\+Mode}} = true
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classMIDIHandler_a8be1de1f346fdabd239864a6f4104477}\label{classMIDIHandler_a8be1de1f346fdabd239864a6f4104477} 
+\index{MIDIHandler@{MIDIHandler}!MIDIHandler@{MIDIHandler}}
+\index{MIDIHandler@{MIDIHandler}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{MIDIHandler()}{MIDIHandler()}}
+{\footnotesize\ttfamily MIDIHandler\+::\+MIDIHandler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classExpressionParser}{Expression\+Parser}} \texorpdfstring{$\ast$}{*}}]{in\+Expression\+Parser }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classMIDIHandler_ae78aacf7a6adb42ec5df8eb4f50ea8a1}\label{classMIDIHandler_ae78aacf7a6adb42ec5df8eb4f50ea8a1} 
+\index{MIDIHandler@{MIDIHandler}!addNote@{addNote}}
+\index{addNote@{addNote}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{addNote()}{addNote()}}
+{\footnotesize\ttfamily void MIDIHandler\+::add\+Note (\begin{DoxyParamCaption}\item[{byte}]{channel,  }\item[{byte}]{note,  }\item[{byte}]{velocity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_ae78aacf7a6adb42ec5df8eb4f50ea8a1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_ae78aacf7a6adb42ec5df8eb4f50ea8a1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMIDIHandler_a4631aede2de70444e470cb29b2ef51db}\label{classMIDIHandler_a4631aede2de70444e470cb29b2ef51db} 
+\index{MIDIHandler@{MIDIHandler}!findNote@{findNote}}
+\index{findNote@{findNote}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{findNote()}{findNote()}}
+{\footnotesize\ttfamily int8\+\_\+t MIDIHandler\+::find\+Note (\begin{DoxyParamCaption}\item[{byte}]{channel,  }\item[{byte}]{note }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+messaging system end note cue begin Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_a4631aede2de70444e470cb29b2ef51db_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMIDIHandler_aef33b29e1cb5e23e1fbb296bda96a002}\label{classMIDIHandler_aef33b29e1cb5e23e1fbb296bda96a002} 
+\index{MIDIHandler@{MIDIHandler}!midiAllNotesOff@{midiAllNotesOff}}
+\index{midiAllNotesOff@{midiAllNotesOff}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{midiAllNotesOff()}{midiAllNotesOff()}}
+{\footnotesize\ttfamily void MIDIHandler\+::midi\+All\+Notes\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_aef33b29e1cb5e23e1fbb296bda96a002_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMIDIHandler_a8b3545569490cb0a4056c0babf1db258}\label{classMIDIHandler_a8b3545569490cb0a4056c0babf1db258} 
+\index{MIDIHandler@{MIDIHandler}!OnAfterTouchPoly@{OnAfterTouchPoly}}
+\index{OnAfterTouchPoly@{OnAfterTouchPoly}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{OnAfterTouchPoly()}{OnAfterTouchPoly()}}
+{\footnotesize\ttfamily void MIDIHandler\+::\+On\+After\+Touch\+Poly (\begin{DoxyParamCaption}\item[{byte}]{channel,  }\item[{byte}]{note,  }\item[{byte}]{pressure }\end{DoxyParamCaption})}
+
+
+
+Handle poly aftertouch message. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_a8b3545569490cb0a4056c0babf1db258_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMIDIHandler_a9896c4c3b7a1776c8f58b38fd1f2610b}\label{classMIDIHandler_a9896c4c3b7a1776c8f58b38fd1f2610b} 
+\index{MIDIHandler@{MIDIHandler}!OnChannelAftertouch@{OnChannelAftertouch}}
+\index{OnChannelAftertouch@{OnChannelAftertouch}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{OnChannelAftertouch()}{OnChannelAftertouch()}}
+{\footnotesize\ttfamily void MIDIHandler\+::\+On\+Channel\+Aftertouch (\begin{DoxyParamCaption}\item[{byte}]{channel,  }\item[{byte}]{pressure }\end{DoxyParamCaption})}
+
+
+
+Handle poly aftertouch message. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_a9896c4c3b7a1776c8f58b38fd1f2610b_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMIDIHandler_a4f644eed423c2a6117d8a4713b63283f}\label{classMIDIHandler_a4f644eed423c2a6117d8a4713b63283f} 
+\index{MIDIHandler@{MIDIHandler}!OnControlChange@{OnControlChange}}
+\index{OnControlChange@{OnControlChange}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{OnControlChange()}{OnControlChange()}}
+{\footnotesize\ttfamily void MIDIHandler\+::\+On\+Control\+Change (\begin{DoxyParamCaption}\item[{byte}]{channel,  }\item[{byte}]{control,  }\item[{byte}]{value }\end{DoxyParamCaption})}
+
+
+
+handle control change message 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_a4f644eed423c2a6117d8a4713b63283f_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMIDIHandler_a0e3fd499dfd9be1e99c45b63ab78709f}\label{classMIDIHandler_a0e3fd499dfd9be1e99c45b63ab78709f} 
+\index{MIDIHandler@{MIDIHandler}!OnNoteOff@{OnNoteOff}}
+\index{OnNoteOff@{OnNoteOff}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{OnNoteOff()}{OnNoteOff()}}
+{\footnotesize\ttfamily void MIDIHandler\+::\+On\+Note\+Off (\begin{DoxyParamCaption}\item[{byte}]{channel,  }\item[{byte}]{note,  }\item[{byte}]{velocity }\end{DoxyParamCaption})}
+
+
+
+Handle note off message. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_a0e3fd499dfd9be1e99c45b63ab78709f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_a0e3fd499dfd9be1e99c45b63ab78709f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMIDIHandler_aa934661065db5fedf3ac616cdf49ee2a}\label{classMIDIHandler_aa934661065db5fedf3ac616cdf49ee2a} 
+\index{MIDIHandler@{MIDIHandler}!OnNoteOn@{OnNoteOn}}
+\index{OnNoteOn@{OnNoteOn}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{OnNoteOn()}{OnNoteOn()}}
+{\footnotesize\ttfamily void MIDIHandler\+::\+On\+Note\+On (\begin{DoxyParamCaption}\item[{byte}]{channel,  }\item[{byte}]{note,  }\item[{byte}]{velocity }\end{DoxyParamCaption})}
+
+
+
+Handles note on messages. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_aa934661065db5fedf3ac616cdf49ee2a_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMIDIHandler_a765fe42874f2ecb4f56c7299d4e28ab0}\label{classMIDIHandler_a765fe42874f2ecb4f56c7299d4e28ab0} 
+\index{MIDIHandler@{MIDIHandler}!OnPitchBend@{OnPitchBend}}
+\index{OnPitchBend@{OnPitchBend}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{OnPitchBend()}{OnPitchBend()}}
+{\footnotesize\ttfamily void MIDIHandler\+::\+On\+Pitch\+Bend (\begin{DoxyParamCaption}\item[{byte}]{channel,  }\item[{int}]{pitch }\end{DoxyParamCaption})}
+
+
+
+handle pitch bend message 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_a765fe42874f2ecb4f56c7299d4e28ab0_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMIDIHandler_a64030fd2adde91877d396608554232a4}\label{classMIDIHandler_a64030fd2adde91877d396608554232a4} 
+\index{MIDIHandler@{MIDIHandler}!OnProgramChange@{OnProgramChange}}
+\index{OnProgramChange@{OnProgramChange}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{OnProgramChange()}{OnProgramChange()}}
+{\footnotesize\ttfamily void MIDIHandler\+::\+On\+Program\+Change (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{channel,  }\item[{uint8\+\_\+t}]{program }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_a64030fd2adde91877d396608554232a4_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMIDIHandler_ad851aca568b97f872fa83b57b9be03e0}\label{classMIDIHandler_ad851aca568b97f872fa83b57b9be03e0} 
+\index{MIDIHandler@{MIDIHandler}!processLocalMessage@{processLocalMessage}}
+\index{processLocalMessage@{processLocalMessage}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{processLocalMessage()}{processLocalMessage()}}
+{\footnotesize\ttfamily void MIDIHandler\+::process\+Local\+Message (\begin{DoxyParamCaption}\item[{String \texorpdfstring{$\ast$}{*}}]{message }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_ad851aca568b97f872fa83b57b9be03e0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_ad851aca568b97f872fa83b57b9be03e0_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMIDIHandler_a714850d9efdfd7e151986bb5aaaf6c22}\label{classMIDIHandler_a714850d9efdfd7e151986bb5aaaf6c22} 
+\index{MIDIHandler@{MIDIHandler}!removeNote@{removeNote}}
+\index{removeNote@{removeNote}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{removeNote()}{removeNote()}}
+{\footnotesize\ttfamily bool MIDIHandler\+::remove\+Note (\begin{DoxyParamCaption}\item[{byte}]{channel,  }\item[{byte}]{note }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_a714850d9efdfd7e151986bb5aaaf6c22_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_a714850d9efdfd7e151986bb5aaaf6c22_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMIDIHandler_aaaa90c963dc1a9ff64c5a061d8558d6f}\label{classMIDIHandler_aaaa90c963dc1a9ff64c5a061d8558d6f} 
+\index{MIDIHandler@{MIDIHandler}!setNote@{setNote}}
+\index{setNote@{setNote}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{setNote()}{setNote()}}
+{\footnotesize\ttfamily void MIDIHandler\+::set\+Note (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+messaging note cue end Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_aaaa90c963dc1a9ff64c5a061d8558d6f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_aaaa90c963dc1a9ff64c5a061d8558d6f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMIDIHandler_a8a396de40e136e9d985ccbd067c46b0b}\label{classMIDIHandler_a8a396de40e136e9d985ccbd067c46b0b} 
+\index{MIDIHandler@{MIDIHandler}!setNotes@{setNotes}}
+\index{setNotes@{setNotes}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{setNotes()}{setNotes()}}
+{\footnotesize\ttfamily void MIDIHandler\+::set\+Notes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_a8a396de40e136e9d985ccbd067c46b0b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_a8a396de40e136e9d985ccbd067c46b0b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMIDIHandler_a73cca14722f21160fabf08d7256eafa5}\label{classMIDIHandler_a73cca14722f21160fabf08d7256eafa5} 
+\index{MIDIHandler@{MIDIHandler}!updateLocalVariables@{updateLocalVariables}}
+\index{updateLocalVariables@{updateLocalVariables}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{updateLocalVariables()}{updateLocalVariables()}}
+{\footnotesize\ttfamily void MIDIHandler\+::update\+Local\+Variables (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+messaging system begin Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIHandler_a73cca14722f21160fabf08d7256eafa5_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classMIDIHandler_af9a7f76a3fb02893d94ba0693bd21c05}\label{classMIDIHandler_af9a7f76a3fb02893d94ba0693bd21c05} 
+\index{MIDIHandler@{MIDIHandler}!expressionParser@{expressionParser}}
+\index{expressionParser@{expressionParser}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{expressionParser}{expressionParser}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classExpressionParser}{Expression\+Parser}}\texorpdfstring{$\ast$}{*} MIDIHandler\+::expression\+Parser = nullptr}
+
+\Hypertarget{classMIDIHandler_a017967bf6e29f7570549305bd017b06e}\label{classMIDIHandler_a017967bf6e29f7570549305bd017b06e} 
+\index{MIDIHandler@{MIDIHandler}!midiMessageConfiguration@{midiMessageConfiguration}}
+\index{midiMessageConfiguration@{midiMessageConfiguration}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{midiMessageConfiguration}{midiMessageConfiguration}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}}\texorpdfstring{$\ast$}{*} MIDIHandler\+::midi\+Message\+Configuration = nullptr}
+
+\Hypertarget{classMIDIHandler_a3b8e4e262f935420931738e47e4b3de9}\label{classMIDIHandler_a3b8e4e262f935420931738e47e4b3de9} 
+\index{MIDIHandler@{MIDIHandler}!monoMode@{monoMode}}
+\index{monoMode@{monoMode}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{monoMode}{monoMode}}
+{\footnotesize\ttfamily bool MIDIHandler\+::mono\+Mode = true\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classMIDIHandler_a3689c0c92eed6daccfa7577278e9ab80}\label{classMIDIHandler_a3689c0c92eed6daccfa7577278e9ab80} 
+\index{MIDIHandler@{MIDIHandler}!noteCount@{noteCount}}
+\index{noteCount@{noteCount}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{noteCount}{noteCount}}
+{\footnotesize\ttfamily int MIDIHandler\+::note\+Count = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The current amount of keys depressed. 
+
+\Hypertarget{classMIDIHandler_ad99a0de9672f7248fa9f0ace54f8bd12}\label{classMIDIHandler_ad99a0de9672f7248fa9f0ace54f8bd12} 
+\index{MIDIHandler@{MIDIHandler}!notesHeld@{notesHeld}}
+\index{notesHeld@{notesHeld}!MIDIHandler@{MIDIHandler}}
+\doxysubsubsection{\texorpdfstring{notesHeld}{notesHeld}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structMIDIHandler_1_1noteMsg}{note\+Msg}}$>$ MIDIHandler\+::notes\+Held\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{midi_8h}{midi.\+h}}\item 
+\mbox{\hyperlink{midi_8cpp}{midi.\+cpp}}\end{DoxyCompactItemize}

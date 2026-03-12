@@ -4,18 +4,60 @@
 
 {\ttfamily \#include $<$solenoid.\+hpp$>$}
 
+
+
+Inheritance diagram for Solenoid\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{classSolenoid__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Solenoid\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSolenoid__coll__graph}
+\end{center}
+\end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classSolenoid_a45c2a4dc277392b5aa99a4d39c211277}{Solenoid}} (char \+\_\+solenoid\+Pin)
+\mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}} \mbox{\hyperlink{classSolenoid_a5b67777c7fcff6e08e8b457c677b2f18}{Solenoid}} (char \+\_\+solenoid\+Pin)
 \item 
-\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classSolenoid_af91c71ce2ab45bc89bd8c2db248a6b4a}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+void \mbox{\hyperlink{classSolenoid_ac5436da834dec4ca7273fe223f080949}{update}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classSolenoid_ad885d148f5a65547491069f843ca5893}{process\+Serial\+Command\+Hidden}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\mbox{\hyperlink{classModule_a5a240a8a9ab1813b17bcb810b24ceaea}{Module}} ()
 \item 
-String \mbox{\hyperlink{classSolenoid_a5d744ed87a648522a3f4669bc907b68b}{dump\+Data}} ()
+virtual const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{get\+Module\+ID}} () const =0
 \item 
-bool \mbox{\hyperlink{classSolenoid_ab6a5e1734209835072e6f106aa2d5bb2}{update}} ()
+virtual \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a9a13ef0a8291e562a9557c311d07b334}{get\+Module\+ID}} ()=0
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a534a35eb18ec29dbcc8bafce30c21128}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_af7fe70cf55b7c8999672c8a202cbdb71}{process\+Module\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a3896fd907affb2fb5a81df36080ef744}{process\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual void \mbox{\hyperlink{classModule_a8aa6237aabeb8c851f0e6272d6cdc28f}{dir}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix, bool hidden, bool modules, bool commands, bool instances, bool instance\+Count, bool recursive)
+\item 
+virtual int \mbox{\hyperlink{classModule_ae6fa72e64554ee0b09a8bb6a77a68640}{get\+Module\+Command\+Count}} ()
+\item 
+virtual void \mbox{\hyperlink{classModule_a5798bc3ad2b47f69e8915297cb33b3e3}{dump\+Data}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}data\+Dump)
+\item 
+virtual void \mbox{\hyperlink{classModule_a72b5f8a3b37fe31c9002c6d7352b2427}{help}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix)
+\item 
+bool \mbox{\hyperlink{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2}{has\+Data\+Change}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleCommand}{Module\+Command}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModuleCommand_a4ce6a1d032eaa918f21ad8121ba59094}{get\+Module\+Command}} (uint8\+\_\+t i) const =0
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -45,7 +87,7 @@ uint16\+\_\+t \mbox{\hyperlink{classSolenoid_add93b1973b29bfce089f9a166ff74560}{
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classSolenoid_a66c6d3f68f11c1bad2518f302ef42e19}{force\+Min}} = 0
 \item 
-float \mbox{\hyperlink{classSolenoid_a6be3226d9b5f3e4f83583c0227331b71}{force\+Multiplier}} = 1
+float \mbox{\hyperlink{classSolenoid_a8e67226b6bb3da8d3856a9929acbe05a}{f\+Force\+Multiplier}} = 1
 \item 
 bool \mbox{\hyperlink{classSolenoid_afc07cd3e237f4d30e653b7e6a5d3d2d4}{solenoid\+Engaged}} = false
 \begin{DoxyCompactList}\small\item\em Current state of the pick solenoid. \end{DoxyCompactList}\item 
@@ -53,111 +95,58 @@ unsigned long \mbox{\hyperlink{classSolenoid_a97789c71533ac969ac20c4a8ca08650e}{
 \begin{DoxyCompactList}\small\item\em Time at which the solenoid was engaged last. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classSolenoid_a57338a84f1eab97588531d68d04bcc08}{solenoid\+Engage\+Duration}} = 15000
 \begin{DoxyCompactList}\small\item\em Duration of the solenoid engagement, given in uS. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classModule_aa09bd171529da96438e917258ab5ab8d}{is\+Group\+Handler}} = false
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}{set\+Data\+Changed}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModule_ad85cad50c5538cc47c6d3ac76500e4cf}{owner}} = nullptr
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classSolenoid_a45c2a4dc277392b5aa99a4d39c211277}\label{classSolenoid_a45c2a4dc277392b5aa99a4d39c211277} 
+\Hypertarget{classSolenoid_a5b67777c7fcff6e08e8b457c677b2f18}\label{classSolenoid_a5b67777c7fcff6e08e8b457c677b2f18} 
 \index{Solenoid@{Solenoid}!Solenoid@{Solenoid}}
 \index{Solenoid@{Solenoid}!Solenoid@{Solenoid}}
 \doxysubsubsection{\texorpdfstring{Solenoid()}{Solenoid()}}
-{\footnotesize\ttfamily Solenoid\+::\+Solenoid (\begin{DoxyParamCaption}\item[{char}]{\+\_\+solenoid\+Pin }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}} Solenoid\+::\+Solenoid (\begin{DoxyParamCaption}\item[{char}]{\+\_\+solenoid\+Pin }\end{DoxyParamCaption})}
 
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classSolenoid_a5d744ed87a648522a3f4669bc907b68b}\label{classSolenoid_a5d744ed87a648522a3f4669bc907b68b} 
-\index{Solenoid@{Solenoid}!dumpData@{dumpData}}
-\index{dumpData@{dumpData}!Solenoid@{Solenoid}}
-\doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
-{\footnotesize\ttfamily String Solenoid\+::dump\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classSolenoid_a5d744ed87a648522a3f4669bc907b68b_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classSolenoid_af91c71ce2ab45bc89bd8c2db248a6b4a}\label{classSolenoid_af91c71ce2ab45bc89bd8c2db248a6b4a} 
-\index{Solenoid@{Solenoid}!processSerialCommand@{processSerialCommand}}
-\index{processSerialCommand@{processSerialCommand}!Solenoid@{Solenoid}}
-\doxysubsubsection{\texorpdfstring{processSerialCommand()}{processSerialCommand()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Solenoid\+::process\+Serial\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classSolenoid_af91c71ce2ab45bc89bd8c2db248a6b4a_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classSolenoid_af91c71ce2ab45bc89bd8c2db248a6b4a_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classSolenoid_ad885d148f5a65547491069f843ca5893}\label{classSolenoid_ad885d148f5a65547491069f843ca5893} 
-\index{Solenoid@{Solenoid}!processSerialCommandHidden@{processSerialCommandHidden}}
-\index{processSerialCommandHidden@{processSerialCommandHidden}!Solenoid@{Solenoid}}
-\doxysubsubsection{\texorpdfstring{processSerialCommandHidden()}{processSerialCommandHidden()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Solenoid\+::process\+Serial\+Command\+Hidden (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
-
 \Hypertarget{classSolenoid_a068fb895637fe34b1406fcf2b0a802ff}\label{classSolenoid_a068fb895637fe34b1406fcf2b0a802ff} 
 \index{Solenoid@{Solenoid}!setSolenoidDuration@{setSolenoidDuration}}
 \index{setSolenoidDuration@{setSolenoidDuration}!Solenoid@{Solenoid}}
 \doxysubsubsection{\texorpdfstring{setSolenoidDuration()}{setSolenoidDuration()}}
 {\footnotesize\ttfamily bool Solenoid\+::set\+Solenoid\+Duration (\begin{DoxyParamCaption}\item[{unsigned long}]{in\+Duration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classSolenoid_a068fb895637fe34b1406fcf2b0a802ff_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classSolenoid_a7ddc40e4cfa4d30ef42cc0d79e23664f}\label{classSolenoid_a7ddc40e4cfa4d30ef42cc0d79e23664f} 
 \index{Solenoid@{Solenoid}!setSolenoidMax@{setSolenoidMax}}
 \index{setSolenoidMax@{setSolenoidMax}!Solenoid@{Solenoid}}
 \doxysubsubsection{\texorpdfstring{setSolenoidMax()}{setSolenoidMax()}}
 {\footnotesize\ttfamily bool Solenoid\+::set\+Solenoid\+Max (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{in\+Max }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classSolenoid_a7ddc40e4cfa4d30ef42cc0d79e23664f_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classSolenoid_a1085333a5d375c2aec9a5ab3ddb54567}\label{classSolenoid_a1085333a5d375c2aec9a5ab3ddb54567} 
 \index{Solenoid@{Solenoid}!setSolenoidMin@{setSolenoidMin}}
 \index{setSolenoidMin@{setSolenoidMin}!Solenoid@{Solenoid}}
 \doxysubsubsection{\texorpdfstring{setSolenoidMin()}{setSolenoidMin()}}
 {\footnotesize\ttfamily bool Solenoid\+::set\+Solenoid\+Min (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{in\+Min }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classSolenoid_a1085333a5d375c2aec9a5ab3ddb54567_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classSolenoid_a3ff145c3e8dee4c19b679adfdeeeed33}\label{classSolenoid_a3ff145c3e8dee4c19b679adfdeeeed33} 
 \index{Solenoid@{Solenoid}!setSolenoidMultiplier@{setSolenoidMultiplier}}
 \index{setSolenoidMultiplier@{setSolenoidMultiplier}!Solenoid@{Solenoid}}
 \doxysubsubsection{\texorpdfstring{setSolenoidMultiplier()}{setSolenoidMultiplier()}}
 {\footnotesize\ttfamily bool Solenoid\+::set\+Solenoid\+Multiplier (\begin{DoxyParamCaption}\item[{float}]{in\+Multiplier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classSolenoid_a3ff145c3e8dee4c19b679adfdeeeed33_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classSolenoid_ad883846bc1ecb3f9c03f4b3f2cc11d84}\label{classSolenoid_ad883846bc1ecb3f9c03f4b3f2cc11d84} 
 \index{Solenoid@{Solenoid}!solenoidDisengage@{solenoidDisengage}}
 \index{solenoidDisengage@{solenoidDisengage}!Solenoid@{Solenoid}}
@@ -203,7 +192,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classSolenoid_aed17f5f69b0799f0be395b582b172616_icgraph}
+\includegraphics[width=222pt]{classSolenoid_aed17f5f69b0799f0be395b582b172616_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classSolenoid_a7d14196dddf96335d1fdb2cbc375b17e}\label{classSolenoid_a7d14196dddf96335d1fdb2cbc375b17e} 
@@ -223,29 +212,39 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classSolenoid_a7d14196dddf96335d1fdb2cbc375b17e_cgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classSolenoid_ab6a5e1734209835072e6f106aa2d5bb2}\label{classSolenoid_ab6a5e1734209835072e6f106aa2d5bb2} 
+\Hypertarget{classSolenoid_ac5436da834dec4ca7273fe223f080949}\label{classSolenoid_ac5436da834dec4ca7273fe223f080949} 
 \index{Solenoid@{Solenoid}!update@{update}}
 \index{update@{update}!Solenoid@{Solenoid}}
 \doxysubsubsection{\texorpdfstring{update()}{update()}}
-{\footnotesize\ttfamily bool Solenoid\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Solenoid\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classModule_a09131761fec40345e3657b801778057f}{Module}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classSolenoid_ab6a5e1734209835072e6f106aa2d5bb2_cgraph}
+\includegraphics[width=350pt]{classSolenoid_ac5436da834dec4ca7273fe223f080949_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classSolenoid_ab6a5e1734209835072e6f106aa2d5bb2_icgraph}
+\includegraphics[width=318pt]{classSolenoid_ac5436da834dec4ca7273fe223f080949_icgraph}
 \end{center}
 \end{figure}
 
 
 \doxysubsection{Member Data Documentation}
+\Hypertarget{classSolenoid_a8e67226b6bb3da8d3856a9929acbe05a}\label{classSolenoid_a8e67226b6bb3da8d3856a9929acbe05a} 
+\index{Solenoid@{Solenoid}!fForceMultiplier@{fForceMultiplier}}
+\index{fForceMultiplier@{fForceMultiplier}!Solenoid@{Solenoid}}
+\doxysubsubsection{\texorpdfstring{fForceMultiplier}{fForceMultiplier}}
+{\footnotesize\ttfamily float Solenoid\+::f\+Force\+Multiplier = 1\hspace{0.3cm}{\ttfamily [private]}}
+
 \Hypertarget{classSolenoid_add93b1973b29bfce089f9a166ff74560}\label{classSolenoid_add93b1973b29bfce089f9a166ff74560} 
 \index{Solenoid@{Solenoid}!forceMax@{forceMax}}
 \index{forceMax@{forceMax}!Solenoid@{Solenoid}}
@@ -257,12 +256,6 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{forceMin@{forceMin}!Solenoid@{Solenoid}}
 \doxysubsubsection{\texorpdfstring{forceMin}{forceMin}}
 {\footnotesize\ttfamily uint16\+\_\+t Solenoid\+::force\+Min = 0\hspace{0.3cm}{\ttfamily [private]}}
-
-\Hypertarget{classSolenoid_a6be3226d9b5f3e4f83583c0227331b71}\label{classSolenoid_a6be3226d9b5f3e4f83583c0227331b71} 
-\index{Solenoid@{Solenoid}!forceMultiplier@{forceMultiplier}}
-\index{forceMultiplier@{forceMultiplier}!Solenoid@{Solenoid}}
-\doxysubsubsection{\texorpdfstring{forceMultiplier}{forceMultiplier}}
-{\footnotesize\ttfamily float Solenoid\+::force\+Multiplier = 1\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classSolenoid_afc07cd3e237f4d30e653b7e6a5d3d2d4}\label{classSolenoid_afc07cd3e237f4d30e653b7e6a5d3d2d4} 
 \index{Solenoid@{Solenoid}!solenoidEngaged@{solenoidEngaged}}

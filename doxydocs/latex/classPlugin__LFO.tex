@@ -1,0 +1,376 @@
+\doxysection{Plugin\+\_\+\+LFO Class Reference}
+\hypertarget{classPlugin__LFO}{}\label{classPlugin__LFO}\index{Plugin\_LFO@{Plugin\_LFO}}
+
+
+{\ttfamily \#include $<$plugin\+\_\+lfo.\+hpp$>$}
+
+
+
+Inheritance diagram for Plugin\+\_\+\+LFO\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{classPlugin__LFO__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Plugin\+\_\+\+LFO\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPlugin__LFO__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structPlugin__LFO_1_1tWaveform}{t\+Waveform}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}} \mbox{\hyperlink{classPlugin__LFO_a53c8c7c739d037f853e991521783c09a}{Plugin\+\_\+\+LFO}} ()
+\item 
+void \mbox{\hyperlink{classPlugin__LFO_aa04273ed167e5222aba0b439d2d07071}{update}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classPlugin}{Plugin}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classPlugin_a84c2231693c775842690918ec259f2dc}{register\+Expression}} (\mbox{\hyperlink{classExpressionParser}{Expression\+Parser}} \texorpdfstring{$\ast$}{*}expression\+Parser)
+\item 
+virtual \mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPlugin_a91eda54a23d2d6bf568219fe774116b3}{get\+Group}} () const =0
+\item 
+virtual void \mbox{\hyperlink{classPlugin_ae6a3b375ea5c78cbdd3454db3f2f91a3}{set\+Group}} (\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*}in\+Group) const =0
+\item 
+virtual \mbox{\hyperlink{classPlugin_a25df9baf81fbf1c9beeb45f4ea178a58}{\texorpdfstring{$\sim$}{\string~}\+Plugin}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule_a5a240a8a9ab1813b17bcb810b24ceaea}{Module}} ()
+\item 
+virtual const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{get\+Module\+ID}} () const =0
+\item 
+virtual \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a9a13ef0a8291e562a9557c311d07b334}{get\+Module\+ID}} ()=0
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a534a35eb18ec29dbcc8bafce30c21128}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_af7fe70cf55b7c8999672c8a202cbdb71}{process\+Module\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a3896fd907affb2fb5a81df36080ef744}{process\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual void \mbox{\hyperlink{classModule_a8aa6237aabeb8c851f0e6272d6cdc28f}{dir}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix, bool hidden, bool modules, bool commands, bool instances, bool instance\+Count, bool recursive)
+\item 
+virtual int \mbox{\hyperlink{classModule_ae6fa72e64554ee0b09a8bb6a77a68640}{get\+Module\+Command\+Count}} ()
+\item 
+virtual void \mbox{\hyperlink{classModule_a5798bc3ad2b47f69e8915297cb33b3e3}{dump\+Data}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}data\+Dump)
+\item 
+virtual void \mbox{\hyperlink{classModule_a72b5f8a3b37fe31c9002c6d7352b2427}{help}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix)
+\item 
+bool \mbox{\hyperlink{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2}{has\+Data\+Change}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleCommand}{Module\+Command}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModuleCommand_a4ce6a1d032eaa918f21ad8121ba59094}{get\+Module\+Command}} (uint8\+\_\+t i) const =0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41}{e\+Waveform}} \{ \newline
+\mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a6b9e97ce59f6ca9e97ea66cb78c22d21}{sawtooth}} = 0
+, \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41ad46006d3b816c2e702df5ae32e4e5b23}{triangle}} = 1
+, \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a3a9263b2ec87846bb9be69bd58c3d6da}{sine}} = 2
+, \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a6f2354d780a71f5bc2fb0f449b2d1ee3}{square}} = 3
+, \newline
+\mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a060afaef265c57c9c2c7588427110e19}{random}} = 4
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classPlugin__LFO_a92a07ddeb396df07c03edfac298ca478}{recalculate\+Increase}} ()
+\item 
+float \mbox{\hyperlink{classPlugin__LFO_a460bf2cc2d2428ab329e50e06fae00e1}{shape\+Triangle}} ()
+\item 
+float \mbox{\hyperlink{classPlugin__LFO_a9e460cde7f1f4c4d233e2dd7b131687c}{shape\+Sine}} ()
+\item 
+float \mbox{\hyperlink{classPlugin__LFO_ac35ffdd44d82f9c123dd4dfd80b50362}{shape\+Square}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classPlugin__LFO_aab92fe923af69deb9561660aaea5c0db}{p\+Enable}} = false
+\item 
+String \mbox{\hyperlink{classPlugin__LFO_ac7afc761d193b6c94d7ad89483b1bdc7}{p\+Name}} = "{}"{}
+\item 
+String \mbox{\hyperlink{classPlugin__LFO_a369e02fd6e8401019ef2100394322276}{p\+Target}} = "{}bw.\+hsh.\+sh5\+:lfoout"{}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classPlugin__LFO_abd63feb97375d492ce0b1b279c38cd20}{p\+Update\+Rate}} = 10
+\item 
+\mbox{\hyperlink{structPlugin__LFO_1_1tWaveform}{t\+Waveform}} \mbox{\hyperlink{classPlugin__LFO_a3081eb1e35094724fc209ca0cf7dda65}{p\+Wave\+Data}} \mbox{[}5\mbox{]}
+\item 
+\mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41}{e\+Waveform}} \mbox{\hyperlink{classPlugin__LFO_a0a9a661c3dffdb3b37a13ad9dd1f2169}{p\+Waveform}} = \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a3a9263b2ec87846bb9be69bd58c3d6da}{e\+Waveform\+::sine}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classPlugin__LFO_a113f98ef51ac74ea8078402dfab43ff7}{p\+Amplitude}} = 65535
+\item 
+float \mbox{\hyperlink{classPlugin__LFO_a5a211081e374ebf17741a9e384ec4b9f}{p\+Frequency}} = 4
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classPlugin__LFO_a1e0937d23fbe721345ac79469546c0cd}{p\+Delay}} = 1000
+\item 
+bool \mbox{\hyperlink{classPlugin__LFO_add5f3d4819b603b978d4e3f91b0c481d}{p\+Bipolar}} = true
+\item 
+float \mbox{\hyperlink{classPlugin__LFO_a256496b6e6b3aecd6a93f9c342c06478}{p\+Count}} = 0
+\item 
+float \mbox{\hyperlink{classPlugin__LFO_a56cdbd9b20cb739d640932e3d59f6ba5}{p\+Delay\+Count}} = 0
+\item 
+float \mbox{\hyperlink{classPlugin__LFO_a0fa41c514176ebb49d23866d7c046f7e}{calculated\+Increase}}
+\item 
+float \mbox{\hyperlink{classPlugin__LFO_ac7554a0f8190a00b40cc483d0a076cef}{delay\+Increase}}
+\item 
+String \mbox{\hyperlink{classPlugin__LFO_a4725cd3a5aef82c0ae215edb9f16d7ee}{last\+Output}} = "{}"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classPlugin}{Plugin}}}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classPlugin_af43b071f70145fea054d97f38c6309a9}{index}} = 0
+\item 
+\mbox{\hyperlink{classModuleHandler}{Module\+Handler}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPlugin_a953f58ecc6906cf9d8c9dc9c8b93998e}{parent}} = nullptr
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classModule_aa09bd171529da96438e917258ab5ab8d}{is\+Group\+Handler}} = false
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}{set\+Data\+Changed}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModule_ad85cad50c5538cc47c6d3ac76500e4cf}{owner}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41}\label{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41} 
+\index{Plugin\_LFO@{Plugin\_LFO}!eWaveform@{eWaveform}}
+\index{eWaveform@{eWaveform}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{eWaveform}{eWaveform}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41}{Plugin\+\_\+\+LFO\+::e\+Waveform}}\hspace{0.3cm}{\ttfamily [private]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{sawtooth@{sawtooth}!Plugin\_LFO@{Plugin\_LFO}}\index{Plugin\_LFO@{Plugin\_LFO}!sawtooth@{sawtooth}}}\Hypertarget{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a6b9e97ce59f6ca9e97ea66cb78c22d21}\label{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a6b9e97ce59f6ca9e97ea66cb78c22d21} 
+sawtooth&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{triangle@{triangle}!Plugin\_LFO@{Plugin\_LFO}}\index{Plugin\_LFO@{Plugin\_LFO}!triangle@{triangle}}}\Hypertarget{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41ad46006d3b816c2e702df5ae32e4e5b23}\label{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41ad46006d3b816c2e702df5ae32e4e5b23} 
+triangle&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{sine@{sine}!Plugin\_LFO@{Plugin\_LFO}}\index{Plugin\_LFO@{Plugin\_LFO}!sine@{sine}}}\Hypertarget{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a3a9263b2ec87846bb9be69bd58c3d6da}\label{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a3a9263b2ec87846bb9be69bd58c3d6da} 
+sine&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{square@{square}!Plugin\_LFO@{Plugin\_LFO}}\index{Plugin\_LFO@{Plugin\_LFO}!square@{square}}}\Hypertarget{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a6f2354d780a71f5bc2fb0f449b2d1ee3}\label{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a6f2354d780a71f5bc2fb0f449b2d1ee3} 
+square&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{random@{random}!Plugin\_LFO@{Plugin\_LFO}}\index{Plugin\_LFO@{Plugin\_LFO}!random@{random}}}\Hypertarget{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a060afaef265c57c9c2c7588427110e19}\label{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a060afaef265c57c9c2c7588427110e19} 
+random&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classPlugin__LFO_a53c8c7c739d037f853e991521783c09a}\label{classPlugin__LFO_a53c8c7c739d037f853e991521783c09a} 
+\index{Plugin\_LFO@{Plugin\_LFO}!Plugin\_LFO@{Plugin\_LFO}}
+\index{Plugin\_LFO@{Plugin\_LFO}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{Plugin\_LFO()}{Plugin\_LFO()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}} Plugin\+\_\+\+LFO\+::\+Plugin\+\_\+\+LFO (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classPlugin__LFO_a92a07ddeb396df07c03edfac298ca478}\label{classPlugin__LFO_a92a07ddeb396df07c03edfac298ca478} 
+\index{Plugin\_LFO@{Plugin\_LFO}!recalculateIncrease@{recalculateIncrease}}
+\index{recalculateIncrease@{recalculateIncrease}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{recalculateIncrease()}{recalculateIncrease()}}
+{\footnotesize\ttfamily void Plugin\+\_\+\+LFO\+::recalculate\+Increase (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPlugin__LFO_a92a07ddeb396df07c03edfac298ca478_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPlugin__LFO_a9e460cde7f1f4c4d233e2dd7b131687c}\label{classPlugin__LFO_a9e460cde7f1f4c4d233e2dd7b131687c} 
+\index{Plugin\_LFO@{Plugin\_LFO}!shapeSine@{shapeSine}}
+\index{shapeSine@{shapeSine}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{shapeSine()}{shapeSine()}}
+{\footnotesize\ttfamily float Plugin\+\_\+\+LFO\+::shape\+Sine (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPlugin__LFO_a9e460cde7f1f4c4d233e2dd7b131687c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPlugin__LFO_ac35ffdd44d82f9c123dd4dfd80b50362}\label{classPlugin__LFO_ac35ffdd44d82f9c123dd4dfd80b50362} 
+\index{Plugin\_LFO@{Plugin\_LFO}!shapeSquare@{shapeSquare}}
+\index{shapeSquare@{shapeSquare}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{shapeSquare()}{shapeSquare()}}
+{\footnotesize\ttfamily float Plugin\+\_\+\+LFO\+::shape\+Square (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPlugin__LFO_ac35ffdd44d82f9c123dd4dfd80b50362_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPlugin__LFO_a460bf2cc2d2428ab329e50e06fae00e1}\label{classPlugin__LFO_a460bf2cc2d2428ab329e50e06fae00e1} 
+\index{Plugin\_LFO@{Plugin\_LFO}!shapeTriangle@{shapeTriangle}}
+\index{shapeTriangle@{shapeTriangle}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{shapeTriangle()}{shapeTriangle()}}
+{\footnotesize\ttfamily float Plugin\+\_\+\+LFO\+::shape\+Triangle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPlugin__LFO_a460bf2cc2d2428ab329e50e06fae00e1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPlugin__LFO_aa04273ed167e5222aba0b439d2d07071}\label{classPlugin__LFO_aa04273ed167e5222aba0b439d2d07071} 
+\index{Plugin\_LFO@{Plugin\_LFO}!update@{update}}
+\index{update@{update}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Plugin\+\_\+\+LFO\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classPlugin_abb4748bbb52c63fc194fc65983674ed7}{Plugin}}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPlugin__LFO_aa04273ed167e5222aba0b439d2d07071_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classPlugin__LFO_a0fa41c514176ebb49d23866d7c046f7e}\label{classPlugin__LFO_a0fa41c514176ebb49d23866d7c046f7e} 
+\index{Plugin\_LFO@{Plugin\_LFO}!calculatedIncrease@{calculatedIncrease}}
+\index{calculatedIncrease@{calculatedIncrease}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{calculatedIncrease}{calculatedIncrease}}
+{\footnotesize\ttfamily float Plugin\+\_\+\+LFO\+::calculated\+Increase\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPlugin__LFO_ac7554a0f8190a00b40cc483d0a076cef}\label{classPlugin__LFO_ac7554a0f8190a00b40cc483d0a076cef} 
+\index{Plugin\_LFO@{Plugin\_LFO}!delayIncrease@{delayIncrease}}
+\index{delayIncrease@{delayIncrease}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{delayIncrease}{delayIncrease}}
+{\footnotesize\ttfamily float Plugin\+\_\+\+LFO\+::delay\+Increase\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPlugin__LFO_a4725cd3a5aef82c0ae215edb9f16d7ee}\label{classPlugin__LFO_a4725cd3a5aef82c0ae215edb9f16d7ee} 
+\index{Plugin\_LFO@{Plugin\_LFO}!lastOutput@{lastOutput}}
+\index{lastOutput@{lastOutput}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{lastOutput}{lastOutput}}
+{\footnotesize\ttfamily String Plugin\+\_\+\+LFO\+::last\+Output = "{}"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPlugin__LFO_a113f98ef51ac74ea8078402dfab43ff7}\label{classPlugin__LFO_a113f98ef51ac74ea8078402dfab43ff7} 
+\index{Plugin\_LFO@{Plugin\_LFO}!pAmplitude@{pAmplitude}}
+\index{pAmplitude@{pAmplitude}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{pAmplitude}{pAmplitude}}
+{\footnotesize\ttfamily uint16\+\_\+t Plugin\+\_\+\+LFO\+::p\+Amplitude = 65535\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPlugin__LFO_add5f3d4819b603b978d4e3f91b0c481d}\label{classPlugin__LFO_add5f3d4819b603b978d4e3f91b0c481d} 
+\index{Plugin\_LFO@{Plugin\_LFO}!pBipolar@{pBipolar}}
+\index{pBipolar@{pBipolar}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{pBipolar}{pBipolar}}
+{\footnotesize\ttfamily bool Plugin\+\_\+\+LFO\+::p\+Bipolar = true\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPlugin__LFO_a256496b6e6b3aecd6a93f9c342c06478}\label{classPlugin__LFO_a256496b6e6b3aecd6a93f9c342c06478} 
+\index{Plugin\_LFO@{Plugin\_LFO}!pCount@{pCount}}
+\index{pCount@{pCount}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{pCount}{pCount}}
+{\footnotesize\ttfamily float Plugin\+\_\+\+LFO\+::p\+Count = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPlugin__LFO_a1e0937d23fbe721345ac79469546c0cd}\label{classPlugin__LFO_a1e0937d23fbe721345ac79469546c0cd} 
+\index{Plugin\_LFO@{Plugin\_LFO}!pDelay@{pDelay}}
+\index{pDelay@{pDelay}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{pDelay}{pDelay}}
+{\footnotesize\ttfamily uint16\+\_\+t Plugin\+\_\+\+LFO\+::p\+Delay = 1000\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPlugin__LFO_a56cdbd9b20cb739d640932e3d59f6ba5}\label{classPlugin__LFO_a56cdbd9b20cb739d640932e3d59f6ba5} 
+\index{Plugin\_LFO@{Plugin\_LFO}!pDelayCount@{pDelayCount}}
+\index{pDelayCount@{pDelayCount}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{pDelayCount}{pDelayCount}}
+{\footnotesize\ttfamily float Plugin\+\_\+\+LFO\+::p\+Delay\+Count = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPlugin__LFO_aab92fe923af69deb9561660aaea5c0db}\label{classPlugin__LFO_aab92fe923af69deb9561660aaea5c0db} 
+\index{Plugin\_LFO@{Plugin\_LFO}!pEnable@{pEnable}}
+\index{pEnable@{pEnable}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{pEnable}{pEnable}}
+{\footnotesize\ttfamily bool Plugin\+\_\+\+LFO\+::p\+Enable = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPlugin__LFO_a5a211081e374ebf17741a9e384ec4b9f}\label{classPlugin__LFO_a5a211081e374ebf17741a9e384ec4b9f} 
+\index{Plugin\_LFO@{Plugin\_LFO}!pFrequency@{pFrequency}}
+\index{pFrequency@{pFrequency}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{pFrequency}{pFrequency}}
+{\footnotesize\ttfamily float Plugin\+\_\+\+LFO\+::p\+Frequency = 4\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPlugin__LFO_ac7afc761d193b6c94d7ad89483b1bdc7}\label{classPlugin__LFO_ac7afc761d193b6c94d7ad89483b1bdc7} 
+\index{Plugin\_LFO@{Plugin\_LFO}!pName@{pName}}
+\index{pName@{pName}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{pName}{pName}}
+{\footnotesize\ttfamily String Plugin\+\_\+\+LFO\+::p\+Name = "{}"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPlugin__LFO_a369e02fd6e8401019ef2100394322276}\label{classPlugin__LFO_a369e02fd6e8401019ef2100394322276} 
+\index{Plugin\_LFO@{Plugin\_LFO}!pTarget@{pTarget}}
+\index{pTarget@{pTarget}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{pTarget}{pTarget}}
+{\footnotesize\ttfamily String Plugin\+\_\+\+LFO\+::p\+Target = "{}bw.\+hsh.\+sh5\+:lfoout"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPlugin__LFO_abd63feb97375d492ce0b1b279c38cd20}\label{classPlugin__LFO_abd63feb97375d492ce0b1b279c38cd20} 
+\index{Plugin\_LFO@{Plugin\_LFO}!pUpdateRate@{pUpdateRate}}
+\index{pUpdateRate@{pUpdateRate}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{pUpdateRate}{pUpdateRate}}
+{\footnotesize\ttfamily uint16\+\_\+t Plugin\+\_\+\+LFO\+::p\+Update\+Rate = 10\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPlugin__LFO_a3081eb1e35094724fc209ca0cf7dda65}\label{classPlugin__LFO_a3081eb1e35094724fc209ca0cf7dda65} 
+\index{Plugin\_LFO@{Plugin\_LFO}!pWaveData@{pWaveData}}
+\index{pWaveData@{pWaveData}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{pWaveData}{pWaveData}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structPlugin__LFO_1_1tWaveform}{t\+Waveform}} Plugin\+\_\+\+LFO\+::p\+Wave\+Data\mbox{[}5\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{\ \{\ \textcolor{stringliteral}{"{}saw"{}},\ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a6b9e97ce59f6ca9e97ea66cb78c22d21}{eWaveform::sawtooth}}\ \},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}triangle"{}},\ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41ad46006d3b816c2e702df5ae32e4e5b23}{eWaveform::triangle}}\ \},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}sine"{}},\ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a3a9263b2ec87846bb9be69bd58c3d6da}{eWaveform::sine}}\ \},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}square"{}},\ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a6f2354d780a71f5bc2fb0f449b2d1ee3}{eWaveform::square}}\ \},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}random"{}},\ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a060afaef265c57c9c2c7588427110e19}{eWaveform::random}}\ \}\ \}}
+
+\end{DoxyCode}
+\Hypertarget{classPlugin__LFO_a0a9a661c3dffdb3b37a13ad9dd1f2169}\label{classPlugin__LFO_a0a9a661c3dffdb3b37a13ad9dd1f2169} 
+\index{Plugin\_LFO@{Plugin\_LFO}!pWaveform@{pWaveform}}
+\index{pWaveform@{pWaveform}!Plugin\_LFO@{Plugin\_LFO}}
+\doxysubsubsection{\texorpdfstring{pWaveform}{pWaveform}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41}{e\+Waveform}} Plugin\+\_\+\+LFO\+::p\+Waveform = \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a3a9263b2ec87846bb9be69bd58c3d6da}{e\+Waveform\+::sine}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{plugin__lfo_8hpp}{plugin\+\_\+lfo.\+hpp}}\item 
+\mbox{\hyperlink{plugin__lfo_8cpp}{plugin\+\_\+lfo.\+cpp}}\end{DoxyCompactItemize}

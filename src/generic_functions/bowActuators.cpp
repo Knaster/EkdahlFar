@@ -27,9 +27,10 @@
 #include "generic_functions/bowActuators.hpp"
 
 const ModuleCommandDeclaration BowActuators::moduleCommands[] = {
-    { "add", "a", "(name):(rest:engage:stall)", "Add new actuator with the given name and parameters", false, false, &s_add, eCommandType::Add},
-    { "remove", "rm", "actuator", "Remove bow actuator", false, false, &s_remove, eCommandType::Remove},
-    { "count", "c", "-", "Returns the amount of saved bow actuators", false, false, &s_count, eCommandType::Count},
+    { "add", "a", "(name):(rest:engage:stall)", "Add new actuator with the given name and parameters", false, false, &s_add, eCommandType_data::ectData | eCommandType_function::ectAdd},
+    { "remove", "rm", "actuator", "Remove bow actuator", false, false, &s_remove, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectRemove},
+    { "count", "c", "-", "Returns the amount of saved bow actuators", false, false, &s_count,
+        eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectCount | eCommandType_access::ectRequest },
 };
 
 getModuleCount(BowActuators)
@@ -46,7 +47,7 @@ BowActuators::BowActuators()
 }
 
 CREATE_INDEX_CALLBACK(actuatorIndexChanged, BowActuators) {
-    debugPrintln("Actuator index changed", debugPrintType::Debug);
+    //debugPrintln("Actuator index changed", debugPrintType::Debug);
     return true;
 }
 
@@ -98,19 +99,19 @@ CREATE_MODULE_COMMAND_FUNCTION(count, BowActuators) {
 BowActuator* BowActuators::addBowActuator(String name, uint16_t rest, uint16_t engage, uint16_t stall) {
     BowActuator *lBowActuator = new BowActuator();
     ModuleGroup *group = addModule(lBowActuator);
-    BowActuator *actuator = group->modules.back();
+    BowActuator *actuator = static_cast<BowActuator*>(group->modules.back());
     actuator->id = name;
     actuator->firstTouchPressure = engage;
     actuator->restPosition = rest;
     actuator->stallPressure = stall;
 
-    debugPrint("adding actuator with values " + actuator->id + "," + String(actuator->restPosition) + ":" + String(actuator->firstTouchPressure) + ":" + String(actuator->stallPressure), debugPrintType::Debug);
+    //debugPrintln("adding actuator with values " + actuator->id + "," + String(actuator->restPosition) + ":" + String(actuator->firstTouchPressure) + ":" + String(actuator->stallPressure), debugPrintType::Debug);
     return actuator;
 }
 
 bool BowActuators::removeBowActuator(uint8_t t_actuator) {
     ModuleGroup *group = getGroup("bowactuators");
-    if (group == nullptr) { return eProcessResult::CommandFailed; }
+    if (group == nullptr) { return false; }
     return group->removeModule(t_actuator);
 }
 

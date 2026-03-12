@@ -20,83 +20,21 @@
 #define COMMANDPARSER_HPP
 
 #include "base/arduinorequired.hpp"
-#include "master_controller/expressionparser.h"
+#include "commanditem.hpp"
 
-extern const uint8_t quoteStyle[];
+#define commandResponseType debugPrintType
 
-#define SELECTION std::vector<uint8_t>
-
-struct commandItemPart {
-    String name;
-    SELECTION selection;
+struct commandResponse {
+    String response;
+    commandResponseType responseType;
 };
 
-/// Class containing command items consisting of one command and any number of arguments
-class commandItem {
-public:
-    std::vector<String> argument;
-    String command = "";
-    std::vector<commandItemPart> hierarchy;
-    int hierarchyIndex = 0;
-    String originalCommand = "";
-    SELECTION selection;
+bool checkArguments(CommandItem *_commandItem, std::vector<commandResponse> *commandResponses, uint8_t arguments, bool t_supressError = false);
 
-    commandItem();
-    commandItem (String commandString);
-    commandItem& operator = (const commandItem& other);
+bool checkArgumentsMin(CommandItem *_commandItem, std::vector<commandResponse> *commandResponses, uint8_t argumentsMin, bool t_supressError = false);
 
-private:
-    void buildHierarchy();
-};
+void printResponses(std::vector<commandResponse> *commandResponses, bool isInternal = false);
 
-/// Class containing an array of commandItem objects and ways of processing them
-class commandList {
-public:
-    std::vector<commandItem> item;
-    bool processingCommands = false;
-
-    void waitIfProcessing();
-
-    int parseQuote(String commandString, char quote, int start);
-
-    int parseBracket(String commandString, int start);
-
-  /// Parses a string of commands into several commandItem objects
-    void addCommands(String commandItems);
-
-    void parseCommandExpressions(ExpressionParser expressionParser);
-
-    commandList(String commandItems);
-
-    commandList& operator = (const commandList& other);
-
-    commandList();
-};
-
-/// Structure for containing help information as long as short-to-long name command name parsing
-struct serialCommandItem {
-    String longCommand;
-    String shortCommand;
-    String arguments;
-    String Help;
-};
-
-/// Preprocesses a commandItem, replacing any short command names with long ones and turns them all into lowercase
-bool processCommandItems(commandItem *_commandParser, const serialCommandItem serialCommandArray[], int size);
-/// Prints all help data for commands given in the serialCommandArray
-String printCommandHelp(serialCommandItem serialCommandArray[], int size);
-/// Prints all help data for commands given in the serialCommandArray
-String addCommandHelp(const serialCommandItem serialCommandArray[], int size, std::vector<commandResponse> *commandResponses, String prefix = "");
-
-bool checkArguments(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, uint8_t arguments, bool t_supressError = false);
-bool checkArgumentsMin(commandItem *_commandItem, std::vector<commandResponse> *commandResponses, uint8_t argumentsMin, bool t_supressError = false);
-bool validateNumber(int16_t number, int16_t min, int16_t max, bool t_supressError = false);
-
-String delimitExpression(String expression, bool force = false);
-String stripQuotes(String expression);
-String removePrefix(String input, String prefix);
-
-extern commandList globalCommands;
-extern commandList globalResponseCommands;
+String buildCommandString(CommandItem *inCommandItem);
 
 #endif

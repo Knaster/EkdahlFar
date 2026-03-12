@@ -1,15 +1,15 @@
 \doxysection{farsingle.\+hpp File Reference}
 \hypertarget{farsingle_8hpp}{}\label{farsingle_8hpp}\index{farsingle.hpp@{farsingle.hpp}}
-{\ttfamily \#include "{}debugprint.\+hpp"{}}\newline
-{\ttfamily \#include "{}mutecontrol.\+cpp"{}}\newline
-{\ttfamily \#include "{}solenoid.\+cpp"{}}\newline
-{\ttfamily \#include "{}bowcontrol.\+cpp"{}}\newline
-{\ttfamily \#include "{}bow\+Actuators.\+cpp"{}}\newline
-{\ttfamily \#include "{}harmonicserieshandler.\+cpp"{}}\newline
-{\ttfamily \#include "{}control\+Reader.\+cpp"{}}\newline
-{\ttfamily \#include "{}calibrationhelpers.\+hpp"{}}\newline
-{\ttfamily \#include "{}bowcalibration.\+cpp"{}}\newline
-{\ttfamily \#include "{}mutecalibration.\+cpp"{}}\newline
+{\ttfamily \#include $<$base/modulehandler.\+hpp$>$}\newline
+{\ttfamily \#include $<$master\+\_\+controller/midiconfigurationhandler.\+hpp$>$}\newline
+{\ttfamily \#include $<$mute/mutecontrol.\+hpp$>$}\newline
+{\ttfamily \#include $<$solenoid/solenoid.\+hpp$>$}\newline
+{\ttfamily \#include $<$bow/bowcontrol.\+hpp$>$}\newline
+{\ttfamily \#include $<$master\+\_\+controller/midi.\+h$>$}\newline
+{\ttfamily \#include $<$mute/mutecalibration.\+hpp$>$}\newline
+{\ttfamily \#include $<$bow/bowcalibration.\+hpp$>$}\newline
+{\ttfamily \#include $<$controlbox/control\+Reader.\+hpp$>$}\newline
+{\ttfamily \#include $<$plugins/pluginhandler.\+hpp$>$}\newline
 Include dependency graph for farsingle.\+hpp\+:
 \nopagebreak
 \begin{figure}[H]
@@ -22,7 +22,7 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=160pt]{farsingle_8hpp__dep__incl}
+\includegraphics[width=240pt]{farsingle_8hpp__dep__incl}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Classes}
@@ -30,30 +30,26 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \item 
 class \mbox{\hyperlink{classFARSingle}{FARSingle}}
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Variables}
+\doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} \mbox{\hyperlink{farsingle_8hpp_a04b385c579c76fd09655085a4cebbe64}{serial\+Commands\+Far\+Single}} \mbox{[}$\,$\mbox{]}
+\#define \mbox{\hyperlink{farsingle_8hpp_a6efb14aaea9598658f4f9c22a8201806}{FAR\+\_\+\+SINGLE\+\_\+\+CREATE\+\_\+\+INSTANCE}}(instance)
 \end{DoxyCompactItemize}
 
 
-\doxysubsection{Variable Documentation}
-\Hypertarget{farsingle_8hpp_a04b385c579c76fd09655085a4cebbe64}\label{farsingle_8hpp_a04b385c579c76fd09655085a4cebbe64} 
-\index{farsingle.hpp@{farsingle.hpp}!serialCommandsFarSingle@{serialCommandsFarSingle}}
-\index{serialCommandsFarSingle@{serialCommandsFarSingle}!farsingle.hpp@{farsingle.hpp}}
-\doxysubsubsection{\texorpdfstring{serialCommandsFarSingle}{serialCommandsFarSingle}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Commands\+Far\+Single\mbox{[}$\,$\mbox{]}}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{farsingle_8hpp_a6efb14aaea9598658f4f9c22a8201806}\label{farsingle_8hpp_a6efb14aaea9598658f4f9c22a8201806} 
+\index{farsingle.hpp@{farsingle.hpp}!FAR\_SINGLE\_CREATE\_INSTANCE@{FAR\_SINGLE\_CREATE\_INSTANCE}}
+\index{FAR\_SINGLE\_CREATE\_INSTANCE@{FAR\_SINGLE\_CREATE\_INSTANCE}!farsingle.hpp@{farsingle.hpp}}
+\doxysubsubsection{\texorpdfstring{FAR\_SINGLE\_CREATE\_INSTANCE}{FAR\_SINGLE\_CREATE\_INSTANCE}}
+{\footnotesize\ttfamily \#define FAR\+\_\+\+SINGLE\+\_\+\+CREATE\+\_\+\+INSTANCE(\begin{DoxyParamCaption}\item[{}]{instance }\end{DoxyParamCaption})}
 
-{\bfseries Initial value\+:}
+{\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{=\ \{}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcalibrateall"{}},\ \textcolor{stringliteral}{"{}bca"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Performs\ all\ calibration\ routines\ on\ the\ selected\ bow,\ see\ below\ for\ routines\ performed"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcalibratespeed"{}},\ \textcolor{stringliteral}{"{}bcs"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Finds\ the\ minimum\ and\ maximum\ bow\ speed\ of\ the\ selected\ bow"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}bowcalibratepressure"{}},\ \textcolor{stringliteral}{"{}bcp"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Finds\ the\ minimum\ and\ maximum\ bow\ pressure\ of\ the\ selected\ bow"{}}\ \},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}pickupstringfrequency"{}},\ \textcolor{stringliteral}{"{}psf"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Returns\ the\ fundamental\ tone\ calculated\ from\ the\ current\ audio\ signal\ if\ appliccable"{}}\},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}pickupaudiopeak"{}},\ \textcolor{stringliteral}{"{}pap"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Returns\ the\ peak\ amplitude\ of\ the\ current\ audio\ signal"{}}\},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}pickupaudiorms"{}},\ \textcolor{stringliteral}{"{}par"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Returns\ the\ RMS\ amplitude\ of\ the\ current\ audio\ signal"{}}\},}
-\DoxyCodeLine{\ \ \ \ \{\ \textcolor{stringliteral}{"{}mutecalibrate"{}},\ \textcolor{stringliteral}{"{}mca"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Calibrate\ mute\ settings"{}}\}}
-\DoxyCodeLine{\}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classFARSingle}{FARSingle}}\ *instance;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ instance\#\#UpdateServoStepperPressure0()\ \{\ instance-\/>\mbox{\hyperlink{classFARSingle_a10de1c088c48f695e026a9c9a711a831}{updatePressureServo}}();\ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ instance\#\#UpdateServoStepperMute0()\ \{\ instance-\/>\mbox{\hyperlink{classFARSingle_ac107bf78c2d579aa3e97e9ba22c537a1}{updateMuteServo}}();\ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ instance\#\#UpdateTachometer0()\ \{\ instance-\/>\mbox{\hyperlink{classFARSingle_af2cb18627f94b6c801521ddd9b632b5d}{updateTachometer}}();\ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ instance\#\#UpdatePID0()\ \{\ instance-\/>\mbox{\hyperlink{classFARSingle_a8d4f9a830c86ddb17c6fb441b07f5ea5}{updatePID}}();\ \}\ \(\backslash\)}
 
 \end{DoxyCode}

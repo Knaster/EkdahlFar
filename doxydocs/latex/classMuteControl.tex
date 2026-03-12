@@ -6,23 +6,26 @@
 
 
 
+Inheritance diagram for Mute\+Control\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{classMuteControl__inherit__graph}
+\end{center}
+\end{figure}
+
+
 Collaboration diagram for Mute\+Control\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=256pt]{classMuteControl__coll__graph}
+\includegraphics[width=350pt]{classMuteControl__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classMuteControl_afd28cfe6b61316d61bcdac4a18ba41d4}{Mute\+Control}} (char step\+En\+Pin, char step\+Dir\+Pin, char step\+Step\+Pin, Hardware\+Serial \texorpdfstring{$\ast$}{*}step\+Serial\+Port, char step\+Home\+Sensor)
-\item 
-\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classMuteControl_a34845eb34893ebd4c145a3421059c05f}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
-\item 
-\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classMuteControl_ab23faefce75e7dc308e857f56114221c}{process\+Serial\+Command\+Hidden}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
-\item 
-String \mbox{\hyperlink{classMuteControl_a957f11cc6ff4ff5013d23c4475e0297e}{dump\+Data}} ()
+\mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}} \mbox{\hyperlink{classMuteControl_a1b4ef7d56aa0f5792c8d1cdfa5eb4d18}{Mute\+Control}} (char step\+En\+Pin, char step\+Dir\+Pin, char step\+Step\+Pin, Hardware\+Serial \texorpdfstring{$\ast$}{*}step\+Serial\+Port, char step\+Home\+Sensor)
 \item 
 bool \mbox{\hyperlink{classMuteControl_ac2bd90e89511af5ed0986e9b74485339}{set\+Position}} (uint16\+\_\+t position)
 \item 
@@ -35,6 +38,10 @@ uint16\+\_\+t \mbox{\hyperlink{classMuteControl_adc61005c2105ef2e5e4526b6652fab4
 bool \mbox{\hyperlink{classMuteControl_af159acc59612045904351189d523a32e}{set\+Half\+Mute\+Position}} (uint16\+\_\+t in\+Half\+Mute\+Position)
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classMuteControl_a776f7ac39c10d9c42ae4f3f4ece2ce35}{get\+Half\+Mute\+Position}} ()
+\item 
+bool \mbox{\hyperlink{classMuteControl_a83034886467cb45ed8b642224c6a075b}{set\+Rest\+Position}} (uint16\+\_\+t in\+Rest\+Position)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classMuteControl_a13064e0a93c03f9164efabb587ef9780}{get\+Rest\+Position}} ()
 \item 
 bool \mbox{\hyperlink{classMuteControl_a8d5b7702ac593f801e3ca282c262ce07}{home}} (bool invert=false)
 \item 
@@ -64,19 +71,65 @@ void \mbox{\hyperlink{classMuteControl_a2957241645c550ee27a2feb8eb66ee66}{update
 \item 
 void \mbox{\hyperlink{classMuteControl_ad03b7fd3c3f10ffad2ec544c45aab2c9}{set\+Step\+Interval\+Callback}} (void \texorpdfstring{$\ast$}{*}step\+Interval\+Callback)
 \end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule_a5a240a8a9ab1813b17bcb810b24ceaea}{Module}} ()
+\item 
+virtual const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{get\+Module\+ID}} () const =0
+\item 
+virtual \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a9a13ef0a8291e562a9557c311d07b334}{get\+Module\+ID}} ()=0
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a534a35eb18ec29dbcc8bafce30c21128}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_af7fe70cf55b7c8999672c8a202cbdb71}{process\+Module\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a3896fd907affb2fb5a81df36080ef744}{process\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual void \mbox{\hyperlink{classModule_a8aa6237aabeb8c851f0e6272d6cdc28f}{dir}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix, bool hidden, bool modules, bool commands, bool instances, bool instance\+Count, bool recursive)
+\item 
+virtual int \mbox{\hyperlink{classModule_ae6fa72e64554ee0b09a8bb6a77a68640}{get\+Module\+Command\+Count}} ()
+\item 
+virtual void \mbox{\hyperlink{classModule_a5798bc3ad2b47f69e8915297cb33b3e3}{dump\+Data}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}data\+Dump)
+\item 
+virtual void \mbox{\hyperlink{classModule_a72b5f8a3b37fe31c9002c6d7352b2427}{help}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix)
+\item 
+bool \mbox{\hyperlink{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2}{has\+Data\+Change}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleCommand}{Module\+Command}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModuleCommand_a4ce6a1d032eaa918f21ad8121ba59094}{get\+Module\+Command}} (uint8\+\_\+t i) const =0
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classMute}{Mute}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classMuteControl_a0b43b5dfca60625d8912d643fb24b7a7}{mute}} = nullptr
 \end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classModule_aa09bd171529da96438e917258ab5ab8d}{is\+Group\+Handler}} = false
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}{set\+Data\+Changed}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModule_ad85cad50c5538cc47c6d3ac76500e4cf}{owner}} = nullptr
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classMuteControl_afd28cfe6b61316d61bcdac4a18ba41d4}\label{classMuteControl_afd28cfe6b61316d61bcdac4a18ba41d4} 
+\Hypertarget{classMuteControl_a1b4ef7d56aa0f5792c8d1cdfa5eb4d18}\label{classMuteControl_a1b4ef7d56aa0f5792c8d1cdfa5eb4d18} 
 \index{MuteControl@{MuteControl}!MuteControl@{MuteControl}}
 \index{MuteControl@{MuteControl}!MuteControl@{MuteControl}}
 \doxysubsubsection{\texorpdfstring{MuteControl()}{MuteControl()}}
-{\footnotesize\ttfamily Mute\+Control\+::\+Mute\+Control (\begin{DoxyParamCaption}\item[{char}]{step\+En\+Pin,  }\item[{char}]{step\+Dir\+Pin,  }\item[{char}]{step\+Step\+Pin,  }\item[{Hardware\+Serial \texorpdfstring{$\ast$}{*}}]{step\+Serial\+Port,  }\item[{char}]{step\+Home\+Sensor }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}} Mute\+Control\+::\+Mute\+Control (\begin{DoxyParamCaption}\item[{char}]{step\+En\+Pin,  }\item[{char}]{step\+Dir\+Pin,  }\item[{char}]{step\+Step\+Pin,  }\item[{Hardware\+Serial \texorpdfstring{$\ast$}{*}}]{step\+Serial\+Port,  }\item[{char}]{step\+Home\+Sensor }\end{DoxyParamCaption})}
 
 
 
@@ -94,32 +147,11 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classMuteControl_a85b73f1ef9113226956a8711eafb5dd9_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classMuteControl_a85b73f1ef9113226956a8711eafb5dd9_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classMuteControl_a957f11cc6ff4ff5013d23c4475e0297e}\label{classMuteControl_a957f11cc6ff4ff5013d23c4475e0297e} 
-\index{MuteControl@{MuteControl}!dumpData@{dumpData}}
-\index{dumpData@{dumpData}!MuteControl@{MuteControl}}
-\doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
-{\footnotesize\ttfamily String Mute\+Control\+::dump\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classMuteControl_a957f11cc6ff4ff5013d23c4475e0297e_cgraph}
-\end{center}
-\end{figure}
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classMuteControl_a957f11cc6ff4ff5013d23c4475e0297e_icgraph}
+\includegraphics[width=350pt]{classMuteControl_a85b73f1ef9113226956a8711eafb5dd9_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classMuteControl_a6938317be28cb82699e9889b1557e79f}\label{classMuteControl_a6938317be28cb82699e9889b1557e79f} 
@@ -128,8 +160,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{getAutoCorrect()}{getAutoCorrect()}}
 {\footnotesize\ttfamily bool Mute\+Control\+::get\+Auto\+Correct (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -149,8 +180,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classMuteControl_abdf488dd94cfb9213d0c786cfdc45603_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -203,8 +233,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classMuteControl_a46a0cb72ae1ab4b6fd9b9485ff6e4dd7_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -224,8 +253,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classMuteControl_a0975366e57663c3cb2fb2bf9f3c26395_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -245,14 +273,6 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classMuteControl_a01e28f1cb2ee05be0c11cfc43870f7bd_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classMuteControl_a01e28f1cb2ee05be0c11cfc43870f7bd_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classMuteControl_afc92dc3cde659a50420dd16efd248d81}\label{classMuteControl_afc92dc3cde659a50420dd16efd248d81} 
 \index{MuteControl@{MuteControl}!getMoveDirection@{getMoveDirection}}
 \index{getMoveDirection@{getMoveDirection}!MuteControl@{MuteControl}}
@@ -266,8 +286,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classMuteControl_afc92dc3cde659a50420dd16efd248d81_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -287,6 +306,19 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classMuteControl_ab7513ed5ce51b0365e899f4d6b970dd2_cgraph}
 \end{center}
 \end{figure}
+\Hypertarget{classMuteControl_a13064e0a93c03f9164efabb587ef9780}\label{classMuteControl_a13064e0a93c03f9164efabb587ef9780} 
+\index{MuteControl@{MuteControl}!getRestPosition@{getRestPosition}}
+\index{getRestPosition@{getRestPosition}!MuteControl@{MuteControl}}
+\doxysubsubsection{\texorpdfstring{getRestPosition()}{getRestPosition()}}
+{\footnotesize\ttfamily uint16\+\_\+t Mute\+Control\+::get\+Rest\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMuteControl_a13064e0a93c03f9164efabb587ef9780_cgraph}
+\end{center}
+\end{figure}
 \Hypertarget{classMuteControl_a0b8c5390fa49a071ded9f8e8e1ca32c7}\label{classMuteControl_a0b8c5390fa49a071ded9f8e8e1ca32c7} 
 \index{MuteControl@{MuteControl}!getTMC2209Info@{getTMC2209Info}}
 \index{getTMC2209Info@{getTMC2209Info}!MuteControl@{MuteControl}}
@@ -300,8 +332,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classMuteControl_a0b8c5390fa49a071ded9f8e8e1ca32c7_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -328,55 +359,13 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classMuteControl_a8d5b7702ac593f801e3ca282c262ce07_icgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classMuteControl_a34845eb34893ebd4c145a3421059c05f}\label{classMuteControl_a34845eb34893ebd4c145a3421059c05f} 
-\index{MuteControl@{MuteControl}!processSerialCommand@{processSerialCommand}}
-\index{processSerialCommand@{processSerialCommand}!MuteControl@{MuteControl}}
-\doxysubsubsection{\texorpdfstring{processSerialCommand()}{processSerialCommand()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Mute\+Control\+::process\+Serial\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classMuteControl_a34845eb34893ebd4c145a3421059c05f_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classMuteControl_a34845eb34893ebd4c145a3421059c05f_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classMuteControl_ab23faefce75e7dc308e857f56114221c}\label{classMuteControl_ab23faefce75e7dc308e857f56114221c} 
-\index{MuteControl@{MuteControl}!processSerialCommandHidden@{processSerialCommandHidden}}
-\index{processSerialCommandHidden@{processSerialCommandHidden}!MuteControl@{MuteControl}}
-\doxysubsubsection{\texorpdfstring{processSerialCommandHidden()}{processSerialCommandHidden()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Mute\+Control\+::process\+Serial\+Command\+Hidden (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classMuteControl_ab23faefce75e7dc308e857f56114221c_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classMuteControl_ab23faefce75e7dc308e857f56114221c_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classMuteControl_a1222f353ba1bf240b6d8e014a1c5e6a5}\label{classMuteControl_a1222f353ba1bf240b6d8e014a1c5e6a5} 
 \index{MuteControl@{MuteControl}!setAutoCorrect@{setAutoCorrect}}
 \index{setAutoCorrect@{setAutoCorrect}!MuteControl@{MuteControl}}
 \doxysubsubsection{\texorpdfstring{setAutoCorrect()}{setAutoCorrect()}}
 {\footnotesize\ttfamily void Mute\+Control\+::set\+Auto\+Correct (\begin{DoxyParamCaption}\item[{bool}]{auto\+Correct }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -436,8 +425,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classMuteControl_a4c84f98f20a559d85079051752f35c87_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -457,6 +445,26 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classMuteControl_ac2bd90e89511af5ed0986e9b74485339_cgraph}
 \end{center}
 \end{figure}
+\Hypertarget{classMuteControl_a83034886467cb45ed8b642224c6a075b}\label{classMuteControl_a83034886467cb45ed8b642224c6a075b} 
+\index{MuteControl@{MuteControl}!setRestPosition@{setRestPosition}}
+\index{setRestPosition@{setRestPosition}!MuteControl@{MuteControl}}
+\doxysubsubsection{\texorpdfstring{setRestPosition()}{setRestPosition()}}
+{\footnotesize\ttfamily bool Mute\+Control\+::set\+Rest\+Position (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{in\+Rest\+Position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMuteControl_a83034886467cb45ed8b642224c6a075b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMuteControl_a83034886467cb45ed8b642224c6a075b_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{classMuteControl_ad03b7fd3c3f10ffad2ec544c45aab2c9}\label{classMuteControl_ad03b7fd3c3f10ffad2ec544c45aab2c9} 
 \index{MuteControl@{MuteControl}!setStepIntervalCallback@{setStepIntervalCallback}}
 \index{setStepIntervalCallback@{setStepIntervalCallback}!MuteControl@{MuteControl}}
@@ -474,7 +482,11 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{MuteControl@{MuteControl}!update@{update}}
 \index{update@{update}!MuteControl@{MuteControl}}
 \doxysubsubsection{\texorpdfstring{update()}{update()}}
-{\footnotesize\ttfamily void Mute\+Control\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void Mute\+Control\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classModule_a09131761fec40345e3657b801778057f}{Module}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -487,7 +499,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classMuteControl_a372e65c7dbf40cf10718dc56a431e307_icgraph}
+\includegraphics[width=336pt]{classMuteControl_a372e65c7dbf40cf10718dc56a431e307_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classMuteControl_a2957241645c550ee27a2feb8eb66ee66}\label{classMuteControl_a2957241645c550ee27a2feb8eb66ee66} 
@@ -521,7 +533,6 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 
-The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{mutecontrol_8hpp}{mutecontrol.\+hpp}}\item 
-\mbox{\hyperlink{mutecontrol_8cpp}{mutecontrol.\+cpp}}\end{DoxyCompactItemize}
+\mbox{\hyperlink{mutecontrol_8hpp}{mutecontrol.\+hpp}}\end{DoxyCompactItemize}

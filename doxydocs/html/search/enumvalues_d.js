@@ -1,5 +1,20 @@
 var searchData=
 [
-  ['secondhomingfalling_0',['SECONDHOMINGFALLING',['../servostepper_8hpp.html#a142f56ac82b59271977a5351ea4e36f9a5fd892078c6323b72bdb4ed2aa2093ae',1,'servostepper.hpp']]],
-  ['secondhomingrising_1',['SECONDHOMINGRISING',['../servostepper_8hpp.html#a142f56ac82b59271977a5351ea4e36f9a61afdcd47391761dc1694c1821d182da',1,'servostepper.hpp']]]
+  ['sattack_0',['sAttack',['../classPlugin__AHDSR.html#a8272101b5b1956012422d6a623eabccfa1d0527fb93d3d95848ff7d8ae9eab150',1,'Plugin_AHDSR']]],
+  ['sawtooth_1',['sawtooth',['../classPlugin__LFO.html#a92cfe3f5dc74cdc4339769cf2d00da41a6b9e97ce59f6ca9e97ea66cb78c22d21',1,'Plugin_LFO']]],
+  ['sdecay_2',['sDecay',['../classPlugin__AHDSR.html#a8272101b5b1956012422d6a623eabccfabebd02651cf1f4795ca5789eb3a3a757',1,'Plugin_AHDSR']]],
+  ['secondhomingfalling_3',['SECONDHOMINGFALLING',['../servostepper_8hpp.html#a142f56ac82b59271977a5351ea4e36f9a5fd892078c6323b72bdb4ed2aa2093ae',1,'servostepper.hpp']]],
+  ['secondhomingrising_4',['SECONDHOMINGRISING',['../servostepper_8hpp.html#a142f56ac82b59271977a5351ea4e36f9a61afdcd47391761dc1694c1821d182da',1,'servostepper.hpp']]],
+  ['shold_5',['sHold',['../classPlugin__AHDSR.html#a8272101b5b1956012422d6a623eabccfa35053322079f9136bfcf97939865775c',1,'Plugin_AHDSR']]],
+  ['simplebool_6',['SimpleBool',['../modulesystembasics_8hpp.html#a9c76f8d2ae49513c603deaf6c24aabb3a28b5bc6291c2acdc97d4f1f46f4789cb',1,'modulesystembasics.hpp']]],
+  ['simplefloat_7',['SimpleFloat',['../modulesystembasics_8hpp.html#a9c76f8d2ae49513c603deaf6c24aabb3aa210d75eecafc3c332388f910fb265f6',1,'modulesystembasics.hpp']]],
+  ['simpleint16_8',['SimpleInt16',['../modulesystembasics_8hpp.html#a9c76f8d2ae49513c603deaf6c24aabb3a5a24c30a835d2fb61a48e94d0674c5b5',1,'modulesystembasics.hpp']]],
+  ['simplestring_9',['SimpleString',['../modulesystembasics_8hpp.html#a9c76f8d2ae49513c603deaf6c24aabb3ab44f630ccd79e857b188881d7be5d554',1,'modulesystembasics.hpp']]],
+  ['simpleuint16_10',['SimpleUInt16',['../modulesystembasics_8hpp.html#a9c76f8d2ae49513c603deaf6c24aabb3a85a18924b17a185c4314d76e2c6737e8',1,'modulesystembasics.hpp']]],
+  ['simpleuint8_11',['SimpleUInt8',['../modulesystembasics_8hpp.html#a9c76f8d2ae49513c603deaf6c24aabb3aa1f2510a5d3c28f81f047744d50ffb8f',1,'modulesystembasics.hpp']]],
+  ['sine_12',['sine',['../classPlugin__LFO.html#a92cfe3f5dc74cdc4339769cf2d00da41a3a9263b2ec87846bb9be69bd58c3d6da',1,'Plugin_LFO']]],
+  ['software_13',['software',['../modulesystembasics_8hpp.html#ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8',1,'modulesystembasics.hpp']]],
+  ['square_14',['square',['../classPlugin__LFO.html#a92cfe3f5dc74cdc4339769cf2d00da41a6f2354d780a71f5bc2fb0f449b2d1ee3',1,'Plugin_LFO']]],
+  ['srelease_15',['sRelease',['../classPlugin__AHDSR.html#a8272101b5b1956012422d6a623eabccfaeb10a6ac2e2cf6c8ffe784ec5f34c2b6',1,'Plugin_AHDSR']]],
+  ['ssustain_16',['sSustain',['../classPlugin__AHDSR.html#a8272101b5b1956012422d6a623eabccfac96212055c180edbdb08585c0e8dc35d',1,'Plugin_AHDSR']]]
 ];

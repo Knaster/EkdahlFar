@@ -6,7 +6,7 @@
 
 enum eProcessResult { NotFound =  0, Ok = 1, CommandFailed = 2, WrongArgumentCount = 3, WrongArgumentMinimum = 4, WrongArgumentValue = 5, PassThrough = 6 };
 
-#define ModuleCommandDeclarationArguments commandItem *inCommandItem, std::vector<commandResponse> *inCommandResponses, bool request, ModuleCommandDeclaration thisItem
+#define ModuleCommandDeclarationArguments CommandItem *inCommandItem, std::vector<commandResponse> *inCommandResponses, bool request, ModuleCommandDeclaration thisItem
 
 struct ModuleCommandDeclaration;
 
@@ -16,6 +16,58 @@ public:
     virtual const ModuleCommandDeclaration getModuleCommand(uint8_t i) const = 0;
 };
 
+// Using 5 bits
+enum eCommandType_data {
+    ectSimpleString = 0,
+    ectSimpleBool = 1,
+    ectSimpleFloat = 2,
+    ectSimpleUInt8 = 3,
+    ectSimpleInt16 = 4,
+    ectSimpleUInt16 = 5,
+    ectCommands = 6,
+    ectData = 7,
+    ectConditional = 8,
+    ectImmediate = 9,
+    ectMilliseconds = 10,
+    ectMicroseconds = 11,
+    ectHertz = 12,
+    ectOutputAssignment = 13,
+    ectSimpleInt8 = 14
+};
+
+// Using 1 bit (+ 0b00000)
+#define eCT_do_sh 5
+enum eCommandType_dataOptions {
+    ectStatic = (0b0 << eCT_do_sh),
+    ectExpression = (0b1 << eCT_do_sh),
+};
+
+// Using 3 bits (+ 0b000000)
+// If ANY of these bits are set, the implication is that you CANNOT set this parameter
+#define eCT_ac (eCT_do_sh + 1)
+enum eCommandType_access {
+    ectRequest = (0b01 << eCT_ac),
+    ectSelfInvoked = (0b10 << eCT_ac),
+    ectInvokeOnly = (0b11 << eCT_ac)
+};
+
+// Using 4 bits (+ 0b000000000 = 512
+#define eCT_fu (eCT_ac + 3)
+enum eCommandType_function {
+    ectParameter = (0 << eCT_fu),
+    ectSetting = (1 << eCT_fu),
+    ectAdd = (2 << eCT_fu),
+    ectRemove = (3 << eCT_fu),
+    ectCount = (4 << eCT_fu),
+    ectName = (5 << eCT_fu),
+    ectIndex = (6 << eCT_fu),
+    ectSystem = (7 << eCT_fu),
+    ectUndefined = (8 << eCT_fu),
+    ectVolatileSetting = (9 << eCT_fu),
+    ectAssignment = (10 << eCT_fu),
+    ectLogic = (11 << eCT_fu)
+};
+/*
 enum eCommandType {
     SimpleString = 0,
     SimpleBool = 1,
@@ -43,7 +95,7 @@ enum eCommandType {
 };
 
 extern String commandTypeDescription[];
-
+*/
 struct ModuleCommandDeclaration {
     const String longCommand;
     const String shortCommand;
@@ -52,7 +104,9 @@ struct ModuleCommandDeclaration {
     const bool hidden;
     const bool save;
     eProcessResult (*commandFunction) (ModuleCommand*, ModuleCommandDeclarationArguments);
-    const eCommandType cType;
+    //const eCommandType cType;
+    const uint16_t cType;
+    const String variables;
 };
 
 enum eModuleType {
@@ -67,7 +121,7 @@ struct tModuleID {
     const char* longName;
     const char* shortName;
     const char* description;
-    const eModuleType moduleType = 0;
+    const eModuleType moduleType = eModuleType::software;
     bool isGroupHandler = false;
     std::string shortAlias;
 };
@@ -77,11 +131,7 @@ extern const String moduleTypeDescription[];
 String getModuleType(uint8_t mType);
 
 #include "module.hpp"
-/*
-static eProcessResult s_dir(ModuleCommand* self, ModuleCommandDeclarationArguments);
-static eProcessResult s_dump(ModuleCommand* self, ModuleCommandDeclarationArguments);
-static eProcessResult s_help(ModuleCommand* self, ModuleCommandDeclarationArguments);
-*/
+
 #define staticCopy(name, className) \
     static eProcessResult s_##name(ModuleCommand* self, ModuleCommandDeclarationArguments) { return static_cast<className*>(self)->name(inCommandItem, inCommandResponses, request, thisItem); }
 
@@ -89,11 +139,12 @@ static eProcessResult s_help(ModuleCommand* self, ModuleCommandDeclarationArgume
 
 #define CREATE_MODULE_COMMAND_FUNCTION(funcname, className) eProcessResult className::funcname(ModuleCommandDeclarationArguments)
 
-#define getModuleCount(name) int name::getModuleCommandCount() { return sizeof(moduleCommands) / sizeof(moduleCommands[0]); }
+//#define getModuleCount(name) int name::getModuleCommandCount() { return sizeof(moduleCommands) / sizeof(moduleCommands[0]); }
+#define getModuleCount(name) int name::getModuleCommandCount() const { return sizeof(moduleCommands) / sizeof(moduleCommands[0]); }
 
 #define MODULECOMMANDHANDLER \
     static const ModuleCommandDeclaration moduleCommands[]; \
-    int getModuleCommandCount(); \
+    int getModuleCommandCount() const; \
     const ModuleCommandDeclaration getModuleCommand(uint8_t i) const override { \
         if ((i < 0) || (i > getModuleCommandCount())) { \
             debugPrintln("Command index out of bounds", debugPrintType::Error); \

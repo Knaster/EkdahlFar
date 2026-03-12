@@ -1,0 +1,1673 @@
+<HTML><HEAD><TITLE>
+Detailed report on module SafeString
+</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="summary">Detailed report on module SafeString</A></H1>
+<TABLE BORDER WIDTH=100%>
+<TR>
+<TH BGCOLOR="AQUA" WIDTH=70%>Metric</TH><TH BGCOLOR="AQUA" WIDTH=10%>Tag</TH><TH BGCOLOR="AQUA" WIDTH=10%>Overall</TH><TH BGCOLOR="AQUA" WIDTH=10%>Per Function</TH></TR>
+<TR>
+<TD>Lines of Code</TD><TD>LOC</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>  1670</EM></TD><TD ALIGN=RIGHT>     8</TD></TR>
+<TR>
+<TD>McCabe's Cyclomatic Number</TD><TD>MVG</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>   482</EM></TD><TD ALIGN=RIGHT>     2</TD></TR>
+<TR>
+<TD>Lines of Comment</TD><TD>COM</TD><TD ALIGN=RIGHT>  1799</TD><TD ALIGN=RIGHT>   8.567</TD></TR>
+<TR>
+<TD>LOC/COM</TD><TD>L_C</TD><TD ALIGN=RIGHT> 0.928</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>MVG/COM</TD><TD>M_C</TD><TD ALIGN=RIGHT> 0.268</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Weighted Methods per Class ( &nbsp;weighting = unity&nbsp;)</TD><TD>WMC1</TD><TD ALIGN=RIGHT>   210</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Weighted Methods per Class ( &nbsp;weighting = visible&nbsp;)</TD><TD>WMCv</TD><TD ALIGN=RIGHT>   192</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Depth of Inheritance Tree</TD><TD>DIT</TD><TD ALIGN=RIGHT>     1</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Number of Children</TD><TD>NOC</TD><TD ALIGN=RIGHT>     2</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Coupling between objects</TD><TD>CBO</TD><TD ALIGN=RIGHT>    12</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Information Flow measure ( &nbsp;inclusive&nbsp;)</TD><TD>IF4</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>   729</EM></TD><TD ALIGN=RIGHT>   3.471</TD></TR>
+<TR>
+<TD>Information Flow measure ( &nbsp;visible&nbsp;)</TD><TD>IF4v</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>   729</STRONG></TD><TD ALIGN=RIGHT>   3.471</TD></TR>
+<TR>
+<TD>Information Flow measure ( &nbsp;concrete&nbsp;)</TD><TD>IF4c</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>   196</STRONG></TD><TD ALIGN=RIGHT>   0.933</TD></TR>
+</TABLE>
+<H2><A NAME="modext">Definitions and Declarations</A></H2>
+<TABLE BORDER WIDTH=100%><TR>
+<TD WIDTH=50%>Description</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH><TR>
+<TD>definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       304">lib/SafeString/src/SafeString.h:304</A></CODE><BR>
+</TD>
+<TD ALIGN=RIGHT>    27</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>   256</TD><TD ALIGN=RIGHT> 0.105</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
+</TR></TABLE>
+<H2><A NAME="proc">Functions</A></H2>
+<TABLE BORDER WIDTH=100%><TR>
+<TD WIDTH=50%>Function prototype</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH><TR>
+<TD>SafeString( &nbsp;...&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       324">lib/SafeString/src/SafeString.h:324</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    17</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>SafeString( &nbsp;const SafeString &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       330">lib/SafeString/src/SafeString.h:330</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>SafeString( &nbsp;size_t, &nbsp;char *, &nbsp;const char *, &nbsp;const char *, &nbsp;bool, &nbsp;bool&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.cpp:       172">lib/SafeString/src/SafeString.cpp:172</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>  1332</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>   443</STRONG></TD><TD ALIGN=RIGHT>   354</TD><TD ALIGN=RIGHT> 3.763</TD><TD ALIGN=RIGHT> 1.251</TD></TR>
+<TR>
+<TD>assignError( &nbsp;...&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1964">lib/SafeString/src/SafeString.h:1964</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>assignErrorMethod( &nbsp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1967">lib/SafeString/src/SafeString.h:1967</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>availableForWrite( &nbsp;void&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       468">lib/SafeString/src/SafeString.h:468</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>binToLong( &nbsp;long &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1321">lib/SafeString/src/SafeString.h:1321</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>binToUnsignedLong( &nbsp;long &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1349">lib/SafeString/src/SafeString.h:1349</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>c_str( &nbsp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       980">lib/SafeString/src/SafeString.h:980</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>capError( &nbsp;...&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1963">lib/SafeString/src/SafeString.h:1963</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>capacity( &nbsp;void&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       453">lib/SafeString/src/SafeString.h:453</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>charAt( &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       953">lib/SafeString/src/SafeString.h:953</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    13</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>cleanUp( &nbsp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1951">lib/SafeString/src/SafeString.h:1951</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>clear( &nbsp;void&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       476">lib/SafeString/src/SafeString.h:476</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>compareTo( &nbsp;SafeString &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       804">lib/SafeString/src/SafeString.h:804</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>compareTo( &nbsp;const char *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       808">lib/SafeString/src/SafeString.h:808</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concat( &nbsp;SafeString &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       675">lib/SafeString/src/SafeString.h:675</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concat( &nbsp;char&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       677">lib/SafeString/src/SafeString.h:677</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       678">lib/SafeString/src/SafeString.h:678</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concat( &nbsp;const __FlashStringHelper *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       685">lib/SafeString/src/SafeString.h:685</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concat( &nbsp;const __FlashStringHelper *, &nbsp;size_t&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       692">lib/SafeString/src/SafeString.h:692</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concat( &nbsp;const char *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       676">lib/SafeString/src/SafeString.h:676</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concat( &nbsp;const char *, &nbsp;size_t&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       689">lib/SafeString/src/SafeString.h:689</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concat( &nbsp;double&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       684">lib/SafeString/src/SafeString.h:684</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concat( &nbsp;float&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       683">lib/SafeString/src/SafeString.h:683</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concat( &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       679">lib/SafeString/src/SafeString.h:679</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       680">lib/SafeString/src/SafeString.h:680</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concat( &nbsp;long&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       681">lib/SafeString/src/SafeString.h:681</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       682">lib/SafeString/src/SafeString.h:682</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concatAssignError( &nbsp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1961">lib/SafeString/src/SafeString.h:1961</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concatErr( &nbsp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1960">lib/SafeString/src/SafeString.h:1960</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concatInternal( &nbsp;char, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1932">lib/SafeString/src/SafeString.h:1932</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concatInternal( &nbsp;const __FlashStringHelper *, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1933">lib/SafeString/src/SafeString.h:1933</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concatInternal( &nbsp;const __FlashStringHelper *, &nbsp;size_t, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1929">lib/SafeString/src/SafeString.h:1929</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concatInternal( &nbsp;const char *, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1931">lib/SafeString/src/SafeString.h:1931</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concatInternal( &nbsp;const char *, &nbsp;size_t, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1928">lib/SafeString/src/SafeString.h:1928</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concatln( &nbsp;char&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1925">lib/SafeString/src/SafeString.h:1925</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concatln( &nbsp;const __FlashStringHelper *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1924">lib/SafeString/src/SafeString.h:1924</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>concatln( &nbsp;const char *, &nbsp;size_t&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1926">lib/SafeString/src/SafeString.h:1926</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>debug( &nbsp;SafeString &amp;, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       407">lib/SafeString/src/SafeString.h:407</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>debug( &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       383">lib/SafeString/src/SafeString.h:383</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>debug( &nbsp;const __FlashStringHelper *, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       399">lib/SafeString/src/SafeString.h:399</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>debug( &nbsp;const char *, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       391">lib/SafeString/src/SafeString.h:391</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>debugInternal( &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1958">lib/SafeString/src/SafeString.h:1958</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>debugInternalMsg( &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1939">lib/SafeString/src/SafeString.h:1939</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>debugInternalResultMsg( &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1959">lib/SafeString/src/SafeString.h:1959</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>endsWith( &nbsp;SafeString &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       921">lib/SafeString/src/SafeString.h:921</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>endsWith( &nbsp;const char *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       927">lib/SafeString/src/SafeString.h:927</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>endsWith( &nbsp;const char&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       915">lib/SafeString/src/SafeString.h:915</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>endsWithCharFrom( &nbsp;SafeString &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       933">lib/SafeString/src/SafeString.h:933</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>endsWithCharFrom( &nbsp;const char *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       939">lib/SafeString/src/SafeString.h:939</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>equals( &nbsp;SafeString &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       810">lib/SafeString/src/SafeString.h:810</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>equals( &nbsp;const char *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       811">lib/SafeString/src/SafeString.h:811</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>equals( &nbsp;const char&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       812">lib/SafeString/src/SafeString.h:812</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>equalsConstantTime( &nbsp;SafeString &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       858">lib/SafeString/src/SafeString.h:858</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>equalsIgnoreCase( &nbsp;SafeString &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       855">lib/SafeString/src/SafeString.h:855</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>equalsIgnoreCase( &nbsp;const char *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       856">lib/SafeString/src/SafeString.h:856</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>errorDetected( &nbsp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       371">lib/SafeString/src/SafeString.h:371</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>errorMethod( &nbsp;const __FlashStringHelper *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1965">lib/SafeString/src/SafeString.h:1965</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>firstToken( &nbsp;SafeString &amp;, &nbsp;SafeString, &nbsp;bool&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1586">lib/SafeString/src/SafeString.h:1586</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>    25</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>firstToken( &nbsp;SafeString &amp;, &nbsp;char, &nbsp;bool&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1525">lib/SafeString/src/SafeString.h:1525</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>    25</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>firstToken( &nbsp;SafeString &amp;, &nbsp;const char *, &nbsp;bool&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1647">lib/SafeString/src/SafeString.h:1647</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>    25</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>getLastReadCount( &nbsp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1874">lib/SafeString/src/SafeString.h:1874</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>hasError( &nbsp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       364">lib/SafeString/src/SafeString.h:364</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>hexToLong( &nbsp;long &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1335">lib/SafeString/src/SafeString.h:1335</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>hexToUnsignedLong( &nbsp;long &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1363">lib/SafeString/src/SafeString.h:1363</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>indexOf( &nbsp;SafeString &amp;, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1019">lib/SafeString/src/SafeString.h:1019</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>indexOf( &nbsp;char, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1003">lib/SafeString/src/SafeString.h:1003</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    20</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>indexOf( &nbsp;const char *, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1012">lib/SafeString/src/SafeString.h:1012</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>indexOfCharFrom( &nbsp;SafeString &amp;, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1076">lib/SafeString/src/SafeString.h:1076</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>indexOfCharFrom( &nbsp;const char *, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1084">lib/SafeString/src/SafeString.h:1084</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>isEmpty( &nbsp;void&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       463">lib/SafeString/src/SafeString.h:463</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>isFull( &nbsp;void&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       458">lib/SafeString/src/SafeString.h:458</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>keepLast( &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1251">lib/SafeString/src/SafeString.h:1251</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>lastIndexOf( &nbsp;SafeString &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1041">lib/SafeString/src/SafeString.h:1041</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>lastIndexOf( &nbsp;SafeString &amp;, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1048">lib/SafeString/src/SafeString.h:1048</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>lastIndexOf( &nbsp;char&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1026">lib/SafeString/src/SafeString.h:1026</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>lastIndexOf( &nbsp;char, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1034">lib/SafeString/src/SafeString.h:1034</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>lastIndexOf( &nbsp;const char *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1055">lib/SafeString/src/SafeString.h:1055</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>lastIndexOf( &nbsp;const char *, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1063">lib/SafeString/src/SafeString.h:1063</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>length( &nbsp;void&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       448">lib/SafeString/src/SafeString.h:448</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>limitedStrLen( &nbsp;const char *, &nbsp;size_t&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1940">lib/SafeString/src/SafeString.h:1940</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>newline( &nbsp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       699">lib/SafeString/src/SafeString.h:699</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>nextToken( &nbsp;SafeString &amp;, &nbsp;SafeString &amp;, &nbsp;bool, &nbsp;bool, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1620">lib/SafeString/src/SafeString.h:1620</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    30</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>nextToken( &nbsp;SafeString &amp;, &nbsp;char, &nbsp;bool, &nbsp;bool, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1559">lib/SafeString/src/SafeString.h:1559</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    30</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>nextToken( &nbsp;SafeString &amp;, &nbsp;const char *, &nbsp;bool, &nbsp;bool, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1681">lib/SafeString/src/SafeString.h:1681</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    30</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>nextTokenInternal( &nbsp;SafeString &amp;, &nbsp;const char *, &nbsp;char, &nbsp;bool, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1946">lib/SafeString/src/SafeString.h:1946</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>octToLong( &nbsp;long &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1328">lib/SafeString/src/SafeString.h:1328</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>octToUnsignedLong( &nbsp;long &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1356">lib/SafeString/src/SafeString.h:1356</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator !=( &nbsp;SafeString &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       822">lib/SafeString/src/SafeString.h:822</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator !=( &nbsp;const char *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       825">lib/SafeString/src/SafeString.h:825</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator !=( &nbsp;const char&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       828">lib/SafeString/src/SafeString.h:828</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator +=( &nbsp;SafeString &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       762">lib/SafeString/src/SafeString.h:762</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>    13</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator +=( &nbsp;char&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       768">lib/SafeString/src/SafeString.h:768</A></CODE><BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       771">lib/SafeString/src/SafeString.h:771</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator +=( &nbsp;const __FlashStringHelper *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       792">lib/SafeString/src/SafeString.h:792</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator +=( &nbsp;const char *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       765">lib/SafeString/src/SafeString.h:765</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator +=( &nbsp;double&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       789">lib/SafeString/src/SafeString.h:789</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator +=( &nbsp;float&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       786">lib/SafeString/src/SafeString.h:786</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator +=( &nbsp;int&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       774">lib/SafeString/src/SafeString.h:774</A></CODE><BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       777">lib/SafeString/src/SafeString.h:777</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator +=( &nbsp;long&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       780">lib/SafeString/src/SafeString.h:780</A></CODE><BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       783">lib/SafeString/src/SafeString.h:783</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator -=( &nbsp;SafeString &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       715">lib/SafeString/src/SafeString.h:715</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>    14</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator -=( &nbsp;char&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       721">lib/SafeString/src/SafeString.h:721</A></CODE><BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       724">lib/SafeString/src/SafeString.h:724</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator -=( &nbsp;const __FlashStringHelper *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       745">lib/SafeString/src/SafeString.h:745</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator -=( &nbsp;const char *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       718">lib/SafeString/src/SafeString.h:718</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator -=( &nbsp;double&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       742">lib/SafeString/src/SafeString.h:742</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator -=( &nbsp;float&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       739">lib/SafeString/src/SafeString.h:739</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator -=( &nbsp;int&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       727">lib/SafeString/src/SafeString.h:727</A></CODE><BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       730">lib/SafeString/src/SafeString.h:730</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator -=( &nbsp;long&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       733">lib/SafeString/src/SafeString.h:733</A></CODE><BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       736">lib/SafeString/src/SafeString.h:736</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator &lt;( &nbsp;SafeString &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       831">lib/SafeString/src/SafeString.h:831</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator &lt;( &nbsp;const char *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       843">lib/SafeString/src/SafeString.h:843</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator &lt;=( &nbsp;SafeString &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       837">lib/SafeString/src/SafeString.h:837</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator &lt;=( &nbsp;const char *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       849">lib/SafeString/src/SafeString.h:849</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator =( &nbsp;SafeString &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       625">lib/SafeString/src/SafeString.h:625</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator =( &nbsp;char&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       553">lib/SafeString/src/SafeString.h:553</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       562">lib/SafeString/src/SafeString.h:562</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    20</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator =( &nbsp;const __FlashStringHelper *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       643">lib/SafeString/src/SafeString.h:643</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator =( &nbsp;const char *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       634">lib/SafeString/src/SafeString.h:634</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator =( &nbsp;double&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       616">lib/SafeString/src/SafeString.h:616</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator =( &nbsp;float&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       607">lib/SafeString/src/SafeString.h:607</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator =( &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       571">lib/SafeString/src/SafeString.h:571</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       580">lib/SafeString/src/SafeString.h:580</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    14</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator =( &nbsp;long&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       589">lib/SafeString/src/SafeString.h:589</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       598">lib/SafeString/src/SafeString.h:598</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    14</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator ==( &nbsp;SafeString &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       813">lib/SafeString/src/SafeString.h:813</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator ==( &nbsp;const char *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       816">lib/SafeString/src/SafeString.h:816</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator ==( &nbsp;const char&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       819">lib/SafeString/src/SafeString.h:819</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator &gt;( &nbsp;SafeString &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       834">lib/SafeString/src/SafeString.h:834</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator &gt;( &nbsp;const char *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       846">lib/SafeString/src/SafeString.h:846</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator &gt;=( &nbsp;SafeString &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       840">lib/SafeString/src/SafeString.h:840</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator &gt;=( &nbsp;const char *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       852">lib/SafeString/src/SafeString.h:852</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>operator []( &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       961">lib/SafeString/src/SafeString.h:961</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>outputFromIndexIfFullDebug( &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1968">lib/SafeString/src/SafeString.h:1968</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>outputName( &nbsp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1927">lib/SafeString/src/SafeString.h:1927</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>prefix( &nbsp;SafeString &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       653">lib/SafeString/src/SafeString.h:653</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>prefix( &nbsp;char&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       655">lib/SafeString/src/SafeString.h:655</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       656">lib/SafeString/src/SafeString.h:656</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>prefix( &nbsp;const __FlashStringHelper *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       663">lib/SafeString/src/SafeString.h:663</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>prefix( &nbsp;const __FlashStringHelper *, &nbsp;size_t&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       665">lib/SafeString/src/SafeString.h:665</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>prefix( &nbsp;const char *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       654">lib/SafeString/src/SafeString.h:654</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>prefix( &nbsp;const char *, &nbsp;size_t&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       664">lib/SafeString/src/SafeString.h:664</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>prefix( &nbsp;double&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       662">lib/SafeString/src/SafeString.h:662</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>prefix( &nbsp;float&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       661">lib/SafeString/src/SafeString.h:661</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>prefix( &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       657">lib/SafeString/src/SafeString.h:657</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       658">lib/SafeString/src/SafeString.h:658</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>prefix( &nbsp;long&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       659">lib/SafeString/src/SafeString.h:659</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       660">lib/SafeString/src/SafeString.h:660</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>prefixErr( &nbsp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1962">lib/SafeString/src/SafeString.h:1962</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>print( &nbsp;...&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       480">lib/SafeString/src/SafeString.h:480</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       481">lib/SafeString/src/SafeString.h:481</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       482">lib/SafeString/src/SafeString.h:482</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       483">lib/SafeString/src/SafeString.h:483</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       484">lib/SafeString/src/SafeString.h:484</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>print( &nbsp;SafeString &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       489">lib/SafeString/src/SafeString.h:489</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>print( &nbsp;char&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       488">lib/SafeString/src/SafeString.h:488</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>print( &nbsp;const __FlashStringHelper *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       486">lib/SafeString/src/SafeString.h:486</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>print( &nbsp;const char *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       487">lib/SafeString/src/SafeString.h:487</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>print( &nbsp;double, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       485">lib/SafeString/src/SafeString.h:485</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>print( &nbsp;double, &nbsp;int, &nbsp;int, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       535">lib/SafeString/src/SafeString.h:535</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>printInt( &nbsp;double, &nbsp;int, &nbsp;int, &nbsp;bool, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1941">lib/SafeString/src/SafeString.h:1941</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>printInternal( &nbsp;...&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1934">lib/SafeString/src/SafeString.h:1934</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1935">lib/SafeString/src/SafeString.h:1935</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>printInternal( &nbsp;double, &nbsp;int, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1936">lib/SafeString/src/SafeString.h:1936</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>printTo( &nbsp;Print &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       435">lib/SafeString/src/SafeString.h:435</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>println( &nbsp;...&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       491">lib/SafeString/src/SafeString.h:491</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       492">lib/SafeString/src/SafeString.h:492</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       493">lib/SafeString/src/SafeString.h:493</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       494">lib/SafeString/src/SafeString.h:494</A></CODE><BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       495">lib/SafeString/src/SafeString.h:495</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>println( &nbsp;SafeString &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       500">lib/SafeString/src/SafeString.h:500</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>println( &nbsp;char&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       499">lib/SafeString/src/SafeString.h:499</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>println( &nbsp;const __FlashStringHelper *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       497">lib/SafeString/src/SafeString.h:497</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>println( &nbsp;const char *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       498">lib/SafeString/src/SafeString.h:498</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>println( &nbsp;double, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       496">lib/SafeString/src/SafeString.h:496</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>println( &nbsp;double, &nbsp;int, &nbsp;int, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       523">lib/SafeString/src/SafeString.h:523</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    19</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>println( &nbsp;void&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       501">lib/SafeString/src/SafeString.h:501</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>printlnErr( &nbsp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1938">lib/SafeString/src/SafeString.h:1938</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>processBackspaces( &nbsp;void&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1292">lib/SafeString/src/SafeString.h:1292</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>read( &nbsp;Stream &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1742">lib/SafeString/src/SafeString.h:1742</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readFrom( &nbsp;...&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1715">lib/SafeString/src/SafeString.h:1715</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    13</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readFrom( &nbsp;SafeString &amp;, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1700">lib/SafeString/src/SafeString.h:1700</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    16</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readUntil( &nbsp;Stream &amp;, &nbsp;SafeString &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1779">lib/SafeString/src/SafeString.h:1779</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readUntil( &nbsp;Stream &amp;, &nbsp;const char *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1767">lib/SafeString/src/SafeString.h:1767</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readUntil( &nbsp;Stream &amp;, &nbsp;const char&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1755">lib/SafeString/src/SafeString.h:1755</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readUntilInternal( &nbsp;Stream &amp;, &nbsp;const char *, &nbsp;char&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1945">lib/SafeString/src/SafeString.h:1945</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readUntilToken( &nbsp;Stream &amp;, &nbsp;SafeString &amp;, &nbsp;SafeString &amp;, &nbsp;bool &amp;, &nbsp;uint8_t, &nbsp;long&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1866">lib/SafeString/src/SafeString.h:1866</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    27</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readUntilToken( &nbsp;Stream &amp;, &nbsp;SafeString &amp;, &nbsp;const char *, &nbsp;bool &amp;, &nbsp;uint8_t, &nbsp;long&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1837">lib/SafeString/src/SafeString.h:1837</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    27</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readUntilToken( &nbsp;Stream &amp;, &nbsp;SafeString &amp;, &nbsp;const char, &nbsp;bool &amp;, &nbsp;uint8_t, &nbsp;long&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1808">lib/SafeString/src/SafeString.h:1808</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    27</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readUntilTokenInternal( &nbsp;Stream &amp;, &nbsp;SafeString &amp;, &nbsp;const char *, &nbsp;char, &nbsp;bool &amp;, &nbsp;uint8_t, &nbsp;long&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1944">lib/SafeString/src/SafeString.h:1944</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>remove( &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1212">lib/SafeString/src/SafeString.h:1212</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>remove( &nbsp;int, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1226">lib/SafeString/src/SafeString.h:1226</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    12</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>removeBefore( &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1201">lib/SafeString/src/SafeString.h:1201</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>removeFrom( &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1190">lib/SafeString/src/SafeString.h:1190</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>removeLast( &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1239">lib/SafeString/src/SafeString.h:1239</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>replace( &nbsp;SafeString &amp;, &nbsp;SafeString &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1178">lib/SafeString/src/SafeString.h:1178</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>replace( &nbsp;char, &nbsp;char&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1150">lib/SafeString/src/SafeString.h:1150</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>replace( &nbsp;const char *, &nbsp;const char *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1171">lib/SafeString/src/SafeString.h:1171</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>replace( &nbsp;const char, &nbsp;SafeString &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1164">lib/SafeString/src/SafeString.h:1164</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>replace( &nbsp;const char, &nbsp;const char *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1157">lib/SafeString/src/SafeString.h:1157</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>reserve( &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       443">lib/SafeString/src/SafeString.h:443</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>setCharAt( &nbsp;int, &nbsp;char&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       971">lib/SafeString/src/SafeString.h:971</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>setError( &nbsp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1937">lib/SafeString/src/SafeString.h:1937</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>setOutput( &nbsp;Print &amp;, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       341">lib/SafeString/src/SafeString.h:341</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>setVerbose( &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       357">lib/SafeString/src/SafeString.h:357</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>startsWith( &nbsp;SafeString &amp;, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       885">lib/SafeString/src/SafeString.h:885</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>startsWith( &nbsp;const char *, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       878">lib/SafeString/src/SafeString.h:878</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>startsWith( &nbsp;const char, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       871">lib/SafeString/src/SafeString.h:871</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>startsWithIgnoreCase( &nbsp;SafeString &amp;, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       907">lib/SafeString/src/SafeString.h:907</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>startsWithIgnoreCase( &nbsp;const char *, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       900">lib/SafeString/src/SafeString.h:900</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>startsWithIgnoreCase( &nbsp;const char, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       893">lib/SafeString/src/SafeString.h:893</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>stoken( &nbsp;SafeString &amp;, &nbsp;int, &nbsp;SafeString &amp;, &nbsp;bool, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1498">lib/SafeString/src/SafeString.h:1498</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    26</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>stoken( &nbsp;SafeString &amp;, &nbsp;int, &nbsp;const char *, &nbsp;bool, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1470">lib/SafeString/src/SafeString.h:1470</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    26</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>stoken( &nbsp;SafeString &amp;, &nbsp;int, &nbsp;const char, &nbsp;bool, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1442">lib/SafeString/src/SafeString.h:1442</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    61</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>stokenInternal( &nbsp;SafeString &amp;, &nbsp;int, &nbsp;const char *, &nbsp;char, &nbsp;bool, &nbsp;bool&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1947">lib/SafeString/src/SafeString.h:1947</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>substring( &nbsp;SafeString &amp;, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1111">lib/SafeString/src/SafeString.h:1111</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    23</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>substring( &nbsp;SafeString &amp;, &nbsp;int, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1140">lib/SafeString/src/SafeString.h:1140</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    27</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>toDouble( &nbsp;double &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1377">lib/SafeString/src/SafeString.h:1377</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>toFloat( &nbsp;float &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1370">lib/SafeString/src/SafeString.h:1370</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>toInt( &nbsp;int &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1306">lib/SafeString/src/SafeString.h:1306</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    12</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>toLong( &nbsp;long &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1313">lib/SafeString/src/SafeString.h:1313</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>toLowerCase( &nbsp;void&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1258">lib/SafeString/src/SafeString.h:1258</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>toUnsignedLong( &nbsp;long &amp;&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1342">lib/SafeString/src/SafeString.h:1342</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>toUpperCase( &nbsp;void&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1262">lib/SafeString/src/SafeString.h:1262</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>trim( &nbsp;void&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1283">lib/SafeString/src/SafeString.h:1283</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    20</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>turnOutputOff( &nbsp;void&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       349">lib/SafeString/src/SafeString.h:349</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>warningMethod( &nbsp;const __FlashStringHelper *&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1966">lib/SafeString/src/SafeString.h:1966</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>write( &nbsp;const uint8_t *, &nbsp;size_t&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       428">lib/SafeString/src/SafeString.h:428</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>write( &nbsp;uint8_t&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       416">lib/SafeString/src/SafeString.h:416</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeTo( &nbsp;SafeString &amp;, &nbsp;int&nbsp;)<BR>
+declaration &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1729">lib/SafeString/src/SafeString.h:1729</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>    12</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
+</TR></TABLE>
+<H2><A NAME="structdet">Relationships</A></H2>
+<TABLE BORDER WIDTH=100%>
+<TR><TH WIDTH=50%>Clients</TH><TH WIDTH=50%>Suppliers</TH></TR>
+<TR>
+<TD WIDTH=50%>
+SafeStringReader [CV] <BR>
+inheritance &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringReader.h:        69">lib/SafeString/src/SafeStringReader.h:69</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringReader.h:        72">lib/SafeString/src/SafeStringReader.h:72</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringReader.h:        73">lib/SafeString/src/SafeStringReader.h:73</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringReader.h:       180">lib/SafeString/src/SafeStringReader.h:180</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringReader.h:       192">lib/SafeString/src/SafeStringReader.h:192</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringReader.h:       196">lib/SafeString/src/SafeStringReader.h:196</A></CODE><BR>
+has by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringReader.h:       198">lib/SafeString/src/SafeStringReader.h:198</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringReader.cpp:        17">lib/SafeString/src/SafeStringReader.cpp:17</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringReader.cpp:        23">lib/SafeString/src/SafeStringReader.cpp:23</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringReader.cpp:        27">lib/SafeString/src/SafeStringReader.cpp:27</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringReader.cpp:       205">lib/SafeString/src/SafeStringReader.cpp:205</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringReader.cpp:       212">lib/SafeString/src/SafeStringReader.cpp:212</A></CODE><BR>
+<BR>
+<BR>
+SafeStringStream [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringStream.cpp:        17">lib/SafeString/src/SafeStringStream.cpp:17</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringStream.cpp:        17">lib/SafeString/src/SafeStringStream.cpp:17</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringStream.cpp:        23">lib/SafeString/src/SafeStringStream.cpp:23</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringStream.cpp:        68">lib/SafeString/src/SafeStringStream.cpp:68</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringStream.h:        43">lib/SafeString/src/SafeStringStream.h:43</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringStream.h:        56">lib/SafeString/src/SafeStringStream.h:56</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringStream.h:        56">lib/SafeString/src/SafeStringStream.h:56</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringStream.h:        71">lib/SafeString/src/SafeStringStream.h:71</A></CODE><BR>
+has by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringStream.h:       119">lib/SafeString/src/SafeStringStream.h:119</A></CODE><BR>
+has by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeStringStream.h:       122">lib/SafeString/src/SafeStringStream.h:122</A></CODE><BR>
+<BR>
+<BR>
+SerialComs [CV] <BR>
+inheritance &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SerialComs.h:        84">lib/SafeString/src/SerialComs.h:84</A></CODE><BR>
+has by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SerialComs.h:       127">lib/SafeString/src/SerialComs.h:127</A></CODE><BR>
+has by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SerialComs.h:       129">lib/SafeString/src/SerialComs.h:129</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SerialComs.h:       136">lib/SafeString/src/SerialComs.h:136</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SerialComs.h:       137">lib/SafeString/src/SerialComs.h:137</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SerialComs.h:       137">lib/SafeString/src/SerialComs.h:137</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SerialComs.cpp:       369">lib/SafeString/src/SerialComs.cpp:369</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SerialComs.cpp:       369">lib/SafeString/src/SerialComs.cpp:369</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SerialComs.cpp:       387">lib/SafeString/src/SerialComs.cpp:387</A></CODE><BR>
+<BR>
+<BR>
+&nbsp;
+</TD>
+<TD WIDTH=50%>
+DebugPrint [CV] <BR>
+has by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1921">lib/SafeString/src/SafeString.h:1921</A></CODE><BR>
+<BR>
+<BR>
+Print [CV] <BR>
+inheritance &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       304">lib/SafeString/src/SafeString.h:304</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       341">lib/SafeString/src/SafeString.h:341</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       435">lib/SafeString/src/SafeString.h:435</A></CODE><BR>
+has by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1879">lib/SafeString/src/SafeString.h:1879</A></CODE><BR>
+has by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1901">lib/SafeString/src/SafeString.h:1901</A></CODE><BR>
+<BR>
+<BR>
+Printable [CV] <BR>
+inheritance &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       304">lib/SafeString/src/SafeString.h:304</A></CODE><BR>
+<BR>
+<BR>
+Stream [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1742">lib/SafeString/src/SafeString.h:1742</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1755">lib/SafeString/src/SafeString.h:1755</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1767">lib/SafeString/src/SafeString.h:1767</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1779">lib/SafeString/src/SafeString.h:1779</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1808">lib/SafeString/src/SafeString.h:1808</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1837">lib/SafeString/src/SafeString.h:1837</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1866">lib/SafeString/src/SafeString.h:1866</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1944">lib/SafeString/src/SafeString.h:1944</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1945">lib/SafeString/src/SafeString.h:1945</A></CODE><BR>
+<BR>
+<BR>
+__FlashStringHelper [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       399">lib/SafeString/src/SafeString.h:399</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       486">lib/SafeString/src/SafeString.h:486</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       497">lib/SafeString/src/SafeString.h:497</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       643">lib/SafeString/src/SafeString.h:643</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       663">lib/SafeString/src/SafeString.h:663</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       665">lib/SafeString/src/SafeString.h:665</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       685">lib/SafeString/src/SafeString.h:685</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       692">lib/SafeString/src/SafeString.h:692</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       745">lib/SafeString/src/SafeString.h:745</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       792">lib/SafeString/src/SafeString.h:792</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1924">lib/SafeString/src/SafeString.h:1924</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1929">lib/SafeString/src/SafeString.h:1929</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1933">lib/SafeString/src/SafeString.h:1933</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1965">lib/SafeString/src/SafeString.h:1965</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1966">lib/SafeString/src/SafeString.h:1966</A></CODE><BR>
+<BR>
+<BR>
+bool [CV] <BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.cpp:       172">lib/SafeString/src/SafeString.cpp:172</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.cpp:       172">lib/SafeString/src/SafeString.cpp:172</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       341">lib/SafeString/src/SafeString.h:341</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       357">lib/SafeString/src/SafeString.h:357</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       383">lib/SafeString/src/SafeString.h:383</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       391">lib/SafeString/src/SafeString.h:391</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       399">lib/SafeString/src/SafeString.h:399</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       407">lib/SafeString/src/SafeString.h:407</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       523">lib/SafeString/src/SafeString.h:523</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       535">lib/SafeString/src/SafeString.h:535</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1442">lib/SafeString/src/SafeString.h:1442</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1442">lib/SafeString/src/SafeString.h:1442</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1470">lib/SafeString/src/SafeString.h:1470</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1470">lib/SafeString/src/SafeString.h:1470</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1498">lib/SafeString/src/SafeString.h:1498</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1498">lib/SafeString/src/SafeString.h:1498</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1525">lib/SafeString/src/SafeString.h:1525</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1559">lib/SafeString/src/SafeString.h:1559</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1559">lib/SafeString/src/SafeString.h:1559</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1559">lib/SafeString/src/SafeString.h:1559</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1586">lib/SafeString/src/SafeString.h:1586</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1620">lib/SafeString/src/SafeString.h:1620</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1620">lib/SafeString/src/SafeString.h:1620</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1620">lib/SafeString/src/SafeString.h:1620</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1647">lib/SafeString/src/SafeString.h:1647</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1681">lib/SafeString/src/SafeString.h:1681</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1681">lib/SafeString/src/SafeString.h:1681</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1681">lib/SafeString/src/SafeString.h:1681</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1808">lib/SafeString/src/SafeString.h:1808</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1837">lib/SafeString/src/SafeString.h:1837</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1866">lib/SafeString/src/SafeString.h:1866</A></CODE><BR>
+has by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1880">lib/SafeString/src/SafeString.h:1880</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1928">lib/SafeString/src/SafeString.h:1928</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1929">lib/SafeString/src/SafeString.h:1929</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1931">lib/SafeString/src/SafeString.h:1931</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1932">lib/SafeString/src/SafeString.h:1932</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1933">lib/SafeString/src/SafeString.h:1933</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1936">lib/SafeString/src/SafeString.h:1936</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1939">lib/SafeString/src/SafeString.h:1939</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1941">lib/SafeString/src/SafeString.h:1941</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1941">lib/SafeString/src/SafeString.h:1941</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1944">lib/SafeString/src/SafeString.h:1944</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1946">lib/SafeString/src/SafeString.h:1946</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1946">lib/SafeString/src/SafeString.h:1946</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1947">lib/SafeString/src/SafeString.h:1947</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1947">lib/SafeString/src/SafeString.h:1947</A></CODE><BR>
+has by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1948">lib/SafeString/src/SafeString.h:1948</A></CODE><BR>
+has by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1949">lib/SafeString/src/SafeString.h:1949</A></CODE><BR>
+has by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1950">lib/SafeString/src/SafeString.h:1950</A></CODE><BR>
+has by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1954">lib/SafeString/src/SafeString.h:1954</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1958">lib/SafeString/src/SafeString.h:1958</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1959">lib/SafeString/src/SafeString.h:1959</A></CODE><BR>
+<BR>
+<BR>
+noDebugPrint [CV] <BR>
+has by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1899">lib/SafeString/src/SafeString.h:1899</A></CODE><BR>
+<BR>
+<BR>
+size_t [CV] <BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.cpp:       172">lib/SafeString/src/SafeString.cpp:172</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       428">lib/SafeString/src/SafeString.h:428</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       664">lib/SafeString/src/SafeString.h:664</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       665">lib/SafeString/src/SafeString.h:665</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       689">lib/SafeString/src/SafeString.h:689</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       692">lib/SafeString/src/SafeString.h:692</A></CODE><BR>
+has by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1882">lib/SafeString/src/SafeString.h:1882</A></CODE><BR>
+has by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1883">lib/SafeString/src/SafeString.h:1883</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1926">lib/SafeString/src/SafeString.h:1926</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1928">lib/SafeString/src/SafeString.h:1928</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1929">lib/SafeString/src/SafeString.h:1929</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1940">lib/SafeString/src/SafeString.h:1940</A></CODE><BR>
+has by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1955">lib/SafeString/src/SafeString.h:1955</A></CODE><BR>
+<BR>
+<BR>
+uint8_t [CV] <BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       416">lib/SafeString/src/SafeString.h:416</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:       428">lib/SafeString/src/SafeString.h:428</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1808">lib/SafeString/src/SafeString.h:1808</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1837">lib/SafeString/src/SafeString.h:1837</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1866">lib/SafeString/src/SafeString.h:1866</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#lib/SafeString/src/SafeString.h:      1944">lib/SafeString/src/SafeString.h:1944</A></CODE><BR>
+<BR>
+<BR>
+&nbsp;
+</TD>
+</TR></TABLE>
+</BODY></HTML>

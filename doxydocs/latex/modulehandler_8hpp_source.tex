@@ -1,0 +1,38 @@
+\doxysection{modulehandler.\+hpp}
+\hypertarget{modulehandler_8hpp_source}{}\label{modulehandler_8hpp_source}\index{modulehandler.hpp@{modulehandler.hpp}}
+\mbox{\hyperlink{modulehandler_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MODULEHANDLER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MODULEHANDLER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{modulegroup_8hpp}{modulegroup.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classModuleHandler}{ModuleHandler}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classModule}{Module}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classModuleHandler_a9eb2f015987df6e507d2e2f7281cc520}{ModuleHandler}}();}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classModuleHandler_aba53cb524d3e200345c18bbaf96adaf2}{processCommands}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classModuleHandler_aa8b5a72e62b7a43ac40822461f535c0c}{processModuleHandlerCommands}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *\mbox{\hyperlink{structcommandResponse}{commandResponse}},\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classModuleHandler_a8086440da55f316a89562f2a736a1ab6}{dir}}(std::vector<commandResponse>\ *inCommandResponses,\ String\ longPrefix,\ String\ shortPrefix,\ \textcolor{keywordtype}{bool}\ hidden,\ \textcolor{keywordtype}{bool}\ modules,\ \textcolor{keywordtype}{bool}\ commands,\ \textcolor{keywordtype}{bool}\ instances,\ \textcolor{keywordtype}{bool}\ instanceCount,\ \textcolor{keywordtype}{bool}\ recursive)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classModuleHandler_a9c235cdcf6965c856fcb2be82cc46175}{help}}(std::vector<commandResponse>\ *inCommandResponses,\ String\ longPrefix,\ String\ shortPrefix);}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ std::vector<ModuleGroup>\ \mbox{\hyperlink{classModuleHandler_a1913f2c62636218e752bbf72de5e45af}{moduleGroups}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classModuleGroup}{ModuleGroup}}*\ \mbox{\hyperlink{classModuleHandler_ab87ee8507b0edd4888eaa422f189d716}{getGroup}}(String\ longName);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classModuleHandler_ae3fa5b4e5e4fa54687c3d26e0d937782}{dumpData}}(std::vector<commandResponse>\ *dataDump);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classModuleGroup}{ModuleGroup}}*\ \mbox{\hyperlink{classModuleHandler_aa8b0ee11f9f981d5d791e0994618377b}{addModule}}(\mbox{\hyperlink{classModule}{Module}}\ *module);}
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ \ \ \ \ \ \ \ ModuleGroup*\ addGroup(ModuleID\ inModuleID);}}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classModuleGroup}{ModuleGroup}}*\ \mbox{\hyperlink{classModuleHandler_a25c83b60da881f9c0dd2886e6a89e631}{addGroup}}(\mbox{\hyperlink{structtModuleID}{tModuleID}}\ inModuleID);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classModuleHandler_aeb0456562a8743c5f4cf5d4aa9a474eb}{addInstances}}(String\ name,\ uint8\_t\ count)\ \{\};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00030\ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MODULEHANDLER\_HPP}}
+
+\end{DoxyCode}

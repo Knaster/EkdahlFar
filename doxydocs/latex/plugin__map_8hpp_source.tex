@@ -1,0 +1,51 @@
+\doxysection{plugin\+\_\+map.\+hpp}
+\hypertarget{plugin__map_8hpp_source}{}\label{plugin__map_8hpp_source}\index{plugin\_map.hpp@{plugin\_map.hpp}}
+\mbox{\hyperlink{plugin__map_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLUGIN\_MAP\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLUGIN\_MAP\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{pluginhandler_8hpp}{plugins/pluginhandler.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPlugin__Map}{Plugin\_Map}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classPlugin}{Plugin}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a726e985c9256abcd3e04b255b31cba09}{SETMODULEID}}(\textcolor{stringliteral}{"{}numbermap"{}},\ \textcolor{stringliteral}{"{}nm"{}},\ \textcolor{stringliteral}{"{}Number\ mapper\ v1.0"{}},\ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8}{eModuleType::software}},\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{pluginhandler_8hpp_a013343e5a8289faf7dd55823f0635aad}{CREATEPLUGINFUNCTIONS}}(\mbox{\hyperlink{classPlugin__Map}{Plugin\_Map}})}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{pluginhandler_8hpp_a08e4d36bf4fbf5d0f602c676445ac171}{REGISTEREXPRESSION}}(\mbox{\hyperlink{classPlugin__Map_a4624e309ae298d35799ab609a7fe1eb4}{s\_mapExpression}})}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(name,\ \mbox{\hyperlink{classPlugin__Map}{Plugin\_Map}})}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(target,\ \mbox{\hyperlink{classPlugin__Map}{Plugin\_Map}})}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(data,\ \mbox{\hyperlink{classPlugin__Map}{Plugin\_Map}})}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(remove,\ \mbox{\hyperlink{classPlugin__Map}{Plugin\_Map}})}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(scale,\ \mbox{\hyperlink{classPlugin__Map}{Plugin\_Map}})}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(trigger,\ \mbox{\hyperlink{classPlugin__Map}{Plugin\_Map}})}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classPlugin__Map}{Plugin\_Map}}();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classPlugin__Map_a49e447b88c077ea108f6980f20f19804}{mapExpression}}(uint8\_t\ input);}
+\DoxyCodeLine{00027\ \ \ \ \ static\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classPlugin__Map_a4624e309ae298d35799ab609a7fe1eb4}{s\_mapExpression}}(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{classPlugin_af43b071f70145fea054d97f38c6309a9}{index}},\ \textcolor{keywordtype}{double}\ input);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPlugin__Map_a0a9fcdb344c339cc3b146a9f4ecb44c6}{updateManual}}(int16\_t\ \mbox{\hyperlink{classPlugin_af43b071f70145fea054d97f38c6309a9}{index}}\ =\ -\/1);}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlugin__Map_a13d757d23e7a59bd90d4ba0bb154e3bc}{update}}()\textcolor{keyword}{\ override\ }\{\};}
+\DoxyCodeLine{00031\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00034\ \ \ \ \ String\ \mbox{\hyperlink{classPlugin__Map_a9626a04c0c475ec015bf3dd9a8eb0cba}{pName}};}
+\DoxyCodeLine{00035\ \ \ \ \ String\ \mbox{\hyperlink{classPlugin__Map_af5e42ee2535005e53f4cecbb9e66cde0}{pTarget}};}
+\DoxyCodeLine{00036\ \ \ \ \ String\ \mbox{\hyperlink{classPlugin__Map_a9a036c460fadf31450261364d8cd225f}{pLastOutput}};}
+\DoxyCodeLine{00037\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classPlugin__Map_acb40edecf6291bb6bdde900811e53190}{pScale}}\ =\ 65535;}
+\DoxyCodeLine{00038\ \ \ \ \ int16\_t\ \mbox{\hyperlink{classPlugin__Map_a220b44047f65c9113cde2f541830a6d9}{pLastIndex}}\ =\ -\/1;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ std::map<uint8\_t,\ float>\ \mbox{\hyperlink{classPlugin__Map_aaa37f2948b622fdb7725e0ba904b6603}{mapData}};}
+\DoxyCodeLine{00041\ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \mbox{\hyperlink{pluginhandler_8hpp_a23e9e92f3a30c6eff4975c9d9f988d5a}{REGISTERPLUGIN}}(\mbox{\hyperlink{classPlugin__Map}{Plugin\_Map}})}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PLUGIN\_MAP\_HPP}}
+
+\end{DoxyCode}

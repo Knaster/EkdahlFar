@@ -23,12 +23,6 @@ public:
 
     PIDController(DCMotorControl &DCMotorControl);
 
-    eProcessResult processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                               commandList *delegatedCommands = nullptr);
-
-    eProcessResult processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                                    commandList *delegatedCommands = nullptr);
-
 private:
     float pKp = 500;                           ///< PID P multiplier 100
     float pKi = 7;                             ///< PID I multiplier 2

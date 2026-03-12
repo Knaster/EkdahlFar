@@ -6,23 +6,30 @@
 
 
 
+Inheritance diagram for PIDController\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{classPIDController__inherit__graph}
+\end{center}
+\end{figure}
+
+
 Collaboration diagram for PIDController\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=207pt]{classPIDController__coll__graph}
+\includegraphics[width=350pt]{classPIDController__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classPIDController_adb86c4a9b80312c6a70f8dc725bd4295}{PIDController}} (\mbox{\hyperlink{classDCMotorControl}{DCMotor\+Control}} \&\mbox{\hyperlink{classDCMotorControl}{DCMotor\+Control}})
+\mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}} \mbox{\hyperlink{classPIDController_a632772361c7e6842c6da7a543a063546}{PIDController}} (\mbox{\hyperlink{classDCMotorControl}{DCMotor\+Control}} \&\mbox{\hyperlink{classDCMotorControl}{DCMotor\+Control}})
 \item 
-\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classPIDController_a698b5049315451aa42344da9c3a0c738}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classPIDController_a698b5049315451aa42344da9c3a0c738}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
 \item 
-\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classPIDController_ae1776f861448d87c44395830ab659c4d}{process\+Serial\+Command\+Hidden}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
-\item 
-String \mbox{\hyperlink{classPIDController_a1eb89031fc53df1e1e43e4f0440fb5e2}{dump\+Data}} ()
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classPIDController_ae1776f861448d87c44395830ab659c4d}{process\+Serial\+Command\+Hidden}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
 \item 
 void \mbox{\hyperlink{classPIDController_ae0bbbe3b4f6578d6475307f83d3ca673}{pid\+Reset}} ()
 \item 
@@ -46,14 +53,46 @@ void \mbox{\hyperlink{classPIDController_a6bc8058b8cb2247d4c06e392c84545af}{set\
 \item 
 void \mbox{\hyperlink{classPIDController_a04e654ba7d6720fa68bb74946c0b138d}{pid\+Control}} ()
 \end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule_a5a240a8a9ab1813b17bcb810b24ceaea}{Module}} ()
+\item 
+virtual const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{get\+Module\+ID}} () const =0
+\item 
+virtual \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a9a13ef0a8291e562a9557c311d07b334}{get\+Module\+ID}} ()=0
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a534a35eb18ec29dbcc8bafce30c21128}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_af7fe70cf55b7c8999672c8a202cbdb71}{process\+Module\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a3896fd907affb2fb5a81df36080ef744}{process\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual void \mbox{\hyperlink{classModule_a8aa6237aabeb8c851f0e6272d6cdc28f}{dir}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix, bool hidden, bool modules, bool commands, bool instances, bool instance\+Count, bool recursive)
+\item 
+virtual void \mbox{\hyperlink{classModule_a09131761fec40345e3657b801778057f}{update}} ()
+\item 
+virtual int \mbox{\hyperlink{classModule_ae6fa72e64554ee0b09a8bb6a77a68640}{get\+Module\+Command\+Count}} ()
+\item 
+virtual void \mbox{\hyperlink{classModule_a5798bc3ad2b47f69e8915297cb33b3e3}{dump\+Data}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}data\+Dump)
+\item 
+virtual void \mbox{\hyperlink{classModule_a72b5f8a3b37fe31c9002c6d7352b2427}{help}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix)
+\item 
+bool \mbox{\hyperlink{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2}{has\+Data\+Change}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleCommand}{Module\+Command}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModuleCommand_a4ce6a1d032eaa918f21ad8121ba59094}{get\+Module\+Command}} (uint8\+\_\+t i) const =0
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-float \mbox{\hyperlink{classPIDController_a5c3eb07a0c4a00b86e1433b84e458a56}{Kp}} = 500
+float \mbox{\hyperlink{classPIDController_a9324567a4ab79b5b5d5d16608ea36674}{p\+Kp}} = 500
 \begin{DoxyCompactList}\small\item\em PID P multiplier 100. \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{classPIDController_a8acd1f19045a89a9dbd1848e56ae6ae0}{Ki}} = 7
+float \mbox{\hyperlink{classPIDController_a197065fb723b56e730246dfc1836dfa3}{p\+Ki}} = 7
 \begin{DoxyCompactList}\small\item\em PID I multiplier 2. \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{classPIDController_a22ef7c93498970edb0b04bef3ae3d2f9}{Kd}} = 200
+float \mbox{\hyperlink{classPIDController_a12206131bd969cae3fc531a38251932c}{p\+Kd}} = 200
 \begin{DoxyCompactList}\small\item\em PID D multiplier 40. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{classPIDController_a455a09fad7c3f0eb99d29505cc02f4c5}{previous\+Error}} = 0.\+0
 \begin{DoxyCompactList}\small\item\em Contains the last frequency error calculated by the PID, given in Hertz. \end{DoxyCompactList}\item 
@@ -79,31 +118,34 @@ float \mbox{\hyperlink{classPIDController_a69f60934cd79167f898e5d121952eefe}{min
 \item 
 float \mbox{\hyperlink{classPIDController_a02862e6a77b8c8503962e0547e5dfbd0}{max\+Speed\+Hz}} = 550
 \end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classModule_aa09bd171529da96438e917258ab5ab8d}{is\+Group\+Handler}} = false
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}{set\+Data\+Changed}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModule_ad85cad50c5538cc47c6d3ac76500e4cf}{owner}} = nullptr
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classPIDController_adb86c4a9b80312c6a70f8dc725bd4295}\label{classPIDController_adb86c4a9b80312c6a70f8dc725bd4295} 
+\Hypertarget{classPIDController_a632772361c7e6842c6da7a543a063546}\label{classPIDController_a632772361c7e6842c6da7a543a063546} 
 \index{PIDController@{PIDController}!PIDController@{PIDController}}
 \index{PIDController@{PIDController}!PIDController@{PIDController}}
 \doxysubsubsection{\texorpdfstring{PIDController()}{PIDController()}}
-{\footnotesize\ttfamily PIDController\+::\+PIDController (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classDCMotorControl}{DCMotor\+Control}} \&}]{DCMotor\+Control }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}} PIDController\+::\+PIDController (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classDCMotorControl}{DCMotor\+Control}} \&}]{DCMotor\+Control }\end{DoxyParamCaption})}
 
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classPIDController_a1eb89031fc53df1e1e43e4f0440fb5e2}\label{classPIDController_a1eb89031fc53df1e1e43e4f0440fb5e2} 
-\index{PIDController@{PIDController}!dumpData@{dumpData}}
-\index{dumpData@{dumpData}!PIDController@{PIDController}}
-\doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
-{\footnotesize\ttfamily String PIDController\+::dump\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classPIDController_a1eb89031fc53df1e1e43e4f0440fb5e2_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classPIDController_a577132f4990b94d9fbb09d9ef267965e}\label{classPIDController_a577132f4990b94d9fbb09d9ef267965e} 
 \index{PIDController@{PIDController}!getMaxSpeedHz@{getMaxSpeedHz}}
 \index{getMaxSpeedHz@{getMaxSpeedHz}!PIDController@{PIDController}}
@@ -142,8 +184,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{getPIDTarget()}{getPIDTarget()}}
 {\footnotesize\ttfamily float PIDController\+::get\+PIDTarget (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -156,20 +197,11 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{measureTimeToTarget()}{measureTimeToTarget()}}
 {\footnotesize\ttfamily float PIDController\+::measure\+Time\+To\+Target (\begin{DoxyParamCaption}\item[{float}]{\+\_\+pid\+Target\+Speed }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classPIDController_accf28de4b7e26653f461c9466521d3c3_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classPIDController_accf28de4b7e26653f461c9466521d3c3_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classPIDController_a04e654ba7d6720fa68bb74946c0b138d}\label{classPIDController_a04e654ba7d6720fa68bb74946c0b138d} 
@@ -179,7 +211,7 @@ Here is the caller graph for this function\+:
 {\footnotesize\ttfamily void PIDController\+::pid\+Control (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 PID calculation function to be called at pid\+Update\+Interval, called by pid\+Interrupt\+Caller \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{todo__todo000004}{Todo}}]add Integral injection and other pre-\/loading parameters to help bow start and change 
+\item[\mbox{\hyperlink{todo__todo000003}{Todo}}]add Integral injection and other pre-\/loading parameters to help bow start and change 
 
 final check so PWM is never out of range min/max 
 
@@ -204,8 +236,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{pidReset()}{pidReset()}}
 {\footnotesize\ttfamily void PIDController\+::pid\+Reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -216,44 +247,14 @@ Here is the caller graph for this function\+:
 \index{PIDController@{PIDController}!processSerialCommand@{processSerialCommand}}
 \index{processSerialCommand@{processSerialCommand}!PIDController@{PIDController}}
 \doxysubsubsection{\texorpdfstring{processSerialCommand()}{processSerialCommand()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} PIDController\+::process\+Serial\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} PIDController\+::process\+Serial\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classPIDController_a698b5049315451aa42344da9c3a0c738_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classPIDController_a698b5049315451aa42344da9c3a0c738_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classPIDController_ae1776f861448d87c44395830ab659c4d}\label{classPIDController_ae1776f861448d87c44395830ab659c4d} 
 \index{PIDController@{PIDController}!processSerialCommandHidden@{processSerialCommandHidden}}
 \index{processSerialCommandHidden@{processSerialCommandHidden}!PIDController@{PIDController}}
 \doxysubsubsection{\texorpdfstring{processSerialCommandHidden()}{processSerialCommandHidden()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} PIDController\+::process\+Serial\+Command\+Hidden (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} PIDController\+::process\+Serial\+Command\+Hidden (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classPIDController_ae1776f861448d87c44395830ab659c4d_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classPIDController_ae1776f861448d87c44395830ab659c4d_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classPIDController_ac1bbccb833ee15c1cd135c5c64a23ed1}\label{classPIDController_ac1bbccb833ee15c1cd135c5c64a23ed1} 
 \index{PIDController@{PIDController}!setMaxSpeedHz@{setMaxSpeedHz}}
 \index{setMaxSpeedHz@{setMaxSpeedHz}!PIDController@{PIDController}}
@@ -297,8 +298,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classPIDController_a3b463eb00aac83a6a4bba64686c9a524_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -311,8 +311,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{setPIDTargetUnsafe()}{setPIDTargetUnsafe()}}
 {\footnotesize\ttfamily void PIDController\+::set\+PIDTarget\+Unsafe (\begin{DoxyParamCaption}\item[{float}]{in\+PIDTarget\+Speed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -348,16 +347,6 @@ Contains the integral used by the PID.
 
 The PID will ignore any integral errors under this threshold 0.\+4. 
 
-\Hypertarget{classPIDController_a22ef7c93498970edb0b04bef3ae3d2f9}\label{classPIDController_a22ef7c93498970edb0b04bef3ae3d2f9} 
-\index{PIDController@{PIDController}!Kd@{Kd}}
-\index{Kd@{Kd}!PIDController@{PIDController}}
-\doxysubsubsection{\texorpdfstring{Kd}{Kd}}
-{\footnotesize\ttfamily float PIDController\+::\+Kd = 200\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-PID D multiplier 40. 
-
 \Hypertarget{classPIDController_aa69bc8cde7aff590dd1517bec1df4448}\label{classPIDController_aa69bc8cde7aff590dd1517bec1df4448} 
 \index{PIDController@{PIDController}!KdTerm@{KdTerm}}
 \index{KdTerm@{KdTerm}!PIDController@{PIDController}}
@@ -368,16 +357,6 @@ PID D multiplier 40.
 
 Calculated D term. 
 
-\Hypertarget{classPIDController_a8acd1f19045a89a9dbd1848e56ae6ae0}\label{classPIDController_a8acd1f19045a89a9dbd1848e56ae6ae0} 
-\index{PIDController@{PIDController}!Ki@{Ki}}
-\index{Ki@{Ki}!PIDController@{PIDController}}
-\doxysubsubsection{\texorpdfstring{Ki}{Ki}}
-{\footnotesize\ttfamily float PIDController\+::\+Ki = 7\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-PID I multiplier 2. 
-
 \Hypertarget{classPIDController_a20c6f80edcd517952c6766e38d36363e}\label{classPIDController_a20c6f80edcd517952c6766e38d36363e} 
 \index{PIDController@{PIDController}!KiTerm@{KiTerm}}
 \index{KiTerm@{KiTerm}!PIDController@{PIDController}}
@@ -387,16 +366,6 @@ PID I multiplier 2.
 
 
 Calculated I term. 
-
-\Hypertarget{classPIDController_a5c3eb07a0c4a00b86e1433b84e458a56}\label{classPIDController_a5c3eb07a0c4a00b86e1433b84e458a56} 
-\index{PIDController@{PIDController}!Kp@{Kp}}
-\index{Kp@{Kp}!PIDController@{PIDController}}
-\doxysubsubsection{\texorpdfstring{Kp}{Kp}}
-{\footnotesize\ttfamily float PIDController\+::\+Kp = 500\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-PID P multiplier 100. 
 
 \Hypertarget{classPIDController_acdeca85f1c17132fca3eba126241c41e}\label{classPIDController_acdeca85f1c17132fca3eba126241c41e} 
 \index{PIDController@{PIDController}!KpTerm@{KpTerm}}
@@ -445,6 +414,36 @@ Max PID error per loop, essentially sets acceleration.
 
 
 PID target speed. 
+
+\Hypertarget{classPIDController_a12206131bd969cae3fc531a38251932c}\label{classPIDController_a12206131bd969cae3fc531a38251932c} 
+\index{PIDController@{PIDController}!pKd@{pKd}}
+\index{pKd@{pKd}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{pKd}{pKd}}
+{\footnotesize\ttfamily float PIDController\+::p\+Kd = 200\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+PID D multiplier 40. 
+
+\Hypertarget{classPIDController_a197065fb723b56e730246dfc1836dfa3}\label{classPIDController_a197065fb723b56e730246dfc1836dfa3} 
+\index{PIDController@{PIDController}!pKi@{pKi}}
+\index{pKi@{pKi}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{pKi}{pKi}}
+{\footnotesize\ttfamily float PIDController\+::p\+Ki = 7\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+PID I multiplier 2. 
+
+\Hypertarget{classPIDController_a9324567a4ab79b5b5d5d16608ea36674}\label{classPIDController_a9324567a4ab79b5b5d5d16608ea36674} 
+\index{PIDController@{PIDController}!pKp@{pKp}}
+\index{pKp@{pKp}!PIDController@{PIDController}}
+\doxysubsubsection{\texorpdfstring{pKp}{pKp}}
+{\footnotesize\ttfamily float PIDController\+::p\+Kp = 500\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+PID P multiplier 100. 
 
 \Hypertarget{classPIDController_a455a09fad7c3f0eb99d29505cc02f4c5}\label{classPIDController_a455a09fad7c3f0eb99d29505cc02f4c5} 
 \index{PIDController@{PIDController}!previousError@{previousError}}

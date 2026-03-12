@@ -16,6 +16,9 @@
 					<Add option="-g" />
 					<Add directory="./" />
 					<Add directory="include" />
+					<Add directory="include/base" />
+					<Add directory="include/base/" />
+					<Add directory="include/master_controller" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -28,8 +31,12 @@
 					<Add option="-O2" />
 					<Add option="-DEFARSLAVE" />
 					<Add option="-DUSB_MIDI_SERIAL" />
+					<Add option="-DNO_EXTERNAL_MODULES" />
 					<Add directory="./" />
 					<Add directory="include" />
+					<Add directory="include/base" />
+					<Add directory="include/base/" />
+					<Add directory="include/master_controller" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -47,6 +54,9 @@
 					<Add option="-DUSB_MIDI_SERIAL" />
 					<Add directory="./" />
 					<Add directory="include" />
+					<Add directory="include/base" />
+					<Add directory="include/base/" />
+					<Add directory="include/master_controller" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -65,6 +75,29 @@
 					<Add option="-DAUDIO_INTERFACE" />
 					<Add directory="./" />
 					<Add directory="include" />
+					<Add directory="include/base" />
+					<Add directory="include/base/" />
+					<Add directory="include/master_controller" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Release - External modules">
+				<Option output="bin/Release/EkdahlFarCB.elf" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="obj/Release/" />
+				<Option type="5" />
+				<Option compiler="teensyduino_1581" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DEFARSLAVE" />
+					<Add option="-DUSB_MIDI_SERIAL" />
+					<Add directory="./" />
+					<Add directory="include" />
+					<Add directory="include/base" />
+					<Add directory="include/base/" />
+					<Add directory="include/master_controller" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -139,8 +172,12 @@
 			<Add after="size ${TARGET_OUTPUT_FILE} --format=sysv" />
 		</ExtraCommands>
 		<Unit filename="include/base/arduinorequired.hpp" />
+		<Unit filename="include/base/basemodule.hpp" />
+		<Unit filename="include/base/commanditem.hpp" />
+		<Unit filename="include/base/commandlist.hpp" />
 		<Unit filename="include/base/commandparser.hpp" />
 		<Unit filename="include/base/debugprint.hpp" />
+		<Unit filename="include/base/generalhelpers.hpp" />
 		<Unit filename="include/base/module.hpp" />
 		<Unit filename="include/base/modulegroup.hpp" />
 		<Unit filename="include/base/modulehandler.hpp" />
@@ -162,7 +199,10 @@
 		<Unit filename="include/generic_functions/tmc2209_servostepper.hpp" />
 		<Unit filename="include/master_controller/automaticversion.hpp" />
 		<Unit filename="include/master_controller/expressionparser.h" />
+		<Unit filename="include/master_controller/externalmodule.hpp" />
+		<Unit filename="include/master_controller/externalmodulehandler.hpp" />
 		<Unit filename="include/master_controller/global_generics.hpp" />
+		<Unit filename="include/master_controller/mastermodule.hpp" />
 		<Unit filename="include/master_controller/midi.h" />
 		<Unit filename="include/master_controller/midiconfigurationhandler.hpp" />
 		<Unit filename="include/master_controller/midimessageconfiguration.hpp" />
@@ -175,9 +215,7 @@
 		<Unit filename="include/plugins/plugin_map.hpp" />
 		<Unit filename="include/plugins/plugin_mult.hpp" />
 		<Unit filename="include/plugins/pluginhandler.hpp" />
-		<Unit filename="include/single_far/basemodule.hpp" />
 		<Unit filename="include/single_far/farsingle.hpp" />
-		<Unit filename="include/single_far/farsinglemodulehandler.hpp" />
 		<Unit filename="include/solenoid/solenoid.hpp" />
 		<Unit filename="include/teensy_specific/eepromhelpers.hpp" />
 		<Unit filename="lib/Adafruit_ADS1X15/Adafruit_ADS1X15.cpp" />
@@ -1075,11 +1113,15 @@
 		</Unit>
 		<Unit filename="lib/tinyexpr/src/tinyexpr.h" />
 		<Unit filename="src/base/arduinorequired.cpp" />
+		<Unit filename="src/base/basemodule.cpp" />
+		<Unit filename="src/base/commanditem.cpp" />
+		<Unit filename="src/base/commandlist.cpp" />
 		<Unit filename="src/base/commandparser.cpp" />
 		<Unit filename="src/base/debugprint.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
+		<Unit filename="src/base/generalhelpers.cpp" />
 		<Unit filename="src/base/module.cpp" />
 		<Unit filename="src/base/modulegroup.cpp" />
 		<Unit filename="src/base/modulehandler.cpp" />
@@ -1101,7 +1143,10 @@
 		<Unit filename="src/generic_functions/pidcontroller.cpp" />
 		<Unit filename="src/generic_functions/tmc2209_servostepper.cpp" />
 		<Unit filename="src/master_controller/expressionparser.cpp" />
+		<Unit filename="src/master_controller/externalmodule.cpp" />
+		<Unit filename="src/master_controller/externalmodulehandler.cpp" />
 		<Unit filename="src/master_controller/globalgenerics.cpp" />
+		<Unit filename="src/master_controller/mastermodule.cpp" />
 		<Unit filename="src/master_controller/midi.cpp" />
 		<Unit filename="src/master_controller/midiconfigurationhandler.cpp" />
 		<Unit filename="src/master_controller/midimessageconfiguration.cpp" />
@@ -1114,7 +1159,6 @@
 		<Unit filename="src/pluginhandler/plugin_map.cpp" />
 		<Unit filename="src/pluginhandler/plugin_mult.cpp" />
 		<Unit filename="src/pluginhandler/pluginhandler.cpp" />
-		<Unit filename="src/single_far/basemodule.cpp" />
 		<Unit filename="src/single_far/farsingle.cpp" />
 		<Unit filename="src/single_far/main.cpp" />
 		<Unit filename="src/single_far/name.c">

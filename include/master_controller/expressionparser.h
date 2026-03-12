@@ -29,7 +29,7 @@ private:
     static double expIBool(double input);
     static double deadband(double value, double threshold);
     static double zeroThreshold(double value);
-    static double ifequal(double value, double comp, String commandList);
+    static double ifequal(double value, double comp, String CommandList);
 public:
     ExpressionParser();
 

@@ -25,10 +25,10 @@
 
 #include "base/arduinorequired.hpp"
 
-enum debugPrintType { Command, USB, Hardware, Undefined, Priority, Error, InfoRequest, EParser, Debug, TextInfo, Help, Internal};
-#define debugPrintTypes 12
-extern String debugPrintTypeName[];
-extern String debugPrintTypeNameShort[];
+enum debugPrintType { Command, dpUSB, Hardware, Undefined, Priority, Error, InfoRequest, EParser, Debug, TextInfo, Help, Internal, External};
+#define debugPrintTypes 13
+extern const String debugPrintTypeName[];
+extern const String debugPrintTypeNameShort[];
 extern bool debugPrintEnabled[];
 
 void outputNext();
@@ -38,8 +38,12 @@ bool debugPrintConnect();
 bool debugPrintCheckType(debugPrintType printType);
 
 void debugPrint(String text, debugPrintType printType);
-
 void debugPrintln(String text, debugPrintType printType);
+
+void debugPrint(String text, debugPrintType printType, void *device);
+void debugPrintln(String text, debugPrintType printType, void *device);
+
+debugPrintType debugPrintGetType(String *text);
 
 void debugRaw(String text);
 
@@ -58,12 +62,5 @@ public:
     void tsDebugPrintln(String m_msg, debugPrintType m_dpType);
 
     String tsRetrieveMessages();
-};
-
-#define commandResponseType debugPrintType
-
-struct commandResponse {
-    String response;
-    commandResponseType responseType;
 };
 #endif // DEBUGPRINT_H

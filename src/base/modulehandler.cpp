@@ -11,20 +11,16 @@ ModuleHandler::ModuleHandler() {
 
 void ModuleHandler::dir(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix, bool hidden, bool modules, bool commands, bool instances, bool instanceCount, bool recursive) {
     String lp = longPrefix, sp = shortPrefix;
-
     if (lp != "") { if (lp[lp.length() - 1] != '.') { lp +=  "."; } }
     if (sp != "") { if (sp[sp.length() - 1] != '.') { sp +=  "."; } }
 
     //debugPrintln("Dir module handler" + String(getModuleID().longName) + " commands", debugPrintType::Debug);
-
     if (commands) {
         Module::dir(inCommandResponses, lp, sp, hidden, modules, commands, instances, instanceCount, recursive);
     }
 
     //debugPrintln("Dir module handler groups", debugPrintType::Debug);
-
     for (int i = 0; i < moduleGroups.size(); i++) {
-//        moduleGroups[i].dir(inCommandResponses,lp + moduleGroups[i].moduleID->getLongName(), sp + moduleGroups[i].moduleID->getShortName(), hidden, modules, commands, instances, instanceCount, recursive);
         moduleGroups[i].dir(inCommandResponses,lp + moduleGroups[i].tmoduleID.longName, sp + moduleGroups[i].tmoduleID.shortName, hidden, modules, commands, instances, instanceCount, recursive);
     }
 }
@@ -58,51 +54,40 @@ void ModuleHandler::dumpData(std::vector<commandResponse> *inCommandResponses) {
 
 ModuleGroup* ModuleHandler::getGroup(String name) {
     for (int i = 0; i < moduleGroups.size(); i++) {
-//        if (moduleGroups[i].moduleID->getLongName() == longName) {
         if ((String(moduleGroups[i].tmoduleID.longName) == name) || (String(moduleGroups[i].tmoduleID.shortName) == name)) {
             return &moduleGroups[i];
         }
     }
     return nullptr;
 }
-/*
-ModuleGroup* ModuleHandler::addGroup(ModuleID inModuleID) {
-    ModuleGroup *group = getGroup(inModuleID.getLongName());
+
+ModuleGroup* ModuleHandler::addGroup(tModuleID inModuleID) {
+    //debugPrintln("Trying to add module group " + String(inModuleID.longName) + " groups", debugPrintType::Debug);
+    ModuleGroup *group = getGroup(inModuleID.longName);
     if (group != nullptr) {
-        debugPrintln("Group already exists!", debugPrintType::Error);
+        //debugPrintln("Group already exists!", debugPrintType::Error);
         return group;
     }
     moduleGroups.push_back(ModuleGroup(inModuleID));
     //debugPrintln("Added a group, for a total of " + String(moduleGroups.size()) + " groups", debugPrintType::Debug);
     return &moduleGroups.back();
 }
-*/
-ModuleGroup* ModuleHandler::addGroup(tModuleID inModuleID) {
-    debugPrintln("Trying to add module group " + String(inModuleID.longName) + " groups", debugPrintType::Debug);
-    ModuleGroup *group = getGroup(inModuleID.longName);
-    if (group != nullptr) {
-        debugPrintln("Group already exists!", debugPrintType::Error);
-        return group;
-    }
-    moduleGroups.push_back(ModuleGroup(inModuleID));
-    debugPrintln("Added a group, for a total of " + String(moduleGroups.size()) + " groups", debugPrintType::Debug);
-    return &moduleGroups.back();
-}
 
 ModuleGroup* ModuleHandler::addModule(Module *module) {
     ModuleGroup *group = nullptr;
-//    group = getGroup(module->moduleID->getLongName());
     group = getGroup(module->getModuleID().longName);
+    //debugPrintln("See if group " + String(module->getModuleID().longName) + " exists..", debugPrintType::Debug);
     if (group == nullptr) {
-        //debugPrintln("Adding group " + module->moduleID->getLongName(), debugPrintType::Debug);
-//        group = addGroup(module->moduleID);
+        //debugPrintln("Adding group " + String(module->getModuleID().longName), debugPrintType::Debug);
         group = addGroup(module->getModuleID());
     }
     group->addModule(module);
-    return &moduleGroups.back();
+    group->owner = this;
+//    return &moduleGroups.back();
+    return group;
 }
 
-eProcessResult ModuleHandler::processModuleHandlerCommands(commandItem *inCommandItem, std::vector<commandResponse> *commandResponse, bool request) {
+eProcessResult ModuleHandler::processModuleHandlerCommands(CommandItem *inCommandItem, std::vector<commandResponse> *commandResponse, bool request) {
     if (inCommandItem->hierarchy[inCommandItem->hierarchyIndex].name == "ins") {
         if (!request) {
             if (!checkArguments(inCommandItem, commandResponse, 2)) { return eProcessResult::WrongArgumentCount; }
@@ -119,7 +104,7 @@ eProcessResult ModuleHandler::processModuleHandlerCommands(commandItem *inComman
     return eProcessResult::NotFound;
 }
 
-eProcessResult ModuleHandler::processCommands(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request) {
+eProcessResult ModuleHandler::processCommands(CommandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request) {
     eProcessResult result = processBuiltInCommands(inCommandItem, commandResponses, request);
     if (result != eProcessResult::NotFound) { return result; }
     result = processModuleHandlerCommands(inCommandItem, commandResponses, request);
@@ -168,4 +153,5 @@ eProcessResult ModuleHandler::processCommands(commandItem *inCommandItem, std::v
     }
     return eProcessResult::NotFound;
 }
+
 #endif

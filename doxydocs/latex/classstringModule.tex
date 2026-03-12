@@ -4,8 +4,20 @@
 
 {\ttfamily \#include $<$stringmodule.\+hpp$>$}
 
+
+
+Collaboration diagram for string\+Module\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classstringModule__coll__graph}
+\end{center}
+\end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classstringModule_a240ee698dd7c4d5cdc32157de0243e1f}{frequency\+Changed}} ()
 \item 
 \mbox{\hyperlink{classstringModule_a8d2813e57f62a901fe0ca8c348112a78}{string\+Module}} ()
 \item 
@@ -23,32 +35,36 @@ bool \mbox{\hyperlink{classstringModule_a1c4a46d4d4304047bdb682124e4b7c75}{proce
 \item 
 bool \mbox{\hyperlink{classstringModule_abeee7163a63d261fed0f7a92622d86de}{process\+Serial\+Command\+\_\+\+Calibrations\+Settings}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}\+\_\+command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegated=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
 \item 
-bool \mbox{\hyperlink{classstringModule_a6d98b93184bfe0426df837453db67143}{process\+Serial\+Command\+\_\+\+Mute\+Control}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}\+\_\+command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegated=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
-\item 
 bool \mbox{\hyperlink{classstringModule_a2e3deb9ec1e55ddadba3cce25fdde5e2}{process\+Serial\+Command\+\_\+\+Status\+Testing}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}\+\_\+command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegated=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
 \item 
 bool \mbox{\hyperlink{classstringModule_a51411f820b0092854766bdbe0fbda616}{process\+Serial\+Command\+\_\+\+Bow\+Actuator}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}\+\_\+command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegated=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
 \item 
+bool \mbox{\hyperlink{classstringModule_a0216edd4e7c554f7f3c4d24cee6ba885}{process\+Serial\+Command\+\_\+\+Calibrate}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}\+\_\+command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegated=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+\item 
 bool \mbox{\hyperlink{classstringModule_aa7efea7570178b24f2ecc1fefc22c8fb}{process\+Request\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}\+\_\+command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool delegated)
 \item 
-bool \mbox{\hyperlink{classstringModule_a5e7353fae7c3d63c8315b485c1ad1626}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8cpp_a065be67893a579abec3c0de4659ebc1c}{commands}}, uint16\+\_\+t \texorpdfstring{$\ast$}{*}index, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool delegated)
+bool \mbox{\hyperlink{classstringModule_a5e7353fae7c3d63c8315b485c1ad1626}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}commands, uint16\+\_\+t \texorpdfstring{$\ast$}{*}index, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool delegated)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 std\+::vector$<$ \mbox{\hyperlink{classbowIO}{bow\+IO}} $>$ \mbox{\hyperlink{classstringModule_a30e0bcd8769adeaecca7f2ba5e1f5f32}{bow\+IOArray}}
 \item 
-std\+::vector$<$ \mbox{\hyperlink{classbowControl}{bow\+Control}} $>$ \mbox{\hyperlink{classstringModule_a253a863c94928bb8d6e5182f4a2c8320}{bow\+Control\+Array}}
+std\+::vector$<$ bow\+Control $>$ \mbox{\hyperlink{classstringModule_a253a863c94928bb8d6e5182f4a2c8320}{bow\+Control\+Array}}
 \item 
-std\+::vector$<$ \mbox{\hyperlink{structCalibrationData}{Calibration\+Data}} $>$ \mbox{\hyperlink{classstringModule_a683500a505f3f4cdcf592142b5c8711d}{calibration\+Data\+Array}}
+std\+::vector$<$ Calibration\+Data $>$ \mbox{\hyperlink{classstringModule_a683500a505f3f4cdcf592142b5c8711d}{calibration\+Data\+Array}}
 \item 
-std\+::vector$<$ \mbox{\hyperlink{classcalibrate}{calibrate}} $>$ \mbox{\hyperlink{classstringModule_a6e4d0a539d96b08a12be40479c18de4f}{calibrate\+Array}}
+std\+::vector$<$ calibrate $>$ \mbox{\hyperlink{classstringModule_a6e4d0a539d96b08a12be40479c18de4f}{calibrate\+Array}}
 \item 
-std\+::vector$<$ \mbox{\hyperlink{classsolenoid}{solenoid}} $>$ \mbox{\hyperlink{classstringModule_a3efba2d94301131466549e783a24623c}{solenoid\+Array}}
+std\+::vector$<$ \mbox{\hyperlink{classSolenoid}{Solenoid}} $>$ \mbox{\hyperlink{classstringModule_afce60d9a55938a792b805b6577119f4c}{solenoid\+Array}}
 \item 
-std\+::vector$<$ \mbox{\hyperlink{classmute}{mute}} $>$ \mbox{\hyperlink{classstringModule_ac21fd840807f137b8ce5384e1dea3ee3}{mute\+Array}}
+std\+::vector$<$ \mbox{\hyperlink{classBowControl}{Bow\+Control}} $>$ \mbox{\hyperlink{classstringModule_a25c079b1b84067174786de202e756c9b}{bow\+Control\+ArrayX}}
 \item 
-std\+::vector$<$ \mbox{\hyperlink{classcalibrateMute}{calibrate\+Mute}} $>$ \mbox{\hyperlink{classstringModule_a5dab3a72fceb5aac97140e8acd462770}{calibrate\+Mute\+Array}}
+std\+::vector$<$ \mbox{\hyperlink{classMuteControl}{Mute\+Control}} $>$ \mbox{\hyperlink{classstringModule_aa2372de34a206c6b857032ce8cc2ec9e}{mute\+Array}}
+\item 
+std\+::vector$<$ calibrate\+Mute $>$ \mbox{\hyperlink{classstringModule_a5dab3a72fceb5aac97140e8acd462770}{calibrate\+Mute\+Array}}
+\item 
+\mbox{\hyperlink{classHarmonicSeriesHandler}{Harmonic\+Series\+Handler}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classstringModule_a4bc6cc6991a4aa262ff751cd411580c2}{harmonic\+Series\+Handler}}
 \item 
 int \mbox{\hyperlink{classstringModule_a7fb66cceefcbed37d29993401fcfe38b}{current\+Bow\+Serial}} = 0
 \item 
@@ -67,6 +83,14 @@ Safe\+String\+Reader \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classstringModu
 \doxysubsubsection{\texorpdfstring{stringModule()}{stringModule()}}
 {\footnotesize\ttfamily string\+Module\+::string\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classstringModule_a8d2813e57f62a901fe0ca8c348112a78_cgraph}
+\end{center}
+\end{figure}
 
 
 \doxysubsection{Member Function Documentation}
@@ -77,14 +101,7 @@ Safe\+String\+Reader \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classstringModu
 {\footnotesize\ttfamily bool string\+Module\+::add\+Bow (\begin{DoxyParamCaption}\item[{char}]{motor\+Rev\+Pin,  }\item[{char}]{motor\+Voltage\+Pin,  }\item[{char}]{motor\+DCDCEn,  }\item[{char}]{tacho\+Pin,  }\item[{char}]{current\+Sense\+Pin,  }\item[{char}]{motor\+Fault\+Pin,  }\item[{char}]{step\+En\+Pin,  }\item[{char}]{step\+Dir\+Pin,  }\item[{char}]{step\+Step\+Pin,  }\item[{Hardware\+Serial \texorpdfstring{$\ast$}{*}}]{step\+Serial\+Port,  }\item[{char}]{step\+Home\+Sensor\+Pin,  }\item[{char}]{step\+Correction\+Sensor\+Pin }\end{DoxyParamCaption})}
 
 \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{todo__todo000009}{Todo}}]fix pointers here, major irritation \end{DoxyRefDesc}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=285pt]{classstringModule_a52a5b213e054d030023de05b46769555_icgraph}
-\end{center}
-\end{figure}
+\item[\mbox{\hyperlink{todo__todo000005}{Todo}}]fix pointers here, major irritation \end{DoxyRefDesc}
 \Hypertarget{classstringModule_ae900a34fa51bb9cdf8e0db8ad54698ee}\label{classstringModule_ae900a34fa51bb9cdf8e0db8ad54698ee} 
 \index{stringModule@{stringModule}!addMute@{addMute}}
 \index{addMute@{addMute}!stringModule@{stringModule}}
@@ -113,27 +130,34 @@ Here is the call graph for this function\+:
 \includegraphics[width=350pt]{classstringModule_a383d333da12d8b196c3a0a3085f466c9_cgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classstringModule_aa7efea7570178b24f2ecc1fefc22c8fb}\label{classstringModule_aa7efea7570178b24f2ecc1fefc22c8fb} 
-\index{stringModule@{stringModule}!processRequestCommand@{processRequestCommand}}
-\index{processRequestCommand@{processRequestCommand}!stringModule@{stringModule}}
-\doxysubsubsection{\texorpdfstring{processRequestCommand()}{processRequestCommand()}}
-{\footnotesize\ttfamily bool string\+Module\+::process\+Request\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{delegated }\end{DoxyParamCaption})}
+\Hypertarget{classstringModule_a240ee698dd7c4d5cdc32157de0243e1f}\label{classstringModule_a240ee698dd7c4d5cdc32157de0243e1f} 
+\index{stringModule@{stringModule}!frequencyChanged@{frequencyChanged}}
+\index{frequencyChanged@{frequencyChanged}!stringModule@{stringModule}}
+\doxysubsubsection{\texorpdfstring{frequencyChanged()}{frequencyChanged()}}
+{\footnotesize\ttfamily void string\+Module\+::frequency\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classstringModule_aa7efea7570178b24f2ecc1fefc22c8fb_cgraph}
+\includegraphics[width=350pt]{classstringModule_a240ee698dd7c4d5cdc32157de0243e1f_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classstringModule_aa7efea7570178b24f2ecc1fefc22c8fb_icgraph}
+\includegraphics[width=350pt]{classstringModule_a240ee698dd7c4d5cdc32157de0243e1f_icgraph}
 \end{center}
 \end{figure}
+\Hypertarget{classstringModule_aa7efea7570178b24f2ecc1fefc22c8fb}\label{classstringModule_aa7efea7570178b24f2ecc1fefc22c8fb} 
+\index{stringModule@{stringModule}!processRequestCommand@{processRequestCommand}}
+\index{processRequestCommand@{processRequestCommand}!stringModule@{stringModule}}
+\doxysubsubsection{\texorpdfstring{processRequestCommand()}{processRequestCommand()}}
+{\footnotesize\ttfamily bool string\+Module\+::process\+Request\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{delegated }\end{DoxyParamCaption})}
+
 \Hypertarget{classstringModule_a5e7353fae7c3d63c8315b485c1ad1626}\label{classstringModule_a5e7353fae7c3d63c8315b485c1ad1626} 
 \index{stringModule@{stringModule}!processSerialCommand@{processSerialCommand}}
 \index{processSerialCommand@{processSerialCommand}!stringModule@{stringModule}}
@@ -148,48 +172,32 @@ Here is the call graph for this function\+:
 \includegraphics[width=350pt]{classstringModule_a5e7353fae7c3d63c8315b485c1ad1626_cgraph}
 \end{center}
 \end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{classstringModule_a5e7353fae7c3d63c8315b485c1ad1626_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{classstringModule_a51411f820b0092854766bdbe0fbda616}\label{classstringModule_a51411f820b0092854766bdbe0fbda616} 
 \index{stringModule@{stringModule}!processSerialCommand\_BowActuator@{processSerialCommand\_BowActuator}}
 \index{processSerialCommand\_BowActuator@{processSerialCommand\_BowActuator}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{processSerialCommand\_BowActuator()}{processSerialCommand\_BowActuator()}}
 {\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+Bow\+Actuator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classstringModule_a51411f820b0092854766bdbe0fbda616_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classstringModule_a51411f820b0092854766bdbe0fbda616_icgraph}
-\end{center}
-\end{figure}
+\Hypertarget{classstringModule_a0216edd4e7c554f7f3c4d24cee6ba885}\label{classstringModule_a0216edd4e7c554f7f3c4d24cee6ba885} 
+\index{stringModule@{stringModule}!processSerialCommand\_Calibrate@{processSerialCommand\_Calibrate}}
+\index{processSerialCommand\_Calibrate@{processSerialCommand\_Calibrate}!stringModule@{stringModule}}
+\doxysubsubsection{\texorpdfstring{processSerialCommand\_Calibrate()}{processSerialCommand\_Calibrate()}}
+{\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+Calibrate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
 \Hypertarget{classstringModule_abeee7163a63d261fed0f7a92622d86de}\label{classstringModule_abeee7163a63d261fed0f7a92622d86de} 
 \index{stringModule@{stringModule}!processSerialCommand\_CalibrationsSettings@{processSerialCommand\_CalibrationsSettings}}
 \index{processSerialCommand\_CalibrationsSettings@{processSerialCommand\_CalibrationsSettings}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{processSerialCommand\_CalibrationsSettings()}{processSerialCommand\_CalibrationsSettings()}}
 {\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+Calibrations\+Settings (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classstringModule_abeee7163a63d261fed0f7a92622d86de_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classstringModule_abeee7163a63d261fed0f7a92622d86de_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classstringModule_a1c4a46d4d4304047bdb682124e4b7c75}\label{classstringModule_a1c4a46d4d4304047bdb682124e4b7c75} 
 \index{stringModule@{stringModule}!processSerialCommand\_GeneralControl@{processSerialCommand\_GeneralControl}}
 \index{processSerialCommand\_GeneralControl@{processSerialCommand\_GeneralControl}!stringModule@{stringModule}}
@@ -204,52 +212,18 @@ Here is the call graph for this function\+:
 \includegraphics[width=350pt]{classstringModule_a1c4a46d4d4304047bdb682124e4b7c75_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classstringModule_a1c4a46d4d4304047bdb682124e4b7c75_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classstringModule_a6d98b93184bfe0426df837453db67143}\label{classstringModule_a6d98b93184bfe0426df837453db67143} 
-\index{stringModule@{stringModule}!processSerialCommand\_MuteControl@{processSerialCommand\_MuteControl}}
-\index{processSerialCommand\_MuteControl@{processSerialCommand\_MuteControl}!stringModule@{stringModule}}
-\doxysubsubsection{\texorpdfstring{processSerialCommand\_MuteControl()}{processSerialCommand\_MuteControl()}}
-{\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+Mute\+Control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classstringModule_a6d98b93184bfe0426df837453db67143_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classstringModule_a6d98b93184bfe0426df837453db67143_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classstringModule_a2e3deb9ec1e55ddadba3cce25fdde5e2}\label{classstringModule_a2e3deb9ec1e55ddadba3cce25fdde5e2} 
 \index{stringModule@{stringModule}!processSerialCommand\_StatusTesting@{processSerialCommand\_StatusTesting}}
 \index{processSerialCommand\_StatusTesting@{processSerialCommand\_StatusTesting}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{processSerialCommand\_StatusTesting()}{processSerialCommand\_StatusTesting()}}
 {\footnotesize\ttfamily bool string\+Module\+::process\+Serial\+Command\+\_\+\+Status\+Testing (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegated = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classstringModule_a2e3deb9ec1e55ddadba3cce25fdde5e2_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classstringModule_a2e3deb9ec1e55ddadba3cce25fdde5e2_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classstringModule_a6be6dd0b987fed725a84cd3b6417aaf7}\label{classstringModule_a6be6dd0b987fed725a84cd3b6417aaf7} 
@@ -272,13 +246,6 @@ Here is the call graph for this function\+:
 \includegraphics[width=350pt]{classstringModule_ab627523a631c2d63089092e18f430e63_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classstringModule_ab627523a631c2d63089092e18f430e63_icgraph}
-\end{center}
-\end{figure}
 
 
 \doxysubsection{Member Data Documentation}
@@ -286,7 +253,13 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{stringModule@{stringModule}!bowControlArray@{bowControlArray}}
 \index{bowControlArray@{bowControlArray}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{bowControlArray}{bowControlArray}}
-{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classbowControl}{bow\+Control}}$>$ string\+Module\+::bow\+Control\+Array}
+{\footnotesize\ttfamily std\+::vector$<$bow\+Control$>$ string\+Module\+::bow\+Control\+Array}
+
+\Hypertarget{classstringModule_a25c079b1b84067174786de202e756c9b}\label{classstringModule_a25c079b1b84067174786de202e756c9b} 
+\index{stringModule@{stringModule}!bowControlArrayX@{bowControlArrayX}}
+\index{bowControlArrayX@{bowControlArrayX}!stringModule@{stringModule}}
+\doxysubsubsection{\texorpdfstring{bowControlArrayX}{bowControlArrayX}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classBowControl}{Bow\+Control}}$>$ string\+Module\+::bow\+Control\+ArrayX}
 
 \Hypertarget{classstringModule_a30e0bcd8769adeaecca7f2ba5e1f5f32}\label{classstringModule_a30e0bcd8769adeaecca7f2ba5e1f5f32} 
 \index{stringModule@{stringModule}!bowIOArray@{bowIOArray}}
@@ -298,19 +271,19 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{stringModule@{stringModule}!calibrateArray@{calibrateArray}}
 \index{calibrateArray@{calibrateArray}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{calibrateArray}{calibrateArray}}
-{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classcalibrate}{calibrate}}$>$ string\+Module\+::calibrate\+Array}
+{\footnotesize\ttfamily std\+::vector$<$calibrate$>$ string\+Module\+::calibrate\+Array}
 
 \Hypertarget{classstringModule_a5dab3a72fceb5aac97140e8acd462770}\label{classstringModule_a5dab3a72fceb5aac97140e8acd462770} 
 \index{stringModule@{stringModule}!calibrateMuteArray@{calibrateMuteArray}}
 \index{calibrateMuteArray@{calibrateMuteArray}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{calibrateMuteArray}{calibrateMuteArray}}
-{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classcalibrateMute}{calibrate\+Mute}}$>$ string\+Module\+::calibrate\+Mute\+Array}
+{\footnotesize\ttfamily std\+::vector$<$calibrate\+Mute$>$ string\+Module\+::calibrate\+Mute\+Array}
 
 \Hypertarget{classstringModule_a683500a505f3f4cdcf592142b5c8711d}\label{classstringModule_a683500a505f3f4cdcf592142b5c8711d} 
 \index{stringModule@{stringModule}!calibrationDataArray@{calibrationDataArray}}
 \index{calibrationDataArray@{calibrationDataArray}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{calibrationDataArray}{calibrationDataArray}}
-{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structCalibrationData}{Calibration\+Data}}$>$ string\+Module\+::calibration\+Data\+Array}
+{\footnotesize\ttfamily std\+::vector$<$Calibration\+Data$>$ string\+Module\+::calibration\+Data\+Array}
 
 \Hypertarget{classstringModule_a7fb66cceefcbed37d29993401fcfe38b}\label{classstringModule_a7fb66cceefcbed37d29993401fcfe38b} 
 \index{stringModule@{stringModule}!currentBowSerial@{currentBowSerial}}
@@ -324,11 +297,17 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{currentSolenoidSerial}{currentSolenoidSerial}}
 {\footnotesize\ttfamily int string\+Module\+::current\+Solenoid\+Serial = 0}
 
-\Hypertarget{classstringModule_ac21fd840807f137b8ce5384e1dea3ee3}\label{classstringModule_ac21fd840807f137b8ce5384e1dea3ee3} 
+\Hypertarget{classstringModule_a4bc6cc6991a4aa262ff751cd411580c2}\label{classstringModule_a4bc6cc6991a4aa262ff751cd411580c2} 
+\index{stringModule@{stringModule}!harmonicSeriesHandler@{harmonicSeriesHandler}}
+\index{harmonicSeriesHandler@{harmonicSeriesHandler}!stringModule@{stringModule}}
+\doxysubsubsection{\texorpdfstring{harmonicSeriesHandler}{harmonicSeriesHandler}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHarmonicSeriesHandler}{Harmonic\+Series\+Handler}}\texorpdfstring{$\ast$}{*} string\+Module\+::harmonic\+Series\+Handler}
+
+\Hypertarget{classstringModule_aa2372de34a206c6b857032ce8cc2ec9e}\label{classstringModule_aa2372de34a206c6b857032ce8cc2ec9e} 
 \index{stringModule@{stringModule}!muteArray@{muteArray}}
 \index{muteArray@{muteArray}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{muteArray}{muteArray}}
-{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classmute}{mute}}$>$ string\+Module\+::mute\+Array}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classMuteControl}{Mute\+Control}}$>$ string\+Module\+::mute\+Array}
 
 \Hypertarget{classstringModule_a86952c16617365c3f5a79613d8215170}\label{classstringModule_a86952c16617365c3f5a79613d8215170} 
 \index{stringModule@{stringModule}!slaveSerialOut@{slaveSerialOut}}
@@ -342,11 +321,11 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{slaveSerialRead}{slaveSerialRead}}
 {\footnotesize\ttfamily Safe\+String\+Reader\texorpdfstring{$\ast$}{*} string\+Module\+::slave\+Serial\+Read = nullptr}
 
-\Hypertarget{classstringModule_a3efba2d94301131466549e783a24623c}\label{classstringModule_a3efba2d94301131466549e783a24623c} 
+\Hypertarget{classstringModule_afce60d9a55938a792b805b6577119f4c}\label{classstringModule_afce60d9a55938a792b805b6577119f4c} 
 \index{stringModule@{stringModule}!solenoidArray@{solenoidArray}}
 \index{solenoidArray@{solenoidArray}!stringModule@{stringModule}}
 \doxysubsubsection{\texorpdfstring{solenoidArray}{solenoidArray}}
-{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classsolenoid}{solenoid}}$>$ string\+Module\+::solenoid\+Array}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classSolenoid}{Solenoid}}$>$ string\+Module\+::solenoid\+Array}
 
 
 

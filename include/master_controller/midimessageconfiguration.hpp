@@ -36,6 +36,8 @@ public:
     CREATE_MODULE_COMMAND_FUNCTION_FWD(receiveChannel, MIDIMessageConfiguration)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(allNotesOff, MIDIMessageConfiguration)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(namef, MIDIMessageConfiguration)
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(eventHandlerNew, MIDIMessageConfiguration)
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(continuouscontroller, MIDIMessageConfiguration)
 
     String *name;
 /*
@@ -57,6 +59,7 @@ public:
     };
 
     const String eventID[7] = { "noteon", "noteoff", "pat", "pc", "cat", "pb", "cc" };
+    const String eventID2[7] = { "noteon", "noteoff", "polyaftertouch", "programchange", "channelaftertouch", "pitchbend", "continuouscontroller" };
 
     String midiEventMap[7];
 

@@ -1,18 +1,97 @@
 \doxysection{Harmonic\+Series Class Reference}
 \hypertarget{classHarmonicSeries}{}\label{classHarmonicSeries}\index{HarmonicSeries@{HarmonicSeries}}
+
+
+{\ttfamily \#include $<$harmonic\+Series.\+hpp$>$}
+
+
+
+Inheritance diagram for Harmonic\+Series\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{classHarmonicSeries__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Harmonic\+Series\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeries__coll__graph}
+\end{center}
+\end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classHarmonicSeries_a25eca1df9aa62d60ffc97ee919063002}{set\+Harmonic}} (uint16\+\_\+t harmonic, float \+\_\+ratio)
+void \mbox{\hyperlink{classHarmonicSeries_afbdd70e64fbed4dc82924ed03672cd6c}{set\+Harmonic}} (uint16\+\_\+t harmonic, float in\+Ratio)
+\item 
+float \mbox{\hyperlink{classHarmonicSeries_ad782b16a3fd50793724537728b81a954}{get\+Harmonic}} (uint16\+\_\+t harmonic)
+\item 
+void \mbox{\hyperlink{classHarmonicSeries_a474532a288397ea7eed3d2a4d32f7e70}{call\+Data\+Changed}} ()
 \item 
 \mbox{\hyperlink{classHarmonicSeries_a58bf4b6e0e8ac8b70ed2ecdeba38d79b}{Harmonic\+Series}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule_a5a240a8a9ab1813b17bcb810b24ceaea}{Module}} ()
+\item 
+virtual const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{get\+Module\+ID}} () const =0
+\item 
+virtual \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a9a13ef0a8291e562a9557c311d07b334}{get\+Module\+ID}} ()=0
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a534a35eb18ec29dbcc8bafce30c21128}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_af7fe70cf55b7c8999672c8a202cbdb71}{process\+Module\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a3896fd907affb2fb5a81df36080ef744}{process\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual void \mbox{\hyperlink{classModule_a8aa6237aabeb8c851f0e6272d6cdc28f}{dir}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix, bool hidden, bool modules, bool commands, bool instances, bool instance\+Count, bool recursive)
+\item 
+virtual void \mbox{\hyperlink{classModule_a09131761fec40345e3657b801778057f}{update}} ()
+\item 
+virtual int \mbox{\hyperlink{classModule_ae6fa72e64554ee0b09a8bb6a77a68640}{get\+Module\+Command\+Count}} ()
+\item 
+virtual void \mbox{\hyperlink{classModule_a5798bc3ad2b47f69e8915297cb33b3e3}{dump\+Data}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}data\+Dump)
+\item 
+virtual void \mbox{\hyperlink{classModule_a72b5f8a3b37fe31c9002c6d7352b2427}{help}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix)
+\item 
+bool \mbox{\hyperlink{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2}{has\+Data\+Change}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleCommand}{Module\+Command}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModuleCommand_a4ce6a1d032eaa918f21ad8121ba59094}{get\+Module\+Command}} (uint8\+\_\+t i) const =0
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::vector$<$ float $>$ \mbox{\hyperlink{classHarmonicSeries_ad2ae00b5e5b2f4e8d09d3ce894338f5c}{ratio}}
+\mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}} std\+::vector$<$ float $>$ \mbox{\hyperlink{classHarmonicSeries_a166ca581a6531e846d42c4f2754c12f2}{ratios}}
 \item 
 String \mbox{\hyperlink{classHarmonicSeries_a864d2755443961c9cbea5d497909f6b0}{Id}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classModule_aa09bd171529da96438e917258ab5ab8d}{is\+Group\+Handler}} = false
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classHarmonicSeries_a961fe997c47728db73732d4705af10e9}{owner}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}{set\+Data\+Changed}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModule_ad85cad50c5538cc47c6d3ac76500e4cf}{owner}} = nullptr
 \end{DoxyCompactItemize}
 
 
@@ -21,22 +100,41 @@ String \mbox{\hyperlink{classHarmonicSeries_a864d2755443961c9cbea5d497909f6b0}{I
 \index{HarmonicSeries@{HarmonicSeries}!HarmonicSeries@{HarmonicSeries}}
 \index{HarmonicSeries@{HarmonicSeries}!HarmonicSeries@{HarmonicSeries}}
 \doxysubsubsection{\texorpdfstring{HarmonicSeries()}{HarmonicSeries()}}
-{\footnotesize\ttfamily Harmonic\+Series\+::\+Harmonic\+Series (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Harmonic\+Series\+::\+Harmonic\+Series (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classHarmonicSeries_a25eca1df9aa62d60ffc97ee919063002}\label{classHarmonicSeries_a25eca1df9aa62d60ffc97ee919063002} 
+\Hypertarget{classHarmonicSeries_a474532a288397ea7eed3d2a4d32f7e70}\label{classHarmonicSeries_a474532a288397ea7eed3d2a4d32f7e70} 
+\index{HarmonicSeries@{HarmonicSeries}!callDataChanged@{callDataChanged}}
+\index{callDataChanged@{callDataChanged}!HarmonicSeries@{HarmonicSeries}}
+\doxysubsubsection{\texorpdfstring{callDataChanged()}{callDataChanged()}}
+{\footnotesize\ttfamily void Harmonic\+Series\+::call\+Data\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHarmonicSeries_a474532a288397ea7eed3d2a4d32f7e70_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHarmonicSeries_ad782b16a3fd50793724537728b81a954}\label{classHarmonicSeries_ad782b16a3fd50793724537728b81a954} 
+\index{HarmonicSeries@{HarmonicSeries}!getHarmonic@{getHarmonic}}
+\index{getHarmonic@{getHarmonic}!HarmonicSeries@{HarmonicSeries}}
+\doxysubsubsection{\texorpdfstring{getHarmonic()}{getHarmonic()}}
+{\footnotesize\ttfamily float Harmonic\+Series\+::get\+Harmonic (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{harmonic }\end{DoxyParamCaption})}
+
+\Hypertarget{classHarmonicSeries_afbdd70e64fbed4dc82924ed03672cd6c}\label{classHarmonicSeries_afbdd70e64fbed4dc82924ed03672cd6c} 
 \index{HarmonicSeries@{HarmonicSeries}!setHarmonic@{setHarmonic}}
 \index{setHarmonic@{setHarmonic}!HarmonicSeries@{HarmonicSeries}}
 \doxysubsubsection{\texorpdfstring{setHarmonic()}{setHarmonic()}}
-{\footnotesize\ttfamily void Harmonic\+Series\+::set\+Harmonic (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{harmonic,  }\item[{float}]{\+\_\+ratio }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void Harmonic\+Series\+::set\+Harmonic (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{harmonic,  }\item[{float}]{in\+Ratio }\end{DoxyParamCaption})}
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classHarmonicSeries_a25eca1df9aa62d60ffc97ee919063002_icgraph}
+\includegraphics[width=350pt]{classHarmonicSeries_afbdd70e64fbed4dc82924ed03672cd6c_icgraph}
 \end{center}
 \end{figure}
 
@@ -48,14 +146,21 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{Id}{Id}}
 {\footnotesize\ttfamily String Harmonic\+Series\+::\+Id}
 
-\Hypertarget{classHarmonicSeries_ad2ae00b5e5b2f4e8d09d3ce894338f5c}\label{classHarmonicSeries_ad2ae00b5e5b2f4e8d09d3ce894338f5c} 
-\index{HarmonicSeries@{HarmonicSeries}!ratio@{ratio}}
-\index{ratio@{ratio}!HarmonicSeries@{HarmonicSeries}}
-\doxysubsubsection{\texorpdfstring{ratio}{ratio}}
-{\footnotesize\ttfamily std\+::vector$<$float$>$ Harmonic\+Series\+::ratio}
+\Hypertarget{classHarmonicSeries_a961fe997c47728db73732d4705af10e9}\label{classHarmonicSeries_a961fe997c47728db73732d4705af10e9} 
+\index{HarmonicSeries@{HarmonicSeries}!owner@{owner}}
+\index{owner@{owner}!HarmonicSeries@{HarmonicSeries}}
+\doxysubsubsection{\texorpdfstring{owner}{owner}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classModule}{Module}}\texorpdfstring{$\ast$}{*} Harmonic\+Series\+::owner\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classHarmonicSeries_a166ca581a6531e846d42c4f2754c12f2}\label{classHarmonicSeries_a166ca581a6531e846d42c4f2754c12f2} 
+\index{HarmonicSeries@{HarmonicSeries}!ratios@{ratios}}
+\index{ratios@{ratios}!HarmonicSeries@{HarmonicSeries}}
+\doxysubsubsection{\texorpdfstring{ratios}{ratios}}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}} std\+::vector$<$float$>$ Harmonic\+Series\+::ratios}
 
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
+\mbox{\hyperlink{harmonicSeries_8hpp}{harmonic\+Series.\+hpp}}\item 
 \mbox{\hyperlink{harmonicSeries_8cpp}{harmonic\+Series.\+cpp}}\end{DoxyCompactItemize}

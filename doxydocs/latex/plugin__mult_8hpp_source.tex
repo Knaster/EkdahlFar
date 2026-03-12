@@ -1,0 +1,63 @@
+\doxysection{plugin\+\_\+mult.\+hpp}
+\hypertarget{plugin__mult_8hpp_source}{}\label{plugin__mult_8hpp_source}\index{plugin\_mult.hpp@{plugin\_mult.hpp}}
+\mbox{\hyperlink{plugin__mult_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLUGIN\_MULT\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLUGIN\_MULT\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{pluginhandler_8hpp}{plugins/pluginhandler.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPlugin__Mult__Connector}{Plugin\_Mult\_Connector}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00008\ \ \ \ \ String\ \mbox{\hyperlink{classPlugin__Mult__Connector_a07c2ef3bffff0a434db991783474ea14}{id}};}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classPlugin__Mult__Connector_a718482a098773947d395541861035684}{value}};}
+\DoxyCodeLine{00010\ \};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPlugin__Mult}{Plugin\_Mult}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classPlugin}{Plugin}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a726e985c9256abcd3e04b255b31cba09}{SETMODULEID}}(\textcolor{stringliteral}{"{}multiple"{}},\ \textcolor{stringliteral}{"{}mlt"{}},\ \textcolor{stringliteral}{"{}Multiple\ input\ connector\ v1.0"{}},\ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8}{eModuleType::software}},\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{pluginhandler_8hpp_a013343e5a8289faf7dd55823f0635aad}{CREATEPLUGINFUNCTIONS}}(\mbox{\hyperlink{classPlugin__Mult}{Plugin\_Mult}})}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(name,\ \mbox{\hyperlink{classPlugin__Mult}{Plugin\_Mult}})}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(target,\ \mbox{\hyperlink{classPlugin__Mult}{Plugin\_Mult}})}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(data,\ \mbox{\hyperlink{classPlugin__Mult}{Plugin\_Mult}})}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(remove,\ \mbox{\hyperlink{classPlugin__Mult}{Plugin\_Mult}})}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classPlugin__Mult}{Plugin\_Mult}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlugin__Mult_a84296f80b46b0576054db1166019e8ca}{updateManual}}();}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlugin__Mult_a907d93505da21178919afdfe6eeaef05}{update}}()\textcolor{keyword}{\ override\ }\{\};}
+\DoxyCodeLine{00030\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{classPlugin__Mult_a41e8033b0398cc6f2c7b98b8b8577b8c}{eMultiType}}\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPlugin__Mult_a41e8033b0398cc6f2c7b98b8b8577b8ca4bd83612185a9aa09c9817640f762dd4}{pAdder}}\ =\ 0,}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPlugin__Mult_a41e8033b0398cc6f2c7b98b8b8577b8ca4b29094e8a559c3eee29babd893c979f}{pRatio}}\ =\ 1}
+\DoxyCodeLine{00034\ \ \ \ \ \};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ String\ \mbox{\hyperlink{classPlugin__Mult_ab03ebe95715f2058894255ceb5a5765f}{sMultiTypeName}}[2]\ =\ \{\ \textcolor{stringliteral}{"{}adder"{}},\ \textcolor{stringliteral}{"{}ratio"{}}\ \};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ String\ \mbox{\hyperlink{classPlugin__Mult_a72d4498e4339660c26815c9aa725686a}{pName}};}
+\DoxyCodeLine{00039\ \ \ \ \ String\ \mbox{\hyperlink{classPlugin__Mult_ac80e2c437ae3fd3b2192d314761a76a5}{pTarget}};}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{//String\ lastOutput;}}
+\DoxyCodeLine{00041\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classPlugin__Mult_a42f2db145db8685d4ca8b9c98009f9dc}{pLastOutput}};}
+\DoxyCodeLine{00042\ \ \ \ \ std::vector<Plugin\_Mult\_Connector>\ \mbox{\hyperlink{classPlugin__Mult_a4db8e2d32cf5f90750f2d0e3c8c1c666}{addConnectors}};}
+\DoxyCodeLine{00043\ \ \ \ \ std::vector<Plugin\_Mult\_Connector>\ \mbox{\hyperlink{classPlugin__Mult_a82760e99abf9a395222c44944fa9a0c3}{ratioConnectors}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classPlugin__Mult__Connector}{Plugin\_Mult\_Connector}}*\ \mbox{\hyperlink{classPlugin__Mult_a6366b7fbe0a540c044c7604edba45176}{getConnector}}(String\ inId,\ std::vector<Plugin\_Mult\_Connector>\ *connectors);}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classPlugin__Mult__Connector}{Plugin\_Mult\_Connector}}*\ \mbox{\hyperlink{classPlugin__Mult_aba3a5cf2905a901d773c0d7917977156}{connect}}(String\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{float}\ value,\ \textcolor{keywordtype}{bool}\ request,\ std::vector<Plugin\_Mult\_Connector>\ *connectors);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classPlugin__Mult_a80da790c1c0e663de944ba001391f24a}{commandConnect}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *inCommandResponses,\ \mbox{\hyperlink{structModuleCommandDeclaration}{ModuleCommandDeclaration}}\ *thisItem,\ \textcolor{keywordtype}{bool}\ request,}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<Plugin\_Mult\_Connector>\ *connectors);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classPlugin__Mult_a8d4fc7f101ba2e5ae531f6dceef492ed}{commandDisconnect}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *inCommandResponses,\ \mbox{\hyperlink{structModuleCommandDeclaration}{ModuleCommandDeclaration}}\ *thisItem,\ \textcolor{keywordtype}{bool}\ request,}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<Plugin\_Mult\_Connector>\ *connectors);}
+\DoxyCodeLine{00053\ \};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \mbox{\hyperlink{pluginhandler_8hpp_a23e9e92f3a30c6eff4975c9d9f988d5a}{REGISTERPLUGIN}}(\mbox{\hyperlink{classPlugin__Mult}{Plugin\_Mult}})}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PLUGIN\_MULT\_HPP}}
+
+\end{DoxyCode}

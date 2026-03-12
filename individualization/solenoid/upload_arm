@@ -1,0 +1,8 @@
+stty -F /dev/ttyACM0 1200
+sleep 0.5
+stty -F /dev/ttyACM0 1200
+sleep 0.5
+cd build/samd21
+"/home/knas/.arduino15/packages/arduino/tools/bossac/1.7.0-arduino3/bossac" -i -d --port=ttyACM0 -U true -i -e -w -v solenoid.bin -R
+cd ..
+cd ..

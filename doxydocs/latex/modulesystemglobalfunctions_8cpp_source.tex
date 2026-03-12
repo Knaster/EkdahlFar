@@ -1,0 +1,74 @@
+\doxysection{modulesystemglobalfunctions.\+cpp}
+\hypertarget{modulesystemglobalfunctions_8cpp_source}{}\label{modulesystemglobalfunctions_8cpp_source}\index{modulesystemglobalfunctions.cpp@{modulesystemglobalfunctions.cpp}}
+\mbox{\hyperlink{modulesystemglobalfunctions_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MODULESYSTEMGLOBALFUNCTIONS\_CPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MODULESYSTEMGLOBALFUNCTIONS\_CPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{modulesystemglobalfunctions_8hpp}{base/modulesystemglobalfunctions.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{modulehandler_8hpp}{base/modulehandler.hpp}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{static}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ s\_dir(\mbox{\hyperlink{classModuleCommand}{ModuleCommand}}\ *self,\ \mbox{\hyperlink{modulesystembasics_8hpp_af1cbff4235e0dc51c811eafe60054141}{ModuleCommandDeclarationArguments}})\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keywordtype}{bool}\ hidden\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{bool}\ modules\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{bool}\ commands\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{bool}\ instances\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{bool}\ instanceCount\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{bool}\ recursive\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordflow}{if}\ (inCommandItem-\/>argument.size()\ ==\ 0)\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ hidden\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ modules\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ commands\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ instances\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ instanceCount\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ recursive\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00022\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ inCommandItem-\/>argument.size();\ i++)\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ String\ arg\ =\ inCommandItem-\/>argument[i];}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((arg\ ==\ \textcolor{stringliteral}{"{}hidden"{}})\ ||\ (arg\ ==\ \textcolor{stringliteral}{"{}h"{}}))\ \{\ hidden\ =\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((arg\ ==\ \textcolor{stringliteral}{"{}modules"{}})\ ||\ (arg\ ==\ \textcolor{stringliteral}{"{}m"{}}))\ \{\ modules\ =\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((arg\ ==\ \textcolor{stringliteral}{"{}commands"{}})\ ||\ (arg\ ==\ \textcolor{stringliteral}{"{}c"{}}))\ \{\ commands\ =\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((arg\ ==\ \textcolor{stringliteral}{"{}instances"{}})\ ||\ (arg\ ==\ \textcolor{stringliteral}{"{}i"{}}))\ \{\ instances\ =\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((arg\ ==\ \textcolor{stringliteral}{"{}instancecount"{}})\ ||\ (arg\ ==\ \textcolor{stringliteral}{"{}ic"{}}))\ \{\ instanceCount\ =\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((arg\ ==\ \textcolor{stringliteral}{"{}recursive"{}})\ ||\ (arg\ ==\ \textcolor{stringliteral}{"{}r"{}}))\ \{\ recursive\ =\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00032\ \ \ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{if}\ (((\mbox{\hyperlink{classModule}{Module}}*)\ self)-\/>isGroupHandler)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classModuleHandler}{ModuleHandler}}\ *mod\ =\ (\mbox{\hyperlink{classModule}{Module}}*)(self);}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ ((\mbox{\hyperlink{classModuleHandler}{ModuleHandler}}*)self)-\/>\mbox{\hyperlink{classModuleHandler_a8086440da55f316a89562f2a736a1ab6}{dir}}(inCommandResponses,\ String(mod-\/>\mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{getModuleID}}().\mbox{\hyperlink{structtModuleID_afcab52c65d05cf884acf5163513bd549}{longName}}),\ String(mod-\/>\mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{getModuleID}}().\mbox{\hyperlink{structtModuleID_a13b7d7442b2db77ec7baec392f2ab660}{shortAlias}}.c\_str()),\ hidden,\ modules,\ commands,\ instances,\ instanceCount,\ recursive);}
+\DoxyCodeLine{00037\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classModule}{Module}}\ *mod\ =\ (\mbox{\hyperlink{classModule}{Module}}*)(self);}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ ((\mbox{\hyperlink{classModule}{Module}}*)self)-\/>\mbox{\hyperlink{classModule_a8aa6237aabeb8c851f0e6272d6cdc28f}{dir}}(inCommandResponses,\ String(mod-\/>\mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{getModuleID}}().\mbox{\hyperlink{structtModuleID_afcab52c65d05cf884acf5163513bd549}{longName}}),\ String(mod-\/>\mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{getModuleID}}().\mbox{\hyperlink{structtModuleID_a13b7d7442b2db77ec7baec392f2ab660}{shortAlias}}.c\_str()),\ hidden,\ modules,\ commands,\ instances,\ instanceCount,\ recursive);}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
+\DoxyCodeLine{00043\ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{static}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ s\_dump(\mbox{\hyperlink{classModuleCommand}{ModuleCommand}}\ *self,\ \mbox{\hyperlink{modulesystembasics_8hpp_af1cbff4235e0dc51c811eafe60054141}{ModuleCommandDeclarationArguments}})\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{if}\ (((\mbox{\hyperlink{classModule}{Module}}*)\ self)-\/>isGroupHandler)\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ ((\mbox{\hyperlink{classModuleHandler}{ModuleHandler}}*)self)-\/>dumpData(inCommandResponses);}
+\DoxyCodeLine{00048\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ ((\mbox{\hyperlink{classModule}{Module}}*)self)-\/>dumpData(inCommandResponses);}
+\DoxyCodeLine{00050\ \ \ \ \ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
+\DoxyCodeLine{00053\ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{static}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ s\_help(\mbox{\hyperlink{classModuleCommand}{ModuleCommand}}\ *self,\ \mbox{\hyperlink{modulesystembasics_8hpp_af1cbff4235e0dc51c811eafe60054141}{ModuleCommandDeclarationArguments}})\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{if}\ (((\mbox{\hyperlink{classModule}{Module}}*)\ self)-\/>isGroupHandler)\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classModuleHandler}{ModuleHandler}}\ *mod\ =\ (\mbox{\hyperlink{classModule}{Module}}*)(self);}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ ((\mbox{\hyperlink{classModuleHandler}{ModuleHandler}}*)self)-\/>\mbox{\hyperlink{classModuleHandler_a9c235cdcf6965c856fcb2be82cc46175}{help}}(inCommandResponses,\ String(mod-\/>\mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{getModuleID}}().\mbox{\hyperlink{structtModuleID_afcab52c65d05cf884acf5163513bd549}{longName}}),\ String(mod-\/>\mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{getModuleID}}().\mbox{\hyperlink{structtModuleID_a13b7d7442b2db77ec7baec392f2ab660}{shortAlias}}.c\_str()));}
+\DoxyCodeLine{00059\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classModule}{Module}}\ *mod\ =\ (\mbox{\hyperlink{classModule}{Module}}*)(self);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ ((\mbox{\hyperlink{classModule}{Module}}*)self)-\/>\mbox{\hyperlink{classModuleHandler_a9c235cdcf6965c856fcb2be82cc46175}{help}}(inCommandResponses,\ String(mod-\/>\mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{getModuleID}}().\mbox{\hyperlink{structtModuleID_afcab52c65d05cf884acf5163513bd549}{longName}}),\ String(mod-\/>\mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{getModuleID}}().\mbox{\hyperlink{structtModuleID_a13b7d7442b2db77ec7baec392f2ab660}{shortAlias}}.c\_str()));}
+\DoxyCodeLine{00062\ \ \ \ \ \}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};}
+\DoxyCodeLine{00065\ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00068\ }
+
+\end{DoxyCode}

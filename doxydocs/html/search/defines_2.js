@@ -1,7 +1,27 @@
 var searchData=
 [
   ['calibrate_5fc_0',['CALIBRATE_C',['../bowcalibration_8cpp.html#ad2b4d031246e6f7874da047d6e1c4503',1,'bowcalibration.cpp']]],
-  ['clamp_1',['clamp',['../main_8cpp.html#ae19eb15a5c6b22f63f3819a0105339d8',1,'main.cpp']]],
-  ['commandresponsetype_2',['commandResponseType',['../debugprint_8hpp.html#a64739a0f4e627e77b702cb4d964bcdb5',1,'debugprint.hpp']]],
-  ['controlreadintervaltime_3',['controlReadIntervalTime',['../main_8cpp.html#ac9a12a1a36ee3528c19ef62340fe33c3',1,'main.cpp']]]
+  ['calibrationhelpers_5fcpp_1',['CALIBRATIONHELPERS_CPP',['../calibrationhelpers_8cpp.html#a221f106791236ee893a56e19abe043f2',1,'calibrationhelpers.cpp']]],
+  ['clamp_2',['clamp',['../arduinorequired_8hpp.html#ae19eb15a5c6b22f63f3819a0105339d8',1,'arduinorequired.hpp']]],
+  ['commandparser_5fcpp_3',['COMMANDPARSER_CPP',['../commandparser_8cpp.html#a3a4f40d4909f636d3cf6d635fa5ec9f0',1,'commandparser.cpp']]],
+  ['commandresponsetype_4',['commandResponseType',['../debugprint_8hpp.html#a64739a0f4e627e77b702cb4d964bcdb5',1,'debugprint.hpp']]],
+  ['connect_5fmidi_5fcallbacks_5',['CONNECT_MIDI_CALLBACKS',['../midiconfigurationhandler_8hpp.html#a2e175e868b161d8eefd737c00682d688',1,'midiconfigurationhandler.hpp']]],
+  ['connect_5fusbmidi_5fcallbacks_6',['CONNECT_USBMIDI_CALLBACKS',['../midiconfigurationhandler_8hpp.html#a130e033600bb847a9803bd8a2395215e',1,'midiconfigurationhandler.hpp']]],
+  ['controlreadintervaltime_7',['controlReadIntervalTime',['../main_8cpp.html#ac9a12a1a36ee3528c19ef62340fe33c3',1,'main.cpp']]],
+  ['create_5fdatachanged_5fcallback_8',['CREATE_DATACHANGED_CALLBACK',['../modulesystembasics_8hpp.html#a223ca5ad493b8c5277139a075b20471a',1,'modulesystembasics.hpp']]],
+  ['create_5fdatachanged_5fcallback_5ffwd_9',['CREATE_DATACHANGED_CALLBACK_FWD',['../modulesystembasics_8hpp.html#abf45ff9851ecf7a95efb74b0f8d550da',1,'modulesystembasics.hpp']]],
+  ['create_5fgetset_5ffunction_10',['CREATE_GETSET_FUNCTION',['../pluginhandler_8hpp.html#aedecf5c5c141e62527c7f9b3139cb50c',1,'pluginhandler.hpp']]],
+  ['create_5fgetset_5ffunction_5fconvert_11',['CREATE_GETSET_FUNCTION_CONVERT',['../pluginhandler_8hpp.html#a718635700fbd5d2df3c85785782bf252',1,'pluginhandler.hpp']]],
+  ['create_5fgetset_5ffunction_5ff_12',['CREATE_GETSET_FUNCTION_F',['../pluginhandler_8hpp.html#adbf6cb71b0c65f252775fc220ec65302',1,'pluginhandler.hpp']]],
+  ['create_5fgetset_5ffunction_5ff_5fconvert_13',['CREATE_GETSET_FUNCTION_F_CONVERT',['../pluginhandler_8hpp.html#a0d02f065371f941263d0c42d86c4ca08',1,'pluginhandler.hpp']]],
+  ['create_5findex_5fcallback_14',['CREATE_INDEX_CALLBACK',['../modulegroup_8hpp.html#a937c07ea2b2812a26c47e5677718699c',1,'modulegroup.hpp']]],
+  ['create_5findex_5fcallback_5ffwd_15',['CREATE_INDEX_CALLBACK_FWD',['../modulegroup_8hpp.html#a3365affcc62335d2b3134fc971ca33f1',1,'modulegroup.hpp']]],
+  ['create_5fmidi_5fsource_5fcallbacks_16',['CREATE_MIDI_SOURCE_CALLBACKS',['../midiconfigurationhandler_8hpp.html#a29beb04f4a4a2df7f4c60ccd7046bb7d',1,'midiconfigurationhandler.hpp']]],
+  ['create_5fmidi_5fsource_5fcallbacks_5ffwd_17',['CREATE_MIDI_SOURCE_CALLBACKS_FWD',['../midiconfigurationhandler_8hpp.html#af1d4195550c85696093c8f91b826bec8',1,'midiconfigurationhandler.hpp']]],
+  ['create_5fmodule_5fcommand_5ffunction_18',['CREATE_MODULE_COMMAND_FUNCTION',['../modulesystembasics_8hpp.html#a33460e04d9e860676f5c8d5f5b47bf61',1,'modulesystembasics.hpp']]],
+  ['create_5fmodule_5fcommand_5ffunction_5ffwd_19',['CREATE_MODULE_COMMAND_FUNCTION_FWD',['../modulesystembasics_8hpp.html#a45bdcd7ad6f73438698f45ce76cbccc3',1,'modulesystembasics.hpp']]],
+  ['creategetset_5ffooter_20',['CREATEGETSET_FOOTER',['../pluginhandler_8hpp.html#af5147d9ca751fce715cfb8c9fd46d787',1,'pluginhandler.hpp']]],
+  ['creategetset_5ffooterq_21',['CREATEGETSET_FOOTERQ',['../pluginhandler_8hpp.html#abfa1ca60fed44b6370e712d3d46a5ed1',1,'pluginhandler.hpp']]],
+  ['creategetset_5fheader_22',['CREATEGETSET_HEADER',['../pluginhandler_8hpp.html#aa2208bddfe36aa22e41fd25450c0c518',1,'pluginhandler.hpp']]],
+  ['createpluginfunctions_23',['CREATEPLUGINFUNCTIONS',['../pluginhandler_8hpp.html#a013343e5a8289faf7dd55823f0635aad',1,'pluginhandler.hpp']]]
 ];

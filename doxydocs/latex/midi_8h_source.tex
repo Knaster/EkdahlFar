@@ -1,0 +1,53 @@
+\doxysection{midi.\+h}
+\hypertarget{midi_8h_source}{}\label{midi_8h_source}\index{midi.h@{midi.h}}
+\mbox{\hyperlink{midi_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MIDI\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MIDI\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{arduinorequired_8hpp}{base/arduinorequired.hpp}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{midimessageconfiguration_8hpp}{master\_controller/midimessageconfiguration.hpp}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{commandparser_8hpp}{base/commandparser.hpp}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{expressionparser_8h}{master\_controller/expressionparser.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classMIDIHandler}{MIDIHandler}}\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{classMIDIHandler}{MIDIHandler}}(\mbox{\hyperlink{classExpressionParser}{ExpressionParser}}\ *inExpressionParser);}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessageConfiguration}}\ *\mbox{\hyperlink{classMIDIHandler_a017967bf6e29f7570549305bd017b06e}{midiMessageConfiguration}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{classExpressionParser}{ExpressionParser}}\ *\mbox{\hyperlink{classMIDIHandler_af9a7f76a3fb02893d94ba0693bd21c05}{expressionParser}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00015\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structMIDIHandler_1_1noteMsg}{noteMsg}}\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structMIDIHandler_1_1noteMsg_ae1299e86280b3b6613d0b09e61a9db92}{channel}}\ =\ -\/1;}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structMIDIHandler_1_1noteMsg_a169cd035e27d81471bf818812345d5e2}{note}}\ =\ -\/1;}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structMIDIHandler_1_1noteMsg_aea3aa52346283648040ffc52a71ceaaf}{velocity}}\ =\ -\/1;}
+\DoxyCodeLine{00020\ \ \ \ \ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ std::vector<noteMsg>\ \mbox{\hyperlink{classMIDIHandler_ad99a0de9672f7248fa9f0ace54f8bd12}{notesHeld}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classMIDIHandler_a3689c0c92eed6daccfa7577278e9ab80}{noteCount}}\ =\ 0;\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMIDIHandler_a3b8e4e262f935420931738e47e4b3de9}{monoMode}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ int8\_t\ \mbox{\hyperlink{classMIDIHandler_a4631aede2de70444e470cb29b2ef51db}{findNote}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ note);}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMIDIHandler_a714850d9efdfd7e151986bb5aaaf6c22}{removeNote}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ note);}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIHandler_ae78aacf7a6adb42ec5df8eb4f50ea8a1}{addNote}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ note,\ \textcolor{keywordtype}{byte}\ velocity);}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIHandler_aaaa90c963dc1a9ff64c5a061d8558d6f}{setNote}}();}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIHandler_a8a396de40e136e9d985ccbd067c46b0b}{setNotes}}();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIHandler_a0e3fd499dfd9be1e99c45b63ab78709f}{OnNoteOff}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ note,\ \textcolor{keywordtype}{byte}\ velocity);}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIHandler_aa934661065db5fedf3ac616cdf49ee2a}{OnNoteOn}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ note,\ \textcolor{keywordtype}{byte}\ velocity);}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIHandler_a8b3545569490cb0a4056c0babf1db258}{OnAfterTouchPoly}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ note,\ \textcolor{keywordtype}{byte}\ pressure);}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIHandler_a9896c4c3b7a1776c8f58b38fd1f2610b}{OnChannelAftertouch}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ pressure);}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIHandler_a4f644eed423c2a6117d8a4713b63283f}{OnControlChange}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{byte}\ control,\ \textcolor{keywordtype}{byte}\ value);}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIHandler_a765fe42874f2ecb4f56c7299d4e28ab0}{OnPitchBend}}(\textcolor{keywordtype}{byte}\ channel,\ \textcolor{keywordtype}{int}\ pitch);}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIHandler_a64030fd2adde91877d396608554232a4}{OnProgramChange}}(uint8\_t\ channel,\ uint8\_t\ program);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIHandler_a73cca14722f21160fabf08d7256eafa5}{updateLocalVariables}}();}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIHandler_ad851aca568b97f872fa83b57b9be03e0}{processLocalMessage}}(String\ *message);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIHandler_aef33b29e1cb5e23e1fbb296bda96a002}{midiAllNotesOff}}();}
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MIDI\_H}}
+
+\end{DoxyCode}

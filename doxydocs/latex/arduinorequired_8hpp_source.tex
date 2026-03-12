@@ -1,0 +1,24 @@
+\doxysection{arduinorequired.\+hpp}
+\hypertarget{arduinorequired_8hpp_source}{}\label{arduinorequired_8hpp_source}\index{arduinorequired.hpp@{arduinorequired.hpp}}
+\mbox{\hyperlink{arduinorequired_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ARDUINO\_REQUIRED}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ARDUINO\_REQUIRED}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#ifdef\ ARDUINO\_TEENSY40}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <WProgram.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <SerialComs.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <millisDelay.h>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <algorithm>}\ \textcolor{comment}{//\ for\ min/max}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ clamp(v,i,x)\ min(max(v,i),x)}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{debugprint_8hpp}{base/debugprint.hpp}}>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ARDUINO\_REQUIRED}}
+\DoxyCodeLine{00018\ }
+
+\end{DoxyCode}

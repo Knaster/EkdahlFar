@@ -4,17 +4,27 @@
 #include "generic_functions/harmonicserieshandler.hpp"
 
 const ModuleCommandDeclaration HarmonicSeriesHandler::moduleCommands[] = {
-    { "fundamental", "fu", "float", "Bow fundamental frequency, all harmonics are calculated from this number", false, true, &s_fundamental, eCommandType::Hertz },
-    { "harmonic", "h", "int", "Bow motor speed in terms of a harmonic number. A ratio is taken from the given harmonic in the current harmonic list, the ratio is then multiplied by the bow fundamental frequency", false, false, &s_harmonic, eCommandType::SimpleUInt8 },
-    { "harmonicadd", "ha", "int", "Additative version of bowcontrolharmonic, the number is given is added to the harmonic given", false, false, &s_harmonicAdd, eCommandType::SimpleUInt8 },
-    { "harmonicbase", "hb", "int", "Same as bowcontrolharmonic but where the harmonic number is based on a MIDI note given by bowcontrolbasenote", false, false, &s_harmonicBase, eCommandType::SimpleUInt8 },
-    { "basenote", "bn", "0-127", "Sets the MIDI base note of the string, used in conjunction with bowcontrolharmonicbase", false, true, &s_baseNote, eCommandType::SimpleUInt8 },
-    { "shift", "sh", "-32767-32767", "Setting shift from the currently playing harmonic where 32767 equals the entire harmonic shift range shifted up", false, false, &s_shift, eCommandType::SimpleUInt16 },
-    { "shiftrange", "sr", "0-36", "Set the number of harmonic numbers that constitutes the entire harmonic shift", false, true, &s_shiftRange, eCommandType::SimpleUInt8 },
-    { "shift5", "sh5", "-32767-32767", "Setting shift from the currently playing harmonic over 5 octaves where 32767 equals 5 octaves shift up from the fundamental", false, false, &s_shift5, eCommandType::SimpleUInt16 },
-    { "add", "a", "(name):(ratios)", "Add a new series with the given name and parameters", false, false, &s_add, eCommandType::Data },
-    { "remove", "rm", "series", "Remove the series given and shift any series accordingly. Cannot remove all series", false, false, &s_remove, eCommandType::Remove },
-    { "count", "c", "-", "Returns the number of harmonic series in the list and their IDs", false, false, &s_count, eCommandType::Count },
+    { "fundamental", "fu", "float", "Bow fundamental frequency, all harmonics are calculated from this number", false, true, &s_fundamental,
+        eCommandType_data::ectHertz | eCommandType_function::ectSetting },
+    { "harmonic", "h", "int", "Bow motor speed in terms of a harmonic number. A ratio is taken from the given harmonic in the current harmonic list, the ratio is then multiplied by the bow fundamental frequency",
+        false, false, &s_harmonic, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectParameter },
+    { "harmonicadd", "ha", "int", "Additative version of bowcontrolharmonic, the number is given is added to the harmonic given", false, false, &s_harmonicAdd,
+        eCommandType_data::ectSimpleInt8 | eCommandType_function::ectParameter },
+    { "harmonicbase", "hb", "int", "Same as bowcontrolharmonic but where the harmonic number is based on a MIDI note given by bowcontrolbasenote", false, false, &s_harmonicBase,
+        eCommandType_data::ectSimpleInt8 | eCommandType_function::ectParameter },
+    { "basenote", "bn", "0-127", "Sets the MIDI base note of the string, used in conjunction with bowcontrolharmonicbase", false, true, &s_baseNote,
+        eCommandType_data::ectSimpleInt8 | eCommandType_function::ectSetting },
+    { "shift", "sh", "-32767-32767", "Setting shift from the currently playing harmonic where 32767 equals the entire harmonic shift range shifted up", false, false, &s_shift,
+        eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectParameter },
+    { "shiftrange", "sr", "0-36", "Set the number of harmonic numbers that constitutes the entire harmonic shift", false, true, &s_shiftRange,
+        eCommandType_data::ectSimpleInt8 | eCommandType_function::ectSetting },
+    { "shift5", "sh5", "-32767-32767", "Setting shift from the currently playing harmonic over 5 octaves where 32767 equals 5 octaves shift up from the fundamental", false, false, &s_shift5,
+        eCommandType_data::ectSimpleInt16 | eCommandType_function::ectParameter },
+    { "add", "a", "(name):(ratios)", "Add a new series with the given name and parameters", false, false, &s_add, eCommandType_data::ectData | eCommandType_function::ectAdd },
+    { "remove", "rm", "series", "Remove the series given and shift any series accordingly. Cannot remove all series", false, false, &s_remove,
+        eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectRemove },
+    { "count", "c", "-", "Returns the number of harmonic series in the list and their IDs", false, false, &s_count,
+        eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectCount | eCommandType_access::ectRequest },
 };
 
 getModuleCount(HarmonicSeriesHandler)
@@ -36,7 +46,7 @@ HarmonicSeriesHandler::HarmonicSeriesHandler() {
 };
 
 CREATE_INDEX_CALLBACK(harmonicSeriesIndexChanged, HarmonicSeriesHandler) {
-    debugPrintln("Index changed hsh!", debugPrintType::Debug);
+    //debugPrintln("Index changed hsh!", debugPrintType::Debug);
     updateHarmonicData();
     return true;
 }
@@ -200,7 +210,7 @@ bool HarmonicSeriesHandler::calculateHarmonicShift() {
     ModuleGroup *group = getGroup("harmonicseries");
     if (group == nullptr) { return false; }
 
-    HarmonicSeries *module = group->getSingleSelection();
+    HarmonicSeries *module = static_cast<HarmonicSeries*>(group->getSingleSelection());
     if (module == nullptr) { return false; }
 
     int octave = module->ratios.size();
@@ -257,7 +267,7 @@ bool HarmonicSeriesHandler::updateHarmonicData() {
     ModuleGroup *group = getGroup("harmonicseries");
     if (group == nullptr) { return false; }
 
-    HarmonicSeries *module = group->getSingleSelection();
+    HarmonicSeries *module = static_cast<HarmonicSeries*>(group->getSingleSelection());
     if (module == nullptr) { return false; }
 
     int targetHarmonic = pHarmonic + pHarmonicAdd;
@@ -297,7 +307,7 @@ bool HarmonicSeriesHandler::checkFrequencyChanged() {
     ModuleGroup *group = getGroup("harmonicseries");
     if (group == nullptr) { return false; }
 
-    HarmonicSeries *module = group->getSingleSelection();
+    HarmonicSeries *module = static_cast<HarmonicSeries*> (group->getSingleSelection());
     if (module == nullptr) { return false; }
     if (module->hasDataChange()) {
         updateHarmonicData();
@@ -314,7 +324,7 @@ HarmonicSeries* HarmonicSeriesHandler::addHarmonicSeries() {
     HarmonicSeries *lHarmonicSeries = new HarmonicSeries();
     ModuleGroup *group = addModule(lHarmonicSeries);
     Module *module = group->modules.back();
-    return module;
+    return static_cast<HarmonicSeries*> (module);
 }
 
 HarmonicSeries* HarmonicSeriesHandler::addHarmonicSeries(String id, float frequencies[], int size) {

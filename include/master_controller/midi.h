@@ -3,6 +3,12 @@
 
 #include <base/arduinorequired.hpp>
 #include <master_controller/midimessageconfiguration.hpp>
+#include <base/commandparser.hpp>
+#include "master_controller/expressionparser.h"
+
+#include <commandlist.hpp>
+extern CommandList globalCommands;
+extern CommandList globalResponseCommands;
 
 class MIDIHandler {
 public:

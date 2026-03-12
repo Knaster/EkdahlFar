@@ -1,0 +1,260 @@
+\doxysection{MIDIMessage\+Configuration Class Reference}
+\hypertarget{classMIDIMessageConfiguration}{}\label{classMIDIMessageConfiguration}\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}}
+
+
+{\ttfamily \#include $<$midimessageconfiguration.\+hpp$>$}
+
+
+
+Inheritance diagram for MIDIMessage\+Configuration\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=228pt]{classMIDIMessageConfiguration__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for MIDIMessage\+Configuration\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIMessageConfiguration__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structMIDIMessageConfiguration_1_1__controlChange}{\+\_\+control\+Change}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96}{e\+MIDIEvent}} \{ \newline
+\mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96ae82b2f2dbb53953f9f7ed60987dc7b45}{ev\+\_\+note\+On}} = 0
+, \mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96af6379cac6b7547ac447bd93e2f5f0f37}{ev\+\_\+note\+Off}} = 1
+, \mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96a45aa3dd284ec0ca600be61b4ec7dc5ad}{ev\+\_\+poly\+After\+Touch}} = 2
+, \mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96a9f3f462099844302c31319bdd2298bb5}{ev\+\_\+program\+Change}} = 3
+, \newline
+\mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96a66def36698da5fd3656f4ea2f4ea42de}{ev\+\_\+channel\+Aftertouch}} = 4
+, \mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96a0e16015a9296fedf512d2409bf14ff5d}{ev\+\_\+\+Pitch\+Bend}} = 5
+, \mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96ab2e58207991f612d9708d410fc275ed2}{ev\+\_\+cc}} = 6
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMIDIMessageConfiguration_a1399579c19f749da2de33d36892352ec}{MIDIMessage\+Configuration}} ()
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classMIDIMessageConfiguration_a4dc791504754091b8e32ac443549d92a}{set\+CC}} (uint8\+\_\+t controller, String \texorpdfstring{$\ast$}{*}command)
+\item 
+bool \mbox{\hyperlink{classMIDIMessageConfiguration_a13912e21c9c6468a7e6f3fde6580ac11}{remove\+CC}} (uint8\+\_\+t controller)
+\item 
+void \mbox{\hyperlink{classMIDIMessageConfiguration_a107f06d383998a78587da419daf0081d}{set\+Default\+Base\+Parameters}} ()
+\item 
+void \mbox{\hyperlink{classMIDIMessageConfiguration_adb2fbb2629cedd665881cc1eb031ab06}{set\+Default\+CCs}} ()
+\item 
+void \mbox{\hyperlink{classMIDIMessageConfiguration_a130a3aa44264f76a9ebbcd469de3a826}{set\+Defaults}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule_a5a240a8a9ab1813b17bcb810b24ceaea}{Module}} ()
+\item 
+virtual const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{get\+Module\+ID}} () const =0
+\item 
+virtual \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a9a13ef0a8291e562a9557c311d07b334}{get\+Module\+ID}} ()=0
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a534a35eb18ec29dbcc8bafce30c21128}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_af7fe70cf55b7c8999672c8a202cbdb71}{process\+Module\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a3896fd907affb2fb5a81df36080ef744}{process\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual void \mbox{\hyperlink{classModule_a8aa6237aabeb8c851f0e6272d6cdc28f}{dir}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix, bool hidden, bool modules, bool commands, bool instances, bool instance\+Count, bool recursive)
+\item 
+virtual void \mbox{\hyperlink{classModule_a09131761fec40345e3657b801778057f}{update}} ()
+\item 
+virtual int \mbox{\hyperlink{classModule_ae6fa72e64554ee0b09a8bb6a77a68640}{get\+Module\+Command\+Count}} ()
+\item 
+virtual void \mbox{\hyperlink{classModule_a5798bc3ad2b47f69e8915297cb33b3e3}{dump\+Data}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}data\+Dump)
+\item 
+virtual void \mbox{\hyperlink{classModule_a72b5f8a3b37fe31c9002c6d7352b2427}{help}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix)
+\item 
+bool \mbox{\hyperlink{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2}{has\+Data\+Change}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleCommand}{Module\+Command}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModuleCommand_a4ce6a1d032eaa918f21ad8121ba59094}{get\+Module\+Command}} (uint8\+\_\+t i) const =0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}} String \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classMIDIMessageConfiguration_ae2069cf2e9bc95d044e15545183ad509}{name}}
+\item 
+const String \mbox{\hyperlink{classMIDIMessageConfiguration_a5de3cb86fd8cbeafd58f3fb4c907e8cf}{event\+ID}} \mbox{[}7\mbox{]} = \{ "{}noteon"{}, "{}noteoff"{}, "{}pat"{}, "{}pc"{}, "{}cat"{}, "{}pb"{}, "{}cc"{} \}
+\item 
+String \mbox{\hyperlink{classMIDIMessageConfiguration_aa71e31509c7f8f753923cf1d3fe2a4e4}{midi\+Event\+Map}} \mbox{[}7\mbox{]}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classMIDIMessageConfiguration_a2cc74ca1efd089ed74ccab27c56877d5}{midi\+Rx\+Channel}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structMIDIMessageConfiguration_1_1__controlChange}{\+\_\+control\+Change}} $>$ \mbox{\hyperlink{classMIDIMessageConfiguration_a8ed406457dbd4ec70290172f64d68b3d}{control\+Change}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classModule_aa09bd171529da96438e917258ab5ab8d}{is\+Group\+Handler}} = false
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}{set\+Data\+Changed}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModule_ad85cad50c5538cc47c6d3ac76500e4cf}{owner}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96}\label{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96} 
+\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!eMIDIEvent@{eMIDIEvent}}
+\index{eMIDIEvent@{eMIDIEvent}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}
+\doxysubsubsection{\texorpdfstring{eMIDIEvent}{eMIDIEvent}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96}{MIDIMessage\+Configuration\+::e\+MIDIEvent}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ev\_noteOn@{ev\_noteOn}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!ev\_noteOn@{ev\_noteOn}}}\Hypertarget{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96ae82b2f2dbb53953f9f7ed60987dc7b45}\label{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96ae82b2f2dbb53953f9f7ed60987dc7b45} 
+ev\+\_\+note\+On&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ev\_noteOff@{ev\_noteOff}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!ev\_noteOff@{ev\_noteOff}}}\Hypertarget{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96af6379cac6b7547ac447bd93e2f5f0f37}\label{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96af6379cac6b7547ac447bd93e2f5f0f37} 
+ev\+\_\+note\+Off&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ev\_polyAfterTouch@{ev\_polyAfterTouch}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!ev\_polyAfterTouch@{ev\_polyAfterTouch}}}\Hypertarget{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96a45aa3dd284ec0ca600be61b4ec7dc5ad}\label{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96a45aa3dd284ec0ca600be61b4ec7dc5ad} 
+ev\+\_\+poly\+After\+Touch&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ev\_programChange@{ev\_programChange}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!ev\_programChange@{ev\_programChange}}}\Hypertarget{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96a9f3f462099844302c31319bdd2298bb5}\label{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96a9f3f462099844302c31319bdd2298bb5} 
+ev\+\_\+program\+Change&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ev\_channelAftertouch@{ev\_channelAftertouch}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!ev\_channelAftertouch@{ev\_channelAftertouch}}}\Hypertarget{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96a66def36698da5fd3656f4ea2f4ea42de}\label{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96a66def36698da5fd3656f4ea2f4ea42de} 
+ev\+\_\+channel\+Aftertouch&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ev\_PitchBend@{ev\_PitchBend}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!ev\_PitchBend@{ev\_PitchBend}}}\Hypertarget{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96a0e16015a9296fedf512d2409bf14ff5d}\label{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96a0e16015a9296fedf512d2409bf14ff5d} 
+ev\+\_\+\+Pitch\+Bend&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ev\_cc@{ev\_cc}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!ev\_cc@{ev\_cc}}}\Hypertarget{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96ab2e58207991f612d9708d410fc275ed2}\label{classMIDIMessageConfiguration_a4068a616809fcf5bbbc8fa3552dc7d96ab2e58207991f612d9708d410fc275ed2} 
+ev\+\_\+cc&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classMIDIMessageConfiguration_a1399579c19f749da2de33d36892352ec}\label{classMIDIMessageConfiguration_a1399579c19f749da2de33d36892352ec} 
+\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}
+\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}
+\doxysubsubsection{\texorpdfstring{MIDIMessageConfiguration()}{MIDIMessageConfiguration()}}
+{\footnotesize\ttfamily MIDIMessage\+Configuration\+::\+MIDIMessage\+Configuration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classMIDIMessageConfiguration_a13912e21c9c6468a7e6f3fde6580ac11}\label{classMIDIMessageConfiguration_a13912e21c9c6468a7e6f3fde6580ac11} 
+\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!removeCC@{removeCC}}
+\index{removeCC@{removeCC}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}
+\doxysubsubsection{\texorpdfstring{removeCC()}{removeCC()}}
+{\footnotesize\ttfamily bool MIDIMessage\+Configuration\+::remove\+CC (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{controller }\end{DoxyParamCaption})}
+
+\Hypertarget{classMIDIMessageConfiguration_a4dc791504754091b8e32ac443549d92a}\label{classMIDIMessageConfiguration_a4dc791504754091b8e32ac443549d92a} 
+\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!setCC@{setCC}}
+\index{setCC@{setCC}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}
+\doxysubsubsection{\texorpdfstring{setCC()}{setCC()}}
+{\footnotesize\ttfamily uint8\+\_\+t MIDIMessage\+Configuration\+::set\+CC (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{controller,  }\item[{String \texorpdfstring{$\ast$}{*}}]{command }\end{DoxyParamCaption})}
+
+\Hypertarget{classMIDIMessageConfiguration_a107f06d383998a78587da419daf0081d}\label{classMIDIMessageConfiguration_a107f06d383998a78587da419daf0081d} 
+\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!setDefaultBaseParameters@{setDefaultBaseParameters}}
+\index{setDefaultBaseParameters@{setDefaultBaseParameters}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}
+\doxysubsubsection{\texorpdfstring{setDefaultBaseParameters()}{setDefaultBaseParameters()}}
+{\footnotesize\ttfamily void MIDIMessage\+Configuration\+::set\+Default\+Base\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIMessageConfiguration_a107f06d383998a78587da419daf0081d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMIDIMessageConfiguration_adb2fbb2629cedd665881cc1eb031ab06}\label{classMIDIMessageConfiguration_adb2fbb2629cedd665881cc1eb031ab06} 
+\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!setDefaultCCs@{setDefaultCCs}}
+\index{setDefaultCCs@{setDefaultCCs}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}
+\doxysubsubsection{\texorpdfstring{setDefaultCCs()}{setDefaultCCs()}}
+{\footnotesize\ttfamily void MIDIMessage\+Configuration\+::set\+Default\+CCs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIMessageConfiguration_adb2fbb2629cedd665881cc1eb031ab06_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMIDIMessageConfiguration_a130a3aa44264f76a9ebbcd469de3a826}\label{classMIDIMessageConfiguration_a130a3aa44264f76a9ebbcd469de3a826} 
+\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!setDefaults@{setDefaults}}
+\index{setDefaults@{setDefaults}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}
+\doxysubsubsection{\texorpdfstring{setDefaults()}{setDefaults()}}
+{\footnotesize\ttfamily void MIDIMessage\+Configuration\+::set\+Defaults (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMIDIMessageConfiguration_a130a3aa44264f76a9ebbcd469de3a826_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classMIDIMessageConfiguration_a8ed406457dbd4ec70290172f64d68b3d}\label{classMIDIMessageConfiguration_a8ed406457dbd4ec70290172f64d68b3d} 
+\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!controlChange@{controlChange}}
+\index{controlChange@{controlChange}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}
+\doxysubsubsection{\texorpdfstring{controlChange}{controlChange}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structMIDIMessageConfiguration_1_1__controlChange}{\+\_\+control\+Change}}$>$ MIDIMessage\+Configuration\+::control\+Change}
+
+\Hypertarget{classMIDIMessageConfiguration_a5de3cb86fd8cbeafd58f3fb4c907e8cf}\label{classMIDIMessageConfiguration_a5de3cb86fd8cbeafd58f3fb4c907e8cf} 
+\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!eventID@{eventID}}
+\index{eventID@{eventID}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}
+\doxysubsubsection{\texorpdfstring{eventID}{eventID}}
+{\footnotesize\ttfamily const String MIDIMessage\+Configuration\+::event\+ID\mbox{[}7\mbox{]} = \{ "{}noteon"{}, "{}noteoff"{}, "{}pat"{}, "{}pc"{}, "{}cat"{}, "{}pb"{}, "{}cc"{} \}}
+
+\Hypertarget{classMIDIMessageConfiguration_aa71e31509c7f8f753923cf1d3fe2a4e4}\label{classMIDIMessageConfiguration_aa71e31509c7f8f753923cf1d3fe2a4e4} 
+\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!midiEventMap@{midiEventMap}}
+\index{midiEventMap@{midiEventMap}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}
+\doxysubsubsection{\texorpdfstring{midiEventMap}{midiEventMap}}
+{\footnotesize\ttfamily String MIDIMessage\+Configuration\+::midi\+Event\+Map\mbox{[}7\mbox{]}}
+
+\Hypertarget{classMIDIMessageConfiguration_a2cc74ca1efd089ed74ccab27c56877d5}\label{classMIDIMessageConfiguration_a2cc74ca1efd089ed74ccab27c56877d5} 
+\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!midiRxChannel@{midiRxChannel}}
+\index{midiRxChannel@{midiRxChannel}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}
+\doxysubsubsection{\texorpdfstring{midiRxChannel}{midiRxChannel}}
+{\footnotesize\ttfamily uint8\+\_\+t MIDIMessage\+Configuration\+::midi\+Rx\+Channel}
+
+\Hypertarget{classMIDIMessageConfiguration_ae2069cf2e9bc95d044e15545183ad509}\label{classMIDIMessageConfiguration_ae2069cf2e9bc95d044e15545183ad509} 
+\index{MIDIMessageConfiguration@{MIDIMessageConfiguration}!name@{name}}
+\index{name@{name}!MIDIMessageConfiguration@{MIDIMessageConfiguration}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}} String\texorpdfstring{$\ast$}{*} MIDIMessage\+Configuration\+::name}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{midimessageconfiguration_8hpp}{midimessageconfiguration.\+hpp}}\item 
+\mbox{\hyperlink{midimessageconfiguration_8cpp}{midimessageconfiguration.\+cpp}}\end{DoxyCompactItemize}

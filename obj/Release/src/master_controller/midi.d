@@ -17,16 +17,13 @@ obj/Release/src/master_controller/midi.o: src/master_controller/midi.cpp \
  lib/teensy4/elapsedMillis.h lib/teensy4/WProgram.h \
  lib/teensy4/IntervalTimer.h lib/teensy4/CrashReport.h \
  lib/teensy4/Printable.h lib/teensy4/WString.h \
- lib/SafeString/src/SerialComs.h lib/SafeString/src/SafeStringReader.h \
- lib/teensy4/Arduino.h lib/SafeString/src/SafeString.h \
- lib/teensy4/Print.h lib/teensy4/Stream.h \
- lib/SafeString/src/SafeStringNameSpaceStart.h \
- lib/SafeString/src/SafeStringNameSpaceEnd.h \
- lib/SafeString/src/millisDelay.h lib/SafeString/src/millisDelay.h \
  include/base/debugprint.hpp lib/MIDI/MIDI.h lib/MIDI/midi_Defs.h \
- lib/MIDI/midi_Namespace.h lib/MIDI/midi_Platform.h \
+ lib/MIDI/midi_Namespace.h lib/teensy4/Arduino.h lib/MIDI/midi_Platform.h \
  lib/MIDI/midi_Settings.h lib/MIDI/midi_Message.h lib/MIDI/serialMIDI.h \
  lib/MIDI/MIDI.hpp include/master_controller/midi.h \
  include/master_controller/midimessageconfiguration.hpp \
  include/base/module.hpp include/base/modulesystembasics.hpp \
- include/base/commandparser.hpp include/base/module.hpp
+ include/base/commandparser.hpp include/base/commanditem.hpp \
+ include/base/generalhelpers.hpp include/base/arduinorequired.hpp \
+ include/base/module.hpp include/base/commandlist.hpp \
+ include/base/commanditem.hpp

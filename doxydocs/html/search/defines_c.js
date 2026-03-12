@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['tachoisr_5fbowcontrolarraymax_0',['tachoISR_bowControlArrayMax',['../isrclasswrapper_8cpp.html#a09ddef76f38af822146ca94d8b1bf211',1,'isrclasswrapper.cpp']]],
-  ['tmc2209_5fservostepper_5fc_1',['TMC2209_SERVOSTEPPER_C',['../tmc2209__servostepper_8cpp.html#a0bd690832afbcfd6df17fb9a955360d5',1,'tmc2209_servostepper.cpp']]]
+  ['registerexpression_0',['REGISTEREXPRESSION',['../pluginhandler_8hpp.html#a08e4d36bf4fbf5d0f602c676445ac171',1,'pluginhandler.hpp']]],
+  ['registerplugin_1',['REGISTERPLUGIN',['../pluginhandler_8hpp.html#a23e9e92f3a30c6eff4975c9d9f988d5a',1,'pluginhandler.hpp']]]
 ];

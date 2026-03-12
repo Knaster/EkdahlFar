@@ -67,7 +67,7 @@ private:
         sRelease = 4
     };
 
-    eStage pStage = 4;
+    eStage pStage = eStage::sRelease;
 
     int32_t pLastValue = 0;
     void recalculateRates();

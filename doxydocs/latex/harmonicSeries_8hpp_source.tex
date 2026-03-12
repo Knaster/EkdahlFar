@@ -23,12 +23,34 @@
 \DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ HARMONICSERIES\_H}}
 \DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ HARMONICSERIES\_H}}
 \DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <WProgram.h>}}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ }
-\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{arduinorequired_8hpp}{base/arduinorequired.hpp}}>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{module_8hpp}{base/module.hpp}}>}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classModule}{Module}}\ \{}
+\DoxyCodeLine{00026\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a726e985c9256abcd3e04b255b31cba09}{SETMODULEID}}(\textcolor{stringliteral}{"{}harmonicseries"{}},\ \textcolor{stringliteral}{"{}hs"{}},\ \textcolor{stringliteral}{"{}The\ list\ of\ ratios\ used\ in\ the\ current\ harmonic\ series"{}},\ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8}{eModuleType::software}},\ \textcolor{keyword}{false})}
 \DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(data,\ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}})}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(name,\ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}})}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(ratio,\ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}})}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(remove,\ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}})}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ std::vector<\textcolor{keywordtype}{float}>\ \mbox{\hyperlink{classHarmonicSeries_a166ca581a6531e846d42c4f2754c12f2}{ratios}};}
+\DoxyCodeLine{00037\ \ \ \ \ String\ \mbox{\hyperlink{classHarmonicSeries_a864d2755443961c9cbea5d497909f6b0}{Id}};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classHarmonicSeries_afbdd70e64fbed4dc82924ed03672cd6c}{setHarmonic}}(uint16\_t\ harmonic,\ \textcolor{keywordtype}{float}\ inRatio);}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classHarmonicSeries_ad782b16a3fd50793724537728b81a954}{getHarmonic}}(uint16\_t\ harmonic);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classHarmonicSeries_a474532a288397ea7eed3d2a4d32f7e70}{callDataChanged}}();}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}}();}
+\DoxyCodeLine{00045\ private:}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classModule}{Module}}\ *\mbox{\hyperlink{classHarmonicSeries_a961fe997c47728db73732d4705af10e9}{owner}};}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00050\ }
 
 \end{DoxyCode}

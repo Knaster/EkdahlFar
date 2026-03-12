@@ -4,17 +4,20 @@
 #include "generic_functions/pidcontroller.hpp"
 
 const ModuleCommandDeclaration PIDController::moduleCommands[] = {
-    { "targetfrequency", "tf", "float", "Sets the PID target frequency", false, false, &s_targetFreq, eCommandType::Hertz },
-    { "ki", "ki", "float", "Sets the Ki parameter of the PID of the selected bow", false, true, &s_ki, eCommandType::SimpleFloat },
-    { "kp", "kp", "float", "Sets the Kp parameter of the PID of the selected bow", false, true, &s_kp, eCommandType::SimpleFloat },
-    { "kd", "kd", "float", "Sets the Kd parameter of the PID of the selected bow", false, true, &s_kd, eCommandType::SimpleFloat },
-    { "integratorerror", "ie", "float", "Sets the lower threshold of error values for the PID integrator to ignore of the selected bow", false, true, &s_integratorError, eCommandType::SimpleFloat },
-    { "reset", "re", "-", "Resets the PID of the selected bow", false, false, &s_reset, eCommandType::Immediate },
-    { "maxerror", "xe", "float", "Maximum error to correct in each PID loop, essentially sets acceleration", false, true, &s_maxError, eCommandType::SimpleFloat },
-    { "peakerror", "pe", "float", "Get latest PID peak error", false, false, &s_peakError, eCommandType::RequestOnly },
-    { "motorspeedmax", "msx", "float", "Bow motor maximum speed limit", false, true, &s_motorSpeedMax, eCommandType::Hertz },
-    { "motorspeedmin", "msi", "float", "Bow motor minimum speed limit", false, true, &s_motorSpeedMin, eCommandType::Hertz },
-    { "measuretimetotarget", "mtt", "float", "Measure the time it takes to change from the current frequency to the target frequency", false, false, &s_measureTimeToTarget, eCommandType::Milliseconds }
+    { "targetfrequency", "tf", "float", "Sets the PID target frequency", false, false, &s_targetFreq, eCommandType_data::ectHertz | eCommandType_function::ectParameter },
+    { "ki", "ki", "float", "Sets the Ki parameter of the PID of the selected bow", false, true, &s_ki, eCommandType_data::ectSimpleFloat | eCommandType_function::ectSetting },
+    { "kp", "kp", "float", "Sets the Kp parameter of the PID of the selected bow", false, true, &s_kp, eCommandType_data::ectSimpleFloat | eCommandType_function::ectSetting },
+    { "kd", "kd", "float", "Sets the Kd parameter of the PID of the selected bow", false, true, &s_kd, eCommandType_data::ectSimpleFloat | eCommandType_function::ectSetting },
+    { "integratorerror", "ie", "float", "Sets the lower threshold of error values for the PID integrator to ignore of the selected bow", false, true, &s_integratorError,
+        eCommandType_data::ectSimpleFloat | eCommandType_function::ectSetting },
+    { "reset", "re", "-", "Resets the PID of the selected bow", false, false, &s_reset, eCommandType_data::ectImmediate | eCommandType_function::ectSystem },
+    { "maxerror", "xe", "float", "Maximum error to correct in each PID loop, essentially sets acceleration", false, true, &s_maxError,
+        eCommandType_data::ectSimpleFloat | eCommandType_function::ectSetting },
+    { "peakerror", "pe", "float", "Get latest PID peak error", false, false, &s_peakError, eCommandType_data::ectSimpleFloat | eCommandType_function::ectSystem | eCommandType_access::ectRequest },
+    { "motorspeedmax", "msx", "float", "Bow motor maximum speed limit", false, true, &s_motorSpeedMax, eCommandType_data::ectHertz | eCommandType_function::ectSetting },
+    { "motorspeedmin", "msi", "float", "Bow motor minimum speed limit", false, true, &s_motorSpeedMin, eCommandType_data::ectHertz | eCommandType_function::ectSetting },
+    { "measuretimetotarget", "mtt", "float", "Measure the time it takes to change from the current frequency to the target frequency", false, false, &s_measureTimeToTarget,
+        eCommandType_data::ectMilliseconds | eCommandType_function::ectSystem }
 };
 
 getModuleCount(PIDController)

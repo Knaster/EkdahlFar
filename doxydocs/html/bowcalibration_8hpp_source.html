@@ -74,7 +74,7 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_b98e0438f8dc60a7ca48badea99892a2.html">bow</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -104,8 +104,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#ifndef CALIBRATE_H</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#define CALIBRATE_H</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &quot;<a class="code" href="debugprint_8hpp.html">debugprint.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;<a class="code" href="calibrationhelpers_8hpp.html">calibrationhelpers.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &quot;<a class="code" href="debugprint_8hpp.html">base/debugprint.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;<a class="code" href="calibrationhelpers_8hpp.html">generic_functions/calibrationhelpers.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
 <div class="foldopen" id="foldopen00036" data-start="{" data-end="};">
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classCalibrateBow.html">   36</a></span><span class="keyword">class </span><a class="code hl_class" href="classCalibrateBow.html">CalibrateBow</a> {</div>
@@ -138,13 +138,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classCalibrateBow.html#ac30fefcd9f184fa2f7258c6c2e354f57">calibrateAll</a>();</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    String <a class="code hl_function" href="classCalibrateBow.html#abb616193d4f13d78b94d37517ed964c2">dumpData</a>();</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">//    String dumpData();</span></div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>};</div>
 </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="acalibrationhelpers_8hpp_html"><div class="ttname"><a href="calibrationhelpers_8hpp.html">calibrationhelpers.hpp</a></div></div>
 <div class="ttc" id="acalibrationhelpers_8hpp_html_a8cd8f7041a9ccae077fbbb821157d9df"><div class="ttname"><a href="calibrationhelpers_8hpp.html#a8cd8f7041a9ccae077fbbb821157d9df">eCalibrationResult</a></div><div class="ttdeci">eCalibrationResult</div><div class="ttdef"><b>Definition</b> calibrationhelpers.hpp:4</div></div>
-<div class="ttc" id="aclassBowControl_html"><div class="ttname"><a href="classBowControl.html">BowControl</a></div><div class="ttdef"><b>Definition</b> bowcontrol.hpp:40</div></div>
+<div class="ttc" id="aclassBowControl_html"><div class="ttname"><a href="classBowControl.html">BowControl</a></div><div class="ttdef"><b>Definition</b> bowcontrol.hpp:32</div></div>
 <div class="ttc" id="aclassCalibrateBow_html"><div class="ttname"><a href="classCalibrateBow.html">CalibrateBow</a></div><div class="ttdef"><b>Definition</b> bowcalibration.hpp:36</div></div>
 <div class="ttc" id="aclassCalibrateBow_html_a07219a59c834914eb60c9f132beae507"><div class="ttname"><a href="classCalibrateBow.html#a07219a59c834914eb60c9f132beae507">CalibrateBow::maxTestPressure</a></div><div class="ttdeci">uint16_t maxTestPressure</div><div class="ttdef"><b>Definition</b> bowcalibration.hpp:58</div></div>
 <div class="ttc" id="aclassCalibrateBow_html_a089012af2313ca1a0b55613164800bf0"><div class="ttname"><a href="classCalibrateBow.html#a089012af2313ca1a0b55613164800bf0">CalibrateBow::bowControl</a></div><div class="ttdeci">BowControl * bowControl</div><div class="ttdef"><b>Definition</b> bowcalibration.hpp:38</div></div>
@@ -152,11 +152,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassCalibrateBow_html_a12009972a45e41c9d62d78a6220a99bd"><div class="ttname"><a href="classCalibrateBow.html#a12009972a45e41c9d62d78a6220a99bd">CalibrateBow::findMinPressure</a></div><div class="ttdeci">eCalibrationResult findMinPressure()</div><div class="ttdef"><b>Definition</b> bowcalibration.cpp:64</div></div>
 <div class="ttc" id="aclassCalibrateBow_html_a1c2a7dc5bc68301cbd3ac596431da525"><div class="ttname"><a href="classCalibrateBow.html#a1c2a7dc5bc68301cbd3ac596431da525">CalibrateBow::pressureTestRetract</a></div><div class="ttdeci">uint16_t pressureTestRetract</div><div class="ttdef"><b>Definition</b> bowcalibration.hpp:59</div></div>
 <div class="ttc" id="aclassCalibrateBow_html_a3da4a85fccb27f50fffb50edf205bd74"><div class="ttname"><a href="classCalibrateBow.html#a3da4a85fccb27f50fffb50edf205bd74">CalibrateBow::waitForBowToStabilize</a></div><div class="ttdeci">bool waitForBowToStabilize(uint16_t maxIterations)</div><div class="ttdoc">Waits for the bow speed to stabilize, used after setting a new bow speed.</div><div class="ttdef"><b>Definition</b> bowcalibration.cpp:43</div></div>
-<div class="ttc" id="aclassCalibrateBow_html_a4420111fa3dd5f773d96b16aafc8972b"><div class="ttname"><a href="classCalibrateBow.html#a4420111fa3dd5f773d96b16aafc8972b">CalibrateBow::findMinMaxPressure</a></div><div class="ttdeci">eCalibrationResult findMinMaxPressure()</div><div class="ttdef"><b>Definition</b> bowcalibration.cpp:214</div></div>
-<div class="ttc" id="aclassCalibrateBow_html_a9e92861c49ee1f093bec2d24ea3e35c2"><div class="ttname"><a href="classCalibrateBow.html#a9e92861c49ee1f093bec2d24ea3e35c2">CalibrateBow::findMinMaxSpeedPWM</a></div><div class="ttdeci">eCalibrationResult findMinMaxSpeedPWM()</div><div class="ttdoc">Find the minimum and maximum bow speed using direct hardware PWM control (as opposed to PID control)</div><div class="ttdef"><b>Definition</b> bowcalibration.cpp:271</div></div>
-<div class="ttc" id="aclassCalibrateBow_html_abb616193d4f13d78b94d37517ed964c2"><div class="ttname"><a href="classCalibrateBow.html#abb616193d4f13d78b94d37517ed964c2">CalibrateBow::dumpData</a></div><div class="ttdeci">String dumpData()</div><div class="ttdef"><b>Definition</b> bowcalibration.cpp:437</div></div>
-<div class="ttc" id="aclassCalibrateBow_html_ac30fefcd9f184fa2f7258c6c2e354f57"><div class="ttname"><a href="classCalibrateBow.html#ac30fefcd9f184fa2f7258c6c2e354f57">CalibrateBow::calibrateAll</a></div><div class="ttdeci">bool calibrateAll()</div><div class="ttdoc">Perform all calibration tests.</div><div class="ttdef"><b>Definition</b> bowcalibration.cpp:443</div></div>
-<div class="ttc" id="aclassCalibrateBow_html_ac7276bb0954119025f6fc8746002789c"><div class="ttname"><a href="classCalibrateBow.html#ac7276bb0954119025f6fc8746002789c">CalibrateBow::safeExitWithResult</a></div><div class="ttdeci">eCalibrationResult safeExitWithResult(eCalibrationResult result, bool pidState=true)</div><div class="ttdef"><b>Definition</b> bowcalibration.cpp:251</div></div>
+<div class="ttc" id="aclassCalibrateBow_html_a4420111fa3dd5f773d96b16aafc8972b"><div class="ttname"><a href="classCalibrateBow.html#a4420111fa3dd5f773d96b16aafc8972b">CalibrateBow::findMinMaxPressure</a></div><div class="ttdeci">eCalibrationResult findMinMaxPressure()</div><div class="ttdef"><b>Definition</b> bowcalibration.cpp:221</div></div>
+<div class="ttc" id="aclassCalibrateBow_html_a9e92861c49ee1f093bec2d24ea3e35c2"><div class="ttname"><a href="classCalibrateBow.html#a9e92861c49ee1f093bec2d24ea3e35c2">CalibrateBow::findMinMaxSpeedPWM</a></div><div class="ttdeci">eCalibrationResult findMinMaxSpeedPWM()</div><div class="ttdoc">Find the minimum and maximum bow speed using direct hardware PWM control (as opposed to PID control)</div><div class="ttdef"><b>Definition</b> bowcalibration.cpp:278</div></div>
+<div class="ttc" id="aclassCalibrateBow_html_ac30fefcd9f184fa2f7258c6c2e354f57"><div class="ttname"><a href="classCalibrateBow.html#ac30fefcd9f184fa2f7258c6c2e354f57">CalibrateBow::calibrateAll</a></div><div class="ttdeci">bool calibrateAll()</div><div class="ttdoc">Perform all calibration tests.</div><div class="ttdef"><b>Definition</b> bowcalibration.cpp:450</div></div>
+<div class="ttc" id="aclassCalibrateBow_html_ac7276bb0954119025f6fc8746002789c"><div class="ttname"><a href="classCalibrateBow.html#ac7276bb0954119025f6fc8746002789c">CalibrateBow::safeExitWithResult</a></div><div class="ttdeci">eCalibrationResult safeExitWithResult(eCalibrationResult result, bool pidState=true)</div><div class="ttdef"><b>Definition</b> bowcalibration.cpp:258</div></div>
 <div class="ttc" id="adebugprint_8hpp_html"><div class="ttname"><a href="debugprint_8hpp.html">debugprint.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

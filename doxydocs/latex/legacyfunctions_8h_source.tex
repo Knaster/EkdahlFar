@@ -1,0 +1,1427 @@
+\doxysection{legacyfunctions.\+h}
+\hypertarget{legacyfunctions_8h_source}{}\label{legacyfunctions_8h_source}\index{legacyfunctions.h@{legacyfunctions.h}}
+\mbox{\hyperlink{legacyfunctions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00003\ \textcolor{comment}{const\ serialCommandItem\ serialCommandsFarSingle[]\ =\ \{}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ \ \ \ \{\ "{}bowcalibrateall"{},\ "{}bca"{},\ "{}-\/"{},\ "{}Performs\ all\ calibration\ routines\ on\ the\ selected\ bow,\ see\ below\ for\ routines\ performed"{}\ \},}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ \ \ \ \{\ "{}bowcalibratespeed"{},\ "{}bcs"{},\ "{}-\/"{},\ "{}Finds\ the\ minimum\ and\ maximum\ bow\ speed\ of\ the\ selected\ bow"{}\ \},}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ \ \ \ \{\ "{}bowcalibratepressure"{},\ "{}bcp"{},\ "{}-\/"{},\ "{}Finds\ the\ minimum\ and\ maximum\ bow\ pressure\ of\ the\ selected\ bow"{}\ \},}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ \ \ \ \{\ "{}pickupstringfrequency"{},\ "{}psf"{},\ "{}-\/"{},\ "{}Returns\ the\ fundamental\ tone\ calculated\ from\ the\ current\ audio\ signal\ if\ appliccable"{}\},}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ \ \ \ \{\ "{}pickupaudiopeak"{},\ "{}pap"{},\ "{}-\/"{},\ "{}Returns\ the\ peak\ amplitude\ of\ the\ current\ audio\ signal"{}\},}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ \ \ \ \{\ "{}pickupaudiorms"{},\ "{}par"{},\ "{}-\/"{},\ "{}Returns\ the\ RMS\ amplitude\ of\ the\ current\ audio\ signal"{}\},}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ \ \ \ \{\ "{}mutecalibrate"{},\ "{}mca"{},\ "{}-\/"{},\ "{}Calibrate\ mute\ settings"{}\}}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\};}}
+\DoxyCodeLine{00012\ \textcolor{comment}{}}
+\DoxyCodeLine{00013\ \textcolor{comment}{eProcessResult\ FARSingle::processSerialCommand(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ \ \ \ processCommandItems(inCommandItem,\ serialCommandsFarSingle,\ sizeof(serialCommandsFarSingle)\ \ /\ sizeof(serialCommandItem));}}
+\DoxyCodeLine{00016\ \textcolor{comment}{}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ \ \ \ eProcessResult\ processResult\ =\ eProcessResult::Ok;}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ \ \ \ eCalibrationResult\ calibrationResult;}}
+\DoxyCodeLine{00019\ \textcolor{comment}{}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}help"{})\ \{}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ \ \ \ \ \ \ \ addCommandHelp(serialCommandsFarSingle,\ sizeof(serialCommandsFarSingle)\ /\ sizeof(serialCommandItem),\ commandResponses,"{}"{});}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00023\ \textcolor{comment}{}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowcalibratespeed"{})\ \{}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!request)\ \{}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ calibrationResult\ =\ calibrateBow-\/>findMinMaxSpeedPWM();}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (calibrationResult\ ==\ CR\_Ok)\ \{\ processResult\ =\ eProcessResult::Ok;\ \}\ else\ \{\ exitWithError(calibrationResult);\ processResult\ =\ eProcessResult::CommandFailed;\ \}}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bcs"{},\ InfoRequest\ \});}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowcalibratepressure"{})\ \{}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!request)\ \{}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ calibrationResult\ =\ calibrateBow-\/>findMinMaxPressure();}}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (calibrationResult\ ==\ CR\_Ok)\ \{\ processResult\ =\ eProcessResult::Ok;\ \}\ else\ \{\ exitWithError(calibrationResult);\ processResult\ =\ eProcessResult::CommandFailed;\ \}}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bcp"{},\ InfoRequest\ \});}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00037\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutecalibrate"{})\ \{}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!request)\ \{}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ calibrationResult\ =\ calibrateMute-\/>calibrateAll();}}
+\DoxyCodeLine{00041\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (calibrationResult\ ==\ CR\_Ok)\ \{\ processResult\ =\ eProcessResult::Ok;\ \}\ else\ \{\ exitWithError(calibrationResult);\ processResult\ =\ eProcessResult::CommandFailed;\ \}}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}mca"{},\ InfoRequest\ \});}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00044\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowcalibrateall"{})\ \{}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!request)\ \{}}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (calibrateBow-\/>calibrateAll())\ \{\ processResult\ =\ eProcessResult::Ok;\ \}\ else\ \{\ processResult\ =\ eProcessResult::CommandFailed;\ \}}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bca"{},\ InfoRequest\ \});}}
+\DoxyCodeLine{00049\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00050\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00051\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutecalibrate"{})\ \{}}
+\DoxyCodeLine{00052\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!calibrateMute-\/>calibrateAll())\ \{}}
+\DoxyCodeLine{00053\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}mca:1"{},\ InfoRequest\});}}
+\DoxyCodeLine{00054\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00055\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}mca:0"{},\ InfoRequest\});}}
+\DoxyCodeLine{00056\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00057\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}pickupstringfrequency"{})\ \{}}
+\DoxyCodeLine{00059\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (audioFrequencyAvaliable())\ \{}}
+\DoxyCodeLine{00060\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}psf:"{}\ +\ String(audioFrequency(),1),\ InfoRequest\ \});}}
+\DoxyCodeLine{00061\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00062\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}psf:\ 0"{},\ InfoRequest\ \});}}
+\DoxyCodeLine{00063\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00064\ \textcolor{comment}{\ \ \ \ \}\ \ else}}
+\DoxyCodeLine{00065\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}pickupaudiopeak"{})\ \{}}
+\DoxyCodeLine{00066\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}pap:"{}\ +\ String(audioPeakAmplitude()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ \ \ \ \}\ \ else}}
+\DoxyCodeLine{00068\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}pickupaudiorms"{})\ \{}}
+\DoxyCodeLine{00069\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}par:"{}\ +\ String(audioRMSAmplitude()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00070\ \textcolor{comment}{\ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00071\ \textcolor{comment}{\ \ \ \ \ \ \ \ processResult\ =\ muteControl-\/>processSerialCommand(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{00072\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ ((processResult\ !=\ eProcessResult::NotFound)\ \&\&\ (processResult\ !=\ eProcessResult::PassThrough))\ \{\ return\ processResult;\ \}}}
+\DoxyCodeLine{00073\ \textcolor{comment}{}}
+\DoxyCodeLine{00074\ \textcolor{comment}{\ \ \ \ \ \ \ \ processResult\ =\ hammerControl-\/>processSerialCommand(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{00075\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ ((processResult\ !=\ eProcessResult::NotFound)\ \&\&\ (processResult\ !=\ eProcessResult::PassThrough))\ \{\ return\ processResult;\ \}}}
+\DoxyCodeLine{00076\ \textcolor{comment}{}}
+\DoxyCodeLine{00077\ \textcolor{comment}{\ \ \ \ \ \ \ \ processResult\ =\ bowControl-\/>processSerialCommand(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{00078\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ ((processResult\ !=\ eProcessResult::NotFound)\ \&\&\ (processResult\ !=\ eProcessResult::PassThrough))\ \{\ return\ processResult;\ \}}}
+\DoxyCodeLine{00079\ \textcolor{comment}{}}
+\DoxyCodeLine{00080\ \textcolor{comment}{\ \ \ \ \ \ \ \ processResult\ =\ bowActuators-\/>processSerialCommand(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{00081\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ ((processResult\ !=\ eProcessResult::NotFound)\ \&\&\ (processResult\ !=\ eProcessResult::PassThrough))\ \{\ return\ processResult;\ \}}}
+\DoxyCodeLine{00082\ \textcolor{comment}{}}
+\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ \ \ \ \ \ processResult\ =\ controlReader-\/>processSerialCommand(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ ((processResult\ !=\ eProcessResult::NotFound)\ \&\&\ (processResult\ !=\ eProcessResult::PassThrough))\ \{\ return\ processResult;\ \}}}
+\DoxyCodeLine{00085\ \textcolor{comment}{}}
+\DoxyCodeLine{00086\ \textcolor{comment}{\ \ \ \ \ \ \ \ processResult\ =\ harmonicSeriesHandler-\/>processSerialCommand(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{00087\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00088\ \textcolor{comment}{\ \ \ \ return\ processResult;}}
+\DoxyCodeLine{00089\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00090\ \textcolor{comment}{}}
+\DoxyCodeLine{00091\ \textcolor{comment}{eProcessResult\ FARSingle::processSerialCommandHidden(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{00092\ \textcolor{comment}{}}
+\DoxyCodeLine{00093\ \textcolor{comment}{\ \ \ \ eProcessResult\ processResult;}}
+\DoxyCodeLine{00094\ \textcolor{comment}{}}
+\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ \ processResult\ =\ bowControl-\/>processSerialCommandHidden(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{00096\ \textcolor{comment}{\ \ \ \ if\ ((processResult\ !=\ eProcessResult::NotFound)\ \&\&\ (processResult\ !=\ eProcessResult::PassThrough))\ \{\ return\ processResult;\ \}}}
+\DoxyCodeLine{00097\ \textcolor{comment}{}}
+\DoxyCodeLine{00098\ \textcolor{comment}{\ \ \ \ processResult\ =\ muteControl-\/>processSerialCommandHidden(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{00099\ \textcolor{comment}{\ \ \ \ if\ ((processResult\ !=\ eProcessResult::NotFound)\ \&\&\ (processResult\ !=\ eProcessResult::PassThrough))\ \{\ return\ processResult;\ \}}}
+\DoxyCodeLine{00100\ \textcolor{comment}{}}
+\DoxyCodeLine{00101\ \textcolor{comment}{\ \ \ \ processResult\ =\ controlReader-\/>processSerialCommandHidden(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{00102\ \textcolor{comment}{\ \ \ \ if\ ((processResult\ !=\ eProcessResult::NotFound)\ \&\&\ (processResult\ !=\ eProcessResult::PassThrough))\ \{\ return\ processResult;\ \}}}
+\DoxyCodeLine{00103\ \textcolor{comment}{}}
+\DoxyCodeLine{00104\ \textcolor{comment}{\ \ \ \ return\ processResult;}}
+\DoxyCodeLine{00105\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00106\ \textcolor{comment}{}}
+\DoxyCodeLine{00107\ \textcolor{comment}{}}
+\DoxyCodeLine{00108\ \textcolor{comment}{}}
+\DoxyCodeLine{00109\ \textcolor{comment}{void\ FARSingle::dir(std::vector<commandResponse>\ *commandResponses,\ String\ longPrefix,\ String\ shortPrefix)\ \{}}
+\DoxyCodeLine{00110\ \textcolor{comment}{//\ \ \ \ commandResponses-\/>push\_back(\{\ "{}dir:"{}\ +\ identifier\ +\ "{}'"{},\ debugPrintType::InfoRequest\ \});}}
+\DoxyCodeLine{00111\ \textcolor{comment}{}}
+\DoxyCodeLine{00112\ \textcolor{comment}{\ \ \ \ dirProto(commandResponses,\ longPrefix,\ shortPrefix,\ serialCommandsFarSingle,\ sizeof(serialCommandsFarSingle)\ /\ sizeof(serialCommandItem),\ nullptr,\ 0);}}
+\DoxyCodeLine{00113\ \textcolor{comment}{}}
+\DoxyCodeLine{00114\ \textcolor{comment}{\ \ \ \ muteControl-\/>dir(commandResponses,\ longPrefix,\ shortPrefix);}}
+\DoxyCodeLine{00115\ \textcolor{comment}{\ \ \ \ hammerControl-\/>dir(commandResponses,\ longPrefix,\ shortPrefix);}}
+\DoxyCodeLine{00116\ \textcolor{comment}{\ \ \ \ bowControl-\/>dir(commandResponses,\ longPrefix,\ shortPrefix);}}
+\DoxyCodeLine{00117\ \textcolor{comment}{\ \ \ \ bowActuators-\/>dir(commandResponses,\ longPrefix,\ shortPrefix);}}
+\DoxyCodeLine{00118\ \textcolor{comment}{\ \ \ \ harmonicSeriesHandler-\/>dir(commandResponses,\ longPrefix,\ shortPrefix);}}
+\DoxyCodeLine{00119\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00120\ \textcolor{comment}{}}
+\DoxyCodeLine{00121\ \textcolor{comment}{}}
+\DoxyCodeLine{00122\ \textcolor{comment}{bool\ FARSingle::enumerateModules()\ \{}}
+\DoxyCodeLine{00123\ \textcolor{comment}{\ \ \ \ //addModule(this);}}
+\DoxyCodeLine{00124\ \textcolor{comment}{}}
+\DoxyCodeLine{00125\ \textcolor{comment}{\ \ \ \ return\ true;}}
+\DoxyCodeLine{00126\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00127\ \textcolor{comment}{}}
+\DoxyCodeLine{00128\ \textcolor{comment}{const\ serialCommandItem\ serialCommandsSolenoid[]\ =\ \{}}
+\DoxyCodeLine{00129\ \textcolor{comment}{\ \ \ \ \{\ "{}solenoidengage"{},\ "{}se"{},\ "{}0-\/65535"{},\ "{}Sets\ the\ solenoid\ engagement\ of\ the\ current\ bow\ using\ the\ 1st\ argument\ as\ hardness"{}\ \},}}
+\DoxyCodeLine{00130\ \textcolor{comment}{\ \ \ \ \{\ "{}solenoiddisengage"{},\ "{}sd"{},\ "{}0-\/1"{},\ "{}Sets\ the\ solenoid\ disengagement\ of\ the\ current\ bow,\ an\ argument\ of\ '0'\ will\ leave\ the\ solenoid\ at\ its\ current\ state\ while\ any\ other\ value\ will\ disengage\ the\ solenoid"{}\ \},}}
+\DoxyCodeLine{00131\ \textcolor{comment}{\ \ \ \ \{\ "{}solenoidmaxforce"{},\ "{}sxf"{},\ "{}0\ -\/\ 65535"{},\ "{}Set\ solenoid\ maximum\ usable\ force"{}\ \},}}
+\DoxyCodeLine{00132\ \textcolor{comment}{\ \ \ \ \{\ "{}solenoidminforce"{},\ "{}sif"{},\ "{}0\ -\/\ 65535"{},\ "{}Set\ solenoid\ minimum\ usable\ force"{}\ \},}}
+\DoxyCodeLine{00133\ \textcolor{comment}{\ \ \ \ \{\ "{}solenoidforcemultiplier"{},\ "{}sfm"{},\ "{}0\ -\/\ 1"{},\ "{}Set\ solenoid\ force\ multiplier"{}\ \},}}
+\DoxyCodeLine{00134\ \textcolor{comment}{\ \ \ \ \{\ "{}solenoidengageduration"{},\ "{}sed"{},\ "{}uS"{},\ "{}Sets\ the\ duration\ of\ the\ solenoid\ hit\ in\ uS,\ if\ a\ value\ of\ 0\ is\ set\ the\ solenoid\ will\ not\ disengage\ until\ a\ solenoiddisengage\ command\ has\ been\ given"{}\}}}
+\DoxyCodeLine{00135\ \textcolor{comment}{\};}}
+\DoxyCodeLine{00136\ \textcolor{comment}{}}
+\DoxyCodeLine{00137\ \textcolor{comment}{eProcessResult\ Solenoid::processSerialCommand(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{00138\ \textcolor{comment}{}}
+\DoxyCodeLine{00139\ \textcolor{comment}{\ \ \ \ processCommandItems(inCommandItem,\ serialCommandsSolenoid,\ sizeof(serialCommandsSolenoid)\ /\ sizeof(serialCommandItem));}}
+\DoxyCodeLine{00140\ \textcolor{comment}{}}
+\DoxyCodeLine{00141\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}help"{})\ \{}}
+\DoxyCodeLine{00142\ \textcolor{comment}{\ \ \ \ \ \ \ \ addCommandHelp(serialCommandsSolenoid,\ sizeof(serialCommandsSolenoid)\ /\ sizeof(serialCommandItem),\ commandResponses,"{}"{});}}
+\DoxyCodeLine{00143\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::PassThrough;}}
+\DoxyCodeLine{00144\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00145\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}solenoidengage"{})\ \{}}
+\DoxyCodeLine{00146\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00147\ \textcolor{comment}{\ \ \ \ \ \ \ \ solenoidEngage(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00148\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}se:"{}\ +\ String(inCommandItem-\/>argument[0].toInt()),\ InfoRequest\});}}
+\DoxyCodeLine{00149\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00150\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}solenoiddisengage"{})\ \{}}
+\DoxyCodeLine{00151\ \textcolor{comment}{\ \ \ \ \ \ \ \ solenoidDisengage();}}
+\DoxyCodeLine{00152\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}sd:"{}\ +\ String(inCommandItem-\/>argument[0].toInt()),\ InfoRequest\});}}
+\DoxyCodeLine{00153\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00154\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}solenoidengageduration"{})\ \{}}
+\DoxyCodeLine{00155\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00156\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}sed:"{}\ +\ String(solenoidEngageDuration),\ InfoRequest\ \});}}
+\DoxyCodeLine{00157\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00158\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00159\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setSolenoidDuration(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00160\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}sed:"{}\ +\ String(solenoidEngageDuration),\ InfoRequest\});}}
+\DoxyCodeLine{00161\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00162\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00163\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}solenoidmaxforce"{})\ \{}}
+\DoxyCodeLine{00164\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00165\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}sxf:"{}\ +\ String(forceMax),\ InfoRequest\ \});}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00167\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00168\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setSolenoidMax(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00169\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}sfx:"{}\ +\ String(forceMax),\ InfoRequest\});}}
+\DoxyCodeLine{00170\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00171\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00172\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}solenoidminforce"{})\ \{}}
+\DoxyCodeLine{00173\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00174\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}sif:"{}\ +\ String(forceMin),\ InfoRequest\ \});}}
+\DoxyCodeLine{00175\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00176\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00177\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setSolenoidMin(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00178\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}sif:"{}\ +\ String(forceMin),\ InfoRequest\});}}
+\DoxyCodeLine{00179\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00180\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00181\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}solenoidforcemultiplier"{})\ \{}}
+\DoxyCodeLine{00182\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00183\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}sfm:"{}\ +\ String(fForceMultiplier),\ InfoRequest\ \});}}
+\DoxyCodeLine{00184\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00185\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00186\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setSolenoidMultiplier(inCommandItem-\/>argument[0].toFloat());}}
+\DoxyCodeLine{00187\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}sfm:"{}\ +\ String(fForceMultiplier),\ InfoRequest\});}}
+\DoxyCodeLine{00188\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00189\ \textcolor{comment}{\ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00190\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::NotFound;}}
+\DoxyCodeLine{00191\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00192\ \textcolor{comment}{\ \ \ \ return\ eProcessResult::Ok;}}
+\DoxyCodeLine{00193\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00194\ \textcolor{comment}{}}
+\DoxyCodeLine{00195\ \textcolor{comment}{eProcessResult\ Solenoid::processSerialCommandHidden(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{00196\ \textcolor{comment}{\ \ \ \ return\ eProcessResult::NotFound;}}
+\DoxyCodeLine{00197\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00198\ \textcolor{comment}{}}
+\DoxyCodeLine{00199\ \textcolor{comment}{const\ serialCommandItem\ serialCommandsMute[]\ =\ \{}}
+\DoxyCodeLine{00200\ \textcolor{comment}{\ \ \ \ \{\ "{}mutesetposition"{},\ "{}msp"{},\ "{}0-\/65535"{},\ "{}Set\ mute\ position"{}\ \},}}
+\DoxyCodeLine{00201\ \textcolor{comment}{\ \ \ \ \{\ "{}mutefullmute"{},\ "{}mfm"{},\ "{}1|0"{},\ "{}Put\ mute\ in\ full\ mute\ position\ (conditional)"{}\ \},}}
+\DoxyCodeLine{00202\ \textcolor{comment}{\ \ \ \ \{\ "{}mutehalfmute"{},\ "{}mhm"{},\ "{}1|0"{},\ "{}Put\ mute\ in\ half\ mute\ position\ (conditional)"{}\ \},}}
+\DoxyCodeLine{00203\ \textcolor{comment}{\ \ \ \ \{\ "{}muterest"{},\ "{}mr"{},\ "{}1|0"{},\ "{}Put\ mute\ in\ rest\ position\ (conditional)"{}\ \},}}
+\DoxyCodeLine{00204\ \textcolor{comment}{\ \ \ \ \{\ "{}mutesavefull"{},\ "{}msf"{},\ "{}1|0"{},\ "{}Save\ current\ mute\ position\ as\ full\ mute\ position\ (conditional)"{}\ \},}}
+\DoxyCodeLine{00205\ \textcolor{comment}{\ \ \ \ \{\ "{}mutesavehalf"{},\ "{}msh"{},\ "{}1|0"{},\ "{}Save\ current\ mute\ position\ as\ half\ mute\ position\ (conditional)"{}\ \},}}
+\DoxyCodeLine{00206\ \textcolor{comment}{\ \ \ \ \{\ "{}mutesaverest"{},\ "{}msr"{},\ "{}1|0"{},\ "{}Save\ current\ mute\ position\ as\ mute\ rest\ position\ (conditional)"{}\ \},}}
+\DoxyCodeLine{00207\ \textcolor{comment}{\ \ \ \ \{\ "{}mutefullmuteposition"{},\ "{}mfmp"{},\ "{}0-\/65535"{},\ "{}Mute\ full\ mute\ position"{}\},}}
+\DoxyCodeLine{00208\ \textcolor{comment}{\ \ \ \ \{\ "{}mutehalfmuteposition"{},\ "{}mhmp"{},\ "{}0-\/65535"{},\ "{}Mute\ half\ mute\ position"{}\},}}
+\DoxyCodeLine{00209\ \textcolor{comment}{\ \ \ \ \{\ "{}muterestposition"{},\ "{}mrp"{},\ "{}0-\/65535"{},\ "{}Mute\ rest\ position"{}\},}}
+\DoxyCodeLine{00210\ \textcolor{comment}{\ \ \ \ \{\ "{}mutesustain"{},\ "{}ms"{},\ "{}0|1"{},\ "{}Setting\ sustain\ on\ (1)\ or\ off\ (0)"{}\ \},}}
+\DoxyCodeLine{00211\ \textcolor{comment}{\ \ \ \ \{\ "{}mutebackoff"{},\ "{}mbo"{},\ "{}0-\/65535"{},\ "{}Setting\ the\ time\ that\ the\ mute\ stays\ in\ the\ mutefullmute\ position\ before\ automatically\ going\ into\ rest,\ set\ in\ mS"{}\},}}
+\DoxyCodeLine{00212\ \textcolor{comment}{\ \ \ \ \{\ "{}mutehome"{},\ "{}mh"{},\ "{}-\/"{},\ "{}Home\ mute"{}\ \}}}
+\DoxyCodeLine{00213\ \textcolor{comment}{\};}}
+\DoxyCodeLine{00214\ \textcolor{comment}{}}
+\DoxyCodeLine{00215\ \textcolor{comment}{const\ serialCommandItem\ serialCommandsMuteHidden[]\ =\ \ \{}}
+\DoxyCodeLine{00216\ \textcolor{comment}{\ \ \ \ \{\ "{}mutesethardwareposition"{},\ "{}mshwp"{},\ "{}0-\/65535"{},\ "{}Sets\ the\ mute\ position\ without\ min/max\ scaling"{}\ \},}}
+\DoxyCodeLine{00217\ \textcolor{comment}{\ \ \ \ \{\ "{}mutecompletetask"{},\ "{}mcpt"{},\ "{}-\/"{},\ "{}Requests\ a\ callback\ when\ the\ current\ operation\ is\ finished"{}\ \},}}
+\DoxyCodeLine{00218\ \textcolor{comment}{\ \ \ \ \{\ "{}muteautocorrect"{},\ "{}mac"{},\ "{}1|0"{},\ "{}Enables\ auto\ correct\ positioning\ that\ uses\ the\ homing\ sensor\ to\ correct\ positioning\ on\ the\ fly"{}\ \},}}
+\DoxyCodeLine{00219\ \textcolor{comment}{\ \ \ \ \{\ "{}mutehomingsensed"{},\ "{}mhmse"{},\ "{}-\/"{},\ "{}Requests\ whether\ the\ homing\ sensor\ is\ currently\ active\ or\ not"{}\ \},}}
+\DoxyCodeLine{00220\ \textcolor{comment}{\ \ \ \ \{\ "{}mutemovedirection"{},\ "{}mmd"{},\ "{}-\/"{},\ "{}Requests\ the\ current\ direction\ of\ movement\ (0\ Forward,\ 1\ Reverse)"{}\ \},}}
+\DoxyCodeLine{00221\ \textcolor{comment}{\ \ \ \ \{\ "{}mutecurrentstep"{},\ "{}mcs"{},\ "{}-\/"{},\ "{}Requests\ the\ current\ step"{}\ \},}}
+\DoxyCodeLine{00222\ \textcolor{comment}{\ \ \ \ \{\ "{}mutehomingpoint"{},\ "{}mhmp"{},\ "{}edge,direction"{},\ "{}Requests\ the\ given\ homing\ point"{}\ \},}}
+\DoxyCodeLine{00223\ \textcolor{comment}{\ \ \ \ \{\ "{}mutehomingstage"{},\ "{}mhms"{},\ "{}-\/"{},\ "{}Requests\ the\ current\ homing\ stage\ (UNHOMED,\ HOMED,\ FIRSTHOMINGRISING,\ SECONDHOMINGFALLING,\ SECONDHOMINGRISING,\ FIRSTHOMINGFALLING,\ MOVEPASTHOMESWITCH,\ MOVETOHOMESWITCH,\ GOTOOFFSET)"{}\ \},}}
+\DoxyCodeLine{00224\ \textcolor{comment}{\ \ \ \ \{\ "{}mutetmcinfo"{},\ "{}mtmi"{},\ "{}-\/"{},\ "{}Request\ statistical\ information\ from\ the\ TMC2209"{}\ \}}}
+\DoxyCodeLine{00225\ \textcolor{comment}{\};}}
+\DoxyCodeLine{00226\ \textcolor{comment}{}}
+\DoxyCodeLine{00227\ \textcolor{comment}{eProcessResult\ MuteControl::processSerialCommand(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{00228\ \textcolor{comment}{}}
+\DoxyCodeLine{00229\ \textcolor{comment}{\ \ \ \ processCommandItems(inCommandItem,\ serialCommandsMute,\ sizeof(serialCommandsMute)\ \ /\ sizeof(serialCommandItem));}}
+\DoxyCodeLine{00230\ \textcolor{comment}{}}
+\DoxyCodeLine{00231\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}help"{})\ \{}}
+\DoxyCodeLine{00232\ \textcolor{comment}{\ \ \ \ \ \ \ \ addCommandHelp(serialCommandsMute,\ sizeof(serialCommandsMute)\ /\ sizeof(serialCommandItem),\ commandResponses,"{}"{});}}
+\DoxyCodeLine{00233\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::PassThrough;}}
+\DoxyCodeLine{00234\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00235\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutesetposition"{})\ \{}}
+\DoxyCodeLine{00236\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00237\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}msp:"{}\ +\ String(mute-\/>getPosition()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00238\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00239\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00240\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ mute-\/>setPosition(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00241\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}msp:"{}\ +\ String(mute-\/>getPosition()),\ InfoRequest\});}}
+\DoxyCodeLine{00242\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00243\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00244\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutefullmute"{})\ \{}}
+\DoxyCodeLine{00245\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00246\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00247\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00248\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (inCommandItem-\/>argument[0].toInt()\ ==\ 1)\ \{}}
+\DoxyCodeLine{00249\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mute-\/>fullMute();}}
+\DoxyCodeLine{00250\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}mfm:1"{},\ InfoRequest\});}}
+\DoxyCodeLine{00251\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00252\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00253\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00254\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutehalfmute"{})\ \{}}
+\DoxyCodeLine{00255\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00256\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00257\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ mute-\/>halfMute();}}
+\DoxyCodeLine{00258\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}mhm:1"{},\ InfoRequest\});}}
+\DoxyCodeLine{00259\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00260\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00261\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}muterest"{})\ \{}}
+\DoxyCodeLine{00262\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00263\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00264\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00265\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (inCommandItem-\/>argument[0].toInt()\ ==\ 1)\ \{}}
+\DoxyCodeLine{00266\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mute-\/>rest();}}
+\DoxyCodeLine{00267\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}mr:1"{},\ InfoRequest\});}}
+\DoxyCodeLine{00268\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00269\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00270\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00271\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutesavefull"{})\ \{}}
+\DoxyCodeLine{00272\ \textcolor{comment}{\ \ \ \ \ \ \ \ mute-\/>saveFullMute();}}
+\DoxyCodeLine{00273\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}msf:1"{},\ InfoRequest\});}}
+\DoxyCodeLine{00274\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00275\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutesavehalf"{})\ \{}}
+\DoxyCodeLine{00276\ \textcolor{comment}{\ \ \ \ \ \ \ \ mute-\/>saveHalfMute();}}
+\DoxyCodeLine{00277\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}msh:1"{},\ InfoRequest\});}}
+\DoxyCodeLine{00278\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00279\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutesaverest"{})\ \{}}
+\DoxyCodeLine{00280\ \textcolor{comment}{\ \ \ \ \ \ \ \ mute-\/>saveRest();}}
+\DoxyCodeLine{00281\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}msr:1"{},\ InfoRequest\});}}
+\DoxyCodeLine{00282\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00283\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutefullmuteposition"{})\ \{}}
+\DoxyCodeLine{00284\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00285\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}mfmp:"{}\ +\ String(mute-\/>getFullMutePosition()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00286\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00287\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00288\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ mute-\/>setFullMutePosition(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00289\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}mfmp:"{}\ +\ String(mute-\/>getFullMutePosition()),\ InfoRequest\});}}
+\DoxyCodeLine{00290\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00291\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00292\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutehalfmuteposition"{})\ \{}}
+\DoxyCodeLine{00293\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00294\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}mhmp:"{}\ +\ String(mute-\/>getHalfMutePosition()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00295\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00296\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00297\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ mute-\/>setHalfMutePosition(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00298\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}mhmp:"{}\ +\ String(mute-\/>getHalfMutePosition()),\ InfoRequest\});}}
+\DoxyCodeLine{00299\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00300\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00301\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}muterestposition"{})\ \{}}
+\DoxyCodeLine{00302\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00303\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}mrp:"{}\ +\ String(mute-\/>getRestPosition()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00304\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00305\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00306\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ mute-\/>setRestPosition(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00307\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}mrp:"{}\ +\ String(mute-\/>getRestPosition()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00308\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00309\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00310\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutesustain"{})\ \{}}
+\DoxyCodeLine{00311\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00312\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}ms:"{}\ +\ String(mute-\/>getSustain()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00313\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00314\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00315\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (inCommandItem-\/>argument[0].toInt()\ ==\ 1)\ \{}}
+\DoxyCodeLine{00316\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mute-\/>setSustain(true);}}
+\DoxyCodeLine{00317\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00318\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mute-\/>setSustain(false);}}
+\DoxyCodeLine{00319\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00320\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}ms:"{}\ +\ String(mute-\/>getSustain()),\ InfoRequest\});}}
+\DoxyCodeLine{00321\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00322\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00323\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutebackoff"{})\ \{}}
+\DoxyCodeLine{00324\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00325\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}mbo:"{}\ +\ String(mute-\/>getBackOffTime()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00326\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00327\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00328\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ mute-\/>setBackOffTime(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00329\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}mbo:"{}\ +\ String(mute-\/>getBackOffTime()),\ InfoRequest\});}}
+\DoxyCodeLine{00330\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00331\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00332\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutehome"{})\ \{}}
+\DoxyCodeLine{00333\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!mute-\/>homeMute())\ \{}}
+\DoxyCodeLine{00334\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}mutehome:0"{},\ Error\});}}
+\DoxyCodeLine{00335\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00336\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}mutehome:1"{},\ InfoRequest\});}}
+\DoxyCodeLine{00337\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00338\ \textcolor{comment}{\ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00339\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::NotFound;}}
+\DoxyCodeLine{00340\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00341\ \textcolor{comment}{\ \ \ \ return\ eProcessResult::Ok;}}
+\DoxyCodeLine{00342\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00343\ \textcolor{comment}{}}
+\DoxyCodeLine{00344\ \textcolor{comment}{eProcessResult\ MuteControl::processSerialCommandHidden(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{00345\ \textcolor{comment}{\ \ \ \ processCommandItems(inCommandItem,\ serialCommandsMuteHidden,\ sizeof(serialCommandsMuteHidden)\ \ /\ sizeof(serialCommandItem));}}
+\DoxyCodeLine{00346\ \textcolor{comment}{}}
+\DoxyCodeLine{00347\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}helphidden"{})\ \{}}
+\DoxyCodeLine{00348\ \textcolor{comment}{\ \ \ \ \ \ \ \ addCommandHelp(serialCommandsMuteHidden,\ sizeof(serialCommandsMuteHidden)\ /\ sizeof(serialCommandItem),\ commandResponses,"{}"{});}}
+\DoxyCodeLine{00349\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::PassThrough;}}
+\DoxyCodeLine{00350\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00351\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutesethardwareposition"{})\ \{}}
+\DoxyCodeLine{00352\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00353\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00354\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00355\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setHardwarePosition(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00356\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}msp:"{}\ +\ inCommandItem-\/>argument[0],\ InfoRequest\});}}
+\DoxyCodeLine{00357\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00358\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00359\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutecompletetask"{})\ \{}}
+\DoxyCodeLine{00360\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (completeTask())\ \{}}
+\DoxyCodeLine{00361\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}mcpt:1"{},\ InfoRequest\});}}
+\DoxyCodeLine{00362\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00363\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}mcpt:0"{},\ InfoRequest\});}}
+\DoxyCodeLine{00364\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00365\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00366\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}muteautocorrect"{})\ \{}}
+\DoxyCodeLine{00367\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00368\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}mac:"{}\ +\ String(getAutoCorrect()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00369\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00370\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00371\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setAutoCorrect(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00372\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}mac:"{}\ +\ String(getAutoCorrect()),\ InfoRequest\});}}
+\DoxyCodeLine{00373\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00374\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00375\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutehomingsensed"{})\ \{}}
+\DoxyCodeLine{00376\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00377\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}mhmse:"{}\ +\ String(getHomingSensed()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00378\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00379\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00380\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutemovedirection"{})\ \{}}
+\DoxyCodeLine{00381\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00382\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}mmd:"{}\ +\ String(getMoveDirection()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00383\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00384\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00385\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutecurrentstep"{})\ \{}}
+\DoxyCodeLine{00386\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00387\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}mcs:"{}\ +\ String(getCurrentStep()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00388\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00389\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00390\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutehomingpoint"{})\ \{}}
+\DoxyCodeLine{00391\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00392\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 2))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00393\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}mhmp:"{}\ +\ String(getHomingPoint(inCommandItem-\/>argument[0].toInt(),\ inCommandItem-\/>argument[1].toInt())),\ InfoRequest\ \});}}
+\DoxyCodeLine{00394\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00395\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00396\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutehomingstage"{})\ \{}}
+\DoxyCodeLine{00397\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00398\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}mhms:"{}\ +\ String(getHomingStage()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00399\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00400\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00401\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}mutetmcinfo"{})\ \{}}
+\DoxyCodeLine{00402\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{\ getTMC2209Info();\ \}}}
+\DoxyCodeLine{00403\ \textcolor{comment}{\ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00404\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::NotFound;}}
+\DoxyCodeLine{00405\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00406\ \textcolor{comment}{\ \ \ \ return\ eProcessResult::Ok;}}
+\DoxyCodeLine{00407\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00408\ \textcolor{comment}{}}
+\DoxyCodeLine{00409\ \textcolor{comment}{serialCommandItem\ serialCommandsHarmonicSeriesHandler[]\ =\ \{}}
+\DoxyCodeLine{00410\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesfundamental"{},\ "{}bcu"{},\ "{}float"{},\ "{}Legacy\ command\ conversion"{}\ \},}}
+\DoxyCodeLine{00411\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesharmonic"{},\ "{}bch"{},\ "{}int"{},\ "{}Legacy\ command\ conversion"{}\ \},}}
+\DoxyCodeLine{00412\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesharmonicadd"{},\ "{}bcha"{},\ "{}int"{},\ "{}Legacy\ command\ conversion"{}\ \},}}
+\DoxyCodeLine{00413\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesharmonicbasenote"{},\ "{}bchb"{},\ "{}int"{},\ "{}Legacy\ command\ conversion"{}\ \},}}
+\DoxyCodeLine{00414\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesharmonicbasenote"{},\ "{}bchbn"{},\ "{}0-\/127"{},\ "{}Legacy\ command\ conversion"{}\},}}
+\DoxyCodeLine{00415\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesharmonicshift"{},\ "{}bchsh"{},\ "{}-\/32767-\/32767"{},\ "{}Legacy\ command\ conversion"{}\ \},}}
+\DoxyCodeLine{00416\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesharmonicshiftrange"{},\ "{}bchsr"{},\ "{}0-\/36"{},\ "{}Legacy\ command\ conversion"{}\ \},}}
+\DoxyCodeLine{00417\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesharmonicshift5"{},\ "{}bchs5"{},\ "{}-\/32767-\/32767"{},\ "{}Legacy\ command\ conversion"{}\ \},}}
+\DoxyCodeLine{00418\ \textcolor{comment}{}}
+\DoxyCodeLine{00419\ \textcolor{comment}{}}
+\DoxyCodeLine{00420\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesfundamental"{},\ "{}bhsu"{},\ "{}float"{},\ "{}Bow\ fundamental\ frequency,\ all\ harmonics\ are\ calculated\ from\ this\ number"{}\ \},}}
+\DoxyCodeLine{00421\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesharmonic"{},\ "{}bhsh"{},\ "{}int"{},\ "{}Bow\ motor\ speed\ in\ terms\ of\ a\ harmonic\ number.\ A\ ratio\ is\ taken\ from\ the\ given\ harmonic\ in\ the\ current\ harmonic\ list,\ the\ ratio\ is\ then\ multiplied\ by\ the\ bow\ fundamental\ frequency"{}\ \},}}
+\DoxyCodeLine{00422\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesharmonicadd"{},\ "{}bhsha"{},\ "{}int"{},\ "{}Additative\ version\ of\ bowcontrolharmonic,\ the\ number\ is\ given\ is\ added\ to\ the\ harmonic\ given"{}\ \},}}
+\DoxyCodeLine{00423\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesharmonicbase"{},\ "{}bhshb"{},\ "{}int"{},\ "{}Same\ as\ bowcontrolharmonic\ but\ where\ the\ harmonic\ number\ is\ based\ on\ a\ MIDI\ note\ given\ by\ bowcontrolbasenote"{}\ \},}}
+\DoxyCodeLine{00424\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesharmonicbasenote"{},\ "{}bhshbn"{},\ "{}0-\/127"{},\ "{}Sets\ the\ MIDI\ base\ note\ of\ the\ string,\ used\ in\ conjunction\ with\ bowcontrolharmonicbase"{}\},}}
+\DoxyCodeLine{00425\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesharmonicshift"{},\ "{}bhshsh"{},\ "{}-\/32767-\/32767"{},\ "{}Setting\ shift\ from\ the\ currently\ playing\ harmonic\ where\ 32767\ equals\ the\ entire\ harmonic\ shift\ range\ shifted\ up"{}\ \},}}
+\DoxyCodeLine{00426\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesharmonicshiftrange"{},\ "{}bhshsr"{},\ "{}0-\/36"{},\ "{}Set\ the\ number\ of\ harmonic\ numbers\ that\ constitutes\ the\ entire\ harmonic\ shift"{}\ \},}}
+\DoxyCodeLine{00427\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesharmonicshift5"{},\ "{}bhshs5"{},\ "{}-\/32767-\/32767"{},\ "{}Setting\ shift\ from\ the\ currently\ playing\ harmonic\ over\ 5\ octaves\ where\ 32767\ equals\ 5\ octaves\ shift\ up\ from\ the\ fundamental"{}\ \},}}
+\DoxyCodeLine{00428\ \textcolor{comment}{}}
+\DoxyCodeLine{00429\ \textcolor{comment}{}}
+\DoxyCodeLine{00430\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseries"{},\ "{}bhs"{},\ "{}int"{},\ "{}Get/set\ the\ current\ harmonic\ series"{}\ \},}}
+\DoxyCodeLine{00431\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesdata"{},\ "{}bhsd"{},\ "{}slot:name:ratios"{},\ "{}Sets\ all\ data\ for\ the\ harmonic\ series\ in\ the\ given\ slot"{}\ \},}}
+\DoxyCodeLine{00432\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesratio"{},\ "{}bhsr"{},\ "{}harmonic:ratio"{},\ "{}Sets\ the\ ratio\ of\ the\ given\ harmonic\ in\ current\ harmonic\ series,\ will\ increase\ the\ list\ size\ if\ needed\ to\ adress\ the\ harmonic"{}\ \},}}
+\DoxyCodeLine{00433\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesratioremove"{},\ "{}bhsrr"{},\ "{}ratio"{},\ "{}Remove\ the\ harmmonic\ ratio\ given\ in\ the\ current\ series\ and\ shift\ any\ ratios\ accordingly.\ Cannot\ remove\ all\ ratios"{}\},}}
+\DoxyCodeLine{00434\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriescount"{},\ "{}bhsc"{},\ "{}-\/"{},\ "{}Returns\ the\ number\ of\ harmonic\ series\ in\ the\ list\ and\ their\ IDs"{}\},}}
+\DoxyCodeLine{00435\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriessave"{},\ "{}bhss"{},\ "{}series:name"{},\ "{}Saves\ the\ current\ harmonic\ series\ in\ the\ slot\ given,\ or\ if\ the\ slot\ is\ out\ of\ range,\ creates\ a\ new\ one\ at\ the\ end\ of\ the\ list"{}\},}}
+\DoxyCodeLine{00436\ \textcolor{comment}{\ \ \ \ \{\ "{}bowharmonicseriesremove"{},\ "{}bhsrm"{},\ "{}series"{},\ "{}Remove\ the\ series\ given\ and\ shift\ any\ series\ accordingly.\ Cannot\ remove\ all\ series"{}\}}}
+\DoxyCodeLine{00437\ \textcolor{comment}{\};}}
+\DoxyCodeLine{00438\ \textcolor{comment}{}}
+\DoxyCodeLine{00439\ \textcolor{comment}{eProcessResult\ HarmonicSeriesHandler::processSerialCommand(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{00440\ \textcolor{comment}{}}
+\DoxyCodeLine{00441\ \textcolor{comment}{\ \ \ \ processCommandItems(inCommandItem,\ serialCommandsHarmonicSeriesHandler,\ sizeof(serialCommandsHarmonicSeriesHandler)\ \ /\ sizeof(serialCommandItem));}}
+\DoxyCodeLine{00442\ \textcolor{comment}{}}
+\DoxyCodeLine{00443\ \textcolor{comment}{\ \ \ \ eProcessResult\ processResult;}}
+\DoxyCodeLine{00444\ \textcolor{comment}{}}
+\DoxyCodeLine{00445\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}help"{})\ \{}}
+\DoxyCodeLine{00446\ \textcolor{comment}{\ \ \ \ \ \ \ \ addCommandHelp(serialCommandsHarmonicSeriesHandler,\ sizeof(serialCommandsHarmonicSeriesHandler)\ /\ sizeof(serialCommandItem),\ commandResponses,"{}"{});}}
+\DoxyCodeLine{00447\ \textcolor{comment}{\ \ \ \ \ \ \ \ processResult\ =\ eProcessResult::PassThrough;}}
+\DoxyCodeLine{00448\ \textcolor{comment}{\ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00449\ \textcolor{comment}{}}
+\DoxyCodeLine{00450\ \textcolor{comment}{\ \ \ \ \ \ \ \ processResult\ =\ processControlCommand(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{00451\ \textcolor{comment}{}}
+\DoxyCodeLine{00452\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ ((processResult\ !=\ eProcessResult::NotFound)\ \&\&\ (processResult\ !=\ eProcessResult::PassThrough))\ \{\ return\ processResult;\ \}}}
+\DoxyCodeLine{00453\ \textcolor{comment}{}}
+\DoxyCodeLine{00454\ \textcolor{comment}{\ \ \ \ \ \ \ \ processResult\ =\ processHarmonicSeriesCommand(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{00455\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00456\ \textcolor{comment}{}}
+\DoxyCodeLine{00457\ \textcolor{comment}{\ \ \ \ return\ processResult;}}
+\DoxyCodeLine{00458\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00459\ \textcolor{comment}{}}
+\DoxyCodeLine{00460\ \textcolor{comment}{eProcessResult\ HarmonicSeriesHandler::processControlCommand(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{00461\ \textcolor{comment}{}}
+\DoxyCodeLine{00462\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowcontrolfundamental"{})\ \{}}
+\DoxyCodeLine{00463\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00464\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bcu:"{}\ +\ String(fundamentalFrequency),\ InfoRequest\ \});}}
+\DoxyCodeLine{00465\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00466\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00467\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ fundamentalFrequency\ =\ inCommandItem-\/>argument[0].toFloat();}}
+\DoxyCodeLine{00468\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bcu:"{}\ +\ String(fundamentalFrequency),\ InfoRequest\});}}
+\DoxyCodeLine{00469\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00470\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00471\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowcontrolharmonic"{})\ \{}}
+\DoxyCodeLine{00472\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00473\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bch:"{}\ +\ String(harmonic),\ InfoRequest\ \});}}
+\DoxyCodeLine{00474\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00475\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00476\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!setHarmonic(inCommandItem-\/>argument[0].toInt()))\ \{}}
+\DoxyCodeLine{00477\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}ERROR\ setting\ harmonic\ to\ "{}\ +\ String(inCommandItem-\/>argument[0].toInt()),\ Error\});}}
+\DoxyCodeLine{00478\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00479\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bch:"{}\ +\ String(harmonic),\ InfoRequest\ \});}}
+\DoxyCodeLine{00480\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00481\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00482\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00483\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowcontrolharmonicadd"{})\ \{}}
+\DoxyCodeLine{00484\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00485\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bcha:"{}\ +\ String(harmonicAdd),\ InfoRequest\ \});}}
+\DoxyCodeLine{00486\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00487\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00488\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!setHarmonicAdd(inCommandItem-\/>argument[0].toInt()))\ \{}}
+\DoxyCodeLine{00489\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}ERROR\ setting\ harmonic\ add\ to\ "{}\ +\ String(inCommandItem-\/>argument[0].toInt()),\ Error\});}}
+\DoxyCodeLine{00490\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00491\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bcha:"{}\ +\ String(harmonicAdd),\ InfoRequest\ \});}}
+\DoxyCodeLine{00492\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00493\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00494\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00495\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowcontrolharmonicbase"{})\ \{}}
+\DoxyCodeLine{00496\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00497\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bchb:"{}\ +\ String(harmonic\ +\ baseNote),\ InfoRequest\ \});}}
+\DoxyCodeLine{00498\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00499\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00500\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setHarmonic(inCommandItem-\/>argument[0].toInt()\ -\/\ baseNote);}}
+\DoxyCodeLine{00501\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bchb:"{}\ +\ String(harmonic\ +\ baseNote),\ InfoRequest\ \});}}
+\DoxyCodeLine{00502\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bch:"{}\ +\ String(harmonic),\ InfoRequest\ \});}}
+\DoxyCodeLine{00503\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00504\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00505\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowcontrolharmonicbasenote"{})\ \{}}
+\DoxyCodeLine{00506\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00507\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bchbn:"{}\ +\ String(baseNote),\ InfoRequest\ \});}}
+\DoxyCodeLine{00508\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00509\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00510\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setBaseNote(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00511\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bchbn:"{}\ +\ String(baseNote),\ InfoRequest\ \});}}
+\DoxyCodeLine{00512\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00513\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00514\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowcontrolharmonicshift"{})\ \{}}
+\DoxyCodeLine{00515\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00516\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bchsh:"{}\ +\ String(harmonicShift),\ InfoRequest\ \});}}
+\DoxyCodeLine{00517\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00518\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00519\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setHarmonicShift(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00520\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bchsh:"{}\ +\ String(harmonicShift),\ InfoRequest\ \});}}
+\DoxyCodeLine{00521\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00522\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00523\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowcontrolharmonicshiftrange"{})\ \{}}
+\DoxyCodeLine{00524\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00525\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bchsr:"{}\ +\ String(harmonicShiftRange),\ InfoRequest\ \});}}
+\DoxyCodeLine{00526\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00527\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00528\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setHarmonicShiftRange(inCommandItem-\/>argument[0].toFloat());}}
+\DoxyCodeLine{00529\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bchsr:"{}\ +\ String(harmonicShiftRange),\ InfoRequest\ \});}}
+\DoxyCodeLine{00530\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00531\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00532\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowcontrolharmonicshift5"{})\ \{}}
+\DoxyCodeLine{00533\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00534\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bchs5:"{}\ +\ String(harmonicShift5),\ InfoRequest\ \});}}
+\DoxyCodeLine{00535\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00536\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00537\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setHarmonicShift5(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00538\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bchs5:"{}\ +\ String(harmonicShift5),\ InfoRequest\ \});}}
+\DoxyCodeLine{00539\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00540\ \textcolor{comment}{\ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00541\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::NotFound;}}
+\DoxyCodeLine{00542\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00543\ \textcolor{comment}{\ \ \ \ return\ eProcessResult::Ok;}}
+\DoxyCodeLine{00544\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00545\ \textcolor{comment}{}}
+\DoxyCodeLine{00546\ \textcolor{comment}{eProcessResult\ HarmonicSeriesHandler::processHarmonicSeriesCommand(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{00547\ \textcolor{comment}{}}
+\DoxyCodeLine{00548\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowharmonicseries"{})\ \{}}
+\DoxyCodeLine{00549\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00550\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bhs:"{}\ +\ String(currentHarmonicSeries),\ InfoRequest\ \});}}
+\DoxyCodeLine{00551\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00552\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00553\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!validateNumber(inCommandItem-\/>argument[0].toInt(),\ 0,\ harmonicSeriesList.series.size()))\ \{\ return\ eProcessResult::WrongArgumentValue;\ \}}}
+\DoxyCodeLine{00554\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ hs\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{00555\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (hs\ >\ (harmonicSeriesList.series.size()\ -\/\ 1))\ \{}}
+\DoxyCodeLine{00556\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}Harmonic\ list\ doesn't\ exist\ "{}\ +\ String(hs),\ Error\});}}
+\DoxyCodeLine{00557\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ eProcessResult::CommandFailed;}}
+\DoxyCodeLine{00558\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00559\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ loadHarmonicSeries(hs);}}
+\DoxyCodeLine{00560\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bhs:"{}\ +\ String(currentHarmonicSeries),\ InfoRequest\ \});}}
+\DoxyCodeLine{00561\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00562\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00563\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowharmonicseriesdata"{})\ \{}}
+\DoxyCodeLine{00564\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00565\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00566\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ int\ ser\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{00567\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!validateNumber(ser,\ 0,\ harmonicSeriesList.series.size()\ -\/\ 1))\ \{}}
+\DoxyCodeLine{00568\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}Harmonic\ series\ out\ of\ range"{},\ Error\});}}
+\DoxyCodeLine{00569\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ eProcessResult::CommandFailed;}}
+\DoxyCodeLine{00570\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00571\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ int\ j=0;}}
+\DoxyCodeLine{00572\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ String\ response\ =\ "{}bhsd"{};}}
+\DoxyCodeLine{00573\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ "{}:"{}\ +\ String(ser)\ +\ "{}:"{}\ +\ harmonicSeriesList.series[ser].Id;}}
+\DoxyCodeLine{00574\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ while\ (j\ <\ int(harmonicSeriesList.series[ser].ratio.size()))\ \{}}
+\DoxyCodeLine{00575\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ "{}:"{}\ +\ String(harmonicSeriesList.series[ser].ratio[j],\ 4);}}
+\DoxyCodeLine{00576\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ j++;}}
+\DoxyCodeLine{00577\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00578\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{response,\ InfoRequest\});}}
+\DoxyCodeLine{00579\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00580\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArgumentsMin(inCommandItem,\ commandResponses,\ 2))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00581\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ String\ response\ =\ "{}Setting\ harmonic\ series\ data:"{}\ +\ String(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00582\ \textcolor{comment}{}}
+\DoxyCodeLine{00583\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ while\ (inCommandItem-\/>argument[0].toInt()\ >\ harmonicSeriesList.series.size()\ -\/\ 1)\ \{}}
+\DoxyCodeLine{00584\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ harmonicSeriesList.addHarmonicSeries();}}
+\DoxyCodeLine{00585\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00586\ \textcolor{comment}{}}
+\DoxyCodeLine{00587\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ harmonicSeriesList.series[inCommandItem-\/>argument[0].toInt()].ratio.clear();}}
+\DoxyCodeLine{00588\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ harmonicSeriesList.series[inCommandItem-\/>argument[0].toInt()].Id\ =\ String(inCommandItem-\/>argument[1]);}}
+\DoxyCodeLine{00589\ \textcolor{comment}{}}
+\DoxyCodeLine{00590\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ for\ (int\ i\ =\ 1;\ i\ <\ (int(inCommandItem-\/>argument.size())\ -\/\ 1);\ i++)\ \{}}
+\DoxyCodeLine{00591\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ "{}:"{}\ +\ inCommandItem-\/>argument[i\ +\ 1];}}
+\DoxyCodeLine{00592\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ harmonicSeriesList.series[inCommandItem-\/>argument[0].toInt()].setHarmonic(i\ -\/\ 1,\ inCommandItem-\/>argument[i\ +\ 1].toFloat());}}
+\DoxyCodeLine{00593\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00594\ \textcolor{comment}{}}
+\DoxyCodeLine{00595\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (harmonicSeriesList.series[currentHarmonicSeries].ratio.size()\ ==\ 0)\ \{}}
+\DoxyCodeLine{00596\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Current\ harmonic\ series\ is\ zero,\ reloading"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00597\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ loadHarmonicSeries(currentHarmonicSeries);}}
+\DoxyCodeLine{00598\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00599\ \textcolor{comment}{}}
+\DoxyCodeLine{00600\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ updateHarmonicData();}}
+\DoxyCodeLine{00601\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{response,\ InfoRequest\});}}
+\DoxyCodeLine{00602\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00603\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00604\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowharmonicseriesratio"{})\ \{}}
+\DoxyCodeLine{00605\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 2))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00606\ \textcolor{comment}{\ \ \ \ \ \ \ \ harmonicSeriesList.series[currentHarmonicSeries].setHarmonic(inCommandItem-\/>argument[0].toInt(),\ inCommandItem-\/>argument[1].toFloat());}}
+\DoxyCodeLine{00607\ \textcolor{comment}{}}
+\DoxyCodeLine{00608\ \textcolor{comment}{\ \ \ \ \ \ \ \ updateHarmonicData();}}
+\DoxyCodeLine{00609\ \textcolor{comment}{}}
+\DoxyCodeLine{00610\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bhsr:"{}\ +\ String(inCommandItem-\/>argument[0].toInt())\ +\ "{}:"{}\ +\ String(inCommandItem-\/>argument[1].toFloat()),\ InfoRequest\});}}
+\DoxyCodeLine{00611\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00612\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowharmonicseriesratioremove"{})\ \{}}
+\DoxyCodeLine{00613\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00614\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (harmonicSeriesList.series[currentHarmonicSeries].ratio.size()\ <\ 2)\ \{}}
+\DoxyCodeLine{00615\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}Cannot\ remove\ all\ harmonics"{},\ Error\});}}
+\DoxyCodeLine{00616\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ return\ eProcessResult::CommandFailed;}}
+\DoxyCodeLine{00617\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00618\ \textcolor{comment}{}}
+\DoxyCodeLine{00619\ \textcolor{comment}{\ \ \ \ \ \ \ \ int\ i\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{00620\ \textcolor{comment}{\ \ \ \ \ \ \ \ harmonicSeriesList.series[currentHarmonicSeries].ratio.erase(harmonicSeriesList.series[currentHarmonicSeries].ratio.begin()\ +\ i);}}
+\DoxyCodeLine{00621\ \textcolor{comment}{\ \ \ \ \ \ \ \ updateHarmonicData();}}
+\DoxyCodeLine{00622\ \textcolor{comment}{}}
+\DoxyCodeLine{00623\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bhsrr:"{}\ +\ String(i),\ InfoRequest\});}}
+\DoxyCodeLine{00624\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00625\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowharmonicseriescount"{})\ \{}}
+\DoxyCodeLine{00626\ \textcolor{comment}{\ \ \ \ \ \ \ \ String\ response\ =\ "{}bhsc:"{}\ +\ String(harmonicSeriesList.series.size());}}
+\DoxyCodeLine{00627\ \textcolor{comment}{\ \ \ \ \ \ \ \ for\ (int\ i=0;\ i<harmonicSeriesList.series.size();\ i++)\ \{}}
+\DoxyCodeLine{00628\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ response\ +=\ "{}:"{}\ +\ harmonicSeriesList.series[i].Id;}}
+\DoxyCodeLine{00629\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00630\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ response,\ InfoRequest\ \});}}
+\DoxyCodeLine{00631\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00632\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowharmonicseriessave"{})\ \{}}
+\DoxyCodeLine{00633\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00634\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bhss:"{}\ +\ String(harmonicSeriesList.series.size()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00635\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00636\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 2))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00637\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!validateNumber(inCommandItem-\/>argument[0].toInt(),\ 0,\ harmonicSeriesList.series.size()\ -\/\ 1,\ true))\ \{}}
+\DoxyCodeLine{00638\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ harmonicSeriesList.addHarmonicSeries(inCommandItem-\/>argument[1],\ harmonicSeriesList.series[currentHarmonicSeries].ratio);}}
+\DoxyCodeLine{00639\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ currentHarmonicSeries\ =\ harmonicSeriesList.series.size()\ -\/\ 1;}}
+\DoxyCodeLine{00640\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00641\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ harmonicSeriesList.series[inCommandItem-\/>argument[0].toInt()]\ =\ harmonicSeriesList.series[currentHarmonicSeries];}}
+\DoxyCodeLine{00642\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ harmonicSeriesList.series[inCommandItem-\/>argument[0].toInt()].Id\ =\ inCommandItem-\/>argument[1];}}
+\DoxyCodeLine{00643\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ currentHarmonicSeries\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{00644\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00645\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bhss:"{}\ +\ String(currentHarmonicSeries),\ InfoRequest\ \});}}
+\DoxyCodeLine{00646\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00647\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00648\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowharmonicseriesremove"{})\ \{}}
+\DoxyCodeLine{00649\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00650\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00651\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00652\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ int\ listNo\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{00653\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Attempting\ to\ remove\ list\ "{}\ +\ String(listNo),\ debugPrintType::Debug);}}
+\DoxyCodeLine{00654\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!validateNumber(listNo,\ 0,\ harmonicSeriesList.series.size()\ -\/\ 1,\ true))\ \{\ return\ eProcessResult::WrongArgumentValue;\ \}}}
+\DoxyCodeLine{00655\ \textcolor{comment}{}}
+\DoxyCodeLine{00656\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ harmonicSeriesList.series.erase(}}
+\DoxyCodeLine{00657\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ harmonicSeriesList.series.begin()\ +\ listNo);}}
+\DoxyCodeLine{00658\ \textcolor{comment}{}}
+\DoxyCodeLine{00659\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ ((currentHarmonicSeries\ >=\ listNo)\ \&\&\ (currentHarmonicSeries\ >\ 0))\ \{}}
+\DoxyCodeLine{00660\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ currentHarmonicSeries-\/-\/;}}
+\DoxyCodeLine{00661\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00662\ \textcolor{comment}{}}
+\DoxyCodeLine{00663\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bhsrm:"{}\ +\ String(currentHarmonicSeries),\ InfoRequest\ \});}}
+\DoxyCodeLine{00664\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00665\ \textcolor{comment}{\ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00666\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::NotFound;}}
+\DoxyCodeLine{00667\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00668\ \textcolor{comment}{\ \ \ \ return\ eProcessResult::Ok;}}
+\DoxyCodeLine{00669\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00670\ \textcolor{comment}{}}
+\DoxyCodeLine{00671\ \textcolor{comment}{const\ serialCommandItem\ serialCommandsBowActuators[]\ =\ \{}}
+\DoxyCodeLine{00672\ \textcolor{comment}{\ \ \ \ \{\ "{}bowactuator"{},\ "{}ba"{},\ "{}actuator"{},\ "{}Sets\ and\ loads\ the\ actuator\ given"{}\},}}
+\DoxyCodeLine{00673\ \textcolor{comment}{\ \ \ \ \{\ "{}bowactuatorremove"{},\ "{}bar"{},\ "{}actuator"{},\ "{}Remove\ bow\ actuator"{}\},}}
+\DoxyCodeLine{00674\ \textcolor{comment}{\ \ \ \ \{\ "{}bowactuatorsave"{},\ "{}bas"{},\ "{}-\/"{},\ "{}Save\ current\ bow\ parameters\ into\ currently\ selected\ bow\ actuator"{}\ \},}}
+\DoxyCodeLine{00675\ \textcolor{comment}{\ \ \ \ \{\ "{}bowactuatordata"{},\ "{}bad"{},\ "{}actuator:engagepressure:stallpressure:restposition:id"{},\ "{}Set\ data\ of\ bow\ actuator\ [actuator]"{}\ \},}}
+\DoxyCodeLine{00676\ \textcolor{comment}{\ \ \ \ \{\ "{}bowactuatorcount"{},\ "{}bac"{},\ "{}-\/"{},\ "{}Returns\ the\ amount\ of\ saved\ bow\ actuators"{}\}}}
+\DoxyCodeLine{00677\ \textcolor{comment}{\};}}
+\DoxyCodeLine{00678\ \textcolor{comment}{}}
+\DoxyCodeLine{00679\ \textcolor{comment}{eProcessResult\ BowActuators::processSerialCommand(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{00680\ \textcolor{comment}{}}
+\DoxyCodeLine{00681\ \textcolor{comment}{\ \ \ \ processCommandItems(inCommandItem,\ serialCommandsBowActuators,\ sizeof(serialCommandsBowActuators)\ \ /\ sizeof(serialCommandItem));}}
+\DoxyCodeLine{00682\ \textcolor{comment}{}}
+\DoxyCodeLine{00683\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}help"{})\ \{}}
+\DoxyCodeLine{00684\ \textcolor{comment}{\ \ \ \ \ \ \ \ addCommandHelp(serialCommandsBowActuators,\ sizeof(serialCommandsBowActuators)\ /\ sizeof(serialCommandItem),\ commandResponses,"{}"{});}}
+\DoxyCodeLine{00685\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::PassThrough;}}
+\DoxyCodeLine{00686\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00687\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowactuator"{})\ \{}}
+\DoxyCodeLine{00688\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00689\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}ba:"{}\ +\ String(m\_currentBowActuator),\ debugPrintType::InfoRequest\ \});}}
+\DoxyCodeLine{00690\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00691\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00692\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!loadBowActuator(inCommandItem-\/>argument[0].toInt()))\ \{}}
+\DoxyCodeLine{00693\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ eProcessResult::CommandFailed;}}
+\DoxyCodeLine{00694\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00695\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}ba:"{}\ +\ String(m\_currentBowActuator),\ debugPrintType::InfoRequest\});}}
+\DoxyCodeLine{00696\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00697\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00698\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowactuatorsave"{})\ \{}}
+\DoxyCodeLine{00699\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 2))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00700\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!saveBowActuator(inCommandItem-\/>argument[0].toInt(),\ inCommandItem-\/>argument[1]))\ \{}}
+\DoxyCodeLine{00701\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ return\ eProcessResult::CommandFailed;}}
+\DoxyCodeLine{00702\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00703\ \textcolor{comment}{\ \ \ \ \ \ \ \ //uint8\_t\ actuator\ =\ getBowActuator();}}
+\DoxyCodeLine{00704\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bas:"{}\ +\ String(m\_currentBowActuator)\ +\ "{}:"{}\ +\ getBowActuatorID(m\_currentBowActuator),\ InfoRequest\});}}
+\DoxyCodeLine{00705\ \textcolor{comment}{\ \ \ \ \}\ \ else}}
+\DoxyCodeLine{00706\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowactuatordata"{})\ \{}}
+\DoxyCodeLine{00707\ \textcolor{comment}{\ \ \ \ \ \ \ \ int8\_t\ bowIndex;}}
+\DoxyCodeLine{00708\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00709\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ bowIndex\ =\ m\_currentBowActuator;}}
+\DoxyCodeLine{00710\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (checkArguments(inCommandItem,\ commandResponses,\ 1,\ true))\ \{}}
+\DoxyCodeLine{00711\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bowIndex\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{00712\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (bowIndex\ >\ (getBowActuatorCount()\ -\/\ 1))\ \{}}
+\DoxyCodeLine{00713\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ eProcessResult::WrongArgumentValue;}}
+\DoxyCodeLine{00714\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00715\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00716\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ eProcessResult::WrongArgumentCount;}}
+\DoxyCodeLine{00717\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00718\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00719\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 5))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00720\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setBowActuatorData(inCommandItem-\/>argument[0].toInt(),\ inCommandItem-\/>argument[1].toInt(),\ inCommandItem-\/>argument[2].toInt(),\ inCommandItem-\/>argument[3].toInt(),\ inCommandItem-\/>argument[4]);}}
+\DoxyCodeLine{00721\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ bowIndex\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{00722\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00723\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bad:"{}\ +\ String(bowIndex)\ +\ "{}:"{}\ +\ getBowActuatorFirstTouchPressure(bowIndex)\ +\ "{}:"{}\ \ +\ getBowActuatorStallPressure(bowIndex)\ +\ "{}:"{}\ +}}
+\DoxyCodeLine{00724\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ getBowActuatorRestPosition(bowIndex)\ +\ "{}:"{}\ +\ getBowActuatorID(bowIndex),\ InfoRequest\ \});}}
+\DoxyCodeLine{00725\ \textcolor{comment}{\ \ \ \ \}\ \ else}}
+\DoxyCodeLine{00726\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowactuatorcount"{})\ \{}}
+\DoxyCodeLine{00727\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bac:"{}\ +\ String(getBowActuatorCount()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00728\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00729\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowactuatorremove"{})\ \{}}
+\DoxyCodeLine{00730\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!request)\ \{}}
+\DoxyCodeLine{00731\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00732\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!removeBowActuator(inCommandItem-\/>argument[0].toInt()))\ \{\ return\ eProcessResult::CommandFailed;\ \}}}
+\DoxyCodeLine{00733\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bar:"{}\ +\ String(inCommandItem-\/>argument[0].toInt()),\ InfoRequest\});}}
+\DoxyCodeLine{00734\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00735\ \textcolor{comment}{\ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00736\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::NotFound;}}
+\DoxyCodeLine{00737\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00738\ \textcolor{comment}{\ \ \ \ return\ eProcessResult::Ok;}}
+\DoxyCodeLine{00739\ \textcolor{comment}{}}
+\DoxyCodeLine{00740\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00741\ \textcolor{comment}{}}
+\DoxyCodeLine{00742\ \textcolor{comment}{}}
+\DoxyCodeLine{00743\ \textcolor{comment}{BowActuators::BowActuators(CalibrationData\ *t\_calibrationDataConnect)}}
+\DoxyCodeLine{00744\ \textcolor{comment}{\{}}
+\DoxyCodeLine{00745\ \textcolor{comment}{\ \ \ \ m\_calibrationDataConnect\ =\ t\_calibrationDataConnect;}}
+\DoxyCodeLine{00746\ \textcolor{comment}{\ \ \ \ m\_currentBowActuator\ =\ 0;}}
+\DoxyCodeLine{00747\ \textcolor{comment}{\ \ \ \ //m\_bowActuator.push\_back(\{0,\ 65535,\ 0,\ "{}default"{}\});}}
+\DoxyCodeLine{00748\ \textcolor{comment}{\ \ \ \ setBowActuatorData(0,\ 2000,\ 50000,\ 0,\ "{}default"{});}}
+\DoxyCodeLine{00749\ \textcolor{comment}{\ \ \ \ loadBowActuator();}}
+\DoxyCodeLine{00750\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00751\ \textcolor{comment}{}}
+\DoxyCodeLine{00752\ \textcolor{comment}{BowActuators::\string~BowActuators()}}
+\DoxyCodeLine{00753\ \textcolor{comment}{\{}}
+\DoxyCodeLine{00754\ \textcolor{comment}{\ \ \ \ //dtor}}
+\DoxyCodeLine{00755\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00756\ \textcolor{comment}{}}
+\DoxyCodeLine{00757\ \textcolor{comment}{}}
+\DoxyCodeLine{00758\ \textcolor{comment}{const\ serialCommandItem\ serialCommandsDCMotor[]\ =\ \{}}
+\DoxyCodeLine{00759\ \textcolor{comment}{\ \ \ \ \{\ "{}bowmotorrun"{},\ "{}bmr"{},\ "{}1|0"{},\ "{}Set\ bow\ motor\ run\ on/off"{}\ \},}}
+\DoxyCodeLine{00760\ \textcolor{comment}{\ \ \ \ \{\ "{}bowmotordirectpwm"{},\ "{}bmdp"{},\ "{}0-\/65535"{},\ "{}Bow\ motor\ direct\ power\ in\ 16-\/bit\ PWM\ values,\ requires\ that\ the\ PID\ is\ turned\ off"{}\ \},}}
+\DoxyCodeLine{00761\ \textcolor{comment}{\ \ \ \ \{\ "{}bowmotorvoltage"{},\ "{}bmv"{},\ "{}float"{},\ "{}Bow\ motor\ voltage"{}\},}}
+\DoxyCodeLine{00762\ \textcolor{comment}{\ \ \ \ \{\ "{}bowmotorcurrent"{},\ "{}bmc"{},\ "{}float"{},\ "{}Bow\ motor\ reported\ current\ use"{}\ \},}}
+\DoxyCodeLine{00763\ \textcolor{comment}{\ \ \ \ \{\ "{}bowmotorcurrentlimit"{},\ "{}bmcl"{},\ "{}float"{},\ "{}Bow\ motor\ current\ limit\ (A)-\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}\ \},}}
+\DoxyCodeLine{00764\ \textcolor{comment}{\ \ \ \ \{\ "{}bowmotorpowerlimit"{},\ "{}bmpl"{},\ "{}float"{},\ "{}Bow\ motor\ power\ limit\ (W)\ -\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}\ \},}}
+\DoxyCodeLine{00765\ \textcolor{comment}{\ \ \ \ \{\ "{}bowmotorfrequency"{},\ "{}bmf"{},\ "{}-\/"{},\ "{}Bow\ motor\ reported\ frequency"{}\},}}
+\DoxyCodeLine{00766\ \textcolor{comment}{\ \ \ \ \{\ "{}bowmotoremergencystop"{},\ "{}bmes"{},\ "{}ms\ (0-\/65535)"{},\ "{}Immediately\ stops\ the\ bowing\ motor\ and\ doesn't\ allow\ it\ to\ start\ again\ until\ the\ cool\ down\ period\ given\ in\ the\ first\ argument\ has\ lapsed\ (milliseconds)"{}\},}}
+\DoxyCodeLine{00767\ \textcolor{comment}{\ \ \ \ \{\ "{}bowmotorpwmmin"{},\ "{}bmpi"{},\ "{}-\/"{},\ "{}Bow\ motor\ minimum\ PWM\ (for\ calibration)"{}\},}}
+\DoxyCodeLine{00768\ \textcolor{comment}{\ \ \ \ \{\ "{}bowmotorpwmmax"{},\ "{}bmpx"{},\ "{}-\/"{},\ "{}Bow\ motor\ maximum\ PWM\ (for\ calibration)"{}\}}}
+\DoxyCodeLine{00769\ \textcolor{comment}{\};}}
+\DoxyCodeLine{00770\ \textcolor{comment}{}}
+\DoxyCodeLine{00771\ \textcolor{comment}{eProcessResult\ DCMotorControl::processSerialCommand(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{00772\ \textcolor{comment}{}}
+\DoxyCodeLine{00773\ \textcolor{comment}{\ \ \ \ processCommandItems(inCommandItem,\ serialCommandsDCMotor,\ sizeof(serialCommandsDCMotor)\ /\ sizeof(serialCommandItem));}}
+\DoxyCodeLine{00774\ \textcolor{comment}{}}
+\DoxyCodeLine{00775\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}help"{})\ \{}}
+\DoxyCodeLine{00776\ \textcolor{comment}{\ \ \ \ \ \ \ \ addCommandHelp(serialCommandsDCMotor,\ sizeof(serialCommandsDCMotor)\ /\ sizeof(serialCommandItem),\ commandResponses,"{}"{});}}
+\DoxyCodeLine{00777\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::PassThrough;}}
+\DoxyCodeLine{00778\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00779\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmotorrun"{})\ \{}}
+\DoxyCodeLine{00780\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00781\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bmr:"{}\ +\ String(pRun),\ InfoRequest\ \});}}
+\DoxyCodeLine{00782\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00783\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00784\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setBowMotorRun(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00785\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (inCommandItem-\/>argument[0].toInt()\ >\ 0)\ \{}}
+\DoxyCodeLine{00786\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ run\ =\ 1;}}
+\DoxyCodeLine{00787\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dcMotorControl-\/>enableMotorPower();}}
+\DoxyCodeLine{00788\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00789\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ run\ =\ 0;}}
+\DoxyCodeLine{00790\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dcMotorControl-\/>disableMotorPower();}}
+\DoxyCodeLine{00791\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00792\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bmr:"{}\ +\ String(pRun),\ InfoRequest\});}}
+\DoxyCodeLine{00793\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00794\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00795\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmotordirectpwm"{})\ \{}}
+\DoxyCodeLine{00796\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!request)\ \{}}
+\DoxyCodeLine{00797\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00798\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setSpeedPWM(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00799\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00800\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bmdp:"{}\ +\ String(getSpeedPWM()),\ debugPrintType::InfoRequest\});}}
+\DoxyCodeLine{00801\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00802\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmotorvoltage"{})\ \{}}
+\DoxyCodeLine{00803\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00804\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bmv:"{}\ +\ String(motorVoltage),\ InfoRequest\ \});}}
+\DoxyCodeLine{00805\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00806\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00807\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setMotorVoltage(inCommandItem-\/>argument[0].toFloat());}}
+\DoxyCodeLine{00808\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bmv:"{}\ +\ String(motorVoltage),\ InfoRequest\});}}
+\DoxyCodeLine{00809\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00810\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00811\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmotorcurrent"{})\ \{}}
+\DoxyCodeLine{00812\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00813\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bmc:"{}\ +\ String(getMotorCurrent()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00814\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00815\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00816\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmotorcurrentlimit"{})\ \{}}
+\DoxyCodeLine{00817\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00818\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bmcl:"{}\ +\ String(motorCurrentLimit),\ InfoRequest\ \});}}
+\DoxyCodeLine{00819\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00820\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00821\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setMotorMaxCurrent(inCommandItem-\/>argument[0].toFloat());}}
+\DoxyCodeLine{00822\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bmcl"{}\ +\ String(motorCurrentLimit),\ InfoRequest\});}}
+\DoxyCodeLine{00823\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00824\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00825\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmotorpowerlimit"{})\ \{}}
+\DoxyCodeLine{00826\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00827\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bmpl:"{}\ +\ String(motorPowerLimit),\ InfoRequest\ \});}}
+\DoxyCodeLine{00828\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00829\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00830\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setMotorMaxPower(inCommandItem-\/>argument[0].toFloat());}}
+\DoxyCodeLine{00831\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bmpl:"{}\ +\ String(motorPowerLimit),\ InfoRequest\});}}
+\DoxyCodeLine{00832\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00833\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00834\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmotorfrequency"{})\ \{}}
+\DoxyCodeLine{00835\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00836\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bmf:"{}\ +\ String(getAverageTachometerFreq()),\ InfoRequest\ \});}}
+\DoxyCodeLine{00837\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00838\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00839\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmotoremergencystop"{})\ \{}}
+\DoxyCodeLine{00840\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00841\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00842\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00843\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ emergencyDisable(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00844\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bmes:"{}\ +\ inCommandItem-\/>argument[0],\ InfoRequest\});}}
+\DoxyCodeLine{00845\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}EMERGENCY\ STOP!\ Cooling\ down\ for\ "{}\ +\ inCommandItem-\/>argument[0]\ +\ "{}\ ms"{},\ debugPrintType::Error\});}}
+\DoxyCodeLine{00846\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00847\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00848\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmotorpwmmin"{})\ \{}}
+\DoxyCodeLine{00849\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!request)\ \{}}
+\DoxyCodeLine{00850\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00851\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setMinSpeedPWM(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00852\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00853\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bmpi:"{}\ +\ String(minSpeedPWM),\ InfoRequest\ \});}}
+\DoxyCodeLine{00854\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00855\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmotorpwmmax"{})\ \{}}
+\DoxyCodeLine{00856\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!request)\ \{}}
+\DoxyCodeLine{00857\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00858\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setMaxSpeedPWM(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{00859\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00860\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bmpx:"{}\ +\ String(maxSpeedPWM),\ InfoRequest\ \});}}
+\DoxyCodeLine{00861\ \textcolor{comment}{\ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00862\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::NotFound;}}
+\DoxyCodeLine{00863\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00864\ \textcolor{comment}{\ \ \ \ return\ eProcessResult::Ok;}}
+\DoxyCodeLine{00865\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00866\ \textcolor{comment}{}}
+\DoxyCodeLine{00867\ \textcolor{comment}{eProcessResult\ DCMotorControl::processSerialCommandHidden(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{00868\ \textcolor{comment}{\ \ \ \ return\ eProcessResult::NotFound;}}
+\DoxyCodeLine{00869\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00870\ \textcolor{comment}{}}
+\DoxyCodeLine{00871\ \textcolor{comment}{String\ DCMotorControl::dumpData()\ \{}}
+\DoxyCodeLine{00872\ \textcolor{comment}{\ \ \ \ String\ dump\ =\ "{}"{};}}
+\DoxyCodeLine{00873\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bmv:"{}\ +\ String(motorVoltage)\ +\ "{},"{};}}
+\DoxyCodeLine{00874\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bmcl:"{}\ +\ String(motorCurrentLimit)\ +\ "{},"{};}}
+\DoxyCodeLine{00875\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bmpl:"{}\ +\ String(motorPowerLimit)\ +\ "{},"{};}}
+\DoxyCodeLine{00876\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bmpi:"{}\ +\ String(minSpeedPWM)\ +\ "{},"{};}}
+\DoxyCodeLine{00877\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bmpx:"{}\ +\ String(maxSpeedPWM);}}
+\DoxyCodeLine{00878\ \textcolor{comment}{\ \ \ \ return\ dump;}}
+\DoxyCodeLine{00879\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00880\ \textcolor{comment}{}}
+\DoxyCodeLine{00881\ \textcolor{comment}{//\ ***\ POWER\ SUPPLY\ FUNCTIONS}}
+\DoxyCodeLine{00882\ \textcolor{comment}{}}
+\DoxyCodeLine{00883\ \textcolor{comment}{}}
+\DoxyCodeLine{00884\ \textcolor{comment}{const\ serialCommandItem\ serialCommandsPID[]\ =\ \{}}
+\DoxyCodeLine{00885\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpidtargetfreq"{},\ "{}bptf"{},\ "{}float"{},\ "{}Sets\ the\ PID\ target\ frequency"{}\ \},}}
+\DoxyCodeLine{00886\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpidki"{},\ "{}bpki"{},\ "{}float"{},\ "{}Sets\ the\ Ki\ parameter\ of\ the\ PID\ of\ the\ selected\ bow"{}\ \},}}
+\DoxyCodeLine{00887\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpidkp"{},\ "{}bpkp"{},\ "{}float"{},\ "{}Sets\ the\ Kp\ parameter\ of\ the\ PID\ of\ the\ selected\ bow"{}\ \},}}
+\DoxyCodeLine{00888\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpidkd"{},\ "{}bpkd"{},\ "{}float"{},\ "{}Sets\ the\ Kd\ parameter\ of\ the\ PID\ of\ the\ selected\ bow"{}\ \},}}
+\DoxyCodeLine{00889\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpidintegratorerror"{},\ "{}bpie"{},\ "{}float"{},\ "{}Sets\ the\ lower\ threshold\ of\ error\ values\ for\ the\ PID\ integrator\ to\ ignore\ of\ the\ selected\ bow"{}\ \},}}
+\DoxyCodeLine{00890\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpidr"{},\ "{}bpir"{},\ "{}-\/"{},\ "{}Resets\ the\ PID\ of\ the\ selected\ bow"{}\ \},}}
+\DoxyCodeLine{00891\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpidmaxerror"{},\ "{}bpme"{},\ "{}float"{},\ "{}Maximum\ error\ to\ correct\ in\ each\ PID\ loop,\ essentially\ sets\ acceleration"{}\ \},}}
+\DoxyCodeLine{00892\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpidpeakerror"{},\ "{}bpperr"{},\ "{}float"{},\ "{}Get\ latest\ PID\ peak\ error"{}\},}}
+\DoxyCodeLine{00893\ \textcolor{comment}{}}
+\DoxyCodeLine{00894\ \textcolor{comment}{\ \ \ \ \{\ "{}bowmotorspeedmax"{},\ "{}bmsx"{},\ "{}float"{},\ "{}Bow\ motor\ maximum\ speed\ limit"{}\ \},}}
+\DoxyCodeLine{00895\ \textcolor{comment}{\ \ \ \ \{\ "{}bowmotorspeedmin"{},\ "{}bmsi"{},\ "{}float"{},\ "{}Bow\ motor\ minimum\ speed\ limit"{}\},}}
+\DoxyCodeLine{00896\ \textcolor{comment}{}}
+\DoxyCodeLine{00897\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpidtargetfreq"{},\ "{}bcf"{},\ "{}float"{},\ "{}Legacy\ command\ conversion"{}\ \},}}
+\DoxyCodeLine{00898\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpidtargetfreq"{},\ "{}bowcontrolfrequency"{},\ "{}float"{},\ "{}Legacy\ command\ conversion"{}\ \},}}
+\DoxyCodeLine{00899\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpidtargetfreq"{},\ "{}bptf"{},\ "{}float"{},\ "{}Sets\ the\ PID\ target\ frequency"{}\ \}}}
+\DoxyCodeLine{00900\ \textcolor{comment}{\};}}
+\DoxyCodeLine{00901\ \textcolor{comment}{}}
+\DoxyCodeLine{00902\ \textcolor{comment}{const\ serialCommandItem\ serialCommandsPIDHidden[]\ =\ \ \{}}
+\DoxyCodeLine{00903\ \textcolor{comment}{\ \ \ \ \{\ "{}bowmeasuretimetotarget"{},\ "{}bmtt"{},\ "{}float"{},\ "{}Measure\ the\ time\ it\ takes\ to\ change\ from\ the\ current\ frequency\ to\ the\ target\ frequency"{}\ \}}}
+\DoxyCodeLine{00904\ \textcolor{comment}{\};}}
+\DoxyCodeLine{00905\ \textcolor{comment}{}}
+\DoxyCodeLine{00906\ \textcolor{comment}{eProcessResult\ PIDController::processSerialCommand(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{00907\ \textcolor{comment}{}}
+\DoxyCodeLine{00908\ \textcolor{comment}{\ \ \ \ processCommandItems(inCommandItem,\ serialCommandsPID,\ sizeof(serialCommandsPID)\ \ /\ sizeof(serialCommandItem));}}
+\DoxyCodeLine{00909\ \textcolor{comment}{}}
+\DoxyCodeLine{00910\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}help"{})\ \{}}
+\DoxyCodeLine{00911\ \textcolor{comment}{\ \ \ \ \ \ \ \ addCommandHelp(serialCommandsPID,\ sizeof(serialCommandsPID)\ /\ sizeof(serialCommandItem),\ commandResponses,"{}"{});}}
+\DoxyCodeLine{00912\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::PassThrough;}}
+\DoxyCodeLine{00913\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00914\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpidtargetfreq"{})\ \{}}
+\DoxyCodeLine{00915\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00916\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bptf:"{}\ +\ String(pidTargetSpeed),\ InfoRequest\ \});}}
+\DoxyCodeLine{00917\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00918\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00919\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setPIDTarget(inCommandItem-\/>argument[0].toFloat());}}
+\DoxyCodeLine{00920\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bptf:"{}\ +\ String(pidTargetSpeed),\ InfoRequest\ \});}}
+\DoxyCodeLine{00921\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00922\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00923\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpidki"{})\ \{}}
+\DoxyCodeLine{00924\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00925\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bpki:"{}\ +\ String(Ki),\ InfoRequest\ \});}}
+\DoxyCodeLine{00926\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00927\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00928\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Ki\ =\ inCommandItem-\/>argument[0].toFloat();}}
+\DoxyCodeLine{00929\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bpki:"{}\ +\ String(Ki),\ InfoRequest\});}}
+\DoxyCodeLine{00930\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00931\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00932\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpidkp"{})\ \{}}
+\DoxyCodeLine{00933\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00934\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bpkp:"{}\ +\ String(Kp),\ InfoRequest\ \});}}
+\DoxyCodeLine{00935\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00936\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00937\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Kp\ =\ inCommandItem-\/>argument[0].toFloat();}}
+\DoxyCodeLine{00938\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bpkp:"{}\ +\ String(Kp),\ InfoRequest\});}}
+\DoxyCodeLine{00939\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00940\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00941\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpidkd"{})\ \{}}
+\DoxyCodeLine{00942\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00943\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bpkd:"{}\ +\ String(Kd),\ InfoRequest\ \});}}
+\DoxyCodeLine{00944\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00945\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00946\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Kd\ =\ inCommandItem-\/>argument[0].toFloat();}}
+\DoxyCodeLine{00947\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bpkd:"{}\ +\ String(Kd),\ InfoRequest\});}}
+\DoxyCodeLine{00948\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00949\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00950\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpidr"{})\ \{}}
+\DoxyCodeLine{00951\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!request)\ \{}}
+\DoxyCodeLine{00952\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bowpidr:1"{},\ InfoRequest\});}}
+\DoxyCodeLine{00953\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ previousError\ =\ 0;}}
+\DoxyCodeLine{00954\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ pidReset();}}
+\DoxyCodeLine{00955\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00956\ \textcolor{comment}{\ \ \ \ \}\ \ else}}
+\DoxyCodeLine{00957\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpidintegratorerror"{})\ \{}}
+\DoxyCodeLine{00958\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00959\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bpie:"{}\ +\ String(integratorIgnoreBelow),\ InfoRequest\ \});}}
+\DoxyCodeLine{00960\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00961\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00962\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ integratorIgnoreBelow\ =\ inCommandItem-\/>argument[0].toFloat();\ //String(serialCommand.substring(2,serialCommand.length())).toFloat();}}
+\DoxyCodeLine{00963\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bpie:"{}\ +\ String(integratorIgnoreBelow),\ InfoRequest\});}}
+\DoxyCodeLine{00964\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00965\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00966\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpidmaxerror"{})\ \{}}
+\DoxyCodeLine{00967\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00968\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bpme:"{}\ +\ String(pidMaxError),\ InfoRequest\ \});}}
+\DoxyCodeLine{00969\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00970\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00971\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ pidMaxError\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{00972\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bpme:"{}\ +\ String(pidMaxError),\ InfoRequest\});}}
+\DoxyCodeLine{00973\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00974\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00975\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpidpeakerror"{})\ \{}}
+\DoxyCodeLine{00976\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00977\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bpperr:"{}\ +\ String(pidPeakError),\ InfoRequest\ \});}}
+\DoxyCodeLine{00978\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ pidPeakError\ =\ 0;}}
+\DoxyCodeLine{00979\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00980\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00981\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmotorspeedmax"{})\ \{}}
+\DoxyCodeLine{00982\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00983\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bmsx:"{}\ +\ String(maxSpeedHz),\ InfoRequest\ \});}}
+\DoxyCodeLine{00984\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00985\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00986\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setMaxSpeedHz(inCommandItem-\/>argument[0].toFloat());\ //String(serialCommand.substring(1,serialCommand.length())).toFloat();}}
+\DoxyCodeLine{00987\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bmsx:"{}\ +\ String(maxSpeedHz),\ InfoRequest\});}}
+\DoxyCodeLine{00988\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00989\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{00990\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmotorspeedmin"{})\ \{}}
+\DoxyCodeLine{00991\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{00992\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bmsi:"{}\ +\ String(minSpeedHz),\ InfoRequest\ \});}}
+\DoxyCodeLine{00993\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00994\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{00995\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setMinSpeedHz(inCommandItem-\/>argument[0].toFloat());}}
+\DoxyCodeLine{00996\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bmsi:"{}\ +\ String(minSpeedHz),\ InfoRequest\});}}
+\DoxyCodeLine{00997\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00998\ \textcolor{comment}{\ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00999\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::NotFound;}}
+\DoxyCodeLine{01000\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{01001\ \textcolor{comment}{\ \ \ \ return\ eProcessResult::Ok;}}
+\DoxyCodeLine{01002\ \textcolor{comment}{\}}}
+\DoxyCodeLine{01003\ \textcolor{comment}{}}
+\DoxyCodeLine{01004\ \textcolor{comment}{}}
+\DoxyCodeLine{01005\ \textcolor{comment}{eProcessResult\ PIDController::processSerialCommandHidden(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{01006\ \textcolor{comment}{}}
+\DoxyCodeLine{01007\ \textcolor{comment}{\ \ \ \ processCommandItems(inCommandItem,\ serialCommandsPIDHidden,\ sizeof(serialCommandsPIDHidden)\ \ /\ sizeof(serialCommandItem));}}
+\DoxyCodeLine{01008\ \textcolor{comment}{}}
+\DoxyCodeLine{01009\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmeasuretimetotarget"{})\ \{}}
+\DoxyCodeLine{01010\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!request)\ \{}}
+\DoxyCodeLine{01011\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01012\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ float\ startSpeed\ =\ pidTargetSpeed;}}
+\DoxyCodeLine{01013\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ float\ endSpeed\ =\ inCommandItem-\/>argument[0].toFloat();}}
+\DoxyCodeLine{01014\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ float\ time\ =\ measureTimeToTarget(endSpeed);}}
+\DoxyCodeLine{01015\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (time\ ==\ -\/1)\ \{}}
+\DoxyCodeLine{01016\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bmtt:0"{},\ InfoRequest\});}}
+\DoxyCodeLine{01017\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ eProcessResult::CommandFailed;}}
+\DoxyCodeLine{01018\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01019\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bmtt:"{}\ +\ String(time)\ +\ "{}:"{}\ +\ String(startSpeed)\ +\ "{}:"{}\ +\ String(endSpeed),\ InfoRequest\});}}
+\DoxyCodeLine{01020\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01021\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01022\ \textcolor{comment}{\ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01023\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::NotFound;}}
+\DoxyCodeLine{01024\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{01025\ \textcolor{comment}{\ \ \ \ return\ eProcessResult::Ok;}}
+\DoxyCodeLine{01026\ \textcolor{comment}{\}}}
+\DoxyCodeLine{01027\ \textcolor{comment}{}}
+\DoxyCodeLine{01028\ \textcolor{comment}{}}
+\DoxyCodeLine{01029\ \textcolor{comment}{String\ PIDController::dumpData()\ \{}}
+\DoxyCodeLine{01030\ \textcolor{comment}{\ \ \ \ String\ dump\ =\ "{}"{};}}
+\DoxyCodeLine{01031\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bpki:"{}\ +\ String(Ki)\ +\ "{},"{};}}
+\DoxyCodeLine{01032\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bpkp:"{}\ +\ String(Kp)\ +\ "{},"{};}}
+\DoxyCodeLine{01033\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bpkd:"{}\ +\ String(Kd)\ +\ "{},"{};}}
+\DoxyCodeLine{01034\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bpie:"{}\ +\ String(integratorIgnoreBelow)\ +\ "{},"{};}}
+\DoxyCodeLine{01035\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bpme:"{}\ +\ String(pidMaxError)\ +\ "{},"{};}}
+\DoxyCodeLine{01036\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bmsx:"{}\ +\ String(maxSpeedHz)\ +\ "{},"{};}}
+\DoxyCodeLine{01037\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bmsi:"{}\ +\ String(minSpeedHz);}}
+\DoxyCodeLine{01038\ \textcolor{comment}{}}
+\DoxyCodeLine{01039\ \textcolor{comment}{\ \ \ \ return\ dump;}}
+\DoxyCodeLine{01040\ \textcolor{comment}{\}}}
+\DoxyCodeLine{01041\ \textcolor{comment}{}}
+\DoxyCodeLine{01042\ \textcolor{comment}{}}
+\DoxyCodeLine{01043\ \textcolor{comment}{void\ PIDController::dir(std::vector<commandResponse>\ *commandResponses,\ String\ longPrefix,\ String\ shortPrefix)\ \{}}
+\DoxyCodeLine{01044\ \textcolor{comment}{\ \ \ \ longPrefix\ +=\ prefix[0]\ +\ "{}."{};}}
+\DoxyCodeLine{01045\ \textcolor{comment}{\ \ \ \ shortPrefix\ +=\ prefix[1]\ +\ "{}."{};}}
+\DoxyCodeLine{01046\ \textcolor{comment}{\ \ \ \ String\ longName,\ shortName;}}
+\DoxyCodeLine{01047\ \textcolor{comment}{}}
+\DoxyCodeLine{01048\ \textcolor{comment}{\ \ \ \ dirProto(commandResponses,\ longPrefix,\ shortPrefix,\ serialCommandsPID,\ sizeof(serialCommandsPID)\ /\ sizeof(serialCommandItem),}}
+\DoxyCodeLine{01049\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ serialCommandsPIDHidden,\ sizeof(serialCommandsPIDHidden)\ /\ sizeof(serialCommandItem));}}
+\DoxyCodeLine{01050\ \textcolor{comment}{\}}}
+\DoxyCodeLine{01051\ \textcolor{comment}{}}
+\DoxyCodeLine{01052\ \textcolor{comment}{const\ serialCommandItem\ serialCommandsBowPressure[]\ =\ \{}}
+\DoxyCodeLine{01053\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpressurebaseline"{},\ "{}bpb"{},\ "{}0-\/65535"{},\ "{}Bow\ pressure\ baseline,\ modulation\ is\ added\ to\ this\ point\ upward"{}\ \},}}
+\DoxyCodeLine{01054\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpressuremodifier"{},\ "{}bpm"{},\ "{}0-\/65535"{},\ "{}Bow\ pressure\ modulation,\ added\ to\ the\ baseline"{}\ \},}}
+\DoxyCodeLine{01055\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpressurerest"{},\ "{}bpr"{},\ "{}0|1"{},\ "{}Puts\ the\ bow\ pressure\ in\ the\ resting\ position\ (conditional)"{}\ \},}}
+\DoxyCodeLine{01056\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpressureengage"{},\ "{}bpe"{},\ "{}0|1"{},\ "{}Puts\ the\ bow\ pressure\ in\ the\ engage\ position\ (conditional)"{}\ \},}}
+\DoxyCodeLine{01057\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpressurepositionmax"{},\ "{}bppx"{},\ "{}0-\/65535"{},\ "{}Bow\ pressure\ stall/maximum\ position"{}\},}}
+\DoxyCodeLine{01058\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpressurepositionengage"{},\ "{}bppe"{},\ "{}0-\/65535"{},\ "{}Bow\ pressure\ touch/minimum\ position"{}\},}}
+\DoxyCodeLine{01059\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpressurepositionrest"{},\ "{}bppr"{},\ "{}0-\/65535"{},\ "{}Bow\ pressure\ rest\ position"{}\},}}
+\DoxyCodeLine{01060\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpressureengagespeed"{},\ "{}bpes"{},\ "{}1\ -\/\ 100?"{},\ "{}Bow\ pressure\ movement\ speed\ when\ engaging\ or\ disengaging"{}\},}}
+\DoxyCodeLine{01061\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpressuremodulationspeed"{},\ "{}bpms"{},\ "{}0.1\ -\/\ 10"{},\ "{}Bow\ pressure\ movement\ speed\ while\ engaged"{}\},}}
+\DoxyCodeLine{01062\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpressurehold"{},\ "{}bph"{},\ "{}0|1"{},\ "{}Sets\ bow\ hold\ on/off"{}\ \},}}
+\DoxyCodeLine{01063\ \textcolor{comment}{\ \ \ \ \{\ "{}bowhome"{},\ "{}bh"{},\ "{}-\/"{},\ "{}Homing\ bow,\ used\ at\ startup\ and\ in\ case\ of\ the\ bow\ loosing\ position"{}\ \},}}
+\DoxyCodeLine{01064\ \textcolor{comment}{\};}}
+\DoxyCodeLine{01065\ \textcolor{comment}{}}
+\DoxyCodeLine{01066\ \textcolor{comment}{const\ serialCommandItem\ serialCommandsBowPressureHidden[]\ =\ \{}}
+\DoxyCodeLine{01067\ \textcolor{comment}{\}}}
+\DoxyCodeLine{01068\ \textcolor{comment}{}}
+\DoxyCodeLine{01069\ \textcolor{comment}{}}
+\DoxyCodeLine{01070\ \textcolor{comment}{eProcessResult\ BowPressure::processSerialCommand(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{01071\ \textcolor{comment}{}}
+\DoxyCodeLine{01072\ \textcolor{comment}{\ \ \ \ processCommandItems(inCommandItem,\ serialCommandsBowPressure,\ sizeof(serialCommandsBowPressure)\ /\ sizeof(serialCommandItem));}}
+\DoxyCodeLine{01073\ \textcolor{comment}{}}
+\DoxyCodeLine{01074\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}help"{})\ \{}}
+\DoxyCodeLine{01075\ \textcolor{comment}{\ \ \ \ \ \ \ \ addCommandHelp(serialCommandsBowPressure,\ sizeof(serialCommandsBowPressure)\ /\ sizeof(serialCommandItem),\ commandResponses,"{}"{});}}
+\DoxyCodeLine{01076\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::PassThrough;}}
+\DoxyCodeLine{01077\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01078\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpressurebaseline"{})\ \{}}
+\DoxyCodeLine{01079\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{01080\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bpb:"{}\ +\ String(baselinePressure),\ InfoRequest\ \});}}
+\DoxyCodeLine{01081\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01082\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01083\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setPressureBaseline(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{01084\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bpb:"{}\ +\ String(baselinePressure),\ InfoRequest\});}}
+\DoxyCodeLine{01085\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01086\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01087\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpressuremodifier"{})\ \{}}
+\DoxyCodeLine{01088\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{01089\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bpm:"{}\ +\ String(modifierPressure),\ InfoRequest\ \});}}
+\DoxyCodeLine{01090\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01091\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01092\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setPressureModifier(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{01093\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bpm:"{}\ +\ String(inCommandItem-\/>argument[0].toInt()),\ InfoRequest\});}}
+\DoxyCodeLine{01094\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01095\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01096\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpressurerest"{})\ \{}}
+\DoxyCodeLine{01097\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01098\ \textcolor{comment}{\ \ \ \ \ \ \ \ rest(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{01099\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bpr:"{}\ +\ String(inCommandItem-\/>argument[0].toInt()),\ InfoRequest\});}}
+\DoxyCodeLine{01100\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01101\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpressureengage"{})\ \{}}
+\DoxyCodeLine{01102\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01103\ \textcolor{comment}{\ \ \ \ \ \ \ \ engage(inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{01104\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bpe:"{}\ +\ String(inCommandItem-\/>argument[0].toInt()),\ InfoRequest\});}}
+\DoxyCodeLine{01105\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01106\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpressurepositionmax"{})\ \{}}
+\DoxyCodeLine{01107\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{01108\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bppx:"{}\ +\ String(maxPressure),\ InfoRequest\ \});}}
+\DoxyCodeLine{01109\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01110\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01111\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ maxPressure\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{01112\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bppx:"{}\ +\ String(maxPressure),\ InfoRequest\});}}
+\DoxyCodeLine{01113\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01114\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01115\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpressurepositionengage"{})\ \{}}
+\DoxyCodeLine{01116\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{01117\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bppe:"{}\ +\ String(engagePressure),\ InfoRequest\ \});}}
+\DoxyCodeLine{01118\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01119\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01120\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ engagePressure\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{01121\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bppe:"{}\ +\ String(engagePressure),\ InfoRequest\});}}
+\DoxyCodeLine{01122\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01123\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01124\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpressurepositionrest"{})\ \{}}
+\DoxyCodeLine{01125\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{01126\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bppr:"{}\ +\ String(restPressure),\ InfoRequest\ \});}}
+\DoxyCodeLine{01127\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01128\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01129\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ restPressure\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{01130\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bppr:"{}\ +\ String(restPressure),\ InfoRequest\ \});}}
+\DoxyCodeLine{01131\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01132\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01133\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpressureengagespeed"{})\ \{}}
+\DoxyCodeLine{01134\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{01135\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bpes:"{}\ +\ String(speedToEngage),\ InfoRequest\ \});}}
+\DoxyCodeLine{01136\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01137\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01138\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ bes\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{01139\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (bes\ >\ 100)\ \{\ bes\ =\ 100;\ \}}}
+\DoxyCodeLine{01140\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ speedToEngage\ =\ bes;}}
+\DoxyCodeLine{01141\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bpes:"{}\ +\ String(speedToEngage),\ InfoRequest\});}}
+\DoxyCodeLine{01142\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01143\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01144\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpressuremodulationspeed"{})\ \{}}
+\DoxyCodeLine{01145\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{01146\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bpms:"{}\ +\ String(speedWhileEngaged),\ InfoRequest\ \});}}
+\DoxyCodeLine{01147\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01148\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01149\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ bes\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{01150\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (bes\ >\ speedWhileEngaged)\ \{\ bes\ =\ speedToEngage;\ \}}}
+\DoxyCodeLine{01151\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ speedWhileEngaged\ =\ bes;}}
+\DoxyCodeLine{01152\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bpms:"{}\ +\ String(speedWhileEngaged),\ InfoRequest\});}}
+\DoxyCodeLine{01153\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01154\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01155\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpressurehold"{})\ \{}}
+\DoxyCodeLine{01156\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01157\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (inCommandItem-\/>argument[0].toInt()\ >\ 0)\ \{\ setHold(true);\ \}\ else\ \{\ setHold(false);\}}}
+\DoxyCodeLine{01158\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bph:"{}\ +\ String(inCommandItem-\/>argument[0].toInt()),\ InfoRequest\});}}
+\DoxyCodeLine{01159\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01160\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowhome"{})\ \{}}
+\DoxyCodeLine{01161\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!request)\ \{}}
+\DoxyCodeLine{01162\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (home())\ \{}}
+\DoxyCodeLine{01163\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bowhome:1"{},\ InfoRequest\});}}
+\DoxyCodeLine{01164\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01165\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bowhome:0"{},\ InfoRequest\});}}
+\DoxyCodeLine{01166\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01167\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01168\ \textcolor{comment}{\ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01169\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::NotFound;}}
+\DoxyCodeLine{01170\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{01171\ \textcolor{comment}{}}
+\DoxyCodeLine{01172\ \textcolor{comment}{\ \ \ \ return\ eProcessResult::Ok;}}
+\DoxyCodeLine{01173\ \textcolor{comment}{\}}}
+\DoxyCodeLine{01174\ \textcolor{comment}{}}
+\DoxyCodeLine{01175\ \textcolor{comment}{eProcessResult\ BowPressure::processSerialCommandHidden(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{01176\ \textcolor{comment}{}}
+\DoxyCodeLine{01177\ \textcolor{comment}{\ \ \ \ return\ eProcessResult::NotFound;}}
+\DoxyCodeLine{01178\ \textcolor{comment}{\}}}
+\DoxyCodeLine{01179\ \textcolor{comment}{}}
+\DoxyCodeLine{01180\ \textcolor{comment}{String\ BowPressure::dumpData()\ \{}}
+\DoxyCodeLine{01181\ \textcolor{comment}{\ \ \ \ String\ dump\ =\ "{}"{};}}
+\DoxyCodeLine{01182\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bpes:"{}\ +\ String(speedToEngage)\ +\ "{},"{};}}
+\DoxyCodeLine{01183\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bpms:"{}\ +\ String(speedWhileEngaged);}}
+\DoxyCodeLine{01184\ \textcolor{comment}{\ \ \ \ return\ dump;}}
+\DoxyCodeLine{01185\ \textcolor{comment}{\}}}
+\DoxyCodeLine{01186\ \textcolor{comment}{}}
+\DoxyCodeLine{01187\ \textcolor{comment}{}}
+\DoxyCodeLine{01188\ \textcolor{comment}{const\ serialCommandItem\ serialCommandsBowControl[]\ =\ \{}}
+\DoxyCodeLine{01189\ \textcolor{comment}{\ \ \ \ \{\ "{}bowcontrolspeedmode"{},\ "{}bcsm"{},\ "{}0|1"{},\ "{}Bow\ motor\ speed\ mode,\ 0\ =\ Automatic\ and\ 1\ =\ Manual"{}\ \},}}
+\DoxyCodeLine{01190\ \textcolor{comment}{\ \ \ \ \{\ "{}bowmotortimeout"{},\ "{}bmt"{},\ "{}ms(0-\/65535)"{},\ "{}Bow\ motor\ shutdown\ timeout\ after\ bow\ having\ been\ put\ into\ the\ rest\ position"{}\ \},}}
+\DoxyCodeLine{01191\ \textcolor{comment}{}}
+\DoxyCodeLine{01192\ \textcolor{comment}{\ \ \ \ \{\ "{}bowpid"{},\ "{}bpid"{},\ "{}1|0"{},\ "{}Sets\ the\ bow\ PID\ on/off"{}\ \},}}
+\DoxyCodeLine{01193\ \textcolor{comment}{\ \ \ \ \{\ "{}bowmotorfaultcommands"{},\ "{}bmfc"{},\ "{}command\ list"{},\ "{}Commands\ to\ execute\ when\ a\ motor\ fault\ is\ tripped\ -\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}\ \},}}
+\DoxyCodeLine{01194\ \textcolor{comment}{\ \ \ \ \{\ "{}bowmotoroverpowercommands"{},\ "{}bmopc"{},\ "{}command\ list"{},\ "{}Commands\ to\ execute\ when\ motor\ is\ over\ the\ power\ limit\ -\/\ !WARNING!\ Can\ ruin\ your\ instrument\ if\ changed"{}\ \},}}
+\DoxyCodeLine{01195\ \textcolor{comment}{\};}}
+\DoxyCodeLine{01196\ \textcolor{comment}{}}
+\DoxyCodeLine{01197\ \textcolor{comment}{eProcessResult\ BowControl::processSerialCommand(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{01198\ \textcolor{comment}{}}
+\DoxyCodeLine{01199\ \textcolor{comment}{\ \ \ \ eProcessResult\ processResult\ =\ eProcessResult::Ok;}}
+\DoxyCodeLine{01200\ \textcolor{comment}{}}
+\DoxyCodeLine{01201\ \textcolor{comment}{\ \ \ \ processCommandItems(inCommandItem,\ serialCommandsBowControl,\ sizeof(serialCommandsBowControl)\ \ /\ sizeof(serialCommandItem));}}
+\DoxyCodeLine{01202\ \textcolor{comment}{}}
+\DoxyCodeLine{01203\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}help"{})\ \{}}
+\DoxyCodeLine{01204\ \textcolor{comment}{\ \ \ \ \ \ \ \ addCommandHelp(serialCommandsBowControl,\ sizeof(serialCommandsBowControl)\ /\ sizeof(serialCommandItem),\ commandResponses,"{}"{});}}
+\DoxyCodeLine{01205\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{01206\ \textcolor{comment}{}}
+\DoxyCodeLine{01207\ \textcolor{comment}{\ \ \ \ if\ (((inCommandItem-\/>command\ ==\ "{}bowpressurerest"{})\ ||\ (inCommandItem-\/>command\ ==\ "{}bpr"{}))\ \&\&\ !request)\ \{}}
+\DoxyCodeLine{01208\ \textcolor{comment}{\ \ \ \ \ \ \ \ debugPrintln("{}Second\ rest"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{01209\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01210\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (inCommandItem-\/>argument[0].toInt()\ ==\ 1)\ \{\ rest();\ \}}}
+\DoxyCodeLine{01211\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{01212\ \textcolor{comment}{}}
+\DoxyCodeLine{01213\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowpid"{})\ \{}}
+\DoxyCodeLine{01214\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{01215\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bpid:"{}\ +\ String(PIDon),\ InfoRequest\ \});}}
+\DoxyCodeLine{01216\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01217\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01218\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (inCommandItem-\/>argument[0].toInt()\ >\ 0)\ \{\ PIDon\ =\ true;\ \}\ else\ \{\ PIDon\ =\ false;\}}}
+\DoxyCodeLine{01219\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bpid:"{}\ +\ String(PIDon),\ InfoRequest\});}}
+\DoxyCodeLine{01220\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01221\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01222\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowcontrolspeedmode"{})\ \{}}
+\DoxyCodeLine{01223\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{01224\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bcsm:"{}\ +\ String(int(speedMode)),\ InfoRequest\});}}
+\DoxyCodeLine{01225\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01226\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01227\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!validateNumber(inCommandItem-\/>argument[0].toInt(),\ 0,\ 1))\ \{\ return\ eProcessResult::WrongArgumentValue;\ \}}}
+\DoxyCodeLine{01228\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ speedMode\ =\ (eSpeedMode)\ (inCommandItem-\/>argument[0].toInt());}}
+\DoxyCodeLine{01229\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bcsm:"{}\ +\ String(int(speedMode)),\ InfoRequest\});}}
+\DoxyCodeLine{01230\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01231\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01232\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmotordirectpwm"{})\ \{}}
+\DoxyCodeLine{01233\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{01234\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bmdp:"{}\ +\ String(manualMotorPWM),\ InfoRequest\ \});}}
+\DoxyCodeLine{01235\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01236\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01237\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ manualMotorPWM\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{01238\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bmdp:"{}\ +\ String(manualMotorPWM),\ InfoRequest\});}}
+\DoxyCodeLine{01239\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01240\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01241\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmotortimeout"{})\ \{}}
+\DoxyCodeLine{01242\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{01243\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bmt:"{}\ +\ String(bowShutoffTimeout),\ InfoRequest\ \});}}
+\DoxyCodeLine{01244\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01245\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ bowShutoffTimeout\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{01246\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}bmt:"{}\ +\ String(bowShutoffTimeout),\ InfoRequest\});}}
+\DoxyCodeLine{01247\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01248\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01249\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmotorfaultcommands"{})\ \{}}
+\DoxyCodeLine{01250\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!request)\ \{}}
+\DoxyCodeLine{01251\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01252\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandsMotorFault\ =\ delimitExpression(inCommandItem-\/>argument[0],\ true);}}
+\DoxyCodeLine{01253\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01254\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bmfc:"{}\ +\ String(commandsMotorFault),\ InfoRequest\ \});}}
+\DoxyCodeLine{01255\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01256\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}bowmotoroverpowercommands"{})\ \{}}
+\DoxyCodeLine{01257\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!request)\ \{}}
+\DoxyCodeLine{01258\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01259\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandsOverPowerCurrent\ =\ delimitExpression(inCommandItem-\/>argument[0],\ true);}}
+\DoxyCodeLine{01260\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01261\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}bmopc:"{}\ +\ String(commandsOverPowerCurrent),\ InfoRequest\ \});}}
+\DoxyCodeLine{01262\ \textcolor{comment}{\ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01263\ \textcolor{comment}{\ \ \ \ \ \ \ \ processResult\ =\ bowPressure-\/>processSerialCommand(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{01264\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ ((processResult\ !=\ eProcessResult::NotFound)\ \&\&\ (processResult\ !=\ eProcessResult::PassThrough))\ \{\ return\ processResult;\ \}}}
+\DoxyCodeLine{01265\ \textcolor{comment}{}}
+\DoxyCodeLine{01266\ \textcolor{comment}{\ \ \ \ \ \ \ \ processResult\ =\ dcMotorControl-\/>processSerialCommand(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{01267\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ ((processResult\ !=\ eProcessResult::NotFound)\ \&\&\ (processResult\ !=\ eProcessResult::PassThrough))\ \{\ return\ processResult;\ \}}}
+\DoxyCodeLine{01268\ \textcolor{comment}{}}
+\DoxyCodeLine{01269\ \textcolor{comment}{\ \ \ \ \ \ \ \ processResult\ =\ pidController-\/>processSerialCommand(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{01270\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{01271\ \textcolor{comment}{}}
+\DoxyCodeLine{01272\ \textcolor{comment}{\ \ \ \ return\ processResult;}}
+\DoxyCodeLine{01273\ \textcolor{comment}{\}}}
+\DoxyCodeLine{01274\ \textcolor{comment}{}}
+\DoxyCodeLine{01275\ \textcolor{comment}{eProcessResult\ BowControl::processSerialCommandHidden(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{01276\ \textcolor{comment}{}}
+\DoxyCodeLine{01277\ \textcolor{comment}{\ \ \ \ eProcessResult\ processResult\ =\ eProcessResult::NotFound;}}
+\DoxyCodeLine{01278\ \textcolor{comment}{}}
+\DoxyCodeLine{01279\ \textcolor{comment}{\ \ \ \ processResult\ =\ bowPressure-\/>processSerialCommandHidden(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{01280\ \textcolor{comment}{\ \ \ \ if\ ((processResult\ !=\ eProcessResult::NotFound)\ \&\&\ (processResult\ !=\ eProcessResult::PassThrough))\ \{\ return\ processResult;\ \}}}
+\DoxyCodeLine{01281\ \textcolor{comment}{}}
+\DoxyCodeLine{01282\ \textcolor{comment}{\ \ \ \ processResult\ =\ dcMotorControl-\/>processSerialCommandHidden(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{01283\ \textcolor{comment}{\ \ \ \ if\ ((processResult\ !=\ eProcessResult::NotFound)\ \&\&\ (processResult\ !=\ eProcessResult::PassThrough))\ \{\ return\ processResult;\ \}}}
+\DoxyCodeLine{01284\ \textcolor{comment}{}}
+\DoxyCodeLine{01285\ \textcolor{comment}{\ \ \ \ processResult\ =\ pidController-\/>processSerialCommandHidden(inCommandItem,\ commandResponses,\ request,\ delegate,\ delegatedCommands);}}
+\DoxyCodeLine{01286\ \textcolor{comment}{\ \ \ \ if\ ((processResult\ !=\ eProcessResult::NotFound)\ \&\&\ (processResult\ !=\ eProcessResult::PassThrough))\ \{\ return\ processResult;\ \}}}
+\DoxyCodeLine{01287\ \textcolor{comment}{}}
+\DoxyCodeLine{01288\ \textcolor{comment}{}}
+\DoxyCodeLine{01289\ \textcolor{comment}{\ \ \ \ return\ eProcessResult::NotFound;}}
+\DoxyCodeLine{01290\ \textcolor{comment}{\}}}
+\DoxyCodeLine{01291\ \textcolor{comment}{}}
+\DoxyCodeLine{01292\ \textcolor{comment}{void\ BowControl::setBowSpeedPWM(uint16\_t\ speed)\ \{}}
+\DoxyCodeLine{01293\ \textcolor{comment}{\ \ \ \ pidController-\/>setPIDTarget(speed);}}
+\DoxyCodeLine{01294\ \textcolor{comment}{\}}}
+\DoxyCodeLine{01295\ \textcolor{comment}{}}
+\DoxyCodeLine{01296\ \textcolor{comment}{}}
+\DoxyCodeLine{01297\ \textcolor{comment}{String\ BowControl::dumpData()\ \{}}
+\DoxyCodeLine{01298\ \textcolor{comment}{\ \ \ \ String\ dump\ =\ "{}"{};}}
+\DoxyCodeLine{01299\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bmt:"{}\ +\ String(bowShutoffTimeout)\ +\ "{},"{};}}
+\DoxyCodeLine{01300\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bmfc:"{}\ +\ commandsMotorFault\ +\ "{},"{};}}
+\DoxyCodeLine{01301\ \textcolor{comment}{\ \ \ \ dump\ +=\ "{}bmopc:"{}\ +\ commandsOverPowerCurrent\ +\ "{},"{};}}
+\DoxyCodeLine{01302\ \textcolor{comment}{\ \ \ \ dump\ +=\ dcMotorControl-\/>dumpData()\ +\ "{},"{};}}
+\DoxyCodeLine{01303\ \textcolor{comment}{\ \ \ \ dump\ +=\ bowPressure-\/>dumpData()\ +\ "{},"{};}}
+\DoxyCodeLine{01304\ \textcolor{comment}{\ \ \ \ dump\ +=\ pidController-\/>dumpData()\ +\ "{},"{};}}
+\DoxyCodeLine{01305\ \textcolor{comment}{\ \ \ \ return\ dump;}}
+\DoxyCodeLine{01306\ \textcolor{comment}{\}}}
+\DoxyCodeLine{01307\ \textcolor{comment}{}}
+\DoxyCodeLine{01308\ \textcolor{comment}{}}
+\DoxyCodeLine{01309\ \textcolor{comment}{serialCommandItem\ serialCommandsControlReader[]\ =\ \{}}
+\DoxyCodeLine{01310\ \textcolor{comment}{\ \ \{\ "{}adccommandmap"{},\ "{}acm"{},\ "{}channel:command\ string"{},\ "{}Sets\ the\ command\ string\ invoked\ when\ the\ value\ on\ ADC\ channel\ [channel]\ changes"{}\},}}
+\DoxyCodeLine{01311\ \textcolor{comment}{\ \ \{\ "{}adcdefaults"{},\ "{}acd"{},\ "{}-\/"{}\ "{}Reverts\ all\ ADC\ command\ strings\ to\ default\ values"{}\ \},}}
+\DoxyCodeLine{01312\ \textcolor{comment}{\ \ \{\ "{}adcread"{},\ "{}adcr"{},\ "{}channel:value"{},\ "{}Sent\ when\ a\ new\ value\ is\ presented\ on\ one\ of\ the\ ADC\ channels,\ cannot\ be\ invoked"{}\ \},}}
+\DoxyCodeLine{01313\ \textcolor{comment}{\ \ \{\ "{}adcsettings"{},\ "{}adcs"{},\ "{}channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout"{},\ "{}Explain\ ADC\ settings\ here"{}\}}}
+\DoxyCodeLine{01314\ \textcolor{comment}{\};}}
+\DoxyCodeLine{01315\ \textcolor{comment}{}}
+\DoxyCodeLine{01316\ \textcolor{comment}{serialCommandItem\ serialCommandsControlReaderHidden[]\ =\ \{}}
+\DoxyCodeLine{01317\ \textcolor{comment}{\ \ \{\ "{}testadclatency"{},\ "{}tal"{},\ "{}0-\/65535"{},\ "{}Test\ ADC\ Latency"{}\ \},}}
+\DoxyCodeLine{01318\ \textcolor{comment}{\ \ \{\ "{}testadclatencyreturn"{},\ "{}talr"{},\ "{}-\/"{},\ "{}Return\ from\ test"{}\ \},}}
+\DoxyCodeLine{01319\ \textcolor{comment}{\ \ \{\ "{}testadcminmax"{},\ "{}tamm"{},\ "{}channel"{},\ "{}Measure\ min/max\ value\ for\ a\ given\ channel\ and\ resets\ the\ counter"{}\ \}}}
+\DoxyCodeLine{01320\ \textcolor{comment}{\};}}
+\DoxyCodeLine{01321\ \textcolor{comment}{}}
+\DoxyCodeLine{01322\ \textcolor{comment}{}}
+\DoxyCodeLine{01323\ \textcolor{comment}{eProcessResult\ ControlReader::processSerialCommand(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{01324\ \textcolor{comment}{}}
+\DoxyCodeLine{01325\ \textcolor{comment}{\ \ \ \ processCommandItems(inCommandItem,\ serialCommandsControlReader,\ sizeof(serialCommandsControlReader)\ \ /\ sizeof(serialCommandItem));}}
+\DoxyCodeLine{01326\ \textcolor{comment}{}}
+\DoxyCodeLine{01327\ \textcolor{comment}{\ \ \ \ eProcessResult\ processResult\ =\ eProcessResult::Ok;}}
+\DoxyCodeLine{01328\ \textcolor{comment}{}}
+\DoxyCodeLine{01329\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}help"{})\ \{}}
+\DoxyCodeLine{01330\ \textcolor{comment}{\ \ \ \ \ \ \ \ addCommandHelp(serialCommandsControlReader,\ sizeof(serialCommandsControlReader)\ /\ sizeof(serialCommandItem),\ commandResponses,"{}"{});}}
+\DoxyCodeLine{01331\ \textcolor{comment}{\ \ \ \ \ \ \ \ processResult\ =\ eProcessResult::PassThrough;}}
+\DoxyCodeLine{01332\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01333\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}adcread"{})\ \{}}
+\DoxyCodeLine{01334\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01335\ \textcolor{comment}{\ \ \ \ \ \ \ \ int\ i\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{01336\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ ((i\ <\ 0)\ ||\ (i\ >\ 7))\ \{\ return\ eProcessResult::WrongArgumentValue;\ \}}}
+\DoxyCodeLine{01337\ \textcolor{comment}{}}
+\DoxyCodeLine{01338\ \textcolor{comment}{\ \ \ \ \ \ \ \ int32\_t\ convertedValue;}}
+\DoxyCodeLine{01339\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (i\ <\ 5)\ \{}}
+\DoxyCodeLine{01340\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ convertedValue\ =\ (int32\_t)\ ((float)\ getData(i)\ *\ ((float)\ 65536\ /\ 32767));}}
+\DoxyCodeLine{01341\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01342\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ convertedValue\ =\ (int32\_t)\ ((float)\ getData(i)\ *\ ((float)\ 65536\ /\ 2048));}}
+\DoxyCodeLine{01343\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01344\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (convertedValue\ >\ 65535)\ \{\ convertedValue\ =\ 65535;\ \}}}
+\DoxyCodeLine{01345\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}adcr:"{}\ +\ String(i)\ +\ "{}:"{}\ +\ String(convertedValue)\ +\ "{}:"{}\ +\ String(getData(i)),\ debugPrintType::InfoRequest\});}}
+\DoxyCodeLine{01346\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01347\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}adccommandmap"{})\ \{}}
+\DoxyCodeLine{01348\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!checkArgumentsMin(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01349\ \textcolor{comment}{\ \ \ \ \ \ \ \ uint8\_t\ channel\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{01350\ \textcolor{comment}{}}
+\DoxyCodeLine{01351\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{01352\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}acm:"{}\ +\ String(channel)\ +\ "{}:"{}\ +\ delimitExpression(cvInputCommands[channel],\ true),\ InfoRequest\});}}
+\DoxyCodeLine{01353\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01354\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 2))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01355\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setADCCommands(channel,\ stripQuotes(inCommandItem-\/>argument[1]));}}
+\DoxyCodeLine{01356\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}acm:"{}\ +\ String(channel)\ +\ "{}:"{}\ +\ delimitExpression(cvInputCommands[channel],\ true),\ InfoRequest\});}}
+\DoxyCodeLine{01357\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01358\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01359\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}adcdefaults"{})\ \{}}
+\DoxyCodeLine{01360\ \textcolor{comment}{\ \ \ \ \ \ \ \ setDefaults();}}
+\DoxyCodeLine{01361\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}acd:1"{},\ debugPrintType::InfoRequest\});}}
+\DoxyCodeLine{01362\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01363\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}adcsettings"{})\ \{}}
+\DoxyCodeLine{01364\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!checkArgumentsMin(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01365\ \textcolor{comment}{\ \ \ \ \ \ \ \ uint8\_t\ channel\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{01366\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (channel\ >\ 7)\ \{\ return\ eProcessResult::WrongArgumentValue;\ \}}}
+\DoxyCodeLine{01367\ \textcolor{comment}{}}
+\DoxyCodeLine{01368\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{01369\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}adcs:"{}\ +\ String(channel)\ +\ "{}:"{}\ +\ getADCAveragerSettings(channel),\ InfoRequest\});}}
+\DoxyCodeLine{01370\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01371\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 5))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01372\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!setADCAveragerSettings(inCommandItem-\/>argument[0].toInt(),\ inCommandItem-\/>argument[1].toInt(),\ inCommandItem-\/>argument[2].toInt(),\ inCommandItem-\/>argument[3].toInt(),}}
+\DoxyCodeLine{01373\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inCommandItem-\/>argument[4].toInt()))\ \{\ return\ eProcessResult::CommandFailed;\ \}}}
+\DoxyCodeLine{01374\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}adcs:"{}\ +\ String(channel)\ +\ "{}:"{}\ +\ getADCAveragerSettings(channel),\ debugPrintType::InfoRequest\});}}
+\DoxyCodeLine{01375\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01376\ \textcolor{comment}{\ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01377\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::NotFound;}}
+\DoxyCodeLine{01378\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{01379\ \textcolor{comment}{}}
+\DoxyCodeLine{01380\ \textcolor{comment}{\ \ \ \ return\ processResult;}}
+\DoxyCodeLine{01381\ \textcolor{comment}{\}}}
+\DoxyCodeLine{01382\ \textcolor{comment}{}}
+\DoxyCodeLine{01383\ \textcolor{comment}{eProcessResult\ ControlReader::processSerialCommandHidden(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request,\ bool\ delegate,\ commandList\ *delegatedCommands)\ \{}}
+\DoxyCodeLine{01384\ \textcolor{comment}{}}
+\DoxyCodeLine{01385\ \textcolor{comment}{\ \ \ \ processCommandItems(inCommandItem,\ serialCommandsControlReaderHidden,\ sizeof(serialCommandsControlReaderHidden)\ \ /\ sizeof(serialCommandItem));}}
+\DoxyCodeLine{01386\ \textcolor{comment}{}}
+\DoxyCodeLine{01387\ \textcolor{comment}{\ \ \ \ eProcessResult\ processResult\ =\ eProcessResult::Ok;}}
+\DoxyCodeLine{01388\ \textcolor{comment}{}}
+\DoxyCodeLine{01389\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}helphidden"{})\ \{}}
+\DoxyCodeLine{01390\ \textcolor{comment}{\ \ \ \ \ \ \ \ addCommandHelp(serialCommandsControlReaderHidden,\ sizeof(serialCommandsControlReaderHidden)\ /\ sizeof(serialCommandItem),\ commandResponses,"{}"{});}}
+\DoxyCodeLine{01391\ \textcolor{comment}{\ \ \ \ \ \ \ \ processResult\ =\ eProcessResult::PassThrough;}}
+\DoxyCodeLine{01392\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01393\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}testadclatency"{})\ \{}}
+\DoxyCodeLine{01394\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01395\ \textcolor{comment}{\ \ \ \ \ \ \ \ testMeasurement\ =\ 0;}}
+\DoxyCodeLine{01396\ \textcolor{comment}{\ \ \ \ \ \ \ \ testMeasurementOngoing\ =\ true;}}
+\DoxyCodeLine{01397\ \textcolor{comment}{\ \ \ \ \ \ \ \ analogWrite(3,\ int(inCommandItem-\/>argument[0].toInt()));}}
+\DoxyCodeLine{01398\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}Starting\ ADC\ latency\ test"{},\ InfoRequest\});}}
+\DoxyCodeLine{01399\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01400\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}testadclatencyreturn"{})\ \{}}
+\DoxyCodeLine{01401\ \textcolor{comment}{\ \ \ \ \ \ \ \ testMeasurementOngoing\ =\ false;}}
+\DoxyCodeLine{01402\ \textcolor{comment}{\ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{"{}Returned\ from\ ADC\ latency\ test\ in\ "{}\ +\ String(testMeasurement)\ +\ "{}\ uS"{},\ InfoRequest\});}}
+\DoxyCodeLine{01403\ \textcolor{comment}{\ \ \ \ \}\ else}}
+\DoxyCodeLine{01404\ \textcolor{comment}{\ \ \ \ if\ (inCommandItem-\/>command\ ==\ "{}testadcminmax"{})\ \{}}
+\DoxyCodeLine{01405\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (request)\ \{}}
+\DoxyCodeLine{01406\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}tamm:"{}\ +\ String(testChannel)\ +\ "{}:"{}\ +\ String(testMin)\ +\ "{}:"{}\ +\ String(testMax),\ InfoRequest\ \});}}
+\DoxyCodeLine{01407\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01408\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ commandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}}}
+\DoxyCodeLine{01409\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ int\ testChannel\ =\ inCommandItem-\/>argument[0].toInt();}}
+\DoxyCodeLine{01410\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ ((testChannel\ <\ 0)\ ||\ (testChannel\ >\ 7))\ \{\ return\ eProcessResult::WrongArgumentValue;\ \}}}
+\DoxyCodeLine{01411\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ setADCMinMaxTestChannel(testChannel);}}
+\DoxyCodeLine{01412\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ commandResponses-\/>push\_back(\{\ "{}Starting\ ADC\ min/max\ test\ on\ channel\ "{}\ +\ String(testChannel),\ InfoRequest\ \});}}
+\DoxyCodeLine{01413\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01414\ \textcolor{comment}{\ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{01415\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ eProcessResult::NotFound;}}
+\DoxyCodeLine{01416\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{01417\ \textcolor{comment}{}}
+\DoxyCodeLine{01418\ \textcolor{comment}{\ \ \ \ return\ processResult;}}
+\DoxyCodeLine{01419\ \textcolor{comment}{\}}}
+\DoxyCodeLine{01420\ \textcolor{comment}{*/}}
+\DoxyCodeLine{01421\ }
+
+\end{DoxyCode}

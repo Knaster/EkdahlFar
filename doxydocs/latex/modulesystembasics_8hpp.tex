@@ -1,0 +1,390 @@
+\doxysection{modulesystembasics.\+hpp File Reference}
+\hypertarget{modulesystembasics_8hpp}{}\label{modulesystembasics_8hpp}\index{modulesystembasics.hpp@{modulesystembasics.hpp}}
+{\ttfamily \#include "{}base/arduinorequired.\+hpp"{}}\newline
+{\ttfamily \#include "{}base/commandparser.\+hpp"{}}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include "{}module.\+hpp"{}}\newline
+Include dependency graph for modulesystembasics.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{modulesystembasics_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{modulesystembasics_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classModuleCommand}{Module\+Command}}
+\item 
+struct \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}}
+\item 
+struct \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{modulesystembasics_8hpp_af1cbff4235e0dc51c811eafe60054141}{Module\+Command\+Declaration\+Arguments}}~\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$\mbox{\hyperlink{structcommandResponse}{command\+Response}}$>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, bool request, \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} this\+Item
+\item 
+\#define \mbox{\hyperlink{modulesystembasics_8hpp_a7bc88154e9bc7637593f19b40d711499}{static\+Copy}}(name,  class\+Name)~    static \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} s\+\_\+\#\#name(\mbox{\hyperlink{classModuleCommand}{Module\+Command}}\texorpdfstring{$\ast$}{*} self, \mbox{\hyperlink{modulesystembasics_8hpp_af1cbff4235e0dc51c811eafe60054141}{Module\+Command\+Declaration\+Arguments}}) \{ return static\+\_\+cast$<$class\+Name\texorpdfstring{$\ast$}{*}$>$(self)-\/$>$name(in\+Command\+Item, in\+Command\+Responses, request, this\+Item); \}
+\item 
+\#define \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION\+\_\+\+FWD}}(funcname,  class\+Name)~\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} funcname(\mbox{\hyperlink{modulesystembasics_8hpp_af1cbff4235e0dc51c811eafe60054141}{Module\+Command\+Declaration\+Arguments}}); \mbox{\hyperlink{modulesystembasics_8hpp_a7bc88154e9bc7637593f19b40d711499}{static\+Copy}}(funcname, class\+Name)
+\item 
+\#define \mbox{\hyperlink{modulesystembasics_8hpp_a33460e04d9e860676f5c8d5f5b47bf61}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}}(funcname,  class\+Name)~\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} class\+Name\+::funcname(\mbox{\hyperlink{modulesystembasics_8hpp_af1cbff4235e0dc51c811eafe60054141}{Module\+Command\+Declaration\+Arguments}})
+\item 
+\#define \mbox{\hyperlink{modulesystembasics_8hpp_ad805e7e7e19b26258610463cec8d7fa8}{get\+Module\+Count}}(name)~int name\+::get\+Module\+Command\+Count() \{ return sizeof(module\+Commands) / sizeof(module\+Commands\mbox{[}0\mbox{]}); \}
+\item 
+\#define \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}}
+\item 
+\#define \mbox{\hyperlink{modulesystembasics_8hpp_abf45ff9851ecf7a95efb74b0f8d550da}{CREATE\+\_\+\+DATACHANGED\+\_\+\+CALLBACK\+\_\+\+FWD}}(name,  class\+Name)
+\item 
+\#define \mbox{\hyperlink{modulesystembasics_8hpp_a223ca5ad493b8c5277139a075b20471a}{CREATE\+\_\+\+DATACHANGED\+\_\+\+CALLBACK}}(name,  class\+Name)~    bool class\+Name\+::name(\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}module)
+\item 
+\#define \mbox{\hyperlink{modulesystembasics_8hpp_a726e985c9256abcd3e04b255b31cba09}{SETMODULEID}}(long\+Name,  short\+Name,  description,  module\+Type,  group\+Handler)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \{ \newline
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}{Not\+Found}} = 0
+, \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{Ok}} = 1
+, \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20}{Command\+Failed}} = 2
+, \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{Wrong\+Argument\+Count}} = 3
+, \newline
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a6e204fafb4965a8a79b8ac29834195e2}{Wrong\+Argument\+Minimum}} = 4
+, \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7945af4588755e4b73b7855397babbb1}{Wrong\+Argument\+Value}} = 5
+, \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}{Pass\+Through}} = 6
+ \}
+\item 
+enum \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3}{e\+Command\+Type}} \{ \newline
+\mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3ab44f630ccd79e857b188881d7be5d554}{Simple\+String}} = 0
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a28b5bc6291c2acdc97d4f1f46f4789cb}{Simple\+Bool}} = 1
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa210d75eecafc3c332388f910fb265f6}{Simple\+Float}} = 2
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa1f2510a5d3c28f81f047744d50ffb8f}{Simple\+UInt8}} = 3
+, \newline
+\mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a5a24c30a835d2fb61a48e94d0674c5b5}{Simple\+Int16}} = 4
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a85a18924b17a185c4314d76e2c6737e8}{Simple\+UInt16}} = 5
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a01d682d86657be62abb7d000317bb67e}{Commands}} = 6
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa9703801ac7bd790f6f980532e4224c0}{Data}} = 7
+, \newline
+\mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a83e5a2cc5db1f28fe99e410d449cf895}{Conditional}} = 8
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a0557cd28125506b469fa64c001718071}{Return\+Only}} = 9
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3ae940424d9ddb2b0510a1c99d4755c2b9}{Immediate}} = 10
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3ae60cea90d3ef92a696f784d475f728e0}{Expression}} = 11
+, \newline
+\mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a0d592a4b562059bc283e00b3704865c9}{Add}} = 12
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a00dbb5a5f8f3c267c5cb1e29fff3c3e5}{Remove}} = 13
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a928f33270be19855038d0245a0fa06a1}{Count}} = 14
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a923b92502c8f8beef4a620fee49b89ae}{Name}} = 15
+, \newline
+\mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a3340c8ecc8e48277387c30bd3c435799}{Index}} = 16
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa401dab5577100adae9efd391c1300a0}{Milliseconds}} = 17
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a155231ae9ec9185d47ef8523aafac530}{Microseconds}} = 18
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a668e4e299b1dc007e1a756ba41fa88dc}{Hertz}} = 19
+, \newline
+\mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3ae2a3aba9326b6832f7ff513bf0138eb7}{Request\+Only}} = 20
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a88550d193faf074a64550cd75aa8da91}{Return\+Request}} = 21
+, \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a613b700c2027b68da289086569c51909}{Output\+Assignment}} = 22
+ \}
+\item 
+enum \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabe}{e\+Module\+Type}} \{ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8}{software}} = 0
+, \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabea41b91ec2ec246009a6c05166c265c06a}{hardware}} = 1
+, \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeafcf00f740c40cfca071f907d32575168}{remote}} = 2
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+String \mbox{\hyperlink{modulesystembasics_8hpp_ab1d3552f0d084f9bcb06087edb6f101b}{get\+Module\+Type}} (uint8\+\_\+t m\+Type)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+String \mbox{\hyperlink{modulesystembasics_8hpp_ab8b5d3dd764b37dbb1275217a0b41042}{command\+Type\+Description}} \mbox{[}$\,$\mbox{]}
+\item 
+const String \mbox{\hyperlink{modulesystembasics_8hpp_a3129efc76642849531b5941ae9606c72}{module\+Type\+Description}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{modulesystembasics_8hpp_a223ca5ad493b8c5277139a075b20471a}\label{modulesystembasics_8hpp_a223ca5ad493b8c5277139a075b20471a} 
+\index{modulesystembasics.hpp@{modulesystembasics.hpp}!CREATE\_DATACHANGED\_CALLBACK@{CREATE\_DATACHANGED\_CALLBACK}}
+\index{CREATE\_DATACHANGED\_CALLBACK@{CREATE\_DATACHANGED\_CALLBACK}!modulesystembasics.hpp@{modulesystembasics.hpp}}
+\doxysubsubsection{\texorpdfstring{CREATE\_DATACHANGED\_CALLBACK}{CREATE\_DATACHANGED\_CALLBACK}}
+{\footnotesize\ttfamily \#define CREATE\+\_\+\+DATACHANGED\+\_\+\+CALLBACK(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{class\+Name }\end{DoxyParamCaption})~    bool class\+Name\+::name(\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}module)}
+
+\Hypertarget{modulesystembasics_8hpp_abf45ff9851ecf7a95efb74b0f8d550da}\label{modulesystembasics_8hpp_abf45ff9851ecf7a95efb74b0f8d550da} 
+\index{modulesystembasics.hpp@{modulesystembasics.hpp}!CREATE\_DATACHANGED\_CALLBACK\_FWD@{CREATE\_DATACHANGED\_CALLBACK\_FWD}}
+\index{CREATE\_DATACHANGED\_CALLBACK\_FWD@{CREATE\_DATACHANGED\_CALLBACK\_FWD}!modulesystembasics.hpp@{modulesystembasics.hpp}}
+\doxysubsubsection{\texorpdfstring{CREATE\_DATACHANGED\_CALLBACK\_FWD}{CREATE\_DATACHANGED\_CALLBACK\_FWD}}
+{\footnotesize\ttfamily \#define CREATE\+\_\+\+DATACHANGED\+\_\+\+CALLBACK\+\_\+\+FWD(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{class\+Name }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{bool}\ name(\mbox{\hyperlink{classModule}{Module}}\ *module);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ s\_\#\#name(\mbox{\hyperlink{classModule}{Module}}\ *owner,\ \mbox{\hyperlink{classModule}{Module}}\ *module)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}className*\textcolor{keyword}{>}(owner)-\/>name(module);\ \}}
+
+\end{DoxyCode}
+\Hypertarget{modulesystembasics_8hpp_a33460e04d9e860676f5c8d5f5b47bf61}\label{modulesystembasics_8hpp_a33460e04d9e860676f5c8d5f5b47bf61} 
+\index{modulesystembasics.hpp@{modulesystembasics.hpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
+\index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!modulesystembasics.hpp@{modulesystembasics.hpp}}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION}{CREATE\_MODULE\_COMMAND\_FUNCTION}}
+{\footnotesize\ttfamily \#define CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION(\begin{DoxyParamCaption}\item[{}]{funcname,  }\item[{}]{class\+Name }\end{DoxyParamCaption})~\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} class\+Name\+::funcname(\mbox{\hyperlink{modulesystembasics_8hpp_af1cbff4235e0dc51c811eafe60054141}{Module\+Command\+Declaration\+Arguments}})}
+
+\Hypertarget{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}\label{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3} 
+\index{modulesystembasics.hpp@{modulesystembasics.hpp}!CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD@{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}
+\index{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD@{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}!modulesystembasics.hpp@{modulesystembasics.hpp}}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}
+{\footnotesize\ttfamily \#define CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION\+\_\+\+FWD(\begin{DoxyParamCaption}\item[{}]{funcname,  }\item[{}]{class\+Name }\end{DoxyParamCaption})~\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} funcname(\mbox{\hyperlink{modulesystembasics_8hpp_af1cbff4235e0dc51c811eafe60054141}{Module\+Command\+Declaration\+Arguments}}); \mbox{\hyperlink{modulesystembasics_8hpp_a7bc88154e9bc7637593f19b40d711499}{static\+Copy}}(funcname, class\+Name)}
+
+\Hypertarget{modulesystembasics_8hpp_ad805e7e7e19b26258610463cec8d7fa8}\label{modulesystembasics_8hpp_ad805e7e7e19b26258610463cec8d7fa8} 
+\index{modulesystembasics.hpp@{modulesystembasics.hpp}!getModuleCount@{getModuleCount}}
+\index{getModuleCount@{getModuleCount}!modulesystembasics.hpp@{modulesystembasics.hpp}}
+\doxysubsubsection{\texorpdfstring{getModuleCount}{getModuleCount}}
+{\footnotesize\ttfamily \#define get\+Module\+Count(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~int name\+::get\+Module\+Command\+Count() \{ return sizeof(module\+Commands) / sizeof(module\+Commands\mbox{[}0\mbox{]}); \}}
+
+\Hypertarget{modulesystembasics_8hpp_af1cbff4235e0dc51c811eafe60054141}\label{modulesystembasics_8hpp_af1cbff4235e0dc51c811eafe60054141} 
+\index{modulesystembasics.hpp@{modulesystembasics.hpp}!ModuleCommandDeclarationArguments@{ModuleCommandDeclarationArguments}}
+\index{ModuleCommandDeclarationArguments@{ModuleCommandDeclarationArguments}!modulesystembasics.hpp@{modulesystembasics.hpp}}
+\doxysubsubsection{\texorpdfstring{ModuleCommandDeclarationArguments}{ModuleCommandDeclarationArguments}}
+{\footnotesize\ttfamily \#define Module\+Command\+Declaration\+Arguments~\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$\mbox{\hyperlink{structcommandResponse}{command\+Response}}$>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, bool request, \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} this\+Item}
+
+\Hypertarget{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}\label{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735} 
+\index{modulesystembasics.hpp@{modulesystembasics.hpp}!MODULECOMMANDHANDLER@{MODULECOMMANDHANDLER}}
+\index{MODULECOMMANDHANDLER@{MODULECOMMANDHANDLER}!modulesystembasics.hpp@{modulesystembasics.hpp}}
+\doxysubsubsection{\texorpdfstring{MODULECOMMANDHANDLER}{MODULECOMMANDHANDLER}}
+{\footnotesize\ttfamily \#define MODULECOMMANDHANDLER}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structModuleCommandDeclaration}{ModuleCommandDeclaration}}\ moduleCommands[];\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ getModuleCommandCount();\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structModuleCommandDeclaration}{ModuleCommandDeclaration}}\ getModuleCommand(uint8\_t\ i)\textcolor{keyword}{\ const\ override\ }\{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ if\ ((i\ <\ 0)\ ||\ (i\ >\ getModuleCommandCount()))\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ debugPrintln(\textcolor{stringliteral}{"{}Command\ index\ out\ of\ bounds"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ moduleCommands[i];\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{modulesystembasics_8hpp_a726e985c9256abcd3e04b255b31cba09}\label{modulesystembasics_8hpp_a726e985c9256abcd3e04b255b31cba09} 
+\index{modulesystembasics.hpp@{modulesystembasics.hpp}!SETMODULEID@{SETMODULEID}}
+\index{SETMODULEID@{SETMODULEID}!modulesystembasics.hpp@{modulesystembasics.hpp}}
+\doxysubsubsection{\texorpdfstring{SETMODULEID}{SETMODULEID}}
+{\footnotesize\ttfamily \#define SETMODULEID(\begin{DoxyParamCaption}\item[{}]{long\+Name,  }\item[{}]{short\+Name,  }\item[{}]{description,  }\item[{}]{module\+Type,  }\item[{}]{group\+Handler }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ kLongName\ =\ longName;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ kShortName\ =\ shortName;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ kDescription\ =\ description;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabe}{eModuleType}}\ kModuleType\ =\ moduleType;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{structtModuleID}{tModuleID}}\ tmoduleID\ =\ \{\ kLongName,\ kShortName,\ kDescription,\ kModuleType,\ groupHandler,\ kShortName\ \};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structtModuleID}{tModuleID}}\&\ getModuleID()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ tmoduleID;\ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{structtModuleID}{tModuleID}}\&\ getModuleID()\textcolor{keyword}{\ override\ }\{\ \textcolor{keywordflow}{return}\ tmoduleID;\ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structtModuleID}{tModuleID}}\ getModuleIDStatic()\ \{\ \textcolor{keywordflow}{return}\ \{\ kLongName,\ kShortName,\ kDescription,\ kModuleType,\ groupHandler,\ kShortName\ \};\ \}}
+
+\end{DoxyCode}
+\Hypertarget{modulesystembasics_8hpp_a7bc88154e9bc7637593f19b40d711499}\label{modulesystembasics_8hpp_a7bc88154e9bc7637593f19b40d711499} 
+\index{modulesystembasics.hpp@{modulesystembasics.hpp}!staticCopy@{staticCopy}}
+\index{staticCopy@{staticCopy}!modulesystembasics.hpp@{modulesystembasics.hpp}}
+\doxysubsubsection{\texorpdfstring{staticCopy}{staticCopy}}
+{\footnotesize\ttfamily \#define static\+Copy(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{class\+Name }\end{DoxyParamCaption})~    static \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} s\+\_\+\#\#name(\mbox{\hyperlink{classModuleCommand}{Module\+Command}}\texorpdfstring{$\ast$}{*} self, \mbox{\hyperlink{modulesystembasics_8hpp_af1cbff4235e0dc51c811eafe60054141}{Module\+Command\+Declaration\+Arguments}}) \{ return static\+\_\+cast$<$class\+Name\texorpdfstring{$\ast$}{*}$>$(self)-\/$>$name(in\+Command\+Item, in\+Command\+Responses, request, this\+Item); \}}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3} 
+\index{modulesystembasics.hpp@{modulesystembasics.hpp}!eCommandType@{eCommandType}}
+\index{eCommandType@{eCommandType}!modulesystembasics.hpp@{modulesystembasics.hpp}}
+\doxysubsubsection{\texorpdfstring{eCommandType}{eCommandType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3}{e\+Command\+Type}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SimpleString@{SimpleString}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!SimpleString@{SimpleString}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3ab44f630ccd79e857b188881d7be5d554}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3ab44f630ccd79e857b188881d7be5d554} 
+Simple\+String&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SimpleBool@{SimpleBool}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!SimpleBool@{SimpleBool}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a28b5bc6291c2acdc97d4f1f46f4789cb}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a28b5bc6291c2acdc97d4f1f46f4789cb} 
+Simple\+Bool&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SimpleFloat@{SimpleFloat}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!SimpleFloat@{SimpleFloat}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa210d75eecafc3c332388f910fb265f6}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa210d75eecafc3c332388f910fb265f6} 
+Simple\+Float&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SimpleUInt8@{SimpleUInt8}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!SimpleUInt8@{SimpleUInt8}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa1f2510a5d3c28f81f047744d50ffb8f}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa1f2510a5d3c28f81f047744d50ffb8f} 
+Simple\+UInt8&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SimpleInt16@{SimpleInt16}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!SimpleInt16@{SimpleInt16}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a5a24c30a835d2fb61a48e94d0674c5b5}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a5a24c30a835d2fb61a48e94d0674c5b5} 
+Simple\+Int16&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SimpleUInt16@{SimpleUInt16}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!SimpleUInt16@{SimpleUInt16}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a85a18924b17a185c4314d76e2c6737e8}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a85a18924b17a185c4314d76e2c6737e8} 
+Simple\+UInt16&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Commands@{Commands}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!Commands@{Commands}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a01d682d86657be62abb7d000317bb67e}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a01d682d86657be62abb7d000317bb67e} 
+Commands&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Data@{Data}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!Data@{Data}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa9703801ac7bd790f6f980532e4224c0}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa9703801ac7bd790f6f980532e4224c0} 
+Data&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Conditional@{Conditional}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!Conditional@{Conditional}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a83e5a2cc5db1f28fe99e410d449cf895}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a83e5a2cc5db1f28fe99e410d449cf895} 
+Conditional&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ReturnOnly@{ReturnOnly}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!ReturnOnly@{ReturnOnly}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a0557cd28125506b469fa64c001718071}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a0557cd28125506b469fa64c001718071} 
+Return\+Only&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Immediate@{Immediate}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!Immediate@{Immediate}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3ae940424d9ddb2b0510a1c99d4755c2b9}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3ae940424d9ddb2b0510a1c99d4755c2b9} 
+Immediate&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Expression@{Expression}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!Expression@{Expression}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3ae60cea90d3ef92a696f784d475f728e0}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3ae60cea90d3ef92a696f784d475f728e0} 
+Expression&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Add@{Add}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!Add@{Add}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a0d592a4b562059bc283e00b3704865c9}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a0d592a4b562059bc283e00b3704865c9} 
+Add&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remove@{Remove}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!Remove@{Remove}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a00dbb5a5f8f3c267c5cb1e29fff3c3e5}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a00dbb5a5f8f3c267c5cb1e29fff3c3e5} 
+Remove&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Count@{Count}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!Count@{Count}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a928f33270be19855038d0245a0fa06a1}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a928f33270be19855038d0245a0fa06a1} 
+Count&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Name@{Name}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!Name@{Name}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a923b92502c8f8beef4a620fee49b89ae}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a923b92502c8f8beef4a620fee49b89ae} 
+Name&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index@{Index}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!Index@{Index}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a3340c8ecc8e48277387c30bd3c435799}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a3340c8ecc8e48277387c30bd3c435799} 
+Index&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Milliseconds@{Milliseconds}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!Milliseconds@{Milliseconds}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa401dab5577100adae9efd391c1300a0}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3aa401dab5577100adae9efd391c1300a0} 
+Milliseconds&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Microseconds@{Microseconds}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!Microseconds@{Microseconds}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a155231ae9ec9185d47ef8523aafac530}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a155231ae9ec9185d47ef8523aafac530} 
+Microseconds&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hertz@{Hertz}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!Hertz@{Hertz}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a668e4e299b1dc007e1a756ba41fa88dc}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a668e4e299b1dc007e1a756ba41fa88dc} 
+Hertz&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RequestOnly@{RequestOnly}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!RequestOnly@{RequestOnly}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3ae2a3aba9326b6832f7ff513bf0138eb7}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3ae2a3aba9326b6832f7ff513bf0138eb7} 
+Request\+Only&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ReturnRequest@{ReturnRequest}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!ReturnRequest@{ReturnRequest}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a88550d193faf074a64550cd75aa8da91}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a88550d193faf074a64550cd75aa8da91} 
+Return\+Request&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OutputAssignment@{OutputAssignment}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!OutputAssignment@{OutputAssignment}}}\Hypertarget{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a613b700c2027b68da289086569c51909}\label{modulesystembasics_8hpp_a9c76f8d2ae49513c603deaf6c24aabb3a613b700c2027b68da289086569c51909} 
+Output\+Assignment&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabe}\label{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabe} 
+\index{modulesystembasics.hpp@{modulesystembasics.hpp}!eModuleType@{eModuleType}}
+\index{eModuleType@{eModuleType}!modulesystembasics.hpp@{modulesystembasics.hpp}}
+\doxysubsubsection{\texorpdfstring{eModuleType}{eModuleType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabe}{e\+Module\+Type}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{software@{software}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!software@{software}}}\Hypertarget{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8}\label{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8} 
+software&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{hardware@{hardware}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!hardware@{hardware}}}\Hypertarget{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabea41b91ec2ec246009a6c05166c265c06a}\label{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabea41b91ec2ec246009a6c05166c265c06a} 
+hardware&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{remote@{remote}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!remote@{remote}}}\Hypertarget{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeafcf00f740c40cfca071f907d32575168}\label{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeafcf00f740c40cfca071f907d32575168} 
+remote&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}\label{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937} 
+\index{modulesystembasics.hpp@{modulesystembasics.hpp}!eProcessResult@{eProcessResult}}
+\index{eProcessResult@{eProcessResult}!modulesystembasics.hpp@{modulesystembasics.hpp}}
+\doxysubsubsection{\texorpdfstring{eProcessResult}{eProcessResult}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NotFound@{NotFound}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!NotFound@{NotFound}}}\Hypertarget{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f}\label{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a70e76b0dfeca4f7119d1da36d948697f} 
+Not\+Found&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Ok@{Ok}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!Ok@{Ok}}}\Hypertarget{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}\label{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e} 
+Ok&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CommandFailed@{CommandFailed}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!CommandFailed@{CommandFailed}}}\Hypertarget{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20}\label{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7a0ddfd03587c54458a28710cfde9f20} 
+Command\+Failed&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WrongArgumentCount@{WrongArgumentCount}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!WrongArgumentCount@{WrongArgumentCount}}}\Hypertarget{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}\label{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3} 
+Wrong\+Argument\+Count&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WrongArgumentMinimum@{WrongArgumentMinimum}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!WrongArgumentMinimum@{WrongArgumentMinimum}}}\Hypertarget{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a6e204fafb4965a8a79b8ac29834195e2}\label{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a6e204fafb4965a8a79b8ac29834195e2} 
+Wrong\+Argument\+Minimum&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WrongArgumentValue@{WrongArgumentValue}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!WrongArgumentValue@{WrongArgumentValue}}}\Hypertarget{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7945af4588755e4b73b7855397babbb1}\label{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a7945af4588755e4b73b7855397babbb1} 
+Wrong\+Argument\+Value&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PassThrough@{PassThrough}!modulesystembasics.hpp@{modulesystembasics.hpp}}\index{modulesystembasics.hpp@{modulesystembasics.hpp}!PassThrough@{PassThrough}}}\Hypertarget{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9}\label{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937acc445c49ec3d316b23933b62fa4c56e9} 
+Pass\+Through&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{modulesystembasics_8hpp_ab1d3552f0d084f9bcb06087edb6f101b}\label{modulesystembasics_8hpp_ab1d3552f0d084f9bcb06087edb6f101b} 
+\index{modulesystembasics.hpp@{modulesystembasics.hpp}!getModuleType@{getModuleType}}
+\index{getModuleType@{getModuleType}!modulesystembasics.hpp@{modulesystembasics.hpp}}
+\doxysubsubsection{\texorpdfstring{getModuleType()}{getModuleType()}}
+{\footnotesize\ttfamily String get\+Module\+Type (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{m\+Type }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{modulesystembasics_8hpp_ab1d3552f0d084f9bcb06087edb6f101b_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{modulesystembasics_8hpp_ab8b5d3dd764b37dbb1275217a0b41042}\label{modulesystembasics_8hpp_ab8b5d3dd764b37dbb1275217a0b41042} 
+\index{modulesystembasics.hpp@{modulesystembasics.hpp}!commandTypeDescription@{commandTypeDescription}}
+\index{commandTypeDescription@{commandTypeDescription}!modulesystembasics.hpp@{modulesystembasics.hpp}}
+\doxysubsubsection{\texorpdfstring{commandTypeDescription}{commandTypeDescription}}
+{\footnotesize\ttfamily String command\+Type\+Description\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{modulesystembasics_8hpp_a3129efc76642849531b5941ae9606c72}\label{modulesystembasics_8hpp_a3129efc76642849531b5941ae9606c72} 
+\index{modulesystembasics.hpp@{modulesystembasics.hpp}!moduleTypeDescription@{moduleTypeDescription}}
+\index{moduleTypeDescription@{moduleTypeDescription}!modulesystembasics.hpp@{modulesystembasics.hpp}}
+\doxysubsubsection{\texorpdfstring{moduleTypeDescription}{moduleTypeDescription}}
+{\footnotesize\ttfamily const String module\+Type\+Description\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+

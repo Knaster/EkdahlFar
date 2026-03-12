@@ -1,0 +1,52 @@
+\doxysection{modulegroup.\+hpp File Reference}
+\hypertarget{modulegroup_8hpp}{}\label{modulegroup_8hpp}\index{modulegroup.hpp@{modulegroup.hpp}}
+{\ttfamily \#include $<$base/module.\+hpp$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+Include dependency graph for modulegroup.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{modulegroup_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{modulegroup_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classModuleGroup}{Module\+Group}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{modulegroup_8hpp_a3365affcc62335d2b3134fc971ca33f1}{CREATE\+\_\+\+INDEX\+\_\+\+CALLBACK\+\_\+\+FWD}}(name,  class\+Name)
+\item 
+\#define \mbox{\hyperlink{modulegroup_8hpp_a937c07ea2b2812a26c47e5677718699c}{CREATE\+\_\+\+INDEX\+\_\+\+CALLBACK}}(name,  class\+Name)~    bool class\+Name\+::name(\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*}module\+Group)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{modulegroup_8hpp_a937c07ea2b2812a26c47e5677718699c}\label{modulegroup_8hpp_a937c07ea2b2812a26c47e5677718699c} 
+\index{modulegroup.hpp@{modulegroup.hpp}!CREATE\_INDEX\_CALLBACK@{CREATE\_INDEX\_CALLBACK}}
+\index{CREATE\_INDEX\_CALLBACK@{CREATE\_INDEX\_CALLBACK}!modulegroup.hpp@{modulegroup.hpp}}
+\doxysubsubsection{\texorpdfstring{CREATE\_INDEX\_CALLBACK}{CREATE\_INDEX\_CALLBACK}}
+{\footnotesize\ttfamily \#define CREATE\+\_\+\+INDEX\+\_\+\+CALLBACK(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{class\+Name }\end{DoxyParamCaption})~    bool class\+Name\+::name(\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*}module\+Group)}
+
+\Hypertarget{modulegroup_8hpp_a3365affcc62335d2b3134fc971ca33f1}\label{modulegroup_8hpp_a3365affcc62335d2b3134fc971ca33f1} 
+\index{modulegroup.hpp@{modulegroup.hpp}!CREATE\_INDEX\_CALLBACK\_FWD@{CREATE\_INDEX\_CALLBACK\_FWD}}
+\index{CREATE\_INDEX\_CALLBACK\_FWD@{CREATE\_INDEX\_CALLBACK\_FWD}!modulegroup.hpp@{modulegroup.hpp}}
+\doxysubsubsection{\texorpdfstring{CREATE\_INDEX\_CALLBACK\_FWD}{CREATE\_INDEX\_CALLBACK\_FWD}}
+{\footnotesize\ttfamily \#define CREATE\+\_\+\+INDEX\+\_\+\+CALLBACK\+\_\+\+FWD(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{class\+Name }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{bool}\ name(\mbox{\hyperlink{classModuleGroup}{ModuleGroup}}\ *moduleGroup);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ s\_\#\#name(\mbox{\hyperlink{classModule}{Module}}*\ owner,\ \mbox{\hyperlink{classModuleGroup}{ModuleGroup}}\ *moduleGroup)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}className*\textcolor{keyword}{>}(owner)-\/>name(moduleGroup);\ \}}
+
+\end{DoxyCode}

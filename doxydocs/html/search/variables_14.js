@@ -1,9 +1,27 @@
 var searchData=
 [
-  ['uaccelperiod_0',['uAccelPeriod',['../classservoStepper.html#a1883b61564ace7a8797983f7965592e6',1,'servoStepper']]],
-  ['updateperiod_1',['updatePeriod',['../classservoStepper.html#aaa70849e320f845a283e3ae01f084d3e',1,'servoStepper']]],
-  ['updaterollingstatus_2',['updateRollingStatus',['../main_8cpp.html#ab04d737a375f71bd322407e877bcfa68',1,'main.cpp']]],
-  ['usb_5fstring_5fmanufacturer_5fname_3',['usb_string_manufacturer_name',['../name_8c.html#aa8457ef11f394fd7531cb8fdee9c81c8',1,'name.c']]],
-  ['usb_5fstring_5fproduct_5fname_4',['usb_string_product_name',['../name_8c.html#ac306526ea4c665592e1c51d6253cbad7',1,'name.c']]],
-  ['usb_5fstring_5fserial_5fnumber_5',['usb_string_serial_number',['../name_8c.html#ad12fc4a657b6d8e7c5f04c8e2f1026ed',1,'name.c']]]
+  ['tachofreq_0',['tachoFreq',['../classDCMotorControl.html#a0faa4d2cb8bd582a4db8e79e6e9da849',1,'DCMotorControl']]],
+  ['tachofreqcount_1',['tachoFreqCount',['../classDCMotorControl.html#aa423255c98c674280dafd0a418fe45d6',1,'DCMotorControl']]],
+  ['tachofreqindex_2',['tachoFreqIndex',['../classDCMotorControl.html#a38fec752bae29f31fd61b9e318bdaf96',1,'DCMotorControl']]],
+  ['tachooldaverage_3',['tachoOldAverage',['../classDCMotorControl.html#aaed2cbdafea785953e9ccba9bb0d5fef',1,'DCMotorControl']]],
+  ['tempem_4',['tempEM',['../classaverager.html#ac44fcaf126fc2e739d07307ebe55556e',1,'averager']]],
+  ['testbegin_5',['testBegin',['../classControlReader.html#aac84137ad7f490b34025edfadb513de4',1,'ControlReader']]],
+  ['testchannel_6',['testChannel',['../classControlReader.html#a12391f415e829660fb9a45820985577a',1,'ControlReader']]],
+  ['testmax_7',['testMax',['../classControlReader.html#a67ffe474cfe49c340b66a0e609aeddf3',1,'ControlReader']]],
+  ['testmeasurement_8',['testMeasurement',['../classControlReader.html#ab9f64447505e0e24bc456e2597aeed6d',1,'ControlReader']]],
+  ['testmeasurementongoing_9',['testMeasurementOngoing',['../classControlReader.html#a4d67c9573ec7d5e4fc9d6a604ad8ca03',1,'ControlReader']]],
+  ['testmin_10',['testMin',['../classControlReader.html#ab9a22bf0de979dac0f952c632841ed39',1,'ControlReader']]],
+  ['timesincechange_11',['timeSinceChange',['../classaverager.html#a3861c71547ed8423c54e1082768620e9',1,'averager']]],
+  ['tmc2209servostepper_12',['tmc2209servostepper',['../classMute.html#a02d9a38e3778c71c3f39f828af2416c5',1,'Mute::tmc2209ServoStepper'],['../classBowPressure.html#a28cc40496b93b093f6714cae60020e1b',1,'BowPressure::tmc2209ServoStepper']]],
+  ['tmoduleid_13',['tmoduleid',['../classModuleGroup.html#a9065b6ea6e705670d51daa469e2c387b',1,'ModuleGroup::tmoduleID'],['../structPluginFactory_1_1PluginRegistry.html#a99f1d3f497792b1dc791eca0186b15c2',1,'PluginFactory::PluginRegistry::tmoduleID'],['../classBaseModule.html#a34b0083ac08427e78f35001239f6f646',1,'BaseModule::tmoduleID']]],
+  ['transientoverpower_14',['transientOverPower',['../classDCMotorControl.html#a3962e1db6f238d51dbde731cc4191f56',1,'DCMotorControl']]],
+  ['trigger_15',['trigger',['../classaverager.html#a911b8cf08ca00c9c0a8040f5627809ae',1,'averager']]],
+  ['triggerdelay_16',['triggerDelay',['../classaverager.html#a1571abcefec5ad9f189bd5123f5a9a60',1,'averager']]],
+  ['triggerdelayem_17',['triggerDelayEM',['../classaverager.html#acb664b8a0229f27d9347850ccb583c63',1,'averager']]],
+  ['triggerdelayengage_18',['triggerDelayEngage',['../classaverager.html#a31644ac67d506815a40b141221f8ade5',1,'averager']]],
+  ['triggerthreshold_19',['triggerThreshold',['../classaverager.html#a5f9bdead7dc4af8e6e437eeaee72c875',1,'averager']]],
+  ['tsmsgflag_20',['tsMsgFlag',['../classthreadSafeDebugPrint.html#a5d91ba64ca66858eb81f0a4ec43dbc36',1,'threadSafeDebugPrint']]],
+  ['turnaround_21',['turnAround',['../classservoStepper.html#a73dc65d535b94ea9429756164cc0f745',1,'servoStepper']]],
+  ['turnarounddirection_22',['turnAroundDirection',['../classservoStepper.html#ab04d4e3c9ed825d5d00ab325ef528e07',1,'servoStepper']]],
+  ['turnaroundposition_23',['turnAroundPosition',['../classservoStepper.html#ac05330644fb45e70fb5e33ffc96c0081',1,'servoStepper']]]
 ];

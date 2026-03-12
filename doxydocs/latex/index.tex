@@ -34,7 +34,7 @@ Classes that contain data that are to be saved into EEPROM implements a function
 \end{DoxyItemize}\hypertarget{index_controlclasses}{}\doxysection{\texorpdfstring{Intermediary data and sensor data processing classes and header files}{Intermediary data and sensor data processing classes and header files}}\label{index_controlclasses}
 
 \begin{DoxyItemize}
-\item bow\+Control -\/ Control class for high level interfacing with a bow\+IO object. This object contains the PID for stable bowing motor control, calcualtes motor set frequency from harmonic tables and pressure engage, rest and free positiong. Parameters are limited by user set soft-\/limitis contained in the pointed to Calibration\+Data and Bow\+Actuators class instances ~\newline
+\item bow\+Control -\/ Control class for high level interfacing with a bow\+IO object. This object contains the PID for stable bowing motor control, calcualtes motor set frequency from harmonic tables and pressure engage, rest and free positiong. Parameters are limited by user set soft-\/limitis contained in the pointed to Calibration\+Data and \doxylink{classBowActuators}{Bow\+Actuators} class instances ~\newline
 
 \item \doxylink{main_8cpp}{main.\+cpp} -\/ Main software starting point. Initializes various hardware, class instances, loads any eeprom settings and binds interrupts to functions. Also contains the main loop function as well as various helper functions. This class has an array of string\+Module class instances and is through maincommandhandler.\+cpp deciding which string\+Module instance is currently being controlled and is passing along any command messages that aren\textquotesingle{}t recognized as global. ~\newline
 
@@ -45,7 +45,7 @@ Classes that contain data that are to be saved into EEPROM implements a function
 \end{DoxyItemize}\hypertarget{index_auxclasses}{}\doxysection{\texorpdfstring{Auxilary / Misc classes and header files}{Auxilary / Misc classes and header files}}\label{index_auxclasses}
 
 \begin{DoxyItemize}
-\item Bow\+Actuators -\/ contains handling of a vector of bow\+Actuator classes which in turn contains soft-\/limit data for user-\/defined actuators ~\newline
+\item \doxylink{classBowActuators}{Bow\+Actuators} -\/ contains handling of a vector of bow\+Actuator classes which in turn contains soft-\/limit data for user-\/defined actuators ~\newline
 
 \item calibrate -\/ contains functions for finding soft-\/limits of the current actuator, utilizes pointeres to bow\+IO and bow\+Control class instances to perform calibration tests and monitor sensor outputs ~\newline
 
@@ -54,17 +54,17 @@ Classes that contain data that are to be saved into EEPROM implements a function
 \item configuration -\/ data storage class for midi mapped command strings
 \item debugprint.\+h -\/ contains functions for message reporting over USB-\/\+Serial ~\newline
 
-\item \doxylink{eepromhelpers_8cpp}{eepromhelpers.\+cpp} -\/ contains functions for saving and loading EEPROM data ~\newline
+\item eepromhelpers.\+cpp -\/ contains functions for saving and loading EEPROM data ~\newline
 
 \item \doxylink{harmonicSeries_8cpp}{harmonic\+Series.\+cpp} and harmonic\+Series.\+h -\/ contains a vector of harmonic\+Series instances which in turn contains the harmonic ratios used by functions in the bow\+Control class to set bowing frequencies ~\newline
 
-\item \doxylink{isrclasswrapper_8cpp}{isrclasswrapper.\+cpp} -\/ wrapper enabling class-\/based functions to be called by interrupts ~\newline
+\item isrclasswrapper.\+cpp -\/ wrapper enabling class-\/based functions to be called by interrupts ~\newline
 
 \item \doxylink{name_8c}{name.\+c} -\/ Teensy 4-\/specific class for setting USB device names ~\newline
 
 \item settingshandler.\+cpp -\/ functions for saving EEPROM data ~\newline
 
-\item automaticversion.\+hpp -\/ functions for autmatically creating a build version number at each compile
+\item \doxylink{automaticversion_8hpp}{automaticversion.\+hpp} -\/ functions for autmatically creating a build version number at each compile
 \end{DoxyItemize}\hypertarget{index_libraries}{}\doxysection{\texorpdfstring{Libraries}{Libraries}}\label{index_libraries}
 
 \begin{DoxyItemize}
@@ -74,7 +74,7 @@ Classes that contain data that are to be saved into EEPROM implements a function
 
 \item Audio -\/ PJRC Teensy 4 Audio library, used by functions in \doxylink{audioanalyze_8h}{audioanalyze.\+h} ~\newline
 
-\item EEPROM -\/ Library for saving data into the Teensy 4 EEPROM, used by \doxylink{eepromhelpers_8cpp}{eepromhelpers.\+cpp} ~\newline
+\item EEPROM -\/ Library for saving data into the Teensy 4 EEPROM, used by eepromhelpers.\+cpp ~\newline
 
 \item Safe\+String -\/ Partial use of its RS-\/232 functionality, used by \doxylink{main_8cpp}{main.\+cpp} and debugprint.\+h ~\newline
 
@@ -84,7 +84,7 @@ Classes that contain data that are to be saved into EEPROM implements a function
 
 \item Teensy\+\_\+\+PWM -\/ Library for better manipulation of the Teensy 4 PWM ports, used by the bow\+IO and solenoid classes ~\newline
 
-\item tinyexpr -\/ Expression parser library used for parsing command message expressions in \doxylink{classcommandList_a642e2aff6de5eb65835d24dbceefd8a8}{command\+List\+::parse\+Command\+Expressions} ~\newline
+\item tinyexpr -\/ Expression parser library used for parsing command message expressions in command\+List\+::parse\+Command\+Expressions ~\newline
 
 \item TMC2209 -\/ Library for the TMC2209 stepper motor driver IC, used by the bow\+IO and mute classes ~\newline
 

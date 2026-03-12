@@ -1,0 +1,228 @@
+\doxysection{Plugin\+Handler Class Reference}
+\hypertarget{classPluginHandler}{}\label{classPluginHandler}\index{PluginHandler@{PluginHandler}}
+
+
+{\ttfamily \#include $<$pluginhandler.\+hpp$>$}
+
+
+
+Inheritance diagram for Plugin\+Handler\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{classPluginHandler__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Plugin\+Handler\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPluginHandler__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}} \mbox{\hyperlink{classPluginHandler_af77fc25ba37b781325e0c34f9f3f5f5d}{Plugin\+Handler}} (\mbox{\hyperlink{classExpressionParser}{Expression\+Parser}} \texorpdfstring{$\ast$}{*}in\+Expression\+Parser)
+\item 
+void \mbox{\hyperlink{classPluginHandler_a5e6713823544269628abc861120bc020}{update}} () override
+\item 
+bool \mbox{\hyperlink{classPluginHandler_a14b1e5fe1e9726110a946358d0b9c8ee}{add\+Plugin}} (String name)
+\item 
+void \mbox{\hyperlink{classPluginHandler_ae989916db9cba23051cb8d2df918934e}{add\+Instances}} (String name, uint8\+\_\+t count) override
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classPluginHandler_aa5c0a0afe6c87a7cdc2a9698924df54c}{get\+Update\+Rate}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleHandler}{Module\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModuleHandler_a9eb2f015987df6e507d2e2f7281cc520}{Module\+Handler}} ()
+\item 
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModuleHandler_aba53cb524d3e200345c18bbaf96adaf2}{process\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false) override
+\item 
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModuleHandler_aa8b5a72e62b7a43ac40822461f535c0c}{process\+Module\+Handler\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structcommandResponse}{command\+Response}}, bool request=false)
+\item 
+void \mbox{\hyperlink{classModuleHandler_a8086440da55f316a89562f2a736a1ab6}{dir}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix, bool hidden, bool modules, bool commands, bool instances, bool instance\+Count, bool recursive) override
+\item 
+void \mbox{\hyperlink{classModuleHandler_a9c235cdcf6965c856fcb2be82cc46175}{help}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix)
+\item 
+\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleHandler_ab87ee8507b0edd4888eaa422f189d716}{get\+Group}} (String long\+Name)
+\item 
+void \mbox{\hyperlink{classModuleHandler_ae3fa5b4e5e4fa54687c3d26e0d937782}{dump\+Data}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}data\+Dump)
+\item 
+\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleHandler_aa8b0ee11f9f981d5d791e0994618377b}{add\+Module}} (\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}module)
+\item 
+\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleHandler_a25c83b60da881f9c0dd2886e6a89e631}{add\+Group}} (\mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} in\+Module\+ID)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule_a5a240a8a9ab1813b17bcb810b24ceaea}{Module}} ()
+\item 
+virtual const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{get\+Module\+ID}} () const =0
+\item 
+virtual \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a9a13ef0a8291e562a9557c311d07b334}{get\+Module\+ID}} ()=0
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a534a35eb18ec29dbcc8bafce30c21128}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_af7fe70cf55b7c8999672c8a202cbdb71}{process\+Module\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual int \mbox{\hyperlink{classModule_ae6fa72e64554ee0b09a8bb6a77a68640}{get\+Module\+Command\+Count}} ()
+\item 
+bool \mbox{\hyperlink{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2}{has\+Data\+Change}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleCommand}{Module\+Command}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModuleCommand_a4ce6a1d032eaa918f21ad8121ba59094}{get\+Module\+Command}} (uint8\+\_\+t i) const =0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classPlugin}{Plugin}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classPluginHandler_a6f0a7b0c610ef6cf22be6f8641c8b82c}{plugins}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModuleHandler}{Module\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classModuleGroup}{Module\+Group}} $>$ \mbox{\hyperlink{classModuleHandler_a1913f2c62636218e752bbf72de5e45af}{module\+Groups}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classModule_aa09bd171529da96438e917258ab5ab8d}{is\+Group\+Handler}} = false
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classPluginHandler_a674b6e0fed47e115f73c194ecafc8f86}{update\+Rate}} = 10
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classPluginHandler_aa3f6b2e10acccf493e23a1e606a3cd43}{last\+Update}} = 0
+\item 
+elapsed\+Millis \mbox{\hyperlink{classPluginHandler_abb4f8f224b6f9c1cdcb904425e1fb69f}{main\+Timer}}
+\item 
+\mbox{\hyperlink{classExpressionParser}{Expression\+Parser}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPluginHandler_adc580b186b73ab79ed80353cc78b5281}{expression\+Parser}} = nullptr
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}{set\+Data\+Changed}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModule_ad85cad50c5538cc47c6d3ac76500e4cf}{owner}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classPluginHandler_af77fc25ba37b781325e0c34f9f3f5f5d}\label{classPluginHandler_af77fc25ba37b781325e0c34f9f3f5f5d} 
+\index{PluginHandler@{PluginHandler}!PluginHandler@{PluginHandler}}
+\index{PluginHandler@{PluginHandler}!PluginHandler@{PluginHandler}}
+\doxysubsubsection{\texorpdfstring{PluginHandler()}{PluginHandler()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}} Plugin\+Handler\+::\+Plugin\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classExpressionParser}{Expression\+Parser}} \texorpdfstring{$\ast$}{*}}]{in\+Expression\+Parser }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classPluginHandler_ae989916db9cba23051cb8d2df918934e}\label{classPluginHandler_ae989916db9cba23051cb8d2df918934e} 
+\index{PluginHandler@{PluginHandler}!addInstances@{addInstances}}
+\index{addInstances@{addInstances}!PluginHandler@{PluginHandler}}
+\doxysubsubsection{\texorpdfstring{addInstances()}{addInstances()}}
+{\footnotesize\ttfamily void Plugin\+Handler\+::add\+Instances (\begin{DoxyParamCaption}\item[{String}]{name,  }\item[{uint8\+\_\+t}]{count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classModuleHandler_aeb0456562a8743c5f4cf5d4aa9a474eb}{Module\+Handler}}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPluginHandler_ae989916db9cba23051cb8d2df918934e_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPluginHandler_a14b1e5fe1e9726110a946358d0b9c8ee}\label{classPluginHandler_a14b1e5fe1e9726110a946358d0b9c8ee} 
+\index{PluginHandler@{PluginHandler}!addPlugin@{addPlugin}}
+\index{addPlugin@{addPlugin}!PluginHandler@{PluginHandler}}
+\doxysubsubsection{\texorpdfstring{addPlugin()}{addPlugin()}}
+{\footnotesize\ttfamily bool Plugin\+Handler\+::add\+Plugin (\begin{DoxyParamCaption}\item[{String}]{name }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPluginHandler_a14b1e5fe1e9726110a946358d0b9c8ee_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPluginHandler_a14b1e5fe1e9726110a946358d0b9c8ee_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classPluginHandler_aa5c0a0afe6c87a7cdc2a9698924df54c}\label{classPluginHandler_aa5c0a0afe6c87a7cdc2a9698924df54c} 
+\index{PluginHandler@{PluginHandler}!getUpdateRate@{getUpdateRate}}
+\index{getUpdateRate@{getUpdateRate}!PluginHandler@{PluginHandler}}
+\doxysubsubsection{\texorpdfstring{getUpdateRate()}{getUpdateRate()}}
+{\footnotesize\ttfamily uint16\+\_\+t Plugin\+Handler\+::get\+Update\+Rate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classPluginHandler_a5e6713823544269628abc861120bc020}\label{classPluginHandler_a5e6713823544269628abc861120bc020} 
+\index{PluginHandler@{PluginHandler}!update@{update}}
+\index{update@{update}!PluginHandler@{PluginHandler}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Plugin\+Handler\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classModule_a09131761fec40345e3657b801778057f}{Module}}.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPluginHandler_a5e6713823544269628abc861120bc020_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classPluginHandler_adc580b186b73ab79ed80353cc78b5281}\label{classPluginHandler_adc580b186b73ab79ed80353cc78b5281} 
+\index{PluginHandler@{PluginHandler}!expressionParser@{expressionParser}}
+\index{expressionParser@{expressionParser}!PluginHandler@{PluginHandler}}
+\doxysubsubsection{\texorpdfstring{expressionParser}{expressionParser}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classExpressionParser}{Expression\+Parser}}\texorpdfstring{$\ast$}{*} Plugin\+Handler\+::expression\+Parser = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPluginHandler_aa3f6b2e10acccf493e23a1e606a3cd43}\label{classPluginHandler_aa3f6b2e10acccf493e23a1e606a3cd43} 
+\index{PluginHandler@{PluginHandler}!lastUpdate@{lastUpdate}}
+\index{lastUpdate@{lastUpdate}!PluginHandler@{PluginHandler}}
+\doxysubsubsection{\texorpdfstring{lastUpdate}{lastUpdate}}
+{\footnotesize\ttfamily uint32\+\_\+t Plugin\+Handler\+::last\+Update = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPluginHandler_abb4f8f224b6f9c1cdcb904425e1fb69f}\label{classPluginHandler_abb4f8f224b6f9c1cdcb904425e1fb69f} 
+\index{PluginHandler@{PluginHandler}!mainTimer@{mainTimer}}
+\index{mainTimer@{mainTimer}!PluginHandler@{PluginHandler}}
+\doxysubsubsection{\texorpdfstring{mainTimer}{mainTimer}}
+{\footnotesize\ttfamily elapsed\+Millis Plugin\+Handler\+::main\+Timer\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classPluginHandler_a6f0a7b0c610ef6cf22be6f8641c8b82c}\label{classPluginHandler_a6f0a7b0c610ef6cf22be6f8641c8b82c} 
+\index{PluginHandler@{PluginHandler}!plugins@{plugins}}
+\index{plugins@{plugins}!PluginHandler@{PluginHandler}}
+\doxysubsubsection{\texorpdfstring{plugins}{plugins}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classPlugin}{Plugin}}\texorpdfstring{$\ast$}{*}$>$ Plugin\+Handler\+::plugins}
+
+\Hypertarget{classPluginHandler_a674b6e0fed47e115f73c194ecafc8f86}\label{classPluginHandler_a674b6e0fed47e115f73c194ecafc8f86} 
+\index{PluginHandler@{PluginHandler}!updateRate@{updateRate}}
+\index{updateRate@{updateRate}!PluginHandler@{PluginHandler}}
+\doxysubsubsection{\texorpdfstring{updateRate}{updateRate}}
+{\footnotesize\ttfamily uint16\+\_\+t Plugin\+Handler\+::update\+Rate = 10\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{pluginhandler_8hpp}{pluginhandler.\+hpp}}\item 
+\mbox{\hyperlink{pluginhandler_8cpp}{pluginhandler.\+cpp}}\end{DoxyCompactItemize}

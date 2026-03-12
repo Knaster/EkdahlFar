@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['mute_0',['Mute',['../classMute.html',1,'']]],
-  ['mutecontrol_1',['MuteControl',['../classMuteControl.html',1,'']]]
+  ['harmonicseries_0',['HarmonicSeries',['../classHarmonicSeries.html',1,'']]],
+  ['harmonicserieshandler_1',['HarmonicSeriesHandler',['../classHarmonicSeriesHandler.html',1,'']]]
 ];

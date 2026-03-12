@@ -113,7 +113,7 @@ Classes and header files with direct hardware access:</h1>
 <h1><a class="anchor" id="controlclasses"></a>
 Intermediary data and sensor data processing classes and header files</h1>
 <ul>
-<li>bowControl - Control class for high level interfacing with a bowIO object. This object contains the PID for stable bowing motor control, calcualtes motor set frequency from harmonic tables and pressure engage, rest and free positiong. Parameters are limited by user set soft-limitis contained in the pointed to CalibrationData and BowActuators class instances <br  />
+<li>bowControl - Control class for high level interfacing with a bowIO object. This object contains the PID for stable bowing motor control, calcualtes motor set frequency from harmonic tables and pressure engage, rest and free positiong. Parameters are limited by user set soft-limitis contained in the pointed to CalibrationData and <a class="el" href="classBowActuators.html">BowActuators</a> class instances <br  />
 </li>
 <li><a class="el" href="main_8cpp.html">main.cpp</a> - Main software starting point. Initializes various hardware, class instances, loads any eeprom settings and binds interrupts to functions. Also contains the main loop function as well as various helper functions. This class has an array of stringModule class instances and is through maincommandhandler.cpp deciding which stringModule instance is currently being controlled and is passing along any command messages that aren't recognized as global. <br  />
 </li>
@@ -125,7 +125,7 @@ Intermediary data and sensor data processing classes and header files</h1>
 <h1><a class="anchor" id="auxclasses"></a>
 Auxilary / Misc classes and header files</h1>
 <ul>
-<li>BowActuators - contains handling of a vector of bowActuator classes which in turn contains soft-limit data for user-defined actuators <br  />
+<li><a class="el" href="classBowActuators.html">BowActuators</a> - contains handling of a vector of bowActuator classes which in turn contains soft-limit data for user-defined actuators <br  />
 </li>
 <li>calibrate - contains functions for finding soft-limits of the current actuator, utilizes pointeres to bowIO and bowControl class instances to perform calibration tests and monitor sensor outputs <br  />
 </li>
@@ -134,17 +134,17 @@ Auxilary / Misc classes and header files</h1>
 <li>configuration - data storage class for midi mapped command strings</li>
 <li>debugprint.h - contains functions for message reporting over USB-Serial <br  />
 </li>
-<li><a class="el" href="eepromhelpers_8cpp.html">eepromhelpers.cpp</a> - contains functions for saving and loading EEPROM data <br  />
+<li>eepromhelpers.cpp - contains functions for saving and loading EEPROM data <br  />
 </li>
 <li><a class="el" href="harmonicSeries_8cpp.html">harmonicSeries.cpp</a> and harmonicSeries.h - contains a vector of harmonicSeries instances which in turn contains the harmonic ratios used by functions in the bowControl class to set bowing frequencies <br  />
 </li>
-<li><a class="el" href="isrclasswrapper_8cpp.html">isrclasswrapper.cpp</a> - wrapper enabling class-based functions to be called by interrupts <br  />
+<li>isrclasswrapper.cpp - wrapper enabling class-based functions to be called by interrupts <br  />
 </li>
 <li><a class="el" href="name_8c.html">name.c</a> - Teensy 4-specific class for setting USB device names <br  />
 </li>
 <li>settingshandler.cpp - functions for saving EEPROM data <br  />
 </li>
-<li>automaticversion.hpp - functions for autmatically creating a build version number at each compile</li>
+<li><a class="el" href="automaticversion_8hpp.html">automaticversion.hpp</a> - functions for autmatically creating a build version number at each compile</li>
 </ul>
 <h1><a class="anchor" id="libraries"></a>
 Libraries</h1>
@@ -155,7 +155,7 @@ Libraries</h1>
 </li>
 <li>Audio - PJRC Teensy 4 Audio library, used by functions in <a class="el" href="audioanalyze_8h.html">audioanalyze.h</a> <br  />
 </li>
-<li>EEPROM - Library for saving data into the Teensy 4 EEPROM, used by <a class="el" href="eepromhelpers_8cpp.html">eepromhelpers.cpp</a> <br  />
+<li>EEPROM - Library for saving data into the Teensy 4 EEPROM, used by eepromhelpers.cpp <br  />
 </li>
 <li>SafeString - Partial use of its RS-232 functionality, used by <a class="el" href="main_8cpp.html">main.cpp</a> and debugprint.h <br  />
 </li>
@@ -165,7 +165,7 @@ Libraries</h1>
 </li>
 <li>Teensy_PWM - Library for better manipulation of the Teensy 4 PWM ports, used by the bowIO and solenoid classes <br  />
 </li>
-<li>tinyexpr - Expression parser library used for parsing command message expressions in <a class="el" href="classcommandList.html#a642e2aff6de5eb65835d24dbceefd8a8">commandList::parseCommandExpressions</a> <br  />
+<li>tinyexpr - Expression parser library used for parsing command message expressions in commandList::parseCommandExpressions <br  />
 </li>
 <li>TMC2209 - Library for the TMC2209 stepper motor driver IC, used by the bowIO and mute classes <br  />
 </li>

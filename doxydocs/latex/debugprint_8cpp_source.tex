@@ -1,0 +1,100 @@
+\doxysection{debugprint.\+cpp}
+\hypertarget{debugprint_8cpp_source}{}\label{debugprint_8cpp_source}\index{debugprint.cpp@{debugprint.cpp}}
+\mbox{\hyperlink{debugprint_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ file\ is\ part\ of\ The\ Ekdahl\ FAR\ firmware.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ The\ Ekdahl\ FAR\ firmware\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ The\ Ekdahl\ FAR\ firmware.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Karl\ Ekdahl}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\ \#ifndef\ DEBUGPRINT\_CPP}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\ \#define\ DEBUGPRINT\_CPP}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ \#include\ <WProgram.h>}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ \#include\ "{}string.h"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{arduinorequired_8hpp}{base/arduinorequired.hpp}}"{}}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{debugprint_8hpp}{base/debugprint.hpp}}"{}}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ String\ \mbox{\hyperlink{debugprint_8cpp_a5ef2a840e25ff8af840a9fbb3a482ddc}{debugPrintTypeName}}[\mbox{\hyperlink{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}{debugPrintTypes}}]\ =\ \{\ \textcolor{stringliteral}{"{}command"{}},\ \textcolor{stringliteral}{"{}usb"{}},\ \textcolor{stringliteral}{"{}hardware"{}}\ ,\ \textcolor{stringliteral}{"{}undefined"{}},\ \textcolor{stringliteral}{"{}priority"{}},\ \textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}inforequest"{}},\ \textcolor{stringliteral}{"{}expressionparser"{}},\ \textcolor{stringliteral}{"{}debug"{}},\ \textcolor{stringliteral}{"{}textinfo"{}},\ \textcolor{stringliteral}{"{}help"{}},\ \textcolor{stringliteral}{"{}internal"{}}\ \};}
+\DoxyCodeLine{00029\ String\ \mbox{\hyperlink{debugprint_8cpp_af34696f4b155e8b3d6c05a4eb26a35b5}{debugPrintTypeNameShort}}[\mbox{\hyperlink{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}{debugPrintTypes}}]\ =\ \{\ \textcolor{stringliteral}{"{}cmd"{}},\ \textcolor{stringliteral}{"{}usb"{}},\ \textcolor{stringliteral}{"{}hw"{}},\ \textcolor{stringliteral}{"{}un"{}},\ \textcolor{stringliteral}{"{}pri"{}},\ \textcolor{stringliteral}{"{}err"{}},\ \textcolor{stringliteral}{"{}irq"{}},\ \textcolor{stringliteral}{"{}ep"{}},\ \textcolor{stringliteral}{"{}dbg"{}},\ \textcolor{stringliteral}{"{}txi"{}},\ \textcolor{stringliteral}{"{}hlp"{}},\ \textcolor{stringliteral}{"{}int"{}}\};}
+\DoxyCodeLine{00030\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{debugprint_8cpp_a01caea6c04358f4b54c9fab5bc1caa69}{debugPrintEnabled}}[\mbox{\hyperlink{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}{debugPrintTypes}}]\ =\ \{\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true},\ \textcolor{keyword}{false}\ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{debugprint_8cpp_a83bc30b4c8938c7379fe25bcbc56ad5f}{debugPrintConnect}}()\ \{}
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ \ \ \ ssOutput.connect(Serial);}}
+\DoxyCodeLine{00034\ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{debugprint_8cpp_a45bba73d029dfb271d5909eed71610a6}{outputNext}}()\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ ssOutput.nextByteOut();}
+\DoxyCodeLine{00038\ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{debugprint_8cpp_a02212746d4c3138ec12bc5d582e5dc8f}{debugPrintCheckType}}(\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debugPrintType}}\ printType)\ \{}
+\DoxyCodeLine{00041\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8cpp_a01caea6c04358f4b54c9fab5bc1caa69}{debugPrintEnabled}}[printType]\ ==\ \textcolor{keyword}{true})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00043\ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{debugprint_8cpp_a12ba011dd5b1adf8f77184369290a419}{debugPrint}}(String\ text,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debugPrintType}}\ printType)\ \{}
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8cpp_a02212746d4c3138ec12bc5d582e5dc8f}{debugPrintCheckType}}(printType))\ \{\ ssOutput.print(\textcolor{stringliteral}{"{}["{}}\ +\ \mbox{\hyperlink{debugprint_8cpp_af34696f4b155e8b3d6c05a4eb26a35b5}{debugPrintTypeNameShort}}[printType]\ +\ \textcolor{stringliteral}{"{}]"{}}\ +\ text);\ \}}
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00048\ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{debugprint_8cpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(String\ text,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debugPrintType}}\ printType)\ \{}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8cpp_a02212746d4c3138ec12bc5d582e5dc8f}{debugPrintCheckType}}(printType))\ \{\ ssOutput.println(\textcolor{stringliteral}{"{}["{}}\ +\ \mbox{\hyperlink{debugprint_8cpp_af34696f4b155e8b3d6c05a4eb26a35b5}{debugPrintTypeNameShort}}[printType]\ +\ \textcolor{stringliteral}{"{}]"{}}\ +\ text);\ \}\ \textcolor{comment}{//\ +\ "{}\ ["{}\ +\ debugPrintTypeName[printType]\ +\ "{}]"{}}}
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00053\ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{debugprint_8cpp_a01bdc1ea330372bc3011577c0eb53ce9}{debugRaw}}(String\ text)\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ ssOutput.println(text);}
+\DoxyCodeLine{00057\ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{debugprint_8cpp_ae6b44982470212efaf4da1bc81b5820e}{setDebugReporting}}(String\ debugName,\ \textcolor{keywordtype}{bool}\ setting)\ \{}
+\DoxyCodeLine{00060\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<\mbox{\hyperlink{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}{debugPrintTypes}};\ i++)\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8cpp_a5ef2a840e25ff8af840a9fbb3a482ddc}{debugPrintTypeName}}[i]\ ==\ debugName)\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8cpp_a01caea6c04358f4b54c9fab5bc1caa69}{debugPrintEnabled}}[i]\ =\ setting;}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8cpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Setting\ reporting\ of\ name\ "{}}\ +\ debugName\ +\ \textcolor{stringliteral}{"{}\ to\ "{}}\ +\ setting,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}});}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00065\ \ \ \ \ \}}
+\DoxyCodeLine{00066\ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00068\ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \mbox{\hyperlink{classthreadSafeDebugPrint_aab7e35736e50f2f6ceb614a9f28c9bbc}{threadSafeDebugPrint::threadSafeDebugPrint}}()\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_a515dd850edffe90a290563f01f85a8c6}{intDrivenMsgP}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00072\ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classthreadSafeDebugPrint_aad7caa93fbf3b20ab427fbab28a19722}{threadSafeDebugPrint::tsDebugPrintln}}(String\ m\_msg,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debugPrintType}}\ m\_dpType)\ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordflow}{while}(\mbox{\hyperlink{classthreadSafeDebugPrint_a8088716b72d16d531c37635ff3eff7f6}{locked}});}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_a8088716b72d16d531c37635ff3eff7f6}{locked}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8hpp_a02212746d4c3138ec12bc5d582e5dc8f}{debugPrintCheckType}}(m\_dpType))\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_a5d91ba64ca66858eb81f0a4ec43dbc36}{tsMsgFlag}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_a515dd850edffe90a290563f01f85a8c6}{intDrivenMsgP}}\ +=\ \textcolor{stringliteral}{"{}["{}}\ +\ \mbox{\hyperlink{debugprint_8hpp_a26aadfde4abe20d62be5b5019c0e371e}{debugPrintTypeNameShort}}[m\_dpType]\ +\ \textcolor{stringliteral}{"{}]"{}}\ +\ m\_msg;}
+\DoxyCodeLine{00080\ \ \ \ \ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_a8088716b72d16d531c37635ff3eff7f6}{locked}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00082\ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ String\ \mbox{\hyperlink{classthreadSafeDebugPrint_af7c3dd7bbde7dd7d06c01a6290fa104c}{threadSafeDebugPrint::tsRetrieveMessages}}()\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classthreadSafeDebugPrint_a5d91ba64ca66858eb81f0a4ec43dbc36}{tsMsgFlag}})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};\ \}}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordflow}{while}(\mbox{\hyperlink{classthreadSafeDebugPrint_a8088716b72d16d531c37635ff3eff7f6}{locked}});}
+\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_a8088716b72d16d531c37635ff3eff7f6}{locked}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00088\ \ \ \ \ String\ intDrivenMsg\ =\ \mbox{\hyperlink{classthreadSafeDebugPrint_a515dd850edffe90a290563f01f85a8c6}{intDrivenMsgP}};}
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_a8088716b72d16d531c37635ff3eff7f6}{locked}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00090\ \ \ \ \ \mbox{\hyperlink{classthreadSafeDebugPrint_a5d91ba64ca66858eb81f0a4ec43dbc36}{tsMsgFlag}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{return}\ intDrivenMsg;}
+\DoxyCodeLine{00092\ \}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DEBUGPRINT\_H}}
+\DoxyCodeLine{00094\ }
+
+\end{DoxyCode}

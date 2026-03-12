@@ -1,0 +1,88 @@
+\doxysection{plugin\+\_\+lfo.\+hpp}
+\hypertarget{plugin__lfo_8hpp_source}{}\label{plugin__lfo_8hpp_source}\index{plugin\_lfo.hpp@{plugin\_lfo.hpp}}
+\mbox{\hyperlink{plugin__lfo_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLUGIN\_LFO\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLUGIN\_LFO\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{pluginhandler_8hpp}{plugins/pluginhandler.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPlugin__LFO}{Plugin\_LFO}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classPlugin}{Plugin}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a726e985c9256abcd3e04b255b31cba09}{SETMODULEID}}(\textcolor{stringliteral}{"{}lfo"{}},\ \textcolor{stringliteral}{"{}lfo"{}},\ \textcolor{stringliteral}{"{}Basic\ software\ LFO\ v1.0"{}},\ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8}{eModuleType::software}},\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{pluginhandler_8hpp_a013343e5a8289faf7dd55823f0635aad}{CREATEPLUGINFUNCTIONS}}(\mbox{\hyperlink{classPlugin__LFO}{Plugin\_LFO}})}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(name,\ \mbox{\hyperlink{classPlugin__LFO}{Plugin\_LFO}})}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(enable,\ \mbox{\hyperlink{classPlugin__LFO}{Plugin\_LFO}})}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(target,\ \mbox{\hyperlink{classPlugin__LFO}{Plugin\_LFO}})}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(updaterate,\ \mbox{\hyperlink{classPlugin__LFO}{Plugin\_LFO}})}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(waveform,\ \mbox{\hyperlink{classPlugin__LFO}{Plugin\_LFO}})}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(frequency,\ \mbox{\hyperlink{classPlugin__LFO}{Plugin\_LFO}})}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(amplitude,\ \mbox{\hyperlink{classPlugin__LFO}{Plugin\_LFO}})}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(delay,\ \mbox{\hyperlink{classPlugin__LFO}{Plugin\_LFO}})}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(resetdelay,\ \mbox{\hyperlink{classPlugin__LFO}{Plugin\_LFO}})}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(resetwave,\ \mbox{\hyperlink{classPlugin__LFO}{Plugin\_LFO}})}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(bipolar,\ \mbox{\hyperlink{classPlugin__LFO}{Plugin\_LFO}})}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classPlugin__LFO}{Plugin\_LFO}}();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlugin__LFO_aa04273ed167e5222aba0b439d2d07071}{update}}()\ override;}
+\DoxyCodeLine{00031\ private:}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPlugin__LFO_aab92fe923af69deb9561660aaea5c0db}{pEnable}}\ =\ false;}
+\DoxyCodeLine{00033\ \ \ \ \ String\ \mbox{\hyperlink{classPlugin__LFO_ac7afc761d193b6c94d7ad89483b1bdc7}{pName}}\ =\ "{}"{};}
+\DoxyCodeLine{00034\ \ \ \ \ String\ \mbox{\hyperlink{classPlugin__LFO_a369e02fd6e8401019ef2100394322276}{pTarget}}\ =\ "{}bw.hsh.sh5:lfoout"{};}
+\DoxyCodeLine{00035\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classPlugin__LFO_abd63feb97375d492ce0b1b279c38cd20}{pUpdateRate}}\ =\ 10;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ enum\ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41}{eWaveform}}\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a6b9e97ce59f6ca9e97ea66cb78c22d21}{sawtooth}}\ =\ 0,}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41ad46006d3b816c2e702df5ae32e4e5b23}{triangle}}\ =\ 1,}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a3a9263b2ec87846bb9be69bd58c3d6da}{sine}}\ =\ 2,}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a6f2354d780a71f5bc2fb0f449b2d1ee3}{square}}\ =\ 3,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a060afaef265c57c9c2c7588427110e19}{random}}\ =\ 4}
+\DoxyCodeLine{00043\ \ \ \ \ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structPlugin__LFO_1_1tWaveform}{tWaveform}}\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ String\ \mbox{\hyperlink{structPlugin__LFO_1_1tWaveform_aa6763603f57d72e50be8a0fd1c8802f3}{name}};}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41}{eWaveform}}\ \mbox{\hyperlink{structPlugin__LFO_1_1tWaveform_ad86b431ab6edb0c47549de35b534d599}{waveform}};}
+\DoxyCodeLine{00048\ \ \ \ \ \};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\ \ \ \ \#define\ WAVEFORMS\ 5}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{structPlugin__LFO_1_1tWaveform}{tWaveform}}\ \mbox{\hyperlink{classPlugin__LFO_a3081eb1e35094724fc209ca0cf7dda65}{pWaveData}}[\mbox{\hyperlink{plugin__lfo_8hpp_a5588d77f78ab13fa95763c0f3c82049a}{WAVEFORMS}}]\ =\ \{\ \{\ \textcolor{stringliteral}{"{}saw"{}},\ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a6b9e97ce59f6ca9e97ea66cb78c22d21}{eWaveform::sawtooth}}\ \},}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}triangle"{}},\ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41ad46006d3b816c2e702df5ae32e4e5b23}{eWaveform::triangle}}\ \},}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}sine"{}},\ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a3a9263b2ec87846bb9be69bd58c3d6da}{eWaveform::sine}}\ \},}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}square"{}},\ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a6f2354d780a71f5bc2fb0f449b2d1ee3}{eWaveform::square}}\ \},}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}random"{}},\ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a060afaef265c57c9c2c7588427110e19}{eWaveform::random}}\ \}\ \};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41}{eWaveform}}\ \mbox{\hyperlink{classPlugin__LFO_a0a9a661c3dffdb3b37a13ad9dd1f2169}{pWaveform}}\ =\ \mbox{\hyperlink{classPlugin__LFO_a92cfe3f5dc74cdc4339769cf2d00da41a3a9263b2ec87846bb9be69bd58c3d6da}{eWaveform::sine}};}
+\DoxyCodeLine{00060\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classPlugin__LFO_a113f98ef51ac74ea8078402dfab43ff7}{pAmplitude}}\ =\ 65535;}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPlugin__LFO_a5a211081e374ebf17741a9e384ec4b9f}{pFrequency}}\ =\ 4;}
+\DoxyCodeLine{00062\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classPlugin__LFO_a1e0937d23fbe721345ac79469546c0cd}{pDelay}}\ =\ 1000;}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPlugin__LFO_add5f3d4819b603b978d4e3f91b0c481d}{pBipolar}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPlugin__LFO_a256496b6e6b3aecd6a93f9c342c06478}{pCount}}\ =\ 0;}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPlugin__LFO_a56cdbd9b20cb739d640932e3d59f6ba5}{pDelayCount}}\ =\ 0;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPlugin__LFO_a0fa41c514176ebb49d23866d7c046f7e}{calculatedIncrease}};}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPlugin__LFO_ac7554a0f8190a00b40cc483d0a076cef}{delayIncrease}};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlugin__LFO_a92a07ddeb396df07c03edfac298ca478}{recalculateIncrease}}();}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPlugin__LFO_a460bf2cc2d2428ab329e50e06fae00e1}{shapeTriangle}}();}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPlugin__LFO_a9e460cde7f1f4c4d233e2dd7b131687c}{shapeSine}}();}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classPlugin__LFO_ac35ffdd44d82f9c123dd4dfd80b50362}{shapeSquare}}();}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ String\ \mbox{\hyperlink{classPlugin__LFO_a4725cd3a5aef82c0ae215edb9f16d7ee}{lastOutput}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00078\ \};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \mbox{\hyperlink{pluginhandler_8hpp_a23e9e92f3a30c6eff4975c9d9f988d5a}{REGISTERPLUGIN}}(\mbox{\hyperlink{classPlugin__LFO}{Plugin\_LFO}})}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PLUGIN\_LFO\_HPP}}
+
+\end{DoxyCode}

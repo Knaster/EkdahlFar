@@ -18,16 +18,7 @@ obj/Release/src/single_far/basemodule.o: src/single_far/basemodule.cpp \
  lib/teensy4/elapsedMillis.h lib/teensy4/WProgram.h \
  lib/teensy4/IntervalTimer.h lib/teensy4/CrashReport.h \
  lib/teensy4/Printable.h lib/teensy4/WString.h \
- lib/SafeString/src/SerialComs.h lib/SafeString/src/SafeStringReader.h \
- lib/teensy4/Arduino.h lib/SafeString/src/SafeString.h \
- lib/teensy4/Print.h lib/teensy4/Stream.h \
- lib/SafeString/src/SafeStringNameSpaceStart.h \
- lib/SafeString/src/SafeStringNameSpaceEnd.h \
- lib/SafeString/src/millisDelay.h lib/SafeString/src/millisDelay.h \
  include/base/debugprint.hpp include/base/modulesystembasics.hpp \
- include/base/commandparser.hpp \
- include/master_controller/expressionparser.h lib/tinyexpr/src/tinyexpr.h \
- include/base/module.hpp include/plugins/pluginhandler.hpp \
- include/master_controller/automaticversion.hpp \
- include/teensy_specific/eepromhelpers.hpp \
- include/master_controller/global_generics.hpp
+ include/base/commandparser.hpp include/base/commanditem.hpp \
+ include/base/generalhelpers.hpp include/base/arduinorequired.hpp \
+ include/base/module.hpp

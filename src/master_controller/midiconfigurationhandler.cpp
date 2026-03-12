@@ -4,10 +4,12 @@
 #include "master_controller/midiconfigurationhandler.hpp"
 
 const ModuleCommandDeclaration MIDIConfigurationHandler::moduleCommands[] = {
-    { "allnotesoff", "ano", "1|0", "Clear the entire buffer of MIDI notes held", false, false, nullptr, eCommandType::Conditional },
-    { "add", "a", "(name):(event:commands)*", "Adds a new MIDI configuration with the given name, events and command strings", false, false, &s_addConfiguration, eCommandType::Data },
-    { "remove", "rm", "int", "Remove the specified MIDI configuration", false,  false, &s_removeConfiguration, eCommandType::Remove },
-    { "count", "c", "-", "Returns the number of MIDI configurations", false, false, &s_count, eCommandType::Count }
+    { "allnotesoff", "ano", "1|0", "Clear the entire buffer of MIDI notes held", false, false, nullptr, eCommandType_data::ectConditional | eCommandType_function::ectParameter },
+    { "add", "a", "(name):(event:commands)*", "Adds a new MIDI configuration with the given name, events and command strings", false, false, &s_addConfiguration,
+        eCommandType_data::ectData | eCommandType_function::ectAdd },
+    { "remove", "rm", "int", "Remove the specified MIDI configuration", false,  false, &s_removeConfiguration, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectRemove },
+    { "count", "c", "-", "Returns the number of MIDI configurations", false, false, &s_count,
+        eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectCount | eCommandType_access::ectRequest }
 };
 
 getModuleCount(MIDIConfigurationHandler)
@@ -26,9 +28,11 @@ MIDIConfigurationHandler::MIDIConfigurationHandler(ExpressionParser *inExpressio
 
 CREATE_INDEX_CALLBACK(configurationIndexChanged, MIDIConfigurationHandler) {
     for (int i = 0; i < midiSources.size(); i++) {
-        midiSources[i].midiHandler->midiMessageConfiguration = moduleGroup->modules[moduleGroup->selection[0]];
+//        midiSources[i].midiHandler->midiMessageConfiguration = moduleGroup->modules[moduleGroup->selection[0]];
+        midiSources[i].midiHandler->midiMessageConfiguration = static_cast<MIDIMessageConfiguration*> (moduleGroup->modules[moduleGroup->selection[0]]);
+
     }
-    debugPrintln("Current configuration set to " + moduleGroup->getSelectionLiteral(), debugPrintType::Debug);
+    //debugPrintln("Current configuration set to " + moduleGroup->getSelectionLiteral(), debugPrintType::Debug);
     return true;
 }
 

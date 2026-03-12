@@ -1,0 +1,106 @@
+\doxysection{midiconfigurationhandler.\+hpp}
+\hypertarget{midiconfigurationhandler_8hpp_source}{}\label{midiconfigurationhandler_8hpp_source}\index{midiconfigurationhandler.hpp@{midiconfigurationhandler.hpp}}
+\mbox{\hyperlink{midiconfigurationhandler_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MIDICONFIGURATIONHANDLER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MIDICONFIGURATIONHANDLER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{midi_8h}{master\_controller/midi.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}MIDI.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{modulehandler_8hpp}{base/modulehandler.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{expressionparser_8h}{master\_controller/expressionparser.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{midimessageconfiguration_8hpp}{master\_controller/midimessageconfiguration.hpp}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ CREATE\_MIDI\_SOURCE\_CALLBACKS\_FWD(name)\ \(\backslash\)}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\ \ \ \ extern\ MIDIHardwareWrapper\ *name\#\#source;}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ CREATE\_MIDI\_SOURCE\_CALLBACKS(name)\ \(\backslash\)}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ \ \ MIDIHardwareWrapper\ *name\#\#source;\ \(\backslash\)}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\ \ \ \ void\ name\#\#OnNoteOn(byte\ channel,\ byte\ note,\ byte\ velocity)\ \ \{\ name\#\#source-\/>midiHandler-\/>OnNoteOn(channel,\ note,\ velocity);\ \}\ \(\backslash\)}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\ \ \ \ void\ name\#\#OnNoteOff(byte\ channel,\ byte\ note,\ byte\ velocity)\ \{\ name\#\#source-\/>midiHandler-\/>OnNoteOff(channel,\ note,\ velocity);\ \}\ \(\backslash\)}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\ \ \ \ void\ name\#\#OnAfterTouchPoly(byte\ channel,\ byte\ note,\ byte\ pressure)\ \{\ name\#\#source-\/>midiHandler-\/>OnAfterTouchPoly(channel,\ note,\ pressure);\ \}\ \(\backslash\)}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\ \ \ \ void\ name\#\#OnChannelAftertouch(byte\ channel,\ byte\ pressure)\ \ \{\ name\#\#source-\/>midiHandler-\/>OnChannelAftertouch(channel,pressure);\ \};\ \(\backslash\)}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\ \ \ \ void\ name\#\#OnControlChange(byte\ channel,\ byte\ control,\ byte\ value)\ \{\ name\#\#source-\/>midiHandler-\/>OnControlChange(channel,\ control,\ value);\ \}\ \(\backslash\)}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\ \ \ \ void\ name\#\#OnPitchBend(byte\ channel,\ int\ pitch)\ \ \{\ name\#\#source-\/>midiHandler-\/>OnPitchBend(channel,\ pitch);\ \}\ \(\backslash\)}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\ \ \ \ void\ name\#\#OnProgramChange(uint8\_t\ channel,\ uint8\_t\ program)\ \{\ name\#\#source-\/>midiHandler-\/>OnProgramChange(channel,\ program);\ \}\ \(\backslash\)}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ CONNECT\_MIDI\_CALLBACKS(source,\ name)\ \(\backslash\)}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\ \ \ \ source-\/>hardwareMIDI-\/>setHandleNoteOn(name\#\#OnNoteOn);\ \(\backslash\)}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\ \ \ \ source-\/>hardwareMIDI-\/>setHandleNoteOff(name\#\#OnNoteOff);\ \(\backslash\)}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ \ \ source-\/>hardwareMIDI-\/>setHandleAfterTouchPoly(name\#\#OnAfterTouchPoly);\ \(\backslash\)}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\ \ \ \ source-\/>hardwareMIDI-\/>setHandleAfterTouchChannel(name\#\#OnChannelAftertouch);\ \(\backslash\)}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\ \ \ \ source-\/>hardwareMIDI-\/>setHandleControlChange(name\#\#OnControlChange);\ \(\backslash\)}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\ \ \ \ source-\/>hardwareMIDI-\/>setHandlePitchBend(name\#\#OnPitchBend);\ \(\backslash\)}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\ \ \ \ source-\/>hardwareMIDI-\/>setHandleProgramChange(name\#\#OnProgramChange);}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ CONNECT\_USBMIDI\_CALLBACKS(source,\ name)\ \(\backslash\)}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\ \ \ \ source-\/>usbMIDI-\/>setHandleNoteOn(name\#\#OnNoteOn);\ \(\backslash\)}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\ \ \ \ source-\/>usbMIDI-\/>setHandleNoteOff(name\#\#OnNoteOff);\ \(\backslash\)}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\ \ \ \ source-\/>usbMIDI-\/>setHandleAfterTouchPoly(name\#\#OnAfterTouchPoly);\ \(\backslash\)}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\ \ \ \ source-\/>usbMIDI-\/>setHandleAfterTouchChannel(name\#\#OnChannelAftertouch);\ \(\backslash\)}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\ \ \ \ source-\/>usbMIDI-\/>setHandleControlChange(name\#\#OnControlChange);\ \(\backslash\)}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\ \ \ \ source-\/>usbMIDI-\/>setHandlePitchChange(name\#\#OnPitchBend);\ \(\backslash\)}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\ \ \ \ source-\/>usbMIDI-\/>setHandleProgramChange(name\#\#OnProgramChange);}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classMIDIHardwareWrapper}{MIDIHardwareWrapper}}\ \{}
+\DoxyCodeLine{00043\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00044\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00045\ \ \ \ \ midi::MidiInterface<midi::SerialMIDI<HardwareSerial>>\ *\mbox{\hyperlink{classMIDIHardwareWrapper_a8d144de09ee75f5a40187bcbd8e653f5}{hardwareMIDI}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00046\ \ \ \ \ usb\_midi\_class\ *\mbox{\hyperlink{classMIDIHardwareWrapper_a473c26129305cd04ef072cc41f8bf16e}{usbMIDI}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classMIDIHandler}{MIDIHandler}}\ *\mbox{\hyperlink{classMIDIHardwareWrapper_a79bd03c55e871a5060bfd4bdd6bf9e33}{midiHandler}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{classMIDIHardwareWrapper_a051c5d6910650ad2e03f671da6bd0f49}{MIDIInterfaceType}}\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMIDIHardwareWrapper_a051c5d6910650ad2e03f671da6bd0f49ae3f5e6752c47fb235d7a6cd9e6f23c58}{hardware}}\ =\ 0,}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMIDIHardwareWrapper_a051c5d6910650ad2e03f671da6bd0f49a5ef7b08a528f28bb777220b752439d8e}{teensy\_usb}}\ =\ 1}
+\DoxyCodeLine{00053\ \ \ \ \ \};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{classMIDIHardwareWrapper_a051c5d6910650ad2e03f671da6bd0f49}{MIDIInterfaceType}}\ \mbox{\hyperlink{classMIDIHardwareWrapper_a0c1c09f0ae978f2b5081b421ba9bfbdd}{midiInterfaceType}};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{classMIDIHardwareWrapper_aa16137191575039bb22696b932bc2583}{MIDIHardwareWrapper}}(midi::MidiInterface<midi::SerialMIDI<HardwareSerial>>\ *inHardwareMIDI,\ \mbox{\hyperlink{classExpressionParser}{ExpressionParser}}\ *inExpressionParser)\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classMIDIHardwareWrapper_a79bd03c55e871a5060bfd4bdd6bf9e33}{midiHandler}}\ ==\ \textcolor{keyword}{nullptr})\ \{\ \mbox{\hyperlink{classMIDIHardwareWrapper_a79bd03c55e871a5060bfd4bdd6bf9e33}{midiHandler}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classMIDIHandler}{MIDIHandler}}(inExpressionParser);\ \}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMIDIHardwareWrapper_a8d144de09ee75f5a40187bcbd8e653f5}{hardwareMIDI}}\ =\ inHardwareMIDI;}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMIDIHardwareWrapper_a0c1c09f0ae978f2b5081b421ba9bfbdd}{midiInterfaceType}}\ =\ \mbox{\hyperlink{classMIDIHardwareWrapper_a051c5d6910650ad2e03f671da6bd0f49ae3f5e6752c47fb235d7a6cd9e6f23c58}{MIDIInterfaceType::hardware}};}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{classMIDIHardwareWrapper_a95844895e3ff24e5227bbbabb584996d}{MIDIHardwareWrapper}}(usb\_midi\_class\ *inUSBMIDI,\ \mbox{\hyperlink{classExpressionParser}{ExpressionParser}}\ *inExpressionParser)\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classMIDIHardwareWrapper_a79bd03c55e871a5060bfd4bdd6bf9e33}{midiHandler}}\ ==\ \textcolor{keyword}{nullptr})\ \{\ \mbox{\hyperlink{classMIDIHardwareWrapper_a79bd03c55e871a5060bfd4bdd6bf9e33}{midiHandler}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classMIDIHandler}{MIDIHandler}}(inExpressionParser);\ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMIDIHardwareWrapper_a473c26129305cd04ef072cc41f8bf16e}{usbMIDI}}\ =\ inUSBMIDI;}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMIDIHardwareWrapper_a0c1c09f0ae978f2b5081b421ba9bfbdd}{midiInterfaceType}}\ =\ \mbox{\hyperlink{classMIDIHardwareWrapper_a051c5d6910650ad2e03f671da6bd0f49a5ef7b08a528f28bb777220b752439d8e}{MIDIInterfaceType::teensy\_usb}};}
+\DoxyCodeLine{00067\ \ \ \ \ \}}
+\DoxyCodeLine{00068\ \};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classMIDIConfigurationHandler}{MIDIConfigurationHandler}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classModuleHandler}{ModuleHandler}}}
+\DoxyCodeLine{00071\ \{}
+\DoxyCodeLine{00072\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a726e985c9256abcd3e04b255b31cba09}{SETMODULEID}}(\textcolor{stringliteral}{"{}midiconfigurationhandler"{}},\ \textcolor{stringliteral}{"{}mcf"{}},\ \textcolor{stringliteral}{"{}MIDI\ message\ configuration\ handler\ 1.0"{}},\ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8}{eModuleType::software}},\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(addConfiguration,\ \mbox{\hyperlink{classMIDIConfigurationHandler}{MIDIConfigurationHandler}})}
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(removeConfiguration,\ \mbox{\hyperlink{classMIDIConfigurationHandler}{MIDIConfigurationHandler}})}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(count,\ \mbox{\hyperlink{classMIDIConfigurationHandler}{MIDIConfigurationHandler}})}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{modulegroup_8hpp_a3365affcc62335d2b3134fc971ca33f1}{CREATE\_INDEX\_CALLBACK\_FWD}}(configurationIndexChanged,\ \mbox{\hyperlink{classMIDIConfigurationHandler}{MIDIConfigurationHandler}});}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{classMIDIConfigurationHandler}{MIDIConfigurationHandler}}(\mbox{\hyperlink{classExpressionParser}{ExpressionParser}}\ *inExpressionParser);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{classMIDIHardwareWrapper}{MIDIHardwareWrapper}}*\ \mbox{\hyperlink{classMIDIConfigurationHandler_a7364e17cb04d53c6279c335eb13ed8e0}{addMIDISource}}(midi::MidiInterface<midi::SerialMIDI<HardwareSerial>>\ *inHardwareMIDI);}
+\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{classMIDIHardwareWrapper}{MIDIHardwareWrapper}}*\ \mbox{\hyperlink{classMIDIConfigurationHandler_a7364e17cb04d53c6279c335eb13ed8e0}{addMIDISource}}(usb\_midi\_class\ *inUSBMIDI);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIConfigurationHandler_ad0cd26b75ec6c680b910e73cc97c843f}{dumpData}}(std::vector<\mbox{\hyperlink{structcommandResponse}{commandResponse}}>\ *dataDump)\ override;}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classMIDIConfigurationHandler_a3ccfb1226f6c9bfa1cc66104f91fd6ad}{addDefaultConfiguration}}();}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMIDIConfigurationHandler_a8f22888ac12b0cc07ae5a6471afd8c43}{update}}();}
+\DoxyCodeLine{00093\ \ \ \ \ std::vector<\mbox{\hyperlink{classMIDIHardwareWrapper}{MIDIHardwareWrapper}}>\ \mbox{\hyperlink{classMIDIConfigurationHandler_acd9d874f8455484f0e68c7e2218783fb}{midiSources}};}
+\DoxyCodeLine{00094\ \ \ \ \ \mbox{\hyperlink{classExpressionParser}{ExpressionParser}}\ *\mbox{\hyperlink{classMIDIConfigurationHandler_ae2ae580fbeab531fcf1d7dcb5772f693}{expressionParser}};}
+\DoxyCodeLine{00095\ protected:}
+\DoxyCodeLine{00096\ private:}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MIDICONFIGURATIONHANDLER\_HPP}}
+
+\end{DoxyCode}

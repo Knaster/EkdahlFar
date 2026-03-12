@@ -1,0 +1,122 @@
+\doxysection{Far\+Single\+Module\+Handler Class Reference}
+\hypertarget{classFarSingleModuleHandler}{}\label{classFarSingleModuleHandler}\index{FarSingleModuleHandler@{FarSingleModuleHandler}}
+
+
+{\ttfamily \#include $<$farsinglemodulehandler.\+hpp$>$}
+
+
+
+Inheritance diagram for Far\+Single\+Module\+Handler\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{classFarSingleModuleHandler__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Far\+Single\+Module\+Handler\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classFarSingleModuleHandler__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classFarSingleModuleHandler_a2e04e932dc3a596b3fe62ccc2df2c4c4}{Far\+Single\+Module\+Handler}} ()
+\item 
+bool \mbox{\hyperlink{classFarSingleModuleHandler_a233a690946d720c17abf976f01ffd6c4}{enumerate\+Modules}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleHandler}{Module\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModuleHandler_a9eb2f015987df6e507d2e2f7281cc520}{Module\+Handler}} ()
+\item 
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModuleHandler_aba53cb524d3e200345c18bbaf96adaf2}{process\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false) override
+\item 
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModuleHandler_aa8b5a72e62b7a43ac40822461f535c0c}{process\+Module\+Handler\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structcommandResponse}{command\+Response}}, bool request=false)
+\item 
+void \mbox{\hyperlink{classModuleHandler_a8086440da55f316a89562f2a736a1ab6}{dir}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix, bool hidden, bool modules, bool commands, bool instances, bool instance\+Count, bool recursive) override
+\item 
+void \mbox{\hyperlink{classModuleHandler_a9c235cdcf6965c856fcb2be82cc46175}{help}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix)
+\item 
+\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleHandler_ab87ee8507b0edd4888eaa422f189d716}{get\+Group}} (String long\+Name)
+\item 
+void \mbox{\hyperlink{classModuleHandler_ae3fa5b4e5e4fa54687c3d26e0d937782}{dump\+Data}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}data\+Dump)
+\item 
+\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleHandler_aa8b0ee11f9f981d5d791e0994618377b}{add\+Module}} (\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}module)
+\item 
+\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleHandler_a25c83b60da881f9c0dd2886e6a89e631}{add\+Group}} (\mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} in\+Module\+ID)
+\item 
+virtual void \mbox{\hyperlink{classModuleHandler_aeb0456562a8743c5f4cf5d4aa9a474eb}{add\+Instances}} (String name, uint8\+\_\+t count)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule_a5a240a8a9ab1813b17bcb810b24ceaea}{Module}} ()
+\item 
+virtual const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{get\+Module\+ID}} () const =0
+\item 
+virtual \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a9a13ef0a8291e562a9557c311d07b334}{get\+Module\+ID}} ()=0
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a534a35eb18ec29dbcc8bafce30c21128}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_af7fe70cf55b7c8999672c8a202cbdb71}{process\+Module\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual void \mbox{\hyperlink{classModule_a09131761fec40345e3657b801778057f}{update}} ()
+\item 
+virtual int \mbox{\hyperlink{classModule_ae6fa72e64554ee0b09a8bb6a77a68640}{get\+Module\+Command\+Count}} ()
+\item 
+bool \mbox{\hyperlink{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2}{has\+Data\+Change}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleCommand}{Module\+Command}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModuleCommand_a4ce6a1d032eaa918f21ad8121ba59094}{get\+Module\+Command}} (uint8\+\_\+t i) const =0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModuleHandler}{Module\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classModuleGroup}{Module\+Group}} $>$ \mbox{\hyperlink{classModuleHandler_a1913f2c62636218e752bbf72de5e45af}{module\+Groups}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classModule_aa09bd171529da96438e917258ab5ab8d}{is\+Group\+Handler}} = false
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}{set\+Data\+Changed}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModule_ad85cad50c5538cc47c6d3ac76500e4cf}{owner}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classFarSingleModuleHandler_a2e04e932dc3a596b3fe62ccc2df2c4c4}\label{classFarSingleModuleHandler_a2e04e932dc3a596b3fe62ccc2df2c4c4} 
+\index{FarSingleModuleHandler@{FarSingleModuleHandler}!FarSingleModuleHandler@{FarSingleModuleHandler}}
+\index{FarSingleModuleHandler@{FarSingleModuleHandler}!FarSingleModuleHandler@{FarSingleModuleHandler}}
+\doxysubsubsection{\texorpdfstring{FarSingleModuleHandler()}{FarSingleModuleHandler()}}
+{\footnotesize\ttfamily Far\+Single\+Module\+Handler\+::\+Far\+Single\+Module\+Handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classFarSingleModuleHandler_a233a690946d720c17abf976f01ffd6c4}\label{classFarSingleModuleHandler_a233a690946d720c17abf976f01ffd6c4} 
+\index{FarSingleModuleHandler@{FarSingleModuleHandler}!enumerateModules@{enumerateModules}}
+\index{enumerateModules@{enumerateModules}!FarSingleModuleHandler@{FarSingleModuleHandler}}
+\doxysubsubsection{\texorpdfstring{enumerateModules()}{enumerateModules()}}
+{\footnotesize\ttfamily bool Far\+Single\+Module\+Handler\+::enumerate\+Modules (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{farsinglemodulehandler_8hpp}{farsinglemodulehandler.\+hpp}}\end{DoxyCompactItemize}

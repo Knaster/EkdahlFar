@@ -1,7 +1,7 @@
 \doxysection{main.\+cpp File Reference}
 \hypertarget{main_8cpp}{}\label{main_8cpp}\index{main.cpp@{main.cpp}}
-{\ttfamily \#include $<$WProgram.\+h$>$}\newline
-{\ttfamily \#include "{}automaticversion.\+hpp"{}}\newline
+{\ttfamily \#include $<$base/arduinorequired.\+hpp$>$}\newline
+{\ttfamily \#include "{}master\+\_\+controller/automaticversion.\+hpp"{}}\newline
 {\ttfamily \#include "{}string.\+h"{}}\newline
 {\ttfamily \#include $<$Hardware\+Serial.\+h$>$}\newline
 {\ttfamily \#include $<$Buffered\+Input.\+h$>$}\newline
@@ -12,20 +12,13 @@
 {\ttfamily \#include $<$Safe\+String\+Name\+Space\+Start.\+h$>$}\newline
 {\ttfamily \#include $<$Safe\+String\+Reader.\+h$>$}\newline
 {\ttfamily \#include $<$Safe\+String\+Stream.\+h$>$}\newline
-{\ttfamily \#include $<$Serial\+Coms.\+h$>$}\newline
-{\ttfamily \#include $<$millis\+Delay.\+h$>$}\newline
-{\ttfamily \#include $<$algorithm$>$}\newline
-{\ttfamily \#include $<$vector$>$}\newline
-{\ttfamily \#include "{}debugprint.\+hpp"{}}\newline
-{\ttfamily \#include "{}eepromhelpers.\+cpp"{}}\newline
-{\ttfamily \#include "{}commandparser.\+hpp"{}}\newline
-{\ttfamily \#include "{}modulesystembasics.\+hpp"{}}\newline
-{\ttfamily \#include "{}../src/module.\+cpp"{}}\newline
-{\ttfamily \#include "{}../src/modulehandler.\+cpp"{}}\newline
-{\ttfamily \#include "{}modulesystemglobalfunctions.\+hpp"{}}\newline
-{\ttfamily \#include "{}farsingle.\+hpp"{}}\newline
-{\ttfamily \#include "{}farsingle.\+cpp"{}}\newline
-{\ttfamily \#include "{}basemodule.\+cpp"{}}\newline
+{\ttfamily \#include "{}../../src/base/debugprint.\+cpp"{}}\newline
+{\ttfamily \#include "{}base/commandparser.\+hpp"{}}\newline
+{\ttfamily \#include "{}base/module.\+hpp"{}}\newline
+{\ttfamily \#include "{}single\+\_\+far/farsingle.\+hpp"{}}\newline
+{\ttfamily \#include "{}single\+\_\+far/basemodule.\+hpp"{}}\newline
+{\ttfamily \#include "{}master\+\_\+controller/global\+\_\+generics.\+hpp"{}}\newline
+{\ttfamily \#include "{}MIDI.\+h"{}}\newline
 Include dependency graph for main.\+cpp\+:
 \nopagebreak
 \begin{figure}[H]
@@ -37,10 +30,6 @@ Include dependency graph for main.\+cpp\+:
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{main_8cpp_a7d0b5b6bfc1bae2a135c12250762d493}{AUDIO\+\_\+\+INTERFACE}}
-\item 
-\#define \mbox{\hyperlink{main_8cpp_ae19eb15a5c6b22f63f3819a0105339d8}{clamp}}(v,  i,  x)~min(max(v,i),x)
-\item 
 \#define \mbox{\hyperlink{main_8cpp_a2540465f0f55b6029155a221fa27eb96}{startup\+Timeout}}~250
 \item 
 \#define \mbox{\hyperlink{main_8cpp_ac9a12a1a36ee3528c19ef62340fe33c3}{control\+Read\+Interval\+Time}}~50
@@ -48,15 +37,11 @@ Include dependency graph for main.\+cpp\+:
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{main_8cpp_ac2dc5984145d4f78c73928eca404b8ae}{create\+Buffered\+Output}} (ss\+Output, 8192, DROP\+\_\+\+UNTIL\+\_\+\+EMPTY)
-\begin{DoxyCompactList}\small\item\em Safe\+String buffer creation. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{main_8cpp_a74558414decb37e920b3291b8623615e}{create\+Safe\+String\+Reader}} (ss\+Reader, 8192, "{}\textbackslash{}r\textbackslash{}n"{})
 \begin{DoxyCompactList}\small\item\em Safe\+String reader creation. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{main_8cpp_afc3e7d08d802f694ab6a85e9908048f4}{freeram}} ()
-\item 
-String \mbox{\hyperlink{main_8cpp_ac7fc43fb1f213243ef62cd57653110cc}{delimit\+Expression}} (String expression, bool force=false)
-\item 
-void \mbox{\hyperlink{main_8cpp_a33042e12a9e7c685f982a942d092f7f0}{process\+Command\+List}} (Module \texorpdfstring{$\ast$}{*}in\+Module, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}in\+Commands, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses)
+\mbox{\hyperlink{main_8cpp_ac2dc5984145d4f78c73928eca404b8ae}{create\+Buffered\+Output}} (ss\+Output, 8192, DROP\+\_\+\+UNTIL\+\_\+\+EMPTY)
+\begin{DoxyCompactList}\small\item\em Safe\+String buffer creation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_ae9620f25c58613adadfd34a32df92d99}{process\+Serial\+Commands}} (\mbox{\hyperlink{classcommandList}{command\+List}} in\+Command\+List, bool is\+Internal=false)
 \item 
 void \mbox{\hyperlink{main_8cpp_aa8ffdf555ac7c84e88dd4ad41098e41a}{process\+Serial\+Commands}} ()
 \item 
@@ -67,25 +52,7 @@ void \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-elapsed\+Micros \mbox{\hyperlink{main_8cpp_a74a971e8a878363938ad6d1426e8255c}{test\+Measurement}}
-\begin{DoxyCompactList}\small\item\em Used for various internal tests. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{main_8cpp_a651d0075db9c3f29b556e9dd764b41c2}{test\+Measurement\+Ongoing}} = false
-\item 
-unsigned long \mbox{\hyperlink{main_8cpp_a9d1a03e6178b7c399cce31fc07aaaef8}{\+\_\+heap\+\_\+start}}
-\item 
-unsigned long \mbox{\hyperlink{main_8cpp_a1e096ab52b7c061afd475f4fedc6c1e9}{\+\_\+heap\+\_\+end}}
-\item 
-char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8cpp_ad193a2cc121e0d4614a1c21eb463fb56}{\+\_\+\+\_\+brkval}}
-\item 
-String \mbox{\hyperlink{main_8cpp_af9f3e3acdcf4bf93bbe8015c4f666f26}{custom\+Startup\+Parameters}} = "{}"{}
-\item 
-String \mbox{\hyperlink{main_8cpp_af98373428ba06a19feb1859d77b9f9d2}{nick\+Name}} = "{}default"{}
-\item 
-\mbox{\hyperlink{classcommandList}{command\+List}} \mbox{\hyperlink{main_8cpp_a895567420077455478bd74c7bdbedbb2}{global\+Commands}}
-\item 
-\mbox{\hyperlink{classcommandList}{command\+List}} \mbox{\hyperlink{main_8cpp_ae7826d05ec6eb6efce350270ead447c8}{global\+Response\+Commands}}
-\item 
-Base\+Module \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8cpp_aff6f231d5279756c610ed734326bf5fe}{base\+Module}}
+\mbox{\hyperlink{classBaseModule}{Base\+Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8cpp_aff6f231d5279756c610ed734326bf5fe}{base\+Module}}
 \item 
 uint32\+\_\+t \mbox{\hyperlink{main_8cpp_ab2f6b8b6b2615dbd77d4253210e4133d}{startup\+Time}}
 \item 
@@ -108,22 +75,12 @@ unsigned long \mbox{\hyperlink{main_8cpp_a320e70c7b238268a4ab14cc695686292}{prev
 unsigned long \mbox{\hyperlink{main_8cpp_ad4e1c8414b02bbecac1700c792231beb}{current\+Alive}} = 0
 \item 
 unsigned long \mbox{\hyperlink{main_8cpp_aa0572001411fe3a440a506b5defa2a3b}{alive\+Update\+Interval}} = 500
+\item 
+midi\+::\+Midi\+Interface$<$ midi\+::\+Serial\+MIDI$<$ Hardware\+Serial $>$ $>$ \mbox{\hyperlink{main_8cpp_a33fb735d671bee15d03db7b848495cd0}{MIDI}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
-\Hypertarget{main_8cpp_a7d0b5b6bfc1bae2a135c12250762d493}\label{main_8cpp_a7d0b5b6bfc1bae2a135c12250762d493} 
-\index{main.cpp@{main.cpp}!AUDIO\_INTERFACE@{AUDIO\_INTERFACE}}
-\index{AUDIO\_INTERFACE@{AUDIO\_INTERFACE}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{AUDIO\_INTERFACE}{AUDIO\_INTERFACE}}
-{\footnotesize\ttfamily \#define AUDIO\+\_\+\+INTERFACE}
-
-\Hypertarget{main_8cpp_ae19eb15a5c6b22f63f3819a0105339d8}\label{main_8cpp_ae19eb15a5c6b22f63f3819a0105339d8} 
-\index{main.cpp@{main.cpp}!clamp@{clamp}}
-\index{clamp@{clamp}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{clamp}{clamp}}
-{\footnotesize\ttfamily \#define clamp(\begin{DoxyParamCaption}\item[{}]{v,  }\item[{}]{i,  }\item[{}]{x }\end{DoxyParamCaption})~min(max(v,i),x)}
-
 \Hypertarget{main_8cpp_ac9a12a1a36ee3528c19ef62340fe33c3}\label{main_8cpp_ac9a12a1a36ee3528c19ef62340fe33c3} 
 \index{main.cpp@{main.cpp}!controlReadIntervalTime@{controlReadIntervalTime}}
 \index{controlReadIntervalTime@{controlReadIntervalTime}!main.cpp@{main.cpp}}
@@ -159,82 +116,50 @@ Safe\+String buffer creation.
 
 Safe\+String reader creation. 
 
-\Hypertarget{main_8cpp_ac7fc43fb1f213243ef62cd57653110cc}\label{main_8cpp_ac7fc43fb1f213243ef62cd57653110cc} 
-\index{main.cpp@{main.cpp}!delimitExpression@{delimitExpression}}
-\index{delimitExpression@{delimitExpression}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{delimitExpression()}{delimitExpression()}}
-{\footnotesize\ttfamily String delimit\+Expression (\begin{DoxyParamCaption}\item[{String}]{expression,  }\item[{bool}]{force = {\ttfamily false} }\end{DoxyParamCaption})}
-
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{main_8cpp_ac7fc43fb1f213243ef62cd57653110cc_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{main_8cpp_afc3e7d08d802f694ab6a85e9908048f4}\label{main_8cpp_afc3e7d08d802f694ab6a85e9908048f4} 
-\index{main.cpp@{main.cpp}!freeram@{freeram}}
-\index{freeram@{freeram}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{freeram()}{freeram()}}
-{\footnotesize\ttfamily int freeram (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=333pt]{main_8cpp_afc3e7d08d802f694ab6a85e9908048f4_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{main_8cpp_afe461d27b9c48d5921c00d521181f12f}\label{main_8cpp_afe461d27b9c48d5921c00d521181f12f} 
 \index{main.cpp@{main.cpp}!loop@{loop}}
 \index{loop@{loop}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{loop()}{loop()}}
 {\footnotesize\ttfamily void loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{main_8cpp_afe461d27b9c48d5921c00d521181f12f_cgraph}
 \end{center}
 \end{figure}
-\Hypertarget{main_8cpp_a33042e12a9e7c685f982a942d092f7f0}\label{main_8cpp_a33042e12a9e7c685f982a942d092f7f0} 
-\index{main.cpp@{main.cpp}!processCommandList@{processCommandList}}
-\index{processCommandList@{processCommandList}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{processCommandList()}{processCommandList()}}
-{\footnotesize\ttfamily void process\+Command\+List (\begin{DoxyParamCaption}\item[{Module \texorpdfstring{$\ast$}{*}}]{in\+Module,  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{in\+Commands,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses }\end{DoxyParamCaption})}
-
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{main_8cpp_a33042e12a9e7c685f982a942d092f7f0_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{main_8cpp_aa8ffdf555ac7c84e88dd4ad41098e41a}\label{main_8cpp_aa8ffdf555ac7c84e88dd4ad41098e41a} 
 \index{main.cpp@{main.cpp}!processSerialCommands@{processSerialCommands}}
 \index{processSerialCommands@{processSerialCommands}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{processSerialCommands()}{processSerialCommands()}}
+\doxysubsubsection{\texorpdfstring{processSerialCommands()}{processSerialCommands()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily void process\+Serial\+Commands (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{main_8cpp_aa8ffdf555ac7c84e88dd4ad41098e41a_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=291pt]{main_8cpp_aa8ffdf555ac7c84e88dd4ad41098e41a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{main_8cpp_ae9620f25c58613adadfd34a32df92d99}\label{main_8cpp_ae9620f25c58613adadfd34a32df92d99} 
+\index{main.cpp@{main.cpp}!processSerialCommands@{processSerialCommands}}
+\index{processSerialCommands@{processSerialCommands}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{processSerialCommands()}{processSerialCommands()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void process\+Serial\+Commands (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandList}{command\+List}}}]{in\+Command\+List,  }\item[{bool}]{is\+Internal = {\ttfamily false} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp_ae9620f25c58613adadfd34a32df92d99_cgraph}
 \end{center}
 \end{figure}
 \Hypertarget{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}\label{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d} 
@@ -243,8 +168,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}}
 {\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -254,24 +178,6 @@ Here is the call graph for this function\+:
 
 
 \doxysubsection{Variable Documentation}
-\Hypertarget{main_8cpp_ad193a2cc121e0d4614a1c21eb463fb56}\label{main_8cpp_ad193a2cc121e0d4614a1c21eb463fb56} 
-\index{main.cpp@{main.cpp}!\_\_brkval@{\_\_brkval}}
-\index{\_\_brkval@{\_\_brkval}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{\_\_brkval}{\_\_brkval}}
-{\footnotesize\ttfamily char\texorpdfstring{$\ast$}{*} \+\_\+\+\_\+brkval\hspace{0.3cm}{\ttfamily [extern]}}
-
-\Hypertarget{main_8cpp_a1e096ab52b7c061afd475f4fedc6c1e9}\label{main_8cpp_a1e096ab52b7c061afd475f4fedc6c1e9} 
-\index{main.cpp@{main.cpp}!\_heap\_end@{\_heap\_end}}
-\index{\_heap\_end@{\_heap\_end}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{\_heap\_end}{\_heap\_end}}
-{\footnotesize\ttfamily unsigned long \+\_\+heap\+\_\+end\hspace{0.3cm}{\ttfamily [extern]}}
-
-\Hypertarget{main_8cpp_a9d1a03e6178b7c399cce31fc07aaaef8}\label{main_8cpp_a9d1a03e6178b7c399cce31fc07aaaef8} 
-\index{main.cpp@{main.cpp}!\_heap\_start@{\_heap\_start}}
-\index{\_heap\_start@{\_heap\_start}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{\_heap\_start}{\_heap\_start}}
-{\footnotesize\ttfamily unsigned long \+\_\+heap\+\_\+start\hspace{0.3cm}{\ttfamily [extern]}}
-
 \Hypertarget{main_8cpp_aa0572001411fe3a440a506b5defa2a3b}\label{main_8cpp_aa0572001411fe3a440a506b5defa2a3b} 
 \index{main.cpp@{main.cpp}!aliveUpdateInterval@{aliveUpdateInterval}}
 \index{aliveUpdateInterval@{aliveUpdateInterval}!main.cpp@{main.cpp}}
@@ -282,7 +188,7 @@ Here is the call graph for this function\+:
 \index{main.cpp@{main.cpp}!baseModule@{baseModule}}
 \index{baseModule@{baseModule}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{baseModule}{baseModule}}
-{\footnotesize\ttfamily Base\+Module\texorpdfstring{$\ast$}{*} base\+Module}
+{\footnotesize\ttfamily \mbox{\hyperlink{classBaseModule}{Base\+Module}}\texorpdfstring{$\ast$}{*} base\+Module}
 
 \Hypertarget{main_8cpp_ac87efa454b18ecfc7d56b23ebf8fb735}\label{main_8cpp_ac87efa454b18ecfc7d56b23ebf8fb735} 
 \index{main.cpp@{main.cpp}!commandUpadateInterval@{commandUpadateInterval}}
@@ -314,29 +220,11 @@ Here is the call graph for this function\+:
 \doxysubsubsection{\texorpdfstring{currentTime}{currentTime}}
 {\footnotesize\ttfamily unsigned long current\+Time = 0}
 
-\Hypertarget{main_8cpp_af9f3e3acdcf4bf93bbe8015c4f666f26}\label{main_8cpp_af9f3e3acdcf4bf93bbe8015c4f666f26} 
-\index{main.cpp@{main.cpp}!customStartupParameters@{customStartupParameters}}
-\index{customStartupParameters@{customStartupParameters}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{customStartupParameters}{customStartupParameters}}
-{\footnotesize\ttfamily String custom\+Startup\+Parameters = "{}"{}}
-
-\Hypertarget{main_8cpp_a895567420077455478bd74c7bdbedbb2}\label{main_8cpp_a895567420077455478bd74c7bdbedbb2} 
-\index{main.cpp@{main.cpp}!globalCommands@{globalCommands}}
-\index{globalCommands@{globalCommands}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{globalCommands}{globalCommands}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classcommandList}{command\+List}} global\+Commands}
-
-\Hypertarget{main_8cpp_ae7826d05ec6eb6efce350270ead447c8}\label{main_8cpp_ae7826d05ec6eb6efce350270ead447c8} 
-\index{main.cpp@{main.cpp}!globalResponseCommands@{globalResponseCommands}}
-\index{globalResponseCommands@{globalResponseCommands}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{globalResponseCommands}{globalResponseCommands}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classcommandList}{command\+List}} global\+Response\+Commands}
-
-\Hypertarget{main_8cpp_af98373428ba06a19feb1859d77b9f9d2}\label{main_8cpp_af98373428ba06a19feb1859d77b9f9d2} 
-\index{main.cpp@{main.cpp}!nickName@{nickName}}
-\index{nickName@{nickName}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{nickName}{nickName}}
-{\footnotesize\ttfamily String nick\+Name = "{}default"{}}
+\Hypertarget{main_8cpp_a33fb735d671bee15d03db7b848495cd0}\label{main_8cpp_a33fb735d671bee15d03db7b848495cd0} 
+\index{main.cpp@{main.cpp}!MIDI@{MIDI}}
+\index{MIDI@{MIDI}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{MIDI}{MIDI}}
+{\footnotesize\ttfamily midi\+::\+Midi\+Interface$<$midi\+::\+Serial\+MIDI$<$Hardware\+Serial$>$ $>$ MIDI\hspace{0.3cm}{\ttfamily [extern]}}
 
 \Hypertarget{main_8cpp_a320e70c7b238268a4ab14cc695686292}\label{main_8cpp_a320e70c7b238268a4ab14cc695686292} 
 \index{main.cpp@{main.cpp}!previousAlive@{previousAlive}}
@@ -374,22 +262,6 @@ Main loop function.
 \index{startupTime@{startupTime}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{startupTime}{startupTime}}
 {\footnotesize\ttfamily uint32\+\_\+t startup\+Time}
-
-\Hypertarget{main_8cpp_a74a971e8a878363938ad6d1426e8255c}\label{main_8cpp_a74a971e8a878363938ad6d1426e8255c} 
-\index{main.cpp@{main.cpp}!testMeasurement@{testMeasurement}}
-\index{testMeasurement@{testMeasurement}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{testMeasurement}{testMeasurement}}
-{\footnotesize\ttfamily elapsed\+Micros test\+Measurement}
-
-
-
-Used for various internal tests. 
-
-\Hypertarget{main_8cpp_a651d0075db9c3f29b556e9dd764b41c2}\label{main_8cpp_a651d0075db9c3f29b556e9dd764b41c2} 
-\index{main.cpp@{main.cpp}!testMeasurementOngoing@{testMeasurementOngoing}}
-\index{testMeasurementOngoing@{testMeasurementOngoing}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{testMeasurementOngoing}{testMeasurementOngoing}}
-{\footnotesize\ttfamily bool test\+Measurement\+Ongoing = false}
 
 \Hypertarget{main_8cpp_ab04d737a375f71bd322407e877bcfa68}\label{main_8cpp_ab04d737a375f71bd322407e877bcfa68} 
 \index{main.cpp@{main.cpp}!updateRollingStatus@{updateRollingStatus}}

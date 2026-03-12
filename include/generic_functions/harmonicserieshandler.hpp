@@ -51,14 +51,7 @@ private:
     bool calculateHarmonicShift();
 
     bool raiseFrequencyChanged();
-/*
-    eProcessResult processControlCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                               commandList *delegatedCommands = nullptr);
 
-    eProcessResult processHarmonicSeriesCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                                      commandList *delegatedCommands = nullptr);
-*/
-    //std::vector<HarmonicSeries> harmonicSeries;
 public:
     bool setHarmonicShift(int inHarmonicShift);
 

@@ -1,0 +1,174 @@
+\doxysection{pluginhandler.\+hpp}
+\hypertarget{pluginhandler_8hpp_source}{}\label{pluginhandler_8hpp_source}\index{pluginhandler.hpp@{pluginhandler.hpp}}
+\mbox{\hyperlink{pluginhandler_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLUGINHANDLER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLUGINHANDLER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{modulehandler_8hpp}{base/modulehandler.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{expressionparser_8h}{master\_controller/expressionparser.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPlugin}{Plugin}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classModule}{Module}}\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlugin_a84c2231693c775842690918ec259f2dc}{registerExpression}}(\mbox{\hyperlink{classExpressionParser}{ExpressionParser}}\ *expressionParser)\ \{\};}
+\DoxyCodeLine{00013\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classPlugin_af43b071f70145fea054d97f38c6309a9}{index}}\ =\ 0;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classModuleGroup}{ModuleGroup}}*\ \mbox{\hyperlink{classPlugin_a91eda54a23d2d6bf568219fe774116b3}{getGroup}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlugin_ae6a3b375ea5c78cbdd3454db3f2f91a3}{setGroup}}(\mbox{\hyperlink{classModuleGroup}{ModuleGroup}}\ *inGroup)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{classModuleHandler}{ModuleHandler}}\ *\mbox{\hyperlink{classPlugin_a953f58ecc6906cf9d8c9dc9c8b93998e}{parent}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classPlugin_a25df9baf81fbf1c9beeb45f4ea178a58}{\string~Plugin}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlugin_abb4748bbb52c63fc194fc65983674ed7}{update}}();}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPluginFactory}{PluginFactory}}\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classPluginFactory_a8ea4c7063d81846fea11cd909ec754cd}{creator\_t}}\ =\ std::function<std::unique\_ptr<Plugin>()>;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structPluginFactory_1_1PluginRegistry}{PluginRegistry}}\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPluginFactory_a8ea4c7063d81846fea11cd909ec754cd}{creator\_t}}\ \mbox{\hyperlink{structPluginFactory_1_1PluginRegistry_a7191c09f0e2ec8adef7b2e17af347967}{creator}};}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structtModuleID}{tModuleID}}\ \mbox{\hyperlink{structPluginFactory_1_1PluginRegistry_a99f1d3f497792b1dc791eca0186b15c2}{tmoduleID}};}
+\DoxyCodeLine{00029\ \ \ \ \ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classPluginFactory}{PluginFactory}}\&\ \mbox{\hyperlink{classPluginFactory_a7cf119d70c104bed92be0a6d8bd6bc48}{instance}}()\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classPluginFactory}{PluginFactory}}\ staticPluginFactory;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ staticPluginFactory;}
+\DoxyCodeLine{00034\ \ \ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ std::vector<PluginRegistry>\ \mbox{\hyperlink{classPluginFactory_a5e3fb082706af187baee9510bedc3010}{plugins}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPluginFactory_a3e56144452e573304bfed7e08ccecacb}{registerPlugin}}(\mbox{\hyperlink{classPluginFactory_a8ea4c7063d81846fea11cd909ec754cd}{creator\_t}}\ creator,\ \mbox{\hyperlink{structtModuleID}{tModuleID}}\ tmoduleID)\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPluginFactory_a5e3fb082706af187baee9510bedc3010}{plugins}}.push\_back(\{\ std::move(creator),\ tmoduleID\ \});}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ \ \ \ std::unique\_ptr<Plugin>\ create(const\ std::string\&\ longName)\ const\ \{}}
+\DoxyCodeLine{00043\ \ \ \ \ std::unique\_ptr<Plugin>\ \mbox{\hyperlink{classPluginFactory_a9ca7f9dd94c64d23429017e1f75b9f7b}{create}}(String\ longName)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ \ \ \ \ \ \ \ debugPrintln("{}Number\ of\ plugins\ registered:\ "{}\ +\ String(plugins.size()),\ debugPrintType::Debug);}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{classPluginFactory_a5e3fb082706af187baee9510bedc3010}{plugins}}.size();\ i++)\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (String(\mbox{\hyperlink{classPluginFactory_a5e3fb082706af187baee9510bedc3010}{plugins}}[i].tmoduleID.longName)\ ==\ longName)\ \{}
+\DoxyCodeLine{00047\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Got\ the\ plugin"{},\ debugPrintType::Debug);}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classPluginFactory_a5e3fb082706af187baee9510bedc3010}{plugins}}[i].creator();}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8cpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Plugin\ not\ found"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ CREATEPLUGINFUNCTIONS(class)\ \(\backslash\)}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\ \ \ \ static\ std::unique\_ptr<Plugin>\ create()\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ std::make\_unique<class>();\ \(\backslash\)}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\ \ \ \ static\ ModuleGroup\ *group;\ \(\backslash\)}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\ \ \ \ ModuleGroup*\ getGroup()\ const\ override\ \{\ return\ group;\ \};\ \(\backslash\)}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\ \ \ \ virtual\ void\ setGroup(ModuleGroup\ *inGroup)\ const\ override\ \{\ group\ =\ inGroup;\ \};\ \(\backslash\)}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\ \ \ \ static\ class*\ getIndex(uint8\_t\ index)\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (index\ >=\ group-\/>modules.size())\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Map\ not\ found"{},\ debugPrintType::Error);\ \(\backslash\)}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ return\ nullptr;\ \(\backslash\)}}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ ((class*)\ group-\/>modules[index]);\ \(\backslash\)}}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\ \ \ \ private:\(\backslash\)}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\ \ \ \ static\ bool\ registered;\(\backslash\)}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\ \ \ \ public:}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ REGISTEREXPRESSION(callback)\ \(\backslash\)}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\ \ \ \ void\ registerExpression(ExpressionParser\ *expressionParser)\ override\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (expressionParser\ ==\ nullptr)\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ debugPrintln("{}Expression\ Parser\ is\ NULL"{},\ debugPrintType::Error);\ \(\backslash\)}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ return;\ \(\backslash\)}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ expressionParser-\/>registerFunction(tmoduleID.shortName,\ (const\ void*)\ \&callback,\ TE\_FUNCTION2);\ \(\backslash\)}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#define\ REGISTERPLUGIN(class)\ \(\backslash\)}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\ \ \ \ bool\ class::registered\ =\ []\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ PluginFactory::instance().registerPlugin(\&class::create,\ class::getModuleIDStatic());\ \(\backslash\)}}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ true;\ \(\backslash\)}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\ \ \ \ \}\ ();\ \(\backslash\)}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\ \ \ \ ModuleGroup*\ class::group\ =\ nullptr;}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#define\ CREATEGETSET\_HEADER(name,\ class)\ \(\backslash\)}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\ \ \ \ CREATE\_MODULE\_COMMAND\_FUNCTION(name,\ class)\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (!request)\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!checkArguments(inCommandItem,\ inCommandResponses,\ 1))\ \{\ return\ eProcessResult::WrongArgumentCount;\ \}\ \(\backslash\)}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#define\ CREATEGETSET\_FOOTER(variable)\ \(\backslash\)}}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ "{}:"{}\ +\ String(variable),\ debugPrintType::InfoRequest\ \});\ \(\backslash\)}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ eProcessResult::Ok;\ \(\backslash\)}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#define\ CREATEGETSET\_FOOTERQ(variable)\ \(\backslash\)}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ "{}:"{}\ +\ delimitExpression(String(variable),\ true),\ debugPrintType::InfoRequest\ \});\ \(\backslash\)}}
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ eProcessResult::Ok;\ \(\backslash\)}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#define\ CREATE\_GETSET\_FUNCTION\_CONVERT(name,\ class,\ variable,\ conversion)\ \(\backslash\)}}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\ \ \ \ CREATEGETSET\_HEADER(name,\ class)\ \(\backslash\)}}
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\ \ \ \ variable\ =\ inCommandItem-\/>argument[0].conversion();\ \(\backslash\)}}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\ \ \ \ CREATEGETSET\_FOOTER(variable)}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#define\ CREATE\_GETSET\_FUNCTION(name,\ class,\ variable)\ \(\backslash\)}}
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\ \ \ \ CREATEGETSET\_HEADER(name,\ class)\ \(\backslash\)}}
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\ \ \ \ variable\ =\ stripQuotes(inCommandItem-\/>argument[0]);\ \(\backslash\)}}
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\ \ \ \ CREATEGETSET\_FOOTERQ(variable)}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#define\ CREATE\_GETSET\_FUNCTION\_F\_CONVERT(name,\ class,\ variable,\ conversion,\ function)\ \(\backslash\)}}
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\ \ \ \ CREATEGETSET\_HEADER(name,\ class)\ \(\backslash\)}}
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\ \ \ \ variable\ =\ inCommandItem-\/>argument[0].conversion();\ \(\backslash\)}}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\ \ \ \ function();\ \(\backslash\)}}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\ \ \ \ CREATEGETSET\_FOOTER(variable)}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#define\ CREATE\_GETSET\_FUNCTION\_F(name,\ class,\ variable,\ function)\ \(\backslash\)}}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\ \ \ \ CREATEGETSET\_HEADER(name,\ class)\ \(\backslash\)}}
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\ \ \ \ variable\ =\ stripQuotes(inCommandItem-\/>argument[0]);\ \(\backslash\)}}
+\DoxyCodeLine{00133\ \textcolor{preprocessor}{\ \ \ \ function();\ \(\backslash\)}}
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\ \ \ \ CREATEGETSET\_FOOTERQ(variable)}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPluginHandler}{PluginHandler}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classModuleHandler}{ModuleHandler}}}
+\DoxyCodeLine{00137\ \{}
+\DoxyCodeLine{00138\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00139\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a726e985c9256abcd3e04b255b31cba09}{SETMODULEID}}(\textcolor{stringliteral}{"{}pluginhandler"{}},\ \textcolor{stringliteral}{"{}ph"{}},\ \textcolor{stringliteral}{"{}Plugin\ handler\ v1.0"{}},\ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8}{eModuleType::software}},\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(add,\ \mbox{\hyperlink{classPluginHandler}{PluginHandler}})}
+\DoxyCodeLine{00144\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(remove,\ \mbox{\hyperlink{classPluginHandler}{PluginHandler}})}
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(count,\ \mbox{\hyperlink{classPluginHandler}{PluginHandler}})}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ \mbox{\hyperlink{classPluginHandler}{PluginHandler}}(\mbox{\hyperlink{classExpressionParser}{ExpressionParser}}\ *inExpressionParser);}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPluginHandler_a5e6713823544269628abc861120bc020}{update}}()\ override;}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPluginHandler_a14b1e5fe1e9726110a946358d0b9c8ee}{addPlugin}}(String\ name);}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPluginHandler_ae989916db9cba23051cb8d2df918934e}{addInstances}}(String\ name,\ uint8\_t\ count)\ override;}
+\DoxyCodeLine{00152\ \textcolor{comment}{//\ \ \ \ void\ dumpData(std::vector<commandResponse>\ inCommandResponse)\ override;}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ std::vector<\mbox{\hyperlink{classPlugin}{Plugin}}*>\ \mbox{\hyperlink{classPluginHandler_a6f0a7b0c610ef6cf22be6f8641c8b82c}{plugins}};}
+\DoxyCodeLine{00155\ protected:}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ private:}
+\DoxyCodeLine{00158\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classPluginHandler_a674b6e0fed47e115f73c194ecafc8f86}{updateRate}}\ =\ 10;}
+\DoxyCodeLine{00159\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classPluginHandler_aa3f6b2e10acccf493e23a1e606a3cd43}{lastUpdate}}\ =\ 0;}
+\DoxyCodeLine{00160\ \ \ \ \ elapsedMillis\ \mbox{\hyperlink{classPluginHandler_abb4f8f224b6f9c1cdcb904425e1fb69f}{mainTimer}};}
+\DoxyCodeLine{00161\ \ \ \ \ \mbox{\hyperlink{classExpressionParser}{ExpressionParser}}\ *\mbox{\hyperlink{classPluginHandler_adc580b186b73ab79ed80353cc78b5281}{expressionParser}}\ =\ \textcolor{keywordtype}{nullptr};}
+\DoxyCodeLine{00162\ public:}
+\DoxyCodeLine{00163\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classPluginHandler_aa5c0a0afe6c87a7cdc2a9698924df54c}{getUpdateRate}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classPluginHandler_a674b6e0fed47e115f73c194ecafc8f86}{updateRate}};\ \}}
+\DoxyCodeLine{00164\ \};}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{pluginhandler_8hpp_a5ff1eeee6f86bc24c60bb267464d0f87}{convertMsToRate}}(\textcolor{keywordtype}{float}\ parentRate,\ \textcolor{keywordtype}{float}\ inRate);}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PLUGINS\_HPP}}
+
+\end{DoxyCode}

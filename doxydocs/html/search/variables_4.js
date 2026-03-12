@@ -1,7 +1,25 @@
 var searchData=
 [
-  ['debugprintenabled_0',['debugPrintEnabled',['../debugprint_8hpp.html#a9c71895d3563902fd61dbfe70213f577',1,'debugprint.hpp']]],
-  ['debugprinttypename_1',['debugPrintTypeName',['../debugprint_8hpp.html#acbab4b58032141437b697b6071034ed6',1,'debugprint.hpp']]],
-  ['debugprinttypenameshort_2',['debugPrintTypeNameShort',['../debugprint_8hpp.html#a325006d92e4f547b1b983336d5be8b08',1,'debugprint.hpp']]],
-  ['dirchange_3',['dirChange',['../classservoStepper.html#a3e1e00e108bec142df788d2dbb8188ba',1,'servoStepper']]]
+  ['dataarray_0',['dataArray',['../classaverager.html#a655a24b1204e470116902f8ed8ddcfc3',1,'averager']]],
+  ['dataaveragelength_1',['dataAverageLength',['../classaverager.html#adde2499165f7e8076a054d49ba747cca',1,'averager']]],
+  ['datacount_2',['dataCount',['../classaverager.html#a82f127ce49291496bdf93d634855ef62',1,'averager']]],
+  ['dataindex_3',['dataIndex',['../classaverager.html#a05e9e18dcdfe19bb3df1202202524eee',1,'averager']]],
+  ['dchannel_4',['dchannel',['../classExpressionParser.html#a48ae31637269c9fb1e99c235b36dd753',1,'ExpressionParser']]],
+  ['dcmotorcontrol_5',['dcmotorcontrol',['../classBowControl.html#a38164fbaeced2317f73f5febac582323',1,'BowControl::dcMotorControl'],['../classPIDController.html#af97ae23b468bb776bd33f3791e44f041',1,'PIDController::dcMotorControl']]],
+  ['debugprintenabled_6',['debugprintenabled',['../debugprint_8cpp.html#a01caea6c04358f4b54c9fab5bc1caa69',1,'debugPrintEnabled:&#160;debugprint.cpp'],['../debugprint_8hpp.html#a8abf5a77dfdae5c168344cd27f6dc937',1,'debugPrintEnabled:&#160;debugprint.cpp']]],
+  ['debugprinttypename_7',['debugprinttypename',['../debugprint_8hpp.html#a856043e32014d640459f77fa2bc7e697',1,'debugPrintTypeName:&#160;debugprint.cpp'],['../debugprint_8cpp.html#a5ef2a840e25ff8af840a9fbb3a482ddc',1,'debugPrintTypeName:&#160;debugprint.cpp']]],
+  ['debugprinttypenameshort_8',['debugprinttypenameshort',['../debugprint_8hpp.html#a26aadfde4abe20d62be5b5019c0e371e',1,'debugPrintTypeNameShort:&#160;debugprint.cpp'],['../debugprint_8cpp.html#af34696f4b155e8b3d6c05a4eb26a35b5',1,'debugPrintTypeNameShort:&#160;debugprint.cpp']]],
+  ['defaultmoduleid_9',['defaultModuleID',['../classBaseModule.html#a650c11bdffac91ad206638ada0b4cab8',1,'BaseModule']]],
+  ['delayincrease_10',['delayIncrease',['../classPlugin__LFO.html#ac7554a0f8190a00b40cc483d0a076cef',1,'Plugin_LFO']]],
+  ['description_11',['description',['../structtModuleID.html#a23934bb69c84616ef2b221e614d6b651',1,'tModuleID']]],
+  ['dirchange_12',['dirChange',['../classservoStepper.html#a3e1e00e108bec142df788d2dbb8188ba',1,'servoStepper']]],
+  ['dmap_13',['dmap',['../expressionparser_8cpp.html#a4e0fa8899ed6b9f1bde2bc03de889626',1,'dMap:&#160;expressionparser.cpp'],['../expressionparser_8h.html#a32ef6f5dfb2bf18814707509a33b56d6',1,'dMap:&#160;expressionparser.cpp']]],
+  ['dnote_14',['dnote',['../classExpressionParser.html#a0a4115f690bf018efe686cd2355b3aa5',1,'ExpressionParser']]],
+  ['dnotecount_15',['dnotecount',['../classExpressionParser.html#a0b8753a9f6d1cecd24f3319323b47017',1,'ExpressionParser']]],
+  ['dpitch_16',['dpitch',['../classExpressionParser.html#ad163507b5e0cf5897c92418db23a9706',1,'ExpressionParser']]],
+  ['dpressure_17',['dpressure',['../classExpressionParser.html#a578792de49e34a10660ac02985f62eb8',1,'ExpressionParser']]],
+  ['dprogram_18',['dprogram',['../classExpressionParser.html#a2d053002eefee94cc5b571936ebb2584',1,'ExpressionParser']]],
+  ['duv_19',['duv',['../classExpressionParser.html#a647fb9673d69abca8a207658a3581b77',1,'ExpressionParser']]],
+  ['dvalue_20',['dvalue',['../classExpressionParser.html#a6d8484e6cb52d2a255f637d591786d48',1,'ExpressionParser']]],
+  ['dvelocity_21',['dvelocity',['../classExpressionParser.html#abfd334fe25ae573583c5d003b1450fa8',1,'ExpressionParser']]]
 ];

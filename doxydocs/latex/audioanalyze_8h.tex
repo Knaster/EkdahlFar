@@ -1,5 +1,6 @@
 \doxysection{audioanalyze.\+h File Reference}
 \hypertarget{audioanalyze_8h}{}\label{audioanalyze_8h}\index{audioanalyze.h@{audioanalyze.h}}
+{\ttfamily \#include $<$base/arduinorequired.\+hpp$>$}\newline
 {\ttfamily \#include $<$Audio.\+h$>$}\newline
 {\ttfamily \#include $<$SPI.\+h$>$}\newline
 {\ttfamily \#include $<$Serial\+Flash.\+h$>$}\newline
@@ -12,10 +13,17 @@ Include dependency graph for audioanalyze.\+h\+:\nopagebreak
 \includegraphics[width=350pt]{audioanalyze_8h__incl}
 \end{center}
 \end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{audioanalyze_8h__dep__incl}
+\end{center}
+\end{figure}
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{audioanalyze_8h_a9c900f998f12cff863e4fe03daf78994}{note\+Freq\+Cutoff}}~800
+\#define \mbox{\hyperlink{audioanalyze_8h_a7d0b5b6bfc1bae2a135c12250762d493}{AUDIO\+\_\+\+INTERFACE}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -35,36 +43,20 @@ float \mbox{\hyperlink{audioanalyze_8h_a1119501c55b77d995f19fb79432bfe53}{audio\
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-Audio\+Input\+Analog \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{audioanalyze_8h_a813f3de3c8849a38037fbc39a6b87376}{audio\+ADC}}
-\item 
 Audio\+Analyze\+Note\+Frequency \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}{audio\+Note\+Freq}}
 \item 
 Audio\+Analyze\+Peak \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b}{audio\+Peak}}
 \item 
 Audio\+Analyze\+RMS \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{audioanalyze_8h_a083d67b82f9d6d474d2567370515fcdb}{audio\+RMS}}
-\item 
-Audio\+Connection \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{audioanalyze_8h_a8e944c87273160403274a8c472005cf4}{audio\+Patch\+Cord1}}
-\item 
-Audio\+Connection \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{audioanalyze_8h_a41033f672a97a3a57b2a596917d92c41}{audio\+Patch\+Cord2}}
-\item 
-Audio\+Connection \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{audioanalyze_8h_aef0a12569b9e758304a652c5c45128df}{audio\+Patch\+Cord3}}
-\item 
-Audio\+Connection \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{audioanalyze_8h_a14a777371d223f1e16b0df5449523fb1}{audio\+Patch\+Cord4}}
-\item 
-Audio\+Output\+USB \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{audioanalyze_8h_a6901729182ea95bdcef9bac60b2cab97}{audio\+Out\+USB}}
-\item 
-Audio\+Filter\+Biquad \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{audioanalyze_8h_a434cfc088f54a8392278fe739c7230fd}{audio\+Filter\+Biquad}}
-\item 
-bool \mbox{\hyperlink{audioanalyze_8h_a7abd8636218afea3505d9c1ca9aa9458}{audio\+Analyze\+Started}} = false
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
-\Hypertarget{audioanalyze_8h_a9c900f998f12cff863e4fe03daf78994}\label{audioanalyze_8h_a9c900f998f12cff863e4fe03daf78994} 
-\index{audioanalyze.h@{audioanalyze.h}!noteFreqCutoff@{noteFreqCutoff}}
-\index{noteFreqCutoff@{noteFreqCutoff}!audioanalyze.h@{audioanalyze.h}}
-\doxysubsubsection{\texorpdfstring{noteFreqCutoff}{noteFreqCutoff}}
-{\footnotesize\ttfamily \#define note\+Freq\+Cutoff~800}
+\Hypertarget{audioanalyze_8h_a7d0b5b6bfc1bae2a135c12250762d493}\label{audioanalyze_8h_a7d0b5b6bfc1bae2a135c12250762d493} 
+\index{audioanalyze.h@{audioanalyze.h}!AUDIO\_INTERFACE@{AUDIO\_INTERFACE}}
+\index{AUDIO\_INTERFACE@{AUDIO\_INTERFACE}!audioanalyze.h@{audioanalyze.h}}
+\doxysubsubsection{\texorpdfstring{AUDIO\_INTERFACE}{AUDIO\_INTERFACE}}
+{\footnotesize\ttfamily \#define AUDIO\+\_\+\+INTERFACE}
 
 
 
@@ -82,8 +74,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{audioanalyze_8h_a8ecd861231dbd0db5f6e4771b3422137_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -103,8 +94,7 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{audioanalyze_8h_aa486c0bb291c2cef78ca63c3169f303b_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -117,8 +107,7 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{audioPeakAmplitude()}{audioPeakAmplitude()}}
 {\footnotesize\ttfamily float audio\+Peak\+Amplitude (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -144,8 +133,7 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{audioRMSAmplitude()}{audioRMSAmplitude()}}
 {\footnotesize\ttfamily float audio\+RMSAmplitude (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -158,72 +146,31 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{startAudioAnalyze()}{startAudioAnalyze()}}
 {\footnotesize\ttfamily void start\+Audio\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{audioanalyze_8h_afa56efd9b032b4127590c49b942706c9_icgraph}
+\end{center}
+\end{figure}
 
 
 \doxysubsection{Variable Documentation}
-\Hypertarget{audioanalyze_8h_a813f3de3c8849a38037fbc39a6b87376}\label{audioanalyze_8h_a813f3de3c8849a38037fbc39a6b87376} 
-\index{audioanalyze.h@{audioanalyze.h}!audioADC@{audioADC}}
-\index{audioADC@{audioADC}!audioanalyze.h@{audioanalyze.h}}
-\doxysubsubsection{\texorpdfstring{audioADC}{audioADC}}
-{\footnotesize\ttfamily Audio\+Input\+Analog\texorpdfstring{$\ast$}{*} audio\+ADC}
-
-\Hypertarget{audioanalyze_8h_a7abd8636218afea3505d9c1ca9aa9458}\label{audioanalyze_8h_a7abd8636218afea3505d9c1ca9aa9458} 
-\index{audioanalyze.h@{audioanalyze.h}!audioAnalyzeStarted@{audioAnalyzeStarted}}
-\index{audioAnalyzeStarted@{audioAnalyzeStarted}!audioanalyze.h@{audioanalyze.h}}
-\doxysubsubsection{\texorpdfstring{audioAnalyzeStarted}{audioAnalyzeStarted}}
-{\footnotesize\ttfamily bool audio\+Analyze\+Started = false}
-
-\Hypertarget{audioanalyze_8h_a434cfc088f54a8392278fe739c7230fd}\label{audioanalyze_8h_a434cfc088f54a8392278fe739c7230fd} 
-\index{audioanalyze.h@{audioanalyze.h}!audioFilterBiquad@{audioFilterBiquad}}
-\index{audioFilterBiquad@{audioFilterBiquad}!audioanalyze.h@{audioanalyze.h}}
-\doxysubsubsection{\texorpdfstring{audioFilterBiquad}{audioFilterBiquad}}
-{\footnotesize\ttfamily Audio\+Filter\+Biquad\texorpdfstring{$\ast$}{*} audio\+Filter\+Biquad}
-
 \Hypertarget{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821}\label{audioanalyze_8h_a86609865b4c42b1f2dc867f30f234821} 
 \index{audioanalyze.h@{audioanalyze.h}!audioNoteFreq@{audioNoteFreq}}
 \index{audioNoteFreq@{audioNoteFreq}!audioanalyze.h@{audioanalyze.h}}
 \doxysubsubsection{\texorpdfstring{audioNoteFreq}{audioNoteFreq}}
-{\footnotesize\ttfamily Audio\+Analyze\+Note\+Frequency\texorpdfstring{$\ast$}{*} audio\+Note\+Freq}
-
-\Hypertarget{audioanalyze_8h_a6901729182ea95bdcef9bac60b2cab97}\label{audioanalyze_8h_a6901729182ea95bdcef9bac60b2cab97} 
-\index{audioanalyze.h@{audioanalyze.h}!audioOutUSB@{audioOutUSB}}
-\index{audioOutUSB@{audioOutUSB}!audioanalyze.h@{audioanalyze.h}}
-\doxysubsubsection{\texorpdfstring{audioOutUSB}{audioOutUSB}}
-{\footnotesize\ttfamily Audio\+Output\+USB\texorpdfstring{$\ast$}{*} audio\+Out\+USB}
-
-\Hypertarget{audioanalyze_8h_a8e944c87273160403274a8c472005cf4}\label{audioanalyze_8h_a8e944c87273160403274a8c472005cf4} 
-\index{audioanalyze.h@{audioanalyze.h}!audioPatchCord1@{audioPatchCord1}}
-\index{audioPatchCord1@{audioPatchCord1}!audioanalyze.h@{audioanalyze.h}}
-\doxysubsubsection{\texorpdfstring{audioPatchCord1}{audioPatchCord1}}
-{\footnotesize\ttfamily Audio\+Connection\texorpdfstring{$\ast$}{*} audio\+Patch\+Cord1}
-
-\Hypertarget{audioanalyze_8h_a41033f672a97a3a57b2a596917d92c41}\label{audioanalyze_8h_a41033f672a97a3a57b2a596917d92c41} 
-\index{audioanalyze.h@{audioanalyze.h}!audioPatchCord2@{audioPatchCord2}}
-\index{audioPatchCord2@{audioPatchCord2}!audioanalyze.h@{audioanalyze.h}}
-\doxysubsubsection{\texorpdfstring{audioPatchCord2}{audioPatchCord2}}
-{\footnotesize\ttfamily Audio\+Connection\texorpdfstring{$\ast$}{*} audio\+Patch\+Cord2}
-
-\Hypertarget{audioanalyze_8h_aef0a12569b9e758304a652c5c45128df}\label{audioanalyze_8h_aef0a12569b9e758304a652c5c45128df} 
-\index{audioanalyze.h@{audioanalyze.h}!audioPatchCord3@{audioPatchCord3}}
-\index{audioPatchCord3@{audioPatchCord3}!audioanalyze.h@{audioanalyze.h}}
-\doxysubsubsection{\texorpdfstring{audioPatchCord3}{audioPatchCord3}}
-{\footnotesize\ttfamily Audio\+Connection\texorpdfstring{$\ast$}{*} audio\+Patch\+Cord3}
-
-\Hypertarget{audioanalyze_8h_a14a777371d223f1e16b0df5449523fb1}\label{audioanalyze_8h_a14a777371d223f1e16b0df5449523fb1} 
-\index{audioanalyze.h@{audioanalyze.h}!audioPatchCord4@{audioPatchCord4}}
-\index{audioPatchCord4@{audioPatchCord4}!audioanalyze.h@{audioanalyze.h}}
-\doxysubsubsection{\texorpdfstring{audioPatchCord4}{audioPatchCord4}}
-{\footnotesize\ttfamily Audio\+Connection\texorpdfstring{$\ast$}{*} audio\+Patch\+Cord4}
+{\footnotesize\ttfamily Audio\+Analyze\+Note\+Frequency\texorpdfstring{$\ast$}{*} audio\+Note\+Freq\hspace{0.3cm}{\ttfamily [extern]}}
 
 \Hypertarget{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b}\label{audioanalyze_8h_a13c02cc930ab5775d56984f8be24378b} 
 \index{audioanalyze.h@{audioanalyze.h}!audioPeak@{audioPeak}}
 \index{audioPeak@{audioPeak}!audioanalyze.h@{audioanalyze.h}}
 \doxysubsubsection{\texorpdfstring{audioPeak}{audioPeak}}
-{\footnotesize\ttfamily Audio\+Analyze\+Peak\texorpdfstring{$\ast$}{*} audio\+Peak}
+{\footnotesize\ttfamily Audio\+Analyze\+Peak\texorpdfstring{$\ast$}{*} audio\+Peak\hspace{0.3cm}{\ttfamily [extern]}}
 
 \Hypertarget{audioanalyze_8h_a083d67b82f9d6d474d2567370515fcdb}\label{audioanalyze_8h_a083d67b82f9d6d474d2567370515fcdb} 
 \index{audioanalyze.h@{audioanalyze.h}!audioRMS@{audioRMS}}
 \index{audioRMS@{audioRMS}!audioanalyze.h@{audioanalyze.h}}
 \doxysubsubsection{\texorpdfstring{audioRMS}{audioRMS}}
-{\footnotesize\ttfamily Audio\+Analyze\+RMS\texorpdfstring{$\ast$}{*} audio\+RMS}
+{\footnotesize\ttfamily Audio\+Analyze\+RMS\texorpdfstring{$\ast$}{*} audio\+RMS\hspace{0.3cm}{\ttfamily [extern]}}
 

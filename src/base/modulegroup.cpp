@@ -3,19 +3,8 @@
 
 #include "base/module.hpp"
 #include "base/modulegroup.hpp"
-/*
-ModuleGroup::ModuleGroup(Module *inModule)
-{
-    moduleID = new ModuleID(inModule->moduleID);
-    addModule(inModule);
-}*/
-/*
-ModuleGroup::ModuleGroup(ModuleID inModuleID) {
-//    moduleID = new ModuleID(inModuleID);
-}
-*/
+
 ModuleGroup::ModuleGroup(tModuleID inModuleID) {
-    //tmoduleID = &inModuleID;
     tmoduleID.description = inModuleID.description;
     tmoduleID.longName = inModuleID.longName;
     tmoduleID.shortName = inModuleID.shortName;
@@ -27,10 +16,8 @@ ModuleGroup::~ModuleGroup() { }
 
 void ModuleGroup::dir(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix, bool hidden, bool inModules, bool commands, bool instances, bool instanceCount, bool recursive) {
     if (modules.size() == 0) {
-//        debugPrintln("Dir empty module group", debugPrintType::Debug);
         if (inModules) {
-//            inCommandResponses->push_back({ "dir: " + longPrefix + "[0] : " + shortPrefix + "[0] : " + String(modules.size()) + " : " + moduleID->getModuleTypeS(), debugPrintType::InfoRequest });
-            inCommandResponses->push_back({ "ls: " + longPrefix + "[0] : " + shortPrefix + "[0] : " + String(modules.size()) + " : " + getModuleType(tmoduleID.moduleType), debugPrintType::InfoRequest });
+            inCommandResponses->push_back({ "ls:" + longPrefix + "[0] : " + shortPrefix + "[0] : " + String(modules.size()) + " : " + getModuleType(tmoduleID.moduleType), debugPrintType::InfoRequest });
         }
         return;
     }
@@ -39,8 +26,7 @@ void ModuleGroup::dir(std::vector<commandResponse> *inCommandResponses, String l
         if (!instances) {
             if (inModules) {
 //                debugPrintln("Dir module group " + String(tmoduleID.longName) + " commands", debugPrintType::Debug);
-//                inCommandResponses->push_back({ "dir: " + longPrefix + "[0] : " + shortPrefix + "[0] : " + String(modules.size()) + " : " + moduleID->getModuleTypeS(), debugPrintType::InfoRequest });
-                inCommandResponses->push_back({ "ls: " + longPrefix + "[0] : " + shortPrefix + "[0] : " + String(modules.size()) + " : " + getModuleType(tmoduleID.moduleType), debugPrintType::InfoRequest });
+                inCommandResponses->push_back({ "ls:" + longPrefix + "[0] : " + shortPrefix + "[0] : " + String(modules.size()) + " : " + getModuleType(tmoduleID.moduleType), debugPrintType::InfoRequest });
             }
             modules[0]->dir(inCommandResponses, longPrefix, shortPrefix, hidden, inModules, commands, instances, instanceCount, recursive);
         } else {
@@ -48,8 +34,7 @@ void ModuleGroup::dir(std::vector<commandResponse> *inCommandResponses, String l
             for (int i = 0; i < modules.size(); i++) {
                 String index = "[" + String (i) + "]";
                 if (inModules) {
-//                    inCommandResponses->push_back({ "dir: " + longPrefix + index + " : " + shortPrefix + index + " : " + String(modules.size()) + " : " + moduleID->getModuleTypeS(), debugPrintType::InfoRequest });
-                    inCommandResponses->push_back({ "ls: " + longPrefix + index + " : " + shortPrefix + index + " : " + String(modules.size()) + " : " + getModuleType(tmoduleID.moduleType), debugPrintType::InfoRequest });
+                    inCommandResponses->push_back({ "ls:" + longPrefix + index + " : " + shortPrefix + index + " : " + String(modules.size()) + " : " + getModuleType(tmoduleID.moduleType), debugPrintType::InfoRequest });
                 }
                 modules[i]->dir(inCommandResponses, longPrefix + index, shortPrefix + index, hidden, inModules, commands, instances, instanceCount, recursive);
             }
@@ -59,16 +44,7 @@ void ModuleGroup::dir(std::vector<commandResponse> *inCommandResponses, String l
 }
 
 void ModuleGroup::help(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix) {
-    if (modules.size() == 0) {
-        debugPrintln("Help: empty module group", debugPrintType::Debug);
-//        inCommandResponses->push_back({ "ls: " + longPrefix + "[0] : " + shortPrefix + "[0] : " + String(modules.size()) + " : " + getModuleType(tmoduleID.moduleType), debugPrintType::InfoRequest });
-        return;
-    }
-
-//            debugPrintln("Dir module group instances", debugPrintType::Debug);
-//        if (inModules) {
-//            inCommandResponses->push_back({ "ls: " + longPrefix + index + " : " + shortPrefix + index + " : " + String(modules.size()) + " : " + getModuleType(tmoduleID.moduleType), debugPrintType::InfoRequest });
-//        }
+    if (modules.size() == 0) { return;  }
      modules[0]->help(inCommandResponses, longPrefix, shortPrefix);
 }
 
@@ -89,7 +65,7 @@ void ModuleGroup::dumpData(std::vector<commandResponse> *inCommandResponses) {
     }
 }
 
-eProcessResult ModuleGroup::processCommands(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request) {
+eProcessResult ModuleGroup::processCommands(CommandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request) {
     // Use any incoming selection
     SELECTION localSel;
     localSel = inCommandItem->hierarchy[inCommandItem->hierarchyIndex].selection;
@@ -119,11 +95,8 @@ eProcessResult ModuleGroup::processCommands(commandItem *inCommandItem, std::vec
 //            debugPrintln("In module " + String(item), debugPrintType::Debug);
             eProcessResult result = modules[item]->processCommands(inCommandItem, &childReturn, request);
 
-            //returnString = moduleID->getShortAlias();
             returnString = tmoduleID.shortAlias.c_str();
-            //if (modules.size() > 1) {
-                    returnString += "[" + String(localSel[i]) + "]";
-            //}
+            returnString += "[" + String(localSel[i]) + "]";
             returnString += ".";
             for (int j = 0; j < childReturn.size(); j++) {
                 commandResponses->push_back({ returnString + childReturn[j].response, childReturn[j].responseType });
@@ -139,7 +112,7 @@ eProcessResult ModuleGroup::processCommands(commandItem *inCommandItem, std::vec
     return eProcessResult::Ok;
 }
 
-bool ModuleGroup::indexing(commandItem *inCommandItem) {
+bool ModuleGroup::indexing(CommandItem *inCommandItem) {
     if ((inCommandItem->hierarchy[inCommandItem->hierarchyIndex].selection.size() > 1) && (singleSelection)) {
         debugPrintln("Group cannot have more than a single selection", debugPrintType::Error);
         return false;
@@ -227,12 +200,9 @@ bool ModuleGroup::setSelection(int inSelection) {
 }
 
 Module* ModuleGroup::addModule(Module *inModule) {
+    inModule->setOwner(owner);
+    inModule->ownerIndex = modules.size();
     modules.push_back(inModule);
-    //debugPrintln("Adding module to group " + moduleID->getLongName() + ", new count is " + String(modules.size()), debugPrintType::Debug);
-
-    //Module *b = modules.back();
-    //debugPrintln("address of input module: " + String(reinterpret_cast<uintptr_t> (inModule), HEX) + " address of std::vector item: "  + String(reinterpret_cast<uintptr_t> (b), HEX), debugPrintType::Debug);
-
     return modules.back();
 }
 
@@ -276,7 +246,7 @@ bool ModuleGroup::removeModule(int index) {
     return true;
 }
 
-void ModuleGroup::setIndexCallback(Module *inOwner, void (*inCallback)(Module *owner, ModuleGroup *moduleGroup)) {
+void ModuleGroup::setIndexCallback(Module *inOwner, bool (*inCallback)(Module *owner, ModuleGroup *moduleGroup)) {
     if ((owner != nullptr) && (owner != inOwner)) {
         debugPrintln("Object can only have on owner!", debugPrintType::Error);
         return;

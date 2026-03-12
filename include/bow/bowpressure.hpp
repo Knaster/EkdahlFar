@@ -46,12 +46,7 @@ private:
 public:
 
     BowPressure(char stepEnPin, char stepDirPin, char stepStepPin, HardwareSerial *stepSerialPort, char stepHomeSensorPin);
-/*
-    eProcessResult processSerialCommand(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                               commandList *delegatedCommands = nullptr);
-    eProcessResult processSerialCommandHidden(commandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request = false, bool delegate = false,
-                                    commandList *delegatedCommands = nullptr);
-*/
+
     void setRestSignal() { restSignal = true; }
     bool getRestSignal();
 
@@ -110,7 +105,7 @@ public:
     void updateServo() { tmc2209ServoStepper->stepServoStepper->updatePosition(); };
 
     // This is to be set to a static function that in turn will call the class instance of updateMuteServo
-    void setStepIntervalCallback(void *stepIntervalCallback) { tmc2209ServoStepper->stepServoStepper->stepIntervalCallback = stepIntervalCallback; };
+    void setStepIntervalCallback(void (*stepIntervalCallback)()) { tmc2209ServoStepper->stepServoStepper->stepIntervalCallback = stepIntervalCallback; };
 
 /***** Internal commands for debugging use, most likely to be removed *****/
 //    void setStepperID(uint16_t stepperID);

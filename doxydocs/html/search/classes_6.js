@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['harmonicseries_0',['HarmonicSeries',['../classHarmonicSeries.html',1,'']]],
-  ['harmonicserieshandler_1',['HarmonicSeriesHandler',['../classHarmonicSeriesHandler.html',1,'']]],
-  ['harmonicserieslist_2',['HarmonicSeriesList',['../classHarmonicSeriesList.html',1,'']]]
+  ['farsingle_0',['FARSingle',['../classFARSingle.html',1,'']]],
+  ['farsinglemodulehandler_1',['FarSingleModuleHandler',['../classFarSingleModuleHandler.html',1,'']]]
 ];

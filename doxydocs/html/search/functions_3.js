@@ -1,8 +1,16 @@
 var searchData=
 [
-  ['debugprint_0',['debugPrint',['../debugprint_8hpp.html#a12ba011dd5b1adf8f77184369290a419',1,'debugprint.hpp']]],
-  ['debugprintchecktype_1',['debugPrintCheckType',['../debugprint_8hpp.html#a02212746d4c3138ec12bc5d582e5dc8f',1,'debugprint.hpp']]],
-  ['debugprintln_2',['debugPrintln',['../debugprint_8hpp.html#a244cb57e724866118a7077bdfc5da06e',1,'debugprint.hpp']]],
-  ['debugraw_3',['debugRaw',['../debugprint_8hpp.html#a01bdc1ea330372bc3011577c0eb53ce9',1,'debugprint.hpp']]],
-  ['delimitexpression_4',['delimitexpression',['../commandparser_8hpp.html#a008cac379590ebbdfc9c51f3b689621a',1,'delimitExpression(String expression, bool force):&#160;commandparser.hpp'],['../main_8cpp.html#ac7fc43fb1f213243ef62cd57653110cc',1,'delimitExpression(String expression, bool force=false):&#160;commandparser.hpp']]]
+  ['datachanged_0',['dataChanged',['../classaverager.html#aec65e58ed67a35cbc04936f407d9b69f',1,'averager']]],
+  ['dcmotorcontrol_1',['DCMotorControl',['../classDCMotorControl.html#a6ca03be3af8f5e7d483a5a663a27f282',1,'DCMotorControl']]],
+  ['deadband_2',['deadband',['../classExpressionParser.html#a377ade2f443753aca8ea271dfa77a130',1,'ExpressionParser']]],
+  ['debugprint_3',['debugprint',['../debugprint_8hpp.html#a12ba011dd5b1adf8f77184369290a419',1,'debugPrint(String text, debugPrintType printType):&#160;debugprint.cpp'],['../debugprint_8cpp.html#a12ba011dd5b1adf8f77184369290a419',1,'debugPrint(String text, debugPrintType printType):&#160;debugprint.cpp']]],
+  ['debugprintchecktype_4',['debugprintchecktype',['../debugprint_8hpp.html#a02212746d4c3138ec12bc5d582e5dc8f',1,'debugPrintCheckType(debugPrintType printType):&#160;debugprint.cpp'],['../debugprint_8cpp.html#a02212746d4c3138ec12bc5d582e5dc8f',1,'debugPrintCheckType(debugPrintType printType):&#160;debugprint.cpp']]],
+  ['debugprintconnect_5',['debugprintconnect',['../debugprint_8hpp.html#a83bc30b4c8938c7379fe25bcbc56ad5f',1,'debugPrintConnect():&#160;debugprint.cpp'],['../debugprint_8cpp.html#a83bc30b4c8938c7379fe25bcbc56ad5f',1,'debugPrintConnect():&#160;debugprint.cpp']]],
+  ['debugprintln_6',['debugprintln',['../debugprint_8hpp.html#a244cb57e724866118a7077bdfc5da06e',1,'debugPrintln(String text, debugPrintType printType):&#160;debugprint.cpp'],['../debugprint_8cpp.html#a244cb57e724866118a7077bdfc5da06e',1,'debugPrintln(String text, debugPrintType printType):&#160;debugprint.cpp']]],
+  ['debugraw_7',['debugraw',['../debugprint_8hpp.html#a01bdc1ea330372bc3011577c0eb53ce9',1,'debugRaw(String text):&#160;debugprint.cpp'],['../debugprint_8cpp.html#a01bdc1ea330372bc3011577c0eb53ce9',1,'debugRaw(String text):&#160;debugprint.cpp']]],
+  ['delimitexpression_8',['delimitexpression',['../commandparser_8hpp.html#ac7fc43fb1f213243ef62cd57653110cc',1,'delimitExpression(String expression, bool force=false):&#160;commandparser.cpp'],['../commandparser_8cpp.html#ac7fc43fb1f213243ef62cd57653110cc',1,'delimitExpression(String expression, bool force=false):&#160;commandparser.cpp']]],
+  ['dir_9',['dir',['../classBaseModule.html#a773ba1995ef5b97d58e3be11ff80238f',1,'BaseModule::dir()'],['../classModuleHandler.html#a8086440da55f316a89562f2a736a1ab6',1,'ModuleHandler::dir()'],['../classModuleGroup.html#acad6e0e158782990f63fe28219faf389',1,'ModuleGroup::dir()'],['../classModule.html#a8aa6237aabeb8c851f0e6272d6cdc28f',1,'Module::dir()']]],
+  ['disablebowmotorpower_10',['disableBowMotorPower',['../classBowControl.html#a9497cf120ffd96fe6a75637c56c65c84',1,'BowControl']]],
+  ['disablemotorpower_11',['disableMotorPower',['../classDCMotorControl.html#ad45596053d5c1d91e50f574a2373479a',1,'DCMotorControl']]],
+  ['dumpdata_12',['dumpdata',['../classBaseModule.html#aa8f8becf50a684de1d93472b355df105',1,'BaseModule::dumpData()'],['../classMIDIConfigurationHandler.html#ad0cd26b75ec6c680b910e73cc97c843f',1,'MIDIConfigurationHandler::dumpData()'],['../classHarmonicSeriesHandler.html#ad54478d5f92f3500da931491d0a59088',1,'HarmonicSeriesHandler::dumpData()'],['../classBowActuators.html#a6a7200c6d26ac713d942e4ef24d453d3',1,'BowActuators::dumpData()'],['../classModuleHandler.html#ae3fa5b4e5e4fa54687c3d26e0d937782',1,'ModuleHandler::dumpData()'],['../classModuleGroup.html#acc2dcc4657aa1206b0bcdd47e161214e',1,'ModuleGroup::dumpData()'],['../classModule.html#a5798bc3ad2b47f69e8915297cb33b3e3',1,'Module::dumpData()']]]
 ];

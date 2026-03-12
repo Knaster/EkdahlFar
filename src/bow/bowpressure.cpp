@@ -4,18 +4,21 @@
 #include "bow/bowpressure.hpp"
 
 const ModuleCommandDeclaration BowPressure::moduleCommands[] = {
-    { "baseline", "ba", "0-65535", "Bow pressure baseline, modulation is added to this point upward", false, false, &s_baseline, eCommandType::SimpleUInt16 },
-    { "modifier", "mo", "0-65535", "Bow pressure modulation, added to the baseline", false, false, &s_modifier, eCommandType::SimpleUInt16 },
-    { "rest", "rs", "0|1", "Puts the bow pressure in the resting position (conditional)", false, false, &s_rest, eCommandType::Conditional },
-    { "engage", "en", "0|1", "Puts the bow pressure in the engage position (conditional)", false, false, &s_engage, eCommandType::Conditional },
-    { "stallpressure", "sp", "0-65535", "Bow pressure stall/maximum position", false, false, &s_stallPressure, eCommandType::SimpleUInt16 },
-    { "engagepressure", "ep", "0-65535", "Bow pressure touch/minimum position", false, false, &s_engagePressure, eCommandType::SimpleUInt16 },
-    { "restpressure", "rp", "0-65535", "Bow pressure rest position", false, false, &s_restPressure, eCommandType::SimpleUInt16},
-    { "engagespeed", "es", "1 - 100?", "Bow pressure movement speed when engaging or disengaging", false, false, &s_engageSpeed, eCommandType::SimpleUInt8 },
-    { "modulationspeed", "ms", "0.1 - 10", "Bow pressure movement speed while engaged", false, false, &s_modulationSpeed, eCommandType::SimpleUInt8 },
-    { "hold", "hd", "0|1", "Sets bow hold on/off", false, false, &s_hold, eCommandType::SimpleBool },
-    { "home", "hm", "-", "Homing bow, used at startup and in case of the bow loosing position", false, false, &s_home, eCommandType::Immediate },
-    { "tmcinfo", "tmi", "-", "Request statistical information from the TMC2209", true, false, &s_tmcinfo, eCommandType::RequestOnly }
+    { "baseline", "ba", "0-65535", "Bow pressure baseline, modulation is added to this point upward", false, false, &s_baseline,
+        eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectParameter },
+    { "modifier", "mo", "0-65535", "Bow pressure modulation, added to the baseline", false, false, &s_modifier, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectParameter },
+    { "rest", "rs", "0|1", "Puts the bow pressure in the resting position (conditional)", false, false, &s_rest, eCommandType_data::ectConditional | eCommandType_function::ectParameter },
+    { "engage", "en", "0|1", "Puts the bow pressure in the engage position (conditional)", false, false, &s_engage, eCommandType_data::ectConditional | eCommandType_function::ectParameter },
+    { "stallpressure", "sp", "0-65535", "Bow pressure stall/maximum position", false, false, &s_stallPressure, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectSetting },
+    { "engagepressure", "ep", "0-65535", "Bow pressure touch/minimum position", false, false, &s_engagePressure, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectSetting },
+    { "restpressure", "rp", "0-65535", "Bow pressure rest position", false, false, &s_restPressure, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectSetting },
+    { "engagespeed", "es", "1 - 100?", "Bow pressure movement speed when engaging or disengaging", false, false, &s_engageSpeed,
+        eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectSetting },
+    { "modulationspeed", "ms", "0.1 - 10", "Bow pressure movement speed while engaged", false, false, &s_modulationSpeed, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectSetting },
+    { "hold", "hd", "0|1", "Sets bow hold on/off", false, false, &s_hold, eCommandType_data::ectSimpleBool | eCommandType_function::ectParameter },
+    { "home", "hm", "-", "Homing bow, used at startup and in case of the bow loosing position", false, false, &s_home, eCommandType_data::ectImmediate | eCommandType_function::ectSystem },
+    { "tmcinfo", "tmi", "-", "Request statistical information from the TMC2209", true, false, &s_tmcinfo,
+        eCommandType_data::ectData | eCommandType_function::ectSystem | eCommandType_access::ectRequest }
 };
 
 getModuleCount(BowPressure)
@@ -159,7 +162,7 @@ BowActuator* BowPressure::currentActuator() {
         debugPrintln("Actuator group not found", debugPrintType::Error);
         return nullptr;
     }
-    BowActuator *actuator = acGroup->getSingleSelection();
+    BowActuator *actuator = static_cast<BowActuator*>(acGroup->getSingleSelection());
     if (actuator == nullptr) {
         debugPrintln("Actuator not found", debugPrintType::Error);
         return nullptr;

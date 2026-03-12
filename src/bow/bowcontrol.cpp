@@ -46,11 +46,14 @@
 /***** NEW CLASS *****/
 
 const ModuleCommandDeclaration BowControl::moduleCommands[] = {
-    { "speedmode", "sm", "0|1", "Bow motor speed mode, 0 = Automatic and 1 = Manual", false, false, &s_speedMode, eCommandType::SimpleBool },
-    { "motortimeout", "mt", "ms(0-65535)", "Bow motor shutdown timeout after bow having been put into the rest position", false, true, &s_motorTimeout, eCommandType::Milliseconds },
-    { "pidenable", "pe", "1|0", "Sets the bow PID on/off", false, false, &s_pidEnable, eCommandType::SimpleBool },
-    { "motorfaultcommands", "mfc", "commands", "Commands to execute when a motor fault is tripped - !WARNING! Can ruin your instrument if changed", false, true, &s_motorFaultCommands, eCommandType::OutputAssignment },
-    { "motoroverpowercommands", "moc", "commands", "Commands to execute when motor is over the power limit - !WARNING! Can ruin your instrument if changed", false, true, &s_motorOverPowerCommands, eCommandType::OutputAssignment },
+    { "speedmode", "sm", "0|1", "Bow motor speed mode, 0 = Automatic and 1 = Manual", false, false, &s_speedMode, eCommandType_data::ectSimpleBool | eCommandType_function::ectSetting },
+    { "motortimeout", "mt", "ms", "Bow motor shutdown timeout after bow having been put into the rest position", false, true, &s_motorTimeout,
+        eCommandType_data::ectMilliseconds | eCommandType_function::ectSetting },
+    { "pidenable", "pe", "1|0", "Sets the bow PID on/off", false, false, &s_pidEnable, eCommandType_data::ectSimpleBool | eCommandType_function::ectSetting },
+    { "motorfaultcommands", "mfc", "commands", "Commands to execute when a motor fault is tripped - !WARNING! Can ruin your instrument if changed", false, true, &s_motorFaultCommands,
+        eCommandType_data::ectOutputAssignment | eCommandType_function::ectVolatileSetting | eCommandType_dataOptions::ectExpression },
+    { "motoroverpowercommands", "moc", "commands", "Commands to execute when motor is over the power limit - !WARNING! Can ruin your instrument if changed", false, true, &s_motorOverPowerCommands,
+        eCommandType_data::ectOutputAssignment | eCommandType_function::ectVolatileSetting | eCommandType_dataOptions::ectExpression },
 };
 
 getModuleCount(BowControl)

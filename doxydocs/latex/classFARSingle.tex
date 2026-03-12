@@ -6,6 +6,15 @@
 
 
 
+Inheritance diagram for FARSingle\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{classFARSingle__inherit__graph}
+\end{center}
+\end{figure}
+
+
 Collaboration diagram for FARSingle\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -18,15 +27,11 @@ Collaboration diagram for FARSingle\+:\nopagebreak
 \item 
 \mbox{\hyperlink{classFARSingle_a8867fca68311c8c3c68478251009a26b}{FARSingle}} (void \texorpdfstring{$\ast$}{*}mute\+Stepper\+Callback, void \texorpdfstring{$\ast$}{*}pressure\+Stepper\+Callback, void \texorpdfstring{$\ast$}{*}tachometer\+Callback, void \texorpdfstring{$\ast$}{*}pid\+Callback)
 \item 
-\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classFARSingle_a6b41b240f8b7ff3b3fcda42dab37e8de}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+void \mbox{\hyperlink{classFARSingle_a06c9e4155848261062fbcbe8be6cfd77}{init\+FAR}} ()
 \item 
-\mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classFARSingle_ac520d53f1804ea44028892be951aa7c7}{process\+Serial\+Command\+Hidden}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
+void \mbox{\hyperlink{classFARSingle_aa10de7dbd98c08a80ecae1a3acb7fc5b}{update\+Control\+Reader}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses)
 \item 
-String \mbox{\hyperlink{classFARSingle_ae5957205745a7026266deed9e7a3bc96}{dump\+Data}} ()
-\item 
-void \mbox{\hyperlink{classFARSingle_a5ff8d0c173cd6127a732f4c0dc51eb28}{update\+Control\+Reader}} ()
-\item 
-void \mbox{\hyperlink{classFARSingle_a3a9e394d329c21b7b0acf5ff419004bc}{update}} ()
+void \mbox{\hyperlink{classFARSingle_a3f734631b7c6abaed45192c1e6481107}{update}} () override
 \item 
 void \mbox{\hyperlink{classFARSingle_a10de1c088c48f695e026a9c9a711a831}{update\+Pressure\+Servo}} ()
 \item 
@@ -36,29 +41,97 @@ void \mbox{\hyperlink{classFARSingle_af2cb18627f94b6c801521ddd9b632b5d}{update\+
 \item 
 void \mbox{\hyperlink{classFARSingle_a8d4f9a830c86ddb17c6fb441b07f5ea5}{update\+PID}} ()
 \end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleHandler}{Module\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModuleHandler_a9eb2f015987df6e507d2e2f7281cc520}{Module\+Handler}} ()
+\item 
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModuleHandler_aba53cb524d3e200345c18bbaf96adaf2}{process\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false) override
+\item 
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModuleHandler_aa8b5a72e62b7a43ac40822461f535c0c}{process\+Module\+Handler\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structcommandResponse}{command\+Response}}, bool request=false)
+\item 
+void \mbox{\hyperlink{classModuleHandler_a8086440da55f316a89562f2a736a1ab6}{dir}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix, bool hidden, bool modules, bool commands, bool instances, bool instance\+Count, bool recursive) override
+\item 
+void \mbox{\hyperlink{classModuleHandler_a9c235cdcf6965c856fcb2be82cc46175}{help}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix)
+\item 
+\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleHandler_ab87ee8507b0edd4888eaa422f189d716}{get\+Group}} (String long\+Name)
+\item 
+void \mbox{\hyperlink{classModuleHandler_ae3fa5b4e5e4fa54687c3d26e0d937782}{dump\+Data}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}data\+Dump)
+\item 
+\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleHandler_aa8b0ee11f9f981d5d791e0994618377b}{add\+Module}} (\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}module)
+\item 
+\mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleHandler_a25c83b60da881f9c0dd2886e6a89e631}{add\+Group}} (\mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} in\+Module\+ID)
+\item 
+virtual void \mbox{\hyperlink{classModuleHandler_aeb0456562a8743c5f4cf5d4aa9a474eb}{add\+Instances}} (String name, uint8\+\_\+t count)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule_a5a240a8a9ab1813b17bcb810b24ceaea}{Module}} ()
+\item 
+virtual const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{get\+Module\+ID}} () const =0
+\item 
+virtual \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a9a13ef0a8291e562a9557c311d07b334}{get\+Module\+ID}} ()=0
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a534a35eb18ec29dbcc8bafce30c21128}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_af7fe70cf55b7c8999672c8a202cbdb71}{process\+Module\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual int \mbox{\hyperlink{classModule_ae6fa72e64554ee0b09a8bb6a77a68640}{get\+Module\+Command\+Count}} ()
+\item 
+bool \mbox{\hyperlink{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2}{has\+Data\+Change}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleCommand}{Module\+Command}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModuleCommand_a4ce6a1d032eaa918f21ad8121ba59094}{get\+Module\+Command}} (uint8\+\_\+t i) const =0
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classControlReader}{Control\+Reader}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_a1aaa3b28349ab94a4ca07f93fffc8689}{control\+Reader}}
+\mbox{\hyperlink{classMIDIConfigurationHandler}{MIDIConfiguration\+Handler}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_a3473d487d9ff4b6d1b2c1d8829e98f71}{midi\+Configuration\+Handler}}
+\item 
+\mbox{\hyperlink{classExpressionParser}{Expression\+Parser}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_a41ef01de5519275a1b7a52c1091fc8ad}{expression\+Parser}} = nullptr
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModuleHandler}{Module\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classModuleGroup}{Module\+Group}} $>$ \mbox{\hyperlink{classModuleHandler_a1913f2c62636218e752bbf72de5e45af}{module\+Groups}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classModule_aa09bd171529da96438e917258ab5ab8d}{is\+Group\+Handler}} = false
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classMuteControl}{Mute\+Control}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_a68a03592fb8cc597309f1409bed459e7}{mute\+Control}}
+\mbox{\hyperlink{classMuteControl}{Mute\+Control}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_a68a03592fb8cc597309f1409bed459e7}{mute\+Control}} = nullptr
 \item 
-\mbox{\hyperlink{classSolenoid}{Solenoid}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_a31056bbccc0d2235e1dfb2996615f2a9}{hammer\+Control}}
+\mbox{\hyperlink{classSolenoid}{Solenoid}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_a31056bbccc0d2235e1dfb2996615f2a9}{hammer\+Control}} = nullptr
 \item 
-\mbox{\hyperlink{classBowControl}{Bow\+Control}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bow\+Control}}
+\mbox{\hyperlink{classBowControl}{Bow\+Control}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}{bow\+Control}} = nullptr
 \item 
-\mbox{\hyperlink{classCalibrateBow}{Calibrate\+Bow}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_ad2d29c0778cac9e2bc2d4067e0a2aca5}{calibrate\+Bow}}
+\mbox{\hyperlink{classControlReader}{Control\+Reader}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_a1aaa3b28349ab94a4ca07f93fffc8689}{control\+Reader}} = nullptr
 \item 
-\mbox{\hyperlink{classCalibrateMute}{Calibrate\+Mute}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_a2e451e94db555be3d3b17d04fa49f89b}{calibrate\+Mute}}
+\mbox{\hyperlink{classMIDIHandler}{MIDIHandler}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_a12aa47cd300f5236b2ab03ef7b9273df}{midi\+Handler}} = nullptr
 \item 
-\mbox{\hyperlink{classBowActuators}{Bow\+Actuators}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_a63878675dd491b77b675363ef9de1012}{bow\+Actuators}}
+\mbox{\hyperlink{classCalibrateBow}{Calibrate\+Bow}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_ad2d29c0778cac9e2bc2d4067e0a2aca5}{calibrate\+Bow}} = nullptr
 \item 
-\mbox{\hyperlink{classHarmonicSeriesHandler}{Harmonic\+Series\+Handler}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_afe32373244a4094dd125895bfb845be2}{harmonic\+Series\+Handler}}
+\mbox{\hyperlink{classCalibrateMute}{Calibrate\+Mute}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFARSingle_a1c829ce6e5a17157c57892da82ae88b0}{p\+Calibrate\+Mute}} = nullptr
 \item 
 Interval\+Timer \mbox{\hyperlink{classFARSingle_a285df2d7ee4cb1fb05aef87789a71d4b}{pid\+Interrupt0}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}{set\+Data\+Changed}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModule_ad85cad50c5538cc47c6d3ac76500e4cf}{owner}} = nullptr
 \end{DoxyCompactItemize}
 
 
@@ -79,109 +152,48 @@ Here is the call graph for this function\+:\nopagebreak
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classFARSingle_ae5957205745a7026266deed9e7a3bc96}\label{classFARSingle_ae5957205745a7026266deed9e7a3bc96} 
-\index{FARSingle@{FARSingle}!dumpData@{dumpData}}
-\index{dumpData@{dumpData}!FARSingle@{FARSingle}}
-\doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
-{\footnotesize\ttfamily String FARSingle\+::dump\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classFARSingle_ae5957205745a7026266deed9e7a3bc96_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classFARSingle_ae5957205745a7026266deed9e7a3bc96_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classFARSingle_a6b41b240f8b7ff3b3fcda42dab37e8de}\label{classFARSingle_a6b41b240f8b7ff3b3fcda42dab37e8de} 
-\index{FARSingle@{FARSingle}!processSerialCommand@{processSerialCommand}}
-\index{processSerialCommand@{processSerialCommand}!FARSingle@{FARSingle}}
-\doxysubsubsection{\texorpdfstring{processSerialCommand()}{processSerialCommand()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} FARSingle\+::process\+Serial\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classFARSingle_a6b41b240f8b7ff3b3fcda42dab37e8de_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classFARSingle_a6b41b240f8b7ff3b3fcda42dab37e8de_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classFARSingle_ac520d53f1804ea44028892be951aa7c7}\label{classFARSingle_ac520d53f1804ea44028892be951aa7c7} 
-\index{FARSingle@{FARSingle}!processSerialCommandHidden@{processSerialCommandHidden}}
-\index{processSerialCommandHidden@{processSerialCommandHidden}!FARSingle@{FARSingle}}
-\doxysubsubsection{\texorpdfstring{processSerialCommandHidden()}{processSerialCommandHidden()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} FARSingle\+::process\+Serial\+Command\+Hidden (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classFARSingle_ac520d53f1804ea44028892be951aa7c7_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classFARSingle_ac520d53f1804ea44028892be951aa7c7_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classFARSingle_a3a9e394d329c21b7b0acf5ff419004bc}\label{classFARSingle_a3a9e394d329c21b7b0acf5ff419004bc} 
-\index{FARSingle@{FARSingle}!update@{update}}
-\index{update@{update}!FARSingle@{FARSingle}}
-\doxysubsubsection{\texorpdfstring{update()}{update()}}
-{\footnotesize\ttfamily void FARSingle\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\Hypertarget{classFARSingle_a06c9e4155848261062fbcbe8be6cfd77}\label{classFARSingle_a06c9e4155848261062fbcbe8be6cfd77} 
+\index{FARSingle@{FARSingle}!initFAR@{initFAR}}
+\index{initFAR@{initFAR}!FARSingle@{FARSingle}}
+\doxysubsubsection{\texorpdfstring{initFAR()}{initFAR()}}
+{\footnotesize\ttfamily void FARSingle\+::init\+FAR (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classFARSingle_a3a9e394d329c21b7b0acf5ff419004bc_cgraph}
+\includegraphics[width=350pt]{classFARSingle_a06c9e4155848261062fbcbe8be6cfd77_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+\Hypertarget{classFARSingle_a3f734631b7c6abaed45192c1e6481107}\label{classFARSingle_a3f734631b7c6abaed45192c1e6481107} 
+\index{FARSingle@{FARSingle}!update@{update}}
+\index{update@{update}!FARSingle@{FARSingle}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void FARSingle\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classModule_a09131761fec40345e3657b801778057f}{Module}}.
+
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=258pt]{classFARSingle_a3a9e394d329c21b7b0acf5ff419004bc_icgraph}
+\includegraphics[width=350pt]{classFARSingle_a3f734631b7c6abaed45192c1e6481107_cgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classFARSingle_a5ff8d0c173cd6127a732f4c0dc51eb28}\label{classFARSingle_a5ff8d0c173cd6127a732f4c0dc51eb28} 
+\Hypertarget{classFARSingle_aa10de7dbd98c08a80ecae1a3acb7fc5b}\label{classFARSingle_aa10de7dbd98c08a80ecae1a3acb7fc5b} 
 \index{FARSingle@{FARSingle}!updateControlReader@{updateControlReader}}
 \index{updateControlReader@{updateControlReader}!FARSingle@{FARSingle}}
 \doxysubsubsection{\texorpdfstring{updateControlReader()}{updateControlReader()}}
-{\footnotesize\ttfamily void FARSingle\+::update\+Control\+Reader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void FARSingle\+::update\+Control\+Reader (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{in\+Command\+Responses }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classFARSingle_a5ff8d0c173cd6127a732f4c0dc51eb28_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=294pt]{classFARSingle_a5ff8d0c173cd6127a732f4c0dc51eb28_icgraph}
+\includegraphics[width=350pt]{classFARSingle_aa10de7dbd98c08a80ecae1a3acb7fc5b_cgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classFARSingle_ac107bf78c2d579aa3e97e9ba22c537a1}\label{classFARSingle_ac107bf78c2d579aa3e97e9ba22c537a1} 
@@ -197,13 +209,6 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classFARSingle_ac107bf78c2d579aa3e97e9ba22c537a1_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classFARSingle_ac107bf78c2d579aa3e97e9ba22c537a1_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classFARSingle_a8d4f9a830c86ddb17c6fb441b07f5ea5}\label{classFARSingle_a8d4f9a830c86ddb17c6fb441b07f5ea5} 
 \index{FARSingle@{FARSingle}!updatePID@{updatePID}}
 \index{updatePID@{updatePID}!FARSingle@{FARSingle}}
@@ -215,13 +220,6 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classFARSingle_a8d4f9a830c86ddb17c6fb441b07f5ea5_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classFARSingle_a8d4f9a830c86ddb17c6fb441b07f5ea5_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classFARSingle_a10de1c088c48f695e026a9c9a711a831}\label{classFARSingle_a10de1c088c48f695e026a9c9a711a831} 
@@ -237,13 +235,6 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classFARSingle_a10de1c088c48f695e026a9c9a711a831_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classFARSingle_a10de1c088c48f695e026a9c9a711a831_icgraph}
-\end{center}
-\end{figure}
 \Hypertarget{classFARSingle_af2cb18627f94b6c801521ddd9b632b5d}\label{classFARSingle_af2cb18627f94b6c801521ddd9b632b5d} 
 \index{FARSingle@{FARSingle}!updateTachometer@{updateTachometer}}
 \index{updateTachometer@{updateTachometer}!FARSingle@{FARSingle}}
@@ -257,63 +248,62 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classFARSingle_af2cb18627f94b6c801521ddd9b632b5d_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classFARSingle_af2cb18627f94b6c801521ddd9b632b5d_icgraph}
-\end{center}
-\end{figure}
 
 
 \doxysubsection{Member Data Documentation}
-\Hypertarget{classFARSingle_a63878675dd491b77b675363ef9de1012}\label{classFARSingle_a63878675dd491b77b675363ef9de1012} 
-\index{FARSingle@{FARSingle}!bowActuators@{bowActuators}}
-\index{bowActuators@{bowActuators}!FARSingle@{FARSingle}}
-\doxysubsubsection{\texorpdfstring{bowActuators}{bowActuators}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classBowActuators}{Bow\+Actuators}}\texorpdfstring{$\ast$}{*} FARSingle\+::bow\+Actuators\hspace{0.3cm}{\ttfamily [private]}}
-
 \Hypertarget{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97}\label{classFARSingle_ab52da6a96b9207a8d4e7e1c100854e97} 
 \index{FARSingle@{FARSingle}!bowControl@{bowControl}}
 \index{bowControl@{bowControl}!FARSingle@{FARSingle}}
 \doxysubsubsection{\texorpdfstring{bowControl}{bowControl}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classBowControl}{Bow\+Control}}\texorpdfstring{$\ast$}{*} FARSingle\+::bow\+Control\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classBowControl}{Bow\+Control}}\texorpdfstring{$\ast$}{*} FARSingle\+::bow\+Control = nullptr\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classFARSingle_ad2d29c0778cac9e2bc2d4067e0a2aca5}\label{classFARSingle_ad2d29c0778cac9e2bc2d4067e0a2aca5} 
 \index{FARSingle@{FARSingle}!calibrateBow@{calibrateBow}}
 \index{calibrateBow@{calibrateBow}!FARSingle@{FARSingle}}
 \doxysubsubsection{\texorpdfstring{calibrateBow}{calibrateBow}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classCalibrateBow}{Calibrate\+Bow}}\texorpdfstring{$\ast$}{*} FARSingle\+::calibrate\+Bow\hspace{0.3cm}{\ttfamily [private]}}
-
-\Hypertarget{classFARSingle_a2e451e94db555be3d3b17d04fa49f89b}\label{classFARSingle_a2e451e94db555be3d3b17d04fa49f89b} 
-\index{FARSingle@{FARSingle}!calibrateMute@{calibrateMute}}
-\index{calibrateMute@{calibrateMute}!FARSingle@{FARSingle}}
-\doxysubsubsection{\texorpdfstring{calibrateMute}{calibrateMute}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classCalibrateMute}{Calibrate\+Mute}}\texorpdfstring{$\ast$}{*} FARSingle\+::calibrate\+Mute\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCalibrateBow}{Calibrate\+Bow}}\texorpdfstring{$\ast$}{*} FARSingle\+::calibrate\+Bow = nullptr\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classFARSingle_a1aaa3b28349ab94a4ca07f93fffc8689}\label{classFARSingle_a1aaa3b28349ab94a4ca07f93fffc8689} 
 \index{FARSingle@{FARSingle}!controlReader@{controlReader}}
 \index{controlReader@{controlReader}!FARSingle@{FARSingle}}
 \doxysubsubsection{\texorpdfstring{controlReader}{controlReader}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classControlReader}{Control\+Reader}}\texorpdfstring{$\ast$}{*} FARSingle\+::control\+Reader}
+{\footnotesize\ttfamily \mbox{\hyperlink{classControlReader}{Control\+Reader}}\texorpdfstring{$\ast$}{*} FARSingle\+::control\+Reader = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classFARSingle_a41ef01de5519275a1b7a52c1091fc8ad}\label{classFARSingle_a41ef01de5519275a1b7a52c1091fc8ad} 
+\index{FARSingle@{FARSingle}!expressionParser@{expressionParser}}
+\index{expressionParser@{expressionParser}!FARSingle@{FARSingle}}
+\doxysubsubsection{\texorpdfstring{expressionParser}{expressionParser}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classExpressionParser}{Expression\+Parser}}\texorpdfstring{$\ast$}{*} FARSingle\+::expression\+Parser = nullptr}
 
 \Hypertarget{classFARSingle_a31056bbccc0d2235e1dfb2996615f2a9}\label{classFARSingle_a31056bbccc0d2235e1dfb2996615f2a9} 
 \index{FARSingle@{FARSingle}!hammerControl@{hammerControl}}
 \index{hammerControl@{hammerControl}!FARSingle@{FARSingle}}
 \doxysubsubsection{\texorpdfstring{hammerControl}{hammerControl}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classSolenoid}{Solenoid}}\texorpdfstring{$\ast$}{*} FARSingle\+::hammer\+Control\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSolenoid}{Solenoid}}\texorpdfstring{$\ast$}{*} FARSingle\+::hammer\+Control = nullptr\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{classFARSingle_afe32373244a4094dd125895bfb845be2}\label{classFARSingle_afe32373244a4094dd125895bfb845be2} 
-\index{FARSingle@{FARSingle}!harmonicSeriesHandler@{harmonicSeriesHandler}}
-\index{harmonicSeriesHandler@{harmonicSeriesHandler}!FARSingle@{FARSingle}}
-\doxysubsubsection{\texorpdfstring{harmonicSeriesHandler}{harmonicSeriesHandler}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classHarmonicSeriesHandler}{Harmonic\+Series\+Handler}}\texorpdfstring{$\ast$}{*} FARSingle\+::harmonic\+Series\+Handler\hspace{0.3cm}{\ttfamily [private]}}
+\Hypertarget{classFARSingle_a3473d487d9ff4b6d1b2c1d8829e98f71}\label{classFARSingle_a3473d487d9ff4b6d1b2c1d8829e98f71} 
+\index{FARSingle@{FARSingle}!midiConfigurationHandler@{midiConfigurationHandler}}
+\index{midiConfigurationHandler@{midiConfigurationHandler}!FARSingle@{FARSingle}}
+\doxysubsubsection{\texorpdfstring{midiConfigurationHandler}{midiConfigurationHandler}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMIDIConfigurationHandler}{MIDIConfiguration\+Handler}}\texorpdfstring{$\ast$}{*} FARSingle\+::midi\+Configuration\+Handler}
+
+\Hypertarget{classFARSingle_a12aa47cd300f5236b2ab03ef7b9273df}\label{classFARSingle_a12aa47cd300f5236b2ab03ef7b9273df} 
+\index{FARSingle@{FARSingle}!midiHandler@{midiHandler}}
+\index{midiHandler@{midiHandler}!FARSingle@{FARSingle}}
+\doxysubsubsection{\texorpdfstring{midiHandler}{midiHandler}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMIDIHandler}{MIDIHandler}}\texorpdfstring{$\ast$}{*} FARSingle\+::midi\+Handler = nullptr\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classFARSingle_a68a03592fb8cc597309f1409bed459e7}\label{classFARSingle_a68a03592fb8cc597309f1409bed459e7} 
 \index{FARSingle@{FARSingle}!muteControl@{muteControl}}
 \index{muteControl@{muteControl}!FARSingle@{FARSingle}}
 \doxysubsubsection{\texorpdfstring{muteControl}{muteControl}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classMuteControl}{Mute\+Control}}\texorpdfstring{$\ast$}{*} FARSingle\+::mute\+Control\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMuteControl}{Mute\+Control}}\texorpdfstring{$\ast$}{*} FARSingle\+::mute\+Control = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classFARSingle_a1c829ce6e5a17157c57892da82ae88b0}\label{classFARSingle_a1c829ce6e5a17157c57892da82ae88b0} 
+\index{FARSingle@{FARSingle}!pCalibrateMute@{pCalibrateMute}}
+\index{pCalibrateMute@{pCalibrateMute}!FARSingle@{FARSingle}}
+\doxysubsubsection{\texorpdfstring{pCalibrateMute}{pCalibrateMute}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCalibrateMute}{Calibrate\+Mute}}\texorpdfstring{$\ast$}{*} FARSingle\+::p\+Calibrate\+Mute = nullptr\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classFARSingle_a285df2d7ee4cb1fb05aef87789a71d4b}\label{classFARSingle_a285df2d7ee4cb1fb05aef87789a71d4b} 
 \index{FARSingle@{FARSingle}!pidInterrupt0@{pidInterrupt0}}

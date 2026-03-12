@@ -1,28 +1,5 @@
 #ifndef FARSINGLE_H
 #define FARSINGLE_H
-/*
-#include "../src/midimessageconfiguration.cpp"
-#include "../src/midiconfigurationhandler.cpp"
-
-#include "module.hpp"
-
-#include "../src/audioanalyze.h"
-#include "../src/midi.cpp"
-
-#include "../src/debugprint.hpp"
-
-#include "../src/mutecontrol.cpp"
-#include "../src/solenoid.cpp"
-#include "../src/bowcontrol.cpp"
-#include "../src/bowActuators.cpp"
-#include "../src/harmonicserieshandler.cpp"
-#include "../src/controlReader.cpp"
-
-#include "../src/calibrationhelpers.hpp"
-
-#include "../src/bowcalibration.cpp"
-#include "../src/mutecalibration.cpp"
-*/
 
 #include <base/modulehandler.hpp>
 #include <master_controller/midiconfigurationhandler.hpp>
@@ -34,9 +11,6 @@
 #include <bow/bowcalibration.hpp>
 #include <controlbox/controlReader.hpp>
 #include <plugins/pluginhandler.hpp>
-
-//CREATE_MIDI_SOURCE_CALLBACKS_FWD(MIDI)
-//CREATE_MIDI_SOURCE_CALLBACKS_FWD(usbMIDI)
 
 #define FAR_SINGLE_CREATE_INSTANCE(instance) \
     FARSingle *instance; \
@@ -60,7 +34,7 @@ public:
     CREATE_MODULE_COMMAND_FUNCTION_FWD(pickupAudioRMS, FARSingle)
 
 public:
-    FARSingle(void *muteStepperCallback, void *pressureStepperCallback, void *tachometerCallback, void *pidCallback);
+    FARSingle(void (*muteStepperCallback)(), void (*pressureStepperCallback)(), void (*tachometerCallback)(), void (*pidCallback)());
 
     MIDIConfigurationHandler *midiConfigurationHandler;
 

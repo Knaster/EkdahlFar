@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['harmonicseries_2ecpp_0',['harmonicSeries.cpp',['../harmonicSeries_8cpp.html',1,'']]],
-  ['harmonicserieshandler_2ecpp_1',['harmonicserieshandler.cpp',['../harmonicserieshandler_8cpp.html',1,'']]]
+  ['global_5fgenerics_2ehpp_0',['global_generics.hpp',['../global__generics_8hpp.html',1,'']]],
+  ['globalgenerics_2ecpp_1',['globalgenerics.cpp',['../globalgenerics_8cpp.html',1,'']]]
 ];

@@ -6,19 +6,23 @@
 #include <cmath>
 
 const ModuleCommandDeclaration Plugin_AHDSR::moduleCommands[] = {
-    { "name", "na", "name", "Sets the LFO name", false, true, &s_name, eCommandType::Name },
-    { "enable", "en", "1|0", "Will enable or disable the output of the target commands", false, true, &s_enable, eCommandType::SimpleBool },
-    { "target", "tg", "commandlist*", "Sets the command string to execute each iteration, the string [ahdsrout] will be replaced with the current value", false, true, &s_target, eCommandType::OutputAssignment },
-    { "updaterate", "ur", "mS", "Sets the frequency with which the target commands are executed. Limited by the global maximum as set in the plugin handler", false, true, &s_updaterate, eCommandType::Milliseconds },
-    { "gate", "gt", "0|1", "Gate signal, [1] initiates the attack phase and if it reaches its maximum value, continues through the decay down to the sustain point. A [0] initiates the release from whatever point the ADSR is at.", false, true, &s_gate, eCommandType::SimpleBool },
-    { "attack", "at", "mS", "Attack time in mS", false, true, &s_attack, eCommandType::Milliseconds },
-    { "hold", "hd", "mS", "Hold time in mS", false, true, &s_hold, eCommandType::Milliseconds },
-    { "decay", "dc", "mS", "Delay time in mS", false, true, &s_decay, eCommandType::Milliseconds },
-    { "sustain", "su", "mS", "Sustain point", false, true, &s_sustain, eCommandType::SimpleUInt16 },
-    { "release", "re", "mS", "Release time in mS", false, true, &s_release, eCommandType::Milliseconds },
-    { "releasetarget", "rt", "commands", "Commands to execute once the release has hit zero", false, true, &s_releasetarget, eCommandType::OutputAssignment },
-    { "amplitude", "amp", "0-65535", "Output amplitude", false, true, &s_amplitude, eCommandType::SimpleUInt16 },
-    { "invert", "inv", "1|0", "Inverts the results and gives negative values", false, true, nullptr, eCommandType::SimpleBool }
+    { "name", "na", "name", "Sets the LFO name", false, true, &s_name, eCommandType_data::ectSimpleString | eCommandType_function::ectName },
+    { "enable", "en", "1|0", "Will enable or disable the output of the target commands", false, true, &s_enable, eCommandType_data::ectSimpleBool | eCommandType_function::ectParameter },
+    { "target", "tg", "commandlist*", "Sets the command string to execute each iteration, the string [ahdsrout] will be replaced with the current value", false, true, &s_target,
+        eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression | eCommandType_function::ectAssignment, "ahdsrout" },
+    { "updaterate", "ur", "mS", "Sets the frequency with which the target commands are executed. Limited by the global maximum as set in the plugin handler", false, true, &s_updaterate,
+        eCommandType_data::ectMilliseconds | eCommandType_function::ectSystem },
+    { "gate", "gt", "0|1", "Gate signal, [1] initiates the attack phase and if it reaches its maximum value, continues through the decay down to the sustain point. A [0] initiates the release from whatever point the ADSR is at.",
+        false, true, &s_gate, eCommandType_data::ectSimpleBool | eCommandType_function::ectParameter },
+    { "attack", "at", "mS", "Attack time in mS", false, true, &s_attack, eCommandType_data::ectMilliseconds | eCommandType_function::ectParameter },
+    { "hold", "hd", "mS", "Hold time in mS", false, true, &s_hold, eCommandType_data::ectMilliseconds | eCommandType_function::ectParameter },
+    { "decay", "dc", "mS", "Delay time in mS", false, true, &s_decay, eCommandType_data::ectMilliseconds | eCommandType_function::ectParameter },
+    { "sustain", "su", "mS", "Sustain point", false, true, &s_sustain, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectParameter },
+    { "release", "re", "mS", "Release time in mS", false, true, &s_release, eCommandType_data::ectMilliseconds | eCommandType_function::ectParameter },
+    { "releasetarget", "rt", "commands", "Commands to execute once the release has hit zero", false, true, &s_releasetarget,
+        eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression | eCommandType_function::ectAssignment },
+    { "amplitude", "amp", "0-65535", "Output amplitude", false, true, &s_amplitude, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectParameter },
+    { "invert", "inv", "1|0", "Inverts the results and gives negative values", false, true, nullptr, eCommandType_data::ectSimpleBool | eCommandType_function::ectParameter }
 };
 
 getModuleCount(Plugin_AHDSR)

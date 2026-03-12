@@ -25,16 +25,27 @@
 #include "base/arduinorequired.hpp"
 #include "base/debugprint.hpp"
 
-String debugPrintTypeName[debugPrintTypes] = { "command", "usb", "hardware" , "undefined", "priority", "error", "inforequest", "expressionparser", "debug", "textinfo", "help", "internal" };
-String debugPrintTypeNameShort[debugPrintTypes] = { "cmd", "usb", "hw", "un", "pri", "err", "irq", "ep", "dbg", "txi", "hlp", "int"};
-bool debugPrintEnabled[debugPrintTypes] = { true, true, true, true, true, true, true, false, true, true, true, false };
+//#if defined(ARDUINO_TEENSY40) || defined(ARM)
+#ifdef ARDUINO_TEENSY40
+#define NEXTBYTE ssOutput.nextByteOut();
+#else
+#include <HardwareSerial.h>
+//#define ssOutput Serial
+#define NEXTBYTE ssOutput.nextByteOut();
+#endif
+
+
+const String debugPrintTypeName[debugPrintTypes] = { "command", "usb", "hardware" , "undefined", "priority", "error", "inforequest", "expressionparser", "debug", "textinfo", "help", "internal", "external" };
+const String debugPrintTypeNameShort[debugPrintTypes] = { "cmd", "usb", "hw", "un", "pri", "err", "irq", "ep", "dbg", "txi", "hlp", "int", "ext"};
+bool debugPrintEnabled[debugPrintTypes] = { true, true, true, true, true, true, true, false, true, true, true, false, true };
 
 bool debugPrintConnect() {
 //    ssOutput.connect(Serial);
+    return true;
 }
 
 void outputNext() {
-    ssOutput.nextByteOut();
+    NEXTBYTE
 }
 
 bool debugPrintCheckType(debugPrintType printType) {
@@ -50,6 +61,35 @@ void debugPrint(String text, debugPrintType printType) {
 void debugPrintln(String text, debugPrintType printType) {
   if (debugPrintCheckType(printType)) { ssOutput.println("[" + debugPrintTypeNameShort[printType] + "]" + text); } // + " [" + debugPrintTypeName[printType] + "]"
   return;
+}
+
+void debugPrint(String text, debugPrintType printType, HardwareSerial *device) {
+  if (debugPrintCheckType(printType)) { device->print("[" + debugPrintTypeNameShort[printType] + "]" + text); }
+  return;
+}
+
+void debugPrintln(String text, debugPrintType printType, HardwareSerial *device) {
+  if (debugPrintCheckType(printType)) { device->println("[" + debugPrintTypeNameShort[printType] + "]" + text); } // + " [" + debugPrintTypeName[printType] + "]"
+  return;
+}
+
+void debugPrint(String text, debugPrintType printType, BufferedOutput *device) {
+  if (debugPrintCheckType(printType)) { device->print("[" + debugPrintTypeNameShort[printType] + "]" + text); }
+  return;
+}
+
+void debugPrintln(String text, debugPrintType printType, BufferedOutput *device) {
+  if (debugPrintCheckType(printType)) { device->println("[" + debugPrintTypeNameShort[printType] + "]" + text); } // + " [" + debugPrintTypeName[printType] + "]"
+  return;
+}
+
+debugPrintType debugPrintGetType(String *text) {
+    for (int i = 0; i < debugPrintTypes; i++) {
+        if (text->substring(1, 4) == debugPrintTypeNameShort[i]) {
+            return (debugPrintType)i;
+        }
+    }
+    return (debugPrintType)-1;
 }
 
 void debugRaw(String text) {

@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['secondhomeoverstep_0',['secondHomeOverStep',['../servostepper_8hpp.html#af01638a8ef574abe19fcc5bfab1b3a28',1,'servostepper.hpp']]],
-  ['selection_1',['SELECTION',['../commandparser_8hpp.html#aef2174e268da3b99985a2d6018a32409',1,'commandparser.hpp']]],
-  ['serial_5fnumber_2',['SERIAL_NUMBER',['../name_8c.html#ad8a20d143f6a7579ed227578aeddec21',1,'name.c']]],
-  ['serial_5fnumber_5flen_3',['SERIAL_NUMBER_LEN',['../name_8c.html#a43aec024a153fcce66ca6d700b350731',1,'name.c']]],
-  ['solenoid_5fc_4',['SOLENOID_C',['../solenoid_8cpp.html#a69b039706ce13a79215a510a96720586',1,'solenoid.cpp']]],
-  ['startuptimeout_5',['startupTimeout',['../main_8cpp.html#a2540465f0f55b6029155a221fa27eb96',1,'main.cpp']]],
-  ['stepsperrevolution_6',['stepsPerRevolution',['../servostepper_8hpp.html#a3f6ba33716d8ab9664efd36f48fc0663',1,'servostepper.hpp']]]
+  ['permissiblefreqdeviation_0',['permissibleFreqDeviation',['../dcmotorcontrol_8hpp.html#a07bc3185c052a70c9ae3ce08b44c0fd3',1,'dcmotorcontrol.hpp']]],
+  ['pidcontroller_5fc_1',['PIDCONTROLLER_C',['../pidcontroller_8cpp.html#a279e0f12d182d911637a2fa6e90b5b5a',1,'pidcontroller.cpp']]],
+  ['plugin_5fahdsr_5fcpp_2',['PLUGIN_AHDSR_CPP',['../plugin__adsr_8cpp.html#a356fc5ed43e374c380f71de2b43340be',1,'plugin_adsr.cpp']]],
+  ['plugin_5flfo_5fcpp_3',['PLUGIN_LFO_CPP',['../plugin__lfo_8cpp.html#a3a4190cf4b8d268421a63669391523fb',1,'plugin_lfo.cpp']]],
+  ['plugin_5fmap_5fcpp_4',['PLUGIN_MAP_CPP',['../plugin__map_8cpp.html#a7bc79578eeee7ebeb96e66ad2fcc84ba',1,'plugin_map.cpp']]],
+  ['plugin_5fmult_5fcpp_5',['PLUGIN_MULT_CPP',['../plugin__mult_8cpp.html#a540d177d00f33d340aea1ff7bcf8e476',1,'plugin_mult.cpp']]],
+  ['pluginhandler_5fcpp_6',['PLUGINHANDLER_CPP',['../pluginhandler_8cpp.html#afe15306f42756ae60e6e698f7a3823c3',1,'pluginhandler.cpp']]],
+  ['plugs_7',['plugs',['../pluginhandler_8cpp.html#a22233c26dd911b862316cd98f4ac8d7f',1,'pluginhandler.cpp']]]
 ];

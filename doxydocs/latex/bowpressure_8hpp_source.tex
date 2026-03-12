@@ -5,120 +5,127 @@
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BOWPRESSURE\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BOWPRESSURE\_H}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tmc2209__servostepper_8cpp}{tmc2209\_servostepper.cpp}}"{}}}
-\DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ \mbox{\hyperlink{bowpressure_8hpp_af91bfbc052e23727d844d402fafc10bb}{serialCommandsBowPressure}}[]\ =\ \{}
-\DoxyCodeLine{00007\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurebaseline"{}},\ \textcolor{stringliteral}{"{}bpb"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ baseline,\ modulation\ is\ added\ to\ this\ point\ upward"{}}\ \},}
-\DoxyCodeLine{00008\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressuremodifier"{}},\ \textcolor{stringliteral}{"{}bpm"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ modulation,\ added\ to\ the\ baseline"{}}\ \},}
-\DoxyCodeLine{00009\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurerest"{}},\ \textcolor{stringliteral}{"{}bpr"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Puts\ the\ bow\ pressure\ in\ the\ resting\ position\ (conditional)"{}}\ \},}
-\DoxyCodeLine{00010\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressureengage"{}},\ \textcolor{stringliteral}{"{}bpe"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Puts\ the\ bow\ pressure\ in\ the\ engage\ position\ (conditional)"{}}\ \},}
-\DoxyCodeLine{00011\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurepositionmax"{}},\ \textcolor{stringliteral}{"{}bppx"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ stall/maximum\ position"{}}\},}
-\DoxyCodeLine{00012\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurepositionengage"{}},\ \textcolor{stringliteral}{"{}bppe"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ touch/minimum\ position"{}}\},}
-\DoxyCodeLine{00013\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurepositionrest"{}},\ \textcolor{stringliteral}{"{}bppr"{}},\ \textcolor{stringliteral}{"{}0-\/65535"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ rest\ position"{}}\},}
-\DoxyCodeLine{00014\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressureengagespeed"{}},\ \textcolor{stringliteral}{"{}bpes"{}},\ \textcolor{stringliteral}{"{}1\ -\/\ 100?"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ movement\ speed\ when\ engaging\ or\ disengaging"{}}\},}
-\DoxyCodeLine{00015\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressuremodulationspeed"{}},\ \textcolor{stringliteral}{"{}bpms"{}},\ \textcolor{stringliteral}{"{}0.1\ -\/\ 10"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ movement\ speed\ while\ engaged"{}}\},}
-\DoxyCodeLine{00016\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowpressurehold"{}},\ \textcolor{stringliteral}{"{}bph"{}},\ \textcolor{stringliteral}{"{}0|1"{}},\ \textcolor{stringliteral}{"{}Sets\ bow\ hold\ on/off"{}}\ \},}
-\DoxyCodeLine{00017\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}bowhome"{}},\ \textcolor{stringliteral}{"{}bh"{}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \textcolor{stringliteral}{"{}Homing\ bow,\ used\ at\ startup\ and\ in\ case\ of\ the\ bow\ loosing\ position"{}}\ \},}
-\DoxyCodeLine{00018\ \};}
-\DoxyCodeLine{00019\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00020\ \textcolor{comment}{const\ serialCommandItem\ serialCommandsBowPressureHidden[]\ =\ \{}}
-\DoxyCodeLine{00021\ \textcolor{comment}{\}}}
-\DoxyCodeLine{00022\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00023\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0c}{ePressureMode}}\ \{\ \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0ca661e967c4cfe56fd40a290550b64d8dc}{Rest}},\ \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0caffb89f6a29dafbca91038396476c4324}{Engage}}\ \};}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classBowPressure}{BowPressure}}\ \{}
-\DoxyCodeLine{00026\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00027\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_aa2552be4057976c6300d665e3754f614}{lastPressure}}\ =\ 0;}
-\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper}{Tmc2209ServoStepper}}\ *\mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}\ =\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_a215006c17542caf19a5a5648deca5dcb}{baselinePressure}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00031\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_a2ac10d76e0df06070fd49145f85ba7b4}{modifierPressure}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0c}{ePressureMode}}\ \mbox{\hyperlink{classBowPressure_af0ef8867c993193742218555a8dbb87c}{pressureMode}}\ =\ \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0ca661e967c4cfe56fd40a290550b64d8dc}{ePressureMode::Rest}};}
-\DoxyCodeLine{00033\ }
-\DoxyCodeLine{00034\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_a15e38408cb66e1b8b39f27807432c690}{maxPressure}}\ =\ 65535;}
-\DoxyCodeLine{00035\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_a33bb0a93bce1acece0abcf94178247d0}{engagePressure}}\ =\ 0;}
-\DoxyCodeLine{00036\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_a8ce241e7ebc5a5a529e57518522fd728}{restPressure}}\ =\ 0;}
-\DoxyCodeLine{00037\ }
-\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classBowPressure_a406b45eee9f49aef1b661179878d6bd9}{speedToEngage}}\ =\ 10;}
-\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classBowPressure_a4283e4fada48c2d67a8d2422de2333de}{speedWhileEngaged}}\ =\ 10;}
-\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_aed90e56b13c8a931c438b3bdcc33fb1d}{reachedEngage}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00041\ }
-\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_ab67217a30161b84c2ac438065c995e9c}{hold}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00043\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classBowPressure}{BowPressure}}(\textcolor{keywordtype}{char}\ stepEnPin,\ \textcolor{keywordtype}{char}\ stepDirPin,\ \textcolor{keywordtype}{char}\ stepStepPin,\ HardwareSerial\ *stepSerialPort,\ \textcolor{keywordtype}{char}\ stepHomeSensorPin);}
-\DoxyCodeLine{00045\ }
-\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classBowPressure_aa8bdebfaa32dc5d991a77270d0d37f06}{processSerialCommand}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegate\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classBowPressure_aca49dc9352f13a5d6099d0025f597f25}{processSerialCommandHidden}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ delegate\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\ *delegatedCommands\ =\ \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{00050\ \ \ \ \ String\ \mbox{\hyperlink{classBowPressure_a4a8fb49c23e85135bdbb93ce6e038aab}{dumpData}}();}
-\DoxyCodeLine{00051\ }
-\DoxyCodeLine{00052\ \textcolor{comment}{/*****\ Module\ specific\ commands\ mirroring\ serially\ attainable\ commands\ *****/}}
-\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a2e73720f7117effca0ef47ef37324a81}{setPressureSafe}}(uint16\_t\ pressure);}
-\DoxyCodeLine{00054\ }
-\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a85bf7901ad1e2bc98d1d99dfb29f16de}{setPressureBaseline}}(uint16\_t\ baseline);}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00057\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_aa8ed0b225cb3166292fbba3042dc9b0b}{getPressureBaseline}}();}
-\DoxyCodeLine{00058\ }
-\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a840b39df3dae69e6e53aab5b63a8b9b7}{setPressureModifier}}(uint16\_t\ modifier);}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{modulehandler_8hpp}{base/modulehandler.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tmc2209__servostepper_8hpp}{generic\_functions/tmc2209\_servostepper.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bowActuators_8hpp}{generic\_functions/bowActuators.hpp}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0c}{ePressureMode}}\ \{\ \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0ca661e967c4cfe56fd40a290550b64d8dc}{Rest}},\ \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0caffb89f6a29dafbca91038396476c4324}{Engage}}\ \};}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classBowPressure}{BowPressure}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classModuleHandler}{ModuleHandler}}\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a726e985c9256abcd3e04b255b31cba09}{SETMODULEID}}(\textcolor{stringliteral}{"{}bowpressure"{}},\ \textcolor{stringliteral}{"{}bp"{}},\ \textcolor{stringliteral}{"{}Bow\ pressure\ controller\ v1.0"{}},\ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabea41b91ec2ec246009a6c05166c265c06a}{eModuleType::hardware}},\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(baseline,\ \mbox{\hyperlink{classBowPressure}{BowPressure}})}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(modifier,\ \mbox{\hyperlink{classBowPressure}{BowPressure}})}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(\mbox{\hyperlink{classBowPressure_aa5dc5f078942e290f8002f3877dac307}{rest}},\ \mbox{\hyperlink{classBowPressure}{BowPressure}})}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(\mbox{\hyperlink{classBowPressure_aad1b47b9e6d76276ed84faadc55d7a9d}{engage}},\ \mbox{\hyperlink{classBowPressure}{BowPressure}})}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(stallPressure,\ \mbox{\hyperlink{classBowPressure}{BowPressure}})}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(engagePressure,\ \mbox{\hyperlink{classBowPressure}{BowPressure}})}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(restPressure,\ \mbox{\hyperlink{classBowPressure}{BowPressure}})}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(engageSpeed,\ \mbox{\hyperlink{classBowPressure}{BowPressure}})}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(modulationSpeed,\ \mbox{\hyperlink{classBowPressure}{BowPressure}})}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(hold,\ \mbox{\hyperlink{classBowPressure}{BowPressure}})}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(\mbox{\hyperlink{classBowPressure_ab1be80952ab6b1ec659c6aa00f5e9f52}{home}},\ \mbox{\hyperlink{classBowPressure}{BowPressure}})}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(tmcinfo,\ \mbox{\hyperlink{classBowPressure}{BowPressure}})}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classBowActuators}{BowActuators}}\ *\mbox{\hyperlink{classBowPressure_a4599e64cafd8d529c6d360db86ce95e1}{bowActuators}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_aa2552be4057976c6300d665e3754f614}{lastPressure}}\ =\ 0;}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{classTmc2209ServoStepper}{Tmc2209ServoStepper}}\ *\mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_a215006c17542caf19a5a5648deca5dcb}{baselinePressure}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_a2ac10d76e0df06070fd49145f85ba7b4}{modifierPressure}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0c}{ePressureMode}}\ \mbox{\hyperlink{classBowPressure_af0ef8867c993193742218555a8dbb87c}{pressureMode}}\ =\ \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0ca661e967c4cfe56fd40a290550b64d8dc}{ePressureMode::Rest}};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classBowPressure_a406b45eee9f49aef1b661179878d6bd9}{speedToEngage}}\ =\ 10;}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classBowPressure_a4283e4fada48c2d67a8d2422de2333de}{speedWhileEngaged}}\ =\ 10;}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_aed90e56b13c8a931c438b3bdcc33fb1d}{reachedEngage}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_a1b922bec4cc06db14a5c4e23781883ab}{pHold}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_acaaf417aaefc9cad4e6260e6476c2cb1}{restSignal}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00046\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classBowPressure_a1b32a6eb3949b425effb931f456b7fa9}{BowPressure}}(\textcolor{keywordtype}{char}\ stepEnPin,\ \textcolor{keywordtype}{char}\ stepDirPin,\ \textcolor{keywordtype}{char}\ stepStepPin,\ HardwareSerial\ *stepSerialPort,\ \textcolor{keywordtype}{char}\ stepHomeSensorPin);}
+\DoxyCodeLine{00049\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00050\ \textcolor{comment}{\ \ \ \ eProcessResult\ processSerialCommand(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request\ =\ false,\ bool\ delegate\ =\ false,}}
+\DoxyCodeLine{00051\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandList\ *delegatedCommands\ =\ nullptr);}}
+\DoxyCodeLine{00052\ \textcolor{comment}{\ \ \ \ eProcessResult\ processSerialCommandHidden(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request\ =\ false,\ bool\ delegate\ =\ false,}}
+\DoxyCodeLine{00053\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandList\ *delegatedCommands\ =\ nullptr);}}
+\DoxyCodeLine{00054\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a28621198e7b76c9d94124e69a1728841}{setRestSignal}}()\ \{\ \mbox{\hyperlink{classBowPressure_acaaf417aaefc9cad4e6260e6476c2cb1}{restSignal}}\ =\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_aa493cbbbcd42b766a335e0573ab4dc17}{getRestSignal}}();}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{comment}{/*****\ Module\ specific\ commands\ mirroring\ serially\ attainable\ commands\ *****/}}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a2e73720f7117effca0ef47ef37324a81}{setPressureSafe}}(uint16\_t\ pressure);}
 \DoxyCodeLine{00060\ }
-\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a79e40c61a6288f269c186c67750be00e}{setHold}}(\textcolor{keywordtype}{bool}\ inHold);}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a85bf7901ad1e2bc98d1d99dfb29f16de}{setPressureBaseline}}(uint16\_t\ baseline);}
 \DoxyCodeLine{00062\ }
-\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_aa5dc5f078942e290f8002f3877dac307}{rest}}(\textcolor{keywordtype}{bool}\ enact);}
+\DoxyCodeLine{00063\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_aa8ed0b225cb3166292fbba3042dc9b0b}{getPressureBaseline}}();}
 \DoxyCodeLine{00064\ }
-\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_aad1b47b9e6d76276ed84faadc55d7a9d}{engage}}(\textcolor{keywordtype}{bool}\ enact);}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a840b39df3dae69e6e53aab5b63a8b9b7}{setPressureModifier}}(uint16\_t\ modifier);}
 \DoxyCodeLine{00066\ }
-\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a416727ac846bccf9dfb717e1398da6ea}{setMaxPressure}}(uint16\_t\ inMaxPressure)\ \{\ \mbox{\hyperlink{classBowPressure_a15e38408cb66e1b8b39f27807432c690}{maxPressure}}\ =\ inMaxPressure;\ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a79e40c61a6288f269c186c67750be00e}{setHold}}(\textcolor{keywordtype}{bool}\ inHold);}
 \DoxyCodeLine{00068\ }
-\DoxyCodeLine{00069\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_a45dfd77ba57d2da2c28dbc5a091474de}{getMaxPressure}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowPressure_a15e38408cb66e1b8b39f27807432c690}{maxPressure}};\ \}}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_aa5dc5f078942e290f8002f3877dac307}{rest}}(\textcolor{keywordtype}{bool}\ enact);}
 \DoxyCodeLine{00070\ }
-\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a4611209843a2926626d508b3854d6e44}{setEngagePressure}}(uint16\_t\ inEngagePressure)\ \{\ \mbox{\hyperlink{classBowPressure_a33bb0a93bce1acece0abcf94178247d0}{engagePressure}}\ =\ inEngagePressure;\ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_aad1b47b9e6d76276ed84faadc55d7a9d}{engage}}(\textcolor{keywordtype}{bool}\ enact);}
 \DoxyCodeLine{00072\ }
-\DoxyCodeLine{00073\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_aae47b143f75a91e727d6951e749ff0ee}{getEngagePressure}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowPressure_a33bb0a93bce1acece0abcf94178247d0}{engagePressure}};\ \}}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_ac929f8c2e086e80da772c42be1167f5e}{setStallPressure}}(uint16\_t\ inStallPressure);}
 \DoxyCodeLine{00074\ }
-\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_ad95f948f469b5535e764d556305d2ce1}{setRestPressure}}(uint16\_t\ inRestPressure)\ \{\ \mbox{\hyperlink{classBowPressure_a8ce241e7ebc5a5a529e57518522fd728}{restPressure}}\ =\ inRestPressure;\ \}}
+\DoxyCodeLine{00075\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_a7ce72570971f0fcd0cc8341fa14062ec}{getStallPressure}}();}
 \DoxyCodeLine{00076\ }
-\DoxyCodeLine{00077\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_a157b3023b744d32eb53b838e9f49a9f3}{getRestPressure}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowPressure_a8ce241e7ebc5a5a529e57518522fd728}{restPressure}};\ \}}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_a94f290e2387a4d90308cf79abc349801}{setEngagePressure}}(uint16\_t\ inEngagePressure);}
 \DoxyCodeLine{00078\ }
-\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_a4c398fe321290b51a3c7af223e450dcc}{getHold}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowPressure_ab67217a30161b84c2ac438065c995e9c}{hold}};\ \}}
+\DoxyCodeLine{00079\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_aae47b143f75a91e727d6951e749ff0ee}{getEngagePressure}}();}
 \DoxyCodeLine{00080\ }
-\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0c}{ePressureMode}}\ \mbox{\hyperlink{classBowPressure_adc8babd4d6e1c175a19e4a3f7f268fc0}{getPressureMode}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowPressure_af0ef8867c993193742218555a8dbb87c}{pressureMode}};\ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_ac421b9d9ef7a02853fc22f8ac21df3bd}{setRestPressure}}(uint16\_t\ inRestPressure);}
 \DoxyCodeLine{00082\ }
-\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_ab1be80952ab6b1ec659c6aa00f5e9f52}{home}}(\textcolor{keywordtype}{bool}\ invert\ =\ \textcolor{keyword}{false})\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_acd55654b623910f5ed3af081148372b6}{home}}(invert);\ \}}
+\DoxyCodeLine{00083\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classBowPressure_a157b3023b744d32eb53b838e9f49a9f3}{getRestPressure}}();}
 \DoxyCodeLine{00084\ }
-\DoxyCodeLine{00085\ \textcolor{comment}{/*****\ Hidden\ serial\ commands\ *****/}}
-\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_abeaa578a81b74ff2cd6704751fe48cb4}{setHardwarePressure}}(uint16\_t\ pressure);}
-\DoxyCodeLine{00087\ }
-\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a353b29c45350a9ead04c999d83524b51}{getTMC2209Info}}();}
-\DoxyCodeLine{00089\ }
-\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_a20fcb7c6a4854837052bf696baaa7579}{completeTask}}(uint16\_t\ timeout\ =\ 3000)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{completeTask}}(timeout);\ \}}
-\DoxyCodeLine{00091\ }
-\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a9f3c33a86cd8c12cce7c6d6c5247eea0}{setAutoCorrect}}(\textcolor{keywordtype}{bool}\ autoCorrect)\ \{\ \mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_afad39eb0e3b738035e7a81cfdc87a26d}{autoCorrectPosition}}\ =\ autoCorrect;\ \}}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_a4c398fe321290b51a3c7af223e450dcc}{getHold}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowPressure_a1b922bec4cc06db14a5c4e23781883ab}{pHold}};\ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{bowpressure_8hpp_ac57b46921d2e047b3305cfb0c7733b0c}{ePressureMode}}\ \mbox{\hyperlink{classBowPressure_adc8babd4d6e1c175a19e4a3f7f268fc0}{getPressureMode}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowPressure_af0ef8867c993193742218555a8dbb87c}{pressureMode}};\ \}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_ab1be80952ab6b1ec659c6aa00f5e9f52}{home}}(\textcolor{keywordtype}{bool}\ invert\ =\ \textcolor{keyword}{false})\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_acd55654b623910f5ed3af081148372b6}{home}}(invert);\ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{comment}{/*****\ Hidden\ serial\ commands\ *****/}}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_abeaa578a81b74ff2cd6704751fe48cb4}{setHardwarePressure}}(uint16\_t\ pressure);}
 \DoxyCodeLine{00093\ }
-\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_aa1aad3330d8301cd9cd70c1e12b01bfb}{getAutoCorrect}}()\ \{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_afad39eb0e3b738035e7a81cfdc87a26d}{autoCorrectPosition}};\ \};}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a353b29c45350a9ead04c999d83524b51}{getTMC2209Info}}();}
 \DoxyCodeLine{00095\ }
-\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a055b155370efb9c29a924f8cd1849121}{setSpeed}}(\textcolor{keywordtype}{float}\ speed)\ \{\ \mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a756180269e0983c5a5f30c0dbc0539e3}{setSpeed}}(speed);\ \}}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_a20fcb7c6a4854837052bf696baaa7579}{completeTask}}(uint16\_t\ timeout\ =\ 3000)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{completeTask}}(timeout);\ \}}
 \DoxyCodeLine{00097\ }
-\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classBowPressure_af8051b2f3f54475821821563507b77bd}{getSpeed}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a7c2afea62b38dee42d9062d73eefdc75}{getSpeed}}();\}}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a9f3c33a86cd8c12cce7c6d6c5247eea0}{setAutoCorrect}}(\textcolor{keywordtype}{bool}\ autoCorrect)\ \{\ \mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_afad39eb0e3b738035e7a81cfdc87a26d}{autoCorrectPosition}}\ =\ autoCorrect;\ \}}
 \DoxyCodeLine{00099\ }
-\DoxyCodeLine{00100\ \textcolor{comment}{/*****\ Internal\ commands\ for\ stand-\/alone\ and\ semi-\/modular\ use\ *****/}}
-\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_af381de6731a25b1ee801cf4c6766a213}{update}}();}
-\DoxyCodeLine{00102\ }
-\DoxyCodeLine{00103\ \ \ \ \ \textcolor{comment}{//\ Handles\ time-\/critical\ timing\ of\ stepper\ motor\ update\ -\/\ automatically\ called\ through\ stepInervalCallback\ -\/\ DO\ NOT\ MANUALLY\ CALL\ THIS}}
-\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_ad171c8f304d6cba6e524bd2f5202fa0c}{updateServo}}()\ \{\ \mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a981bafbfa5bf82c13a4e620aab894dc2}{updatePosition}}();\ \};}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_aa1aad3330d8301cd9cd70c1e12b01bfb}{getAutoCorrect}}()\ \{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_afad39eb0e3b738035e7a81cfdc87a26d}{autoCorrectPosition}};\ \};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a055b155370efb9c29a924f8cd1849121}{setSpeed}}(\textcolor{keywordtype}{float}\ speed)\ \{\ \mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a756180269e0983c5a5f30c0dbc0539e3}{setSpeed}}(speed);\ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classBowPressure_af8051b2f3f54475821821563507b77bd}{getSpeed}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a7c2afea62b38dee42d9062d73eefdc75}{getSpeed}}();\}}
 \DoxyCodeLine{00105\ }
-\DoxyCodeLine{00106\ \ \ \ \ \textcolor{comment}{//\ This\ is\ to\ be\ set\ to\ a\ static\ function\ that\ in\ turn\ will\ call\ the\ class\ instance\ of\ updateMuteServo}}
-\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a0891ff0635cc2954afd32081144fecc5}{setStepIntervalCallback}}(\textcolor{keywordtype}{void}\ *stepIntervalCallback)\ \{\ \mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a9354943971fa185957e25c1b2106b3ac}{stepIntervalCallback}}\ =\ stepIntervalCallback;\ \};}
+\DoxyCodeLine{00106\ \textcolor{comment}{/*****\ Internal\ commands\ for\ stand-\/alone\ and\ semi-\/modular\ use\ *****/}}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_af381de6731a25b1ee801cf4c6766a213}{update}}();}
 \DoxyCodeLine{00108\ }
-\DoxyCodeLine{00109\ \textcolor{comment}{/*****\ Internal\ commands\ for\ debugging\ use,\ most\ likely\ to\ be\ removed\ *****/}}
-\DoxyCodeLine{00110\ \textcolor{comment}{//\ \ \ \ void\ setStepperID(uint16\_t\ stepperID);}}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{comment}{//\ Handles\ time-\/critical\ timing\ of\ stepper\ motor\ update\ -\/\ automatically\ called\ through\ stepInervalCallback\ -\/\ DO\ NOT\ MANUALLY\ CALL\ THIS}}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_ad171c8f304d6cba6e524bd2f5202fa0c}{updateServo}}()\ \{\ \mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a981bafbfa5bf82c13a4e620aab894dc2}{updatePosition}}();\ \};}
 \DoxyCodeLine{00111\ }
-\DoxyCodeLine{00112\ \textcolor{comment}{/*****\ Private\ commands\ *****/}}
-\DoxyCodeLine{00113\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_a668f5460844d279cf7c6c953e6945846}{calculateBaselineModifierPressure}}();}
-\DoxyCodeLine{00115\ \};}
-\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BOWPRESSURE\_H}}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{comment}{//\ This\ is\ to\ be\ set\ to\ a\ static\ function\ that\ in\ turn\ will\ call\ the\ class\ instance\ of\ updateMuteServo}}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowPressure_a0891ff0635cc2954afd32081144fecc5}{setStepIntervalCallback}}(\textcolor{keywordtype}{void}\ *stepIntervalCallback)\ \{\ \mbox{\hyperlink{classBowPressure_a28cc40496b93b093f6714cae60020e1b}{tmc2209ServoStepper}}-\/>\mbox{\hyperlink{classTmc2209ServoStepper_aac13b861a68e1b74a231a625c8d77e02}{stepServoStepper}}-\/>\mbox{\hyperlink{classservoStepper_a9354943971fa185957e25c1b2106b3ac}{stepIntervalCallback}}\ =\ stepIntervalCallback;\ \};}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{comment}{/*****\ Internal\ commands\ for\ debugging\ use,\ most\ likely\ to\ be\ removed\ *****/}}
+\DoxyCodeLine{00116\ \textcolor{comment}{//\ \ \ \ void\ setStepperID(uint16\_t\ stepperID);}}
 \DoxyCodeLine{00117\ }
-\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00118\ \textcolor{comment}{/*****\ Private\ commands\ *****/}}
+\DoxyCodeLine{00119\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowPressure_a668f5460844d279cf7c6c953e6945846}{calculateBaselineModifierPressure}}();}
+\DoxyCodeLine{00121\ \ \ \ \ \mbox{\hyperlink{classBowActuator}{BowActuator}}*\ \mbox{\hyperlink{classBowPressure_a7d6da8c4bd6a4ce287ab7871456ec850}{currentActuator}}();}
+\DoxyCodeLine{00122\ \};}
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BOWPRESSURE\_H}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ }
 
 \end{DoxyCode}
