@@ -4,11 +4,11 @@
 #include "plugins/plugin_mult.hpp"
 
 const ModuleCommandDeclaration Plugin_Mult::moduleCommands[] = {
-    { "name", "na", "name", "Sets the map name", false, true, &s_name, eCommandType_data::ectSimpleString | eCommandType_function::ectName },
+    { "name", "na", "name", "Sets the map name", false, true, &s_name, eCommandType_function::ectName },
     { "target", "tg", "commandlist*", "Sets the command string to execute whenever a connection value changes", false, true, &s_target,
         eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression | eCommandType_function::ectAssignment, "mltout" },
-    { "data", "da", "(adder|ratio:id:value)", "Adds or requests data", false, true, &s_data, eCommandType_data::ectData | eCommandType_function::ectParameter },
-    { "remove", "rm", "adder|ratio:id", "Removes the adder or ratio with the given id", false, true, &s_remove, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectRemove }
+    { "data", "da", "(adder|ratio:id:value)", "Adds or requests data", false, true, &s_data, eCommandType_data::ectData | eCommandType_function::ectAdminSetting },
+    { "remove", "rm", "adder|ratio:id", "Removes the adder or ratio with the given id", false, true, &s_remove, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectAdminAction }
 };
 
 getModuleCount(Plugin_Mult)
@@ -84,7 +84,7 @@ CREATE_MODULE_COMMAND_FUNCTION(data, Plugin_Mult) {
         inCommandResponses->push_back({ out + sMultiTypeName[eMultiType::pRatio] + ":" + ratioConnectors[i].id + ":" + ratioConnectors[i].value, debugPrintType::InfoRequest });
     }
     if ((addConnectors.size() == 0) && (ratioConnectors.size() == 0)) {
-        inCommandResponses->push_back({ out + "0" });
+        inCommandResponses->push_back({ out + "", debugPrintType::InfoRequest });
     }
 
     return eProcessResult::Ok;

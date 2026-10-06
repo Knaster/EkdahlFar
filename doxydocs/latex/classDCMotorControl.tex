@@ -27,10 +27,6 @@ Collaboration diagram for DCMotor\+Control\+:\nopagebreak
 \item 
 \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}} \mbox{\hyperlink{classDCMotorControl_a6ca03be3af8f5e7d483a5a663a27f282}{DCMotor\+Control}} (char in\+Motor\+Rev\+Pin, char in\+Motor\+Voltage\+Pin, char in\+Motor\+DCDCEn\+Pin, char in\+Tacho\+Pin, char in\+Current\+Sense\+Pin, char in\+Motor\+Fault\+Pin)
 \item 
-\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classDCMotorControl_a325129fe30f71a28ef89ea346bc43252}{process\+Serial\+Command}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
-\item 
-\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classDCMotorControl_a5e28fcc8d7953071b2668ada7672af9e}{process\+Serial\+Command\+Hidden}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false, bool delegate=false, \mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}delegated\+Commands=nullptr)
-\item 
 void \mbox{\hyperlink{classDCMotorControl_a1a5fae8f5845422a64d6b07f6dfe3a71}{set\+Bow\+Motor\+Run}} (bool in\+Run)
 \item 
 bool \mbox{\hyperlink{classDCMotorControl_aafd3b156211d186a3fe6ef5197878ab9}{get\+Bow\+Motor\+Run}} ()
@@ -94,21 +90,25 @@ virtual const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperl
 \item 
 virtual \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a9a13ef0a8291e562a9557c311d07b334}{get\+Module\+ID}} ()=0
 \item 
-virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a534a35eb18ec29dbcc8bafce30c21128}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a3fa7b98362e8824b2aab3684909ff1c1}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
 \item 
-virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_af7fe70cf55b7c8999672c8a202cbdb71}{process\+Module\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a26c8c97baf171c0656ce9b1361ff65f6}{process\+Module\+Commands}} (\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
 \item 
-virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a3896fd907affb2fb5a81df36080ef744}{process\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a339cea47e3b78c8ea6e601e54b50c689}{process\+Commands}} (\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
 \item 
 virtual void \mbox{\hyperlink{classModule_a8aa6237aabeb8c851f0e6272d6cdc28f}{dir}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix, bool hidden, bool modules, bool commands, bool instances, bool instance\+Count, bool recursive)
 \item 
 virtual void \mbox{\hyperlink{classModule_a09131761fec40345e3657b801778057f}{update}} ()
 \item 
-virtual int \mbox{\hyperlink{classModule_ae6fa72e64554ee0b09a8bb6a77a68640}{get\+Module\+Command\+Count}} ()
+virtual int \mbox{\hyperlink{classModule_ac7c4b142fd2a11d6ee1a0920faba15cd}{get\+Module\+Command\+Count}} () const
 \item 
 virtual void \mbox{\hyperlink{classModule_a5798bc3ad2b47f69e8915297cb33b3e3}{dump\+Data}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}data\+Dump)
 \item 
 virtual void \mbox{\hyperlink{classModule_a72b5f8a3b37fe31c9002c6d7352b2427}{help}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix)
+\item 
+bool \mbox{\hyperlink{classModule_a098e542bca66c3660521a2d904079565}{get\+Lineage}} (String \texorpdfstring{$\ast$}{*}in\+Lineage, bool long\+Name)
+\item 
+void \mbox{\hyperlink{classModule_acfd20044532da98fae5ae9665e14df03}{set\+Owner}} (\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}in\+Owner)
 \item 
 bool \mbox{\hyperlink{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2}{has\+Data\+Change}} ()
 \end{DoxyCompactItemize}
@@ -126,6 +126,8 @@ char \mbox{\hyperlink{classDCMotorControl_a021b48c5d7ff1309f43d70efcddba029}{ref
 \begin{DoxyCompactItemize}
 \item 
 bool \mbox{\hyperlink{classModule_aa09bd171529da96438e917258ab5ab8d}{is\+Group\+Handler}} = false
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classModule_a079279271ba4d956a59527f6eb3dd1dd}{owner\+Index}} = 0
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -179,6 +181,14 @@ elapsed\+Millis \mbox{\hyperlink{classDCMotorControl_a038a4764bed09abe3910af18a0
 \item 
 uint32\+\_\+t \mbox{\hyperlink{classDCMotorControl_a3b2b8a9cbdf7f5fff47d90e2ef2db815}{over\+Power\+Duration}} = 100
 \item 
+bool \mbox{\hyperlink{classDCMotorControl_a18284aa0135d73d4677c362b0afc5f8c}{over\+Current\+Flag}} = false
+\item 
+bool \mbox{\hyperlink{classDCMotorControl_af5e99582383b4004739657b00ab6a0af}{transient\+Over\+Current}} = false
+\item 
+elapsed\+Millis \mbox{\hyperlink{classDCMotorControl_a527a02d59e57045ac75c41290c844f49}{last\+Over\+Current\+Event}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classDCMotorControl_a31ba618e4ebd30e2afeaa74a6aece48a}{over\+Current\+Duration}} = 100
+\item 
 uint32\+\_\+t \mbox{\hyperlink{classDCMotorControl_a3166cdcc795f8076911257f08d284dbe}{emergency\+Cool\+Down\+Event}}
 \item 
 uint16\+\_\+t \mbox{\hyperlink{classDCMotorControl_a4661d598ac4fd485a7f66a1340fda51d}{emergency\+Cool\+Down\+Period}} = 1000
@@ -199,12 +209,21 @@ bool \mbox{\hyperlink{classDCMotorControl_a33e7323a17c4411960d00ab2c8ddfd0a}{p\+
 \doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
 \begin{DoxyCompactItemize}
 \item 
+int \mbox{\hyperlink{classModule_a4eddb3b6ba2034603c234262dccd5f4d}{get\+Builtin\+Command\+Count}} ()
+\item 
+const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModule_a2ce723cda6f7377fee2023c174b48948}{get\+Builtin\+Command}} (uint8\+\_\+t i)
+\item 
 void \mbox{\hyperlink{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}{set\+Data\+Changed}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModule_ad85cad50c5538cc47c6d3ac76500e4cf}{owner}} = nullptr
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModule_a2b930f376b031611ccdf0070585fb805}{builtin\+Commands}} \mbox{[}$\,$\mbox{]}
 \end{DoxyCompactItemize}
 
 
@@ -511,18 +530,6 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classDCMotorControl_a005cc5e24ccd310852e74bc36c94b851_icgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classDCMotorControl_a325129fe30f71a28ef89ea346bc43252}\label{classDCMotorControl_a325129fe30f71a28ef89ea346bc43252} 
-\index{DCMotorControl@{DCMotorControl}!processSerialCommand@{processSerialCommand}}
-\index{processSerialCommand@{processSerialCommand}!DCMotorControl@{DCMotorControl}}
-\doxysubsubsection{\texorpdfstring{processSerialCommand()}{processSerialCommand()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} DCMotor\+Control\+::process\+Serial\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
-
-\Hypertarget{classDCMotorControl_a5e28fcc8d7953071b2668ada7672af9e}\label{classDCMotorControl_a5e28fcc8d7953071b2668ada7672af9e} 
-\index{DCMotorControl@{DCMotorControl}!processSerialCommandHidden@{processSerialCommandHidden}}
-\index{processSerialCommandHidden@{processSerialCommandHidden}!DCMotorControl@{DCMotorControl}}
-\doxysubsubsection{\texorpdfstring{processSerialCommandHidden()}{processSerialCommandHidden()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} DCMotor\+Control\+::process\+Serial\+Command\+Hidden (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false},  }\item[{bool}]{delegate = {\ttfamily false},  }\item[{\mbox{\hyperlink{classcommandList}{command\+List}} \texorpdfstring{$\ast$}{*}}]{delegated\+Commands = {\ttfamily nullptr} }\end{DoxyParamCaption})}
-
 \Hypertarget{classDCMotorControl_a1a5fae8f5845422a64d6b07f6dfe3a71}\label{classDCMotorControl_a1a5fae8f5845422a64d6b07f6dfe3a71} 
 \index{DCMotorControl@{DCMotorControl}!setBowMotorRun@{setBowMotorRun}}
 \index{setBowMotorRun@{setBowMotorRun}!DCMotorControl@{DCMotorControl}}
@@ -700,6 +707,12 @@ Pin for motor current sense.
 
 Holds the last PWM speed value sent to the bowing wheel. 
 
+\Hypertarget{classDCMotorControl_a527a02d59e57045ac75c41290c844f49}\label{classDCMotorControl_a527a02d59e57045ac75c41290c844f49} 
+\index{DCMotorControl@{DCMotorControl}!lastOverCurrentEvent@{lastOverCurrentEvent}}
+\index{lastOverCurrentEvent@{lastOverCurrentEvent}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{lastOverCurrentEvent}{lastOverCurrentEvent}}
+{\footnotesize\ttfamily elapsed\+Millis DCMotor\+Control\+::last\+Over\+Current\+Event\hspace{0.3cm}{\ttfamily [private]}}
+
 \Hypertarget{classDCMotorControl_a038a4764bed09abe3910af18a0412b02}\label{classDCMotorControl_a038a4764bed09abe3910af18a0412b02} 
 \index{DCMotorControl@{DCMotorControl}!lastOverPowerEvent@{lastOverPowerEvent}}
 \index{lastOverPowerEvent@{lastOverPowerEvent}!DCMotorControl@{DCMotorControl}}
@@ -800,6 +813,18 @@ Pin for motor driver reverse PWM.
 \doxysubsubsection{\texorpdfstring{motorVoltagePWM}{motorVoltagePWM}}
 {\footnotesize\ttfamily Teensy\+\_\+\+PWM\texorpdfstring{$\ast$}{*} DCMotor\+Control\+::motor\+Voltage\+PWM\hspace{0.3cm}{\ttfamily [private]}}
 
+\Hypertarget{classDCMotorControl_a31ba618e4ebd30e2afeaa74a6aece48a}\label{classDCMotorControl_a31ba618e4ebd30e2afeaa74a6aece48a} 
+\index{DCMotorControl@{DCMotorControl}!overCurrentDuration@{overCurrentDuration}}
+\index{overCurrentDuration@{overCurrentDuration}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{overCurrentDuration}{overCurrentDuration}}
+{\footnotesize\ttfamily uint32\+\_\+t DCMotor\+Control\+::over\+Current\+Duration = 100\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classDCMotorControl_a18284aa0135d73d4677c362b0afc5f8c}\label{classDCMotorControl_a18284aa0135d73d4677c362b0afc5f8c} 
+\index{DCMotorControl@{DCMotorControl}!overCurrentFlag@{overCurrentFlag}}
+\index{overCurrentFlag@{overCurrentFlag}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{overCurrentFlag}{overCurrentFlag}}
+{\footnotesize\ttfamily bool DCMotor\+Control\+::over\+Current\+Flag = false\hspace{0.3cm}{\ttfamily [private]}}
+
 \Hypertarget{classDCMotorControl_a3b2b8a9cbdf7f5fff47d90e2ef2db815}\label{classDCMotorControl_a3b2b8a9cbdf7f5fff47d90e2ef2db815} 
 \index{DCMotorControl@{DCMotorControl}!overPowerDuration@{overPowerDuration}}
 \index{overPowerDuration@{overPowerDuration}!DCMotorControl@{DCMotorControl}}
@@ -897,6 +922,12 @@ Current tachometer index.
 
 
 Holds the last calculate tachometer average, given in Hertz. 
+
+\Hypertarget{classDCMotorControl_af5e99582383b4004739657b00ab6a0af}\label{classDCMotorControl_af5e99582383b4004739657b00ab6a0af} 
+\index{DCMotorControl@{DCMotorControl}!transientOverCurrent@{transientOverCurrent}}
+\index{transientOverCurrent@{transientOverCurrent}!DCMotorControl@{DCMotorControl}}
+\doxysubsubsection{\texorpdfstring{transientOverCurrent}{transientOverCurrent}}
+{\footnotesize\ttfamily bool DCMotor\+Control\+::transient\+Over\+Current = false\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{classDCMotorControl_a3962e1db6f238d51dbde731cc4191f56}\label{classDCMotorControl_a3962e1db6f238d51dbde731cc4191f56} 
 \index{DCMotorControl@{DCMotorControl}!transientOverPower@{transientOverPower}}

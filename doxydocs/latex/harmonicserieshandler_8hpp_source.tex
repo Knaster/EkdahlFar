@@ -32,73 +32,67 @@
 \DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeriesHandler_a71b2f84329c07f34a3d6e95e09190221}{HarmonicSeriesHandler}}();}
 \DoxyCodeLine{00029\ }
 \DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ad54478d5f92f3500da931491d0a59088}{dumpData}}(std::vector<commandResponse>\ *dataDump)\ \textcolor{keyword}{override};}
-\DoxyCodeLine{00031\ }
-\DoxyCodeLine{00032\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab7e94991bfffdabd0d9049f658a16f4d}{fundamentalFrequency}}\ =\ 66;}
-\DoxyCodeLine{00034\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classHarmonicSeriesHandler_a9376db8cd5a7be8ed59dd9319d45582c}{pBaseNote}}\ =\ 64;}
-\DoxyCodeLine{00035\ }
-\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classHarmonicSeriesHandler_afbf8da531e9d50bff3ff48088a98045d}{currentHarmonicFreq}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classHarmonicSeriesHandler_adf400b812ed4ee0fdbff83500f6f1669}{currentHarmonicShiftFreq}}\ =\ 0;\ \ \ \ \ \ \ }
-\DoxyCodeLine{00038\ }
-\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_adcb5e5ffd6a283d124936abca437ac85}{harmonicShiftRange}}\ =\ 12;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a70af6f2f1eb059517339969fc3100461}{harmonicShift}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a21386aa3a7245c6b7114320a5c1b5ac6}{harmonicShift5}}\ =\ 0;}
-\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a3a754e7dd46324742f1b1bbe19104920}{pHarmonic}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a2901f7ff9f99cbc8278f5d1dbdb8375b}{pHarmonicAdd}}\ =\ 0;}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \ \ \ \ int16\_t\ \mbox{\hyperlink{classHarmonicSeriesHandler_a802667d02b9f8ce6c2cfecbe08a24af1}{lowerHarmonic}}\ =\ -\/48;}
-\DoxyCodeLine{00046\ \ \ \ \ int16\_t\ \mbox{\hyperlink{classHarmonicSeriesHandler_a9c996baab64d406af9740e914264ad7a}{upperHarmonic}}\ =\ 49;}
-\DoxyCodeLine{00047\ }
-\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a6c0ea250eca8743be2bc1031e4ce5af3}{frequencyChanged}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a315318ea84b2603f8c4fbe27a5c456f6}{harmonicSeriesChangeReported}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00050\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab3f2f36f18026e2c8880c23aacf0a25c}{calculateHarmonicShift}}();}
-\DoxyCodeLine{00052\ }
-\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a0c5dae4f8cf80d9d4796f7304c7b8981}{raiseFrequencyChanged}}();}
-\DoxyCodeLine{00054\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00055\ \textcolor{comment}{\ \ \ \ eProcessResult\ processControlCommand(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request\ =\ false,\ bool\ delegate\ =\ false,}}
-\DoxyCodeLine{00056\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandList\ *delegatedCommands\ =\ nullptr);}}
-\DoxyCodeLine{00057\ \textcolor{comment}{}}
-\DoxyCodeLine{00058\ \textcolor{comment}{\ \ \ \ eProcessResult\ processHarmonicSeriesCommand(commandItem\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ bool\ request\ =\ false,\ bool\ delegate\ =\ false,}}
-\DoxyCodeLine{00059\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandList\ *delegatedCommands\ =\ nullptr);}}
-\DoxyCodeLine{00060\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//std::vector<HarmonicSeries>\ harmonicSeries;}}
-\DoxyCodeLine{00062\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ae769737a2459f9704dd9eb1357343104}{setHarmonicShift}}(\textcolor{keywordtype}{int}\ inHarmonicShift);}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classHarmonicSeriesHandler_afde840eb1e45c5cd163ebd7ea9388f6c}{addInstances}}(String\ name,\ uint8\_t\ count)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab7e94991bfffdabd0d9049f658a16f4d}{fundamentalFrequency}}\ =\ 66;}
+\DoxyCodeLine{00035\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classHarmonicSeriesHandler_a9376db8cd5a7be8ed59dd9319d45582c}{pBaseNote}}\ =\ 64;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classHarmonicSeriesHandler_afbf8da531e9d50bff3ff48088a98045d}{currentHarmonicFreq}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classHarmonicSeriesHandler_adf400b812ed4ee0fdbff83500f6f1669}{currentHarmonicShiftFreq}}\ =\ 0;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_adcb5e5ffd6a283d124936abca437ac85}{harmonicShiftRange}}\ =\ 12;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a70af6f2f1eb059517339969fc3100461}{harmonicShift}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a21386aa3a7245c6b7114320a5c1b5ac6}{harmonicShift5}}\ =\ 0;}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a3a754e7dd46324742f1b1bbe19104920}{pHarmonic}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a2901f7ff9f99cbc8278f5d1dbdb8375b}{pHarmonicAdd}}\ =\ 0;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ int16\_t\ \mbox{\hyperlink{classHarmonicSeriesHandler_a802667d02b9f8ce6c2cfecbe08a24af1}{lowerHarmonic}}\ =\ -\/48;}
+\DoxyCodeLine{00047\ \ \ \ \ int16\_t\ \mbox{\hyperlink{classHarmonicSeriesHandler_a9c996baab64d406af9740e914264ad7a}{upperHarmonic}}\ =\ 49;}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a6c0ea250eca8743be2bc1031e4ce5af3}{frequencyChanged}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a315318ea84b2603f8c4fbe27a5c456f6}{harmonicSeriesChangeReported}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00051\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab3f2f36f18026e2c8880c23aacf0a25c}{calculateHarmonicShift}}();}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a0c5dae4f8cf80d9d4796f7304c7b8981}{raiseFrequencyChanged}}();}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ae769737a2459f9704dd9eb1357343104}{setHarmonicShift}}(\textcolor{keywordtype}{int}\ inHarmonicShift);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_abc241df1c3dd3e8f005d50b7895c4339}{setHarmonicShift5}}(\textcolor{keywordtype}{int}\ inHarmonicShift5);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a291e7a1affee1773092526297c90a425}{getHarmonicShift}}();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a592cc31106a795478ff66f8eabd0a24e}{getHarmonicShift5}}();}
 \DoxyCodeLine{00064\ }
-\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_abc241df1c3dd3e8f005d50b7895c4339}{setHarmonicShift5}}(\textcolor{keywordtype}{int}\ inHarmonicShift5);}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_aaaf5d361c3220a3dc3cc477df74d5100}{setHarmonicShiftRange}}(\textcolor{keywordtype}{int}\ inHarmonicShiftRange);}
 \DoxyCodeLine{00066\ }
-\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a291e7a1affee1773092526297c90a425}{getHarmonicShift}}();}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_af8b94475d0f5bca4f4b4f5d8868daf53}{getHarmonicShiftRange}}();}
 \DoxyCodeLine{00068\ }
-\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a592cc31106a795478ff66f8eabd0a24e}{getHarmonicShift5}}();}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab775bc9141cb72e66073da77f5be9817}{setHarmonic}}(\textcolor{keywordtype}{int}\ \_harmonic);}
 \DoxyCodeLine{00070\ }
-\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_aaaf5d361c3220a3dc3cc477df74d5100}{setHarmonicShiftRange}}(\textcolor{keywordtype}{int}\ inHarmonicShiftRange);}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ae5595b18fc15842426d7fab38462088c}{getHarmonic}}();}
 \DoxyCodeLine{00072\ }
-\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_af8b94475d0f5bca4f4b4f5d8868daf53}{getHarmonicShiftRange}}();}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a948584873518c7d24d9304d51fd52de2}{setHarmonicAdd}}(\textcolor{keywordtype}{int}\ \_harmonic);}
 \DoxyCodeLine{00074\ }
-\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ab775bc9141cb72e66073da77f5be9817}{setHarmonic}}(\textcolor{keywordtype}{int}\ \_harmonic);}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a707614acd1d75704f57ab4875bd9862d}{getHarmonicAdd}}();}
 \DoxyCodeLine{00076\ }
-\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_ae5595b18fc15842426d7fab38462088c}{getHarmonic}}();}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da}{updateHarmonicData}}();}
 \DoxyCodeLine{00078\ }
-\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a948584873518c7d24d9304d51fd52de2}{setHarmonicAdd}}(\textcolor{keywordtype}{int}\ \_harmonic);}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_afcb716f608764f2fc078e857bf1df049}{setBaseNote}}(\textcolor{keywordtype}{int}\ inBaseNote);}
 \DoxyCodeLine{00080\ }
-\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a707614acd1d75704f57ab4875bd9862d}{getHarmonicAdd}}();}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a342a5e5bb9add99b597d600a6ed12188}{loadHarmonicSeries}}(\textcolor{keywordtype}{int}\ i);}
 \DoxyCodeLine{00082\ }
-\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a3202534b2f78146271120e4bafd9d0da}{updateHarmonicData}}();}
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}}*\ \mbox{\hyperlink{classHarmonicSeriesHandler_afef415cddf83a8f05f8daa94f33ed7bb}{addHarmonicSeries}}();}
 \DoxyCodeLine{00084\ }
-\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_afcb716f608764f2fc078e857bf1df049}{setBaseNote}}(\textcolor{keywordtype}{int}\ inBaseNote);}
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}}*\ \mbox{\hyperlink{classHarmonicSeriesHandler_afef415cddf83a8f05f8daa94f33ed7bb}{addHarmonicSeries}}(String\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{float}\ frequencies[]\ =\ NULL,\ \textcolor{keywordtype}{int}\ size\ =\ 0);}
 \DoxyCodeLine{00086\ }
-\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a342a5e5bb9add99b597d600a6ed12188}{loadHarmonicSeries}}(\textcolor{keywordtype}{int}\ i);}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classHarmonicSeriesHandler_aefbeacf5b5058bcc3ff0fed6486b4edb}{getCalculatedFrequency}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_adf400b812ed4ee0fdbff83500f6f1669}{currentHarmonicShiftFreq}};\ \}}
 \DoxyCodeLine{00088\ }
-\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}}*\ \mbox{\hyperlink{classHarmonicSeriesHandler_afef415cddf83a8f05f8daa94f33ed7bb}{addHarmonicSeries}}();}
-\DoxyCodeLine{00090\ }
-\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{classHarmonicSeries}{HarmonicSeries}}*\ \mbox{\hyperlink{classHarmonicSeriesHandler_afef415cddf83a8f05f8daa94f33ed7bb}{addHarmonicSeries}}(String\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{float}\ frequencies[]\ =\ NULL,\ \textcolor{keywordtype}{int}\ size\ =\ 0);}
-\DoxyCodeLine{00092\ }
-\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classHarmonicSeriesHandler_aefbeacf5b5058bcc3ff0fed6486b4edb}{getCalculatedFrequency}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classHarmonicSeriesHandler_adf400b812ed4ee0fdbff83500f6f1669}{currentHarmonicShiftFreq}};\ \}}
-\DoxyCodeLine{00094\ }
-\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a69ca24dc5cdbe6467027bf1b48275e11}{checkFrequencyChanged}}();}
-\DoxyCodeLine{00096\ \};}
-\DoxyCodeLine{00097\ }
-\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ HARMONICSERIESHANDLER\_H}}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classHarmonicSeriesHandler_a69ca24dc5cdbe6467027bf1b48275e11}{checkFrequencyChanged}}();}
+\DoxyCodeLine{00090\ \};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ HARMONICSERIESHANDLER\_H}}
 
 \end{DoxyCode}

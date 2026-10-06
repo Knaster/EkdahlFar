@@ -25,7 +25,7 @@
 
 #include "base/arduinorequired.hpp"
 
-enum debugPrintType { Command, dpUSB, Hardware, Undefined, Priority, Error, InfoRequest, EParser, Debug, TextInfo, Help, Internal, External};
+enum debugPrintType { Command, dpUSB, Hardware, Undefined, Priority, Error, InfoRequest, EParser, Debug, TextInfo, Help, Internal, External };
 #define debugPrintTypes 13
 extern const String debugPrintTypeName[];
 extern const String debugPrintTypeNameShort[];

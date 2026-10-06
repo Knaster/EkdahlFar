@@ -90,94 +90,16 @@ Terminologoy</h1>
 </ul>
 <h1><a class="anchor" id="brief"></a>
 Brief overview</h1>
-<p>The code is structured primarily around a hierarchial class structure where the base objects is a vector of stringModule instances. This class handles all <em>command messages</em> surrounding a single string and delegates data and commands to other classes down the line. The top level classes deals with direct hardware interfacing, the middle level takes care of the logical control of these classes depending on the outcome of processed data and the bottom level deals with interpretation and handling of command messages. Everything is tied together through the main function which periodically runs basic function calls which are not time-sensitive while time-critical functions are called through periodic interrupts. Global messages are handled through the loop via the use of functions in maincommandhandler.cpp</p>
-<p>All outwards functionality can be accessed through command messages, these can be invoked through USB-Serial, RS232 and added to que by internal functions that may or may not be connected to other external hardware. All incoming MIDI-messages are mapped to a editable string of command messages, this way complete freedom in midi-mapping is obtained. A universal messaging system that is ignorant of the source of the control messages makes for a more transparent and uniform way of handling events, hardware control and data processing. This also makes for a system where minimal code changes are required when doing modifications or introducing new functionaltiy and options. The 'help'-command exposes existing commands, their arguments and a brief description.</p>
-<p>Classes that contain data that are to be saved into EEPROM implements a function with the name dumpData() that returns a string of commands with any applicable parameters containing the data to be saved. On load, the command string can be directly added to que and thus executed as is to set the desired parameters.</p>
-<h1><a class="anchor" id="hardwareclasses"></a>
-Classes and header files with direct hardware access:</h1>
-<ul>
-<li><a class="el" href="classservoStepper.html">servoStepper</a> - library for handling stepper motor step/dir signals as well as homing switch control. Based on a positional approach like that of a classic RC servo, includes speed and acceleration parameters. The class is normally used with periodic interrupt driven polling of the <a class="el" href="classservoStepper.html#a981bafbfa5bf82c13a4e620aab894dc2">servoStepper::updatePosition()</a> function but can be used in a blocking manner by utilization of the <a class="el" href="classservoStepper.html#a3b30f6750877bffdc3d8b8f39fb779ef">servoStepper::completeTask()</a> function <br  />
-</li>
-<li>bowIO - handles bowing jack stepper motor position (through a <a class="el" href="classservoStepper.html">servoStepper</a> class instance), direct speed control of the DC bowing motor, tachometer interrupt calls and control of the DC/DC converter that drives the DC motor driver. It also provides functionality for checking motor driver fault conditions and over-current/power measurements through the current sensor connected to the DC/DC converter. <br  />
-</li>
-<li>mute - handles mute stepper motor position and provides functions for setting various mute states. Requires frequent polling of stepServoStepper-&gt;updatePosition() in order for the stepper motor to continuously update its position, this is preferably done via interrupts. <br  />
-</li>
-<li>solenoid - provides variable force solenoid control through the utilization of PWM, engages the solenoid for a set period of time (in uS) after which it will automatically disengage, Requires frequent polling of the solenoid::updateSolenoid() function in order to engage and disengage the solenoid in a timely manner. <br  />
-</li>
-<li>stringModule - this class handles an entire string module with vectors of bowControl, solenoid and mute objects as well as bowIO, calibrate and CalibrationData objects. The stringModule instance parses all local command messages applicable and does the appropriate function calls. <br  />
-</li>
-<li>controlReader - reads data from i2c ADC converter(s) and issues command messages associated with the given ADC channel at certain value-change conditions. This class is updated through the controlReader::readData() function which is to to be called periodically. Due to the blocking nature of the ARM i2c library one needs to take care with how often controlReader::readData() is called. <br  />
-</li>
-<li><a class="el" href="audioanalyze_8h.html">audioanalyze.h</a> - samples audio data from a pin connected to the electromagnetic pickup and does basic DSP calculations on frequency and audio level</li>
-</ul>
-<h1><a class="anchor" id="controlclasses"></a>
-Intermediary data and sensor data processing classes and header files</h1>
-<ul>
-<li>bowControl - Control class for high level interfacing with a bowIO object. This object contains the PID for stable bowing motor control, calcualtes motor set frequency from harmonic tables and pressure engage, rest and free positiong. Parameters are limited by user set soft-limitis contained in the pointed to CalibrationData and <a class="el" href="classBowActuators.html">BowActuators</a> class instances <br  />
-</li>
-<li><a class="el" href="main_8cpp.html">main.cpp</a> - Main software starting point. Initializes various hardware, class instances, loads any eeprom settings and binds interrupts to functions. Also contains the main loop function as well as various helper functions. This class has an array of stringModule class instances and is through maincommandhandler.cpp deciding which stringModule instance is currently being controlled and is passing along any command messages that aren't recognized as global. <br  />
-</li>
-<li>maincommandhandler.cpp - contains functions for processing of global commands sent to the internal command message que. <br  />
-</li>
-<li><a class="el" href="midi_8cpp.html">midi.cpp</a> - contains functions for processing midi commands according to the current configuration class. Not directly bound to hardware but used with callback function pointers by <a class="el" href="main_8cpp.html">main.cpp</a> <br  />
- </li>
-</ul>
-<h1><a class="anchor" id="auxclasses"></a>
-Auxilary / Misc classes and header files</h1>
-<ul>
-<li><a class="el" href="classBowActuators.html">BowActuators</a> - contains handling of a vector of bowActuator classes which in turn contains soft-limit data for user-defined actuators <br  />
-</li>
-<li>calibrate - contains functions for finding soft-limits of the current actuator, utilizes pointeres to bowIO and bowControl class instances to perform calibration tests and monitor sensor outputs <br  />
-</li>
-<li>commandparser.h - contains functions and classes for parsing and storing command messages. The main classes are <a class="el" href="classcommandItem.html" title="Class containing command items consisting of one command and any number of arguments.">commandItem</a> which contains a single command and arguments, and <a class="el" href="classcommandList.html" title="Class containing an array of commandItem objects and ways of processing them.">commandList</a> which contains a vector of <a class="el" href="classcommandItem.html" title="Class containing command items consisting of one command and any number of arguments.">commandItem</a> instances. <br  />
-</li>
-<li>configuration - data storage class for midi mapped command strings</li>
-<li>debugprint.h - contains functions for message reporting over USB-Serial <br  />
-</li>
-<li>eepromhelpers.cpp - contains functions for saving and loading EEPROM data <br  />
-</li>
-<li><a class="el" href="harmonicSeries_8cpp.html">harmonicSeries.cpp</a> and harmonicSeries.h - contains a vector of harmonicSeries instances which in turn contains the harmonic ratios used by functions in the bowControl class to set bowing frequencies <br  />
-</li>
-<li>isrclasswrapper.cpp - wrapper enabling class-based functions to be called by interrupts <br  />
-</li>
-<li><a class="el" href="name_8c.html">name.c</a> - Teensy 4-specific class for setting USB device names <br  />
-</li>
-<li>settingshandler.cpp - functions for saving EEPROM data <br  />
-</li>
-<li><a class="el" href="automaticversion_8hpp.html">automaticversion.hpp</a> - functions for autmatically creating a build version number at each compile</li>
-</ul>
-<h1><a class="anchor" id="libraries"></a>
-Libraries</h1>
-<ul>
-<li>Adafruit_ADS1X15 - library for using the ADS1X15 ADC converters, used by the controlReader class <br  />
-</li>
-<li>Adafruit_BusIO - library used by the Adafruit_ADS1X15 library <br  />
-</li>
-<li>Audio - PJRC Teensy 4 Audio library, used by functions in <a class="el" href="audioanalyze_8h.html">audioanalyze.h</a> <br  />
-</li>
-<li>EEPROM - Library for saving data into the Teensy 4 EEPROM, used by eepromhelpers.cpp <br  />
-</li>
-<li>SafeString - Partial use of its RS-232 functionality, used by <a class="el" href="main_8cpp.html">main.cpp</a> and debugprint.h <br  />
-</li>
-<li>SD, SdFat, SerialFlash, SPI - Libraries required by the Teensy 4 Audio library <br  />
-</li>
-<li>Teensy4 - The PJRC Teensy 4 library <br  />
-</li>
-<li>Teensy_PWM - Library for better manipulation of the Teensy 4 PWM ports, used by the bowIO and solenoid classes <br  />
-</li>
-<li>tinyexpr - Expression parser library used for parsing command message expressions in commandList::parseCommandExpressions <br  />
-</li>
-<li>TMC2209 - Library for the TMC2209 stepper motor driver IC, used by the bowIO and mute classes <br  />
-</li>
-<li>Wire - Library for i2c communications, used by the controlReader class <br  />
- </li>
-</ul>
-<h1><a class="anchor" id="author"></a>
-Author</h1>
-<ul>
-<li>Created by Karl Ekdahl on 2023-09-03</li>
-<li>Modified by Karl Ekdahl on 2024-07-26 </li>
-</ul>
+<p>The Ekdahl FAR is structured around a hierarchal concept of <a class="el" href="classModule.html">modules</a> that handles specific parts of the instrument, whether internal or external, software or hardware related. All <em>modules</em> have a <a class="el" href="structModuleCommandDeclaration.html">module command declaration</a> which shows what <em>commands</em> the module has and some basic information about the <em>commands</em>. This information is used both internally to call the associated functions as well as offering an interface for users or connected software to discover the capabilities of each <em>module</em>.</p>
+<p>The subclass <a class="el" href="classModuleHandler.html">module handler</a> allows a module to contain other modules using <a class="el" href="classModuleGroup.html">module groups</a>. Each <em>module</em> <em>group</em> can contain any number of instances of single type of <a class="el" href="classModule.html">Module</a> or <a class="el" href="classModuleHandler.html">module handler</a> class. Addressing of <em>modules</em> is done in a hierarchal manner using the full names of all preceding modules separated with a '.'. Individual children of <em>module</em> <em>groups</em> are optionally addressed using <em>indexing</em> through brackets '[]' and accepts both singles ('[2]'), ranges ('[0-2]') and comma separated instances ('[0-1,3]').</p>
+<p>Addressing a child with an <em>index</em> but without calling a <em>command</em> in that child creates a <em>selection</em>, these <em>selections</em> are used by owning <em>modules</em> in order to do things like changing MIDI configuration or harmonic table. A <em>selection</em> can also be used by later <em>commands</em> in order to invoke functions on the currently selected child by omitting the brackets when addressing. If omitting the brackets and there is no previous selection, the first ([0]) child is addressed.</p>
+<p>The main <a class="el" href="main_8cpp.html#afe461d27b9c48d5921c00d521181f12f">loop</a> function periodically runs basic function calls which are not time-sensitive while time-critical functions are called through periodic interrupts. All messages are processed by their respective <em>modules</em> with the <a class="el" href="classMasterModule.html">master module</a> offering a few system functions, the root <em>module</em> <em>handler</em> passed when creating the <em>master</em> <em>module</em> contains commands specific to the current setup. Certain <em>commands</em> are offered by ALL modules and are declared in <a class="el" href="classModule.html#a2b930f376b031611ccdf0070585fb805">Module::builtinCommands</a>, as of this writing these are: <br  />
+ <br  />
+list - returns all <em>commands</em> and child <em>modules</em> within the <em>module</em> <br  />
+help - returns detailed information about each child <em>module</em> and <em>command</em>, for use both by direct users and software <br  />
+dump - returns all data currently associated with each <em>command</em> and child <em>module</em>, used by software and internally to store parameters <br  />
+ <br  />
+ All <em>commands</em> can be invoked through USB-Serial, RS232 and added to queue by internal functions that may or may not be connected to other external hardware. All incoming MIDI-messages are mapped to a editable string of <em>command</em> messages, this way complete freedom in midi-mapping is obtained. A universal messaging system that is ignorant of the source of the <em>command</em> messages makes for a more transparent and uniform way of handling events, hardware control and data processing. This also makes for a system where minimal code changes are required when doing modifications or introducing new functionality and options. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

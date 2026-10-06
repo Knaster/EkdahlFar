@@ -36,21 +36,33 @@
  *
  * @section brief Brief overview
  *
- * The code is structured primarily around a hierarchial class structure where the base objects is a vector of stringModule instances. This class handles all <em>command messages</em> surrounding a single string
- * and delegates data and commands to other classes down the line. The top level classes deals with direct hardware interfacing, the middle level takes care of the
- * logical control of these classes depending on the outcome of processed data and the bottom level deals with interpretation and handling of command messages.
- * Everything is tied together through the main function which periodically runs basic function calls which are not time-sensitive while time-critical functions are
- * called through periodic interrupts. Global messages are handled through the loop via the use of functions in maincommandhandler.cpp
+ * The Ekdahl FAR is structured around a hierarchal concept of \ref "Module"modules that handles specific parts of the instrument, whether internal or external, software or hardware related.
+ * All \a modules have a \ref "ModuleCommandDeclaration" "module command declaration" which shows what \a commands the module has and some basic information about the \a commands.
+ * This information is used both internally to call the associated functions as well as offering an interface for users or connected software to discover the capabilities of each \a module.
  *
- * All outwards functionality can be accessed through command messages, these can be invoked through USB-Serial, RS232 and added to que by internal functions that may or may not be connected to other external hardware.
- * All incoming MIDI-messages are mapped to a editable string of command messages, this way complete freedom in midi-mapping is obtained.
- * A universal messaging system that is ignorant of the source of the control messages makes for a more transparent and uniform way of handling events, hardware control and data processing.
- * This also makes for a system where minimal code changes are required when doing modifications or introducing new functionaltiy and options.
- * The 'help'-command exposes existing commands, their arguments and a brief description.
+ * The subclass \ref "ModuleHandler" "module handler" allows a module to contain other modules using \ref "ModuleGroup" "module groups". Each \a module \a group can contain any number of
+ * instances of single type of \ref Module or \ref "ModuleHandler" "module handler" class.
+ * Addressing of \a modules is done in a hierarchal manner using the full names of all preceding modules separated with a '.'. Individual children of \a module \a groups are optionally
+ * addressed using \a indexing through brackets '[]' and accepts both singles ('[2]'), ranges ('[0-2]') and comma separated instances ('[0-1,3]').
  *
- * Classes that contain data that are to be saved into EEPROM implements a function with the name dumpData() that returns a string of commands with any applicable parameters containing the data to be saved.
- * On load, the command string can be directly added to que and thus executed as is to set the desired parameters.
+ * Addressing a child with an \a index but without calling a \a command in that child creates a \a selection, these \a selections are used by owning \a modules in order to do things like
+ * changing MIDI configuration or harmonic table. A \a selection can also be used by later \a commands in order to invoke functions on the currently selected child by omitting the brackets
+ * when addressing. If omitting the brackets and there is no previous selection, the first ([0]) child is addressed.
  *
+ * The main \ref loop function periodically runs basic function calls which are not time-sensitive while time-critical functions are called through periodic interrupts.
+ * All messages are processed by their respective \a modules with the \ref "MasterModule" "master module" offering a few system functions,
+ * the root \a module \a handler passed when creating the \a master \a module contains commands specific to the current setup.
+ * Certain \a commands are offered by ALL modules and are declared in Module::builtinCommands, as of this writing these are: \n \n
+ * list - returns all \a commands and child \a modules within the \a module \n
+ * help - returns detailed information about each child \a module and \a command, for use both by direct users and software \n
+ * dump - returns all data currently associated with each \a command and child \a module, used by software and internally to store parameters \n \n
+ *
+ * All \a commands can be invoked through USB-Serial, RS232 and added to queue by internal functions that may or may not be connected to other external hardware.
+ * All incoming MIDI-messages are mapped to a editable string of \a command messages, this way complete freedom in midi-mapping is obtained.
+ * A universal messaging system that is ignorant of the source of the \a command messages makes for a more transparent and uniform way of handling events, hardware control and data processing.
+ * This also makes for a system where minimal code changes are required when doing modifications or introducing new functionality and options.
+ *
+ * @cond
  * @section hardwareclasses Classes and header files with direct hardware access:
  * - servoStepper - library for handling stepper motor step/dir signals as well as homing switch control. Based on a positional approach like that of a classic RC servo,
  * includes speed and acceleration parameters. The class is normally used with periodic interrupt driven polling of the servoStepper::updatePosition() function but can be used in a
@@ -110,6 +122,7 @@
  * \n
  * - automaticversion.hpp - functions for autmatically creating a build version number at each compile
  *
+ * @endcond
  * @section libraries Libraries
  * - Adafruit_ADS1X15 - library for using the ADS1X15 ADC converters, used by the controlReader class
  * \n
@@ -153,8 +166,13 @@
 
 //String customStartupParameters = "";
 //8192
-createSafeStringReader(ssReader, 8192, "\r\n");       ///< SafeString reader creation
-createBufferedOutput(ssOutput, 8192, DROP_UNTIL_EMPTY); ///< SafeString buffer creation
+createSafeStringReader(ssReader, 28192, "\r\n");       ///< SafeString reader creation
+createBufferedOutput(ssOutput, 28192, DROP_UNTIL_EMPTY); ///< SafeString buffer creation
+
+#ifdef USE_USART_AS_EXT
+createSafeStringReader(ssExternalInput, 8192, "\r\n");
+createBufferedOutput(ssExternalOutput, 8192, DROP_UNTIL_EMPTY);
+#endif
 
 #include "../../src/base/debugprint.cpp"
 
@@ -195,6 +213,10 @@ void processSerialCommands(CommandList inCommandList, bool isInternal = false) {
 void processSerialCommands() {
     globalCommands = globalResponseCommands;
     if (ssReader.read()) { globalCommands.addCommands(ssReader.c_str()); }
+#ifdef USE_USART_AS_EXT
+    if (ssExternalInput.read()) { globalCommands.addCommands(ssExternalInput.c_str()); }
+#endif // USE_USART_AS_EXT
+
     processSerialCommands(globalCommands, false);
     globalCommands.item.clear();
 }
@@ -207,6 +229,12 @@ void setup() {
     Serial.begin(115200);
     ssOutput.connect(Serial);
     ssReader.connect(Serial);
+
+    #ifdef USE_USART_AS_EXT
+    Serial1.begin(115200);
+    ssExternalInput.connect(Serial1);
+    ssExternalOutput.connect(Serial1);
+    #endif // USE_USART_AS_EXT
 
     analogReadResolution(12);
 
@@ -259,9 +287,7 @@ void loop() {
         }
     } else {
         outputNext();
-
         usbMIDI.read();
-
         if (controlReaderInterval >= controlReadIntervalTime) {
             std::vector<commandResponse> inCommandResponse;
             farSingle->updateControlReader(&inCommandResponse);
@@ -271,10 +297,9 @@ void loop() {
             }
             controlReaderInterval = 0;
         }
-#ifdef NO_EXTERNAL_MODULES
+#ifdef USE_USART_AS_MIDI
         MIDI.read();
 #endif
-
     }
 
     masterModule->update();

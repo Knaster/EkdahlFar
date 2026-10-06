@@ -1,0 +1,36 @@
+\doxysection{commandlist.\+hpp}
+\hypertarget{commandlist_8hpp_source}{}\label{commandlist_8hpp_source}\index{commandlist.hpp@{commandlist.hpp}}
+\mbox{\hyperlink{commandlist_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ COMMANDLIST\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ COMMANDLIST\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{commanditem_8hpp}{commanditem.hpp}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ uint8\_t\ \mbox{\hyperlink{commandlist_8hpp_aa230916c95623a7e6e5b94cae91a4a08}{quoteStyle}}[];}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classCommandList}{CommandList}}\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00012\ \ \ \ \ std::vector<CommandItem>\ \mbox{\hyperlink{classCommandList_a4bc8f1a0be9b61417bf577fd1ed12f57}{item}};}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCommandList_a961d7f8202b327d9b1867cb8e93e310c}{processingCommands}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCommandList_aeb54879678311f335540dfc989b3fb1d}{waitIfProcessing}}();}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCommandList_aaee57c7581b6ecc161c3e3aa3148bac9}{parseQuote}}(String\ commandString,\ \textcolor{keywordtype}{char}\ quote,\ \textcolor{keywordtype}{int}\ start);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCommandList_a4299d19bac48701293bd6913f82f9d4d}{parseBracket}}(String\ commandString,\ \textcolor{keywordtype}{int}\ start);}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCommandList_ae710462ca42d899a42e43b0a29d0bf04}{addCommands}}(String\ commandItems);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ \ \ \ void\ parseCommandExpressions(ExpressionParser\ expressionParser);}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classCommandList_aa5cc72c5c68da1d3e18f808da93025c6}{CommandList}}(String\ commandItems);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classCommandList}{CommandList}}\&\ \mbox{\hyperlink{classCommandList_afa1d096ae79395a6d62d15ed77ae5b83}{operator\ =\ }}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classCommandList}{CommandList}}\&\ other);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classCommandList_aa5cc72c5c68da1d3e18f808da93025c6}{CommandList}}();}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ COMMANDLIST\_HPP}}
+
+\end{DoxyCode}

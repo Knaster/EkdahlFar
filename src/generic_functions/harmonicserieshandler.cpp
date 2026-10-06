@@ -5,26 +5,27 @@
 
 const ModuleCommandDeclaration HarmonicSeriesHandler::moduleCommands[] = {
     { "fundamental", "fu", "float", "Bow fundamental frequency, all harmonics are calculated from this number", false, true, &s_fundamental,
-        eCommandType_data::ectHertz | eCommandType_function::ectSetting },
+        eCommandType_data::ectHertz | eCommandType_function::ectCalibration },
     { "harmonic", "h", "int", "Bow motor speed in terms of a harmonic number. A ratio is taken from the given harmonic in the current harmonic list, the ratio is then multiplied by the bow fundamental frequency",
-        false, false, &s_harmonic, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectParameter },
-    { "harmonicadd", "ha", "int", "Additative version of bowcontrolharmonic, the number is given is added to the harmonic given", false, false, &s_harmonicAdd,
-        eCommandType_data::ectSimpleInt8 | eCommandType_function::ectParameter },
-    { "harmonicbase", "hb", "int", "Same as bowcontrolharmonic but where the harmonic number is based on a MIDI note given by bowcontrolbasenote", false, false, &s_harmonicBase,
-        eCommandType_data::ectSimpleInt8 | eCommandType_function::ectParameter },
-    { "basenote", "bn", "0-127", "Sets the MIDI base note of the string, used in conjunction with bowcontrolharmonicbase", false, true, &s_baseNote,
-        eCommandType_data::ectSimpleInt8 | eCommandType_function::ectSetting },
-    { "shift", "sh", "-32767-32767", "Setting shift from the currently playing harmonic where 32767 equals the entire harmonic shift range shifted up", false, false, &s_shift,
-        eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectParameter },
+        false, false, &s_harmonic, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectLiveParameter },
+    { "harmonicadd", "ha", "int", "This number is added to the current harmonic", false, false, &s_harmonicAdd,
+        eCommandType_data::ectSimpleInt8 | eCommandType_function::ectLiveParameter },
+    { "harmonicbase", "hb", "int", "Same as harmonic but where the harmonic number is based on a MIDI note given by basenote", false, false, &s_harmonicBase,
+        eCommandType_data::ectSimpleInt8 | eCommandType_function::ectLiveParameter },
+    { "basenote", "bn", "0-127", "Sets the MIDI base note of the bowing wheel, used in conjunction with harmonicbase", false, true, &s_baseNote,
+        eCommandType_data::ectSimpleInt8 | eCommandType_function::ectCalibration },
+    { "shift", "sh", "-32767-32767", "Sets shift from the currently playing harmonic where 32767 equals the entire harmonic shift range shifted up", false, false, &s_shift,
+        eCommandType_data::ectSimpleInt16 | eCommandType_function::ectLiveParameter },
+//    { "tune", "tu", "freq", "Tune the entire scale by the given frequency, can be positive or negative"    }
     { "shiftrange", "sr", "0-36", "Set the number of harmonic numbers that constitutes the entire harmonic shift", false, true, &s_shiftRange,
-        eCommandType_data::ectSimpleInt8 | eCommandType_function::ectSetting },
+        eCommandType_data::ectSimpleInt8 | eCommandType_function::ectCalibration },
     { "shift5", "sh5", "-32767-32767", "Setting shift from the currently playing harmonic over 5 octaves where 32767 equals 5 octaves shift up from the fundamental", false, false, &s_shift5,
-        eCommandType_data::ectSimpleInt16 | eCommandType_function::ectParameter },
-    { "add", "a", "(name):(ratios)", "Add a new series with the given name and parameters", false, false, &s_add, eCommandType_data::ectData | eCommandType_function::ectAdd },
+        eCommandType_data::ectSimpleInt16 | eCommandType_function::ectLiveParameter },
+    { "add", "a", "(name):(ratios)", "Add a new series with the given name and parameters", false, false, &s_add, eCommandType_data::ectData | eCommandType_function::ectAddModule },
     { "remove", "rm", "series", "Remove the series given and shift any series accordingly. Cannot remove all series", false, false, &s_remove,
-        eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectRemove },
+        eCommandType_function::ectRemoveModule },
     { "count", "c", "-", "Returns the number of harmonic series in the list and their IDs", false, false, &s_count,
-        eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectCount | eCommandType_access::ectRequest },
+        eCommandType_function::ectCountModules | eCommandType_access::ectRequest },
 };
 
 getModuleCount(HarmonicSeriesHandler)
@@ -78,7 +79,8 @@ CREATE_MODULE_COMMAND_FUNCTION(add, HarmonicSeriesHandler) {
         }
     }
 
-    String response = thisItem.shortCommand + ":" + delimitExpression(lHarmonicSeries->Id, true);
+    ModuleGroup *group = getGroup("harmonicseries");
+    String response = thisItem.shortCommand + ":harmonicseries:" + String(group->modules.size() - 1) + ":" + delimitExpression(lHarmonicSeries->Id, true);
     for (int i = 0; i < lHarmonicSeries->ratios.size(); i++) {
         response += ":" + String(lHarmonicSeries->ratios[i]);
     }
@@ -100,7 +102,7 @@ CREATE_MODULE_COMMAND_FUNCTION(remove, HarmonicSeriesHandler) {
             return eProcessResult::CommandFailed;
         }
     }
-    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(getGroup("harmonicseries")->modules.size()), debugPrintType::InfoRequest });
+    inCommandResponses->push_back({ thisItem.shortCommand + ":harmonicseries:" + String(getGroup("harmonicseries")->modules.size()), debugPrintType::InfoRequest });
     return eProcessResult::Ok;
 };
 
@@ -339,6 +341,24 @@ HarmonicSeries* HarmonicSeriesHandler::addHarmonicSeries(String id, float freque
 void HarmonicSeriesHandler::dumpData(std::vector<commandResponse> *inCommandResponses) {
     ModuleHandler::dumpData(inCommandResponses);
     inCommandResponses->push_back({ "hs[" + String(moduleGroups[0].selection[0]) + "]", debugPrintType::InfoRequest });
+}
+
+void HarmonicSeriesHandler::addInstances(String name, uint8_t count) {
+    debugPrintln("addInstances reached", debugPrintType::Debug);
+    if ((name != "hs") and (name != "harmonicseries")) {
+        debugPrintln("Unknown instance name '" + name + "'", debugPrintType::Error);
+    } else {
+        ModuleGroup *group = getGroup("harmonicseries");
+        if (group == nullptr) {
+                debugPrintln("Error in addInstances", debugPrintType::Error);
+                return;
+        }
+        debugPrintln("Count is " + String(count) + " size is " + String(group->modules.size()), debugPrintType::Debug);
+        while (count > group->modules.size()) {
+            group->addModule(new HarmonicSeries());
+            debugPrintln("Added module '" + name + "'", debugPrintType::Debug);
+        }
+    }
 }
 
 #endif // HARMONICSERIESHANDLER_H

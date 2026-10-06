@@ -38,13 +38,13 @@ void \mbox{\hyperlink{classModuleGroup_acad6e0e158782990f63fe28219faf389}{dir}} 
 \item 
 void \mbox{\hyperlink{classModuleGroup_a27b05bb52b6cb2d90e3476077afdf173}{help}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix)
 \item 
-\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModuleGroup_a50cfe5dba8c8fd4c5370db3783080c5e}{process\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModuleGroup_ad7c01d5a4c00865d45e3aab9fd733c64}{process\+Commands}} (\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
 \item 
-void \mbox{\hyperlink{classModuleGroup_a8717163c078eab3cde180864ae0b97e0}{set\+Index\+Callback}} (\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}in\+Owner, void(\texorpdfstring{$\ast$}{*}in\+Callback)(\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classModuleGroup_ae091ad7a4842bc2ba9ce9d4f54614226}{owner}}, \mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*}module\+Group))
+void \mbox{\hyperlink{classModuleGroup_a2895248d9c6ce2762570823bc2f4022c}{set\+Index\+Callback}} (\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}in\+Owner, bool(\texorpdfstring{$\ast$}{*}in\+Callback)(\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classModuleGroup_ae091ad7a4842bc2ba9ce9d4f54614226}{owner}}, \mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*}module\+Group))
 \item 
 void \mbox{\hyperlink{classModuleGroup_acc2dcc4657aa1206b0bcdd47e161214e}{dump\+Data}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}data\+Dump)
 \item 
-bool \mbox{\hyperlink{classModuleGroup_a5ce734e35209ce46f679fd36bb33965a}{indexing}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item)
+bool \mbox{\hyperlink{classModuleGroup_a15e75670d8832e6096225d56b87eeb0c}{indexing}} (\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -53,7 +53,7 @@ bool \mbox{\hyperlink{classModuleGroup_a5ce734e35209ce46f679fd36bb33965a}{indexi
 \item 
 \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \mbox{\hyperlink{classModuleGroup_a9065b6ea6e705670d51daa469e2c387b}{tmodule\+ID}}
 \item 
-\mbox{\hyperlink{commandparser_8hpp_aef2174e268da3b99985a2d6018a32409}{SELECTION}} \mbox{\hyperlink{classModuleGroup_af65596b8184170bed3b063917cdd0af5}{selection}}
+\mbox{\hyperlink{commanditem_8hpp_aef2174e268da3b99985a2d6018a32409}{SELECTION}} \mbox{\hyperlink{classModuleGroup_af65596b8184170bed3b063917cdd0af5}{selection}}
 \item 
 bool \mbox{\hyperlink{classModuleGroup_a805cd7c74ebdfdc02abb5d77b7054bd5}{single\+Selection}} = false
 \item 
@@ -90,7 +90,15 @@ bool(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleGroup_ad1059699173ec
 \doxysubsubsection{\texorpdfstring{addModule()}{addModule()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} Module\+Group\+::add\+Module (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}}]{in\+Module }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classModuleGroup_a6bfbb3a4931c37b2ea5d5d0439e0c952_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -154,37 +162,30 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{help()}{help()}}
 {\footnotesize\ttfamily void Module\+Group\+::help (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{in\+Command\+Responses,  }\item[{String}]{long\+Prefix,  }\item[{String}]{short\+Prefix }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classModuleGroup_a27b05bb52b6cb2d90e3476077afdf173_cgraph}
-\end{center}
-\end{figure}
-\Hypertarget{classModuleGroup_a5ce734e35209ce46f679fd36bb33965a}\label{classModuleGroup_a5ce734e35209ce46f679fd36bb33965a} 
+\Hypertarget{classModuleGroup_a15e75670d8832e6096225d56b87eeb0c}\label{classModuleGroup_a15e75670d8832e6096225d56b87eeb0c} 
 \index{ModuleGroup@{ModuleGroup}!indexing@{indexing}}
 \index{indexing@{indexing}!ModuleGroup@{ModuleGroup}}
 \doxysubsubsection{\texorpdfstring{indexing()}{indexing()}}
-{\footnotesize\ttfamily bool Module\+Group\+::indexing (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool Module\+Group\+::indexing (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classModuleGroup_a5ce734e35209ce46f679fd36bb33965a_cgraph}
+\includegraphics[width=350pt]{classModuleGroup_a15e75670d8832e6096225d56b87eeb0c_cgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classModuleGroup_a50cfe5dba8c8fd4c5370db3783080c5e}\label{classModuleGroup_a50cfe5dba8c8fd4c5370db3783080c5e} 
+\Hypertarget{classModuleGroup_ad7c01d5a4c00865d45e3aab9fd733c64}\label{classModuleGroup_ad7c01d5a4c00865d45e3aab9fd733c64} 
 \index{ModuleGroup@{ModuleGroup}!processCommands@{processCommands}}
 \index{processCommands@{processCommands}!ModuleGroup@{ModuleGroup}}
 \doxysubsubsection{\texorpdfstring{processCommands()}{processCommands()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Module\+Group\+::process\+Commands (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} Module\+Group\+::process\+Commands (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false} }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classModuleGroup_a50cfe5dba8c8fd4c5370db3783080c5e_cgraph}
+\includegraphics[width=350pt]{classModuleGroup_ad7c01d5a4c00865d45e3aab9fd733c64_cgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classModuleGroup_ad25b6763d2890573872308326c8cd2a7}\label{classModuleGroup_ad25b6763d2890573872308326c8cd2a7} 
@@ -207,24 +208,24 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classModuleGroup_ad25b6763d2890573872308326c8cd2a7_icgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classModuleGroup_a8717163c078eab3cde180864ae0b97e0}\label{classModuleGroup_a8717163c078eab3cde180864ae0b97e0} 
+\Hypertarget{classModuleGroup_a2895248d9c6ce2762570823bc2f4022c}\label{classModuleGroup_a2895248d9c6ce2762570823bc2f4022c} 
 \index{ModuleGroup@{ModuleGroup}!setIndexCallback@{setIndexCallback}}
 \index{setIndexCallback@{setIndexCallback}!ModuleGroup@{ModuleGroup}}
 \doxysubsubsection{\texorpdfstring{setIndexCallback()}{setIndexCallback()}}
-{\footnotesize\ttfamily void Module\+Group\+::set\+Index\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}}]{in\+Owner,  }\item[{void(\texorpdfstring{$\ast$}{*})(\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classModuleGroup_ae091ad7a4842bc2ba9ce9d4f54614226}{owner}}, \mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*}module\+Group)}]{in\+Callback }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Module\+Group\+::set\+Index\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}}]{in\+Owner,  }\item[{bool(\texorpdfstring{$\ast$}{*})(\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classModuleGroup_ae091ad7a4842bc2ba9ce9d4f54614226}{owner}}, \mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*}module\+Group)}]{in\+Callback }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classModuleGroup_a8717163c078eab3cde180864ae0b97e0_cgraph}
+\includegraphics[width=350pt]{classModuleGroup_a2895248d9c6ce2762570823bc2f4022c_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classModuleGroup_a8717163c078eab3cde180864ae0b97e0_icgraph}
+\includegraphics[width=350pt]{classModuleGroup_a2895248d9c6ce2762570823bc2f4022c_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classModuleGroup_af24aa1dfc36a2312c4374ead5bffe4ac}\label{classModuleGroup_af24aa1dfc36a2312c4374ead5bffe4ac} 
@@ -291,7 +292,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{ModuleGroup@{ModuleGroup}!selection@{selection}}
 \index{selection@{selection}!ModuleGroup@{ModuleGroup}}
 \doxysubsubsection{\texorpdfstring{selection}{selection}}
-{\footnotesize\ttfamily \mbox{\hyperlink{commandparser_8hpp_aef2174e268da3b99985a2d6018a32409}{SELECTION}} Module\+Group\+::selection}
+{\footnotesize\ttfamily \mbox{\hyperlink{commanditem_8hpp_aef2174e268da3b99985a2d6018a32409}{SELECTION}} Module\+Group\+::selection}
 
 \Hypertarget{classModuleGroup_a805cd7c74ebdfdc02abb5d77b7054bd5}\label{classModuleGroup_a805cd7c74ebdfdc02abb5d77b7054bd5} 
 \index{ModuleGroup@{ModuleGroup}!singleSelection@{singleSelection}}

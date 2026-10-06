@@ -38,7 +38,7 @@
 \DoxyCodeLine{00044\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classservoStepper_aea134299b06f53f581a20c4c16ab963e}{accelerationSteps}}\ =\ 35;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ 30\ min\ for\ serial\ control\ @\ speed\ 20}}
 \DoxyCodeLine{00045\ }
 \DoxyCodeLine{00046\ \ \ \ \ IntervalTimer\ \mbox{\hyperlink{classservoStepper_a7e22e14773073f92d8670fd66762853d}{stepInterval}};}
-\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{classservoStepper_a9354943971fa185957e25c1b2106b3ac}{stepIntervalCallback}};}
+\DoxyCodeLine{00047\ \ \ \ \ void\ (*\mbox{\hyperlink{classservoStepper_af1a200a31b6e04fe61c2beb3ea039ec3}{stepIntervalCallback}})();}
 \DoxyCodeLine{00048\ }
 \DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classservoStepper_a6ce149fe254e8fa5c1b93d73d16b11e5}{reachedTarget}}\ =\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00050\ }
@@ -122,7 +122,7 @@
 \DoxyCodeLine{00128\ }
 \DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classservoStepper_acac2b7ede284e6e575793cf2a319f799}{tsDebugPrintln}}(String\ m\_msg,\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debugPrintType}}\ m\_dpType)\ \{}
 \DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{debugprint_8cpp_a02212746d4c3138ec12bc5d582e5dc8f}{debugPrintCheckType}}(m\_dpType))\ \{}
-\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a1ce32e635777e6e5ce904dfc3a935e8a}{intDrivenMsgP}}\ +=\ \textcolor{stringliteral}{"{}["{}}\ +\ \mbox{\hyperlink{debugprint_8cpp_af34696f4b155e8b3d6c05a4eb26a35b5}{debugPrintTypeNameShort}}[m\_dpType]\ +\ \textcolor{stringliteral}{"{}]"{}}\ +\ m\_msg;}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a1ce32e635777e6e5ce904dfc3a935e8a}{intDrivenMsgP}}\ +=\ \textcolor{stringliteral}{"{}["{}}\ +\ \mbox{\hyperlink{debugprint_8cpp_a7f2721280cae683e7f3632c3da5e4a8e}{debugPrintTypeNameShort}}[m\_dpType]\ +\ \textcolor{stringliteral}{"{}]"{}}\ +\ m\_msg;}
 \DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00133\ \ \ \ \ \}}
 \DoxyCodeLine{00134\ }
@@ -318,8 +318,8 @@
 \DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00325\ }
 \DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a6ac51a96a27dfaccd4b88da6bc4021b7}{stepNext}}(\mbox{\hyperlink{classservoStepper_a1883b61564ace7a8797983f7965592e6}{uAccelPeriod}});}
-\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_a9354943971fa185957e25c1b2106b3ac}{stepIntervalCallback}}\ !=\ \textcolor{keyword}{nullptr})\ \{}
-\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a7e22e14773073f92d8670fd66762853d}{stepInterval}}.begin(\mbox{\hyperlink{classservoStepper_a9354943971fa185957e25c1b2106b3ac}{stepIntervalCallback}},\ ((\textcolor{keywordtype}{double})\ \mbox{\hyperlink{classservoStepper_a1883b61564ace7a8797983f7965592e6}{uAccelPeriod}}));}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classservoStepper_af1a200a31b6e04fe61c2beb3ea039ec3}{stepIntervalCallback}}\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classservoStepper_a7e22e14773073f92d8670fd66762853d}{stepInterval}}.begin(\mbox{\hyperlink{classservoStepper_af1a200a31b6e04fe61c2beb3ea039ec3}{stepIntervalCallback}},\ ((\textcolor{keywordtype}{double})\ \mbox{\hyperlink{classservoStepper_a1883b61564ace7a8797983f7965592e6}{uAccelPeriod}}));}
 \DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \}}

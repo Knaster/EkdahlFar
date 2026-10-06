@@ -6,7 +6,7 @@
 #include "plugins/pluginhandler.hpp"
 #include "master_controller/global_generics.hpp"
 
-#ifndef NO_EXTERNAL_MODULES
+#ifdef USE_EXTERNAL_MODULES
 #include "master_controller/externalmodulehandler.hpp"
 #endif
 
@@ -54,7 +54,7 @@ public:
 protected:
     PluginHandler *pluginHandler = nullptr;
     ExpressionParser *expressionParser = nullptr;
-#ifndef NO_EXTERNAL_MODULES
+#ifdef USE_EXTERNAL_MODULES
     ExternalModuleHandler *externalModuleHandler = nullptr;
 #endif
     String pNickName = "";

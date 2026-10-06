@@ -86,6 +86,7 @@ public:
     MIDIHardwareWrapper* addMIDISource(usb_midi_class *inUSBMIDI);
 
     void dumpData(std::vector<commandResponse> *dataDump) override;
+    void addInstances(String name, uint8_t count) override;
 
     bool addDefaultConfiguration();
 

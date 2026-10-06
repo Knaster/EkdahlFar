@@ -52,6 +52,6 @@ private:
                                            std::vector<Plugin_Mult_Connector> *connectors);
 };
 
-REGISTERPLUGIN(Plugin_Mult)
+REGISTERPLUGIN(Plugin_Mult, 4)
 
 #endif // PLUGIN_MULT_HPP

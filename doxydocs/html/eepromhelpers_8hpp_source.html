@@ -99,46 +99,38 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> *</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> * Copyright (C) 2024 Karl Ekdahl</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> */</span></div>
-<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="eepromhelpers_8hpp.html#aa24ecf0d4c0610d752b0e8e5aa887486">   19</a></span>uint32_t <a class="code hl_function" href="eepromhelpers_8hpp.html#aa24ecf0d4c0610d752b0e8e5aa887486">EEPROMSaveString</a>(String *data, uint32_t EEPROM_offset) {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="comment">//eeprom_write_byte(EEPROM_offset, data-&gt;length());</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    uint32_t datal = data-&gt;length();</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    eeprom_write_dword(0, datal);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//    eeprom_read_block(const void *addr)</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    eeprom_write_block(data-&gt;c_str(), (<span class="keywordtype">void</span>*) (EEPROM_offset + 4), data-&gt;length() + 1); <span class="comment">// Save one above length so the trailing NULL is included</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordflow">return</span> 2 + data-&gt;length();</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#ifndef EEPROM_HELPERS_HPP</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#define EEPROM_HELPERS_HPP</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="}">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="eepromhelpers_8hpp.html#aa24ecf0d4c0610d752b0e8e5aa887486">   22</a></span>uint32_t <a class="code hl_function" href="eepromhelpers_8hpp.html#aa24ecf0d4c0610d752b0e8e5aa887486">EEPROMSaveString</a>(String *data, uint32_t EEPROM_offset) {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    uint32_t datal = data-&gt;length();</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    eeprom_write_dword(0, datal);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    eeprom_write_block(data-&gt;c_str(), (<span class="keywordtype">void</span>*) (EEPROM_offset + 4), data-&gt;length() + 1); <span class="comment">// Save one above length so the trailing NULL is included</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordflow">return</span> 2 + data-&gt;length();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
 </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="eepromhelpers_8hpp.html#a030652f23e30526a2b56af8de9d3e4dc">   28</a></span>uint32_t <a class="code hl_function" href="eepromhelpers_8hpp.html#a030652f23e30526a2b56af8de9d3e4dc">EEPROMLoadString</a>(String *data, uint32_t EEPROM_offset) {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    uint32_t datal = 0;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    eeprom_read_block(&amp;datal, (<span class="keywordtype">void</span>*) (EEPROM_offset), 1);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    datal = eeprom_read_dword(0);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordflow">if</span> (datal != 0) {</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keywordtype">char</span> text[datal + 1];  <span class="comment">// Make enough room for the Text + NULL</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        eeprom_read_block(&amp;text, (<span class="keywordtype">void</span>*) (EEPROM_offset + 4), datal + 1); <span class="comment">// save text + NULL</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        *data = text;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        *data = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    }</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">return</span> datal + 2;  <span class="comment">// +1 for intial length byte, +1 for trailing NULL</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="}">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="eepromhelpers_8hpp.html#a030652f23e30526a2b56af8de9d3e4dc">   29</a></span>uint32_t <a class="code hl_function" href="eepromhelpers_8hpp.html#a030652f23e30526a2b56af8de9d3e4dc">EEPROMLoadString</a>(String *data, uint32_t EEPROM_offset) {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    uint32_t datal = 0;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    eeprom_read_block(&amp;datal, (<span class="keywordtype">void</span>*) (EEPROM_offset), 1);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    datal = eeprom_read_dword(0);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordflow">if</span> (datal != 0) {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keywordtype">char</span> text[datal + 1];  <span class="comment">// Make enough room for the Text + NULL</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        eeprom_read_block(&amp;text, (<span class="keywordtype">void</span>*) (EEPROM_offset + 4), datal + 1); <span class="comment">// save text + NULL</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        *data = text;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        *data = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">return</span> datal + 2;  <span class="comment">// +1 for intial length byte, +1 for trailing NULL</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>}</div>
 </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">/*</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">void debugPrintEEPROM(uint16_t offset, uint16_t count) {</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">  uint8_t b1;</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">  for (int i=offset; i&lt;(offset+count); i++) {</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">      b1 = eeprom_read_byte(i);</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">      debugPrint(String(b1) + &quot; &quot;, Debug);</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">  }</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">  debugPrintln(String(b1) + &quot; &quot;, Debug);</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">}</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"></span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">*/</span></div>
-<div class="ttc" id="aeepromhelpers_8hpp_html_a030652f23e30526a2b56af8de9d3e4dc"><div class="ttname"><a href="eepromhelpers_8hpp.html#a030652f23e30526a2b56af8de9d3e4dc">EEPROMLoadString</a></div><div class="ttdeci">uint32_t EEPROMLoadString(String *data, uint32_t EEPROM_offset)</div><div class="ttdef"><b>Definition</b> eepromhelpers.hpp:28</div></div>
-<div class="ttc" id="aeepromhelpers_8hpp_html_aa24ecf0d4c0610d752b0e8e5aa887486"><div class="ttname"><a href="eepromhelpers_8hpp.html#aa24ecf0d4c0610d752b0e8e5aa887486">EEPROMSaveString</a></div><div class="ttdeci">uint32_t EEPROMSaveString(String *data, uint32_t EEPROM_offset)</div><div class="ttdef"><b>Definition</b> eepromhelpers.hpp:19</div></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aeepromhelpers_8hpp_html_a030652f23e30526a2b56af8de9d3e4dc"><div class="ttname"><a href="eepromhelpers_8hpp.html#a030652f23e30526a2b56af8de9d3e4dc">EEPROMLoadString</a></div><div class="ttdeci">uint32_t EEPROMLoadString(String *data, uint32_t EEPROM_offset)</div><div class="ttdef"><b>Definition</b> eepromhelpers.hpp:29</div></div>
+<div class="ttc" id="aeepromhelpers_8hpp_html_aa24ecf0d4c0610d752b0e8e5aa887486"><div class="ttname"><a href="eepromhelpers_8hpp.html#aa24ecf0d4c0610d752b0e8e5aa887486">EEPROMSaveString</a></div><div class="ttdeci">uint32_t EEPROMSaveString(String *data, uint32_t EEPROM_offset)</div><div class="ttdef"><b>Definition</b> eepromhelpers.hpp:22</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

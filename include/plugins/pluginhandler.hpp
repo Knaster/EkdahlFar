@@ -31,6 +31,8 @@ public:
     struct PluginRegistry {
         creator_t creator;
         tModuleID tmoduleID;
+        int moduleCommandCount;
+        ModuleCommandDeclaration *moduleCommands;
     };
 
     static PluginFactory& instance() {
@@ -40,8 +42,8 @@ public:
 
     std::vector<PluginRegistry> plugins;
 
-    void registerPlugin(creator_t creator, tModuleID tmoduleID) {
-        plugins.push_back({ std::move(creator), tmoduleID });
+    void registerPlugin(creator_t creator, tModuleID tmoduleID, int moduleCommandCount, ModuleCommandDeclaration *moduleCommands) {
+        plugins.push_back({ std::move(creator), tmoduleID, moduleCommandCount, moduleCommands });
     }
 
 //    std::unique_ptr<Plugin> create(const std::string& longName) const {
@@ -91,9 +93,9 @@ private:
         expressionParser->registerFunction(tmoduleID.shortName, (const void*) &callback, TE_FUNCTION2); \
     } \
 
-#define REGISTERPLUGIN(class) \
+#define REGISTERPLUGIN(class, commandCount) \
     bool class::registered = [] { \
-        PluginFactory::instance().registerPlugin(&class::create, class::getModuleIDStatic()); \
+        PluginFactory::instance().registerPlugin(&class::create, class::getModuleIDStatic(), commandCount, class::moduleCommands); \
         return true; \
     } (); \
     \
@@ -150,6 +152,8 @@ public:
     CREATE_MODULE_COMMAND_FUNCTION_FWD(count, PluginHandler)
 
     PluginHandler(ExpressionParser *inExpressionParser);
+
+    void help(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix);
 
     void update() override;
     bool addPlugin(String name);

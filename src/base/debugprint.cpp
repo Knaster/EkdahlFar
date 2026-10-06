@@ -54,12 +54,22 @@ bool debugPrintCheckType(debugPrintType printType) {
 }
 
 void debugPrint(String text, debugPrintType printType) {
-  if (debugPrintCheckType(printType)) { ssOutput.print("[" + debugPrintTypeNameShort[printType] + "]" + text); }
+  if (debugPrintCheckType(printType)) {
+        ssOutput.print("[" + debugPrintTypeNameShort[printType] + "]" + text);
+        #ifdef USE_USART_AS_EXT
+        ssExternalOutput.print("[" + debugPrintTypeNameShort[printType] + "]" + text);
+        #endif
+  }
   return;
 }
 
 void debugPrintln(String text, debugPrintType printType) {
-  if (debugPrintCheckType(printType)) { ssOutput.println("[" + debugPrintTypeNameShort[printType] + "]" + text); } // + " [" + debugPrintTypeName[printType] + "]"
+  if (debugPrintCheckType(printType)) {
+        ssOutput.println("[" + debugPrintTypeNameShort[printType] + "]" + text);
+        #ifdef USE_USART_AS_EXT
+        ssExternalOutput.println("[" + debugPrintTypeNameShort[printType] + "]" + text);
+        #endif
+  } // + " [" + debugPrintTypeName[printType] + "]"
   return;
 }
 

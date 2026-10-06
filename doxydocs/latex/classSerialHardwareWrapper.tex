@@ -1,0 +1,205 @@
+\doxysection{Serial\+Hardware\+Wrapper Class Reference}
+\hypertarget{classSerialHardwareWrapper}{}\label{classSerialHardwareWrapper}\index{SerialHardwareWrapper@{SerialHardwareWrapper}}
+
+
+{\ttfamily \#include $<$externalmodulehandler.\+hpp$>$}
+
+
+
+Collaboration diagram for Serial\+Hardware\+Wrapper\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSerialHardwareWrapper__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSerialHardwareWrapper_aa16c906a19c1e210c785a96597eb37cf}{Serial\+Hardware\+Wrapper}} (Hardware\+Serial \texorpdfstring{$\ast$}{*}in\+Port, uint32\+\_\+t in\+Baud, \mbox{\hyperlink{classModuleHandler}{Module\+Handler}} \texorpdfstring{$\ast$}{*}in\+Main\+Module, void \texorpdfstring{$\ast$}{*}parent)
+\item 
+\mbox{\hyperlink{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508}{e\+Scan\+Response}} \mbox{\hyperlink{classSerialHardwareWrapper_a6b17943dd45092164922ec401ecd5b8d}{scan\+For\+Modules}} ()
+\item 
+void \mbox{\hyperlink{classSerialHardwareWrapper_a48687974906c41abc266c004864c5c78}{check\+For\+Data}} ()
+\item 
+void \mbox{\hyperlink{classSerialHardwareWrapper_ae6fc27b78bbfdc16ab93a9e1fea98957}{transmit}} (String commands, uint8\+\_\+t ext\+ID)
+\item 
+void \mbox{\hyperlink{classSerialHardwareWrapper_a59a118e9cbfa1802553507c510494581}{update}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classSerialHardwareWrapper_a17746d07362d3a0ff15e06c712b7ecd4}{s\+\_\+transmit}} (String commands, uint8\+\_\+t ext\+ID, void \texorpdfstring{$\ast$}{*}parent)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSerialHardwareWrapper_aba11653c78cd041745d019367632ad19}{tmodule\+ID}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classSerialHardwareWrapper_ac581edf7b73122e1dbc5412b44aa3d83}{child\+Count}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Hardware\+Serial \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSerialHardwareWrapper_a7b119864a4d3b4394e37e9f078b8d84a}{port}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classSerialHardwareWrapper_a38a066dd29f4f28802816ce36b2bea82}{baud}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool() \mbox{\hyperlink{classSerialHardwareWrapper_a038e3b61e4e05dd87cb26c9f8c175a5e}{emh\+Callback}} (\mbox{\hyperlink{classModule}{Module}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classSerialHardwareWrapper_aaffcbc83c4d07942323bf3bd51f76c93}{current\+Index}}
+\item 
+const uint16\+\_\+t \mbox{\hyperlink{classSerialHardwareWrapper_acbaaa6f3b74bc38a144e5289eb4afdde}{serial\+Timeout}} = 250
+\item 
+\mbox{\hyperlink{classModuleHandler}{Module\+Handler}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSerialHardwareWrapper_a876844ebb3e2bb8af805bcd638164f46}{main\+Module}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classExternalModule}{External\+Module}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classSerialHardwareWrapper_a74733d2dfda8e78f12577b035fed0362}{modules}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structexternalOutItem}{external\+Out\+Item}} $>$ \mbox{\hyperlink{classSerialHardwareWrapper_a4bb5f11fb78d2b460d6185ee82c849f6}{external\+Output\+Buffer}}
+\item 
+String \mbox{\hyperlink{classSerialHardwareWrapper_abae6d5a47ce8a75c4ff60b18d3fb0efc}{beep}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classSerialHardwareWrapper_aa16c906a19c1e210c785a96597eb37cf}\label{classSerialHardwareWrapper_aa16c906a19c1e210c785a96597eb37cf} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{SerialHardwareWrapper()}{SerialHardwareWrapper()}}
+{\footnotesize\ttfamily Serial\+Hardware\+Wrapper\+::\+Serial\+Hardware\+Wrapper (\begin{DoxyParamCaption}\item[{Hardware\+Serial \texorpdfstring{$\ast$}{*}}]{in\+Port,  }\item[{uint32\+\_\+t}]{in\+Baud,  }\item[{\mbox{\hyperlink{classModuleHandler}{Module\+Handler}} \texorpdfstring{$\ast$}{*}}]{in\+Main\+Module,  }\item[{void \texorpdfstring{$\ast$}{*}}]{parent }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classSerialHardwareWrapper_a48687974906c41abc266c004864c5c78}\label{classSerialHardwareWrapper_a48687974906c41abc266c004864c5c78} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!checkForData@{checkForData}}
+\index{checkForData@{checkForData}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{checkForData()}{checkForData()}}
+{\footnotesize\ttfamily void Serial\+Hardware\+Wrapper\+::check\+For\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classSerialHardwareWrapper_a038e3b61e4e05dd87cb26c9f8c175a5e}\label{classSerialHardwareWrapper_a038e3b61e4e05dd87cb26c9f8c175a5e} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!emhCallback@{emhCallback}}
+\index{emhCallback@{emhCallback}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{emhCallback()}{emhCallback()}}
+{\footnotesize\ttfamily bool() Serial\+Hardware\+Wrapper\+::emh\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classModule}{Module}}}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classSerialHardwareWrapper_a17746d07362d3a0ff15e06c712b7ecd4}\label{classSerialHardwareWrapper_a17746d07362d3a0ff15e06c712b7ecd4} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!s\_transmit@{s\_transmit}}
+\index{s\_transmit@{s\_transmit}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{s\_transmit()}{s\_transmit()}}
+{\footnotesize\ttfamily void Serial\+Hardware\+Wrapper\+::s\+\_\+transmit (\begin{DoxyParamCaption}\item[{String}]{commands,  }\item[{uint8\+\_\+t}]{ext\+ID,  }\item[{void \texorpdfstring{$\ast$}{*}}]{parent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classSerialHardwareWrapper_a6b17943dd45092164922ec401ecd5b8d}\label{classSerialHardwareWrapper_a6b17943dd45092164922ec401ecd5b8d} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!scanForModules@{scanForModules}}
+\index{scanForModules@{scanForModules}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{scanForModules()}{scanForModules()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508}{e\+Scan\+Response}} Serial\+Hardware\+Wrapper\+::scan\+For\+Modules (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSerialHardwareWrapper_a6b17943dd45092164922ec401ecd5b8d_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classSerialHardwareWrapper_ae6fc27b78bbfdc16ab93a9e1fea98957}\label{classSerialHardwareWrapper_ae6fc27b78bbfdc16ab93a9e1fea98957} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!transmit@{transmit}}
+\index{transmit@{transmit}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{transmit()}{transmit()}}
+{\footnotesize\ttfamily void Serial\+Hardware\+Wrapper\+::transmit (\begin{DoxyParamCaption}\item[{String}]{commands,  }\item[{uint8\+\_\+t}]{ext\+ID }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSerialHardwareWrapper_ae6fc27b78bbfdc16ab93a9e1fea98957_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classSerialHardwareWrapper_a59a118e9cbfa1802553507c510494581}\label{classSerialHardwareWrapper_a59a118e9cbfa1802553507c510494581} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!update@{update}}
+\index{update@{update}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Serial\+Hardware\+Wrapper\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSerialHardwareWrapper_a59a118e9cbfa1802553507c510494581_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classSerialHardwareWrapper_a38a066dd29f4f28802816ce36b2bea82}\label{classSerialHardwareWrapper_a38a066dd29f4f28802816ce36b2bea82} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!baud@{baud}}
+\index{baud@{baud}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{baud}{baud}}
+{\footnotesize\ttfamily uint32\+\_\+t Serial\+Hardware\+Wrapper\+::baud\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classSerialHardwareWrapper_abae6d5a47ce8a75c4ff60b18d3fb0efc}\label{classSerialHardwareWrapper_abae6d5a47ce8a75c4ff60b18d3fb0efc} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!beep@{beep}}
+\index{beep@{beep}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{beep}{beep}}
+{\footnotesize\ttfamily String Serial\+Hardware\+Wrapper\+::beep\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classSerialHardwareWrapper_ac581edf7b73122e1dbc5412b44aa3d83}\label{classSerialHardwareWrapper_ac581edf7b73122e1dbc5412b44aa3d83} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!childCount@{childCount}}
+\index{childCount@{childCount}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{childCount}{childCount}}
+{\footnotesize\ttfamily uint8\+\_\+t Serial\+Hardware\+Wrapper\+::child\+Count}
+
+\Hypertarget{classSerialHardwareWrapper_aaffcbc83c4d07942323bf3bd51f76c93}\label{classSerialHardwareWrapper_aaffcbc83c4d07942323bf3bd51f76c93} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!currentIndex@{currentIndex}}
+\index{currentIndex@{currentIndex}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{currentIndex}{currentIndex}}
+{\footnotesize\ttfamily uint8\+\_\+t Serial\+Hardware\+Wrapper\+::current\+Index\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classSerialHardwareWrapper_a4bb5f11fb78d2b460d6185ee82c849f6}\label{classSerialHardwareWrapper_a4bb5f11fb78d2b460d6185ee82c849f6} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!externalOutputBuffer@{externalOutputBuffer}}
+\index{externalOutputBuffer@{externalOutputBuffer}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{externalOutputBuffer}{externalOutputBuffer}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structexternalOutItem}{external\+Out\+Item}}$>$ Serial\+Hardware\+Wrapper\+::external\+Output\+Buffer\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classSerialHardwareWrapper_a876844ebb3e2bb8af805bcd638164f46}\label{classSerialHardwareWrapper_a876844ebb3e2bb8af805bcd638164f46} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!mainModule@{mainModule}}
+\index{mainModule@{mainModule}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{mainModule}{mainModule}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classModuleHandler}{Module\+Handler}}\texorpdfstring{$\ast$}{*} Serial\+Hardware\+Wrapper\+::main\+Module\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classSerialHardwareWrapper_a74733d2dfda8e78f12577b035fed0362}\label{classSerialHardwareWrapper_a74733d2dfda8e78f12577b035fed0362} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!modules@{modules}}
+\index{modules@{modules}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{modules}{modules}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classExternalModule}{External\+Module}}\texorpdfstring{$\ast$}{*}$>$ Serial\+Hardware\+Wrapper\+::modules\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classSerialHardwareWrapper_a7b119864a4d3b4394e37e9f078b8d84a}\label{classSerialHardwareWrapper_a7b119864a4d3b4394e37e9f078b8d84a} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!port@{port}}
+\index{port@{port}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily Hardware\+Serial\texorpdfstring{$\ast$}{*} Serial\+Hardware\+Wrapper\+::port\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classSerialHardwareWrapper_acbaaa6f3b74bc38a144e5289eb4afdde}\label{classSerialHardwareWrapper_acbaaa6f3b74bc38a144e5289eb4afdde} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!serialTimeout@{serialTimeout}}
+\index{serialTimeout@{serialTimeout}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{serialTimeout}{serialTimeout}}
+{\footnotesize\ttfamily const uint16\+\_\+t Serial\+Hardware\+Wrapper\+::serial\+Timeout = 250\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classSerialHardwareWrapper_aba11653c78cd041745d019367632ad19}\label{classSerialHardwareWrapper_aba11653c78cd041745d019367632ad19} 
+\index{SerialHardwareWrapper@{SerialHardwareWrapper}!tmoduleID@{tmoduleID}}
+\index{tmoduleID@{tmoduleID}!SerialHardwareWrapper@{SerialHardwareWrapper}}
+\doxysubsubsection{\texorpdfstring{tmoduleID}{tmoduleID}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}}\texorpdfstring{$\ast$}{*} Serial\+Hardware\+Wrapper\+::tmodule\+ID}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{externalmodulehandler_8hpp}{externalmodulehandler.\+hpp}}\item 
+\mbox{\hyperlink{externalmodulehandler_8cpp}{externalmodulehandler.\+cpp}}\end{DoxyCompactItemize}

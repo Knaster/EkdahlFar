@@ -4,20 +4,20 @@
 #include "generic_functions/pidcontroller.hpp"
 
 const ModuleCommandDeclaration PIDController::moduleCommands[] = {
-    { "targetfrequency", "tf", "float", "Sets the PID target frequency", false, false, &s_targetFreq, eCommandType_data::ectHertz | eCommandType_function::ectParameter },
-    { "ki", "ki", "float", "Sets the Ki parameter of the PID of the selected bow", false, true, &s_ki, eCommandType_data::ectSimpleFloat | eCommandType_function::ectSetting },
-    { "kp", "kp", "float", "Sets the Kp parameter of the PID of the selected bow", false, true, &s_kp, eCommandType_data::ectSimpleFloat | eCommandType_function::ectSetting },
-    { "kd", "kd", "float", "Sets the Kd parameter of the PID of the selected bow", false, true, &s_kd, eCommandType_data::ectSimpleFloat | eCommandType_function::ectSetting },
-    { "integratorerror", "ie", "float", "Sets the lower threshold of error values for the PID integrator to ignore of the selected bow", false, true, &s_integratorError,
-        eCommandType_data::ectSimpleFloat | eCommandType_function::ectSetting },
-    { "reset", "re", "-", "Resets the PID of the selected bow", false, false, &s_reset, eCommandType_data::ectImmediate | eCommandType_function::ectSystem },
+    { "targetfrequency", "tf", "float", "Sets the PID target frequency", false, false, &s_targetFreq, eCommandType_data::ectHertz | eCommandType_function::ectLiveParameter },
+    { "ki", "ki", "float", "Sets the Ki parameter of the PID", false, true, &s_ki, eCommandType_data::ectSimpleFloat | eCommandType_function::ectCalibration },
+    { "kp", "kp", "float", "Sets the Kp parameter of the PID", false, true, &s_kp, eCommandType_data::ectSimpleFloat | eCommandType_function::ectCalibration },
+    { "kd", "kd", "float", "Sets the Kd parameter of the PID", false, true, &s_kd, eCommandType_data::ectSimpleFloat | eCommandType_function::ectCalibration },
+    { "integratorerror", "ie", "float", "Sets the lower threshold of error values for the PID integrator to ignore", false, true, &s_integratorError,
+        eCommandType_data::ectSimpleFloat | eCommandType_function::ectCalibration },
+    { "reset", "re", "-", "Resets the PID integrator and derivative", false, false, &s_reset, eCommandType_data::ectConditional | eCommandType_function::ectAdminAction | eCommandType_flags::ectSystem },
     { "maxerror", "xe", "float", "Maximum error to correct in each PID loop, essentially sets acceleration", false, true, &s_maxError,
-        eCommandType_data::ectSimpleFloat | eCommandType_function::ectSetting },
-    { "peakerror", "pe", "float", "Get latest PID peak error", false, false, &s_peakError, eCommandType_data::ectSimpleFloat | eCommandType_function::ectSystem | eCommandType_access::ectRequest },
-    { "motorspeedmax", "msx", "float", "Bow motor maximum speed limit", false, true, &s_motorSpeedMax, eCommandType_data::ectHertz | eCommandType_function::ectSetting },
-    { "motorspeedmin", "msi", "float", "Bow motor minimum speed limit", false, true, &s_motorSpeedMin, eCommandType_data::ectHertz | eCommandType_function::ectSetting },
+        eCommandType_data::ectSimpleFloat | eCommandType_function::ectCalibration },
+    { "peakerror", "pe", "float", "Get latest PID peak error", false, false, &s_peakError, eCommandType_data::ectSimpleFloat | eCommandType_function::ectLiveStatistics | eCommandType_access::ectRequest },
+    { "motorspeedmax", "msx", "float", "Bow motor maximum speed limit", false, true, &s_motorSpeedMax, eCommandType_data::ectHertz | eCommandType_function::ectCalibration | eCommandType_flags::ectVolatileSetting },
+    { "motorspeedmin", "msi", "float", "Bow motor minimum speed limit", false, true, &s_motorSpeedMin, eCommandType_data::ectHertz | eCommandType_function::ectCalibration | eCommandType_flags::ectVolatileSetting },
     { "measuretimetotarget", "mtt", "float", "Measure the time it takes to change from the current frequency to the target frequency", false, false, &s_measureTimeToTarget,
-        eCommandType_data::ectMilliseconds | eCommandType_function::ectSystem }
+        eCommandType_data::ectMilliseconds | eCommandType_function::ectAdminAction | eCommandType_access::ectInvokeOnly | eCommandType_flags::ectSystem }
 };
 
 getModuleCount(PIDController)

@@ -1,16 +1,15 @@
 \doxysection{commandparser.\+hpp File Reference}
 \hypertarget{commandparser_8hpp}{}\label{commandparser_8hpp}\index{commandparser.hpp@{commandparser.hpp}}
 {\ttfamily \#include "{}base/arduinorequired.\+hpp"{}}\newline
-Include dependency graph for commandparser.\+hpp\+:
-\nopagebreak
+{\ttfamily \#include "{}commanditem.\+hpp"{}}\newline
+Include dependency graph for commandparser.\+hpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{commandparser_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,181 +19,79 @@ This graph shows which files directly or indirectly include this file\+:
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{structcommandItemPart}{command\+Item\+Part}}
-\item 
-class \mbox{\hyperlink{classcommandItem}{command\+Item}}
-\begin{DoxyCompactList}\small\item\em Class containing command items consisting of one command and any number of arguments. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classcommandList}{command\+List}}
-\begin{DoxyCompactList}\small\item\em Class containing an array of \doxylink{classcommandItem}{command\+Item} objects and ways of processing them. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}}
-\begin{DoxyCompactList}\small\item\em Structure for containing help information as long as short-\/to-\/long name command name parsing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+struct \mbox{\hyperlink{structcommandResponse}{command\+Response}}
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{commandparser_8hpp_aef2174e268da3b99985a2d6018a32409}{SELECTION}}~std\+::vector$<$uint8\+\_\+t$>$
+\#define \mbox{\hyperlink{commandparser_8hpp_a64739a0f4e627e77b702cb4d964bcdb5}{command\+Response\+Type}}~\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{commandparser_8hpp_a2eea721b98604de46300feecf7703b60}{process\+Command\+Items}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}\+\_\+command\+Parser, const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Command\+Array\mbox{[}$\,$\mbox{]}, int size)
-\begin{DoxyCompactList}\small\item\em Preprocesses a \doxylink{classcommandItem}{command\+Item}, replacing any short command names with long ones and turns them all into lowercase. \end{DoxyCompactList}\item 
-String \mbox{\hyperlink{commandparser_8hpp_a4a189b33229a0bbe691a7f3921eebb7b}{print\+Command\+Help}} (\mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Command\+Array\mbox{[}$\,$\mbox{]}, int size)
-\begin{DoxyCompactList}\small\item\em Prints all help data for commands given in the serial\+Command\+Array. \end{DoxyCompactList}\item 
-String \mbox{\hyperlink{commandparser_8hpp_a9584ed5f207c1c49b9a477ada94421f8}{add\+Command\+Help}} (const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}} serial\+Command\+Array\mbox{[}$\,$\mbox{]}, int size, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, String prefix="{}"{})
-\begin{DoxyCompactList}\small\item\em Prints all help data for commands given in the serial\+Command\+Array. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{check\+Arguments}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}\+\_\+command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, uint8\+\_\+t arguments, bool t\+\_\+supress\+Error=false)
+bool \mbox{\hyperlink{commandparser_8hpp_a6d642cbd3ecbe3986bdcc291d9992aa4}{check\+Arguments}} (\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}\+\_\+command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, uint8\+\_\+t arguments, bool t\+\_\+supress\+Error=false)
 \item 
-bool \mbox{\hyperlink{commandparser_8hpp_a47b5a74095fe6948dc38caf72ddfbff0}{check\+Arguments\+Min}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}\+\_\+command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, uint8\+\_\+t arguments\+Min, bool t\+\_\+supress\+Error=false)
+bool \mbox{\hyperlink{commandparser_8hpp_adc39aed39cadb773bd43633feca7c9f6}{check\+Arguments\+Min}} (\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}\+\_\+command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, uint8\+\_\+t arguments\+Min, bool t\+\_\+supress\+Error=false)
 \item 
-bool \mbox{\hyperlink{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea}{validate\+Number}} (int16\+\_\+t number, int16\+\_\+t min, int16\+\_\+t max, bool t\+\_\+supress\+Error=false)
+void \mbox{\hyperlink{commandparser_8hpp_a8fe82b9f9d885f8a30e5b42db8445c0c}{print\+Responses}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool is\+Internal=false)
 \item 
-String \mbox{\hyperlink{commandparser_8hpp_ac7fc43fb1f213243ef62cd57653110cc}{delimit\+Expression}} (String expression, bool force=false)
-\item 
-String \mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{strip\+Quotes}} (String expression)
-\item 
-String \mbox{\hyperlink{commandparser_8hpp_aa2920a70f474546b537b11768a46d011}{remove\+Prefix}} (String input, String prefix)
-\end{DoxyCompactItemize}
-\doxysubsubsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-const uint8\+\_\+t \mbox{\hyperlink{commandparser_8hpp_aa230916c95623a7e6e5b94cae91a4a08}{quote\+Style}} \mbox{[}$\,$\mbox{]}
-\item 
-\mbox{\hyperlink{classcommandList}{command\+List}} \mbox{\hyperlink{commandparser_8hpp_a895567420077455478bd74c7bdbedbb2}{global\+Commands}}
-\item 
-\mbox{\hyperlink{classcommandList}{command\+List}} \mbox{\hyperlink{commandparser_8hpp_ae7826d05ec6eb6efce350270ead447c8}{global\+Response\+Commands}}
+String \mbox{\hyperlink{commandparser_8hpp_a1eff6989b7f7bce42d0debe46fb58f6d}{build\+Command\+String}} (\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
-\Hypertarget{commandparser_8hpp_aef2174e268da3b99985a2d6018a32409}\label{commandparser_8hpp_aef2174e268da3b99985a2d6018a32409} 
-\index{commandparser.hpp@{commandparser.hpp}!SELECTION@{SELECTION}}
-\index{SELECTION@{SELECTION}!commandparser.hpp@{commandparser.hpp}}
-\doxysubsubsection{\texorpdfstring{SELECTION}{SELECTION}}
-{\footnotesize\ttfamily \#define SELECTION~std\+::vector$<$uint8\+\_\+t$>$}
+\Hypertarget{commandparser_8hpp_a64739a0f4e627e77b702cb4d964bcdb5}\label{commandparser_8hpp_a64739a0f4e627e77b702cb4d964bcdb5} 
+\index{commandparser.hpp@{commandparser.hpp}!commandResponseType@{commandResponseType}}
+\index{commandResponseType@{commandResponseType}!commandparser.hpp@{commandparser.hpp}}
+\doxysubsubsection{\texorpdfstring{commandResponseType}{commandResponseType}}
+{\footnotesize\ttfamily \#define command\+Response\+Type~\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}}}
 
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{commandparser_8hpp_a9584ed5f207c1c49b9a477ada94421f8}\label{commandparser_8hpp_a9584ed5f207c1c49b9a477ada94421f8} 
-\index{commandparser.hpp@{commandparser.hpp}!addCommandHelp@{addCommandHelp}}
-\index{addCommandHelp@{addCommandHelp}!commandparser.hpp@{commandparser.hpp}}
-\doxysubsubsection{\texorpdfstring{addCommandHelp()}{addCommandHelp()}}
-{\footnotesize\ttfamily String add\+Command\+Help (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}}}]{serial\+Command\+Array\mbox{[}$\,$\mbox{]},  }\item[{int}]{size,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{String}]{prefix = {\ttfamily "{}"{}} }\end{DoxyParamCaption})}
+\Hypertarget{commandparser_8hpp_a1eff6989b7f7bce42d0debe46fb58f6d}\label{commandparser_8hpp_a1eff6989b7f7bce42d0debe46fb58f6d} 
+\index{commandparser.hpp@{commandparser.hpp}!buildCommandString@{buildCommandString}}
+\index{buildCommandString@{buildCommandString}!commandparser.hpp@{commandparser.hpp}}
+\doxysubsubsection{\texorpdfstring{buildCommandString()}{buildCommandString()}}
+{\footnotesize\ttfamily String build\+Command\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item }\end{DoxyParamCaption})}
 
-
-
-Prints all help data for commands given in the serial\+Command\+Array. 
-
-\Hypertarget{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}\label{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e} 
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{commandparser_8hpp_a1eff6989b7f7bce42d0debe46fb58f6d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{commandparser_8hpp_a1eff6989b7f7bce42d0debe46fb58f6d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{commandparser_8hpp_a6d642cbd3ecbe3986bdcc291d9992aa4}\label{commandparser_8hpp_a6d642cbd3ecbe3986bdcc291d9992aa4} 
 \index{commandparser.hpp@{commandparser.hpp}!checkArguments@{checkArguments}}
 \index{checkArguments@{checkArguments}!commandparser.hpp@{commandparser.hpp}}
 \doxysubsubsection{\texorpdfstring{checkArguments()}{checkArguments()}}
-{\footnotesize\ttfamily bool check\+Arguments (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{uint8\+\_\+t}]{arguments,  }\item[{bool}]{t\+\_\+supress\+Error = {\ttfamily false} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool check\+Arguments (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{uint8\+\_\+t}]{arguments,  }\item[{bool}]{t\+\_\+supress\+Error = {\ttfamily false} }\end{DoxyParamCaption})}
 
-\Hypertarget{commandparser_8hpp_a47b5a74095fe6948dc38caf72ddfbff0}\label{commandparser_8hpp_a47b5a74095fe6948dc38caf72ddfbff0} 
+\Hypertarget{commandparser_8hpp_adc39aed39cadb773bd43633feca7c9f6}\label{commandparser_8hpp_adc39aed39cadb773bd43633feca7c9f6} 
 \index{commandparser.hpp@{commandparser.hpp}!checkArgumentsMin@{checkArgumentsMin}}
 \index{checkArgumentsMin@{checkArgumentsMin}!commandparser.hpp@{commandparser.hpp}}
 \doxysubsubsection{\texorpdfstring{checkArgumentsMin()}{checkArgumentsMin()}}
-{\footnotesize\ttfamily bool check\+Arguments\+Min (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{uint8\+\_\+t}]{arguments\+Min,  }\item[{bool}]{t\+\_\+supress\+Error = {\ttfamily false} }\end{DoxyParamCaption})}
-
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{commandparser_8hpp_a47b5a74095fe6948dc38caf72ddfbff0_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{commandparser_8hpp_ac7fc43fb1f213243ef62cd57653110cc}\label{commandparser_8hpp_ac7fc43fb1f213243ef62cd57653110cc} 
-\index{commandparser.hpp@{commandparser.hpp}!delimitExpression@{delimitExpression}}
-\index{delimitExpression@{delimitExpression}!commandparser.hpp@{commandparser.hpp}}
-\doxysubsubsection{\texorpdfstring{delimitExpression()}{delimitExpression()}}
-{\footnotesize\ttfamily String delimit\+Expression (\begin{DoxyParamCaption}\item[{String}]{expression,  }\item[{bool}]{force = {\ttfamily false} }\end{DoxyParamCaption})}
-
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{commandparser_8hpp_ac7fc43fb1f213243ef62cd57653110cc_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{commandparser_8hpp_a4a189b33229a0bbe691a7f3921eebb7b}\label{commandparser_8hpp_a4a189b33229a0bbe691a7f3921eebb7b} 
-\index{commandparser.hpp@{commandparser.hpp}!printCommandHelp@{printCommandHelp}}
-\index{printCommandHelp@{printCommandHelp}!commandparser.hpp@{commandparser.hpp}}
-\doxysubsubsection{\texorpdfstring{printCommandHelp()}{printCommandHelp()}}
-{\footnotesize\ttfamily String print\+Command\+Help (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}}}]{serial\+Command\+Array\mbox{[}$\,$\mbox{]},  }\item[{int}]{size }\end{DoxyParamCaption})}
-
-
-
-Prints all help data for commands given in the serial\+Command\+Array. 
-
-\Hypertarget{commandparser_8hpp_a2eea721b98604de46300feecf7703b60}\label{commandparser_8hpp_a2eea721b98604de46300feecf7703b60} 
-\index{commandparser.hpp@{commandparser.hpp}!processCommandItems@{processCommandItems}}
-\index{processCommandItems@{processCommandItems}!commandparser.hpp@{commandparser.hpp}}
-\doxysubsubsection{\texorpdfstring{processCommandItems()}{processCommandItems()}}
-{\footnotesize\ttfamily bool process\+Command\+Items (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}}]{\+\_\+command\+Parser,  }\item[{const \mbox{\hyperlink{structserialCommandItem}{serial\+Command\+Item}}}]{serial\+Command\+Array\mbox{[}$\,$\mbox{]},  }\item[{int}]{size }\end{DoxyParamCaption})}
-
-
-
-Preprocesses a \doxylink{classcommandItem}{command\+Item}, replacing any short command names with long ones and turns them all into lowercase. 
-
-\Hypertarget{commandparser_8hpp_aa2920a70f474546b537b11768a46d011}\label{commandparser_8hpp_aa2920a70f474546b537b11768a46d011} 
-\index{commandparser.hpp@{commandparser.hpp}!removePrefix@{removePrefix}}
-\index{removePrefix@{removePrefix}!commandparser.hpp@{commandparser.hpp}}
-\doxysubsubsection{\texorpdfstring{removePrefix()}{removePrefix()}}
-{\footnotesize\ttfamily String remove\+Prefix (\begin{DoxyParamCaption}\item[{String}]{input,  }\item[{String}]{prefix }\end{DoxyParamCaption})}
-
-\Hypertarget{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}\label{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6} 
-\index{commandparser.hpp@{commandparser.hpp}!stripQuotes@{stripQuotes}}
-\index{stripQuotes@{stripQuotes}!commandparser.hpp@{commandparser.hpp}}
-\doxysubsubsection{\texorpdfstring{stripQuotes()}{stripQuotes()}}
-{\footnotesize\ttfamily String strip\+Quotes (\begin{DoxyParamCaption}\item[{String}]{expression }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool check\+Arguments\+Min (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}}]{\+\_\+command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{uint8\+\_\+t}]{arguments\+Min,  }\item[{bool}]{t\+\_\+supress\+Error = {\ttfamily false} }\end{DoxyParamCaption})}
 
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6_icgraph}
+\includegraphics[width=350pt]{commandparser_8hpp_adc39aed39cadb773bd43633feca7c9f6_icgraph}
 \end{center}
 \end{figure}
-\Hypertarget{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea}\label{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea} 
-\index{commandparser.hpp@{commandparser.hpp}!validateNumber@{validateNumber}}
-\index{validateNumber@{validateNumber}!commandparser.hpp@{commandparser.hpp}}
-\doxysubsubsection{\texorpdfstring{validateNumber()}{validateNumber()}}
-{\footnotesize\ttfamily bool validate\+Number (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{number,  }\item[{int16\+\_\+t}]{min,  }\item[{int16\+\_\+t}]{max,  }\item[{bool}]{t\+\_\+supress\+Error = {\ttfamily false} }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea_icgraph}
-\end{center}
-\end{figure}
-
-
-\doxysubsection{Variable Documentation}
-\Hypertarget{commandparser_8hpp_a895567420077455478bd74c7bdbedbb2}\label{commandparser_8hpp_a895567420077455478bd74c7bdbedbb2} 
-\index{commandparser.hpp@{commandparser.hpp}!globalCommands@{globalCommands}}
-\index{globalCommands@{globalCommands}!commandparser.hpp@{commandparser.hpp}}
-\doxysubsubsection{\texorpdfstring{globalCommands}{globalCommands}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classcommandList}{command\+List}} global\+Commands\hspace{0.3cm}{\ttfamily [extern]}}
-
-\Hypertarget{commandparser_8hpp_ae7826d05ec6eb6efce350270ead447c8}\label{commandparser_8hpp_ae7826d05ec6eb6efce350270ead447c8} 
-\index{commandparser.hpp@{commandparser.hpp}!globalResponseCommands@{globalResponseCommands}}
-\index{globalResponseCommands@{globalResponseCommands}!commandparser.hpp@{commandparser.hpp}}
-\doxysubsubsection{\texorpdfstring{globalResponseCommands}{globalResponseCommands}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classcommandList}{command\+List}} global\+Response\+Commands\hspace{0.3cm}{\ttfamily [extern]}}
-
-\Hypertarget{commandparser_8hpp_aa230916c95623a7e6e5b94cae91a4a08}\label{commandparser_8hpp_aa230916c95623a7e6e5b94cae91a4a08} 
-\index{commandparser.hpp@{commandparser.hpp}!quoteStyle@{quoteStyle}}
-\index{quoteStyle@{quoteStyle}!commandparser.hpp@{commandparser.hpp}}
-\doxysubsubsection{\texorpdfstring{quoteStyle}{quoteStyle}}
-{\footnotesize\ttfamily const uint8\+\_\+t quote\+Style\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+\Hypertarget{commandparser_8hpp_a8fe82b9f9d885f8a30e5b42db8445c0c}\label{commandparser_8hpp_a8fe82b9f9d885f8a30e5b42db8445c0c} 
+\index{commandparser.hpp@{commandparser.hpp}!printResponses@{printResponses}}
+\index{printResponses@{printResponses}!commandparser.hpp@{commandparser.hpp}}
+\doxysubsubsection{\texorpdfstring{printResponses()}{printResponses()}}
+{\footnotesize\ttfamily void print\+Responses (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{is\+Internal = {\ttfamily false} }\end{DoxyParamCaption})}
 

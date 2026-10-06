@@ -30,56 +30,66 @@ void ISR_AdsDataReady2() {
 }
 
 const ModuleCommandDeclaration ControlReader::moduleCommands[] = {
-  { "controldata", "cda", "0-7:outputassignment", "Sets the command string invoked when the value on ADC channel [channel] changes", false, false, &s_controlData,
-    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
-
+/*  { "controldata", "cda", "0-7:outputassignment", "Sets the command string invoked when the value on ADC channel [channel] changes", false, false, &s_controlData,
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression | eCommandType_function::ectAssignment, "value" },
   { "harmonic", "har", "outputassignment", "Sets the command string invoked when the harmonic knob or modulation changes", false, true, &s_controlDataNew,
-    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression | eCommandType_function::ectAssignment, "value" },
   { "harmonicshift", "has", "outputassignment", "Sets the command string invoked when the harmonic shift modulation changes", false, true, &s_controlDataNew,
-    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression | eCommandType_function::ectAssignment, "value" },
   { "finetune", "fin", "outputassignment", "Sets the command string invoked when the fine tune knob changes", false, true, &s_controlDataNew,
-    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression | eCommandType_function::ectAssignment, "value" },
   { "pressure", "pre", "outputassignment", "Sets the command string invoked when the pressure knob or modulation changes", false, true, &s_controlDataNew,
-    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression | eCommandType_function::ectAssignment, "value" },
   { "mute", "mut", "outputassignment", "Sets the command string invoked when the mute knob or modulation changes", false, true, &s_controlDataNew,
-    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression | eCommandType_function::ectAssignment, "value" },
   { "hammerscale", "hms", "outputassignment", "Sets the command string invoked when the hammer scale knob changes", false, true, &s_controlDataNew,
-    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression | eCommandType_function::ectAssignment, "value" },
   { "gate", "gt", "outputassignment", "Sets the command string invoked when the gate switch or modulation changes", false, true, &s_controlDataNew,
-    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression | eCommandType_function::ectAssignment, "value" },
   { "hammertrig", "hmt", "outputassignment", "Sets the command string invoked when the hammer trigger modulation changes", false, true, &s_controlDataNew,
-    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression, "value" },
-
-  { "controldefaults", "cde", "-", "Reverts all ADC command strings to default values", false, false, &s_controlDefaults, eCommandType_data::ectImmediate | eCommandType_function::ectSystem },
-  { "datareturn", "dr", "channel:value", "Sent when a new value is presented on one of the ADC channels, cannot be invoked. Triggers the commands associated with the channel", false, false, &s_dataReturn,
-    eCommandType_data::ectSimpleUInt16 | eCommandType_access::ectSelfInvoked },
-  { "adcsettings", "ads", "channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout", "Explain ADC settings here", false, true, &s_adcSettings,
-    eCommandType_data::ectData | eCommandType_function::ectSystem },
-  { "testadclatency", "tal", "0-65535", "Test ADC Latency", true, false, &s_testADCLatency, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectSystem },
-  { "testadclatencyreturn", "talr", "-", "Return from test", true, false, &s_testADCLatencyReturn, eCommandType_data::ectImmediate | eCommandType_access::ectSelfInvoked },
+    eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression | eCommandType_function::ectAssignment, "value" },
+*/
+  { "controldefaults", "cde", "-", "Reverts all ADC command strings to default values", false, false, &s_controlDefaults,
+    eCommandType_data::ectConditional | eCommandType_access::ectInvokeOnly | eCommandType_function::ectAdminAction },
+/*
+  { "datareturn", "dr", "channel:value", "Sent when a new value is presented on one of the ADC channels, cannot be invoked. Primarily for monitoring CV signals", false, false, &s_dataReturn,
+    eCommandType_data::ectSimpleUInt16 | eCommandType_access::ectSelfInvoked | eCommandType_function::ectLiveParameter },
+  { "adcsettings", "ads", "channel:averages:interrupterrorthreshold:continuouserrorthreshold:continuoustimeout", "Sets ADC settings for a given channel. Averages are the number of samples to average, interruptthreshold is how much the value must change in order to issue a new value change event. continuousthreshold is how much the value must change when a previous change has already been recorded within the timespan of continuoustimeout", false, true, &s_adcSettings,
+    eCommandType_data::ectData | eCommandType_function::ectCalibration | eCommandType_flags::ectSystem },
+*/
+/*  { "testadclatency", "tal", "0-65535", "Test ADC Latency", true, false, &s_testADCLatency,
+    eCommandType_data::ectSimpleUInt16 | eCommandType_access::ectInvokeOnly | eCommandType_function::ectAdminAction | eCommandType_flags::ectSystem },
+  { "testadclatencyreturn", "talr", "-", "Return from test", true, false, &s_testADCLatencyReturn,
+    eCommandType_data::ectSimpleUInt16 | eCommandType_access::ectSelfInvoked | eCommandType_function::ectAdminAction | eCommandType_flags::ectSystem },
   { "testadcminmax", "tix", "channel", "Measure min/max value for a given channel and resets the counter", true, false, &s_testADCMinMax,
-    eCommandType_data::ectData | eCommandType_function::ectSystem }
+    eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectAdminAction | eCommandType_flags::ectSystem }*/
 };
 
-#define DATARETURN_CMD 2
+#define DATARETURN_CMD 10
 
 getModuleCount(ControlReader)
 
 ControlReader::ControlReader(uint8_t inDataReadyPin, uint8_t inGatePin, MIDIHandler *inMidiHadler)
 {
-//    moduleID = new ModuleID("controlbox", "cb", "Control Box 1.0", eModuleType::hardware);
-
-    setDefaults();
+    //setDefaults();
 
     pinDataReady = inDataReadyPin;
     pinGate = inGatePin;
 
     pinMode(pinDataReady, INPUT);
     pinMode(pinGate, INPUT);
-
+    /*
     averages[4].trigger = true;
     averages[4].dataAverageLength = 1;
     averages[5].trigger = true;
+    */
+    ControlboxControl *controlboxControl = new ControlboxControl(controlAssignment[0], defaultCommands[0], controlTrigger[0]);
+    ModuleGroup *group = addGroup(controlboxControl->tmoduleID);
+    group->addModule(controlboxControl);
+    for (int i=1; i<8; i++) {
+        ControlboxControl *controlboxControl = new ControlboxControl(controlAssignment[i], defaultCommands[i], controlTrigger[i]);
+        group->addModule(controlboxControl);
+    }
 
     resetAds();
 
@@ -91,7 +101,7 @@ ControlReader::ControlReader(uint8_t inDataReadyPin, uint8_t inGatePin, MIDIHand
     expressionParser = midiHandler->expressionParser;
     return;
 }
-
+/*
 CREATE_MODULE_COMMAND_FUNCTION(controlData, ControlReader) {
     int8_t channel = -1;
     if (checkArgumentsMin(inCommandItem, inCommandResponses, 1, true)) {
@@ -136,26 +146,30 @@ CREATE_MODULE_COMMAND_FUNCTION(controlDataNew, ControlReader) {
     }
     return eProcessResult::Ok;
 };
-
+*/
 CREATE_MODULE_COMMAND_FUNCTION(controlDefaults, ControlReader) {
-    setDefaults();
-    inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::InfoRequest});
+    if (!request) {
+        setDefaults();
+        inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::InfoRequest});
+    }
     return eProcessResult::Ok;
 };
-
+/*
 CREATE_MODULE_COMMAND_FUNCTION(dataReturn, ControlReader) {
-    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-    int i = inCommandItem->argument[0].toInt();
-    if ((i < 0) || (i > 7)) { return eProcessResult::WrongArgumentValue; }
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        int i = inCommandItem->argument[0].toInt();
+        if ((i < 0) || (i > 7)) { return eProcessResult::WrongArgumentValue; }
 
-    int32_t convertedValue;
-    if (i < 5) {
-        convertedValue = (int32_t) ((float) getData(i) * ((float) 65536 / 32767));
-    } else {
-        convertedValue = (int32_t) ((float) getData(i) * ((float) 65536 / 2048));
+        int32_t convertedValue;
+        if (i < 5) {
+            convertedValue = (int32_t) ((float) getData(i) * ((float) 65536 / 32767));
+        } else {
+            convertedValue = (int32_t) ((float) getData(i) * ((float) 65536 / 2048));
+        }
+        if (convertedValue > 65535) { convertedValue = 65535; }
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(i) + ":" + String(convertedValue) + ":" + String(getData(i)), debugPrintType::InfoRequest});
     }
-    if (convertedValue > 65535) { convertedValue = 65535; }
-    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(i) + ":" + String(convertedValue) + ":" + String(getData(i)), debugPrintType::InfoRequest});
     return eProcessResult::Ok;
 };
 
@@ -184,18 +198,22 @@ CREATE_MODULE_COMMAND_FUNCTION(adcSettings, ControlReader) {
 };
 
 CREATE_MODULE_COMMAND_FUNCTION(testADCLatency, ControlReader) {
-    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-    testMeasurement = 0;
-    testMeasurementOngoing = true;
-    analogWrite(3, int(inCommandItem->argument[0].toInt()));
-    inCommandResponses->push_back({"Starting ADC latency test", debugPrintType::TextInfo});
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        testMeasurement = 0;
+        testMeasurementOngoing = true;
+        analogWrite(3, int(inCommandItem->argument[0].toInt()));
+        inCommandResponses->push_back({"Starting ADC latency test", debugPrintType::TextInfo});
+    }
     return eProcessResult::Ok;
 };
 
 CREATE_MODULE_COMMAND_FUNCTION(testADCLatencyReturn, ControlReader) {
-    testMeasurementOngoing = false;
-    inCommandResponses->push_back({"Returned from ADC latency test in " + String(testMeasurement) + " uS", debugPrintType::TextInfo});
-    inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::InfoRequest });
+    if (!request) {
+        testMeasurementOngoing = false;
+        inCommandResponses->push_back({"Returned from ADC latency test in " + String(testMeasurement) + " uS", debugPrintType::TextInfo});
+        inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::InfoRequest });
+    }
     return eProcessResult::Ok;
 };
 
@@ -212,7 +230,7 @@ CREATE_MODULE_COMMAND_FUNCTION(testADCMinMax, ControlReader) {
     }
     return eProcessResult::Ok;
 };
-
+*/
 /*! \brief Tries to reconnect to the ADC converters
  */
 
@@ -281,34 +299,37 @@ bool ControlReader::readSingleADS(Adafruit_ADS1X15 &adsx, volatile bool &newData
             }
 
             if (a < 0) { a = 0; }
-
+/*
             if (testMeasurementOngoing) {
                 debugPrintln("New data (" + String(a) + ") on ADC channel " + String(ch + channelOffset) + " at " + String(testMeasurement) + "uS", Debug);
             }
             if (testChannel == (ch + channelOffset)) {
                 addTestData(a);
             }
+*/
+            //averages[channelOffset + ch].addData(a);
+            ModuleGroup *group = getGroup("controlboxcontrol");
+            ControlboxControl* controlboxControl = static_cast<ControlboxControl*> (group->modules[channelOffset + ch]);
+            controlboxControl->averager.addData(a);
 
-            averages[channelOffset + ch].addData(a);
-            if (averages[channelOffset + ch].dataChanged()) {
+            //if (averages[channelOffset + ch].dataChanged()) {
+            if (controlboxControl->averager.dataChanged()) {
                 // Convert value to 0-65535 range
-                int32_t convertedValue = (int32_t) ((float) averages[channelOffset + ch].value * ((float) 65536 / resolution));
+                //int32_t convertedValue = (int32_t) ((float) averages[channelOffset + ch].value * ((float) 65536 / resolution));
+                int32_t convertedValue = (int32_t) ((float) controlboxControl->averager.value * ((float) 65536 / resolution));
                 if (convertedValue > 65535) { convertedValue = 65535; }
                 expressionParser->dvalue = (double) convertedValue;
 
-                inCommandResponses->push_back({ moduleCommands[DATARETURN_CMD].shortCommand + ":" + String(ch + channelOffset) + ":" + String(convertedValue) + ":" +
-                                              String(averages[channelOffset + ch].value), debugPrintType::InfoRequest });
-/*
-                if (outputDebugData) {
-                    debugPrintln("adcr:" + String(ch + channelOffset) + ":" + String(convertedValue) + ":" + String(averages[channelOffset + ch].value), debugPrintType::InfoRequest);
-                }
-*/
-                if (!testMeasurementOngoing) {
-                    midiHandler->processLocalMessage(&cvInputCommands[channelOffset + ch]);
-                } else {
+//                inCommandResponses->push_back({ moduleCommands[DATARETURN_CMD].shortCommand + ":" + String(ch + channelOffset) + ":" + String(convertedValue) // + ":" + String(averages[channelOffset + ch].value)
+//                                              , debugPrintType::InfoRequest });
+                //if (!testMeasurementOngoing) {
+                    //midiHandler->processLocalMessage(&cvInputCommands[channelOffset + ch]);
+                controlboxControl->lastValue = convertedValue;
+                midiHandler->processLocalMessage(&(controlboxControl->outputCommands));
+                /*} else {
                     String tempMessages = "talr";
                     midiHandler->processLocalMessage(&tempMessages);
-                }
+                }*/
 
                 // The process adds roughly 5mS of latency, add to queue as priority aka first in line?
             }
@@ -342,7 +363,7 @@ void ControlReader::readData(std::vector<commandResponse> *inCommandResponses) {
     readSingleADS(ads, adsNewData, currentChannel, 0, adsConversionStart, adsErrorReported, adsTimeOut, 32767, inCommandResponses);
 }
 
-
+/*
 bool ControlReader::setADCCommands(uint8_t channel, String commands) {
     if ((channel > 7)) { return false; }
 
@@ -383,19 +404,23 @@ void ControlReader::setADCMinMaxTestChannel(uint8_t t_channel) {
     testChannel = t_channel;
     testBegin = true;
 }
-
+*/
 void ControlReader::setDefaults() {
-    cvInputCommands.clear();
+/*    cvInputCommands.clear();
     cvInputCommands.push_back("bw.hsh.ha:\"value/1327.716667-20\"");
     cvInputCommands.push_back("bw.hsh.sh5:\"deadband(value-32236, 20)/2.425\"");
     cvInputCommands.push_back("bw.hsh.sh:\"deadband((value-32600)*0.49064, 250)\"");//    cvInputCommands.push_back("msp:value");
     cvInputCommands.push_back("bw.bp.ba:value");
     cvInputCommands.push_back("so.en:value");
     cvInputCommands.push_back("bw.dcm.ru:bool(value-10000),bw.pe:1,bw.sm:0,bw.bp.en:bool(value-10000),bw.bp.rs:ibool(value-10000),bw.bp.hd:ibool(value-10000)");
-    cvInputCommands.push_back("so.fm:\"deadband(1/65535*value,0.002)\"");
-    cvInputCommands.push_back("mu.sp:value");//    cvInputCommands.push_back("");
+    cvInputCommands.push_back("so.fm:\"deadband(value,50)\"");
+    cvInputCommands.push_back("mu.sp:value");//    cvInputCommands.push_back("");*/
+    ModuleGroup *group = getGroup("controlboxcontrol");
+    for (uint8_t i=0; i<8; i++) {
+        static_cast<ControlboxControl*> (group->modules[i])->setDefaults();
+    }
 }
-
+/*
 int32_t ControlReader::getData(int16_t channel) {
     if ((channel < 0) || (channel > 7)) {
         return -1;
@@ -403,3 +428,4 @@ int32_t ControlReader::getData(int16_t channel) {
         return averages[channel].value;
     }
 }
+*/

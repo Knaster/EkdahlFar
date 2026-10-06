@@ -4,12 +4,12 @@
 #include "master_controller/midiconfigurationhandler.hpp"
 
 const ModuleCommandDeclaration MIDIConfigurationHandler::moduleCommands[] = {
-    { "allnotesoff", "ano", "1|0", "Clear the entire buffer of MIDI notes held", false, false, nullptr, eCommandType_data::ectConditional | eCommandType_function::ectParameter },
-    { "add", "a", "(name):(event:commands)*", "Adds a new MIDI configuration with the given name, events and command strings", false, false, &s_addConfiguration,
-        eCommandType_data::ectData | eCommandType_function::ectAdd },
-    { "remove", "rm", "int", "Remove the specified MIDI configuration", false,  false, &s_removeConfiguration, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectRemove },
+    { "allnotesoff", "ano", "1|0", "Clears the entire buffer of MIDI notes held", false, false, nullptr, eCommandType_data::ectConditional | eCommandType_function::ectLiveAction },
+    { "add", "a", "name", "Adds a new MIDI configuration with the given name", false, false, &s_addConfiguration,
+        eCommandType_data::ectData | eCommandType_function::ectAddModule },
+    { "remove", "rm", "int", "Remove the specified MIDI configuration", false,  false, &s_removeConfiguration, eCommandType_function::ectRemoveModule },
     { "count", "c", "-", "Returns the number of MIDI configurations", false, false, &s_count,
-        eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectCount | eCommandType_access::ectRequest }
+        eCommandType_function::ectCountModules | eCommandType_access::ectRequest }
 };
 
 getModuleCount(MIDIConfigurationHandler)
@@ -44,7 +44,7 @@ CREATE_MODULE_COMMAND_FUNCTION(addConfiguration, MIDIConfigurationHandler) {
     MIDIMessageConfiguration *midiConfig = new MIDIMessageConfiguration();
     *midiConfig->name = inCommandItem->argument[0];
     addModule(midiConfig);
-    inCommandResponses->push_back({ thisItem.shortCommand + ":1", InfoRequest });
+    inCommandResponses->push_back({ thisItem.shortCommand + ":midiconfiguration:" + String(getGroup("midiconfiguration")->modules.size() - 1), InfoRequest });
     return eProcessResult::Ok;
 }
 
@@ -60,7 +60,7 @@ CREATE_MODULE_COMMAND_FUNCTION(removeConfiguration, MIDIConfigurationHandler) {
             return eProcessResult::CommandFailed;
         }
     }
-    inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::InfoRequest});
+    inCommandResponses->push_back({ thisItem.shortCommand + ":midiconfiguration:" + inCommandItem->argument[0], debugPrintType::InfoRequest});
     return eProcessResult::Ok;
 }
 
@@ -97,4 +97,21 @@ void MIDIConfigurationHandler::dumpData(std::vector<commandResponse> *inCommandR
     inCommandResponses->push_back({ "mc[" + String(moduleGroups[0].selection[0]) + "]", debugPrintType::InfoRequest });
 }
 
+void MIDIConfigurationHandler::addInstances(String name, uint8_t count) {
+    debugPrintln("addInstances reached", debugPrintType::Debug);
+    if ((name != "mc") and (name != "midiconfiguration")) {
+        debugPrintln("Unknown instance name '" + name + "'", debugPrintType::Error);
+    } else {
+        ModuleGroup *group = getGroup("midiconfiguration");
+        if (group == nullptr) {
+                debugPrintln("Error in addInstances", debugPrintType::Error);
+                return;
+        }
+        debugPrintln("Count is " + String(count) + " size is " + String(group->modules.size()), debugPrintType::Debug);
+        while (count > group->modules.size()) {
+            group->addModule(new MIDIMessageConfiguration());
+            debugPrintln("Added module '" + name + "'", debugPrintType::Debug);
+        }
+    }
+}
 #endif

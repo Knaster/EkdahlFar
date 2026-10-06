@@ -22,8 +22,10 @@ obj/Release/src/controlbox/controlReader.o: \
  include/base/generalhelpers.hpp include/base/arduinorequired.hpp \
  include/base/module.hpp include/master_controller/midi.h \
  include/master_controller/midimessageconfiguration.hpp \
+ include/base/modulehandler.hpp include/base/modulegroup.hpp \
  include/master_controller/expressionparser.h lib/tinyexpr/src/tinyexpr.h \
  include/base/commandlist.hpp include/base/commanditem.hpp \
+ include/controlbox/controlboxControl.hpp include/controlbox/averager.h \
  lib/Wire/Wire.h lib/Wire/WireIMXRT.h lib/teensy4/Arduino.h \
  lib/Adafruit_ADS1X15/Adafruit_ADS1X15.h \
- lib/Adafruit_BusIO/Adafruit_I2CDevice.h include/controlbox/averager.h
+ lib/Adafruit_BusIO/Adafruit_I2CDevice.h

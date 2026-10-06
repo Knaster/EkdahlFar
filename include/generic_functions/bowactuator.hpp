@@ -10,7 +10,10 @@ public:
     MODULECOMMANDHANDLER
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(name, BowActuator)
-    CREATE_MODULE_COMMAND_FUNCTION_FWD(data, BowActuator)
+//    CREATE_MODULE_COMMAND_FUNCTION_FWD(data, BowActuator)
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(restPressure, BowActuator)
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(stallPressureF, BowActuator)
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(engagePressure, BowActuator)
 
     BowActuator();
 

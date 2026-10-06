@@ -5,11 +5,10 @@ Include dependency graph for debugprint.\+hpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{debugprint_8hpp__incl}
+\includegraphics[width=292pt]{debugprint_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,22 +19,18 @@ This graph shows which files directly or indirectly include this file\+:
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classthreadSafeDebugPrint}{thread\+Safe\+Debug\+Print}}
-\item 
-struct \mbox{\hyperlink{structcommandResponse}{command\+Response}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}{debug\+Print\+Types}}~12
-\item 
-\#define \mbox{\hyperlink{debugprint_8hpp_a64739a0f4e627e77b702cb4d964bcdb5}{command\+Response\+Type}}~\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}}
+\#define \mbox{\hyperlink{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}{debug\+Print\+Types}}~13
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
 enum \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}} \{ \newline
 \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4afe3054aee03156c2553151700236dc9c}{Command}}
-, \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a65f6b55fdc64778bf10632a795b97761}{USB}}
+, \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a79626d0ea8c0182a9a974434bd2fb4fc}{dp\+USB}}
 , \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4aa1e0ed72a417f9c6ec63b58d565357f3}{Hardware}}
 , \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a18f893264a00711081b62de694f99db4}{Undefined}}
 , \newline
@@ -48,6 +43,8 @@ enum \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debug\+
 , \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a701ce2c0c0eef34bc6aeaa5be3ae0d9c}{Text\+Info}}
 , \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a2c1b595c80ad4c1b7452f5ef8887ffba}{Help}}
 , \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4aa992d66faf4c155dfd78ec168fc25f8a}{Internal}}
+, \newline
+\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a977cc667a6db29d9dd079d6b6d3b8e9b}{External}}
  \}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
@@ -63,6 +60,12 @@ void \mbox{\hyperlink{debugprint_8hpp_a12ba011dd5b1adf8f77184369290a419}{debug\+
 \item 
 void \mbox{\hyperlink{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}{debug\+Println}} (String text, \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}} print\+Type)
 \item 
+void \mbox{\hyperlink{debugprint_8hpp_a97721fa8d388aff3e00561f7c32cfd40}{debug\+Print}} (String text, \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}} print\+Type, void \texorpdfstring{$\ast$}{*}device)
+\item 
+void \mbox{\hyperlink{debugprint_8hpp_a488147e807c64aa763ed32f436b14cf1}{debug\+Println}} (String text, \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}} print\+Type, void \texorpdfstring{$\ast$}{*}device)
+\item 
+\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}} \mbox{\hyperlink{debugprint_8hpp_a965c9218709588717012913d2032dc1f}{debug\+Print\+Get\+Type}} (String \texorpdfstring{$\ast$}{*}text)
+\item 
 void \mbox{\hyperlink{debugprint_8hpp_a01bdc1ea330372bc3011577c0eb53ce9}{debug\+Raw}} (String text)
 \item 
 bool \mbox{\hyperlink{debugprint_8hpp_ae6b44982470212efaf4da1bc81b5820e}{set\+Debug\+Reporting}} (String debug\+Name, bool setting)
@@ -70,26 +73,20 @@ bool \mbox{\hyperlink{debugprint_8hpp_ae6b44982470212efaf4da1bc81b5820e}{set\+De
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-String \mbox{\hyperlink{debugprint_8hpp_a856043e32014d640459f77fa2bc7e697}{debug\+Print\+Type\+Name}} \mbox{[}$\,$\mbox{]}
+const String \mbox{\hyperlink{debugprint_8hpp_aa8ac9d17ed0a10c453ecd86a21ea2a12}{debug\+Print\+Type\+Name}} \mbox{[}$\,$\mbox{]}
 \item 
-String \mbox{\hyperlink{debugprint_8hpp_a26aadfde4abe20d62be5b5019c0e371e}{debug\+Print\+Type\+Name\+Short}} \mbox{[}$\,$\mbox{]}
+const String \mbox{\hyperlink{debugprint_8hpp_a7dc54dc57634b4ef625f9674f65e6436}{debug\+Print\+Type\+Name\+Short}} \mbox{[}$\,$\mbox{]}
 \item 
 bool \mbox{\hyperlink{debugprint_8hpp_a8abf5a77dfdae5c168344cd27f6dc937}{debug\+Print\+Enabled}} \mbox{[}$\,$\mbox{]}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
-\Hypertarget{debugprint_8hpp_a64739a0f4e627e77b702cb4d964bcdb5}\label{debugprint_8hpp_a64739a0f4e627e77b702cb4d964bcdb5} 
-\index{debugprint.hpp@{debugprint.hpp}!commandResponseType@{commandResponseType}}
-\index{commandResponseType@{commandResponseType}!debugprint.hpp@{debugprint.hpp}}
-\doxysubsubsection{\texorpdfstring{commandResponseType}{commandResponseType}}
-{\footnotesize\ttfamily \#define command\+Response\+Type~\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}}}
-
 \Hypertarget{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0}\label{debugprint_8hpp_a9b9f43fa932668c3ae692f0f2a8655e0} 
 \index{debugprint.hpp@{debugprint.hpp}!debugPrintTypes@{debugPrintTypes}}
 \index{debugPrintTypes@{debugPrintTypes}!debugprint.hpp@{debugprint.hpp}}
 \doxysubsubsection{\texorpdfstring{debugPrintTypes}{debugPrintTypes}}
-{\footnotesize\ttfamily \#define debug\+Print\+Types~12}
+{\footnotesize\ttfamily \#define debug\+Print\+Types~13}
 
 
 
@@ -105,8 +102,8 @@ bool \mbox{\hyperlink{debugprint_8hpp_a8abf5a77dfdae5c168344cd27f6dc937}{debug\+
 Command&\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{USB@{USB}!debugprint.hpp@{debugprint.hpp}}\index{debugprint.hpp@{debugprint.hpp}!USB@{USB}}}\Hypertarget{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a65f6b55fdc64778bf10632a795b97761}\label{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a65f6b55fdc64778bf10632a795b97761} 
-USB&\\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dpUSB@{dpUSB}!debugprint.hpp@{debugprint.hpp}}\index{debugprint.hpp@{debugprint.hpp}!dpUSB@{dpUSB}}}\Hypertarget{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a79626d0ea8c0182a9a974434bd2fb4fc}\label{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a79626d0ea8c0182a9a974434bd2fb4fc} 
+dp\+USB&\\
 \hline
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{Hardware@{Hardware}!debugprint.hpp@{debugprint.hpp}}\index{debugprint.hpp@{debugprint.hpp}!Hardware@{Hardware}}}\Hypertarget{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4aa1e0ed72a417f9c6ec63b58d565357f3}\label{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4aa1e0ed72a417f9c6ec63b58d565357f3} 
@@ -149,6 +146,10 @@ Help&\\
 Internal&\\
 \hline
 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{External@{External}!debugprint.hpp@{debugprint.hpp}}\index{debugprint.hpp@{debugprint.hpp}!External@{External}}}\Hypertarget{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a977cc667a6db29d9dd079d6b6d3b8e9b}\label{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a977cc667a6db29d9dd079d6b6d3b8e9b} 
+External&\\
+\hline
+
 \end{DoxyEnumFields}
 
 
@@ -156,7 +157,7 @@ Internal&\\
 \Hypertarget{debugprint_8hpp_a12ba011dd5b1adf8f77184369290a419}\label{debugprint_8hpp_a12ba011dd5b1adf8f77184369290a419} 
 \index{debugprint.hpp@{debugprint.hpp}!debugPrint@{debugPrint}}
 \index{debugPrint@{debugPrint}!debugprint.hpp@{debugprint.hpp}}
-\doxysubsubsection{\texorpdfstring{debugPrint()}{debugPrint()}}
+\doxysubsubsection{\texorpdfstring{debugPrint()}{debugPrint()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily void debug\+Print (\begin{DoxyParamCaption}\item[{String}]{text,  }\item[{\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}}}]{print\+Type }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
@@ -173,6 +174,12 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{debugprint_8hpp_a12ba011dd5b1adf8f77184369290a419_icgraph}
 \end{center}
 \end{figure}
+\Hypertarget{debugprint_8hpp_a97721fa8d388aff3e00561f7c32cfd40}\label{debugprint_8hpp_a97721fa8d388aff3e00561f7c32cfd40} 
+\index{debugprint.hpp@{debugprint.hpp}!debugPrint@{debugPrint}}
+\index{debugPrint@{debugPrint}!debugprint.hpp@{debugprint.hpp}}
+\doxysubsubsection{\texorpdfstring{debugPrint()}{debugPrint()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void debug\+Print (\begin{DoxyParamCaption}\item[{String}]{text,  }\item[{\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}}}]{print\+Type,  }\item[{void \texorpdfstring{$\ast$}{*}}]{device }\end{DoxyParamCaption})}
+
 \Hypertarget{debugprint_8hpp_a02212746d4c3138ec12bc5d582e5dc8f}\label{debugprint_8hpp_a02212746d4c3138ec12bc5d582e5dc8f} 
 \index{debugprint.hpp@{debugprint.hpp}!debugPrintCheckType@{debugPrintCheckType}}
 \index{debugPrintCheckType@{debugPrintCheckType}!debugprint.hpp@{debugprint.hpp}}
@@ -193,10 +200,23 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{debugPrintConnect()}{debugPrintConnect()}}
 {\footnotesize\ttfamily bool debug\+Print\+Connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+\Hypertarget{debugprint_8hpp_a965c9218709588717012913d2032dc1f}\label{debugprint_8hpp_a965c9218709588717012913d2032dc1f} 
+\index{debugprint.hpp@{debugprint.hpp}!debugPrintGetType@{debugPrintGetType}}
+\index{debugPrintGetType@{debugPrintGetType}!debugprint.hpp@{debugprint.hpp}}
+\doxysubsubsection{\texorpdfstring{debugPrintGetType()}{debugPrintGetType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}} debug\+Print\+Get\+Type (\begin{DoxyParamCaption}\item[{String \texorpdfstring{$\ast$}{*}}]{text }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{debugprint_8hpp_a965c9218709588717012913d2032dc1f_icgraph}
+\end{center}
+\end{figure}
 \Hypertarget{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e}\label{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e} 
 \index{debugprint.hpp@{debugprint.hpp}!debugPrintln@{debugPrintln}}
 \index{debugPrintln@{debugPrintln}!debugprint.hpp@{debugprint.hpp}}
-\doxysubsubsection{\texorpdfstring{debugPrintln()}{debugPrintln()}}
+\doxysubsubsection{\texorpdfstring{debugPrintln()}{debugPrintln()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily void debug\+Println (\begin{DoxyParamCaption}\item[{String}]{text,  }\item[{\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}}}]{print\+Type }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
@@ -206,6 +226,12 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=316pt]{debugprint_8hpp_a244cb57e724866118a7077bdfc5da06e_cgraph}
 \end{center}
 \end{figure}
+\Hypertarget{debugprint_8hpp_a488147e807c64aa763ed32f436b14cf1}\label{debugprint_8hpp_a488147e807c64aa763ed32f436b14cf1} 
+\index{debugprint.hpp@{debugprint.hpp}!debugPrintln@{debugPrintln}}
+\index{debugPrintln@{debugPrintln}!debugprint.hpp@{debugprint.hpp}}
+\doxysubsubsection{\texorpdfstring{debugPrintln()}{debugPrintln()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void debug\+Println (\begin{DoxyParamCaption}\item[{String}]{text,  }\item[{\mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4}{debug\+Print\+Type}}}]{print\+Type,  }\item[{void \texorpdfstring{$\ast$}{*}}]{device }\end{DoxyParamCaption})}
+
 \Hypertarget{debugprint_8hpp_a01bdc1ea330372bc3011577c0eb53ce9}\label{debugprint_8hpp_a01bdc1ea330372bc3011577c0eb53ce9} 
 \index{debugprint.hpp@{debugprint.hpp}!debugRaw@{debugRaw}}
 \index{debugRaw@{debugRaw}!debugprint.hpp@{debugprint.hpp}}
@@ -254,15 +280,15 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{debugPrintEnabled}{debugPrintEnabled}}
 {\footnotesize\ttfamily bool debug\+Print\+Enabled\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
 
-\Hypertarget{debugprint_8hpp_a856043e32014d640459f77fa2bc7e697}\label{debugprint_8hpp_a856043e32014d640459f77fa2bc7e697} 
+\Hypertarget{debugprint_8hpp_aa8ac9d17ed0a10c453ecd86a21ea2a12}\label{debugprint_8hpp_aa8ac9d17ed0a10c453ecd86a21ea2a12} 
 \index{debugprint.hpp@{debugprint.hpp}!debugPrintTypeName@{debugPrintTypeName}}
 \index{debugPrintTypeName@{debugPrintTypeName}!debugprint.hpp@{debugprint.hpp}}
 \doxysubsubsection{\texorpdfstring{debugPrintTypeName}{debugPrintTypeName}}
-{\footnotesize\ttfamily String debug\+Print\+Type\+Name\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+{\footnotesize\ttfamily const String debug\+Print\+Type\+Name\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
 
-\Hypertarget{debugprint_8hpp_a26aadfde4abe20d62be5b5019c0e371e}\label{debugprint_8hpp_a26aadfde4abe20d62be5b5019c0e371e} 
+\Hypertarget{debugprint_8hpp_a7dc54dc57634b4ef625f9674f65e6436}\label{debugprint_8hpp_a7dc54dc57634b4ef625f9674f65e6436} 
 \index{debugprint.hpp@{debugprint.hpp}!debugPrintTypeNameShort@{debugPrintTypeNameShort}}
 \index{debugPrintTypeNameShort@{debugPrintTypeNameShort}!debugprint.hpp@{debugprint.hpp}}
 \doxysubsubsection{\texorpdfstring{debugPrintTypeNameShort}{debugPrintTypeNameShort}}
-{\footnotesize\ttfamily String debug\+Print\+Type\+Name\+Short\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+{\footnotesize\ttfamily const String debug\+Print\+Type\+Name\+Short\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
 

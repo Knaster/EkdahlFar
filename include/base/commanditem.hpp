@@ -23,7 +23,9 @@ public:
     SELECTION selection;
 
     CommandItem();
-    CommandItem (String *commandString);
+// Attempt to fix loadparameters hang 2026-09-24
+//    CommandItem (String *commandString);
+    CommandItem (String commandString);
     CommandItem& operator = (const CommandItem& other);
 
 private:

@@ -5,20 +5,21 @@
 
 const ModuleCommandDeclaration BowPressure::moduleCommands[] = {
     { "baseline", "ba", "0-65535", "Bow pressure baseline, modulation is added to this point upward", false, false, &s_baseline,
-        eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectParameter },
-    { "modifier", "mo", "0-65535", "Bow pressure modulation, added to the baseline", false, false, &s_modifier, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectParameter },
-    { "rest", "rs", "0|1", "Puts the bow pressure in the resting position (conditional)", false, false, &s_rest, eCommandType_data::ectConditional | eCommandType_function::ectParameter },
-    { "engage", "en", "0|1", "Puts the bow pressure in the engage position (conditional)", false, false, &s_engage, eCommandType_data::ectConditional | eCommandType_function::ectParameter },
-    { "stallpressure", "sp", "0-65535", "Bow pressure stall/maximum position", false, false, &s_stallPressure, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectSetting },
-    { "engagepressure", "ep", "0-65535", "Bow pressure touch/minimum position", false, false, &s_engagePressure, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectSetting },
-    { "restpressure", "rp", "0-65535", "Bow pressure rest position", false, false, &s_restPressure, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectSetting },
+        eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectLiveParameter },
+    { "modifier", "mo", "0-65535", "Bow pressure modulation, added to the baseline", false, false, &s_modifier, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectLiveParameter },
+    { "rest", "rs", "0|1", "Puts the bow pressure in the resting position (conditional)", false, false, &s_rest, eCommandType_data::ectConditional | eCommandType_function::ectLiveParameter },
+    { "engage", "en", "0|1", "Puts the bow pressure in the engage position (conditional)", false, false, &s_engage, eCommandType_data::ectConditional | eCommandType_function::ectLiveParameter },
+    { "stallpressure", "sp", "0-65535", "Bow pressure stall/maximum position", false, false, &s_stallPressure, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectCalibration },
+    { "engagepressure", "ep", "0-65535", "Bow pressure touch/minimum position", false, false, &s_engagePressure, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectCalibration },
+    { "restpressure", "rp", "0-65535", "Bow pressure rest position", false, false, &s_restPressure, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectCalibration },
     { "engagespeed", "es", "1 - 100?", "Bow pressure movement speed when engaging or disengaging", false, false, &s_engageSpeed,
-        eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectSetting },
-    { "modulationspeed", "ms", "0.1 - 10", "Bow pressure movement speed while engaged", false, false, &s_modulationSpeed, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectSetting },
-    { "hold", "hd", "0|1", "Sets bow hold on/off", false, false, &s_hold, eCommandType_data::ectSimpleBool | eCommandType_function::ectParameter },
-    { "home", "hm", "-", "Homing bow, used at startup and in case of the bow loosing position", false, false, &s_home, eCommandType_data::ectImmediate | eCommandType_function::ectSystem },
+        eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectCalibration },
+    { "modulationspeed", "ms", "0.1 - 10", "Bow pressure movement speed while engaged", false, false, &s_modulationSpeed, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectCalibration },
+    { "hold", "hd", "0|1", "Sets bow hold on/off", false, false, &s_hold, eCommandType_data::ectSimpleBool | eCommandType_function::ectLiveAction },
+    { "home", "hm", "-", "Homing bow, used at startup and in case of the bow loosing position", false, false, &s_home,
+        eCommandType_data::ectConditional | eCommandType_access::ectInvokeOnly | eCommandType_function::ectAdminAction | eCommandType_flags::ectSystem },
     { "tmcinfo", "tmi", "-", "Request statistical information from the TMC2209", true, false, &s_tmcinfo,
-        eCommandType_data::ectData | eCommandType_function::ectSystem | eCommandType_access::ectRequest }
+        eCommandType_data::ectData | eCommandType_access::ectRequest |  eCommandType_function::ectInternalStatistics | eCommandType_flags::ectSystem }
 };
 
 getModuleCount(BowPressure)
@@ -54,16 +55,20 @@ CREATE_MODULE_COMMAND_FUNCTION(modifier, BowPressure) {
 };
 
 CREATE_MODULE_COMMAND_FUNCTION(rest, BowPressure) {
-    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-    rest(inCommandItem->argument[0].toInt());
-    inCommandResponses->push_back({thisItem.shortCommand + ":" + String(inCommandItem->argument[0].toInt()), InfoRequest});
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        rest(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(inCommandItem->argument[0].toInt()), InfoRequest});
+    }
     return eProcessResult::Ok;
 };
 
 CREATE_MODULE_COMMAND_FUNCTION(engage, BowPressure) {
-    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-    engage(inCommandItem->argument[0].toInt());
-    inCommandResponses->push_back({thisItem.shortCommand + ":" + String(inCommandItem->argument[0].toInt()), InfoRequest});
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        engage(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(inCommandItem->argument[0].toInt()), InfoRequest});
+    }
     return eProcessResult::Ok;
 };
 
@@ -129,7 +134,13 @@ CREATE_MODULE_COMMAND_FUNCTION(modulationSpeed, BowPressure) {
 CREATE_MODULE_COMMAND_FUNCTION(hold, BowPressure) {
     if (!request) {
         if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        if (inCommandItem->argument[0].toInt() > 0) { setHold(true); } else { setHold(false);}
+        if (inCommandItem->argument[0].toInt() > 0) {
+            //debugPrint("Holding bow", debugPrintType::Debug);
+            setHold(false);
+        } else {
+            setHold(true);
+            //debugPrint("Not holding bow", debugPrintType::Debug);
+        }
     }
     inCommandResponses->push_back({thisItem.shortCommand + ":" + String(getHold()), InfoRequest});
     return eProcessResult::Ok;

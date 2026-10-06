@@ -7,20 +7,15 @@
 {\ttfamily \#include $<$Buffered\+Input.\+h$>$}\newline
 {\ttfamily \#include $<$Buffered\+Output.\+h$>$}\newline
 {\ttfamily \#include $<$Safe\+String.\+h$>$}\newline
-{\ttfamily \#include $<$Safe\+String\+Name\+Space.\+h$>$}\newline
-{\ttfamily \#include $<$Safe\+String\+Name\+Space\+End.\+h$>$}\newline
-{\ttfamily \#include $<$Safe\+String\+Name\+Space\+Start.\+h$>$}\newline
 {\ttfamily \#include $<$Safe\+String\+Reader.\+h$>$}\newline
-{\ttfamily \#include $<$Safe\+String\+Stream.\+h$>$}\newline
 {\ttfamily \#include "{}../../src/base/debugprint.\+cpp"{}}\newline
 {\ttfamily \#include "{}base/commandparser.\+hpp"{}}\newline
 {\ttfamily \#include "{}base/module.\+hpp"{}}\newline
 {\ttfamily \#include "{}single\+\_\+far/farsingle.\+hpp"{}}\newline
-{\ttfamily \#include "{}single\+\_\+far/basemodule.\+hpp"{}}\newline
+{\ttfamily \#include "{}master\+\_\+controller/mastermodule.\+hpp"{}}\newline
 {\ttfamily \#include "{}master\+\_\+controller/global\+\_\+generics.\+hpp"{}}\newline
 {\ttfamily \#include "{}MIDI.\+h"{}}\newline
-Include dependency graph for main.\+cpp\+:
-\nopagebreak
+Include dependency graph for main.\+cpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -37,11 +32,11 @@ Include dependency graph for main.\+cpp\+:
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{main_8cpp_a74558414decb37e920b3291b8623615e}{create\+Safe\+String\+Reader}} (ss\+Reader, 8192, "{}\textbackslash{}r\textbackslash{}n"{})
+\mbox{\hyperlink{main_8cpp_ac19416464c2dc9f20043793f18a10ca7}{create\+Safe\+String\+Reader}} (ss\+Reader, 28192, "{}\textbackslash{}r\textbackslash{}n"{})
 \begin{DoxyCompactList}\small\item\em Safe\+String reader creation. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{main_8cpp_ac2dc5984145d4f78c73928eca404b8ae}{create\+Buffered\+Output}} (ss\+Output, 8192, DROP\+\_\+\+UNTIL\+\_\+\+EMPTY)
+\mbox{\hyperlink{main_8cpp_a575ea5b5851f669df533c1c9103390ab}{create\+Buffered\+Output}} (ss\+Output, 28192, DROP\+\_\+\+UNTIL\+\_\+\+EMPTY)
 \begin{DoxyCompactList}\small\item\em Safe\+String buffer creation. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{main_8cpp_ae9620f25c58613adadfd34a32df92d99}{process\+Serial\+Commands}} (\mbox{\hyperlink{classcommandList}{command\+List}} in\+Command\+List, bool is\+Internal=false)
+void \mbox{\hyperlink{main_8cpp_a79ad6548865b6ee16326b47b9d9142f1}{process\+Serial\+Commands}} (\mbox{\hyperlink{classCommandList}{Command\+List}} in\+Command\+List, bool is\+Internal=false)
 \item 
 void \mbox{\hyperlink{main_8cpp_aa8ffdf555ac7c84e88dd4ad41098e41a}{process\+Serial\+Commands}} ()
 \item 
@@ -52,7 +47,11 @@ void \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classBaseModule}{Base\+Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8cpp_aff6f231d5279756c610ed734326bf5fe}{base\+Module}}
+\mbox{\hyperlink{classMasterModule}{Master\+Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8cpp_ae4957f2a978ca76c116e7bd13bde9cd8}{master\+Module}}
+\item 
+\mbox{\hyperlink{classCommandList}{Command\+List}} \mbox{\hyperlink{main_8cpp_aed8489a6fdb6a80a6ff7a0314db6f554}{global\+Commands}}
+\item 
+\mbox{\hyperlink{classCommandList}{Command\+List}} \mbox{\hyperlink{main_8cpp_a2b5f5a646c2866ea89977d8d9a71a585}{global\+Response\+Commands}}
 \item 
 uint32\+\_\+t \mbox{\hyperlink{main_8cpp_ab2f6b8b6b2615dbd77d4253210e4133d}{startup\+Time}}
 \item 
@@ -96,27 +95,57 @@ midi\+::\+Midi\+Interface$<$ midi\+::\+Serial\+MIDI$<$ Hardware\+Serial $>$ $>$ 
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{main_8cpp_ac2dc5984145d4f78c73928eca404b8ae}\label{main_8cpp_ac2dc5984145d4f78c73928eca404b8ae} 
+\Hypertarget{main_8cpp_a575ea5b5851f669df533c1c9103390ab}\label{main_8cpp_a575ea5b5851f669df533c1c9103390ab} 
 \index{main.cpp@{main.cpp}!createBufferedOutput@{createBufferedOutput}}
 \index{createBufferedOutput@{createBufferedOutput}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{createBufferedOutput()}{createBufferedOutput()}}
-{\footnotesize\ttfamily create\+Buffered\+Output (\begin{DoxyParamCaption}\item[{ss\+Output}]{,  }\item[{8192}]{,  }\item[{DROP\+\_\+\+UNTIL\+\_\+\+EMPTY}]{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily create\+Buffered\+Output (\begin{DoxyParamCaption}\item[{ss\+Output}]{,  }\item[{28192}]{,  }\item[{DROP\+\_\+\+UNTIL\+\_\+\+EMPTY}]{ }\end{DoxyParamCaption})}
 
 
 
 Safe\+String buffer creation. 
 
-\Hypertarget{main_8cpp_a74558414decb37e920b3291b8623615e}\label{main_8cpp_a74558414decb37e920b3291b8623615e} 
+\Hypertarget{main_8cpp_ac19416464c2dc9f20043793f18a10ca7}\label{main_8cpp_ac19416464c2dc9f20043793f18a10ca7} 
 \index{main.cpp@{main.cpp}!createSafeStringReader@{createSafeStringReader}}
 \index{createSafeStringReader@{createSafeStringReader}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{createSafeStringReader()}{createSafeStringReader()}}
-{\footnotesize\ttfamily create\+Safe\+String\+Reader (\begin{DoxyParamCaption}\item[{ss\+Reader}]{,  }\item[{8192}]{,  }\item[{"{}\textbackslash{}r\textbackslash{}n"{}}]{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily create\+Safe\+String\+Reader (\begin{DoxyParamCaption}\item[{ss\+Reader}]{,  }\item[{28192}]{,  }\item[{"{}\textbackslash{}r\textbackslash{}n"{}}]{ }\end{DoxyParamCaption})}
 
 
 
 Safe\+String reader creation. 
 
-\Hypertarget{main_8cpp_afe461d27b9c48d5921c00d521181f12f}\label{main_8cpp_afe461d27b9c48d5921c00d521181f12f} 
+\hypertarget{main_8cpp_libraries}{}\doxysubsection{\texorpdfstring{Libraries}{Libraries}}\label{main_8cpp_libraries}
+
+\begin{DoxyItemize}
+\item Adafruit\+\_\+\+ADS1\+X15 -\/ library for using the ADS1\+X15 ADC converters, used by the control\+Reader class ~\newline
+
+\item Adafruit\+\_\+\+Bus\+IO -\/ library used by the Adafruit\+\_\+\+ADS1\+X15 library ~\newline
+
+\item Audio -\/ PJRC Teensy 4 Audio library, used by functions in \doxylink{audioanalyze_8h}{audioanalyze.\+h} ~\newline
+
+\item EEPROM -\/ Library for saving data into the Teensy 4 EEPROM, used by eepromhelpers.\+cpp ~\newline
+
+\item Safe\+String -\/ Partial use of its RS-\/232 functionality, used by \doxylink{main_8cpp}{main.\+cpp} and debugprint.\+h ~\newline
+
+\item SD, Sd\+Fat, Serial\+Flash, SPI -\/ Libraries required by the Teensy 4 Audio library ~\newline
+
+\item Teensy4 -\/ The PJRC Teensy 4 library ~\newline
+
+\item Teensy\+\_\+\+PWM -\/ Library for better manipulation of the Teensy 4 PWM ports, used by the bow\+IO and solenoid classes ~\newline
+
+\item tinyexpr -\/ Expression parser library used for parsing command message expressions in command\+List\+::parse\+Command\+Expressions ~\newline
+
+\item TMC2209 -\/ Library for the TMC2209 stepper motor driver IC, used by the bow\+IO and mute classes ~\newline
+
+\item Wire -\/ Library for i2c communications, used by the control\+Reader class ~\newline
+ 
+\end{DoxyItemize}\hypertarget{main_8cpp_author}{}\doxysubsection{\texorpdfstring{Author}{Author}}\label{main_8cpp_author}
+
+\begin{DoxyItemize}
+\item Created by Karl Ekdahl on 2023-\/09-\/03
+\item Modified by Karl Ekdahl on 2024-\/07-\/26 
+\end{DoxyItemize}\Hypertarget{main_8cpp_afe461d27b9c48d5921c00d521181f12f}\label{main_8cpp_afe461d27b9c48d5921c00d521181f12f} 
 \index{main.cpp@{main.cpp}!loop@{loop}}
 \index{loop@{loop}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{loop()}{loop()}}
@@ -149,17 +178,17 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=291pt]{main_8cpp_aa8ffdf555ac7c84e88dd4ad41098e41a_icgraph}
 \end{center}
 \end{figure}
-\Hypertarget{main_8cpp_ae9620f25c58613adadfd34a32df92d99}\label{main_8cpp_ae9620f25c58613adadfd34a32df92d99} 
+\Hypertarget{main_8cpp_a79ad6548865b6ee16326b47b9d9142f1}\label{main_8cpp_a79ad6548865b6ee16326b47b9d9142f1} 
 \index{main.cpp@{main.cpp}!processSerialCommands@{processSerialCommands}}
 \index{processSerialCommands@{processSerialCommands}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{processSerialCommands()}{processSerialCommands()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void process\+Serial\+Commands (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcommandList}{command\+List}}}]{in\+Command\+List,  }\item[{bool}]{is\+Internal = {\ttfamily false} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void process\+Serial\+Commands (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCommandList}{Command\+List}}}]{in\+Command\+List,  }\item[{bool}]{is\+Internal = {\ttfamily false} }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{main_8cpp_ae9620f25c58613adadfd34a32df92d99_cgraph}
+\includegraphics[width=350pt]{main_8cpp_a79ad6548865b6ee16326b47b9d9142f1_cgraph}
 \end{center}
 \end{figure}
 \Hypertarget{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}\label{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d} 
@@ -183,12 +212,6 @@ Here is the call graph for this function\+:\nopagebreak
 \index{aliveUpdateInterval@{aliveUpdateInterval}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{aliveUpdateInterval}{aliveUpdateInterval}}
 {\footnotesize\ttfamily unsigned long alive\+Update\+Interval = 500}
-
-\Hypertarget{main_8cpp_aff6f231d5279756c610ed734326bf5fe}\label{main_8cpp_aff6f231d5279756c610ed734326bf5fe} 
-\index{main.cpp@{main.cpp}!baseModule@{baseModule}}
-\index{baseModule@{baseModule}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{baseModule}{baseModule}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classBaseModule}{Base\+Module}}\texorpdfstring{$\ast$}{*} base\+Module}
 
 \Hypertarget{main_8cpp_ac87efa454b18ecfc7d56b23ebf8fb735}\label{main_8cpp_ac87efa454b18ecfc7d56b23ebf8fb735} 
 \index{main.cpp@{main.cpp}!commandUpadateInterval@{commandUpadateInterval}}
@@ -219,6 +242,24 @@ Here is the call graph for this function\+:\nopagebreak
 \index{currentTime@{currentTime}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{currentTime}{currentTime}}
 {\footnotesize\ttfamily unsigned long current\+Time = 0}
+
+\Hypertarget{main_8cpp_aed8489a6fdb6a80a6ff7a0314db6f554}\label{main_8cpp_aed8489a6fdb6a80a6ff7a0314db6f554} 
+\index{main.cpp@{main.cpp}!globalCommands@{globalCommands}}
+\index{globalCommands@{globalCommands}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{globalCommands}{globalCommands}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCommandList}{Command\+List}} global\+Commands}
+
+\Hypertarget{main_8cpp_a2b5f5a646c2866ea89977d8d9a71a585}\label{main_8cpp_a2b5f5a646c2866ea89977d8d9a71a585} 
+\index{main.cpp@{main.cpp}!globalResponseCommands@{globalResponseCommands}}
+\index{globalResponseCommands@{globalResponseCommands}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{globalResponseCommands}{globalResponseCommands}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCommandList}{Command\+List}} global\+Response\+Commands}
+
+\Hypertarget{main_8cpp_ae4957f2a978ca76c116e7bd13bde9cd8}\label{main_8cpp_ae4957f2a978ca76c116e7bd13bde9cd8} 
+\index{main.cpp@{main.cpp}!masterModule@{masterModule}}
+\index{masterModule@{masterModule}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{masterModule}{masterModule}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMasterModule}{Master\+Module}}\texorpdfstring{$\ast$}{*} master\+Module}
 
 \Hypertarget{main_8cpp_a33fb735d671bee15d03db7b848495cd0}\label{main_8cpp_a33fb735d671bee15d03db7b848495cd0} 
 \index{main.cpp@{main.cpp}!MIDI@{MIDI}}

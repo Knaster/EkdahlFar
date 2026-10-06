@@ -27,10 +27,10 @@
 #include "generic_functions/bowActuators.hpp"
 
 const ModuleCommandDeclaration BowActuators::moduleCommands[] = {
-    { "add", "a", "(name):(rest:engage:stall)", "Add new actuator with the given name and parameters", false, false, &s_add, eCommandType_data::ectData | eCommandType_function::ectAdd},
-    { "remove", "rm", "actuator", "Remove bow actuator", false, false, &s_remove, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectRemove},
+    { "add", "a", "(name):(rest:engage:stall)", "Add new actuator with the given name and parameters", false, false, &s_add, eCommandType_data::ectData | eCommandType_function::ectAddModule},
+    { "remove", "rm", "actuator", "Remove bow actuator", false, false, &s_remove, eCommandType_function::ectRemoveModule },
     { "count", "c", "-", "Returns the amount of saved bow actuators", false, false, &s_count,
-        eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectCount | eCommandType_access::ectRequest },
+        eCommandType_function::ectCountModules | eCommandType_access::ectRequest },
 };
 
 getModuleCount(BowActuators)
@@ -52,25 +52,26 @@ CREATE_INDEX_CALLBACK(actuatorIndexChanged, BowActuators) {
 }
 
 CREATE_MODULE_COMMAND_FUNCTION(add, BowActuators) {
-    BowActuator *actuator;
+    if (!request) {
+        BowActuator *actuator;
 
-    switch(inCommandItem->argument.size()) {
-    case 0:
-        actuator = addBowActuator();
-        break;
-    case 1:
-        actuator = addBowActuator(inCommandItem->argument[0]);
-        break;
-    case 4:
-        actuator = addBowActuator(inCommandItem->argument[0], inCommandItem->argument[1].toInt(), inCommandItem->argument[2].toInt(), inCommandItem->argument[3].toInt());
-        break;
-    default:
-        return eProcessResult::WrongArgumentCount;
+        switch(inCommandItem->argument.size()) {
+        case 0:
+            actuator = addBowActuator();
+            break;
+        case 1:
+            actuator = addBowActuator(inCommandItem->argument[0]);
+            break;
+        case 4:
+            actuator = addBowActuator(inCommandItem->argument[0], inCommandItem->argument[1].toInt(), inCommandItem->argument[2].toInt(), inCommandItem->argument[3].toInt());
+            break;
+        default:
+            return eProcessResult::WrongArgumentCount;
+        }
+
+        inCommandResponses->push_back({ thisItem.shortCommand + ":actuator:" + String(getGroup("actuator")->modules.size() - 1) + ":" + actuator->restPosition+ ":" + actuator->firstTouchPressure  + ":" + actuator->stallPressure,
+                                      debugPrintType::InfoRequest });
     }
-
-    inCommandResponses->push_back({ thisItem.shortCommand + ":" + actuator->id + ":" + actuator->restPosition+ ":" + actuator->firstTouchPressure  + ":" + actuator->stallPressure,
-                                  debugPrintType::InfoRequest });
-
     return eProcessResult::Ok;
 }
 
@@ -86,8 +87,8 @@ CREATE_MODULE_COMMAND_FUNCTION(remove, BowActuators) {
                 return eProcessResult::CommandFailed;
             }
         }
+        inCommandResponses->push_back({ thisItem.shortCommand + ":actuator:" + inCommandItem->argument[0], debugPrintType::InfoRequest });
     }
-    inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::InfoRequest });
     return eProcessResult::Ok;
 }
 
@@ -110,7 +111,7 @@ BowActuator* BowActuators::addBowActuator(String name, uint16_t rest, uint16_t e
 }
 
 bool BowActuators::removeBowActuator(uint8_t t_actuator) {
-    ModuleGroup *group = getGroup("bowactuators");
+    ModuleGroup *group = getGroup("actuator");
     if (group == nullptr) { return false; }
     return group->removeModule(t_actuator);
 }
@@ -121,6 +122,24 @@ void BowActuators::dumpData(std::vector<commandResponse> *dataDump) {
     commandResponses.push_back({ "ac[" + String(moduleGroups[0].selection[0]) + "]", debugPrintType::InfoRequest });
     return commandResponses;*/
     ModuleHandler::dumpData(dataDump);
+}
+
+void BowActuators::addInstances(String name, uint8_t count) {
+    debugPrintln("addInstances reached", debugPrintType::Debug);
+    if ((name != "ac") and (name != "actuator")) {
+        debugPrintln("Unknown instance name '" + name + "'", debugPrintType::Error);
+    } else {
+        ModuleGroup *group = getGroup("actuator");
+        if (group == nullptr) {
+                debugPrintln("Error in addInstances", debugPrintType::Error);
+                return;
+        }
+        debugPrintln("Count is " + String(count) + " size is " + String(group->modules.size()), debugPrintType::Debug);
+        while (count > group->modules.size()) {
+            group->addModule(new BowActuator());
+            debugPrintln("Added module '" + name + "'", debugPrintType::Debug);
+        }
+    }
 }
 
 #endif

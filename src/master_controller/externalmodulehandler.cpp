@@ -59,7 +59,9 @@ void SerialHardwareWrapper::update() {
         debugPrintType dp = debugPrintGetType(&extResponse);
         extResponse = extResponse.substring(5);
 
-        CommandItem extItem = CommandItem(&extResponse);
+// Attempt to fix loadparameters hang 2026-09-24
+//        CommandItem extItem = CommandItem(&extResponse);
+        CommandItem extItem = CommandItem(extResponse);
         if (extItem.hierarchy.size() > 0) {
             if (extItem.hierarchy[0].name == "ls" || extItem.hierarchy[0].name == "list") {
                 String shortLineage;

@@ -30,7 +30,10 @@ void ModuleGroup::dir(std::vector<commandResponse> *inCommandResponses, String l
             }
             modules[0]->dir(inCommandResponses, longPrefix, shortPrefix, hidden, inModules, commands, instances, instanceCount, recursive);
         } else {
-//            debugPrintln("Dir module group instances", debugPrintType::Debug);
+/*            if (modules.size() == 0)
+                inCommandResponses->push_back({"Dir: no module group instances", debugPrintType::Debug});
+            else
+                inCommandResponses->push_back({"Dir: has module group instances", debugPrintType::Debug});*/
             for (int i = 0; i < modules.size(); i++) {
                 String index = "[" + String (i) + "]";
                 if (inModules) {
@@ -55,7 +58,6 @@ void ModuleGroup::dumpData(std::vector<commandResponse> *inCommandResponses) {
     for (int i = 0; i < modules.size(); i++) {
         modules[i]->dumpData(&outDataDump);
         for (int j = 0; j < outDataDump.size(); j++) {
-//            out = modules[i]->moduleID->getShortAlias();
             out = String(modules[i]->getModuleID().shortAlias.c_str());
             if (modules.size() > 1) { out += "[" + String(i) + "]"; }
             out += "." + outDataDump[j].response;
@@ -63,6 +65,18 @@ void ModuleGroup::dumpData(std::vector<commandResponse> *inCommandResponses) {
         }
         outDataDump.clear();
     }
+
+    // Save index if applicable
+    if ((selection.size() == 1) && (modules.size() > 0)) {
+        out = String(modules[0]->getModuleID().shortAlias.c_str());
+        out += "[" + String(selection[0]) + "]";
+
+        //debugPrint("Dumping index " + out, debugPrintType::Debug);
+        inCommandResponses->push_back({ out, debugPrintType::InfoRequest });
+    } else if (modules.size() > 0) {
+        //debugPrint("No index dumping for " + String(modules[0]->getModuleID().shortAlias.c_str()), debugPrintType::Debug);
+    }
+
 }
 
 eProcessResult ModuleGroup::processCommands(CommandItem *inCommandItem, std::vector<commandResponse> *commandResponses, bool request) {

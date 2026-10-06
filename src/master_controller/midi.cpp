@@ -39,6 +39,7 @@
 #include "master_controller/expressionparser.h"
 #include <MIDI.h>
 #include "master_controller/midi.h"
+#include "master_controller/midicc.hpp"
 
 #define MIDI_CONFIG_CHECK \
     if (midiMessageConfiguration == nullptr) { \
@@ -216,13 +217,24 @@ void MIDIHandler::OnControlChange(byte channel, byte control, byte value) {
 
     debugPrintln("Control change on channel " + String(channel) + " control " + String(control) + " value " + String(value), dpUSB);
 
-    for (int i = 0; i < int(midiMessageConfiguration->controlChange.size()); i++) {
-        if (midiMessageConfiguration->controlChange[i].control == control) {
-            expressionParser->dnote = 0;
-            expressionParser->dvelocity = 0;
-            expressionParser->dchannel = channel;
-            expressionParser->dvalue = value;
-            processLocalMessage(&midiMessageConfiguration->controlChange[i].command);
+    ModuleGroup *ccgroup;
+    ccgroup = midiMessageConfiguration->getGroup("cc");
+
+    if (ccgroup != nullptr) {
+        MIDICC *mcc = nullptr;
+        for (uint8_t i=0; i<ccgroup->modules.size(); i++) {
+            mcc = static_cast<MIDICC*> (ccgroup->modules[i]);
+
+//    for (int i = 0; i < int(midiMessageConfiguration->controlChange.size()); i++) {
+//        if (midiMessageConfiguration->controlChange[i].control == control) {
+            if (mcc->ccnum == control) {
+                expressionParser->dnote = 0;
+                expressionParser->dvelocity = 0;
+                expressionParser->dchannel = channel;
+                expressionParser->dvalue = value;
+                //processLocalMessage(&midiMessageConfiguration->controlChange[i].command);
+                processLocalMessage(&mcc->outputS);
+            }
         }
     }
 }

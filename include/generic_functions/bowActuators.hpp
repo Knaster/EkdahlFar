@@ -38,6 +38,8 @@ public:
 
     void dumpData(std::vector<commandResponse> *dataDump) override;
 
+    void addInstances(String name, uint8_t count) override;
+
     BowActuators();
 
 private:
@@ -45,40 +47,6 @@ private:
     BowActuator* addBowActuator(String name = "default", uint16_t rest = 0, uint16_t engage = 2000, uint16_t stall = 65535);
 
     bool removeBowActuator(uint8_t t_actuator);
-
-
-//    uint8_t setBowActuator(uint8_t t_actuator);
-
-//    uint8_t getBowActuator();
-
-//    uint8_t getBowActuatorCount();
-/*
-    bool loadBowActuator();
-
-    bool loadBowActuator(uint8_t t_actuator);
-
-    bool saveBowActuator(uint16_t actuator, String name);
-    */
-/*
-    bool setBowActuatorFirstTouchPressure(uint16_t t_firstTouchPressure);
-
-    bool setBowActuatorStallPressure(uint16_t t_stallPressure);
-
-    bool setBowActuatorRestPosition(uint16_t t_restPosition);
-
-    bool setBowActuatorID(String t_id);
-*/
-/*
-    uint16_t getBowActuatorFirstTouchPressure(int8_t t_bowActuatorIndex = -1);
-
-    uint16_t getBowActuatorStallPressure(int8_t t_bowActuatorIndex = -1);
-
-    uint16_t getBowActuatorRestPosition(int8_t t_bowActuatorIndex = -1);
-    */
-/*
-    String getBowActuatorID(int8_t t_bowActuatorIndex = -1);
-
-    bool setBowActuatorData(int8_t t_bowActuatorIndex, uint16_t t_firstTouchPressure, uint16_t t_stallPressure, uint16_t t_restPosition, String t_id);*/
 };
 
 #endif // BOWACTUATORS_H

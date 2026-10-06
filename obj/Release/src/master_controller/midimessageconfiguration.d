@@ -19,7 +19,8 @@ obj/Release/src/master_controller/midimessageconfiguration.o: \
  lib/teensy4/Printable.h lib/teensy4/WString.h \
  include/base/debugprint.hpp \
  include/master_controller/midimessageconfiguration.hpp \
+ include/base/modulehandler.hpp include/base/modulegroup.hpp \
  include/base/module.hpp include/base/modulesystembasics.hpp \
  include/base/commandparser.hpp include/base/commanditem.hpp \
  include/base/generalhelpers.hpp include/base/arduinorequired.hpp \
- include/base/module.hpp
+ include/base/module.hpp include/master_controller/midicc.hpp

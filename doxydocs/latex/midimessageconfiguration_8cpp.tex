@@ -2,8 +2,8 @@
 \hypertarget{midimessageconfiguration_8cpp}{}\label{midimessageconfiguration_8cpp}\index{midimessageconfiguration.cpp@{midimessageconfiguration.cpp}}
 {\ttfamily \#include $<$base/arduinorequired.\+hpp$>$}\newline
 {\ttfamily \#include "{}master\+\_\+controller/midimessageconfiguration.\+hpp"{}}\newline
-Include dependency graph for midimessageconfiguration.\+cpp\+:
-\nopagebreak
+{\ttfamily \#include "{}master\+\_\+controller/midicc.\+hpp"{}}\newline
+Include dependency graph for midimessageconfiguration.\+cpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,11 +20,13 @@ Include dependency graph for midimessageconfiguration.\+cpp\+:
 \item 
 \mbox{\hyperlink{midimessageconfiguration_8cpp_a0c14a62d418c9248bf4bf80d55429a53}{get\+Module\+Count}} (\mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}}) \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}}
 \item 
-\mbox{\hyperlink{midimessageconfiguration_8cpp_a44c8ff3de6c7791095fd2fba7f19b5b1}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (event\+Handler, \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}})
+\mbox{\hyperlink{midimessageconfiguration_8cpp_a529874d23c2d520ee8d5b899a95138ef}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (event\+Handler\+New, \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}})
 \item 
-\mbox{\hyperlink{midimessageconfiguration_8cpp_af7d5b674ead816ef7baf34fc17453954}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (addcc, \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}})
+\mbox{\hyperlink{midimessageconfiguration_8cpp_a21890cd2a5e66d0bfd31db73cfe532cd}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (cc\+Add, \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}})
 \item 
 \mbox{\hyperlink{midimessageconfiguration_8cpp_ab4866416cfd6ac20fbe8585a8da02b44}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (cc\+Remove, \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}})
+\item 
+\mbox{\hyperlink{midimessageconfiguration_8cpp_a2d3c4abdd14ff7d61a9564c854893f58}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (cc\+Count, \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}})
 \item 
 \mbox{\hyperlink{midimessageconfiguration_8cpp_a55e1854feb85c8b5655235fab2aa8565}{CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION}} (namef, \mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}})
 \item 
@@ -46,23 +48,10 @@ Include dependency graph for midimessageconfiguration.\+cpp\+:
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{midimessageconfiguration_8cpp_af7d5b674ead816ef7baf34fc17453954}\label{midimessageconfiguration_8cpp_af7d5b674ead816ef7baf34fc17453954} 
-\index{midimessageconfiguration.cpp@{midimessageconfiguration.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
-\index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!midimessageconfiguration.cpp@{midimessageconfiguration.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{addcc}]{,  }\item[{\mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}}}]{ }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{midimessageconfiguration_8cpp_af7d5b674ead816ef7baf34fc17453954_cgraph}
-\end{center}
-\end{figure}
 \Hypertarget{midimessageconfiguration_8cpp_aedd0c9ab30dedcf5c63100653c54fa42}\label{midimessageconfiguration_8cpp_aedd0c9ab30dedcf5c63100653c54fa42} 
 \index{midimessageconfiguration.cpp@{midimessageconfiguration.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!midimessageconfiguration.cpp@{midimessageconfiguration.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
 {\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{all\+Notes\+Off}]{,  }\item[{\mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}}}]{ }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
@@ -72,10 +61,30 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{midimessageconfiguration_8cpp_aedd0c9ab30dedcf5c63100653c54fa42_cgraph}
 \end{center}
 \end{figure}
+\Hypertarget{midimessageconfiguration_8cpp_a21890cd2a5e66d0bfd31db73cfe532cd}\label{midimessageconfiguration_8cpp_a21890cd2a5e66d0bfd31db73cfe532cd} 
+\index{midimessageconfiguration.cpp@{midimessageconfiguration.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
+\index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!midimessageconfiguration.cpp@{midimessageconfiguration.cpp}}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{cc\+Add}]{,  }\item[{\mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}}}]{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{midimessageconfiguration_8cpp_a21890cd2a5e66d0bfd31db73cfe532cd_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{midimessageconfiguration_8cpp_a2d3c4abdd14ff7d61a9564c854893f58}\label{midimessageconfiguration_8cpp_a2d3c4abdd14ff7d61a9564c854893f58} 
+\index{midimessageconfiguration.cpp@{midimessageconfiguration.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
+\index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!midimessageconfiguration.cpp@{midimessageconfiguration.cpp}}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{cc\+Count}]{,  }\item[{\mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}}}]{ }\end{DoxyParamCaption})}
+
 \Hypertarget{midimessageconfiguration_8cpp_ab4866416cfd6ac20fbe8585a8da02b44}\label{midimessageconfiguration_8cpp_ab4866416cfd6ac20fbe8585a8da02b44} 
 \index{midimessageconfiguration.cpp@{midimessageconfiguration.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!midimessageconfiguration.cpp@{midimessageconfiguration.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
 {\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{cc\+Remove}]{,  }\item[{\mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}}}]{ }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
@@ -88,26 +97,26 @@ Here is the call graph for this function\+:\nopagebreak
 \Hypertarget{midimessageconfiguration_8cpp_a816ba11f4a75be4091dbc1ab89eb6220}\label{midimessageconfiguration_8cpp_a816ba11f4a75be4091dbc1ab89eb6220} 
 \index{midimessageconfiguration.cpp@{midimessageconfiguration.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!midimessageconfiguration.cpp@{midimessageconfiguration.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
 {\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{defaults}]{,  }\item[{\mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}}}]{ }\end{DoxyParamCaption})}
 
-\Hypertarget{midimessageconfiguration_8cpp_a44c8ff3de6c7791095fd2fba7f19b5b1}\label{midimessageconfiguration_8cpp_a44c8ff3de6c7791095fd2fba7f19b5b1} 
+\Hypertarget{midimessageconfiguration_8cpp_a529874d23c2d520ee8d5b899a95138ef}\label{midimessageconfiguration_8cpp_a529874d23c2d520ee8d5b899a95138ef} 
 \index{midimessageconfiguration.cpp@{midimessageconfiguration.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!midimessageconfiguration.cpp@{midimessageconfiguration.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
-{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{event\+Handler}]{,  }\item[{\mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}}}]{ }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{event\+Handler\+New}]{,  }\item[{\mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}}}]{ }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{midimessageconfiguration_8cpp_a44c8ff3de6c7791095fd2fba7f19b5b1_cgraph}
+\includegraphics[width=350pt]{midimessageconfiguration_8cpp_a529874d23c2d520ee8d5b899a95138ef_cgraph}
 \end{center}
 \end{figure}
 \Hypertarget{midimessageconfiguration_8cpp_a55e1854feb85c8b5655235fab2aa8565}\label{midimessageconfiguration_8cpp_a55e1854feb85c8b5655235fab2aa8565} 
 \index{midimessageconfiguration.cpp@{midimessageconfiguration.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!midimessageconfiguration.cpp@{midimessageconfiguration.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
 {\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{namef}]{,  }\item[{\mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}}}]{ }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
@@ -120,7 +129,7 @@ Here is the call graph for this function\+:\nopagebreak
 \Hypertarget{midimessageconfiguration_8cpp_a64a9054ecf2abb6110173ee9932537be}\label{midimessageconfiguration_8cpp_a64a9054ecf2abb6110173ee9932537be} 
 \index{midimessageconfiguration.cpp@{midimessageconfiguration.cpp}!CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}}
 \index{CREATE\_MODULE\_COMMAND\_FUNCTION@{CREATE\_MODULE\_COMMAND\_FUNCTION}!midimessageconfiguration.cpp@{midimessageconfiguration.cpp}}
-\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
+\doxysubsubsection{\texorpdfstring{CREATE\_MODULE\_COMMAND\_FUNCTION()}{CREATE\_MODULE\_COMMAND\_FUNCTION()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
 {\footnotesize\ttfamily CREATE\+\_\+\+MODULE\+\_\+\+COMMAND\+\_\+\+FUNCTION (\begin{DoxyParamCaption}\item[{receive\+Channel}]{,  }\item[{\mbox{\hyperlink{classMIDIMessageConfiguration}{MIDIMessage\+Configuration}}}]{ }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak

@@ -20,6 +20,11 @@ void ModuleHandler::dir(std::vector<commandResponse> *inCommandResponses, String
     }
 
     //debugPrintln("Dir module handler groups", debugPrintType::Debug);
+/*    if (moduleGroups.size() == 0)
+        inCommandResponses->push_back({"Dir: Module handler groups is empty", debugPrintType::Debug});
+    else
+        inCommandResponses->push_back({"Dir: Module handler groups is not empty", debugPrintType::Debug});
+*/
     for (int i = 0; i < moduleGroups.size(); i++) {
         moduleGroups[i].dir(inCommandResponses,lp + moduleGroups[i].tmoduleID.longName, sp + moduleGroups[i].tmoduleID.shortName, hidden, modules, commands, instances, instanceCount, recursive);
     }
@@ -88,11 +93,13 @@ ModuleGroup* ModuleHandler::addModule(Module *module) {
 }
 
 eProcessResult ModuleHandler::processModuleHandlerCommands(CommandItem *inCommandItem, std::vector<commandResponse> *commandResponse, bool request) {
+    // 'ins' is a specialty command only used for parameter load (and thus save) and will insert x number of empty children that can be populated by following information
+    // from saved parameters
     if (inCommandItem->hierarchy[inCommandItem->hierarchyIndex].name == "ins") {
         if (!request) {
             if (!checkArguments(inCommandItem, commandResponse, 2)) { return eProcessResult::WrongArgumentCount; }
             addInstances(inCommandItem->argument[0], inCommandItem->argument[1].toInt());
-            commandResponse->push_back({ "ins:" + inCommandItem->argument[0] + ":1", debugPrintType::InfoRequest });
+            commandResponse->push_back({ "ins:" + inCommandItem->argument[0] + ":" + inCommandItem->argument[1], debugPrintType::InfoRequest });
             return eProcessResult::Ok;
         };
         for (int i = 0; i < moduleGroups.size(); i++) {
@@ -134,7 +141,7 @@ eProcessResult ModuleHandler::processCommands(CommandItem *inCommandItem, std::v
                             commandResponses->push_back({ returnString + "[" + String(moduleGroups[i].selection[j]) + "]", debugPrintType::InfoRequest });
                         }
                     } else {
-                        commandResponses->push_back({ returnString + ":none", debugPrintType::InfoRequest });
+                        commandResponses->push_back({ returnString + "[0]", debugPrintType::InfoRequest });
                     }
                     return eProcessResult::Ok;
                 } else {

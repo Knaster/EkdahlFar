@@ -76,12 +76,14 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">pluginhandler.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="modulehandler_8hpp_source.html">base/modulehandler.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="expressionparser_8h_source.html">master_controller/expressionparser.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="commandlist_8hpp_source.html">commandlist.hpp</a>&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;cstring&gt;</code><br />
@@ -90,48 +92,57 @@ Include dependency graph for pluginhandler.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="pluginhandler_8hpp__incl.png" border="0" usemap="#apluginhandler_8hpp" alt=""/></div>
 <map name="apluginhandler_8hpp" id="apluginhandler_8hpp">
-<area shape="rect" title=" " alt="" coords="526,5,665,31"/>
-<area shape="rect" href="modulehandler_8hpp.html" title=" " alt="" coords="324,79,507,104"/>
-<area shape="poly" title=" " alt="" coords="567,33,458,76,456,71,565,28"/>
-<area shape="rect" title=" " alt="" coords="450,372,509,397"/>
-<area shape="poly" title=" " alt="" coords="591,32,564,87,552,125,547,163,547,240,543,275,530,308,499,362,495,360,526,306,537,273,542,239,542,163,547,123,559,86,586,30"/>
-<area shape="rect" href="expressionparser_8h.html" title=" " alt="" coords="533,372,797,397"/>
-<area shape="poly" title=" " alt="" coords="598,31,598,163,598,239,603,274,616,307,649,360,644,363,611,309,598,275,593,240,593,163,593,31"/>
-<area shape="rect" title=" " alt="" coords="633,79,720,104"/>
-<area shape="poly" title=" " alt="" coords="610,29,655,68,651,72,607,33"/>
-<area shape="rect" title=" " alt="" coords="745,79,811,104"/>
-<area shape="poly" title=" " alt="" coords="626,28,736,71,734,76,624,33"/>
-<area shape="rect" href="modulegroup_8hpp.html" title=" " alt="" coords="347,152,483,177"/>
-<area shape="poly" title=" " alt="" coords="418,104,418,138,413,138,413,104"/>
-<area shape="rect" href="module_8hpp.html" title=" " alt="" coords="244,225,379,251"/>
-<area shape="poly" title=" " alt="" coords="400,180,341,219,338,215,397,175"/>
-<area shape="rect" title=" " alt="" coords="403,225,481,251"/>
-<area shape="poly" title=" " alt="" coords="422,177,435,212,430,214,417,179"/>
-<area shape="rect" href="arduinorequired_8hpp.html" title=" " alt="" coords="229,445,417,471"/>
-<area shape="poly" title=" " alt="" coords="259,253,220,271,203,284,190,300,187,311,190,323,196,363,202,378,215,396,243,420,276,438,274,443,240,425,211,399,198,381,191,364,185,325,182,311,185,297,199,280,217,266,257,248"/>
-<area shape="rect" href="modulesystembasics_8hpp.html" title=" " alt="" coords="200,299,423,324"/>
-<area shape="poly" title=" " alt="" coords="307,251,305,285,300,285,302,251"/>
-<area shape="rect" title=" " alt="" coords="5,519,113,544"/>
-<area shape="poly" title=" " alt="" coords="282,473,116,518,115,512,280,468"/>
-<area shape="rect" title=" " alt="" coords="138,519,245,544"/>
-<area shape="poly" title=" " alt="" coords="303,473,226,514,224,510,301,468"/>
-<area shape="rect" title=" " alt="" coords="269,519,354,544"/>
-<area shape="poly" title=" " alt="" coords="324,471,318,506,313,505,319,471"/>
-<area shape="rect" title=" " alt="" coords="557,519,620,544"/>
-<area shape="poly" title=" " alt="" coords="367,468,544,515,543,521,365,473"/>
-<area shape="rect" href="debugprint_8hpp.html" title=" " alt="" coords="378,519,533,544"/>
-<area shape="poly" title=" " alt="" coords="339,468,416,510,413,515,336,473"/>
-<area shape="poly" title=" " alt="" coords="439,521,362,479,365,474,442,516"/>
-<area shape="poly" title=" " alt="" coords="316,298,317,264,323,265,321,299"/>
-<area shape="poly" title=" " alt="" coords="283,327,258,340,235,356,222,376,221,385,224,396,246,420,274,437,272,442,243,424,220,399,215,386,217,374,231,353,255,335,281,322"/>
-<area shape="rect" href="commandparser_8hpp.html" title=" " alt="" coords="235,372,425,397"/>
-<area shape="poly" title=" " alt="" coords="317,324,326,358,321,360,312,325"/>
-<area shape="poly" title=" " alt="" coords="339,322,440,364,438,369,337,326"/>
-<area shape="poly" title=" " alt="" coords="332,398,328,432,323,432,326,397"/>
-<area shape="poly" title=" " alt="" coords="610,400,392,445,391,440,609,395"/>
-<area shape="poly" title=" " alt="" coords="655,399,636,421,618,447,605,477,596,506,591,504,600,475,613,444,631,417,651,396"/>
-<area shape="rect" title=" " alt="" coords="627,445,713,471"/>
-<area shape="poly" title=" " alt="" coords="668,397,671,432,665,432,663,398"/>
+<area shape="rect" title=" " alt="" coords="523,5,661,31"/>
+<area shape="rect" href="modulehandler_8hpp.html" title=" " alt="" coords="287,79,470,104"/>
+<area shape="poly" title=" " alt="" coords="559,33,427,77,425,72,557,28"/>
+<area shape="rect" title=" " alt="" coords="363,372,421,397"/>
+<area shape="poly" title=" " alt="" coords="583,33,563,55,542,86,524,123,517,164,517,239,515,260,508,280,485,316,455,345,425,367,422,363,452,341,481,312,503,278,510,259,512,239,512,163,519,122,537,84,559,52,579,29"/>
+<area shape="rect" href="expressionparser_8h.html" title=" " alt="" coords="520,519,784,544"/>
+<area shape="poly" title=" " alt="" coords="598,30,612,87,619,125,621,163,621,386,624,419,630,451,645,505,640,507,624,452,618,419,616,386,616,163,613,125,607,88,593,31"/>
+<area shape="rect" href="commandlist_8hpp.html" title=" " alt="" coords="446,372,581,397"/>
+<area shape="poly" title=" " alt="" coords="591,31,578,88,572,125,569,163,569,239,565,274,556,307,530,362,525,359,551,306,560,273,564,239,564,163,566,125,572,87,586,30"/>
+<area shape="rect" title=" " alt="" coords="657,79,743,104"/>
+<area shape="poly" title=" " alt="" coords="611,28,672,69,669,73,608,33"/>
+<area shape="rect" title=" " alt="" coords="768,79,835,104"/>
+<area shape="poly" title=" " alt="" coords="626,28,756,72,754,77,625,33"/>
+<area shape="rect" href="modulegroup_8hpp.html" title=" " alt="" coords="309,152,445,177"/>
+<area shape="poly" title=" " alt="" coords="381,104,380,139,375,138,376,104"/>
+<area shape="rect" href="module_8hpp.html" title=" " alt="" coords="175,225,310,251"/>
+<area shape="poly" title=" " alt="" coords="357,180,278,221,276,216,354,175"/>
+<area shape="rect" title=" " alt="" coords="339,225,416,251"/>
+<area shape="poly" title=" " alt="" coords="380,178,380,212,375,212,375,178"/>
+<area shape="rect" href="arduinorequired_8hpp.html" title=" " alt="" coords="117,592,305,617"/>
+<area shape="poly" title=" " alt="" coords="204,253,159,271,112,299,92,316,76,336,65,358,61,384,61,459,64,481,72,501,99,535,135,563,171,584,168,588,132,568,95,539,67,503,59,482,56,460,56,383,60,357,71,333,88,312,109,294,157,267,202,248"/>
+<area shape="rect" href="modulesystembasics_8hpp.html" title=" " alt="" coords="131,299,354,324"/>
+<area shape="poly" title=" " alt="" coords="238,251,237,285,231,285,233,251"/>
+<area shape="rect" title=" " alt="" coords="184,665,269,691"/>
+<area shape="poly" title=" " alt="" coords="216,617,224,652,219,653,211,618"/>
+<area shape="rect" title=" " alt="" coords="293,665,379,691"/>
+<area shape="poly" title=" " alt="" coords="232,615,305,656,302,661,229,620"/>
+<area shape="rect" title=" " alt="" coords="435,665,498,691"/>
+<area shape="poly" title=" " alt="" coords="253,615,423,662,421,667,251,620"/>
+<area shape="rect" href="debugprint_8hpp.html" title=" " alt="" coords="5,665,160,691"/>
+<area shape="poly" title=" " alt="" coords="185,620,110,660,107,656,182,615"/>
+<area shape="poly" title=" " alt="" coords="109,663,184,622,187,627,112,667"/>
+<area shape="poly" title=" " alt="" coords="247,298,249,264,254,265,252,299"/>
+<area shape="poly" title=" " alt="" coords="202,326,166,345,150,357,137,373,126,400,124,428,128,457,137,486,165,539,194,579,189,582,160,541,132,488,123,458,119,428,121,399,132,371,146,354,163,340,200,322"/>
+<area shape="rect" href="commandparser_8hpp.html" title=" " alt="" coords="147,372,338,397"/>
+<area shape="poly" title=" " alt="" coords="245,324,245,358,240,358,240,324"/>
+<area shape="poly" title=" " alt="" coords="268,322,356,364,354,368,266,326"/>
+<area shape="poly" title=" " alt="" coords="243,398,221,519,215,578,210,578,216,518,238,397"/>
+<area shape="rect" href="commanditem_8hpp.html" title=" " alt="" coords="249,445,394,471"/>
+<area shape="poly" title=" " alt="" coords="257,395,300,434,297,438,254,399"/>
+<area shape="poly" title=" " alt="" coords="298,473,267,493,238,520,224,549,216,579,211,578,219,548,234,517,263,488,295,468"/>
+<area shape="poly" title=" " alt="" coords="347,469,379,489,409,517,430,551,446,587,465,651,460,653,441,589,425,553,405,520,375,493,344,473"/>
+<area shape="rect" href="generalhelpers_8hpp.html" title=" " alt="" coords="248,519,395,544"/>
+<area shape="poly" title=" " alt="" coords="324,471,324,505,319,505,319,471"/>
+<area shape="poly" title=" " alt="" coords="305,546,242,587,239,582,302,542"/>
+<area shape="poly" title=" " alt="" coords="582,547,296,592,295,587,581,541"/>
+<area shape="poly" title=" " alt="" coords="638,547,494,659,491,654,635,542"/>
+<area shape="rect" title=" " alt="" coords="609,592,695,617"/>
+<area shape="poly" title=" " alt="" coords="655,544,655,578,649,578,649,544"/>
+<area shape="poly" title=" " alt="" coords="514,398,473,652,468,651,509,397"/>
+<area shape="poly" title=" " alt="" coords="483,400,367,443,365,438,482,395"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -139,37 +150,36 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="pluginhandler_8hpp__dep__incl.png" border="0" usemap="#apluginhandler_8hppdep" alt=""/></div>
 <map name="apluginhandler_8hppdep" id="apluginhandler_8hppdep">
-<area shape="rect" title=" " alt="" coords="459,5,598,31"/>
-<area shape="rect" href="basemodule_8cpp.html" title=" " alt="" coords="5,152,135,177"/>
-<area shape="poly" title=" " alt="" coords="446,23,352,27,250,37,158,54,123,66,98,81,86,97,78,116,73,152,67,152,73,115,81,94,95,77,121,61,157,49,249,32,352,22,446,18"/>
-<area shape="rect" href="basemodule_8hpp.html" title=" " alt="" coords="109,79,239,104"/>
-<area shape="poly" title=" " alt="" coords="459,36,232,81,231,76,458,31"/>
-<area shape="rect" href="farsingle_8hpp.html" title=" " alt="" coords="263,79,370,104"/>
-<area shape="poly" title=" " alt="" coords="483,37,352,81,350,76,481,32"/>
-<area shape="rect" href="plugin__adsr_8hpp.html" title=" " alt="" coords="395,79,519,104"/>
-<area shape="poly" title=" " alt="" coords="509,43,470,80,466,77,505,39"/>
-<area shape="rect" href="plugin__lfo_8hpp.html" title=" " alt="" coords="543,79,658,104"/>
-<area shape="poly" title=" " alt="" coords="552,39,591,77,587,80,549,43"/>
-<area shape="rect" href="plugin__map_8hpp.html" title=" " alt="" coords="683,79,809,104"/>
-<area shape="poly" title=" " alt="" coords="577,32,712,76,710,81,576,37"/>
-<area shape="rect" href="plugin__mult_8hpp.html" title=" " alt="" coords="833,79,960,104"/>
-<area shape="poly" title=" " alt="" coords="602,31,838,76,837,81,601,36"/>
-<area shape="rect" href="pluginhandler_8cpp.html" title=" " alt="" coords="984,79,1121,104"/>
-<area shape="poly" title=" " alt="" coords="612,28,973,76,984,78,983,83,972,81,611,33"/>
-<area shape="poly" title=" " alt="" coords="147,114,89,154,86,150,144,110"/>
-<area shape="rect" href="main_8cpp.html" title=" " alt="" coords="159,152,242,177"/>
-<area shape="poly" title=" " alt="" coords="186,116,199,151,194,153,181,118"/>
-<area shape="poly" title=" " alt="" coords="288,113,221,154,218,149,285,109"/>
-<area shape="rect" href="farsingle_8cpp.html" title=" " alt="" coords="266,152,373,177"/>
-<area shape="poly" title=" " alt="" coords="320,118,322,152,316,152,315,118"/>
-<area shape="rect" href="plugin__adsr_8cpp.html" title=" " alt="" coords="397,152,519,177"/>
-<area shape="poly" title=" " alt="" coords="460,118,460,152,455,152,454,118"/>
-<area shape="rect" href="plugin__lfo_8cpp.html" title=" " alt="" coords="544,152,657,177"/>
-<area shape="poly" title=" " alt="" coords="603,118,603,152,598,152,598,118"/>
-<area shape="rect" href="plugin__map_8cpp.html" title=" " alt="" coords="683,152,809,177"/>
-<area shape="poly" title=" " alt="" coords="749,118,749,152,743,152,743,118"/>
-<area shape="rect" href="plugin__mult_8cpp.html" title=" " alt="" coords="833,152,960,177"/>
-<area shape="poly" title=" " alt="" coords="899,118,899,152,894,152,894,118"/>
+<area shape="rect" title=" " alt="" coords="547,5,685,31"/>
+<area shape="rect" href="farsingle_8hpp.html" title=" " alt="" coords="109,79,216,104"/>
+<area shape="poly" title=" " alt="" coords="534,34,228,81,217,83,216,78,228,76,533,29"/>
+<area shape="rect" href="mastermodule_8hpp.html" title=" " alt="" coords="241,79,386,104"/>
+<area shape="poly" title=" " alt="" coords="555,36,363,81,362,76,554,31"/>
+<area shape="rect" href="plugin__adsr_8hpp.html" title=" " alt="" coords="410,79,534,104"/>
+<area shape="poly" title=" " alt="" coords="582,39,497,81,494,76,580,34"/>
+<area shape="rect" href="plugin__lfo_8hpp.html" title=" " alt="" coords="559,79,673,104"/>
+<area shape="poly" title=" " alt="" coords="619,44,619,79,613,79,613,44"/>
+<area shape="rect" href="plugin__map_8hpp.html" title=" " alt="" coords="698,79,825,104"/>
+<area shape="poly" title=" " alt="" coords="653,34,739,76,736,81,650,39"/>
+<area shape="rect" href="plugin__mult_8hpp.html" title=" " alt="" coords="849,79,975,104"/>
+<area shape="poly" title=" " alt="" coords="677,31,865,76,863,81,676,36"/>
+<area shape="rect" href="pluginhandler_8cpp.html" title=" " alt="" coords="999,79,1137,104"/>
+<area shape="poly" title=" " alt="" coords="699,30,999,77,999,82,699,35"/>
+<area shape="rect" href="farsingle_8cpp.html" title=" " alt="" coords="5,152,112,177"/>
+<area shape="poly" title=" " alt="" coords="136,114,77,154,74,150,133,110"/>
+<area shape="rect" href="main_8cpp.html" title=" " alt="" coords="136,152,219,177"/>
+<area shape="poly" title=" " alt="" coords="170,117,178,151,172,152,165,118"/>
+<area shape="poly" title=" " alt="" coords="281,113,201,154,198,149,278,108"/>
+<area shape="rect" href="mastermodule_8cpp.html" title=" " alt="" coords="243,152,387,177"/>
+<area shape="poly" title=" " alt="" coords="316,118,317,152,312,152,311,118"/>
+<area shape="rect" href="plugin__adsr_8cpp.html" title=" " alt="" coords="411,152,533,177"/>
+<area shape="poly" title=" " alt="" coords="475,118,475,152,469,152,469,118"/>
+<area shape="rect" href="plugin__lfo_8cpp.html" title=" " alt="" coords="559,152,673,177"/>
+<area shape="poly" title=" " alt="" coords="619,118,619,152,613,152,613,118"/>
+<area shape="rect" href="plugin__map_8cpp.html" title=" " alt="" coords="699,152,824,177"/>
+<area shape="poly" title=" " alt="" coords="764,118,764,152,759,152,759,118"/>
+<area shape="rect" href="plugin__mult_8cpp.html" title=" " alt="" coords="849,152,975,177"/>
+<area shape="poly" title=" " alt="" coords="915,118,915,152,909,152,909,118"/>
 </map>
 </div>
 </div>
@@ -192,8 +202,8 @@ Macros</h2></td></tr>
 <tr class="separator:a013343e5a8289faf7dd55823f0635aad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08e4d36bf4fbf5d0f602c676445ac171" id="r_a08e4d36bf4fbf5d0f602c676445ac171"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pluginhandler_8hpp.html#a08e4d36bf4fbf5d0f602c676445ac171">REGISTEREXPRESSION</a>(callback)</td></tr>
 <tr class="separator:a08e4d36bf4fbf5d0f602c676445ac171"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23e9e92f3a30c6eff4975c9d9f988d5a" id="r_a23e9e92f3a30c6eff4975c9d9f988d5a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pluginhandler_8hpp.html#a23e9e92f3a30c6eff4975c9d9f988d5a">REGISTERPLUGIN</a>(class)</td></tr>
-<tr class="separator:a23e9e92f3a30c6eff4975c9d9f988d5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad26f208a0d2d16e50cb202d1419f5926" id="r_ad26f208a0d2d16e50cb202d1419f5926"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pluginhandler_8hpp.html#ad26f208a0d2d16e50cb202d1419f5926">REGISTERPLUGIN</a>(class,  commandCount)</td></tr>
+<tr class="separator:ad26f208a0d2d16e50cb202d1419f5926"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2208bddfe36aa22e41fd25450c0c518" id="r_aa2208bddfe36aa22e41fd25450c0c518"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pluginhandler_8hpp.html#aa2208bddfe36aa22e41fd25450c0c518">CREATEGETSET_HEADER</a>(name,  class)</td></tr>
 <tr class="separator:aa2208bddfe36aa22e41fd25450c0c518"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5147d9ca751fce715cfb8c9fd46d787" id="r_af5147d9ca751fce715cfb8c9fd46d787"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pluginhandler_8hpp.html#af5147d9ca751fce715cfb8c9fd46d787">CREATEGETSET_FOOTER</a>(variable)</td></tr>
@@ -213,6 +223,13 @@ Macros</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a5ff1eeee6f86bc24c60bb267464d0f87" id="r_a5ff1eeee6f86bc24c60bb267464d0f87"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pluginhandler_8hpp.html#a5ff1eeee6f86bc24c60bb267464d0f87">convertMsToRate</a> (float parentRate, float inRate)</td></tr>
 <tr class="separator:a5ff1eeee6f86bc24c60bb267464d0f87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aed8489a6fdb6a80a6ff7a0314db6f554" id="r_aed8489a6fdb6a80a6ff7a0314db6f554"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCommandList.html">CommandList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pluginhandler_8hpp.html#aed8489a6fdb6a80a6ff7a0314db6f554">globalCommands</a></td></tr>
+<tr class="separator:aed8489a6fdb6a80a6ff7a0314db6f554"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b5f5a646c2866ea89977d8d9a71a585" id="r_a2b5f5a646c2866ea89977d8d9a71a585"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCommandList.html">CommandList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pluginhandler_8hpp.html#a2b5f5a646c2866ea89977d8d9a71a585">globalResponseCommands</a></td></tr>
+<tr class="separator:a2b5f5a646c2866ea89977d8d9a71a585"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="aedecf5c5c141e62527c7f9b3139cb50c" name="aedecf5c5c141e62527c7f9b3139cb50c"></a>
@@ -247,10 +264,10 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="pluginhandler_8hpp.html#aa2208bddfe36aa22e41fd25450c0c518">CREATEGETSET_HEADER</a>(name, <span class="keyword">class</span>) \</div>
-<div class="line">    variable = <a class="code hl_function" href="commandparser_8cpp.html#aebd20c907cdd2829b1502eb63dba63a6">stripQuotes</a>(inCommandItem-&gt;argument[0]); \</div>
+<div class="line">    variable = <a class="code hl_function" href="generalhelpers_8cpp.html#aebd20c907cdd2829b1502eb63dba63a6">stripQuotes</a>(inCommandItem-&gt;argument[0]); \</div>
 <div class="line">    CREATEGETSET_FOOTERQ(variable)</div>
-<div class="ttc" id="acommandparser_8cpp_html_aebd20c907cdd2829b1502eb63dba63a6"><div class="ttname"><a href="commandparser_8cpp.html#aebd20c907cdd2829b1502eb63dba63a6">stripQuotes</a></div><div class="ttdeci">String stripQuotes(String expression)</div><div class="ttdef"><b>Definition</b> commandparser.cpp:376</div></div>
-<div class="ttc" id="apluginhandler_8hpp_html_aa2208bddfe36aa22e41fd25450c0c518"><div class="ttname"><a href="pluginhandler_8hpp.html#aa2208bddfe36aa22e41fd25450c0c518">CREATEGETSET_HEADER</a></div><div class="ttdeci">#define CREATEGETSET_HEADER(name, class)</div><div class="ttdef"><b>Definition</b> pluginhandler.hpp:97</div></div>
+<div class="ttc" id="ageneralhelpers_8cpp_html_aebd20c907cdd2829b1502eb63dba63a6"><div class="ttname"><a href="generalhelpers_8cpp.html#aebd20c907cdd2829b1502eb63dba63a6">stripQuotes</a></div><div class="ttdeci">String stripQuotes(String expression)</div><div class="ttdef"><b>Definition</b> generalhelpers.cpp:31</div></div>
+<div class="ttc" id="apluginhandler_8hpp_html_aa2208bddfe36aa22e41fd25450c0c518"><div class="ttname"><a href="pluginhandler_8hpp.html#aa2208bddfe36aa22e41fd25450c0c518">CREATEGETSET_HEADER</a></div><div class="ttdeci">#define CREATEGETSET_HEADER(name, class)</div><div class="ttdef"><b>Definition</b> pluginhandler.hpp:104</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -335,7 +352,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="pluginhandler_8hpp.html#aa2208bddfe36aa22e41fd25450c0c518">CREATEGETSET_HEADER</a>(name, <span class="keyword">class</span>) \</div>
-<div class="line">    variable = <a class="code hl_function" href="commandparser_8cpp.html#aebd20c907cdd2829b1502eb63dba63a6">stripQuotes</a>(inCommandItem-&gt;argument[0]); \</div>
+<div class="line">    variable = <a class="code hl_function" href="generalhelpers_8cpp.html#aebd20c907cdd2829b1502eb63dba63a6">stripQuotes</a>(inCommandItem-&gt;argument[0]); \</div>
 <div class="line">    function(); \</div>
 <div class="line">    CREATEGETSET_FOOTERQ(variable)</div>
 </div><!-- fragment -->
@@ -431,10 +448,10 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">        } \</div>
-<div class="line">        inCommandResponses-&gt;push_back({ thisItem.shortCommand + <span class="stringliteral">&quot;:&quot;</span> + <a class="code hl_function" href="commandparser_8cpp.html#ac7fc43fb1f213243ef62cd57653110cc">delimitExpression</a>(String(variable), <span class="keyword">true</span>), <a class="code hl_enumvalue" href="debugprint_8hpp.html#a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6">debugPrintType::InfoRequest</a> }); \</div>
+<div class="line">        inCommandResponses-&gt;push_back({ thisItem.shortCommand + <span class="stringliteral">&quot;:&quot;</span> + <a class="code hl_function" href="generalhelpers_8cpp.html#a008cac379590ebbdfc9c51f3b689621a">delimitExpression</a>(String(variable), <span class="keyword">true</span>), <a class="code hl_enumvalue" href="debugprint_8hpp.html#a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6">debugPrintType::InfoRequest</a> }); \</div>
 <div class="line">        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="modulesystembasics_8hpp.html#a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e">eProcessResult::Ok</a>; \</div>
 <div class="line">    }</div>
-<div class="ttc" id="acommandparser_8cpp_html_ac7fc43fb1f213243ef62cd57653110cc"><div class="ttname"><a href="commandparser_8cpp.html#ac7fc43fb1f213243ef62cd57653110cc">delimitExpression</a></div><div class="ttdeci">String delimitExpression(String expression, bool force=false)</div><div class="ttdef"><b>Definition</b> commandparser.cpp:335</div></div>
+<div class="ttc" id="ageneralhelpers_8cpp_html_a008cac379590ebbdfc9c51f3b689621a"><div class="ttname"><a href="generalhelpers_8cpp.html#a008cac379590ebbdfc9c51f3b689621a">delimitExpression</a></div><div class="ttdeci">String delimitExpression(String expression, bool force)</div><div class="ttdef"><b>Definition</b> generalhelpers.cpp:6</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -465,9 +482,9 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="modulesystembasics_8hpp.html#a33460e04d9e860676f5c8d5f5b47bf61">CREATE_MODULE_COMMAND_FUNCTION</a>(name, <span class="keyword">class</span>) { \</div>
 <div class="line">        if (!request) { \</div>
-<div class="line">            if (!<a class="code hl_function" href="commandparser_8cpp.html#af2583fe961d044690c62a57c7563ec9d">checkArguments</a>(inCommandItem, inCommandResponses, 1)) { <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="modulesystembasics_8hpp.html#a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3">eProcessResult::WrongArgumentCount</a>; } \</div>
-<div class="ttc" id="acommandparser_8cpp_html_af2583fe961d044690c62a57c7563ec9d"><div class="ttname"><a href="commandparser_8cpp.html#af2583fe961d044690c62a57c7563ec9d">checkArguments</a></div><div class="ttdeci">bool checkArguments(commandItem *_commandItem, std::vector&lt; commandResponse &gt; *commandResponses, uint8_t arguments, bool t_supressError)</div><div class="ttdef"><b>Definition</b> commandparser.cpp:309</div></div>
-<div class="ttc" id="amodulesystembasics_8hpp_html_a33460e04d9e860676f5c8d5f5b47bf61"><div class="ttname"><a href="modulesystembasics_8hpp.html#a33460e04d9e860676f5c8d5f5b47bf61">CREATE_MODULE_COMMAND_FUNCTION</a></div><div class="ttdeci">#define CREATE_MODULE_COMMAND_FUNCTION(funcname, className)</div><div class="ttdef"><b>Definition</b> modulesystembasics.hpp:90</div></div>
+<div class="line">            if (!<a class="code hl_function" href="commandparser_8cpp.html#aea45a3e61c00e65dd78a1dd2fcdca1c9">checkArguments</a>(inCommandItem, inCommandResponses, 1)) { <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="modulesystembasics_8hpp.html#a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3">eProcessResult::WrongArgumentCount</a>; } \</div>
+<div class="ttc" id="acommandparser_8cpp_html_aea45a3e61c00e65dd78a1dd2fcdca1c9"><div class="ttname"><a href="commandparser_8cpp.html#aea45a3e61c00e65dd78a1dd2fcdca1c9">checkArguments</a></div><div class="ttdeci">bool checkArguments(CommandItem *_commandItem, std::vector&lt; commandResponse &gt; *commandResponses, uint8_t arguments, bool t_supressError)</div><div class="ttdef"><b>Definition</b> commandparser.cpp:24</div></div>
+<div class="ttc" id="amodulesystembasics_8hpp_html_a33460e04d9e860676f5c8d5f5b47bf61"><div class="ttname"><a href="modulesystembasics_8hpp.html#a33460e04d9e860676f5c8d5f5b47bf61">CREATE_MODULE_COMMAND_FUNCTION</a></div><div class="ttdeci">#define CREATE_MODULE_COMMAND_FUNCTION(funcname, className)</div><div class="ttdef"><b>Definition</b> modulesystembasics.hpp:156</div></div>
 <div class="ttc" id="amodulesystembasics_8hpp_html_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3"><div class="ttname"><a href="modulesystembasics_8hpp.html#a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3">WrongArgumentCount</a></div><div class="ttdeci">@ WrongArgumentCount</div><div class="ttdef"><b>Definition</b> modulesystembasics.hpp:7</div></div>
 </div><!-- fragment -->
 </div>
@@ -507,7 +524,7 @@ Functions</h2></td></tr>
 <div class="line">    <span class="keyword">static</span> <span class="keywordtype">bool</span> registered;\</div>
 <div class="line">    <span class="keyword">public</span>:</div>
 <div class="ttc" id="aclassModuleGroup_html"><div class="ttname"><a href="classModuleGroup.html">ModuleGroup</a></div><div class="ttdef"><b>Definition</b> modulegroup.hpp:15</div></div>
-<div class="ttc" id="aclassModuleGroup_html_a31669ae78598fbdb7e03c1bbbfc65219"><div class="ttname"><a href="classModuleGroup.html#a31669ae78598fbdb7e03c1bbbfc65219">ModuleGroup::modules</a></div><div class="ttdeci">std::vector&lt; Module * &gt; modules</div><div class="ttdef"><b>Definition</b> modulegroup.hpp:52</div></div>
+<div class="ttc" id="aclassModuleGroup_html_a31669ae78598fbdb7e03c1bbbfc65219"><div class="ttname"><a href="classModuleGroup.html#a31669ae78598fbdb7e03c1bbbfc65219">ModuleGroup::modules</a></div><div class="ttdeci">std::vector&lt; Module * &gt; modules</div><div class="ttdef"><b>Definition</b> modulegroup.hpp:50</div></div>
 <div class="ttc" id="adebugprint_8hpp_html_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f"><div class="ttname"><a href="debugprint_8hpp.html#a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f">Error</a></div><div class="ttdeci">@ Error</div><div class="ttdef"><b>Definition</b> debugprint.hpp:28</div></div>
 </div><!-- fragment -->
 </div>
@@ -539,8 +556,8 @@ Functions</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a23e9e92f3a30c6eff4975c9d9f988d5a" name="a23e9e92f3a30c6eff4975c9d9f988d5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23e9e92f3a30c6eff4975c9d9f988d5a">&#9670;&#160;</a></span>REGISTERPLUGIN</h2>
+<a id="ad26f208a0d2d16e50cb202d1419f5926" name="ad26f208a0d2d16e50cb202d1419f5926"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad26f208a0d2d16e50cb202d1419f5926">&#9670;&#160;</a></span>REGISTERPLUGIN</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -549,13 +566,23 @@ Functions</h2></td></tr>
           <td class="memname">#define REGISTERPLUGIN</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">class</td><td>)</td>
+          <td class="paramname">class, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">commandCount&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordtype">bool</span> class::registered = [] { \</div>
-<div class="line">        PluginFactory::instance().registerPlugin(&amp;class::create, class::getModuleIDStatic()); \</div>
+<div class="line">        PluginFactory::instance().registerPlugin(&amp;class::create, class::getModuleIDStatic(), commandCount, class::moduleCommands); \</div>
 <div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>; \</div>
 <div class="line">    } (); \</div>
 <div class="line">    \</div>
@@ -601,6 +628,51 @@ Here is the caller graph for this function:</div>
 <area shape="poly" title=" " alt="" coords="169,28,135,28,135,23,169,23"/>
 </map>
 </div>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="aed8489a6fdb6a80a6ff7a0314db6f554" name="aed8489a6fdb6a80a6ff7a0314db6f554"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed8489a6fdb6a80a6ff7a0314db6f554">&#9670;&#160;</a></span>globalCommands</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCommandList.html">CommandList</a> globalCommands</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2b5f5a646c2866ea89977d8d9a71a585" name="a2b5f5a646c2866ea89977d8d9a71a585"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b5f5a646c2866ea89977d8d9a71a585">&#9670;&#160;</a></span>globalResponseCommands</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCommandList.html">CommandList</a> globalResponseCommands</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

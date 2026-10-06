@@ -135,9 +135,10 @@ obj/Release/src/single_far/main.o: src/single_far/main.cpp \
  lib/Audio/synth_pwm.h lib/Audio/synth_wavetable.h \
  include/generic_functions/calibrationhelpers.hpp \
  include/bow/bowcalibration.hpp include/controlbox/controlReader.hpp \
+ include/controlbox/controlboxControl.hpp include/controlbox/averager.h \
  lib/Wire/Wire.h lib/Wire/WireIMXRT.h \
  lib/Adafruit_ADS1X15/Adafruit_ADS1X15.h \
- lib/Adafruit_BusIO/Adafruit_I2CDevice.h include/controlbox/averager.h \
+ lib/Adafruit_BusIO/Adafruit_I2CDevice.h \
  include/plugins/pluginhandler.hpp \
  include/master_controller/mastermodule.hpp include/base/basemodule.hpp \
  include/master_controller/global_generics.hpp

@@ -1,0 +1,97 @@
+\doxysection{externalmodulehandler.\+hpp}
+\hypertarget{externalmodulehandler_8hpp_source}{}\label{externalmodulehandler_8hpp_source}\index{externalmodulehandler.hpp@{externalmodulehandler.hpp}}
+\mbox{\hyperlink{externalmodulehandler_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ EXTERNALMODULEHANDLER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ EXTERNALMODULEHANDLER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\#include\ "{}HardwareSerial.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{comment}{//\#include\ "{}string.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\#include\ <base/arduinorequired.hpp>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <HardwareSerial.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <BufferedInput.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <BufferedOutput.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <SafeString.h>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <SafeStringReader.h>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{debugprint_8hpp}{debugprint.hpp}}"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{commandparser_8hpp}{commandparser.hpp}}"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{commandlist_8hpp}{commandlist.hpp}}"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{modulehandler_8hpp}{modulehandler.hpp}}"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{externalmodule_8hpp}{externalmodule.hpp}}"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00022\ \textcolor{comment}{Transmission:}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ \ \ \ Select\ TX\ channel}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ \ \ \ Transmit\ -\/\ slaves\ should\ always\ be\ ready}}
+\DoxyCodeLine{00025\ \textcolor{comment}{}}
+\DoxyCodeLine{00026\ \textcolor{comment}{Reading:}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ \ \ \ CTS\ LOW}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ \ \ Check\ if\ DATA\_AVALIABLE}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ \ \ \ \ \ \ \ iterate\ through\ RX\ addresses\ until\ slave\ found,\ i.e.\ master\_RTS\ on\ that\ channel\ is\ TRUE}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ CTS\ HIGH}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ -\/\ receive}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ CTS\ LOW}}
+\DoxyCodeLine{00033\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{classCommandList}{CommandList}}\ \mbox{\hyperlink{externalmodulehandler_8hpp_aed8489a6fdb6a80a6ff7a0314db6f554}{globalCommands}};}
+\DoxyCodeLine{00036\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{classCommandList}{CommandList}}\ \mbox{\hyperlink{externalmodulehandler_8hpp_a2b5f5a646c2866ea89977d8d9a71a585}{globalResponseCommands}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structexternalOutItem}{externalOutItem}}\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structexternalOutItem_ab5f4bdbfd0f0da88f54144d81e860452}{extID}};}
+\DoxyCodeLine{00040\ \ \ \ \ String\ \mbox{\hyperlink{structexternalOutItem_abbf982d918b4d6a55719d5b2f5c4ae65}{commandString}};}
+\DoxyCodeLine{00041\ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508}{eScanResponse}}\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508ad322fce90458bd3112a92bca2439287e}{noResponse}},}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508adc2c3bc8a4ad742a8afa12cb27fd175d}{errorInResponse}},}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508a671e7452fd61421a4915f7c3fbdcb9b9}{added}}}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classSerialHardwareWrapper}{SerialHardwareWrapper}}\ \{}
+\DoxyCodeLine{00050\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{classSerialHardwareWrapper}{SerialHardwareWrapper}}(HardwareSerial\ *inPort,\ uint32\_t\ inBaud,\ \mbox{\hyperlink{classModuleHandler}{ModuleHandler}}\ *inMainModule,\ \textcolor{keywordtype}{void}\ *parent);}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508}{eScanResponse}}\ \mbox{\hyperlink{classSerialHardwareWrapper_a6b17943dd45092164922ec401ecd5b8d}{scanForModules}}();}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{structtModuleID}{tModuleID}}\ *\mbox{\hyperlink{classSerialHardwareWrapper_aba11653c78cd041745d019367632ad19}{tmoduleID}};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSerialHardwareWrapper_a17746d07362d3a0ff15e06c712b7ecd4}{s\_transmit}}(String\ commands,\ uint8\_t\ extID,\ \textcolor{keywordtype}{void}\ *parent);}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSerialHardwareWrapper_a48687974906c41abc266c004864c5c78}{checkForData}}();}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSerialHardwareWrapper_ae6fc27b78bbfdc16ab93a9e1fea98957}{transmit}}(String\ commands,\ uint8\_t\ extID);}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSerialHardwareWrapper_a59a118e9cbfa1802553507c510494581}{update}}();}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classSerialHardwareWrapper_ac581edf7b73122e1dbc5412b44aa3d83}{childCount}};}
+\DoxyCodeLine{00061\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00062\ \ \ \ \ HardwareSerial\ *\mbox{\hyperlink{classSerialHardwareWrapper_a7b119864a4d3b4394e37e9f078b8d84a}{port}};}
+\DoxyCodeLine{00063\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classSerialHardwareWrapper_a38a066dd29f4f28802816ce36b2bea82}{baud}};}
+\DoxyCodeLine{00064\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00065\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classSerialHardwareWrapper_aaffcbc83c4d07942323bf3bd51f76c93}{currentIndex}};}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{const}\ uint16\_t\ \mbox{\hyperlink{classSerialHardwareWrapper_acbaaa6f3b74bc38a144e5289eb4afdde}{serialTimeout}}\ =\ 250;}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{classModuleHandler}{ModuleHandler}}\ *\mbox{\hyperlink{classSerialHardwareWrapper_a876844ebb3e2bb8af805bcd638164f46}{mainModule}};}
+\DoxyCodeLine{00068\ \ \ \ \ std::vector<ExternalModule*>\ \mbox{\hyperlink{classSerialHardwareWrapper_a74733d2dfda8e78f12577b035fed0362}{modules}};}
+\DoxyCodeLine{00069\ \ \ \ \ bool\ (\mbox{\hyperlink{classSerialHardwareWrapper_a038e3b61e4e05dd87cb26c9f8c175a5e}{emhCallback}})\ (\mbox{\hyperlink{classModule}{Module}});}
+\DoxyCodeLine{00070\ \ \ \ \ std::vector<externalOutItem>\ \mbox{\hyperlink{classSerialHardwareWrapper_a4bb5f11fb78d2b460d6185ee82c849f6}{externalOutputBuffer}};}
+\DoxyCodeLine{00071\ \ \ \ \ String\ \mbox{\hyperlink{classSerialHardwareWrapper_abae6d5a47ce8a75c4ff60b18d3fb0efc}{beep}};}
+\DoxyCodeLine{00072\ \};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classExternalModuleHandler}{ExternalModuleHandler}}}
+\DoxyCodeLine{00075\ \{}
+\DoxyCodeLine{00076\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{classExternalModuleHandler_a29b20cabc847503e240975aef3affbfa}{ExternalModuleHandler}}();}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classExternalModuleHandler_a8ed1b4a8c35a462db40e16c7034501a8}{addSerialHardware}}(HardwareSerial\ *port);}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classExternalModuleHandler_a3f6e4e446f484a090cce21be826159a3}{scanForModules}}();}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{classModuleHandler}{ModuleHandler}}\ *\mbox{\hyperlink{classExternalModuleHandler_a1ca0d6ea2a3bea4b488eb9771314dd91}{mainModule}};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classExternalModuleHandler_a8a6ac413758462af614fcab0e6f4aeb3}{update}}();}
+\DoxyCodeLine{00084\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00087\ \ \ \ \ std::vector<SerialHardwareWrapper>\ \mbox{\hyperlink{classExternalModuleHandler_a4f0cf89e516054c296001cc304b5a462}{serial}};}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{classExternalModuleHandler_a1e3745255abe386827721eaa208a41b6}{baud}}\ =\ 115200;}
+\DoxyCodeLine{00089\ \};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EXTERNALMODULEHANDLER\_HPP}}
+
+\end{DoxyCode}

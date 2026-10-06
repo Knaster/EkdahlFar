@@ -61,11 +61,9 @@ private:
     uint16_t lastMotorPWM = 0;                          ///< Holds the last PWM speed value sent to the bowing wheel
 
     uint16_t minSpeedPWM = 0;
-
     uint16_t maxSpeedPWM = 65535;
 
     float motorCurrentLimit = 1.75;                     ///< Limit for tripping bow current draw error
-
     float motorPowerLimit = 12.84;
 
     char motorRevPin;                                   ///< Pin for motor driver reverse PWM
@@ -75,21 +73,20 @@ private:
     uint8_t currentSensePin;                            ///< Pin for motor current sense
 
     bool overPowerFlag = false;       // External flag to show a over-power event has happend, taking into account the duration of the event etc.
-
     bool transientOverPower = false;  // Set to true at first over-power event, cleared if bow is not over power
-
     elapsedMillis lastOverPowerEvent;
-
     uint32_t overPowerDuration = 100; // If bow over power events are going past the duration (in ms), signal the over power event
 
+    bool overCurrentFlag = false;
+    bool transientOverCurrent = false;
+    elapsedMillis lastOverCurrentEvent;
+    uint32_t overCurrentDuration = 100; // If bow over power events are going past the duration (in ms), signal the over power event
+
     uint32_t emergencyCoolDownEvent;
-
     uint16_t emergencyCoolDownPeriod = 1000;
-
     bool emergencyCoolDown = false;
 
     uint8_t motorDCDCEnPin;
-
     bool motorDCDCEn = false;
 
     uint8_t motorVoltagePin;

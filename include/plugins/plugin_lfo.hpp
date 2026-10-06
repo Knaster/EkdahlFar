@@ -16,6 +16,7 @@ public:
     CREATE_MODULE_COMMAND_FUNCTION_FWD(enable, Plugin_LFO)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(target, Plugin_LFO)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(updaterate, Plugin_LFO)
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(outputvalue, Plugin_LFO)
 
     CREATE_MODULE_COMMAND_FUNCTION_FWD(waveform, Plugin_LFO)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(frequency, Plugin_LFO)
@@ -75,8 +76,9 @@ private:
     float shapeSquare();
 
     String lastOutput = "";
+    int32_t lastOutputValue = 0;
 };
 
-REGISTERPLUGIN(Plugin_LFO)
+REGISTERPLUGIN(Plugin_LFO, 12)
 
 #endif // PLUGIN_LFO_HPP

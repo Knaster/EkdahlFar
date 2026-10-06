@@ -15,47 +15,61 @@ CommandItem::CommandItem() {
 }
 
 /// Parses commands of style command:argument1:argument2 [etc..]
-CommandItem::CommandItem (String *commandString) {
-    int cmlength = commandString->length();
-    int i = commandString->indexOf(":");
-/*    if (i == -1) {
-        command = *commandString;
-        //debugPrintln("Command is " + command, debugPrintType::EParser);
-    } else {*/
+// Attempt to fix loadparameters hang 2026-09-24
+//CommandItem::CommandItem (String *commandString) {
+//    int cmlength = commandString->length();
+//    int i = commandString->indexOf(":");
+CommandItem::CommandItem (String commandString) {
+    int cmlength = commandString.length();
+    int i = commandString.indexOf(":");
     if (i != -1) {
-        //command = commandString->substring(0, i);
         cmlength = i;
-//        command.toLowerCase();
-        //debugPrintln("Command is " + command, debugPrintType::EParser);
-        while (i < (int(commandString->length()) - 1)) {
+// Attempt to fix loadparameters hang 2026-09-24
+//        while (i < (int(commandString->length()) - 1)) {
+        while (i < (int(commandString.length()) - 1)) {
             i++;
-            int e = commandString->indexOf(":", i);
-            int f = commandString->indexOf("'", i);
-            int h = commandString->indexOf("\"", i); // Added 2023-10-25
+// Attempt to fix loadparameters hang 2026-09-24
+//            int e = commandString->indexOf(":", i);
+//            int f = commandString->indexOf("'", i);
+//            int h = commandString->indexOf("\"", i); // Added 2023-10-25
+            int e = commandString.indexOf(":", i);
+            int f = commandString.indexOf("'", i);
+            int h = commandString.indexOf("\"", i);
             if (((f != -1) && (f < e)) || ((h != -1) && (h < e))) { // Added 2023-10-25
-                //String searchFor = "'"; // Added 2023-10-25
                 char searchFor = '\'';
-//                if (((h < f) && (h != -1)) || (f == -1)) { searchFor = "\""; f = h; } else { searchFor = "'"; } // Added 2023-10-25
                 if (((h < f) && (h != -1)) || (f == -1)) { searchFor = '"'; f = h; } else { searchFor = '\''; } // Added 2023-10-25
-                int g = commandString->indexOf(searchFor,f + 1);  // Added 2023-10-25
+// Attempt to fix loadparameters hang 2026-09-24
+//                int g = commandString->indexOf(searchFor,f + 1);  // Added 2023-10-25
+                int g = commandString.indexOf(searchFor,f + 1);  // Added 2023-10-25
                 if (g != -1) {
                     e = g + 1;
                 }
             };
 
             if (e == -1) {
-                e = commandString->length();
+// Attempt to fix loadparameters hang 2026-09-24
+//                e = commandString->length();
+                e = commandString.length();
             }
 
-            String arg = commandString->substring(i, e);
-            arg.toLowerCase();
+// Attempt to fix loadparameters hang 2026-09-24
+//            String arg = commandString->substring(i, e);
+            String arg = commandString.substring(i, e);
+            arg = arg.toLowerCase();
             argument.push_back(arg);
             i = e;
         }
     }
-    buildHierarchy(commandString->substring(0, cmlength));
+// Attempt to fix loadparameters hang 2026-09-24
+//    buildHierarchy(commandString->substring(0, cmlength));
+    buildHierarchy(commandString.substring(0, cmlength));
 }
-
+/*
+CommandItem::CommandItem (String *commandString) {
+    String tCommandString(*commandString);
+    CommandItem::CommandItem(tCommandString);
+}
+*/
 CommandItem& CommandItem::operator = (const CommandItem& other) {
     // Guard self assignment
     if (this == &other)

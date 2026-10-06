@@ -4,20 +4,20 @@
 #include "generic_functions/dcmotorcontrol.hpp"
 
 const ModuleCommandDeclaration DCMotorControl::moduleCommands[] = {
-    { "run", "ru", "1|0", "Set bow motor run on/off", false, false, &s_run, eCommandType_data::ectSimpleBool | eCommandType_function::ectParameter },
+    { "run", "ru", "1|0", "Set bow motor run on/off", false, false, &s_run, eCommandType_data::ectConditional | eCommandType_function::ectLiveParameter },
     { "pwm", "pw", "0-65535", "Bow motor direct power in 16-bit PWM values, requires that the PID is turned off", false, false, &s_pwm,
-        eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectParameter },
-    { "voltage", "vo", "float", "Bow motor voltage", false, true, &s_voltage, eCommandType_data::ectSimpleFloat | eCommandType_function::ectSetting },
-    { "current", "cu", "float", "Bow motor reported current use", false, false, &s_current, eCommandType_data::ectSimpleFloat | eCommandType_access::ectRequest },
+        eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectLiveParameter },
+    { "voltage", "vo", "float", "Bow motor voltage", false, true, &s_voltage, eCommandType_data::ectSimpleFloat | eCommandType_function::ectAdminSetting | eCommandType_flags::ectVolatileSetting },
+    { "current", "cu", "float", "Bow motor reported current use", false, false, &s_current, eCommandType_data::ectSimpleFloat | eCommandType_access::ectRequest | eCommandType_function::ectLiveStatistics },
     { "currentlimit", "cl", "float", "Bow motor current limit (A)- !WARNING! Can ruin your instrument if changed", false, true, &s_currentLimit,
-        eCommandType_data::ectSimpleFloat | eCommandType_function::ectVolatileSetting },
+        eCommandType_data::ectSimpleFloat | eCommandType_function::ectCalibration | eCommandType_flags::ectVolatileSetting },
     { "powerlimit", "pl", "float", "Bow motor power limit (W) - !WARNING! Can ruin your instrument if changed", false, true, &s_powerLimit,
-        eCommandType_data::ectSimpleFloat | eCommandType_function::ectVolatileSetting },
-    { "frequency", "fq", "-", "Bow motor reported frequency", false, false, &s_frequency, eCommandType_data::ectSimpleFloat | eCommandType_function::ectParameter },
-    { "emergencystop", "es", "ms (0-65535)", "Immediately stops the bowing motor and doesn't allow it to start again until the cool down period given in the first argument has lapsed (milliseconds)",
-        false, false, &s_emergencyStop, eCommandType_data::ectOutputAssignment | eCommandType_function::ectVolatileSetting },
-    { "minpwm", "ip", "-", "Bow motor minimum PWM (for calibration)", false, true, &s_minPWM, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectSetting },
-    { "maxpwm", "xp", "-", "Bow motor maximum PWM (for calibration)", false, true, &s_maxPWM, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectSetting }
+        eCommandType_data::ectSimpleFloat | eCommandType_function::ectCalibration | eCommandType_flags::ectVolatileSetting },
+    { "frequency", "fq", "-", "Bow motor reported frequency", false, false, &s_frequency, eCommandType_data::ectHertz | eCommandType_access::ectRequest | eCommandType_function::ectLiveStatistics },
+    { "emergencystop", "es", "ms (0-65535)", "Immediately stops the bowing motor and does not allow it to start again until the cool down period given in the first argument has lapsed (milliseconds)",
+        false, false, &s_emergencyStop, eCommandType_data::ectMilliseconds | eCommandType_function::ectAdminAction | eCommandType_flags::ectVolatileSetting },
+    { "minpwm", "ip", "-", "Bow motor minimum PWM (for calibration)", false, true, &s_minPWM, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectCalibration | eCommandType_flags::ectVolatileSetting },
+    { "maxpwm", "xp", "-", "Bow motor maximum PWM (for calibration)", false, true, &s_maxPWM, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectCalibration | eCommandType_flags::ectVolatileSetting }
 };
 
 getModuleCount(DCMotorControl)
@@ -350,10 +350,22 @@ float DCMotorControl::getMotorCurrent() {
 
 bool DCMotorControl::isOverCurrent() {
     if (getMotorCurrent() >= motorCurrentLimit) {
-        return true;
+        if (transientOverCurrent) {
+            if (lastOverCurrentEvent > overCurrentDuration) {
+                debugPrintln("Over current (" + String(getMotorCurrent()) + "A) event for " + String(lastOverCurrentEvent) + " ms", debugPrintType::Error);
+                overCurrentFlag = true;
+                return true;
+            }
+        } else {
+            transientOverCurrent = true;
+            lastOverCurrentEvent = 0;
+            return false;
+        }
     } else {
-        return false;
+        overCurrentFlag = false;
+        transientOverCurrent = false;
     }
+    return false;
 }
 
 bool DCMotorControl::isOverPower() {
@@ -363,20 +375,22 @@ bool DCMotorControl::isOverPower() {
             // And that was set more than the allowed time-span ago, aka the over-power event has been going on for X ms
             if (lastOverPowerEvent > overPowerDuration) {
                 // Signal the external over power flag
+                debugPrintln("Over power event (" + String(getMotorCurrent() * motorVoltage) + "W) for " + String(lastOverPowerEvent) + " ms", debugPrintType::Error);
                 overPowerFlag = true;
+                return true;
             }
         } else {
             // If this is a new over-power event set the flag and clear the event-time
             transientOverPower = true;
             lastOverPowerEvent = 0;
+            return false;
         }
-        return true;
     } else {
         // Clear everything if we no longer have an over power event
         overPowerFlag = false;
         transientOverPower = false;
-        return false;
     }
+    return false;
 }
 
 // Emergency disable of power with a required cooldown period before bow is allowed to be started again

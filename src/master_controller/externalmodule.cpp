@@ -4,7 +4,9 @@
 #include "externalmodule.hpp"
 
 ExternalModule::ExternalModule(String deviceString) {
-    CommandItem ver(&deviceString);
+// Attempt to fix loadparameters hang 2026-09-24
+//    CommandItem ver(&deviceString);
+    CommandItem ver(deviceString);
     kLongName = ver.argument[1];
     kShortName = ver.argument[2];
     kDescription = ver.argument[0];
@@ -34,23 +36,27 @@ void ExternalModule::dir(std::vector<commandResponse> *inCommandResponses, Strin
     if (instances) { lsStr += ":i"; }
     if (instanceCount) { lsStr += ":ic"; }
     if (recursive) { lsStr += ":r"; }
-    CommandItem cmd = CommandItem(&lsStr);
+// Attempt to fix loadparameters hang 2026-09-24
+//    CommandItem cmd = CommandItem(&lsStr);
+    CommandItem cmd = CommandItem(lsStr);
     processCommands(&cmd, inCommandResponses, false);
 }
 
 void ExternalModule::dumpData(std::vector<commandResponse> *dataDump) {
     debugPrintln("External: dump", debugPrintType::Debug);
     String cmdDump = "dump";
-    //&String("dump")
-    CommandItem cmd = CommandItem(&cmdDump);
+// Attempt to fix loadparameters hang 2026-09-24
+//    CommandItem cmd = CommandItem(&cmdDump);
+    CommandItem cmd = CommandItem(cmdDump);
     processCommands(&cmd, dataDump, false);
 }
 
 void ExternalModule::help(std::vector<commandResponse> *inCommandResponses, String longPrefix, String shortPrefix) {
     debugPrintln("External: help", debugPrintType::Debug);
     String cmdHelp = "help";
-    //String("help")
-    CommandItem cmd = CommandItem(&cmdHelp);
+// Attempt to fix loadparameters hang 2026-09-24
+//    CommandItem cmd = CommandItem(&cmdHelp);
+    CommandItem cmd = CommandItem(cmdHelp);
     processCommands(&cmd, inCommandResponses, false);
 }
 

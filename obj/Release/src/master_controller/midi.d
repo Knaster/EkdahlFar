@@ -22,8 +22,9 @@ obj/Release/src/master_controller/midi.o: src/master_controller/midi.cpp \
  lib/MIDI/midi_Settings.h lib/MIDI/midi_Message.h lib/MIDI/serialMIDI.h \
  lib/MIDI/MIDI.hpp include/master_controller/midi.h \
  include/master_controller/midimessageconfiguration.hpp \
+ include/base/modulehandler.hpp include/base/modulegroup.hpp \
  include/base/module.hpp include/base/modulesystembasics.hpp \
  include/base/commandparser.hpp include/base/commanditem.hpp \
  include/base/generalhelpers.hpp include/base/arduinorequired.hpp \
  include/base/module.hpp include/base/commandlist.hpp \
- include/base/commanditem.hpp
+ include/base/commanditem.hpp include/master_controller/midicc.hpp

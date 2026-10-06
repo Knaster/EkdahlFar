@@ -1,0 +1,178 @@
+\doxysection{Command\+List Class Reference}
+\hypertarget{classCommandList}{}\label{classCommandList}\index{CommandList@{CommandList}}
+
+
+Class containing an array of command\+Item objects and ways of processing them.  
+
+
+
+
+{\ttfamily \#include $<$commandlist.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCommandList_aeb54879678311f335540dfc989b3fb1d}{wait\+If\+Processing}} ()
+\begin{DoxyCompactList}\small\item\em Class containing an array of command\+Item objects and ways of processing them. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classCommandList_aaee57c7581b6ecc161c3e3aa3148bac9}{parse\+Quote}} (String command\+String, char quote, int start)
+\item 
+int \mbox{\hyperlink{classCommandList_a4299d19bac48701293bd6913f82f9d4d}{parse\+Bracket}} (String command\+String, int start)
+\item 
+void \mbox{\hyperlink{classCommandList_ae710462ca42d899a42e43b0a29d0bf04}{add\+Commands}} (String command\+Items)
+\begin{DoxyCompactList}\small\item\em Parses a string of commands into several command\+Item objects. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classCommandList_a197063cb09b56da661ba260832d4b550}{Command\+List}} (String command\+Items)
+\item 
+\mbox{\hyperlink{classCommandList}{Command\+List}} \& \mbox{\hyperlink{classCommandList_afa1d096ae79395a6d62d15ed77ae5b83}{operator=}} (const \mbox{\hyperlink{classCommandList}{Command\+List}} \&other)
+\item 
+\mbox{\hyperlink{classCommandList_aa5cc72c5c68da1d3e18f808da93025c6}{Command\+List}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classCommandItem}{Command\+Item}} $>$ \mbox{\hyperlink{classCommandList_a4bc8f1a0be9b61417bf577fd1ed12f57}{item}}
+\item 
+bool \mbox{\hyperlink{classCommandList_a961d7f8202b327d9b1867cb8e93e310c}{processing\+Commands}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class containing an array of command\+Item objects and ways of processing them. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classCommandList_a197063cb09b56da661ba260832d4b550}\label{classCommandList_a197063cb09b56da661ba260832d4b550} 
+\index{CommandList@{CommandList}!CommandList@{CommandList}}
+\index{CommandList@{CommandList}!CommandList@{CommandList}}
+\doxysubsubsection{\texorpdfstring{CommandList()}{CommandList()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Command\+List\+::\+Command\+List (\begin{DoxyParamCaption}\item[{String}]{command\+Items }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCommandList_a197063cb09b56da661ba260832d4b550_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classCommandList_aa5cc72c5c68da1d3e18f808da93025c6}\label{classCommandList_aa5cc72c5c68da1d3e18f808da93025c6} 
+\index{CommandList@{CommandList}!CommandList@{CommandList}}
+\index{CommandList@{CommandList}!CommandList@{CommandList}}
+\doxysubsubsection{\texorpdfstring{CommandList()}{CommandList()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Command\+List\+::\+Command\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classCommandList_ae710462ca42d899a42e43b0a29d0bf04}\label{classCommandList_ae710462ca42d899a42e43b0a29d0bf04} 
+\index{CommandList@{CommandList}!addCommands@{addCommands}}
+\index{addCommands@{addCommands}!CommandList@{CommandList}}
+\doxysubsubsection{\texorpdfstring{addCommands()}{addCommands()}}
+{\footnotesize\ttfamily void Command\+List\+::add\+Commands (\begin{DoxyParamCaption}\item[{String}]{command\+Items }\end{DoxyParamCaption})}
+
+
+
+Parses a string of commands into several command\+Item objects. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCommandList_ae710462ca42d899a42e43b0a29d0bf04_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCommandList_ae710462ca42d899a42e43b0a29d0bf04_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classCommandList_afa1d096ae79395a6d62d15ed77ae5b83}\label{classCommandList_afa1d096ae79395a6d62d15ed77ae5b83} 
+\index{CommandList@{CommandList}!operator=@{operator=}}
+\index{operator=@{operator=}!CommandList@{CommandList}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCommandList}{Command\+List}} \& Command\+List\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classCommandList}{Command\+List}} \&}]{other }\end{DoxyParamCaption})}
+
+\Hypertarget{classCommandList_a4299d19bac48701293bd6913f82f9d4d}\label{classCommandList_a4299d19bac48701293bd6913f82f9d4d} 
+\index{CommandList@{CommandList}!parseBracket@{parseBracket}}
+\index{parseBracket@{parseBracket}!CommandList@{CommandList}}
+\doxysubsubsection{\texorpdfstring{parseBracket()}{parseBracket()}}
+{\footnotesize\ttfamily int Command\+List\+::parse\+Bracket (\begin{DoxyParamCaption}\item[{String}]{command\+String,  }\item[{int}]{start }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCommandList_a4299d19bac48701293bd6913f82f9d4d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCommandList_a4299d19bac48701293bd6913f82f9d4d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classCommandList_aaee57c7581b6ecc161c3e3aa3148bac9}\label{classCommandList_aaee57c7581b6ecc161c3e3aa3148bac9} 
+\index{CommandList@{CommandList}!parseQuote@{parseQuote}}
+\index{parseQuote@{parseQuote}!CommandList@{CommandList}}
+\doxysubsubsection{\texorpdfstring{parseQuote()}{parseQuote()}}
+{\footnotesize\ttfamily int Command\+List\+::parse\+Quote (\begin{DoxyParamCaption}\item[{String}]{command\+String,  }\item[{char}]{quote,  }\item[{int}]{start }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCommandList_aaee57c7581b6ecc161c3e3aa3148bac9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCommandList_aaee57c7581b6ecc161c3e3aa3148bac9_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classCommandList_aeb54879678311f335540dfc989b3fb1d}\label{classCommandList_aeb54879678311f335540dfc989b3fb1d} 
+\index{CommandList@{CommandList}!waitIfProcessing@{waitIfProcessing}}
+\index{waitIfProcessing@{waitIfProcessing}!CommandList@{CommandList}}
+\doxysubsubsection{\texorpdfstring{waitIfProcessing()}{waitIfProcessing()}}
+{\footnotesize\ttfamily void Command\+List\+::wait\+If\+Processing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Class containing an array of command\+Item objects and ways of processing them. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCommandList_aeb54879678311f335540dfc989b3fb1d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCommandList_aeb54879678311f335540dfc989b3fb1d_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classCommandList_a4bc8f1a0be9b61417bf577fd1ed12f57}\label{classCommandList_a4bc8f1a0be9b61417bf577fd1ed12f57} 
+\index{CommandList@{CommandList}!item@{item}}
+\index{item@{item}!CommandList@{CommandList}}
+\doxysubsubsection{\texorpdfstring{item}{item}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classCommandItem}{Command\+Item}}$>$ Command\+List\+::item}
+
+\Hypertarget{classCommandList_a961d7f8202b327d9b1867cb8e93e310c}\label{classCommandList_a961d7f8202b327d9b1867cb8e93e310c} 
+\index{CommandList@{CommandList}!processingCommands@{processingCommands}}
+\index{processingCommands@{processingCommands}!CommandList@{CommandList}}
+\doxysubsubsection{\texorpdfstring{processingCommands}{processingCommands}}
+{\footnotesize\ttfamily bool Command\+List\+::processing\+Commands = false}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{commandlist_8hpp}{commandlist.\+hpp}}\item 
+\mbox{\hyperlink{commandlist_8cpp}{commandlist.\+cpp}}\end{DoxyCompactItemize}

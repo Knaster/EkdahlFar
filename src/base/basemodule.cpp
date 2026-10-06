@@ -4,17 +4,22 @@
 #include "base/basemodule.hpp"
 
 const ModuleCommandDeclaration BaseModule::moduleCommands[] = {
-    { "version", "ver", "-", "Gets the current firmware version", false, true, &s_version, eCommandType_data::ectData | eCommandType_access::ectRequest},
+    { "version", "ver", "-", "Gets the current firmware version", false, true, &s_version, eCommandType_data::ectSimpleString | eCommandType_access::ectRequest | eCommandType_flags::ectSystem |
+        eCommandType_function::ectAdminAction},
     { "debugprint", "dp", "command|usb|hardware|undefined|priority|error|inforequest|expressionparser|debug:1|0", "Turns on or off serial feedback for the given item", false, true,
-        &s_debugPrint, eCommandType_data::ectData | eCommandType_function::ectSystem },
+        &s_debugPrint, eCommandType_data::ectData | eCommandType_flags::ectSystem | eCommandType_function::ectAdminAction},
     { "requestinfo", "rqi", "command", "Retrives rather than sets data associated with a command, if applicable", false, false, &s_requestInfo,
-        eCommandType_data::ectCommands | eCommandType_function::ectSystem },
-    { "saveallparameters", "sap", "-", "Saves all avaliable parameters", false, false, &s_saveAllParameters, eCommandType_data::ectImmediate | eCommandType_function::ectSystem},
-    { "loadallparameters", "lap", "-", "Loads all avaliable parameters", false, false, &s_loadAllParameters, eCommandType_data::ectImmediate | eCommandType_function::ectSystem},
-    { "resetallparameters", "rap", "-", "Resets all saved parameters", false, false, &s_resetAllParameters, eCommandType_data::ectImmediate | eCommandType_function::ectSystem},
-    { "reset", "rst", "0|1", "Resets the Ekdahl FAR, conditional", false, false, &s_reset, eCommandType_data::ectConditional | eCommandType_function::ectSystem},
-    { "nick", "nick", "string", "Sets the nickname of this unit" , false, true, &s_nick, eCommandType_data::ectSimpleString | eCommandType_function::ectSetting},
-    { "nooperation", "nop", "-", "Do absolutely, positively, nothing", false, false, &s_noOperation, eCommandType_data::ectImmediate | eCommandType_function::ectSystem }
+        eCommandType_data::ectCommands | eCommandType_flags::ectSystem },
+    { "saveallparameters", "sap", "-", "Saves all avaliable parameters", false, false, &s_saveAllParameters, eCommandType_data::ectConditional | eCommandType_function::ectAdminAction |
+        eCommandType_flags::ectSystem},
+    { "loadallparameters", "lap", "-", "Loads all avaliable parameters", false, false, &s_loadAllParameters, eCommandType_data::ectConditional | eCommandType_function::ectAdminAction |
+        eCommandType_flags::ectSystem},
+    { "resetallparameters", "rap", "-", "Resets all saved parameters", false, false, &s_resetAllParameters, eCommandType_data::ectConditional | eCommandType_function::ectAdminAction |
+        eCommandType_flags::ectSystem},
+    { "reset", "rst", "0|1", "Resets the Ekdahl FAR, conditional", false, false, &s_reset, eCommandType_data::ectConditional | eCommandType_function::ectAdminAction |
+        eCommandType_flags::ectSystem},
+    { "nick", "nick", "string", "Sets the nickname of this unit" , false, true, &s_nick, eCommandType_data::ectSimpleString | eCommandType_function::ectAdminSetting | eCommandType_flags::ectSystem},
+    { "nooperation", "nop", "-", "Do absolutely, positively, nothing", false, false, &s_noOperation, eCommandType_access::ectInvokeOnly | eCommandType_flags::ectSystem | eCommandType_function::ectAdminAction }
 };
 
 getModuleCount(BaseModule)
@@ -66,26 +71,32 @@ CREATE_MODULE_COMMAND_FUNCTION(version, BaseModule) {
 };
 
 CREATE_MODULE_COMMAND_FUNCTION(saveAllParameters, BaseModule) {
-    String save = saveAllParameters();
-    if (save == "") {
-        inCommandResponses->push_back({thisItem.shortCommand + ":0", InfoRequest});
-        return eProcessResult::Ok;
+    if (!request) {
+        String save = saveAllParameters();
+        if (save == "") {
+            inCommandResponses->push_back({thisItem.shortCommand + ":0", InfoRequest});
+            return eProcessResult::Ok;
+        }
+        debugPrintln(save, Command);
+        inCommandResponses->push_back({thisItem.shortCommand + ":1", InfoRequest});
     }
-    debugPrintln(save, Command);
-    inCommandResponses->push_back({thisItem.shortCommand + ":1", InfoRequest});
     return eProcessResult::Ok;
 };
 
 CREATE_MODULE_COMMAND_FUNCTION(loadAllParameters, BaseModule) {
-    loadAllParameters();
-    inCommandResponses->push_back({thisItem.shortCommand + ":1", InfoRequest});
+    if (!request) {
+        loadAllParameters();
+        inCommandResponses->push_back({thisItem.shortCommand + ":1", InfoRequest});
+    }
     //debugPrintln("Returning to command handler", debugPrintType::Debug);
     return eProcessResult::Ok;
 };
 
 CREATE_MODULE_COMMAND_FUNCTION(resetAllParameters, BaseModule) {
-    resetAllParameters();
-    inCommandResponses->push_back({thisItem.shortCommand + ":1", InfoRequest});
+    if (!request) {
+        resetAllParameters();
+        inCommandResponses->push_back({thisItem.shortCommand + ":1", InfoRequest});
+    }
     return eProcessResult::Ok;
 };
 
@@ -123,7 +134,9 @@ CREATE_MODULE_COMMAND_FUNCTION(requestInfo, BaseModule) {
         for (int i = 0; i < inCommandItem->argument.size() - 1; i++) {
             commandString += ":" + inCommandItem->argument[i + 1];
         }
-        CommandItem tCommandItem(&commandString);
+// Attempt to fix loadparameters hang 2026-09-24
+//        CommandItem tCommandItem(&commandString);
+        CommandItem tCommandItem(commandString);
         return processCommands(&tCommandItem, inCommandResponses, true);
     }
     return eProcessResult::WrongArgumentCount;

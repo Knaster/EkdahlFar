@@ -40,6 +40,6 @@ private:
     std::map<uint8_t, float> mapData;
 };
 
-REGISTERPLUGIN(Plugin_Map)
+REGISTERPLUGIN(Plugin_Map,6)
 
 #endif // PLUGIN_MAP_HPP

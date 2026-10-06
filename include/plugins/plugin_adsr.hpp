@@ -73,6 +73,6 @@ private:
     void recalculateRates();
 };
 
-REGISTERPLUGIN(Plugin_AHDSR)
+REGISTERPLUGIN(Plugin_AHDSR, 13)
 
 #endif // PLUGIN_ADSR_HPP

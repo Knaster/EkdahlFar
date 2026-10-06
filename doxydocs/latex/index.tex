@@ -11,88 +11,16 @@ Firmware for the KNAS Ekdahl FAR, a string based electro-\/acoustic music instru
 \item pressure -\/ the position of the bowing jack as set by the stepper motor connected to the assembly
 \item string module -\/ a complete assembly of functions connected to a single string, this includes pickups, solenoids, mutes, bows etc.
 \end{DoxyItemize}\hypertarget{index_brief}{}\doxysection{\texorpdfstring{Brief overview}{Brief overview}}\label{index_brief}
-The code is structured primarily around a hierarchial class structure where the base objects is a vector of string\+Module instances. This class handles all {\itshape command messages} surrounding a single string and delegates data and commands to other classes down the line. The top level classes deals with direct hardware interfacing, the middle level takes care of the logical control of these classes depending on the outcome of processed data and the bottom level deals with interpretation and handling of command messages. Everything is tied together through the main function which periodically runs basic function calls which are not time-\/sensitive while time-\/critical functions are called through periodic interrupts. Global messages are handled through the loop via the use of functions in maincommandhandler.\+cpp
+The Ekdahl FAR is structured around a hierarchal concept of \doxylink{classModule}{modules} that handles specific parts of the instrument, whether internal or external, software or hardware related. All {\itshape modules} have a \doxylink{structModuleCommandDeclaration}{module command declaration} which shows what {\itshape commands} the module has and some basic information about the {\itshape commands}. This information is used both internally to call the associated functions as well as offering an interface for users or connected software to discover the capabilities of each {\itshape module}.
 
-All outwards functionality can be accessed through command messages, these can be invoked through USB-\/\+Serial, RS232 and added to que by internal functions that may or may not be connected to other external hardware. All incoming MIDI-\/messages are mapped to a editable string of command messages, this way complete freedom in midi-\/mapping is obtained. A universal messaging system that is ignorant of the source of the control messages makes for a more transparent and uniform way of handling events, hardware control and data processing. This also makes for a system where minimal code changes are required when doing modifications or introducing new functionaltiy and options. The \textquotesingle{}help\textquotesingle{}-\/command exposes existing commands, their arguments and a brief description.
+The subclass \doxylink{classModuleHandler}{module handler} allows a module to contain other modules using \doxylink{classModuleGroup}{module groups}. Each {\itshape module} {\itshape group} can contain any number of instances of single type of \doxylink{classModule}{Module} or \doxylink{classModuleHandler}{module handler} class. Addressing of {\itshape modules} is done in a hierarchal manner using the full names of all preceding modules separated with a \textquotesingle{}.\textquotesingle{}. Individual children of {\itshape module} {\itshape groups} are optionally addressed using {\itshape indexing} through brackets \textquotesingle{}\mbox{[}\mbox{]}\textquotesingle{} and accepts both singles (\textquotesingle{}\mbox{[}2\mbox{]}\textquotesingle{}), ranges (\textquotesingle{}\mbox{[}0-\/2\mbox{]}\textquotesingle{}) and comma separated instances (\textquotesingle{}\mbox{[}0-\/1,3\mbox{]}\textquotesingle{}).
 
-Classes that contain data that are to be saved into EEPROM implements a function with the name dump\+Data() that returns a string of commands with any applicable parameters containing the data to be saved. On load, the command string can be directly added to que and thus executed as is to set the desired parameters.\hypertarget{index_hardwareclasses}{}\doxysection{\texorpdfstring{Classes and header files with direct hardware access\+:}{Classes and header files with direct hardware access:}}\label{index_hardwareclasses}
+Addressing a child with an {\itshape index} but without calling a {\itshape command} in that child creates a {\itshape selection}, these {\itshape selections} are used by owning {\itshape modules} in order to do things like changing MIDI configuration or harmonic table. A {\itshape selection} can also be used by later {\itshape commands} in order to invoke functions on the currently selected child by omitting the brackets when addressing. If omitting the brackets and there is no previous selection, the first (\mbox{[}0\mbox{]}) child is addressed.
 
-\begin{DoxyItemize}
-\item \doxylink{classservoStepper}{servo\+Stepper} -\/ library for handling stepper motor step/dir signals as well as homing switch control. Based on a positional approach like that of a classic RC servo, includes speed and acceleration parameters. The class is normally used with periodic interrupt driven polling of the \doxylink{classservoStepper_a981bafbfa5bf82c13a4e620aab894dc2}{servo\+Stepper\+::update\+Position()} function but can be used in a blocking manner by utilization of the \doxylink{classservoStepper_a3b30f6750877bffdc3d8b8f39fb779ef}{servo\+Stepper\+::complete\+Task()} function ~\newline
-
-\item bow\+IO -\/ handles bowing jack stepper motor position (through a \doxylink{classservoStepper}{servo\+Stepper} class instance), direct speed control of the DC bowing motor, tachometer interrupt calls and control of the DC/\+DC converter that drives the DC motor driver. It also provides functionality for checking motor driver fault conditions and over-\/current/power measurements through the current sensor connected to the DC/\+DC converter. ~\newline
-
-\item mute -\/ handles mute stepper motor position and provides functions for setting various mute states. Requires frequent polling of step\+Servo\+Stepper-\/\texorpdfstring{$>$}{>}update\+Position() in order for the stepper motor to continuously update its position, this is preferably done via interrupts. ~\newline
-
-\item solenoid -\/ provides variable force solenoid control through the utilization of PWM, engages the solenoid for a set period of time (in uS) after which it will automatically disengage, Requires frequent polling of the solenoid\+::update\+Solenoid() function in order to engage and disengage the solenoid in a timely manner. ~\newline
-
-\item string\+Module -\/ this class handles an entire string module with vectors of bow\+Control, solenoid and mute objects as well as bow\+IO, calibrate and Calibration\+Data objects. The string\+Module instance parses all local command messages applicable and does the appropriate function calls. ~\newline
-
-\item control\+Reader -\/ reads data from i2c ADC converter(s) and issues command messages associated with the given ADC channel at certain value-\/change conditions. This class is updated through the control\+Reader\+::read\+Data() function which is to to be called periodically. Due to the blocking nature of the ARM i2c library one needs to take care with how often control\+Reader\+::read\+Data() is called. ~\newline
-
-\item \doxylink{audioanalyze_8h}{audioanalyze.\+h} -\/ samples audio data from a pin connected to the electromagnetic pickup and does basic DSP calculations on frequency and audio level
-\end{DoxyItemize}\hypertarget{index_controlclasses}{}\doxysection{\texorpdfstring{Intermediary data and sensor data processing classes and header files}{Intermediary data and sensor data processing classes and header files}}\label{index_controlclasses}
-
-\begin{DoxyItemize}
-\item bow\+Control -\/ Control class for high level interfacing with a bow\+IO object. This object contains the PID for stable bowing motor control, calcualtes motor set frequency from harmonic tables and pressure engage, rest and free positiong. Parameters are limited by user set soft-\/limitis contained in the pointed to Calibration\+Data and \doxylink{classBowActuators}{Bow\+Actuators} class instances ~\newline
-
-\item \doxylink{main_8cpp}{main.\+cpp} -\/ Main software starting point. Initializes various hardware, class instances, loads any eeprom settings and binds interrupts to functions. Also contains the main loop function as well as various helper functions. This class has an array of string\+Module class instances and is through maincommandhandler.\+cpp deciding which string\+Module instance is currently being controlled and is passing along any command messages that aren\textquotesingle{}t recognized as global. ~\newline
-
-\item maincommandhandler.\+cpp -\/ contains functions for processing of global commands sent to the internal command message que. ~\newline
-
-\item \doxylink{midi_8cpp}{midi.\+cpp} -\/ contains functions for processing midi commands according to the current configuration class. Not directly bound to hardware but used with callback function pointers by \doxylink{main_8cpp}{main.\+cpp} ~\newline
- 
-\end{DoxyItemize}\hypertarget{index_auxclasses}{}\doxysection{\texorpdfstring{Auxilary / Misc classes and header files}{Auxilary / Misc classes and header files}}\label{index_auxclasses}
-
-\begin{DoxyItemize}
-\item \doxylink{classBowActuators}{Bow\+Actuators} -\/ contains handling of a vector of bow\+Actuator classes which in turn contains soft-\/limit data for user-\/defined actuators ~\newline
-
-\item calibrate -\/ contains functions for finding soft-\/limits of the current actuator, utilizes pointeres to bow\+IO and bow\+Control class instances to perform calibration tests and monitor sensor outputs ~\newline
-
-\item commandparser.\+h -\/ contains functions and classes for parsing and storing command messages. The main classes are \doxylink{classcommandItem}{command\+Item} which contains a single command and arguments, and \doxylink{classcommandList}{command\+List} which contains a vector of \doxylink{classcommandItem}{command\+Item} instances. ~\newline
-
-\item configuration -\/ data storage class for midi mapped command strings
-\item debugprint.\+h -\/ contains functions for message reporting over USB-\/\+Serial ~\newline
-
-\item eepromhelpers.\+cpp -\/ contains functions for saving and loading EEPROM data ~\newline
-
-\item \doxylink{harmonicSeries_8cpp}{harmonic\+Series.\+cpp} and harmonic\+Series.\+h -\/ contains a vector of harmonic\+Series instances which in turn contains the harmonic ratios used by functions in the bow\+Control class to set bowing frequencies ~\newline
-
-\item isrclasswrapper.\+cpp -\/ wrapper enabling class-\/based functions to be called by interrupts ~\newline
-
-\item \doxylink{name_8c}{name.\+c} -\/ Teensy 4-\/specific class for setting USB device names ~\newline
-
-\item settingshandler.\+cpp -\/ functions for saving EEPROM data ~\newline
-
-\item \doxylink{automaticversion_8hpp}{automaticversion.\+hpp} -\/ functions for autmatically creating a build version number at each compile
-\end{DoxyItemize}\hypertarget{index_libraries}{}\doxysection{\texorpdfstring{Libraries}{Libraries}}\label{index_libraries}
-
-\begin{DoxyItemize}
-\item Adafruit\+\_\+\+ADS1\+X15 -\/ library for using the ADS1\+X15 ADC converters, used by the control\+Reader class ~\newline
-
-\item Adafruit\+\_\+\+Bus\+IO -\/ library used by the Adafruit\+\_\+\+ADS1\+X15 library ~\newline
-
-\item Audio -\/ PJRC Teensy 4 Audio library, used by functions in \doxylink{audioanalyze_8h}{audioanalyze.\+h} ~\newline
-
-\item EEPROM -\/ Library for saving data into the Teensy 4 EEPROM, used by eepromhelpers.\+cpp ~\newline
-
-\item Safe\+String -\/ Partial use of its RS-\/232 functionality, used by \doxylink{main_8cpp}{main.\+cpp} and debugprint.\+h ~\newline
-
-\item SD, Sd\+Fat, Serial\+Flash, SPI -\/ Libraries required by the Teensy 4 Audio library ~\newline
-
-\item Teensy4 -\/ The PJRC Teensy 4 library ~\newline
-
-\item Teensy\+\_\+\+PWM -\/ Library for better manipulation of the Teensy 4 PWM ports, used by the bow\+IO and solenoid classes ~\newline
-
-\item tinyexpr -\/ Expression parser library used for parsing command message expressions in command\+List\+::parse\+Command\+Expressions ~\newline
-
-\item TMC2209 -\/ Library for the TMC2209 stepper motor driver IC, used by the bow\+IO and mute classes ~\newline
-
-\item Wire -\/ Library for i2c communications, used by the control\+Reader class ~\newline
- 
-\end{DoxyItemize}\hypertarget{index_author}{}\doxysection{\texorpdfstring{Author}{Author}}\label{index_author}
-
-\begin{DoxyItemize}
-\item Created by Karl Ekdahl on 2023-\/09-\/03
-\item Modified by Karl Ekdahl on 2024-\/07-\/26 
-\end{DoxyItemize}
+The main \doxylink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop} function periodically runs basic function calls which are not time-\/sensitive while time-\/critical functions are called through periodic interrupts. All messages are processed by their respective {\itshape modules} with the \doxylink{classMasterModule}{master module} offering a few system functions, the root {\itshape module} {\itshape handler} passed when creating the {\itshape master} {\itshape module} contains commands specific to the current setup. Certain {\itshape commands} are offered by ALL modules and are declared in \doxylink{classModule_a2b930f376b031611ccdf0070585fb805}{Module\+::builtin\+Commands}, as of this writing these are\+: ~\newline
+ ~\newline
+list -\/ returns all {\itshape commands} and child {\itshape modules} within the {\itshape module} ~\newline
+help -\/ returns detailed information about each child {\itshape module} and {\itshape command}, for use both by direct users and software ~\newline
+dump -\/ returns all data currently associated with each {\itshape command} and child {\itshape module}, used by software and internally to store parameters ~\newline
+ ~\newline
+ All {\itshape commands} can be invoked through USB-\/\+Serial, RS232 and added to queue by internal functions that may or may not be connected to other external hardware. All incoming MIDI-\/messages are mapped to a editable string of {\itshape command} messages, this way complete freedom in midi-\/mapping is obtained. A universal messaging system that is ignorant of the source of the {\itshape command} messages makes for a more transparent and uniform way of handling events, hardware control and data processing. This also makes for a system where minimal code changes are required when doing modifications or introducing new functionality and options. 

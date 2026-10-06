@@ -2,11 +2,11 @@
 \hypertarget{pluginhandler_8hpp}{}\label{pluginhandler_8hpp}\index{pluginhandler.hpp@{pluginhandler.hpp}}
 {\ttfamily \#include "{}base/modulehandler.\+hpp"{}}\newline
 {\ttfamily \#include "{}master\+\_\+controller/expressionparser.\+h"{}}\newline
+{\ttfamily \#include $<$commandlist.\+hpp$>$}\newline
 {\ttfamily \#include $<$functional$>$}\newline
 {\ttfamily \#include $<$string$>$}\newline
 {\ttfamily \#include $<$cstring$>$}\newline
-Include dependency graph for pluginhandler.\+hpp\+:
-\nopagebreak
+Include dependency graph for pluginhandler.\+hpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -38,7 +38,7 @@ class \mbox{\hyperlink{classPluginHandler}{Plugin\+Handler}}
 \item 
 \#define \mbox{\hyperlink{pluginhandler_8hpp_a08e4d36bf4fbf5d0f602c676445ac171}{REGISTEREXPRESSION}}(callback)
 \item 
-\#define \mbox{\hyperlink{pluginhandler_8hpp_a23e9e92f3a30c6eff4975c9d9f988d5a}{REGISTERPLUGIN}}(class)
+\#define \mbox{\hyperlink{pluginhandler_8hpp_ad26f208a0d2d16e50cb202d1419f5926}{REGISTERPLUGIN}}(class,  command\+Count)
 \item 
 \#define \mbox{\hyperlink{pluginhandler_8hpp_aa2208bddfe36aa22e41fd25450c0c518}{CREATEGETSET\+\_\+\+HEADER}}(name,  class)
 \item 
@@ -59,6 +59,13 @@ class \mbox{\hyperlink{classPluginHandler}{Plugin\+Handler}}
 \item 
 float \mbox{\hyperlink{pluginhandler_8hpp_a5ff1eeee6f86bc24c60bb267464d0f87}{convert\+Ms\+To\+Rate}} (float parent\+Rate, float in\+Rate)
 \end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCommandList}{Command\+List}} \mbox{\hyperlink{pluginhandler_8hpp_aed8489a6fdb6a80a6ff7a0314db6f554}{global\+Commands}}
+\item 
+\mbox{\hyperlink{classCommandList}{Command\+List}} \mbox{\hyperlink{pluginhandler_8hpp_a2b5f5a646c2866ea89977d8d9a71a585}{global\+Response\+Commands}}
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
@@ -71,7 +78,7 @@ float \mbox{\hyperlink{pluginhandler_8hpp_a5ff1eeee6f86bc24c60bb267464d0f87}{con
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{pluginhandler_8hpp_aa2208bddfe36aa22e41fd25450c0c518}{CREATEGETSET\_HEADER}}(name,\ \textcolor{keyword}{class})\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ variable\ =\ \mbox{\hyperlink{commandparser_8cpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(inCommandItem-\/>argument[0]);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ variable\ =\ \mbox{\hyperlink{generalhelpers_8cpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(inCommandItem-\/>argument[0]);\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ CREATEGETSET\_FOOTERQ(variable)}
 
 \end{DoxyCode}
@@ -97,7 +104,7 @@ float \mbox{\hyperlink{pluginhandler_8hpp_a5ff1eeee6f86bc24c60bb267464d0f87}{con
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{pluginhandler_8hpp_aa2208bddfe36aa22e41fd25450c0c518}{CREATEGETSET\_HEADER}}(name,\ \textcolor{keyword}{class})\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ variable\ =\ \mbox{\hyperlink{commandparser_8cpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(inCommandItem-\/>argument[0]);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ variable\ =\ \mbox{\hyperlink{generalhelpers_8cpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(inCommandItem-\/>argument[0]);\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ function();\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ CREATEGETSET\_FOOTERQ(variable)}
 
@@ -139,7 +146,7 @@ float \mbox{\hyperlink{pluginhandler_8hpp_a5ff1eeee6f86bc24c60bb267464d0f87}{con
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{commandparser_8cpp_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(String(variable),\ \textcolor{keyword}{true}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\ \});\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ inCommandResponses-\/>push\_back(\{\ thisItem.shortCommand\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ \mbox{\hyperlink{generalhelpers_8cpp_a008cac379590ebbdfc9c51f3b689621a}{delimitExpression}}(String(variable),\ \textcolor{keyword}{true}),\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a463fdf874c042f19a95a85cff5e823d6}{debugPrintType::InfoRequest}}\ \});\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937a06d32f047358de4e6a30c28046f4688e}{eProcessResult::Ok}};\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \}}
 
@@ -154,7 +161,7 @@ float \mbox{\hyperlink{pluginhandler_8hpp_a5ff1eeee6f86bc24c60bb267464d0f87}{con
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a33460e04d9e860676f5c8d5f5b47bf61}{CREATE\_MODULE\_COMMAND\_FUNCTION}}(name,\ \textcolor{keyword}{class})\ \{\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ if\ (!request)\ \{\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!\mbox{\hyperlink{commandparser_8cpp_af2583fe961d044690c62a57c7563ec9d}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!\mbox{\hyperlink{commandparser_8cpp_aea45a3e61c00e65dd78a1dd2fcdca1c9}{checkArguments}}(inCommandItem,\ inCommandResponses,\ 1))\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937ab051e2438e8385c892983461fd9c32e3}{eProcessResult::WrongArgumentCount}};\ \}\ \(\backslash\)}
 
 \end{DoxyCode}
 \Hypertarget{pluginhandler_8hpp_a013343e5a8289faf7dd55823f0635aad}\label{pluginhandler_8hpp_a013343e5a8289faf7dd55823f0635aad} 
@@ -203,16 +210,16 @@ float \mbox{\hyperlink{pluginhandler_8hpp_a5ff1eeee6f86bc24c60bb267464d0f87}{con
 \DoxyCodeLine{\ \ \ \ \}\ \(\backslash\)}
 
 \end{DoxyCode}
-\Hypertarget{pluginhandler_8hpp_a23e9e92f3a30c6eff4975c9d9f988d5a}\label{pluginhandler_8hpp_a23e9e92f3a30c6eff4975c9d9f988d5a} 
+\Hypertarget{pluginhandler_8hpp_ad26f208a0d2d16e50cb202d1419f5926}\label{pluginhandler_8hpp_ad26f208a0d2d16e50cb202d1419f5926} 
 \index{pluginhandler.hpp@{pluginhandler.hpp}!REGISTERPLUGIN@{REGISTERPLUGIN}}
 \index{REGISTERPLUGIN@{REGISTERPLUGIN}!pluginhandler.hpp@{pluginhandler.hpp}}
 \doxysubsubsection{\texorpdfstring{REGISTERPLUGIN}{REGISTERPLUGIN}}
-{\footnotesize\ttfamily \#define REGISTERPLUGIN(\begin{DoxyParamCaption}\item[{}]{class }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \#define REGISTERPLUGIN(\begin{DoxyParamCaption}\item[{}]{class,  }\item[{}]{command\+Count }\end{DoxyParamCaption})}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{bool}\ class::registered\ =\ []\ \{\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ PluginFactory::instance().registerPlugin(\&class::create,\ class::getModuleIDStatic());\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ PluginFactory::instance().registerPlugin(\&class::create,\ class::getModuleIDStatic(),\ commandCount,\ class::moduleCommands);\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \}\ ();\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \(\backslash\)}
@@ -235,3 +242,18 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{pluginhandler_8hpp_a5ff1eeee6f86bc24c60bb267464d0f87_icgraph}
 \end{center}
 \end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{pluginhandler_8hpp_aed8489a6fdb6a80a6ff7a0314db6f554}\label{pluginhandler_8hpp_aed8489a6fdb6a80a6ff7a0314db6f554} 
+\index{pluginhandler.hpp@{pluginhandler.hpp}!globalCommands@{globalCommands}}
+\index{globalCommands@{globalCommands}!pluginhandler.hpp@{pluginhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{globalCommands}{globalCommands}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCommandList}{Command\+List}} global\+Commands\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{pluginhandler_8hpp_a2b5f5a646c2866ea89977d8d9a71a585}\label{pluginhandler_8hpp_a2b5f5a646c2866ea89977d8d9a71a585} 
+\index{pluginhandler.hpp@{pluginhandler.hpp}!globalResponseCommands@{globalResponseCommands}}
+\index{globalResponseCommands@{globalResponseCommands}!pluginhandler.hpp@{pluginhandler.hpp}}
+\doxysubsubsection{\texorpdfstring{globalResponseCommands}{globalResponseCommands}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCommandList}{Command\+List}} global\+Response\+Commands\hspace{0.3cm}{\ttfamily [extern]}}
+

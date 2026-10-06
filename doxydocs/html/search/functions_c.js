@@ -7,6 +7,6 @@ var searchData=
   ['onnoteon_4',['OnNoteOn',['../classMIDIHandler.html#aa934661065db5fedf3ac616cdf49ee2a',1,'MIDIHandler']]],
   ['onpitchbend_5',['OnPitchBend',['../classMIDIHandler.html#a765fe42874f2ecb4f56c7299d4e28ab0',1,'MIDIHandler']]],
   ['onprogramchange_6',['OnProgramChange',['../classMIDIHandler.html#a64030fd2adde91877d396608554232a4',1,'MIDIHandler']]],
-  ['operator_3d_7',['operator=',['../classcommandItem.html#a7a92b9044b3420619d12b51b3b92541a',1,'commandItem::operator=()'],['../classcommandList.html#a17c67d5921695b3a111c2d6f0764889f',1,'commandList::operator=()']]],
+  ['operator_3d_7',['operator=',['../classCommandItem.html#a6e4cb2eb1581ea1dd5f84ee3805d71e7',1,'CommandItem::operator=()'],['../classCommandList.html#afa1d096ae79395a6d62d15ed77ae5b83',1,'CommandList::operator=()']]],
   ['outputnext_8',['outputnext',['../debugprint_8cpp.html#a45bba73d029dfb271d5909eed71610a6',1,'outputNext():&#160;debugprint.cpp'],['../debugprint_8hpp.html#a45bba73d029dfb271d5909eed71610a6',1,'outputNext():&#160;debugprint.cpp']]]
 ];

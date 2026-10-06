@@ -1,0 +1,89 @@
+\doxysection{externalmodulehandler.\+hpp File Reference}
+\hypertarget{externalmodulehandler_8hpp}{}\label{externalmodulehandler_8hpp}\index{externalmodulehandler.hpp@{externalmodulehandler.hpp}}
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$Hardware\+Serial.\+h$>$}\newline
+{\ttfamily \#include $<$Buffered\+Input.\+h$>$}\newline
+{\ttfamily \#include $<$Buffered\+Output.\+h$>$}\newline
+{\ttfamily \#include $<$Safe\+String.\+h$>$}\newline
+{\ttfamily \#include $<$Safe\+String\+Reader.\+h$>$}\newline
+{\ttfamily \#include "{}debugprint.\+hpp"{}}\newline
+{\ttfamily \#include "{}commandparser.\+hpp"{}}\newline
+{\ttfamily \#include "{}commandlist.\+hpp"{}}\newline
+{\ttfamily \#include "{}modulehandler.\+hpp"{}}\newline
+{\ttfamily \#include "{}externalmodule.\+hpp"{}}\newline
+Include dependency graph for externalmodulehandler.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{externalmodulehandler_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=231pt]{externalmodulehandler_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structexternalOutItem}{external\+Out\+Item}}
+\item 
+class \mbox{\hyperlink{classSerialHardwareWrapper}{Serial\+Hardware\+Wrapper}}
+\item 
+class \mbox{\hyperlink{classExternalModuleHandler}{External\+Module\+Handler}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508}{e\+Scan\+Response}} \{ \mbox{\hyperlink{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508ad322fce90458bd3112a92bca2439287e}{no\+Response}}
+, \mbox{\hyperlink{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508adc2c3bc8a4ad742a8afa12cb27fd175d}{error\+In\+Response}}
+, \mbox{\hyperlink{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508a671e7452fd61421a4915f7c3fbdcb9b9}{added}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCommandList}{Command\+List}} \mbox{\hyperlink{externalmodulehandler_8hpp_aed8489a6fdb6a80a6ff7a0314db6f554}{global\+Commands}}
+\item 
+\mbox{\hyperlink{classCommandList}{Command\+List}} \mbox{\hyperlink{externalmodulehandler_8hpp_a2b5f5a646c2866ea89977d8d9a71a585}{global\+Response\+Commands}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508}\label{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508} 
+\index{externalmodulehandler.hpp@{externalmodulehandler.hpp}!eScanResponse@{eScanResponse}}
+\index{eScanResponse@{eScanResponse}!externalmodulehandler.hpp@{externalmodulehandler.hpp}}
+\doxysubsubsection{\texorpdfstring{eScanResponse}{eScanResponse}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508}{e\+Scan\+Response}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{noResponse@{noResponse}!externalmodulehandler.hpp@{externalmodulehandler.hpp}}\index{externalmodulehandler.hpp@{externalmodulehandler.hpp}!noResponse@{noResponse}}}\Hypertarget{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508ad322fce90458bd3112a92bca2439287e}\label{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508ad322fce90458bd3112a92bca2439287e} 
+no\+Response&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{errorInResponse@{errorInResponse}!externalmodulehandler.hpp@{externalmodulehandler.hpp}}\index{externalmodulehandler.hpp@{externalmodulehandler.hpp}!errorInResponse@{errorInResponse}}}\Hypertarget{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508adc2c3bc8a4ad742a8afa12cb27fd175d}\label{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508adc2c3bc8a4ad742a8afa12cb27fd175d} 
+error\+In\+Response&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{added@{added}!externalmodulehandler.hpp@{externalmodulehandler.hpp}}\index{externalmodulehandler.hpp@{externalmodulehandler.hpp}!added@{added}}}\Hypertarget{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508a671e7452fd61421a4915f7c3fbdcb9b9}\label{externalmodulehandler_8hpp_a08b7fdab83506c5b2679c90f0a485508a671e7452fd61421a4915f7c3fbdcb9b9} 
+added&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{externalmodulehandler_8hpp_aed8489a6fdb6a80a6ff7a0314db6f554}\label{externalmodulehandler_8hpp_aed8489a6fdb6a80a6ff7a0314db6f554} 
+\index{externalmodulehandler.hpp@{externalmodulehandler.hpp}!globalCommands@{globalCommands}}
+\index{globalCommands@{globalCommands}!externalmodulehandler.hpp@{externalmodulehandler.hpp}}
+\doxysubsubsection{\texorpdfstring{globalCommands}{globalCommands}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCommandList}{Command\+List}} global\+Commands\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{externalmodulehandler_8hpp_a2b5f5a646c2866ea89977d8d9a71a585}\label{externalmodulehandler_8hpp_a2b5f5a646c2866ea89977d8d9a71a585} 
+\index{externalmodulehandler.hpp@{externalmodulehandler.hpp}!globalResponseCommands@{globalResponseCommands}}
+\index{globalResponseCommands@{globalResponseCommands}!externalmodulehandler.hpp@{externalmodulehandler.hpp}}
+\doxysubsubsection{\texorpdfstring{globalResponseCommands}{globalResponseCommands}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCommandList}{Command\+List}} global\+Response\+Commands\hspace{0.3cm}{\ttfamily [extern]}}
+

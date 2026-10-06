@@ -81,16 +81,16 @@ void \mbox{\hyperlink{classBowPressure_af381de6731a25b1ee801cf4c6766a213}{update
 \item 
 void \mbox{\hyperlink{classBowPressure_ad171c8f304d6cba6e524bd2f5202fa0c}{update\+Servo}} ()
 \item 
-void \mbox{\hyperlink{classBowPressure_a0891ff0635cc2954afd32081144fecc5}{set\+Step\+Interval\+Callback}} (void \texorpdfstring{$\ast$}{*}step\+Interval\+Callback)
+void \mbox{\hyperlink{classBowPressure_add8829e2a729ee1f59b04d44dcce8509}{set\+Step\+Interval\+Callback}} (void(\texorpdfstring{$\ast$}{*}step\+Interval\+Callback)())
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModuleHandler}{Module\+Handler}}}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classModuleHandler_a9eb2f015987df6e507d2e2f7281cc520}{Module\+Handler}} ()
 \item 
-\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModuleHandler_aba53cb524d3e200345c18bbaf96adaf2}{process\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false) override
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModuleHandler_a971a87e00d40ec41c142d3278af8faaf}{process\+Commands}} (\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false) override
 \item 
-\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModuleHandler_aa8b5a72e62b7a43ac40822461f535c0c}{process\+Module\+Handler\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structcommandResponse}{command\+Response}}, bool request=false)
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModuleHandler_a99791b180619ab9885a509962ee6e0fa}{process\+Module\+Handler\+Commands}} (\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structcommandResponse}{command\+Response}}, bool request=false)
 \item 
 void \mbox{\hyperlink{classModuleHandler_a8086440da55f316a89562f2a736a1ab6}{dir}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix, bool hidden, bool modules, bool commands, bool instances, bool instance\+Count, bool recursive) override
 \item 
@@ -105,6 +105,8 @@ void \mbox{\hyperlink{classModuleHandler_ae3fa5b4e5e4fa54687c3d26e0d937782}{dump
 \mbox{\hyperlink{classModuleGroup}{Module\+Group}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModuleHandler_a25c83b60da881f9c0dd2886e6a89e631}{add\+Group}} (\mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} in\+Module\+ID)
 \item 
 virtual void \mbox{\hyperlink{classModuleHandler_aeb0456562a8743c5f4cf5d4aa9a474eb}{add\+Instances}} (String name, uint8\+\_\+t count)
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classModuleHandler_a2b52136123ab171d0c24076cc602b611}{get\+Own\+Index}} (\mbox{\hyperlink{classModule}{Module}} in\+Module)
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
 \begin{DoxyCompactItemize}
@@ -115,11 +117,15 @@ virtual const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperl
 \item 
 virtual \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classModule_a9a13ef0a8291e562a9557c311d07b334}{get\+Module\+ID}} ()=0
 \item 
-virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a534a35eb18ec29dbcc8bafce30c21128}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a3fa7b98362e8824b2aab3684909ff1c1}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
 \item 
-virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_af7fe70cf55b7c8999672c8a202cbdb71}{process\+Module\+Commands}} (\mbox{\hyperlink{classcommandItem}{command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a26c8c97baf171c0656ce9b1361ff65f6}{process\+Module\+Commands}} (\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
 \item 
-virtual int \mbox{\hyperlink{classModule_ae6fa72e64554ee0b09a8bb6a77a68640}{get\+Module\+Command\+Count}} ()
+virtual int \mbox{\hyperlink{classModule_ac7c4b142fd2a11d6ee1a0920faba15cd}{get\+Module\+Command\+Count}} () const
+\item 
+bool \mbox{\hyperlink{classModule_a098e542bca66c3660521a2d904079565}{get\+Lineage}} (String \texorpdfstring{$\ast$}{*}in\+Lineage, bool long\+Name)
+\item 
+void \mbox{\hyperlink{classModule_acfd20044532da98fae5ae9665e14df03}{set\+Owner}} (\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}in\+Owner)
 \item 
 bool \mbox{\hyperlink{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2}{has\+Data\+Change}} ()
 \end{DoxyCompactItemize}
@@ -170,9 +176,15 @@ std\+::vector$<$ \mbox{\hyperlink{classModuleGroup}{Module\+Group}} $>$ \mbox{\h
 \begin{DoxyCompactItemize}
 \item 
 bool \mbox{\hyperlink{classModule_aa09bd171529da96438e917258ab5ab8d}{is\+Group\+Handler}} = false
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classModule_a079279271ba4d956a59527f6eb3dd1dd}{owner\+Index}} = 0
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
 \begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classModule_a4eddb3b6ba2034603c234262dccd5f4d}{get\+Builtin\+Command\+Count}} ()
+\item 
+const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModule_a2ce723cda6f7377fee2023c174b48948}{get\+Builtin\+Command}} (uint8\+\_\+t i)
 \item 
 void \mbox{\hyperlink{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}{set\+Data\+Changed}} ()
 \end{DoxyCompactItemize}
@@ -180,6 +192,11 @@ void \mbox{\hyperlink{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}{set\+Data\+
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModule_ad85cad50c5538cc47c6d3ac76500e4cf}{owner}} = nullptr
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModule_a2b930f376b031611ccdf0070585fb805}{builtin\+Commands}} \mbox{[}$\,$\mbox{]}
 \end{DoxyCompactItemize}
 
 
@@ -653,17 +670,17 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{classBowPressure_ac929f8c2e086e80da772c42be1167f5e_icgraph}
 \end{center}
 \end{figure}
-\Hypertarget{classBowPressure_a0891ff0635cc2954afd32081144fecc5}\label{classBowPressure_a0891ff0635cc2954afd32081144fecc5} 
+\Hypertarget{classBowPressure_add8829e2a729ee1f59b04d44dcce8509}\label{classBowPressure_add8829e2a729ee1f59b04d44dcce8509} 
 \index{BowPressure@{BowPressure}!setStepIntervalCallback@{setStepIntervalCallback}}
 \index{setStepIntervalCallback@{setStepIntervalCallback}!BowPressure@{BowPressure}}
 \doxysubsubsection{\texorpdfstring{setStepIntervalCallback()}{setStepIntervalCallback()}}
-{\footnotesize\ttfamily void Bow\+Pressure\+::set\+Step\+Interval\+Callback (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{step\+Interval\+Callback }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void Bow\+Pressure\+::set\+Step\+Interval\+Callback (\begin{DoxyParamCaption}\item[{void(\texorpdfstring{$\ast$}{*})()}]{step\+Interval\+Callback }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classBowPressure_a0891ff0635cc2954afd32081144fecc5_icgraph}
+\includegraphics[width=350pt]{classBowPressure_add8829e2a729ee1f59b04d44dcce8509_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classBowPressure_af381de6731a25b1ee801cf4c6766a213}\label{classBowPressure_af381de6731a25b1ee801cf4c6766a213} 

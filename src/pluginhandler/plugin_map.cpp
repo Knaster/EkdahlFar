@@ -4,15 +4,15 @@
 #include "plugins/plugin_map.hpp"
 
 const ModuleCommandDeclaration Plugin_Map::moduleCommands[] = {
-    { "name", "na", "name", "Sets the map name", false, true, &s_name, eCommandType_data::ectSimpleString | eCommandType_function::ectName },
+    { "name", "na", "name", "Sets the map name", false, true, &s_name, eCommandType_function::ectName },
     { "target", "tg", "commandlist*", "Sets the command string to execute whenever a connection value changes", false, true, &s_target,
         eCommandType_data::ectOutputAssignment  | eCommandType_dataOptions::ectExpression | eCommandType_function::ectAssignment, "nmout" },
     { "data", "da", "(in:out)*", "Set the map data in any number of pairs of [in] returns [out]", false, true, &s_data,
-        eCommandType_data::ectData | eCommandType_function::ectParameter },
-    { "remove", "rm", "in", "Removes the map with [in] if it exists", false, false, &s_remove, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectRemove },
-    { "scale", "sc", "in", "Sets the overall scale of the number map", false, true, &s_scale, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectParameter },
+        eCommandType_data::ectData | eCommandType_function::ectLiveParameter },
+    { "remove", "rm", "in", "Removes the map with [in] if it exists", false, false, &s_remove, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectAdminAction },
+    { "scale", "sc", "in", "Sets the overall scale of the number map", false, true, &s_scale, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectLiveParameter },
     { "trigger", "tr", "number", "Triggers the commands set in the target with the given output", false, false, &s_trigger,
-        eCommandType_data::ectSimpleInt16 | eCommandType_function::ectParameter }
+        eCommandType_data::ectSimpleInt16 | eCommandType_function::ectLiveAction }
 };
 
 getModuleCount(Plugin_Map)

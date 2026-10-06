@@ -3,7 +3,7 @@
 
 #include "single_far/farsingle.hpp"
 
-#ifdef NO_EXTERNAL_MODULES
+#ifdef USE_USART_AS_MIDI
 MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI);
 CREATE_MIDI_SOURCE_CALLBACKS(MIDI)
 #endif
@@ -12,19 +12,19 @@ CREATE_MIDI_SOURCE_CALLBACKS(usbMIDI)
 
 const ModuleCommandDeclaration FARSingle::moduleCommands[] = {
     { "calibrateall", "ca", "-", "Performs all calibration routines on the selected bow, see below for routines performed", false, false, &s_calibrateAll,
-        eCommandType_data::ectImmediate | eCommandType_function::ectSystem | eCommandType_access::ectInvokeOnly },
+        eCommandType_data::ectConditional | eCommandType_function::ectAdminAction | eCommandType_access::ectInvokeOnly },
     { "calibratebowspeed", "cbs", "-", "Finds the minimum and maximum bow speed of the selected bow", false, false, &s_calibrateBowSpeed,
-        eCommandType_data::ectImmediate | eCommandType_function::ectSystem | eCommandType_access::ectInvokeOnly },
+        eCommandType_data::ectConditional | eCommandType_function::ectAdminAction | eCommandType_access::ectInvokeOnly },
     { "calibratebowpressure", "cbp", "-", "Finds the minimum and maximum bow pressure of the selected bow", false, false, &s_calibrateBowPressure,
-        eCommandType_data::ectImmediate | eCommandType_function::ectSystem | eCommandType_access::ectInvokeOnly },
+        eCommandType_data::ectConditional | eCommandType_function::ectAdminAction | eCommandType_access::ectInvokeOnly },
     { "calibratemute", "cmu", "-", "Calibrate mute settings", false, false, &s_calibrateMute,
-        eCommandType_data::ectImmediate | eCommandType_function::ectSystem | eCommandType_access::ectInvokeOnly },
+        eCommandType_data::ectConditional | eCommandType_function::ectAdminAction | eCommandType_access::ectInvokeOnly | eCommandType_access::ectInvokeOnly },
     { "pickupstringfrequency", "psf", "-", "Returns the fundamental tone calculated from the current audio signal if appliccable", false, false, &s_pickupStringFrequency,
-        eCommandType_data::ectHertz | eCommandType_function::ectParameter | eCommandType_access::ectRequest },
+        eCommandType_data::ectHertz | eCommandType_function::ectLiveStatistics | eCommandType_access::ectRequest },
     { "pickupaudiopeak", "pap", "-", "Returns the peak amplitude of the current audio signal", false, false, &s_pickupAudioPeak,
-        eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectParameter | eCommandType_access::ectRequest },
+        eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectLiveStatistics | eCommandType_access::ectRequest },
     { "pickupaudiorms", "par", "-", "Returns the RMS amplitude of the current audio signal", false, false, &s_pickupAudioRMS,
-        eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectParameter | eCommandType_access::ectRequest }
+        eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectLiveStatistics | eCommandType_access::ectRequest }
 };
 
 // The order in which things are created and added is important and volatile and needs to be fixed
@@ -41,7 +41,7 @@ FARSingle::FARSingle(void (*muteStepperCallback)(), void (*pressureStepperCallba
 
     midiHandler = new MIDIHandler(expressionParser);
     midiConfigurationHandler = new MIDIConfigurationHandler(expressionParser);
-#ifdef NO_EXTERNAL_MODULES
+#ifdef USE_USART_AS_MIDI
     MIDIsource = midiConfigurationHandler->addMIDISource(&MIDI);
     CONNECT_MIDI_CALLBACKS(MIDIsource, MIDI)
 #endif

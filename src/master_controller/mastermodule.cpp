@@ -5,18 +5,22 @@
 #include "teensy_specific/eepromhelpers.hpp"
 
 const ModuleCommandDeclaration MasterModule::masterModuleCommands[] = {
-    { "uservariable", "uv", "variable(0-9):value", "Set user variable 0-9 to value", false, false, &s_userVariables, eCommandType_data::ectData | eCommandType_function::ectParameter},
+    { "uservariable", "uv", "variable(0-9):value", "Set user variable 0-9 to value", false, false, &s_userVariables, eCommandType_data::ectData | eCommandType_function::ectAdminSetting},
     { "expressionparserevaluate", "epev", "expression", "Evaluates an arithmetric expression and sends back the output", false, false, &s_expressionParserEvaluate,
-        eCommandType_data::ectSimpleFloat | eCommandType_dataOptions::ectExpression | eCommandType_function::ectUndefined },
-    { "ifequal", "ife", "variable:comparator:truecommandstring:elsecommandstring", "Performs [IF [variable] EQUALS [comparator]] and adds [truecommandstring] to the que if TRUE, otherwise adds [elsecommandstring]",
-        false, false, &s_ifEqual, eCommandType_data::ectData | eCommandType_function::ectLogic },
-    { "ifgreater", "ifg", "variable:comparator:truecommandstring:elsecommandstring", "Performs [IF [variable] > [comparator]] and adds [truecommandstring] to the que if TRUE, otherwise adds [elsecommandstring]",
-        false, false, &s_ifGreater, eCommandType_data::ectData | eCommandType_function::ectLogic },
-    { "ifless", "ifl", "variable:comparator:truecommandstring:elsecommandstring", "Performs [IF [variable] < [comparator]] and adds [truecommandstring] to the que if TRUE, otherwise adds [elsecommandstring]",
-        false, false, &s_ifLess, eCommandType_data::ectData | eCommandType_function::ectLogic },
-    { "freeram", "free", "-", "Shows free RAM memory", false, false, &s_freeRAM, eCommandType_data::ectData | eCommandType_function::ectSystem },
-    { "external", "ext", "commandlist", "Directly sending commands to external units", false, false, s_external, eCommandType_data::ectCommands | eCommandType_function::ectSystem },
-    { "test", "test", "-", "-", false, false, &s_test, eCommandType_data::ectData | eCommandType_function::ectSystem }
+        eCommandType_data::ectSimpleString | eCommandType_dataOptions::ectExpression | eCommandType_access::ectInvokeOnly | eCommandType_function::ectAdminAction },
+    { "ifequal", "ife", "variable:comparator:truecommandstring:elsecommandstring",
+        "Performs [IF [variable] EQUALS [comparator]] and adds [truecommandstring] to the que if TRUE, otherwise adds [elsecommandstring]", false, false, &s_ifEqual,
+        eCommandType_data::ectSimpleString | eCommandType_dataOptions::ectExpression | eCommandType_access::ectInvokeOnly | eCommandType_function::ectLiveAction | eCommandType_flags::ectLogic },
+    { "ifgreater", "ifg", "variable:comparator:truecommandstring:elsecommandstring",
+        "Performs [IF [variable] > [comparator]] and adds [truecommandstring] to the que if TRUE, otherwise adds [elsecommandstring]",false, false, &s_ifGreater,
+        eCommandType_data::ectSimpleString | eCommandType_dataOptions::ectExpression | eCommandType_access::ectInvokeOnly | eCommandType_function::ectLiveAction | eCommandType_flags::ectLogic },
+    { "ifless", "ifl", "variable:comparator:truecommandstring:elsecommandstring",
+        "Performs [IF [variable] < [comparator]] and adds [truecommandstring] to the que if TRUE, otherwise adds [elsecommandstring]", false, false, &s_ifLess,
+        eCommandType_data::ectSimpleString | eCommandType_dataOptions::ectExpression | eCommandType_access::ectInvokeOnly | eCommandType_function::ectLiveAction | eCommandType_flags::ectLogic },
+    { "freeram", "free", "-", "Shows free RAM memory", false, false, &s_freeRAM, eCommandType_data::ectData | eCommandType_access::ectRequest | eCommandType_function::ectLiveStatistics },
+    { "external", "ext", "commandlist", "Directly sending commands to external units", false, false, s_external,
+        eCommandType_data::ectCommands | eCommandType_dataOptions::ectExpression | eCommandType_access::ectInvokeOnly | eCommandType_function::ectAdminAction },
+    { "test", "test", "-", "-", false, false, &s_test, eCommandType_data::ectData | eCommandType_access::ectInvokeOnly | eCommandType_function::ectAdminAction }
 };
 
 int MasterModule::getMasterModuleCommandCount() const {
@@ -29,7 +33,7 @@ MasterModule::MasterModule(ModuleHandler *inModule, ExpressionParser *inExpressi
         pluginHandler = new PluginHandler(expressionParser);
         inModule->addModule(pluginHandler);
 
-#ifndef NO_EXTERNAL_MODULES
+#ifdef USE_EXTERNAL_MODULES
         externalModuleHandler = new ExternalModuleHandler();
         externalModuleHandler->mainModule = inModule;
         externalModuleHandler->addSerialHardware(&Serial1);
@@ -180,7 +184,11 @@ void MasterModule::loadAllParameters() {
     String loadData; //  = new String();
     uint32_t datal = EEPROMLoadString(&loadData, 0);
     debugPrintln(loadData + "\nLoaded " + String(datal) + " bytes of data", Command);
+    CommandList fart;
     globalResponseCommands.addCommands(loadData);
+    //globalResponseCommands.addCommands("ver:'FAR 1.1':::'1.1a20260916235822',dp:command:1,dp:usb:1,dp:hardware:1,dp:undefined:1,dp:priority:1,dp:error:1,dp:inforequest:1,dp:expressionparser:0,dp:debug:1,dp:textinfo:1,dp:help:1,dp:internal:1,dp:external:1,nick:,ins:so:1,ins:bw:1,so.xf:65535,so.if:0,so.fm:65535,so.ed:15000,ins:mcf:1,bw.ins:dcm:1,bw.mt:1000,bw.mfc:'bw.dcm.ru:0,bw.bp.rs:1',bw.moc:'bw.dcm.ru:0,bw.bp.rs:1,bw.dcm.es:1000',bw.ins:pid:1,bw.dcm.vo:6.60,bw.dcm.cl:1.75,bw.dcm.pl:12.84,bw.dcm.ip:0,bw.dcm.xp:65535,bw.ins:bp:1,bw.pid.ki:7.00,bw.pid.kp:500.00,bw.pid.kd:200.00,bw.pid.ie:0.10,bw.pid.xe:50.00,bw.pid.msx:550.00,bw.pid.msi:20.00,bw.ins:hsh:1,bw.bp.ins:ah:1,bw.bp.ah.ins:ac:1,bw.bp.ah.ac.rp:0,bw.bp.ah.ac.sp:65535,bw.bp.ah.ac.ep:2000,");
+    //globalResponseCommands.addCommands("bw.hsh.ins:hs:2,bw.hsh.fu:66.00,bw.hsh.bn:64,bw.hsh.sr:12,bw.hsh.hs[0].da:'Just intonation':1.000:1.067:1.125:1.200:1.250:1.333:1.406:1.500:1.600:1.667:1.800:1.875,bw.hsh.hs[1].da:'Equal temperament':1.000:1.059:1.122:1.189:1.260:1.335:1.414:1.498:1.587:1.682:1.782:1.888,");
+    //globalResponseCommands.addCommands("bw.hsh.hs[0],ins:mu:1,mcf.ins:mc:1,mcf.mc.ins:cc:2,mcf.mc.na:default,mcf.mc.non:'bw.hsh.hb:note,bw.dcm.ru:1,bw.pe:1,bw.bp.en:1,so.en:(velocity*512)*(1-notecount),bw.sm:0',mcf.mc.nof:'bw.bp.rs:ibool(notecount),bw.sm:0',mcf.mc.pat:'',mcf.mc.cat:'bw.bp.mo:(pressure*512)',mcf.mc.pb:'bw.hsh.sh:pitch*4',mcf.mc.pc:'',mcf.mc.ccd:64:'bw.bp.hd:bool(value)',mcf.mc.ccd:123:'mcf.ano:1',mcf.mc[0],ins:cb:1,mu.fmp:65535,mu.hmp:0,mu.rp:0,mu.bo:0,ins:ph:1,cb.har:'bw.hsh.ha:\"value/1327.716667-20\"',cb.has:'bw.hsh.sh5:\"deadband(value-32236, 20)/2.425\"',cb.fin:'bw.hsh.sh:\"deadband((value-32600)*0.49064, 250)\"',cb.pre:'bw.bp.ba:value',cb.mut:'mu.sp:value',cb.hms:'so.fm:\"deadband(value,50)\"',cb.gt:'bw.dcm.ru:bool(value-10000),bw.pe:1,bw.sm:0,bw.bp.en:bool(value-10000),bw.bp.rs:ibool(value-10000),bw.bp.hd:ibool(value-10000)',cb.hmt:'so.en:value',cb.ads:0:1:40:2:10,cb.ads:1:1:40:2:10,cb.ads:2:1:40:2:10,cb.ads:3:1:40:2:10,cb.ads:4:1:40:2:10,cb.ads:5:1:40:2:10,cb.ads:6:1:40:2:10,cb.ads:7:1:40:2:10");
     debugPrintln("Commands added", debugPrintType::Debug);
 };
 
@@ -209,7 +217,7 @@ void MasterModule::reset() {
 void MasterModule::update() {
     BaseModule::update();
     pluginHandler->update();
-#ifndef NO_EXTERNAL_MODULES
+#ifdef USE_EXTERNAL_MODULES
     externalModuleHandler->update();
 #endif
 }
@@ -220,7 +228,7 @@ CREATE_MODULE_COMMAND_FUNCTION(test, MasterModule) {
 }
 
 void MasterModule::init() {
-#ifndef NO_EXTERNAL_MODULES
+#ifdef USE_EXTERNAL_MODULES
     externalModuleHandler->scanForModules();
 #endif
 };

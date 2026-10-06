@@ -47,7 +47,9 @@ int CommandList::parseBracket(String commandString, int start) {
 void CommandList::addCommands(String commandItems) {
     debugPrintln("Building command list", debugPrintType::EParser);
     waitIfProcessing();
-    commandItems.toLowerCase();
+    // Attempt to fix loadparameters hang 2026-09-24
+    //commandItems.toLowerCase();
+    commandItems = commandItems.toLowerCase();
     commandItems = stripQuotes(commandItems);
     int i = 0;
     int e = 0;
@@ -77,8 +79,10 @@ void CommandList::addCommands(String commandItems) {
 
         debugPrintln("New string from " + String(i) + " to " + String(f) + " is " + commandItems.substring(i, f), EParser);
         debugPrintln("Creating command string " + stripQuotes(commandItems.substring(i, f)), EParser);
-        String strippedCmd = stripQuotes(commandItems.substring(i, f));
-        item.push_back(CommandItem(&strippedCmd));
+        // Attempt to fix loadparameters hang 2026-09-24
+        //String strippedCmd = stripQuotes(commandItems.substring(i, f));
+        //item.push_back(CommandItem(&strippedCmd));
+        item.push_back(CommandItem(stripQuotes(commandItems.substring(i, f))));
 
         i = e;
         i++;

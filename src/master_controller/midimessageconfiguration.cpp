@@ -22,13 +22,14 @@
 #include <base/arduinorequired.hpp>
 //#include "avr_functions.h"
 #include "master_controller/midimessageconfiguration.hpp"
+#include "master_controller/midicc.hpp"
 
 const ModuleCommandDeclaration MIDIMessageConfiguration::moduleCommands[] = {
-    { "", "", "int", "Sets the current MIDI configuration", false, false, nullptr, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectIndex },
-    { "name", "na", "string", "Set the name of the MIDI configuration (for request, argument is index of configuration to return name for (optional))", false, true, &s_namef,
+    //{ "", "", "int", "Sets the current MIDI configuration", false, false, nullptr, eCommandType_function::ectIndex },
+    { "name", "na", "string", "Set the name of the MIDI configuration", false, true, &s_namef,
         eCommandType_data::ectSimpleString | eCommandType_function::ectName },
-    { "data", "da", "noteon|noteoff|pat|cc:(0-127)|cat|pb|pc:outputassignment", "Set the MIDI event handling data, the event given will execute the given command string",
-        false, false, &s_eventHandler, eCommandType_data::ectOutputAssignment | eCommandType_function::ectAssignment | eCommandType_dataOptions::ectExpression },
+/*    { "data", "da", "noteon|noteoff|pat|cc:(0-127)|cat|pb|pc:outputassignment", "Set the MIDI event handling data, the event given will execute the given command string",
+        false, false, &s_eventHandler, eCommandType_data::ectOutputAssignment | eCommandType_function::ectAssignment | eCommandType_dataOptions::ectExpression },*/
     { "noteon", "non", "outputassignment", "Sets the commands to execute at a MIDI Note On event", false, true, &s_eventHandlerNew,
         eCommandType_data::ectOutputAssignment | eCommandType_function::ectAssignment | eCommandType_dataOptions::ectExpression, "channel,note,velocity" },
     { "noteoff", "nof", "outputassignment", "Sets the commands to execute at a MIDI Note Off event", false, true, &s_eventHandlerNew,
@@ -41,14 +42,15 @@ const ModuleCommandDeclaration MIDIMessageConfiguration::moduleCommands[] = {
         eCommandType_data::ectOutputAssignment | eCommandType_function::ectAssignment | eCommandType_dataOptions::ectExpression, "channel,pitch" },
     { "programchange", "pc", "outputassignment", "Sets the commands to execute at a MIDI Program change event", false, true, &s_eventHandlerNew,
         eCommandType_data::ectOutputAssignment | eCommandType_function::ectAssignment | eCommandType_dataOptions::ectExpression, "channel,program" },
-    { "continuouscontroller", "cc", "number:outputassignment", "Sets the commands to execute at a MIDI Continuous controller event with the given [number]", false, true, &s_continuouscontroller,
-        eCommandType_data::ectOutputAssignment | eCommandType_function::ectAssignment | eCommandType_dataOptions::ectExpression, "channel,value" },
-    { "addcc", "ac", "0-127:outputassignment", "Add continuous controller and the command string to execute", false, false, &s_addcc,
-        eCommandType_data::ectData | eCommandType_function::ectAssignment },
-    { "removecc", "rmc", "cc number", "remove continuous controller from list", false, false, &s_ccRemove, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectRemove },
-    { "defaults", "d", "-", "Reverts the current configuration to default values and CCs", false, false, &s_defaults, eCommandType_data::ectImmediate | eCommandType_function::ectSystem },
-    { "receivechannel", "rc", "-", "Sets the MIDI receive channel of the current configuration. 1-16 sets specific channel, any other value for OMNI", false, false, &s_receiveChannel,
-        eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectParameter }
+/*    { "continuouscontrollerdata", "ccd", "number:outputassignment", "Sets the commands to execute at a MIDI Continuous controller event with the given [number]", false, true, &s_continuouscontroller,
+        eCommandType_data::ectData | eCommandType_function::ectParameter | eCommandType_dataOptions::ectExpression, "channel,control,value" },*/
+    { "addcc", "ac", "0-127:outputassignment", "Add continuous controller and the command string to execute", false, false, &s_ccAdd,
+        eCommandType_data::ectData | eCommandType_function::ectAddModule },
+    { "removecc", "rmc", "cc number", "remove continuous controller from list", false, false, &s_ccRemove, eCommandType_function::ectRemoveModule },
+    { "countcc", "ccc", "-", "returns the number of configured continuous controllers", false, false, &s_ccCount, eCommandType_function::ectCountModules | eCommandType_access::ectRequest },
+    { "defaults", "d", "-", "Reverts the current configuration to default values and CCs", false, false, &s_defaults, eCommandType_data::ectConditional | eCommandType_function::ectAdminAction },
+    { "receivechannel", "rc", "-", "Sets the MIDI receive channel of the current configuration. 1-16 sets specific channel, any other value for OMNI", false, true, &s_receiveChannel,
+        eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectLiveParameter }
 };
 
 getModuleCount(MIDIMessageConfiguration)
@@ -60,76 +62,14 @@ MIDIMessageConfiguration::MIDIMessageConfiguration() {
     setDefaultCCs();
 }
 
-CREATE_MODULE_COMMAND_FUNCTION(eventHandler, MIDIMessageConfiguration) {
-    int argument = 0, evtype;
-    int argumentCount = inCommandItem->argument.size();
-    bool changedSomething = false;
-
-    if (!request) {
-        if (!checkArgumentsMin(inCommandItem, inCommandResponses, 2)) { return eProcessResult::WrongArgumentCount; }
-        while (argument < argumentCount) {
-            evtype = -1;
-            for (int j = 0; j < 7; j++) {
-                if (inCommandItem->argument[argument].toLowerCase() == eventID[j]) {
-                    evtype = j;
-                    break;
-                } else {
-//                    debugPrintln("Event type -" + inCommandItem->argument[argument].toLowerCase() + "- is not -" + eventID[j] + "-", debugPrintType::Debug);
-                }
-            }
-            if (evtype == -1) {
-                inCommandResponses->push_back({ "Event type not found: -" + inCommandItem->argument[argument].toLowerCase() + "-", debugPrintType::Error });
-                return eProcessResult::WrongArgumentValue;
-            }
-
-            argument++;
-
-            if ((argument >= argumentCount) || ((evtype == ev_cc) && ((argument + 1) >= argumentCount))) { return eProcessResult::WrongArgumentCount; }
-
-            if (evtype == ev_cc) {
-                String temp = stripQuotes(inCommandItem->argument[argument + 1]);
-                setCC(inCommandItem->argument[argument].toInt(), &temp);
-                argument++;
-                changedSomething = true;
-            } else {
-                midiEventMap[evtype] = stripQuotes(inCommandItem->argument[argument]);
-                changedSomething = true;
-            }
-            argument++;
-        }
-        if (!changedSomething) {
-
-//            inCommandResponses->push_back({ "Error setting midi configuration data: " + inCommandItem->command, debugPrintType::Error });
-            inCommandResponses->push_back({ "Error setting midi configuration data: " + inCommandItem->hierarchy[0].name, debugPrintType::Error });
-            return eProcessResult::CommandFailed;
-        }
-    }
-
-    for (int i = 0; i < 6; i++) {
-        String out = delimitExpression(midiEventMap[i], true);
-        if (out == "") { out = "''"; }
-        inCommandResponses->push_back({thisItem.shortCommand + ":" + eventID[i] + ":" + out, debugPrintType::InfoRequest});
-    }
-    for (int i = 0; i < controlChange.size(); i++) {
-        String out = delimitExpression(controlChange[i].command, true);
-        if (out == "") { out = "''"; }
-        inCommandResponses->push_back({thisItem.shortCommand + ":" + eventID[ev_cc] + ":" + String(controlChange[i].control) + ":" +
-                                      out, debugPrintType::InfoRequest});
-    }
-
-    return eProcessResult::Ok;
-}
-
 CREATE_MODULE_COMMAND_FUNCTION(eventHandlerNew, MIDIMessageConfiguration) {
     uint8_t evtype = -1;
 
     for (int j = 0; j < 7; j++) {
         if (thisItem.longCommand == eventID2[j]) {
-//            debugPrintln("Event type -" + thisItem.longCommand + "- is " + eventID[j] + "-", debugPrintType::Debug);
             evtype = j;
             break;
         } else {
-//            debugPrintln("Event type -" + thisItem.longCommand + "- is not -" + eventID[j] + "-", debugPrintType::Debug);
         }
     }
     if (evtype == -1) {
@@ -143,66 +83,86 @@ CREATE_MODULE_COMMAND_FUNCTION(eventHandlerNew, MIDIMessageConfiguration) {
         midiEventMap[evtype] = stripQuotes(inCommandItem->argument[0]);
     }
 
-//    for (int i = 0; i < 6; i++) {
     String out = delimitExpression(midiEventMap[evtype], true);
     if (out == "") { out = "''"; }
     inCommandResponses->push_back({thisItem.shortCommand + ":" + out, debugPrintType::InfoRequest});
-/*
-    }
-*/
     return eProcessResult::Ok;
 }
-
+/*
 CREATE_MODULE_COMMAND_FUNCTION(continuouscontroller, MIDIMessageConfiguration) {
-    int8_t cc = -1;
+    ModuleGroup *ccgroup;
+    MIDICC *mcc = nullptr;
 
-    if (checkArgumentsMin(inCommandItem, inCommandResponses, 1, true)) {
-        uint8_t findcc = inCommandItem->argument[0].toInt();
-        for (int i = 0; i < controlChange.size(); i++) {
-            if (controlChange[i].control == findcc) { cc = i; break; }
-        }
-        if ((cc == -1) && (request)) { return eProcessResult::WrongArgumentValue; }
-    } else
-    if (!request) { return eProcessResult::WrongArgumentCount; }
-    else {
-        for (int i = 0; i < controlChange.size(); i++) {
-            String out = delimitExpression(controlChange[i].command, true);
-            if (out == "") { out = "''"; }
-            inCommandResponses->push_back({thisItem.shortCommand + ":" + String(controlChange[i].control) + ":" + out, debugPrintType::InfoRequest});
+    if (!checkArgumentsMin(inCommandItem, inCommandResponses, 1, true)) {
+        if (!request) { return eProcessResult::WrongArgumentCount; }
+
+        ccgroup = getGroup("cc");
+        if (ccgroup != nullptr) {
+            for (uint8_t i=0; i<ccgroup->modules.size(); i++) {
+                mcc = static_cast<MIDICC*> (ccgroup->modules[i]);
+                inCommandResponses->push_back({thisItem.shortCommand + ":" + String(mcc->ccnum) + ":" + delimitExpression(mcc->outputS, true), debugPrintType::InfoRequest});
+            }
         }
         return eProcessResult::Ok;
     }
 
     if (!request) {
-        if (checkArguments(inCommandItem, inCommandResponses, 2)) { return eProcessResult::WrongArgumentCount; }
-        setCC(inCommandItem->argument[0].toInt(), &inCommandItem->argument[1]);
-        if (cc == -1) { cc = controlChange.size() - 1; }
+        if (!checkArguments(inCommandItem, inCommandResponses, 2, true)) { return eProcessResult::WrongArgumentCount; }
+        setCC(inCommandItem->argument[0].toInt(), &stripQuotes(inCommandItem->argument[1]));
     }
 
-    inCommandResponses->push_back({thisItem.shortCommand + ":" + String(controlChange[cc].control) + ":" + controlChange[cc].command, debugPrintType::InfoRequest});
-    return eProcessResult::Ok;
-}
+    ccgroup = getGroup("cc");
+    if (ccgroup == nullptr) { return eProcessResult::CommandFailed; }
+    uint8_t controller = inCommandItem->argument[0].toInt();
 
-CREATE_MODULE_COMMAND_FUNCTION(addcc, MIDIMessageConfiguration) {
-    if (!checkArguments(inCommandItem, inCommandResponses, 2)) { return eProcessResult::WrongArgumentCount; }
+    for (uint8_t i=0; i<ccgroup->modules.size(); i++) {
+        mcc = static_cast<MIDICC*> (ccgroup->modules[i]);
+        if (mcc->ccnum == controller) {
+            inCommandResponses->push_back({thisItem.shortCommand + ":" + String(mcc->ccnum) + ":" + delimitExpression(mcc->outputS, true), debugPrintType::InfoRequest});
+            return eProcessResult::Ok;
+        }
+    }
+
+    return eProcessResult::CommandFailed;
+}
+*/
+CREATE_MODULE_COMMAND_FUNCTION(ccAdd, MIDIMessageConfiguration) {
     if (!request) {
-        String temp = stripQuotes(inCommandItem->argument[1]);
-        int i = setCC(inCommandItem->argument[0].toInt(), &temp);
-        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(controlChange[i].control) + ":" + delimitExpression(stripQuotes(controlChange[i].command), true), debugPrintType::InfoRequest });
+        if (!checkArguments(inCommandItem, inCommandResponses, 2)) { return eProcessResult::WrongArgumentCount; }
+        if (!request) {
+            String temp = stripQuotes(inCommandItem->argument[1]);
+            uint8_t cc = setCC(inCommandItem->argument[0].toInt(), &temp);
+    //        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(controlChange[i].control) + ":" + delimitExpression(stripQuotes(controlChange[i].command), true), debugPrintType::InfoRequest });
+            inCommandResponses->push_back({ thisItem.shortCommand + ":cc:" + String(cc) + ":" + delimitExpression(stripQuotes(temp), true), debugPrintType::InfoRequest });
+        }
     }
     return eProcessResult::Ok;
 }
 
 CREATE_MODULE_COMMAND_FUNCTION(ccRemove, MIDIMessageConfiguration) {
-    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-    if (!validateNumber(inCommandItem->argument[0].toInt(), 0, 127)) { return eProcessResult::WrongArgumentValue; }
-    if (removeCC(inCommandItem->argument[0].toInt())) {
-        inCommandResponses->push_back({thisItem.shortCommand + ":" + inCommandItem->argument[0], InfoRequest});
-    } else {
-        inCommandResponses->push_back({"Unknown CC " + inCommandItem->argument[0], Error});
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        if (!validateNumber(inCommandItem->argument[0].toInt(), 0, 127)) { return eProcessResult::WrongArgumentValue; }
+
+        int8_t cc = removeCC(inCommandItem->argument[0].toInt());
+
+        if (cc != -1) {
+            inCommandResponses->push_back({thisItem.shortCommand + ":cc:" + String(cc), InfoRequest});
+        } else {
+            inCommandResponses->push_back({"Unknown CC " + inCommandItem->argument[0], Error});
+        }
     }
     return eProcessResult::Ok;
 }
+
+CREATE_MODULE_COMMAND_FUNCTION(ccCount, MIDIMessageConfiguration) {
+    ModuleGroup *group = getGroup("continuouscontroller");
+    if (group == nullptr) { return eProcessResult::CommandFailed; }
+
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(group->modules.size()), debugPrintType::InfoRequest});
+    return eProcessResult::Ok;
+}
+
 
 CREATE_MODULE_COMMAND_FUNCTION(namef, MIDIMessageConfiguration) {
     if (request) {
@@ -216,9 +176,10 @@ CREATE_MODULE_COMMAND_FUNCTION(namef, MIDIMessageConfiguration) {
 }
 
 CREATE_MODULE_COMMAND_FUNCTION(defaults, MIDIMessageConfiguration) {
-    setDefaults();
-    inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::InfoRequest});
-
+    if (!request) {
+        setDefaults();
+        inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::InfoRequest});
+    }
     return eProcessResult::Ok;
 }
 
@@ -235,32 +196,51 @@ CREATE_MODULE_COMMAND_FUNCTION(receiveChannel, MIDIMessageConfiguration) {
 }
 
 CREATE_MODULE_COMMAND_FUNCTION(allNotesOff, MIDIMessageConfiguration) {
-    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-    if (inCommandItem->argument[0].toInt() == 1) {
-        inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::InfoRequest});
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        if (inCommandItem->argument[0].toInt() == 1) {
+            inCommandResponses->push_back({ thisItem.shortCommand + ":1", debugPrintType::InfoRequest});
+        }
     }
     return eProcessResult::Ok;
 }
 
 uint8_t MIDIMessageConfiguration::setCC(uint8_t controller, String *command) {
-    for (uint16_t i=0; i<controlChange.size(); i++) {
-        if (controlChange[i].control == controller) {
-            controlChange[i].command = *command;
-            return i;
+    ModuleGroup *ccgroup = getGroup("cc");
+    if (ccgroup != nullptr) {
+        for (uint8_t i=0; i<ccgroup->modules.size(); i++) {
+
+            if ((static_cast<MIDICC*> (ccgroup->modules[i]))->ccnum == controller) {
+                (static_cast<MIDICC*> (ccgroup->modules[i]))->outputS = *command;
+                //return controlChange.size() - 1;
+                return i;
+            }
         }
     }
-    controlChange.push_back({controller, *command });
-    return controlChange.size() - 1;
+    addModule(new MIDICC(controller, command));
+    return ccgroup->modules.size() - 1;
+    //return controlChange.size() - 1;
 }
 
-bool MIDIMessageConfiguration::removeCC(uint8_t controller) {
-    for (uint16_t i=0; i<controlChange.size(); i++) {
+int8_t MIDIMessageConfiguration::removeCC(uint8_t controller) {
+/*    for (uint16_t i=0; i<controlChange.size(); i++) {
         if (controlChange[i].control == controller) {
             controlChange.erase(controlChange.begin() + i);
             return true;
         }
+    }*/
+    ModuleGroup *ccgroup = getGroup("cc");
+    if (ccgroup != nullptr) {
+        for (uint8_t i=0; i<ccgroup->modules.size(); i++) {
+            //ccgroup->modules.erase(ccgroup->modules.begin() + i);
+            if ((static_cast<MIDICC*> (ccgroup->modules[i]))->ccnum == controller) {
+                ccgroup->modules.erase(ccgroup->modules.begin() + i);
+                return i;
+            }
+        }
     }
-    return false;
+
+    return -1;
 }
 
 void MIDIMessageConfiguration::setDefaultBaseParameters() {
@@ -276,9 +256,15 @@ void MIDIMessageConfiguration::setDefaultBaseParameters() {
 }
 
 void MIDIMessageConfiguration::setDefaultCCs() {
-    controlChange.clear();
-    controlChange.push_back({64, "bw.bp.hd:bool(value)"});
-    controlChange.push_back({123, "mcf.ano:1"});
+    //controlChange.clear();
+    //controlChange.push_back({64, "bw.bp.hd:bool(value)"});
+    //controlChange.push_back({123, "mcf.ano:1"});
+    ModuleGroup *ccgroup = getGroup("cc");
+    if (ccgroup != nullptr) {
+        ccgroup->modules.clear();
+    }
+    setCC(64, &String("bw.bp.hd:bool(value)"));
+    setCC(123, &String("mcf.ano:1"));
 }
 
 void MIDIMessageConfiguration::setDefaults() {
@@ -286,4 +272,21 @@ void MIDIMessageConfiguration::setDefaults() {
     setDefaultCCs();
 }
 
+void MIDIMessageConfiguration::addInstances(String name, uint8_t count) {
+    debugPrintln("addInstances reached", debugPrintType::Debug);
+    if ((name != "cc") and (name != "continuouscontroller")) {
+        debugPrintln("Unknown instance name '" + name + "'", debugPrintType::Error);
+    } else {
+        ModuleGroup *group = getGroup("cc");
+        if (group == nullptr) {
+                debugPrintln("Error in addInstances", debugPrintType::Error);
+                return;
+        }
+        debugPrintln("Count is " + String(count) + " size is " + String(group->modules.size()), debugPrintType::Debug);
+        while (count > group->modules.size()) {
+            group->addModule(new MIDICC(0, &String("")));
+            debugPrintln("Added module '" + name + "'", debugPrintType::Debug);
+        }
+    }
+}
 #endif

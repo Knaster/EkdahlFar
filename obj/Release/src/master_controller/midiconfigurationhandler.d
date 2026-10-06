@@ -20,6 +20,7 @@ obj/Release/src/master_controller/midiconfigurationhandler.o: \
  lib/teensy4/Printable.h lib/teensy4/WString.h \
  include/base/debugprint.hpp \
  include/master_controller/midimessageconfiguration.hpp \
+ include/base/modulehandler.hpp include/base/modulegroup.hpp \
  include/base/module.hpp include/base/modulesystembasics.hpp \
  include/base/commandparser.hpp include/base/commanditem.hpp \
  include/base/generalhelpers.hpp include/base/arduinorequired.hpp \
@@ -28,5 +29,4 @@ obj/Release/src/master_controller/midiconfigurationhandler.o: \
  include/base/commanditem.hpp lib/MIDI/MIDI.h lib/MIDI/midi_Defs.h \
  lib/MIDI/midi_Namespace.h lib/teensy4/Arduino.h lib/MIDI/midi_Platform.h \
  lib/MIDI/midi_Settings.h lib/MIDI/midi_Message.h lib/MIDI/serialMIDI.h \
- lib/MIDI/MIDI.hpp include/base/modulehandler.hpp \
- include/base/modulegroup.hpp
+ lib/MIDI/MIDI.hpp

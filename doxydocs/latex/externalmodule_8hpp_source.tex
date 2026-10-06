@@ -1,0 +1,54 @@
+\doxysection{externalmodule.\+hpp}
+\hypertarget{externalmodule_8hpp_source}{}\label{externalmodule_8hpp_source}\index{externalmodule.hpp@{externalmodule.hpp}}
+\mbox{\hyperlink{externalmodule_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ EXTERNALMODULE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ EXTERNALMODULE\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{arduinorequired_8hpp}{arduinorequired.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{module_8hpp}{module.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classExternalModule}{ExternalModule}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classModule}{Module}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{structtModuleID}{tModuleID}}\ *\mbox{\hyperlink{classExternalModule_aa6db93b2a3b574e547acc765548480b7}{tmoduleID}};}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structtModuleID}{tModuleID}}\&\ \mbox{\hyperlink{classExternalModule_afd85849a759d1685ccc4a27442130a66}{getModuleID}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classExternalModule_aa6db93b2a3b574e547acc765548480b7}{tmoduleID}};\ \}}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{structtModuleID}{tModuleID}}\&\ \mbox{\hyperlink{classExternalModule_afec6816b10b2e05bbd7c0cad6c47d189}{getModuleID}}()\textcolor{keyword}{\ override\ }\{\ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classExternalModule_aa6db93b2a3b574e547acc765548480b7}{tmoduleID}};\ \}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ std::vector\ <ModuleCommandDeclaration>\ \mbox{\hyperlink{classExternalModule_a422f4cb2d0837a57419d96f8b1dd2ca9}{moduleCommands}};}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structModuleCommandDeclaration}{ModuleCommandDeclaration}}\ \mbox{\hyperlink{classExternalModule_a65633c78509555b1dc1a68b1f04e98f9}{getModuleCommand}}(uint8\_t\ i)\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8cpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Getting\ external\ module\ commands"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4ac909e86054cb6ad83c22bfc2b3e6e5b8}{debugPrintType::Debug}});}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((i\ <\ 0)\ ||\ (i\ >\ \mbox{\hyperlink{classExternalModule_a67cf439e585296f698792fe2751a5f46}{moduleCommandCount}}))\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{debugprint_8cpp_a244cb57e724866118a7077bdfc5da06e}{debugPrintln}}(\textcolor{stringliteral}{"{}Command\ index\ out\ of\ bounds"{}},\ \mbox{\hyperlink{debugprint_8hpp_a7f327d12d94173c3c786ded0b10d2be4a4dfd42ec49d09d8c6555c218301cc30f}{debugPrintType::Error}});}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classExternalModule_a422f4cb2d0837a57419d96f8b1dd2ca9}{moduleCommands}}[i];}
+\DoxyCodeLine{00021\ \ \ \ \ \}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classExternalModule}{ExternalModule}}(String\ deviceString);}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classExternalModule_a8f22fbc7cfa9d9be508070acbaa8c848}{update}}()\ \{\};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{eProcessResult}}\ \mbox{\hyperlink{classExternalModule_a875e534eb52eb7c53d7dbe5ff06970bb}{processCommands}}(\mbox{\hyperlink{classCommandItem}{CommandItem}}\ *inCommandItem,\ std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ request\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classExternalModule_a54dae73074153ec7b21c8220466f7682}{dir}}(std::vector<commandResponse>\ *inCommandResponses,\ String\ longPrefix,\ String\ shortPrefix,\ \textcolor{keywordtype}{bool}\ hidden,\ \textcolor{keywordtype}{bool}\ modules,\ \textcolor{keywordtype}{bool}\ commands,\ \textcolor{keywordtype}{bool}\ instances,\ \textcolor{keywordtype}{bool}\ instanceCount,\ \textcolor{keywordtype}{bool}\ recursive);}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classExternalModule_a69020555c7a9f4eac9905ee8cb553588}{dumpData}}(std::vector<commandResponse>\ *dataDump);\ \ \textcolor{comment}{//\ Returns\ dump\ data\ directly\ as\ string}}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classExternalModule_a0b1810f5f1023953a84c99910654b24d}{help}}(std::vector<commandResponse>\ *inCommandResponses,\ String\ longPrefix,\ String\ shortPrefix);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classExternalModule_a1af026ce87766fdce9ce9ef3a5b91c16}{isGroupHandler}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00032\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00033\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classExternalModule_a67cf439e585296f698792fe2751a5f46}{moduleCommandCount}}\ =\ 0;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ String\ \mbox{\hyperlink{classExternalModule_a47f5524b938387dd4808f0ed8ac93a06}{kLongName}};}
+\DoxyCodeLine{00036\ \ \ \ \ String\ \mbox{\hyperlink{classExternalModule_a407fded3140b5ba6c6919384fe55b1cf}{kShortName}};}
+\DoxyCodeLine{00037\ \ \ \ \ String\ \mbox{\hyperlink{classExternalModule_a271e039beb2c0469cd04468a3d5ff459}{kDescription}};}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabe}{eModuleType}}\ \mbox{\hyperlink{classExternalModule_af09bcc57f7ba81da1b68cc20eed9bb7a}{kModuleType}};}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classExternalModule_a3a4269165b573c537826ca3c7e7fa5b8}{kGroupHandler}};}
+\DoxyCodeLine{00040\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classExternalModule_a8c897bb58fa3869f22b9610d708e156e}{extID}};}
+\DoxyCodeLine{00042\ \ \ \ \ void\ (*\mbox{\hyperlink{classExternalModule_afa77733644f156c61023e95a04b9ab2b}{transmit}})\ (String\ commands,\ uint8\_t\ \mbox{\hyperlink{classExternalModule_a8c897bb58fa3869f22b9610d708e156e}{extID}},\ \textcolor{keywordtype}{void}\ *parent);}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{classExternalModule_a099519954787a0af5d96d6afcbe77c12}{transmissionObject}};}
+\DoxyCodeLine{00044\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classModule}{Module}}\ *\mbox{\hyperlink{classExternalModule_ab7aa34af8dd4f8063f21a862b8b2138e}{owner}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00046\ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EXTERNALMODULE\_HPP}}
+
+\end{DoxyCode}

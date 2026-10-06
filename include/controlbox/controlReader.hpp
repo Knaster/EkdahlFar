@@ -21,51 +21,52 @@
 
 #include <base/module.hpp>
 #include <master_controller/midi.h>
+#include <controlbox/controlboxControl.hpp>
 
 #include <Wire.h>
 #include <Adafruit_ADS1X15.h>
 #include "averager.h"
 
-class ControlReader : public Module
+class ControlReader : public ModuleHandler
 {
 public:
     SETMODULEID("controlbox", "cb", "Control Box 1.0", eModuleType::hardware, false)
 
     MODULECOMMANDHANDLER
 
-    CREATE_MODULE_COMMAND_FUNCTION_FWD(controlData, ControlReader)
-    CREATE_MODULE_COMMAND_FUNCTION_FWD(controlDataNew, ControlReader)
+/*    CREATE_MODULE_COMMAND_FUNCTION_FWD(controlData, ControlReader)
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(controlDataNew, ControlReader)*/
     CREATE_MODULE_COMMAND_FUNCTION_FWD(controlDefaults, ControlReader)
-    CREATE_MODULE_COMMAND_FUNCTION_FWD(dataReturn, ControlReader)
-    CREATE_MODULE_COMMAND_FUNCTION_FWD(adcSettings, ControlReader)
-    CREATE_MODULE_COMMAND_FUNCTION_FWD(testADCLatency, ControlReader)
+/*    CREATE_MODULE_COMMAND_FUNCTION_FWD(dataReturn, ControlReader)
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(adcSettings, ControlReader)*/
+/*    CREATE_MODULE_COMMAND_FUNCTION_FWD(testADCLatency, ControlReader)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(testADCLatencyReturn, ControlReader)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(testADCMinMax, ControlReader)
-
+*/
     ControlReader(uint8_t inDataReadyPin, uint8_t inGatePin, MIDIHandler *inMidiHandler);
 
 public:
     void readData(std::vector<commandResponse> *inCommandResponses);
 
-    std::vector<String> cvInputCommands;
-
-    bool outputDebugData = true;
-    bool setADCCommands(uint8_t channel, String commands);
-
+//    std::vector<String> cvInputCommands;
+/*    bool setADCCommands(uint8_t channel, String commands);
     bool setADCAveragerSettings(uint8_t t_channel, uint8_t t_averages, uint16_t t_interruptErrorThreshold, uint16_t t_continuousErrorThreshold, uint16_t t_continuousTimeout);
-    String getADCAveragerSettings(uint8_t channel);
+    String getADCAveragerSettings(uint8_t channel);*/
     void setDefaults();
 
-    uint16_t testMin, testMax;
+/*    uint16_t testMin, testMax;
     bool testBegin = true;
     uint8_t testChannel = 0;
     void setADCMinMaxTestChannel(uint8_t t_channel);
-
+*/
     void resetAds();
-    int32_t getData(int16_t channel);
+/*    int32_t getData(int16_t channel);*/
 
     const String controlAssignment[8] = { "harmonic", "harmonicshift", "finetune", "pressure", "hammertrig", "gate", "hammerscale", "mute" };
-
+    const String defaultCommands[8] = { "bw.hsh.ha:\"value/1327.716667-20\"", "bw.hsh.sh5:\"deadband(value-32236, 20)/2.425\"", "bw.hsh.sh:\"deadband((value-32600)*0.49064, 250)\"", "bw.bp.ba:value",
+                                        "so.en:value", "bw.dcm.ru:bool(value-10000),bw.pe:1,bw.sm:0,bw.bp.en:bool(value-10000),bw.bp.rs:ibool(value-10000),bw.bp.hd:ibool(value-10000)",
+                                        "so.fm:\"deadband(value,50)\"", "mu.sp:value"};
+    const bool controlTrigger[8] = { false, false, false, false, true, true, false, false };
 protected:
     uint16_t gateState = 0;
 
@@ -81,7 +82,7 @@ private:
     Adafruit_ADS1015 ads2;
     uint8_t pinDataReady, pinGate;
 
-    averager averages[8];
+//    Averager averages[8];
     uint16_t currentChannel;
     uint16_t currentChannel2;
 

@@ -21,33 +21,25 @@
 
 #include "base/arduinorequired.hpp"
 #include <vector>
-#include "base/module.hpp"
+#include "base/modulehandler.hpp"
 
-class MIDIMessageConfiguration : public Module {
+class MIDIMessageConfiguration : public ModuleHandler {
 public:
     SETMODULEID("midiconfiguration", "mc", "MIDI message configuration 1.0", eModuleType::software, false)
 
     MODULECOMMANDHANDLER
 
-    CREATE_MODULE_COMMAND_FUNCTION_FWD(eventHandler, MIDIMessageConfiguration)
-    CREATE_MODULE_COMMAND_FUNCTION_FWD(addcc, MIDIMessageConfiguration)
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(ccAdd, MIDIMessageConfiguration)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(ccRemove, MIDIMessageConfiguration)
+    CREATE_MODULE_COMMAND_FUNCTION_FWD(ccCount, MIDIMessageConfiguration)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(defaults, MIDIMessageConfiguration)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(receiveChannel, MIDIMessageConfiguration)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(allNotesOff, MIDIMessageConfiguration)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(namef, MIDIMessageConfiguration)
     CREATE_MODULE_COMMAND_FUNCTION_FWD(eventHandlerNew, MIDIMessageConfiguration)
-    CREATE_MODULE_COMMAND_FUNCTION_FWD(continuouscontroller, MIDIMessageConfiguration)
 
     String *name;
-/*
-    String *noteOn;
-    String *noteOff;
-    String *polyAftertouch;
-    String *programChange;
-    String *channelAftertouch;
-    String *pitchBend;
-*/
+
     enum eMIDIEvent {
         ev_noteOn = 0,
         ev_noteOff = 1,
@@ -65,19 +57,13 @@ public:
 
     uint8_t midiRxChannel;
 
-    struct _controlChange {
-        byte control;
-        String command;
-    };
-
-    std::vector<_controlChange> controlChange;
-
     MIDIMessageConfiguration();
     uint8_t setCC(uint8_t controller, String *command);
-    bool removeCC(uint8_t controller);
+    int8_t removeCC(uint8_t controller);
     void setDefaultBaseParameters();
     void setDefaultCCs();
     void setDefaults();
-//    String dumpData();
+
+    void addInstances(String name, uint8_t count) override;
 };
 #endif

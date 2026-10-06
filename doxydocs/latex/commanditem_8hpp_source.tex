@@ -1,0 +1,40 @@
+\doxysection{commanditem.\+hpp}
+\hypertarget{commanditem_8hpp_source}{}\label{commanditem_8hpp_source}\index{commanditem.hpp@{commanditem.hpp}}
+\mbox{\hyperlink{commanditem_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ COMMANDITEM\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ COMMANDITEM\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{arduinorequired_8hpp}{base/arduinorequired.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{generalhelpers_8hpp}{generalhelpers.hpp}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ SELECTION\ std::vector<uint8\_t>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structCommandItemPart}{CommandItemPart}}\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ String\ \mbox{\hyperlink{structCommandItemPart_a6436fbbd467b38ed5528e9c71e3d33e3}{name}};}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{commanditem_8hpp_aef2174e268da3b99985a2d6018a32409}{SELECTION}}\ \mbox{\hyperlink{structCommandItemPart_a0aab87d34563b3c3dea5be909ef85e29}{selection}};}
+\DoxyCodeLine{00013\ \};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classCommandItem}{CommandItem}}\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ std::vector<String>\ \mbox{\hyperlink{classCommandItem_a78d2c76d7bb292427f7487196f185467}{argument}};}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ String\ command\ =\ "{}"{};}}
+\DoxyCodeLine{00020\ \ \ \ \ std::vector<CommandItemPart>\ \mbox{\hyperlink{classCommandItem_aa5c6c7964280311977e2114464126c45}{hierarchy}};}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCommandItem_a7904fcaba89cb49ea7621a2f96b6beb6}{hierarchyIndex}}\ =\ 0;}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{//String\ originalCommand\ =\ "{}"{};}}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{commanditem_8hpp_aef2174e268da3b99985a2d6018a32409}{SELECTION}}\ \mbox{\hyperlink{classCommandItem_afa7d00c6812e7aacf2accfe9b679e7a2}{selection}};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classCommandItem_a281e1a91e54d195f3354cc0afc452362}{CommandItem}}();}
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ Attempt\ to\ fix\ loadparameters\ hang\ 2026-\/09-\/24}}
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ \ \ \ CommandItem\ (String\ *commandString);}}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classCommandItem_a281e1a91e54d195f3354cc0afc452362}{CommandItem}}\ (String\ commandString);}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{classCommandItem}{CommandItem}}\&\ \mbox{\hyperlink{classCommandItem_a6e4cb2eb1581ea1dd5f84ee3805d71e7}{operator\ =\ }}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classCommandItem}{CommandItem}}\&\ other);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCommandItem_aea25f2d2c8ec8063c0999788c04e2012}{buildHierarchy}}(String\ command);}
+\DoxyCodeLine{00033\ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ COMMANDITEM\_HPP}}
+
+\end{DoxyCode}

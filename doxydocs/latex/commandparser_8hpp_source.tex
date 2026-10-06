@@ -24,78 +24,23 @@
 \DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ COMMANDPARSER\_HPP}}
 \DoxyCodeLine{00021\ }
 \DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{arduinorequired_8hpp}{base/arduinorequired.hpp}}"{}}}
-\DoxyCodeLine{00023\ \textcolor{comment}{//\#include\ "{}master\_controller/expressionparser.h"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{commanditem_8hpp}{commanditem.hpp}}"{}}}
 \DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ uint8\_t\ \mbox{\hyperlink{commandparser_8hpp_aa230916c95623a7e6e5b94cae91a4a08}{quoteStyle}}[];}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ commandResponseType\ debugPrintType}}
 \DoxyCodeLine{00026\ }
-\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ SELECTION\ std::vector<uint8\_t>}}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcommandItemPart}{commandItemPart}}\ \{}
-\DoxyCodeLine{00030\ \ \ \ \ String\ \mbox{\hyperlink{structcommandItemPart_ae3236c5eeac38b19bff56fc7108fa4d9}{name}};}
-\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_aef2174e268da3b99985a2d6018a32409}{SELECTION}}\ \mbox{\hyperlink{structcommandItemPart_aba0800f90fe68eed75771aedd71c5cad}{selection}};}
-\DoxyCodeLine{00032\ \};}
+\DoxyCodeLine{00027\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcommandResponse}{commandResponse}}\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ String\ \mbox{\hyperlink{structcommandResponse_a15fbee9577b960681f4d8205ce8afc65}{response}};}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_a64739a0f4e627e77b702cb4d964bcdb5}{commandResponseType}}\ \mbox{\hyperlink{structcommandResponse_adbc467c2f02ce2bef481f8ee0d4ae7d8}{responseType}};}
+\DoxyCodeLine{00030\ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_a6d642cbd3ecbe3986bdcc291d9992aa4}{checkArguments}}(\mbox{\hyperlink{classCommandItem}{CommandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ uint8\_t\ arguments,\ \textcolor{keywordtype}{bool}\ t\_supressError\ =\ \textcolor{keyword}{false});}
 \DoxyCodeLine{00033\ }
-\DoxyCodeLine{00035\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcommandItem}{commandItem}}\ \{}
-\DoxyCodeLine{00036\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00037\ \ \ \ \ std::vector<String>\ \mbox{\hyperlink{classcommandItem_a59d0d48da61baeaa87b78737a19a9ffb}{argument}};}
-\DoxyCodeLine{00038\ \ \ \ \ String\ \mbox{\hyperlink{classcommandItem_a9231b44c127879e0e6bd2a4e70955db0}{command}}\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00039\ \ \ \ \ std::vector<commandItemPart>\ \mbox{\hyperlink{classcommandItem_a28a5a435734fef37683ee69d92a42854}{hierarchy}};}
-\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcommandItem_af827425df75c26c320c43581963faba1}{hierarchyIndex}}\ =\ 0;}
-\DoxyCodeLine{00041\ \ \ \ \ String\ \mbox{\hyperlink{classcommandItem_a5a2c3d3e2fc28bd141919d2388936be1}{originalCommand}}\ =\ \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{commandparser_8hpp_aef2174e268da3b99985a2d6018a32409}{SELECTION}}\ \mbox{\hyperlink{classcommandItem_abcf23aaba67fdd691e6b5ff34b7fec25}{selection}};}
-\DoxyCodeLine{00043\ }
-\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classcommandItem_a6c459427959a43fe80d8f1a72012dc6a}{commandItem}}();}
-\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classcommandItem_a6c459427959a43fe80d8f1a72012dc6a}{commandItem}}\ (String\ commandString);}
-\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classcommandItem}{commandItem}}\&\ \mbox{\hyperlink{classcommandItem_a7a92b9044b3420619d12b51b3b92541a}{operator\ =\ }}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classcommandItem}{commandItem}}\&\ other);}
-\DoxyCodeLine{00047\ }
-\DoxyCodeLine{00048\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcommandItem_a5244bdaca36d379542c1a390b952eec7}{buildHierarchy}}();}
-\DoxyCodeLine{00050\ \};}
-\DoxyCodeLine{00051\ }
-\DoxyCodeLine{00053\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcommandList}{commandList}}\ \{}
-\DoxyCodeLine{00054\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00055\ \ \ \ \ std::vector<commandItem>\ \mbox{\hyperlink{classcommandList_af4ced6b17f05b39c964445bd36222d7c}{item}};}
-\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classcommandList_ab023b253b73ce66e0f3442686cc5eb1a}{processingCommands}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00057\ }
-\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcommandList_a0a2aa6dcae713788e3217d85d4facfd7}{waitIfProcessing}}();}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcommandList_a060e73762f17623fa0fe2079e7d08431}{parseQuote}}(String\ commandString,\ \textcolor{keywordtype}{char}\ quote,\ \textcolor{keywordtype}{int}\ start);}
-\DoxyCodeLine{00061\ }
-\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcommandList_a12ff03e9259042daa07f184d66b387e2}{parseBracket}}(String\ commandString,\ \textcolor{keywordtype}{int}\ start);}
-\DoxyCodeLine{00063\ }
-\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcommandList_a904e6e8220f9141ed807005326dd96f6}{addCommands}}(String\ commandItems);}
-\DoxyCodeLine{00066\ }
-\DoxyCodeLine{00067\ \textcolor{comment}{//\ \ \ \ void\ parseCommandExpressions(ExpressionParser\ expressionParser);}}
-\DoxyCodeLine{00068\ }
-\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{classcommandList_aecba7f7d49008de18d24c19fbd6b3dca}{commandList}}(String\ commandItems);}
-\DoxyCodeLine{00070\ }
-\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{classcommandList}{commandList}}\&\ \mbox{\hyperlink{classcommandList_a17c67d5921695b3a111c2d6f0764889f}{operator\ =\ }}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classcommandList}{commandList}}\&\ other);}
-\DoxyCodeLine{00072\ }
-\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{classcommandList_aecba7f7d49008de18d24c19fbd6b3dca}{commandList}}();}
-\DoxyCodeLine{00074\ \};}
-\DoxyCodeLine{00075\ }
-\DoxyCodeLine{00077\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ \{}
-\DoxyCodeLine{00078\ \ \ \ \ String\ \mbox{\hyperlink{structserialCommandItem_acfc1dd4408fcc9ebfb66f7f40fcc8efb}{longCommand}};}
-\DoxyCodeLine{00079\ \ \ \ \ String\ \mbox{\hyperlink{structserialCommandItem_a885ce2b2f796898ce57bfa939c405c66}{shortCommand}};}
-\DoxyCodeLine{00080\ \ \ \ \ String\ \mbox{\hyperlink{structserialCommandItem_a439b7c89ac67641d420f0b485a7ea18d}{arguments}};}
-\DoxyCodeLine{00081\ \ \ \ \ String\ \mbox{\hyperlink{structserialCommandItem_adb3c941261b6fa076154cb515884042d}{Help}};}
-\DoxyCodeLine{00082\ \};}
-\DoxyCodeLine{00083\ }
-\DoxyCodeLine{00085\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_a2eea721b98604de46300feecf7703b60}{processCommandItems}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandParser,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ serialCommandArray[],\ \textcolor{keywordtype}{int}\ size);}
-\DoxyCodeLine{00087\ String\ \mbox{\hyperlink{commandparser_8hpp_a4a189b33229a0bbe691a7f3921eebb7b}{printCommandHelp}}(\mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ serialCommandArray[],\ \textcolor{keywordtype}{int}\ size);}
-\DoxyCodeLine{00089\ String\ \mbox{\hyperlink{commandparser_8hpp_a9584ed5f207c1c49b9a477ada94421f8}{addCommandHelp}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structserialCommandItem}{serialCommandItem}}\ serialCommandArray[],\ \textcolor{keywordtype}{int}\ size,\ std::vector<commandResponse>\ *commandResponses,\ String\ prefix\ =\ \textcolor{stringliteral}{"{}"{}});}
-\DoxyCodeLine{00090\ }
-\DoxyCodeLine{00091\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_acbb00437acc53a7ecb00112ed63d4e9e}{checkArguments}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ uint8\_t\ arguments,\ \textcolor{keywordtype}{bool}\ t\_supressError\ =\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00092\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_a47b5a74095fe6948dc38caf72ddfbff0}{checkArgumentsMin}}(\mbox{\hyperlink{classcommandItem}{commandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ uint8\_t\ argumentsMin,\ \textcolor{keywordtype}{bool}\ t\_supressError\ =\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00093\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_a91c0b52dff43b3f28af4dcd90938c4ea}{validateNumber}}(int16\_t\ number,\ int16\_t\ min,\ int16\_t\ max,\ \textcolor{keywordtype}{bool}\ t\_supressError\ =\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00094\ }
-\DoxyCodeLine{00095\ String\ \mbox{\hyperlink{commandparser_8hpp_ac7fc43fb1f213243ef62cd57653110cc}{delimitExpression}}(String\ expression,\ \textcolor{keywordtype}{bool}\ force\ =\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00096\ String\ \mbox{\hyperlink{commandparser_8hpp_aebd20c907cdd2829b1502eb63dba63a6}{stripQuotes}}(String\ expression);}
-\DoxyCodeLine{00097\ String\ \mbox{\hyperlink{commandparser_8hpp_aa2920a70f474546b537b11768a46d011}{removePrefix}}(String\ input,\ String\ prefix);}
-\DoxyCodeLine{00098\ }
-\DoxyCodeLine{00099\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{classcommandList}{commandList}}\ \mbox{\hyperlink{commandparser_8hpp_a895567420077455478bd74c7bdbedbb2}{globalCommands}};}
-\DoxyCodeLine{00100\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{classcommandList}{commandList}}\ \mbox{\hyperlink{commandparser_8hpp_ae7826d05ec6eb6efce350270ead447c8}{globalResponseCommands}};}
-\DoxyCodeLine{00101\ }
-\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00034\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{commandparser_8hpp_adc39aed39cadb773bd43633feca7c9f6}{checkArgumentsMin}}(\mbox{\hyperlink{classCommandItem}{CommandItem}}\ *\_commandItem,\ std::vector<commandResponse>\ *commandResponses,\ uint8\_t\ argumentsMin,\ \textcolor{keywordtype}{bool}\ t\_supressError\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{commandparser_8hpp_a8fe82b9f9d885f8a30e5b42db8445c0c}{printResponses}}(std::vector<commandResponse>\ *commandResponses,\ \textcolor{keywordtype}{bool}\ isInternal\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ String\ \mbox{\hyperlink{commandparser_8hpp_a1eff6989b7f7bce42d0debe46fb58f6d}{buildCommandString}}(\mbox{\hyperlink{classCommandItem}{CommandItem}}\ *inCommandItem);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

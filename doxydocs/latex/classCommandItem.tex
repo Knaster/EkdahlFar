@@ -1,0 +1,129 @@
+\doxysection{Command\+Item Class Reference}
+\hypertarget{classCommandItem}{}\label{classCommandItem}\index{CommandItem@{CommandItem}}
+
+
+Class containing command items consisting of one command and any number of arguments.  
+
+
+
+
+{\ttfamily \#include $<$commanditem.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCommandItem_a281e1a91e54d195f3354cc0afc452362}{Command\+Item}} ()
+\item 
+\mbox{\hyperlink{classCommandItem_a88b69e1f76697934b9aa062cbda5790f}{Command\+Item}} (String command\+String)
+\begin{DoxyCompactList}\small\item\em Parses commands of style command\+:argument1\+:argument2 \mbox{[}etc..\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classCommandItem}{Command\+Item}} \& \mbox{\hyperlink{classCommandItem_a6e4cb2eb1581ea1dd5f84ee3805d71e7}{operator=}} (const \mbox{\hyperlink{classCommandItem}{Command\+Item}} \&other)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ String $>$ \mbox{\hyperlink{classCommandItem_a78d2c76d7bb292427f7487196f185467}{argument}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structCommandItemPart}{Command\+Item\+Part}} $>$ \mbox{\hyperlink{classCommandItem_aa5c6c7964280311977e2114464126c45}{hierarchy}}
+\item 
+int \mbox{\hyperlink{classCommandItem_a7904fcaba89cb49ea7621a2f96b6beb6}{hierarchy\+Index}} = 0
+\item 
+std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classCommandItem_afa7d00c6812e7aacf2accfe9b679e7a2}{selection}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCommandItem_aea25f2d2c8ec8063c0999788c04e2012}{build\+Hierarchy}} (String command)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class containing command items consisting of one command and any number of arguments. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classCommandItem_a281e1a91e54d195f3354cc0afc452362}\label{classCommandItem_a281e1a91e54d195f3354cc0afc452362} 
+\index{CommandItem@{CommandItem}!CommandItem@{CommandItem}}
+\index{CommandItem@{CommandItem}!CommandItem@{CommandItem}}
+\doxysubsubsection{\texorpdfstring{CommandItem()}{CommandItem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Command\+Item\+::\+Command\+Item (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classCommandItem_a88b69e1f76697934b9aa062cbda5790f}\label{classCommandItem_a88b69e1f76697934b9aa062cbda5790f} 
+\index{CommandItem@{CommandItem}!CommandItem@{CommandItem}}
+\index{CommandItem@{CommandItem}!CommandItem@{CommandItem}}
+\doxysubsubsection{\texorpdfstring{CommandItem()}{CommandItem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Command\+Item\+::\+Command\+Item (\begin{DoxyParamCaption}\item[{String}]{command\+String }\end{DoxyParamCaption})}
+
+
+
+Parses commands of style command\+:argument1\+:argument2 \mbox{[}etc..\mbox{]}. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCommandItem_a88b69e1f76697934b9aa062cbda5790f_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classCommandItem_aea25f2d2c8ec8063c0999788c04e2012}\label{classCommandItem_aea25f2d2c8ec8063c0999788c04e2012} 
+\index{CommandItem@{CommandItem}!buildHierarchy@{buildHierarchy}}
+\index{buildHierarchy@{buildHierarchy}!CommandItem@{CommandItem}}
+\doxysubsubsection{\texorpdfstring{buildHierarchy()}{buildHierarchy()}}
+{\footnotesize\ttfamily void Command\+Item\+::build\+Hierarchy (\begin{DoxyParamCaption}\item[{String}]{command }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCommandItem_aea25f2d2c8ec8063c0999788c04e2012_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCommandItem_aea25f2d2c8ec8063c0999788c04e2012_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classCommandItem_a6e4cb2eb1581ea1dd5f84ee3805d71e7}\label{classCommandItem_a6e4cb2eb1581ea1dd5f84ee3805d71e7} 
+\index{CommandItem@{CommandItem}!operator=@{operator=}}
+\index{operator=@{operator=}!CommandItem@{CommandItem}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCommandItem}{Command\+Item}} \& Command\+Item\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classCommandItem}{Command\+Item}} \&}]{other }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classCommandItem_a78d2c76d7bb292427f7487196f185467}\label{classCommandItem_a78d2c76d7bb292427f7487196f185467} 
+\index{CommandItem@{CommandItem}!argument@{argument}}
+\index{argument@{argument}!CommandItem@{CommandItem}}
+\doxysubsubsection{\texorpdfstring{argument}{argument}}
+{\footnotesize\ttfamily std\+::vector$<$String$>$ Command\+Item\+::argument}
+
+\Hypertarget{classCommandItem_aa5c6c7964280311977e2114464126c45}\label{classCommandItem_aa5c6c7964280311977e2114464126c45} 
+\index{CommandItem@{CommandItem}!hierarchy@{hierarchy}}
+\index{hierarchy@{hierarchy}!CommandItem@{CommandItem}}
+\doxysubsubsection{\texorpdfstring{hierarchy}{hierarchy}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structCommandItemPart}{Command\+Item\+Part}}$>$ Command\+Item\+::hierarchy}
+
+\Hypertarget{classCommandItem_a7904fcaba89cb49ea7621a2f96b6beb6}\label{classCommandItem_a7904fcaba89cb49ea7621a2f96b6beb6} 
+\index{CommandItem@{CommandItem}!hierarchyIndex@{hierarchyIndex}}
+\index{hierarchyIndex@{hierarchyIndex}!CommandItem@{CommandItem}}
+\doxysubsubsection{\texorpdfstring{hierarchyIndex}{hierarchyIndex}}
+{\footnotesize\ttfamily int Command\+Item\+::hierarchy\+Index = 0}
+
+\Hypertarget{classCommandItem_afa7d00c6812e7aacf2accfe9b679e7a2}\label{classCommandItem_afa7d00c6812e7aacf2accfe9b679e7a2} 
+\index{CommandItem@{CommandItem}!selection@{selection}}
+\index{selection@{selection}!CommandItem@{CommandItem}}
+\doxysubsubsection{\texorpdfstring{selection}{selection}}
+{\footnotesize\ttfamily std\+::vector$<$uint8\+\_\+t$>$ Command\+Item\+::selection}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{commanditem_8hpp}{commanditem.\+hpp}}\item 
+\mbox{\hyperlink{commanditem_8cpp}{commanditem.\+cpp}}\end{DoxyCompactItemize}

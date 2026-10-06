@@ -1,0 +1,352 @@
+\doxysection{External\+Module Class Reference}
+\hypertarget{classExternalModule}{}\label{classExternalModule}\index{ExternalModule@{ExternalModule}}
+
+
+{\ttfamily \#include $<$externalmodule.\+hpp$>$}
+
+
+
+Inheritance diagram for External\+Module\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{classExternalModule__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for External\+Module\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classExternalModule__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classExternalModule_afd85849a759d1685ccc4a27442130a66}{get\+Module\+ID}} () const override
+\item 
+\mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& \mbox{\hyperlink{classExternalModule_afec6816b10b2e05bbd7c0cad6c47d189}{get\+Module\+ID}} () override
+\item 
+const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classExternalModule_a65633c78509555b1dc1a68b1f04e98f9}{get\+Module\+Command}} (uint8\+\_\+t i) const override
+\item 
+\mbox{\hyperlink{classExternalModule_ada79e7d73ba4c7086ded83f402885c8c}{External\+Module}} (String device\+String)
+\item 
+void \mbox{\hyperlink{classExternalModule_a8f22fbc7cfa9d9be508070acbaa8c848}{update}} ()
+\item 
+\mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classExternalModule_a875e534eb52eb7c53d7dbe5ff06970bb}{process\+Commands}} (\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+void \mbox{\hyperlink{classExternalModule_a54dae73074153ec7b21c8220466f7682}{dir}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix, bool hidden, bool modules, bool commands, bool instances, bool instance\+Count, bool recursive)
+\item 
+void \mbox{\hyperlink{classExternalModule_a69020555c7a9f4eac9905ee8cb553588}{dump\+Data}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}data\+Dump)
+\item 
+void \mbox{\hyperlink{classExternalModule_a0b1810f5f1023953a84c99910654b24d}{help}} (std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}in\+Command\+Responses, String long\+Prefix, String short\+Prefix)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule_a5a240a8a9ab1813b17bcb810b24ceaea}{Module}} ()
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a3fa7b98362e8824b2aab3684909ff1c1}{process\+Built\+In\+Commands}} (\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} \mbox{\hyperlink{classModule_a26c8c97baf171c0656ce9b1361ff65f6}{process\+Module\+Commands}} (\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}in\+Command\+Item, std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}command\+Responses, bool request=false)
+\item 
+virtual int \mbox{\hyperlink{classModule_ac7c4b142fd2a11d6ee1a0920faba15cd}{get\+Module\+Command\+Count}} () const
+\item 
+bool \mbox{\hyperlink{classModule_a098e542bca66c3660521a2d904079565}{get\+Lineage}} (String \texorpdfstring{$\ast$}{*}in\+Lineage, bool long\+Name)
+\item 
+void \mbox{\hyperlink{classModule_acfd20044532da98fae5ae9665e14df03}{set\+Owner}} (\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*}in\+Owner)
+\item 
+bool \mbox{\hyperlink{classModule_a46a99578f2cccf0152f2c1e83b9e5ad2}{has\+Data\+Change}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classExternalModule_aa6db93b2a3b574e547acc765548480b7}{tmodule\+ID}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} $>$ \mbox{\hyperlink{classExternalModule_a422f4cb2d0837a57419d96f8b1dd2ca9}{module\+Commands}}
+\item 
+bool \mbox{\hyperlink{classExternalModule_a1af026ce87766fdce9ce9ef3a5b91c16}{is\+Group\+Handler}} = false
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classExternalModule_a8c897bb58fa3869f22b9610d708e156e}{ext\+ID}}
+\item 
+void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classExternalModule_afa77733644f156c61023e95a04b9ab2b}{transmit}} )(String commands, uint8\+\_\+t \mbox{\hyperlink{classExternalModule_a8c897bb58fa3869f22b9610d708e156e}{ext\+ID}}, void \texorpdfstring{$\ast$}{*}parent)
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classExternalModule_a099519954787a0af5d96d6afcbe77c12}{transmission\+Object}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classModule_aa09bd171529da96438e917258ab5ab8d}{is\+Group\+Handler}} = false
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classModule_a079279271ba4d956a59527f6eb3dd1dd}{owner\+Index}} = 0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classExternalModule_ab7aa34af8dd4f8063f21a862b8b2138e}{owner}} = nullptr
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModule}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classModule_ad85cad50c5538cc47c6d3ac76500e4cf}{owner}} = nullptr
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classExternalModule_a67cf439e585296f698792fe2751a5f46}{module\+Command\+Count}} = 0
+\item 
+String \mbox{\hyperlink{classExternalModule_a47f5524b938387dd4808f0ed8ac93a06}{k\+Long\+Name}}
+\item 
+String \mbox{\hyperlink{classExternalModule_a407fded3140b5ba6c6919384fe55b1cf}{k\+Short\+Name}}
+\item 
+String \mbox{\hyperlink{classExternalModule_a271e039beb2c0469cd04468a3d5ff459}{k\+Description}}
+\item 
+\mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabe}{e\+Module\+Type}} \mbox{\hyperlink{classExternalModule_af09bcc57f7ba81da1b68cc20eed9bb7a}{k\+Module\+Type}}
+\item 
+bool \mbox{\hyperlink{classExternalModule_a3a4269165b573c537826ca3c7e7fa5b8}{k\+Group\+Handler}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classModule_a4eddb3b6ba2034603c234262dccd5f4d}{get\+Builtin\+Command\+Count}} ()
+\item 
+const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModule_a2ce723cda6f7377fee2023c174b48948}{get\+Builtin\+Command}} (uint8\+\_\+t i)
+\item 
+void \mbox{\hyperlink{classModule_a691b8d7f95611abf1aa51fb3f09e34cd}{set\+Data\+Changed}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{classModule}{Module}}}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} \mbox{\hyperlink{classModule_a2b930f376b031611ccdf0070585fb805}{builtin\+Commands}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classExternalModule_ada79e7d73ba4c7086ded83f402885c8c}\label{classExternalModule_ada79e7d73ba4c7086ded83f402885c8c} 
+\index{ExternalModule@{ExternalModule}!ExternalModule@{ExternalModule}}
+\index{ExternalModule@{ExternalModule}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{ExternalModule()}{ExternalModule()}}
+{\footnotesize\ttfamily External\+Module\+::\+External\+Module (\begin{DoxyParamCaption}\item[{String}]{device\+String }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classExternalModule_ada79e7d73ba4c7086ded83f402885c8c_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classExternalModule_a54dae73074153ec7b21c8220466f7682}\label{classExternalModule_a54dae73074153ec7b21c8220466f7682} 
+\index{ExternalModule@{ExternalModule}!dir@{dir}}
+\index{dir@{dir}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{dir()}{dir()}}
+{\footnotesize\ttfamily void External\+Module\+::dir (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{in\+Command\+Responses,  }\item[{String}]{long\+Prefix,  }\item[{String}]{short\+Prefix,  }\item[{bool}]{hidden,  }\item[{bool}]{modules,  }\item[{bool}]{commands,  }\item[{bool}]{instances,  }\item[{bool}]{instance\+Count,  }\item[{bool}]{recursive }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classModule_a8aa6237aabeb8c851f0e6272d6cdc28f}{Module}}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classExternalModule_a54dae73074153ec7b21c8220466f7682_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classExternalModule_a69020555c7a9f4eac9905ee8cb553588}\label{classExternalModule_a69020555c7a9f4eac9905ee8cb553588} 
+\index{ExternalModule@{ExternalModule}!dumpData@{dumpData}}
+\index{dumpData@{dumpData}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{dumpData()}{dumpData()}}
+{\footnotesize\ttfamily void External\+Module\+::dump\+Data (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{data\+Dump }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classModule_a5798bc3ad2b47f69e8915297cb33b3e3}{Module}}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classExternalModule_a69020555c7a9f4eac9905ee8cb553588_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classExternalModule_a65633c78509555b1dc1a68b1f04e98f9}\label{classExternalModule_a65633c78509555b1dc1a68b1f04e98f9} 
+\index{ExternalModule@{ExternalModule}!getModuleCommand@{getModuleCommand}}
+\index{getModuleCommand@{getModuleCommand}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{getModuleCommand()}{getModuleCommand()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}} External\+Module\+::get\+Module\+Command (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classModuleCommand_a4ce6a1d032eaa918f21ad8121ba59094}{Module\+Command}}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classExternalModule_a65633c78509555b1dc1a68b1f04e98f9_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classExternalModule_afd85849a759d1685ccc4a27442130a66}\label{classExternalModule_afd85849a759d1685ccc4a27442130a66} 
+\index{ExternalModule@{ExternalModule}!getModuleID@{getModuleID}}
+\index{getModuleID@{getModuleID}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{getModuleID()}{getModuleID()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& External\+Module\+::get\+Module\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classModule_a262f18e4f440d6e82dbf7b20d42be4f8}{Module}}.
+
+\Hypertarget{classExternalModule_afec6816b10b2e05bbd7c0cad6c47d189}\label{classExternalModule_afec6816b10b2e05bbd7c0cad6c47d189} 
+\index{ExternalModule@{ExternalModule}!getModuleID@{getModuleID}}
+\index{getModuleID@{getModuleID}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{getModuleID()}{getModuleID()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}} \& External\+Module\+::get\+Module\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classModule_a9a13ef0a8291e562a9557c311d07b334}{Module}}.
+
+\Hypertarget{classExternalModule_a0b1810f5f1023953a84c99910654b24d}\label{classExternalModule_a0b1810f5f1023953a84c99910654b24d} 
+\index{ExternalModule@{ExternalModule}!help@{help}}
+\index{help@{help}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{help()}{help()}}
+{\footnotesize\ttfamily void External\+Module\+::help (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{in\+Command\+Responses,  }\item[{String}]{long\+Prefix,  }\item[{String}]{short\+Prefix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classModule_a72b5f8a3b37fe31c9002c6d7352b2427}{Module}}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classExternalModule_a0b1810f5f1023953a84c99910654b24d_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classExternalModule_a875e534eb52eb7c53d7dbe5ff06970bb}\label{classExternalModule_a875e534eb52eb7c53d7dbe5ff06970bb} 
+\index{ExternalModule@{ExternalModule}!processCommands@{processCommands}}
+\index{processCommands@{processCommands}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{processCommands()}{processCommands()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_a857ad5a1b44799f7252ac0c13a22e937}{e\+Process\+Result}} External\+Module\+::process\+Commands (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCommandItem}{Command\+Item}} \texorpdfstring{$\ast$}{*}}]{in\+Command\+Item,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structcommandResponse}{command\+Response}} $>$ \texorpdfstring{$\ast$}{*}}]{command\+Responses,  }\item[{bool}]{request = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classModule_a339cea47e3b78c8ea6e601e54b50c689}{Module}}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classExternalModule_a875e534eb52eb7c53d7dbe5ff06970bb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classExternalModule_a875e534eb52eb7c53d7dbe5ff06970bb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classExternalModule_a8f22fbc7cfa9d9be508070acbaa8c848}\label{classExternalModule_a8f22fbc7cfa9d9be508070acbaa8c848} 
+\index{ExternalModule@{ExternalModule}!update@{update}}
+\index{update@{update}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void External\+Module\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classModule_a09131761fec40345e3657b801778057f}{Module}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classExternalModule_a8c897bb58fa3869f22b9610d708e156e}\label{classExternalModule_a8c897bb58fa3869f22b9610d708e156e} 
+\index{ExternalModule@{ExternalModule}!extID@{extID}}
+\index{extID@{extID}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{extID}{extID}}
+{\footnotesize\ttfamily uint8\+\_\+t External\+Module\+::ext\+ID}
+
+\Hypertarget{classExternalModule_a1af026ce87766fdce9ce9ef3a5b91c16}\label{classExternalModule_a1af026ce87766fdce9ce9ef3a5b91c16} 
+\index{ExternalModule@{ExternalModule}!isGroupHandler@{isGroupHandler}}
+\index{isGroupHandler@{isGroupHandler}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{isGroupHandler}{isGroupHandler}}
+{\footnotesize\ttfamily bool External\+Module\+::is\+Group\+Handler = false}
+
+\Hypertarget{classExternalModule_a271e039beb2c0469cd04468a3d5ff459}\label{classExternalModule_a271e039beb2c0469cd04468a3d5ff459} 
+\index{ExternalModule@{ExternalModule}!kDescription@{kDescription}}
+\index{kDescription@{kDescription}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{kDescription}{kDescription}}
+{\footnotesize\ttfamily String External\+Module\+::k\+Description\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classExternalModule_a3a4269165b573c537826ca3c7e7fa5b8}\label{classExternalModule_a3a4269165b573c537826ca3c7e7fa5b8} 
+\index{ExternalModule@{ExternalModule}!kGroupHandler@{kGroupHandler}}
+\index{kGroupHandler@{kGroupHandler}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{kGroupHandler}{kGroupHandler}}
+{\footnotesize\ttfamily bool External\+Module\+::k\+Group\+Handler\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classExternalModule_a47f5524b938387dd4808f0ed8ac93a06}\label{classExternalModule_a47f5524b938387dd4808f0ed8ac93a06} 
+\index{ExternalModule@{ExternalModule}!kLongName@{kLongName}}
+\index{kLongName@{kLongName}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{kLongName}{kLongName}}
+{\footnotesize\ttfamily String External\+Module\+::k\+Long\+Name\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classExternalModule_af09bcc57f7ba81da1b68cc20eed9bb7a}\label{classExternalModule_af09bcc57f7ba81da1b68cc20eed9bb7a} 
+\index{ExternalModule@{ExternalModule}!kModuleType@{kModuleType}}
+\index{kModuleType@{kModuleType}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{kModuleType}{kModuleType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabe}{e\+Module\+Type}} External\+Module\+::k\+Module\+Type\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classExternalModule_a407fded3140b5ba6c6919384fe55b1cf}\label{classExternalModule_a407fded3140b5ba6c6919384fe55b1cf} 
+\index{ExternalModule@{ExternalModule}!kShortName@{kShortName}}
+\index{kShortName@{kShortName}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{kShortName}{kShortName}}
+{\footnotesize\ttfamily String External\+Module\+::k\+Short\+Name\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classExternalModule_a67cf439e585296f698792fe2751a5f46}\label{classExternalModule_a67cf439e585296f698792fe2751a5f46} 
+\index{ExternalModule@{ExternalModule}!moduleCommandCount@{moduleCommandCount}}
+\index{moduleCommandCount@{moduleCommandCount}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{moduleCommandCount}{moduleCommandCount}}
+{\footnotesize\ttfamily uint8\+\_\+t External\+Module\+::module\+Command\+Count = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classExternalModule_a422f4cb2d0837a57419d96f8b1dd2ca9}\label{classExternalModule_a422f4cb2d0837a57419d96f8b1dd2ca9} 
+\index{ExternalModule@{ExternalModule}!moduleCommands@{moduleCommands}}
+\index{moduleCommands@{moduleCommands}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{moduleCommands}{moduleCommands}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structModuleCommandDeclaration}{Module\+Command\+Declaration}}$>$ External\+Module\+::module\+Commands}
+
+\Hypertarget{classExternalModule_ab7aa34af8dd4f8063f21a862b8b2138e}\label{classExternalModule_ab7aa34af8dd4f8063f21a862b8b2138e} 
+\index{ExternalModule@{ExternalModule}!owner@{owner}}
+\index{owner@{owner}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{owner}{owner}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classModule}{Module}}\texorpdfstring{$\ast$}{*} External\+Module\+::owner = nullptr\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classExternalModule_aa6db93b2a3b574e547acc765548480b7}\label{classExternalModule_aa6db93b2a3b574e547acc765548480b7} 
+\index{ExternalModule@{ExternalModule}!tmoduleID@{tmoduleID}}
+\index{tmoduleID@{tmoduleID}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{tmoduleID}{tmoduleID}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structtModuleID}{t\+Module\+ID}}\texorpdfstring{$\ast$}{*} External\+Module\+::tmodule\+ID}
+
+\Hypertarget{classExternalModule_a099519954787a0af5d96d6afcbe77c12}\label{classExternalModule_a099519954787a0af5d96d6afcbe77c12} 
+\index{ExternalModule@{ExternalModule}!transmissionObject@{transmissionObject}}
+\index{transmissionObject@{transmissionObject}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{transmissionObject}{transmissionObject}}
+{\footnotesize\ttfamily void\texorpdfstring{$\ast$}{*} External\+Module\+::transmission\+Object}
+
+\Hypertarget{classExternalModule_afa77733644f156c61023e95a04b9ab2b}\label{classExternalModule_afa77733644f156c61023e95a04b9ab2b} 
+\index{ExternalModule@{ExternalModule}!transmit@{transmit}}
+\index{transmit@{transmit}!ExternalModule@{ExternalModule}}
+\doxysubsubsection{\texorpdfstring{transmit}{transmit}}
+{\footnotesize\ttfamily void(\texorpdfstring{$\ast$}{*} External\+Module\+::transmit) (String commands, uint8\+\_\+t \mbox{\hyperlink{classExternalModule_a8c897bb58fa3869f22b9610d708e156e}{ext\+ID}}, void \texorpdfstring{$\ast$}{*}parent)}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{externalmodule_8hpp}{externalmodule.\+hpp}}\item 
+\mbox{\hyperlink{externalmodule_8cpp}{externalmodule.\+cpp}}\end{DoxyCompactItemize}

@@ -42,49 +42,17 @@
 \DoxyCodeLine{00038\ }
 \DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowActuators_a6a7200c6d26ac713d942e4ef24d453d3}{dumpData}}(std::vector<commandResponse>\ *dataDump)\ \textcolor{keyword}{override};}
 \DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a60eda3041548ae23515cab1673539ced}{BowActuators}}();}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBowActuators_a716390d8616a13e0f39be1a2f76b9c4d}{addInstances}}(String\ name,\ uint8\_t\ count)\ \textcolor{keyword}{override};}
 \DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00044\ \textcolor{comment}{/*****\ Module\ specific\ commands\ mirroring\ serially\ attainable\ commands\ *****/}}
-\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classBowActuator}{BowActuator}}*\ \mbox{\hyperlink{classBowActuators_a8b6dd6bfc325d555f1f150ee2095f048}{addBowActuator}}(String\ name\ =\ \textcolor{stringliteral}{"{}default"{}},\ uint16\_t\ rest\ =\ 0,\ uint16\_t\ engage\ =\ 2000,\ uint16\_t\ stall\ =\ 65535);}
-\DoxyCodeLine{00046\ }
-\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowActuators_aecd8def24b0739a29c639b340416553f}{removeBowActuator}}(uint8\_t\ t\_actuator);}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{classBowActuators_a60eda3041548ae23515cab1673539ced}{BowActuators}}();}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00046\ \textcolor{comment}{/*****\ Module\ specific\ commands\ mirroring\ serially\ attainable\ commands\ *****/}}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classBowActuator}{BowActuator}}*\ \mbox{\hyperlink{classBowActuators_a8b6dd6bfc325d555f1f150ee2095f048}{addBowActuator}}(String\ name\ =\ \textcolor{stringliteral}{"{}default"{}},\ uint16\_t\ rest\ =\ 0,\ uint16\_t\ engage\ =\ 2000,\ uint16\_t\ stall\ =\ 65535);}
 \DoxyCodeLine{00048\ }
-\DoxyCodeLine{00049\ }
-\DoxyCodeLine{00050\ \textcolor{comment}{//\ \ \ \ uint8\_t\ setBowActuator(uint8\_t\ t\_actuator);}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBowActuators_aecd8def24b0739a29c639b340416553f}{removeBowActuator}}(uint8\_t\ t\_actuator);}
+\DoxyCodeLine{00050\ \};}
 \DoxyCodeLine{00051\ }
-\DoxyCodeLine{00052\ \textcolor{comment}{//\ \ \ \ uint8\_t\ getBowActuator();}}
-\DoxyCodeLine{00053\ }
-\DoxyCodeLine{00054\ \textcolor{comment}{//\ \ \ \ uint8\_t\ getBowActuatorCount();}}
-\DoxyCodeLine{00055\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00056\ \textcolor{comment}{\ \ \ \ bool\ loadBowActuator();}}
-\DoxyCodeLine{00057\ \textcolor{comment}{}}
-\DoxyCodeLine{00058\ \textcolor{comment}{\ \ \ \ bool\ loadBowActuator(uint8\_t\ t\_actuator);}}
-\DoxyCodeLine{00059\ \textcolor{comment}{}}
-\DoxyCodeLine{00060\ \textcolor{comment}{\ \ \ \ bool\ saveBowActuator(uint16\_t\ actuator,\ String\ name);}}
-\DoxyCodeLine{00061\ \textcolor{comment}{\ \ \ \ */}}
-\DoxyCodeLine{00062\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00063\ \textcolor{comment}{\ \ \ \ bool\ setBowActuatorFirstTouchPressure(uint16\_t\ t\_firstTouchPressure);}}
-\DoxyCodeLine{00064\ \textcolor{comment}{}}
-\DoxyCodeLine{00065\ \textcolor{comment}{\ \ \ \ bool\ setBowActuatorStallPressure(uint16\_t\ t\_stallPressure);}}
-\DoxyCodeLine{00066\ \textcolor{comment}{}}
-\DoxyCodeLine{00067\ \textcolor{comment}{\ \ \ \ bool\ setBowActuatorRestPosition(uint16\_t\ t\_restPosition);}}
-\DoxyCodeLine{00068\ \textcolor{comment}{}}
-\DoxyCodeLine{00069\ \textcolor{comment}{\ \ \ \ bool\ setBowActuatorID(String\ t\_id);}}
-\DoxyCodeLine{00070\ \textcolor{comment}{*/}}
-\DoxyCodeLine{00071\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00072\ \textcolor{comment}{\ \ \ \ uint16\_t\ getBowActuatorFirstTouchPressure(int8\_t\ t\_bowActuatorIndex\ =\ -\/1);}}
-\DoxyCodeLine{00073\ \textcolor{comment}{}}
-\DoxyCodeLine{00074\ \textcolor{comment}{\ \ \ \ uint16\_t\ getBowActuatorStallPressure(int8\_t\ t\_bowActuatorIndex\ =\ -\/1);}}
-\DoxyCodeLine{00075\ \textcolor{comment}{}}
-\DoxyCodeLine{00076\ \textcolor{comment}{\ \ \ \ uint16\_t\ getBowActuatorRestPosition(int8\_t\ t\_bowActuatorIndex\ =\ -\/1);}}
-\DoxyCodeLine{00077\ \textcolor{comment}{\ \ \ \ */}}
-\DoxyCodeLine{00078\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00079\ \textcolor{comment}{\ \ \ \ String\ getBowActuatorID(int8\_t\ t\_bowActuatorIndex\ =\ -\/1);}}
-\DoxyCodeLine{00080\ \textcolor{comment}{}}
-\DoxyCodeLine{00081\ \textcolor{comment}{\ \ \ \ bool\ setBowActuatorData(int8\_t\ t\_bowActuatorIndex,\ uint16\_t\ t\_firstTouchPressure,\ uint16\_t\ t\_stallPressure,\ uint16\_t\ t\_restPosition,\ String\ t\_id);*/}}
-\DoxyCodeLine{00082\ \};}
-\DoxyCodeLine{00083\ }
-\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BOWACTUATORS\_H}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BOWACTUATORS\_H}}
 
 \end{DoxyCode}

@@ -25,13 +25,13 @@
 #include "generic_functions/harmonicSeries.hpp"
 
 const ModuleCommandDeclaration HarmonicSeries::moduleCommands[] = {
-    { "", "", "int", "Sets the current Harmonic Series", false, false, nullptr, eCommandType_function::ectIndex },
-    { "name", "na", "name", "Sets the name of the harmonic series", false, false, &s_name, eCommandType_function::ectName },
-    { "data", "da", "name:ratios", "Gets / sets all data for the harmonic series in the given slot", false, true, &s_data, eCommandType_data::ectData },
+    //{ "", "", "int", "Sets the current Harmonic Series", false, false, nullptr, eCommandType_function::ectIndex },
+    { "name", "na", "name", "Sets the name of the harmonic series", false, true, &s_name, eCommandType_function::ectName },
+    { "data", "da", "name:ratios", "Gets / sets all data for the harmonic series in the given slot", false, true, &s_data, eCommandType_data::ectData | eCommandType_function::ectCalibration },
     { "ratio", "r", "harmonic:ratio", "Sets the ratio of the given harmonic in current harmonic series, will increase the list size if needed to adress the harmonic", false, false, &s_ratio,
-        eCommandType_data::ectData },
+        eCommandType_data::ectData | eCommandType_function::ectCalibration },
     { "remove", "rm", "harmonic", "Remove the harmonic ratio given in the current series and shift any ratios accordingly. Cannot remove all ratios", false, false, &s_remove,
-        eCommandType_function::ectRemove }
+        eCommandType_function::ectRemoveModule }
 };
 
 getModuleCount(HarmonicSeries)
@@ -86,7 +86,7 @@ CREATE_MODULE_COMMAND_FUNCTION(ratio, HarmonicSeries) {
         } else {
             for (int i = 0; i < ratios.size(); i++) {
                 if (i > 0) { returnString += ":"; }
-                returnString += String(ratios[r]);
+                returnString += String(ratios[i]);
             }
         }
         inCommandResponses->push_back({returnString, InfoRequest});

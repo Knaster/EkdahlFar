@@ -3,7 +3,7 @@
 
 #include <base/arduinorequired.hpp>
 
-class averager
+class Averager
 {
     public:
         int32_t value = 0;                          // Final value after averaging
@@ -31,13 +31,14 @@ class averager
 
         bool outputDebugData = false;
 
-        averager() {
+        Averager() {
             dataIndex = 0;
             dataCount = 0;
 
             for (int i = 0; i < dataAverageLength; i++) {
                 dataArray[i] = 0;
             }
+            setDefaults();
         }
 
         bool dataChanged() {
@@ -115,6 +116,13 @@ class averager
                 if (pDataChanged) { value = temp; }
             }
             return true;
+        }
+
+        void setDefaults() {
+            dataAverageLength = 1;
+            continuousTimeout = 10;
+            continuousErrorThreshold = 2;
+            interruptedErrorThreshold = 40;
         }
 };
 

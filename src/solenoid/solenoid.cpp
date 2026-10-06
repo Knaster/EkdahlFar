@@ -28,14 +28,14 @@
 #include "solenoid/solenoid.hpp"
 
 const ModuleCommandDeclaration Solenoid::moduleCommands[] = {
-    { "engage", "en", "0-65535", "Engages the solenoid using the 1st argument as hardness", false, false, &s_engage, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectParameter },
-    { "rest", "rs", "0-1", "Forces the solenoid to its rest position, an argument of 0 will leave the solenoid at its current state while any other value will disengage the solenoid",
-        false, false, &s_disengage, eCommandType_data::ectConditional | eCommandType_function::ectParameter },
-    { "maxforce", "xf", "0-65535", "Set solenoid maximum usable force", false, true, &s_maxForce, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectSetting },
-    { "minforce", "if", "0-65535", "Set solenoid minimum usable force", false, true, &s_minForce, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectSetting },
-    { "forcemultiplier", "fm", "0-65535", "Set solenoid force multiplier", false, true, &s_forceMultiplier, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectParameter },
-    { "engageduration", "ed", "uS", "Sets the duration of the solenoid hit in uS, if a value of 0 is set the solenoid will not disengage until a solenoiddisengage command has been given. WARNING!! HAVING THE SOLENOID ON FOR A SPAN OF SECONDS COULD DESTROY THE CIRCUITRY!!",
-        false, true, &s_engageDuration, eCommandType_data::ectMicroseconds | eCommandType_function::ectVolatileSetting }
+    { "engage", "en", "0-65535", "Engages the solenoid using the first parameter as the force", false, false, &s_engage, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectLiveAction },
+    { "rest", "rs", "0-1", "Forces the solenoid to its rest position, conditional",
+        false, false, &s_disengage, eCommandType_data::ectConditional | eCommandType_function::ectLiveAction },
+    { "maxforce", "xf", "0-65535", "Set solenoid maximum usable force", false, true, &s_maxForce, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectCalibration },
+    { "minforce", "if", "0-65535", "Set solenoid minimum usable force", false, true, &s_minForce, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectCalibration },
+    { "forcemultiplier", "fm", "0-65535", "Set solenoid force multiplier", false, true, &s_forceMultiplier, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectLiveParameter },
+    { "engageduration", "ed", "uS", "Sets the duration of the solenoid hit in uS, if a value of 0 is set the solenoid will not disengage until a rest command has been given. WARNING!! HAVING THE SOLENOID ON FOR A SPAN OF SECONDS COULD DESTROY THE CIRCUITRY!!",
+        false, true, &s_engageDuration, eCommandType_data::ectMicroseconds | eCommandType_function::ectCalibration | eCommandType_flags::ectVolatileSetting }
 };
 
 getModuleCount(Solenoid)
@@ -46,15 +46,19 @@ Solenoid::Solenoid(char _solenoidPin) {
 }
 
 CREATE_MODULE_COMMAND_FUNCTION(engage, Solenoid) {
-    if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-    solenoidEngage(inCommandItem->argument[0].toInt());
-    inCommandResponses->push_back({thisItem.shortCommand + ":" + String(inCommandItem->argument[0].toInt()), InfoRequest});
+    if (!request) {
+        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
+        solenoidEngage(inCommandItem->argument[0].toInt());
+        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(inCommandItem->argument[0].toInt()), InfoRequest});
+    }
     return eProcessResult::Ok;
 }
 
 CREATE_MODULE_COMMAND_FUNCTION(disengage, Solenoid) {
-    solenoidDisengage();
-    inCommandResponses->push_back({thisItem.shortCommand + ":" + String(inCommandItem->argument[0].toInt()), InfoRequest});
+    if (!request) {
+        solenoidDisengage();
+        inCommandResponses->push_back({thisItem.shortCommand, InfoRequest});
+    }
     return eProcessResult::Ok;
 }
 
@@ -79,18 +83,6 @@ CREATE_MODULE_COMMAND_FUNCTION(minForce, Solenoid) {
     }
     return eProcessResult::Ok;
 }
-/*
-CREATE_MODULE_COMMAND_FUNCTION(forceMultiplier, Solenoid) {
-    if (request) {
-        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(fForceMultiplier), InfoRequest });
-    } else {
-        if (!checkArguments(inCommandItem, inCommandResponses, 1)) { return eProcessResult::WrongArgumentCount; }
-        setSolenoidMultiplier(inCommandItem->argument[0].toFloat());
-        inCommandResponses->push_back({thisItem.shortCommand + ":" + String(fForceMultiplier), InfoRequest});
-    }
-    return eProcessResult::Ok;
-}
-*/
 
 CREATE_MODULE_COMMAND_FUNCTION(forceMultiplier, Solenoid) {
     if (request) {
@@ -118,18 +110,15 @@ CREATE_MODULE_COMMAND_FUNCTION(engageDuration, Solenoid) {
 void Solenoid::solenoidEngage(int force) {
     if (force <= 0) { return; }
     if (force > 65535) { force = 65535; }
-/*
-    float forceMultiplied = ((float) force) * fForceMultiplier;
-    if (forceMultiplied == 0) { return; }
 
-    float actualForce = forceMin + ((float) (forceMax - forceMin)) / 65535 * forceMultiplied;
-*/
-    //uint32_t multd = ((uint32_t) (forceMax - forceMin) * ((uint32_t) ((force * pForceMultiplier) / 65535)));
-    //debugPrintln("Multd " + String(multd), debugPrintType::Debug);
-    //uint32_t wlimits = ((uint32_t) (forceMax - forceMin) * multd);
-//    debugPrintln("Wlimits " + String(wlimits), debugPrintType::Debug);
-    //int32_t actualForce = forceMin + (((forceMax - forceMin) * ((force * pForceMultiplier) / 65535)) / 65535);
-    uint32_t actualForce = ((uint32_t) (forceMax - forceMin) * ((uint32_t) ((force * pForceMultiplier) / 65535))) / 65535;
+    //uint32_t actualForce = ((uint32_t) (forceMax - forceMin) * ((uint32_t) ((force * pForceMultiplier) / 65535))) / 65535;
+    uint16_t forceRange = forceMax - forceMin;
+    uint32_t forceMultiplied = (force * pForceMultiplier) / 65535;
+    uint32_t forceScaled = forceMultiplied * forceRange / 65535;
+    uint32_t actualForce = forceMin + forceScaled;
+
+    debugPrintln("Input force " + String(force) + ", force range " + String(forceRange) + ", force multiplied " + String(forceMultiplied) + ", force scaled " + String(forceScaled) + ", actual force " + String(actualForce), debugPrintType::Debug);
+
     if (actualForce < 0) { actualForce = 0; }
     if (actualForce > 65535) { actualForce = 65535; }
 
@@ -137,7 +126,6 @@ void Solenoid::solenoidEngage(int force) {
 
     analogWrite(solenoidPin, int(actualForce));
     solenoidEngaged = true;
-    debugPrintln("Egaging solenoid with force " + String(actualForce), Hardware);
 }
 
 /// Engage solenoid with maximum force
@@ -148,7 +136,6 @@ void Solenoid::solenoidEngage() {
 /// Disengage solenoid
 void Solenoid::solenoidDisengage() {
     analogWrite(solenoidPin, 0);
-   // debugPrintln("Disengaging solenoid", Hardware);
     solenoidEngaged = false;
 }
 
@@ -163,13 +150,7 @@ bool Solenoid::setSolenoidMin(uint16_t inMin)  {
     forceMin = inMin;
     return true;
 }
-/*
-bool Solenoid::setSolenoidMultiplier(float inMultiplier) {
-    if ((inMultiplier < 0) || (inMultiplier > 1)) { return false; }
-    fForceMultiplier = inMultiplier;
-    return true;
-}
-*/
+
 bool Solenoid::setSolenoidMultiplier(uint16_t inMultiplier) {
     pForceMultiplier = inMultiplier;
     return true;

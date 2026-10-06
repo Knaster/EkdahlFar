@@ -16,57 +16,73 @@ public:
     virtual const ModuleCommandDeclaration getModuleCommand(uint8_t i) const = 0;
 };
 
-// Using 5 bits
+// Using 4 bits 0bxxxxxxxxxxxx0000
 enum eCommandType_data {
-    ectSimpleString = 0,
-    ectSimpleBool = 1,
-    ectSimpleFloat = 2,
-    ectSimpleUInt8 = 3,
-    ectSimpleInt16 = 4,
-    ectSimpleUInt16 = 5,
-    ectCommands = 6,
-    ectData = 7,
-    ectConditional = 8,
-    ectImmediate = 9,
-    ectMilliseconds = 10,
-    ectMicroseconds = 11,
-    ectHertz = 12,
-    ectOutputAssignment = 13,
-    ectSimpleInt8 = 14
+    ectNone = 0,
+    ectSimpleString = 1,
+    ectSimpleBool = 2,
+    ectSimpleFloat = 3,
+    ectSimpleUInt8 = 4,
+    ectSimpleInt16 = 5,
+    ectSimpleUInt16 = 6,
+    ectCommands = 7,
+    ectData = 8,
+    ectMilliseconds = 9,
+    ectMicroseconds = 10,
+    ectHertz = 11,
+    ectOutputAssignment = 12,
+    ectSimpleInt8 = 13,
+    ectConditional = 14         // Makes something happen give that the first parameter is '1'
 };
 
-// Using 1 bit (+ 0b00000)
-#define eCT_do_sh 5
+// Using 1 bit (+ 0bxxxxxxxxxxx0xxxx)
+#define eCT_do_sh 4
 enum eCommandType_dataOptions {
-    ectStatic = (0b0 << eCT_do_sh),
-    ectExpression = (0b1 << eCT_do_sh),
+    ectStatic = 0 << eCT_do_sh,         // Indicates that the argument(s) are going to be interpreted literally
+    ectExpression = 1 << eCT_do_sh,     // Indicates that the argument(s) are of expression type and accepts equations and variables
 };
 
-// Using 3 bits (+ 0b000000)
+// Using 2 bits (+ 0bxxxxxxxx000xxxxx)
 // If ANY of these bits are set, the implication is that you CANNOT set this parameter
 #define eCT_ac (eCT_do_sh + 1)
 enum eCommandType_access {
-    ectRequest = (0b01 << eCT_ac),
-    ectSelfInvoked = (0b10 << eCT_ac),
-    ectInvokeOnly = (0b11 << eCT_ac)
+    ectSetRequest = 0 << eCT_ac,       // Indicates that the command is of get/set type
+    ectRequest = 1 << eCT_ac,          // Indicates that the command only returns data and cannot be set
+    ectSelfInvoked = 2 << eCT_ac,      // Indicates that the command is self-invoked and will be issued internally during certain conditions
+    ectInvokeOnly = 3 << eCT_ac        // Indicates that the command can only be set, a data request cannot be made on the function
 };
 
-// Using 4 bits (+ 0b000000000 = 512
-#define eCT_fu (eCT_ac + 3)
+
+// Actions are stateless, momentary events that are generally not readable. Things like triggering the hammer, adding a new module etc.
+// Parameters, settings & calibrations when set will keep that state until changed, things like "motor run", "full mute" etc.
+// Using 4 bits (+ 0bxxxx0000xxxxxxxx
+#define eCT_fu (eCT_ac + 2)
 enum eCommandType_function {
-    ectParameter = (0 << eCT_fu),
-    ectSetting = (1 << eCT_fu),
-    ectAdd = (2 << eCT_fu),
-    ectRemove = (3 << eCT_fu),
-    ectCount = (4 << eCT_fu),
-    ectName = (5 << eCT_fu),
-    ectIndex = (6 << eCT_fu),
-    ectSystem = (7 << eCT_fu),
-    ectUndefined = (8 << eCT_fu),
-    ectVolatileSetting = (9 << eCT_fu),
-    ectAssignment = (10 << eCT_fu),
-    ectLogic = (11 << eCT_fu)
+    ectUndefined = (0 << eCT_fu),
+    //ectParameter = (1 << eCT_fu),           // Indicates a parameter setting
+    ectCalibration = (1 << eCT_fu),         // Indicates a setting that is a calibration setting meant for setting up once
+    ectAddModule = (2 << eCT_fu),           // Indicates that the function adds a module
+    ectRemoveModule = (3 << eCT_fu),        // Indicates that the function removes a module
+    ectCountModules = (4 << eCT_fu),        // Indicates that the function returns the number of child modules
+    ectName = (5 << eCT_fu),                // Sets the name of a module
+    ectIndex = (6 << eCT_fu),               // Retrieves or sets (?) the index of the currently selected child module
+    ectAssignment = (7 << eCT_fu),          // Indicates that the command is assigned other commands that will at some point be executed
+    ectAdminAction = (8 << eCT_fu),         // Indicates a command that invokes and immediate, momentary, action meant for administrative use
+    ectLiveParameter = (9 << eCT_fu),       // A parameter setting intended for live on-the-fly modification that may or may not be saved
+    ectLiveAction = (10 << eCT_fu),         // Invokes a momentary action that is meant as a live control which doesn't keep a state, generally not saved
+    ectAdminSetting = (11 << eCT_fu),       // Indicates an administrative setting
+    ectLiveStatistics = (12 << eCT_fu),     // A command that is used for statistics, generally a return-only, no-save
+    ectInternalStatistics = (13 << eCT_fu)  // Statistical function only used for internal use
 };
+
+// Using 4 bits (+ 0b00000xxxxxxxxxxx
+#define eCT_fl (eCT_fu + 4)
+enum eCommandType_flags {
+    ectSystem = (1 << eCT_fl),             // Used for system-related commands not meant for user interaction
+    ectLogic = (2 << eCT_fl),              // Used to perform logical functions in conjunction with other commands, does nothing on its own
+    ectVolatileSetting = (4 << eCT_fl),    // Indicates a setting that is potentially harmful to change
+};
+
 /*
 enum eCommandType {
     SimpleString = 0,

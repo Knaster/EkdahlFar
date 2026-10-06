@@ -6,19 +6,21 @@
 #include <cmath>
 
 const ModuleCommandDeclaration Plugin_LFO::moduleCommands[] = {
-    { "name", "na", "name", "Sets the LFO name", false, true, &s_name, eCommandType_data::ectSimpleString | eCommandType_function::ectName },
-    { "enable", "en", "1|0", "Will enable or disable the output of the target commands", false, true, &s_enable, eCommandType_data::ectSimpleBool | eCommandType_function::ectParameter },
+    { "name", "na", "name", "Sets the LFO name", false, true, &s_name, eCommandType_function::ectName },
+    { "enable", "en", "1|0", "Will enable or disable the plugin", false, true, &s_enable, eCommandType_data::ectSimpleBool | eCommandType_function::ectLiveParameter },
     { "target", "tg", "commandlist*", "Sets the command string to execute each iteration, the string [lfoout] will be replaced with the current value", false, true, &s_target,
         eCommandType_data::ectOutputAssignment | eCommandType_dataOptions::ectExpression | eCommandType_function::ectAssignment, "lfoout" },
     { "updaterate", "ur", "mS", "Sets the frequency with which the target commands are executed. Limited by the global maximum as set in the plugin handler", false, true, &s_updaterate,
-        eCommandType_data::ectMilliseconds | eCommandType_function::ectSystem },
-    { "waveform", "wf", "sine|triangle|square|saw", "Sets the waveform", false, true, &s_waveform, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectParameter },
-    { "frequency", "fq", "Hz", "Sets the frequency of the LFO", false, true, &s_frequency, eCommandType_data::ectHertz | eCommandType_function::ectParameter },
-    { "amplitude", "amp", "0-65535", "Sets the output amplitude of the LFO", false, true, &s_amplitude, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectParameter },
-    { "delay", "dl", "ms", "Sets the amplitude ramp up delay, from 1ms to 65s", false, true, &s_delay,eCommandType_data::ectMilliseconds | eCommandType_function::ectParameter },
-    { "resetdelay", "rd", "-", "Resets the delay count to zero and reset the waveform", false, false, &s_resetdelay, eCommandType_data::ectSimpleBool | eCommandType_function::ectParameter },
-    { "resetwave", "rw", "-", "Resets the waveform so it starts over", false, false, &s_resetwave, eCommandType_data::ectSimpleBool | eCommandType_function::ectParameter },
-    { "bipolar", "bp", "1|0", "Sets whether the waveform is bipolar (default) or positive only", false, true, &s_bipolar, eCommandType_data::ectSimpleBool | eCommandType_function::ectParameter }
+        eCommandType_data::ectMilliseconds | eCommandType_function::ectAdminSetting | eCommandType_flags::ectSystem },
+    { "outputvalue", "ov", "-", "Returns the last calculated output value of the plugin", false, true, &s_outputvalue, eCommandType_data::ectSimpleUInt16 | eCommandType_access::ectRequest |
+        eCommandType_function::ectLiveStatistics},
+    { "waveform", "wf", "sine|triangle|square|saw", "Sets the waveform", false, true, &s_waveform, eCommandType_data::ectData | eCommandType_function::ectLiveParameter },
+    { "frequency", "fq", "Hz", "Sets the frequency of the LFO", false, true, &s_frequency, eCommandType_data::ectHertz | eCommandType_function::ectLiveParameter },
+    { "amplitude", "amp", "0-65535", "Sets the output amplitude of the LFO", false, true, &s_amplitude, eCommandType_data::ectSimpleUInt16 | eCommandType_function::ectLiveParameter },
+    { "delay", "dl", "ms", "Sets the amplitude ramp up delay, from 1ms to 65s", false, true, &s_delay,eCommandType_data::ectMilliseconds | eCommandType_function::ectLiveParameter },
+    { "resetdelay", "rd", "-", "Resets the delay count to zero and reset the waveform", false, false, &s_resetdelay, eCommandType_data::ectConditional | eCommandType_function::ectLiveParameter },
+    { "resetwave", "rw", "-", "Resets the waveform so it starts over", false, false, &s_resetwave, eCommandType_data::ectConditional | eCommandType_function::ectLiveParameter },
+    { "bipolar", "bp", "1|0", "Sets whether the waveform is bipolar (default) or positive only", false, true, &s_bipolar, eCommandType_data::ectSimpleBool | eCommandType_function::ectLiveParameter }
 };
 
 getModuleCount(Plugin_LFO)
@@ -37,6 +39,8 @@ CREATE_MODULE_COMMAND_FUNCTION(enable, Plugin_LFO) {
         pEnable = inCommandItem->argument[0].toInt();
 
         if (pEnable == 0) {
+            lastOutputValue = 0;
+            pCount = 0;
             String newTarget = pTarget;
             newTarget = newTarget.replace("lfoout", "0");
             globalResponseCommands.addCommands(newTarget);
@@ -48,6 +52,13 @@ CREATE_MODULE_COMMAND_FUNCTION(enable, Plugin_LFO) {
 
 CREATE_GETSET_FUNCTION(target, Plugin_LFO, pTarget)
 CREATE_GETSET_FUNCTION_CONVERT(updaterate, Plugin_LFO, pUpdateRate, toInt)
+
+CREATE_MODULE_COMMAND_FUNCTION(outputvalue, Plugin_LFO) {
+    if (request) {
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + String(lastOutputValue), debugPrintType::InfoRequest });
+    }
+    return eProcessResult::Ok;
+}
 
 CREATE_MODULE_COMMAND_FUNCTION(waveform, Plugin_LFO) {
     if (!request) {
@@ -87,6 +98,8 @@ CREATE_MODULE_COMMAND_FUNCTION(resetwave, Plugin_LFO) {
 }
 
 void Plugin_LFO::update() {
+    if (!pEnable) { return; }
+
     pCount += calculatedIncrease;
     if (pCount > 65535) { pCount -= 65535; }
 
@@ -130,6 +143,7 @@ void Plugin_LFO::update() {
         if (out < 0) { out = 0; }
     }
 
+    lastOutputValue = out;
     String newTarget = pTarget;
     newTarget = newTarget.replace("lfoout", String(out));
     if ((pEnable) && (newTarget != lastOutput)) {
