@@ -1,0 +1,245 @@
+\doxysection{Averager Class Reference}
+\hypertarget{classAverager}{}\label{classAverager}\index{Averager@{Averager}}
+
+
+{\ttfamily \#include $<$averager.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classAverager_a492e0b02a7b059ed039356885d8620d6}{Averager}} ()
+\item 
+bool \mbox{\hyperlink{classAverager_addfbfe0ba6971889c60e92a950193e72}{data\+Changed}} ()
+\item 
+bool \mbox{\hyperlink{classAverager_a5cd59a8a03ee791cea99bf77f133766d}{add\+Data}} (int16\+\_\+t data)
+\item 
+void \mbox{\hyperlink{classAverager_a1712debc902161e82594faae9803c0f0}{set\+Defaults}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{classAverager_a3aae252e3b43c64fd670691e852cfe8a}{value}} = 0
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classAverager_a662cd85f3bb7a28c6beb3d72fb00c4cb}{data\+Average\+Length}} = 1
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classAverager_a1ca561bde4fd4fe4b7be30e6caf56de8}{data\+Index}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classAverager_a354aa09fcc3ff6e008980b9e3439a640}{data\+Array}} \mbox{[}10\mbox{]}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classAverager_a89fda6fb5657008dccbead4c5fb57e92}{data\+Count}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classAverager_abba519a511a402e4a7ea9b8a42cee73f}{continuous\+Timeout}} = 10
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classAverager_a66e3c410abed3749f42f7ece769cff8a}{continuous\+Error\+Threshold}} = 2
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classAverager_a6d0d392843bd2f6e040a784c8712409b}{interrupted\+Error\+Threshold}} = 40
+\item 
+bool \mbox{\hyperlink{classAverager_a88eb2b18f2997c2fe7b8351f6a162338}{trigger}} = false
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classAverager_a5945a7dd73bb6bd950628d17b071aed2}{trigger\+Threshold}} = 250
+\item 
+int16\+\_\+t \mbox{\hyperlink{classAverager_ade28957a468fd2a42050cfff09dde652}{trigger\+Delay}} = 3000
+\item 
+elapsed\+Micros \mbox{\hyperlink{classAverager_abb70b778a8a74556b58b46c283edc72e}{trigger\+Delay\+EM}}
+\item 
+bool \mbox{\hyperlink{classAverager_adb1348be061a2e5c1b5e68f1609a9865}{trigger\+Delay\+Engage}} = false
+\item 
+bool \mbox{\hyperlink{classAverager_a290961a1d3f0344d823d402b130cf057}{single\+Shot}} = false
+\item 
+bool \mbox{\hyperlink{classAverager_a36a7992c25060c400db8302da92ae907}{output\+Debug\+Data}} = false
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classAverager_a90008c63fb9e125171f4aebfc27d1bf9}{p\+Data\+Changed}} = false
+\item 
+elapsed\+Millis \mbox{\hyperlink{classAverager_abb44c51ccb2177d4a1b93d454a67d21e}{time\+Since\+Change}} = 0
+\item 
+elapsed\+Millis \mbox{\hyperlink{classAverager_ae5c8b5b6cdd4ac28fd657efb98373c5e}{temp\+EM}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classAverager_a492e0b02a7b059ed039356885d8620d6}\label{classAverager_a492e0b02a7b059ed039356885d8620d6} 
+\index{Averager@{Averager}!Averager@{Averager}}
+\index{Averager@{Averager}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{Averager()}{Averager()}}
+{\footnotesize\ttfamily Averager\+::\+Averager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{classAverager_a492e0b02a7b059ed039356885d8620d6_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classAverager_a5cd59a8a03ee791cea99bf77f133766d}\label{classAverager_a5cd59a8a03ee791cea99bf77f133766d} 
+\index{Averager@{Averager}!addData@{addData}}
+\index{addData@{addData}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{addData()}{addData()}}
+{\footnotesize\ttfamily bool Averager\+::add\+Data (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classAverager_a5cd59a8a03ee791cea99bf77f133766d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classAverager_a5cd59a8a03ee791cea99bf77f133766d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classAverager_addfbfe0ba6971889c60e92a950193e72}\label{classAverager_addfbfe0ba6971889c60e92a950193e72} 
+\index{Averager@{Averager}!dataChanged@{dataChanged}}
+\index{dataChanged@{dataChanged}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{dataChanged()}{dataChanged()}}
+{\footnotesize\ttfamily bool Averager\+::data\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classAverager_addfbfe0ba6971889c60e92a950193e72_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classAverager_a1712debc902161e82594faae9803c0f0}\label{classAverager_a1712debc902161e82594faae9803c0f0} 
+\index{Averager@{Averager}!setDefaults@{setDefaults}}
+\index{setDefaults@{setDefaults}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{setDefaults()}{setDefaults()}}
+{\footnotesize\ttfamily void Averager\+::set\+Defaults (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{classAverager_a1712debc902161e82594faae9803c0f0_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classAverager_a66e3c410abed3749f42f7ece769cff8a}\label{classAverager_a66e3c410abed3749f42f7ece769cff8a} 
+\index{Averager@{Averager}!continuousErrorThreshold@{continuousErrorThreshold}}
+\index{continuousErrorThreshold@{continuousErrorThreshold}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{continuousErrorThreshold}{continuousErrorThreshold}}
+{\footnotesize\ttfamily uint16\+\_\+t Averager\+::continuous\+Error\+Threshold = 2}
+
+\Hypertarget{classAverager_abba519a511a402e4a7ea9b8a42cee73f}\label{classAverager_abba519a511a402e4a7ea9b8a42cee73f} 
+\index{Averager@{Averager}!continuousTimeout@{continuousTimeout}}
+\index{continuousTimeout@{continuousTimeout}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{continuousTimeout}{continuousTimeout}}
+{\footnotesize\ttfamily uint16\+\_\+t Averager\+::continuous\+Timeout = 10}
+
+\Hypertarget{classAverager_a354aa09fcc3ff6e008980b9e3439a640}\label{classAverager_a354aa09fcc3ff6e008980b9e3439a640} 
+\index{Averager@{Averager}!dataArray@{dataArray}}
+\index{dataArray@{dataArray}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{dataArray}{dataArray}}
+{\footnotesize\ttfamily uint16\+\_\+t Averager\+::data\+Array\mbox{[}10\mbox{]}}
+
+\Hypertarget{classAverager_a662cd85f3bb7a28c6beb3d72fb00c4cb}\label{classAverager_a662cd85f3bb7a28c6beb3d72fb00c4cb} 
+\index{Averager@{Averager}!dataAverageLength@{dataAverageLength}}
+\index{dataAverageLength@{dataAverageLength}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{dataAverageLength}{dataAverageLength}}
+{\footnotesize\ttfamily uint8\+\_\+t Averager\+::data\+Average\+Length = 1}
+
+\Hypertarget{classAverager_a89fda6fb5657008dccbead4c5fb57e92}\label{classAverager_a89fda6fb5657008dccbead4c5fb57e92} 
+\index{Averager@{Averager}!dataCount@{dataCount}}
+\index{dataCount@{dataCount}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{dataCount}{dataCount}}
+{\footnotesize\ttfamily uint16\+\_\+t Averager\+::data\+Count}
+
+\Hypertarget{classAverager_a1ca561bde4fd4fe4b7be30e6caf56de8}\label{classAverager_a1ca561bde4fd4fe4b7be30e6caf56de8} 
+\index{Averager@{Averager}!dataIndex@{dataIndex}}
+\index{dataIndex@{dataIndex}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{dataIndex}{dataIndex}}
+{\footnotesize\ttfamily uint16\+\_\+t Averager\+::data\+Index}
+
+\Hypertarget{classAverager_a6d0d392843bd2f6e040a784c8712409b}\label{classAverager_a6d0d392843bd2f6e040a784c8712409b} 
+\index{Averager@{Averager}!interruptedErrorThreshold@{interruptedErrorThreshold}}
+\index{interruptedErrorThreshold@{interruptedErrorThreshold}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{interruptedErrorThreshold}{interruptedErrorThreshold}}
+{\footnotesize\ttfamily uint16\+\_\+t Averager\+::interrupted\+Error\+Threshold = 40}
+
+\Hypertarget{classAverager_a36a7992c25060c400db8302da92ae907}\label{classAverager_a36a7992c25060c400db8302da92ae907} 
+\index{Averager@{Averager}!outputDebugData@{outputDebugData}}
+\index{outputDebugData@{outputDebugData}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{outputDebugData}{outputDebugData}}
+{\footnotesize\ttfamily bool Averager\+::output\+Debug\+Data = false}
+
+\Hypertarget{classAverager_a90008c63fb9e125171f4aebfc27d1bf9}\label{classAverager_a90008c63fb9e125171f4aebfc27d1bf9} 
+\index{Averager@{Averager}!pDataChanged@{pDataChanged}}
+\index{pDataChanged@{pDataChanged}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{pDataChanged}{pDataChanged}}
+{\footnotesize\ttfamily bool Averager\+::p\+Data\+Changed = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classAverager_a290961a1d3f0344d823d402b130cf057}\label{classAverager_a290961a1d3f0344d823d402b130cf057} 
+\index{Averager@{Averager}!singleShot@{singleShot}}
+\index{singleShot@{singleShot}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{singleShot}{singleShot}}
+{\footnotesize\ttfamily bool Averager\+::single\+Shot = false}
+
+\Hypertarget{classAverager_ae5c8b5b6cdd4ac28fd657efb98373c5e}\label{classAverager_ae5c8b5b6cdd4ac28fd657efb98373c5e} 
+\index{Averager@{Averager}!tempEM@{tempEM}}
+\index{tempEM@{tempEM}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{tempEM}{tempEM}}
+{\footnotesize\ttfamily elapsed\+Millis Averager\+::temp\+EM\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classAverager_abb44c51ccb2177d4a1b93d454a67d21e}\label{classAverager_abb44c51ccb2177d4a1b93d454a67d21e} 
+\index{Averager@{Averager}!timeSinceChange@{timeSinceChange}}
+\index{timeSinceChange@{timeSinceChange}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{timeSinceChange}{timeSinceChange}}
+{\footnotesize\ttfamily elapsed\+Millis Averager\+::time\+Since\+Change = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classAverager_a88eb2b18f2997c2fe7b8351f6a162338}\label{classAverager_a88eb2b18f2997c2fe7b8351f6a162338} 
+\index{Averager@{Averager}!trigger@{trigger}}
+\index{trigger@{trigger}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{trigger}{trigger}}
+{\footnotesize\ttfamily bool Averager\+::trigger = false}
+
+\Hypertarget{classAverager_ade28957a468fd2a42050cfff09dde652}\label{classAverager_ade28957a468fd2a42050cfff09dde652} 
+\index{Averager@{Averager}!triggerDelay@{triggerDelay}}
+\index{triggerDelay@{triggerDelay}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{triggerDelay}{triggerDelay}}
+{\footnotesize\ttfamily int16\+\_\+t Averager\+::trigger\+Delay = 3000}
+
+\Hypertarget{classAverager_abb70b778a8a74556b58b46c283edc72e}\label{classAverager_abb70b778a8a74556b58b46c283edc72e} 
+\index{Averager@{Averager}!triggerDelayEM@{triggerDelayEM}}
+\index{triggerDelayEM@{triggerDelayEM}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{triggerDelayEM}{triggerDelayEM}}
+{\footnotesize\ttfamily elapsed\+Micros Averager\+::trigger\+Delay\+EM}
+
+\Hypertarget{classAverager_adb1348be061a2e5c1b5e68f1609a9865}\label{classAverager_adb1348be061a2e5c1b5e68f1609a9865} 
+\index{Averager@{Averager}!triggerDelayEngage@{triggerDelayEngage}}
+\index{triggerDelayEngage@{triggerDelayEngage}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{triggerDelayEngage}{triggerDelayEngage}}
+{\footnotesize\ttfamily bool Averager\+::trigger\+Delay\+Engage = false}
+
+\Hypertarget{classAverager_a5945a7dd73bb6bd950628d17b071aed2}\label{classAverager_a5945a7dd73bb6bd950628d17b071aed2} 
+\index{Averager@{Averager}!triggerThreshold@{triggerThreshold}}
+\index{triggerThreshold@{triggerThreshold}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{triggerThreshold}{triggerThreshold}}
+{\footnotesize\ttfamily uint16\+\_\+t Averager\+::trigger\+Threshold = 250}
+
+\Hypertarget{classAverager_a3aae252e3b43c64fd670691e852cfe8a}\label{classAverager_a3aae252e3b43c64fd670691e852cfe8a} 
+\index{Averager@{Averager}!value@{value}}
+\index{value@{value}!Averager@{Averager}}
+\doxysubsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily int32\+\_\+t Averager\+::value = 0}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{averager_8h}{averager.\+h}}\end{DoxyCompactItemize}

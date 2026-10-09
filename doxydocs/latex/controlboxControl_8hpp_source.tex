@@ -1,0 +1,41 @@
+\doxysection{controlbox\+Control.\+hpp}
+\hypertarget{controlboxControl_8hpp_source}{}\label{controlboxControl_8hpp_source}\index{controlboxControl.hpp@{controlboxControl.hpp}}
+\mbox{\hyperlink{controlboxControl_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CONTROLBOXCONTROL\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CONTROLBOXCONTROL\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{module_8hpp}{base/module.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{averager_8h}{averager.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classControlboxControl}{ControlboxControl}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classModule}{Module}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a726e985c9256abcd3e04b255b31cba09}{SETMODULEID}}(\textcolor{stringliteral}{"{}controlboxcontrol"{}},\ \textcolor{stringliteral}{"{}cbc"{}},\ \textcolor{stringliteral}{"{}Control\ box\ control"{}},\ \mbox{\hyperlink{modulesystembasics_8hpp_ac0f9d5c7914d1037b48937a3de93cabeacf442184e2d6d7821e741e8ec9cceaf8}{eModuleType::software}},\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a4e880a1a5618ce289caa355084e13735}{MODULECOMMANDHANDLER}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(name,\ \mbox{\hyperlink{classControlboxControl}{ControlboxControl}})}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(commands,\ \mbox{\hyperlink{classControlboxControl}{ControlboxControl}})}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(value,\ \mbox{\hyperlink{classControlboxControl}{ControlboxControl}})}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(averages,\ \mbox{\hyperlink{classControlboxControl}{ControlboxControl}})}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(interruptthreshold,\ \mbox{\hyperlink{classControlboxControl}{ControlboxControl}})}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(continuousthreshold,\ \mbox{\hyperlink{classControlboxControl}{ControlboxControl}})}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{modulesystembasics_8hpp_a45bdcd7ad6f73438698f45ce76cbccc3}{CREATE\_MODULE\_COMMAND\_FUNCTION\_FWD}}(continuoustimeout,\ \mbox{\hyperlink{classControlboxControl}{ControlboxControl}})}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{classControlboxControl}{ControlboxControl}}(String\ inName,\ String\ inDefaultCommands,\ \textcolor{keywordtype}{bool}\ inTrigger);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classControlboxControl_adfbbf26c053be284767286bc053f7aca}{setDefaults}}();}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classAverager}{Averager}}\ \mbox{\hyperlink{classControlboxControl_a2c2774966f1a6ca89cd4de2b84627175}{averager}};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ String\ \mbox{\hyperlink{classControlboxControl_a836e4a701f6196e47f58ca3b2ad86ebc}{pName}};}
+\DoxyCodeLine{00028\ \ \ \ \ String\ \mbox{\hyperlink{classControlboxControl_a5b15710f2b664f2bdb6337647808ce16}{outputCommands}};}
+\DoxyCodeLine{00029\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classControlboxControl_ae2d48f2a2169abb0e9ff147ff212952f}{lastValue}};}
+\DoxyCodeLine{00030\ private:}
+\DoxyCodeLine{00031\ \ \ \ \ String\ \mbox{\hyperlink{classControlboxControl_a7b3d969e1a907d4282e9777b81ae9aa6}{defaultCommands}};}
+\DoxyCodeLine{00032\ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BOWACTUATOR\_HPP}}
+\DoxyCodeLine{00035\ }
+
+\end{DoxyCode}

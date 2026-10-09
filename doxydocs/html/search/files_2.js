@@ -8,6 +8,8 @@ var searchData=
   ['commandlist_2ehpp_5',['commandlist.hpp',['../commandlist_8hpp.html',1,'']]],
   ['commandparser_2ecpp_6',['commandparser.cpp',['../commandparser_8cpp.html',1,'']]],
   ['commandparser_2ehpp_7',['commandparser.hpp',['../commandparser_8hpp.html',1,'']]],
-  ['controlreader_2ecpp_8',['controlReader.cpp',['../controlReader_8cpp.html',1,'']]],
-  ['controlreader_2ehpp_9',['controlReader.hpp',['../controlReader_8hpp.html',1,'']]]
+  ['controlboxcontrol_2ecpp_8',['controlboxControl.cpp',['../controlboxControl_8cpp.html',1,'']]],
+  ['controlboxcontrol_2ehpp_9',['controlboxControl.hpp',['../controlboxControl_8hpp.html',1,'']]],
+  ['controlreader_2ecpp_10',['controlReader.cpp',['../controlReader_8cpp.html',1,'']]],
+  ['controlreader_2ehpp_11',['controlReader.hpp',['../controlReader_8hpp.html',1,'']]]
 ];

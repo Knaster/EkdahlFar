@@ -9,10 +9,11 @@ var searchData=
   ['lastpressure_6',['lastPressure',['../classBowPressure.html#aa2552be4057976c6300d665e3754f614',1,'BowPressure']]],
   ['lastreflectorisrstate_7',['lastReflectorISRState',['../classDCMotorControl.html#af4ef0ddb65548e4d8f539af48d1ac1b6',1,'DCMotorControl']]],
   ['lastupdate_8',['lastupdate',['../classBowControl.html#ac8743e51d6e90939a32feed0f820d5f8',1,'BowControl::lastUpdate'],['../classPluginHandler.html#aa3f6b2e10acccf493e23a1e606a3cd43',1,'PluginHandler::lastUpdate']]],
-  ['levelfundamental_9',['levelFundamental',['../classCalibrateMute.html#a14c9dea06cb113aec92a6db028411be2',1,'CalibrateMute']]],
-  ['levelsilence_10',['levelSilence',['../classCalibrateMute.html#adcd25eb94a2964e74b408e791af2d21c',1,'CalibrateMute']]],
-  ['locked_11',['locked',['../classthreadSafeDebugPrint.html#a8088716b72d16d531c37635ff3eff7f6',1,'threadSafeDebugPrint']]],
-  ['longcommand_12',['longCommand',['../structModuleCommandDeclaration.html#a80d1f95b2e2eaecd56547f3924a11cad',1,'ModuleCommandDeclaration']]],
-  ['longname_13',['longName',['../structtModuleID.html#afcab52c65d05cf884acf5163513bd549',1,'tModuleID']]],
-  ['lowerharmonic_14',['lowerHarmonic',['../classHarmonicSeriesHandler.html#a802667d02b9f8ce6c2cfecbe08a24af1',1,'HarmonicSeriesHandler']]]
+  ['lastvalue_9',['lastValue',['../classControlboxControl.html#ae2d48f2a2169abb0e9ff147ff212952f',1,'ControlboxControl']]],
+  ['levelfundamental_10',['levelFundamental',['../classCalibrateMute.html#a14c9dea06cb113aec92a6db028411be2',1,'CalibrateMute']]],
+  ['levelsilence_11',['levelSilence',['../classCalibrateMute.html#adcd25eb94a2964e74b408e791af2d21c',1,'CalibrateMute']]],
+  ['locked_12',['locked',['../classthreadSafeDebugPrint.html#a8088716b72d16d531c37635ff3eff7f6',1,'threadSafeDebugPrint']]],
+  ['longcommand_13',['longCommand',['../structModuleCommandDeclaration.html#a80d1f95b2e2eaecd56547f3924a11cad',1,'ModuleCommandDeclaration']]],
+  ['longname_14',['longName',['../structtModuleID.html#afcab52c65d05cf884acf5163513bd549',1,'tModuleID']]],
+  ['lowerharmonic_15',['lowerHarmonic',['../classHarmonicSeriesHandler.html#a802667d02b9f8ce6c2cfecbe08a24af1',1,'HarmonicSeriesHandler']]]
 ];

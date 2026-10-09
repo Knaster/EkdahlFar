@@ -9,7 +9,7 @@ var searchData=
   ['shortcommand_6',['shortCommand',['../structModuleCommandDeclaration.html#ae00e734f2adf202ac60b7304b9f31041',1,'ModuleCommandDeclaration']]],
   ['shortname_7',['shortName',['../structtModuleID.html#a7e235716c9308ab73c5ca5774361d1c5',1,'tModuleID']]],
   ['singleselection_8',['singleSelection',['../classModuleGroup.html#a805cd7c74ebdfdc02abb5d77b7054bd5',1,'ModuleGroup']]],
-  ['singleshot_9',['singleShot',['../classaverager.html#ab3a154fc369eb7de55c5acf2f5d2162b',1,'averager']]],
+  ['singleshot_9',['singleShot',['../classAverager.html#a290961a1d3f0344d823d402b130cf057',1,'Averager']]],
   ['smultitypename_10',['sMultiTypeName',['../classPlugin__Mult.html#ab03ebe95715f2058894255ceb5a5765f',1,'Plugin_Mult']]],
   ['solenoidengaged_11',['solenoidEngaged',['../classSolenoid.html#afc07cd3e237f4d30e653b7e6a5d3d2d4',1,'Solenoid']]],
   ['solenoidengageduration_12',['solenoidEngageDuration',['../classSolenoid.html#a57338a84f1eab97588531d68d04bcc08',1,'Solenoid']]],

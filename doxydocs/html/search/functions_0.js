@@ -2,7 +2,7 @@ var searchData=
 [
   ['addbowactuator_0',['addBowActuator',['../classBowActuators.html#a8b6dd6bfc325d555f1f150ee2095f048',1,'BowActuators']]],
   ['addcommands_1',['addCommands',['../classCommandList.html#ae710462ca42d899a42e43b0a29d0bf04',1,'CommandList']]],
-  ['adddata_2',['addData',['../classaverager.html#aaa54da4b2f567beab8279a63a683a4bb',1,'averager']]],
+  ['adddata_2',['addData',['../classAverager.html#a5cd59a8a03ee791cea99bf77f133766d',1,'Averager']]],
   ['adddefaultconfiguration_3',['addDefaultConfiguration',['../classMIDIConfigurationHandler.html#a3ccfb1226f6c9bfa1cc66104f91fd6ad',1,'MIDIConfigurationHandler']]],
   ['addgroup_4',['addGroup',['../classModuleHandler.html#a25c83b60da881f9c0dd2886e6a89e631',1,'ModuleHandler']]],
   ['addharmonicseries_5',['addharmonicseries',['../classHarmonicSeriesHandler.html#afef415cddf83a8f05f8daa94f33ed7bb',1,'HarmonicSeriesHandler::addHarmonicSeries()'],['../classHarmonicSeriesHandler.html#a26067e68cc51209cb17a55d7055e6967',1,'HarmonicSeriesHandler::addHarmonicSeries(String id, float frequencies[]=NULL, int size=0)']]],
@@ -19,5 +19,5 @@ var searchData=
   ['audiopeakamplitude_16',['audiopeakamplitude',['../audioanalyze_8cpp.html#a46623e59a36a0f978fef31fb33f2efd1',1,'audioPeakAmplitude():&#160;audioanalyze.cpp'],['../audioanalyze_8h.html#a46623e59a36a0f978fef31fb33f2efd1',1,'audioPeakAmplitude():&#160;audioanalyze.cpp']]],
   ['audioprocessorusage_17',['audioprocessorusage',['../audioanalyze_8cpp.html#a1119501c55b77d995f19fb79432bfe53',1,'audioProcessorUsage():&#160;audioanalyze.cpp'],['../audioanalyze_8h.html#a1119501c55b77d995f19fb79432bfe53',1,'audioProcessorUsage():&#160;audioanalyze.cpp']]],
   ['audiormsamplitude_18',['audiormsamplitude',['../audioanalyze_8cpp.html#ae3b3ce9622c1f8f5f25f46ebe4bc8ced',1,'audioRMSAmplitude():&#160;audioanalyze.cpp'],['../audioanalyze_8h.html#ae3b3ce9622c1f8f5f25f46ebe4bc8ced',1,'audioRMSAmplitude():&#160;audioanalyze.cpp']]],
-  ['averager_19',['averager',['../classaverager.html#a984c8c03a83d4d02ed1cfeb1f5f320ae',1,'averager']]]
+  ['averager_19',['Averager',['../classAverager.html#a492e0b02a7b059ed039356885d8620d6',1,'Averager']]]
 ];

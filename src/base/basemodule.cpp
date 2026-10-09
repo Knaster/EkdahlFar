@@ -38,20 +38,25 @@ BaseModule::BaseModule(Module *inModule)
 CREATE_MODULE_COMMAND_FUNCTION(debugPrint, BaseModule) {
     if (!request) {
         if (!checkArguments(inCommandItem, inCommandResponses, 2)) { return eProcessResult::WrongArgumentCount; }
+        String out = "";
         bool found = false;
         for (int i=0; i<debugPrintTypes; i++ ) {
             if (debugPrintTypeName[i] == inCommandItem->argument[0]) {
                 debugPrintEnabled[i] = inCommandItem->argument[1].toInt();
+                out += debugPrintTypeName[i] + ":" + debugPrintEnabled[i];
                 found = true;
                 break;
             }
         }
         if (!found) { return eProcessResult::WrongArgumentValue; }
+
+        inCommandResponses->push_back({ thisItem.shortCommand + ":" + out });
+    } else {
+        for (int i=0; i<debugPrintTypes; i++ ) {
+            inCommandResponses->push_back({ thisItem.shortCommand + ":" + debugPrintTypeName[i] + ":" + debugPrintEnabled[i], debugPrintType::InfoRequest });
+        }
     }
 
-    for (int i=0; i<debugPrintTypes; i++ ) {
-        inCommandResponses->push_back({ thisItem.shortCommand + ":" + debugPrintTypeName[i] + ":" + debugPrintEnabled[i], debugPrintType::InfoRequest });
-    }
     return eProcessResult::Ok;
 };
 

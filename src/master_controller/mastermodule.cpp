@@ -5,7 +5,7 @@
 #include "teensy_specific/eepromhelpers.hpp"
 
 const ModuleCommandDeclaration MasterModule::masterModuleCommands[] = {
-    { "uservariable", "uv", "variable(0-9):value", "Set user variable 0-9 to value", false, false, &s_userVariables, eCommandType_data::ectData | eCommandType_function::ectAdminSetting},
+    { "uservariable", "uv", "variable:value", "Set user variable 0-9 to value", false, false, &s_userVariables, eCommandType_data::ectData | eCommandType_function::ectAdminSetting},
     { "expressionparserevaluate", "epev", "expression", "Evaluates an arithmetric expression and sends back the output", false, false, &s_expressionParserEvaluate,
         eCommandType_data::ectSimpleString | eCommandType_dataOptions::ectExpression | eCommandType_access::ectInvokeOnly | eCommandType_function::ectAdminAction },
     { "ifequal", "ife", "variable:comparator:truecommandstring:elsecommandstring",

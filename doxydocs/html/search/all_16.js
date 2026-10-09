@@ -1,7 +1,7 @@
 var searchData=
 [
   ['validatenumber_0',['validatenumber',['../generalhelpers_8cpp.html#af6624c34403144ab1de6b6b2c70c117d',1,'validateNumber(int16_t number, int16_t min, int16_t max, bool t_supressError):&#160;generalhelpers.cpp'],['../generalhelpers_8hpp.html#a91c0b52dff43b3f28af4dcd90938c4ea',1,'validateNumber(int16_t number, int16_t min, int16_t max, bool t_supressError=false):&#160;generalhelpers.cpp']]],
-  ['value_1',['value',['../classaverager.html#ade0cac017e395f4b8a524d44b0d831ec',1,'averager::value'],['../classPlugin__Mult__Connector.html#a718482a098773947d395541861035684',1,'Plugin_Mult_Connector::value']]],
+  ['value_1',['value',['../classAverager.html#a3aae252e3b43c64fd670691e852cfe8a',1,'Averager::value'],['../classPlugin__Mult__Connector.html#a718482a098773947d395541861035684',1,'Plugin_Mult_Connector::value']]],
   ['valueperrotation_2',['valuePerRotation',['../servostepper_8hpp.html#afede2097a25e7d6451771f11e431a6e1',1,'servostepper.hpp']]],
   ['variables_3',['variables',['../structModuleCommandDeclaration.html#a8d8177b47fab1477ebee08fb6a1002ec',1,'ModuleCommandDeclaration']]],
   ['velocity_4',['velocity',['../structMIDIHandler_1_1noteMsg.html#aea3aa52346283648040ffc52a71ceaaf',1,'MIDIHandler::noteMsg']]],

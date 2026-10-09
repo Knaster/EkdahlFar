@@ -4,7 +4,7 @@
 #include "master_controller/midicc.hpp"
 
 const ModuleCommandDeclaration MIDICC::moduleCommands[] = {
-    { "control", "cl", "number", "Get/Set the controller number", false, true, &s_control, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectAssignment },
+    { "control", "cl", "number", "Get/Set the controller number", false, true, &s_control, eCommandType_data::ectSimpleUInt8 | eCommandType_function::ectName },
     { "command", "cm", "outputassignment", "Get/Set the commands to execute when the given controller is sent", false, true, &s_command,
         eCommandType_data::ectOutputAssignment | eCommandType_function::ectAssignment | eCommandType_dataOptions::ectExpression, "channel,controller,value" }
 };

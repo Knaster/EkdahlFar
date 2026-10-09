@@ -5,7 +5,7 @@ var searchData=
   ['addbowactuator_2',['addBowActuator',['../classBowActuators.html#a8b6dd6bfc325d555f1f150ee2095f048',1,'BowActuators']]],
   ['addcommands_3',['addCommands',['../classCommandList.html#ae710462ca42d899a42e43b0a29d0bf04',1,'CommandList']]],
   ['addconnectors_4',['addConnectors',['../classPlugin__Mult.html#a4db8e2d32cf5f90750f2d0e3c8c1c666',1,'Plugin_Mult']]],
-  ['adddata_5',['addData',['../classaverager.html#aaa54da4b2f567beab8279a63a683a4bb',1,'averager']]],
+  ['adddata_5',['addData',['../classAverager.html#a5cd59a8a03ee791cea99bf77f133766d',1,'Averager']]],
   ['adddefaultconfiguration_6',['addDefaultConfiguration',['../classMIDIConfigurationHandler.html#a3ccfb1226f6c9bfa1cc66104f91fd6ad',1,'MIDIConfigurationHandler']]],
   ['added_7',['added',['../externalmodulehandler_8hpp.html#a08b7fdab83506c5b2679c90f0a485508a671e7452fd61421a4915f7c3fbdcb9b9',1,'externalmodulehandler.hpp']]],
   ['addgroup_8',['addGroup',['../classModuleHandler.html#a25c83b60da881f9c0dd2886e6a89e631',1,'ModuleHandler']]],
@@ -60,7 +60,6 @@ var searchData=
   ['autocorrectposition_57',['autoCorrectPosition',['../classservoStepper.html#afad39eb0e3b738035e7a81cfdc87a26d',1,'servoStepper']]],
   ['automatic_58',['Automatic',['../bowcontrol_8hpp.html#a85d7864d6d68b5370e4f7aa90eb2fb82a9248ea5dc540b00adb523d1b86fc1389',1,'bowcontrol.hpp']]],
   ['automaticversion_2ehpp_59',['automaticversion.hpp',['../automaticversion_8hpp.html',1,'']]],
-  ['averager_60',['averager',['../classaverager.html#a984c8c03a83d4d02ed1cfeb1f5f320ae',1,'averager::averager()'],['../classaverager.html',1,'averager']]],
-  ['averager_2eh_61',['averager.h',['../averager_8h.html',1,'']]],
-  ['averages_62',['averages',['../classControlReader.html#a3a31ef1b2f4860a5116bfeaedbf758d3',1,'ControlReader']]]
+  ['averager_60',['averager',['../classAverager.html#a492e0b02a7b059ed039356885d8620d6',1,'Averager::Averager()'],['../classControlboxControl.html#a2c2774966f1a6ca89cd4de2b84627175',1,'ControlboxControl::averager'],['../classAverager.html',1,'Averager']]],
+  ['averager_2eh_61',['averager.h',['../averager_8h.html',1,'']]]
 ];

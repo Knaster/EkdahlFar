@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['datachanged_0',['dataChanged',['../classaverager.html#aec65e58ed67a35cbc04936f407d9b69f',1,'averager']]],
+  ['datachanged_0',['dataChanged',['../classAverager.html#addfbfe0ba6971889c60e92a950193e72',1,'Averager']]],
   ['dcmotorcontrol_1',['DCMotorControl',['../classDCMotorControl.html#a6ca03be3af8f5e7d483a5a663a27f282',1,'DCMotorControl']]],
   ['deadband_2',['deadband',['../classExpressionParser.html#a377ade2f443753aca8ea271dfa77a130',1,'ExpressionParser']]],
   ['debugprint_3',['debugprint',['../debugprint_8cpp.html#a12ba011dd5b1adf8f77184369290a419',1,'debugPrint(String text, debugPrintType printType):&#160;debugprint.cpp'],['../debugprint_8hpp.html#a97721fa8d388aff3e00561f7c32cfd40',1,'debugPrint(String text, debugPrintType printType, void *device):&#160;debugprint.hpp'],['../debugprint_8hpp.html#a12ba011dd5b1adf8f77184369290a419',1,'debugPrint(String text, debugPrintType printType):&#160;debugprint.cpp'],['../debugprint_8cpp.html#ad72598b5cf48d17a134cd1afacbcaa79',1,'debugPrint(String text, debugPrintType printType, BufferedOutput *device):&#160;debugprint.cpp'],['../debugprint_8cpp.html#afce492d1912ceaf97ac6659b7a838c27',1,'debugPrint(String text, debugPrintType printType, HardwareSerial *device):&#160;debugprint.cpp']]],

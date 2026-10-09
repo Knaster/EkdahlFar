@@ -30,5 +30,5 @@ var searchData=
   ['audiopeak_27',['audiopeak',['../audioanalyze_8cpp.html#a13c02cc930ab5775d56984f8be24378b',1,'audioPeak:&#160;audioanalyze.cpp'],['../audioanalyze_8h.html#a13c02cc930ab5775d56984f8be24378b',1,'audioPeak:&#160;audioanalyze.cpp']]],
   ['audiorms_28',['audiorms',['../audioanalyze_8cpp.html#a083d67b82f9d6d474d2567370515fcdb',1,'audioRMS:&#160;audioanalyze.cpp'],['../audioanalyze_8h.html#a083d67b82f9d6d474d2567370515fcdb',1,'audioRMS:&#160;audioanalyze.cpp']]],
   ['autocorrectposition_29',['autoCorrectPosition',['../classservoStepper.html#afad39eb0e3b738035e7a81cfdc87a26d',1,'servoStepper']]],
-  ['averages_30',['averages',['../classControlReader.html#a3a31ef1b2f4860a5116bfeaedbf758d3',1,'ControlReader']]]
+  ['averager_30',['averager',['../classControlboxControl.html#a2c2774966f1a6ca89cd4de2b84627175',1,'ControlboxControl']]]
 ];

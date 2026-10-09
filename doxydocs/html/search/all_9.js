@@ -1,7 +1,7 @@
 var searchData=
 [
   ['i_0',['i',['../classthreadSafeDebugPrint.html#a289a79848af877ee5ac8aa7889b9999d',1,'threadSafeDebugPrint']]],
-  ['id_1',['id',['../classHarmonicSeries.html#a864d2755443961c9cbea5d497909f6b0',1,'HarmonicSeries::Id'],['../classPlugin__Mult__Connector.html#a07c2ef3bffff0a434db991783474ea14',1,'Plugin_Mult_Connector::id'],['../classBowActuator.html#a348c05af0569a9b1d23292bf31a87048',1,'BowActuator::id']]],
+  ['id_1',['id',['../classBowActuator.html#a348c05af0569a9b1d23292bf31a87048',1,'BowActuator::id'],['../classHarmonicSeries.html#a864d2755443961c9cbea5d497909f6b0',1,'HarmonicSeries::Id'],['../classPlugin__Mult__Connector.html#a07c2ef3bffff0a434db991783474ea14',1,'Plugin_Mult_Connector::id']]],
   ['identifier_2',['identifier',['../classBowControl.html#add8ee71da9ed9509ef51d89bdb3abd85',1,'BowControl']]],
   ['ifequal_3',['ifequal',['../classExpressionParser.html#a839e733f3fd2f95a20fdd21da8dc7084',1,'ExpressionParser']]],
   ['index_4',['index',['../classPlugin.html#af43b071f70145fea054d97f38c6309a9',1,'Plugin']]],
@@ -18,7 +18,7 @@ var searchData=
   ['integral_15',['integral',['../classPIDController.html#a9f1834a4933702b2de5076effea32f1f',1,'PIDController']]],
   ['integratorignorebelow_16',['integratorIgnoreBelow',['../classPIDController.html#a90107c556130bfbd7d3ab44cb2d1a936',1,'PIDController']]],
   ['internal_17',['Internal',['../debugprint_8hpp.html#a7f327d12d94173c3c786ded0b10d2be4aa992d66faf4c155dfd78ec168fc25f8a',1,'debugprint.hpp']]],
-  ['interruptederrorthreshold_18',['interruptedErrorThreshold',['../classaverager.html#ae65171959ff0da0adeed67a844e0e3d9',1,'averager']]],
+  ['interruptederrorthreshold_18',['interruptedErrorThreshold',['../classAverager.html#a6d0d392843bd2f6e040a784c8712409b',1,'Averager']]],
   ['invertdirection_19',['invertDirection',['../classservoStepper.html#a64601bfc98656bc629953d6ca7a249b0',1,'servoStepper']]],
   ['isgrouphandler_20',['isgrouphandler',['../classModule.html#aa09bd171529da96438e917258ab5ab8d',1,'Module::isGroupHandler'],['../structtModuleID.html#aa039dd2855b4a003ec960e591d0915de',1,'tModuleID::isGroupHandler'],['../classExternalModule.html#a1af026ce87766fdce9ce9ef3a5b91c16',1,'ExternalModule::isGroupHandler']]],
   ['ismoving_21',['isMoving',['../classservoStepper.html#a1744eedcff7b7b7ba19c8262938563d0',1,'servoStepper']]],

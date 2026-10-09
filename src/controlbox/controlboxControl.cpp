@@ -29,7 +29,8 @@
 
 const ModuleCommandDeclaration ControlboxControl::moduleCommands[] = {
     { "name", "na", "string", "Gets the name of the control", false, false, &s_name, eCommandType_data::ectSimpleString | eCommandType_function::ectName | eCommandType_access::ectRequest },
-    { "commands", "cm", "string", "Sets the output commands of the control", false, true, &s_commands, eCommandType_data::ectCommands | eCommandType_function::ectAssignment },
+    { "commands", "cm", "string", "Sets the output commands of the control", false, true, &s_commands, eCommandType_data::ectOutputAssignment | eCommandType_function::ectAssignment |
+        eCommandType_dataOptions::ectExpression, "value" },
     { "value", "va", "int", "Returns the last value read", false, false, &s_value, eCommandType_data::ectSimpleInt16 | eCommandType_function::ectLiveStatistics | eCommandType_access::ectRequest },
     { "averages", "av", "int", "Sets the number of averages used while sampling", false, true, &s_averages, eCommandType_data::ectSimpleInt8 | eCommandType_function::ectAdminSetting },
     { "interruptthreshold", "it", "int", "Sets the sample difference needed to register as a change and start continuous sampling", false, true, &s_interruptthreshold,
@@ -61,9 +62,9 @@ CREATE_MODULE_COMMAND_FUNCTION(name, ControlboxControl) {
 CREATE_MODULE_COMMAND_FUNCTION(commands, ControlboxControl) {
     if (!request) {
         if (!checkArgumentsMin(inCommandItem, inCommandResponses, 1, true)) { return eProcessResult::WrongArgumentCount; }
-        outputCommands = inCommandItem->argument[0];
+        outputCommands = stripQuotes(inCommandItem->argument[0]);
     }
-    inCommandResponses->push_back({ thisItem.shortCommand + ":" + outputCommands, debugPrintType::InfoRequest });
+    inCommandResponses->push_back({ thisItem.shortCommand + ":" + delimitExpression(outputCommands, true), debugPrintType::InfoRequest });
     return eProcessResult::Ok;
 }
 

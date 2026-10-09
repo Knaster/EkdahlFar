@@ -8,12 +8,12 @@
 
 ModuleCommandDeclaration Module::builtinCommands[] = {
   { "list", "ls", "hidden/h:modules/m:commands/c:instances/i:instancecounts/ic:recursive/r", "Lists all commands and modules under the current module depending on the parameters given; \
-    'hidden' includes normally hidden commands, 'modules' includes any submodules, 'commands' includes commands, 'instances' shows data for each individual instance of a module, \
-     'instancecounts' includes number of instances of each module, 'recursive' lists and child modules / commands ", false, false,&s_dir,
+    [hidden] includes normally hidden commands, [modules] includes any submodules, [commands] includes commands, [instances] shows data for each individual instance of a module, \
+     [instancecounts] includes number of instances of each module, [recursive] lists and child modules / commands ", false, false,&s_dir,
      eCommandType_data::ectData | eCommandType_function::ectAdminAction | eCommandType_access::ectRequest | eCommandType_flags::ectSystem },
-  { "help", "help", "recursive/r", "shows this brief explanation of all commands and modules, shows the help for all submodules as well if 'recursive'", false, false, &s_help,
+  { "help", "help", "recursive/r", "shows this brief explanation of all commands and modules, shows the help for all submodules as well if [recursive]", false, false, &s_help,
     eCommandType_data::ectData | eCommandType_function::ectAdminAction | eCommandType_access::ectRequest | eCommandType_flags::ectSystem },
-  { "dumpdata", "dump", "recursive/r", "Dumps all data to be saved for the current module, will list the data of all submodules as well if 'recursive'", false, false, &s_dump,
+  { "dumpdata", "dump", "recursive/r", "Dumps all data to be saved for the current module, will list the data of all submodules as well if [recursive]", false, false, &s_dump,
     eCommandType_data::ectData | eCommandType_function::ectAdminAction | eCommandType_access::ectRequest | eCommandType_flags::ectSystem },
 };
 

@@ -6,5 +6,6 @@ var searchData=
   ['commanditempart_3',['CommandItemPart',['../structCommandItemPart.html',1,'']]],
   ['commandlist_4',['CommandList',['../classCommandList.html',1,'']]],
   ['commandresponse_5',['commandResponse',['../structcommandResponse.html',1,'']]],
-  ['controlreader_6',['ControlReader',['../classControlReader.html',1,'']]]
+  ['controlboxcontrol_6',['ControlboxControl',['../classControlboxControl.html',1,'']]],
+  ['controlreader_7',['ControlReader',['../classControlReader.html',1,'']]]
 ];

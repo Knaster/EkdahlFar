@@ -1,7 +1,7 @@
 var searchData=
 [
   ['i_0',['i',['../classthreadSafeDebugPrint.html#a289a79848af877ee5ac8aa7889b9999d',1,'threadSafeDebugPrint']]],
-  ['id_1',['id',['../classHarmonicSeries.html#a864d2755443961c9cbea5d497909f6b0',1,'HarmonicSeries::Id'],['../classBowActuator.html#a348c05af0569a9b1d23292bf31a87048',1,'BowActuator::id'],['../classPlugin__Mult__Connector.html#a07c2ef3bffff0a434db991783474ea14',1,'Plugin_Mult_Connector::id']]],
+  ['id_1',['id',['../classBowActuator.html#a348c05af0569a9b1d23292bf31a87048',1,'BowActuator::id'],['../classPlugin__Mult__Connector.html#a07c2ef3bffff0a434db991783474ea14',1,'Plugin_Mult_Connector::id'],['../classHarmonicSeries.html#a864d2755443961c9cbea5d497909f6b0',1,'HarmonicSeries::Id']]],
   ['identifier_2',['identifier',['../classBowControl.html#add8ee71da9ed9509ef51d89bdb3abd85',1,'BowControl']]],
   ['index_3',['index',['../classPlugin.html#af43b071f70145fea054d97f38c6309a9',1,'Plugin']]],
   ['indexcallback_4',['indexCallback',['../classModuleGroup.html#ad1059699173ecfa6d55324cd854e4b47',1,'ModuleGroup']]],
@@ -11,7 +11,7 @@ var searchData=
   ['intdrivenmsgp_8',['intdrivenmsgp',['../classthreadSafeDebugPrint.html#a515dd850edffe90a290563f01f85a8c6',1,'threadSafeDebugPrint::intDrivenMsgP'],['../classservoStepper.html#a1ce32e635777e6e5ce904dfc3a935e8a',1,'servoStepper::intDrivenMsgP']]],
   ['integral_9',['integral',['../classPIDController.html#a9f1834a4933702b2de5076effea32f1f',1,'PIDController']]],
   ['integratorignorebelow_10',['integratorIgnoreBelow',['../classPIDController.html#a90107c556130bfbd7d3ab44cb2d1a936',1,'PIDController']]],
-  ['interruptederrorthreshold_11',['interruptedErrorThreshold',['../classaverager.html#ae65171959ff0da0adeed67a844e0e3d9',1,'averager']]],
+  ['interruptederrorthreshold_11',['interruptedErrorThreshold',['../classAverager.html#a6d0d392843bd2f6e040a784c8712409b',1,'Averager']]],
   ['invertdirection_12',['invertDirection',['../classservoStepper.html#a64601bfc98656bc629953d6ca7a249b0',1,'servoStepper']]],
   ['isgrouphandler_13',['isgrouphandler',['../classModule.html#aa09bd171529da96438e917258ab5ab8d',1,'Module::isGroupHandler'],['../structtModuleID.html#aa039dd2855b4a003ec960e591d0915de',1,'tModuleID::isGroupHandler'],['../classExternalModule.html#a1af026ce87766fdce9ce9ef3a5b91c16',1,'ExternalModule::isGroupHandler']]],
   ['ismoving_14',['isMoving',['../classservoStepper.html#a1744eedcff7b7b7ba19c8262938563d0',1,'servoStepper']]],
